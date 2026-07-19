@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>管理后台 - yunzhuan.icu</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f0f2f5;
+            color: #333;
+            min-height: 100vh;
+        }
+
+        /* 登录页 */
+        .login-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .login-card {
+            background: white;
+            border-radius: 12px;
+            padding: 40px 36px;
+            width: 360px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+        }
+        .login-card h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 6px;
+            font-size: 1.4rem;
+        }
+        .login-card .subtitle {
+            text-align: center;
+            color: #999;
+            margin-bottom: 28px;
+            font-size: 0.85rem;
+        }
+        .login-card input {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            margin-bottom: 16px;
+            transition: border-color 0.2s;
+        }
+        .login-card input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        .login-card button {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+        .login-card button:hover { opacity: 0.9; }
+        .login-error {
+            color: #e53e3e;
+            font-size: 0.82rem;
+            text-align: center;
+            margin-bottom: 12px;
+            display: none;
+        }
+        .login-hint {
+            text-align: center;
+            color: #bbb;
+            font-size: 0.78rem;
+            margin-top: 20px;
+        }
+
+        /* 仪表盘 */
+        .dashboard { display: none; }
+        .dashboard.active { display: block; }
+
+        .topbar {
+            background: white;
+            padding: 14px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .topbar .title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #333;
+        }
+        .topbar .title .en {
+            color: #999;
+            font-size: 0.8rem;
+            font-weight: normal;
+            margin-left: 6px;
+        }
+        .topbar .actions {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        .topbar select, .topbar button {
+            padding: 6px 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 0.85rem;
+            background: white;
+            cursor: pointer;
+        }
+        .topbar button:hover { background: #f8f9fa; }
+        .topbar .btn-logout {
+            color: #e53e3e;
+            border-color: #fed7d7;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 16px;
+        }
+
+        /* 统计卡片 */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+        .stat-card {
+            background: white;
+            border-radius: 8px;
+            padding: 18px 20px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+        }
+        .stat-card .label {
+            color: #888;
+            font-size: 0.8rem;
+            margin-bottom: 6px;
+        }
+        .stat-card .value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #333;
+        }
+        .stat-card .change {
+            font-size: 0.78rem;
+            margin-top: 4px;
+        }
+        .stat-card .change.up { color: #38a169; }
+        .stat-card .change.down { color: #e53e3e; }
+        .stat-card .icon {
+            float: right;
+            color: #667eea;
+            font-size: 1.2rem;
+            opacity: 0.3;
+        }
+
+        /* 图表区 */
+        .charts-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+        .chart-card {
+            background: white;
+            border-radius: 8px;
+            padding: 18px 20px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+        }
+        .chart-card.full { grid-column: 1 / -1; }
+        .chart-card h3 {
+            font-size: 0.95rem;
+            color: #333;
+            margin-bottom: 14px;
+            font-weight: 600;
+        }
+        .chart-card h3 .en {
+            color: #999;
+            font-size: 0.78rem;
+            font-weight: normal;
+            margin-left: 6px;
+        }
+        .chart-wrapper {
+            position: relative;
+            height: 260px;
+        }
+
+        /* 数据表 */
+        .table-card {
+            background: white;
+            border-radius: 8px;
+            padding: 18px 20px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+            margin-bottom: 20px;
+        }
+        .table-card h3 {
+            font-size: 0.95rem;
+            color: #333;
+            margin-bottom: 14px;
+            font-weight: 600;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table th {
+            text-align: left;
+            padding: 10px 12px;
+            background: #f8f9fa;
+            color: #666;
+            font-size: 0.82rem;
+            font-weight: 600;
+            border-bottom: 1px solid #eee;
+        }
+        table td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 0.88rem;
+        }
+        table tr:hover td { background: #fafbfc; }
+        .rank {
+            display: inline-block;
+            width: 22px;
+            height: 22px;
+            line-height: 22px;
+            text-align: center;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            background: #e8eaf6;
+            color: #667eea;
+        }
+        .rank.top1 { background: #ffd700; color: #fff; }
+        .rank.top2 { background: #c0c0c0; color: #fff; }
+        .rank.top3 { background: #cd7f32; color: #fff; }
+
+        /* 设置区 */
+        .settings-card {
+            background: white;
+            border-radius: 8px;
+            padding: 18px 20px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+            margin-bottom: 20px;
+        }
+        .settings-card h3 {
+            font-size: 0.95rem;
+            margin-bottom: 14px;
+            font-weight: 600;
+        }
+        .settings-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+        .settings-row label {
+            width: 140px;
+            color: #666;
+            font-size: 0.85rem;
+        }
+        .settings-row input, .settings-row select {
+            flex: 1;
+            padding: 8px 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 0.85rem;
+        }
+        .settings-row button {
+            padding: 8px 16px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 0.85rem;
+            cursor: pointer;
+        }
+        .settings-row button:hover { opacity: 0.9; }
+
+        .footer {
+            text-align: center;
+            color: #999;
+            font-size: 0.8rem;
+            padding: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .charts-grid { grid-template-columns: 1fr; }
+            .stat-card .value { font-size: 1.4rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- 登录页 -->
+<div class="login-wrapper" id="loginPage">
+    <div class="login-card">
+        <h1>管理后台</h1>
+        <p class="subtitle">yunzhuan.icu Admin Dashboard</p>
+        <div class="login-error" id="loginError">密码错误，请重试</div>
+        <input type="password" id="passwordInput" placeholder="请输入管理密码" autofocus>
+        <button onclick="login()">登录</button>
+        <p class="login-hint">默认密码：yunzhuan2026</p>
+    </div>
+</div>
+
+<!-- 仪表盘 -->
+<div class="dashboard" id="dashboard">
+    <div class="topbar">
+        <div class="title">数据仪表盘 <span class="en">Analytics Dashboard</span></div>
+        <div class="actions">
+            <select id="dateRange" onchange="refreshData()">
+                <option value="7">近 7 天</option>
+                <option value="30" selected>近 30 天</option>
+                <option value="90">近 90 天</option>
+            </select>
+            <button onclick="refreshData()">刷新</button>
+            <button onclick="exportData()">导出</button>
+            <button onclick="goHome()">查看网站</button>
+            <button class="btn-logout" onclick="logout()">退出</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- 统计卡片 -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="label">总访问量 <span style="color:#bbb;font-size:0.75rem;">Total Page Views</span></div>
+                <div class="value" id="totalPV">--</div>
+                <div class="change up" id="pvChange">--</div>
+            </div>
+            <div class="stat-card">
+                <div class="label">独立访客 <span style="color:#bbb;font-size:0.75rem;">Unique Visitors</span></div>
+                <div class="value" id="totalUV">--</div>
+                <div class="change up" id="uvChange">--</div>
+            </div>
+            <div class="stat-card">
+                <div class="label">今日访问 <span style="color:#bbb;font-size:0.75rem;">Today's Views</span></div>
+                <div class="value" id="todayPV">--</div>
+                <div class="change up" id="todayChange">--</div>
+            </div>
+            <div class="stat-card">
+                <div class="label">平均停留 <span style="color:#bbb;font-size:0.75rem;">Avg Session</span></div>
+                <div class="value" id="avgSession">--</div>
+                <div class="change" id="sessionChange">--</div>
+            </div>
+        </div>
+
+        <!-- 图表区 -->
+        <div class="charts-grid">
+            <div class="chart-card full">
+                <h3>访问趋势 <span class="en">Traffic Trend</span></h3>
+                <div class="chart-wrapper">
+                    <canvas id="trendChart"></canvas>
+                </div>
+            </div>
+            <div class="chart-card">
+                <h3>流量来源 <span class="en">Traffic Sources</span></h3>
+                <div class="chart-wrapper">
+                    <canvas id="sourceChart"></canvas>
+                </div>
+            </div>
+            <div class="chart-card">
+                <h3>访客地区 <span class="en">Top Regions</span></h3>
+                <div class="chart-wrapper">
+                    <canvas id="regionChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- 页面热度表 -->
+        <div class="table-card">
+            <h3>热门页面 <span class="en" style="color:#999;font-size:0.78rem;font-weight:normal;margin-left:6px;">Top Pages</span></h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width:50px;">排名</th>
+                        <th>页面路径</th>
+                        <th style="width:100px;">访问量</th>
+                        <th style="width:100px;">占比</th>
+                        <th style="width:120px;">平均停留</th>
+                    </tr>
+                </thead>
+                <tbody id="topPagesBody">
+                    <tr><td colspan="5" style="text-align:center;color:#999;padding:30px;">暂无数据</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 数据源设置 -->
+        <div class="settings-card">
+            <h3>数据源配置 <span class="en" style="color:#999;font-size:0.78rem;font-weight:normal;margin-left:6px;">Data Source Settings</span></h3>
+            <div class="settings-row">
+                <label>数据源类型</label>
+                <select id="dataSourceType">
+                    <option value="demo">演示数据（默认）</option>
+                    <option value="vercel">Vercel Analytics API</option>
+                    <option value="umami">Umami API</option>
+                    <option value="manual">手动录入</option>
+                </select>
+            </div>
+            <div class="settings-row">
+                <label>API 地址</label>
+                <input type="text" id="apiUrl" placeholder="例如：https://api.vercel.com/v1/...">
+            </div>
+            <div class="settings-row">
+                <label>API Token</label>
+                <input type="password" id="apiToken" placeholder="输入 API Token">
+            </div>
+            <div class="settings-row">
+                <label></label>
+                <button onclick="saveSettings()">保存配置</button>
+                <button onclick="testConnection()" style="background:#38a169;">测试连接</button>
+            </div>
+        </div>
+
+        <div class="footer">
+            © 2026 yunzhuan.icu | 管理后台 v1.0 | 数据本地存储，支持接入 Vercel Analytics / Umami
+        </div>
+    </div>
+</div>
+
+<script>
+// ==================== 登录管理 ====================
+const ADMIN_PASSWORD = 'yunzhuan2026';
+const SESSION_KEY = 'admin_session';
+const SETTINGS_KEY = 'analytics_settings';
+
+function checkSession() {
+    const session = sessionStorage.getItem(SESSION_KEY);
+    if (session === 'logged_in') {
+        showDashboard();
+    }
+}
+
+function login() {
+    const input = document.getElementById('passwordInput').value;
+    if (input === ADMIN_PASSWORD) {
+        sessionStorage.setItem(SESSION_KEY, 'logged_in');
+        document.getElementById('loginError').style.display = 'none';
+        showDashboard();
+    } else {
+        document.getElementById('loginError').style.display = 'block';
+        document.getElementById('passwordInput').value = '';
+    }
+}
+
+function logout() {
+    sessionStorage.removeItem(SESSION_KEY);
+    document.getElementById('dashboard').classList.remove('active');
+    document.getElementById('loginPage').style.display = 'flex';
+    document.getElementById('passwordInput').value = '';
+}
+
+function showDashboard() {
+    document.getElementById('loginPage').style.display = 'none';
+    document.getElementById('dashboard').classList.add('active');
+    refreshData();
+}
+
+document.getElementById('passwordInput').addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') login();
+});
+
+// ==================== 数据管理 ====================
+function loadSettings() {
+    const saved = localStorage.getItem(SETTINGS_KEY);
+    if (saved) {
+        const settings = JSON.parse(saved);
+        document.getElementById('dataSourceType').value = settings.type || 'demo';
+        document.getElementById('apiUrl').value = settings.apiUrl || '';
+        document.getElementById('apiToken').value = settings.apiToken || '';
+    }
+}
+
+function saveSettings() {
+    const settings = {
+        type: document.getElementById('dataSourceType').value,
+        apiUrl: document.getElementById('apiUrl').value,
+        apiToken: document.getElementById('apiToken').value
+    };
+    localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings));
+    alert('配置已保存');
+}
+
+function testConnection() {
+    const type = document.getElementById('dataSourceType').value;
+    if (type === 'demo') {
+        alert('演示数据模式，无需连接测试');
+    } else if (type === 'manual') {
+        alert('手动录入模式，请在数据管理中录入数据');
+    } else {
+        alert('连接测试中...\n（需配置正确的 API 地址和 Token）');
+    }
+}
+
+// ==================== 演示数据生成器 ====================
+function generateDemoData(days) {
+    const dates = [];
+    const pvData = [];
+    const uvData = [];
+    const today = new Date();
+
+    for (let i = days - 1; i >= 0; i--) {
+        const d = new Date(today);
+        d.setDate(d.getDate() - i);
+        dates.push((d.getMonth()+1) + '/' + d.getDate());
+        // 模拟波动数据
+        const base = 80 + Math.random() * 60;
+        const weekend = (d.getDay() === 0 || d.getDay() === 6) ? 0.7 : 1;
+        pvData.push(Math.floor(base * weekend));
+        uvData.push(Math.floor(base * weekend * 0.6));
+    }
+
+    return {
+        dates,
+        pvData,
+        uvData,
+        totalPV: pvData.reduce((a, b) => a + b, 0),
+        totalUV: uvData.reduce((a, b) => a + b, 0),
+        todayPV: pvData[pvData.length - 1],
+        avgSession: (1.5 + Math.random() * 2).toFixed(1) + ' 分钟'
+    };
+}
+
+function getSourceData() {
+    return {
+        labels: ['搜索引擎', '直接访问', '社交媒体', '外链推荐', '其他'],
+        data: [42, 28, 15, 10, 5]
+    };
+}
+
+function getRegionData() {
+    return {
+        labels: ['中国', '美国', '日本', '新加坡', '英国', '其他'],
+        data: [55, 20, 8, 6, 4, 7]
+    };
+}
+
+function getTopPagesData() {
+    return [
+        { path: '/ (首页)', views: 3420, duration: '2.3 分钟' },
+        { path: '/computer/cs.html (计算机科学)', views: 1850, duration: '3.1 分钟' },
+        { path: '/business/finance.html (金融学)', views: 1620, duration: '2.8 分钟' },
+        { path: '/social/psychology.html (心理学)', views: 1340, duration: '3.5 分钟' },
+        { path: '/engineering/mechanical.html (机械工程)', views: 1180, duration: '2.6 分钟' },
+        { path: '/biology/nursing.html (护理学)', views: 980, duration: '2.9 分钟' },
+        { path: '/science/mathematics.html (数学)', views: 870, duration: '3.2 分钟' },
+        { path: '/arts/design.html (设计)', views: 760, duration: '2.4 分钟' },
+        { path: '/social/economics.html (经济学)', views: 720, duration: '3.0 分钟' },
+        { path: '/computer/ai.html (人工智能)', views: 680, duration: '3.8 分钟' }
+    ];
+}
+
+// ==================== 图表渲染 ====================
+let trendChart, sourceChart, regionChart;
+
+function renderTrendChart(data) {
+    const ctx = document.getElementById('trendChart').getContext('2d');
+    if (trendChart) trendChart.destroy();
+
+    trendChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: data.dates,
+            datasets: [
+                {
+                    label: '页面浏览量 PV',
+                    data: data.pvData,
+                    borderColor: '#667eea',
+                    backgroundColor: 'rgba(102,126,234,0.1)',
+                    fill: true,
+                    tension: 0.3,
+                    pointRadius: 3,
+                    pointHoverRadius: 6
+                },
+                {
+                    label: '独立访客 UV',
+                    data: data.uvData,
+                    borderColor: '#764ba2',
+                    backgroundColor: 'rgba(118,75,162,0.05)',
+                    fill: true,
+                    tension: 0.3,
+                    pointRadius: 3,
+                    pointHoverRadius: 6
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { position: 'top', labels: { font: { size: 12 } } }
+            },
+            scales: {
+                y: { beginAtZero: true, grid: { color: '#f0f0f0' } },
+                x: { grid: { display: false } }
+            }
+        }
+    });
+}
+
+function renderSourceChart(data) {
+    const ctx = document.getElementById('sourceChart').getContext('2d');
+    if (sourceChart) sourceChart.destroy();
+
+    sourceChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: data.labels,
+            datasets: [{
+                data: data.data,
+                backgroundColor: ['#667eea','#764ba2','#38a169','#ed8936','#718096'],
+                borderWidth: 2,
+                borderColor: '#fff'
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { position: 'right', labels: { font: { size: 11 }, padding: 10 } }
+            }
+        }
+    });
+}
+
+function renderRegionChart(data) {
+    const ctx = document.getElementById('regionChart').getContext('2d');
+    if (regionChart) regionChart.destroy();
+
+    regionChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: data.labels,
+            datasets: [{
+                label: '访客占比 (%)',
+                data: data.data,
+                backgroundColor: '#667eea',
+                borderRadius: 4
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            indexAxis: 'y',
+            plugins: { legend: { display: false } },
+            scales: {
+                x: { beginAtZero: true, grid: { color: '#f0f0f0' } },
+                y: { grid: { display: false } }
+            }
+        }
+    });
+}
+
+function renderTopPages(pages) {
+    const tbody = document.getElementById('topPagesBody');
+    const totalViews = pages.reduce((sum, p) => sum + p.views, 0);
+
+    tbody.innerHTML = pages.map((page, i) => {
+        const rankClass = i === 0 ? 'top1' : i === 1 ? 'top2' : i === 2 ? 'top3' : '';
+        const percent = ((page.views / totalViews) * 100).toFixed(1);
+        return `<tr>
+            <td><span class="rank ${rankClass}">${i + 1}</span></td>
+            <td>${page.path}</td>
+            <td>${page.views.toLocaleString()}</td>
+            <td>${percent}%</td>
+            <td>${page.duration}</td>
+        </tr>`;
+    }).join('');
+}
+
+// ==================== 数据刷新 ====================
+function refreshData() {
+    const days = parseInt(document.getElementById('dateRange').value);
+    const dataSourceType = document.getElementById('dataSourceType').value;
+
+    if (dataSourceType === 'demo') {
+        // 演示数据
+        const data = generateDemoData(days);
+        document.getElementById('totalPV').textContent = data.totalPV.toLocaleString();
+        document.getElementById('totalUV').textContent = data.totalUV.toLocaleString();
+        document.getElementById('todayPV').textContent = data.todayPV;
+        document.getElementById('avgSession').textContent = data.avgSession;
+
+        const pvChange = ((Math.random() - 0.3) * 20).toFixed(1);
+        const uvChange = ((Math.random() - 0.3) * 20).toFixed(1);
+        document.getElementById('pvChange').textContent = (pvChange > 0 ? '↑' : '↓') + ' ' + Math.abs(pvChange) + '% 较上期';
+        document.getElementById('uvChange').textContent = (uvChange > 0 ? '↑' : '↓') + ' ' + Math.abs(uvChange) + '% 较上期';
+        document.getElementById('pvChange').className = 'change ' + (pvChange > 0 ? 'up' : 'down');
+        document.getElementById('uvChange').className = 'change ' + (uvChange > 0 ? 'up' : 'down');
+        document.getElementById('todayChange').textContent = '实时更新';
+        document.getElementById('sessionChange').textContent = '较上期 +0.3 分钟';
+
+        renderTrendChart(data);
+        renderSourceChart(getSourceData());
+        renderRegionChart(getRegionData());
+        renderTopPages(getTopPagesData());
+    } else if (dataSourceType === 'vercel') {
+        // Vercel Analytics API（需配置 Token）
+        fetchVercelAnalytics(days);
+    } else if (dataSourceType === 'umami') {
+        // Umami API
+        fetchUmamiAnalytics(days);
+    }
+}
+
+function fetchVercelAnalytics(days) {
+    const settings = JSON.parse(localStorage.getItem(SETTINGS_KEY) || '{}');
+    if (!settings.apiUrl || !settings.apiToken) {
+        alert('请先配置 Vercel API 地址和 Token');
+        return;
+    }
+    // Vercel Analytics API 调用（预留接口）
+    // 实际部署时通过 Vercel Serverless Function 代理请求
+    alert('Vercel Analytics API 接入中...\n请确保已配置正确的 API 地址和 Token。\n\n提示：建议部署 Vercel Serverless Function 作为 API 代理，避免 Token 暴露。');
+}
+
+function fetchUmamiAnalytics(days) {
+    const settings = JSON.parse(localStorage.getItem(SETTINGS_KEY) || '{}');
+    if (!settings.apiUrl) {
+        alert('请先配置 Umami API 地址');
+        return;
+    }
+    // Umami API 调用（预留接口）
+    alert('Umami API 接入中...\n请确保已部署 Umami 服务并配置正确的 API 地址。');
+}
+
+// ==================== 导出 ====================
+function exportData() {
+    const days = parseInt(document.getElementById('dateRange').value);
+    const data = generateDemoData(days);
+    const exportObj = {
+        exportTime: new Date().toISOString(),
+        dateRange: `近 ${days} 天`,
+        summary: {
+            totalPV: data.totalPV,
+            totalUV: data.totalUV,
+            todayPV: data.todayPV,
+            avgSession: data.avgSession
+        },
+        trend: data.dates.map((d, i) => ({ date: d, pv: data.pvData[i], uv: data.uvData[i] })),
+        sources: getSourceData(),
+        regions: getRegionData(),
+        topPages: getTopPagesData()
+    };
+
+    const blob = new Blob([JSON.stringify(exportObj, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `analytics_${new Date().toISOString().slice(0,10)}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+}
+
+function goHome() {
+    window.open('/', '_blank');
+}
+
+// ==================== 初始化 ====================
+window.addEventListener('load', function() {
+    checkSession();
+    loadSettings();
+});
+</script>
+
+<!-- Vercel Analytics -->
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>
