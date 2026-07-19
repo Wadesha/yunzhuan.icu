@@ -51,7 +51,11 @@
  line-height: 1.7;
  font-size: 0.92rem;
  }
- .footer {
+ .section .en { color: #999; font-size: 0.8rem; font-weight: normal; }
+.course-list { display: flex; flex-wrap: wrap; gap: 6px; }
+.course-link { display: inline-block; padding: 4px 10px; background: #f8f9fa; border-radius: 4px; text-decoration: none; color: #333; font-size: 0.85rem; border-left: 3px solid #667eea; }
+.course-link:hover { background: #e8eaf6; border-left-color: #764ba2; }
+.footer {
  text-align: center;
  margin-top: 20px;
  color: #999;
@@ -74,6 +78,19 @@
  <h2>English Introduction</h2>
  <p>Biomedical Sciences is a discipline that studies the intersection of life sciences and medicine. It covers physiology, pathology, pharmacology, immunology, molecular biology, and more. Coursework includes biology, chemistry, anatomy, physiology, and microbiology. Graduates have extensive employment opportunities in pharmaceutical industry, medical device companies, research institutions, and hospitals. According to NCES data, degrees in biological and biomedical sciences rank fourth in award volume.</p>
  </div>
+
+    <div class="section">
+        <h2>核心课程 <span class="en">Core Courses</span></h2>
+        <div class="course-list">
+            <a href="courses/bio-biology.html" class="course-link">普通生物学</a>
+            <a href="courses/bio-chemistry.html" class="course-link">普通化学</a>
+            <a href="courses/bio-organic.html" class="course-link">有机化学</a>
+            <a href="courses/bio-genetics.html" class="course-link">遗传学</a>
+            <a href="courses/bio-physiology.html" class="course-link">生理学</a>
+            <a href="courses/bio-microbiology.html" class="course-link">微生物学</a>
+            <a href="courses/bio-pathology.html" class="course-link">病理学</a>
+        </div>
+    </div>
 
  <p class="footer">© 2026 yunzhuan.icu | 美国大学专业导航</p>
 </body>
