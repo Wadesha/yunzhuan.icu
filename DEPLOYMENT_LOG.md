@@ -341,6 +341,201 @@ curl -sI https://yunzhuan.icu
 
 ## 8. 互动效果更新
 
+---
+
+## 9. 美国大学专业导航内容更新
+
+### 9.1 更新需求
+
+| 需求编号 | 需求描述 | 优先级 | 来源 |
+|---------|---------|--------|------|
+| R006 | 创建美国大学专业导航网站 | P0 | 用户功能开发请求 |
+| R007 | 按专业分类组织（计算机/工程/商科等） | P0 | 用户功能开发请求 |
+| R008 | 每个专业页面包含中英文介绍 | P0 | 用户功能开发请求 |
+| R009 | 使用纯文本超链接形式 | P1 | 用户功能开发请求 |
+
+### 9.2 专业分类与数量
+
+基于 NCES（美国国家教育统计中心）数据，选择了最受欢迎的 44 个本科专业，分为 8 个分类：
+
+| 分类 | 数量 | 专业列表 |
+|------|------|---------|
+| 💻 计算机类 | 7 | 计算机科学、软件工程、人工智能、数据科学、网络安全、信息系统、人机交互 |
+| 🛠️ 工程类 | 7 | 电气工程、机械工程、生物医学工程、土木工程、化学工程、工业工程、航空航天工程 |
+| 💼 商科类 | 7 | 金融学、会计学、商业分析、市场营销、管理学、国际商务、供应链管理 |
+| 🔬 生物与健康类 | 6 | 生物医学科学、护理学、分子生物学、公共卫生、神经科学、生物化学 |
+| 👥 社会科学类 | 6 | 经济学、心理学、政治学、社会学、历史学、人类学 |
+| 🔭 自然科学类 | 4 | 物理学、化学、数学、环境科学 |
+| 🎨 艺术类 | 4 | 艺术、音乐、设计、传媒 |
+| 📚 教育类 | 3 | 教育学、特殊教育、幼儿教育 |
+
+### 9.3 页面设计规范
+
+#### 9.3.1 首页设计
+
+**文件路径**：`/workspace/index.html`
+
+**设计要点**：
+- 响应式布局，适配移动端和桌面端
+- 卡片式分类展示，每个分类显示专业数量
+- 悬停动画效果（背景色变化 + 左移 + 边框颜色变化）
+- 统计数据展示（8个分类，44个专业）
+
+**关键代码**：
+```html
+<div class="category">
+    <h2>💻 计算机类 (Computer) <span class="count">7个专业</span></h2>
+    <div class="major-list">
+        <a href="computer/cs.html" class="major-link">
+            <span class="cn">计算机科学</span>
+            <span class="en">Computer Science</span>
+        </a>
+        <!-- ... 更多专业链接 -->
+    </div>
+</div>
+```
+
+#### 9.3.2 专业详情页设计
+
+**文件路径**：`/workspace/{category}/{major}.html`
+
+**设计要点**：
+- 统一模板，确保所有专业页面风格一致
+- 返回首页链接（面包屑导航）
+- 中英文双语言介绍
+- 卡片式内容布局
+
+**关键代码**：
+```html
+<a href="../index.html" class="back-link">← 返回首页</a>
+<h1>💻 计算机科学</h1>
+<p class="en-name">Computer Science</p>
+
+<div class="section">
+    <h2>中文介绍</h2>
+    <p>计算机科学是研究计算机系统、算法和计算理论的学科...</p>
+</div>
+
+<div class="section">
+    <h2>English Introduction</h2>
+    <p>Computer Science is the study of computer systems, algorithms...</p>
+</div>
+```
+
+### 9.4 目录结构
+
+```
+/workspace/
+├── index.html                    # 首页（专业分类导航）
+├── computer/                     # 计算机类（7个专业）
+│   ├── cs.html                   # 计算机科学
+│   ├── software.html             # 软件工程
+│   ├── ai.html                   # 人工智能
+│   ├── data.html                 # 数据科学
+│   ├── cyber.html                # 网络安全
+│   ├── info.html                 # 信息系统
+│   └── hci.html                  # 人机交互
+├── engineering/                  # 工程类（7个专业）
+│   ├── electrical.html           # 电气工程
+│   ├── mechanical.html           # 机械工程
+│   ├── biomedical.html           # 生物医学工程
+│   ├── civil.html                # 土木工程
+│   ├── chemical.html             # 化学工程
+│   ├── industrial.html           # 工业工程
+│   └── aerospace.html            # 航空航天工程
+├── business/                     # 商科类（7个专业）
+│   ├── finance.html              # 金融学
+│   ├── accounting.html           # 会计学
+│   ├── analytics.html            # 商业分析
+│   ├── marketing.html            # 市场营销
+│   ├── management.html           # 管理学
+│   ├── international.html        # 国际商务
+│   └── supply.html               # 供应链管理
+├── biology/                      # 生物与健康类（6个专业）
+│   ├── biomedical.html           # 生物医学科学
+│   ├── nursing.html              # 护理学
+│   ├── molecular.html            # 分子生物学
+│   ├── public.html               # 公共卫生
+│   ├── neuroscience.html         # 神经科学
+│   └── biochemistry.html         # 生物化学
+├── social/                       # 社会科学类（6个专业）
+│   ├── economics.html            # 经济学
+│   ├── psychology.html           # 心理学
+│   ├── political.html            # 政治学
+│   ├── sociology.html            # 社会学
+│   ├── history.html              # 历史学
+│   └── anthropology.html         # 人类学
+├── science/                      # 自然科学类（4个专业）
+│   ├── physics.html              # 物理学
+│   ├── chemistry.html            # 化学
+│   ├── mathematics.html          # 数学
+│   └── environmental.html        # 环境科学
+├── arts/                         # 艺术类（4个专业）
+│   ├── fine-arts.html            # 艺术
+│   ├── music.html                # 音乐
+│   ├── design.html               # 设计
+│   └── communication.html        # 传媒
+├── education/                    # 教育类（3个专业）
+│   ├── education.html            # 教育学
+│   ├── special.html              # 特殊教育
+│   └── early.html                # 幼儿教育
+├── snapshots/                    # 快照目录
+├── snapshot.sh                   # 快照脚本
+├── DEPLOYMENT_LOG.md             # 部署记录
+└── README.md                     # 项目说明
+```
+
+### 9.5 专业页面内容规范
+
+每个专业页面包含：
+1. **返回首页链接** - 方便用户导航回首页
+2. **专业中文名** - 大号标题显示
+3. **专业英文名** - 副标题显示
+4. **中文介绍** - 简洁明了的专业描述，包含专业核心内容和就业方向
+5. **English Introduction** - 英文专业介绍，与中文内容对应
+
+**内容编写原则**：
+- 基于 NCES 数据，确保专业信息准确
+- 不虚构数据，仅提供事实性描述
+- 中英文内容一一对应
+- 每个专业介绍约 150-200 字
+
+### 9.6 更新流程
+
+**执行时间**：2026-07-19
+
+**执行步骤**：
+
+```bash
+# 1. 创建目录结构
+mkdir -p computer engineering business biology social science arts education
+
+# 2. 创建首页（专业分类导航）
+# 创建 index.html
+
+# 3. 创建各分类专业页面
+# 创建 computer/*.html（7个）
+# 创建 engineering/*.html（7个）
+# 创建 business/*.html（7个）
+# 创建 biology/*.html（6个）
+# 创建 social/*.html（6个）
+# 创建 science/*.html（4个）
+# 创建 arts/*.html（4个）
+# 创建 education/*.html（3个）
+
+# 4. 保存快照
+./snapshot.sh
+
+# 5. 提交并推送
+git add .
+git commit -m "Add 44 US undergraduate majors navigation with 8 categories"
+git push origin main
+```
+
+---
+
+## 10. 部署流程图
+
 ### 8.1 更新需求
 
 | 功能编号 | 功能描述 | 实现方式 |
@@ -599,9 +794,19 @@ git push origin main
 
 ### 12.2 文件清单
 
-| 文件 | 路径 | 说明 |
-|------|------|------|
-| index.html | /workspace/index.html | 网站主页面 |
+| 文件/目录 | 路径 | 说明 |
+|-----------|------|------|
+| index.html | /workspace/index.html | 网站主页面（专业分类导航） |
+| computer/ | /workspace/computer/ | 计算机类专业页面（7个） |
+| engineering/ | /workspace/engineering/ | 工程类专业页面（7个） |
+| business/ | /workspace/business/ | 商科类专业页面（7个） |
+| biology/ | /workspace/biology/ | 生物与健康类专业页面（6个） |
+| social/ | /workspace/social/ | 社会科学类专业页面（6个） |
+| science/ | /workspace/science/ | 自然科学类专业页面（4个） |
+| arts/ | /workspace/arts/ | 艺术类专业页面（4个） |
+| education/ | /workspace/education/ | 教育类专业页面（3个） |
+| snapshots/ | /workspace/snapshots/ | 历史快照目录 |
+| snapshot.sh | /workspace/snapshot.sh | 快照脚本 |
 | DEPLOYMENT_LOG.md | /workspace/DEPLOYMENT_LOG.md | 部署记录文档 |
 | README.md | /workspace/README.md | 项目说明 |
 
@@ -675,6 +880,7 @@ git push origin main
 | v2.0 | 2026-07-19 | 添加互动效果：粒子、主题切换、打字机、计数器 | cc94f8e |
 | v2.1 | 2026-07-19 | 添加部署记录文档 DEPLOYMENT_LOG.md | 11a9be4 |
 | v2.2 | 2026-07-19 | 添加快照机制：自动保存带时间戳的 HTML 备份 | 908d785 |
+| v3.0 | 2026-07-19 | 创建美国大学专业导航：44个专业，8个分类，中英文介绍 | 待提交 |
 
 ---
 
