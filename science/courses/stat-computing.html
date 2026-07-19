@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>统计计算 - Statistical Computing - yunzhuan.icu</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 760px; margin: 0 auto; padding: 20px 16px; background: #f5f5f5; color: #333; }
+        .back-link { color: #667eea; text-decoration: none; font-size: 0.85rem; margin-bottom: 12px; display: inline-block; }
+        .back-link:hover { text-decoration: underline; }
+        h1 { color: #333; margin-bottom: 4px; font-size: 1.4rem; }
+        .en-name { color: #888; font-size: 0.95rem; margin-bottom: 14px; font-weight: normal; }
+        .section { background: white; border-radius: 8px; padding: 14px 18px; margin-bottom: 10px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+        .section h2 { color: #667eea; margin-bottom: 8px; font-size: 1rem; font-weight: 600; }
+        .section h2 .en { color: #999; font-size: 0.8rem; font-weight: normal; }
+        .section p { color: #333; line-height: 1.7; font-size: 0.92rem; }
+        .meta { font-size: 0.82rem; color: #888; margin-bottom: 8px; }
+        .footer { text-align: center; margin-top: 20px; color: #999; font-size: 0.8rem; }
+    </style>
+</head>
+<body>
+    <a href="../statistics.html" class="back-link">← 返回统计学专业</a>
+    <h1>统计计算</h1>
+    <p class="en-name">Statistical Computing</p>
+    <div class="section">
+        <h2>课程介绍 <span class="en">Course Introduction</span></h2>
+        <p class="meta">学分：3 | 先修课：数理统计学、至少一门编程语言 | 学期：大三上学期</p>
+        <p>本课程讲授统计学中常用的计算方法和技术，是理论统计与实际应用之间的桥梁。内容包括随机数生成（逆变换法、接受拒绝法）、蒙特卡洛积分与模拟、自助法（Bootstrap）与刀切法（Jackknife）、EM算法、数值优化方法（梯度下降、牛顿法）、马尔可夫链蒙特卡洛（MCMC）、高维数据处理、并行计算基础等。课程主要使用R或Python语言，培养学生实现统计算法和处理实际数据的编程能力。</p>
+        <p style="margin-top:8px;">This course covers computational methods and techniques commonly used in statistics, bridging theoretical statistics and practical applications. Topics include random number generation, Monte Carlo integration and simulation, bootstrap and jackknife methods, EM algorithm, numerical optimization (gradient descent, Newton's method), MCMC, high-dimensional data processing, and parallel computing basics.</p>
+    </div>
+    <div class="section">
+        <h2>大作业 <span class="en">Final Project</span></h2>
+        <p class="meta">作业标题：混合模型参数估计的EM算法实现</p>
+        <p>实现高斯混合模型（GMM）的EM算法，用于聚类分析和密度估计。学生需从零编写EM算法代码（不使用现成的GMM库函数），推导E步和M步的计算公式，在模拟数据集和真实数据集（如鸢尾花、手写数字）上测试算法，与K-means聚类结果进行比较，分析不同初始化方式和分量数对结果的影响，并可视化展示聚类效果。</p>
+        <p style="margin-top:8px;">Implement the EM algorithm for Gaussian Mixture Models (GMM) for clustering and density estimation. Students write EM algorithm code from scratch, derive E-step and M-step formulas, test on simulated and real datasets (iris, handwritten digits), compare with K-means, analyze initialization and component count effects, and visualize clustering results.</p>
+    </div>
+    <p class="footer">© 2026 yunzhuan.icu</p>
+</body>
+</html>
