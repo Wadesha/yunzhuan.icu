@@ -51,12 +51,16 @@
  line-height: 1.7;
  font-size: 0.92rem;
  }
- .footer {
- text-align: center;
- margin-top: 20px;
- color: #999;
- font-size: 0.8rem;
- }
+ .section .en { color: #999; font-size: 0.8rem; font-weight: normal; }
+.course-list { display: flex; flex-wrap: wrap; gap: 6px; }
+.course-link { display: inline-block; padding: 4px 10px; background: #f8f9fa; border-radius: 4px; text-decoration: none; color: #333; font-size: 0.85rem; border-left: 3px solid #667eea; }
+.course-link:hover { background: #e8eaf6; border-left-color: #764ba2; }
+.footer {
+text-align: center;
+margin-top: 20px;
+color: #999;
+font-size: 0.8rem;
+}
  </style>
 </head>
 <body>
@@ -75,6 +79,18 @@
  <p>Accounting is the study of recording, classifying, summarizing, and reporting economic activities. It covers financial accounting, management accounting, auditing, taxation, and more. Coursework includes financial statement analysis, cost accounting, auditing, tax law, and accounting information systems. Graduates have extensive employment opportunities in accounting firms, corporate finance departments, and government agencies. Accounting is one of the most stable business majors with strong employment prospects.</p>
  </div>
 
- <p class="footer">© 2026 yunzhuan.icu | 美国大学专业导航</p>
+    <div class="section">
+        <h2>核心课程 <span class="en">Core Courses</span></h2>
+        <div class="course-list">
+            <a href="courses/acct-financial.html" class="course-link">财务会计</a>
+            <a href="courses/acct-managerial.html" class="course-link">管理会计</a>
+            <a href="courses/acct-intermediate.html" class="course-link">中级会计</a>
+            <a href="courses/acct-tax.html" class="course-link">税法</a>
+            <a href="courses/acct-audit.html" class="course-link">审计学</a>
+            <a href="courses/acct-cost.html" class="course-link">成本会计</a>
+            <a href="courses/acct-advanced.html" class="course-link">高级会计</a>
+        </div>
+    </div>
+<p class="footer">© 2026 yunzhuan.icu | 美国大学专业导航</p>
 </body>
 </html>

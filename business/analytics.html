@@ -51,7 +51,11 @@
  line-height: 1.7;
  font-size: 0.92rem;
  }
- .footer {
+ .section .en { color: #999; font-size: 0.8rem; font-weight: normal; }
+        .course-list { display: flex; flex-wrap: wrap; gap: 6px; }
+        .course-link { display: inline-block; padding: 4px 10px; background: #f8f9fa; border-radius: 4px; text-decoration: none; color: #333; font-size: 0.85rem; border-left: 3px solid #667eea; }
+        .course-link:hover { background: #e8eaf6; border-left-color: #764ba2; }
+        .footer {
  text-align: center;
  margin-top: 20px;
  color: #999;
@@ -74,6 +78,20 @@
  <h2>English Introduction</h2>
  <p>Business Analytics combines data analysis with business knowledge to support business decisions using data. It covers data mining, predictive analytics, business intelligence, decision modeling, and more. Coursework includes statistics, data analysis tools, business strategy, and operations management. Graduates have extensive employment opportunities in tech companies, financial institutions, and consulting firms. Business Analytics is one of the most popular business majors in recent years, with continued job demand growth.</p>
  </div>
+
+
+    <div class="section">
+        <h2>核心课程 <span class="en">Core Courses</span></h2>
+        <div class="course-list">
+            <a href="courses/ba-statistics.html" class="course-link">商业统计</a>
+            <a href="courses/ba-python.html" class="course-link">Python数据分析</a>
+            <a href="courses/ba-machine-learning.html" class="course-link">机器学习</a>
+            <a href="courses/ba-visualization.html" class="course-link">数据可视化</a>
+            <a href="courses/ba-database.html" class="course-link">商务数据库</a>
+            <a href="courses/ba-optimization.html" class="course-link">优化建模</a>
+            <a href="courses/ba-capstone.html" class="course-link">商业分析实践</a>
+        </div>
+    </div>
 
  <p class="footer">© 2026 yunzhuan.icu | 美国大学专业导航</p>
 </body>

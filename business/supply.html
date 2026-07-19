@@ -51,12 +51,16 @@
  line-height: 1.7;
  font-size: 0.92rem;
  }
- .footer {
- text-align: center;
- margin-top: 20px;
- color: #999;
- font-size: 0.8rem;
- }
+ .section .en { color: #999; font-size: 0.8rem; font-weight: normal; }
+.course-list { display: flex; flex-wrap: wrap; gap: 6px; }
+.course-link { display: inline-block; padding: 4px 10px; background: #f8f9fa; border-radius: 4px; text-decoration: none; color: #333; font-size: 0.85rem; border-left: 3px solid #667eea; }
+.course-link:hover { background: #e8eaf6; border-left-color: #764ba2; }
+.footer {
+text-align: center;
+margin-top: 20px;
+color: #999;
+font-size: 0.8rem;
+}
  </style>
 </head>
 <body>
@@ -75,6 +79,18 @@
  <p>Supply Chain Management is the study of how to optimize the flow of products from raw materials to end consumers. It covers procurement management, logistics management, inventory management, demand forecasting, and more. Coursework includes operations management, logistics management, supply chain strategy, data analysis, and risk management. Graduates have extensive employment opportunities in manufacturing, retail, logistics companies, and e-commerce platforms. With the complexity of global supply chains, demand for supply chain management continues to increase.</p>
  </div>
 
+    <div class="section">
+        <h2>核心课程 <span class="en">Core Courses</span></h2>
+        <div class="course-list">
+            <a href="courses/scm-intro.html" class="course-link">供应链管理导论</a>
+            <a href="courses/scm-logistics.html" class="course-link">物流管理</a>
+            <a href="courses/scm-operations.html" class="course-link">运营管理</a>
+            <a href="courses/scm-procurement.html" class="course-link">采购管理</a>
+            <a href="courses/scm-inventory.html" class="course-link">库存管理</a>
+            <a href="courses/scm-simulation.html" class="course-link">供应链仿真</a>
+            <a href="courses/scm-strategy.html" class="course-link">供应链战略</a>
+        </div>
+    </div>
  <p class="footer">© 2026 yunzhuan.icu | 美国大学专业导航</p>
 </body>
 </html>
