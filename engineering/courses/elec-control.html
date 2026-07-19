@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>控制系统 - Control Systems - yunzhuan.icu</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 760px; margin: 0 auto; padding: 20px 16px; background: #f5f5f5; color: #333; }
+        .back-link { color: #667eea; text-decoration: none; font-size: 0.85rem; margin-bottom: 12px; display: inline-block; }
+        .back-link:hover { text-decoration: underline; }
+        h1 { color: #333; margin-bottom: 4px; font-size: 1.4rem; }
+        .en-name { color: #888; font-size: 0.95rem; margin-bottom: 14px; font-weight: normal; }
+        .section { background: white; border-radius: 8px; padding: 14px 18px; margin-bottom: 10px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+        .section h2 { color: #667eea; margin-bottom: 8px; font-size: 1rem; font-weight: 600; }
+        .section h2 .en { color: #999; font-size: 0.8rem; font-weight: normal; }
+        .section p { color: #333; line-height: 1.7; font-size: 0.92rem; }
+        .meta { font-size: 0.82rem; color: #888; margin-bottom: 8px; }
+        .footer { text-align: center; margin-top: 20px; color: #999; font-size: 0.8rem; }
+    </style>
+</head>
+<body>
+    <a href="../electrical.html" class="back-link">← 返回电气工程</a>
+    <h1>控制系统</h1>
+    <p class="en-name">Control Systems</p>
+    <div class="section">
+        <h2>课程介绍 <span class="en">Course Introduction</span></h2>
+        <p class="meta">学分：3 | 先修课：信号与系统、微分方程 | 学期：第6学期</p>
+        <p>控制系统是电气工程与自动化专业的核心课程，讲授反馈控制系统的建模、分析与设计方法。课程内容包括线性系统数学模型、传递函数与方块图、状态空间描述、时域性能指标与稳定性判据、根轨迹法、频域分析中的伯德图与奈奎斯特判据、PID 控制器设计与超前滞后校正。结合 MATLAB/Simulink 仿真，培养学生对实际工程系统的分析设计与调试能力。</p>
+        <p style="margin-top:8px;">Control Systems is a core course for electrical engineering and automation majors, teaching modeling, analysis, and design of feedback control systems. Topics include mathematical models of linear systems, transfer functions and block diagrams, state-space representation, time-domain performance and stability criteria, root locus, Bode plots and Nyquist criterion in frequency-domain analysis, and PID controller design with lead-lag compensation. Combined with MATLAB/Simulink, it develops practical analysis, design, and tuning skills.</p>
+    </div>
+    <div class="section">
+        <h2>大作业 <span class="en">Final Project</span></h2>
+        <p class="meta">作业标题：直流电机调速系统的 PID 控制器设计与仿真</p>
+        <p>学生建立直流他励电机的数学模型，在 Simulink 中搭建闭环调速系统，分别采用试凑法与 Ziegler-Nichols 法整定 PID 参数，对比单位阶跃响应的上升时间、超调量与稳态误差。要求设计串联校正装置使系统满足给定性能指标，撰写报告并提交仿真模型与参数整定过程文档。</p>
+        <p style="margin-top:8px;">Students model a separately excited DC motor, build a closed-loop speed control system in Simulink, tune PID parameters using trial-and-error and Ziegler-Nichols methods, and compare rise time, overshoot, and steady-state error of the unit step response. They design a series compensator to meet given performance specifications, and submit a report with simulation model and tuning documentation.</p>
+    </div>
+    <p class="footer">© 2026 yunzhuan.icu</p>
+</body>
+</html>
