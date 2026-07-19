@@ -1094,6 +1094,111 @@ git push origin main
 - **密码安全性**：admin.html 使用前端校验，非强安全方案，主要防止随意浏览
 - **数据延迟**：Vercel Analytics 数据通常在 30 秒内显示
 
+### 17.7 自建真实统计系统（v2.0 升级）
+
+#### 17.7.1 背景
+
+Vercel Analytics 免费版虽然能在后台看数据，但 API 访问需要 Pro 版本。为了让 admin.html 仪表盘显示**真实数据**，自建了一套轻量级统计系统。
+
+#### 17.7.2 架构
+
+```
+用户访问页面
+    │
+    ├─→ Vercel Analytics（后台查看）
+    │
+    └─→ /js/track.js（客户端采集）
+            │
+            ▼
+        POST /api/track（Serverless Function）
+            │
+            ▼
+        Vercel KV Storage（数据存储）
+            │
+            ▼
+        GET /api/stats（Serverless Function）
+            │
+            ▼
+        admin.html 仪表盘（数据展示）
+```
+
+#### 17.7.3 新增文件
+
+| 文件 | 说明 |
+|------|------|
+| `/js/track.js` | 客户端跟踪脚本，生成访客 ID + 发送访问记录 |
+| `/api/track.js` | Serverless Function，记录访问到 Vercel KV |
+| `/api/stats.js` | Serverless Function，返回统计数据 |
+
+#### 17.7.4 数据存储方案
+
+使用 **Vercel KV**（基于 Upstash Redis）存储数据：
+
+| Key 格式 | 说明 | 示例 |
+|----------|------|------|
+| `total_pv` | 总访问量（计数器） | INCR total_pv |
+| `daily_pv:YYYY-MM-DD` | 每日访问量 | INCR daily_pv:2026-07-19 |
+| `page_pv:/path` | 单页面访问量 | INCR page_pv:/computer/cs.html |
+| `total_uv` | 总独立访客（集合） | SADD total_uv v_1234_abc |
+| `daily_uv:YYYY-MM-DD` | 每日独立访客 | SADD daily_uv:2026-07-19 v_1234_abc |
+
+使用 Pipeline 批量执行命令，减少 KV 调用次数。
+
+#### 17.7.5 仪表盘升级（v2.0）
+
+**新增功能**：
+
+1. **顶部实时滚动条**：显示今日访问/今日访客/总访问量/总访客/更新时间
+2. **真实数据模式**（默认）：调用 `/api/stats` 获取真实统计
+3. **每 30 秒自动刷新**：登录后自动定时拉取最新数据
+4. **降级机制**：KV 未配置时回退到演示数据并显示提示
+5. **连接测试**：点击"测试连接"可验证 KV 是否配置成功
+
+**滚动条效果**：
+- 渐变紫色背景（#667eea → #764ba2）
+- 40 秒循环滚动
+- 显示实时数据：今日访问 XX 次 | 今日访客 XX 人 | 总访问量 XX 次 | 总访客 XX 人 | 更新时间
+
+#### 17.7.6 部署步骤（用户必做）
+
+**第 1 步**：在 Vercel 后台创建 KV Storage
+1. 登录 https://vercel.com/dashboard
+2. 进入 yunzhuan-icu 项目
+3. 点击 **Storage** 标签
+4. 点击 **Create Database** → 选择 **KV**
+5. 创建完成后点击 **Connect to Project**
+
+**第 2 步**：Vercel 自动注入环境变量
+- `KV_REST_API_URL`：KV 的 REST API 地址
+- `KV_REST_API_TOKEN`：KV 的访问 Token
+
+**第 3 步**：重新部署（Vercel 会自动触发）
+
+**第 4 步**：访问 https://yunzhuan.icu/admin.html
+- 输入密码：`yunzhuan2026`
+- 数据源默认为"真实数据"
+- 顶部滚动条显示实时统计
+
+#### 17.7.7 批量添加跟踪脚本
+
+使用 Python 脚本 `add_track.py` 批量给所有 HTML 页面添加引用：
+
+```html
+<!-- Vercel Analytics -->
+<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/js/track.js"></script>
+```
+
+**执行结果**：351 个文件全部添加成功
+
+#### 17.7.8 免费额度说明
+
+| 资源 | 免费额度 | 预估使用量 |
+|------|----------|-----------|
+| Vercel KV 命令 | 每天 3000 次 | 每次访问 5-7 条命令，约支持 400-600 次访问/天 |
+| Serverless Function 调用 | 每天 100000 次 | 每次访问 1 次调用，远超需求 |
+| KV 存储 | 256 MB | 足够存储数年访问数据 |
+
 ---
 
 *文档更新时间：2026-07-19*

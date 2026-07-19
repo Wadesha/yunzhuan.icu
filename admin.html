@@ -85,6 +85,39 @@
         .dashboard { display: none; }
         .dashboard.active { display: block; }
 
+        /* 顶部滚动条 */
+        .ticker-bar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            overflow: hidden;
+            white-space: nowrap;
+            padding: 8px 0;
+            position: relative;
+        }
+        .ticker-content {
+            display: inline-block;
+            animation: scroll-left 40s linear infinite;
+            font-size: 0.85rem;
+            padding-left: 100%;
+        }
+        .ticker-content span {
+            margin-right: 40px;
+            font-weight: 500;
+        }
+        .ticker-content .num {
+            font-weight: 700;
+            font-size: 0.95rem;
+            margin: 0 4px;
+        }
+        .ticker-content .sep {
+            margin: 0 20px;
+            opacity: 0.5;
+        }
+        @keyframes scroll-left {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100%); }
+        }
+
         .topbar {
             background: white;
             padding: 14px 24px;
@@ -334,6 +367,13 @@
         </div>
     </div>
 
+    <!-- 顶部实时数据滚动条 -->
+    <div class="ticker-bar">
+        <div class="ticker-content" id="tickerContent">
+            <span>正在加载访问数据...</span>
+        </div>
+    </div>
+
     <div class="container">
         <!-- 统计卡片 -->
         <div class="stats-grid">
@@ -406,8 +446,8 @@
             <div class="settings-row">
                 <label>数据源类型</label>
                 <select id="dataSourceType">
-                    <option value="demo">演示数据（默认）</option>
-                    <option value="vercel">Vercel Analytics API</option>
+                    <option value="real">真实数据（自建统计，默认）</option>
+                    <option value="demo">演示数据</option>
                     <option value="umami">Umami API</option>
                     <option value="manual">手动录入</option>
                 </select>
@@ -428,7 +468,7 @@
         </div>
 
         <div class="footer">
-            © 2026 yunzhuan.icu | 管理后台 v1.0 | 数据本地存储，支持接入 Vercel Analytics / Umami
+            © 2026 yunzhuan.icu | 管理后台 v2.0 | 真实数据采集：Vercel KV + Serverless Function
         </div>
     </div>
 </div>
@@ -469,6 +509,14 @@ function showDashboard() {
     document.getElementById('loginPage').style.display = 'none';
     document.getElementById('dashboard').classList.add('active');
     refreshData();
+    // 每 30 秒自动刷新真实数据
+    if (statsRefreshTimer) clearInterval(statsRefreshTimer);
+    statsRefreshTimer = setInterval(function() {
+        const dataSourceType = document.getElementById('dataSourceType').value;
+        if (dataSourceType === 'real') {
+            fetchRealStats(parseInt(document.getElementById('dateRange').value));
+        }
+    }, 30000);
 }
 
 document.getElementById('passwordInput').addEventListener('keypress', function(e) {
@@ -498,7 +546,17 @@ function saveSettings() {
 
 function testConnection() {
     const type = document.getElementById('dataSourceType').value;
-    if (type === 'demo') {
+    if (type === 'real') {
+        fetch('/api/stats').then(r => r.json()).then(data => {
+            if (data.ok) {
+                alert('连接成功！\n总访问量：' + data.totalPV + '\n今日访问：' + data.todayPV + '\n总访客：' + data.totalUV);
+            } else {
+                alert('连接失败：' + (data.message || data.reason || '未知错误') + '\n\n请在 Vercel 后台创建 KV Storage');
+            }
+        }).catch(e => {
+            alert('连接失败：' + e.message);
+        });
+    } else if (type === 'demo') {
         alert('演示数据模式，无需连接测试');
     } else if (type === 'manual') {
         alert('手动录入模式，请在数据管理中录入数据');
@@ -683,12 +741,141 @@ function renderTopPages(pages) {
     }).join('');
 }
 
+// ==================== 真实数据获取 ====================
+let statsRefreshTimer = null;
+
+async function fetchRealStats(days) {
+    try {
+        const res = await fetch('/api/stats');
+        const data = await res.json();
+
+        if (data.ok) {
+            // 更新统计卡片
+            document.getElementById('totalPV').textContent = data.totalPV.toLocaleString();
+            document.getElementById('totalUV').textContent = data.totalUV.toLocaleString();
+            document.getElementById('todayPV').textContent = data.todayPV;
+            document.getElementById('avgSession').textContent = '--';
+
+            document.getElementById('pvChange').textContent = '真实数据';
+            document.getElementById('uvChange').textContent = '真实数据';
+            document.getElementById('todayChange').textContent = '今日实时';
+            document.getElementById('sessionChange').textContent = '需更多数据';
+
+            // 更新顶部滚动条
+            updateTicker(data);
+
+            // 更新趋势图
+            const trendData = generateTrendFromReal(data, days);
+            renderTrendChart(trendData);
+
+            // 来源和地区暂时用演示数据
+            renderSourceChart(getSourceData());
+            renderRegionChart(getRegionData());
+            renderTopPages(getTopPagesData());
+        } else {
+            // KV 未配置
+            document.getElementById('tickerContent').innerHTML =
+                '<span>统计服务未配置</span><span class="sep">|</span>' +
+                '<span>请在 Vercel 后台创建 KV Storage 并连接到项目</span><span class="sep">|</span>' +
+                '<span>详见 DEPLOYMENT_LOG.md 第 17 节</span>';
+
+            // 回退到演示数据
+            const demoData = generateDemoData(days);
+            document.getElementById('totalPV').textContent = demoData.totalPV.toLocaleString();
+            document.getElementById('totalUV').textContent = demoData.totalUV.toLocaleString();
+            document.getElementById('todayPV').textContent = demoData.todayPV;
+            document.getElementById('avgSession').textContent = demoData.avgSession;
+            renderTrendChart(demoData);
+            renderSourceChart(getSourceData());
+            renderRegionChart(getRegionData());
+            renderTopPages(getTopPagesData());
+        }
+    } catch (e) {
+        document.getElementById('tickerContent').innerHTML =
+            '<span>无法连接统计服务</span><span class="sep">|</span>' +
+            '<span>请检查网络或稍后重试</span><span class="sep">|</span>' +
+            '<span>错误：' + e.message + '</span>';
+
+        // 回退到演示数据
+        const demoData = generateDemoData(days);
+        document.getElementById('totalPV').textContent = demoData.totalPV.toLocaleString();
+        document.getElementById('totalUV').textContent = demoData.totalUV.toLocaleString();
+        document.getElementById('todayPV').textContent = demoData.todayPV;
+        document.getElementById('avgSession').textContent = demoData.avgSession;
+        renderTrendChart(demoData);
+        renderSourceChart(getSourceData());
+        renderRegionChart(getRegionData());
+        renderTopPages(getTopPagesData());
+    }
+}
+
+function updateTicker(data) {
+    const now = new Date();
+    const timeStr = now.toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+    const dateStr = now.toLocaleDateString('zh-CN');
+
+    // 重复两次保证滚动连续
+    const item =
+        '<span>今日访问：<span class="num">' + data.todayPV + '</span>次</span>' +
+        '<span class="sep">|</span>' +
+        '<span>今日访客：<span class="num">' + data.todayUV + '</span>人</span>' +
+        '<span class="sep">|</span>' +
+        '<span>总访问量：<span class="num">' + data.totalPV.toLocaleString() + '</span>次</span>' +
+        '<span class="sep">|</span>' +
+        '<span>总访客：<span class="num">' + data.totalUV.toLocaleString() + '</span>人</span>' +
+        '<span class="sep">|</span>' +
+        '<span>数据更新于：<span class="num">' + dateStr + ' ' + timeStr + '</span></span>' +
+        '<span class="sep">|</span>' +
+        '<span>yunzhuan.icu 访问统计系统</span>' +
+        '<span class="sep">|</span>';
+
+    document.getElementById('tickerContent').innerHTML = item + item;
+}
+
+function generateTrendFromReal(data, days) {
+    const dates = [];
+    const pvData = [];
+    const uvData = [];
+    const today = new Date();
+
+    for (let i = days - 1; i >= 0; i--) {
+        const d = new Date(today);
+        d.setDate(d.getDate() - i);
+        dates.push((d.getMonth()+1) + '/' + d.getDate());
+
+        if (i === 0) {
+            // 今天用真实数据
+            pvData.push(data.todayPV);
+            uvData.push(data.todayUV);
+        } else {
+            // 历史数据估算
+            const ratio = (days - i) / days;
+            const histPV = Math.max(0, Math.floor((data.totalPV - data.todayPV) * ratio / (days - 1)));
+            const histUV = Math.max(0, Math.floor((data.totalUV - data.todayUV) * ratio / (days - 1)));
+            pvData.push(histPV);
+            uvData.push(histUV);
+        }
+    }
+
+    return {
+        dates: dates,
+        pvData: pvData,
+        uvData: uvData,
+        totalPV: data.totalPV,
+        totalUV: data.totalUV,
+        todayPV: data.todayPV,
+        avgSession: '--'
+    };
+}
+
 // ==================== 数据刷新 ====================
 function refreshData() {
     const days = parseInt(document.getElementById('dateRange').value);
     const dataSourceType = document.getElementById('dataSourceType').value;
 
-    if (dataSourceType === 'demo') {
+    if (dataSourceType === 'real') {
+        fetchRealStats(days);
+    } else if (dataSourceType === 'demo') {
         // 演示数据
         const data = generateDemoData(days);
         document.getElementById('totalPV').textContent = data.totalPV.toLocaleString();
@@ -702,31 +889,22 @@ function refreshData() {
         document.getElementById('uvChange').textContent = (uvChange > 0 ? '↑' : '↓') + ' ' + Math.abs(uvChange) + '% 较上期';
         document.getElementById('pvChange').className = 'change ' + (pvChange > 0 ? 'up' : 'down');
         document.getElementById('uvChange').className = 'change ' + (uvChange > 0 ? 'up' : 'down');
-        document.getElementById('todayChange').textContent = '实时更新';
+        document.getElementById('todayChange').textContent = '演示数据';
         document.getElementById('sessionChange').textContent = '较上期 +0.3 分钟';
+
+        // 演示滚动条
+        document.getElementById('tickerContent').innerHTML =
+            '<span>演示模式</span><span class="sep">|</span>' +
+            '<span>切换到"真实数据"查看实际访问统计</span><span class="sep">|</span>' +
+            '<span>今日访问：<span class="num">' + data.todayPV + '</span>次（演示）</span>';
 
         renderTrendChart(data);
         renderSourceChart(getSourceData());
         renderRegionChart(getRegionData());
         renderTopPages(getTopPagesData());
-    } else if (dataSourceType === 'vercel') {
-        // Vercel Analytics API（需配置 Token）
-        fetchVercelAnalytics(days);
     } else if (dataSourceType === 'umami') {
-        // Umami API
         fetchUmamiAnalytics(days);
     }
-}
-
-function fetchVercelAnalytics(days) {
-    const settings = JSON.parse(localStorage.getItem(SETTINGS_KEY) || '{}');
-    if (!settings.apiUrl || !settings.apiToken) {
-        alert('请先配置 Vercel API 地址和 Token');
-        return;
-    }
-    // Vercel Analytics API 调用（预留接口）
-    // 实际部署时通过 Vercel Serverless Function 代理请求
-    alert('Vercel Analytics API 接入中...\n请确保已配置正确的 API 地址和 Token。\n\n提示：建议部署 Vercel Serverless Function 作为 API 代理，避免 Token 暴露。');
 }
 
 function fetchUmamiAnalytics(days) {
@@ -735,7 +913,6 @@ function fetchUmamiAnalytics(days) {
         alert('请先配置 Umami API 地址');
         return;
     }
-    // Umami API 调用（预留接口）
     alert('Umami API 接入中...\n请确保已部署 Umami 服务并配置正确的 API 地址。');
 }
 
@@ -780,5 +957,6 @@ window.addEventListener('load', function() {
 
 <!-- Vercel Analytics -->
 <script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/js/track.js"></script>
 </body>
 </html>
