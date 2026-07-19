@@ -607,12 +607,74 @@ git push origin main
 
 ---
 
-## 13. 版本历史
+## 13. 快照机制
+
+### 13.1 功能说明
+
+为每次 HTML 更新创建带时间戳的快照备份，方便回溯历史版本。
+
+### 13.2 快照文件命名规则
+
+```
+snapshots/index_YYYYMMDD_HHMMSS.html
+```
+
+**示例**：`snapshots/index_20260719_012800.html`
+
+### 13.3 快照脚本
+
+**文件路径**：`/workspace/snapshot.sh`
+
+```bash
+#!/bin/bash
+
+timestamp=$(date +"%Y%m%d_%H%M%S")
+snapshot_dir="snapshots"
+source_file="index.html"
+snapshot_file="${snapshot_dir}/index_${timestamp}.html"
+
+mkdir -p "${snapshot_dir}"
+cp "${source_file}" "${snapshot_file}"
+
+echo "✅ 快照已保存: ${snapshot_file}"
+git add "${snapshot_file}"
+echo "✅ 快照已添加到 git"
+```
+
+### 13.4 使用方式
+
+```bash
+# 每次更新前运行快照脚本
+./snapshot.sh
+
+# 然后正常提交和推送
+git add index.html
+git commit -m "描述更新内容"
+git push origin main
+```
+
+### 13.5 快照目录结构
+
+```
+/workspace/
+├── index.html              # 当前最新版本
+├── snapshot.sh             # 快照脚本
+└── snapshots/              # 快照目录
+    ├── index_20260719_012800.html  # 历史快照 1
+    ├── index_20260719_xxxxxx.html  # 历史快照 2
+    └── ...                          # 更多快照
+```
+
+---
+
+## 14. 版本历史
 
 | 版本 | 日期 | 变更内容 | 提交哈希 |
 |------|------|---------|---------|
 | v1.0 | 2026-07-19 | 初始版本：Hello World 页面 | 32e4bf8 |
 | v2.0 | 2026-07-19 | 添加互动效果：粒子、主题切换、打字机、计数器 | cc94f8e |
+| v2.1 | 2026-07-19 | 添加部署记录文档 DEPLOYMENT_LOG.md | 11a9be4 |
+| v2.2 | 2026-07-19 | 添加快照机制：自动保存带时间戳的 HTML 备份 | 908d785 |
 
 ---
 
