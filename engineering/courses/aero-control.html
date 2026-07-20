@@ -30,12 +30,12 @@
         <p>本课程是航空航天工程专业的核心专业课，讲授飞行器飞行控制系统的基本原理与设计方法。内容包括飞行器运动方程与传递函数、飞行器模态特性分析、飞行品质评价、增稳系统与控制增稳系统、自动驾驶仪设计、飞行控制系统经典设计方法、现代飞行控制技术简介。课程注重经典控制理论在飞行器控制中的应用，使学生掌握飞行器飞行控制系统的分析与初步设计能力。</p>
         <p style="margin-top:8px;">This core aerospace engineering course teaches fundamental principles and design methods of aircraft flight control systems. Topics include aircraft equations of motion and transfer functions, modal characteristic analysis, flying qualities evaluation, stability augmentation systems and control augmentation systems, autopilot design, classical flight control design methods, and introduction to modern flight control techniques. The course focuses on applying classical control theory to aircraft control, developing students' ability to analyze and preliminarily design flight control systems.</p>
     </div>
-        <div class="section">
+    <div class="section">
         <h2>大作业 <span class="en">Final Project</span></h2>
         <div>
-<p class="meta">作业标题：课程项目</p>
-        <p>学生需完成本课程的综合项目，展示所学知识和技能的应用能力。</p>
-        <p style="margin-top:8px;">Students complete a comprehensive project demonstrating application of knowledge and skills learned in this course.</p>
+<p class="meta">作业标题：飞行器纵向自动驾驶仪设计与仿真 / Aircraft Longitudinal Autopilot Design and Simulation</p>
+        <p>针对指定机型完成纵向通道自动驾驶仪设计，包括俯仰角保持与高度保持模式。建立飞机纵向运动模型、设计控制律并使用MATLAB/Simulink完成闭环仿真与飞行品质评估。</p>
+        <p style="margin-top:8px;">Design a longitudinal channel autopilot for a specified aircraft, including pitch attitude hold and altitude hold modes. Build the longitudinal motion model, design control laws, and complete closed-loop simulation and flying qualities evaluation using MATLAB/Simulink.</p>
         </div>
     </div>
     <div class="section">
@@ -45,33 +45,33 @@
 
 <div class="step-item">
     <div class="step-number">步骤 1</div>
-    <div class="step-title">需求分析</div>
-    <div class="step-desc">明确项目目标和功能需求</div>
-    <div class="step-output">产出：需求规格文档</div>
+    <div class="step-title">飞行器建模</div>
+    <div class="step-desc">建立纵向短周期与长周期运动方程和传递函数</div>
+    <div class="step-output">产出：纵向运动数学模型</div>
 </div>
 <div class="step-item">
     <div class="step-number">步骤 2</div>
-    <div class="step-title">方案设计</div>
-    <div class="step-desc">设计整体架构和方案</div>
-    <div class="step-output">产出：系统设计文档</div>
+    <div class="step-title">飞行品质分析</div>
+    <div class="step-desc">分析飞机模态特性并评估飞行品质等级</div>
+    <div class="step-output">产出：模态分析报告</div>
 </div>
 <div class="step-item">
     <div class="step-number">步骤 3</div>
-    <div class="step-title">核心实现</div>
-    <div class="step-desc">编写核心代码实现功能</div>
-    <div class="step-output">产出：源代码文件</div>
+    <div class="step-title">控制律设计</div>
+    <div class="step-desc">设计俯仰阻尼器与自动驾驶仪控制律参数</div>
+    <div class="step-output">产出：控制律设计文档</div>
 </div>
 <div class="step-item">
     <div class="step-number">步骤 4</div>
-    <div class="step-title">测试验证</div>
-    <div class="step-desc">设计测试用例验证正确性</div>
-    <div class="step-output">产出：测试报告</div>
+    <div class="step-title">仿真验证</div>
+    <div class="step-desc">在Simulink中搭建闭环仿真并验证跟踪性能</div>
+    <div class="step-output">产出：Simulink仿真模型</div>
 </div>
 <div class="step-item">
     <div class="step-number">步骤 5</div>
-    <div class="step-title">文档提交</div>
-    <div class="step-desc">整理代码注释和项目文档</div>
-    <div class="step-output">产出：最终提交材料</div>
+    <div class="step-title">品质评估与报告</div>
+    <div class="step-desc">评估闭环飞行品质并撰写设计报告</div>
+    <div class="step-output">产出：自动驾驶仪设计报告</div>
 </div>
             
 
@@ -79,33 +79,33 @@
     <h3 style="font-size:0.9rem;color:#667eea;margin-bottom:8px;">Steps</h3>
 <div class="step-item">
     <div class="step-number">Step 1</div>
-    <div class="step-title">Requirements</div>
-    <div class="step-desc">Define objectives and requirements</div>
-    <div class="step-output">Deliverable: Requirements Doc</div>
+    <div class="step-title">Aircraft Modeling</div>
+    <div class="step-desc">Derive longitudinal short-period and phugoid equations and transfer functions</div>
+    <div class="step-output">Deliverable: Longitudinal Math Model</div>
 </div>
 <div class="step-item">
     <div class="step-number">Step 2</div>
-    <div class="step-title">Design</div>
-    <div class="step-desc">Design architecture and solutions</div>
-    <div class="step-output">Deliverable: Design Doc</div>
+    <div class="step-title">Flying Qualities Analysis</div>
+    <div class="step-desc">Analyze modal characteristics and evaluate handling qualities levels</div>
+    <div class="step-output">Deliverable: Modal Analysis Report</div>
 </div>
 <div class="step-item">
     <div class="step-number">Step 3</div>
-    <div class="step-title">Implementation</div>
-    <div class="step-desc">Write core code</div>
-    <div class="step-output">Deliverable: Source Code</div>
+    <div class="step-title">Control Law Design</div>
+    <div class="step-desc">Design pitch damper and autopilot control law parameters</div>
+    <div class="step-output">Deliverable: Control Law Design Doc</div>
 </div>
 <div class="step-item">
     <div class="step-number">Step 4</div>
-    <div class="step-title">Testing</div>
-    <div class="step-desc">Verify functionality</div>
-    <div class="step-output">Deliverable: Test Report</div>
+    <div class="step-title">Simulation Verification</div>
+    <div class="step-desc">Build closed-loop Simulink model and verify tracking performance</div>
+    <div class="step-output">Deliverable: Simulink Model</div>
 </div>
 <div class="step-item">
     <div class="step-number">Step 5</div>
-    <div class="step-title">Documentation</div>
-    <div class="step-desc">Prepare final submission</div>
-    <div class="step-output">Deliverable: Final Docs</div>
+    <div class="step-title">Quality Evaluation and Report</div>
+    <div class="step-desc">Evaluate closed-loop flying qualities and write design report</div>
+    <div class="step-output">Deliverable: Autopilot Design Report</div>
 </div>
             </div>
         </div>

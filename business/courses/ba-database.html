@@ -30,15 +30,15 @@
         <p>本课程教授关系型数据库的设计与应用，重点关注商务场景下的数据管理与查询。内容涵盖关系模型、SQL语言（DDL、DML、DQL）、数据库设计范式、ER图建模、索引与性能优化、事务与并发控制、数据仓库基础等。课程以MySQL为主要实践平台，结合电商订单系统、CRM系统、ERP系统等商业案例，培养学生设计合理数据库结构、编写高效SQL查询、从数据库中提取分析数据的能力。</p>
         <p style="margin-top:8px;">This course teaches relational database design and application with a focus on data management and querying in business contexts. Topics include relational models, SQL (DDL, DML, DQL), database normalization, ER diagram modeling, indexing and performance optimization, transactions and concurrency control, and data warehousing fundamentals. Using MySQL as the primary platform with business cases like e-commerce order systems, CRM, and ERP systems, students develop skills in designing proper database structures, writing efficient SQL queries, and extracting data for analysis.</p>
     </div>
-        <div class="section">
+            <div class="section">
         <h2>大作业 <span class="en">Final Project</span></h2>
         <div>
-<p class="meta">作业标题：课程项目</p>
-        <p>学生需完成本课程的综合项目，展示所学知识和技能的应用能力。</p>
-        <p style="margin-top:8px;">Students complete a comprehensive project demonstrating application of knowledge and skills learned in this course.</p>
+<p class="meta">作业标题：电商订单系统数据库设计与实现</p>
+        <p>针对电商订单业务场景，进行需求分析并绘制ER图，按数据库范式设计表结构，使用MySQL创建数据库并编写SQL实现数据增删改查，最终交付完整的数据库设计方案和SQL脚本。</p>
+        <p style="margin-top:8px;">For an e-commerce order scenario, perform requirements analysis, draw ER diagrams, design table structures following normalization, use MySQL to create the database and write SQL for CRUD operations, delivering a complete design scheme and SQL scripts.</p>
         </div>
     </div>
-    <div class="section">
+        <div class="section">
         <h2>实施步骤 <span class="en">Implementation Steps</span></h2>
         <div>
 
@@ -46,31 +46,31 @@
 <div class="step-item">
     <div class="step-number">步骤 1</div>
     <div class="step-title">需求分析</div>
-    <div class="step-desc">分析业务需求，确定数据实体和关系</div>
-    <div class="step-output">产出：需求分析文档</div>
+    <div class="step-desc">分析电商订单系统的数据需求</div>
+    <div class="step-output">产出：需求规格说明</div>
 </div>
 <div class="step-item">
     <div class="step-number">步骤 2</div>
-    <div class="step-title">E-R建模</div>
-    <div class="step-desc">设计实体关系图和属性定义</div>
-    <div class="step-output">产出：E-R模型图</div>
+    <div class="step-title">ER图设计</div>
+    <div class="step-desc">绘制实体关系图并识别主外键</div>
+    <div class="step-output">产出：ER图</div>
 </div>
 <div class="step-item">
     <div class="step-number">步骤 3</div>
-    <div class="step-title">关系设计</div>
-    <div class="step-desc">规范化到第三范式，设计表结构</div>
-    <div class="step-output">产出：关系模式设计</div>
+    <div class="step-title">表结构设计</div>
+    <div class="step-desc">按第三范式设计数据库表结构</div>
+    <div class="step-output">产出：表结构定义</div>
 </div>
 <div class="step-item">
     <div class="step-number">步骤 4</div>
-    <div class="step-title">SQL实现</div>
-    <div class="step-desc">编写建表、查询、存储过程等SQL脚本</div>
+    <div class="step-title">数据库实现</div>
+    <div class="step-desc">用MySQL建表并编写SQL查询</div>
     <div class="step-output">产出：SQL脚本</div>
 </div>
 <div class="step-item">
     <div class="step-number">步骤 5</div>
-    <div class="step-title">测试验证</div>
-    <div class="step-desc">导入测试数据验证功能正确性</div>
+    <div class="step-title">性能优化与测试</div>
+    <div class="step-desc">创建索引并测试查询性能</div>
     <div class="step-output">产出：测试报告</div>
 </div>
             
@@ -80,37 +80,36 @@
 <div class="step-item">
     <div class="step-number">Step 1</div>
     <div class="step-title">Requirements Analysis</div>
-    <div class="step-desc">Analyze business requirements</div>
-    <div class="step-output">Deliverable: Requirements Doc</div>
+    <div class="step-desc">Analyze data requirements of e-commerce system</div>
+    <div class="step-output">Deliverable: Requirements Spec</div>
 </div>
 <div class="step-item">
     <div class="step-number">Step 2</div>
-    <div class="step-title">E-R Modeling</div>
-    <div class="step-desc">Design entity-relationship diagram</div>
-    <div class="step-output">Deliverable: E-R Diagram</div>
+    <div class="step-title">ER Diagram Design</div>
+    <div class="step-desc">Draw ER diagram and identify keys</div>
+    <div class="step-output">Deliverable: ER Diagram</div>
 </div>
 <div class="step-item">
     <div class="step-number">Step 3</div>
-    <div class="step-title">Schema Design</div>
-    <div class="step-desc">Normalize to 3NF and design tables</div>
-    <div class="step-output">Deliverable: Schema Design</div>
+    <div class="step-title">Table Structure Design</div>
+    <div class="step-desc">Design tables following third normal form</div>
+    <div class="step-output">Deliverable: Schema Definition</div>
 </div>
 <div class="step-item">
     <div class="step-number">Step 4</div>
-    <div class="step-title">SQL Implementation</div>
-    <div class="step-desc">Write tables, queries, stored procedures</div>
+    <div class="step-title">Database Implementation</div>
+    <div class="step-desc">Create tables and write SQL in MySQL</div>
     <div class="step-output">Deliverable: SQL Scripts</div>
 </div>
 <div class="step-item">
     <div class="step-number">Step 5</div>
-    <div class="step-title">Testing</div>
-    <div class="step-desc">Validate with test data</div>
+    <div class="step-title">Optimization & Testing</div>
+    <div class="step-desc">Create indexes and test query performance</div>
     <div class="step-output">Deliverable: Test Report</div>
 </div>
             </div>
         </div>
-    </div>
-    <div class="course-nav" style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:16px;padding:12px 16px;background:white;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,0.05);flex-wrap:wrap;">
+    </div>    <div class="course-nav" style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:16px;padding:12px 16px;background:white;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,0.05);flex-wrap:wrap;">
     <a href="../analytics.html" style="color:#667eea;text-decoration:none;font-size:0.88rem;">← 返回商业分析</a>
     <a href="ba-optimization.html" style="color:#667eea;text-decoration:none;font-size:0.88rem;">下一门：优化建模 →</a>
     <a href="#" onclick="goRandomCourse();return false;" style="color:#667eea;text-decoration:none;font-size:0.88rem;">🎲 随机课程</a>

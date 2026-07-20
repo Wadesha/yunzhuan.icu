@@ -30,12 +30,12 @@
         <p>电力系统是电气工程专业的核心专业课程，讲授电力生产、传输、分配与运行分析的基本理论。课程内容包括电力系统组成与额定电压、输电线路与变压器的参数及等值电路、标幺制与网络方程、潮流计算的牛顿-拉夫逊法与快速解耦法、短路故障分析与对称分量法、发电机与系统稳定性、电力系统调度与无功补偿。课程为从事电力调度、规划与运行工作奠定基础。</p>
         <p style="margin-top:8px;">Power Systems is a core course for electrical engineering majors, teaching the basic theory of generation, transmission, distribution, and operation of power systems. Topics include system configuration and rated voltages, line and transformer parameters and equivalent circuits, per-unit system and network equations, Newton-Raphson and fast decoupled power flow, short-circuit fault analysis with symmetrical components, generator and system stability, and dispatch with reactive power compensation. It lays the foundation for power dispatch, planning, and operation.</p>
     </div>
-        <div class="section">
+    <div class="section">
         <h2>大作业 <span class="en">Final Project</span></h2>
         <div>
-<p class="meta">作业标题：课程项目</p>
-        <p>学生需完成本课程的综合项目，展示所学知识和技能的应用能力。</p>
-        <p style="margin-top:8px;">Students complete a comprehensive project demonstrating application of knowledge and skills learned in this course.</p>
+<p class="meta">作业标题：区域电力系统潮流计算与短路分析 / Regional Power System Power Flow and Short-Circuit Analysis</p>
+        <p>针对指定区域电力系统完成潮流计算与短路故障分析，使用标幺制建立网络方程并编写程序求解。评估系统稳定性。</p>
+        <p style="margin-top:8px;">Complete power flow calculation and short-circuit fault analysis for a specified regional power system, building network equations using per-unit system and solving with programmed code. Evaluate system stability.</p>
         </div>
     </div>
     <div class="section">
@@ -45,33 +45,33 @@
 
 <div class="step-item">
     <div class="step-number">步骤 1</div>
-    <div class="step-title">需求分析</div>
-    <div class="step-desc">明确项目目标和功能需求</div>
-    <div class="step-output">产出：需求规格文档</div>
+    <div class="step-title">系统建模</div>
+    <div class="step-desc">建立电力系统拓扑与元件等值电路</div>
+    <div class="step-output">产出：系统等值电路</div>
 </div>
 <div class="step-item">
     <div class="step-number">步骤 2</div>
-    <div class="step-title">方案设计</div>
-    <div class="step-desc">设计整体架构和方案</div>
-    <div class="step-output">产出：系统设计文档</div>
+    <div class="step-title">标幺制与网络方程</div>
+    <div class="step-desc">选择基准值并形成节点导纳矩阵</div>
+    <div class="step-output">产出：节点导纳矩阵</div>
 </div>
 <div class="step-item">
     <div class="step-number">步骤 3</div>
-    <div class="step-title">核心实现</div>
-    <div class="step-desc">编写核心代码实现功能</div>
-    <div class="step-output">产出：源代码文件</div>
+    <div class="step-title">潮流计算</div>
+    <div class="step-desc">编程实现牛顿-拉夫逊法潮流求解</div>
+    <div class="step-output">产出：潮流计算结果</div>
 </div>
 <div class="step-item">
     <div class="step-number">步骤 4</div>
-    <div class="step-title">测试验证</div>
-    <div class="step-desc">设计测试用例验证正确性</div>
-    <div class="step-output">产出：测试报告</div>
+    <div class="step-title">短路分析</div>
+    <div class="step-desc">用对称分量法计算三相短路故障电流</div>
+    <div class="step-output">产出：短路计算结果</div>
 </div>
 <div class="step-item">
     <div class="step-number">步骤 5</div>
-    <div class="step-title">文档提交</div>
-    <div class="step-desc">整理代码注释和项目文档</div>
-    <div class="step-output">产出：最终提交材料</div>
+    <div class="step-title">稳定性评估与报告</div>
+    <div class="step-desc">评估静态稳定性并撰写系统分析报告</div>
+    <div class="step-output">产出：电力系统分析报告</div>
 </div>
             
 
@@ -79,33 +79,33 @@
     <h3 style="font-size:0.9rem;color:#667eea;margin-bottom:8px;">Steps</h3>
 <div class="step-item">
     <div class="step-number">Step 1</div>
-    <div class="step-title">Requirements</div>
-    <div class="step-desc">Define objectives and requirements</div>
-    <div class="step-output">Deliverable: Requirements Doc</div>
+    <div class="step-title">System Modeling</div>
+    <div class="step-desc">Build power system topology and component equivalent circuits</div>
+    <div class="step-output">Deliverable: System Equivalent Circuit</div>
 </div>
 <div class="step-item">
     <div class="step-number">Step 2</div>
-    <div class="step-title">Design</div>
-    <div class="step-desc">Design architecture and solutions</div>
-    <div class="step-output">Deliverable: Design Doc</div>
+    <div class="step-title">Per-Unit and Network Equations</div>
+    <div class="step-desc">Select base values and form admittance matrix</div>
+    <div class="step-output">Deliverable: Node Admittance Matrix</div>
 </div>
 <div class="step-item">
     <div class="step-number">Step 3</div>
-    <div class="step-title">Implementation</div>
-    <div class="step-desc">Write core code</div>
-    <div class="step-output">Deliverable: Source Code</div>
+    <div class="step-title">Power Flow Calculation</div>
+    <div class="step-desc">Implement Newton-Raphson power flow solver in code</div>
+    <div class="step-output">Deliverable: Power Flow Results</div>
 </div>
 <div class="step-item">
     <div class="step-number">Step 4</div>
-    <div class="step-title">Testing</div>
-    <div class="step-desc">Verify functionality</div>
-    <div class="step-output">Deliverable: Test Report</div>
+    <div class="step-title">Short-Circuit Analysis</div>
+    <div class="step-desc">Compute three-phase short-circuit current using symmetrical components</div>
+    <div class="step-output">Deliverable: Short-Circuit Calculation Results</div>
 </div>
 <div class="step-item">
     <div class="step-number">Step 5</div>
-    <div class="step-title">Documentation</div>
-    <div class="step-desc">Prepare final submission</div>
-    <div class="step-output">Deliverable: Final Docs</div>
+    <div class="step-title">Stability Evaluation and Report</div>
+    <div class="step-desc">Evaluate static stability and write system analysis report</div>
+    <div class="step-output">Deliverable: Power System Analysis Report</div>
 </div>
             </div>
         </div>

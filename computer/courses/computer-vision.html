@@ -30,71 +30,71 @@
         <p>计算机视觉研究使计算机从图像与视频中获取信息、理解视觉世界的理论与方法。课程内容包括图像处理基础、特征检测、相机模型与几何视觉、卷积神经网络、目标检测（YOLO、Faster R-CNN）、语义分割、人脸识别、3D视觉与生成模型（GAN、Diffusion）。学生将掌握视觉感知的核心算法，能应用于自动驾驶、医学影像、AR/VR等领域。</p>
         <p style="margin-top:8px;">Computer Vision studies theories and methods that enable computers to extract information from images and video and understand the visual world. Topics include image processing fundamentals, feature detection, camera models and geometry, CNNs, object detection (YOLO, Faster R-CNN), semantic segmentation, face recognition, 3D vision, and generative models (GANs, Diffusion). Students master core perception algorithms applicable to autonomous driving, medical imaging, and AR/VR.</p>
     </div>
-        <div class="section">
+            <div class="section">
         <h2>大作业 <span class="en">Final Project</span></h2>
         <div>
-<p class="meta">作业标题：课程项目</p>
-        <p>学生需完成本课程的综合项目，展示所学知识和技能的应用能力。</p>
-        <p style="margin-top:8px;">Students complete a comprehensive project demonstrating application of knowledge and skills learned in this course.</p>
+<p class="meta">作业标题：基于深度学习的目标检测系统设计与实现</p>
+        <p>基于YOLO或Faster R-CNN等算法，构建一个端到端的目标检测系统，完成数据集准备、模型训练、推理部署与性能评估。提交可运行系统与技术报告。</p>
+        <p style="margin-top:8px;">Build an end-to-end object detection system using YOLO or Faster R-CNN, covering dataset preparation, model training, inference deployment, and performance evaluation. Deliver a runnable system with a technical report.</p>
         </div>
     </div>
-    <div class="section">
+        <div class="section">
         <h2>实施步骤 <span class="en">Implementation Steps</span></h2>
         <div>
 <div class="step-item">
     <div class="step-number">步骤 1</div>
-    <div class="step-title">图像数据集准备</div>
-    <div class="step-desc">收集目标检测数据集，标注目标边界框和类别信息</div>
+    <div class="step-title">数据集构建</div>
+    <div class="step-desc">采集与标注图像数据，进行数据增强</div>
     <div class="step-output">产出：标注数据集</div>
 </div><div class="step-item">
     <div class="step-number">步骤 2</div>
-    <div class="step-title">目标检测算法研究</div>
-    <div class="step-desc">研究YOLO、Faster R-CNN等算法原理，选择合适方案</div>
-    <div class="step-output">产出：算法研究报告</div>
+    <div class="step-title">模型选型与训练</div>
+    <div class="step-desc">选择YOLO/Faster R-CNN，训练目标检测模型</div>
+    <div class="step-output">产出：训练代码与权重</div>
 </div><div class="step-item">
     <div class="step-number">步骤 3</div>
-    <div class="step-title">模型实现与训练</div>
-    <div class="step-desc">实现目标检测模型，在标注数据集上进行训练</div>
-    <div class="step-output">产出：训练好的模型</div>
+    <div class="step-title">推理与部署</div>
+    <div class="step-desc">实现推理脚本与Web/API接口</div>
+    <div class="step-output">产出：推理服务Demo</div>
 </div><div class="step-item">
     <div class="step-number">步骤 4</div>
-    <div class="step-title">检测效果评估</div>
-    <div class="step-desc">评估mAP、IoU等指标，优化检测精度</div>
+    <div class="step-title">评估与优化</div>
+    <div class="step-desc">计算mAP、FPS等指标，优化精度与速度</div>
     <div class="step-output">产出：评估报告</div>
 </div><div class="step-item">
     <div class="step-number">步骤 5</div>
-    <div class="step-title">文档提交</div>
-    <div class="step-desc">整理代码注释和实验报告</div>
+    <div class="step-title">文档与展示</div>
+    <div class="step-desc">撰写技术报告，演示系统效果</div>
     <div class="step-output">产出：最终提交材料</div>
 </div><div style="margin-top:14px;padding-top:10px;border-top:1px solid #eee;">
     <h3 style="font-size:0.9rem;color:#667eea;margin-bottom:8px;">Steps</h3><div class="step-item">
     <div class="step-number">Step 1</div>
-    <div class="step-title">Dataset Preparation</div>
-    <div class="step-desc">Collect object detection dataset, annotate bounding boxes</div>
+    <div class="step-title">Dataset Construction</div>
+    <div class="step-desc">Collect and annotate images, perform data augmentation</div>
     <div class="step-output">Deliverable: Annotated Dataset</div>
 </div><div class="step-item">
     <div class="step-number">Step 2</div>
-    <div class="step-title">Algorithm Research</div>
-    <div class="step-desc">Study YOLO, Faster R-CNN, select appropriate approach</div>
-    <div class="step-output">Deliverable: Algorithm Research Report</div>
+    <div class="step-title">Model Training</div>
+    <div class="step-desc">Train YOLO/Faster R-CNN detection model</div>
+    <div class="step-output">Deliverable: Training Code & Weights</div>
 </div><div class="step-item">
     <div class="step-number">Step 3</div>
-    <div class="step-title">Implementation & Training</div>
-    <div class="step-desc">Implement detection model, train on annotated dataset</div>
-    <div class="step-output">Deliverable: Trained Model</div>
+    <div class="step-title">Inference & Deployment</div>
+    <div class="step-desc">Implement inference script and Web/API interface</div>
+    <div class="step-output">Deliverable: Inference Service Demo</div>
 </div><div class="step-item">
     <div class="step-number">Step 4</div>
-    <div class="step-title">Detection Evaluation</div>
-    <div class="step-desc">Evaluate mAP, IoU metrics, optimize accuracy</div>
+    <div class="step-title">Evaluation & Optimization</div>
+    <div class="step-desc">Compute mAP, FPS metrics, optimize accuracy and speed</div>
     <div class="step-output">Deliverable: Evaluation Report</div>
 </div><div class="step-item">
     <div class="step-number">Step 5</div>
-    <div class="step-title">Documentation</div>
-    <div class="step-desc">Prepare code comments and experimental report</div>
+    <div class="step-title">Documentation & Demo</div>
+    <div class="step-desc">Write technical report, demonstrate the system</div>
     <div class="step-output">Deliverable: Final Submission</div>
 </div></div>
-        
-    <div class="course-nav" style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:16px;padding:12px 16px;background:white;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,0.05);flex-wrap:wrap;">
+        </div>
+    </div><div class="course-nav" style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:16px;padding:12px 16px;background:white;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,0.05);flex-wrap:wrap;">
     <a href="../ai.html" style="color:#667eea;text-decoration:none;font-size:0.88rem;">← 返回人工智能</a>
     <a href="reinforcement-learning.html" style="color:#667eea;text-decoration:none;font-size:0.88rem;">下一门：强化学习 →</a>
     <a href="#" onclick="goRandomCourse();return false;" style="color:#667eea;text-decoration:none;font-size:0.88rem;">🎲 随机课程</a>

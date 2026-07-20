@@ -30,71 +30,71 @@
         <p>大数据处理课程聚焦海量数据的存储、计算与分析技术，主要内容涵盖Hadoop生态系统、MapReduce编程模型、Spark内存计算、分布式文件系统HDFS、NoSQL数据库与流处理框架Kafka、Flink等。课程强调分布式计算原理、数据分区与容错机制，训练学生设计可扩展的数据处理管道，应对TB至PB级别的数据挑战。</p>
         <p style="margin-top:8px;">Big Data Processing focuses on storage, computation, and analysis of massive datasets. Topics cover the Hadoop ecosystem, the MapReduce programming model, Spark in-memory computing, the HDFS distributed file system, NoSQL databases, and stream processing frameworks such as Kafka and Flink. The course emphasizes distributed computing principles, data partitioning, and fault tolerance, training students to design scalable data processing pipelines for TB to PB-scale data challenges.</p>
     </div>
-        <div class="section">
+            <div class="section">
         <h2>大作业 <span class="en">Final Project</span></h2>
         <div>
-<p class="meta">作业标题：课程项目</p>
-        <p>学生需完成本课程的综合项目，展示所学知识和技能的应用能力。</p>
-        <p style="margin-top:8px;">Students complete a comprehensive project demonstrating application of knowledge and skills learned in this course.</p>
+<p class="meta">作业标题：分布式日志大数据分析平台设计与实现</p>
+        <p>基于Hadoop/Spark生态系统，构建一个处理TB级日志数据的分布式分析平台，完成数据采集、分布式存储、批处理/流计算与可视化全链路。要求体现数据分区、容错机制与可扩展性设计，并提交可运行的系统与技术报告。</p>
+        <p style="margin-top:8px;">Build a distributed analytics platform for TB-scale log data using the Hadoop/Spark ecosystem, covering data collection, distributed storage, batch/stream processing, and visualization. Demonstrate data partitioning, fault tolerance, and scalability; submit a runnable system with a technical report.</p>
         </div>
     </div>
-    <div class="section">
+        <div class="section">
         <h2>实施步骤 <span class="en">Implementation Steps</span></h2>
         <div>
 <div class="step-item">
     <div class="step-number">步骤 1</div>
-    <div class="step-title">数据采集</div>
-    <div class="step-desc">使用Spark采集和处理大规模日志数据，进行数据清洗</div>
+    <div class="step-title">数据采集与清洗</div>
+    <div class="step-desc">使用Flume/Kafka采集日志数据，Spark进行清洗去重与格式化</div>
     <div class="step-output">产出：清洗后数据集</div>
 </div><div class="step-item">
     <div class="step-number">步骤 2</div>
-    <div class="step-title">数据存储设计</div>
-    <div class="step-desc">设计HDFS存储方案，划分数据分区和索引策略</div>
+    <div class="step-title">HDFS存储设计</div>
+    <div class="step-desc">设计HDFS目录结构与分区策略，配置副本与容错机制</div>
     <div class="step-output">产出：存储设计文档</div>
 </div><div class="step-item">
     <div class="step-number">步骤 3</div>
-    <div class="step-title">数据分析实现</div>
-    <div class="step-desc">使用Spark SQL进行数据查询和聚合分析，实现统计报表</div>
-    <div class="step-output">产出：分析代码</div>
+    <div class="step-title">分布式计算实现</div>
+    <div class="step-desc">使用Spark SQL/RDD实现统计聚合、批处理与多维分析</div>
+    <div class="step-output">产出：计算代码</div>
 </div><div class="step-item">
     <div class="step-number">步骤 4</div>
-    <div class="step-title">数据可视化</div>
-    <div class="step-desc">使用BI工具或ECharts展示分析结果，生成可视化报表</div>
-    <div class="step-output">产出：可视化报表</div>
+    <div class="step-title">流处理与可视化</div>
+    <div class="step-desc">Flink实现实时处理，ECharts/Superset构建可视化看板</div>
+    <div class="step-output">产出：实时分析看板</div>
 </div><div class="step-item">
     <div class="step-number">步骤 5</div>
-    <div class="step-title">文档提交</div>
-    <div class="step-desc">整理代码注释和分析报告</div>
+    <div class="step-title">性能优化与文档</div>
+    <div class="step-desc">调优数据倾斜与内存配置，撰写部署与使用文档</div>
     <div class="step-output">产出：最终提交材料</div>
 </div><div style="margin-top:14px;padding-top:10px;border-top:1px solid #eee;">
     <h3 style="font-size:0.9rem;color:#667eea;margin-bottom:8px;">Steps</h3><div class="step-item">
     <div class="step-number">Step 1</div>
     <div class="step-title">Data Collection</div>
-    <div class="step-desc">Collect and process large-scale log data using Spark</div>
+    <div class="step-desc">Collect logs via Flume/Kafka, clean and deduplicate with Spark</div>
     <div class="step-output">Deliverable: Cleaned Dataset</div>
 </div><div class="step-item">
     <div class="step-number">Step 2</div>
-    <div class="step-title">Storage Design</div>
-    <div class="step-desc">Design HDFS storage scheme, partition and indexing</div>
+    <div class="step-title">HDFS Storage Design</div>
+    <div class="step-desc">Design HDFS layout, partitioning, replication, and fault tolerance</div>
     <div class="step-output">Deliverable: Storage Design Doc</div>
 </div><div class="step-item">
     <div class="step-number">Step 3</div>
-    <div class="step-title">Analysis Implementation</div>
-    <div class="step-desc">Use Spark SQL for query and aggregation, implement reports</div>
-    <div class="step-output">Deliverable: Analysis Code</div>
+    <div class="step-title">Distributed Computing</div>
+    <div class="step-desc">Implement aggregation, batch processing, and analytics with Spark SQL/RDD</div>
+    <div class="step-output">Deliverable: Computing Code</div>
 </div><div class="step-item">
     <div class="step-number">Step 4</div>
-    <div class="step-title">Data Visualization</div>
-    <div class="step-desc">Use BI tools or ECharts for visualization</div>
-    <div class="step-output">Deliverable: Visualization Reports</div>
+    <div class="step-title">Stream Processing & Visualization</div>
+    <div class="step-desc">Real-time processing with Flink, dashboards with ECharts/Superset</div>
+    <div class="step-output">Deliverable: Real-time Dashboard</div>
 </div><div class="step-item">
     <div class="step-number">Step 5</div>
-    <div class="step-title">Documentation</div>
-    <div class="step-desc">Prepare code comments and analysis report</div>
+    <div class="step-title">Optimization & Documentation</div>
+    <div class="step-desc">Tune data skew and memory, write deployment and usage docs</div>
     <div class="step-output">Deliverable: Final Submission</div>
 </div></div>
-        
-    <div class="course-nav" style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:16px;padding:12px 16px;background:white;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,0.05);flex-wrap:wrap;">
+        </div>
+    </div><div class="course-nav" style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:16px;padding:12px 16px;background:white;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,0.05);flex-wrap:wrap;">
     <a href="../data.html" style="color:#667eea;text-decoration:none;font-size:0.88rem;">← 返回数据科学</a>
     <a href="calculus.html" style="color:#667eea;text-decoration:none;font-size:0.88rem;">下一门：微积分 →</a>
     <a href="#" onclick="goRandomCourse();return false;" style="color:#667eea;text-decoration:none;font-size:0.88rem;">🎲 随机课程</a>

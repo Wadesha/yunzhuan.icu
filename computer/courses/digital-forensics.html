@@ -30,71 +30,71 @@
         <p>数字取证课程研究电子证据的获取、保存、分析与呈现方法。内容包括磁盘取证、内存取证、网络流量取证、移动设备取证、文件系统分析（NTFS、EXT4）、数据恢复技术、隐写术检测、时间线分析等。学生将学习使用EnCase、Autopsy、Volatility等专业工具进行取证调查。</p>
         <p style="margin-top:8px;">Digital Forensics studies methods for acquiring, preserving, analyzing, and presenting electronic evidence. Topics include disk forensics, memory forensics, network traffic forensics, mobile device forensics, file system analysis (NTFS, EXT4), data recovery techniques, steganography detection, and timeline analysis. Students learn to use professional tools such as EnCase, Autopsy, and Volatility for forensic investigation.</p>
     </div>
-        <div class="section">
+            <div class="section">
         <h2>大作业 <span class="en">Final Project</span></h2>
         <div>
-<p class="meta">作业标题：课程项目</p>
-        <p>学生需完成本课程的综合项目，展示所学知识和技能的应用能力。</p>
-        <p style="margin-top:8px;">Students complete a comprehensive project demonstrating application of knowledge and skills learned in this course.</p>
+<p class="meta">作业标题：模拟入侵事件的数字取证调查与证据链构建</p>
+        <p>针对模拟入侵场景，完成磁盘、内存、网络流量等多源证据的获取、分析与时间线重建。使用Autopsy、Volatility等工具，输出符合法律程序的取证报告。</p>
+        <p style="margin-top:8px;">Investigate a simulated intrusion scenario, performing acquisition, analysis, and timeline reconstruction of multi-source evidence from disk, memory, and network traffic. Use Autopsy, Volatility, and other tools to produce a forensically sound report.</p>
         </div>
     </div>
-    <div class="section">
+        <div class="section">
         <h2>实施步骤 <span class="en">Implementation Steps</span></h2>
         <div>
 <div class="step-item">
     <div class="step-number">步骤 1</div>
-    <div class="step-title">证据收集</div>
-    <div class="step-desc">使用取证工具收集数字证据，确保证据完整性</div>
-    <div class="step-output">产出：证据收集记录</div>
+    <div class="step-title">证据获取与保全</div>
+    <div class="step-desc">制作磁盘/内存镜像，计算哈希进行证据保全</div>
+    <div class="step-output">产出：证据镜像文件</div>
 </div><div class="step-item">
     <div class="step-number">步骤 2</div>
-    <div class="step-title">数据恢复</div>
-    <div class="step-desc">恢复已删除文件和数据，分析文件系统</div>
-    <div class="step-output">产出：恢复数据</div>
+    <div class="step-title">磁盘取证分析</div>
+    <div class="step-desc">使用Autopsy分析文件系统，恢复删除文件</div>
+    <div class="step-output">产出：磁盘分析报告</div>
 </div><div class="step-item">
     <div class="step-number">步骤 3</div>
-    <div class="step-title">证据分析</div>
-    <div class="step-desc">分析日志文件、网络流量、注册表等证据</div>
-    <div class="step-output">产出：分析报告</div>
+    <div class="step-title">内存与流量取证</div>
+    <div class="step-desc">Volatility分析内存进程，Wireshark分析网络流量</div>
+    <div class="step-output">产出：内存流量报告</div>
 </div><div class="step-item">
     <div class="step-number">步骤 4</div>
-    <div class="step-title">证据验证</div>
-    <div class="step-desc">验证证据真实性和关联性</div>
-    <div class="step-output">产出：验证报告</div>
+    <div class="step-title">时间线重建</div>
+    <div class="step-desc">整合多源证据构建事件时间线</div>
+    <div class="step-output">产出：时间线分析图</div>
 </div><div class="step-item">
     <div class="step-number">步骤 5</div>
     <div class="step-title">取证报告</div>
-    <div class="step-desc">撰写完整的数字取证报告</div>
-    <div class="step-output">产出：取证报告</div>
+    <div class="step-desc">撰写符合法律规范的取证调查报告</div>
+    <div class="step-output">产出：最终提交材料</div>
 </div><div style="margin-top:14px;padding-top:10px;border-top:1px solid #eee;">
     <h3 style="font-size:0.9rem;color:#667eea;margin-bottom:8px;">Steps</h3><div class="step-item">
     <div class="step-number">Step 1</div>
-    <div class="step-title">Evidence Collection</div>
-    <div class="step-desc">Collect digital evidence using forensic tools</div>
-    <div class="step-output">Deliverable: Evidence Collection Record</div>
+    <div class="step-title">Evidence Acquisition</div>
+    <div class="step-desc">Create disk/memory images, compute hashes for preservation</div>
+    <div class="step-output">Deliverable: Evidence Images</div>
 </div><div class="step-item">
     <div class="step-number">Step 2</div>
-    <div class="step-title">Data Recovery</div>
-    <div class="step-desc">Recover deleted files, analyze file system</div>
-    <div class="step-output">Deliverable: Recovered Data</div>
+    <div class="step-title">Disk Forensics</div>
+    <div class="step-desc">Analyze file system with Autopsy, recover deleted files</div>
+    <div class="step-output">Deliverable: Disk Analysis Report</div>
 </div><div class="step-item">
     <div class="step-number">Step 3</div>
-    <div class="step-title">Evidence Analysis</div>
-    <div class="step-desc">Analyze logs, network traffic, registry entries</div>
-    <div class="step-output">Deliverable: Analysis Report</div>
+    <div class="step-title">Memory & Network Forensics</div>
+    <div class="step-desc">Analyze memory with Volatility, traffic with Wireshark</div>
+    <div class="step-output">Deliverable: Memory/Network Report</div>
 </div><div class="step-item">
     <div class="step-number">Step 4</div>
-    <div class="step-title">Evidence Verification</div>
-    <div class="step-desc">Verify evidence authenticity and relevance</div>
-    <div class="step-output">Deliverable: Verification Report</div>
+    <div class="step-title">Timeline Reconstruction</div>
+    <div class="step-desc">Integrate multi-source evidence into event timeline</div>
+    <div class="step-output">Deliverable: Timeline Analysis</div>
 </div><div class="step-item">
     <div class="step-number">Step 5</div>
-    <div class="step-title">Forensic Report</div>
-    <div class="step-desc">Prepare comprehensive digital forensics report</div>
-    <div class="step-output">Deliverable: Forensic Report</div>
+    <div class="step-title">Forensics Report</div>
+    <div class="step-desc">Write forensically sound investigation report</div>
+    <div class="step-output">Deliverable: Final Submission</div>
 </div></div>
-        
-    <div class="course-nav" style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:16px;padding:12px 16px;background:white;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,0.05);flex-wrap:wrap;">
+        </div>
+    </div><div class="course-nav" style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:16px;padding:12px 16px;background:white;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,0.05);flex-wrap:wrap;">
     <a href="../cyber.html" style="color:#667eea;text-decoration:none;font-size:0.88rem;">← 返回网络安全</a>
     <a href="computer-networks.html" style="color:#667eea;text-decoration:none;font-size:0.88rem;">下一门：计算机网络 →</a>
     <a href="#" onclick="goRandomCourse();return false;" style="color:#667eea;text-decoration:none;font-size:0.88rem;">🎲 随机课程</a>

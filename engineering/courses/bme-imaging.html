@@ -30,12 +30,12 @@
         <p>本课程系统讲授主流医学成像模态的物理原理与图像重建算法，涵盖X射线、CT、超声、MRI、PET与SPECT。学生学习投影重建、傅里叶变换、滤波反投影、迭代重建等核心算法，掌握图像质量评价、伪影识别与剂量优化方法。课程结合临床应用案例，培养学生医学图像处理与分析能力，为影像设备研发与放射科工作打下基础。</p>
         <p style="margin-top:8px;">This course systematically covers physical principles and reconstruction algorithms of major medical imaging modalities, including X-ray, CT, ultrasound, MRI, PET, and SPECT. Students learn projection reconstruction, Fourier transforms, filtered back-projection, and iterative methods, with image quality evaluation, artifact identification, and dose optimization. Clinical cases build skills in medical image processing and imaging device R&D.</p>
     </div>
-        <div class="section">
+    <div class="section">
         <h2>大作业 <span class="en">Final Project</span></h2>
         <div>
-<p class="meta">作业标题：课程项目</p>
-        <p>学生需完成本课程的综合项目，展示所学知识和技能的应用能力。</p>
-        <p style="margin-top:8px;">Students complete a comprehensive project demonstrating application of knowledge and skills learned in this course.</p>
+<p class="meta">作业标题：CT图像滤波反投影重建算法实现与质量评价 / CT Image Filtered Back-Projection Reconstruction and Quality Evaluation</p>
+        <p>实现CT图像滤波反投影重建算法，使用仿真投影数据重建断层图像并评价图像质量。分析滤波函数与剂量对重建质量的影响。</p>
+        <p style="margin-top:8px;">Implement the CT filtered back-projection reconstruction algorithm, reconstruct tomographic images using simulated projection data and evaluate image quality. Analyze the effects of filter functions and dose on reconstruction quality.</p>
         </div>
     </div>
     <div class="section">
@@ -45,33 +45,33 @@
 
 <div class="step-item">
     <div class="step-number">步骤 1</div>
-    <div class="step-title">需求分析</div>
-    <div class="step-desc">明确项目目标和功能需求</div>
-    <div class="step-output">产出：需求规格文档</div>
+    <div class="step-title">算法原理分析</div>
+    <div class="step-desc">推导投影定理与滤波反投影算法公式</div>
+    <div class="step-output">产出：算法原理文档</div>
 </div>
 <div class="step-item">
     <div class="step-number">步骤 2</div>
-    <div class="step-title">方案设计</div>
-    <div class="step-desc">设计整体架构和方案</div>
-    <div class="step-output">产出：系统设计文档</div>
+    <div class="step-title">仿真数据生成</div>
+    <div class="step-desc">使用Shepp-Logan phantom生成投影数据</div>
+    <div class="step-output">产出：投影数据集</div>
 </div>
 <div class="step-item">
     <div class="step-number">步骤 3</div>
-    <div class="step-title">核心实现</div>
-    <div class="step-desc">编写核心代码实现功能</div>
-    <div class="step-output">产出：源代码文件</div>
+    <div class="step-title">重建算法实现</div>
+    <div class="step-desc">编程实现滤波反投影重建算法</div>
+    <div class="step-output">产出：重建程序代码</div>
 </div>
 <div class="step-item">
     <div class="step-number">步骤 4</div>
-    <div class="step-title">测试验证</div>
-    <div class="step-desc">设计测试用例验证正确性</div>
-    <div class="step-output">产出：测试报告</div>
+    <div class="step-title">图像质量评价</div>
+    <div class="step-desc">计算PSNR、SSIM与对比度指标并识别伪影</div>
+    <div class="step-output">产出：质量评价结果</div>
 </div>
 <div class="step-item">
     <div class="step-number">步骤 5</div>
-    <div class="step-title">文档提交</div>
-    <div class="step-desc">整理代码注释和项目文档</div>
-    <div class="step-output">产出：最终提交材料</div>
+    <div class="step-title">参数分析与报告</div>
+    <div class="step-desc">分析滤波函数与投影数影响并撰写报告</div>
+    <div class="step-output">产出：图像重建报告</div>
 </div>
             
 
@@ -79,33 +79,33 @@
     <h3 style="font-size:0.9rem;color:#667eea;margin-bottom:8px;">Steps</h3>
 <div class="step-item">
     <div class="step-number">Step 1</div>
-    <div class="step-title">Requirements</div>
-    <div class="step-desc">Define objectives and requirements</div>
-    <div class="step-output">Deliverable: Requirements Doc</div>
+    <div class="step-title">Algorithm Principle Analysis</div>
+    <div class="step-desc">Derive projection theorem and FBP algorithm formulation</div>
+    <div class="step-output">Deliverable: Algorithm Principle Doc</div>
 </div>
 <div class="step-item">
     <div class="step-number">Step 2</div>
-    <div class="step-title">Design</div>
-    <div class="step-desc">Design architecture and solutions</div>
-    <div class="step-output">Deliverable: Design Doc</div>
+    <div class="step-title">Simulated Data Generation</div>
+    <div class="step-desc">Generate projection data using Shepp-Logan phantom</div>
+    <div class="step-output">Deliverable: Projection Dataset</div>
 </div>
 <div class="step-item">
     <div class="step-number">Step 3</div>
-    <div class="step-title">Implementation</div>
-    <div class="step-desc">Write core code</div>
-    <div class="step-output">Deliverable: Source Code</div>
+    <div class="step-title">Reconstruction Algorithm Implementation</div>
+    <div class="step-desc">Implement FBP reconstruction algorithm in code</div>
+    <div class="step-output">Deliverable: Reconstruction Source Code</div>
 </div>
 <div class="step-item">
     <div class="step-number">Step 4</div>
-    <div class="step-title">Testing</div>
-    <div class="step-desc">Verify functionality</div>
-    <div class="step-output">Deliverable: Test Report</div>
+    <div class="step-title">Image Quality Evaluation</div>
+    <div class="step-desc">Compute PSNR, SSIM, contrast metrics and identify artifacts</div>
+    <div class="step-output">Deliverable: Quality Evaluation Results</div>
 </div>
 <div class="step-item">
     <div class="step-number">Step 5</div>
-    <div class="step-title">Documentation</div>
-    <div class="step-desc">Prepare final submission</div>
-    <div class="step-output">Deliverable: Final Docs</div>
+    <div class="step-title">Parameter Analysis and Report</div>
+    <div class="step-desc">Analyze filter and projection number effects and write report</div>
+    <div class="step-output">Deliverable: Image Reconstruction Report</div>
 </div>
             </div>
         </div>

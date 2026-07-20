@@ -30,71 +30,71 @@
         <p>系统安全课程研究操作系统与底层软件的安全机制。内容包括内存保护、访问控制、权限管理、缓冲区溢出攻击与防御、ROP攻击、内核漏洞利用、沙箱机制、可信计算与安全启动。学生将学习二进制分析、漏洞挖掘与利用技术，以及现代操作系统（Linux、Windows）的安全加固方法。</p>
         <p style="margin-top:8px;">System Security examines security mechanisms of operating systems and low-level software. Topics include memory protection, access control, privilege management, buffer overflow attacks and defenses, ROP attacks, kernel vulnerability exploitation, sandboxing, trusted computing, and secure boot. Students learn binary analysis, vulnerability discovery and exploitation, and security hardening of modern operating systems (Linux, Windows).</p>
     </div>
-        <div class="section">
+            <div class="section">
         <h2>大作业 <span class="en">Final Project</span></h2>
         <div>
-<p class="meta">作业标题：课程项目</p>
-        <p>学生需完成本课程的综合项目，展示所学知识和技能的应用能力。</p>
-        <p style="margin-top:8px;">Students complete a comprehensive project demonstrating application of knowledge and skills learned in this course.</p>
+<p class="meta">作业标题：二进制漏洞分析与操作系统安全加固实践</p>
+        <p>针对一个存在漏洞的程序，完成漏洞分析、利用与防御方案设计，并对Linux/Windows系统进行安全加固。提交漏洞分析报告、PoC代码与加固方案。</p>
+        <p style="margin-top:8px;">For a vulnerable program, complete vulnerability analysis, exploitation, and defense design, and perform security hardening on Linux/Windows systems. Deliver a vulnerability analysis report, PoC code, and a hardening plan.</p>
         </div>
     </div>
-    <div class="section">
+        <div class="section">
         <h2>实施步骤 <span class="en">Implementation Steps</span></h2>
         <div>
 <div class="step-item">
     <div class="step-number">步骤 1</div>
-    <div class="step-title">安全风险评估</div>
-    <div class="step-desc">评估系统安全风险，识别威胁和漏洞</div>
-    <div class="step-output">产出：风险评估报告</div>
+    <div class="step-title">漏洞分析</div>
+    <div class="step-desc">使用GDB/IDA分析二进制漏洞成因</div>
+    <div class="step-output">产出：漏洞分析文档</div>
 </div><div class="step-item">
     <div class="step-number">步骤 2</div>
-    <div class="step-title">安全策略制定</div>
-    <div class="step-desc">制定系统安全策略和安全标准</div>
-    <div class="step-output">产出：安全策略文档</div>
+    <div class="step-title">漏洞利用</div>
+    <div class="step-desc">编写PoC实现缓冲区溢出或ROP利用</div>
+    <div class="step-output">产出：PoC代码</div>
 </div><div class="step-item">
     <div class="step-number">步骤 3</div>
-    <div class="step-title">安全措施实施</div>
-    <div class="step-desc">实施安全控制措施，包括访问控制、加密等</div>
-    <div class="step-output">产出：实施记录</div>
+    <div class="step-title">防御方案</div>
+    <div class="step-desc">设计ASLR、DEP、栈保护等防御措施</div>
+    <div class="step-output">产出：防御方案文档</div>
 </div><div class="step-item">
     <div class="step-number">步骤 4</div>
-    <div class="step-title">安全测试</div>
-    <div class="step-desc">进行渗透测试和安全审计</div>
-    <div class="step-output">产出：安全测试报告</div>
+    <div class="step-title">系统加固</div>
+    <div class="step-desc">Linux/Windows权限、内核与安全配置加固</div>
+    <div class="step-output">产出：加固配置脚本</div>
 </div><div class="step-item">
     <div class="step-number">步骤 5</div>
-    <div class="step-title">报告提交</div>
-    <div class="step-desc">撰写系统安全方案报告</div>
-    <div class="step-output">产出：安全方案报告</div>
+    <div class="step-title">综合报告</div>
+    <div class="step-desc">整理分析、利用与加固方案</div>
+    <div class="step-output">产出：最终提交材料</div>
 </div><div style="margin-top:14px;padding-top:10px;border-top:1px solid #eee;">
     <h3 style="font-size:0.9rem;color:#667eea;margin-bottom:8px;">Steps</h3><div class="step-item">
     <div class="step-number">Step 1</div>
-    <div class="step-title">Security Risk Assessment</div>
-    <div class="step-desc">Assess system security risks, identify threats</div>
-    <div class="step-output">Deliverable: Risk Assessment Report</div>
+    <div class="step-title">Vulnerability Analysis</div>
+    <div class="step-desc">Analyze binary vulnerability with GDB/IDA</div>
+    <div class="step-output">Deliverable: Vulnerability Analysis Doc</div>
 </div><div class="step-item">
     <div class="step-number">Step 2</div>
-    <div class="step-title">Security Policy</div>
-    <div class="step-desc">Develop system security policies and standards</div>
-    <div class="step-output">Deliverable: Security Policy Doc</div>
+    <div class="step-title">Exploitation</div>
+    <div class="step-desc">Write PoC for buffer overflow or ROP exploitation</div>
+    <div class="step-output">Deliverable: PoC Code</div>
 </div><div class="step-item">
     <div class="step-number">Step 3</div>
-    <div class="step-title">Security Implementation</div>
-    <div class="step-desc">Implement access control, encryption, security measures</div>
-    <div class="step-output">Deliverable: Implementation Record</div>
+    <div class="step-title">Defense Design</div>
+    <div class="step-desc">Design ASLR, DEP, stack canary defenses</div>
+    <div class="step-output">Deliverable: Defense Plan Doc</div>
 </div><div class="step-item">
     <div class="step-number">Step 4</div>
-    <div class="step-title">Security Testing</div>
-    <div class="step-desc">Conduct penetration testing and security audit</div>
-    <div class="step-output">Deliverable: Security Test Report</div>
+    <div class="step-title">System Hardening</div>
+    <div class="step-desc">Harden Linux/Windows permissions, kernel, and security</div>
+    <div class="step-output">Deliverable: Hardening Scripts</div>
 </div><div class="step-item">
     <div class="step-number">Step 5</div>
-    <div class="step-title">Report Submission</div>
-    <div class="step-desc">Prepare system security plan report</div>
-    <div class="step-output">Deliverable: Security Plan Report</div>
+    <div class="step-title">Comprehensive Report</div>
+    <div class="step-desc">Compile analysis, exploitation, and hardening</div>
+    <div class="step-output">Deliverable: Final Submission</div>
 </div></div>
-        
-    <div class="course-nav" style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:16px;padding:12px 16px;background:white;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,0.05);flex-wrap:wrap;">
+        </div>
+    </div><div class="course-nav" style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:16px;padding:12px 16px;background:white;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,0.05);flex-wrap:wrap;">
     <a href="../cyber.html" style="color:#667eea;text-decoration:none;font-size:0.88rem;">← 返回网络安全</a>
     <a href="web-security.html" style="color:#667eea;text-decoration:none;font-size:0.88rem;">下一门：Web安全 →</a>
     <a href="#" onclick="goRandomCourse();return false;" style="color:#667eea;text-decoration:none;font-size:0.88rem;">🎲 随机课程</a>
