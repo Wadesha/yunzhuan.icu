@@ -85,84 +85,70 @@
     
         <div class="section">
         <h2>大作业 <span class="en">Final Project</span></h2>
-        <p class="meta">作业标题：图书管理系统数据库设计</p>
+        <div class="collapsible-content collapsed">
+<p class="meta">作业标题：图书管理系统数据库设计</p>
         <p>学生需完成一个图书管理系统的数据库设计与实现，包括需求分析、E-R建模、关系模式设计、规范化到第三范式，并使用SQL实现建表、查询、借还书、罚款计算等业务逻辑。要求包含存储过程、触发器及索引优化。交付物为数据库脚本、设计文档及测试数据。</p>
         <p style="margin-top:8px;">Students complete the database design and implementation of a library management system, including requirements analysis, E-R modeling, schema design, normalization to 3NF, and SQL implementation of tables, queries, borrowing, returning, and fine calculation. Stored procedures, triggers, and index optimization are required. Deliverables include scripts, design documents, and test data.</p>
-    </div>
-    <div class="section">
-        <h2>实施步骤 <span class="en">Implementation Steps</span></h2>
-        <div class="collapsible-content collapsed">
-
-
-<div class="step-item">
-    <div class="step-number">步骤 1</div>
-    <div class="step-title">需求分析</div>
-    <div class="step-desc">分析业务需求，确定数据实体和关系</div>
-    <div class="step-output">产出：需求分析文档</div>
-</div>
-<div class="step-item">
-    <div class="step-number">步骤 2</div>
-    <div class="step-title">E-R建模</div>
-    <div class="step-desc">设计实体关系图和属性定义</div>
-    <div class="step-output">产出：E-R模型图</div>
-</div>
-<div class="step-item">
-    <div class="step-number">步骤 3</div>
-    <div class="step-title">关系设计</div>
-    <div class="step-desc">规范化到第三范式，设计表结构</div>
-    <div class="step-output">产出：关系模式设计</div>
-</div>
-<div class="step-item">
-    <div class="step-number">步骤 4</div>
-    <div class="step-title">SQL实现</div>
-    <div class="step-desc">编写建表、查询、存储过程等SQL脚本</div>
-    <div class="step-output">产出：SQL脚本</div>
-</div>
-<div class="step-item">
-    <div class="step-number">步骤 5</div>
-    <div class="step-title">测试验证</div>
-    <div class="step-desc">导入测试数据验证功能正确性</div>
-    <div class="step-output">产出：测试报告</div>
-</div>
-            
-
-<div style="margin-top:14px;padding-top:10px;border-top:1px solid #eee;">
-    <h3 style="font-size:0.9rem;color:#667eea;margin-bottom:8px;">Steps</h3>
-<div class="step-item">
-    <div class="step-number">Step 1</div>
-    <div class="step-title">Requirements Analysis</div>
-    <div class="step-desc">Analyze business requirements</div>
-    <div class="step-output">Deliverable: Requirements Doc</div>
-</div>
-<div class="step-item">
-    <div class="step-number">Step 2</div>
-    <div class="step-title">E-R Modeling</div>
-    <div class="step-desc">Design entity-relationship diagram</div>
-    <div class="step-output">Deliverable: E-R Diagram</div>
-</div>
-<div class="step-item">
-    <div class="step-number">Step 3</div>
-    <div class="step-title">Schema Design</div>
-    <div class="step-desc">Normalize to 3NF and design tables</div>
-    <div class="step-output">Deliverable: Schema Design</div>
-</div>
-<div class="step-item">
-    <div class="step-number">Step 4</div>
-    <div class="step-title">SQL Implementation</div>
-    <div class="step-desc">Write tables, queries, stored procedures</div>
-    <div class="step-output">Deliverable: SQL Scripts</div>
-</div>
-<div class="step-item">
-    <div class="step-number">Step 5</div>
-    <div class="step-title">Testing</div>
-    <div class="step-desc">Validate with test data</div>
-    <div class="step-output">Deliverable: Test Report</div>
-</div>
-            </div>
         </div>
         <div class="collapsible-overlay"></div>
         <button class="collapsible-toggle">展开</button>
     </div>
+    <div class="section">
+        <h2>实施步骤 <span class="en">Implementation Steps</span></h2>
+        <div class="collapsible-content collapsed">
+<div class="step-item">
+    <div class="step-number">步骤 1</div>
+    <div class="step-title">数据库需求分析</div>
+    <div class="step-desc">分析图书馆管理需求，识别实体（图书、读者、借阅记录等）和关系</div>
+    <div class="step-output">产出：需求分析文档</div>
+</div><div class="step-item">
+    <div class="step-number">步骤 2</div>
+    <div class="step-title">E-R建模与关系设计</div>
+    <div class="step-desc">设计E-R图，转换为关系模式，进行规范化设计</div>
+    <div class="step-output">产出：数据库设计文档</div>
+</div><div class="step-item">
+    <div class="step-number">步骤 3</div>
+    <div class="step-title">SQL实现</div>
+    <div class="step-desc">编写DDL创建数据库和表，实现图书管理、借阅、查询等功能</div>
+    <div class="step-output">产出：SQL脚本</div>
+</div><div class="step-item">
+    <div class="step-number">步骤 4</div>
+    <div class="step-title">性能优化</div>
+    <div class="step-desc">设计索引策略，优化查询性能，进行事务处理</div>
+    <div class="step-output">产出：优化方案</div>
+</div><div class="step-item">
+    <div class="step-number">步骤 5</div>
+    <div class="step-title">文档提交</div>
+    <div class="step-desc">整理设计文档和使用说明</div>
+    <div class="step-output">产出：最终提交材料</div>
+</div><div style="margin-top:14px;padding-top:10px;border-top:1px solid #eee;">
+    <h3 style="font-size:0.9rem;color:#667eea;margin-bottom:8px;">Steps</h3><div class="step-item">
+    <div class="step-number">Step 1</div>
+    <div class="step-title">Requirements Analysis</div>
+    <div class="step-desc">Analyze library management needs, identify entities and relationships</div>
+    <div class="step-output">Deliverable: Requirements Doc</div>
+</div><div class="step-item">
+    <div class="step-number">Step 2</div>
+    <div class="step-title">E-R Modeling</div>
+    <div class="step-desc">Design E-R diagram, convert to relational schema</div>
+    <div class="step-output">Deliverable: Database Design Doc</div>
+</div><div class="step-item">
+    <div class="step-number">Step 3</div>
+    <div class="step-title">SQL Implementation</div>
+    <div class="step-desc">Write DDL, implement book management and queries</div>
+    <div class="step-output">Deliverable: SQL Scripts</div>
+</div><div class="step-item">
+    <div class="step-number">Step 4</div>
+    <div class="step-title">Performance Optimization</div>
+    <div class="step-desc">Design indexing strategy, optimize queries</div>
+    <div class="step-output">Deliverable: Optimization Plan</div>
+</div><div class="step-item">
+    <div class="step-number">Step 5</div>
+    <div class="step-title">Documentation</div>
+    <div class="step-desc">Prepare design documentation and user manual</div>
+    <div class="step-output">Deliverable: Final Submission</div>
+</div></div>
+        
     
     <p class="footer">© 2026 yunzhuan.icu</p>
 <!-- Vercel Analytics -->
