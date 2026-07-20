@@ -18,6 +18,7 @@
         .meta { font-size: 0.82rem; color: #888; margin-bottom: 8px; }
         .footer { text-align: center; margin-top: 20px; color: #999; font-size: 0.8rem; }
     </style>
+<link rel="stylesheet" href="/css/collapse.css">
 </head>
 <body>
     <a href="../statistics.html" class="back-link">← 返回统计学专业</a>
@@ -29,14 +30,85 @@
         <p>本课程讲授统计学中常用的计算方法和技术，是理论统计与实际应用之间的桥梁。内容包括随机数生成（逆变换法、接受拒绝法）、蒙特卡洛积分与模拟、自助法（Bootstrap）与刀切法（Jackknife）、EM算法、数值优化方法（梯度下降、牛顿法）、马尔可夫链蒙特卡洛（MCMC）、高维数据处理、并行计算基础等。课程主要使用R或Python语言，培养学生实现统计算法和处理实际数据的编程能力。</p>
         <p style="margin-top:8px;">This course covers computational methods and techniques commonly used in statistics, bridging theoretical statistics and practical applications. Topics include random number generation, Monte Carlo integration and simulation, bootstrap and jackknife methods, EM algorithm, numerical optimization (gradient descent, Newton's method), MCMC, high-dimensional data processing, and parallel computing basics.</p>
     </div>
-    <div class="section">
+    <div class="section collapsible-section">
         <h2>大作业 <span class="en">Final Project</span></h2>
+        <div class="collapsible-content collapsed">
         <p class="meta">作业标题：混合模型参数估计的EM算法实现</p>
         <p>实现高斯混合模型（GMM）的EM算法，用于聚类分析和密度估计。学生需从零编写EM算法代码（不使用现成的GMM库函数），推导E步和M步的计算公式，在模拟数据集和真实数据集（如鸢尾花、手写数字）上测试算法，与K-means聚类结果进行比较，分析不同初始化方式和分量数对结果的影响，并可视化展示聚类效果。</p>
         <p style="margin-top:8px;">Implement the EM algorithm for Gaussian Mixture Models (GMM) for clustering and density estimation. Students write EM algorithm code from scratch, derive E-step and M-step formulas, test on simulated and real datasets (iris, handwritten digits), compare with K-means, analyze initialization and component count effects, and visualize clustering results.</p>
+        <div style="margin-top:14px;padding-top:10px;border-top:1px solid #eee;">
+            <h3 style="font-size:0.9rem;color:#667eea;margin-bottom:8px;">实施步骤 <span style="font-size:0.75rem;color:#999;font-weight:normal;">Implementation Steps</span></h3>
+<div class="step-item">
+            <div class="step-number">步骤 1</div>
+            <div class="step-title">需求分析</div>
+            <div class="step-desc">明确项目目标和功能需求</div>
+            <div class="step-output">产出：需求规格文档</div>
+        </div>
+<div class="step-item">
+            <div class="step-number">步骤 2</div>
+            <div class="step-title">方案设计</div>
+            <div class="step-desc">设计整体架构和方案</div>
+            <div class="step-output">产出：系统设计文档</div>
+        </div>
+<div class="step-item">
+            <div class="step-number">步骤 3</div>
+            <div class="step-title">核心实现</div>
+            <div class="step-desc">编写核心代码实现功能</div>
+            <div class="step-output">产出：源代码文件</div>
+        </div>
+<div class="step-item">
+            <div class="step-number">步骤 4</div>
+            <div class="step-title">测试验证</div>
+            <div class="step-desc">设计测试用例验证正确性</div>
+            <div class="step-output">产出：测试报告</div>
+        </div>
+<div class="step-item">
+            <div class="step-number">步骤 5</div>
+            <div class="step-title">文档提交</div>
+            <div class="step-desc">整理代码注释和项目文档</div>
+            <div class="step-output">产出：最终提交材料</div>
+        </div>
+        </div>
+        <div style="margin-top:14px;padding-top:10px;border-top:1px solid #eee;">
+            <h3 style="font-size:0.9rem;color:#667eea;margin-bottom:8px;">Steps</h3>
+<div class="step-item">
+            <div class="step-number">Step 1</div>
+            <div class="step-title">Requirements</div>
+            <div class="step-desc">Define objectives and requirements</div>
+            <div class="step-output">Deliverable: Requirements Doc</div>
+        </div>
+<div class="step-item">
+            <div class="step-number">Step 2</div>
+            <div class="step-title">Design</div>
+            <div class="step-desc">Design architecture and solutions</div>
+            <div class="step-output">Deliverable: Design Doc</div>
+        </div>
+<div class="step-item">
+            <div class="step-number">Step 3</div>
+            <div class="step-title">Implementation</div>
+            <div class="step-desc">Write core code</div>
+            <div class="step-output">Deliverable: Source Code</div>
+        </div>
+<div class="step-item">
+            <div class="step-number">Step 4</div>
+            <div class="step-title">Testing</div>
+            <div class="step-desc">Verify functionality</div>
+            <div class="step-output">Deliverable: Test Report</div>
+        </div>
+<div class="step-item">
+            <div class="step-number">Step 5</div>
+            <div class="step-title">Documentation</div>
+            <div class="step-desc">Prepare final submission</div>
+            <div class="step-output">Deliverable: Final Docs</div>
+        </div>
+        </div>
+        </div>
+        <div class="collapsible-overlay"></div>
+        <button class="collapsible-toggle">展开</button>
     </div>
     <p class="footer">© 2026 yunzhuan.icu</p>
 <!-- Vercel Analytics -->
+<script defer src="/js/collapse.js"></script>
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 </body>
 </html>

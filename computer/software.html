@@ -62,6 +62,7 @@
  font-size: 0.8rem;
  }
  </style>
+<link rel="stylesheet" href="/css/collapse.css">
 </head>
 <body>
  <a href="../index.html" class="back-link">← 返回首页</a>
@@ -69,15 +70,14 @@
  <h1>软件工程</h1>
  <p class="en-name">Software Engineering</p>
 
- <div class="section">
+ <div class="section collapsible-section">
  <h2>中文介绍</h2>
+ <div class="collapsible-content collapsed">
  <p>软件工程是一门研究如何系统地设计、开发、测试和维护软件系统的学科。它将工程原理应用于软件开发过程，注重软件质量、可维护性和可扩展性。软件工程专业的课程包括编程语言、数据结构、算法设计、软件架构、项目管理等。毕业生通常从事软件工程师、系统架构师、产品经理等职业，在科技公司、金融机构、政府部门等都有广泛的就业需求。</p>
+ <p style="margin-top:8px;">Software Engineering is the discipline of systematically designing, developing, testing, and maintaining software systems. It applies engineering principles to the software development process, emphasizing software quality, maintainability, and scalability. Coursework includes programming languages, data structures, algorithm design, software architecture, and project management. Graduates typically work as software engineers, system architects, product managers, and have extensive employment opportunities in tech companies, financial institutions, and government agencies.</p>
  </div>
-
- <div class="section">
- <h2>English Introduction</h2>
- <p>Software Engineering is the discipline of systematically designing, developing, testing, and maintaining software systems. It applies engineering principles to the software development process, emphasizing software quality, maintainability, and scalability. Coursework includes programming languages, data structures, algorithm design, software architecture, and project management. Graduates typically work as software engineers, system architects, product managers, and have extensive employment opportunities in tech companies, financial institutions, and government agencies.</p>
- </div>
+ <div class="collapsible-overlay"></div>
+ <button class="collapsible-toggle">展开</button></div>
 
     <div class="section">
         <h2>核心课程 <span class="en">Core Courses</span></h2>
@@ -94,6 +94,7 @@
 
  <p class="footer">© 2026 yunzhuan.icu | 美国大学专业导航</p>
 <!-- Vercel Analytics -->
+<script defer src="/js/collapse.js"></script>
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 </body>
 </html>

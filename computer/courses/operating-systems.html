@@ -68,6 +68,7 @@
             font-size: 0.8rem;
         }
     </style>
+<link rel="stylesheet" href="/css/collapse.css">
 </head>
 <body>
     <a href="../index.html" class="back-link">← 返回首页</a>
@@ -82,15 +83,86 @@
         <p style="margin-top:8px;">This course covers core concepts and mechanisms of modern operating systems. Topics include process and thread management, CPU scheduling, synchronization and mutual exclusion, deadlock handling, memory management with paging, segmentation, and virtual memory, file systems, disk scheduling, I/O management, and security. Real systems such as Linux are analyzed to develop system-level programming and resource management skills.</p>
     </div>
     
-    <div class="section">
+    <div class="section collapsible-section">
         <h2>大作业 <span class="en">Final Project</span></h2>
+        <div class="collapsible-content collapsed">
         <p class="meta">作业标题：Shell命令解释器实现</p>
         <p>学生需使用C或C++实现一个简易的Shell命令解释器，支持命令解析、内部命令、外部命令执行、管道、输入输出重定向、后台运行及作业控制等功能。要求使用fork、exec、pipe、dup等系统调用，并正确处理进程同步。交付物为可运行程序、源代码及实现说明文档，需通过指定测试用例。</p>
         <p style="margin-top:8px;">Students implement a simple shell command interpreter in C or C++ supporting command parsing, built-in and external commands, pipes, I/O redirection, background execution, and job control. The project requires fork, exec, pipe, and dup system calls with correct synchronization. Deliverables include a runnable program, source code, and documentation passing specified test cases.</p>
+        <div style="margin-top:14px;padding-top:10px;border-top:1px solid #eee;">
+            <h3 style="font-size:0.9rem;color:#667eea;margin-bottom:8px;">实施步骤 <span style="font-size:0.75rem;color:#999;font-weight:normal;">Implementation Steps</span></h3>
+<div class="step-item">
+            <div class="step-number">步骤 1</div>
+            <div class="step-title">需求调研</div>
+            <div class="step-desc">调研用户需求，分析竞品功能</div>
+            <div class="step-output">产出：需求文档</div>
+        </div>
+<div class="step-item">
+            <div class="step-number">步骤 2</div>
+            <div class="step-title">架构设计</div>
+            <div class="step-desc">设计系统架构、模块划分和数据库模型</div>
+            <div class="step-output">产出：架构设计文档</div>
+        </div>
+<div class="step-item">
+            <div class="step-number">步骤 3</div>
+            <div class="step-title">原型开发</div>
+            <div class="step-desc">使用合适框架实现原型系统</div>
+            <div class="step-output">产出：可运行原型</div>
+        </div>
+<div class="step-item">
+            <div class="step-number">步骤 4</div>
+            <div class="step-title">迭代完善</div>
+            <div class="step-desc">根据测试反馈优化功能和性能</div>
+            <div class="step-output">产出：优化后的系统</div>
+        </div>
+<div class="step-item">
+            <div class="step-number">步骤 5</div>
+            <div class="step-title">部署交付</div>
+            <div class="step-desc">部署到服务器，编写使用手册</div>
+            <div class="step-output">产出：完整系统+文档</div>
+        </div>
+        </div>
+        <div style="margin-top:14px;padding-top:10px;border-top:1px solid #eee;">
+            <h3 style="font-size:0.9rem;color:#667eea;margin-bottom:8px;">Steps</h3>
+<div class="step-item">
+            <div class="step-number">Step 1</div>
+            <div class="step-title">Requirements Research</div>
+            <div class="step-desc">Research user requirements</div>
+            <div class="step-output">Deliverable: Requirements Document</div>
+        </div>
+<div class="step-item">
+            <div class="step-number">Step 2</div>
+            <div class="step-title">Architecture Design</div>
+            <div class="step-desc">Design system architecture</div>
+            <div class="step-output">Deliverable: Architecture Design</div>
+        </div>
+<div class="step-item">
+            <div class="step-number">Step 3</div>
+            <div class="step-title">Prototype Development</div>
+            <div class="step-desc">Implement prototype</div>
+            <div class="step-output">Deliverable: Working Prototype</div>
+        </div>
+<div class="step-item">
+            <div class="step-number">Step 4</div>
+            <div class="step-title">Iteration</div>
+            <div class="step-desc">Optimize based on testing</div>
+            <div class="step-output">Deliverable: Optimized System</div>
+        </div>
+<div class="step-item">
+            <div class="step-number">Step 5</div>
+            <div class="step-title">Deployment</div>
+            <div class="step-desc">Deploy and write manual</div>
+            <div class="step-output">Deliverable: Complete System</div>
+        </div>
+        </div>
+        </div>
+        <div class="collapsible-overlay"></div>
+        <button class="collapsible-toggle">展开</button>
     </div>
     
     <p class="footer">© 2026 yunzhuan.icu</p>
 <!-- Vercel Analytics -->
+<script defer src="/js/collapse.js"></script>
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 </body>
 </html>

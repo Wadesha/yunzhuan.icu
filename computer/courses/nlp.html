@@ -18,6 +18,7 @@
         .meta { font-size: 0.82rem; color: #888; margin-bottom: 8px; }
         .footer { text-align: center; margin-top: 20px; color: #999; font-size: 0.8rem; }
     </style>
+<link rel="stylesheet" href="/css/collapse.css">
 </head>
 <body>
     <a href="../index.html" class="back-link">← 返回首页</a>
@@ -29,14 +30,85 @@
         <p>自然语言处理研究计算机理解、生成与处理人类语言的理论与方法。课程涵盖文本预处理、词向量表示（Word2Vec、GloVe）、语言模型、循环与注意力网络、Transformer与预训练模型（BERT、GPT）、文本分类、机器翻译、问答系统与生成式任务。学生将掌握从规则方法到深度学习的演进，理解大语言模型原理，能应用于实际NLP工程。</p>
         <p style="margin-top:8px;">Natural Language Processing studies theories and methods for computers to understand, generate, and process human language. Topics include text preprocessing, word embeddings (Word2Vec, GloVe), language models, recurrent and attention networks, Transformers and pre-trained models (BERT, GPT), text classification, machine translation, question answering, and generation. Students trace the evolution from rule-based to deep learning approaches and master large language model principles for real NLP engineering.</p>
     </div>
-    <div class="section">
+    <div class="section collapsible-section">
         <h2>大作业 <span class="en">Final Project</span></h2>
+        <div class="collapsible-content collapsed">
         <p class="meta">作业标题：影评情感分类系统</p>
         <p>学生需基于IMDb或豆瓣影评数据构建情感分类系统。要求实现基于Transformer的文本分类模型，对比传统方法（TF-IDF+SVM）与预训练模型微调（BERT）的效果，完成数据清洗、tokenization、训练与评估。需提交代码、模型对比报告及可视化混淆矩阵，F1分数作为核心指标。</p>
         <p style="margin-top:8px;">Students build a sentiment classification system on IMDb or Douban movie reviews. The project requires implementing a Transformer-based text classifier, comparing traditional methods (TF-IDF + SVM) with fine-tuned pre-trained models (BERT), and completing data cleaning, tokenization, training, and evaluation. Deliverables include code, a model comparison report, and a confusion matrix visualization, with F1 score as the key metric.</p>
+        <div style="margin-top:14px;padding-top:10px;border-top:1px solid #eee;">
+            <h3 style="font-size:0.9rem;color:#667eea;margin-bottom:8px;">实施步骤 <span style="font-size:0.75rem;color:#999;font-weight:normal;">Implementation Steps</span></h3>
+<div class="step-item">
+            <div class="step-number">步骤 1</div>
+            <div class="step-title">需求分析</div>
+            <div class="step-desc">明确项目目标和功能需求，分析核心问题</div>
+            <div class="step-output">产出：需求规格文档</div>
+        </div>
+<div class="step-item">
+            <div class="step-number">步骤 2</div>
+            <div class="step-title">方案设计</div>
+            <div class="step-desc">设计整体架构、数据结构和算法方案</div>
+            <div class="step-output">产出：系统设计文档</div>
+        </div>
+<div class="step-item">
+            <div class="step-number">步骤 3</div>
+            <div class="step-title">核心实现</div>
+            <div class="step-desc">编写核心代码，实现主要功能模块</div>
+            <div class="step-output">产出：源代码文件</div>
+        </div>
+<div class="step-item">
+            <div class="step-number">步骤 4</div>
+            <div class="step-title">测试验证</div>
+            <div class="step-desc">设计测试用例，验证功能正确性</div>
+            <div class="step-output">产出：测试报告</div>
+        </div>
+<div class="step-item">
+            <div class="step-number">步骤 5</div>
+            <div class="step-title">文档提交</div>
+            <div class="step-desc">整理代码注释和项目文档</div>
+            <div class="step-output">产出：最终提交材料</div>
+        </div>
+        </div>
+        <div style="margin-top:14px;padding-top:10px;border-top:1px solid #eee;">
+            <h3 style="font-size:0.9rem;color:#667eea;margin-bottom:8px;">Steps</h3>
+<div class="step-item">
+            <div class="step-number">Step 1</div>
+            <div class="step-title">Requirements Analysis</div>
+            <div class="step-desc">Define project objectives and functional requirements</div>
+            <div class="step-output">Deliverable: Requirements Specification</div>
+        </div>
+<div class="step-item">
+            <div class="step-number">Step 2</div>
+            <div class="step-title">Design</div>
+            <div class="step-desc">Design overall architecture and algorithm solutions</div>
+            <div class="step-output">Deliverable: System Design Document</div>
+        </div>
+<div class="step-item">
+            <div class="step-number">Step 3</div>
+            <div class="step-title">Implementation</div>
+            <div class="step-desc">Write core code and implement main modules</div>
+            <div class="step-output">Deliverable: Source Code</div>
+        </div>
+<div class="step-item">
+            <div class="step-number">Step 4</div>
+            <div class="step-title">Testing</div>
+            <div class="step-desc">Design test cases and verify correctness</div>
+            <div class="step-output">Deliverable: Test Report</div>
+        </div>
+<div class="step-item">
+            <div class="step-number">Step 5</div>
+            <div class="step-title">Documentation</div>
+            <div class="step-desc">Organize code comments and project docs</div>
+            <div class="step-output">Deliverable: Final Submission</div>
+        </div>
+        </div>
+        </div>
+        <div class="collapsible-overlay"></div>
+        <button class="collapsible-toggle">展开</button>
     </div>
     <p class="footer">© 2026 yunzhuan.icu</p>
 <!-- Vercel Analytics -->
+<script defer src="/js/collapse.js"></script>
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 </body>
 </html>

@@ -62,6 +62,7 @@
  font-size: 0.8rem;
  }
  </style>
+<link rel="stylesheet" href="/css/collapse.css">
 </head>
 <body>
  <a href="../index.html" class="back-link">← 返回首页</a>
@@ -69,15 +70,14 @@
  <h1>音乐</h1>
  <p class="en-name">Music</p>
 
- <div class="section">
+ <div class="section collapsible-section">
  <h2>中文介绍</h2>
+ <div class="collapsible-content collapsed">
  <p>音乐专业是一门培养音乐表演、创作和理论能力的学科。它涵盖了音乐表演、音乐创作、音乐理论、音乐教育、音乐制作等多个方向。音乐专业的课程包括乐理、和声、曲式分析、乐器演奏、音乐史、音乐技术等。毕业生在音乐表演、音乐教育、音乐制作、影视配乐、音乐管理等领域都有广泛的就业机会。音乐专业培养学生的音乐才能和艺术修养。</p>
+ <p style="margin-top:8px;">Music is a discipline that develops musical performance, composition, and theoretical abilities. It covers musical performance, music composition, music theory, music education, music production, and more. Coursework includes music theory, harmony, form analysis, instrument performance, music history, and music technology. Graduates have extensive employment opportunities in music performance, music education, music production, film scoring, and music management. Music develops students' musical talent and artistic refinement.</p>
  </div>
-
- <div class="section">
- <h2>English Introduction</h2>
- <p>Music is a discipline that develops musical performance, composition, and theoretical abilities. It covers musical performance, music composition, music theory, music education, music production, and more. Coursework includes music theory, harmony, form analysis, instrument performance, music history, and music technology. Graduates have extensive employment opportunities in music performance, music education, music production, film scoring, and music management. Music develops students' musical talent and artistic refinement.</p>
- </div>
+ <div class="collapsible-overlay"></div>
+ <button class="collapsible-toggle">展开</button></div>
 
  <div class="section">
  <h2>核心课程 <span class="en">Core Courses</span></h2>
@@ -93,6 +93,7 @@
  </div>
  <p class="footer">© 2026 yunzhuan.icu | 美国大学专业导航</p>
 <!-- Vercel Analytics -->
+<script defer src="/js/collapse.js"></script>
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 </body>
 </html>

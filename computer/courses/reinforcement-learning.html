@@ -18,6 +18,7 @@
         .meta { font-size: 0.82rem; color: #888; margin-bottom: 8px; }
         .footer { text-align: center; margin-top: 20px; color: #999; font-size: 0.8rem; }
     </style>
+<link rel="stylesheet" href="/css/collapse.css">
 </head>
 <body>
     <a href="../index.html" class="back-link">← 返回首页</a>
@@ -29,14 +30,85 @@
         <p>强化学习研究智能体通过与环境交互、试错优化策略以最大化累积回报的学习范式。课程内容包括马尔可夫决策过程、值迭代与策略迭代、蒙特卡洛方法、时序差分学习（Q-Learning、SARSA）、Deep Q-Network、策略梯度方法（REINFORCE、PPO）、Actor-Critic框架及多智能体强化学习。学生将掌握序列决策的核心算法，应用于游戏AI、机器人控制、推荐系统等场景。</p>
         <p style="margin-top:8px;">Reinforcement Learning studies how agents learn optimal policies through environment interaction and trial-and-error to maximize cumulative reward. Topics include Markov decision processes, value and policy iteration, Monte Carlo methods, temporal difference learning (Q-Learning, SARSA), Deep Q-Network, policy gradient methods (REINFORCE, PPO), Actor-Critic frameworks, and multi-agent RL. Students master sequential decision-making algorithms applicable to game AI, robotic control, and recommender systems.</p>
     </div>
-    <div class="section">
+    <div class="section collapsible-section">
         <h2>大作业 <span class="en">Final Project</span></h2>
+        <div class="collapsible-content collapsed">
         <p class="meta">作业标题：Atari游戏AI智能体</p>
         <p>学生需基于DQN或PPO算法训练一个Atari游戏（如Breakout、Pong）智能体。要求使用Stable Baselines3或自行实现算法，完成环境搭建、训练、调参与评估，平均回报需超过基准线。需提交代码、训练曲线、性能对比报告及演示视频，讨论探索策略、奖励塑形与稳定训练技巧的影响。</p>
         <p style="margin-top:8px;">Students train an Atari game agent (such as Breakout or Pong) using DQN or PPO algorithms. The project requires setting up the environment, training, hyperparameter tuning, and evaluation using Stable Baselines3 or a custom implementation, with average reward exceeding the baseline. Deliverables include code, training curves, a performance comparison report, and a demo video, discussing exploration strategies, reward shaping, and stable training techniques.</p>
+        <div style="margin-top:14px;padding-top:10px;border-top:1px solid #eee;">
+            <h3 style="font-size:0.9rem;color:#667eea;margin-bottom:8px;">实施步骤 <span style="font-size:0.75rem;color:#999;font-weight:normal;">Implementation Steps</span></h3>
+<div class="step-item">
+            <div class="step-number">步骤 1</div>
+            <div class="step-title">数据收集</div>
+            <div class="step-desc">收集和整理相关数据集</div>
+            <div class="step-output">产出：数据集</div>
+        </div>
+<div class="step-item">
+            <div class="step-number">步骤 2</div>
+            <div class="step-title">数据清洗</div>
+            <div class="step-desc">处理缺失值、异常值和噪声数据</div>
+            <div class="step-output">产出：清洗后的数据集</div>
+        </div>
+<div class="step-item">
+            <div class="step-number">步骤 3</div>
+            <div class="step-title">模型设计</div>
+            <div class="step-desc">选择合适的算法模型</div>
+            <div class="step-output">产出：模型设计方案</div>
+        </div>
+<div class="step-item">
+            <div class="step-number">步骤 4</div>
+            <div class="step-title">模型训练</div>
+            <div class="step-desc">训练模型并调参优化</div>
+            <div class="step-output">产出：训练好的模型</div>
+        </div>
+<div class="step-item">
+            <div class="step-number">步骤 5</div>
+            <div class="step-title">结果分析</div>
+            <div class="step-desc">分析模型结果，撰写报告</div>
+            <div class="step-output">产出：分析报告</div>
+        </div>
+        </div>
+        <div style="margin-top:14px;padding-top:10px;border-top:1px solid #eee;">
+            <h3 style="font-size:0.9rem;color:#667eea;margin-bottom:8px;">Steps</h3>
+<div class="step-item">
+            <div class="step-number">Step 1</div>
+            <div class="step-title">Data Collection</div>
+            <div class="step-desc">Collect and organize relevant datasets</div>
+            <div class="step-output">Deliverable: Dataset</div>
+        </div>
+<div class="step-item">
+            <div class="step-number">Step 2</div>
+            <div class="step-title">Data Cleaning</div>
+            <div class="step-desc">Handle missing values and outliers</div>
+            <div class="step-output">Deliverable: Cleaned Dataset</div>
+        </div>
+<div class="step-item">
+            <div class="step-number">Step 3</div>
+            <div class="step-title">Model Design</div>
+            <div class="step-desc">Select appropriate algorithm models</div>
+            <div class="step-output">Deliverable: Model Design</div>
+        </div>
+<div class="step-item">
+            <div class="step-number">Step 4</div>
+            <div class="step-title">Model Training</div>
+            <div class="step-desc">Train model and optimize parameters</div>
+            <div class="step-output">Deliverable: Trained Model</div>
+        </div>
+<div class="step-item">
+            <div class="step-number">Step 5</div>
+            <div class="step-title">Result Analysis</div>
+            <div class="step-desc">Analyze results and write report</div>
+            <div class="step-output">Deliverable: Analysis Report</div>
+        </div>
+        </div>
+        </div>
+        <div class="collapsible-overlay"></div>
+        <button class="collapsible-toggle">展开</button>
     </div>
     <p class="footer">© 2026 yunzhuan.icu</p>
 <!-- Vercel Analytics -->
+<script defer src="/js/collapse.js"></script>
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 </body>
 </html>

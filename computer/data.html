@@ -62,6 +62,7 @@
  font-size: 0.8rem;
  }
  </style>
+<link rel="stylesheet" href="/css/collapse.css">
 </head>
 <body>
  <a href="../index.html" class="back-link">← 返回首页</a>
@@ -69,15 +70,14 @@
  <h1>数据科学</h1>
  <p class="en-name">Data Science</p>
 
- <div class="section">
+ <div class="section collapsible-section">
  <h2>中文介绍</h2>
+ <div class="collapsible-content collapsed">
  <p>数据科学是一门交叉学科，融合了统计学、计算机科学和领域知识，旨在从数据中提取有价值的信息和洞察。数据科学专业的课程包括数据分析、机器学习、数据可视化、数据库管理等。作为典型的交叉学科，数据科学成为美本申请的新宠，岗位年增长率达19%。该专业融合了统计学、编程与机器学习，编程要求低于纯CS，是文科生转STEM的优选，毕业生就业率高达95%，平均起薪约9万美元。</p>
+ <p style="margin-top:8px;">Data Science is an interdisciplinary field that combines statistics, computer science, and domain knowledge to extract valuable insights from data. Coursework includes data analysis, machine learning, data visualization, and database management. As a typical interdisciplinary major, Data Science has become a favorite in US undergraduate applications, with 19% annual job growth. It combines statistics, programming, and machine learning, with lower programming requirements than pure CS, making it an ideal choice for liberal arts students transitioning to STEM. Graduates enjoy a 95% employment rate with an average starting salary of approximately $90,000.</p>
  </div>
-
- <div class="section">
- <h2>English Introduction</h2>
- <p>Data Science is an interdisciplinary field that combines statistics, computer science, and domain knowledge to extract valuable insights from data. Coursework includes data analysis, machine learning, data visualization, and database management. As a typical interdisciplinary major, Data Science has become a favorite in US undergraduate applications, with 19% annual job growth. It combines statistics, programming, and machine learning, with lower programming requirements than pure CS, making it an ideal choice for liberal arts students transitioning to STEM. Graduates enjoy a 95% employment rate with an average starting salary of approximately $90,000.</p>
- </div>
+ <div class="collapsible-overlay"></div>
+ <button class="collapsible-toggle">展开</button></div>
 
     <div class="section">
         <h2>核心课程 <span class="en">Core Courses</span></h2>
@@ -94,6 +94,7 @@
 
  <p class="footer">© 2026 yunzhuan.icu | 美国大学专业导航</p>
 <!-- Vercel Analytics -->
+<script defer src="/js/collapse.js"></script>
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 </body>
 </html>

@@ -18,6 +18,7 @@
         .meta { font-size: 0.82rem; color: #888; margin-bottom: 8px; }
         .footer { text-align: center; margin-top: 20px; color: #999; font-size: 0.8rem; }
     </style>
+<link rel="stylesheet" href="/css/collapse.css">
 </head>
 <body>
     <a href="../analytics.html" class="back-link">← 返回专业首页</a>
@@ -29,14 +30,85 @@
         <p>本课程系统介绍机器学习算法及其商业应用。内容涵盖监督学习（线性回归、逻辑回归、决策树、随机森林、SVM、KNN）、无监督学习（K-Means聚类、层次聚类、主成分分析）、模型评估与选择、交叉验证、特征工程、过拟合与正则化等。课程使用scikit-learn库进行实践，结合客户分群、信用评分、推荐系统、销量预测等商业场景，培养学生运用机器学习解决实际商业问题的能力。</p>
         <p style="margin-top:8px;">This course systematically introduces machine learning algorithms and their business applications. Topics include supervised learning (linear regression, logistic regression, decision trees, random forests, SVM, KNN), unsupervised learning (K-Means, hierarchical clustering, PCA), model evaluation and selection, cross-validation, feature engineering, overfitting, and regularization. Using scikit-learn with business scenarios like customer segmentation, credit scoring, recommendation systems, and sales forecasting, students develop skills to solve real business problems with machine learning.</p>
     </div>
-    <div class="section">
+    <div class="section collapsible-section">
         <h2>大作业 <span class="en">Final Project</span></h2>
+        <div class="collapsible-content collapsed">
         <p class="meta">作业标题：电商客户分群与价值预测</p>
         <p>基于电商平台客户交易行为数据，进行数据预处理和特征工程，使用K-Means聚类算法对客户进行分群，识别高价值客户、潜力客户、流失客户等不同群体的行为特征。建立分类预测模型，预测客户的购买意愿和价值等级。对比不同算法的预测效果，选择最优模型。最终提交包含客户画像、分群策略、营销建议的完整分析报告及Python代码。</p>
         <p style="margin-top:8px;">Preprocess e-commerce customer transaction data and perform feature engineering. Apply K-Means clustering to segment customers into groups such as high-value, potential, and churned customers, identifying behavioral characteristics. Build classification models to predict purchase intent and customer value tiers. Compare algorithm performance and select the optimal model. Submit a complete report with customer personas, segmentation strategies, marketing recommendations, and Python code.</p>
+        <div style="margin-top:14px;padding-top:10px;border-top:1px solid #eee;">
+            <h3 style="font-size:0.9rem;color:#667eea;margin-bottom:8px;">实施步骤 <span style="font-size:0.75rem;color:#999;font-weight:normal;">Implementation Steps</span></h3>
+<div class="step-item">
+            <div class="step-number">步骤 1</div>
+            <div class="step-title">数据收集</div>
+            <div class="step-desc">收集和整理相关数据集</div>
+            <div class="step-output">产出：数据集</div>
+        </div>
+<div class="step-item">
+            <div class="step-number">步骤 2</div>
+            <div class="step-title">数据清洗</div>
+            <div class="step-desc">处理缺失值和异常数据</div>
+            <div class="step-output">产出：清洗后的数据集</div>
+        </div>
+<div class="step-item">
+            <div class="step-number">步骤 3</div>
+            <div class="step-title">模型设计</div>
+            <div class="step-desc">选择合适的算法模型</div>
+            <div class="step-output">产出：模型设计方案</div>
+        </div>
+<div class="step-item">
+            <div class="step-number">步骤 4</div>
+            <div class="step-title">模型训练</div>
+            <div class="step-desc">训练模型并调参优化</div>
+            <div class="step-output">产出：训练好的模型</div>
+        </div>
+<div class="step-item">
+            <div class="step-number">步骤 5</div>
+            <div class="step-title">结果分析</div>
+            <div class="step-desc">分析模型结果撰写报告</div>
+            <div class="step-output">产出：分析报告</div>
+        </div>
+        </div>
+        <div style="margin-top:14px;padding-top:10px;border-top:1px solid #eee;">
+            <h3 style="font-size:0.9rem;color:#667eea;margin-bottom:8px;">Steps</h3>
+<div class="step-item">
+            <div class="step-number">Step 1</div>
+            <div class="step-title">Data Collection</div>
+            <div class="step-desc">Collect datasets</div>
+            <div class="step-output">Deliverable: Dataset</div>
+        </div>
+<div class="step-item">
+            <div class="step-number">Step 2</div>
+            <div class="step-title">Data Cleaning</div>
+            <div class="step-desc">Handle missing values</div>
+            <div class="step-output">Deliverable: Cleaned Data</div>
+        </div>
+<div class="step-item">
+            <div class="step-number">Step 3</div>
+            <div class="step-title">Model Design</div>
+            <div class="step-desc">Select algorithms</div>
+            <div class="step-output">Deliverable: Model Design</div>
+        </div>
+<div class="step-item">
+            <div class="step-number">Step 4</div>
+            <div class="step-title">Training</div>
+            <div class="step-desc">Train and optimize</div>
+            <div class="step-output">Deliverable: Trained Model</div>
+        </div>
+<div class="step-item">
+            <div class="step-number">Step 5</div>
+            <div class="step-title">Analysis</div>
+            <div class="step-desc">Analyze results</div>
+            <div class="step-output">Deliverable: Analysis Report</div>
+        </div>
+        </div>
+        </div>
+        <div class="collapsible-overlay"></div>
+        <button class="collapsible-toggle">展开</button>
     </div>
     <p class="footer">© 2026 yunzhuan.icu</p>
 <!-- Vercel Analytics -->
+<script defer src="/js/collapse.js"></script>
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 </body>
 </html>

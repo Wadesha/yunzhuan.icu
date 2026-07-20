@@ -18,6 +18,7 @@
         .meta { font-size: 0.82rem; color: #888; margin-bottom: 8px; }
         .footer { text-align: center; margin-top: 20px; color: #999; font-size: 0.8rem; }
     </style>
+<link rel="stylesheet" href="/css/collapse.css">
 </head>
 <body>
     <a href="../index.html" class="back-link">← 返回首页</a>
@@ -29,14 +30,85 @@
         <p>软件架构课程聚焦大型软件系统的结构设计、风格选择与质量属性权衡，是软件工程专业的高阶核心课程。内容包括架构风格（分层、客户端-服务器、微服务、事件驱动）、质量属性（性能、可用性、可修改性、安全性）、架构文档化（4+1视图）、设计模式与架构评估方法（ATAM）。培养学生从系统视角进行架构决策的能力。</p>
         <p style="margin-top:8px;">Software Architecture focuses on the structural design, style selection, and quality attribute tradeoffs of large software systems. Topics cover architectural styles (layered, client-server, microservices, event-driven), quality attributes (performance, availability, modifiability, security), documentation (4+1 views), design patterns, and evaluation methods (ATAM). Students develop system-level architectural decision-making skills.</p>
     </div>
-    <div class="section">
+    <div class="section collapsible-section">
         <h2>大作业 <span class="en">Final Project</span></h2>
+        <div class="collapsible-content collapsed">
         <p class="meta">作业标题：微服务架构设计</p>
         <p>学生需针对一个电商或在线教育场景，设计基于微服务的系统架构。要求绘制系统上下文图、容器图与组件图（C4模型），定义服务边界与通信协议（REST或gRPC），并讨论容错、负载均衡与服务发现方案。提交架构设计文档、图表与原型代码，并进行架构评审答辩。</p>
         <p style="margin-top:8px;">For an e-commerce or online education scenario, students design a microservices-based architecture. Requirements include C4 model diagrams (context, container, component), service boundaries, REST or gRPC protocols, and discussions on fault tolerance, load balancing, and service discovery. Submit architecture documentation, diagrams, prototype code, and conduct an architecture review defense.</p>
+        <div style="margin-top:14px;padding-top:10px;border-top:1px solid #eee;">
+            <h3 style="font-size:0.9rem;color:#667eea;margin-bottom:8px;">实施步骤 <span style="font-size:0.75rem;color:#999;font-weight:normal;">Implementation Steps</span></h3>
+<div class="step-item">
+            <div class="step-number">步骤 1</div>
+            <div class="step-title">需求调研</div>
+            <div class="step-desc">调研用户需求，分析竞品功能</div>
+            <div class="step-output">产出：需求文档</div>
+        </div>
+<div class="step-item">
+            <div class="step-number">步骤 2</div>
+            <div class="step-title">架构设计</div>
+            <div class="step-desc">设计系统架构、模块划分和数据库模型</div>
+            <div class="step-output">产出：架构设计文档</div>
+        </div>
+<div class="step-item">
+            <div class="step-number">步骤 3</div>
+            <div class="step-title">原型开发</div>
+            <div class="step-desc">使用合适框架实现原型系统</div>
+            <div class="step-output">产出：可运行原型</div>
+        </div>
+<div class="step-item">
+            <div class="step-number">步骤 4</div>
+            <div class="step-title">迭代完善</div>
+            <div class="step-desc">根据测试反馈优化功能和性能</div>
+            <div class="step-output">产出：优化后的系统</div>
+        </div>
+<div class="step-item">
+            <div class="step-number">步骤 5</div>
+            <div class="step-title">部署交付</div>
+            <div class="step-desc">部署到服务器，编写使用手册</div>
+            <div class="step-output">产出：完整系统+文档</div>
+        </div>
+        </div>
+        <div style="margin-top:14px;padding-top:10px;border-top:1px solid #eee;">
+            <h3 style="font-size:0.9rem;color:#667eea;margin-bottom:8px;">Steps</h3>
+<div class="step-item">
+            <div class="step-number">Step 1</div>
+            <div class="step-title">Requirements Research</div>
+            <div class="step-desc">Research user requirements</div>
+            <div class="step-output">Deliverable: Requirements Document</div>
+        </div>
+<div class="step-item">
+            <div class="step-number">Step 2</div>
+            <div class="step-title">Architecture Design</div>
+            <div class="step-desc">Design system architecture</div>
+            <div class="step-output">Deliverable: Architecture Design</div>
+        </div>
+<div class="step-item">
+            <div class="step-number">Step 3</div>
+            <div class="step-title">Prototype Development</div>
+            <div class="step-desc">Implement prototype</div>
+            <div class="step-output">Deliverable: Working Prototype</div>
+        </div>
+<div class="step-item">
+            <div class="step-number">Step 4</div>
+            <div class="step-title">Iteration</div>
+            <div class="step-desc">Optimize based on testing</div>
+            <div class="step-output">Deliverable: Optimized System</div>
+        </div>
+<div class="step-item">
+            <div class="step-number">Step 5</div>
+            <div class="step-title">Deployment</div>
+            <div class="step-desc">Deploy and write manual</div>
+            <div class="step-output">Deliverable: Complete System</div>
+        </div>
+        </div>
+        </div>
+        <div class="collapsible-overlay"></div>
+        <button class="collapsible-toggle">展开</button>
     </div>
     <p class="footer">© 2026 yunzhuan.icu</p>
 <!-- Vercel Analytics -->
+<script defer src="/js/collapse.js"></script>
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 </body>
 </html>

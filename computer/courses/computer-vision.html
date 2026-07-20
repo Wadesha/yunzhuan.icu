@@ -18,6 +18,7 @@
         .meta { font-size: 0.82rem; color: #888; margin-bottom: 8px; }
         .footer { text-align: center; margin-top: 20px; color: #999; font-size: 0.8rem; }
     </style>
+<link rel="stylesheet" href="/css/collapse.css">
 </head>
 <body>
     <a href="../index.html" class="back-link">← 返回首页</a>
@@ -29,14 +30,85 @@
         <p>计算机视觉研究使计算机从图像与视频中获取信息、理解视觉世界的理论与方法。课程内容包括图像处理基础、特征检测、相机模型与几何视觉、卷积神经网络、目标检测（YOLO、Faster R-CNN）、语义分割、人脸识别、3D视觉与生成模型（GAN、Diffusion）。学生将掌握视觉感知的核心算法，能应用于自动驾驶、医学影像、AR/VR等领域。</p>
         <p style="margin-top:8px;">Computer Vision studies theories and methods that enable computers to extract information from images and video and understand the visual world. Topics include image processing fundamentals, feature detection, camera models and geometry, CNNs, object detection (YOLO, Faster R-CNN), semantic segmentation, face recognition, 3D vision, and generative models (GANs, Diffusion). Students master core perception algorithms applicable to autonomous driving, medical imaging, and AR/VR.</p>
     </div>
-    <div class="section">
+    <div class="section collapsible-section">
         <h2>大作业 <span class="en">Final Project</span></h2>
+        <div class="collapsible-content collapsed">
         <p class="meta">作业标题：实时目标检测系统</p>
         <p>学生需基于YOLOv8实现一个实时目标检测系统。要求在自定义数据集上完成数据标注、模型微调、推理与性能评估，mAP@0.5需达到0.7以上。系统需支持视频流输入与实时可视化框选，可部署于本地或边缘设备。需提交代码、训练日志、演示视频及对比报告，讨论速度与精度的权衡。</p>
         <p style="margin-top:8px;">Students implement a real-time object detection system based on YOLOv8. The project requires data annotation, model fine-tuning, inference, and performance evaluation on a custom dataset, achieving mAP@0.5 above 0.7. The system must support video stream input and real-time visualization, deployable on local or edge devices. Deliverables include code, training logs, a demo video, and a comparison report discussing the speed-accuracy trade-off.</p>
+        <div style="margin-top:14px;padding-top:10px;border-top:1px solid #eee;">
+            <h3 style="font-size:0.9rem;color:#667eea;margin-bottom:8px;">实施步骤 <span style="font-size:0.75rem;color:#999;font-weight:normal;">Implementation Steps</span></h3>
+<div class="step-item">
+            <div class="step-number">步骤 1</div>
+            <div class="step-title">需求分析</div>
+            <div class="step-desc">明确项目目标和功能需求，分析核心问题</div>
+            <div class="step-output">产出：需求规格文档</div>
+        </div>
+<div class="step-item">
+            <div class="step-number">步骤 2</div>
+            <div class="step-title">方案设计</div>
+            <div class="step-desc">设计整体架构、数据结构和算法方案</div>
+            <div class="step-output">产出：系统设计文档</div>
+        </div>
+<div class="step-item">
+            <div class="step-number">步骤 3</div>
+            <div class="step-title">核心实现</div>
+            <div class="step-desc">编写核心代码，实现主要功能模块</div>
+            <div class="step-output">产出：源代码文件</div>
+        </div>
+<div class="step-item">
+            <div class="step-number">步骤 4</div>
+            <div class="step-title">测试验证</div>
+            <div class="step-desc">设计测试用例，验证功能正确性</div>
+            <div class="step-output">产出：测试报告</div>
+        </div>
+<div class="step-item">
+            <div class="step-number">步骤 5</div>
+            <div class="step-title">文档提交</div>
+            <div class="step-desc">整理代码注释和项目文档</div>
+            <div class="step-output">产出：最终提交材料</div>
+        </div>
+        </div>
+        <div style="margin-top:14px;padding-top:10px;border-top:1px solid #eee;">
+            <h3 style="font-size:0.9rem;color:#667eea;margin-bottom:8px;">Steps</h3>
+<div class="step-item">
+            <div class="step-number">Step 1</div>
+            <div class="step-title">Requirements Analysis</div>
+            <div class="step-desc">Define project objectives and functional requirements</div>
+            <div class="step-output">Deliverable: Requirements Specification</div>
+        </div>
+<div class="step-item">
+            <div class="step-number">Step 2</div>
+            <div class="step-title">Design</div>
+            <div class="step-desc">Design overall architecture and algorithm solutions</div>
+            <div class="step-output">Deliverable: System Design Document</div>
+        </div>
+<div class="step-item">
+            <div class="step-number">Step 3</div>
+            <div class="step-title">Implementation</div>
+            <div class="step-desc">Write core code and implement main modules</div>
+            <div class="step-output">Deliverable: Source Code</div>
+        </div>
+<div class="step-item">
+            <div class="step-number">Step 4</div>
+            <div class="step-title">Testing</div>
+            <div class="step-desc">Design test cases and verify correctness</div>
+            <div class="step-output">Deliverable: Test Report</div>
+        </div>
+<div class="step-item">
+            <div class="step-number">Step 5</div>
+            <div class="step-title">Documentation</div>
+            <div class="step-desc">Organize code comments and project docs</div>
+            <div class="step-output">Deliverable: Final Submission</div>
+        </div>
+        </div>
+        </div>
+        <div class="collapsible-overlay"></div>
+        <button class="collapsible-toggle">展开</button>
     </div>
     <p class="footer">© 2026 yunzhuan.icu</p>
 <!-- Vercel Analytics -->
+<script defer src="/js/collapse.js"></script>
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 </body>
 </html>

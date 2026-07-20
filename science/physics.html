@@ -62,6 +62,7 @@
  font-size: 0.8rem;
  }
  </style>
+<link rel="stylesheet" href="/css/collapse.css">
 </head>
 <body>
  <a href="../index.html" class="back-link">← 返回首页</a>
@@ -69,15 +70,14 @@
  <h1>物理学</h1>
  <p class="en-name">Physics</p>
 
- <div class="section">
+ <div class="section collapsible-section">
  <h2>中文介绍</h2>
+ <div class="collapsible-content collapsed">
  <p>物理学是一门研究物质、能量和相互作用的基础科学。它涵盖了力学、热学、电磁学、光学、量子力学、相对论等多个方向。物理学专业的课程包括高等数学、经典力学、电磁学、热学、量子物理等。毕业生在科研机构、科技公司、教育机构、工程领域等都有广泛的就业机会。物理学专业培养学生的分析能力和抽象思维能力。</p>
+ <p style="margin-top:8px;">Physics is a fundamental science that studies matter, energy, and interactions. It covers mechanics, thermodynamics, electromagnetism, optics, quantum mechanics, relativity, and more. Coursework includes advanced mathematics, classical mechanics, electromagnetism, thermodynamics, and quantum physics. Graduates have extensive employment opportunities in research institutions, tech companies, educational institutions, and engineering fields. Physics develops students' analytical and abstract thinking abilities.</p>
  </div>
-
- <div class="section">
- <h2>English Introduction</h2>
- <p>Physics is a fundamental science that studies matter, energy, and interactions. It covers mechanics, thermodynamics, electromagnetism, optics, quantum mechanics, relativity, and more. Coursework includes advanced mathematics, classical mechanics, electromagnetism, thermodynamics, and quantum physics. Graduates have extensive employment opportunities in research institutions, tech companies, educational institutions, and engineering fields. Physics develops students' analytical and abstract thinking abilities.</p>
- </div>
+ <div class="collapsible-overlay"></div>
+ <button class="collapsible-toggle">展开</button></div>
 
  <div class="section">
  <h2>核心课程 <span class="en">Core Courses</span></h2>
@@ -94,6 +94,7 @@
 
  <p class="footer">© 2026 yunzhuan.icu | 美国大学专业导航</p>
 <!-- Vercel Analytics -->
+<script defer src="/js/collapse.js"></script>
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 </body>
 </html>
