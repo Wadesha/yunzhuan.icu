@@ -3,19 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>用户档案 v20260722-3</title>
+<title>用户档案 v20260722-4</title>
 <link rel="stylesheet" href="css/user.css">
 </head>
 <body>
 <noscript><div style="background:#f8d7da;color:#721c24;padding:10px;">请开启JavaScript</div></noscript>
 <div id="debugBar" style="background:#ff6b6b;color:white;padding:8px 12px;font-size:13px;font-weight:bold;border-bottom:2px solid #ee5253;">
-  [版本 v20260722-3] 调试 | 
+  [v20260722-4] 调试 | 
   slot_token: <span id="d1">检查中</span> | 
   user_data: <span id="d2">检查中</span> |
   CloudSlot: <span id="d3">检查中</span> |
-  supabase: <span id="d4">检查中</span>
+  supabase: <span id="d4">检查中</span> |
+  错误: <span id="d5">无</span>
 </div>
 <script>
+window.onerror = function(msg, url, line) {
+  var el = document.getElementById('d5');
+  if (el) el.textContent = msg + ' (' + url + ':' + line + ')';
+};
 try {
   document.getElementById('d1').textContent = localStorage.getItem('slot_token') ? '有' : '无';
   document.getElementById('d2').textContent = localStorage.getItem('prereq_user_v1') ? '有' : '无';
