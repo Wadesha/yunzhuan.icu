@@ -294,7 +294,7 @@
     <div class="container">
         <a href="../index.html" class="back-link">← 返回首页</a>
         
-        <h1>💻 计算机课程刷题</h1>
+        <h1>计算机课程刷题</h1>
         <p class="subtitle">Computer Science Quiz</p>
 
         <!-- 课程选择 -->
@@ -498,11 +498,11 @@
                 streak++;
                 if (streak > maxStreak) maxStreak = streak;
                 feedback.classList.add('correct');
-                document.getElementById('feedbackTitle').textContent = '🎉 答对了！';
+                document.getElementById('feedbackTitle').textContent = '答对了！';
             } else {
                 streak = 0;
                 feedback.classList.add('wrong');
-                document.getElementById('feedbackTitle').textContent = '😅 答错了';
+                document.getElementById('feedbackTitle').textContent = '答错了';
             }
             
             document.getElementById('feedbackText').textContent = explanation;
@@ -537,7 +537,7 @@
             document.getElementById('wrongCount').textContent = currentQuestions.length - score;
             
             if (maxStreak >= 3) {
-                document.getElementById('maxStreak').textContent = `🔥 最高连击 ${maxStreak}`;
+                document.getElementById('maxStreak').textContent = `最高连击 ${maxStreak}`;
             } else {
                 document.getElementById('maxStreak').textContent = '';
             }
