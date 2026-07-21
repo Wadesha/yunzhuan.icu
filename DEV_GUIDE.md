@@ -250,6 +250,406 @@ API_BASE_URL: 'https://api.yunzhuan.icu/v1'
 
 ---
 
+## 8. 完整架构设计文档（Supabase + 注册登录 + 云同步）
+
+> 2026-07-21 新增
+> 目标：实现邮箱/手机号 + 密码注册登录，实时同步答题数据，为后续勋章/任务/排行榜等功能铺路。
+
+### 8.1 技术选型说明
+
+#### 为什么选 Supabase
+
+| 能力 | Supabase | 自己实现（Express + DB） | Firebase |
+|------|----------|--------------------------|----------|
+| 邮箱/手机号认证 | 内置，无需开发 | 需自己写加密、验证、找回 | 内置 |
+| 数据库 | PostgreSQL（关系型） | 自己选型 | NoSQL（Firestore） |
+| 实时推送 | 内置 Realtime 订阅 | 需 WebSocket | 内置 |
+| API 生成 | 自动 REST + RPC | 全部手写 | 自动 |
+| 成本 | 免费额度 500MB DB | 服务器费用 | 按读取次数计费 |
+| 部署 | 托管/自托管 | 自己运维 | 托管 |
+
+**结论**：用 Supabase 最省事，注册登录、数据库、API 全部现成，前端只管调用。
+
+### 8.2 整体架构
+
+```
+┌─────────────────────────────────────────────────────────┐
+│                    前端（yunzhuan.icu）                  │
+│  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌────────┐  │
+│  │  index   │  │ profile  │  │  quiz    │  │  ...   │  │
+│  └─────┬────┘  └─────┬────┘  └─────┬────┘  └────┬───┘  │
+│        │             │              │            │       │
+│        └─────────────┴──────┬───────┴────────────┘       │
+│                             │                            │
+│                    ┌────────▼────────┐                   │
+│                    │  js/auth.js     │ 注册/登录         │
+│                    │  js/user.js     │ Storage + 金币   │
+│                    │  js/sync.js     │ 云同步（新）     │
+│                    └────────┬────────┘                   │
+└─────────────────────────────┼───────────────────────────┘
+                              │ HTTPS
+                    ┌─────────▼─────────┐
+                    │   Supabase        │
+                    │  ┌────────────┐   │
+                    │  │   Auth     │ ← 邮箱/手机号+密码  │
+                    │  ├────────────┤   │
+                    │  │ PostgreSQL │ ← users, answers... │
+                    │  ├────────────┤   │
+                    │  │ Realtime   │ ← 实时同步订阅     │
+                    │  └────────────┘   │
+                    └───────────────────┘
+```
+
+### 8.3 数据模型（PostgreSQL Schema）
+
+```sql
+-- 用户档案（与 auth.users 一对一）
+CREATE TABLE profiles (
+  id UUID PRIMARY KEY REFERENCES auth.users(id) ON DELETE CASCADE,
+  username TEXT,
+  created_at TIMESTAMPTZ DEFAULT now(),
+  last_active_at TIMESTAMPTZ DEFAULT now(),
+  -- 数值系统
+  coin INT DEFAULT 0,
+  level INT DEFAULT 1,
+  total_answered INT DEFAULT 0,
+  total_correct INT DEFAULT 0,
+  total_sessions INT DEFAULT 0,
+  max_streak INT DEFAULT 0,
+  -- 预留字段
+  badges JSONB DEFAULT '[]'::jsonb,
+  tasks JSONB DEFAULT '{}'::jsonb
+);
+
+-- 课程进度
+CREATE TABLE course_progress (
+  id BIGSERIAL PRIMARY KEY,
+  user_id UUID REFERENCES profiles(id) ON DELETE CASCADE,
+  course_id TEXT NOT NULL,
+  answered INT DEFAULT 0,
+  correct INT DEFAULT 0,
+  last_practiced_at TIMESTAMPTZ DEFAULT now(),
+  UNIQUE(user_id, course_id)
+);
+
+-- 答题明细（用于统计和复盘）
+CREATE TABLE answers (
+  id BIGSERIAL PRIMARY KEY,
+  user_id UUID REFERENCES profiles(id) ON DELETE CASCADE,
+  course_id TEXT NOT NULL,
+  question_id TEXT NOT NULL,
+  is_correct BOOLEAN NOT NULL,
+  answered_at TIMESTAMPTZ DEFAULT now()
+);
+
+-- 勋章（预留）
+CREATE TABLE badges (
+  id TEXT PRIMARY KEY,
+  name TEXT NOT NULL,
+  description TEXT,
+  icon TEXT,
+  condition JSONB  -- 触发条件
+);
+
+-- 用户勋章关联
+CREATE TABLE user_badges (
+  user_id UUID REFERENCES profiles(id),
+  badge_id TEXT REFERENCES badges(id),
+  earned_at TIMESTAMPTZ DEFAULT now(),
+  PRIMARY KEY (user_id, badge_id)
+);
+
+-- 排行榜视图（虚拟表）
+CREATE VIEW leaderboard AS
+SELECT 
+  p.id, p.username, p.coin, p.level,
+  RANK() OVER (ORDER BY p.coin DESC) AS rank
+FROM profiles p
+LIMIT 100;
+```
+
+### 8.4 认证流程
+
+#### 注册
+
+```
+用户输入邮箱/手机号 + 密码
+        │
+        ▼
+supabase.auth.signUp({ email, password })
+        │
+        ├─ 成功 → Supabase 发验证邮件/短信
+        │         → 用户点击链接/输入验证码
+        │         → 前端收到 session
+        │         → 触发 onAuthStateChange 监听
+        │         → 创建 profiles 记录
+        │
+        └─ 失败 → 提示错误（邮箱已存在、密码太弱等）
+```
+
+#### 登录
+
+```
+用户输入邮箱/手机号 + 密码
+        │
+        ▼
+supabase.auth.signInWithPassword({ email, password })
+        │
+        ├─ 成功 → 保存 session 到 localStorage
+        │         → 从云端拉取 profiles 数据
+        │         → 合并本地 localStorage 数据（首次登录）
+        │         → 进入应用
+        │
+        └─ 失败 → 提示错误
+```
+
+#### 登出
+
+```
+supabase.auth.signOut()
+        │
+        ▼
+清除 localStorage 中的 session
+        │
+        ▼
+保留 localStorage 中的离线数据（可选清理）
+```
+
+### 8.5 实时同步策略
+
+#### 同步触发点
+
+| 事件 | 同步内容 | 频率 |
+|------|---------|------|
+| 注册/登录首次成功 | 全量拉取 profiles + course_progress | 1 次 |
+| 答完一题 | 上报 answers 表 + 更新 profiles 累计字段 | 每次 |
+| 刷题会话结束 | 更新 max_streak, total_sessions | 每次 |
+| 页面加载（已登录） | 拉取最新 profiles（防止多设备不一致） | 每次 |
+| 离线后恢复在线 | 批量上报暂存队列 | 恢复时 |
+
+#### 同步实现（新文件 `js/sync.js`）
+
+```javascript
+const Sync = {
+  // 待上报队列（离线时暂存）
+  pendingQueue: [],
+  
+  // 上报单次答题
+  async reportAnswer(courseId, questionId, isCorrect) {
+    if (!Auth.isLoggedIn()) {
+      // 未登录：仅本地存储
+      return;
+    }
+    
+    try {
+      const user = Auth.getUser();
+      
+      // 1. 插入答题明细
+      await supabase.from('answers').insert({
+        user_id: user.id,
+        course_id: courseId,
+        question_id: questionId,
+        is_correct: isCorrect
+      });
+      
+      // 2. 更新 profiles 累计
+      await supabase.rpc('update_user_stats', {
+        p_user_id: user.id,
+        p_is_correct: isCorrect
+      });
+      
+      // 3. 更新课程进度
+      await supabase.rpc('update_course_progress', {
+        p_user_id: user.id,
+        p_course_id: courseId,
+        p_is_correct: isCorrect
+      });
+      
+      // 4. 检查勋章触发
+      await this.checkBadges();
+      
+    } catch (e) {
+      // 网络失败：加入待上报队列
+      this.pendingQueue.push({ courseId, questionId, isCorrect, at: Date.now() });
+      console.warn('Sync failed, queued:', e);
+    }
+  },
+  
+  // 恢复在线时批量上报
+  async flushQueue() {
+    if (this.pendingQueue.length === 0) return;
+    
+    for (const item of this.pendingQueue) {
+      await this.reportAnswer(item.courseId, item.questionId, item.isCorrect);
+    }
+    this.pendingQueue = [];
+  },
+  
+  // 检查勋章
+  async checkBadges() {
+    // 调用 RPC 检查并发放勋章
+  }
+};
+```
+
+### 8.6 前端文件规划
+
+#### 新增文件
+
+| 文件 | 职责 |
+|------|------|
+| `js/auth.js` | 注册/登录/登出、session 管理 |
+| `js/sync.js` | 实时同步、离线队列、勋章检查 |
+| `login.html` | 登录/注册页面 |
+| `forgot-password.html` | 找回密码页面 |
+
+#### 修改文件
+
+| 文件 | 修改内容 |
+|------|---------|
+| `js/user.js` | 接入 Supabase 客户端，区分登录/未登录 |
+| `profile.html` | 增加登录入口、显示用户信息 |
+| `quiz/index.html` | 答题后调用 Sync.reportAnswer |
+| 所有页面 | 顶部金币栏根据登录状态显示不同内容 |
+
+### 8.7 关键 RPC 函数（PostgreSQL）
+
+```sql
+-- 更新用户累计统计
+CREATE OR REPLACE FUNCTION update_user_stats(
+  p_user_id UUID,
+  p_is_correct BOOLEAN
+) RETURNS void AS $$
+BEGIN
+  UPDATE profiles SET
+    total_answered = total_answered + 1,
+    total_correct = total_correct + CASE WHEN p_is_correct THEN 1 ELSE 0 END,
+    coin = coin + CASE WHEN p_is_correct THEN 1 ELSE 0 END,
+    level = FLOOR(coin / 100) + 1,
+    last_active_at = now()
+  WHERE id = p_user_id;
+END;
+$$ LANGUAGE plpgsql;
+
+-- 更新课程进度
+CREATE OR REPLACE FUNCTION update_course_progress(
+  p_user_id UUID,
+  p_course_id TEXT,
+  p_is_correct BOOLEAN
+) RETURNS void AS $$
+BEGIN
+  INSERT INTO course_progress (user_id, course_id, answered, correct, last_practiced_at)
+  VALUES (p_user_id, p_course_id, 1, CASE WHEN p_is_correct THEN 1 ELSE 0 END, now())
+  ON CONFLICT (user_id, course_id) DO UPDATE SET
+    answered = course_progress.answered + 1,
+    correct = course_progress.correct + CASE WHEN p_is_correct THEN 1 ELSE 0 END,
+    last_practiced_at = now();
+END;
+$$ LANGUAGE plpgsql;
+```
+
+### 8.8 安全设计
+
+| 风险 | 措施 |
+|------|------|
+| SQL 注入 | Supabase 自动处理，使用参数化查询 |
+| XSS | Supabase 自动转义，密码字段不渲染 |
+| 密码泄露 | 密码只在传输到 Supabase 时使用，不落库 |
+| 越权访问 | Row Level Security (RLS)：用户只能读写自己的数据 |
+| 刷接口 | Supabase 内置 rate limit + RLS 双重防护 |
+| CSRF | Supabase 使用 JWT，无需 CSRF token |
+
+#### RLS 策略示例
+
+```sql
+-- 用户只能读取自己的 profiles
+CREATE POLICY "Users can view own profile" ON profiles
+  FOR SELECT USING (auth.uid() = id);
+
+-- 用户只能更新自己的 profiles
+CREATE POLICY "Users can update own profile" ON profiles
+  FOR UPDATE USING (auth.uid() = id);
+
+-- 排行榜公开可读
+CREATE POLICY "Leaderboard is public" ON profiles
+  FOR SELECT USING (true);
+```
+
+### 8.9 数据迁移方案
+
+#### 现有匿名用户升级
+
+```
+1. 用户首次访问登录页，看到提示：
+   "已有本地数据？登录后自动同步到云端"
+
+2. 用户登录成功：
+   - 读取 localStorage 中的 prereq_user_v1
+   - 调用 supabase.from('profiles').upsert(本地数据)
+   - 标记 localStorage 为已迁移（防止重复迁移）
+   
+3. 之后所有操作走云端，本地仅作缓存
+```
+
+### 8.10 分阶段实施计划
+
+#### 阶段 1：后端准备（不涉及前端改动）
+
+- [ ] 注册 Supabase 项目
+- [ ] 创建数据表（profiles, course_progress, answers, badges）
+- [ ] 创建 RPC 函数（update_user_stats, update_course_progress）
+- [ ] 配置 RLS 策略
+- [ ] 配置邮箱 SMTP（用于验证邮件）
+- [ ] 配置 Realtime 订阅
+
+#### 阶段 2：前端认证
+
+- [ ] 创建 `js/auth.js`（封装 supabase.auth）
+- [ ] 创建 `login.html`（注册/登录表单）
+- [ ] 创建 `forgot-password.html`
+- [ ] 接入 session 状态监听
+
+#### 阶段 3：数据同步
+
+- [ ] 创建 `js/sync.js`
+- [ ] quiz 页面接入 Sync.reportAnswer
+- [ ] 实现离线队列
+- [ ] 实现首次登录数据迁移
+
+#### 阶段 4：档案页升级
+
+- [ ] profile.html 显示登录状态
+- [ ] 显示云端数据（与本地对比）
+- [ ] 添加登出按钮
+- [ ] 添加多设备同步提示
+
+#### 阶段 5：勋章/任务（后续）
+
+- [ ] 勋章触发逻辑
+- [ ] 任务系统
+- [ ] 排行榜页面
+
+### 8.11 成本估算
+
+| 项目 | 免费额度 | 超出后 |
+|------|---------|--------|
+| 数据库 | 500 MB | $0.125/GB/月 |
+| 认证用户 | 50,000 MAU | $0.00325/MAU |
+| 实时连接 | 200 并发 | $10/100 并发 |
+| API 请求 | 5M/月 | $0.0001/次 |
+
+**预计**：用户量 < 1 万时基本免费。
+
+### 8.12 风险与备选
+
+| 风险 | 备选方案 |
+|------|---------|
+| Supabase 倒闭/涨价 | 数据可一键导出 PostgreSQL dump，迁回自建 |
+| 国内访问慢 | 用 Cloudflare CDN 代理，或自托管在国内服务器 |
+| 实名认证要求 | 接入第三方短信网关（阿里云、腾讯云） |
+
+---
+
 ## 7. 工具开发注意事项
 
 ### 7.1 任务变大后的关键原则
