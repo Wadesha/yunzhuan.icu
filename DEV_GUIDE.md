@@ -170,6 +170,84 @@ Storage.saveUser(user);
 2. 在 `createUser` 中初始化新字段
 3. 必要时写迁移逻辑
 
+### 6.3 全局金币展示架构
+
+#### 组件设计
+
+| 文件 | 职责 |
+|------|------|
+| `js/user.js` | Storage 模块 + CoinDisplay 组件 |
+| `css/user.css` | 金币栏和档案页样式 |
+| `profile.html` | 用户档案页面 |
+
+#### Storage 模块结构
+
+```javascript
+Storage = {
+  KEY: 'prereq_user_v1',
+  API_BASE_URL: '',        // 预留：后端地址
+  getUser()                // 读取用户数据
+  saveUser(user)           // 保存并触发云同步
+  resetUser()              // 重置数据
+  createUser()             // 创建新用户
+  calcLevel(coin)          // 根据金币计算等级
+  syncToCloud(user)        // 预留：同步到云端
+  login(userId)            // 预留：登录
+  logout()                 // 预留：登出
+  getLeaderboard()         // 预留：排行榜
+}
+```
+
+#### 用户数据结构
+
+```javascript
+{
+  userId: 'user_xxx',
+  createdAt: '2024-01-01T00:00:00Z',
+  lastActiveAt: '2024-01-01T00:00:00Z',
+  coin: 0,                 // 金币数量
+  level: 1,                // 用户等级
+  totalAnswered: 0,        // 总答题数
+  totalCorrect: 0,         // 正确数
+  totalSessions: 0,        // 刷题次数
+  maxStreak: 0,            // 最高连击
+  courseProgress: {},      // 课程进度
+  badges: [],              // 勋章（预留）
+  tasks: {}                // 任务（预留）
+}
+```
+
+### 6.4 预留上云接口
+
+#### 切换方式
+
+将 `API_BASE_URL` 从空字符串改为后端地址即可启用云同步：
+
+```javascript
+// 本地开发
+API_BASE_URL: ''
+
+// 上线后
+API_BASE_URL: 'https://api.yunzhuan.icu/v1'
+```
+
+#### 预留 API 列表
+
+| 函数 | 用途 | 实现状态 |
+|------|------|---------|
+| `syncToCloud(user)` | 自动同步用户数据到云端 | 预留 |
+| `login(userId)` | 用户登录并拉取云端数据 | 预留 |
+| `logout()` | 清除会话 | 预留 |
+| `getLeaderboard()` | 获取排行榜 | 预留 |
+| `saveQuestionAnswer(...)` | 答题记录上报 | 预留 |
+
+#### 上云注意事项
+
+1. **数据迁移**：上线时需提供从 localStorage 迁移到云端的方案
+2. **网络容错**：云同步失败时不影响本地使用
+3. **冲突解决**：以云端数据为准，本地作为缓存
+4. **隐私保护**：用户 ID 使用随机生成的字符串，不存储真实身份信息
+
 ---
 
 ## 7. 工具开发注意事项

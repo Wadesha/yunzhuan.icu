@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>用户档案</title>
+<link rel="stylesheet" href="../css/user.css">
+</head>
+<body>
+<div class="profile-page">
+  <a href="../index.html" class="back-btn">← 返回首页</a>
+
+  <div class="profile-header">
+    <div class="profile-avatar">●</div>
+    <div class="profile-name">学习者</div>
+    <div class="profile-id">ID: <span id="userId">--</span></div>
+    <div style="margin-top:12px;font-size:1.6rem;">● <span id="totalCoin">0</span></div>
+    <div style="font-size:0.9rem;">等级 <span id="level">1</span></div>
+  </div>
+
+  <div class="profile-stats">
+    <div class="stat-card">
+      <div class="v" id="statAnswered">0</div>
+      <div class="l">总答题数</div>
+    </div>
+    <div class="stat-card">
+      <div class="v" id="statCorrect">0</div>
+      <div class="l">正确数</div>
+    </div>
+    <div class="stat-card">
+      <div class="v" id="statSessions">0</div>
+      <div class="l">刷题次数</div>
+    </div>
+    <div class="stat-card">
+      <div class="v" id="statStreak">0</div>
+      <div class="l">最高连击</div>
+    </div>
+  </div>
+
+  <div style="margin-top:16px;">
+    <div class="section-title">课程学习进度</div>
+    <div class="course-progress-list" id="courseProgress">
+      <div style="text-align:center;color:#999;padding:20px;">暂无学习记录</div>
+    </div>
+  </div>
+
+  <div style="margin-top:16px;">
+    <div class="section-title">数据存储说明</div>
+    <div style="background:#f0f4ff;border-radius:8px;padding:14px;font-size:0.85rem;color:#555;">
+      <p style="margin-bottom:8px;">当前数据存储在本地浏览器中，清除浏览器缓存会导致数据丢失。</p>
+      <p>预留：后续将支持云端同步，登录后数据自动保存到服务器。</p>
+    </div>
+  </div>
+
+  <div style="margin-top:16px;text-align:center;">
+    <button onclick="clearData()" style="padding:8px 20px;background:#ffebee;color:#c62828;border:none;border-radius:6px;font-size:0.85rem;cursor:pointer;">重置所有数据</button>
+  </div>
+</div>
+
+<script src="../js/user.js"></script>
+<script>
+function loadData() {
+  const user = Storage.getUser();
+  
+  document.getElementById('userId').textContent = user.userId;
+  document.getElementById('totalCoin').textContent = user.coin;
+  document.getElementById('level').textContent = user.level;
+  
+  document.getElementById('statAnswered').textContent = user.totalAnswered;
+  document.getElementById('statCorrect').textContent = user.totalCorrect;
+  document.getElementById('statSessions').textContent = user.totalSessions;
+  document.getElementById('statStreak').textContent = user.maxStreak;
+  
+  // 显示课程进度
+  const cp = user.courseProgress;
+  const keys = Object.keys(cp);
+  if (keys.length === 0) return;
+  
+  let html = '';
+  keys.forEach(courseId => {
+    const p = cp[courseId];
+    const percent = p.answered > 0 ? Math.round(p.correct / p.answered * 100) : 0;
+    html += `
+    <div class="progress-item">
+      <span style="font-size:0.88rem;color:#333;">${courseId}</span>
+      <div class="progress-bar-mini">
+        <div class="progress-fill-mini" style="width:${percent}%"></div>
+      </div>
+      <span style="font-size:0.85rem;color:#666;">${p.correct}/${p.answered} (${percent}%)</span>
+    </div>`;
+  });
+  
+  document.getElementById('courseProgress').innerHTML = html;
+}
+
+function clearData() {
+  if (confirm('确定要重置所有数据吗？此操作不可恢复。')) {
+    Storage.resetUser();
+    location.reload();
+  }
+}
+
+document.addEventListener('DOMContentLoaded', loadData);
+</script>
+</body>
+</html>
