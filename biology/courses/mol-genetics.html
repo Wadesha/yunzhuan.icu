@@ -38,6 +38,7 @@
         <p style="margin-top:8px;">Select a target gene, design a CRISPR gene editing plan, predict phenotypes, and experimentally validate gene function. Write a complete research plan and results analysis.</p>
         </div>
     </div>
+    
     <div class="section">
         <h2>实施步骤 <span class="en">Implementation Steps</span></h2>
         <div>
@@ -45,10 +46,114 @@
 
 <div class="step-item">
     <div class="step-number">步骤 1</div>
-    <div class="step-title">基因选择</div>
-    <div class="step-desc">选定目标基因并查询序列和功能信息</div>
-    <div class="step-output">产出：基因信息表</div>
+    <div class="step-title">遗传病选择与分子遗传学研究设计</div>
+    <div class="step-desc">
+        本步骤的核心任务是选择一种遗传病，设计分子遗传学研究方案。需要从单基因病、多基因病、染色体病中选择研究对象，明确研究目的（致病基因鉴定、发病机制研究、诊断方法开发、基因治疗探索），设计科学的研究方案。分子遗传学研究需要结合分子生物学技术和遗传学分析方法。
+<br><br>
+• 选择研究疾病：从孟德尔遗传病（如地中海贫血、血友病、苯丙酮尿症、亨廷顿舞蹈症、Duchenne肌营养不良）、复杂疾病（如糖尿病、高血压、精神分裂症）、染色体病（如唐氏综合征）中选择一种疾病<br>• 研究设计：确定研究类型——致病基因定位与克隆（家系连锁分析、候选基因法、全外显子测序WES、全基因组测序WGS）、基因型-表型相关性研究、疾病机制研究（细胞/动物模型）、分子诊断方法开发、群体遗传学研究<br>• 样本收集方案：确定样本量和样本类型（患者、家系成员、正常对照），制定样本收集标准（诊断标准、纳入排除标准），设计临床资料收集表（病史、体征、检查结果、家系图），考虑伦理审查和知情同意
+    </div>
+    <div class="step-output">产出：分子遗传学研究设计方案（含疾病选择依据、研究设计、样本收集方案、技术路线图）｜ 质量标准：疾病选择有研究价值，设计科学合理，技术路线清晰可行</div>
 </div>
+<div class="step-item">
+    <div class="step-number">步骤 2</div>
+    <div class="step-title">样本制备与DNA/RNA提取</div>
+    <div class="step-desc">
+        本步骤的核心任务是制备研究样本，提取高质量的DNA和RNA。分子遗传学实验对核酸质量要求很高，高质量的核酸是后续实验成功的基础。需要根据样本类型选择合适的提取方法，严格控制实验过程，避免降解和污染。
+<br><br>
+• 样本收集与处理：收集外周血（EDTA抗凝）、组织样本（液氮速冻或福尔马林固定石蜡包埋）、口腔拭子等样本，记录样本信息（编号、来源、收集时间、保存条件），建立样本库和样本追踪系统<br>• 核酸提取纯化：使用商品化试剂盒（Qiagen、Thermo Fisher）或传统方法（酚-氯仿法、盐析法）提取基因组DNA；使用TRIzol法或柱提法提取总RNA；操作在超净工作台进行，防止RNase/DNase污染<br>• 核酸质量检测：使用Nanodrop测定核酸浓度和纯度（A260/A280比值，DNA≈1.8，RNA≈2.0）；使用琼脂糖凝胶电泳检测DNA完整性（基因组DNA应为单一条带，无降解）；使用Agilent Bioanalyzer检测RNA完整性（RIN值≥7）
+    </div>
+    <div class="step-output">产出：高质量核酸样本（含DNA/RNA样本、浓度纯度检测报告、完整性评估结果）、样本库记录｜ 质量标准：核酸浓度纯度达标，完整性良好，无降解无污染，样本记录完整</div>
+</div>
+<div class="step-item">
+    <div class="step-number">步骤 3</div>
+    <div class="step-title">基因突变检测与分析</div>
+    <div class="step-desc">
+        本步骤的核心任务是使用分子生物学技术检测基因突变，进行遗传学分析。根据研究目的和疾病类型选择合适的突变检测方法，从候选基因筛查到全基因组分析，从点突变到大片段缺失/重复。突变检测是分子遗传学研究的核心实验环节。
+<br><br>
+• 候选基因筛查：使用PCR-Sanger测序法进行候选基因外显子扩增和测序——设计引物（使用Primer3、NCBI Primer-BLAST）、梯度PCR优化扩增条件、琼脂糖凝胶电泳验证扩增产物、Sanger测序（ABI 3730测序仪）、使用SeqMan或Sequencher比对参考序列识别突变<br>• 高通量测序分析：使用全外显子测序（WES）或目标区域测序（Panel）——制备测序文库（NimbleGen、Agilent捕获系统）、Illumina测序平台测序、生物信息学分析（BWA比对、GATK变异检测、ANNOVAR注释）、筛选致病突变（等位基因频率、功能预测、共分离分析）<br>• 大片段变异检测：使用MLPA（多重连接依赖探针扩增）检测外显子缺失/重复；使用aCGH（阵列比较基因组杂交）或SNP芯片检测拷贝数变异（CNV）；使用FISH（荧光原位杂交）检测染色体易位或大片段缺失
+    </div>
+    <div class="step-output">产出：基因突变检测结果（含测序图谱、变异列表、突变验证结果、基因型数据表）｜ 质量标准：突变检测方法准确，变异注释全面，验证结果可靠</div>
+</div>
+<div class="step-item">
+    <div class="step-number">步骤 4</div>
+    <div class="step-title">突变功能验证与分子机制研究</div>
+    <div class="step-desc">
+        本步骤的核心任务是验证突变的致病性，研究其分子致病机制。发现突变只是第一步，需要通过功能实验证明突变的致病性，阐明突变如何影响基因功能和细胞生物学过程。功能研究是从相关性到因果性的关键环节。
+<br><br>
+• 生物信息学预测与共分离分析：使用SIFT、PolyPhen-2、MutationTaster、CADD等工具预测错义突变的致病性；使用家系共分离分析验证突变与表型的共分离；查询HGMD、ClinVar、gnomAD数据库了解突变频率和临床意义<br>• 细胞水平功能验证：构建野生型和突变型表达载体（定点突变PCR法），转染细胞系（HEK293T、HeLa或相关细胞），检测——mRNA表达水平（qPCR）、蛋白表达水平（Western blot）、亚细胞定位（免疫荧光共聚焦显微镜）、蛋白稳定性（环己酰亚胺追踪实验）、酶活性、细胞凋亡、细胞增殖等<br>• 动物模型与分子机制：必要时构建模式生物模型（小鼠、斑马鱼、果蝇）——CRISPR/Cas9基因敲除或敲入，观察表型变化，进行组织病理学检查，探究分子机制（信号通路异常、蛋白相互作用改变、转录调控异常）
+    </div>
+    <div class="step-output">产出：功能研究结果（含生物信息学预测、细胞功能实验结果、动物模型表型、机制分析）｜ 质量标准：功能实验设计严谨，结果可靠，机制解释合理有深度</div>
+</div>
+<div class="step-item">
+    <div class="step-number">步骤 5</div>
+    <div class="step-title">分子遗传学研究报告与诊断应用开发</div>
+    <div class="step-desc">
+        本步骤的核心任务是撰写分子遗传学研究报告，开发分子诊断应用方案。需要系统总结研究发现，阐明疾病的分子遗传学基础，提出分子诊断、遗传咨询和产前诊断的应用方案。基础研究成果的转化应用是分子遗传学研究的重要目标。
+<br><br>
+• 撰写研究报告：按照分子遗传学研究规范撰写完整报告，包括引言、材料与方法、实验结果、分析与讨论、结论、参考文献，系统呈现基因突变发现、功能验证和机制研究结果<br>• 分子诊断方法开发：基于发现的致病突变，开发分子诊断方法——PCR-RFLP、ARMS-PCR、实时荧光定量PCR、HRM（高分辨率熔解曲线）、Sanger测序、基因芯片、下一代测序Panel，进行方法学验证（灵敏度、特异性、重复性）<br>• 遗传咨询与临床应用：编写遗传咨询手册，说明疾病的遗传方式、再发风险、诊断方法、防治措施；制定携带者筛查方案、产前诊断方案、植入前遗传学诊断（PGD）方案，绘制家系遗传图谱
+    </div>
+    <div class="step-output">产出：分子遗传学研究报告、分子诊断方法学资料、遗传咨询手册｜ 质量标准：研究报告学术规范，诊断方法可行，遗传咨询内容专业全面</div>
+</div>
+
+            
+
+<div style="margin-top:14px;padding-top:10px;border-top:1px solid #eee;">
+    <h3 style="font-size:0.9rem;color:#667eea;margin-bottom:8px;">Steps</h3>
+<div class="step-item">
+    <div class="step-number">Step 1</div>
+    <div class="step-title">Genetic Disease Selection and Molecular Genetics Study Design</div>
+    <div class="step-desc">
+        The core task of this step is to select a genetic disease and design a molecular genetics study plan. Choose from monogenic disorders, polygenic disorders, chromosomal disorders.
+<br><br>
+• Select disease for study: choose from Mendelian disorders (thalassemia, hemophilia, PKU, Huntington disease, Duchenne muscular dystrophy), complex diseases (diabetes, hypertension, schizophrenia), chromosomal disorders (Down syndrome)<br>• Study design: determine study type—disease gene mapping and cloning (family linkage analysis, candidate gene approach, WES, WGS), genotype-phenotype correlation study, disease mechanism study (cell/animal models), molecular diagnostic method development, population genetics study<br>• Sample collection plan: determine sample size and types (patients, family members, normal controls); develop sample collection criteria (diagnostic criteria, inclusion/exclusion criteria); design clinical data collection form (medical history, signs, test results, pedigree); consider ethical review and informed consent
+    </div>
+    <div class="step-output">Deliverable: Molecular genetics study design proposal (disease selection rationale, study design, sample collection plan, technical roadmap) | Quality standard: Research-valuable disease selection, scientific and reasonable design, clear and feasible technical roadmap</div>
+</div>
+<div class="step-item">
+    <div class="step-number">Step 2</div>
+    <div class="step-title">Sample Preparation and DNA/RNA Extraction</div>
+    <div class="step-desc">
+        The core task of this step is to prepare study samples and extract high-quality DNA and RNA. Molecular genetics experiments require high nucleic acid quality; high-quality nucleic acids are the foundation of successful downstream experiments.
+<br><br>
+• Sample collection and processing: collect peripheral blood (EDTA anticoagulant), tissue samples (liquid nitrogen frozen or FFPE), buccal swabs; record sample information (ID, source, collection time, storage conditions); establish sample bank and tracking system<br>• Nucleic acid extraction and purification: use commercial kits (Qiagen, Thermo Fisher) or traditional methods (phenol-chloroform, salting out) for genomic DNA extraction; use TRIzol or column-based methods for total RNA extraction; work in clean bench to prevent RNase/DNase contamination<br>• Nucleic acid quality testing: use Nanodrop to measure concentration and purity (A260/A280 ratio, DNA≈1.8, RNA≈2.0); use agarose gel electrophoresis to check DNA integrity (genomic DNA should be single band, no degradation); use Agilent Bioanalyzer for RNA integrity (RIN≥7)
+    </div>
+    <div class="step-output">Deliverable: High-quality nucleic acid samples (DNA/RNA samples, concentration/purity test report, integrity assessment results), sample bank records | Quality standard: Nucleic acid concentration and purity meet standards, good integrity, no degradation or contamination, complete sample records</div>
+</div>
+<div class="step-item">
+    <div class="step-number">Step 3</div>
+    <div class="step-title">Gene Mutation Detection and Analysis</div>
+    <div class="step-desc">
+        The core task of this step is to detect gene mutations using molecular biology techniques and perform genetic analysis. Select appropriate mutation detection methods based on research purpose and disease type.
+<br><br>
+• Candidate gene screening: use PCR-Sanger sequencing for candidate gene exon amplification and sequencing—design primers (Primer3, NCBI Primer-BLAST), gradient PCR optimization, agarose gel electrophoresis validation, Sanger sequencing (ABI 3730); use SeqMan or Sequencher to align with reference sequence and identify mutations<br>• High-throughput sequencing analysis: use whole exome sequencing (WES) or targeted panel sequencing—prepare sequencing libraries (NimbleGen, Agilent capture system); sequence on Illumina platform; bioinformatics analysis (BWA alignment, GATK variant calling, ANNOVAR annotation); filter pathogenic mutations (allele frequency, functional prediction, co-segregation analysis)<br>• Large fragment variation detection: use MLPA (Multiplex Ligation-dependent Probe Amplification) for exon deletion/duplication detection; use aCGH or SNP array for CNV detection; use FISH for chromosomal translocation or large deletion detection
+    </div>
+    <div class="step-output">Deliverable: Gene mutation detection results (sequencing traces, variant list, mutation validation results, genotype data table) | Quality standard: Accurate mutation detection method, comprehensive variant annotation, reliable validation results</div>
+</div>
+<div class="step-item">
+    <div class="step-number">Step 4</div>
+    <div class="step-title">Mutation Functional Validation and Molecular Mechanism Study</div>
+    <div class="step-desc">
+        The core task of this step is to validate pathogenicity of mutations and study molecular pathogenic mechanisms. Discovering mutations is only the first step; functional experiments are needed to prove pathogenicity.
+<br><br>
+• Bioinformatics prediction and co-segregation analysis: use SIFT, PolyPhen-2, MutationTaster, CADD to predict pathogenicity of missense mutations; perform family co-segregation analysis; query HGMD, ClinVar, gnomAD databases for mutation frequency and clinical significance<br>• Cell-level functional validation: construct wild-type and mutant expression vectors (site-directed mutagenesis PCR); transfect cell lines (HEK293T, HeLa or relevant cells); test—mRNA expression (qPCR), protein expression (Western blot), subcellular localization (immunofluorescence confocal microscopy), protein stability (CHX chase assay), enzyme activity, apoptosis, cell proliferation, etc.<br>• Animal models and molecular mechanisms: if necessary, construct model organism models (mouse, zebrafish, Drosophila)—CRISPR/Cas9 knockout or knock-in; observe phenotypic changes; perform histopathological examination; explore molecular mechanisms (abnormal signaling pathways, altered protein interactions, transcriptional regulation abnormalities)
+    </div>
+    <div class="step-output">Deliverable: Functional study results (bioinformatics prediction, cellular functional experiment results, animal model phenotypes, mechanism analysis) | Quality standard: Rigorous functional experiment design, reliable results, reasonable and in-depth mechanism explanation</div>
+</div>
+<div class="step-item">
+    <div class="step-number">Step 5</div>
+    <div class="step-title">Molecular Genetics Research Report and Diagnostic Application Development</div>
+    <div class="step-desc">
+        The core task of this step is to write a molecular genetics research report and develop molecular diagnostic applications. Systematically summarize research findings and clarify molecular genetic basis of the disease.
+<br><br>
+• Write research report: compose complete report following molecular genetics research standards, including introduction, materials and methods, experimental results, analysis and discussion, conclusions, references; systematically present mutation discovery, functional validation, and mechanism study results<br>• Molecular diagnostic method development: based on discovered pathogenic mutations, develop molecular diagnostic methods—PCR-RFLP, ARMS-PCR, real-time qPCR, HRM, Sanger sequencing, gene chip, NGS panel; perform methodological validation (sensitivity, specificity, reproducibility)<br>• Genetic counseling and clinical application: write genetic counseling manual explaining inheritance pattern, recurrence risk, diagnostic methods, prevention measures; develop carrier screening protocol, prenatal diagnosis protocol, PGD protocol; draw pedigree charts
+    </div>
+    <div class="step-output">Deliverable: Molecular genetics research report, molecular diagnostic methodology materials, genetic counseling manual | Quality standard: Academic standard research report, feasible diagnostic methods, professional and comprehensive genetic counseling content</div>
+</div>
+
+            </div>
+        </div>
+    </div>
+
 <div class="step-item">
     <div class="step-number">步骤 2</div>
     <div class="step-title">sgRNA设计</div>

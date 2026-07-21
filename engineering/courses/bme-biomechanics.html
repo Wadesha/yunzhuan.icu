@@ -40,38 +40,58 @@
     </div>
     <div class="section">
         <h2>实施步骤 <span class="en">Implementation Steps</span></h2>
-        <div>
+<div>
 
 
 <div class="step-item">
     <div class="step-number">步骤 1</div>
     <div class="step-title">实验设计</div>
-    <div class="step-desc">设计步态采集方案并选取受试者与标记点</div>
-    <div class="step-output">产出：实验方案</div>
+    <div class="step-desc">
+        本步骤进行生物医学系统或器械的方案设计，将临床需求转化为具体的技术方案。生物医学设计需同时考虑功能性、生物相容性、安全性和法规合规性，在多目标约束下寻求最优解。采用模块化设计方法，确保系统可验证、可制造、可维护。
+        <br><br>
+        • 进行系统架构设计，划分功能模块，确定各模块接口规范和通信协议<br>• 选择关键元器件和材料，依据ISO 10993或GB/T 16886评估生物相容性<br>• 设计电路原理图或机械结构，使用Altium Designer或SolidWorks完成详细设计
+    </div>
+    <div class="step-output">产出：设计文档（含系统架构图、原理图/结构图、BOM表、材料选型说明、接口规范） ｜ 质量标准：设计合理、参数正确、材料合规、满足临床需求</div>
 </div>
 <div class="step-item">
     <div class="step-number">步骤 2</div>
     <div class="step-title">数据采集</div>
-    <div class="step-desc">采集运动捕捉与测力台同步数据</div>
-    <div class="step-output">产出：原始实验数据</div>
+    <div class="step-desc">
+        本步骤进行生物医学实验设计与实施，通过科学实验获取可靠的数据和结论。生物医学实验需严格遵循科学方法和伦理规范，确保实验结果的客观性和可重复性。从实验设计、样本制备、数据采集到统计分析全流程质量控制。
+        <br><br>
+        • 设计实验方案，确定样本量、分组方法、对照设置和评价指标，通过伦理审查<br>• 准备实验样本和试剂，调试实验设备，建立标准操作程序(SOP)<br>• 按照实验方案进行数据采集，使用SPSS或GraphPad Prism进行统计分析
+    </div>
+    <div class="step-output">产出：实验报告（含实验方案、原始数据、统计分析、结果图表、结论讨论） ｜ 质量标准：实验设计科学、数据真实可靠、统计方法正确、结论有据</div>
 </div>
 <div class="step-item">
     <div class="step-number">步骤 3</div>
     <div class="step-title">运动学分析</div>
-    <div class="step-desc">计算下肢关节角度与运动轨迹</div>
-    <div class="step-output">产出：运动学分析结果</div>
+    <div class="step-desc">
+        本步骤对生物医学工程问题进行深入分析，明确临床需求和技术指标。生物医学工程的核心是将工程技术与医学需求相结合，需要从临床应用场景出发，分析生理机制、技术可行性和安全要求。通过文献调研和临床需求调研确定设计输入。
+        <br><br>
+        • 检索PubMed、IEEE Xplore等数据库，调研国内外研究现状和技术发展趋势<br>• 分析临床应用场景和用户需求，明确适应症、使用人群和关键性能指标<br>• 识别技术难点和风险点，制定技术路线和关键性能参数指标
+    </div>
+    <div class="step-output">产出：需求分析报告（含文献综述、临床需求、技术指标、风险分析、技术路线） ｜ 质量标准：调研充分、需求明确、指标合理、技术路线可行</div>
 </div>
 <div class="step-item">
     <div class="step-number">步骤 4</div>
     <div class="step-title">动力学建模</div>
-    <div class="step-desc">建立逆动力学模型并计算关节力矩</div>
-    <div class="step-output">产出：关节力矩数据</div>
+    <div class="step-desc">
+        本步骤建立生物医学系统的数学模型，为仿真分析和参数优化提供理论基础。生物系统具有复杂性和非线性特点，需要从生理机制出发，结合实验数据建立合理的数学描述。模型需在准确性和复杂度之间取得平衡，确保可计算性和可解释性。
+        <br><br>
+        • 基于生理机制和解剖学数据，使用MATLAB或COMSOL建立微分方程或有限元模型<br>• 进行参数敏感性分析，识别关键参数，为后续参数辨识和优化提供方向<br>• 通过实验数据或临床数据进行模型校准，使用最小二乘法或贝叶斯方法辨识参数
+    </div>
+    <div class="step-output">产出：数学模型报告（含控制方程、参数列表、敏感性分析、校准结果、验证对比） ｜ 质量标准：模型机理清晰、参数可辨识、拟合误差<15%、验证充分</div>
 </div>
 <div class="step-item">
     <div class="step-number">步骤 5</div>
     <div class="step-title">结果分析与报告</div>
-    <div class="step-desc">分析步态特征并撰写生物力学分析报告</div>
-    <div class="step-output">产出：步态分析报告</div>
+    <div class="step-desc">
+        本步骤对生物医学工程问题进行深入分析，明确临床需求和技术指标。生物医学工程的核心是将工程技术与医学需求相结合，需要从临床应用场景出发，分析生理机制、技术可行性和安全要求。通过文献调研和临床需求调研确定设计输入。
+        <br><br>
+        • 检索PubMed、IEEE Xplore等数据库，调研国内外研究现状和技术发展趋势<br>• 分析临床应用场景和用户需求，明确适应症、使用人群和关键性能指标<br>• 识别技术难点和风险点，制定技术路线和关键性能参数指标
+    </div>
+    <div class="step-output">产出：需求分析报告（含文献综述、临床需求、技术指标、风险分析、技术路线） ｜ 质量标准：调研充分、需求明确、指标合理、技术路线可行</div>
 </div>
             
 
@@ -80,36 +100,55 @@
 <div class="step-item">
     <div class="step-number">Step 1</div>
     <div class="step-title">Experiment Design</div>
-    <div class="step-desc">Design gait collection protocol and select subjects and markers</div>
-    <div class="step-output">Deliverable: Experiment Protocol</div>
+    <div class="step-desc">
+        This step performs biomedical system or device scheme design, translating clinical needs into specific technical solutions. Biomedical design must simultaneously consider functionality, biocompatibility, safety and regulatory compliance, seeking optimal solutions under multi-objective constraints. Adopt modular design methods to ensure system verifiability, manufacturability and maintainability.
+        <br><br>
+        • Perform system architecture design, divide functional modules, determine interface specifications and communication protocols for each module<br>• Select key components and materials, evaluate biocompatibility according to ISO 10993 or GB/T 16886<br>• Design circuit schematics or mechanical structures, complete detailed design using Altium Designer or SolidWorks
+    </div>
+    <div class="step-output">Deliverable: Design document (including system architecture diagram, schematic/structural diagram, BOM table, material selection description, interface specifications) | Quality standard: Reasonable design, correct parameters, compliant materials, meeting clinical needs</div>
 </div>
 <div class="step-item">
     <div class="step-number">Step 2</div>
     <div class="step-title">Data Acquisition</div>
-    <div class="step-desc">Acquire synchronized motion capture and force plate data</div>
-    <div class="step-output">Deliverable: Raw Experimental Data</div>
+    <div class="step-desc">
+        This step performs biomedical experiment design and implementation, obtaining reliable data and conclusions through scientific experiments. Biomedical experiments must strictly follow scientific methods and ethical norms, ensuring objectivity and reproducibility of experimental results. Full-process quality control from experimental design, sample preparation, data collection to statistical analysis.
+        <br><br>
+        • Design experimental protocol, determine sample size, grouping method, control setting and evaluation indicators, pass ethical review<br>• Prepare experimental samples and reagents, debug experimental equipment, establish standard operating procedures (SOP)<br>• Conduct data collection according to experimental protocol, perform statistical analysis using SPSS or GraphPad Prism
+    </div>
+    <div class="step-output">Deliverable: Experimental report (including experimental protocol, raw data, statistical analysis, result charts, conclusion discussion) | Quality standard: Scientific experimental design, reliable data, correct statistical methods, evidence-based conclusions</div>
 </div>
 <div class="step-item">
     <div class="step-number">Step 3</div>
     <div class="step-title">Kinematic Analysis</div>
-    <div class="step-desc">Compute lower-limb joint angles and motion trajectories</div>
-    <div class="step-output">Deliverable: Kinematic Analysis Results</div>
+    <div class="step-desc">
+        This step conducts in-depth analysis of biomedical engineering problems, clarifying clinical requirements and technical specifications. The core of biomedical engineering is combining engineering technology with medical needs, requiring analysis of physiological mechanisms, technical feasibility and safety requirements starting from clinical application scenarios. Determine design inputs through literature review and clinical needs investigation.
+        <br><br>
+        • Search databases such as PubMed and IEEE Xplore, investigate domestic and international research status and technology development trends<br>• Analyze clinical application scenarios and user needs, clarify indications, target population and key performance indicators<br>• Identify technical difficulties and risk points, develop technical route and key performance parameter specifications
+    </div>
+    <div class="step-output">Deliverable: Requirements analysis report (including literature review, clinical needs, technical specifications, risk analysis, technical route) | Quality standard: Thorough investigation, clear requirements, reasonable specifications, feasible technical route</div>
 </div>
 <div class="step-item">
     <div class="step-number">Step 4</div>
     <div class="step-title">Kinetic Modeling</div>
-    <div class="step-desc">Build inverse dynamics model and compute joint torques</div>
-    <div class="step-output">Deliverable: Joint Torque Data</div>
+    <div class="step-desc">
+        This step establishes mathematical models of biomedical systems, providing theoretical foundation for simulation analysis and parameter optimization. Biological systems are characterized by complexity and nonlinearity, requiring reasonable mathematical descriptions based on physiological mechanisms combined with experimental data. The model must balance accuracy and complexity, ensuring computability and interpretability.
+        <br><br>
+        • Build differential equation or finite element models using MATLAB or COMSOL based on physiological mechanisms and anatomical data<br>• Perform parameter sensitivity analysis, identify key parameters, provide direction for subsequent parameter identification and optimization<br>• Calibrate model with experimental or clinical data, identify parameters using least squares or Bayesian methods
+    </div>
+    <div class="step-output">Deliverable: Mathematical model report (including governing equations, parameter list, sensitivity analysis, calibration results, validation comparison) | Quality standard: Clear model mechanism, identifiable parameters, fitting error <15%, sufficient validation</div>
 </div>
 <div class="step-item">
     <div class="step-number">Step 5</div>
     <div class="step-title">Result Analysis and Report</div>
-    <div class="step-desc">Analyze gait features and write biomechanical analysis report</div>
-    <div class="step-output">Deliverable: Gait Analysis Report</div>
+    <div class="step-desc">
+        This step conducts in-depth analysis of biomedical engineering problems, clarifying clinical requirements and technical specifications. The core of biomedical engineering is combining engineering technology with medical needs, requiring analysis of physiological mechanisms, technical feasibility and safety requirements starting from clinical application scenarios. Determine design inputs through literature review and clinical needs investigation.
+        <br><br>
+        • Search databases such as PubMed and IEEE Xplore, investigate domestic and international research status and technology development trends<br>• Analyze clinical application scenarios and user needs, clarify indications, target population and key performance indicators<br>• Identify technical difficulties and risk points, develop technical route and key performance parameter specifications
+    </div>
+    <div class="step-output">Deliverable: Requirements analysis report (including literature review, clinical needs, technical specifications, risk analysis, technical route) | Quality standard: Thorough investigation, clear requirements, reasonable specifications, feasible technical route</div>
 </div>
             </div>
         </div>
-    </div>
     <div class="course-nav" style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:16px;padding:12px 16px;background:white;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,0.05);flex-wrap:wrap;">
     <a href="../biomedical.html" style="color:#667eea;text-decoration:none;font-size:0.88rem;">← 返回生物医学工程</a>
     <a href="bme-biomaterials.html" style="color:#667eea;text-decoration:none;font-size:0.88rem;">下一门：生物材料 →</a>

@@ -40,60 +40,78 @@
     </div>
         <div class="section">
         <h2>实施步骤 <span class="en">Implementation Steps</span></h2>
-        <div>
-<div class="step-item">
+        <div><div class="step-item">
     <div class="step-number">步骤 1</div>
     <div class="step-title">证据获取与保全</div>
-    <div class="step-desc">制作磁盘/内存镜像，计算哈希进行证据保全</div>
-    <div class="step-output">产出：证据镜像文件</div>
+    <div class="step-desc">
+        本步骤进行安全需求分析与风险评估，明确数字取证项目的安全目标与范围。安全需求分析是安全项目的起点，需要识别资产、威胁与脆弱性，进行风险评估与优先级排序。通过资产清单、威胁建模（STRIDE）、风险矩阵等方法系统分析安全需求。制定安全策略与安全目标，为后续安全设计与实施提供依据。<br><br>• 资产识别与分级：梳理信息资产清单，进行资产分类与价值评估，确定保护优先级<br>• 威胁建模与风险分析：使用STRIDE方法识别威胁，进行脆弱性分析，评估风险等级<br>• 安全需求定义：制定安全目标与安全策略，定义安全功能需求与保障需求
+    </div>
+    <div class="step-output">产出：安全需求分析报告（含资产清单、威胁建模、风险评估、安全需求）｜ 质量标准：风险识别全面，需求明确，分级合理</div>
 </div><div class="step-item">
     <div class="step-number">步骤 2</div>
     <div class="step-title">磁盘取证分析</div>
-    <div class="step-desc">使用Autopsy分析文件系统，恢复删除文件</div>
-    <div class="step-output">产出：磁盘分析报告</div>
+    <div class="step-desc">
+        本步骤进行数字取证的安全架构设计与安全方案设计。安全架构设计从整体层面规划安全防护体系，确保安全措施的系统性与协调性。设计纵深防御体系，涵盖网络安全、主机安全、应用安全、数据安全等多个层面。选择合适的安全技术与产品，设计安全流程与管理机制。使用安全框架（如NIST CSF、ISO 27001）指导设计工作。<br><br>• 安全架构设计：设计纵深防御架构，定义安全域与边界，设计安全控制措施矩阵<br>• 安全技术方案：网络安全（防火墙/IDS/IPS）、身份认证（SSO/MFA）、加密方案（对称/非对称/Hash）<br>• 安全管理设计：安全组织、安全流程、安全制度、应急预案、安全培训方案
+    </div>
+    <div class="step-output">产出：安全设计方案（含安全架构、技术方案、管理方案、部署设计）｜ 质量标准：架构完整，方案可行，符合安全最佳实践</div>
 </div><div class="step-item">
     <div class="step-number">步骤 3</div>
     <div class="step-title">内存与流量取证</div>
-    <div class="step-desc">Volatility分析内存进程，Wireshark分析网络流量</div>
-    <div class="step-output">产出：内存流量报告</div>
+    <div class="step-desc">
+        本步骤实施数字取证的安全措施与安全配置，将安全设计落地执行。安全实施是将安全设计转化为实际防护能力的关键环节，需要严格按照设计方案进行部署与配置。进行安全设备配置、安全策略部署、安全工具安装与调优。实施过程中注重最小权限原则、纵深防御原则与默认安全原则。通过安全基线检查确保配置符合标准。<br><br>• 安全设备部署与配置：防火墙策略配置、IDS/IPS规则配置、VPN部署、WAF配置<br>• 系统安全加固：操作系统安全加固（Linux/Windows）、数据库安全配置、中间件安全设置<br>• 身份与访问管理：用户权限配置、双因素认证部署、审计日志配置、访问控制策略实施
+    </div>
+    <div class="step-output">产出：安全实施记录（含配置文档、部署手册、安全基线检查报告）｜ 质量标准：配置正确，策略有效，通过基线检查</div>
 </div><div class="step-item">
     <div class="step-number">步骤 4</div>
     <div class="step-title">时间线重建</div>
-    <div class="step-desc">整合多源证据构建事件时间线</div>
-    <div class="step-output">产出：时间线分析图</div>
+    <div class="step-desc">
+        本步骤进行数字取证的安全测试与渗透测试，验证安全措施的有效性。安全测试是检验防护能力的重要手段，通过模拟攻击与漏洞扫描发现安全隐患。进行漏洞扫描、渗透测试、代码审计、配置审计等多种测试。使用专业安全工具（Nessus、Metasploit、Burp Suite、Wireshark）进行检测与验证。对发现的漏洞进行风险评级与修复建议。<br><br>• 漏洞扫描与评估：使用Nessus/OpenVAS进行系统漏洞扫描，使用AWVS进行Web应用扫描<br>• 渗透测试：执行OWASP Top 10测试，使用Burp Suite/Kali Linux工具集，编写渗透测试报告<br>• 安全审计与验证：代码安全审计、配置审计、日志审计、应急响应演练
+    </div>
+    <div class="step-output">产出：安全测试报告（含漏洞清单、风险评级、渗透测试报告、修复建议）｜ 质量标准：测试全面，发现高危漏洞，建议可操作</div>
 </div><div class="step-item">
     <div class="step-number">步骤 5</div>
     <div class="step-title">取证报告</div>
-    <div class="step-desc">撰写符合法律规范的取证调查报告</div>
-    <div class="step-output">产出：最终提交材料</div>
+    <div class="step-desc">
+        本步骤进行安全运维与持续改进，建立数字取证的长效安全机制。安全是持续的过程，需要建立安全监控、应急响应、持续改进的闭环机制。部署安全监控与告警系统，建立安全事件响应流程。定期进行安全评估与渗透测试，持续优化安全措施。建立安全意识培训机制，提升整体安全水平。<br><br>• 安全监控与告警：部署SIEM系统（Splunk/ELK），配置安全告警规则，建立7x24监控机制<br>• 应急响应：制定应急预案，建立应急响应团队，开展应急演练，进行安全事件溯源与分析<br>• 持续改进：定期安全评审，跟踪安全趋势，更新安全策略，开展安全培训与意识教育
+    </div>
+    <div class="step-output">产出：安全运维体系（含监控系统、应急预案、改进计划、培训材料）｜ 质量标准：机制健全，响应及时，持续改进</div>
 </div><div style="margin-top:14px;padding-top:10px;border-top:1px solid #eee;">
     <h3 style="font-size:0.9rem;color:#667eea;margin-bottom:8px;">Steps</h3><div class="step-item">
     <div class="step-number">Step 1</div>
     <div class="step-title">Evidence Acquisition</div>
-    <div class="step-desc">Create disk/memory images, compute hashes for preservation</div>
-    <div class="step-output">Deliverable: Evidence Images</div>
+    <div class="step-desc">
+        This step conducts security requirements analysis and risk assessment, clarifying security objectives and scope of the Digital Forensics project. Security requirements analysis is the starting point of security projects, requiring identification of assets, threats and vulnerabilities, risk assessment and priority ranking. Systematically analyze security requirements through asset inventory, threat modeling (STRIDE), risk matrix and other methods. Develop security strategy and security objectives, providing basis for subsequent security design and implementation.<br><br>• Asset identification and classification: compile information asset inventory, classify and evaluate asset value, determine protection priority<br>• Threat modeling and risk analysis: use STRIDE method to identify threats, conduct vulnerability analysis, assess risk levels<br>• Security requirements definition: develop security objectives and security strategy, define security functional requirements and assurance requirements
+    </div>
+    <div class="step-output">Deliverable: Security requirements analysis report (asset inventory, threat modeling, risk assessment, security requirements) | Quality standard: Comprehensive risk identification, clear requirements, reasonable classification</div>
 </div><div class="step-item">
     <div class="step-number">Step 2</div>
     <div class="step-title">Disk Forensics</div>
-    <div class="step-desc">Analyze file system with Autopsy, recover deleted files</div>
-    <div class="step-output">Deliverable: Disk Analysis Report</div>
+    <div class="step-desc">
+        This step conducts security architecture design and security solution design for Digital Forensics. Security architecture design plans the security protection system from the overall level, ensuring systematic and coordinated security measures. Design defense-in-depth system covering network security, host security, application security, data security and other levels. Select appropriate security technologies and products, design security processes and management mechanisms. Use security frameworks (NIST CSF, ISO 27001) to guide design work.<br><br>• Security architecture design: design defense-in-depth architecture, define security domains and boundaries, design security control measures matrix<br>• Security technical solution: network security (firewall/IDS/IPS), identity authentication (SSO/MFA), encryption scheme (symmetric/asymmetric/Hash)<br>• Security management design: security organization, security processes, security policies, emergency response plan, security training program
+    </div>
+    <div class="step-output">Deliverable: Security design solution (security architecture, technical solution, management solution, deployment design) | Quality standard: Complete architecture, feasible solution, follows security best practices</div>
 </div><div class="step-item">
     <div class="step-number">Step 3</div>
     <div class="step-title">Memory & Network Forensics</div>
-    <div class="step-desc">Analyze memory with Volatility, traffic with Wireshark</div>
-    <div class="step-output">Deliverable: Memory/Network Report</div>
+    <div class="step-desc">
+        This step implements security measures and security configurations for Digital Forensics, putting security design into execution. Security implementation is a keystep of transforming security design into actual protection capabilities, requiring deployment and configuration strictly according to the design plan. Conduct security device configuration, security policy deployment, security tool installation and tuning. Implement principle of least privilege, defense-in-depth principle and secure-by-default principle. Ensure configurations meet standards through security baseline checks.<br><br>• Security device deployment and configuration: firewall policy configuration, IDS/IPS rule configuration, VPN deployment, WAF configuration<br>• System security hardening: OS security hardening (Linux/Windows), database security configuration, middleware security settings<br>• Identity and access management: user permission configuration, MFA deployment, audit log configuration, access control policy implementation
+    </div>
+    <div class="step-output">Deliverable: Security implementation records (configuration documents, deployment manual, security baseline check report) | Quality standard: Correct configuration, effective policies, passes baseline check</div>
 </div><div class="step-item">
     <div class="step-number">Step 4</div>
     <div class="step-title">Timeline Reconstruction</div>
-    <div class="step-desc">Integrate multi-source evidence into event timeline</div>
-    <div class="step-output">Deliverable: Timeline Analysis</div>
+    <div class="step-desc">
+        This step conducts security testing and penetration testing for Digital Forensics, verifying effectiveness of security measures. Security testing is an important means of verifying protection capabilities, discovering security risks through simulated attacks and vulnerability scanning. Conduct vulnerability scanning, penetration testing, code audit, configuration audit and other tests. Use professional security tools (Nessus, Metasploit, Burp Suite, Wireshark) for detection and verification. Rate risks and provide remediation recommendations for discovered vulnerabilities.<br><br>• Vulnerability scanning and assessment: use Nessus/OpenVAS for system vulnerability scanning, use AWVS for web application scanning<br>• Penetration testing: execute OWASP Top 10 testing, use Burp Suite/Kali Linux toolset, write penetration test report<br>• Security audit and verification: code security audit, configuration audit, log audit, emergency response drill
+    </div>
+    <div class="step-output">Deliverable: Security test report (vulnerability list, risk rating, penetration test report, remediation recommendations) | Quality standard: Comprehensive testing, high-risk vulnerabilities discovered, actionable recommendations</div>
 </div><div class="step-item">
     <div class="step-number">Step 5</div>
     <div class="step-title">Forensics Report</div>
-    <div class="step-desc">Write forensically sound investigation report</div>
-    <div class="step-output">Deliverable: Final Submission</div>
-</div></div>
-        </div>
+    <div class="step-desc">
+        This step conducts security operations and continuous improvement, establishing long-term security mechanism for Digital Forensics. Security is a continuous process, requiring establishment of closed-loop mechanism for security monitoring, emergency response, and continuous improvement. Deploy security monitoring and alerting system, establish security incident response process. Conduct regular security assessments and penetration tests, continuously optimize security measures. Establish security awareness training mechanism to improve overall security level.<br><br>• Security monitoring and alerting: deploy SIEM system (Splunk/ELK), configure security alert rules, establish 24x7 monitoring mechanism<br>• Emergency response: develop emergency plan, establish emergency response team, conduct emergency drills, perform security incident tracing and analysis<br>• Continuous improvement: regular security reviews, track security trends, update security policies, conduct security training and awareness education
+    </div>
+    <div class="step-output">Deliverable: Security operations system (monitoring system, emergency plan, improvement plan, training materials) | Quality standard: Sound mechanism, timely response, continuous improvement</div>
+</div></div></div>
     </div><div class="course-nav" style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:16px;padding:12px 16px;background:white;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,0.05);flex-wrap:wrap;">
     <a href="../cyber.html" style="color:#667eea;text-decoration:none;font-size:0.88rem;">← 返回网络安全</a>
     <a href="computer-networks.html" style="color:#667eea;text-decoration:none;font-size:0.88rem;">下一门：计算机网络 →</a>

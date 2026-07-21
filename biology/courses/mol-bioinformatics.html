@@ -38,6 +38,7 @@
         <p style="margin-top:8px;">Select a genomic dataset, perform sequence alignment, gene prediction, and functional annotation, and construct a phylogenetic tree to analyze evolutionary relationships. Submit a complete bioinformatics analysis report.</p>
         </div>
     </div>
+    
     <div class="section">
         <h2>实施步骤 <span class="en">Implementation Steps</span></h2>
         <div>
@@ -45,10 +46,114 @@
 
 <div class="step-item">
     <div class="step-number">步骤 1</div>
-    <div class="step-title">数据获取</div>
-    <div class="step-desc">从公共数据库获取目标基因组序列</div>
-    <div class="step-output">产出：序列数据集</div>
+    <div class="step-title">研究问题确定与生物信息学分析方案设计</div>
+    <div class="step-desc">
+        本步骤的核心任务是确定分子生物信息学研究问题，设计分析方案。需要从基因组学、转录组学、蛋白质组学、代谢组学等组学数据中选择研究主题，明确科学问题，设计合理的生物信息学分析流程。好的分析方案是获得可靠生物信息学结果的基础。
+<br><br>
+• 确定研究方向：从基因组变异分析（SNP、InDel、CNV、SV）、基因表达分析（差异表达、共表达网络）、蛋白质结构与功能预测、非编码RNA分析（miRNA、lncRNA、circRNA）、单细胞测序分析、宏基因组分析中选择主题<br>• 数据获取：确定数据来源——公共数据库（GEO、TCGA、ENCODE、NCBI SRA、UniProt、PDB）下载数据或自有测序数据，明确数据类型（测序数据、芯片数据、蛋白质组数据）和数据格式（FASTQ、BAM、VCF、FASTA）<br>• 分析流程设计：设计完整的生物信息学分析流程，确定分析软件和工具（如BWA、GATK、STAR、DESeq2、Cytoscape、BLAST、Pymol、R/Bioconductor、Python/Biopython），制定质量控制方案和分析时间表
+    </div>
+    <div class="step-output">产出：生物信息学分析方案（含研究问题、数据来源、分析流程、工具清单、质量控制方案）｜ 质量标准：研究问题明确，分析流程科学合理，工具选择恰当，方案详细可行</div>
 </div>
+<div class="step-item">
+    <div class="step-number">步骤 2</div>
+    <div class="step-title">数据获取与预处理</div>
+    <div class="step-desc">
+        本步骤的核心任务是获取原始组学数据，进行数据预处理和质量控制。原始测序数据通常包含低质量碱基、接头污染、重复序列等问题，需要经过严格的质量控制和预处理才能用于后续分析。数据质量直接影响分析结果的可靠性。
+<br><br>
+• 数据下载与整理：从NCBI SRA、GEO、TCGA等数据库下载原始数据（使用SRA Toolkit、Aspera），整理样本信息（分组、表型、临床数据），建立分析项目目录结构（原始数据、中间结果、最终结果、脚本、文档）<br>• 原始数据质量评估：使用FastQC、MultiQC进行测序数据质量评估，检查碱基质量分布、GC含量、接头残留、重复序列、k-mer异常等指标，生成质量报告<br>• 数据预处理与清洗：使用Trimmomatic、Cutadapt、fastp等工具进行数据清洗——去除接头序列、修剪低质量碱基（Q值<20）、过滤过短序列、去除rRNA污染、去除PCR重复（Picard），再次进行质量评估确认清洗效果
+    </div>
+    <div class="step-output">产出：预处理数据集（含清洗后数据、质量控制报告、数据整理表、分析目录结构）｜ 质量标准：数据完整准确，质控严格，清洗效果良好，数据整理规范</div>
+</div>
+<div class="step-item">
+    <div class="step-number">步骤 3</div>
+    <div class="step-title">核心生物信息学分析</div>
+    <div class="step-desc">
+        本步骤的核心任务是进行主要的生物信息学分析，获得关键分析结果。根据研究类型的不同，分析内容包括序列比对、变异检测、基因表达定量、差异分析、富集分析等。核心分析是整个生物信息学研究的主体部分，需要严格按照分析流程执行。
+<br><br>
+• 序列比对与定量：基因组分析使用BWA、Bowtie2进行reads比对到参考基因组；转录组分析使用STAR、HISAT2进行RNA-seq比对，使用featureCounts、RSEM或Salmon进行基因表达定量；使用Samtools、BEDTools处理BAM文件<br>• 差异分析与变异检测：基因表达差异分析使用DESeq2、edgeR、limma包进行差异表达分析，筛选差异基因（阈值如|log2FC|≥1，padj<0.05）；基因组变异分析使用GATK HaplotypeCaller、Samtools mpileup检测SNP和InDel，使用ANNOVAR、VEP进行变异注释<br>• 功能富集分析：使用DAVID、Metascape、clusterProfiler进行GO功能富集分析（生物过程BP、细胞组分CC、分子功能MF）和KEGG/Reactome通路富集分析，绘制富集气泡图、柱状图、热图
+    </div>
+    <div class="step-output">产出：核心分析结果（含差异表达基因列表、变异注释表、富集分析结果、可视化图表）｜ 质量标准：分析流程规范，结果准确可靠，可视化清晰专业</div>
+</div>
+<div class="step-item">
+    <div class="step-number">步骤 4</div>
+    <div class="step-title">高级分析与系统生物学整合</div>
+    <div class="step-desc">
+        本步骤的核心任务是进行高级生物信息学分析，从系统生物学角度整合多组学数据。高级分析包括网络分析、机器学习、多组学整合、单细胞分析等，能够从更复杂、更系统的层面揭示生物学机制。系统生物学整合是生物信息学分析的深化和提升。
+<br><br>
+• 网络分析：使用WGCNA构建基因共表达网络，识别模块和核心基因（hub gene）；使用STRING、Cytoscape构建蛋白质-蛋白质相互作用（PPI）网络，进行网络拓扑分析（度、介数、接近度），识别关键节点<br>• 多组学整合与机器学习：使用mixOmics、MOFA进行多组学数据整合（基因组、转录组、蛋白质组、代谢组）；使用机器学习方法（随机森林、SVM、LASSO、深度学习）构建分类预测模型或预后模型，进行特征选择和模型评估<br>• 高级分析：根据研究方向进行专项分析——单细胞测序分析（Seurat、Scanpy：降维聚类、细胞注释、拟时序分析、细胞通讯）、蛋白质结构预测与分析（AlphaFold、SWISS-MODEL、PyMOL可视化、分子对接AutoDock）、宏基因组分析（物种注释、功能分析、多样性分析）
+    </div>
+    <div class="step-output">产出：高级分析结果（含网络分析图、机器学习模型、多组学整合结果、专项分析输出）｜ 质量标准：分析方法先进，结果深入有洞见，模型性能良好，解释合理</div>
+</div>
+<div class="step-item">
+    <div class="step-number">步骤 5</div>
+    <div class="step-title">结果可视化与报告撰写</div>
+    <div class="step-desc">
+        本步骤的核心任务是将生物信息学分析结果进行高质量可视化，撰写完整的分析报告。生物信息学分析结果复杂多样，好的可视化能够清晰直观地展示关键发现。分析报告应系统呈现分析流程、主要结果和生物学解释，体现科研思维和专业能力。
+<br><br>
+• 数据可视化：使用R语言（ggplot2、pheatmap、ComplexHeatmap、ggplot2扩展包）、Python（Matplotlib、Seaborn、Plotly）制作高质量统计图——火山图、热图、散点图、箱线图、富集分析图、生存曲线、网络图、基因组圈图（Circos）<br>• 撰写分析报告：按照生物信息学分析报告规范撰写，包括项目背景、分析目标、数据来源、分析方法与流程、结果展示、生物学解释与讨论、结论、附录（代码、参数、文件清单），字数不少于4000字<br>• 可重复性保障：整理所有分析脚本（Shell、R、Python），使用Snakemake或Nextflow构建可重复分析流程，记录软件版本和参数，提供README文档，确保分析结果可重复
+    </div>
+    <div class="step-output">产出：生物信息学分析报告（PDF格式，含全部分析结果和高质量图表）、分析脚本、可重复分析流程｜ 质量标准：报告结构完整，图表精美专业，分析深入，结果可重复</div>
+</div>
+
+            
+
+<div style="margin-top:14px;padding-top:10px;border-top:1px solid #eee;">
+    <h3 style="font-size:0.9rem;color:#667eea;margin-bottom:8px;">Steps</h3>
+<div class="step-item">
+    <div class="step-number">Step 1</div>
+    <div class="step-title">Research Question Definition and Bioinformatics Analysis Plan Design</div>
+    <div class="step-desc">
+        The core task of this step is to define molecular bioinformatics research questions and design the analysis plan. Choose research topics from genomics, transcriptomics, proteomics, metabolomics and other omics data.
+<br><br>
+• Define research direction: choose from genomic variant analysis (SNP, InDel, CNV, SV), gene expression analysis (differential expression, co-expression network), protein structure and function prediction, non-coding RNA analysis (miRNA, lncRNA, circRNA), single-cell sequencing, metagenomics<br>• Data acquisition: determine data sources—public databases (GEO, TCGA, ENCODE, NCBI SRA, UniProt, PDB) or own sequencing data; clarify data types (sequencing, microarray, proteomics) and formats (FASTQ, BAM, VCF, FASTA)<br>• Analysis pipeline design: design complete bioinformatics analysis pipeline; determine analysis software and tools (BWA, GATK, STAR, DESeq2, Cytoscape, BLAST, Pymol, R/Bioconductor, Python/Biopython); develop QC plan and analysis timeline
+    </div>
+    <div class="step-output">Deliverable: Bioinformatics analysis proposal (research questions, data sources, analysis pipeline, tool list, QC plan) | Quality standard: Clear research question, scientific and reasonable analysis pipeline, appropriate tool selection, detailed and feasible plan</div>
+</div>
+<div class="step-item">
+    <div class="step-number">Step 2</div>
+    <div class="step-title">Data Acquisition and Preprocessing</div>
+    <div class="step-desc">
+        The core task of this step is to acquire raw omics data and perform data preprocessing and quality control. Raw sequencing data usually contains low-quality bases, adapter contamination, duplicate sequences.
+<br><br>
+• Data download and organization: download raw data from NCBI SRA, GEO, TCGA (using SRA Toolkit, Aspera); organize sample information (groups, phenotypes, clinical data); establish project directory structure (raw data, intermediate results, final results, scripts, docs)<br>• Raw data quality assessment: use FastQC, MultiQC for sequencing data QC; check base quality distribution, GC content, adapter residues, duplicate sequences, k-mer abnormalities; generate QC report<br>• Data preprocessing and cleaning: use Trimmomatic, Cutadapt, fastp for data cleaning—remove adapter sequences, trim low-quality bases (Q<20), filter too-short sequences, remove rRNA contamination, remove PCR duplicates (Picard); perform QC again to confirm cleaning effect
+    </div>
+    <div class="step-output">Deliverable: Preprocessed dataset (cleaned data, QC reports, data organization table, analysis directory structure) | Quality standard: Complete and accurate data, strict QC, good cleaning effect, standardized data organization</div>
+</div>
+<div class="step-item">
+    <div class="step-number">Step 3</div>
+    <div class="step-title">Core Bioinformatics Analysis</div>
+    <div class="step-desc">
+        The core task of this step is to perform main bioinformatics analysis and obtain key results. Depending on research type, analysis includes sequence alignment, variant detection, gene expression quantification, differential analysis, enrichment analysis.
+<br><br>
+• Sequence alignment and quantification: genomic analysis uses BWA, Bowtie2 for reads alignment to reference genome; transcriptome analysis uses STAR, HISAT2 for RNA-seq alignment, featureCounts, RSEM or Salmon for gene expression quantification; use Samtools, BEDTools for BAM file processing<br>• Differential analysis and variant detection: gene expression differential analysis uses DESeq2, edgeR, limma; screen DEGs (thresholds like |log2FC|≥1, padj<0.05); genomic variant analysis uses GATK HaplotypeCaller, Samtools mpileup for SNP and InDel detection; use ANNOVAR, VEP for variant annotation<br>• Functional enrichment analysis: use DAVID, Metascape, clusterProfiler for GO enrichment analysis (BP, CC, MF) and KEGG/Reactome pathway enrichment analysis; draw enrichment bubble plots, bar charts, heatmaps
+    </div>
+    <div class="step-output">Deliverable: Core analysis results (DEG list, variant annotation table, enrichment analysis results, visualization charts) | Quality standard: Standard analysis pipeline, accurate and reliable results, clear and professional visualization</div>
+</div>
+<div class="step-item">
+    <div class="step-number">Step 4</div>
+    <div class="step-title">Advanced Analysis and Systems Biology Integration</div>
+    <div class="step-desc">
+        The core task of this step is to perform advanced bioinformatics analysis and integrate multi-omics data from a systems biology perspective. Advanced analysis includes network analysis, machine learning, multi-omics integration, single-cell analysis.
+<br><br>
+• Network analysis: use WGCNA to build gene co-expression network, identify modules and hub genes; use STRING, Cytoscape to build PPI network; perform network topology analysis (degree, betweenness, closeness); identify key nodes<br>• Multi-omics integration and machine learning: use mixOmics, MOFA for multi-omics data integration (genome, transcriptome, proteome, metabolome); use machine learning methods (random forest, SVM, LASSO, deep learning) to build classification or prognostic models; perform feature selection and model evaluation<br>• Advanced analysis: perform specialized analysis based on research direction—single-cell sequencing analysis (Seurat, Scanpy: dimensionality reduction, clustering, cell annotation, pseudotime analysis, cell-cell communication); protein structure prediction and analysis (AlphaFold, SWISS-MODEL, PyMOL visualization, molecular docking with AutoDock); metagenomics analysis (taxonomic annotation, functional analysis, diversity analysis)
+    </div>
+    <div class="step-output">Deliverable: Advanced analysis results (network analysis graphs, machine learning models, multi-omics integration results, specialized analysis outputs) | Quality standard: Advanced analysis methods, in-depth and insightful results, good model performance, reasonable interpretation</div>
+</div>
+<div class="step-item">
+    <div class="step-number">Step 5</div>
+    <div class="step-title">Result Visualization and Report Writing</div>
+    <div class="step-desc">
+        The core task of this step is to generate high-quality visualizations of bioinformatics analysis results and write a complete analysis report. Bioinformatics results are complex and diverse; good visualization clearly presents key findings.
+<br><br>
+• Data visualization: use R (ggplot2, pheatmap, ComplexHeatmap, ggplot2 extensions), Python (Matplotlib, Seaborn, Plotly) to produce high-quality statistical graphs—volcano plots, heatmaps, scatter plots, boxplots, enrichment plots, survival curves, network diagrams, Circos plots<br>• Write analysis report: follow bioinformatics analysis report standards, including project background, analysis objectives, data sources, analysis methods and pipeline, results presentation, biological interpretation and discussion, conclusions, appendix (code, parameters, file list); minimum 4000 words<br>• Reproducibility assurance: organize all analysis scripts (Shell, R, Python); use Snakemake or Nextflow to build reproducible analysis pipeline; document software versions and parameters; provide README documentation; ensure reproducible analysis results
+    </div>
+    <div class="step-output">Deliverable: Bioinformatics analysis report (PDF format with all results and high-quality charts), analysis scripts, reproducible analysis pipeline | Quality standard: Complete report structure, beautiful and professional charts, in-depth analysis, reproducible results</div>
+</div>
+
+            </div>
+        </div>
+    </div>
+
 <div class="step-item">
     <div class="step-number">步骤 2</div>
     <div class="step-title">序列比对</div>

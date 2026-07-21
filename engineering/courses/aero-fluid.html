@@ -40,38 +40,58 @@
     </div>
     <div class="section">
         <h2>实施步骤 <span class="en">Implementation Steps</span></h2>
-        <div>
+<div>
 
 
 <div class="step-item">
     <div class="step-number">步骤 1</div>
     <div class="step-title">问题建模</div>
-    <div class="step-desc">确定翼型几何与计算域并生成网格</div>
-    <div class="step-output">产出：计算网格</div>
+    <div class="step-desc">
+        本步骤的核心任务是建立飞行器的数学模型，为后续飞行品质分析和控制律设计提供理论基础。准确的飞行器模型是保证控制系统设计质量的前提，直接影响飞行安全和性能指标。基于牛顿-欧拉方程或拉格朗日方法推导六自由度运动方程，考虑气动导数、惯性张量和质量特性。
+        <br><br>
+        • 使用Datcom或AVL软件估算气动导数，建立纵横向小扰动线化模型，推导状态空间表达式<br>• 基于质量、转动惯量和重心位置等参数，建立六自由度非线性运动方程组<br>• 通过风洞试验数据或CFD计算结果校验气动导数，确保模型误差在10%以内
+    </div>
+    <div class="step-output">产出：飞行器数学模型报告（含状态空间方程、气动导数表、惯性参数、模型验证曲线） ｜ 质量标准：模型推导正确、参数完整、与试验数据偏差<10%</div>
 </div>
 <div class="step-item">
     <div class="step-number">步骤 2</div>
     <div class="step-title">控制方程设置</div>
-    <div class="step-desc">选择湍流模型并设置边界条件</div>
-    <div class="step-output">产出：CFD模型配置</div>
+    <div class="step-desc">
+        本步骤是航空航天工程项目的关键环节，通过专业方法和工具完成特定任务目标。航空航天工程强调安全性、可靠性和精确性，每一步都需要严谨的理论推导和充分的验证。采用行业标准方法和专业软件工具确保结果的准确性和工程实用性。
+        <br><br>
+        • 明确任务目标和技术指标，依据航空航天相关标准制定详细的实施方案和技术路线<br>• 使用专业软件工具（MATLAB/ANSYS/Fluent/CATIA等）进行建模、计算或仿真分析<br>• 通过试验数据或文献结果进行对比验证，确保结果可靠并满足工程要求
+    </div>
+    <div class="step-output">产出：专业技术报告（含方法说明、计算过程、结果数据、验证对比、结论建议） ｜ 质量标准：方法科学规范、数据准确可靠、结论有据可依、满足工程标准</div>
 </div>
 <div class="step-item">
     <div class="step-number">步骤 3</div>
     <div class="step-title">数值求解</div>
-    <div class="step-desc">求解N-S方程获得流场参数分布</div>
-    <div class="step-output">产出：流场计算结果</div>
+    <div class="step-desc">
+        本步骤使用仿真软件进行控制律的仿真验证，在数字环境中全面测试系统性能。仿真是现代飞行器设计的必要手段，可以在不依赖实物的情况下验证各种飞行工况下的系统响应，降低试飞风险。通过时域和频域多维度验证控制效果。
+        <br><br>
+        • 在MATLAB/Simulink中搭建闭环仿真模型，设置阶跃、脉冲、正弦等典型输入信号<br>• 进行多工况仿真验证，包括巡航、起飞、着陆等不同飞行状态下的系统响应<br>• 加入传感器噪声、气动参数摄动和外部干扰，验证系统鲁棒性和抗扰能力
+    </div>
+    <div class="step-output">产出：仿真验证报告（含仿真模型、时域响应曲线、频域特性、鲁棒性测试结果） ｜ 质量标准：仿真模型准确、工况覆盖全面、响应曲线合理、鲁棒性达标</div>
 </div>
 <div class="step-item">
     <div class="step-number">步骤 4</div>
     <div class="step-title">结果分析</div>
-    <div class="step-desc">分析升阻力系数、压力分布与流动分离现象</div>
-    <div class="step-output">产出：气动特性分析图</div>
+    <div class="step-desc">
+        本步骤对飞行器飞行品质进行深入分析，评估系统的稳定性、阻尼特性和操纵响应。飞行品质分析是飞行器设计的关键环节，依据MIL-STD-1797或GJB标准评价等级，为控制律设计提供指标要求。通过特征值分析、频域响应和时域仿真多维度评估。
+        <br><br>
+        • 运用MATLAB/Simulink进行特征值分析，计算短周期、长周期、滚转、偏航等模态的阻尼比和自然频率<br>• 绘制Bode图和根轨迹，分析系统稳定性裕度，确定相位裕度和增益裕度<br>• 按照MIL-STD-1797B标准评定飞行品质等级，区分Level 1/2/3飞行品质
+    </div>
+    <div class="step-output">产出：飞行品质分析报告（含特征值表、模态参数、Bode图、根轨迹、品质等级评定） ｜ 质量标准：分析方法符合规范、模态参数准确、品质等级评定正确</div>
 </div>
 <div class="step-item">
     <div class="step-number">步骤 5</div>
     <div class="step-title">报告撰写</div>
-    <div class="step-desc">整理仿真结果并撰写流场分析报告</div>
-    <div class="step-output">产出：流场分析报告</div>
+    <div class="step-desc">
+        本步骤是航空航天工程项目的关键环节，通过专业方法和工具完成特定任务目标。航空航天工程强调安全性、可靠性和精确性，每一步都需要严谨的理论推导和充分的验证。采用行业标准方法和专业软件工具确保结果的准确性和工程实用性。
+        <br><br>
+        • 明确任务目标和技术指标，依据航空航天相关标准制定详细的实施方案和技术路线<br>• 使用专业软件工具（MATLAB/ANSYS/Fluent/CATIA等）进行建模、计算或仿真分析<br>• 通过试验数据或文献结果进行对比验证，确保结果可靠并满足工程要求
+    </div>
+    <div class="step-output">产出：专业技术报告（含方法说明、计算过程、结果数据、验证对比、结论建议） ｜ 质量标准：方法科学规范、数据准确可靠、结论有据可依、满足工程标准</div>
 </div>
             
 
@@ -80,36 +100,55 @@
 <div class="step-item">
     <div class="step-number">Step 1</div>
     <div class="step-title">Problem Modeling</div>
-    <div class="step-desc">Define airfoil geometry, computational domain and generate mesh</div>
-    <div class="step-output">Deliverable: Computational Mesh</div>
+    <div class="step-desc">
+        The core task of this step is to establish the aircraft mathematical model, providing the theoretical foundation for subsequent flying qualities analysis and control law design. An accurate aircraft model is the prerequisite for ensuring control system design quality, directly affecting flight safety and performance indicators. Derive 6-DOF equations of motion based on Newton-Euler or Lagrangian methods, considering aerodynamic derivatives, inertia tensor and mass properties.
+        <br><br>
+        • Estimate aerodynamic derivatives using Datcom or AVL software, establish longitudinal and lateral small perturbation linearized models, derive state-space expressions<br>• Build 6-DOF nonlinear motion equations based on mass, moments of inertia and center of gravity position<br>• Validate aerodynamic derivatives with wind tunnel test data or CFD results, ensuring model error within 10%
+    </div>
+    <div class="step-output">Deliverable: Aircraft mathematical model report (including state-space equations, aerodynamic derivative table, inertia parameters, model validation curves) | Quality standard: Correct model derivation, complete parameters, deviation from test data <10%</div>
 </div>
 <div class="step-item">
     <div class="step-number">Step 2</div>
     <div class="step-title">Governing Equations Setup</div>
-    <div class="step-desc">Select turbulence model and set boundary conditions</div>
-    <div class="step-output">Deliverable: CFD Model Config</div>
+    <div class="step-desc">
+        This step is a critical element in aerospace engineering projects, accomplishing specific task objectives through professional methods and tools. Aerospace engineering emphasizes safety, reliability and precision, requiring rigorous theoretical derivation and sufficient verification at every step. Industry standard methods and professional software tools are used to ensure result accuracy and engineering practicality.
+        <br><br>
+        • Clarify task objectives and technical specifications, develop detailed implementation plan and technical route based on aerospace related standards<br>• Use professional software tools (MATLAB/ANSYS/Fluent/CATIA, etc.) for modeling, calculation or simulation analysis<br>• Compare and validate with test data or literature results, ensuring results are reliable and meet engineering requirements
+    </div>
+    <div class="step-output">Deliverable: Professional technical report (including method description, calculation process, result data, validation comparison, conclusions and suggestions) | Quality standard: Scientific and standard method, accurate and reliable data, evidence-based conclusions, meeting engineering standards</div>
 </div>
 <div class="step-item">
     <div class="step-number">Step 3</div>
     <div class="step-title">Numerical Solution</div>
-    <div class="step-desc">Solve Navier-Stokes equations for flow field parameters</div>
-    <div class="step-output">Deliverable: Flow Field Results</div>
+    <div class="step-desc">
+        This step uses simulation software for control law simulation verification, comprehensively testing system performance in a digital environment. Simulation is an essential means in modern aircraft design, allowing verification of system response under various flight conditions without physical hardware, reducing flight test risk. Multi-dimensional control effect verification through time and frequency domain analysis.
+        <br><br>
+        • Build closed-loop simulation model in MATLAB/Simulink, set typical input signals such as step, pulse and sine<br>• Conduct multi-condition simulation verification, including system response under cruise, takeoff, landing and other flight states<br>• Add sensor noise, aerodynamic parameter perturbations and external disturbances to verify system robustness and disturbance rejection
+    </div>
+    <div class="step-output">Deliverable: Simulation verification report (including simulation model, time domain response curves, frequency domain characteristics, robustness test results) | Quality standard: Accurate simulation model, comprehensive condition coverage, reasonable response curves, qualified robustness</div>
 </div>
 <div class="step-item">
     <div class="step-number">Step 4</div>
     <div class="step-title">Result Analysis</div>
-    <div class="step-desc">Analyze lift/drag coefficients, pressure distribution and separation</div>
-    <div class="step-output">Deliverable: Aero Analysis Plots</div>
+    <div class="step-desc">
+        This step conducts in-depth analysis of aircraft flying qualities, evaluating system stability, damping characteristics and control response. Flying qualities analysis is a critical element in aircraft design, evaluating levels based on MIL-STD-1797 or GJB standards, providing performance requirements for control law design. Multi-dimensional evaluation through eigenvalue analysis, frequency domain response and time domain simulation.
+        <br><br>
+        • Perform eigenvalue analysis using MATLAB/Simulink, calculate damping ratios and natural frequencies of short-period, phugoid, roll, yaw modes<br>• Plot Bode diagrams and root locus, analyze stability margins, determine phase margin and gain margin<br>• Rate flying qualities levels according to MIL-STD-1797B standard, distinguish Level 1/2/3 flying qualities
+    </div>
+    <div class="step-output">Deliverable: Flying qualities analysis report (including eigenvalue table, modal parameters, Bode plots, root locus, quality level assessment) | Quality standard: Analysis method compliant with standards, accurate modal parameters, correct quality rating</div>
 </div>
 <div class="step-item">
     <div class="step-number">Step 5</div>
     <div class="step-title">Report Writing</div>
-    <div class="step-desc">Organize simulation results and write flow analysis report</div>
-    <div class="step-output">Deliverable: Flow Analysis Report</div>
+    <div class="step-desc">
+        This step is a critical element in aerospace engineering projects, accomplishing specific task objectives through professional methods and tools. Aerospace engineering emphasizes safety, reliability and precision, requiring rigorous theoretical derivation and sufficient verification at every step. Industry standard methods and professional software tools are used to ensure result accuracy and engineering practicality.
+        <br><br>
+        • Clarify task objectives and technical specifications, develop detailed implementation plan and technical route based on aerospace related standards<br>• Use professional software tools (MATLAB/ANSYS/Fluent/CATIA, etc.) for modeling, calculation or simulation analysis<br>• Compare and validate with test data or literature results, ensuring results are reliable and meet engineering requirements
+    </div>
+    <div class="step-output">Deliverable: Professional technical report (including method description, calculation process, result data, validation comparison, conclusions and suggestions) | Quality standard: Scientific and standard method, accurate and reliable data, evidence-based conclusions, meeting engineering standards</div>
 </div>
             </div>
         </div>
-    </div>
     <div class="course-nav" style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:16px;padding:12px 16px;background:white;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,0.05);flex-wrap:wrap;">
     <a href="../aerospace.html" style="color:#667eea;text-decoration:none;font-size:0.88rem;">← 返回航空航天工程</a>
     <a href="aero-structural.html" style="color:#667eea;text-decoration:none;font-size:0.88rem;">下一门：结构力学 →</a>

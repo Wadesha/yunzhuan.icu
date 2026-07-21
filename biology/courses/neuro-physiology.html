@@ -38,6 +38,7 @@
         <p style="margin-top:8px;">Select an ion channel or neuron type, record electrophysiological signals using patch clamp and related techniques, and analyze its properties and modulation mechanisms. Write an electrophysiology research report.</p>
         </div>
     </div>
+    
     <div class="section">
         <h2>实施步骤 <span class="en">Implementation Steps</span></h2>
         <div>
@@ -45,10 +46,114 @@
 
 <div class="step-item">
     <div class="step-number">步骤 1</div>
-    <div class="step-title">主题选择</div>
-    <div class="step-desc">选定离子通道或神经元类型</div>
-    <div class="step-output">产出：选题说明</div>
+    <div class="step-title">神经生理功能选择与实验方案设计</div>
+    <div class="step-desc">
+        本步骤的核心任务是选择一个神经生理功能主题，设计科学的神经生理学实验方案。神经生理学研究神经系统的电活动和功能，需要运用电生理记录、神经调控、成像等技术，在神经元、环路和系统水平研究神经信号的产生、传导和处理。合理的实验设计是获得可靠神经生理数据的前提。
+<br><br>
+• 选择研究主题：从神经生理学方向选择——神经元电生理特性（膜电位、离子通道、兴奋性）、突触传递与可塑性、感觉信息处理、运动控制机制、神经节律与振荡、神经环路动力学、睡眠与觉醒<br>• 选择实验体系与技术：确定实验模型——离体脑片、在体动物（麻醉/清醒）、培养神经元、计算机建模；选择技术方法——细胞内/外记录、膜片钳、多通道记录（MEA、在体多通道）、脑电图/脑磁图、钙成像、光遗传/化学遗传调控、神经药理学<br>• 实验设计：设计实验方案——确定记录部位（皮层、海马、丘脑等）、记录方式（全细胞、场电位、单位放电）、刺激方案（电刺激、光刺激、感觉刺激）、实验分组（对照组、给药组、损伤组）、对照设置，制定详细实验流程
+    </div>
+    <div class="step-output">产出：神经生理学实验设计方案（含研究问题、实验体系、技术选择、刺激/记录方案、分组设计）｜ 质量标准：实验设计科学合理，技术选择恰当，方案详细可行</div>
 </div>
+<div class="step-item">
+    <div class="step-number">步骤 2</div>
+    <div class="step-title">电生理记录准备与系统调试</div>
+    <div class="step-desc">
+        本步骤的核心任务是准备电生理实验，调试记录系统。神经电生理实验对设备和操作要求很高，精密的仪器和精细的操作是获得高质量电生理信号的关键。需要仔细准备实验设备、标本/动物、电极和灌流系统，确保实验条件的稳定性和可靠性。
+<br><br>
+• 设备准备与调试：配置电生理记录系统——膜片钳放大器（Axon Multiclamp、HEKA EPC）、数模/模数转换器、微操纵器（压电微操纵器）、防震台、法拉第笼、刺激隔离器；调试系统噪声（<1pA）、接地和屏蔽，使用pCLAMP、PatchMaster等采集软件<br>• 标本制备：根据实验类型制备标本——脑片制备（振动切片机切取300-400μm厚脑片，人工脑脊液孵育恢复）、细胞培养标本（接种在盖玻片上的原代神经元）、在体动物（麻醉固定、颅骨开窗、记录电极植入）<br>• 电极制备：使用微电极拉制仪（P-97拉制仪）拉制玻璃微电极——膜片钳电极（电阻3-5MΩ，内液充灌）、细胞外记录电极、刺激电极；进行电极抛光和电极液填充，测试电极电阻和封接成功率
+    </div>
+    <div class="step-output">产出：电生理实验准备记录（含设备配置清单、标本制备方案、电极参数、系统测试报告）｜ 质量标准：设备调试精准，标本制备规范，电极质量可靠，准备充分</div>
+</div>
+<div class="step-item">
+    <div class="step-number">步骤 3</div>
+    <div class="step-title">电生理记录与数据采集</div>
+    <div class="step-desc">
+        本步骤的核心任务是进行电生理记录，系统采集神经电活动数据。电生理记录需要精细的操作技巧和高度的耐心，需要严格控制实验条件，确保记录质量和稳定性。高质量的原始数据是后续分析和可靠结论的基础。
+<br><br>
+• 膜片钳记录：进行全细胞膜片钳记录——封接（GΩ封接）、破膜、记录模式（电压钳/电流钳）；记录基本电生理特性（静息电位、输入电阻、膜电容、动作电位发放）；记录突触电流（自发/微小突触后电流sEPSC/mEPSC、sIPSC/mIPSC、诱发性突触后电流eEPSC/eIPSC）<br>• 场电位与单位放电记录：记录脑片场电位（如海马CA1区的fEPSP、群体锋电位）和长时程增强（LTP）；在体多通道记录——多电极阵列（MEA）或在体硅探针记录，采集神经元单位放电和局部场电位（LFP），进行 Spike Sorting 分析<br>• 实验操作与质控：进行药理学实验——灌流给药（TTX、APV、CNQX、picrotoxin等），观察药物效应；进行配对脉冲易化（PPF）、LTP/LTD诱导实验；监控记录质量（串联电阻、封接电阻、基线稳定性），记录实验日志，及时排除干扰
+    </div>
+    <div class="step-output">产出：电生理原始数据集（含膜片钳/场电位/多通道原始数据、实验记录日志、标记文件）｜ 质量标准：记录质量高、数据完整、操作规范、质控严格</div>
+</div>
+<div class="step-item">
+    <div class="step-number">步骤 4</div>
+    <div class="step-title">电生理数据分析与神经机制解释</div>
+    <div class="step-desc">
+        本步骤的核心任务是对电生理数据进行专业分析，解释神经活动的生理机制。电生理数据包含丰富的神经编码信息，需要运用专业的分析方法提取关键参数，揭示神经元和神经环路的功能特性。数据分析的深度和质量直接影响研究结论的可靠性。
+<br><br>
+• 基本电生理参数分析：使用Clampfit、MiniAnalysis、Igor Pro等软件分析——被动膜特性（静息电位、输入电阻、膜电容、时间常数）、动作电位特性（阈值、幅度、半宽、频率适应、后超极化）、突触传递特性（突触电流幅度、频率、动力学：上升时间、衰减时间常数、配对脉冲比PPR）<br>• 突触可塑性与网络活动分析：分析LTP/LTD——计算fEPSP斜率/幅度变化百分比，统计增强/压抑的大小和时程；分析神经网络振荡——场电位频谱分析（功率谱、相干分析）、振荡相位耦合、神经元放电与场电位相位锁定<br>• 神经机制解释：基于电生理结果分析神经机制——离子通道机制（特定通道阻滞剂/激活剂实验）、突触前/后机制（PPR、CV分析、量子分析）、环路机制（兴奋/抑制平衡、反馈/前馈回路），构建神经功能调控模型
+    </div>
+    <div class="step-output">产出：电生理分析报告（含参数统计表、示例轨迹图、机制分析、模型图）｜ 质量标准：分析方法专业准确，结果呈现清晰，机制解释深入合理</div>
+</div>
+<div class="step-item">
+    <div class="step-number">步骤 5</div>
+    <div class="step-title">神经生理学研究报告撰写</div>
+    <div class="step-desc">
+        本步骤的核心任务是撰写神经生理学研究报告，系统呈现电生理研究的完整发现。需要从电信号的特征分析入手，结合神经科学理论，阐明神经生理功能的机制。研究报告应体现电生理实验的技术严谨性和神经生理学的理论深度。
+<br><br>
+• 撰写研究报告：按照神经生理学论文规范撰写——摘要、引言、材料与方法（动物/标本、设备、溶液、记录方案、数据分析方法）、结果（基本特性→突触传递→可塑性→网络活动，逐步深入）、讨论（与已知文献比较、生理意义、机制模型、局限性）、结论、参考文献<br>• 制作电生理图表：制作高质量电生理图——代表性轨迹图（电流/电压轨迹，标注清楚）、统计柱状图/折线图、LTP时间曲线图、场电位频谱图、神经元放电光栅图，确保电生理图的专业性和可读性<br>• 功能意义讨论：讨论神经电生理特性的功能意义——与感觉编码、运动控制、学习记忆、信息处理的关系，联系神经疾病（癫痫、帕金森病、阿尔茨海默病）的电生理异常，讨论临床转化价值
+    </div>
+    <div class="step-output">产出：神经生理学研究报告（PDF格式，含完整电生理数据、机制分析、深入讨论）、原始数据附件｜ 质量标准：报告内容充实、数据可靠、分析深入、讨论专业、格式规范</div>
+</div>
+
+            
+
+<div style="margin-top:14px;padding-top:10px;border-top:1px solid #eee;">
+    <h3 style="font-size:0.9rem;color:#667eea;margin-bottom:8px;">Steps</h3>
+<div class="step-item">
+    <div class="step-number">Step 1</div>
+    <div class="step-title">Neurophysiological Function Selection and Experimental Protocol Design</div>
+    <div class="step-desc">
+        The core task of this step is to select a neurophysiological function topic and design a scientific neurophysiology experiment plan.
+<br><br>
+• Select research topic: choose from neurophysiology directions—neuronal electrophysiological properties (membrane potential, ion channels, excitability), synaptic transmission and plasticity, sensory information processing, motor control mechanisms, neural rhythms and oscillations, neural circuit dynamics, sleep and wakefulness<br>• Select experimental system and technique: determine experimental model—in vitro brain slices, in vivo animals (anesthetized/awake), cultured neurons, computational modeling; select techniques—intracellular/extracellular recording, patch-clamp, multi-channel recording (MEA, in vivo multi-channel), EEG/MEG, calcium imaging, optogenetic/chemogenetic modulation, neuropharmacology<br>• Experimental design: design experimental protocol—determine recording site (cortex, hippocampus, thalamus, etc.), recording mode (whole-cell, field potential, unit firing), stimulation protocol (electrical, optical, sensory), experimental groups (control, drug, lesion), control settings; develop detailed experimental workflow
+    </div>
+    <div class="step-output">Deliverable: Neurophysiology experiment design proposal (research question, experimental system, technique selection, stimulation/recording protocol, grouping design) | Quality standard: Scientific and reasonable experimental design, appropriate technique selection, detailed and feasible plan</div>
+</div>
+<div class="step-item">
+    <div class="step-number">Step 2</div>
+    <div class="step-title">Electrophysiological Recording Preparation and System Calibration</div>
+    <div class="step-desc">
+        The core task of this step is to prepare electrophysiological experiments and calibrate recording systems. Neuroelectrophysiology experiments require high standards for equipment and operation.
+<br><br>
+• Equipment preparation and calibration: set up electrophysiological recording system—patch-clamp amplifier (Axon Multiclamp, HEKA EPC), A/D-D/A converter, micromanipulator (piezoelectric), anti-vibration table, Faraday cage, stimulus isolator; debug system noise (<1pA), grounding and shielding; use pCLAMP, PatchMaster acquisition software<br>• Specimen preparation: prepare specimens according to experiment type—brain slice preparation (300-400μm thick slices with vibratome, recovery in ACSF), cell culture specimens (primary neurons plated on coverslips), in vivo animals (anesthesia and fixation, craniotomy, recording electrode implantation)<br>• Electrode preparation: pull glass microelectrodes using microelectrode puller (P-97)—patch-clamp electrodes (3-5MΩ resistance, internal solution filling), extracellular recording electrodes, stimulating electrodes; perform electrode polishing and filling; test electrode resistance and seal success rate
+    </div>
+    <div class="step-output">Deliverable: Electrophysiology experiment preparation records (equipment configuration list, specimen preparation protocol, electrode parameters, system test report) | Quality standard: Precise equipment calibration, standard specimen preparation, reliable electrode quality, adequate preparation</div>
+</div>
+<div class="step-item">
+    <div class="step-number">Step 3</div>
+    <div class="step-title">Electrophysiological Recording and Data Acquisition</div>
+    <div class="step-desc">
+        The core task of this step is to perform electrophysiological recordings and systematically collect neural electrical activity data.
+<br><br>
+• Patch-clamp recording: perform whole-cell patch-clamp recording—sealing (GΩ seal), breaking in, recording mode (voltage clamp/current clamp); record basic electrophysiological properties (resting potential, input resistance, membrane capacitance, action potential firing); record synaptic currents (spontaneous/miniature postsynaptic currents sEPSC/mEPSC, sIPSC/mIPSC, evoked postsynaptic currents eEPSC/eIPSC)<br>• Field potential and unit firing recording: record brain slice field potentials (e.g., hippocampal CA1 fEPSP, population spike) and long-term potentiation (LTP); in vivo multi-channel recording—multi-electrode array (MEA) or in vivo silicon probe recording; collect neuronal unit firing and local field potentials (LFP); perform spike sorting analysis<br>• Experimental operation and QC: perform pharmacological experiments—perfusion drug application (TTX, APV, CNQX, picrotoxin, etc.), observe drug effects; perform paired-pulse facilitation (PPF), LTP/LTD induction experiments; monitor recording quality (series resistance, seal resistance, baseline stability); keep experiment log; eliminate interference promptly
+    </div>
+    <div class="step-output">Deliverable: Electrophysiology raw dataset (patch-clamp/field potential/multi-channel raw data, experiment log, annotation files) | Quality standard: High recording quality, complete data, standard operation, strict QC</div>
+</div>
+<div class="step-item">
+    <div class="step-number">Step 4</div>
+    <div class="step-title">Electrophysiological Data Analysis and Neural Mechanism Interpretation</div>
+    <div class="step-desc">
+        The core task of this step is to perform professional analysis of electrophysiological data and interpret physiological mechanisms of neural activity.
+<br><br>
+• Basic electrophysiological parameter analysis: use Clampfit, MiniAnalysis, Igor Pro software for analysis—passive membrane properties (resting potential, input resistance, membrane capacitance, time constant), action potential properties (threshold, amplitude, half-width, frequency adaptation, afterhyperpolarization), synaptic transmission properties (synaptic current amplitude, frequency, kinetics: rise time, decay time constant, paired-pulse ratio PPR)<br>• Synaptic plasticity and network activity analysis: analyze LTP/LTD—calculate percent change in fEPSP slope/amplitude, statistics on magnitude and time course of potentiation/depression; analyze neural network oscillations—field potential spectral analysis (power spectrum, coherence analysis), oscillatory phase coupling, neuronal firing phase locking to LFP<br>• Neural mechanism interpretation: analyze neural mechanisms based on electrophysiological results—ion channel mechanisms (specific channel blocker/activator experiments), pre/post synaptic mechanisms (PPR, CV analysis, quantal analysis), circuit mechanisms (excitation/inhibition balance, feedback/feedforward circuits); build neural function regulatory model
+    </div>
+    <div class="step-output">Deliverable: Electrophysiology analysis report (parameter statistics table, example traces, mechanism analysis, model diagrams) | Quality standard: Professional and accurate analysis methods, clear result presentation, in-depth and reasonable mechanism interpretation</div>
+</div>
+<div class="step-item">
+    <div class="step-number">Step 5</div>
+    <div class="step-title">Neurophysiology Research Report Writing</div>
+    <div class="step-desc">
+        The core task of this step is to write a neurophysiology research report systematically presenting complete findings of the electrophysiology study.
+<br><br>
+• Write research report: write following neurophysiology paper standards—abstract, introduction, materials and methods (animals/specimens, equipment, solutions, recording protocol, data analysis methods), results (basic properties → synaptic transmission → plasticity → network activity, progressive depth), discussion (comparison with known literature, physiological significance, mechanism model, limitations), conclusion, references<br>• Create electrophysiology figures: produce high-quality electrophysiology figures—representative traces (current/voltage traces with clear labels), statistical bar/line charts, LTP time course curves, field potential spectra, neuronal firing raster plots; ensure professionalism and readability of electrophysiology figures<br>• Functional significance discussion: discuss functional significance of neurophysiological properties—relationship with sensory coding, motor control, learning and memory, information processing; relate to electrophysiological abnormalities in neurological diseases (epilepsy, Parkinson disease, Alzheimer disease); discuss clinical translation value
+    </div>
+    <div class="step-output">Deliverable: Neurophysiology research report (PDF format with complete electrophysiology data, mechanism analysis, in-depth discussion), raw data attachments | Quality standard: Substantial report content, reliable data, in-depth analysis, professional discussion, standard format</div>
+</div>
+
+            </div>
+        </div>
+    </div>
+
 <div class="step-item">
     <div class="step-number">步骤 2</div>
     <div class="step-title">实验设计</div>

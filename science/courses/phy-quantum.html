@@ -43,71 +43,108 @@
         <div>
 
 
+
+
+
+
 <div class="step-item">
     <div class="step-number">步骤 1</div>
-    <div class="step-title">体系选择与方法确定</div>
-    <div class="step-desc">选定量子体系并确定数值方法</div>
-    <div class="step-output">产出：方案书</div>
+    <div class="step-title">物理问题选择与建模</div>
+    <div class="step-desc">
+        本步骤的核心任务是选择一个有趣的物理问题并建立相应的物理模型，为后续的理论分析和实验验证奠定基础。从课程核心内容中选择具体的研究问题，可以是经典力学、电磁学、量子力学、热力学或实验物理中的实际问题。通过合理的近似和假设，将实际问题抽象为可求解的物理模型。<br><br>• 从课程内容中选择具体的物理问题，明确研究目标和物理意义，可以是理论推导、实验测量或数值模拟类问题<br>• 查阅相关教材和文献（如APS、IOP、arXiv、中国物理学会期刊），了解问题的研究背景和已有成果<br>• 建立物理模型：根据研究目标，抓住主要因素，忽略次要因素，进行合理近似，建立清晰的物理图像和数学模型
+    </div>
+    <div class="step-output">产出：选题报告与物理模型（含问题背景、物理图像、模型假设、研究计划）｜ 质量标准：选题有物理意义，模型假设合理，研究方案可行</div>
 </div>
+
 <div class="step-item">
     <div class="step-number">步骤 2</div>
-    <div class="step-title">方程离散化与编程</div>
-    <div class="step-desc">离散化薛定谔方程并编程</div>
-    <div class="step-output">产出：源代码</div>
+    <div class="step-title">理论推导与解析求解</div>
+    <div class="step-desc">
+        本步骤的核心任务是运用物理基本定律和数学方法，对建立的物理模型进行理论分析和解析求解。从基本原理出发（如牛顿定律、麦克斯韦方程、薛定谔方程、热力学定律），通过数学推导得到物理量之间的定量关系。理论分析是物理研究的核心，要求物理图像清晰、数学推导严谨。<br><br>• 建立基本方程：根据物理模型，应用相应的物理定律（牛顿力学、拉格朗日/哈密顿形式、麦克斯韦方程、薛定谔方程等）建立控制方程<br>• 解析求解：运用微积分、线性代数、微分方程、复变函数等数学方法，尝试获得问题的解析解，分析解的物理意义<br>• 特例与极限验证：通过特殊情况、极限情形或量纲分析验证解析结果的合理性，检查结果是否符合物理直觉和已知结论
+    </div>
+    <div class="step-output">产出：理论分析报告（含基本方程、解析推导、结果讨论、验证分析）｜ 质量标准：物理图像清晰，推导过程严谨，解析结果正确</div>
 </div>
+
 <div class="step-item">
     <div class="step-number">步骤 3</div>
-    <div class="step-title">能级与波函数计算</div>
-    <div class="step-desc">计算本征值与本征函数</div>
-    <div class="step-output">产出：计算结果</div>
+    <div class="step-title">数值模拟与计算验证</div>
+    <div class="step-desc">
+        本步骤的核心任务是通过数值计算和计算机模拟，对理论结果进行验证或求解无法解析处理的问题。数值方法是现代物理研究的重要手段，包括有限元、有限差分、蒙特卡洛、分子动力学等方法。通过数值模拟可以直观地展示物理过程，验证理论预测的正确性。<br><br>• 选择数值方法：根据问题特点选择合适的数值方法（如有限差分法、有限元法、蒙特卡洛方法、分子动力学模拟等）<br>• 编程实现：使用Python（NumPy、SciPy、Matplotlib）、MATLAB、COMSOL或其他专业软件进行数值计算和模拟，编写计算程序<br>• 结果验证：进行收敛性测试和网格独立性验证，将数值结果与解析解或实验数据对比，验证数值方法的准确性和可靠性
+    </div>
+    <div class="step-output">产出：数值计算报告（含数值方法、程序代码、计算结果、验证分析）｜ 质量标准：数值方法选择合理，程序正确，结果可靠有验证</div>
 </div>
+
 <div class="step-item">
     <div class="step-number">步骤 4</div>
-    <div class="step-title">与解析解对比</div>
-    <div class="step-desc">与精确解对比验证</div>
-    <div class="step-output">产出：对比分析</div>
+    <div class="step-title">实验测量与数据分析</div>
+    <div class="step-desc">
+        本步骤的核心任务是设计并完成物理实验，通过实验测量验证理论预测或发现新的物理现象。实验是物理学的基础，要求实验设计科学、操作规范、数据分析严谨。系统学习误差分析和数据处理方法，确保实验结果的可靠性。<br><br>• 实验设计：根据研究目标设计实验方案，选择实验仪器和测量方法，制定实验步骤和数据记录表格，考虑误差来源和减小措施<br>• 实验操作：按照实验规范进行操作，校准仪器，进行多次测量以减小随机误差，记录所有原始数据和实验条件<br>• 数据处理：使用Origin、Python或MATLAB进行数据处理和误差分析，计算不确定度，绘制实验曲线，将实验结果与理论预测对比
+    </div>
+    <div class="step-output">产出：实验报告与数据（含实验方案、原始数据、数据处理、误差分析）｜ 质量标准：实验设计科学，操作规范，数据处理正确，误差分析到位</div>
 </div>
+
 <div class="step-item">
     <div class="step-number">步骤 5</div>
-    <div class="step-title">微扰讨论与报告</div>
-    <div class="step-desc">讨论微扰影响并撰写报告</div>
-    <div class="step-output">产出：研究报告</div>
+    <div class="step-title">结果讨论与报告撰写</div>
+    <div class="step-desc">
+        本步骤的核心任务是对研究结果进行深入的物理讨论，撰写规范的物理研究报告。结合理论分析、数值模拟和实验结果，全面探讨物理现象的本质和规律。研究报告需符合物理学术规范，物理图像清晰，数据图表规范，论证逻辑严密。<br><br>• 结果讨论：深入分析理论和实验结果，解释物理机制，讨论结果的物理意义和适用范围，分析误差来源和影响因素<br>• 报告撰写：按照物理论文规范撰写报告，包含摘要、引言、理论方法、实验/计算结果、讨论、结论、参考文献，使用规范的物理术语<br>• 总结展望：总结研究的主要发现和创新点，比较不同方法的优缺点，提出改进方向和未来研究设想
+    </div>
+    <div class="step-output">产出：研究论文与总结（含完整报告、数据图表、参考文献、研究总结）｜ 质量标准：讨论有物理深度，报告规范完整，结论科学可靠</div>
 </div>
-            
 
 <div style="margin-top:14px;padding-top:10px;border-top:1px solid #eee;">
     <h3 style="font-size:0.9rem;color:#667eea;margin-bottom:8px;">Steps</h3>
+
 <div class="step-item">
     <div class="step-number">Step 1</div>
-    <div class="step-title">System & Method</div>
-    <div class="step-desc">Choose quantum system and numerical method</div>
-    <div class="step-output">Deliverable: Plan</div>
+    <div class="step-title">Physics Problem Selection and Modeling</div>
+    <div class="step-desc">
+        The core task of this step is to select an interesting physics problem and establish the corresponding physical model, laying the foundation for subsequent theoretical analysis and experimental verification. Choose specific research questions from the core content of the course, which can be practical problems in classical mechanics, electromagnetism, quantum mechanics, thermodynamics, or experimental physics. Through reasonable approximations and assumptions, abstract practical problems into solvable physical models.<br><br>• Select specific physics problems from course content, clarify research objectives and physical significance, which can be theoretical derivation, experimental measurement, or numerical simulation problems<br>• Review relevant textbooks and literature (APS, IOP, arXiv, Chinese Physical Society journals) to understand the research background and existing results of the problem<br>• Establish physical model: according to research objectives, grasp main factors, ignore secondary factors, make reasonable approximations, and establish clear physical pictures and mathematical models
+    </div>
+    <div class="step-output">Deliverable: Topic selection report and physical model (problem background, physical picture, model assumptions, research plan) | Quality standard: Physically meaningful topic selection, reasonable model assumptions, feasible research plan</div>
 </div>
+
 <div class="step-item">
     <div class="step-number">Step 2</div>
-    <div class="step-title">Discretization & Coding</div>
-    <div class="step-desc">Discretize Schrodinger equation and code</div>
-    <div class="step-output">Deliverable: Source Code</div>
+    <div class="step-title">Theoretical Derivation and Analytical Solution</div>
+    <div class="step-desc">
+        The core task of this step is to use fundamental laws of physics and mathematical methods to conduct theoretical analysis and analytical solution of the established physical model. Starting from basic principles (such as Newton's laws, Maxwell's equations, Schrödinger equation, laws of thermodynamics), obtain quantitative relationships between physical quantities through mathematical derivation. Theoretical analysis is the core of physics research, requiring clear physical pictures and rigorous mathematical derivation.<br><br>• Establish basic equations: according to the physical model, apply corresponding physical laws (Newtonian mechanics, Lagrangian/Hamiltonian formalism, Maxwell's equations, Schrödinger equation, etc.) to establish governing equations<br>• Analytical solution: use mathematical methods such as calculus, linear algebra, differential equations, complex functions to try to obtain analytical solutions of the problem, and analyze the physical meaning of the solutions<br>• Special cases and limit verification: verify the rationality of analytical results through special cases, limit situations, or dimensional analysis, and check whether results conform to physical intuition and known conclusions
+    </div>
+    <div class="step-output">Deliverable: Theoretical analysis report (basic equations, analytical derivation, result discussion, verification analysis) | Quality standard: Clear physical picture, rigorous derivation process, correct analytical results</div>
 </div>
+
 <div class="step-item">
     <div class="step-number">Step 3</div>
-    <div class="step-title">Energy & Wavefunction</div>
-    <div class="step-desc">Compute eigenvalues and eigenfunctions</div>
-    <div class="step-output">Deliverable: Results</div>
+    <div class="step-title">Numerical Simulation and Computational Verification</div>
+    <div class="step-desc">
+        The core task of this step is to verify theoretical results or solve problems that cannot be analytically treated through numerical computation and computer simulation. Numerical methods are important tools in modern physics research, including finite element, finite difference, Monte Carlo, molecular dynamics and other methods. Through numerical simulation, physical processes can be intuitively displayed, and the correctness of theoretical predictions can be verified.<br><br>• Select numerical methods: choose appropriate numerical methods according to problem characteristics (such as finite difference method, finite element method, Monte Carlo method, molecular dynamics simulation, etc.)<br>• Programming implementation: use Python (NumPy, SciPy, Matplotlib), MATLAB, COMSOL or other professional software for numerical computation and simulation, and write calculation programs<br>• Result verification: perform convergence tests and grid independence verification, compare numerical results with analytical solutions or experimental data, and verify the accuracy and reliability of numerical methods
+    </div>
+    <div class="step-output">Deliverable: Numerical computation report (numerical methods, program code, computation results, verification analysis) | Quality standard: Reasonable numerical method selection, correct program, reliable and verified results</div>
 </div>
+
 <div class="step-item">
     <div class="step-number">Step 4</div>
-    <div class="step-title">Comparison with Analytical Solutions</div>
-    <div class="step-desc">Verify against exact solutions</div>
-    <div class="step-output">Deliverable: Comparison</div>
+    <div class="step-title">Experimental Measurement and Data Analysis</div>
+    <div class="step-desc">
+        The core task of this step is to design and complete physics experiments, verify theoretical predictions through experimental measurements, or discover new physical phenomena. Experimentation is the foundation of physics, requiring scientific experimental design, standardized operation, and rigorous data analysis. Systematically learn error analysis and data processing methods to ensure the reliability of experimental results.<br><br>• Experimental design: design experimental schemes according to research objectives, select experimental instruments and measurement methods, develop experimental procedures and data recording tables, consider error sources and reduction measures<br>• Experimental operation: operate according to experimental specifications, calibrate instruments, perform multiple measurements to reduce random errors, and record all raw data and experimental conditions<br>• Data processing: use Origin, Python or MATLAB for data processing and error analysis, calculate uncertainty, draw experimental curves, and compare experimental results with theoretical predictions
+    </div>
+    <div class="step-output">Deliverable: Experiment report and data (experimental plan, raw data, data processing, error analysis) | Quality standard: Scientific experimental design, standardized operation, correct data processing, thorough error analysis</div>
 </div>
+
 <div class="step-item">
     <div class="step-number">Step 5</div>
-    <div class="step-title">Perturbation & Report</div>
-    <div class="step-desc">Discuss perturbation effects and write report</div>
-    <div class="step-output">Deliverable: Research Report</div>
+    <div class="step-title">Result Discussion and Report Writing</div>
+    <div class="step-desc">
+        The core task of this step is to conduct in-depth physical discussion of research results and write a standardized physics research report. Combine theoretical analysis, numerical simulation, and experimental results to comprehensively explore the essence and laws of physical phenomena. The research report must conform to physics academic standards, with clear physical pictures, standardized data charts, and rigorous argumentation logic.<br><br>• Result discussion: in-depth analysis of theoretical and experimental results, explain physical mechanisms, discuss physical significance and scope of application of results, analyze error sources and influencing factors<br>• Report writing: write the report according to physics paper standards, including abstract, introduction, theoretical methods, experimental/computational results, discussion, conclusions, references, using standard physics terminology<br>• Summary and outlook: summarize main findings and innovations of the research, compare advantages and disadvantages of different methods, and propose improvement directions and future research ideas
+    </div>
+    <div class="step-output">Deliverable: Research paper and summary (complete report, data charts, references, research summary) | Quality standard: Physically in-depth discussion, standardized and complete report, scientific and reliable conclusions</div>
 </div>
+
             </div>
+
+
+
+
         </div>
     </div>
     <div class="course-nav" style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:16px;padding:12px 16px;background:white;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,0.05);flex-wrap:wrap;">

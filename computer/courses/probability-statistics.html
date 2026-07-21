@@ -40,60 +40,78 @@
     </div>
         <div class="section">
         <h2>实施步骤 <span class="en">Implementation Steps</span></h2>
-        <div>
-<div class="step-item">
+        <div><div class="step-item">
     <div class="step-number">步骤 1</div>
     <div class="step-title">数据探索</div>
-    <div class="step-desc">数据清洗与描述性统计分析</div>
-    <div class="step-output">产出：探索性分析报告</div>
+    <div class="step-desc">
+        本步骤从概率统计的典型应用场景出发，建立严谨的数学模型。问题建模是整个研究的起点，模型的合理性直接决定后续结果的应用价值。需要明确变量定义、目标函数与约束条件，将实际问题转化为可求解的数学形式。通过文献调研确保问题的研究意义，为后续分析奠定坚实基础。<br><br>• 选取具有实际背景的典型问题，明确研究目标与应用价值，梳理问题的输入输出与约束边界<br>• 定义关键变量与参数，建立数学模型，包括目标函数、约束条件、初始条件等要素<br>• 分析问题的数学性质，如凸性、可微性、收敛性，确定问题类型与求解思路
+    </div>
+    <div class="step-output">产出：数学模型文档（含问题描述、变量定义、目标函数、约束条件）｜ 质量标准：模型表述严谨，变量定义清晰，问题分类准确</div>
 </div><div class="step-item">
     <div class="step-number">步骤 2</div>
     <div class="step-title">概率建模</div>
-    <div class="step-desc">选择概率分布模型，进行参数估计</div>
-    <div class="step-output">产出：概率模型文档</div>
+    <div class="step-desc">
+        本步骤运用概率统计的核心理论进行推导分析，从理论层面刻画解的性质与规律。理论推导是连接数学原理与实际应用的桥梁，通过严谨的逻辑推理揭示问题的内在规律。运用本课程的核心定理与方法，逐步推导关键结论，建立完整的理论框架。每一步推导都要有理有据，确保结论的正确性与可靠性。<br><br>• 运用课程核心理论进行推导：定义、定理、引理的应用，逐步建立完整的证明链条<br>• 分析关键性质：存在性、唯一性、稳定性、收敛性等，刻画解的数学特性<br>• 推导计算公式与算法步骤，为后续数值实现提供理论依据
+    </div>
+    <div class="step-output">产出：理论推导文档（含定理证明、公式推导、性质分析）｜ 质量标准：推导过程严谨，逻辑清晰，理论分析有深度</div>
 </div><div class="step-item">
     <div class="step-number">步骤 3</div>
     <div class="step-title">假设检验</div>
-    <div class="step-desc">设计假设检验，分析显著性</div>
-    <div class="step-output">产出：检验分析报告</div>
+    <div class="step-desc">
+        本步骤使用Python/MATLAB实现数值计算算法，将理论推导转化为可运行的计算程序。数值方法是解决实际问题的核心手段，将数学理论转化为可执行的计算流程。实现过程需要考虑数值稳定性、计算效率、边界条件处理等工程细节，确保算法的正确性与鲁棒性。模块化设计与详细注释提升代码的可读性与可维护性。<br><br>• 使用NumPy/SciPy/MATLAB实现核心算法，封装为函数/模块，设计合理的输入输出接口<br>• 实现辅助功能：数据预处理、结果可视化、误差分析，形成完整的计算工具链<br>• 处理边界条件与异常情况：空输入、非法参数、不收敛等，保证程序的健壮性
+    </div>
+    <div class="step-output">产出：计算代码（含核心算法、辅助工具、测试用例）｜ 质量标准：算法实现正确，代码结构清晰，有详细注释</div>
 </div><div class="step-item">
     <div class="step-number">步骤 4</div>
     <div class="step-title">回归建模</div>
-    <div class="step-desc">实现线性/逻辑回归，评估模型</div>
-    <div class="step-output">产出：回归模型代码</div>
+    <div class="step-desc">
+        本步骤通过数值实验验证理论结论，对比分析不同方法的性能差异。结果验证是检验理论与实践一致性的关键环节，通过多组实验深入理解算法的行为特性。设计对比实验，在不同参数与数据集上测试算法表现，通过定量指标与可视化图表全面评估。分析实验现象背后的数学原理，深化对课程知识的理解。<br><br>• 设计多组测试用例：标准测试问题、边界情况、大规模数据，全面验证算法正确性<br>• 定量评估性能：计算精度、收敛速度、时间复杂度、空间复杂度，对比不同方法的差异<br>• 可视化实验结果：使用Matplotlib/Seaborn绘制曲线图、散点图、热力图，直观展示算法特性
+    </div>
+    <div class="step-output">产出：结果分析报告（含实验数据、性能对比、可视化图表）｜ 质量标准：图表规范，分析深入，结论有数据支撑</div>
 </div><div class="step-item">
     <div class="step-number">步骤 5</div>
     <div class="step-title">综合报告</div>
-    <div class="step-desc">整理分析与建模结论</div>
-    <div class="step-output">产出：最终提交材料</div>
+    <div class="step-desc">
+        本步骤整理完整的研究过程与成果，撰写规范的课程报告。报告是研究工作的最终呈现形式，需要逻辑清晰、论证充分、格式规范。从问题背景、理论推导、数值实现到结果分析形成完整的论证链条，附录提供代码与补充材料。良好的文档撰写能力是数学素养的重要组成部分，体现科学严谨的治学态度。<br><br>• 按照学术规范撰写报告：摘要、引言、问题建模、理论分析、数值实验、结果讨论、结论<br>• 使用LaTeX规范排版数学公式，绘制清晰的图表，引用相关文献与理论<br>• 附录包含完整源代码、补充推导、额外实验结果，提供可复现的实验说明
+    </div>
+    <div class="step-output">产出：最终提交材料（含研究报告、源代码、附录材料）｜ 质量标准：结构完整、逻辑清晰、格式规范、可复现</div>
 </div><div style="margin-top:14px;padding-top:10px;border-top:1px solid #eee;">
     <h3 style="font-size:0.9rem;color:#667eea;margin-bottom:8px;">Steps</h3><div class="step-item">
     <div class="step-number">Step 1</div>
     <div class="step-title">Data Exploration</div>
-    <div class="step-desc">Clean data and perform descriptive statistics</div>
-    <div class="step-output">Deliverable: EDA Report</div>
+    <div class="step-desc">
+        This step starts from typical application scenarios of Probability & Statistics and establishes a rigorous mathematical model. Problem modeling is the starting point of the entire research, and the rationality of the model directly determines the application value of subsequent results. It is necessary to clarify variable definitions, objective functions, and constraints, transforming practical problems into solvable mathematical forms. Ensure the research significance through literature review, laying a solid foundation for subsequent analysis.<br><br>• Select typical problems with practical background, clarify research objectives and application value, sort out input/output and constraint boundaries<br>• Define key variables and parameters, establish mathematical model including objective function, constraints, initial conditions<br>• Analyze mathematical properties of the problem, such as convexity, differentiability, convergence, determine problem type and solution approach
+    </div>
+    <div class="step-output">Deliverable: Math model document (problem description, variable definitions, objective function, constraints) | Quality standard: Rigorous formulation, clear definitions, accurate classification</div>
 </div><div class="step-item">
     <div class="step-number">Step 2</div>
     <div class="step-title">Probability Modeling</div>
-    <div class="step-desc">Select probability distribution, estimate parameters</div>
-    <div class="step-output">Deliverable: Probability Model Doc</div>
+    <div class="step-desc">
+        This step applies core theories of Probability & Statistics for derivation and analysis, characterizing solution properties and patterns from a theoretical perspective. Theoretical derivation is the bridge connecting mathematical principles with practical applications, revealing inherent laws of the problem through rigorous logical reasoning. Apply core theorems and methods of this course to gradually derive key conclusions and establish a complete theoretical framework. Each derivation step must be well-founded, ensuring correctness and reliability of conclusions.<br><br>• Apply course core theories for derivation: application of definitions, theorems, lemmas, gradually building complete proof chains<br>• Analyze key properties: existence, uniqueness, stability, convergence, etc., characterize mathematical features of solutions<br>• Derive calculation formulas and algorithm steps, providing theoretical basis for subsequent numerical implementation
+    </div>
+    <div class="step-output">Deliverable: Theoretical derivation document (theorem proofs, formula derivations, property analysis) | Quality standard: Rigorous derivation process, clear logic, in-depth theoretical analysis</div>
 </div><div class="step-item">
     <div class="step-number">Step 3</div>
     <div class="step-title">Hypothesis Testing</div>
-    <div class="step-desc">Design hypothesis tests, analyze significance</div>
-    <div class="step-output">Deliverable: Testing Report</div>
+    <div class="step-desc">
+        This step implements numerical computation algorithms using Python/MATLAB, transforming theoretical derivations into executable computational programs. Numerical methods are the core means of solving practical problems, converting mathematical theory into executable computation workflows. Implementation requires considering engineering details such as numerical stability, computational efficiency, boundary condition handling, ensuring algorithm correctness and robustness. Modular design and detailed comments improve code readability and maintainability.<br><br>• Implement core algorithms using NumPy/SciPy/MATLAB, encapsulated as functions/modules, design reasonable input/output interfaces<br>• Implement auxiliary functions: data preprocessing, result visualization, error analysis, forming complete computational toolchain<br>• Handle boundary conditions and exceptions: empty input, illegal parameters, non-convergence, etc., ensure program robustness
+    </div>
+    <div class="step-output">Deliverable: Computation code (core algorithms, auxiliary tools, test cases) | Quality standard: Correct algorithm implementation, clear code structure, detailed comments</div>
 </div><div class="step-item">
     <div class="step-number">Step 4</div>
     <div class="step-title">Regression Modeling</div>
-    <div class="step-desc">Implement linear/logistic regression, evaluate model</div>
-    <div class="step-output">Deliverable: Regression Code</div>
+    <div class="step-desc">
+        This step verifies theoretical conclusions through numerical experiments, comparing and analyzing performance differences of different methods. Result verification is a key step in testing consistency between theory and practice, providing in-depth understanding of algorithm behavior through multiple experiments. Design comparative experiments to test algorithm performance on different parameters and datasets, comprehensively evaluate through quantitative metrics and visualization charts. Analyze mathematical principles behind experimental phenomena, deepening understanding of course knowledge.<br><br>• Design multiple test cases: standard test problems, boundary cases, large-scale data, comprehensively verify algorithm correctness<br>• Quantitatively evaluate performance: computational accuracy, convergence speed, time complexity, space complexity, compare differences between methods<br>• Visualize experimental results: use Matplotlib/Seaborn to plot curves, scatter plots, heatmaps, intuitively show algorithm characteristics
+    </div>
+    <div class="step-output">Deliverable: Result analysis report (experimental data, performance comparison, visualization charts) | Quality standard: Standardized charts, in-depth analysis, data-supported conclusions</div>
 </div><div class="step-item">
     <div class="step-number">Step 5</div>
     <div class="step-title">Comprehensive Report</div>
-    <div class="step-desc">Compile analysis and modeling conclusions</div>
-    <div class="step-output">Deliverable: Final Submission</div>
-</div></div>
-        </div>
+    <div class="step-desc">
+        This step compiles the complete research process and results, writing a standardized course report. The report is the final presentation of research work, requiring clear logic, sufficient argumentation, and standardized format. Form a complete argument chain from problem background, theoretical derivation, numerical implementation to result analysis, with appendices providing code and supplementary materials. Good documentation skills are an important part of mathematical literacy, reflecting a rigorous scientific attitude.<br><br>• Write report following academic standards: abstract, introduction, problem modeling, theoretical analysis, numerical experiments, results discussion, conclusion<br>• Use LaTeX for standardized mathematical formula typesetting, draw clear charts, cite relevant literature and theories<br>• Appendix includes complete source code, supplementary derivations, additional experimental results, provide reproducible experiment instructions
+    </div>
+    <div class="step-output">Deliverable: Final submission (research report, source code, appendix materials) | Quality standard: Complete structure, clear logic, standardized format, reproducible</div>
+</div></div></div>
     </div><div class="course-nav" style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:16px;padding:12px 16px;background:white;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,0.05);flex-wrap:wrap;">
     <a href="../ai.html" style="color:#667eea;text-decoration:none;font-size:0.88rem;">← 返回人工智能</a>
     <a href="ml-intro.html" style="color:#667eea;text-decoration:none;font-size:0.88rem;">下一门：机器学习导论 →</a>

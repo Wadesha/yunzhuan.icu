@@ -40,38 +40,58 @@
     </div>
     <div class="section">
         <h2>实施步骤 <span class="en">Implementation Steps</span></h2>
-        <div>
+<div>
 
 
 <div class="step-item">
     <div class="step-number">步骤 1</div>
     <div class="step-title">管路系统建模</div>
-    <div class="step-desc">建立管路系统几何参数与流量需求</div>
-    <div class="step-output">产出：管路系统参数表</div>
+    <div class="step-desc">
+        本步骤建立机械系统的动力学或有限元模型，为精确分析和优化提供数值工具。机械系统建模需要准确描述系统的质量、刚度、阻尼和约束特性，通过合理简化捕捉系统的主要动力学行为。模型验证是确保分析结果可信的关键环节。
+        <br><br>
+        • 使用ANSYS或ABAQUS建立有限元模型，划分网格、定义材料属性、设置边界条件和载荷<br>• 建立多体动力学模型，使用ADAMS进行运动学和动力学仿真，分析运动轨迹和动力载荷<br>• 进行模型验证，通过模态试验或解析解对比，确保模型频率和振型误差在10%以内
+    </div>
+    <div class="step-output">产出：仿真模型（含有限元/动力学模型、网格收敛性、材料参数、验证结果） ｜ 质量标准：模型准确、网格合理、验证充分、与试验/理论偏差<10%</div>
 </div>
 <div class="step-item">
     <div class="step-number">步骤 2</div>
     <div class="step-title">沿程与局部阻力计算</div>
-    <div class="step-desc">计算沿程损失与局部阻力损失</div>
-    <div class="step-output">产出：阻力损失计算书</div>
+    <div class="step-desc">
+        本步骤进行机械零部件的详细计算，验证强度、刚度和稳定性等设计指标。力学计算是机械设计的基础，依据材料力学、弹性力学和机械设计理论，确保零部件在工作载荷下安全可靠。采用解析计算与有限元计算相结合、互相验证的方法。
+        <br><br>
+        • 进行受力分析和内力计算，绘制剪力图、弯矩图和扭矩图，确定危险截面<br>• 应用强度理论（第一、第二、第三、第四强度理论）进行强度校核，计算安全系数<br>• 进行刚度计算（变形计算）和稳定性计算，确保挠度、转角和临界应力满足要求
+    </div>
+    <div class="step-output">产出：计算书（含受力分析、内力图、强度校核、刚度校核、稳定性计算） ｜ 质量标准：计算模型正确、公式应用得当、结果准确、安全系数足够</div>
 </div>
 <div class="step-item">
     <div class="step-number">步骤 3</div>
     <div class="step-title">伯努利方程求解</div>
-    <div class="step-desc">用伯努利方程计算扬程与压力分布</div>
-    <div class="step-output">产出：水力计算结果</div>
+    <div class="step-desc">
+        本步骤进行机械零部件的详细计算，验证强度、刚度和稳定性等设计指标。力学计算是机械设计的基础，依据材料力学、弹性力学和机械设计理论，确保零部件在工作载荷下安全可靠。采用解析计算与有限元计算相结合、互相验证的方法。
+        <br><br>
+        • 进行受力分析和内力计算，绘制剪力图、弯矩图和扭矩图，确定危险截面<br>• 应用强度理论（第一、第二、第三、第四强度理论）进行强度校核，计算安全系数<br>• 进行刚度计算（变形计算）和稳定性计算，确保挠度、转角和临界应力满足要求
+    </div>
+    <div class="step-output">产出：计算书（含受力分析、内力图、强度校核、刚度校核、稳定性计算） ｜ 质量标准：计算模型正确、公式应用得当、结果准确、安全系数足够</div>
 </div>
 <div class="step-item">
     <div class="step-number">步骤 4</div>
     <div class="step-title">水泵选型</div>
-    <div class="step-desc">根据流量与扬程选择水泵型号</div>
-    <div class="step-output">产出：水泵选型方案</div>
+    <div class="step-desc">
+        本步骤是机械工程设计的关键环节，运用力学原理和工程方法解决机械系统问题。机械工程强调安全可靠，每一步都需要严谨的力学计算和充分的验证。采用成熟的设计理论和专业CAD/CAE工具保证设计质量。
+        <br><br>
+        • 依据机械设计规范和标准，制定详细的设计方案和计算方法<br>• 使用专业软件（SolidWorks/ANSYS/ADAMS/AutoCAD等）进行设计、建模和分析<br>• 进行强度、刚度、稳定性、疲劳等多方面校核，确保设计安全可靠
+    </div>
+    <div class="step-output">产出：机械设计报告（含设计图纸、计算书、仿真分析、选型说明） ｜ 质量标准：设计规范、计算准确、校核充分、安全可靠</div>
 </div>
 <div class="step-item">
     <div class="step-number">步骤 5</div>
     <div class="step-title">工作点校核与报告</div>
-    <div class="step-desc">校核工作点并撰写流体计算报告</div>
-    <div class="step-output">产出：流体计算报告</div>
+    <div class="step-desc">
+        本步骤对机械设计进行全面校核，确保所有零部件满足设计准则和标准要求。校核是保证机械产品质量和可靠性的关键环节，通过强度、刚度、稳定性、寿命等多维度检验，消除设计隐患。需按国家标准和行业规范进行系统校核。
+        <br><br>
+        • 按GB/T 3811或相关机械设计标准进行强度、刚度、稳定性校核和疲劳寿命估算<br>• 进行关键件的有限元分析校核，对比解析计算结果，确保应力分布和变形合理<br>• 检查设计图纸和工艺性，进行工艺性审查和标准化审查，确保设计可制造、可装配
+    </div>
+    <div class="step-output">产出：校核报告（含各项校核结果、有限元验证、工艺性审查、问题清单、整改建议） ｜ 质量标准：校核全面、数据准确、全部指标合格、可制造性好</div>
 </div>
             
 
@@ -80,36 +100,55 @@
 <div class="step-item">
     <div class="step-number">Step 1</div>
     <div class="step-title">Piping System Modeling</div>
-    <div class="step-desc">Build piping geometry and flow requirements</div>
-    <div class="step-output">Deliverable: Piping System Parameter Table</div>
+    <div class="step-desc">
+        This step establishes dynamic or finite element models of mechanical systems, providing numerical tools for precise analysis and optimization. Mechanical system modeling requires accurate description of system mass, stiffness, damping and constraint characteristics, capturing main dynamic behaviors of the system through reasonable simplification. Model validation is a key link to ensure credible analysis results.
+        <br><br>
+        • Build finite element models using ANSYS or ABAQUS, mesh the model, define material properties, set boundary conditions and loads<br>• Establish multi-body dynamics model, perform kinematic and dynamic simulation using ADAMS, analyze motion trajectory and dynamic loads<br>• Perform model validation, compare with modal test or analytical solutions, ensuring model frequency and mode shape error within 10%
+    </div>
+    <div class="step-output">Deliverable: Simulation model (including FEM/dynamics model, mesh convergence, material parameters, validation results) | Quality standard: Accurate model, reasonable mesh, sufficient validation, deviation from test/theory <10%</div>
 </div>
 <div class="step-item">
     <div class="step-number">Step 2</div>
     <div class="step-title">Friction and Minor Loss Calculation</div>
-    <div class="step-desc">Compute friction losses and minor losses</div>
-    <div class="step-output">Deliverable: Loss Calculation Document</div>
+    <div class="step-desc">
+        This step performs detailed calculation of mechanical components, verifying design indicators such as strength, stiffness and stability. Mechanics calculation is the foundation of mechanical design, based on mechanics of materials, elasticity and mechanical design theory, ensuring components are safe and reliable under working loads. Combine analytical calculation with finite element calculation for mutual verification.
+        <br><br>
+        • Perform force analysis and internal force calculation, draw shear force diagram, bending moment diagram and torque diagram, determine critical sections<br>• Apply strength theories (first, second, third, fourth strength theory) for strength verification, calculate safety factor<br>• Perform stiffness calculation (deformation calculation) and stability calculation, ensuring deflection, rotation angle and critical stress meet requirements
+    </div>
+    <div class="step-output">Deliverable: Calculation document (including force analysis, internal force diagrams, strength verification, stiffness verification, stability calculation) | Quality standard: Correct calculation model, proper formula application, accurate results, sufficient safety factor</div>
 </div>
 <div class="step-item">
     <div class="step-number">Step 3</div>
     <div class="step-title">Bernoulli Equation Solution</div>
-    <div class="step-desc">Compute head and pressure distribution using Bernoulli equation</div>
-    <div class="step-output">Deliverable: Hydraulic Calculation Results</div>
+    <div class="step-desc">
+        This step performs detailed calculation of mechanical components, verifying design indicators such as strength, stiffness and stability. Mechanics calculation is the foundation of mechanical design, based on mechanics of materials, elasticity and mechanical design theory, ensuring components are safe and reliable under working loads. Combine analytical calculation with finite element calculation for mutual verification.
+        <br><br>
+        • Perform force analysis and internal force calculation, draw shear force diagram, bending moment diagram and torque diagram, determine critical sections<br>• Apply strength theories (first, second, third, fourth strength theory) for strength verification, calculate safety factor<br>• Perform stiffness calculation (deformation calculation) and stability calculation, ensuring deflection, rotation angle and critical stress meet requirements
+    </div>
+    <div class="step-output">Deliverable: Calculation document (including force analysis, internal force diagrams, strength verification, stiffness verification, stability calculation) | Quality standard: Correct calculation model, proper formula application, accurate results, sufficient safety factor</div>
 </div>
 <div class="step-item">
     <div class="step-number">Step 4</div>
     <div class="step-title">Pump Selection</div>
-    <div class="step-desc">Select pump model based on flow rate and head</div>
-    <div class="step-output">Deliverable: Pump Selection Scheme</div>
+    <div class="step-desc">
+        This step is a critical element in mechanical engineering design, using mechanics principles and engineering methods to solve mechanical system problems. Mechanical engineering emphasizes safety and reliability, requiring rigorous mechanical calculation and sufficient verification at every step. Use mature design theories and professional CAD/CAE tools to ensure design quality.
+        <br><br>
+        • Develop detailed design schemes and calculation methods according to mechanical design specifications and standards<br>• Use professional software (SolidWorks/ANSYS/ADAMS/AutoCAD, etc.) for design, modeling and analysis<br>• Perform multi-faceted verification such as strength, stiffness, stability and fatigue, ensuring design is safe and reliable
+    </div>
+    <div class="step-output">Deliverable: Mechanical design report (including design drawings, calculation document, simulation analysis, selection description) | Quality standard: Standard design, accurate calculation, sufficient verification, safe and reliable</div>
 </div>
 <div class="step-item">
     <div class="step-number">Step 5</div>
     <div class="step-title">Operating Point Check and Report</div>
-    <div class="step-desc">Check operating point and write fluid calculation report</div>
-    <div class="step-output">Deliverable: Fluid Calculation Report</div>
+    <div class="step-desc">
+        This step performs comprehensive verification of mechanical design, ensuring all components meet design criteria and standard requirements. Verification is a key link to ensure mechanical product quality and reliability, eliminating design hidden dangers through multi-dimensional inspection of strength, stiffness, stability, life, etc. Must perform systematic verification according to national standards and industry specifications.
+        <br><br>
+        • Perform strength, stiffness, stability verification and fatigue life estimation according to GB/T 3811 or relevant mechanical design standards<br>• Perform FEA verification of key components, compare with analytical calculation results, ensuring reasonable stress distribution and deformation<br>• Check design drawings and manufacturability, conduct manufacturability review and standardization review, ensuring design is manufacturable and assemblable
+    </div>
+    <div class="step-output">Deliverable: Verification report (including various verification results, FEA validation, manufacturability review, problem list, correction suggestions) | Quality standard: Comprehensive verification, accurate data, all indicators qualified, good manufacturability</div>
 </div>
             </div>
         </div>
-    </div>
     <div class="course-nav" style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:16px;padding:12px 16px;background:white;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,0.05);flex-wrap:wrap;">
     <a href="../mechanical.html" style="color:#667eea;text-decoration:none;font-size:0.88rem;">← 返回机械工程</a>
     <a href="mech-design.html" style="color:#667eea;text-decoration:none;font-size:0.88rem;">下一门：机械设计 →</a>

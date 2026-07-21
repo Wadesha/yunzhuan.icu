@@ -38,6 +38,7 @@
         <p style="margin-top:8px;">Select a cognitive function (such as memory, attention, or decision-making), design an experimental paradigm, and analyze fMRI or EEG brain imaging data. Write a complete research report.</p>
         </div>
     </div>
+    
     <div class="section">
         <h2>实施步骤 <span class="en">Implementation Steps</span></h2>
         <div>
@@ -45,10 +46,114 @@
 
 <div class="step-item">
     <div class="step-number">步骤 1</div>
-    <div class="step-title">文献调研</div>
-    <div class="step-desc">调研选定认知功能的神经基础研究</div>
-    <div class="step-output">产出：文献综述</div>
+    <div class="step-title">认知功能主题选择与实验设计</div>
+    <div class="step-desc">
+        本步骤的核心任务是选择一个认知神经科学研究主题，设计科学的认知实验方案。需要从感知觉、注意、记忆、语言、思维、决策、情绪等认知功能中选择研究方向，运用认知心理学实验范式结合神经影像技术，揭示认知过程的神经机制。好的实验设计是认知神经科学研究成功的关键。
+<br><br>
+• 选择认知主题：从感知觉（视觉/听觉加工）、注意（选择性注意、分配性注意）、记忆（工作记忆、长时记忆、情节记忆、语义记忆）、语言（语言产生、语言理解、双语）、执行功能（抑制控制、认知灵活性、问题解决）、决策与社会认知中选择研究主题<br>• 实验设计：确定实验设计类型——组块设计、事件相关设计、混合设计；确定因素设计（被试内/被试间/混合设计）；设置自变量（实验条件）和因变量（行为指标+神经指标）；控制混淆变量<br>• 选择技术手段：选择研究技术——行为实验（反应时、正确率）、眼动追踪（注视点、眼跳）、脑电图/事件相关电位（EEG/ERP）、功能磁共振成像（fMRI）、经颅磁刺激（TMS），制定实验流程和刺激呈现方案（使用E-prime、PsychoPy、Presentation）
+    </div>
+    <div class="step-output">产出：认知神经科学实验设计方案（含研究问题、实验设计、技术选择、刺激材料、流程时间表）｜ 质量标准：实验设计科学严谨，变量控制完善，技术选择恰当，方案详细可行</div>
 </div>
+<div class="step-item">
+    <div class="step-number">步骤 2</div>
+    <div class="step-title">刺激材料制备与实验程序编写</div>
+    <div class="step-desc">
+        本步骤的核心任务是制备实验刺激材料，编写实验程序。认知实验对刺激材料的标准化要求很高，需要严格控制刺激的物理属性和心理学属性。实验程序的准确编写是实验顺利进行和数据可靠的基础，需要确保刺激呈现的精确性和数据记录的完整性。
+<br><br>
+• 刺激材料制备：制作/选择实验刺激——视觉刺激（文字、图片、面孔、几何图形）使用Photoshop、GIMP标准化大小、亮度、对比度；听觉刺激（语音、纯音、环境音）使用Audacity、Praat标准化强度、时长；建立刺激库并进行标准化评定（熟悉度、情绪效价、唤醒度）<br>• 实验程序编写：使用PsychoPy、E-prime或Presentation编写实验程序——设计实验流程（指导语、练习、正式实验、休息）、设置刺激呈现参数（呈现时间、SOA、反应窗口）、实现反应收集（键盘、按键盒、语音反应）、设置伪随机化和平衡设计<br>• 预实验与调试：进行小规模预实验（3-5名被试），测试实验流程顺畅性、刺激材料有效性、程序稳定性，调整实验参数（难度、时长、刺激数量），确保实验可操作性和数据质量
+    </div>
+    <div class="step-output">产出：实验刺激库与程序（含标准化刺激材料、实验程序代码、刺激评定数据、预实验报告）｜ 质量标准：刺激材料标准规范，程序稳定可靠，预实验验证有效</div>
+</div>
+<div class="step-item">
+    <div class="step-number">步骤 3</div>
+    <div class="step-title">被试招募与行为实验/神经影像数据采集</div>
+    <div class="step-desc">
+        本步骤的核心任务是招募被试，进行行为实验和神经影像数据采集。被试招募需要考虑样本代表性和样本量，数据采集需要严格按照标准化流程进行，确保数据质量。认知神经科学研究的数据采集过程复杂，需要实验者具备扎实的操作技能和严谨的科学态度。
+<br><br>
+• 被试招募：确定样本量（基于效应量和统计功效估算），制定纳入排除标准（年龄、利手、视力/听力、神经精神病史），招募被试（广告、招募平台、课程学分），签署知情同意书，收集人口学信息和筛选问卷<br>• 行为数据采集：在标准化实验室环境进行行为实验——保持环境安静、光线适宜、设备一致；使用专业反应设备（按键盒、脚踏板）；记录反应时、正确率、眼动数据等，主试保持中立，记录实验过程中的异常情况<br>• 神经影像数据采集（如适用）：EEG/ERP采集——使用导电膏降低电极阻抗（<5kΩ），设置采样率（500-1000Hz），记录参考电极和接地电极；fMRI采集——使用标准头线圈，采集结构像（T1加权）和功能像（EPI序列），进行头动监控，记录生理信号（呼吸、心跳）
+    </div>
+    <div class="step-output">产出：实验数据集（含行为数据文件、EEG/fMRI原始数据、被试信息表、实验记录、质量检查报告）｜ 质量标准：样本量充足，数据采集规范，质量控制严格，数据完整可靠</div>
+</div>
+<div class="step-item">
+    <div class="step-number">步骤 4</div>
+    <div class="step-title">行为数据分析与神经影像数据处理</div>
+    <div class="step-desc">
+        本步骤的核心任务是对行为数据和神经影像数据进行系统处理和统计分析，揭示认知过程的行为和神经机制。需要运用专业的数据分析软件和统计学方法，从复杂的神经信号中提取与认知加工相关的神经活动模式。数据分析是认知神经科学研究从数据到发现的关键环节。
+<br><br>
+• 行为数据分析：使用R、SPSS或Python对行为数据进行统计分析——反应时分析（剔除极端值、计算平均反应时）、正确率分析、信号检测论分析（d'、β），进行重复测量ANOVA、t检验、相关分析，绘制行为结果图<br>• ERP数据分析（如适用）：使用EEGLAB、BrainVision Analyzer进行ERP分析——数据预处理（滤波、重参考、眼电/肌电伪迹去除、分段、基线校正、平均叠加），选择ERP成分（如N1、P2、N2、P3、N400、LPC），测量波幅和潜伏期，进行统计分析<br>• fMRI数据分析（如适用）：使用SPM、FSL或AFNI进行fMRI分析——数据预处理（时间层校正、头动校正、空间标准化、平滑），建立一般线性模型（GLM），进行任务态分析（对比条件激活）、功能连接分析、多体素模式分析（MVPA），进行多重比较校正
+    </div>
+    <div class="step-output">产出：数据分析结果（含行为统计结果、ERP成分分析/fMRI脑激活图、统计参数图、结果表格）｜ 质量标准：分析方法正确规范，结果可靠可重复，可视化清晰专业</div>
+</div>
+<div class="step-item">
+    <div class="step-number">步骤 5</div>
+    <div class="step-title">认知神经机制分析与研究报告撰写</div>
+    <div class="step-desc">
+        本步骤的核心任务是基于行为和神经数据综合分析认知过程的神经机制，撰写完整的研究报告。需要整合行为结果和神经影像结果，构建认知加工的神经模型，阐明认知过程的时间进程和空间定位。研究报告应体现认知神经科学研究的科学深度和创新性。
+<br><br>
+• 认知神经机制整合：综合行为数据和神经影像结果，分析认知加工的神经机制——时间进程（ERP成分时间序列反映的加工阶段）、空间定位（fMRI激活脑区的功能意义）、脑网络（功能连接反映的脑区协作），构建认知加工的神经模型<br>• 撰写研究报告：按照认知神经科学论文规范撰写——摘要、引言（认知理论+神经基础）、材料与方法（被试、刺激、设备、程序、数据分析方法）、结果（行为结果+神经结果，分小节呈现）、讨论（与理论的关系、与前人研究的比较、神经机制解释、局限性）、结论、参考文献，字数不少于4000字<br>• 制作结果图表：制作高质量的认知神经科学图表——行为结果统计图、ERP波形图（地形图）、fMRI脑激活图（玻璃脑、切片图、3D渲染）、认知神经模型示意图，图表标注规范，符合学术出版标准
+    </div>
+    <div class="step-output">产出：认知神经科学研究报告（PDF格式，含完整研究内容、高质量脑图、深入机制讨论）、数据与代码附件｜ 质量标准：报告结构完整、数据可靠、机制分析深入、讨论有洞见、格式专业规范</div>
+</div>
+
+            
+
+<div style="margin-top:14px;padding-top:10px;border-top:1px solid #eee;">
+    <h3 style="font-size:0.9rem;color:#667eea;margin-bottom:8px;">Steps</h3>
+<div class="step-item">
+    <div class="step-number">Step 1</div>
+    <div class="step-title">Cognitive Function Topic Selection and Experimental Design</div>
+    <div class="step-desc">
+        The core task of this step is to select a cognitive neuroscience research topic and design a scientific cognitive experiment plan. Choose from perception, attention, memory, language, thinking, decision-making, emotion.
+<br><br>
+• Select cognitive topic: choose from perception (visual/auditory processing), attention (selective, divided), memory (working, long-term, episodic, semantic), language (production, comprehension, bilingual), executive function (inhibitory control, cognitive flexibility, problem solving), decision-making and social cognition<br>• Experimental design: determine design type—block design, event-related design, mixed design; determine factorial design (within-subjects/between-subjects/mixed); set independent variables (experimental conditions) and dependent variables (behavioral + neural measures); control confounding variables<br>• Select techniques: choose research techniques—behavioral experiments (reaction time, accuracy), eye tracking (fixation, saccades), EEG/ERP, fMRI, TMS; develop experimental flow and stimulus presentation protocol (using E-prime, PsychoPy, Presentation)
+    </div>
+    <div class="step-output">Deliverable: Cognitive neuroscience experiment design proposal (research question, experimental design, technique selection, stimulus materials, flow timeline) | Quality standard: Scientific and rigorous experimental design, comprehensive variable control, appropriate technique selection, detailed and feasible plan</div>
+</div>
+<div class="step-item">
+    <div class="step-number">Step 2</div>
+    <div class="step-title">Stimulus Material Preparation and Experimental Programming</div>
+    <div class="step-desc">
+        The core task of this step is to prepare experimental stimulus materials and write the experimental program. Cognitive experiments require high standardization of stimulus materials with strict control of physical and psychological properties.
+<br><br>
+• Stimulus material preparation: create/select experimental stimuli—visual stimuli (words, pictures, faces, geometric figures) standardized for size, brightness, contrast using Photoshop, GIMP; auditory stimuli (speech, pure tones, environmental sounds) standardized for intensity, duration using Audacity, Praat; build stimulus library with normative ratings (familiarity, valence, arousal)<br>• Experimental programming: write experiment program using PsychoPy, E-prime, or Presentation—design experiment flow (instructions, practice, formal experiment, breaks), set stimulus presentation parameters (duration, SOA, response window), implement response collection (keyboard, button box, voice response), set pseudorandomization and counterbalancing<br>• Pilot testing and debugging: conduct small pilot study (3-5 subjects); test flow smoothness, stimulus effectiveness, program stability; adjust parameters (difficulty, duration, stimulus number); ensure experimental operability and data quality
+    </div>
+    <div class="step-output">Deliverable: Experimental stimulus library and program (standardized stimulus materials, experiment program code, stimulus rating data, pilot report) | Quality standard: Standard and normalized stimulus materials, stable and reliable program, validated by pilot experiment</div>
+</div>
+<div class="step-item">
+    <div class="step-number">Step 3</div>
+    <div class="step-title">Participant Recruitment and Behavioral/Neuroimaging Data Acquisition</div>
+    <div class="step-desc">
+        The core task of this step is to recruit participants and perform behavioral experiments and neuroimaging data acquisition. Participant recruitment requires consideration of sample representativeness and sample size.
+<br><br>
+• Participant recruitment: determine sample size (estimated based on effect size and statistical power); develop inclusion/exclusion criteria (age, handedness, vision/hearing, neuropsychiatric history); recruit participants (advertisements, recruitment platforms, course credit); obtain informed consent; collect demographic information and screening questionnaires<br>• Behavioral data collection: conduct behavioral experiments in standardized lab environment—keep quiet environment, appropriate lighting, consistent equipment; use professional response devices (button box, foot pedal); record reaction time, accuracy, eye movement data; experimenter remains neutral; record abnormalities during experiment<br>• Neuroimaging data acquisition (if applicable): EEG/ERP recording—use conductive gel to reduce electrode impedance (<5kΩ); set sampling rate (500-1000Hz); record reference and ground electrodes; fMRI acquisition—use standard head coil; acquire structural (T1-weighted) and functional (EPI) images; monitor head motion; record physiological signals (respiration, heartbeat)
+    </div>
+    <div class="step-output">Deliverable: Experimental dataset (behavioral data files, raw EEG/fMRI data, participant information table, experiment records, quality check report) | Quality standard: Sufficient sample size, standardized data collection, strict quality control, complete and reliable data</div>
+</div>
+<div class="step-item">
+    <div class="step-number">Step 4</div>
+    <div class="step-title">Behavioral Data Analysis and Neuroimaging Data Processing</div>
+    <div class="step-desc">
+        The core task of this step is to systematically process and statistically analyze behavioral and neuroimaging data, revealing behavioral and neural mechanisms of cognitive processes.
+<br><br>
+• Behavioral data analysis: use R, SPSS, or Python for statistical analysis of behavioral data—reaction time analysis (outlier removal, mean RT calculation), accuracy analysis, signal detection theory analysis (d', β); perform repeated measures ANOVA, t-tests, correlation analysis; draw behavioral result graphs<br>• ERP data analysis (if applicable): use EEGLAB, BrainVision Analyzer for ERP analysis—data preprocessing (filtering, re-referencing, EOG/EMG artifact removal, epoching, baseline correction, averaging); select ERP components (N1, P2, N2, P3, N400, LPC); measure amplitude and latency; perform statistical analysis<br>• fMRI data analysis (if applicable): use SPM, FSL, or AFNI for fMRI analysis—data preprocessing (slice timing, motion correction, spatial normalization, smoothing); build general linear model (GLM); perform task-state analysis (condition activation contrasts), functional connectivity analysis, MVPA; perform multiple comparison correction
+    </div>
+    <div class="step-output">Deliverable: Data analysis results (behavioral statistical results, ERP component analysis/fMRI brain activation maps, statistical parametric maps, result tables) | Quality standard: Correct and standard analysis methods, reliable and reproducible results, clear and professional visualization</div>
+</div>
+<div class="step-item">
+    <div class="step-number">Step 5</div>
+    <div class="step-title">Cognitive Neural Mechanism Analysis and Research Report Writing</div>
+    <div class="step-desc">
+        The core task of this step is to comprehensively analyze neural mechanisms of cognitive processes based on behavioral and neural data, and write a complete research report. Integrate behavioral and neuroimaging results.
+<br><br>
+• Cognitive neural mechanism integration: synthesize behavioral data and neuroimaging results; analyze neural mechanisms of cognitive processing—temporal course (processing stages reflected by ERP component sequences), spatial localization (functional significance of fMRI-activated brain regions), brain networks (brain region collaboration reflected by functional connectivity); build neural model of cognitive processing<br>• Write research report: follow cognitive neuroscience paper standards—abstract, introduction (cognitive theory + neural basis), materials and methods (participants, stimuli, equipment, procedure, data analysis methods), results (behavioral + neural results, presented in subsections), discussion (relationship to theory, comparison with previous studies, neural mechanism interpretation, limitations), conclusion, references; minimum 4000 words<br>• Create result figures: produce high-quality cognitive neuroscience figures—behavioral result statistics, ERP waveforms (topographic maps), fMRI activation maps (glass brain, slice views, 3D rendering), cognitive neural model diagrams; standard figure annotations meeting academic publication standards
+    </div>
+    <div class="step-output">Deliverable: Cognitive neuroscience research report (PDF format with complete research content, high-quality brain maps, in-depth mechanism discussion), data and code attachments | Quality standard: Complete report structure, reliable data, in-depth mechanism analysis, insightful discussion, professional and standard format</div>
+</div>
+
+            </div>
+        </div>
+    </div>
+
 <div class="step-item">
     <div class="step-number">步骤 2</div>
     <div class="step-title">实验设计</div>

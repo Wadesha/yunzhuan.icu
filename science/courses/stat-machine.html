@@ -43,71 +43,108 @@
         <div>
 
 
+
+
+
+
 <div class="step-item">
     <div class="step-number">步骤 1</div>
-    <div class="step-title">数据集与任务确定</div>
-    <div class="step-desc">选定数据集与学习任务</div>
-    <div class="step-output">产出：任务说明</div>
+    <div class="step-title">问题选择与数据获取</div>
+    <div class="step-desc">
+        本步骤的核心任务是选择一个有实际意义的统计问题，并获取合适的数据集用于分析。从课程核心内容和实际应用场景中选择研究问题，可以是描述统计、推断统计、回归分析、机器学习或贝叶斯统计等方向。数据是统计分析的基础，选择合适的数据集至关重要。<br><br>• 从实际应用场景中选择具体的统计问题，明确研究目标和分析需求，可以是业务分析、科学研究或社会调查类问题<br>• 获取数据集：从公开数据库（如UCI、Kaggle、国家统计局、WHO、PubMed）获取真实数据，或通过模拟生成数据，确保数据质量和适用性<br>• 制定分析计划：明确分析目标，选择合适的统计方法，制定数据分析流程，确定评估指标和预期成果
+    </div>
+    <div class="step-output">产出：选题报告与数据集（含问题描述、数据来源、变量说明、分析计划）｜ 质量标准：选题有实际意义，数据质量好，分析计划合理可行</div>
 </div>
+
 <div class="step-item">
     <div class="step-number">步骤 2</div>
-    <div class="step-title">数据预处理与探索</div>
-    <div class="step-desc">清洗数据并进行探索分析</div>
-    <div class="step-output">产出：EDA报告</div>
+    <div class="step-title">数据预处理与探索性分析</div>
+    <div class="step-desc">
+        本步骤的核心任务是对原始数据进行清洗和预处理，并通过探索性数据分析了解数据特征。真实世界的数据往往存在缺失值、异常值、噪声等问题，数据预处理直接影响分析结果的质量。探索性分析可以帮助发现数据中的模式、趋势和异常，为后续建模提供指导。<br><br>• 数据清洗：处理缺失值（删除、插补）、异常值（识别、处理）、重复数据，进行数据类型转换和标准化，确保数据质量<br>• 描述性统计：计算均值、中位数、方差、分位数等统计量，了解各变量的分布特征和集中/离散趋势<br>• 探索性分析：使用直方图、箱线图、散点图、热力图等可视化方法探索数据分布、变量间关系和异常模式，使用Python（Pandas、Matplotlib、Seaborn）或R进行分析
+    </div>
+    <div class="step-output">产出：数据处理与探索报告（含数据清洗记录、描述统计、可视化图表、初步发现）｜ 质量标准：数据处理规范，探索分析全面，可视化效果好</div>
 </div>
+
 <div class="step-item">
     <div class="step-number">步骤 3</div>
-    <div class="step-title">多模型建模</div>
-    <div class="step-desc">实现至少三种方法建模</div>
-    <div class="step-output">产出：模型代码</div>
+    <div class="step-title">统计建模与方法实现</div>
+    <div class="step-desc">
+        本步骤的核心任务是根据研究问题和数据特点，选择合适的统计模型进行建模分析。运用课程所学的统计理论和方法，建立数据的统计模型，进行参数估计、假设检验、预测或分类等分析。统计建模需要考虑模型假设、模型选择和模型诊断。<br><br>• 模型选择：根据研究问题和数据类型选择合适的统计模型（如线性回归、逻辑回归、时间序列、贝叶斯模型、机器学习算法等）<br>• 模型拟合：使用R、Python（Scikit-learn、StatsModels、PyTorch）或其他统计软件拟合模型，估计参数，进行假设检验和区间估计<br>• 模型诊断：检验模型假设（如正态性、同方差性、独立性），进行残差分析，检测多重共线性和离群点，评估模型拟合效果
+    </div>
+    <div class="step-output">产出：统计建模报告（含模型选择、参数估计、假设检验、诊断分析）｜ 质量标准：模型选择合理，建模过程规范，诊断分析全面</div>
 </div>
+
 <div class="step-item">
     <div class="step-number">步骤 4</div>
-    <div class="step-title">评估与调优</div>
-    <div class="step-desc">进行交叉验证与超参数调优</div>
-    <div class="step-output">产出：评估对比表</div>
+    <div class="step-title">模型评估与结果解释</div>
+    <div class="step-desc">
+        本步骤的核心任务是对建立的统计模型进行全面评估，并对结果进行合理的统计解释。模型评估包括预测性能、泛化能力、稳健性等多个维度。结果解释需要结合实际背景，将统计结论转化为有实际意义的见解，避免统计误用和过度解读。<br><br>• 模型评估：使用交叉验证、训练/测试集划分等方法评估模型的预测性能，计算准确率、精确率、召回率、F1值、AUC、MSE、R²等评估指标<br>• 模型比较：对比不同模型的性能，选择最优模型，分析各模型的优缺点和适用场景<br>• 结果解释：解释模型参数的实际意义，进行因果推断或相关性分析，讨论统计显著性与实际显著性的区别，给出合理的结论和建议
+    </div>
+    <div class="step-output">产出：模型评估与解释报告（含评估指标、模型对比、结果解释、业务建议）｜ 质量标准：评估方法科学，结果解释合理，结论有实际价值</div>
 </div>
+
 <div class="step-item">
     <div class="step-number">步骤 5</div>
-    <div class="step-title">报告撰写与解释</div>
-    <div class="step-desc">撰写报告并解释模型</div>
-    <div class="step-output">产出：项目报告</div>
+    <div class="step-title">报告撰写与成果展示</div>
+    <div class="step-desc">
+        本步骤的核心任务是将整个统计分析过程和结果整理成规范的数据分析报告，并以清晰直观的方式展示研究成果。数据分析报告要求结构清晰、图表规范、结论明确，既要专业严谨又要通俗易懂。成果展示需要根据受众特点选择合适的呈现方式。<br><br>• 撰写分析报告：按照数据分析报告规范组织内容，包含背景介绍、数据描述、方法说明、结果分析、结论建议、附录，引用规范（APA或GB/T 7714）<br>• 数据可视化：制作高质量的统计图表和可视化作品，使用Tableau、Power BI或Python（Plotly、Seaborn）制作交互式或静态图表<br>• 成果展示：制作演示文稿（PPT）进行汇报，设计数据看板（Dashboard），准备技术文档和可复现的代码（使用R Markdown或Jupyter Notebook）
+    </div>
+    <div class="step-output">产出：分析报告与展示材料（含完整报告、代码文件、可视化图表、演示文稿）｜ 质量标准：报告结构完整，图表美观规范，展示清晰有说服力</div>
 </div>
-            
 
 <div style="margin-top:14px;padding-top:10px;border-top:1px solid #eee;">
     <h3 style="font-size:0.9rem;color:#667eea;margin-bottom:8px;">Steps</h3>
+
 <div class="step-item">
     <div class="step-number">Step 1</div>
-    <div class="step-title">Data & Task</div>
-    <div class="step-desc">Choose dataset and learning task</div>
-    <div class="step-output">Deliverable: Task Statement</div>
+    <div class="step-title">Problem Selection and Data Acquisition</div>
+    <div class="step-desc">
+        The core task of this step is to select a practical statistical problem and obtain an appropriate dataset for analysis. Choose research questions from core course content and practical application scenarios, which can be descriptive statistics, inferential statistics, regression analysis, machine learning, or Bayesian statistics. Data is the foundation of statistical analysis, and selecting an appropriate dataset is crucial.<br><br>• Select specific statistical problems from practical application scenarios, clarify research objectives and analysis needs, which can be business analytics, scientific research, or social survey problems<br>• Data acquisition: obtain real data from public databases (such as UCI, Kaggle, National Bureau of Statistics, WHO, PubMed), or generate data through simulation, ensuring data quality and applicability<br>• Develop analysis plan: clarify analysis objectives, select appropriate statistical methods, develop data analysis process, and determine evaluation metrics and expected outcomes
+    </div>
+    <div class="step-output">Deliverable: Topic selection report and dataset (problem description, data source, variable description, analysis plan) | Quality standard: Practically meaningful topic selection, good data quality, reasonable and feasible analysis plan</div>
 </div>
+
 <div class="step-item">
     <div class="step-number">Step 2</div>
-    <div class="step-title">Preprocessing & EDA</div>
-    <div class="step-desc">Clean data and explore</div>
-    <div class="step-output">Deliverable: EDA Report</div>
+    <div class="step-title">Data Preprocessing and Exploratory Analysis</div>
+    <div class="step-desc">
+        The core task of this step is to clean and preprocess raw data, and understand data characteristics through exploratory data analysis. Real-world data often has problems such as missing values, outliers, and noise, and data preprocessing directly affects the quality of analysis results. Exploratory analysis can help discover patterns, trends, and anomalies in data, providing guidance for subsequent modeling.<br><br>• Data cleaning: handle missing values (deletion, imputation), outliers (identification, treatment), duplicate data, perform data type conversion and standardization, ensuring data quality<br>• Descriptive statistics: calculate statistics such as mean, median, variance, quantiles, and understand distribution characteristics and concentration/dispersion trends of each variable<br>• Exploratory analysis: use histograms, box plots, scatter plots, heatmaps and other visualization methods to explore data distribution, relationships between variables, and abnormal patterns, using Python (Pandas, Matplotlib, Seaborn) or R for analysis
+    </div>
+    <div class="step-output">Deliverable: Data processing and exploration report (data cleaning records, descriptive statistics, visualization charts, preliminary findings) | Quality standard: Standardized data processing, comprehensive exploratory analysis, good visualization effects</div>
 </div>
+
 <div class="step-item">
     <div class="step-number">Step 3</div>
-    <div class="step-title">Multi-Model Building</div>
-    <div class="step-desc">Implement at least three methods</div>
-    <div class="step-output">Deliverable: Model Code</div>
+    <div class="step-title">Statistical Modeling and Method Implementation</div>
+    <div class="step-desc">
+        The core task of this step is to select appropriate statistical models for modeling and analysis based on the research problem and data characteristics. Apply statistical theories and methods learned in the course to build statistical models of data, and perform parameter estimation, hypothesis testing, prediction, or classification. Statistical modeling requires considering model assumptions, model selection, and model diagnostics.<br><br>• Model selection: choose appropriate statistical models according to research problems and data types (such as linear regression, logistic regression, time series, Bayesian models, machine learning algorithms, etc.)<br>• Model fitting: use R, Python (Scikit-learn, StatsModels, PyTorch) or other statistical software to fit models, estimate parameters, and perform hypothesis testing and interval estimation<br>• Model diagnostics: test model assumptions (such as normality, homoscedasticity, independence), perform residual analysis, detect multicollinearity and outliers, and evaluate model fitting effects
+    </div>
+    <div class="step-output">Deliverable: Statistical modeling report (model selection, parameter estimation, hypothesis testing, diagnostic analysis) | Quality standard: Reasonable model selection, standardized modeling process, comprehensive diagnostic analysis</div>
 </div>
+
 <div class="step-item">
     <div class="step-number">Step 4</div>
-    <div class="step-title">Evaluation & Tuning</div>
-    <div class="step-desc">Cross-validation and hyperparameter tuning</div>
-    <div class="step-output">Deliverable: Comparison Table</div>
+    <div class="step-title">Model Evaluation and Result Interpretation</div>
+    <div class="step-desc">
+        The core task of this step is to conduct comprehensive evaluation of the established statistical models and provide reasonable statistical interpretation of results. Model evaluation includes multiple dimensions such as prediction performance, generalization ability, and robustness. Result interpretation needs to be combined with actual background, translating statistical conclusions into practically meaningful insights, avoiding statistical misuse and over-interpretation.<br><br>• Model evaluation: use cross-validation, training/test set splitting and other methods to evaluate model prediction performance, calculate evaluation metrics such as accuracy, precision, recall, F1 score, AUC, MSE, R²<br>• Model comparison: compare performance of different models, select the optimal model, and analyze advantages, disadvantages, and applicable scenarios of each model<br>• Result interpretation: explain practical meaning of model parameters, conduct causal inference or correlation analysis, discuss the difference between statistical significance and practical significance, and provide reasonable conclusions and suggestions
+    </div>
+    <div class="step-output">Deliverable: Model evaluation and interpretation report (evaluation metrics, model comparison, result interpretation, business recommendations) | Quality standard: Scientific evaluation methods, reasonable result interpretation, practically valuable conclusions</div>
 </div>
+
 <div class="step-item">
     <div class="step-number">Step 5</div>
-    <div class="step-title">Report & Interpretation</div>
-    <div class="step-desc">Write report and interpret models</div>
-    <div class="step-output">Deliverable: Project Report</div>
+    <div class="step-title">Report Writing and Result Presentation</div>
+    <div class="step-desc">
+        The core task of this step is to organize the entire statistical analysis process and results into a standardized data analysis report, and present research results in a clear and intuitive way. Data analysis reports require clear structure, standardized charts, and clear conclusions, being both professionally rigorous and easy to understand. Result presentation needs to choose appropriate presentation methods according to audience characteristics.<br><br>• Write analysis report: organize content according to data analysis report standards, including background introduction, data description, method explanation, result analysis, conclusion suggestions, appendix, with standardized citations (APA or GB/T 7714)<br>• Data visualization: produce high-quality statistical charts and visualization works, use Tableau, Power BI or Python (Plotly, Seaborn) to create interactive or static charts<br>• Result presentation: create presentation slides (PPT) for reporting, design data dashboards, prepare technical documentation and reproducible code (using R Markdown or Jupyter Notebook)
+    </div>
+    <div class="step-output">Deliverable: Analysis report and presentation materials (complete report, code files, visualization charts, presentation slides) | Quality standard: Complete report structure, beautiful and standardized charts, clear and persuasive presentation</div>
 </div>
+
             </div>
+
+
+
+
         </div>
     </div>
     <div class="course-nav" style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:16px;padding:12px 16px;background:white;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,0.05);flex-wrap:wrap;">

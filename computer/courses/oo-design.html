@@ -40,60 +40,78 @@
     </div>
         <div class="section">
         <h2>实施步骤 <span class="en">Implementation Steps</span></h2>
-        <div>
-<div class="step-item">
+        <div><div class="step-item">
     <div class="step-number">步骤 1</div>
     <div class="step-title">需求与用例分析</div>
-    <div class="step-desc">分析系统需求，绘制用例图</div>
-    <div class="step-output">产出：需求用例文档</div>
+    <div class="step-desc">
+        本步骤进行需求获取与分析，明确面向对象设计项目的功能需求与非功能需求。需求分析是软件项目的起点，准确的需求定义是后续设计与开发的基础。通过用户访谈、场景分析、用例建模等方法获取并梳理需求，建立需求规格说明书。使用UML用例图、活动图等工具可视化表达需求，确保各方对需求的理解一致。<br><br>• 需求获取与梳理：通过用户调研、场景分析收集需求，区分功能性需求与非功能性需求<br>• 需求建模与分析：使用UML用例图、活动图、类图建立需求模型，识别参与者与用例<br>• 需求规格说明：编写需求规格说明书，定义验收标准，进行需求评审与确认
+    </div>
+    <div class="step-output">产出：需求规格说明书（含用例图、活动图、需求清单、验收标准）｜ 质量标准：需求完整清晰，可验证可追溯，通过评审</div>
 </div><div class="step-item">
     <div class="step-number">步骤 2</div>
     <div class="step-title">类图设计</div>
-    <div class="step-desc">运用SOLID原则设计类结构与关系</div>
-    <div class="step-output">产出：UML类图</div>
+    <div class="step-desc">
+        本步骤进行面向对象设计的架构设计与详细设计。架构设计决定系统的整体结构与质量属性，是软件项目的核心环节。运用设计模式与架构原则，设计系统的分层架构、模块划分、接口定义。详细设计阶段细化每个模块的内部结构，设计核心算法与数据结构。使用UML类图、序列图、状态图等工具精确表达设计意图。<br><br>• 架构设计：设计分层架构（表现层、业务层、数据层），选择合适的架构模式（MVC/MVVM/微服务）<br>• 详细设计：设计类结构、接口定义、核心算法、数据结构，应用设计模式（单例、工厂、观察者等）<br>• 设计文档：编写架构设计文档与详细设计文档，包含UML图、设计说明、技术选型
+    </div>
+    <div class="step-output">产出：设计文档（含架构设计、详细设计、UML图、数据库设计）｜ 质量标准：架构合理，设计清晰，遵循设计原则与模式</div>
 </div><div class="step-item">
     <div class="step-number">步骤 3</div>
     <div class="step-title">设计模式应用</div>
-    <div class="step-desc">合理应用工厂、策略、观察者等模式</div>
-    <div class="step-output">产出：设计说明文档</div>
+    <div class="step-desc">
+        本步骤基于设计文档进行编码实现，使用面向对象设计相关的技术栈构建软件系统。实现阶段将设计转化为可运行的软件产品，需要严格遵循编码规范与设计文档。采用面向对象编程思想，运用封装、继承、多态等特性。使用版本控制工具（Git）管理代码，通过CI/CD流水线保障代码质量。编写单元测试用例，确保代码质量。<br><br>• 代码实现：使用Java/C#/Python等语言，遵循SOLID原则，应用设计模式，编写可读性强的代码<br>• 数据库实现：设计数据库表结构，编写SQL语句，使用ORM框架（Hibernate/MyBatis/SQLAlchemy）<br>• 版本控制与质量：使用Git进行版本管理，编写单元测试（JUnit/Mockito/PyTest），进行代码审查
+    </div>
+    <div class="step-output">产出：源代码（含业务代码、数据库脚本、单元测试）｜ 质量标准：代码规范，结构清晰，测试覆盖率达标</div>
 </div><div class="step-item">
     <div class="step-number">步骤 4</div>
     <div class="step-title">代码实现</div>
-    <div class="step-desc">Java/C++实现完整系统</div>
-    <div class="step-output">产出：源代码</div>
+    <div class="step-desc">
+        本步骤进行软件测试与质量保证，确保面向对象设计项目的质量满足要求。软件测试是发现缺陷、保障质量的关键环节，需要制定系统的测试策略与计划。进行单元测试、集成测试、系统测试、验收测试等多层次测试。使用自动化测试工具提升测试效率，通过缺陷管理跟踪问题修复。分析测试结果，评估产品质量与发布风险。<br><br>• 测试策略制定：确定测试范围、测试方法、测试环境，制定测试计划与测试用例<br>• 多层级测试：单元测试（JUnit/TestNG）、集成测试、系统测试、性能测试（JMeter/LoadRunner）<br>• 缺陷管理与质量评估：使用Jira/禅道管理缺陷，分析测试覆盖率与缺陷密度，评估发布风险
+    </div>
+    <div class="step-output">产出：测试报告（含测试计划、测试用例、缺陷报告、质量评估）｜ 质量标准：测试覆盖全面，缺陷及时修复，质量达标</div>
 </div><div class="step-item">
     <div class="step-number">步骤 5</div>
     <div class="step-title">测试与文档</div>
-    <div class="step-desc">编写单元测试，撰写设计说明</div>
-    <div class="step-output">产出：最终提交材料</div>
+    <div class="step-desc">
+        本步骤进行项目总结与文档完善，完成面向对象设计课程大作业的最终交付。总结项目的全过程，梳理技术方案与实现细节，形成完整的项目文档。部署软件系统，准备演示环境与用户手册。总结项目经验与教训，反思技术选型与开发过程中的得失。良好的文档与总结能力是软件工程师的必备素养。<br><br>• 文档完善：编写用户手册、部署手册、运维手册，完善API文档与技术文档<br>• 系统部署与演示：部署到测试/生产环境，准备演示数据与演示脚本，进行功能演示<br>• 项目总结：撰写项目总结报告，分析成功经验与不足，提出改进建议与未来展望
+    </div>
+    <div class="step-output">产出：最终交付物（含完整文档、部署包、演示系统、总结报告）｜ 质量标准：文档齐全，系统稳定，总结深入</div>
 </div><div style="margin-top:14px;padding-top:10px;border-top:1px solid #eee;">
     <h3 style="font-size:0.9rem;color:#667eea;margin-bottom:8px;">Steps</h3><div class="step-item">
     <div class="step-number">Step 1</div>
     <div class="step-title">Requirements & Use Cases</div>
-    <div class="step-desc">Analyze requirements, draw use case diagrams</div>
-    <div class="step-output">Deliverable: Requirements Doc</div>
+    <div class="step-desc">
+        This step conducts requirements elicitation and analysis, clarifying functional and non-functional requirements of the Object-Oriented Design project. Requirements analysis is the starting point of software projects, and accurate requirement definition is the foundation for subsequent design and development. Elicit and organize requirements through user interviews, scenario analysis, use case modeling and other methods, establish requirements specification. Use UML use case diagrams, activity diagrams and other tools to visually express requirements, ensuring consistent understanding among all parties.<br><br>• Requirements elicitation and organization: collect requirements through user research and scenario analysis, distinguish functional and non-functional requirements<br>• Requirements modeling and analysis: use UML use case diagrams, activity diagrams, class diagrams to build requirements models, identify actors and use cases<br>• Requirements specification: write requirements specification document, define acceptance criteria, conduct requirements review and confirmation
+    </div>
+    <div class="step-output">Deliverable: Requirements specification document (use case diagrams, activity diagrams, requirements list, acceptance criteria) | Quality standard: Complete and clear requirements, verifiable and traceable, reviewed and approved</div>
 </div><div class="step-item">
     <div class="step-number">Step 2</div>
     <div class="step-title">Class Diagram Design</div>
-    <div class="step-desc">Design class structure using SOLID principles</div>
-    <div class="step-output">Deliverable: UML Class Diagram</div>
+    <div class="step-desc">
+        This step conducts architecture design and detailed design for Object-Oriented Design. Architecture design determines the overall structure and quality attributes of the system, and is the corestep of software projects. Apply design patterns and architectural principles to design layered architecture, module division, and interface definitions. Detailed design phase refines internal structure of each module, designs core algorithms and data structures. Use UML class diagrams, sequence diagrams, state diagrams to precisely express design intent.<br><br>• Architecture design: design layered architecture (presentation layer, business layer, data layer), select appropriate architecture patterns (MVC/MVVM/Microservices)<br>• Detailed design: design class structure, interface definitions, core algorithms, data structures, apply design patterns (Singleton, Factory, Observer, etc.)<br>• Design documentation: write architecture design document and detailed design document, including UML diagrams, design description, technology selection
+    </div>
+    <div class="step-output">Deliverable: Design document (architecture design, detailed design, UML diagrams, database design) | Quality standard: Reasonable architecture, clear design, follows design principles and patterns</div>
 </div><div class="step-item">
     <div class="step-number">Step 3</div>
     <div class="step-title">Design Patterns</div>
-    <div class="step-desc">Apply Factory, Strategy, Observer patterns appropriately</div>
-    <div class="step-output">Deliverable: Design Notes</div>
+    <div class="step-desc">
+        This step performs coding implementation based on design documents, using Object-Oriented Design related tech stack to build the software system. Implementation phase transforms design into runnable software product, requiring strict adherence to coding standards and design documents. Adopt object-oriented programming concepts, apply encapsulation, inheritance, polymorphism and other features. Use version control tools (Git) to manage code, ensure code quality through CI/CD pipelines. Write unit test cases to ensure code quality.<br><br>• Code implementation: use Java/C#/Python etc., follow SOLID principles, apply design patterns, write highly readable code<br>• Database implementation: design database table structure, write SQL statements, use ORM frameworks (Hibernate/MyBatis/SQLAlchemy)<br>• Version control and quality: use Git for version management, write unit tests (JUnit/Mockito/PyTest), conduct code review
+    </div>
+    <div class="step-output">Deliverable: Source code (business code, database scripts, unit tests) | Quality standard: Standardized code, clear structure, qualified test coverage</div>
 </div><div class="step-item">
     <div class="step-number">Step 4</div>
     <div class="step-title">Code Implementation</div>
-    <div class="step-desc">Implement complete system in Java/C++</div>
-    <div class="step-output">Deliverable: Source Code</div>
+    <div class="step-desc">
+        This step conducts software testing and quality assurance, ensuring Object-Oriented Design project quality meets requirements. Software testing is a keystep of discovering defects and ensuring quality, requiring systematic testing strategy and plan. Conduct multi-level testing including unit testing, integration testing, system testing, acceptance testing. Use automated testing tools to improve testing efficiency, track defect resolution through defect management. Analyze test results, evaluate product quality and release risk.<br><br>• Test strategy formulation: determine test scope, test methods, test environment, develop test plan and test cases<br>• Multi-level testing: unit testing (JUnit/TestNG), integration testing, system testing, performance testing (JMeter/LoadRunner)<br>• Defect management and quality assessment: use Jira for defect management, analyze test coverage and defect density, assess release risk
+    </div>
+    <div class="step-output">Deliverable: Test report (test plan, test cases, defect report, quality assessment) | Quality standard: Comprehensive test coverage, timely defect fixing, quality meets standards</div>
 </div><div class="step-item">
     <div class="step-number">Step 5</div>
     <div class="step-title">Testing & Documentation</div>
-    <div class="step-desc">Write unit tests, document design decisions</div>
-    <div class="step-output">Deliverable: Final Submission</div>
-</div></div>
-        </div>
+    <div class="step-desc">
+        This step conducts project summary and documentation improvement, completing final delivery of the Object-Oriented Design course project. Summarize the entire project process, sort out technical solutions and implementation details, form complete project documentation. Deploy software system, prepare demo environment and user manual. Summarize project experience and lessons, reflect on gains and losses in technology selection and development process. Good documentation and summary skills are essential qualities for software engineers.<br><br>• Documentation improvement: write user manual, deployment manual, operation manual, improve API documentation and technical documents<br>• System deployment and demo: deploy to test/production environment, prepare demo data and demo script, conduct function demo<br>• Project summary: write project summary report, analyze successful experience and shortcomings, propose improvement suggestions and future outlook
+    </div>
+    <div class="step-output">Deliverable: Final deliverables (complete documents, deployment package, demo system, summary report) | Quality standard: Complete documentation, stable system, in-depth summary</div>
+</div></div></div>
     </div><div class="course-nav" style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:16px;padding:12px 16px;background:white;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,0.05);flex-wrap:wrap;">
     <a href="../software.html" style="color:#667eea;text-decoration:none;font-size:0.88rem;">← 返回软件工程</a>
     <a href="se-intro.html" style="color:#667eea;text-decoration:none;font-size:0.88rem;">下一门：软件工程导论 →</a>

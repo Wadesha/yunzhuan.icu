@@ -40,60 +40,78 @@
     </div>
         <div class="section">
         <h2>实施步骤 <span class="en">Implementation Steps</span></h2>
-        <div>
-<div class="step-item">
+        <div><div class="step-item">
     <div class="step-number">步骤 1</div>
     <div class="step-title">数据采集与清洗</div>
-    <div class="step-desc">使用Flume/Kafka采集日志数据，Spark进行清洗去重与格式化</div>
-    <div class="step-output">产出：清洗后数据集</div>
+    <div class="step-desc">
+        本步骤进行大数据平台架构设计与环境搭建，为后续数据处理奠定基础设施。大数据平台需要支持海量数据的存储、计算与分析，需要设计合理的技术架构。选择合适的大数据组件，包括分布式文件系统、计算引擎、消息队列、数据库等。搭建集群环境，配置各组件，确保系统稳定运行。架构设计需要考虑可扩展性、可靠性、性能与成本的平衡。<br><br>• 架构设计与技术选型：Lambda/Kappa架构选型，HDFS/OSS存储，Spark/Flink计算引擎，Kafka消息队列<br>• 集群环境搭建：Hadoop集群部署，Hive/HBase配置，Spark安装调优，ZooKeeper协调服务<br>• 平台基础服务：数据接入服务、资源调度（YARN/K8s）、监控告警（Prometheus/Grafana）、权限管理
+    </div>
+    <div class="step-output">产出：大数据平台方案（含架构设计、部署文档、平台环境）｜ 质量标准：架构合理，环境可用，组件协同</div>
 </div><div class="step-item">
     <div class="step-number">步骤 2</div>
     <div class="step-title">HDFS存储设计</div>
-    <div class="step-desc">设计HDFS目录结构与分区策略，配置副本与容错机制</div>
-    <div class="step-output">产出：存储设计文档</div>
+    <div class="step-desc">
+        本步骤进行数据采集与数据仓库建设，构建大数据的完整数据链路。数据采集是大数据的入口，需要对接多种数据源，实现高效可靠的数据传输。设计数据仓库模型，分层存储数据（ODS/DWD/DWS/ADS）。实现ETL/ELT流程，进行数据清洗、转换、加载。建立数据血缘追踪与数据质量监控体系，保障数据资产的可信度与可用性。<br><br>• 数据采集接入：批量采集（Sqoop/DataX）、实时采集（Flume/Logstash）、CDC数据同步（Debezium/Canal）<br>• 数仓建模：维度建模（星型/雪花模型）、分层设计（ODS/DWD/DWS/ADS）、指标体系设计<br>• 数据开发与质量：ETL开发（Hive SQL/Spark SQL）、数据质量监控、数据血缘、元数据管理
+    </div>
+    <div class="step-output">产出：数据仓库方案（含数据链路、数仓模型、ETL代码、数据质量报告）｜ 质量标准：链路通畅，模型规范，数据可信</div>
 </div><div class="step-item">
     <div class="step-number">步骤 3</div>
     <div class="step-title">分布式计算实现</div>
-    <div class="step-desc">使用Spark SQL/RDD实现统计聚合、批处理与多维分析</div>
-    <div class="step-output">产出：计算代码</div>
+    <div class="step-desc">
+        本步骤进行大数据处理与分析挖掘，从数据中提取价值与洞察。使用分布式计算引擎进行海量数据处理，包括批处理与流处理。进行统计分析、用户画像、推荐算法、预测模型等数据分析挖掘工作。使用Spark MLlib进行机器学习建模，使用Flink进行实时计算。优化数据处理性能，解决数据倾斜、资源调优等常见问题。<br><br>• 数据处理与计算：Spark批处理、Flink流处理、SQL优化、性能调优、数据倾斜治理<br>• 数据分析与挖掘：用户画像、标签体系、推荐算法（协同过滤/Content-based）、A/B测试分析<br>• 机器学习应用：特征工程、模型训练（Spark MLlib）、模型评估、模型服务化
+    </div>
+    <div class="step-output">产出：数据分析成果（含处理脚本、分析报告、模型结果、可视化报表）｜ 质量标准：处理高效，分析深入，结果有价值</div>
 </div><div class="step-item">
     <div class="step-number">步骤 4</div>
     <div class="step-title">流处理与可视化</div>
-    <div class="step-desc">Flink实现实时处理，ECharts/Superset构建可视化看板</div>
-    <div class="step-output">产出：实时分析看板</div>
+    <div class="step-desc">
+        本步骤进行数据可视化与报表系统建设，将分析结果直观呈现。数据可视化是数据价值传递的关键环节，需要设计清晰、美观、易用的可视化方案。选择合适的可视化工具（ECharts/D3.js/Superset），构建数据看板与报表系统。设计驾驶舱、趋势图、热力图、地图等多种可视化形式。确保数据准确、交互友好、响应快速，支持业务决策与数据洞察。<br><br>• 可视化方案设计：指标看板设计、图表选型（折线/柱状/饼图/地图/桑基图）、交互设计、响应式布局<br>• 工具实现：BI工具（Superset/Tableau/Power BI）、前端开发（ECharts/D3.js）、报表平台搭建<br>• 数据产品化：自助分析平台、数据门户、权限控制、报表订阅、导出功能
+    </div>
+    <div class="step-output">产出：数据可视化系统（含看板设计、前端代码、报表平台、用户手册）｜ 质量标准：视觉清晰，交互流畅，数据准确</div>
 </div><div class="step-item">
     <div class="step-number">步骤 5</div>
     <div class="step-title">性能优化与文档</div>
-    <div class="step-desc">调优数据倾斜与内存配置，撰写部署与使用文档</div>
-    <div class="step-output">产出：最终提交材料</div>
+    <div class="step-desc">
+        本步骤进行平台运维优化与项目总结，完成大数据项目的最终交付。大数据平台需要持续的运维保障与性能优化，确保系统稳定高效运行。建立监控告警机制，进行性能调优与故障排查。总结整个项目，梳理技术方案与实施经验。展望大数据技术的发展趋势与应用前景。撰写完整的技术文档与项目报告，沉淀知识资产。<br><br>• 平台运维与优化：监控告警体系、性能调优（SQL/资源/参数）、故障排查、容量规划、成本优化<br>• 文档与交付：架构文档、运维手册、用户手册、API文档、代码仓库、数据字典<br>• 总结与展望：项目复盘、技术沉淀、经验教训、技术趋势分析、未来改进方向
+    </div>
+    <div class="step-output">产出：项目交付物（含运维体系、完整文档、总结报告、技术沉淀）｜ 质量标准：平台稳定，文档齐全，总结深入</div>
 </div><div style="margin-top:14px;padding-top:10px;border-top:1px solid #eee;">
     <h3 style="font-size:0.9rem;color:#667eea;margin-bottom:8px;">Steps</h3><div class="step-item">
     <div class="step-number">Step 1</div>
     <div class="step-title">Data Collection</div>
-    <div class="step-desc">Collect logs via Flume/Kafka, clean and deduplicate with Spark</div>
-    <div class="step-output">Deliverable: Cleaned Dataset</div>
+    <div class="step-desc">
+        This step conducts big data platform architecture design and environment setup, laying infrastructure foundation for subsequent data processing. Big data platform needs to support massive data storage, computation and analysis, requiring reasonable technical architecture design. Select appropriate big data components, including distributed file systems, computing engines, message queues, databases, etc. Build cluster environment, configure each component, ensure stable system operation. Architecture design needs to consider balance of scalability, reliability, performance and cost.<br><br>• Architecture design and technology selection: Lambda/Kappa architecture selection, HDFS/OSS storage, Spark/Flink computing engine, Kafka message queue<br>• Cluster environment setup: Hadoop cluster deployment, Hive/HBase configuration, Spark installation and tuning, ZooKeeper coordination service<br>• Platform basic services: data access service, resource scheduling (YARN/K8s), monitoring and alerting (Prometheus/Grafana), permission management
+    </div>
+    <div class="step-output">Deliverable: Big data platform solution (architecture design, deployment document, platform environment) | Quality standard: Reasonable architecture, usable environment, coordinated components</div>
 </div><div class="step-item">
     <div class="step-number">Step 2</div>
     <div class="step-title">HDFS Storage Design</div>
-    <div class="step-desc">Design HDFS layout, partitioning, replication, and fault tolerance</div>
-    <div class="step-output">Deliverable: Storage Design Doc</div>
+    <div class="step-desc">
+        This step conducts data collection and data warehouse construction, building complete data pipeline for big data. Data collection is the entry point of big data, requiring integration of multiple data sources to achieve efficient and reliable data transmission. Design data warehouse model, store data in layers (ODS/DWD/DWS/ADS). Implement ETL/ELT processes for data cleaning, transformation, loading. Establish data lineage tracking and data quality monitoring system to ensure credibility and availability of data assets.<br><br>• Data collection and access: batch collection (Sqoop/DataX), real-time collection (Flume/Logstash), CDC data synchronization (Debezium/Canal)<br>• Data warehouse modeling: dimensional modeling (star/snowflake schema), layered design (ODS/DWD/DWS/ADS), metric system design<br>• Data development and quality: ETL development (Hive SQL/Spark SQL), data quality monitoring, data lineage, metadata management
+    </div>
+    <div class="step-output">Deliverable: Data warehouse solution (data pipeline, warehouse model, ETL code, data quality report) | Quality standard: Smooth pipeline, standardized model, trusted data</div>
 </div><div class="step-item">
     <div class="step-number">Step 3</div>
     <div class="step-title">Distributed Computing</div>
-    <div class="step-desc">Implement aggregation, batch processing, and analytics with Spark SQL/RDD</div>
-    <div class="step-output">Deliverable: Computing Code</div>
+    <div class="step-desc">
+        This step conducts big data processing and analysis mining, extracting value and insights from data. Use distributed computing engines for massive data processing, including batch processing and stream processing. Conduct statistical analysis, user profiling, recommendation algorithms, prediction models and other data analysis and mining work. Use Spark MLlib for machine learning modeling, use Flink for real-time computing. Optimize data processing performance, solve common problems like data skew and resource tuning.<br><br>• Data processing and computing: Spark batch processing, Flink stream processing, SQL optimization, performance tuning, data skew governance<br>• Data analysis and mining: user profiling, tag system, recommendation algorithms (collaborative filtering/Content-based), A/B testing analysis<br>• Machine learning application: feature engineering, model training (Spark MLlib), model evaluation, model serving
+    </div>
+    <div class="step-output">Deliverable: Data analysis results (processing scripts, analysis report, model results, visualization reports) | Quality standard: Efficient processing, in-depth analysis, valuable results</div>
 </div><div class="step-item">
     <div class="step-number">Step 4</div>
     <div class="step-title">Stream Processing & Visualization</div>
-    <div class="step-desc">Real-time processing with Flink, dashboards with ECharts/Superset</div>
-    <div class="step-output">Deliverable: Real-time Dashboard</div>
+    <div class="step-desc">
+        This step conducts data visualization and reporting system construction, presenting analysis results intuitively. Data visualization is a keystep of data value delivery, requiring clear, beautiful and easy-to-use visualization solutions. Select appropriate visualization tools (ECharts/D3.js/Superset), build data dashboards and reporting systems. Design various visualization forms such as dashboards, trend charts, heatmaps, maps, etc. Ensure accurate data, friendly interaction, fast response, supporting business decision-making and data insights.<br><br>• Visualization solution design: metric dashboard design, chart selection (line/bar/pie/map/sankey), interaction design, responsive layout<br>• Tool implementation: BI tools (Superset/Tableau/Power BI), frontend development (ECharts/D3.js), report platform construction<br>• Data productization: self-service analytics platform, data portal, permission control, report subscription, export function
+    </div>
+    <div class="step-output">Deliverable: Data visualization system (dashboard design, frontend code, reporting platform, user manual) | Quality standard: Clear visuals, smooth interaction, accurate data</div>
 </div><div class="step-item">
     <div class="step-number">Step 5</div>
     <div class="step-title">Optimization & Documentation</div>
-    <div class="step-desc">Tune data skew and memory, write deployment and usage docs</div>
-    <div class="step-output">Deliverable: Final Submission</div>
-</div></div>
-        </div>
+    <div class="step-desc">
+        This step conducts platform operations optimization and project summary, completing final delivery of the big data project. Big data platform requires continuous operations support and performance optimization to ensure stable and efficient system operation. Establish monitoring and alerting mechanism, conduct performance tuning and troubleshooting. Summarize the entire project, sort out technical solutions and implementation experience. Outlook development trends and application prospects of big data technology. Write complete technical documents and project reports,assets knowledge assets.<br><br>• Platform operations and optimization: monitoring and alerting system, performance tuning (SQL/resource/parameters), troubleshooting, capacity planning, cost optimization<br>• Documentation and delivery: architecture document, operations manual, user manual, API document, code repository, data dictionary<br>• Summary and outlook: project retrospective, technologyassets, lessons learned, technology trend analysis, future improvement directions
+    </div>
+    <div class="step-output">Deliverable: Project deliverables (operations system, complete documents, summary report, technologyassets) | Quality standard: Stable platform, complete documentation, in-depth summary</div>
+</div></div></div>
     </div><div class="course-nav" style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:16px;padding:12px 16px;background:white;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,0.05);flex-wrap:wrap;">
     <a href="../data.html" style="color:#667eea;text-decoration:none;font-size:0.88rem;">← 返回数据科学</a>
     <a href="calculus.html" style="color:#667eea;text-decoration:none;font-size:0.88rem;">下一门：微积分 →</a>

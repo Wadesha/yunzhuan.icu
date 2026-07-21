@@ -40,38 +40,58 @@
     </div>
     <div class="section">
         <h2>实施步骤 <span class="en">Implementation Steps</span></h2>
-        <div>
+<div>
 
 
 <div class="step-item">
     <div class="step-number">步骤 1</div>
     <div class="step-title">物性数据获取</div>
-    <div class="step-desc">选用状态方程并回归纯物质与混合物热力学性质</div>
-    <div class="step-output">产出：物性参数表</div>
+    <div class="step-desc">
+        本步骤的核心任务是获取并回归纯物质与混合物的热力学物性参数，为后续相平衡计算和能量衡算提供基础数据。准确的物性数据是化工设计计算的基石，直接影响工艺设计的可靠性和经济性。通过数据库查询、实验测定或理论估算多途径获取。
+        <br><br>
+        • 从NIST Chemistry WebBook、DIPPR数据库或Aspen Properties获取临界参数、偏心因子、饱和蒸气压等基础物性数据<br>• 选用Peng-Robinson或SRK状态方程，用最小二乘法回归二元交互作用参数kij<br>• 验证回归结果与实验数据的偏差，确保平均相对误差小于5%
+    </div>
+    <div class="step-output">产出：物性参数表（含纯物质临界参数、状态方程参数、二元交互作用参数、对比验证数据） ｜ 质量标准：与实验数据偏差<5%，参数完整无遗漏</div>
 </div>
 <div class="step-item">
     <div class="step-number">步骤 2</div>
     <div class="step-title">相平衡计算</div>
-    <div class="step-desc">完成汽液相平衡计算与活度系数模型选择</div>
-    <div class="step-output">产出：相平衡计算结果</div>
+    <div class="step-desc">
+        本步骤进行化工过程的详细计算，获取定量的设计参数和性能指标。计算是化工设计的核心手段，通过物料衡算、能量衡算和设备计算为工艺设计提供定量依据。需严格遵循化工设计规范和标准，确保计算结果准确可靠。
+        <br><br>
+        • 确定计算方法和计算公式，明确计算的理论依据和假设条件，绘制计算流程图<br>• 使用Aspen Plus或PROII进行流程模拟计算，获得物料流股数据和设备参数<br>• 手动校核关键计算结果，通过经验公式或简化模型交叉验证，确保计算准确
+    </div>
+    <div class="step-output">产出：计算书（含计算公式、计算过程、结果数据表、模拟文件、验证对比） ｜ 质量标准：计算方法正确、过程清晰、结果准确、验证充分</div>
 </div>
 <div class="step-item">
     <div class="step-number">步骤 3</div>
     <div class="step-title">能量衡算</div>
-    <div class="step-desc">完成过程能量衡算与焓平衡计算</div>
-    <div class="step-output">产出：能量衡算表</div>
+    <div class="step-desc">
+        本步骤进行化工过程的详细计算，获取定量的设计参数和性能指标。计算是化工设计的核心手段，通过物料衡算、能量衡算和设备计算为工艺设计提供定量依据。需严格遵循化工设计规范和标准，确保计算结果准确可靠。
+        <br><br>
+        • 确定计算方法和计算公式，明确计算的理论依据和假设条件，绘制计算流程图<br>• 使用Aspen Plus或PROII进行流程模拟计算，获得物料流股数据和设备参数<br>• 手动校核关键计算结果，通过经验公式或简化模型交叉验证，确保计算准确
+    </div>
+    <div class="step-output">产出：计算书（含计算公式、计算过程、结果数据表、模拟文件、验证对比） ｜ 质量标准：计算方法正确、过程清晰、结果准确、验证充分</div>
 </div>
 <div class="step-item">
     <div class="step-number">步骤 4</div>
     <div class="step-title">火用分析</div>
-    <div class="step-desc">计算各单元火用损失并识别节能潜力</div>
-    <div class="step-output">产出：火用分析报告</div>
+    <div class="step-desc">
+        本步骤对化工过程进行热力学分析和火用分析，揭示过程的能量利用效率和不可逆损失。火用分析是评估过程能量品质的高级方法，基于热力学第二定律，量化各单元的火用损失，找出能量利用的薄弱环节。为节能改造和工艺优化提供方向性指导。
+        <br><br>
+        • 确定环境状态参数（T0、P0），计算各流股的焓、熵和火用值，建立火用衡算方程<br>• 计算各单元设备的火用损失和火用效率，识别不可逆损失最大的关键设备<br>• 绘制热集成温焓图（T-H图）和夹点分析，确定最小公用工程用量和节能潜力
+    </div>
+    <div class="step-output">产出：火用分析报告（含火用衡算表、各单元火用损失分布图、夹点分析图、节能潜力评估） ｜ 质量标准：火用衡算闭合、损失分布清晰、节能潜力分析合理</div>
 </div>
 <div class="step-item">
     <div class="step-number">步骤 5</div>
     <div class="step-title">优化方案与报告</div>
-    <div class="step-desc">提出节能优化方案并撰写热力学分析报告</div>
-    <div class="step-output">产出：热力学分析报告</div>
+    <div class="step-desc">
+        本步骤对化工过程进行优化设计，在满足约束条件下寻求技术经济最优方案。化工优化涉及多目标决策，需在投资、能耗、操作成本和产品质量间寻求平衡。采用流程模拟与数学规划相结合的方法，系统地搜索最优解空间。
+        <br><br>
+        • 确定优化目标函数（如最小年化总成本、最大净现值）和约束条件（产量、纯度、安全环保等）<br>• 使用Aspen Plus灵敏度分析或Aspen Optimization进行单参数和多参数优化<br>• 进行技术经济评价，计算投资回收期、内部收益率等指标，对比优化前后性能
+    </div>
+    <div class="step-output">产出：优化设计报告（含优化模型、参数优化过程、技术经济分析、优化前后对比、推荐方案） ｜ 质量标准：优化目标明确、方法科学、效果显著、方案可行</div>
 </div>
             
 
@@ -80,36 +100,55 @@
 <div class="step-item">
     <div class="step-number">Step 1</div>
     <div class="step-title">Property Data Acquisition</div>
-    <div class="step-desc">Select equation of state and regress thermodynamic properties</div>
-    <div class="step-output">Deliverable: Property Parameter Table</div>
+    <div class="step-desc">
+        The core task of this step is to obtain and regress thermodynamic property parameters of pure substances and mixtures, providing basic data for subsequent phase equilibrium calculations and energy balances. Accurate property data is the cornerstone of chemical engineering design calculations, directly affecting process design reliability and economics. Obtained through multiple approaches: database query, experimental measurement or theoretical estimation.
+        <br><br>
+        • Obtain basic property data such as critical parameters, acentric factors, and saturation vapor pressures from NIST Chemistry WebBook, DIPPR database or Aspen Properties<br>• Select Peng-Robinson or SRK equation of state, regress binary interaction parameters kij using least squares method<br>• Validate regression results against experimental data, ensuring average relative error is less than 5%
+    </div>
+    <div class="step-output">Deliverable: Property parameter table (including pure substance critical parameters, EOS parameters, binary interaction parameters, validation data) | Quality standard: Deviation from experimental data <5%, complete parameters</div>
 </div>
 <div class="step-item">
     <div class="step-number">Step 2</div>
     <div class="step-title">Phase Equilibrium Calculation</div>
-    <div class="step-desc">Complete VLE calculation and select activity coefficient model</div>
-    <div class="step-output">Deliverable: Phase Equilibrium Results</div>
+    <div class="step-desc">
+        This step performs detailed calculations of chemical engineering processes, obtaining quantitative design parameters and performance indicators. Calculation is the core means of chemical engineering design, providing quantitative basis for process design through material balance, energy balance and equipment calculation. Must strictly follow chemical engineering design specifications and standards, ensuring accurate and reliable calculation results.
+        <br><br>
+        • Determine calculation methods and formulas, clarify theoretical basis and assumptions, draw calculation flow chart<br>• Perform process simulation calculations using Aspen Plus or PROII, obtain material stream data and equipment parameters<br>• Manually verify key calculation results, cross-validate through empirical formulas or simplified models, ensuring calculation accuracy
+    </div>
+    <div class="step-output">Deliverable: Calculation document (including calculation formulas, calculation process, result data table, simulation files, validation comparison) | Quality standard: Correct calculation method, clear process, accurate results, sufficient verification</div>
 </div>
 <div class="step-item">
     <div class="step-number">Step 3</div>
     <div class="step-title">Energy Balance</div>
-    <div class="step-desc">Complete process energy balance and enthalpy calculations</div>
-    <div class="step-output">Deliverable: Energy Balance Table</div>
+    <div class="step-desc">
+        This step performs detailed calculations of chemical engineering processes, obtaining quantitative design parameters and performance indicators. Calculation is the core means of chemical engineering design, providing quantitative basis for process design through material balance, energy balance and equipment calculation. Must strictly follow chemical engineering design specifications and standards, ensuring accurate and reliable calculation results.
+        <br><br>
+        • Determine calculation methods and formulas, clarify theoretical basis and assumptions, draw calculation flow chart<br>• Perform process simulation calculations using Aspen Plus or PROII, obtain material stream data and equipment parameters<br>• Manually verify key calculation results, cross-validate through empirical formulas or simplified models, ensuring calculation accuracy
+    </div>
+    <div class="step-output">Deliverable: Calculation document (including calculation formulas, calculation process, result data table, simulation files, validation comparison) | Quality standard: Correct calculation method, clear process, accurate results, sufficient verification</div>
 </div>
 <div class="step-item">
     <div class="step-number">Step 4</div>
     <div class="step-title">Exergy Analysis</div>
-    <div class="step-desc">Compute exergy destruction and identify energy saving potential</div>
-    <div class="step-output">Deliverable: Exergy Analysis Report</div>
+    <div class="step-desc">
+        This step performs thermodynamic analysis and exergy analysis of chemical processes, revealing process energy utilization efficiency and irreversible losses. Exergy analysis is an advanced method for evaluating process energy quality, quantifying exergy losses of each unit based on the second law of thermodynamics, identifying weak links in energy utilization. Provides directional guidance for energy-saving retrofitting and process optimization.
+        <br><br>
+        • Determine environmental state parameters (T0, P0), calculate enthalpy, entropy and exergy values of each stream, establish exergy balance equations<br>• Calculate exergy loss and exergy efficiency of each unit equipment, identify key equipment with maximum irreversible loss<br>• Plot heat integration temperature-enthalpy diagram (T-H diagram) and pinch analysis, determine minimum utility consumption and energy saving potential
+    </div>
+    <div class="step-output">Deliverable: Exergy analysis report (including exergy balance table, unit exergy loss distribution diagram, pinch analysis diagram, energy saving potential assessment) | Quality standard: Exergy balance closed, clear loss distribution, reasonable energy saving potential analysis</div>
 </div>
 <div class="step-item">
     <div class="step-number">Step 5</div>
     <div class="step-title">Optimization Scheme and Report</div>
-    <div class="step-desc">Propose energy saving scheme and write thermo analysis report</div>
-    <div class="step-output">Deliverable: Thermodynamic Analysis Report</div>
+    <div class="step-desc">
+        This step performs optimization design of chemical processes, seeking the optimal techno-economic solution under constraint conditions. Chemical engineering optimization involves multi-objective decision-making, requiring balance among investment, energy consumption, operating cost and product quality. Systematically search the optimal solution space using a combination of process simulation and mathematical programming methods.
+        <br><br>
+        • Determine optimization objective function (e.g., minimum annualized total cost, maximum NPV) and constraint conditions (production, purity, safety and environmental protection, etc.)<br>• Perform single-parameter and multi-parameter optimization using Aspen Plus sensitivity analysis or Aspen Optimization<br>• Conduct techno-economic evaluation, calculate payback period, IRR and other indicators, compare performance before and after optimization
+    </div>
+    <div class="step-output">Deliverable: Optimization design report (including optimization model, parameter optimization process, techno-economic analysis, before-after comparison, recommended scheme) | Quality standard: Clear optimization objectives, scientific method, significant effects, feasible solution</div>
 </div>
             </div>
         </div>
-    </div>
     <div class="course-nav" style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:16px;padding:12px 16px;background:white;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,0.05);flex-wrap:wrap;">
     <a href="../chemical.html" style="color:#667eea;text-decoration:none;font-size:0.88rem;">← 返回化学工程</a>
     <a href="chem-separation.html" style="color:#667eea;text-decoration:none;font-size:0.88rem;">下一门：分离工程 →</a>

@@ -40,60 +40,78 @@
     </div>
         <div class="section">
         <h2>实施步骤 <span class="en">Implementation Steps</span></h2>
-        <div>
-<div class="step-item">
+        <div><div class="step-item">
     <div class="step-number">步骤 1</div>
     <div class="step-title">数据准备</div>
-    <div class="step-desc">采集中文语料，完成分词、清洗与标注</div>
-    <div class="step-output">产出：标注数据集</div>
+    <div class="step-desc">
+        本步骤进行问题定义与数据准备，明确自然语言处理项目的研究目标与数据基础。问题定义是AI项目的起点，需要明确任务类型（分类/回归/生成/序列标注等）、评价指标与应用场景。进行数据收集与数据探索，了解数据分布与质量。数据准备包括数据清洗、数据标注、特征工程、数据集划分。高质量的数据是模型成功的基础，决定了AI系统的性能上限。<br><br>• 问题定义与指标设计：明确任务类型与应用场景，制定评价指标（准确率/F1/AUC/BLEU/ROUGE等）<br>• 数据收集与探索：收集公开数据集（Kaggle/UCI/HuggingFace），进行EDA探索性数据分析，理解数据分布<br>• 数据预处理：数据清洗（去重/去噪/缺失值处理）、数据标注（LabelStudio/Doccano）、特征工程、数据集划分
+    </div>
+    <div class="step-output">产出：数据与问题定义报告（含问题描述、数据集、数据探索报告、预处理方案）｜ 质量标准：问题明确，数据充分，方案可行</div>
 </div><div class="step-item">
     <div class="step-number">步骤 2</div>
     <div class="step-title">词向量与模型</div>
-    <div class="step-desc">训练Word2Vec或微调BERT预训练模型</div>
-    <div class="step-output">产出：模型代码与权重</div>
+    <div class="step-desc">
+        本步骤进行自然语言处理的模型设计与算法选型。模型设计是AI项目的核心，需要根据任务特点与数据特性选择合适的模型架构。对于传统机器学习，选择SVM、随机森林、XGBoost等算法。对于深度学习，选择CNN、RNN、Transformer、预训练模型等架构。进行模型架构设计，定义损失函数与优化策略。参考SOTA模型与开源实现，设计有竞争力的方案。<br><br>• 算法选型与基线：调研SOTA方法，选择基线模型（Baseline），对比不同算法的适用场景与性能<br>• 模型架构设计：传统ML（sklearn/XGBoost/LightGBM）、深度学习（PyTorch/TensorFlow）、预训练模型（BERT/GPT/ViT）<br>• 训练策略设计：损失函数设计（交叉熵/MSE/Contrastive Loss）、优化器（Adam/SGD）、学习率调度、正则化策略
+    </div>
+    <div class="step-output">产出：模型设计方案（含算法选型、网络架构、训练策略、技术路线）｜ 质量标准：选型合理，设计有依据，有创新点</div>
 </div><div class="step-item">
     <div class="step-number">步骤 3</div>
     <div class="step-title">分类与情感分析</div>
-    <div class="step-desc">实现文本分类与情感分析模块</div>
-    <div class="step-output">产出：算法代码</div>
+    <div class="step-desc">
+        本步骤进行模型实现与训练调优，构建自然语言处理的AI系统。模型实现将设计方案转化为可运行的代码，使用PyTorch/TensorFlow等深度学习框架搭建网络。进行模型训练，监控训练过程与指标变化。调优超参数，改进模型性能。处理训练中的常见问题：过拟合、欠拟合、梯度消失/爆炸、收敛困难等。使用实验管理工具记录实验过程与结果。<br><br>• 模型实现与工程化：使用PyTorch/TensorFlow实现模型，封装数据加载器，配置训练/验证/测试流程<br>• 训练与调试：训练监控（TensorBoard/WandB）、损失曲线分析、超参数调优（网格搜索/贝叶斯优化）<br>• 性能优化：正则化（Dropout/L2/早停）、数据增强、迁移学习、模型压缩（剪枝/量化/蒸馏）
+    </div>
+    <div class="step-output">产出：模型代码与训练结果（含源代码、训练日志、模型权重、实验记录）｜ 质量标准：代码规范，训练稳定，基线达标</div>
 </div><div class="step-item">
     <div class="step-number">步骤 4</div>
     <div class="step-title">系统集成</div>
-    <div class="step-desc">构建Web/API推理服务</div>
-    <div class="step-output">产出：可运行系统Demo</div>
+    <div class="step-desc">
+        本步骤进行模型评估与结果分析，全面检验自然语言处理项目的效果。模型评估是验证模型性能与发现问题的关键环节，需要设计全面的评估方案。在测试集上进行定量评估，计算各项评价指标。进行错误分析，深入理解模型的失败案例与局限性。进行消融实验（Ablation Study）验证各组件的有效性。与基线模型和SOTA方法进行对比分析。<br><br>• 定量评估：在标准测试集上计算指标（Accuracy/F1/mAP/Perplexity等），进行交叉验证，统计显著性检验<br>• 定性分析与错误分析：可视化预测结果，错误案例分类，混淆矩阵分析，BadCase分析与归因<br>• 对比与消融实验：与基线方法对比，消融实验验证各模块贡献，泛化能力测试，鲁棒性测试
+    </div>
+    <div class="step-output">产出：评估分析报告（含定量结果、错误分析、对比实验、可视化结果）｜ 质量标准：评估全面，分析深入，结论可信</div>
 </div><div class="step-item">
     <div class="step-number">步骤 5</div>
     <div class="step-title">评估与文档</div>
-    <div class="step-desc">评估准确率、F1等指标，撰写报告</div>
-    <div class="step-output">产出：最终提交材料</div>
+    <div class="step-desc">
+        本步骤进行系统集成与总结展望，完成自然语言处理课程大作业的最终交付。将训练好的模型部署为可用的系统，构建演示Demo。进行模型服务化（Flask/FastAPI/ONNX），设计用户界面与交互流程。总结整个项目，梳理技术方案与实验结论。展望未来改进方向与应用前景。撰写规范的课程论文或技术报告，展示研究成果与学术贡献。<br><br>• 系统部署与Demo：模型服务化（FastAPI/Triton）、前端界面、演示Demo、性能优化（推理加速/批处理）<br>• 论文/报告撰写：摘要、引言、相关工作、方法、实验、结论、参考文献，按照学术规范排版<br>• 总结与展望：成果总结、创新点梳理、局限性分析、未来工作展望、开源代码与模型发布
+    </div>
+    <div class="step-output">产出：最终交付物（含Demo系统、论文/报告、代码、模型、总结）｜ 质量标准：系统可用，报告规范，总结深入</div>
 </div><div style="margin-top:14px;padding-top:10px;border-top:1px solid #eee;">
     <h3 style="font-size:0.9rem;color:#667eea;margin-bottom:8px;">Steps</h3><div class="step-item">
     <div class="step-number">Step 1</div>
     <div class="step-title">Data Preparation</div>
-    <div class="step-desc">Collect Chinese corpus, perform tokenization and annotation</div>
-    <div class="step-output">Deliverable: Annotated Dataset</div>
+    <div class="step-desc">
+        This step conducts problem definition and data preparation, clarifying research objectives and data foundation of the Natural Language Processing project. Problem definition is the starting point of AI projects, requiring clarification of task type (classification/regression/generation/sequence labeling, etc.), evaluation metrics and application scenarios. Conduct data collection and data exploration to understand data distribution and quality. Data preparation includes data cleaning, data annotation, feature engineering, dataset splitting. High-quality data is the foundation of model success, determining the performance ceiling of AI systems.<br><br>• Problem definition and metric design: clarify task type and application scenarios, develop evaluation metrics (Accuracy/F1/AUC/BLEU/ROUGE, etc.)<br>• Data collection and exploration: collect public datasets (Kaggle/UCI/HuggingFace), conduct EDA exploratory data analysis, understand data distribution<br>• Data preprocessing: data cleaning (deduplication/denoising/missing value handling), data annotation (LabelStudio/Doccano), feature engineering, dataset splitting
+    </div>
+    <div class="step-output">Deliverable: Data and problem definition report (problem description, dataset, data exploration report, preprocessing plan) | Quality standard: Clear problem, sufficient data, feasible plan</div>
 </div><div class="step-item">
     <div class="step-number">Step 2</div>
     <div class="step-title">Word Vectors & Model</div>
-    <div class="step-desc">Train Word2Vec or fine-tune BERT model</div>
-    <div class="step-output">Deliverable: Model Code & Weights</div>
+    <div class="step-desc">
+        This step conducts model design and algorithm selection for Natural Language Processing. Model design is the core of AI projects, requiring selection of appropriate model architecture based on task characteristics and data properties. For traditional machine learning, choose SVM, Random Forest, XGBoost and other algorithms. For deep learning, choose CNN, RNN, Transformer, pre-trained models and other architectures. Conduct model architecture design, define loss function and optimization strategy. Refer to SOTA models and open-source implementations to design competitive solutions.<br><br>• Algorithm selection and baseline: research SOTA methods, select baseline model (Baseline), compare applicable scenarios and performance of different algorithms<br>• Model architecture design: traditional ML (sklearn/XGBoost/LightGBM), deep learning (PyTorch/TensorFlow), pre-trained models (BERT/GPT/ViT)<br>• Training strategy design: loss function design (cross-entropy/MSE/Contrastive Loss), optimizer (Adam/SGD), learning rate scheduling, regularization strategy
+    </div>
+    <div class="step-output">Deliverable: Model design solution (algorithm selection, network architecture, training strategy, technical route) | Quality standard: Reasonable selection, evidence-based design, innovative points</div>
 </div><div class="step-item">
     <div class="step-number">Step 3</div>
     <div class="step-title">Classification & Sentiment</div>
-    <div class="step-desc">Implement text classification and sentiment analysis</div>
-    <div class="step-output">Deliverable: Algorithm Code</div>
+    <div class="step-desc">
+        This step conducts model implementation and training optimization, building the AI system for Natural Language Processing. Model implementation transforms designsolution into runnable code, using PyTorch/TensorFlow and other deep learning frameworks to build networks. Conduct model training, monitor training process and metric changes. Tune hyperparameters to improve model performance. Handle common problems in training: overfitting, underfitting, gradient vanishing/explosion, convergence difficulties, etc. Use experiment management tools to record experiment process and results.<br><br>• Model implementation and engineering: use PyTorch/TensorFlow to implement models, encapsulate data loaders, configure training/validation/test pipelines<br>• Training and debugging: training monitoring (TensorBoard/WandB), loss curve analysis, hyperparameter tuning (grid search/Bayesian optimization)<br>• Performance optimization: regularization (Dropout/L2/early stopping), data augmentation, transfer learning, model compression (pruning/quantization/distillation)
+    </div>
+    <div class="step-output">Deliverable: Model code and training results (source code, training logs, model weights, experiment records) | Quality standard: Standardized code, stable training, baseline achieved</div>
 </div><div class="step-item">
     <div class="step-number">Step 4</div>
     <div class="step-title">System Integration</div>
-    <div class="step-desc">Build Web/API inference service</div>
-    <div class="step-output">Deliverable: Runnable System Demo</div>
+    <div class="step-desc">
+        This step conducts model evaluation and result analysis, comprehensively verifying effects of the Natural Language Processing project. Model evaluation is a keystep of verifying model performance and discovering problems, requiring design of comprehensive evaluationsolution. Conduct quantitative evaluation on test set, calculate various evaluation metrics. Conduct error analysis to deeply understand failure cases and limitations of the model. Conduct ablation study to verify effectiveness of each component. Compare and analyze with baseline models and SOTA methods.<br><br>• Quantitative evaluation: calculate metrics on standard test set (Accuracy/F1/mAP/Perplexity, etc.), conduct cross-validation, statistical significance test<br>• Qualitative analysis and error analysis: visualize prediction results, error case classification, confusion matrix analysis, BadCase analysis and attribution<br>• Comparison and ablation experiments: compare with baseline methods, ablation experiments verify contribution of each module, generalization ability test, robustness test
+    </div>
+    <div class="step-output">Deliverable: Evaluation analysis report (quantitative results, error analysis, comparative experiments, visualization results) | Quality standard: Comprehensive evaluation, in-depth analysis, credible conclusions</div>
 </div><div class="step-item">
     <div class="step-number">Step 5</div>
     <div class="step-title">Evaluation & Documentation</div>
-    <div class="step-desc">Evaluate accuracy, F1 metrics, write report</div>
-    <div class="step-output">Deliverable: Final Submission</div>
-</div></div>
-        </div>
+    <div class="step-desc">
+        This step conducts system integration and summary outlook, completing final delivery of the Natural Language Processing course project. Deploy the trained model as a usable system, build demonstration Demo. Conduct model serving (Flask/FastAPI/ONNX), design user interface and interaction flow. Summarize the entire project, sort out technical solutions and experimental conclusions. Outlook future improvement directions and application prospects. Write standardized course paper or technical report,display researchresults and academic contributions.<br><br>• System deployment and Demo: model serving (FastAPI/Triton), frontend interface, demo Demo, performance optimization (inference acceleration/batching)<br>• Paper/report writing: abstract, introduction, related work, method, experiments, conclusion, references, format according to academic standards<br>• Summary and outlook: result summary, innovation points sorting, limitation analysis, future work outlook, open source code and model release
+    </div>
+    <div class="step-output">Deliverable: Final deliverables (Demo system, paper/report, code, model, summary) | Quality standard: Usable system, standardized report, in-depth summary</div>
+</div></div></div>
     </div><div class="course-nav" style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:16px;padding:12px 16px;background:white;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,0.05);flex-wrap:wrap;">
     <a href="../ai.html" style="color:#667eea;text-decoration:none;font-size:0.88rem;">← 返回人工智能</a>
     <a href="computer-vision.html" style="color:#667eea;text-decoration:none;font-size:0.88rem;">下一门：计算机视觉 →</a>

@@ -40,38 +40,58 @@
     </div>
     <div class="section">
         <h2>实施步骤 <span class="en">Implementation Steps</span></h2>
-        <div>
+<div>
 
 
 <div class="step-item">
     <div class="step-number">步骤 1</div>
     <div class="step-title">设计要求分析</div>
-    <div class="step-desc">确定机翼气动载荷、油箱容积与强度准则</div>
-    <div class="step-output">产出：设计需求文件</div>
+    <div class="step-desc">
+        本步骤对飞行器飞行品质进行深入分析，评估系统的稳定性、阻尼特性和操纵响应。飞行品质分析是飞行器设计的关键环节，依据MIL-STD-1797或GJB标准评价等级，为控制律设计提供指标要求。通过特征值分析、频域响应和时域仿真多维度评估。
+        <br><br>
+        • 运用MATLAB/Simulink进行特征值分析，计算短周期、长周期、滚转、偏航等模态的阻尼比和自然频率<br>• 绘制Bode图和根轨迹，分析系统稳定性裕度，确定相位裕度和增益裕度<br>• 按照MIL-STD-1797B标准评定飞行品质等级，区分Level 1/2/3飞行品质
+    </div>
+    <div class="step-output">产出：飞行品质分析报告（含特征值表、模态参数、Bode图、根轨迹、品质等级评定） ｜ 质量标准：分析方法符合规范、模态参数准确、品质等级评定正确</div>
 </div>
 <div class="step-item">
     <div class="step-number">步骤 2</div>
     <div class="step-title">结构布局设计</div>
-    <div class="step-desc">设计翼盒、翼梁与桁条布置方案</div>
-    <div class="step-output">产出：结构布局方案图</div>
+    <div class="step-desc">
+        本步骤进行飞行控制律设计，使闭环系统满足期望的飞行品质指标。控制律设计是飞行控制系统的核心，采用经典PID或现代控制理论方法，通过反馈校正改善系统动态特性。需考虑鲁棒性、抗扰性和工程可实现性。
+        <br><br>
+        • 采用根轨迹法或频域校正法设计PID控制器，确定比例、积分、微分增益参数<br>• 设计增稳系统和控制增稳系统，引入俯仰角速率、法向过载等反馈信号改善阻尼<br>• 使用LQR或H∞方法进行现代控制律设计，通过权重矩阵调节性能与鲁棒性平衡
+    </div>
+    <div class="step-output">产出：控制律设计报告（含控制器结构、参数整定过程、稳定性裕度、鲁棒性分析） ｜ 质量标准：控制律结构合理、参数优化、满足飞行品质指标、稳定裕度足够</div>
 </div>
 <div class="step-item">
     <div class="step-number">步骤 3</div>
     <div class="step-title">关键件选材与设计</div>
-    <div class="step-desc">选择蒙皮、长桁材料并设计尺寸</div>
-    <div class="step-output">产出：关键件设计图</div>
+    <div class="step-desc">
+        本步骤进行飞行控制律设计，使闭环系统满足期望的飞行品质指标。控制律设计是飞行控制系统的核心，采用经典PID或现代控制理论方法，通过反馈校正改善系统动态特性。需考虑鲁棒性、抗扰性和工程可实现性。
+        <br><br>
+        • 采用根轨迹法或频域校正法设计PID控制器，确定比例、积分、微分增益参数<br>• 设计增稳系统和控制增稳系统，引入俯仰角速率、法向过载等反馈信号改善阻尼<br>• 使用LQR或H∞方法进行现代控制律设计，通过权重矩阵调节性能与鲁棒性平衡
+    </div>
+    <div class="step-output">产出：控制律设计报告（含控制器结构、参数整定过程、稳定性裕度、鲁棒性分析） ｜ 质量标准：控制律结构合理、参数优化、满足飞行品质指标、稳定裕度足够</div>
 </div>
 <div class="step-item">
     <div class="step-number">步骤 4</div>
     <div class="step-title">传力路径分析</div>
-    <div class="step-desc">分析气动载荷传力路径并校核主要承力件</div>
-    <div class="step-output">产出：传力分析报告</div>
+    <div class="step-desc">
+        本步骤对飞行器飞行品质进行深入分析，评估系统的稳定性、阻尼特性和操纵响应。飞行品质分析是飞行器设计的关键环节，依据MIL-STD-1797或GJB标准评价等级，为控制律设计提供指标要求。通过特征值分析、频域响应和时域仿真多维度评估。
+        <br><br>
+        • 运用MATLAB/Simulink进行特征值分析，计算短周期、长周期、滚转、偏航等模态的阻尼比和自然频率<br>• 绘制Bode图和根轨迹，分析系统稳定性裕度，确定相位裕度和增益裕度<br>• 按照MIL-STD-1797B标准评定飞行品质等级，区分Level 1/2/3飞行品质
+    </div>
+    <div class="step-output">产出：飞行品质分析报告（含特征值表、模态参数、Bode图、根轨迹、品质等级评定） ｜ 质量标准：分析方法符合规范、模态参数准确、品质等级评定正确</div>
 </div>
 <div class="step-item">
     <div class="step-number">步骤 5</div>
     <div class="step-title">疲劳评估与报告</div>
-    <div class="step-desc">进行疲劳寿命初步评估并撰写设计报告</div>
-    <div class="step-output">产出：结构设计报告</div>
+    <div class="step-desc">
+        本步骤是航空航天工程项目的关键环节，通过专业方法和工具完成特定任务目标。航空航天工程强调安全性、可靠性和精确性，每一步都需要严谨的理论推导和充分的验证。采用行业标准方法和专业软件工具确保结果的准确性和工程实用性。
+        <br><br>
+        • 明确任务目标和技术指标，依据航空航天相关标准制定详细的实施方案和技术路线<br>• 使用专业软件工具（MATLAB/ANSYS/Fluent/CATIA等）进行建模、计算或仿真分析<br>• 通过试验数据或文献结果进行对比验证，确保结果可靠并满足工程要求
+    </div>
+    <div class="step-output">产出：专业技术报告（含方法说明、计算过程、结果数据、验证对比、结论建议） ｜ 质量标准：方法科学规范、数据准确可靠、结论有据可依、满足工程标准</div>
 </div>
             
 
@@ -80,36 +100,55 @@
 <div class="step-item">
     <div class="step-number">Step 1</div>
     <div class="step-title">Design Requirements Analysis</div>
-    <div class="step-desc">Define wing aerodynamic loads, fuel volume and strength criteria</div>
-    <div class="step-output">Deliverable: Design Requirements Doc</div>
+    <div class="step-desc">
+        This step conducts in-depth analysis of aircraft flying qualities, evaluating system stability, damping characteristics and control response. Flying qualities analysis is a critical element in aircraft design, evaluating levels based on MIL-STD-1797 or GJB standards, providing performance requirements for control law design. Multi-dimensional evaluation through eigenvalue analysis, frequency domain response and time domain simulation.
+        <br><br>
+        • Perform eigenvalue analysis using MATLAB/Simulink, calculate damping ratios and natural frequencies of short-period, phugoid, roll, yaw modes<br>• Plot Bode diagrams and root locus, analyze stability margins, determine phase margin and gain margin<br>• Rate flying qualities levels according to MIL-STD-1797B standard, distinguish Level 1/2/3 flying qualities
+    </div>
+    <div class="step-output">Deliverable: Flying qualities analysis report (including eigenvalue table, modal parameters, Bode plots, root locus, quality level assessment) | Quality standard: Analysis method compliant with standards, accurate modal parameters, correct quality rating</div>
 </div>
 <div class="step-item">
     <div class="step-number">Step 2</div>
     <div class="step-title">Structural Layout Design</div>
-    <div class="step-desc">Design wing box, spar and stringer layout scheme</div>
-    <div class="step-output">Deliverable: Layout Scheme Drawing</div>
+    <div class="step-desc">
+        This step performs flight control law design, enabling the closed-loop system to meet desired flying qualities specifications. Control law design is the core of flight control systems, using classical PID or modern control theory methods, improving system dynamic characteristics through feedback compensation. Robustness, disturbance rejection and engineering implementability must be considered.
+        <br><br>
+        • Design PID controller using root locus or frequency domain compensation methods, determine proportional, integral, derivative gain parameters<br>• Design stability augmentation system and control augmentation system, introduce pitch rate, normal acceleration feedback signals to improve damping<br>• Apply LQR or H∞ methods for modern control law design, adjust performance and robustness balance through weight matrices
+    </div>
+    <div class="step-output">Deliverable: Control law design report (including controller structure, parameter tuning process, stability margins, robustness analysis) | Quality standard: Reasonable control law structure, optimized parameters, meeting flying qualities specs, sufficient stability margins</div>
 </div>
 <div class="step-item">
     <div class="step-number">Step 3</div>
     <div class="step-title">Key Component Design</div>
-    <div class="step-desc">Select skin and stringer materials and design dimensions</div>
-    <div class="step-output">Deliverable: Key Component Drawings</div>
+    <div class="step-desc">
+        This step performs flight control law design, enabling the closed-loop system to meet desired flying qualities specifications. Control law design is the core of flight control systems, using classical PID or modern control theory methods, improving system dynamic characteristics through feedback compensation. Robustness, disturbance rejection and engineering implementability must be considered.
+        <br><br>
+        • Design PID controller using root locus or frequency domain compensation methods, determine proportional, integral, derivative gain parameters<br>• Design stability augmentation system and control augmentation system, introduce pitch rate, normal acceleration feedback signals to improve damping<br>• Apply LQR or H∞ methods for modern control law design, adjust performance and robustness balance through weight matrices
+    </div>
+    <div class="step-output">Deliverable: Control law design report (including controller structure, parameter tuning process, stability margins, robustness analysis) | Quality standard: Reasonable control law structure, optimized parameters, meeting flying qualities specs, sufficient stability margins</div>
 </div>
 <div class="step-item">
     <div class="step-number">Step 4</div>
     <div class="step-title">Load Path Analysis</div>
-    <div class="step-desc">Analyze load paths and check primary load-bearing members</div>
-    <div class="step-output">Deliverable: Load Path Analysis Report</div>
+    <div class="step-desc">
+        This step conducts in-depth analysis of aircraft flying qualities, evaluating system stability, damping characteristics and control response. Flying qualities analysis is a critical element in aircraft design, evaluating levels based on MIL-STD-1797 or GJB standards, providing performance requirements for control law design. Multi-dimensional evaluation through eigenvalue analysis, frequency domain response and time domain simulation.
+        <br><br>
+        • Perform eigenvalue analysis using MATLAB/Simulink, calculate damping ratios and natural frequencies of short-period, phugoid, roll, yaw modes<br>• Plot Bode diagrams and root locus, analyze stability margins, determine phase margin and gain margin<br>• Rate flying qualities levels according to MIL-STD-1797B standard, distinguish Level 1/2/3 flying qualities
+    </div>
+    <div class="step-output">Deliverable: Flying qualities analysis report (including eigenvalue table, modal parameters, Bode plots, root locus, quality level assessment) | Quality standard: Analysis method compliant with standards, accurate modal parameters, correct quality rating</div>
 </div>
 <div class="step-item">
     <div class="step-number">Step 5</div>
     <div class="step-title">Fatigue Evaluation and Report</div>
-    <div class="step-desc">Conduct preliminary fatigue evaluation and write design report</div>
-    <div class="step-output">Deliverable: Structural Design Report</div>
+    <div class="step-desc">
+        This step is a critical element in aerospace engineering projects, accomplishing specific task objectives through professional methods and tools. Aerospace engineering emphasizes safety, reliability and precision, requiring rigorous theoretical derivation and sufficient verification at every step. Industry standard methods and professional software tools are used to ensure result accuracy and engineering practicality.
+        <br><br>
+        • Clarify task objectives and technical specifications, develop detailed implementation plan and technical route based on aerospace related standards<br>• Use professional software tools (MATLAB/ANSYS/Fluent/CATIA, etc.) for modeling, calculation or simulation analysis<br>• Compare and validate with test data or literature results, ensuring results are reliable and meet engineering requirements
+    </div>
+    <div class="step-output">Deliverable: Professional technical report (including method description, calculation process, result data, validation comparison, conclusions and suggestions) | Quality standard: Scientific and standard method, accurate and reliable data, evidence-based conclusions, meeting engineering standards</div>
 </div>
             </div>
         </div>
-    </div>
     <div class="course-nav" style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:16px;padding:12px 16px;background:white;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,0.05);flex-wrap:wrap;">
     <a href="../aerospace.html" style="color:#667eea;text-decoration:none;font-size:0.88rem;">← 返回航空航天工程</a>
     <a href="aero-orbital.html" style="color:#667eea;text-decoration:none;font-size:0.88rem;">下一门：轨道力学 →</a>

@@ -38,6 +38,7 @@
         <p style="margin-top:8px;">Select a medical or public health dataset, apply appropriate statistical methods including descriptive statistics, hypothesis testing, and regression analysis. Write a complete statistical analysis report.</p>
         </div>
     </div>
+    
     <div class="section">
         <h2>实施步骤 <span class="en">Implementation Steps</span></h2>
         <div>
@@ -45,10 +46,114 @@
 
 <div class="step-item">
     <div class="step-number">步骤 1</div>
-    <div class="step-title">数据集选择</div>
-    <div class="step-desc">选择合适的医学数据集并明确研究问题</div>
-    <div class="step-output">产出：数据集说明</div>
+    <div class="step-title">研究问题确定与统计分析方案设计</div>
+    <div class="step-desc">
+        本步骤的核心任务是确定研究问题，设计科学的统计分析方案。需要将流行病学研究问题转化为可检验的统计学假设，选择合适的统计分析方法，制定详细的分析计划。统计分析方案的科学性是研究结果可靠性的保障。
+<br><br>
+• 确定研究问题：从疾病分布、危险因素分析、诊断试验评价、预后分析等方向选择具体研究问题，明确研究目的（描述、比较、关联、预测）<br>• 制定统计分析计划：确定数据类型（计量、计数、等级），选择统计方法（描述统计、t检验、卡方检验、方差分析、回归分析、生存分析等），设定检验水准α=0.05<br>• 样本量估算与检验效能：根据研究设计类型（横断面、病例对照、队列），使用样本量计算公式或软件（G*Power、PASS）估算所需样本量，评估检验效能（1-β≥0.8）
+    </div>
+    <div class="step-output">产出：统计分析方案（含研究假设、数据类型、统计方法选择、样本量计算、分析流程图）｜ 质量标准：研究假设明确，统计方法选择恰当，样本量计算正确，分析计划详细可行</div>
 </div>
+<div class="step-item">
+    <div class="step-number">步骤 2</div>
+    <div class="step-title">数据收集与数据库建立</div>
+    <div class="step-desc">
+        本步骤的核心任务是系统收集研究数据，建立规范的数据库。需要设计数据收集工具，制定数据录入规范，确保数据的完整性、准确性和一致性。数据质量是统计分析结果可靠性的基础，垃圾进垃圾出（Garbage In, Garbage Out）。
+<br><br>
+• 设计数据收集表：根据研究变量设计CRF表（病例报告表）或调查问卷，包括基本信息、暴露因素、结局指标、协变量等，定义变量编码规则和取值范围<br>• 建立数据库：使用EpiData、Excel或SPSS建立数据库，设置变量名、变量类型、标签、值标签、缺失值编码，设置逻辑校验和范围校验<br>• 数据录入与质量控制：采用双人双录入或录入后抽检方式，进行一致性检验（Kappa值、一致率），记录数据清洗日志，保存原始数据和清洗后数据
+    </div>
+    <div class="step-output">产出：研究数据集（含原始数据库、清洗后数据库、数据字典、数据清洗日志、质量控制报告）｜ 质量标准：数据完整准确，数据库结构规范，质量控制严格，变量定义清晰</div>
+</div>
+<div class="step-item">
+    <div class="step-number">步骤 3</div>
+    <div class="step-title">描述性统计与数据探索</div>
+    <div class="step-desc">
+        本步骤的核心任务是对数据进行全面的描述性统计和探索性分析，了解数据分布特征，发现数据中的规律和异常。描述性统计是统计分析的第一步，能够为后续的推断性统计提供基础，并帮助选择合适的统计方法。
+<br><br>
+• 计量资料描述：计算均数、中位数、标准差、四分位数间距、最大值、最小值，判断数据分布类型（正态分布、偏态分布），绘制直方图、箱线图、Q-Q图<br>• 计数资料描述：计算频数、频率、构成比、相对比，绘制条形图、饼图、帕累托图，描述分类变量的分布特征<br>• 数据探索与异常值检验：进行正态性检验（Shapiro-Wilk检验、Kolmogorov-Smirnov检验），识别异常值（3σ原则、箱线图法），分析缺失值模式，探索变量间的初步关系（散点图矩阵、相关矩阵）
+    </div>
+    <div class="step-output">产出：描述性统计报告（含统计描述表、分布图、探索性分析图表、数据质量评估）｜ 质量标准：描述全面准确，图表规范清晰，数据分布特征明确，异常值处理合理</div>
+</div>
+<div class="step-item">
+    <div class="step-number">步骤 4</div>
+    <div class="step-title">推断性统计与关联性分析</div>
+    <div class="step-desc">
+        本步骤的核心任务是运用推断性统计方法检验研究假设，分析变量间的关联性。需要根据研究设计和数据类型选择合适的统计检验方法，计算效应指标和置信区间，评估统计学意义和临床意义。关联性分析是流行病学研究的核心分析内容。
+<br><br>
+• 组间比较：根据数据类型和设计类型选择检验方法——计量资料用t检验（独立样本/配对）或方差分析（单因素/双因素/重复测量）；计数资料用卡方检验、Fisher确切概率法或秩和检验<br>• 关联性分析：计算相关系数（Pearson积差相关、Spearman秩相关），进行简单线性回归和多重线性回归分析，计算OR、RR、HR等关联指标及其95%置信区间<br>• 混杂因素控制：采用分层分析（Mantel-Haenszel法）、多因素回归分析（logistic回归、Cox比例风险模型）控制混杂因素，进行交互作用检验，绘制森林图展示结果
+    </div>
+    <div class="step-output">产出：推断性统计分析报告（含假设检验结果、关联强度指标、回归分析表、森林图、假设检验结论）｜ 质量标准：统计方法应用正确，结果解释合理，混杂控制得当，结论有据可依</div>
+</div>
+<div class="step-item">
+    <div class="step-number">步骤 5</div>
+    <div class="step-title">统计结果报告与论文撰写</div>
+    <div class="step-desc">
+        本步骤的核心任务是规范报告统计分析结果，撰写完整的研究论文或统计分析报告。需要遵循统计学报告规范（如STROBE、CONSORT），清晰准确地呈现研究方法、统计结果和结论。统计结果的规范报告是科学研究可重复性的重要保障。
+<br><br>
+• 结果报告规范：按照研究类型对应的报告规范（观察性研究STROBE、随机对照试验CONSORT、诊断试验STARD）撰写方法和结果部分，报告效应量及95%CI，给出精确P值<br>• 制作统计图表：按照学术期刊规范制作统计表（三线表）和统计图（散点图、柱状图、生存曲线、ROC曲线），标注清楚坐标轴、图例、误差线、统计学符号<br>• 撰写分析报告：撰写完整的统计分析报告或学术论文，包括摘要、引言、材料与方法、结果、讨论、结论、参考文献，讨论统计学意义与实际意义的区别，分析研究的局限性
+    </div>
+    <div class="step-output">产出：完整统计分析报告/研究论文（含全部统计分析结果、规范图表、讨论分析）、统计分析代码与数据文件｜ 质量标准：报告结构完整，统计方法描述详细，结果呈现规范，讨论深入充分</div>
+</div>
+
+            
+
+<div style="margin-top:14px;padding-top:10px;border-top:1px solid #eee;">
+    <h3 style="font-size:0.9rem;color:#667eea;margin-bottom:8px;">Steps</h3>
+<div class="step-item">
+    <div class="step-number">Step 1</div>
+    <div class="step-title">Research Question Definition and Statistical Analysis Plan Design</div>
+    <div class="step-desc">
+        The core task of this step is to define the research question and design a scientific statistical analysis plan. Transform epidemiological research questions into testable statistical hypotheses, select appropriate statistical analysis methods.
+<br><br>
+• Define research question: choose specific topics from disease distribution, risk factor analysis, diagnostic test evaluation, prognostic analysis; clarify research purpose (descriptive, comparative, associative, predictive)<br>• Develop statistical analysis plan: determine data types (continuous, count, ordinal); select statistical methods (descriptive stats, t-test, chi-square, ANOVA, regression, survival analysis); set significance level α=0.05<br>• Sample size estimation and power: based on study design (cross-sectional, case-control, cohort); use sample size formulas or software (G*Power, PASS); assess power (1-β≥0.8)
+    </div>
+    <div class="step-output">Deliverable: Statistical analysis plan (research hypotheses, data types, method selection, sample size calculation, analysis flowchart) | Quality standard: Clear research hypothesis, appropriate statistical method selection, correct sample size calculation, detailed and feasible analysis plan</div>
+</div>
+<div class="step-item">
+    <div class="step-number">Step 2</div>
+    <div class="step-title">Data Collection and Database Establishment</div>
+    <div class="step-desc">
+        The core task of this step is to systematically collect research data and establish a standardized database. Design data collection tools, develop data entry specifications, ensure data completeness, accuracy, and consistency.
+<br><br>
+• Design data collection forms: design CRF (Case Report Form) or questionnaires based on research variables, including basic information, exposure factors, outcome indicators, covariates; define variable coding rules and value ranges<br>• Establish database: use EpiData, Excel, or SPSS to build database; set variable names, types, labels, value labels, missing value codes; set logical validation and range validation<br>• Data entry and quality control: use double data entry or post-entry spot check; perform consistency testing (Kappa value, agreement rate); record data cleaning log; save raw and cleaned data
+    </div>
+    <div class="step-output">Deliverable: Research dataset (raw database, cleaned database, data dictionary, data cleaning log, quality control report) | Quality standard: Complete and accurate data, standardized database structure, strict quality control, clear variable definitions</div>
+</div>
+<div class="step-item">
+    <div class="step-number">Step 3</div>
+    <div class="step-title">Descriptive Statistics and Data Exploration</div>
+    <div class="step-desc">
+        The core task of this step is to perform comprehensive descriptive statistics and exploratory data analysis, understand data distribution characteristics, discover patterns and anomalies. Descriptive statistics is the first step of statistical analysis.
+<br><br>
+• Continuous data description: calculate mean, median, standard deviation, interquartile range, max, min; determine distribution type (normal, skewed); draw histograms, boxplots, Q-Q plots<br>• Categorical data description: calculate frequency, proportion, composition ratio, relative ratio; draw bar charts, pie charts, Pareto charts; describe distribution characteristics of categorical variables<br>• Data exploration and outlier testing: perform normality tests (Shapiro-Wilk, Kolmogorov-Smirnov); identify outliers (3σ rule, boxplot method); analyze missing value patterns; explore preliminary relationships among variables (scatterplot matrix, correlation matrix)
+    </div>
+    <div class="step-output">Deliverable: Descriptive statistics report (statistical description tables, distribution plots, exploratory analysis charts, data quality assessment) | Quality standard: Comprehensive and accurate description, standard and clear charts, clear distribution characteristics, reasonable outlier handling</div>
+</div>
+<div class="step-item">
+    <div class="step-number">Step 4</div>
+    <div class="step-title">Inferential Statistics and Association Analysis</div>
+    <div class="step-desc">
+        The core task of this step is to test research hypotheses using inferential statistical methods and analyze associations among variables. Select appropriate statistical test methods based on study design and data types.
+<br><br>
+• Group comparison: select test methods based on data type and design—continuous data use t-test (independent/paired) or ANOVA (one-way/two-way/repeated measures); categorical data use chi-square, Fisher exact test, or rank sum test<br>• Association analysis: calculate correlation coefficients (Pearson product-moment, Spearman rank); perform simple and multiple linear regression; calculate association indicators (OR, RR, HR) with 95% confidence intervals<br>• Confounding control: use stratified analysis (Mantel-Haenszel method), multivariable regression (logistic regression, Cox proportional hazards model); test for interaction; draw forest plots to present results
+    </div>
+    <div class="step-output">Deliverable: Inferential statistics analysis report (hypothesis test results, association strength indicators, regression analysis tables, forest plots, hypothesis test conclusions) | Quality standard: Correct application of statistical methods, reasonable result interpretation, proper confounding control, evidence-based conclusions</div>
+</div>
+<div class="step-item">
+    <div class="step-number">Step 5</div>
+    <div class="step-title">Statistical Results Reporting and Paper Writing</div>
+    <div class="step-desc">
+        The core task of this step is to report statistical analysis results in a standardized manner and write a complete research paper or statistical analysis report. Follow statistical reporting guidelines (STROBE, CONSORT).
+<br><br>
+• Result reporting standards: follow reporting guidelines corresponding to study type (STROBE for observational, CONSORT for RCT, STARD for diagnostic tests); report effect sizes with 95% CI; provide exact P-values<br>• Create statistical charts: produce statistical tables (three-line tables) and graphs (scatter plots, bar charts, survival curves, ROC curves) following journal standards; clearly label axes, legends, error bars, statistical symbols<br>• Write analysis report: compose complete statistical analysis report or academic paper including abstract, introduction, materials and methods, results, discussion, conclusion, references; discuss difference between statistical and practical significance; analyze study limitations
+    </div>
+    <div class="step-output">Deliverable: Complete statistical analysis report/research paper (all statistical results, standard charts, discussion), statistical analysis code and data files | Quality standard: Complete report structure, detailed statistical method description, standard result presentation, in-depth and thorough discussion</div>
+</div>
+
+            </div>
+        </div>
+    </div>
+
 <div class="step-item">
     <div class="step-number">步骤 2</div>
     <div class="step-title">数据清理与描述</div>

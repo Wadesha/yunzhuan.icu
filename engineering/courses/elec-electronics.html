@@ -40,38 +40,58 @@
     </div>
     <div class="section">
         <h2>实施步骤 <span class="en">Implementation Steps</span></h2>
-        <div>
+<div>
 
 
 <div class="step-item">
     <div class="step-number">步骤 1</div>
     <div class="step-title">性能指标分析</div>
-    <div class="step-desc">确定增益、带宽、输入阻抗与输出功率指标</div>
-    <div class="step-output">产出：设计指标文档</div>
+    <div class="step-desc">
+        本步骤对电气工程问题进行深入分析，明确设计指标和技术要求。电气工程涉及强电和弱电多个领域，需从功能需求、性能指标、约束条件等多维度分析。通过需求分析和指标分解确定设计输入，为后续电路设计和系统实现奠定基础。
+        <br><br>
+        • 分析系统功能需求和性能指标，包括频率响应、增益、带宽、信噪比、功耗等关键参数<br>• 确定约束条件，如电源电压、工作温度、尺寸限制、成本预算、电磁兼容要求等<br>• 查阅相关技术标准和规范（如GB、IEC、IEEE标准），明确设计依据和测试方法
+    </div>
+    <div class="step-output">产出：需求分析报告（含功能需求、性能指标、约束条件、设计依据、技术路线） ｜ 质量标准：需求明确、指标具体、约束清晰、依据充分</div>
 </div>
 <div class="step-item">
     <div class="step-number">步骤 2</div>
     <div class="step-title">电路方案设计</div>
-    <div class="step-desc">设计前置级、推动级与功放级方案</div>
-    <div class="step-output">产出：电路方案图</div>
+    <div class="step-desc">
+        本步骤进行电气系统或电路的方案设计，将功能指标转化为具体的电路结构和参数。电路设计是电气工程的核心，需在性能、功耗、成本和可靠性之间寻求最优平衡。采用模块化设计方法，通过理论计算和仿真验证迭代优化设计方案。
+        <br><br>
+        • 选择电路拓扑结构，确定系统架构和模块划分，设计信号流向和接口规范<br>• 进行元器件选型和参数计算，依据器件手册（datasheet）确定工作点和外围元件参数<br>• 使用Cadence、Altium Designer或Multisim绘制电路原理图，进行设计规则检查(DRC)
+    </div>
+    <div class="step-output">产出：设计文档（含电路原理图、BOM表、参数计算、元器件选型说明、接口定义） ｜ 质量标准：拓扑合理、参数正确、选型得当、满足指标</div>
 </div>
 <div class="step-item">
     <div class="step-number">步骤 3</div>
     <div class="step-title">器件选型与偏置计算</div>
-    <div class="step-desc">选择晶体管并计算静态工作点</div>
-    <div class="step-output">产出：器件参数与偏置计算</div>
+    <div class="step-desc">
+        本步骤进行电气系统的详细计算，获取定量的电气参数和性能指标。电气计算是电气工程设计的基础，依据电路理论和电磁学原理，通过精确计算确定系统的工作状态和性能边界。计算结果为元器件选型和系统优化提供定量依据。
+        <br><br>
+        • 运用基尔霍夫定律、节点电压法或回路电流法进行电路稳态分析计算<br>• 进行传递函数推导和频率特性计算，绘制幅频特性和相频特性曲线<br>• 进行功率计算和效率分析，估算系统功耗和热损耗，确保元器件工作在额定范围内
+    </div>
+    <div class="step-output">产出：计算书（含计算公式、推导过程、数值结果、性能指标汇总） ｜ 质量标准：公式正确、推导严谨、结果准确、与仿真一致</div>
 </div>
 <div class="step-item">
     <div class="step-number">步骤 4</div>
     <div class="step-title">仿真验证</div>
-    <div class="step-desc">在Multisim中仿真频率响应与失真</div>
-    <div class="step-output">产出：仿真波形</div>
+    <div class="step-desc">
+        本步骤使用仿真软件对电路或系统进行仿真验证，在制作实物前全面验证设计性能。仿真是现代电子设计的必要手段，可以快速验证电路功能、分析参数敏感性、发现潜在问题。通过SPICE仿真、频域分析和瞬态分析多维度验证设计。
+        <br><br>
+        • 建立仿真模型，设置元器件模型参数和激励源，确保仿真模型准确反映实际电路<br>• 进行直流工作点分析、交流小信号分析、瞬态分析、噪声分析和蒙特卡洛分析<br>• 进行参数扫描和温度扫描，分析关键参数变化对系统性能的影响
+    </div>
+    <div class="step-output">产出：仿真报告（含仿真电路、波形曲线、性能参数、参数扫描结果、问题分析） ｜ 质量标准：模型准确、覆盖全面、波形合理、指标达标</div>
 </div>
 <div class="step-item">
     <div class="step-number">步骤 5</div>
     <div class="step-title">性能评估与报告</div>
-    <div class="step-desc">评估放大器性能并撰写设计报告</div>
-    <div class="step-output">产出：放大器设计报告</div>
+    <div class="step-desc">
+        本步骤是电气工程设计的关键环节，运用电路理论和专业方法解决电气系统问题。电气工程强调精确性和可靠性，每一步都需要严谨的理论分析和充分的实验验证。采用行业标准设计方法和专业EDA工具保证设计质量。
+        <br><br>
+        • 依据电气设计规范和标准，制定详细的技术方案和测试方法<br>• 使用专业EDA软件（Cadence/Altium/Multisim/PSpice等）进行设计、仿真和分析<br>• 进行功能测试、性能测试和可靠性验证，确保满足设计指标和标准要求
+    </div>
+    <div class="step-output">产出：电气工程设计报告（含原理图、计算过程、仿真结果、测试数据） ｜ 质量标准：设计规范、计算准确、仿真充分、测试合格</div>
 </div>
             
 
@@ -80,36 +100,55 @@
 <div class="step-item">
     <div class="step-number">Step 1</div>
     <div class="step-title">Performance Specification Analysis</div>
-    <div class="step-desc">Define gain, bandwidth, input impedance and output power specs</div>
-    <div class="step-output">Deliverable: Design Spec Document</div>
+    <div class="step-desc">
+        This step conducts in-depth analysis of electrical engineering problems, clarifying design specifications and technical requirements. Electrical engineering covers multiple fields of power and electronics, requiring multi-dimensional analysis from functional requirements, performance indicators, constraint conditions, etc. Determine design inputs through requirements analysis and specification decomposition, laying the foundation for subsequent circuit design and system implementation.
+        <br><br>
+        • Analyze system functional requirements and performance indicators, including frequency response, gain, bandwidth, SNR, power consumption and other key parameters<br>• Determine constraint conditions, such as supply voltage, operating temperature, size limits, cost budget, EMC requirements, etc.<br>• Consult relevant technical standards and specifications (GB, IEC, IEEE standards), clarify design basis and test methods
+    </div>
+    <div class="step-output">Deliverable: Requirements analysis report (including functional requirements, performance specifications, constraints, design basis, technical route) | Quality standard: Clear requirements, specific indicators, clear constraints, sufficient basis</div>
 </div>
 <div class="step-item">
     <div class="step-number">Step 2</div>
     <div class="step-title">Circuit Scheme Design</div>
-    <div class="step-desc">Design pre-amplifier, driver and power amplifier stages</div>
-    <div class="step-output">Deliverable: Circuit Scheme Diagram</div>
+    <div class="step-desc">
+        This step performs scheme design of electrical systems or circuits, translating functional specifications into specific circuit structures and parameters. Circuit design is the core of electrical engineering, requiring optimal balance among performance, power consumption, cost and reliability. Adopt modular design methods, iteratively optimize design schemes through theoretical calculation and simulation verification.
+        <br><br>
+        • Select circuit topology, determine system architecture and module division, design signal flow and interface specifications<br>• Perform component selection and parameter calculation, determine operating point and peripheral component parameters based on device datasheets<br>• Draw circuit schematics using Cadence, Altium Designer or Multisim, perform design rule check (DRC)
+    </div>
+    <div class="step-output">Deliverable: Design document (including circuit schematic, BOM table, parameter calculation, component selection description, interface definition) | Quality standard: Reasonable topology, correct parameters, appropriate selection, meeting specifications</div>
 </div>
 <div class="step-item">
     <div class="step-number">Step 3</div>
     <div class="step-title">Device Selection and Bias Calculation</div>
-    <div class="step-desc">Select transistors and calculate quiescent operating points</div>
-    <div class="step-output">Deliverable: Device Parameters and Bias Calculation</div>
+    <div class="step-desc">
+        This step performs detailed calculation of electrical systems, obtaining quantitative electrical parameters and performance indicators. Electrical calculation is the foundation of electrical engineering design, based on circuit theory and electromagnetic principles, determining system operating state and performance boundaries through precise calculation. Calculation results provide quantitative basis for component selection and system optimization.
+        <br><br>
+        • Perform circuit steady-state analysis calculation using Kirchhoff's laws, node voltage method or mesh current method<br>• Derive transfer functions and calculate frequency characteristics, plot magnitude-frequency and phase-frequency characteristic curves<br>• Perform power calculation and efficiency analysis, estimate system power consumption and heat loss, ensuring components operate within rated range
+    </div>
+    <div class="step-output">Deliverable: Calculation document (including calculation formulas, derivation process, numerical results, performance indicator summary) | Quality standard: Correct formulas, rigorous derivation, accurate results, consistent with simulation</div>
 </div>
 <div class="step-item">
     <div class="step-number">Step 4</div>
     <div class="step-title">Simulation Verification</div>
-    <div class="step-desc">Simulate frequency response and distortion in Multisim</div>
-    <div class="step-output">Deliverable: Simulation Waveforms</div>
+    <div class="step-desc">
+        This step uses simulation software for circuit or system simulation verification, comprehensively verifying design performance before physical implementation. Simulation is an essential means in modern electronic design, enabling quick verification of circuit functionality, analysis of parameter sensitivity, and discovery of potential problems. Multi-dimensional design verification through SPICE simulation, frequency domain analysis and transient analysis.
+        <br><br>
+        • Build simulation model, set component model parameters and excitation sources, ensuring the simulation model accurately reflects the actual circuit<br>• Perform DC operating point analysis, AC small signal analysis, transient analysis, noise analysis and Monte Carlo analysis<br>• Conduct parameter sweep and temperature sweep, analyze the influence of key parameter changes on system performance
+    </div>
+    <div class="step-output">Deliverable: Simulation report (including simulation circuit, waveform curves, performance parameters, parameter sweep results, problem analysis) | Quality standard: Accurate model, comprehensive coverage, reasonable waveforms, specifications met</div>
 </div>
 <div class="step-item">
     <div class="step-number">Step 5</div>
     <div class="step-title">Performance Evaluation and Report</div>
-    <div class="step-desc">Evaluate amplifier performance and write design report</div>
-    <div class="step-output">Deliverable: Amplifier Design Report</div>
+    <div class="step-desc">
+        This step is a critical element in electrical engineering design, using circuit theory and professional methods to solve electrical system problems. Electrical engineering emphasizes precision and reliability, requiring rigorous theoretical analysis and sufficient experimental verification at every step. Industry standard design methods and professional EDA tools are used to ensure design quality.
+        <br><br>
+        • Develop detailed technical solutions and test methods according to electrical design specifications and standards<br>• Use professional EDA software (Cadence/Altium/Multisim/PSpice, etc.) for design, simulation and analysis<br>• Perform functional testing, performance testing and reliability verification, ensuring meeting design specifications and standard requirements
+    </div>
+    <div class="step-output">Deliverable: Electrical engineering design report (including schematics, calculation process, simulation results, test data) | Quality standard: Standard design, accurate calculation, sufficient simulation, qualified testing</div>
 </div>
             </div>
         </div>
-    </div>
     <div class="course-nav" style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:16px;padding:12px 16px;background:white;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,0.05);flex-wrap:wrap;">
     <a href="../electrical.html" style="color:#667eea;text-decoration:none;font-size:0.88rem;">← 返回电气工程</a>
     <a href="elec-digital.html" style="color:#667eea;text-decoration:none;font-size:0.88rem;">下一门：数字电路设计 →</a>

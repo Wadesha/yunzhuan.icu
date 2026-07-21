@@ -38,6 +38,8 @@
         <p style="margin-top:8px;">Select a physiological system (such as cardiovascular, respiratory, or motor system), design experiments to observe regulatory mechanisms, and collect and analyze physiological data. Write an experimental research report.</p>
         </div>
     </div>
+    
+    
     <div class="section">
         <h2>实施步骤 <span class="en">Implementation Steps</span></h2>
         <div>
@@ -45,10 +47,250 @@
 
 <div class="step-item">
     <div class="step-number">步骤 1</div>
-    <div class="step-title">选题与设计</div>
-    <div class="step-desc">选定生理系统并设计实验方案</div>
-    <div class="step-output">产出：实验设计书</div>
+    <div class="step-title">生理系统选择与实验方案设计</div>
+    <div class="step-desc">
+        本步骤的核心任务是选择一个重要的生理系统，设计科学的实验方案来研究其功能调节机制。需要从神经、肌肉、血液、循环、呼吸、消化、泌尿、内分泌等系统中选择一个具有代表性的功能进行实验研究。实验设计应遵循对照、随机、重复的科学实验原则。
+<br><br>
+• 从心血管系统调节（压力感受性反射、心率变异性）、呼吸系统调节（肺通气、血气变化）、神经-肌肉生理（肌电、肌肉收缩）、泌尿系统（尿生成调节）等中选择一个研究主题<br>• 实验设计：确定实验对象（人或实验动物）、实验组与对照组（自身对照或组间对照）、观察指标（心率、血压、呼吸频率、潮气量、肌电等）、实验流程和数据采集方案<br>• 列出实验器材：生理信号采集系统（PowerLab/BL-420）、血压换能器、呼吸换能器、针形电极、心电图电极等，以及实验步骤和安全注意事项
+    </div>
+    <div class="step-output">产出：生理学实验设计方案（含研究问题、实验对象、分组方案、观察指标、器材清单、实验流程）｜ 质量标准：实验设计科学合理，指标选择恰当，对照设置合适，流程清晰可行</div>
 </div>
+<div class="step-item">
+    <div class="step-number">步骤 2</div>
+    <div class="step-title">实验准备与仪器校准</div>
+    <div class="step-desc">
+        本步骤的核心任务是做好实验前的各项准备工作，校准实验仪器，确保实验能够顺利进行并获得可靠数据。生理学实验对仪器精度和操作规范性要求很高，仪器的准确校准是获得可靠数据的前提。实验准备充分与否直接影响实验成败。
+<br><br>
+• 仪器准备与校准：连接生理信号采集系统和各种换能器，开机预热；校准血压换能器（用汞柱血压计定标）、呼吸流量传感器、生物电放大器，设置采样率（如1000Hz）和滤波参数<br>• 实验对象准备：如为人体实验，受试者签署知情同意书，测量身高、体重、基础血压心率；如为动物实验，进行麻醉（20%乌拉坦5ml/kg腹腔注射）、手术（气管插管、颈总动脉插管、迷走神经分离等）<br>• 预实验测试：进行短时间预实验，观察信号质量，调整电极位置和增益参数，确保信号清晰稳定，排除干扰因素
+    </div>
+    <div class="step-output">产出：实验准备记录（含仪器校准记录、参数设置表、受试者/动物基线数据、预实验结果）｜ 质量标准：仪器校准准确，参数设置合理，基线数据稳定，预实验信号质量良好</div>
+</div>
+<div class="step-item">
+    <div class="step-number">步骤 3</div>
+    <div class="step-title">生理实验操作与数据采集</div>
+    <div class="step-desc">
+        本步骤的核心任务是按照实验方案规范操作，系统采集生理数据。实验过程中需要严格控制实验条件，避免干扰因素，确保数据的准确性和可重复性。每个实验条件需要重复多次，每个测量需要有足够的记录时间。
+<br><br>
+• 基础状态记录：记录安静状态下的各项生理指标基线值（心率、血压、呼吸频率、心电图等），连续记录5-10分钟，取稳定期数据作为对照<br>• 实验干预与记录：按照实验方案施加干预因素（如体位改变、运动负荷、Valsalva动作、颈动脉窦按摩、药物注射、缺氧刺激等），同步记录各项生理指标的动态变化<br>• 平行对照与重复：每项实验干预做3次重复，设置合适的恢复间隔，记录实验过程中的现象和异常情况，及时在实验记录本上备注
+    </div>
+    <div class="step-output">产出：原始生理数据文件（含多导生理记录图）、实验记录本（含操作步骤、干预时间点、实验现象、异常记录）｜ 质量标准：操作规范有序，数据完整同步，重复实验一致性好，记录详实准确</div>
+</div>
+<div class="step-item">
+    <div class="step-number">步骤 4</div>
+    <div class="step-title">数据处理与生理机制分析</div>
+    <div class="step-desc">
+        本步骤的核心任务是对采集的生理数据进行系统的处理和分析，运用生理学原理解释实验结果，阐明功能调节机制。数据处理需要使用专业的生理信号分析软件，提取特征参数，进行统计分析。机制分析需要结合神经调节、体液调节和自身调节等生理学基本理论。
+<br><br>
+• 数据预处理：使用生理信号分析软件（LabChart、Matlab）对原始数据进行滤波、去趋势、分段截取等预处理，提取有效数据段<br>• 参数提取与统计：计算各项指标的平均值、标准差，如心率变异性（HRV）的时域和频域指标、血压的收缩压/舒张压/平均动脉压、呼吸的潮气量/分钟通气量等，进行配对t检验或方差分析<br>• 机制分析：运用生理学原理解释实验结果，分析调节机制（神经调节通路、体液因子作用、负反馈调节过程），绘制调节机制框图
+    </div>
+    <div class="step-output">产出：数据分析报告（含数据处理方法、统计结果表、关系曲线图、机制分析讨论）｜ 质量标准：数据处理方法正确，统计分析规范，机制分析深入合理</div>
+</div>
+<div class="step-item">
+    <div class="step-number">步骤 5</div>
+    <div class="step-title">实验报告撰写与讨论</div>
+    <div class="step-desc">
+        本步骤的核心任务是撰写完整的生理学实验研究报告，系统呈现实验设计、实验方法、数据结果和机制分析。报告应体现生理学实验的科学严谨性，讨论实验结果的生理意义和临床应用价值。实验报告是科学研究能力的综合体现。
+<br><br>
+• 按照生理学实验报告规范撰写：摘要、引言、材料与方法、实验结果、分析与讨论、结论、参考文献，字数不少于3000字<br>• 制作高质量结果图表：原始生理记录图（标注关键事件）、统计柱状图/折线图（带误差棒）、机制示意图，图题表题清晰规范<br>• 深入讨论：分析实验结果与理论预期的一致性，讨论影响因素和误差来源，比较不同实验条件下的差异，联系临床应用（如心血管疾病、呼吸功能不全），提出改进建议
+    </div>
+    <div class="step-output">产出：完整生理学实验报告（PDF格式，含原始记录、数据统计、机制分析）、数据文件附件｜ 质量标准：报告结构完整、数据可靠、分析深入、讨论充分、格式规范</div>
+</div>
+
+            
+
+<div style="margin-top:14px;padding-top:10px;border-top:1px solid #eee;">
+    <h3 style="font-size:0.9rem;color:#667eea;margin-bottom:8px;">Steps</h3>
+<div class="step-item">
+    <div class="step-number">Step 1</div>
+    <div class="step-title">Physiological System Selection and Experimental Protocol Design</div>
+    <div class="step-desc">
+        The core task of this step is to select an important physiological system and design a scientific experimental protocol to study its functional regulation mechanism. Choose a representative function from nervous, muscular, blood, circulatory, respiratory, digestive, urinary, or endocrine systems.
+<br><br>
+• Choose a research topic from cardiovascular regulation (baroreflex, heart rate variability), respiratory regulation (pulmonary ventilation, blood gas changes), neuro-muscular physiology (EMG, muscle contraction), urinary system (urine formation regulation), etc.<br>• Experimental design: determine experimental subjects (human or lab animals), experimental and control groups (self-control or inter-group control), observation indicators (heart rate, blood pressure, respiratory rate, tidal volume, EMG, etc.), experimental workflow and data collection plan<br>• List experimental equipment: physiological signal acquisition system (PowerLab/BL-420), pressure transducer, respiration transducer, needle electrodes, ECG electrodes, etc.; include experimental procedures and safety precautions
+    </div>
+    <div class="step-output">Deliverable: Physiology experiment design proposal (research question, subjects, grouping scheme, observation indicators, equipment list, experimental workflow) | Quality standard: Scientific and reasonable design, appropriate indicator selection, proper control setting, clear and feasible workflow</div>
+</div>
+<div class="step-item">
+    <div class="step-number">Step 2</div>
+    <div class="step-title">Experimental Preparation and Instrument Calibration</div>
+    <div class="step-desc">
+        The core task of this step is to complete all pre-experiment preparations and calibrate experimental instruments to ensure smooth experiment execution and reliable data. Physiology experiments require high instrument precision and operational standardization.
+<br><br>
+• Instrument preparation and calibration: connect physiological signal acquisition system with various transducers; power on and warm up; calibrate blood pressure transducer (with mercury sphygmomanometer), respiratory flow sensor, bioelectric amplifier; set sampling rate (e.g., 1000Hz) and filtering parameters<br>• Subject preparation: for human experiments, subjects sign informed consent; measure height, weight, baseline BP and HR; for animal experiments, perform anesthesia (20% urethane 5ml/kg i.p.), surgery (tracheal intubation, carotid artery cannulation, vagus nerve isolation, etc.)<br>• Pilot test: conduct short pilot experiment; observe signal quality; adjust electrode positions and gain parameters; ensure clear and stable signals; eliminate interfering factors
+    </div>
+    <div class="step-output">Deliverable: Experiment preparation records (instrument calibration records, parameter settings table, subject/animal baseline data, pilot results) | Quality standard: Accurate instrument calibration, reasonable parameter settings, stable baseline data, good pilot signal quality</div>
+</div>
+<div class="step-item">
+    <div class="step-number">Step 3</div>
+    <div class="step-title">Physiological Experiment Operation and Data Acquisition</div>
+    <div class="step-desc">
+        The core task of this step is to perform standard operations according to experimental protocol and systematically collect physiological data. During experiments, strictly control experimental conditions, avoid interfering factors, and ensure data accuracy and reproducibility.
+<br><br>
+• Baseline state recording: record baseline values of all physiological indicators at rest (HR, BP, respiratory rate, ECG, etc.); record continuously for 5-10 minutes; use stable period data as control<br>• Experimental intervention and recording: apply intervention factors according to protocol (postural change, exercise load, Valsalva maneuver, carotid sinus massage, drug injection, hypoxic stimulus, etc.); synchronously record dynamic changes of all physiological indicators<br>• Parallel control and replication: repeat each intervention 3 times; set appropriate recovery intervals; record experimental phenomena and abnormal situations; make notes in lab notebook promptly
+    </div>
+    <div class="step-output">Deliverable: Raw physiological data files (including multi-channel physiological recordings), lab notebook (procedures, intervention time points, experimental phenomena, abnormality records) | Quality standard: Standard and orderly operation, complete and synchronized data, good repeat consistency, detailed and accurate records</div>
+</div>
+<div class="step-item">
+    <div class="step-number">Step 4</div>
+    <div class="step-title">Data Processing and Physiological Mechanism Analysis</div>
+    <div class="step-desc">
+        The core task of this step is to systematically process and analyze collected physiological data, explain experimental results using physiological principles, and clarify functional regulation mechanisms. Data processing requires professional physiological signal analysis software.
+<br><br>
+• Data preprocessing: use physiological signal analysis software (LabChart, Matlab) for filtering, detrending, segmenting raw data; extract valid data segments<br>• Parameter extraction and statistics: calculate mean and standard deviation of each indicator, such as heart rate variability (HRV) time and frequency domain parameters, systolic/diastolic/mean arterial pressure, tidal volume/minute ventilation; perform paired t-test or ANOVA<br>• Mechanism analysis: explain experimental results using physiological principles; analyze regulatory mechanisms (neural regulatory pathways, humoral factor effects, negative feedback processes); draw regulatory mechanism block diagrams
+    </div>
+    <div class="step-output">Deliverable: Data analysis report (data processing methods, statistical results tables, relationship curves, mechanism analysis discussion) | Quality standard: Correct data processing methods, standard statistical analysis, in-depth and reasonable mechanism analysis</div>
+</div>
+<div class="step-item">
+    <div class="step-number">Step 5</div>
+    <div class="step-title">Lab Report Writing and Discussion</div>
+    <div class="step-desc">
+        The core task of this step is to write a complete physiology experiment report systematically presenting experimental design, methods, data results, and mechanism analysis. The report should demonstrate scientific rigor of physiology experiments and discuss physiological significance and clinical application value.
+<br><br>
+• Write according to physiology lab report standards: abstract, introduction, materials and methods, experimental results, analysis and discussion, conclusion, references; minimum 3000 words<br>• Create high-quality result figures: raw physiological recording traces (with key events labeled), statistical bar/line charts (with error bars), mechanism diagrams; clear and standard figure/table captions<br>• In-depth discussion: analyze consistency between results and theoretical expectations; discuss influencing factors and error sources; compare differences under different experimental conditions; connect to clinical applications (cardiovascular diseases, respiratory insufficiency); propose improvement suggestions
+    </div>
+    <div class="step-output">Deliverable: Complete physiology lab report (PDF format with raw recordings, data statistics, mechanism analysis), data file attachments | Quality standard: Complete structure, reliable data, in-depth analysis, thorough discussion, professional format</div>
+</div>
+
+            </div>
+        </div>
+    </div>
+
+<div class="step-item">
+    <div class="step-number">步骤 2</div>
+    <div class="step-title">实验准备与仪器校准</div>
+    <div class="step-desc">
+        本步骤的核心任务是做好实验前的各项准备工作，校准实验仪器，确保实验能够顺利进行并获得可靠数据。生理学实验对仪器精度和操作规范性要求很高，仪器的准确校准是获得可靠数据的前提。实验准备充分与否直接影响实验成败。
+<br><br>
+• 仪器准备与校准：连接生理信号采集系统和各种换能器，开机预热；校准血压换能器（用汞柱血压计定标）、呼吸流量传感器、生物电放大器，设置采样率（如1000Hz）和滤波参数
+<br>
+• 实验对象准备：如为人体实验，受试者签署知情同意书，测量身高、体重、基础血压心率；如为动物实验，进行麻醉（20%乌拉坦5ml/kg腹腔注射）、手术（气管插管、颈总动脉插管、迷走神经分离等）
+<br>
+• 预实验测试：进行短时间预实验，观察信号质量，调整电极位置和增益参数，确保信号清晰稳定，排除干扰因素
+    </div>
+    <div class="step-output">产出：实验准备记录（含仪器校准记录、参数设置表、受试者/动物基线数据、预实验结果）｜ 质量标准：仪器校准准确，参数设置合理，基线数据稳定，预实验信号质量良好</div>
+</div>
+<div class="step-item">
+    <div class="step-number">步骤 3</div>
+    <div class="step-title">生理实验操作与数据采集</div>
+    <div class="step-desc">
+        本步骤的核心任务是按照实验方案规范操作，系统采集生理数据。实验过程中需要严格控制实验条件，避免干扰因素，确保数据的准确性和可重复性。每个实验条件需要重复多次，每个测量需要有足够的记录时间。
+<br><br>
+• 基础状态记录：记录安静状态下的各项生理指标基线值（心率、血压、呼吸频率、心电图等），连续记录5-10分钟，取稳定期数据作为对照
+<br>
+• 实验干预与记录：按照实验方案施加干预因素（如体位改变、运动负荷、Valsalva动作、颈动脉窦按摩、药物注射、缺氧刺激等），同步记录各项生理指标的动态变化
+<br>
+• 平行对照与重复：每项实验干预做3次重复，设置合适的恢复间隔，记录实验过程中的现象和异常情况，及时在实验记录本上备注
+    </div>
+    <div class="step-output">产出：原始生理数据文件（含多导生理记录图）、实验记录本（含操作步骤、干预时间点、实验现象、异常记录）｜ 质量标准：操作规范有序，数据完整同步，重复实验一致性好，记录详实准确</div>
+</div>
+<div class="step-item">
+    <div class="step-number">步骤 4</div>
+    <div class="step-title">数据处理与生理机制分析</div>
+    <div class="step-desc">
+        本步骤的核心任务是对采集的生理数据进行系统的处理和分析，运用生理学原理解释实验结果，阐明功能调节机制。数据处理需要使用专业的生理信号分析软件，提取特征参数，进行统计分析。机制分析需要结合神经调节、体液调节和自身调节等生理学基本理论。
+<br><br>
+• 数据预处理：使用生理信号分析软件（LabChart、Matlab）对原始数据进行滤波、去趋势、分段截取等预处理，提取有效数据段
+<br>
+• 参数提取与统计：计算各项指标的平均值、标准差，如心率变异性（HRV）的时域和频域指标、血压的收缩压/舒张压/平均动脉压、呼吸的潮气量/分钟通气量等，进行配对t检验或方差分析
+<br>
+• 机制分析：运用生理学原理解释实验结果，分析调节机制（神经调节通路、体液因子作用、负反馈调节过程），绘制调节机制框图
+    </div>
+    <div class="step-output">产出：数据分析报告（含数据处理方法、统计结果表、关系曲线图、机制分析讨论）｜ 质量标准：数据处理方法正确，统计分析规范，机制分析深入合理</div>
+</div>
+<div class="step-item">
+    <div class="step-number">步骤 5</div>
+    <div class="step-title">实验报告撰写与讨论</div>
+    <div class="step-desc">
+        本步骤的核心任务是撰写完整的生理学实验研究报告，系统呈现实验设计、实验方法、数据结果和机制分析。报告应体现生理学实验的科学严谨性，讨论实验结果的生理意义和临床应用价值。实验报告是科学研究能力的综合体现。
+<br><br>
+• 按照生理学实验报告规范撰写：摘要、引言、材料与方法、实验结果、分析与讨论、结论、参考文献，字数不少于3000字
+<br>
+• 制作高质量结果图表：原始生理记录图（标注关键事件）、统计柱状图/折线图（带误差棒）、机制示意图，图题表题清晰规范
+<br>
+• 深入讨论：分析实验结果与理论预期的一致性，讨论影响因素和误差来源，比较不同实验条件下的差异，联系临床应用（如心血管疾病、呼吸功能不全），提出改进建议
+    </div>
+    <div class="step-output">产出：完整生理学实验报告（PDF格式，含原始记录、数据统计、机制分析）、数据文件附件｜ 质量标准：报告结构完整、数据可靠、分析深入、讨论充分、格式规范</div>
+</div>
+
+            
+
+<div style="margin-top:14px;padding-top:10px;border-top:1px solid #eee;">
+    <h3 style="font-size:0.9rem;color:#667eea;margin-bottom:8px;">Steps</h3>
+<div class="step-item">
+    <div class="step-number">Step 1</div>
+    <div class="step-title">Physiological System Selection and Experimental Protocol Design</div>
+    <div class="step-desc">
+        The core task of this step is to select an important physiological system and design a scientific experimental protocol to study its functional regulation mechanism. Choose a representative function from nervous, muscular, blood, circulatory, respiratory, digestive, urinary, or endocrine systems for experimental study. Experimental design should follow scientific principles of control, randomization, and replication.
+<br><br>
+• Choose a research topic from cardiovascular regulation (baroreflex, heart rate variability), respiratory regulation (pulmonary ventilation, blood gas changes), neuro-muscular physiology (EMG, muscle contraction), urinary system (urine formation regulation), etc.
+<br>
+• Experimental design: determine experimental subjects (human or lab animals), experimental and control groups (self-control or inter-group control), observation indicators (heart rate, blood pressure, respiratory rate, tidal volume, EMG, etc.), experimental workflow and data collection plan
+<br>
+• List experimental equipment: physiological signal acquisition system (PowerLab/BL-420), pressure transducer, respiration transducer, needle electrodes, ECG electrodes, etc.; include experimental procedures and safety precautions
+    </div>
+    <div class="step-output">Deliverable: Physiology experiment design proposal (research question, subjects, grouping scheme, observation indicators, equipment list, experimental workflow) | Quality standard: Scientific and reasonable design, appropriate indicator selection, proper control setting, clear and feasible workflow</div>
+</div>
+<div class="step-item">
+    <div class="step-number">Step 2</div>
+    <div class="step-title">Experimental Preparation and Instrument Calibration</div>
+    <div class="step-desc">
+        The core task of this step is to complete all pre-experiment preparations and calibrate experimental instruments to ensure smooth experiment execution and reliable data. Physiology experiments require high instrument precision and operational standardization. Accurate instrument calibration is prerequisite for reliable data. Adequate preparation directly affects experiment success.
+<br><br>
+• Instrument preparation and calibration: connect physiological signal acquisition system with various transducers; power on and warm up; calibrate blood pressure transducer (with mercury sphygmomanometer), respiratory flow sensor, bioelectric amplifier; set sampling rate (e.g., 1000Hz) and filtering parameters
+<br>
+• Subject preparation: for human experiments, subjects sign informed consent; measure height, weight, baseline BP and HR; for animal experiments, perform anesthesia (20% urethane 5ml/kg i.p.), surgery (tracheal intubation, carotid artery cannulation, vagus nerve isolation, etc.)
+<br>
+• Pilot test: conduct short pilot experiment; observe signal quality; adjust electrode positions and gain parameters; ensure clear and stable signals; eliminate interfering factors
+    </div>
+    <div class="step-output">Deliverable: Experiment preparation records (instrument calibration records, parameter settings table, subject/animal baseline data, pilot results) | Quality standard: Accurate instrument calibration, reasonable parameter settings, stable baseline data, good pilot signal quality</div>
+</div>
+<div class="step-item">
+    <div class="step-number">Step 3</div>
+    <div class="step-title">Physiological Experiment Operation and Data Acquisition</div>
+    <div class="step-desc">
+        The core task of this step is to perform standard operations according to experimental protocol and systematically collect physiological data. During experiments, strictly control experimental conditions, avoid interfering factors, and ensure data accuracy and reproducibility. Each experimental condition requires multiple repetitions, and each measurement needs sufficient recording time.
+<br><br>
+• Baseline state recording: record baseline values of all physiological indicators at rest (HR, BP, respiratory rate, ECG, etc.); record continuously for 5-10 minutes; use stable period data as control
+<br>
+• Experimental intervention and recording: apply intervention factors according to protocol (postural change, exercise load, Valsalva maneuver, carotid sinus massage, drug injection, hypoxic stimulus, etc.); synchronously record dynamic changes of all physiological indicators
+<br>
+• Parallel control and replication: repeat each intervention 3 times; set appropriate recovery intervals; record experimental phenomena and abnormal situations; make notes in lab notebook promptly
+    </div>
+    <div class="step-output">Deliverable: Raw physiological data files (including multi-channel physiological recordings), lab notebook (procedures, intervention time points, experimental phenomena, abnormality records) | Quality standard: Standard and orderly operation, complete and synchronized data, good repeat consistency, detailed and accurate records</div>
+</div>
+<div class="step-item">
+    <div class="step-number">Step 4</div>
+    <div class="step-title">Data Processing and Physiological Mechanism Analysis</div>
+    <div class="step-desc">
+        The core task of this step is to systematically process and analyze collected physiological data, explain experimental results using physiological principles, and clarify functional regulation mechanisms. Data processing requires professional physiological signal analysis software to extract characteristic parameters and perform statistical analysis. Mechanism analysis should integrate basic physiological theories of neural, humoral, and autoregulation.
+<br><br>
+• Data preprocessing: use physiological signal analysis software (LabChart, Matlab) for filtering, detrending, segmenting raw data; extract valid data segments
+<br>
+• Parameter extraction and statistics: calculate mean and standard deviation of each indicator, such as heart rate variability (HRV) time and frequency domain parameters, systolic/diastolic/mean arterial pressure, tidal volume/minute ventilation; perform paired t-test or ANOVA
+<br>
+• Mechanism analysis: explain experimental results using physiological principles; analyze regulatory mechanisms (neural regulatory pathways, humoral factor effects, negative feedback processes); draw regulatory mechanism block diagrams
+    </div>
+    <div class="step-output">Deliverable: Data analysis report (data processing methods, statistical results tables, relationship curves, mechanism analysis discussion) | Quality standard: Correct data processing methods, standard statistical analysis, in-depth and reasonable mechanism analysis</div>
+</div>
+<div class="step-item">
+    <div class="step-number">Step 5</div>
+    <div class="step-title">Lab Report Writing and Discussion</div>
+    <div class="step-desc">
+        The core task of this step is to write a complete physiology experiment report systematically presenting experimental design, methods, data results, and mechanism analysis. The report should demonstrate scientific rigor of physiology experiments and discuss physiological significance and clinical application value of results. Lab report is a comprehensive manifestation of scientific research ability.
+<br><br>
+• Write according to physiology lab report standards: abstract, introduction, materials and methods, experimental results, analysis and discussion, conclusion, references; minimum 3000 words
+<br>
+• Create high-quality result figures: raw physiological recording traces (with key events labeled), statistical bar/line charts (with error bars), mechanism diagrams; clear and standard figure/table captions
+<br>
+• In-depth discussion: analyze consistency between results and theoretical expectations; discuss influencing factors and error sources; compare differences under different experimental conditions; connect to clinical applications (cardiovascular diseases, respiratory insufficiency); propose improvement suggestions
+    </div>
+    <div class="step-output">Deliverable: Complete physiology lab report (PDF format with raw recordings, data statistics, mechanism analysis), data file attachments | Quality standard: Complete structure, reliable data, in-depth analysis, thorough discussion, professional format</div>
+</div>
+
+            </div>
+        </div>
+    </div>
+
 <div class="step-item">
     <div class="step-number">步骤 2</div>
     <div class="step-title">实验实施</div>

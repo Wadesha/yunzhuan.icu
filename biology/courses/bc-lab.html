@@ -38,6 +38,9 @@
         <p style="margin-top:8px;">Select a target protein from a biological sample, design a complete purification workflow (salting out, dialysis, chromatography, electrophoresis), and determine its enzyme activity and kinetic parameters. Document the experimental process and analyze purification efficiency.</p>
         </div>
     </div>
+    
+    
+    
     <div class="section">
         <h2>实施步骤 <span class="en">Implementation Steps</span></h2>
         <div>
@@ -45,10 +48,350 @@
 
 <div class="step-item">
     <div class="step-number">步骤 1</div>
-    <div class="step-title">方案设计</div>
-    <div class="step-desc">确定目标蛋白、样品来源与纯化策略</div>
-    <div class="step-output">产出：实验方案书</div>
+    <div class="step-title">目标蛋白选择与纯化方案设计</div>
+    <div class="step-desc">
+        本步骤的核心任务是选择合适的目标蛋白和生物样品来源，设计完整的蛋白质分离纯化技术路线。需要综合考虑蛋白性质（分子量、等电点、溶解度、稳定性）、样品来源丰富度和纯化难度，选择合适的纯化策略组合。纯化方案的设计直接决定最终的蛋白纯度和回收率。
+<br><br>
+• 从溶菌酶、过氧化氢酶、淀粉酶、碱性磷酸酶等中选择目标蛋白，确定生物材料来源（鸡蛋清、猪肝、黄豆芽等），查阅文献了解蛋白性质和纯化方法<br>• 设计纯化技术路线：粗提（匀浆、盐析）→ 初步纯化（透析、超滤）→ 精细纯化（离子交换层析/亲和层析/凝胶过滤层析）→ 纯度鉴定，每步选择合适的缓冲液体系<br>• 列出实验试剂（硫酸铵、Tris-HCl缓冲液、NaCl、层析介质等）、仪器（高速冷冻离心机、层析系统、核酸蛋白检测仪、电泳仪）和安全注意事项
+    </div>
+    <div class="step-output">产出：蛋白质纯化实验设计方案（含目标蛋白性质、纯化技术路线图、试剂清单、仪器清单、预期纯化倍数）｜ 质量标准：纯化路线科学合理，技术选择匹配蛋白性质，试剂仪器清单完整</div>
 </div>
+<div class="step-item">
+    <div class="step-number">步骤 2</div>
+    <div class="step-title">蛋白粗提与盐析分级分离</div>
+    <div class="step-desc">
+        本步骤的核心任务是从生物材料中提取总蛋白，并利用硫酸铵分级盐析初步富集目标蛋白。蛋白质提取需要保持低温环境防止蛋白变性，盐析需要精确控制硫酸铵饱和度以实现不同蛋白的分级沉淀。这一步是获得粗酶液的关键，直接影响后续纯化效率。
+<br><br>
+• 制备组织匀浆：称取新鲜生物材料，加入预冷提取缓冲液（含PMSF蛋白酶抑制剂），在冰浴中用组织匀浆器匀浆，4层纱布过滤，收集滤液<br>• 硫酸铵分级盐析：测定滤液蛋白浓度，缓慢加入研磨的硫酸铵粉末至30%饱和度，搅拌30min后10000rpm离心20min取上清；继续加硫酸铵至60%饱和度，离心收集沉淀<br>• 沉淀溶解与透析：将沉淀用少量Tris-HCl缓冲液（pH 7.4）溶解，装入透析袋，在4℃冰箱中对20倍体积缓冲液透析24h，期间换液3次
+    </div>
+    <div class="step-output">产出：粗酶液样品、盐析各组分蛋白浓度测定数据、透析后样品、实验操作记录｜ 质量标准：蛋白提取率>70%，盐析分级明显，透析彻底无硫酸铵残留</div>
+</div>
+<div class="step-item">
+    <div class="step-number">步骤 3</div>
+    <div class="step-title">柱层析精细纯化与活性跟踪</div>
+    <div class="step-desc">
+        本步骤的核心任务是使用层析技术对目标蛋白进行精细纯化，并在每一步都进行蛋白浓度测定和酶活性检测，跟踪目标蛋白的纯化效果。层析纯化需要精确控制流速、洗脱梯度和组分收集，活性跟踪确保目标蛋白不丢失。纯化倍数和回收率是评估纯化效果的关键指标。
+<br><br>
+• 装柱与平衡：装填离子交换柱（如DEAE-Sepharose）或亲和层析柱，用起始缓冲液平衡至少5个柱体积，检测基线稳定<br>• 上样与洗脱：将透析后的样品上柱，用线性盐梯度（0-1M NaCl）洗脱，使用核酸蛋白检测仪在280nm监测蛋白峰，分步收集洗脱组分<br>• 活性测定与合并：对各收集管进行酶活性测定（比色法或分光光度法）和蛋白浓度测定，计算比活和纯化倍数，合并高活性组分
+    </div>
+    <div class="step-output">产出：层析洗脱曲线、各组分蛋白浓度和酶活性数据表、纯化后蛋白样品、纯化效果分析表｜ 质量标准：纯化倍数>10倍，酶活性回收率>30%，洗脱峰形对称分离度好</div>
+</div>
+<div class="step-item">
+    <div class="step-number">步骤 4</div>
+    <div class="step-title">纯度鉴定与酶动力学参数测定</div>
+    <div class="step-desc">
+        本步骤的核心任务是鉴定纯化蛋白的纯度，并测定其酶动力学参数（Km、Vmax、最适pH、最适温度）。SDS-PAGE电泳是评估蛋白纯度的金标准，酶动力学测定需要设置多个底物浓度梯度并精确控制反应条件。这些参数表征了酶的催化特性，是研究酶作用机制的基础。
+<br><br>
+• SDS-聚丙烯酰胺凝胶电泳：配制分离胶（12%）和浓缩胶（5%），将纯化样品与标准分子量Marker一起上样，电泳后考马斯亮蓝R-250染色，凝胶成像系统拍照，估算蛋白纯度和亚基分子量<br>• 酶动力学参数测定：配制不同浓度的底物溶液（6-8个浓度点，覆盖0.2-5倍Km范围），在最适条件下测定反应初速度，用Lineweaver-Burk双倒数法作图计算Km和Vmax<br>• 酶学性质研究：测定不同pH（pH 5-9）和不同温度（20-60℃）下的酶活性，确定最适pH和最适温度，研究抑制剂对酶活性的影响
+    </div>
+    <div class="step-output">产出：SDS-PAGE电泳图谱（含纯度分析）、酶动力学参数表（Km、Vmax、比活）、最适pH/温度曲线、抑制剂动力学分析｜ 质量标准：SDS-PAGE显示单一条带（纯度>90%），动力学数据R²>0.95，数据重复性好</div>
+</div>
+<div class="step-item">
+    <div class="step-number">步骤 5</div>
+    <div class="step-title">实验报告撰写与纯化效果评价</div>
+    <div class="step-desc">
+        本步骤的核心任务是撰写完整的生化实验技术报告，系统呈现蛋白质纯化过程、纯度鉴定结果和酶学性质分析。实验报告需要详细记录每一步的操作参数和结果，用数据和图表清晰展示纯化效果，并对整个纯化策略进行总结和评价。报告应体现生化实验技能和科学思维。
+<br><br>
+• 按照学术规范撰写实验报告：摘要、引言、材料与方法、实验结果、讨论、结论、参考文献，字数不少于3500字<br>• 制作完整的纯化流程图和结果图表：各步骤纯化效果汇总表、层析洗脱图谱、SDS-PAGE电泳图、酶动力学曲线、pH/温度依赖性曲线<br>• 深入讨论纯化策略：评价各纯化步骤的有效性，分析影响蛋白纯度和回收率的因素，比较不同纯化方法的优缺点，提出改进方案
+    </div>
+    <div class="step-output">产出：完整实验报告（PDF格式）、纯化效果评价表、所有原始数据和图表附件｜ 质量标准：报告结构完整、数据翔实、图表规范、分析深入，专业术语使用准确</div>
+</div>
+
+            
+
+<div style="margin-top:14px;padding-top:10px;border-top:1px solid #eee;">
+    <h3 style="font-size:0.9rem;color:#667eea;margin-bottom:8px;">Steps</h3>
+<div class="step-item">
+    <div class="step-number">Step 1</div>
+    <div class="step-title">Target Protein Selection and Purification Strategy Design</div>
+    <div class="step-desc">
+        The core task of this step is to select an appropriate target protein and biological sample source, and design a complete protein purification strategy. It requires comprehensive consideration of protein properties (MW, pI, solubility, stability), sample availability, and purification difficulty.
+<br><br>
+• Choose target protein from lysozyme, catalase, amylase, alkaline phosphatase, etc.; determine biological source (egg white, pig liver, soybean sprouts); review literature for properties and purification methods<br>• Design purification workflow: crude extraction (homogenization, salting out) → partial purification (dialysis, ultrafiltration) → fine purification (ion exchange/affinity/gel filtration) → purity assessment<br>• List reagents (ammonium sulfate, Tris-HCl buffer, NaCl, chromatography media), equipment (high-speed refrigerated centrifuge, chromatography system, UV detector, electrophoresis unit), and safety precautions
+    </div>
+    <div class="step-output">Deliverable: Protein purification experimental design (target protein properties, workflow diagram, reagent list, equipment list, expected purification fold) | Quality standard: Scientific purification strategy, technique selection matching protein properties, complete reagent/equipment list</div>
+</div>
+<div class="step-item">
+    <div class="step-number">Step 2</div>
+    <div class="step-title">Crude Protein Extraction and Ammonium Sulfate Fractionation</div>
+    <div class="step-desc">
+        The core task of this step is to extract total protein from biological material and use ammonium sulfate fractionation to preliminarily enrich the target protein. Protein extraction requires low temperature to prevent denaturation, and salting out needs precise saturation control.
+<br><br>
+• Prepare tissue homogenate: weigh fresh biological material, add pre-chilled extraction buffer (with PMSF protease inhibitor), homogenize on ice bath, filter through 4 layers of gauze, collect filtrate<br>• Ammonium sulfate fractionation: measure protein concentration; slowly add ammonium sulfate to 30% saturation; stir 30 min; centrifuge at 10,000 rpm for 20 min; keep supernatant; continue to 60% saturation; collect precipitate<br>• Precipitate dissolution and dialysis: dissolve precipitate in Tris-HCl buffer (pH 7.4); transfer to dialysis bag; dialyze against 20x volume buffer at 4°C for 24h with 3 buffer changes
+    </div>
+    <div class="step-output">Deliverable: Crude enzyme sample, protein concentration data from salting out fractions, dialyzed sample, experimental operation records | Quality standard: Protein extraction yield >70%, clear salting out fractionation, complete dialysis without ammonium sulfate residue</div>
+</div>
+<div class="step-item">
+    <div class="step-number">Step 3</div>
+    <div class="step-title">Column Chromatography Purification and Activity Tracking</div>
+    <div class="step-desc">
+        The core task of this step is to perform fine purification of the target protein using chromatography and monitor purification efficiency through protein concentration and enzyme activity assays at each step.
+<br><br>
+• Column packing and equilibration: pack ion exchange column (e.g., DEAE-Sepharose) or affinity column; equilibrate with starting buffer for at least 5 column volumes; verify stable baseline<br>• Sample loading and elution: load dialyzed sample; elute with linear salt gradient (0-1M NaCl); monitor protein peaks at 280nm with UV detector; collect eluted fractions<br>• Activity assay and pooling: measure enzyme activity (colorimetric or spectrophotometric) and protein concentration for each tube; calculate specific activity and purification fold; pool high-activity fractions
+    </div>
+    <div class="step-output">Deliverable: Chromatography elution profile, protein concentration and enzyme activity data table, purified protein sample, purification efficiency summary table | Quality standard: Purification fold >10x, enzyme activity recovery >30%, symmetric elution peaks with good resolution</div>
+</div>
+<div class="step-item">
+    <div class="step-number">Step 4</div>
+    <div class="step-title">Purity Assessment and Enzyme Kinetic Characterization</div>
+    <div class="step-desc">
+        The core task of this step is to assess the purity of the purified protein and determine its enzyme kinetic parameters (Km, Vmax, optimal pH, optimal temperature). SDS-PAGE is the gold standard for evaluating protein purity.
+<br><br>
+• SDS-PAGE electrophoresis: prepare separating gel (12%) and stacking gel (5%); load sample along with molecular weight marker; stain with Coomassie Blue R-250; capture image; estimate purity and subunit MW<br>• Enzyme kinetic parameter determination: prepare substrate solutions at different concentrations (6-8 points covering 0.2-5x Km range); measure initial rates under optimal conditions; calculate Km and Vmax using Lineweaver-Burk plot<br>• Enzyme properties study: measure activity at different pH (pH 5-9) and temperatures (20-60°C); determine optimal pH and temperature; study inhibitor effects on enzyme activity
+    </div>
+    <div class="step-output">Deliverable: SDS-PAGE gel image (with purity analysis), enzyme kinetic parameters table (Km, Vmax, specific activity), optimal pH/temperature curves, inhibitor kinetics analysis | Quality standard: Single band on SDS-PAGE (purity >90%), kinetic data R² >0.95, good data reproducibility</div>
+</div>
+<div class="step-item">
+    <div class="step-number">Step 5</div>
+    <div class="step-title">Lab Report Writing and Purification Evaluation</div>
+    <div class="step-desc">
+        The core task of this step is to write a comprehensive biochemistry laboratory report presenting the protein purification process, purity assessment results, and enzyme characterization.
+<br><br>
+• Write lab report following academic standards: abstract, introduction, materials and methods, results, discussion, conclusion, references; minimum 3500 words<br>• Create complete purification flow chart and result figures: purification summary table, chromatography elution profiles, SDS-PAGE gel, enzyme kinetic curves, pH/temperature dependence curves<br>• Discuss purification strategy in depth: evaluate effectiveness of each step, analyze factors affecting purity and recovery, compare advantages/disadvantages of methods, propose improvements
+    </div>
+    <div class="step-output">Deliverable: Complete lab report (PDF format), purification evaluation table, all raw data and figure attachments | Quality standard: Complete structure, detailed data, professional figures, in-depth analysis, accurate terminology</div>
+</div>
+
+            </div>
+        </div>
+    </div>
+
+<div class="step-item">
+    <div class="step-number">步骤 2</div>
+    <div class="step-title">蛋白粗提与盐析分级分离</div>
+    <div class="step-desc">
+        本步骤的核心任务是从生物材料中提取总蛋白，并利用硫酸铵分级盐析初步富集目标蛋白。蛋白质提取需要保持低温环境防止蛋白变性，盐析需要精确控制硫酸铵饱和度以实现不同蛋白的分级沉淀。这一步是获得粗酶液的关键，直接影响后续纯化效率。
+<br><br>
+• 制备组织匀浆：称取新鲜生物材料，加入预冷提取缓冲液（含PMSF蛋白酶抑制剂），在冰浴中用组织匀浆器匀浆，4层纱布过滤，收集滤液<br>• 硫酸铵分级盐析：测定滤液蛋白浓度，缓慢加入研磨的硫酸铵粉末至30%饱和度，搅拌30min后10000rpm离心20min取上清；继续加硫酸铵至60%饱和度，离心收集沉淀<br>• 沉淀溶解与透析：将沉淀用少量Tris-HCl缓冲液（pH 7.4）溶解，装入透析袋，在4℃冰箱中对20倍体积缓冲液透析24h，期间换液3次
+    </div>
+    <div class="step-output">产出：粗酶液样品、盐析各组分蛋白浓度测定数据、透析后样品、实验操作记录｜ 质量标准：蛋白提取率>70%，盐析分级明显，透析彻底无硫酸铵残留</div>
+</div>
+<div class="step-item">
+    <div class="step-number">步骤 3</div>
+    <div class="step-title">柱层析精细纯化与活性跟踪</div>
+    <div class="step-desc">
+        本步骤的核心任务是使用层析技术对目标蛋白进行精细纯化，并在每一步都进行蛋白浓度测定和酶活性检测，跟踪目标蛋白的纯化效果。层析纯化需要精确控制流速、洗脱梯度和组分收集，活性跟踪确保目标蛋白不丢失。纯化倍数和回收率是评估纯化效果的关键指标。
+<br><br>
+• 装柱与平衡：装填离子交换柱（如DEAE-Sepharose）或亲和层析柱，用起始缓冲液平衡至少5个柱体积，检测基线稳定<br>• 上样与洗脱：将透析后的样品上柱，用线性盐梯度（0-1M NaCl）洗脱，使用核酸蛋白检测仪在280nm监测蛋白峰，分步收集洗脱组分<br>• 活性测定与合并：对各收集管进行酶活性测定（比色法或分光光度法）和蛋白浓度测定，计算比活和纯化倍数，合并高活性组分
+    </div>
+    <div class="step-output">产出：层析洗脱曲线、各组分蛋白浓度和酶活性数据表、纯化后蛋白样品、纯化效果分析表｜ 质量标准：纯化倍数>10倍，酶活性回收率>30%，洗脱峰形对称分离度好</div>
+</div>
+<div class="step-item">
+    <div class="step-number">步骤 4</div>
+    <div class="step-title">纯度鉴定与酶动力学参数测定</div>
+    <div class="step-desc">
+        本步骤的核心任务是鉴定纯化蛋白的纯度，并测定其酶动力学参数（Km、Vmax、最适pH、最适温度）。SDS-PAGE电泳是评估蛋白纯度的金标准，酶动力学测定需要设置多个底物浓度梯度并精确控制反应条件。这些参数表征了酶的催化特性，是研究酶作用机制的基础。
+<br><br>
+• SDS-聚丙烯酰胺凝胶电泳：配制分离胶（12%）和浓缩胶（5%），将纯化样品与标准分子量Marker一起上样，电泳后考马斯亮蓝R-250染色，凝胶成像系统拍照，估算蛋白纯度和亚基分子量<br>• 酶动力学参数测定：配制不同浓度的底物溶液（6-8个浓度点，覆盖0.2-5倍Km范围），在最适条件下测定反应初速度，用Lineweaver-Burk双倒数法作图计算Km和Vmax<br>• 酶学性质研究：测定不同pH（pH 5-9）和不同温度（20-60℃）下的酶活性，确定最适pH和最适温度，研究抑制剂对酶活性的影响
+    </div>
+    <div class="step-output">产出：SDS-PAGE电泳图谱（含纯度分析）、酶动力学参数表（Km、Vmax、比活）、最适pH/温度曲线、抑制剂动力学分析｜ 质量标准：SDS-PAGE显示单一条带（纯度>90%），动力学数据R²>0.95，数据重复性好</div>
+</div>
+<div class="step-item">
+    <div class="step-number">步骤 5</div>
+    <div class="step-title">实验报告撰写与纯化效果评价</div>
+    <div class="step-desc">
+        本步骤的核心任务是撰写完整的生化实验技术报告，系统呈现蛋白质纯化过程、纯度鉴定结果和酶学性质分析。实验报告需要详细记录每一步的操作参数和结果，用数据和图表清晰展示纯化效果，并对整个纯化策略进行总结和评价。报告应体现生化实验技能和科学思维。
+<br><br>
+• 按照学术规范撰写实验报告：摘要、引言、材料与方法、实验结果、讨论、结论、参考文献，字数不少于3500字<br>• 制作完整的纯化流程图和结果图表：各步骤纯化效果汇总表、层析洗脱图谱、SDS-PAGE电泳图、酶动力学曲线、pH/温度依赖性曲线<br>• 深入讨论纯化策略：评价各纯化步骤的有效性，分析影响蛋白纯度和回收率的因素，比较不同纯化方法的优缺点，提出改进方案
+    </div>
+    <div class="step-output">产出：完整实验报告（PDF格式）、纯化效果评价表、所有原始数据和图表附件｜ 质量标准：报告结构完整、数据翔实、图表规范、分析深入，专业术语使用准确</div>
+</div>
+
+            
+
+<div style="margin-top:14px;padding-top:10px;border-top:1px solid #eee;">
+    <h3 style="font-size:0.9rem;color:#667eea;margin-bottom:8px;">Steps</h3>
+<div class="step-item">
+    <div class="step-number">Step 1</div>
+    <div class="step-title">Target Protein Selection and Purification Strategy Design</div>
+    <div class="step-desc">
+        The core task of this step is to select an appropriate target protein and biological sample source, and design a complete protein purification strategy. It requires comprehensive consideration of protein properties (MW, pI, solubility, stability), sample availability, and purification difficulty.
+<br><br>
+• Choose target protein from lysozyme, catalase, amylase, alkaline phosphatase, etc.; determine biological source (egg white, pig liver, soybean sprouts); review literature for properties and purification methods<br>• Design purification workflow: crude extraction (homogenization, salting out) → partial purification (dialysis, ultrafiltration) → fine purification (ion exchange/affinity/gel filtration) → purity assessment<br>• List reagents (ammonium sulfate, Tris-HCl buffer, NaCl, chromatography media), equipment (high-speed refrigerated centrifuge, chromatography system, UV detector, electrophoresis unit), and safety precautions
+    </div>
+    <div class="step-output">Deliverable: Protein purification experimental design (target protein properties, workflow diagram, reagent list, equipment list, expected purification fold) | Quality standard: Scientific purification strategy, technique selection matching protein properties, complete reagent/equipment list</div>
+</div>
+<div class="step-item">
+    <div class="step-number">Step 2</div>
+    <div class="step-title">Crude Protein Extraction and Ammonium Sulfate Fractionation</div>
+    <div class="step-desc">
+        The core task of this step is to extract total protein from biological material and use ammonium sulfate fractionation to preliminarily enrich the target protein. Protein extraction requires low temperature to prevent denaturation, and salting out needs precise saturation control.
+<br><br>
+• Prepare tissue homogenate: weigh fresh biological material, add pre-chilled extraction buffer (with PMSF protease inhibitor), homogenize on ice bath, filter through 4 layers of gauze, collect filtrate<br>• Ammonium sulfate fractionation: measure protein concentration; slowly add ammonium sulfate to 30% saturation; stir 30 min; centrifuge at 10,000 rpm for 20 min; keep supernatant; continue to 60% saturation; collect precipitate<br>• Precipitate dissolution and dialysis: dissolve precipitate in Tris-HCl buffer (pH 7.4); transfer to dialysis bag; dialyze against 20x volume buffer at 4°C for 24h with 3 buffer changes
+    </div>
+    <div class="step-output">Deliverable: Crude enzyme sample, protein concentration data from salting out fractions, dialyzed sample, experimental operation records | Quality standard: Protein extraction yield >70%, clear salting out fractionation, complete dialysis without ammonium sulfate residue</div>
+</div>
+<div class="step-item">
+    <div class="step-number">Step 3</div>
+    <div class="step-title">Column Chromatography Purification and Activity Tracking</div>
+    <div class="step-desc">
+        The core task of this step is to perform fine purification of the target protein using chromatography and monitor purification efficiency through protein concentration and enzyme activity assays at each step.
+<br><br>
+• Column packing and equilibration: pack ion exchange column (e.g., DEAE-Sepharose) or affinity column; equilibrate with starting buffer for at least 5 column volumes; verify stable baseline<br>• Sample loading and elution: load dialyzed sample; elute with linear salt gradient (0-1M NaCl); monitor protein peaks at 280nm with UV detector; collect eluted fractions<br>• Activity assay and pooling: measure enzyme activity (colorimetric or spectrophotometric) and protein concentration for each tube; calculate specific activity and purification fold; pool high-activity fractions
+    </div>
+    <div class="step-output">Deliverable: Chromatography elution profile, protein concentration and enzyme activity data table, purified protein sample, purification efficiency summary table | Quality standard: Purification fold >10x, enzyme activity recovery >30%, symmetric elution peaks with good resolution</div>
+</div>
+<div class="step-item">
+    <div class="step-number">Step 4</div>
+    <div class="step-title">Purity Assessment and Enzyme Kinetic Characterization</div>
+    <div class="step-desc">
+        The core task of this step is to assess the purity of the purified protein and determine its enzyme kinetic parameters (Km, Vmax, optimal pH, optimal temperature). SDS-PAGE is the gold standard for evaluating protein purity.
+<br><br>
+• SDS-PAGE electrophoresis: prepare separating gel (12%) and stacking gel (5%); load sample along with molecular weight marker; stain with Coomassie Blue R-250; capture image; estimate purity and subunit MW<br>• Enzyme kinetic parameter determination: prepare substrate solutions at different concentrations (6-8 points covering 0.2-5x Km range); measure initial rates under optimal conditions; calculate Km and Vmax using Lineweaver-Burk plot<br>• Enzyme properties study: measure activity at different pH (pH 5-9) and temperatures (20-60°C); determine optimal pH and temperature; study inhibitor effects on enzyme activity
+    </div>
+    <div class="step-output">Deliverable: SDS-PAGE gel image (with purity analysis), enzyme kinetic parameters table (Km, Vmax, specific activity), optimal pH/temperature curves, inhibitor kinetics analysis | Quality standard: Single band on SDS-PAGE (purity >90%), kinetic data R² >0.95, good data reproducibility</div>
+</div>
+<div class="step-item">
+    <div class="step-number">Step 5</div>
+    <div class="step-title">Lab Report Writing and Purification Evaluation</div>
+    <div class="step-desc">
+        The core task of this step is to write a comprehensive biochemistry laboratory report presenting the protein purification process, purity assessment results, and enzyme characterization.
+<br><br>
+• Write lab report following academic standards: abstract, introduction, materials and methods, results, discussion, conclusion, references; minimum 3500 words<br>• Create complete purification flow chart and result figures: purification summary table, chromatography elution profiles, SDS-PAGE gel, enzyme kinetic curves, pH/temperature dependence curves<br>• Discuss purification strategy in depth: evaluate effectiveness of each step, analyze factors affecting purity and recovery, compare advantages/disadvantages of methods, propose improvements
+    </div>
+    <div class="step-output">Deliverable: Complete lab report (PDF format), purification evaluation table, all raw data and figure attachments | Quality standard: Complete structure, detailed data, professional figures, in-depth analysis, accurate terminology</div>
+</div>
+
+            </div>
+        </div>
+    </div>
+
+<div class="step-item">
+    <div class="step-number">步骤 2</div>
+    <div class="step-title">蛋白粗提与盐析分级分离</div>
+    <div class="step-desc">
+        本步骤的核心任务是从生物材料中提取总蛋白，并利用硫酸铵分级盐析初步富集目标蛋白。蛋白质提取需要保持低温环境防止蛋白变性，盐析需要精确控制硫酸铵饱和度以实现不同蛋白的分级沉淀。这一步是获得粗酶液的关键，直接影响后续纯化效率。
+<br><br>
+• 制备组织匀浆：称取新鲜生物材料，加入预冷提取缓冲液（含PMSF蛋白酶抑制剂），在冰浴中用组织匀浆器匀浆，4层纱布过滤，收集滤液
+<br>
+• 硫酸铵分级盐析：测定滤液蛋白浓度，缓慢加入研磨的硫酸铵粉末至30%饱和度，搅拌30min后10000rpm离心20min取上清；继续加硫酸铵至60%饱和度，离心收集沉淀
+<br>
+• 沉淀溶解与透析：将沉淀用少量Tris-HCl缓冲液（pH 7.4）溶解，装入透析袋，在4℃冰箱中对20倍体积缓冲液透析24h，期间换液3次
+    </div>
+    <div class="step-output">产出：粗酶液样品、盐析各组分蛋白浓度测定数据、透析后样品、实验操作记录｜ 质量标准：蛋白提取率>70%，盐析分级明显，透析彻底无硫酸铵残留</div>
+</div>
+<div class="step-item">
+    <div class="step-number">步骤 3</div>
+    <div class="step-title">柱层析精细纯化与活性跟踪</div>
+    <div class="step-desc">
+        本步骤的核心任务是使用层析技术对目标蛋白进行精细纯化，并在每一步都进行蛋白浓度测定和酶活性检测，跟踪目标蛋白的纯化效果。层析纯化需要精确控制流速、洗脱梯度和组分收集，活性跟踪确保目标蛋白不丢失。纯化倍数和回收率是评估纯化效果的关键指标。
+<br><br>
+• 装柱与平衡：装填离子交换柱（如DEAE-Sepharose）或亲和层析柱，用起始缓冲液平衡至少5个柱体积，检测基线稳定
+<br>
+• 上样与洗脱：将透析后的样品上柱，用线性盐梯度（0-1M NaCl）洗脱，使用核酸蛋白检测仪在280nm监测蛋白峰，分步收集洗脱组分
+<br>
+• 活性测定与合并：对各收集管进行酶活性测定（比色法或分光光度法）和蛋白浓度测定，计算比活和纯化倍数，合并高活性组分
+    </div>
+    <div class="step-output">产出：层析洗脱曲线、各组分蛋白浓度和酶活性数据表、纯化后蛋白样品、纯化效果分析表（总蛋白、总活性、比活、纯化倍数、回收率）｜ 质量标准：纯化倍数>10倍，酶活性回收率>30%，洗脱峰形对称分离度好</div>
+</div>
+<div class="step-item">
+    <div class="step-number">步骤 4</div>
+    <div class="step-title">纯度鉴定与酶动力学参数测定</div>
+    <div class="step-desc">
+        本步骤的核心任务是鉴定纯化蛋白的纯度，并测定其酶动力学参数（Km、Vmax、最适pH、最适温度）。SDS-PAGE电泳是评估蛋白纯度的金标准，酶动力学测定需要设置多个底物浓度梯度并精确控制反应条件。这些参数表征了酶的催化特性，是研究酶作用机制的基础。
+<br><br>
+• SDS-聚丙烯酰胺凝胶电泳：配制分离胶（12%）和浓缩胶（5%），将纯化样品与标准分子量Marker一起上样，电泳后考马斯亮蓝R-250染色，凝胶成像系统拍照，估算蛋白纯度和亚基分子量
+<br>
+• 酶动力学参数测定：配制不同浓度的底物溶液（6-8个浓度点，覆盖0.2-5倍Km范围），在最适条件下测定反应初速度，用Lineweaver-Burk双倒数法作图计算Km和Vmax
+<br>
+• 酶学性质研究：测定不同pH（pH 5-9）和不同温度（20-60℃）下的酶活性，确定最适pH和最适温度，研究抑制剂对酶活性的影响
+    </div>
+    <div class="step-output">产出：SDS-PAGE电泳图谱（含纯度分析）、酶动力学参数表（Km、Vmax、比活）、最适pH/温度曲线、抑制剂动力学分析｜ 质量标准：SDS-PAGE显示单一条带（纯度>90%），动力学数据R²>0.95，数据重复性好</div>
+</div>
+<div class="step-item">
+    <div class="step-number">步骤 5</div>
+    <div class="step-title">实验报告撰写与纯化效果评价</div>
+    <div class="step-desc">
+        本步骤的核心任务是撰写完整的生化实验技术报告，系统呈现蛋白质纯化过程、纯度鉴定结果和酶学性质分析。实验报告需要详细记录每一步的操作参数和结果，用数据和图表清晰展示纯化效果，并对整个纯化策略进行总结和评价。报告应体现生化实验技能和科学思维。
+<br><br>
+• 按照学术规范撰写实验报告：摘要、引言、材料与方法、实验结果、讨论、结论、参考文献，字数不少于3500字
+<br>
+• 制作完整的纯化流程图和结果图表：各步骤纯化效果汇总表、层析洗脱图谱、SDS-PAGE电泳图、酶动力学曲线、pH/温度依赖性曲线
+<br>
+• 深入讨论纯化策略：评价各纯化步骤的有效性，分析影响蛋白纯度和回收率的因素，比较不同纯化方法的优缺点，提出改进方案
+    </div>
+    <div class="step-output">产出：完整实验报告（PDF格式）、纯化效果评价表、所有原始数据和图表附件｜ 质量标准：报告结构完整、数据翔实、图表规范、分析深入，专业术语使用准确</div>
+</div>
+
+            
+
+<div style="margin-top:14px;padding-top:10px;border-top:1px solid #eee;">
+    <h3 style="font-size:0.9rem;color:#667eea;margin-bottom:8px;">Steps</h3>
+<div class="step-item">
+    <div class="step-number">Step 1</div>
+    <div class="step-title">Target Protein Selection and Purification Strategy Design</div>
+    <div class="step-desc">
+        The core task of this step is to select an appropriate target protein and biological sample source, and design a complete protein purification strategy. It requires comprehensive consideration of protein properties (molecular weight, pI, solubility, stability), sample availability, and purification difficulty. The choice of purification strategy (combination of affinity, ion exchange, gel filtration, etc.) directly determines final purity and yield.
+<br><br>
+• Choose target protein from lysozyme, catalase, amylase, alkaline phosphatase, etc.; determine biological source (egg white, pig liver, soybean sprouts, etc.); review literature for protein properties and purification methods
+<br>
+• Design purification workflow: crude extraction (homogenization, salting out) → partial purification (dialysis, ultrafiltration) → fine purification (ion exchange/affinity/gel filtration chromatography) → purity assessment; select appropriate buffer systems for each step
+<br>
+• List experimental reagents (ammonium sulfate, Tris-HCl buffer, NaCl, chromatography media, etc.), equipment (high-speed refrigerated centrifuge, chromatography system, UV detector, electrophoresis unit), and safety precautions
+    </div>
+    <div class="step-output">Deliverable: Protein purification experimental design (including target protein properties, purification workflow diagram, reagent list, equipment list, expected purification fold) | Quality standard: Scientific purification strategy, technique selection matching protein properties, complete reagent/equipment list</div>
+</div>
+<div class="step-item">
+    <div class="step-number">Step 2</div>
+    <div class="step-title">Crude Protein Extraction and Ammonium Sulfate Fractionation</div>
+    <div class="step-desc">
+        The core task of this step is to extract total protein from biological material and use ammonium sulfate fractionation to preliminarily enrich the target protein. Protein extraction requires low temperature to prevent denaturation, and salting out needs precise ammonium sulfate saturation control for fractional precipitation. This step is critical for obtaining crude enzyme extract and affects subsequent purification efficiency.
+<br><br>
+• Prepare tissue homogenate: weigh fresh biological material, add pre-chilled extraction buffer (with PMSF protease inhibitor), homogenize with tissue homogenizer on ice bath, filter through 4 layers of gauze, collect filtrate
+<br>
+• Ammonium sulfate fractionation: measure protein concentration of filtrate; slowly add ground ammonium sulfate to 30% saturation; stir for 30 min; centrifuge at 10,000 rpm for 20 min; keep supernatant; continue adding ammonium sulfate to 60% saturation; centrifuge and collect precipitate
+<br>
+• Precipitate dissolution and dialysis: dissolve precipitate in small volume of Tris-HCl buffer (pH 7.4); transfer to dialysis bag; dialyze against 20x volume buffer at 4°C for 24h with 3 buffer changes
+    </div>
+    <div class="step-output">Deliverable: Crude enzyme sample, protein concentration data from salting out fractions, dialyzed sample, experimental operation records | Quality standard: Protein extraction yield >70%, clear salting out fractionation, complete dialysis without ammonium sulfate residue</div>
+</div>
+<div class="step-item">
+    <div class="step-number">Step 3</div>
+    <div class="step-title">Column Chromatography Purification and Activity Tracking</div>
+    <div class="step-desc">
+        The core task of this step is to perform fine purification of the target protein using chromatography and monitor purification efficiency through protein concentration and enzyme activity assays at each step. Chromatography requires precise flow rate control, elution gradient, and fraction collection. Activity tracking ensures target protein is not lost. Purification fold and recovery are key metrics.
+<br><br>
+• Column packing and equilibration: pack ion exchange column (e.g., DEAE-Sepharose) or affinity column; equilibrate with starting buffer for at least 5 column volumes; verify stable baseline
+<br>
+• Sample loading and elution: load dialyzed sample onto column; elute with linear salt gradient (0-1M NaCl); monitor protein peaks at 280nm with UV detector; collect eluted fractions in tubes
+<br>
+• Activity assay and pooling: measure enzyme activity (colorimetric or spectrophotometric) and protein concentration for each collected tube; calculate specific activity and purification fold; pool high-activity fractions
+    </div>
+    <div class="step-output">Deliverable: Chromatography elution profile, protein concentration and enzyme activity data table, purified protein sample, purification efficiency summary table (total protein, total activity, specific activity, purification fold, recovery) | Quality standard: Purification fold >10x, enzyme activity recovery >30%, symmetric elution peaks with good resolution</div>
+</div>
+<div class="step-item">
+    <div class="step-number">Step 4</div>
+    <div class="step-title">Purity Assessment and Enzyme Kinetic Characterization</div>
+    <div class="step-desc">
+        The core task of this step is to assess the purity of the purified protein and determine its enzyme kinetic parameters (Km, Vmax, optimal pH, optimal temperature). SDS-PAGE is the gold standard for evaluating protein purity. Enzyme kinetic assays require multiple substrate concentrations and precise reaction condition control. These parameters characterize catalytic properties and are fundamental for studying enzyme mechanisms.
+<br><br>
+• SDS-PAGE electrophoresis: prepare separating gel (12%) and stacking gel (5%); load purified sample along with molecular weight marker; stain with Coomassie Brilliant Blue R-250 after electrophoresis; capture image with gel documentation system; estimate purity and subunit molecular weight
+<br>
+• Enzyme kinetic parameter determination: prepare substrate solutions at different concentrations (6-8 points covering 0.2-5x Km range); measure initial reaction rates under optimal conditions; calculate Km and Vmax using Lineweaver-Burk double reciprocal plot
+<br>
+• Enzyme properties study: measure enzyme activity at different pH (pH 5-9) and temperatures (20-60°C); determine optimal pH and temperature; study inhibitor effects on enzyme activity
+    </div>
+    <div class="step-output">Deliverable: SDS-PAGE gel image (with purity analysis), enzyme kinetic parameters table (Km, Vmax, specific activity), optimal pH/temperature curves, inhibitor kinetics analysis | Quality standard: Single band on SDS-PAGE (purity >90%), kinetic data R² >0.95, good data reproducibility</div>
+</div>
+<div class="step-item">
+    <div class="step-number">Step 5</div>
+    <div class="step-title">Lab Report Writing and Purification Evaluation</div>
+    <div class="step-desc">
+        The core task of this step is to write a comprehensive biochemistry laboratory report presenting the protein purification process, purity assessment results, and enzyme characterization. The report should document operational parameters and results at each step in detail, clearly demonstrate purification effectiveness through data and figures, and summarize and evaluate the overall purification strategy.
+<br><br>
+• Write lab report following academic standards: abstract, introduction, materials and methods, results, discussion, conclusion, references; minimum 3500 words
+<br>
+• Create complete purification flow chart and result figures: purification summary table for each step, chromatography elution profiles, SDS-PAGE gel, enzyme kinetic curves, pH/temperature dependence curves
+<br>
+• Discuss purification strategy in depth: evaluate effectiveness of each purification step, analyze factors affecting protein purity and recovery, compare advantages/disadvantages of different methods, propose improvements
+    </div>
+    <div class="step-output">Deliverable: Complete lab report (PDF format), purification evaluation table, all raw data and figure attachments | Quality standard: Complete structure, detailed data, professional figures, in-depth analysis, accurate terminology</div>
+</div>
+
+            </div>
+        </div>
+    </div>
+
 <div class="step-item">
     <div class="step-number">步骤 2</div>
     <div class="step-title">样品制备</div>

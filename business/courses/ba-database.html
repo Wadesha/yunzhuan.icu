@@ -43,71 +43,106 @@
         <div>
 
 
+
+
+
 <div class="step-item">
     <div class="step-number">步骤 1</div>
-    <div class="step-title">需求分析</div>
-    <div class="step-desc">分析电商订单系统的数据需求</div>
-    <div class="step-output">产出：需求规格说明</div>
+    <div class="step-title">业务问题定义与目标设定</div>
+    <div class="step-desc">
+        本步骤的核心任务是明确业务问题，定义分析目标，将业务需求转化为可分析的问题。通过与业务方沟通，理解业务背景和痛点，确定分析范围和成功标准，制定项目计划。<br><br>• 与业务利益相关者访谈，理解业务背景、痛点和需求，明确分析的业务目标和期望产出，将模糊的业务问题转化为可量化的分析目标<br>• 进行可行性分析：评估数据可获得性、技术可行性、时间和资源约束，确定分析范围、边界条件和成功标准（KPI）<br>• 制定项目计划：分解分析任务，确定时间节点、资源需求、交付物，使用甘特图规划项目进度，明确各阶段里程碑
+    </div>
+    <div class="step-output">产出：业务分析项目计划书（含问题定义、目标设定、可行性分析、项目计划、成功标准）｜ 质量标准：业务问题定义清晰，目标具体可衡量，项目计划合理可行</div>
 </div>
+
 <div class="step-item">
     <div class="step-number">步骤 2</div>
-    <div class="step-title">ER图设计</div>
-    <div class="step-desc">绘制实体关系图并识别主外键</div>
-    <div class="step-output">产出：ER图</div>
+    <div class="step-title">数据收集与理解</div>
+    <div class="step-desc">
+        本步骤的核心任务是收集相关数据，理解数据结构和质量，进行初步的数据探索。识别可用数据源，获取数据，评估数据质量，了解数据的基本特征和分布。<br><br>• 识别和获取数据源：确定所需数据类型（交易数据、用户数据、市场数据等），识别内部和外部数据源，获取数据并进行初步的格式转换和整合<br>• 数据理解与质量评估：查看数据结构（字段、类型、规模），评估数据质量（完整性、准确性、一致性、时效性），识别数据问题（缺失、异常、重复、不一致）<br>• 初步探索性分析：进行简单的描述统计和可视化，了解数据分布、趋势和模式，识别初步的规律和异常，形成对数据的整体认识
+    </div>
+    <div class="step-output">产出：数据收集与探索报告（含数据源清单、数据字典、数据质量评估、初步探索发现）｜ 质量标准：数据源识别全面，数据质量评估客观，初步探索有价值</div>
 </div>
+
 <div class="step-item">
     <div class="step-number">步骤 3</div>
-    <div class="step-title">表结构设计</div>
-    <div class="step-desc">按第三范式设计数据库表结构</div>
-    <div class="step-output">产出：表结构定义</div>
+    <div class="step-title">分析建模与方案设计</div>
+    <div class="step-desc">
+        本步骤的核心任务是选择合适的分析方法和模型，对业务问题进行深入分析和建模。根据问题类型选择相应的分析方法和工具，构建分析模型。<br><br>• 选择分析方法：根据问题类型选择合适的分析方法，如描述性分析（报表、OLAP）、诊断性分析（下钻、归因）、预测性分析（回归、时间序列、机器学习）、处方性分析（优化、仿真）<br>• 数据预处理与特征工程：进行数据清洗（处理缺失值、异常值、重复值）、数据转换（标准化、归一化、编码）、特征选择和特征提取，准备建模数据<br>• 构建分析模型：使用合适的工具（Excel、Python、R、SPSS、SQL等）构建分析模型，进行模型训练和参数调优，输出初步分析结果
+    </div>
+    <div class="step-output">产出：分析建模方案（含方法选择说明、数据预处理方案、模型构建过程、初步分析结果）｜ 质量标准：方法选择恰当，建模过程规范，分析逻辑严谨</div>
 </div>
+
 <div class="step-item">
     <div class="step-number">步骤 4</div>
-    <div class="step-title">数据库实现</div>
-    <div class="step-desc">用MySQL建表并编写SQL查询</div>
-    <div class="step-output">产出：SQL脚本</div>
+    <div class="step-title">结果验证与优化</div>
+    <div class="step-desc">
+        本步骤的核心任务是验证分析结果的可靠性和有效性，优化模型和方案。通过多种方法验证分析结论的稳健性，评估模型性能，进行敏感性分析，确保结果可靠可用。<br><br>• 模型评估与验证：使用适当的评估指标（准确率、精确率、召回率、F1、AUC、MSE、R²等）评估模型性能，进行交叉验证，检验模型的泛化能力<br>• 敏感性分析与稳健性检验：测试关键参数变化对结果的影响，检验结论的稳健性，识别敏感因素，分析模型的适用范围和局限性<br>• 模型优化与迭代：根据评估结果优化模型（调整参数、特征工程、模型选择），进行多轮迭代，在性能和可解释性之间取得平衡
+    </div>
+    <div class="step-output">产出：模型验证与优化报告（含评估指标、交叉验证结果、敏感性分析、优化迭代记录）｜ 质量标准：评估方法科学，验证充分，优化有效，结论稳健可靠</div>
 </div>
+
 <div class="step-item">
     <div class="step-number">步骤 5</div>
-    <div class="step-title">性能优化与测试</div>
-    <div class="step-desc">创建索引并测试查询性能</div>
-    <div class="step-output">产出：测试报告</div>
+    <div class="step-title">可视化呈现与业务建议</div>
+    <div class="step-desc">
+        本步骤的核心任务是将分析结果可视化呈现，转化为业务建议，形成可交付的分析成果。设计直观有效的可视化方案，撰写分析报告，向业务方汇报，推动决策落地。<br><br>• 数据可视化设计：选择合适的图表类型（柱状图、折线图、饼图、散点图、热力图、仪表盘等），设计可视化方案，使用工具（Tableau、Power BI、matplotlib、Excel）制作可视化作品<br>• 撰写分析报告：结构化呈现分析过程和结果，包括执行摘要、问题背景、分析方法、关键发现、业务建议、局限性，确保报告逻辑清晰、有数据支撑<br>• 汇报与推动落地：向业务方进行汇报演示，解答疑问，收集反馈，制定落地行动计划，跟踪建议的执行情况和效果
+    </div>
+    <div class="step-output">产出：分析报告与可视化成果（含可视化仪表盘、分析报告、业务建议、落地计划）｜ 质量标准：可视化清晰直观，报告结构完整，业务建议具体可落地</div>
 </div>
-            
 
 <div style="margin-top:14px;padding-top:10px;border-top:1px solid #eee;">
     <h3 style="font-size:0.9rem;color:#667eea;margin-bottom:8px;">Steps</h3>
+
 <div class="step-item">
     <div class="step-number">Step 1</div>
-    <div class="step-title">Requirements Analysis</div>
-    <div class="step-desc">Analyze data requirements of e-commerce system</div>
-    <div class="step-output">Deliverable: Requirements Spec</div>
+    <div class="step-title">Business Problem Definition & Goal Setting</div>
+    <div class="step-desc">
+        The core task of this step is to clarify business problems, define analysis objectives, and translate business needs into analyzable questions. Through communication with business stakeholders, understand business background and pain points.<br><br>• Interview business stakeholders, understand business background, pain points and needs, clarify business objectives and expected outputs of analysis, translate vague business problems into quantifiable analysis goals<br>• Conduct feasibility analysis: assess data availability, technical feasibility, time and resource constraints, determine analysis scope, boundary conditions and success criteria (KPIs)<br>• Develop project plan: decompose analysis tasks, determine timelines, resource requirements, deliverables, use Gantt chart to plan project schedule, define milestones for each phase
+    </div>
+    <div class="step-output">Deliverable: Business analysis project plan (including problem definition, goal setting, feasibility analysis, project plan, success criteria) | Quality standard: Clear business problem definition, specific measurable goals, reasonable feasible project plan</div>
 </div>
+
 <div class="step-item">
     <div class="step-number">Step 2</div>
-    <div class="step-title">ER Diagram Design</div>
-    <div class="step-desc">Draw ER diagram and identify keys</div>
-    <div class="step-output">Deliverable: ER Diagram</div>
+    <div class="step-title">Data Collection & Understanding</div>
+    <div class="step-desc">
+        The core task of this step is to collect relevant data, understand data structure and quality, and conduct initial data exploration. Identify available data sources, acquire data, assess data quality.<br><br>• Identify and acquire data sources: determine required data types (transaction data, user data, market data, etc.), identify internal and external data sources, acquire data and perform initial format conversion and integration<br>• Data understanding and quality assessment: review data structure (fields, types, size), assess data quality (completeness, accuracy, consistency, timeliness), identify data issues (missing, outliers, duplicates, inconsistencies)<br>• Initial exploratory analysis: perform simple descriptive statistics and visualization, understand data distribution, trends and patterns, identify initial regularities and anomalies, form overall understanding of data
+    </div>
+    <div class="step-output">Deliverable: Data collection and exploration report (including data source inventory, data dictionary, data quality assessment, initial exploration findings) | Quality standard: Comprehensive data source identification, objective data quality assessment, valuable initial exploration</div>
 </div>
+
 <div class="step-item">
     <div class="step-number">Step 3</div>
-    <div class="step-title">Table Structure Design</div>
-    <div class="step-desc">Design tables following third normal form</div>
-    <div class="step-output">Deliverable: Schema Definition</div>
+    <div class="step-title">Analytical Modeling & Solution Design</div>
+    <div class="step-desc">
+        The core task of this step is to select appropriate analytical methods and models for in-depth analysis and modeling of business problems. Based on problem type, select corresponding analytical methods and tools, build analytical models.<br><br>• Select analysis methods: choose appropriate methods based on problem type, such as descriptive analysis (reports, OLAP), diagnostic analysis (drill-down, attribution), predictive analysis (regression, time series, machine learning), prescriptive analysis (optimization, simulation)<br>• Data preprocessing and feature engineering: perform data cleaning (handle missing, outliers, duplicates), data transformation (standardization, normalization, encoding), feature selection and feature extraction, prepare modeling data<br>• Build analytical models: use appropriate tools (Excel, Python, R, SPSS, SQL, etc.) to build analytical models, perform model training and parameter tuning, output initial analysis results
+    </div>
+    <div class="step-output">Deliverable: Analytical modeling solution (including method selection description, data preprocessing plan, model building process, initial analysis results) | Quality standard: Appropriate method selection, standardized modeling process, rigorous analytical logic</div>
 </div>
+
 <div class="step-item">
     <div class="step-number">Step 4</div>
-    <div class="step-title">Database Implementation</div>
-    <div class="step-desc">Create tables and write SQL in MySQL</div>
-    <div class="step-output">Deliverable: SQL Scripts</div>
+    <div class="step-title">Result Validation & Optimization</div>
+    <div class="step-desc">
+        The core task of this step is to validate the reliability and validity of analysis results, optimize models and solutions. Verify robustness of analysis conclusions through multiple methods, evaluate model performance, conduct sensitivity analysis.<br><br>• Model evaluation and validation: evaluate model performance using appropriate metrics (accuracy, precision, recall, F1, AUC, MSE, R², etc.), perform cross-validation, test generalization ability of the model<br>• Sensitivity analysis and robustness testing: test impact of key parameter changes on results, test robustness of conclusions, identify sensitive factors, analyze applicable scope and limitations of the model<br>• Model optimization and iteration: optimize model based on evaluation results (adjust parameters, feature engineering, model selection), conduct multiple iterations, balance between performance and interpretability
+    </div>
+    <div class="step-output">Deliverable: Model validation and optimization report (including evaluation metrics, cross-validation results, sensitivity analysis, optimization iteration records) | Quality standard: Scientific evaluation methods, sufficient validation, effective optimization, robust reliable conclusions</div>
 </div>
+
 <div class="step-item">
     <div class="step-number">Step 5</div>
-    <div class="step-title">Optimization & Testing</div>
-    <div class="step-desc">Create indexes and test query performance</div>
-    <div class="step-output">Deliverable: Test Report</div>
+    <div class="step-title">Visualization & Business Recommendations</div>
+    <div class="step-desc">
+        The core task of this step is to visualize analysis results, translate them into business recommendations, and form deliverable analysis outcomes. Design intuitive and effective visualization solutions, write analysis reports, present to business stakeholders.<br><br>• Data visualization design: select appropriate chart types (bar charts, line charts, pie charts, scatter plots, heatmaps, dashboards, etc.), design visualization solutions, create visualizations using tools (Tableau, Power BI, matplotlib, Excel)<br>• Write analysis report: present analysis process and results in structured way, including executive summary, problem background, methodology, key findings, business recommendations, limitations, ensuring clear logic and data support<br>• Presentation and implementation drive: present and demonstrate to business stakeholders, answer questions, collect feedback, develop implementation action plan, track execution status and effects of recommendations
+    </div>
+    <div class="step-output">Deliverable: Analysis report and visualization deliverables (including visualization dashboard, analysis report, business recommendations, implementation plan) | Quality standard: Clear intuitive visualization, complete report structure, specific implementable business recommendations</div>
 </div>
+
             </div>
+
+
+
         </div>
     </div>    <div class="course-nav" style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:16px;padding:12px 16px;background:white;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,0.05);flex-wrap:wrap;">
     <a href="../analytics.html" style="color:#667eea;text-decoration:none;font-size:0.88rem;">← 返回商业分析</a>
