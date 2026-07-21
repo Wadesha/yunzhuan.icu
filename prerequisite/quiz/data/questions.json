@@ -1,0 +1,196 @@
+[
+  {
+    "id": "cs-ds-001",
+    "course": "数据结构",
+    "type": "single",
+    "question": "栈（Stack）的特点是什么？",
+    "options": ["先进先出（FIFO）", "先进后出（LIFO）", "随机访问", "双向访问"],
+    "answer": 1,
+    "explanation": "栈是一种后进先出（LIFO, Last In First Out）的数据结构，最后放入的元素最先被取出。",
+    "difficulty": 1
+  },
+  {
+    "id": "cs-ds-002",
+    "course": "数据结构",
+    "type": "single",
+    "question": "队列（Queue）的特点是什么？",
+    "options": ["先进先出（FIFO）", "先进后出（LIFO）", "只能从一端操作", "不支持删除操作"],
+    "answer": 0,
+    "explanation": "队列是一种先进先出（FIFO, First In First Out）的数据结构，先放入的元素先被取出。",
+    "difficulty": 1
+  },
+  {
+    "id": "cs-ds-003",
+    "course": "数据结构",
+    "type": "single",
+    "question": "二叉树的第i层最多有多少个节点？",
+    "options": ["i个", "2^i个", "2^(i-1)个", "2i个"],
+    "answer": 2,
+    "explanation": "二叉树的第i层最多有2^(i-1)个节点，这是二叉树的基本性质。",
+    "difficulty": 1
+  },
+  {
+    "id": "cs-ds-004",
+    "course": "数据结构",
+    "type": "judge",
+    "question": "数组和链表都可以在O(1)时间内随机访问任意元素。",
+    "answer": false,
+    "explanation": "数组可以O(1)随机访问，但链表需要从头遍历，时间复杂度是O(n)。",
+    "difficulty": 1
+  },
+  {
+    "id": "cs-ds-005",
+    "course": "数据结构",
+    "type": "single",
+    "question": "哈希表查找元素的平均时间复杂度是多少？",
+    "options": ["O(1)", "O(log n)", "O(n)", "O(n²)"],
+    "answer": 0,
+    "explanation": "哈希表通过哈希函数直接定位元素位置，平均情况下查找时间复杂度为O(1)。",
+    "difficulty": 1
+  },
+  {
+    "id": "cs-ds-006",
+    "course": "数据结构",
+    "type": "single",
+    "question": "以下哪种排序算法的时间复杂度在最坏情况下是O(n²)？",
+    "options": ["归并排序", "快速排序", "堆排序", "以上都是"],
+    "answer": 1,
+    "explanation": "快速排序在最坏情况下（如数组已排序）时间复杂度为O(n²)，而归并排序和堆排序始终保持O(n log n)。",
+    "difficulty": 2
+  },
+  {
+    "id": "cs-ds-007",
+    "course": "数据结构",
+    "type": "judge",
+    "question": "完全二叉树一定是满二叉树。",
+    "answer": false,
+    "explanation": "满二叉树是所有叶子节点在同一层且每个节点要么有两个子节点要么没有。完全二叉树允许最后一层不满，所以完全二叉树不一定是满二叉树。",
+    "difficulty": 2
+  },
+  {
+    "id": "cs-ds-008",
+    "course": "数据结构",
+    "type": "single",
+    "question": "Dijkstra算法用于解决什么问题？",
+    "options": ["最小生成树", "单源最短路径", "多源最短路径", "拓扑排序"],
+    "answer": 1,
+    "explanation": "Dijkstra算法用于计算图中从单个源点到所有其他节点的最短路径。",
+    "difficulty": 2
+  },
+  {
+    "id": "cs-ds-009",
+    "course": "数据结构",
+    "type": "single",
+    "question": "在二叉搜索树中查找元素的平均时间复杂度是？",
+    "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)"],
+    "answer": 1,
+    "explanation": "平衡的二叉搜索树查找时间复杂度为O(log n)，类似于二分查找。",
+    "difficulty": 1
+  },
+  {
+    "id": "cs-ds-010",
+    "course": "数据结构",
+    "type": "judge",
+    "question": "图的深度优先搜索（DFS）使用队列实现。",
+    "answer": false,
+    "explanation": "图的深度优先搜索使用栈（递归调用栈）实现，广度优先搜索（BFS）才使用队列实现。",
+    "difficulty": 2
+  },
+  {
+    "id": "cs-algo-001",
+    "course": "算法设计",
+    "type": "single",
+    "question": "算法的时间复杂度是指？",
+    "options": ["算法执行所需的时间", "算法执行所需的内存", "算法执行时间随输入规模增长的趋势", "算法代码的行数"],
+    "answer": 2,
+    "explanation": "时间复杂度描述的是算法执行时间随输入规模增长的变化趋势，用大O表示法表示。",
+    "difficulty": 1
+  },
+  {
+    "id": "cs-algo-002",
+    "course": "算法设计",
+    "type": "single",
+    "question": "以下哪种是分治策略的典型应用？",
+    "options": ["冒泡排序", "归并排序", "插入排序", "选择排序"],
+    "answer": 1,
+    "explanation": "归并排序将数组分成两半分别排序再合并，是典型的分治策略应用。",
+    "difficulty": 1
+  },
+  {
+    "id": "cs-algo-003",
+    "course": "算法设计",
+    "type": "judge",
+    "question": "动态规划与分治的主要区别是动态规划会保存子问题的解以避免重复计算。",
+    "answer": true,
+    "explanation": "动态规划通过存储子问题的解（记忆化或制表）来避免重复计算，这是与分治的核心区别。",
+    "difficulty": 2
+  },
+  {
+    "id": "cs-algo-004",
+    "course": "算法设计",
+    "type": "single",
+    "question": "贪心算法能保证得到全局最优解吗？",
+    "options": ["总是能", "有时能，有时不能", "永远不能", "只对排序问题能"],
+    "answer": 1,
+    "explanation": "贪心算法每步选择局部最优，不保证全局最优。只有在特定问题（如活动选择、最小生成树）上才能得到全局最优解。",
+    "difficulty": 2
+  },
+  {
+    "id": "cs-algo-005",
+    "course": "算法设计",
+    "type": "single",
+    "question": "二分查找的时间复杂度是？",
+    "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)"],
+    "answer": 1,
+    "explanation": "二分查找每次将搜索范围减半，时间复杂度为O(log n)。",
+    "difficulty": 1
+  },
+  {
+    "id": "cs-os-001",
+    "course": "操作系统",
+    "type": "single",
+    "question": "进程和线程的主要区别是？",
+    "options": ["进程是资源分配单位，线程是调度单位", "线程是资源分配单位，进程是调度单位", "进程比线程更轻量", "它们没有区别"],
+    "answer": 0,
+    "explanation": "进程是操作系统资源分配的基本单位，线程是CPU调度的基本单位。同一进程内的线程共享进程资源。",
+    "difficulty": 1
+  },
+  {
+    "id": "cs-os-002",
+    "course": "操作系统",
+    "type": "judge",
+    "question": "死锁的四个必要条件是：互斥、占有并等待、不可抢占、循环等待。",
+    "answer": true,
+    "explanation": "这是死锁的四个必要条件（Coffman条件），只有同时满足这四个条件才会发生死锁。",
+    "difficulty": 1
+  },
+  {
+    "id": "cs-os-003",
+    "course": "操作系统",
+    "type": "single",
+    "question": "页面置换算法LRU的含义是？",
+    "options": ["先进先出", "最近最少使用", "最不经常使用", "随机置换"],
+    "answer": 1,
+    "explanation": "LRU（Least Recently Used）算法淘汰最近最长时间没有被访问的页面。",
+    "difficulty": 1
+  },
+  {
+    "id": "cs-os-004",
+    "course": "操作系统",
+    "type": "single",
+    "question": "以下哪种调度算法是非抢占式的？",
+    "options": ["时间片轮转", "优先级调度", "先来先服务（FCFS）", "最短作业优先（SJF）抢占式"],
+    "answer": 2,
+    "explanation": "FCFS是非抢占式调度，进程一旦获得CPU就一直运行直到完成或阻塞。",
+    "difficulty": 2
+  },
+  {
+    "id": "cs-os-005",
+    "course": "操作系统",
+    "type": "judge",
+    "question": "虚拟内存允许程序使用超过物理内存大小的地址空间。",
+    "answer": true,
+    "explanation": "虚拟内存通过页面置换机制，让程序可以使用比物理内存更大的逻辑地址空间。",
+    "difficulty": 1
+  }
+]
