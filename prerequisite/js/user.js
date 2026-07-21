@@ -260,6 +260,25 @@ const Storage = {
 // ===== 全局金币展示组件 =====
 // 在页面顶部显示金币和等级
 
+function getRootPrefix() {
+  var path = location.pathname;
+  var parts = path.split('/').filter(function(p) { return p !== ''; });
+  var depth = 0;
+  var foundPrereq = false;
+  for (var i = 0; i < parts.length; i++) {
+    if (parts[i] === 'prerequisite') {
+      foundPrereq = true;
+      continue;
+    }
+    if (foundPrereq) depth++;
+  }
+  var prefix = '';
+  for (var j = 0; j < depth - 1; j++) {
+    prefix += '../';
+  }
+  return prefix;
+}
+
 const CoinDisplay = {
   init() {
     const user = Storage.getUser();
@@ -267,6 +286,7 @@ const CoinDisplay = {
   },
 
   render(user) {
+    var prefix = getRootPrefix();
     const html = `
     <div class="coin-bar" id="coin-bar">
       <div class="coin-item">
@@ -277,7 +297,7 @@ const CoinDisplay = {
         <span class="level-label">等级</span>
         <span class="level-value">${user.level}</span>
       </div>
-      <a href="profile.html" class="profile-link">查看档案</a>
+      <a href="${prefix}profile.html" class="profile-link">查看档案</a>
     </div>`;
     
     // 在页面 body 开头插入
