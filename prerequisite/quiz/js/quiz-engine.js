@@ -51,11 +51,12 @@ class QuizEngine {
       this.score++;
       this.streak++;
       if (this.streak > this.maxStreak) this.maxStreak = this.streak;
-      // 简单规则:答对+1金币,答错+0
       this.coinsEarned += 1;
     } else {
       this.streak = 0;
     }
+
+    saveSingleAnswer(isCorrect, q);
 
     return { isCorrect, correctAnswer: q.answer, q };
   }
@@ -84,24 +85,45 @@ class QuizEngine {
   }
 }
 
-// 保存到用户档案
+// 保存到用户档案（最后提交时调用）
 function saveResult(result) {
   const user = Storage.getUser();
-  user.coin += result.coinsEarned;
-  user.totalAnswered += result.total;
-  user.totalCorrect += result.correct;
   user.totalSessions += 1;
   if (result.maxStreak > user.maxStreak) user.maxStreak = result.maxStreak;
-  // 课程进度
-  if (result.courseId) {
-    const cp = user.courseProgress[result.courseId] || { answered: 0, correct: 0, best: 0 };
-    cp.answered += result.total;
-    cp.correct += result.correct;
-    if (result.accuracy > cp.best) cp.best = result.accuracy;
-    user.courseProgress[result.courseId] = cp;
+  Storage.saveUser(user);
+  
+  if (typeof CloudSlot !== 'undefined' && CloudSlot.isLoggedIn()) {
+    CloudSlot.kvSet('user_data', user).catch(e => console.warn('[云同步] 上传失败:', e.message));
   }
-  // 重新计算等级 (简化:每100金币1级)
+  
+  return user;
+}
+
+// 每答一题就保存（支持云同步）
+async function saveSingleAnswer(isCorrect, q) {
+  const user = Storage.getUser();
+  user.totalAnswered += 1;
+  if (isCorrect) {
+    user.coin += 1;
+    user.totalCorrect += 1;
+  }
+  if (q.courseId) {
+    const cp = user.courseProgress[q.courseId] || { answered: 0, correct: 0, best: 0 };
+    cp.answered += 1;
+    if (isCorrect) cp.correct += 1;
+    const currentAccuracy = Math.round(cp.correct / cp.answered * 100);
+    if (currentAccuracy > cp.best) cp.best = currentAccuracy;
+    user.courseProgress[q.courseId] = cp;
+  }
   user.level = Storage.calcLevel(user.coin);
   Storage.saveUser(user);
-  return user;
+
+  if (typeof CloudSlot !== 'undefined' && CloudSlot.isLoggedIn()) {
+    try {
+      await CloudSlot.kvSet('user_data', user);
+      console.log('[云同步] 答题数据已上传');
+    } catch (e) {
+      console.warn('[云同步] 上传失败:', e.message);
+    }
+  }
 }
