@@ -206,7 +206,7 @@ let engine = null;
 function renderQuestion() {
   const q = engine.getCurrent();
   const prog = engine.getProgress();
-  const user = Storage.getUser();
+  const user = UserStorage.getUser();
   const isLast = engine.currentIndex === engine.questions.length - 1;
   
   // 计算返回链接

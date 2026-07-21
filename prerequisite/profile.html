@@ -129,7 +129,7 @@ var checkTimer = setInterval(function() {
 <script src="js/user.js?v=7"></script>
 <script>
 function loadData() {
-  const user = Storage.getUser();
+  const user = UserStorage.getUser();
   
   document.getElementById('userId').textContent = user.userId;
   document.getElementById('totalCoin').textContent = user.coin;
@@ -189,7 +189,7 @@ function logout() {
 
 async function uploadToCloud() {
   if (!confirm('确定要把本地数据上传到云端吗？这会覆盖云端数据。')) return;
-  const user = Storage.getUser();
+  const user = UserStorage.getUser();
   const result = await CloudSlot.kvSet('user_data', user);
   if (result.success) {
     alert('上传成功');
@@ -199,7 +199,7 @@ async function uploadToCloud() {
 }
 
 async function syncFromCloud() {
-  const result = await Storage.syncFromCloud();
+  const result = await UserStorage.syncFromCloud();
   if (result) {
     alert('下载成功，本地数据已更新');
     loadData();

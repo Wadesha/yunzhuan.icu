@@ -87,10 +87,10 @@ class QuizEngine {
 
 // 保存到用户档案（最后提交时调用）
 function saveResult(result) {
-  const user = Storage.getUser();
+  const user = UserStorage.getUser();
   user.totalSessions += 1;
   if (result.maxStreak > user.maxStreak) user.maxStreak = result.maxStreak;
-  Storage.saveUser(user);
+  UserStorage.saveUser(user);
   
   if (typeof CloudSlot !== 'undefined' && CloudSlot.isLoggedIn()) {
     CloudSlot.kvSet('user_data', user).catch(e => console.warn('[云同步] 上传失败:', e.message));
@@ -101,7 +101,7 @@ function saveResult(result) {
 
 // 每答一题就保存（支持云同步）
 async function saveSingleAnswer(isCorrect, q) {
-  const user = Storage.getUser();
+  const user = UserStorage.getUser();
   user.totalAnswered += 1;
   if (isCorrect) {
     user.coin += 1;
@@ -115,8 +115,8 @@ async function saveSingleAnswer(isCorrect, q) {
     if (currentAccuracy > cp.best) cp.best = currentAccuracy;
     user.courseProgress[q.courseId] = cp;
   }
-  user.level = Storage.calcLevel(user.coin);
-  Storage.saveUser(user);
+  user.level = UserStorage.calcLevel(user.coin);
+  UserStorage.saveUser(user);
 
   if (typeof CloudSlot !== 'undefined' && CloudSlot.isLoggedIn()) {
     try {
