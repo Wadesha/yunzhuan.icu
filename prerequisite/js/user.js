@@ -55,72 +55,35 @@ function initSupabase() {
     setTimeout(() => {
       clearInterval(checkInterval);
       if (!supabaseReady) {
-        window.supabaseLoadStatus = '超时:页面脚本未加载完成';
+        window.supabaseLoadStatus = '超时:页面脚本未加载完成，尝试UMD';
+        loadUMDVersion();
       }
     }, 15000);
     return;
   }
-  window.supabaseLoadStatus = '动态加载ES模块中';
-  if (typeof importScripts === 'function') {
-    importScripts('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js');
-    if (window.supabase && typeof window.supabase.createClient === 'function') {
-      supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-      supabaseReady = true;
-      window.supabaseLoadStatus = '已初始化(importScripts)';
-      supabaseReadyCallbacks.forEach(cb => cb());
-      supabaseReadyCallbacks.length = 0;
-    }
-    return;
-  }
-  const script = document.createElement('script');
-  script.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js';
-  script.onload = function() {
-    if (window.supabase && typeof window.supabase.createClient === 'function') {
-      supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-      supabaseReady = true;
-      window.supabaseLoadStatus = '已初始化(动态加载UMD)';
-      supabaseReadyCallbacks.forEach(cb => cb());
-      supabaseReadyCallbacks.length = 0;
-    } else {
-      if (window.supabase_js || window.SupabaseClient) {
-        var mod = window.supabase_js || { createClient: function() {} };
-        if (window.SupabaseClient && !mod.createClient) {
-          window.supabaseLoadStatus = '找到SupabaseClient但无createClient';
-        }
-      }
-      window.supabaseLoadStatus = 'UMD加载后无window.supabase，尝试ES模块';
-      tryLoadAsModule();
-    }
-  };
-  script.onerror = function() {
-    window.supabaseLoadStatus = '失败:UMD脚本加载失败，尝试ES模块';
-    tryLoadAsModule();
-  };
-  document.head.appendChild(script);
+  loadUMDVersion();
 
-  function tryLoadAsModule() {
-    if (typeof import === 'function') {
-      window.supabaseLoadStatus = '尝试动态import ES模块';
-      import('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm')
-        .then(function(mod) {
-          if (mod && mod.createClient) {
-            supabase = mod.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-            window.supabase = mod;
-            supabaseReady = true;
-            window.supabaseLoadStatus = '已初始化(ES模块)';
-            supabaseReadyCallbacks.forEach(cb => cb());
-            supabaseReadyCallbacks.length = 0;
-          } else {
-            window.supabaseLoadStatus = 'ES模块加载但无createClient';
-          }
-        })
-        .catch(function(e) {
-          window.supabaseLoadStatus = 'ES模块加载失败: ' + e.message;
-          console.error('[Supabase] ES模块加载失败:', e);
-        });
-    } else {
-      window.supabaseLoadStatus = '浏览器不支持动态import';
-    }
+  function loadUMDVersion() {
+    window.supabaseLoadStatus = '加载UMD版本中';
+    const script = document.createElement('script');
+    script.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js';
+    script.onload = function() {
+      if (window.supabase && typeof window.supabase.createClient === 'function') {
+        supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        supabaseReady = true;
+        window.supabaseLoadStatus = '已初始化(UMD)';
+        supabaseReadyCallbacks.forEach(cb => cb());
+        supabaseReadyCallbacks.length = 0;
+      } else {
+        window.supabaseLoadStatus = 'UMD加载后无window.supabase';
+        console.warn('[Supabase] UMD版本加载后未找到window.supabase');
+      }
+    };
+    script.onerror = function() {
+      window.supabaseLoadStatus = 'UMD加载失败';
+      console.error('[Supabase] UMD脚本加载失败');
+    };
+    document.head.appendChild(script);
   }
 }
 
