@@ -3,17 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>用户档案 v20260722-4</title>
+<title>用户档案 v20260722-5</title>
 <link rel="stylesheet" href="css/user.css">
 </head>
 <body>
 <noscript><div style="background:#f8d7da;color:#721c24;padding:10px;">请开启JavaScript</div></noscript>
 <div id="debugBar" style="background:#ff6b6b;color:white;padding:8px 12px;font-size:13px;font-weight:bold;border-bottom:2px solid #ee5253;">
-  [v20260722-4] 调试 | 
+  [v20260722-5] 调试 | 
   slot_token: <span id="d1">检查中</span> | 
   user_data: <span id="d2">检查中</span> |
   CloudSlot: <span id="d3">检查中</span> |
   supabase: <span id="d4">检查中</span> |
+  user.js: <span id="d6">未加载</span> |
   错误: <span id="d5">无</span>
 </div>
 <script>
@@ -27,6 +28,28 @@ try {
 } catch(e) {
   document.getElementById('d1').textContent = 'ERR:' + e.message;
 }
+
+function checkCloudSlot() {
+  var d3 = document.getElementById('d3');
+  var d4 = document.getElementById('d4');
+  var d6 = document.getElementById('d6');
+  if (typeof CloudSlot !== 'undefined') {
+    d3.textContent = '已加载';
+    d6.textContent = '已加载';
+  } else if (typeof window.userJsLoaded !== 'undefined') {
+    d6.textContent = '已加载但无CloudSlot';
+  }
+  if (typeof supabaseReady !== 'undefined') {
+    d4.textContent = supabaseReady ? '就绪' : '加载中';
+  }
+}
+
+var checkCount = 0;
+var checkTimer = setInterval(function() {
+  checkCount++;
+  checkCloudSlot();
+  if (checkCount > 30) clearInterval(checkTimer);
+}, 500);
 </script>
 <div class="profile-page">
   <a href="index.html" class="back-btn">← 返回首页</a>
@@ -179,9 +202,6 @@ function clearData() {
 document.addEventListener('DOMContentLoaded', () => {
   loadData();
   updateLoginStatus();
-  
-  document.getElementById('d3').textContent = typeof CloudSlot !== 'undefined' ? '已加载' : '未加载';
-  document.getElementById('d4').textContent = typeof supabaseReady !== 'undefined' ? (supabaseReady ? '就绪' : '加载中') : '未知';
 });
 </script>
 </body>

@@ -376,3 +376,9 @@ const CoinDisplay = {
 document.addEventListener('DOMContentLoaded', () => {
   CoinDisplay.init();
 });
+
+// 标记 user.js 已加载完成
+window.userJsLoaded = true;
+if (typeof console !== 'undefined') {
+  console.log('[user.js] 加载完成，版本 v20260722-5');
+}
