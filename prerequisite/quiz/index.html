@@ -213,6 +213,9 @@ function renderQuestion() {
       <span class="stat">${engine.currentIndex + 1} / ${engine.questions.length}</span>
       <span class="stat">金币 <b>${user.coin}</b> · ${user.level}级</span>
     </div>
+    <div style="background:#f0f4ff;border-left:3px solid #667eea;padding:8px 12px;border-radius:6px;margin-bottom:12px;font-size:0.8rem;color:#555;">
+        提示：按键盘 1-4 选择答案，按空格键朗读题干，答对可获得 1 金币。
+    </div>
     <div class="progress-bar"><div class="progress-fill" style="width:${prog.percent}%"></div></div>
     <div class="card">
       <div class="q-type">${q.type === 'single' ? '单选题' : '判断题'}</div>
@@ -360,6 +363,7 @@ function renderResult() {
 
       <a href="javascript:location.reload()" class="btn">再来一次</a>
       <a href="javascript:history.back()" class="btn ghost">返回课程</a>
+      <a href="../index.html" class="btn ghost">浏览其他课程</a>
     </div>
   `;
 }
@@ -379,5 +383,6 @@ document.addEventListener('keydown', (e) => {
 });
 </script>
 
+<!-- enhanced-links -->
 </body>
 </html>
