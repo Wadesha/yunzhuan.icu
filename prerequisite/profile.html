@@ -158,6 +158,18 @@ function clearData() {
 document.addEventListener('DOMContentLoaded', () => {
   loadData();
   updateLoginStatus();
+  
+  const debug = document.createElement('div');
+  debug.style.cssText = 'position:fixed;bottom:10px;left:10px;background:#fff;padding:10px;border:1px solid #ddd;font-size:12px;z-index:9999;max-width:300px;word-break:break-all;';
+  const token = localStorage.getItem('slot_token');
+  const userData = localStorage.getItem('prereq_user_v1');
+  debug.innerHTML = '<b>调试信息</b><br>' +
+    'slot_token: ' + (token ? '存在 (' + token.length + '字符)' : '不存在') + '<br>' +
+    'user_data: ' + (userData ? '存在' : '不存在') + '<br>' +
+    'CloudSlot: ' + (typeof CloudSlot !== 'undefined' ? '已加载' : '未加载') + '<br>' +
+    'isLoggedIn: ' + (typeof CloudSlot !== 'undefined' ? CloudSlot.isLoggedIn() : 'N/A') + '<br>' +
+    'supabaseReady: ' + (typeof supabaseReady !== 'undefined' ? supabaseReady : 'N/A');
+  document.body.appendChild(debug);
 });
 </script>
 </body>
