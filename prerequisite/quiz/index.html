@@ -277,9 +277,6 @@ function renderQuestion() {
 }
 
 function confirmExit() {
-  if (engine && !engine.answered && engine.currentIndex > 0) {
-    return confirm('确定要退出吗？进度将不保存。');
-  }
   return true;
 }
 
