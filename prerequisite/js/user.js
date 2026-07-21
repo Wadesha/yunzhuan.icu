@@ -2,9 +2,180 @@
 // 支持 localStorage 和未来后端 API
 // 预留上云接口：只需替换 API_BASE_URL 和实现 fetch* 函数
 
+// ===== Supabase 客户端（占坑模式）=====
+// 使用说明：上线时替换下面的 URL 和 key
+const SUPABASE_URL = ''; // 替换为你的 Supabase 项目 URL
+const SUPABASE_ANON_KEY = ''; // 替换为你的 Supabase anon key
+
+let supabase = null;
+if (SUPABASE_URL && SUPABASE_ANON_KEY) {
+  // 加载 Supabase JS SDK（通过 script 标签引入）
+  // <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  if (window.supabase) {
+    supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  }
+}
+
+// ===== 云端占坑 API（CloudSlot）=====
+// 对应 PostgreSQL SECURITY DEFINER 存储过程
+
+const CloudSlot = {
+  // 注册占坑：手机号 + 可选 PIN
+  async create(phone, pin) {
+    if (!supabase) return { success: false, error: 'Cloud not configured' };
+    
+    try {
+      const { data, error } = await supabase.rpc('create_slot', {
+        p_phone: phone,
+        p_pin: pin || null
+      });
+      
+      if (error) {
+        return { success: false, error: error.message };
+      }
+      
+      const result = data[0];
+      if (result.conflict) {
+        return { success: false, conflict: true };
+      }
+      
+      // 保存凭证到 localStorage
+      localStorage.setItem('slot_token', JSON.stringify({
+        slot_id: result.slot_id,
+        slot_secret: result.slot_secret,
+        phone: phone
+      }));
+      
+      return { success: true, slot_id: result.slot_id, slot_secret: result.slot_secret };
+      
+    } catch (e) {
+      return { success: false, error: e.message };
+    }
+  },
+
+  // 登录：手机号 + 可选 PIN
+  async login(phone, pin) {
+    if (!supabase) return { success: false, error: 'Cloud not configured' };
+    
+    try {
+      const { data, error } = await supabase.rpc('login_slot', {
+        p_phone: phone,
+        p_pin: pin || null
+      });
+      
+      if (error) {
+        return { success: false, error: error.message };
+      }
+      
+      const result = data[0];
+      if (result.not_found) {
+        return { success: false, not_found: true };
+      }
+      if (result.bad_pin) {
+        return { success: false, bad_pin: true };
+      }
+      
+      localStorage.setItem('slot_token', JSON.stringify({
+        slot_id: result.slot_id,
+        slot_secret: result.slot_secret,
+        phone: phone
+      }));
+      
+      return { success: true, slot_id: result.slot_id, slot_secret: result.slot_secret };
+      
+    } catch (e) {
+      return { success: false, error: e.message };
+    }
+  },
+
+  // 获取当前登录凭证
+  getToken() {
+    try {
+      return JSON.parse(localStorage.getItem('slot_token'));
+    } catch (e) {
+      return null;
+    }
+  },
+
+  // 判断是否已登录
+  isLoggedIn() {
+    return !!this.getToken();
+  },
+
+  // 登出：清除本地凭证
+  logout() {
+    localStorage.removeItem('slot_token');
+  },
+
+  // KV 写入
+  async kvSet(key, value) {
+    const token = this.getToken();
+    if (!token || !supabase) return { success: false };
+    
+    try {
+      const { error } = await supabase.rpc('kv_slot_set', {
+        p_slot_id: token.slot_id,
+        p_slot_secret: token.slot_secret,
+        p_key: key,
+        p_value: value
+      });
+      
+      return { success: !error, error: error ? error.message : null };
+      
+    } catch (e) {
+      return { success: false, error: e.message };
+    }
+  },
+
+  // KV 读取
+  async kvGet() {
+    const token = this.getToken();
+    if (!token || !supabase) return { success: false, data: null };
+    
+    try {
+      const { data, error } = await supabase.rpc('kv_slot_get', {
+        p_slot_id: token.slot_id,
+        p_slot_secret: token.slot_secret
+      });
+      
+      if (error) {
+        return { success: false, error: error.message };
+      }
+      
+      const result = {};
+      data.forEach(item => {
+        result[item.key] = item.value;
+      });
+      
+      return { success: true, data: result };
+      
+    } catch (e) {
+      return { success: false, error: e.message };
+    }
+  },
+
+  // KV 删除
+  async kvDel(key) {
+    const token = this.getToken();
+    if (!token || !supabase) return { success: false };
+    
+    try {
+      const { error } = await supabase.rpc('kv_slot_del', {
+        p_slot_id: token.slot_id,
+        p_slot_secret: token.slot_secret,
+        p_key: key
+      });
+      
+      return { success: !error, error: error ? error.message : null };
+      
+    } catch (e) {
+      return { success: false, error: e.message };
+    }
+  }
+};
+
 const Storage = {
   KEY: 'prereq_user_v1',
-  API_BASE_URL: '', // 预留：上线后改为后端地址，如 'https://api.yunzhuan.icu/v1'
 
   // ===== 本地存储 API =====
   
@@ -20,17 +191,15 @@ const Storage = {
     try {
       localStorage.setItem(this.KEY, JSON.stringify(user));
     } catch (e) {}
-    // 预留：同步到后端
-    if (this.API_BASE_URL) {
+    // 预留：同步到云端（占坑模式）
+    if (CloudSlot.isLoggedIn()) {
       this.syncToCloud(user);
     }
   },
 
   resetUser() {
     localStorage.removeItem(this.KEY);
-    if (this.API_BASE_URL) {
-      this.logout();
-    }
+    CloudSlot.logout();
   },
 
   createUser() {
@@ -58,59 +227,33 @@ const Storage = {
     return 'user_' + Date.now().toString(36) + Math.random().toString(36).substr(2, 9);
   },
 
-  // ===== 预留：后端云同步 API =====
+  // ===== 云端同步（占坑模式）=====
 
   async syncToCloud(user) {
-    // 预留：上线后实现
-    /*
-    try {
-      await fetch(`${this.API_BASE_URL}/user/sync`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(user)
-      });
-    } catch (e) {
-      console.warn('Cloud sync failed:', e);
-    }
-    */
+    // 通过 CloudSlot.kvSet 同步 user_data
+    await CloudSlot.kvSet('user_data', user);
   },
 
-  async login(userId) {
-    // 预留：登录后从云端同步数据
-    /*
-    try {
-      const resp = await fetch(`${this.API_BASE_URL}/user/${userId}`);
-      const data = await resp.json();
-      if (data.user) {
-        localStorage.setItem(this.KEY, JSON.stringify(data.user));
-        return data.user;
-      }
-    } catch (e) {
-      console.warn('Cloud login failed:', e);
+  async syncFromCloud() {
+    // 从云端拉取 user_data
+    const result = await CloudSlot.kvGet();
+    if (result.success && result.data && result.data.user_data) {
+      localStorage.setItem(this.KEY, JSON.stringify(result.data.user_data));
+      return result.data.user_data;
     }
-    */
-    return this.getUser();
-  },
-
-  async logout() {
-    // 预留：清除云端会话
+    return null;
   },
 
   async getLeaderboard() {
-    // 预留：排行榜
-    /*
-    try {
-      const resp = await fetch(`${this.API_BASE_URL}/leaderboard`);
-      return await resp.json();
-    } catch (e) {
-      return [];
-    }
-    */
     return [];
   },
 
   async saveQuestionAnswer(courseId, questionId, isCorrect) {
-    // 预留：答题记录上报
+    // 预留：答题记录上报到云端
+    if (CloudSlot.isLoggedIn()) {
+      const user = this.getUser();
+      await CloudSlot.kvSet('user_data', user);
+    }
   }
 };
 

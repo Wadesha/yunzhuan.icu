@@ -16,6 +16,7 @@
     <div class="profile-id">ID: <span id="userId">--</span></div>
     <div style="margin-top:12px;font-size:1.6rem;">● <span id="totalCoin">0</span></div>
     <div style="font-size:0.9rem;">等级 <span id="level">1</span></div>
+    <div style="font-size:0.75rem;margin-top:8px;" id="loginStatus">未登录</div>
   </div>
 
   <div class="profile-stats">
@@ -49,6 +50,12 @@
     <div style="background:#f0f4ff;border-radius:8px;padding:14px;font-size:0.85rem;color:#555;">
       <p style="margin-bottom:8px;">当前数据存储在本地浏览器中，清除浏览器缓存会导致数据丢失。</p>
       <p>预留：后续将支持云端同步，登录后数据自动保存到服务器。</p>
+    </div>
+    
+    <div style="margin-top:12px;text-align:center;">
+      <a href="login.html" style="display:inline-block;padding:8px 24px;background:#667eea;color:white;border-radius:20px;text-decoration:none;font-size:0.85rem;" id="loginBtn">去登录</a>
+      <button onclick="logout()" style="display:none;padding:8px 24px;background:#f0f0f0;color:#666;border:none;border-radius:20px;font-size:0.85rem;cursor:pointer;" id="logoutBtn">登出</button>
+      <button onclick="syncFromCloud()" style="display:none;margin-left:8px;padding:8px 24px;background:#e3f2fd;color:#1976d2;border:none;border-radius:20px;font-size:0.85rem;cursor:pointer;" id="syncBtn">同步数据</button>
     </div>
   </div>
 
@@ -93,6 +100,40 @@ function loadData() {
   document.getElementById('courseProgress').innerHTML = html;
 }
 
+function updateLoginStatus() {
+  const loggedIn = CloudSlot.isLoggedIn();
+  const token = CloudSlot.getToken();
+  
+  document.getElementById('loginStatus').textContent = loggedIn ? '已登录' : '未登录';
+  document.getElementById('loginStatus').style.color = loggedIn ? '#a5d6a7' : '#ffcc80';
+  
+  document.getElementById('loginBtn').style.display = loggedIn ? 'none' : 'inline-block';
+  document.getElementById('logoutBtn').style.display = loggedIn ? 'inline-block' : 'none';
+  document.getElementById('syncBtn').style.display = loggedIn ? 'inline-block' : 'none';
+  
+  if (loggedIn && token) {
+    document.getElementById('userId').textContent = token.phone || 'slot_' + token.slot_id.substring(0, 8);
+  }
+}
+
+function logout() {
+  if (confirm('确定要登出吗？')) {
+    CloudSlot.logout();
+    updateLoginStatus();
+    loadData();
+  }
+}
+
+async function syncFromCloud() {
+  const result = await Storage.syncFromCloud();
+  if (result) {
+    alert('数据同步成功');
+    loadData();
+  } else {
+    alert('同步失败或云端无数据');
+  }
+}
+
 function clearData() {
   if (confirm('确定要重置所有数据吗？此操作不可恢复。')) {
     Storage.resetUser();
@@ -100,7 +141,10 @@ function clearData() {
   }
 }
 
-document.addEventListener('DOMContentLoaded', loadData);
+document.addEventListener('DOMContentLoaded', () => {
+  loadData();
+  updateLoginStatus();
+});
 </script>
 </body>
 </html>
