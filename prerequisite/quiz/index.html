@@ -207,15 +207,20 @@ function renderQuestion() {
   const prog = engine.getProgress();
   const user = Storage.getUser();
   const isLast = engine.currentIndex === engine.questions.length - 1;
+  
+  // 计算返回链接
+  const backUrl = document.referrer && document.referrer.indexOf(location.host) > -1 
+    ? 'javascript:history.back()' 
+    : '../index.html';
 
   app.innerHTML = `
     <div class="top-bar">
-      <a href="javascript:history.back()" class="back-link">返回课程</a>
+      <a href="${backUrl}" class="back-link" onclick="return confirmExit()">退出</a>
       <span class="stat">${engine.currentIndex + 1} / ${engine.questions.length}</span>
       <span class="stat">金币 <b>${user.coin}</b> · ${user.level}级</span>
     </div>
     <div style="background:#f0f4ff;border-left:3px solid #667eea;padding:8px 12px;border-radius:6px;margin-bottom:12px;font-size:0.8rem;color:#555;">
-        提示：按键盘 1-4 选择答案，按空格键朗读题干，答对可获得 1 金币。
+        提示：按键盘 1-4 选择答案，按空格键朗读题干，答对可获得 1 金币。点击左上角"退出"可随时离开。
     </div>
     <div class="progress-bar"><div class="progress-fill" style="width:${prog.percent}%"></div></div>
     <div class="card">
@@ -269,6 +274,13 @@ function renderQuestion() {
       }, 200);
     }
   };
+}
+
+function confirmExit() {
+  if (engine && !engine.answered && engine.currentIndex > 0) {
+    return confirm('确定要退出吗？进度将不保存。');
+  }
+  return true;
 }
 
 function selectAnswer(idx, el) {
