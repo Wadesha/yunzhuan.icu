@@ -4,8 +4,8 @@
 
 // ===== Supabase 客户端（占坑模式）=====
 // 使用说明：上线时替换下面的 URL 和 key
-const SUPABASE_URL = ''; // 替换为你的 Supabase 项目 URL
-const SUPABASE_ANON_KEY = ''; // 替换为你的 Supabase anon key
+const SUPABASE_URL = 'https://otfjbzjvkoectpejhxar.supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable_SBRF6ewKH-se3dNlqFwsXQ_lObhamTr';
 
 let supabase = null;
 if (SUPABASE_URL && SUPABASE_ANON_KEY) {
