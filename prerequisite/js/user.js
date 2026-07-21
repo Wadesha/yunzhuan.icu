@@ -26,6 +26,19 @@ function initSupabase() {
     supabaseReadyCallbacks.length = 0;
     return;
   }
+  if (document.querySelector('script[src*="supabase-js"]')) {
+    const checkInterval = setInterval(() => {
+      if (window.supabase) {
+        clearInterval(checkInterval);
+        supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        supabaseReady = true;
+        supabaseReadyCallbacks.forEach(cb => cb());
+        supabaseReadyCallbacks.length = 0;
+      }
+    }, 100);
+    setTimeout(() => clearInterval(checkInterval), 15000);
+    return;
+  }
   const script = document.createElement('script');
   script.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2';
   script.onload = function() {
