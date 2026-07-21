@@ -142,16 +142,35 @@ input:focus {
   </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="js/user.js"></script>
 <script>
-let isRegister = false;
-
 function showMessage(text, type) {
   const msg = document.getElementById('msg');
-  msg.textContent = text;
-  msg.className = 'message ' + type;
+  if (msg) {
+    msg.textContent = text;
+    msg.className = 'message ' + type;
+  } else {
+    console.log('[登录页]', type + ':', text);
+  }
 }
+
+window.onerror = function(msg, url, line, col, error) {
+  showMessage('页面错误: ' + msg, 'error');
+  console.error(msg, url, line, col, error);
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+if (typeof supabase === 'undefined') {
+  showMessage('Supabase SDK 加载失败，请检查网络', 'error');
+}
+</script>
+<script src="js/user.js"></script>
+<script>
+if (typeof CloudSlot === 'undefined') {
+  showMessage('用户模块加载失败', 'error');
+}
+
+let isRegister = false;
 
 function toggleMode() {
   isRegister = !isRegister;
@@ -170,34 +189,51 @@ async function handleSubmit() {
     return;
   }
 
+  if (typeof CloudSlot === 'undefined') {
+    showMessage('模块未加载，请刷新页面重试', 'error');
+    return;
+  }
+
+  const btn = document.getElementById('submitBtn');
+  const originalText = btn.textContent;
+  btn.disabled = true;
+  btn.textContent = '处理中...';
   showMessage('', '');
 
-  if (isRegister) {
-    const result = await CloudSlot.create(phone, pin);
-    if (result.success) {
-      showMessage('注册成功', 'success');
-      setTimeout(() => {
-        location.href = 'profile.html';
-      }, 1000);
-    } else if (result.conflict) {
-      showMessage('该手机号已注册', 'error');
+  try {
+    if (isRegister) {
+      const result = await CloudSlot.create(phone, pin);
+      if (result.success) {
+        showMessage('注册成功', 'success');
+        setTimeout(() => {
+          location.href = 'profile.html';
+        }, 1000);
+      } else if (result.conflict) {
+        showMessage('该手机号已注册', 'error');
+      } else {
+        showMessage(result.error || '注册失败', 'error');
+      }
     } else {
-      showMessage(result.error || '注册失败', 'error');
+      const result = await CloudSlot.login(phone, pin);
+      if (result.success) {
+        showMessage('登录成功', 'success');
+        setTimeout(() => {
+          location.href = 'profile.html';
+        }, 1000);
+      } else if (result.not_found) {
+        showMessage('手机号未注册', 'error');
+      } else if (result.bad_pin) {
+        showMessage('PIN 错误', 'error');
+      } else {
+        showMessage(result.error || '登录失败', 'error');
+      }
     }
-  } else {
-    const result = await CloudSlot.login(phone, pin);
-    if (result.success) {
-      showMessage('登录成功', 'success');
-      setTimeout(() => {
-        location.href = 'profile.html';
-      }, 1000);
-    } else if (result.not_found) {
-      showMessage('手机号未注册', 'error');
-    } else if (result.bad_pin) {
-      showMessage('PIN 错误', 'error');
-    } else {
-      showMessage(result.error || '登录失败', 'error');
-    }
+  } catch (e) {
+    showMessage('出错了: ' + e.message, 'error');
+    console.error(e);
+  } finally {
+    btn.disabled = false;
+    btn.textContent = originalText;
   }
 }
 
