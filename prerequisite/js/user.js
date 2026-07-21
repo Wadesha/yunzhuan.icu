@@ -22,32 +22,48 @@ function initSupabase() {
   if (window.supabase) {
     supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
     supabaseReady = true;
+    window.supabaseLoadStatus = '已初始化(直接可用)';
     supabaseReadyCallbacks.forEach(cb => cb());
     supabaseReadyCallbacks.length = 0;
     return;
   }
   if (document.querySelector('script[src*="supabase-js"]')) {
+    window.supabaseLoadStatus = '等待页面已有脚本加载';
     const checkInterval = setInterval(() => {
       if (window.supabase) {
         clearInterval(checkInterval);
         supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
         supabaseReady = true;
+        window.supabaseLoadStatus = '已初始化(页面已有脚本)';
         supabaseReadyCallbacks.forEach(cb => cb());
         supabaseReadyCallbacks.length = 0;
       }
     }, 100);
-    setTimeout(() => clearInterval(checkInterval), 15000);
+    setTimeout(() => {
+      clearInterval(checkInterval);
+      if (!supabaseReady) {
+        window.supabaseLoadStatus = '超时:页面脚本未加载完成';
+      }
+    }, 15000);
     return;
   }
+  window.supabaseLoadStatus = '动态创建脚本中';
   const script = document.createElement('script');
   script.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2';
   script.onload = function() {
     if (window.supabase) {
       supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
       supabaseReady = true;
+      window.supabaseLoadStatus = '已初始化(动态加载)';
       supabaseReadyCallbacks.forEach(cb => cb());
       supabaseReadyCallbacks.length = 0;
+    } else {
+      window.supabaseLoadStatus = '脚本加载后无window.supabase';
     }
+  };
+  script.onerror = function() {
+    window.supabaseLoadStatus = '失败:CDN脚本加载失败';
+    console.error('[Supabase] CDN脚本加载失败');
   };
   document.head.appendChild(script);
 }

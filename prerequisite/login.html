@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>登录 / 注册</title>
+<title>登录 / 注册 v20260722-5</title>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body {
@@ -118,6 +118,53 @@ input:focus {
 </style>
 </head>
 <body>
+<div id="debugBar" style="background:#ff6b6b;color:white;padding:8px 12px;font-size:13px;font-weight:bold;border-bottom:2px solid #ee5253;">
+  [v20260722-5] 登录页调试 | 
+  slot_token: <span id="d1">检查中</span> | 
+  user.js: <span id="d6">未加载</span> |
+  CloudSlot: <span id="d3">检查中</span> |
+  supabase: <span id="d4">检查中</span> |
+  错误: <span id="d5">无</span>
+</div>
+<script>
+window.onerror = function(msg, url, line, col, error) {
+  var el = document.getElementById('d5');
+  if (el) el.textContent = msg + ' (' + url + ':' + line + ')';
+  console.error(msg, url, line, col, error);
+};
+try {
+  document.getElementById('d1').textContent = localStorage.getItem('slot_token') ? '有' : '无';
+} catch(e) {}
+
+function checkStatus() {
+  var d3 = document.getElementById('d3');
+  var d4 = document.getElementById('d4');
+  var d6 = document.getElementById('d6');
+  if (typeof CloudSlot !== 'undefined') {
+    d3.textContent = '已加载';
+    d6.textContent = '已加载';
+  } else if (typeof window.userJsLoaded !== 'undefined') {
+    d6.textContent = '已加载但无CloudSlot';
+  }
+  if (typeof supabaseReady !== 'undefined') {
+    if (supabaseReady) {
+      d4.textContent = '就绪';
+    } else if (typeof window.supabaseLoadStatus !== 'undefined') {
+      d4.textContent = window.supabaseLoadStatus;
+    } else {
+      d4.textContent = '加载中';
+    }
+  } else if (typeof window.supabaseLoadStatus !== 'undefined') {
+    d4.textContent = window.supabaseLoadStatus;
+  }
+}
+var checkCount = 0;
+var checkTimer = setInterval(function() {
+  checkCount++;
+  checkStatus();
+  if (checkCount > 30) clearInterval(checkTimer);
+}, 500);
+</script>
 <div class="container">
   <h1 id="pageTitle">登录</h1>
   
@@ -152,13 +199,8 @@ function showMessage(text, type) {
     console.log('[登录页]', type + ':', text);
   }
 }
-
-window.onerror = function(msg, url, line, col, error) {
-  showMessage('页面错误: ' + msg, 'error');
-  console.error(msg, url, line, col, error);
-};
 </script>
-<script src="js/user.js"></script>
+<script src="js/user.js?v=5"></script>
 <script>
 if (typeof CloudSlot === 'undefined') {
   showMessage('用户模块加载失败', 'error');

@@ -12,9 +12,9 @@
   [v20260722-5] 调试 | 
   slot_token: <span id="d1">检查中</span> | 
   user_data: <span id="d2">检查中</span> |
+  user.js: <span id="d6">未加载</span> |
   CloudSlot: <span id="d3">检查中</span> |
   supabase: <span id="d4">检查中</span> |
-  user.js: <span id="d6">未加载</span> |
   错误: <span id="d5">无</span>
 </div>
 <script>
@@ -40,7 +40,15 @@ function checkCloudSlot() {
     d6.textContent = '已加载但无CloudSlot';
   }
   if (typeof supabaseReady !== 'undefined') {
-    d4.textContent = supabaseReady ? '就绪' : '加载中';
+    if (supabaseReady) {
+      d4.textContent = '就绪';
+    } else if (typeof window.supabaseLoadStatus !== 'undefined') {
+      d4.textContent = window.supabaseLoadStatus;
+    } else {
+      d4.textContent = '加载中';
+    }
+  } else if (typeof window.supabaseLoadStatus !== 'undefined') {
+    d4.textContent = window.supabaseLoadStatus;
   }
 }
 
@@ -109,8 +117,8 @@ var checkTimer = setInterval(function() {
   </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="js/user.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2?v=5"></script>
+<script src="js/user.js?v=5"></script>
 <script>
 function loadData() {
   const user = Storage.getUser();
