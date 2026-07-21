@@ -55,7 +55,8 @@
     <div style="margin-top:12px;text-align:center;">
       <a href="login.html" style="display:inline-block;padding:8px 24px;background:#667eea;color:white;border-radius:20px;text-decoration:none;font-size:0.85rem;" id="loginBtn">去登录</a>
       <button onclick="logout()" style="display:none;padding:8px 24px;background:#f0f0f0;color:#666;border:none;border-radius:20px;font-size:0.85rem;cursor:pointer;" id="logoutBtn">登出</button>
-      <button onclick="syncFromCloud()" style="display:none;margin-left:8px;padding:8px 24px;background:#e3f2fd;color:#1976d2;border:none;border-radius:20px;font-size:0.85rem;cursor:pointer;" id="syncBtn">同步数据</button>
+      <button onclick="uploadToCloud()" style="display:none;margin-left:8px;padding:8px 24px;background:#fff3e0;color:#f57c00;border:none;border-radius:20px;font-size:0.85rem;cursor:pointer;" id="uploadBtn">上传到云端</button>
+      <button onclick="syncFromCloud()" style="display:none;margin-left:8px;padding:8px 24px;background:#e3f2fd;color:#1976d2;border:none;border-radius:20px;font-size:0.85rem;cursor:pointer;" id="syncBtn">从云端下载</button>
     </div>
   </div>
 
@@ -109,6 +110,7 @@ function updateLoginStatus() {
   
   document.getElementById('loginBtn').style.display = loggedIn ? 'none' : 'inline-block';
   document.getElementById('logoutBtn').style.display = loggedIn ? 'inline-block' : 'none';
+  document.getElementById('uploadBtn').style.display = loggedIn ? 'inline-block' : 'none';
   document.getElementById('syncBtn').style.display = loggedIn ? 'inline-block' : 'none';
   
   if (loggedIn && token) {
@@ -124,13 +126,24 @@ function logout() {
   }
 }
 
+async function uploadToCloud() {
+  if (!confirm('确定要把本地数据上传到云端吗？这会覆盖云端数据。')) return;
+  const user = Storage.getUser();
+  const result = await CloudSlot.kvSet('user_data', user);
+  if (result.success) {
+    alert('上传成功');
+  } else {
+    alert('上传失败: ' + (result.error || '未知错误'));
+  }
+}
+
 async function syncFromCloud() {
   const result = await Storage.syncFromCloud();
   if (result) {
-    alert('数据同步成功');
+    alert('下载成功，本地数据已更新');
     loadData();
   } else {
-    alert('同步失败或云端无数据');
+    alert('下载失败或云端无数据，请先上传');
   }
 }
 
