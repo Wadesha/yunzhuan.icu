@@ -3,26 +3,65 @@
 // 预留上云接口：只需替换 API_BASE_URL 和实现 fetch* 函数
 
 // ===== Supabase 客户端（占坑模式）=====
-// 使用说明：上线时替换下面的 URL 和 key
 const SUPABASE_URL = 'https://otfjbzjvkoectpejhxar.supabase.co';
 const SUPABASE_ANON_KEY = 'sb_publishable_SBRF6ewKH-se3dNlqFwsXQ_lObhamTr';
 
 let supabase = null;
-if (SUPABASE_URL && SUPABASE_ANON_KEY) {
-  // 加载 Supabase JS SDK（通过 script 标签引入）
-  // <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+let supabaseReady = false;
+const supabaseReadyCallbacks = [];
+
+function onSupabaseReady(callback) {
+  if (supabaseReady) {
+    callback();
+  } else {
+    supabaseReadyCallbacks.push(callback);
+  }
+}
+
+function initSupabase() {
   if (window.supabase) {
     supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    supabaseReady = true;
+    supabaseReadyCallbacks.forEach(cb => cb());
+    supabaseReadyCallbacks.length = 0;
+    return;
   }
+  const script = document.createElement('script');
+  script.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2';
+  script.onload = function() {
+    if (window.supabase) {
+      supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+      supabaseReady = true;
+      supabaseReadyCallbacks.forEach(cb => cb());
+      supabaseReadyCallbacks.length = 0;
+    }
+  };
+  document.head.appendChild(script);
+}
+
+if (SUPABASE_URL && SUPABASE_ANON_KEY && typeof document !== 'undefined') {
+  initSupabase();
 }
 
 // ===== 云端占坑 API（CloudSlot）=====
 // 对应 PostgreSQL SECURITY DEFINER 存储过程
 
+function waitForSupabase() {
+  return new Promise((resolve) => {
+    if (supabaseReady && supabase) {
+      resolve(true);
+    } else {
+      onSupabaseReady(() => resolve(true));
+      setTimeout(() => resolve(false), 10000);
+    }
+  });
+}
+
 const CloudSlot = {
   // 注册占坑：手机号 + 可选 PIN
   async create(phone, pin) {
-    if (!supabase) return { success: false, error: 'Cloud not configured' };
+    const ready = await waitForSupabase();
+    if (!ready || !supabase) return { success: false, error: 'Cloud not configured' };
     
     try {
       const { data, error } = await supabase.rpc('create_slot', {
@@ -55,7 +94,8 @@ const CloudSlot = {
 
   // 登录：手机号 + 可选 PIN
   async login(phone, pin) {
-    if (!supabase) return { success: false, error: 'Cloud not configured' };
+    const ready = await waitForSupabase();
+    if (!ready || !supabase) return { success: false, error: 'Cloud not configured' };
     
     try {
       const { data, error } = await supabase.rpc('login_slot', {
@@ -110,7 +150,8 @@ const CloudSlot = {
   // KV 写入
   async kvSet(key, value) {
     const token = this.getToken();
-    if (!token || !supabase) return { success: false };
+    const ready = await waitForSupabase();
+    if (!token || !ready || !supabase) return { success: false };
     
     try {
       const { error } = await supabase.rpc('kv_slot_set', {
@@ -130,7 +171,8 @@ const CloudSlot = {
   // KV 读取
   async kvGet() {
     const token = this.getToken();
-    if (!token || !supabase) return { success: false, data: null };
+    const ready = await waitForSupabase();
+    if (!token || !ready || !supabase) return { success: false, data: null };
     
     try {
       const { data, error } = await supabase.rpc('kv_slot_get', {
@@ -157,7 +199,8 @@ const CloudSlot = {
   // KV 删除
   async kvDel(key) {
     const token = this.getToken();
-    if (!token || !supabase) return { success: false };
+    const ready = await waitForSupabase();
+    if (!token || !ready || !supabase) return { success: false };
     
     try {
       const { error } = await supabase.rpc('kv_slot_del', {
