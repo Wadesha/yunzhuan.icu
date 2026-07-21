@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>部署状态检查 v20260722-6</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: #f5f5f5;
+  color: #333;
+  padding: 20px;
+}
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+  padding: 24px;
+}
+h1 {
+  font-size: 1.4rem;
+  margin-bottom: 20px;
+  color: #333;
+}
+.chain-item {
+  margin-bottom: 16px;
+  padding: 14px;
+  border-radius: 8px;
+  border-left: 4px solid #ccc;
+  background: #fafafa;
+}
+.chain-item.ok { border-left-color: #4caf50; background: #e8f5e9; }
+.chain-item.fail { border-left-color: #f44336; background: #ffebee; }
+.chain-item.loading { border-left-color: #ff9800; background: #fff3e0; }
+.chain-title {
+  font-weight: bold;
+  font-size: 0.95rem;
+  margin-bottom: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.chain-status {
+  font-size: 0.8rem;
+  padding: 2px 8px;
+  border-radius: 10px;
+  background: #ddd;
+  color: #666;
+}
+.chain-status.ok { background: #c8e6c9; color: #2e7d32; }
+.chain-status.fail { background: #ffcdd2; color: #c62828; }
+.chain-status.loading { background: #ffe0b2; color: #e65100; }
+.chain-detail {
+  font-size: 0.85rem;
+  color: #666;
+  font-family: monospace;
+  line-height: 1.5;
+}
+.check-btn {
+  display: inline-block;
+  padding: 10px 24px;
+  background: #667eea;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+.check-btn:hover { opacity: 0.9; }
+.check-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.back-link {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 0.85rem;
+}
+.back-link a { color: #999; text-decoration: none; }
+.back-link a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>部署链条状态检查</h1>
+  <button class="check-btn" id="checkBtn" onclick="checkAll()">开始检查</button>
+
+  <div class="chain-item loading" id="step1">
+    <div class="chain-title">
+      <span>1. 当前页面版本（本文件）</span>
+      <span class="chain-status loading" id="s1_status">待检查</span>
+    </div>
+    <div class="chain-detail" id="s1_detail">点击开始检查</div>
+  </div>
+
+  <div class="chain-item loading" id="step2">
+    <div class="chain-title">
+      <span>2. 本地 user.js 加载</span>
+      <span class="chain-status loading" id="s2_status">待检查</span>
+    </div>
+    <div class="chain-detail" id="s2_detail">-</div>
+  </div>
+
+  <div class="chain-item loading" id="step3">
+    <div class="chain-title">
+      <span>3. GitHub raw (最新代码)</span>
+      <span class="chain-status loading" id="s3_status">待检查</span>
+    </div>
+    <div class="chain-detail" id="s3_detail">-</div>
+  </div>
+
+  <div class="chain-item loading" id="step4">
+    <div class="chain-title">
+      <span>4. Vercel 生产环境 (yunzhuan.icu)</span>
+      <span class="chain-status loading" id="s4_status">待检查</span>
+    </div>
+    <div class="chain-detail" id="s4_detail">-</div>
+  </div>
+
+  <div class="chain-item loading" id="step5">
+    <div class="chain-title">
+      <span>5. CloudSlot 模块可用性</span>
+      <span class="chain-status loading" id="s5_status">待检查</span>
+    </div>
+    <div class="chain-detail" id="s5_detail">-</div>
+  </div>
+
+  <div class="chain-item loading" id="step6">
+    <div class="chain-title">
+      <span>6. Supabase 连接状态</span>
+      <span class="chain-status loading" id="s6_status">待检查</span>
+    </div>
+    <div class="chain-detail" id="s6_detail">-</div>
+  </div>
+
+  <div class="back-link">
+    <a href="index.html">← 返回首页</a>
+  </div>
+</div>
+
+<script>
+var PAGE_BUILD = { version: 'v20260722-6', commit: '53b0c39', module: 'deploy-status.html' };
+var EXPECTED_COMMIT = '53b0c39';
+var EXPECTED_VERSION = 'v20260722-6';
+
+function setStep(id, status, detail) {
+  var el = document.getElementById('step' + id);
+  var st = document.getElementById('s' + id + '_status');
+  var dt = document.getElementById('s' + id + '_detail');
+  el.className = 'chain-item ' + status;
+  st.className = 'chain-status ' + status;
+  st.textContent = status === 'ok' ? '正常' : status === 'fail' ? '异常' : '检查中';
+  dt.innerHTML = detail;
+}
+
+async function checkAll() {
+  var btn = document.getElementById('checkBtn');
+  btn.disabled = true;
+  btn.textContent = '检查中...';
+
+  // Step 1: 当前页面版本
+  setStep(1, 'ok',
+    '版本: ' + PAGE_BUILD.version + '<br>' +
+    'Commit: ' + PAGE_BUILD.commit + '<br>' +
+    '模块: ' + PAGE_BUILD.module + '<br>' +
+    'URL: ' + location.href
+  );
+
+  // Step 2: user.js 加载（通过动态创建 script 检测）
+  setStep(2, 'loading', '正在加载 user.js...');
+  try {
+    await loadUserJs();
+    setStep(2, 'ok',
+      'user.js 加载成功<br>' +
+      '版本: ' + (window.userJsVersion || '未知') + '<br>' +
+      'Commit: ' + (window.userJsCommit || '未知') + '<br>' +
+      'CloudSlot: ' + (typeof CloudSlot !== 'undefined' ? '已定义' : '未定义')
+    );
+  } catch(e) {
+    setStep(2, 'fail', 'user.js 加载失败: ' + e.message);
+  }
+
+  // Step 3: GitHub raw
+  setStep(3, 'loading', '正在获取 GitHub 版本...');
+  try {
+    var ghText = await fetchText('https://raw.githubusercontent.com/Wadesha/yunzhuan.icu/main/prerequisite/js/user.js?ts=' + Date.now());
+    var ghMatch = ghText.match(/commit:\s*['"]([0-9a-f]+)['"]/);
+    var ghVerMatch = ghText.match(/version:\s*['"]([^'"]+)['"]/);
+    if (ghMatch) {
+      var ghCommit = ghMatch[1];
+      var ghVersion = ghVerMatch ? ghVerMatch[1] : '未知';
+      var match = ghCommit === EXPECTED_COMMIT;
+      setStep(3, match ? 'ok' : 'fail',
+        '版本: ' + ghVersion + '<br>' +
+        'Commit: ' + ghCommit + '<br>' +
+        '预期: ' + EXPECTED_COMMIT + '<br>' +
+        '状态: ' + (match ? '与本地一致' : '与本地不一致！')
+      );
+    } else {
+      setStep(3, 'fail', '无法解析 GitHub 版本信息<br>获取内容长度: ' + ghText.length + ' 字节');
+    }
+  } catch(e) {
+    setStep(3, 'fail', '获取 GitHub 内容失败: ' + e.message + '<br>（可能是 CORS 限制，属正常现象）');
+  }
+
+  // Step 4: Vercel 生产环境
+  setStep(4, 'loading', '正在检查 Vercel 生产环境...');
+  try {
+    var vcText = await fetchText('/prerequisite/js/user.js?ts=' + Date.now());
+    var vcMatch = vcText.match(/commit:\s*['"]([0-9a-f]+)['"]/);
+    var vcVerMatch = vcText.match(/version:\s*['"]([^'"]+)['"]/);
+    if (vcMatch) {
+      var vcCommit = vcMatch[1];
+      var vcVersion = vcVerMatch ? vcVerMatch[1] : '未知';
+      var vcMatch_gh = vcCommit === EXPECTED_COMMIT;
+      setStep(4, vcMatch_gh ? 'ok' : 'fail',
+        '版本: ' + vcVersion + '<br>' +
+        'Commit: ' + vcCommit + '<br>' +
+        '预期: ' + EXPECTED_COMMIT + '<br>' +
+        '状态: ' + (vcMatch_gh ? '与 GitHub 同步' : '⚠️ Vercel 版本落后！请检查部署状态')
+      );
+    } else {
+      setStep(4, 'fail', '无法解析生产环境版本信息<br>获取内容长度: ' + vcText.length + ' 字节');
+    }
+  } catch(e) {
+    setStep(4, 'fail', '获取生产环境内容失败: ' + e.message);
+  }
+
+  // Step 5: CloudSlot 可用性
+  setStep(5, 'loading', '正在检查 CloudSlot...');
+  if (typeof CloudSlot !== 'undefined') {
+    var hasToken = CloudSlot.isLoggedIn();
+    setStep(5, hasToken ? 'ok' : 'ok',
+      'CloudSlot 已定义<br>' +
+      '登录状态: ' + (hasToken ? '已登录' : '未登录') + '<br>' +
+      '可用方法: create, login, logout, kvGet, kvSet, kvDel'
+    );
+  } else {
+    setStep(5, 'fail', 'CloudSlot 未定义！user.js 可能加载失败或执行出错');
+  }
+
+  // Step 6: Supabase 连接
+  setStep(6, 'loading', '正在检查 Supabase...');
+  if (typeof supabaseReady !== 'undefined') {
+    if (supabaseReady) {
+      setStep(6, 'ok', 'Supabase 客户端已就绪<br>URL: ' + (typeof SUPABASE_URL !== 'undefined' ? SUPABASE_URL : '未知'));
+    } else {
+      var loadStatus = typeof window.supabaseLoadStatus !== 'undefined' ? window.supabaseLoadStatus : '加载中';
+      setStep(6, 'loading', 'Supabase 加载中...<br>状态: ' + loadStatus + '<br>（10秒后再确认）');
+      setTimeout(function() {
+        if (supabaseReady) {
+          setStep(6, 'ok', 'Supabase 客户端已就绪');
+        } else {
+          var finalStatus = typeof window.supabaseLoadStatus !== 'undefined' ? window.supabaseLoadStatus : '超时';
+          setStep(6, 'fail', 'Supabase 加载失败<br>最终状态: ' + finalStatus);
+        }
+      }, 10000);
+    }
+  } else {
+    setStep(6, 'fail', 'supabaseReady 变量未定义<br>user.js 可能未加载或执行出错');
+  }
+
+  btn.disabled = false;
+  btn.textContent = '重新检查';
+}
+
+function loadUserJs() {
+  return new Promise(function(resolve, reject) {
+    if (typeof CloudSlot !== 'undefined') {
+      resolve();
+      return;
+    }
+    var script = document.createElement('script');
+    script.src = 'js/user.js?ts=' + Date.now();
+    script.onload = function() {
+      setTimeout(resolve, 100);
+    };
+    script.onerror = function() {
+      reject(new Error('脚本加载失败'));
+    };
+    document.head.appendChild(script);
+  });
+}
+
+function fetchText(url) {
+  return new Promise(function(resolve, reject) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', url, true);
+    xhr.onload = function() {
+      if (xhr.status >= 200 && xhr.status < 300) {
+        resolve(xhr.responseText);
+      } else {
+        reject(new Error('HTTP ' + xhr.status));
+      }
+    };
+    xhr.onerror = function() {
+      reject(new Error('网络错误或 CORS 限制'));
+    };
+    xhr.timeout = 10000;
+    xhr.ontimeout = function() { reject(new Error('超时')); };
+    xhr.send();
+  });
+}
+</script>
+</body>
+</html>

@@ -2,6 +2,19 @@
 // 支持 localStorage 和未来后端 API
 // 预留上云接口：只需替换 API_BASE_URL 和实现 fetch* 函数
 
+// ===== 版本信息（部署追溯用）=====
+const BUILD_INFO = {
+  version: 'v20260722-6',
+  commit: '53b0c39',
+  commitFull: '53b0c39dbaecd02718daca8aa0b717f50af8a50f',
+  branch: 'main',
+  buildTime: '2026-07-21T22:47:07Z',
+  module: 'user.js'
+};
+if (typeof console !== 'undefined') {
+  console.log('[BUILD] ' + BUILD_INFO.module + ' ' + BUILD_INFO.version + ' (' + BUILD_INFO.commit + ') ' + BUILD_INFO.buildTime);
+}
+
 // ===== Supabase 客户端（占坑模式）=====
 const SUPABASE_URL = 'https://otfjbzjvkoectpejhxar.supabase.co';
 const SUPABASE_ANON_KEY = 'sb_publishable_SBRF6ewKH-se3dNlqFwsXQ_lObhamTr';
@@ -395,6 +408,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // 标记 user.js 已加载完成
 window.userJsLoaded = true;
-if (typeof console !== 'undefined') {
-  console.log('[user.js] 加载完成，版本 v20260722-5');
-}
+window.userJsVersion = BUILD_INFO.version;
+window.userJsCommit = BUILD_INFO.commit;
