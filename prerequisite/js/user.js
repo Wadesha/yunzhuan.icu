@@ -2,45 +2,35 @@
 // 支持 localStorage 和未来后端 API
 // 预留上云接口：只需替换 API_BASE_URL 和实现 fetch* 函数
 
+// ===== 安全兜底（防止脚本执行失败时页面完全挂掉）=====
+window.CloudSlot = window.CloudSlot || {
+  isLoggedIn: () => false,
+  getToken: () => null,
+  create: () => ({ success: false, error: '模块加载中' }),
+  login: () => ({ success: false, error: '模块加载中' }),
+  logout: () => {},
+  kvGet: () => ({ success: false, error: '模块加载中' }),
+  kvSet: () => ({ success: false, error: '模块加载中' }),
+  kvDel: () => ({ success: false, error: '模块加载中' })
+};
+
+window.UserStorage = window.UserStorage || {
+  getUser: () => ({ userId: 'guest', coin: 0, level: 1, totalAnswered: 0, totalCorrect: 0, courseProgress: {}, badges: [], tasks: {} }),
+  saveUser: () => {},
+  resetUser: () => {},
+  calcLevel: (coin) => Math.floor(coin / 100) + 1,
+  syncToCloud: () => {},
+  syncFromCloud: () => null,
+  saveQuestionAnswer: () => {}
+};
+
 // ===== 版本信息（部署追溯用）=====
 const BUILD_INFO = {
-  version: 'v20260722-7',
-  commit: '89de3bb',
-  commitFull: '89de3bbdbaecd02718daca8aa0b717f50af8a50f',
+  version: 'v20260722-81',
+  commit: 'ff3831b',
+  commitFull: 'ff3831b4df32b0822ea070338b1c7e775d9c6f70',
   branch: 'main',
-  buildTime: '2026-07-21T22:47:07Z',
-  module: 'user.js'
-};
-if (typeof console !== 'undefined') {
-  console.log('[BUILD] ' + BUILD_INFO.module + ' ' + BUILD_INFO.version + ' (' + BUILD_INFO.commit + ') ' + BUILD_INFO.buildTime);
-}
-
-// ===== Supabase 客户端（占坑模式）=====
-const SUPABASE_URL = 'https://otfjbzjvkoectpejhxar.supabase.co';
-const SUPABASE_ANON_KEY = 'sb_publishable_SBRF6ewKH-se3dNlqFwsXQ_lObhamTr';
-
-let supabase = null;
-let supabaseReady = false;
-const supabaseReadyCallbacks = [];
-
-function onSupabaseReady(callback) {
-  if (supabaseReady) {
-    callback();
-  } else {
-    supabaseReadyCallbacks.push(callback);
-  }
-}
-
-function initSupabase() {
-  if (window.supabase && typeof window.supabase.createClient === 'function') {
-    supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-    supabaseReady = true;
-    window.supabaseLoadStatus = '已初始化(直接可用)';
-    supabaseReadyCallbacks.forEach(cb => cb());
-    supabaseReadyCallbacks.length = 0;
-    return;
-  }
-  if (document.querySelector('script[src*="supabase-js"]')) {
+  buildTime: '2026-07-22T02:28:02Z'supabase-js"]')) {
     window.supabaseLoadStatus = '等待页面已有脚本加载';
     const checkInterval = setInterval(() => {
       if (window.supabase && typeof window.supabase.createClient === 'function') {

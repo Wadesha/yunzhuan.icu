@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>登录 / 注册 v20260722-7</title>
+<title>登录 / 注册 v20260722-81</title>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body {
@@ -118,8 +118,8 @@ input:focus {
 </style>
 </head>
 <body>
-<div id="debugBar" style="background:#ff6b6b;color:white;padding:8px 12px;font-size:13px;font-weight:bold;border-bottom:2px solid #ee5253;">
-  [v20260722-7] login.html | commit: <span id="d_commit">page-89de3bb</span> | 
+<div id="debugBar" style="display:none;background:#ff6b6b;color:white;padding:8px 12px;font-size:13px;font-weight:bold;border-bottom:2px solid #ee5253;">
+  [v20260722-81] login.html | commit: <span id="d_commit">page-89de3bb</span> | 
   slot_token: <span id="d1">检查中</span> | 
   user.js: <span id="d6">未加载</span> |
   CloudSlot: <span id="d3">检查中</span> |
@@ -127,7 +127,12 @@ input:focus {
   错误: <span id="d5">无</span>
 </div>
 <script>
-var PAGE_BUILD = { version: 'v20260722-7', commit: '89de3bb', module: 'login.html' };
+var PAGE_BUILD = { version: 'v20260722-81', commit: '89de3bb', module: 'login.html' };
+
+if (new URLSearchParams(window.location.search).get('debug') === '1') {
+  document.getElementById('debugBar').style.display = 'block';
+}
+
 window.onerror = function(msg, url, line, col, error) {
   var el = document.getElementById('d5');
   if (el) el.textContent = msg + ' (' + url + ':' + line + ')';
@@ -210,6 +215,7 @@ function showMessage(text, type) {
 </script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js?v=7"></script>
 <script src="js/user.js?v=7"></script>
+<script src="js/footer.js"></script>
 <script>
 if (typeof CloudSlot === 'undefined') {
   showMessage('用户模块加载失败', 'error');
