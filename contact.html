@@ -209,36 +209,26 @@
     </div>
 
     <div class="section" id="comment-form">
-        <h2>Feedback Form <span class="en">在线反馈表单</span></h2>
-        <p>有任何建议、问题或想法，欢迎通过下方表单告诉我们：</p>
-        <form action="https://formspree.io/f/your-form-id" method="POST">
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="name">Name / 姓名</label>
-                    <input type="text" id="name" name="name" required>
-                </div>
-                <div class="form-group">
-                    <label for="email">Email / 邮箱</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="type">Type / 类型</label>
-                <select id="type" name="type">
-                    <option value="bug">Bug Report / Bug 反馈</option>
-                    <option value="feature">Feature Request / 功能建议</option>
-                    <option value="content">Content Issue / 内容问题</option>
-                    <option value="collab">Collaboration / 合作开发</option>
-                    <option value="other">Other / 其他</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="message">Message / 内容</label>
-                <textarea id="message" name="message" required placeholder="请描述你的问题或建议..."></textarea>
-            </div>
-            <button type="submit" class="submit-btn">Send / 发送</button>
-            <p class="form-note">* 表单由 Formspree 提供服务，提交后会直接发送到站长邮箱。</p>
-        </form>
+        <h2>Feedback Form <span class="en">在线反馈</span></h2>
+        <p>有任何建议、问题或想法，欢迎通过以下方式告诉我们：</p>
+        <div class="contact-grid" style="margin-top:14px;">
+            <a href="https://github.com/Wadesha/yunzhuan.icu/issues/new/choose" target="_blank" class="contact-card">
+                <span class="label">New Issue</span>
+                <span class="desc">提交 Bug / 功能建议<br>最推荐，便于追踪和归档</span>
+            </a>
+            <a href="https://github.com/Wadesha/yunzhuan.icu/discussions" target="_blank" class="contact-card">
+                <span class="label">Discussions</span>
+                <span class="desc">公开讨论 / 提问交流<br>基于 GitHub Discussions</span>
+            </a>
+            <a href="#comments" class="contact-card">
+                <span class="label">Page Comments</span>
+                <span class="desc">本页留言 / 快速反馈<br>需 GitHub 账号登录</span>
+            </a>
+            <a href="mailto:your-email@example.com" class="contact-card">
+                <span class="label">Email</span>
+                <span class="desc">商务合作 / 隐私问题<br>your-email@example.com</span>
+            </a>
+        </div>
     </div>
 
     <div class="section">
@@ -251,11 +241,11 @@
             </li>
             <li>
                 <span class="step">2</span>
-                <strong>邮件或表单</strong>：发送邮件或填写上方表单，我们会定期整理和评估。
+                <strong>Discussions 讨论</strong>：在 <a href="https://github.com/Wadesha/yunzhuan.icu/discussions" target="_blank" style="color:#667eea;">Discussions</a> 中发帖交流，适合开放性讨论。
             </li>
             <li>
                 <span class="step">3</span>
-                <strong>Giscus 留言</strong>：在页面底部评论区留言讨论，适合小建议和交流。
+                <strong>页面留言</strong>：在本页底部 Giscus 评论区留言，适合小建议和快速交流。
             </li>
         </ul>
     </div>
@@ -289,26 +279,46 @@
     <div class="section" id="comments">
         <h2>Discussion <span class="en">留言讨论</span></h2>
         <p>有什么想说的？欢迎在下方留言（基于 GitHub Discussions，需要 GitHub 账号）：</p>
-        <div class="giscus-container">
-            <script src="https://giscus.app/client.js"
-                    data-repo="Wadesha/yunzhuan.icu"
-                    data-repo-id="your-repo-id"
-                    data-category="General"
-                    data-category-id="your-category-id"
-                    data-mapping="pathname"
-                    data-strict="0"
-                    data-reactions-enabled="1"
-                    data-emit-metadata="0"
-                    data-input-position="bottom"
-                    data-theme="light"
-                    data-lang="en"
-                    crossorigin="anonymous"
-                    async>
-            </script>
-            <p style="text-align:center;color:#aaa;font-size:0.8rem;margin-top:12px;">
-                启用 Giscus 评论需要先在 GitHub 仓库设置中开启 Discussions
+        <div class="giscus-container" id="giscus">
+            <p style="text-align:center;color:#aaa;font-size:0.85rem;padding:20px 0;">
+                💬 评论区待启用<br>
+                <span style="font-size:0.78rem;">Giscus 配置完成后即可在此留言</span>
             </p>
         </div>
+        <script>
+            var giscusConfig = {
+                repo: "Wadesha/yunzhuan.icu",
+                repoId: "",
+                category: "General",
+                categoryId: "",
+                mapping: "pathname",
+                strict: "0",
+                reactionsEnabled: "1",
+                emitMetadata: "0",
+                inputPosition: "bottom",
+                theme: "light",
+                lang: "en"
+            };
+            if (giscusConfig.repoId && giscusConfig.categoryId) {
+                var s = document.createElement("script");
+                s.src = "https://giscus.app/client.js";
+                s.setAttribute("data-repo", giscusConfig.repo);
+                s.setAttribute("data-repo-id", giscusConfig.repoId);
+                s.setAttribute("data-category", giscusConfig.category);
+                s.setAttribute("data-category-id", giscusConfig.categoryId);
+                s.setAttribute("data-mapping", giscusConfig.mapping);
+                s.setAttribute("data-strict", giscusConfig.strict);
+                s.setAttribute("data-reactions-enabled", giscusConfig.reactionsEnabled);
+                s.setAttribute("data-emit-metadata", giscusConfig.emitMetadata);
+                s.setAttribute("data-input-position", giscusConfig.inputPosition);
+                s.setAttribute("data-theme", giscusConfig.theme);
+                s.setAttribute("data-lang", giscusConfig.lang);
+                s.crossOrigin = "anonymous";
+                s.async = true;
+                document.getElementById("giscus").innerHTML = "";
+                document.getElementById("giscus").appendChild(s);
+            }
+        </script>
     </div>
 
     <p class="footer">© 2026 yunzhuan.icu | Contact &amp; Feedback</p>
