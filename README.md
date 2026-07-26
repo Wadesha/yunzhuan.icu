@@ -598,6 +598,8 @@ git push origin vX.Y.Z
 | v12.0 | 2026-07-26 | 新增申请季四大板块：Standardized Tests（SAT/ACT/TOEFL/IELTS/DET）、Universities（美英加澳港新）、Timeline（9-10/11/12 年级）、Essays（PS/Common App/Supplemental/UCAS） |
 | v13.0 | 2026-07-27 | 新增 21 个详情页：8 所美国大学详情卡（Harvard/MIT/Stanford/Yale/Princeton/Columbia/UChicago/UPenn）、5 个标化备考页（SAT/ACT/TOEFL/IELTS/DET）、8 所学校补充文书页、3 个年级月度清单；新增分数换算工具页、文书流程/避坑页；新增 4 个 Python 批量生成脚本（gen_schools/gen_test_prep/gen_supplemental/gen_monthly） |
 | v13.1 | 2026-07-27 | 新增 PTE Academic 板块：介绍页 + 备考页，含 20 种题型全解析和高分值题型策略；tests 首页考试对比表从 5 个扩展为 6 个 |
+| v13.1.0 | 2026-07-27 | 正式版本：版本管理系统上线（全站快照 + Git Tag + 三重回退机制）；版本历史索引页 snapshots/index.html |
+| v13.2 | 2026-07-27 | 新增 Contact & Feedback 页面：Formspree 在线表单、GitHub Issues 入口、Email、Giscus 评论区、贡献指南；首页底部导航新增 Contact 入口 |
 
 ---
 
