@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>管理后台 - yunzhuan.icu</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f0f2f5;
+            color: #333;
+            min-height: 100vh;
+        }
+
+        /* 登录页 */
+        .login-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .login-card {
+            background: white;
+            border-radius: 12px;
+            padding: 40px 36px;
+            width: 360px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+        }
+        .login-card h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 6px;
+            font-size: 1.4rem;
+        }
+        .login-card .subtitle {
+            text-align: center;
+            color: #999;
+            margin-bottom: 28px;
+            font-size: 0.85rem;
+        }
+        .login-card input {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            margin-bottom: 16px;
+            transition: border-color 0.2s;
+        }
+        .login-card input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        .login-card button {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+        .login-card button:hover { opacity: 0.9; }
+        .login-error {
+            color: #e53e3e;
+            font-size: 0.82rem;
+            text-align: center;
+            margin-bottom: 12px;
+            display: none;
+        }
+        .login-hint {
+            text-align: center;
+            color: #bbb;
+            font-size: 0.78rem;
+            margin-top: 20px;
+        }
+
+        /* 仪表盘 */
+        .dashboard { display: none; }
+        .dashboard.active { display: block; }
+
+        /* 顶部滚动条 */
+        .ticker-bar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            overflow: hidden;
+            white-space: nowrap;
+            padding: 10px 0;
+            position: relative;
+        }
+        .ticker-content {
+            display: inline-block;
+            animation: scroll-left 35s linear infinite;
+            font-size: 0.88rem;
+            padding-left: 100%;
+        }
+        .ticker-content span {
+            margin-right: 40px;
+            font-weight: 500;
+        }
+        .ticker-content .num {
+            font-weight: 700;
+            font-size: 1rem;
+            margin: 0 4px;
+        }
+        .ticker-content .sep {
+            margin: 0 20px;
+            opacity: 0.5;
+        }
+        @keyframes scroll-left {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100%); }
+        }
+
+        .topbar {
+            background: white;
+            padding: 14px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .topbar .title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #333;
+        }
+        .topbar .title .en {
+            color: #999;
+            font-size: 0.8rem;
+            font-weight: normal;
+            margin-left: 6px;
+        }
+        .topbar .actions {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        .topbar button {
+            padding: 6px 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 0.85rem;
+            background: white;
+            cursor: pointer;
+        }
+        .topbar button:hover { background: #f8f9fa; }
+        .topbar .btn-logout {
+            color: #e53e3e;
+            border-color: #fed7d7;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 24px 16px;
+        }
+
+        /* 统计卡片 */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+        .stat-card {
+            background: white;
+            border-radius: 10px;
+            padding: 24px 28px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+        }
+        .stat-card .label {
+            color: #888;
+            font-size: 0.85rem;
+            margin-bottom: 8px;
+        }
+        .stat-card .label .en {
+            color: #bbb;
+            font-size: 0.75rem;
+            margin-left: 4px;
+        }
+        .stat-card .value {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #333;
+        }
+        .stat-card.pv .value { color: #667eea; }
+        .stat-card.uv .value { color: #764ba2; }
+        .stat-card .source {
+            font-size: 0.75rem;
+            color: #bbb;
+            margin-top: 6px;
+        }
+
+        /* 说明卡片 */
+        .info-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px 24px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+            margin-bottom: 20px;
+        }
+        .info-card h3 {
+            font-size: 0.95rem;
+            color: #333;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        .info-card p {
+            color: #666;
+            font-size: 0.85rem;
+            line-height: 1.6;
+            margin-bottom: 8px;
+        }
+        .info-card a {
+            color: #667eea;
+            text-decoration: none;
+        }
+        .info-card a:hover { text-decoration: underline; }
+        .info-card ul {
+            margin: 8px 0 8px 20px;
+            color: #666;
+            font-size: 0.85rem;
+            line-height: 1.8;
+        }
+
+        .footer {
+            text-align: center;
+            color: #999;
+            font-size: 0.8rem;
+            padding: 20px;
+        }
+
+        @media (max-width: 600px) {
+            .stats-grid { grid-template-columns: 1fr; }
+            .stat-card .value { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- 隐藏的不蒜子计数元素 -->
+<span id="busuanzi_value_site_pv" style="display:none;"></span>
+<span id="busuanzi_value_site_uv" style="display:none;"></span>
+
+<!-- 登录页 -->
+<div class="login-wrapper" id="loginPage">
+    <div class="login-card">
+        <h1>管理后台</h1>
+        <p class="subtitle">yunzhuan.icu Admin Dashboard</p>
+        <div class="login-error" id="loginError">密码错误，请重试</div>
+        <input type="password" id="passwordInput" placeholder="请输入管理密码" autofocus>
+        <button onclick="login()">登录</button>
+        <p class="login-hint">默认密码：yunzhuan2026</p>
+    </div>
+</div>
+
+<!-- 仪表盘 -->
+<div class="dashboard" id="dashboard">
+    <div class="topbar">
+        <div class="title">访问统计 <span class="en">Analytics</span></div>
+        <div class="actions">
+            <button onclick="refreshData()">刷新</button>
+            <button onclick="goHome()">查看网站</button>
+            <button class="btn-logout" onclick="logout()">退出</button>
+        </div>
+    </div>
+
+    <!-- 顶部实时数据滚动条 -->
+    <div class="ticker-bar">
+        <div class="ticker-content" id="tickerContent">
+            <span>正在加载访问数据...</span>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- 统计卡片 -->
+        <div class="stats-grid">
+            <div class="stat-card pv">
+                <div class="label">总访问量 <span class="en">Total Page Views</span></div>
+                <div class="value" id="totalPV">--</div>
+                <div class="source">数据来源：不蒜子 busuanzi</div>
+            </div>
+            <div class="stat-card uv">
+                <div class="label">独立访客 <span class="en">Unique Visitors</span></div>
+                <div class="value" id="totalUV">--</div>
+                <div class="source">数据来源：不蒜子 busuanzi</div>
+            </div>
+        </div>
+
+        <!-- 说明卡片 -->
+        <div class="info-card">
+            <h3>更多详细数据</h3>
+            <p>不蒜子提供累计访问量和访客数统计。如需查看更详细的数据，请前往以下平台：</p>
+            <ul>
+                <li><strong>Vercel Analytics</strong>：查看来源、地区、设备、热门页面等详细数据
+                    <br>→ <a href="https://vercel.com/dashboard" target="_blank">Vercel 后台 → 项目 → Analytics</a>
+                </li>
+                <li><strong>GitHub 仓库</strong>：查看代码更新历史
+                    <br>→ <a href="https://github.com/Wadesha/yunzhuan.icu" target="_blank">github.com/Wadesha/yunzhuan.icu</a>
+                </li>
+            </ul>
+            <p style="margin-top:10px;font-size:0.8rem;color:#999;">
+                页面每 30 秒自动刷新 | 数据由不蒜子免费提供
+            </p>
+        </div>
+
+        <div class="footer">
+            © 2026 yunzhuan.icu | 管理后台 v3.0 | 真实数据：不蒜子 busuanzi
+        </div>
+    </div>
+</div>
+
+<script>
+// ==================== 登录管理 ====================
+var ADMIN_PASSWORD = 'yunzhuan2026';
+var SESSION_KEY = 'admin_session';
+var statsRefreshTimer = null;
+
+function checkSession() {
+    var session = sessionStorage.getItem(SESSION_KEY);
+    if (session === 'logged_in') {
+        showDashboard();
+    }
+}
+
+function login() {
+    var input = document.getElementById('passwordInput').value;
+    if (input === ADMIN_PASSWORD) {
+        sessionStorage.setItem(SESSION_KEY, 'logged_in');
+        document.getElementById('loginError').style.display = 'none';
+        showDashboard();
+    } else {
+        document.getElementById('loginError').style.display = 'block';
+        document.getElementById('passwordInput').value = '';
+    }
+}
+
+function logout() {
+    sessionStorage.removeItem(SESSION_KEY);
+    if (statsRefreshTimer) {
+        clearInterval(statsRefreshTimer);
+        statsRefreshTimer = null;
+    }
+    document.getElementById('dashboard').classList.remove('active');
+    document.getElementById('loginPage').style.display = 'flex';
+    document.getElementById('passwordInput').value = '';
+}
+
+function showDashboard() {
+    document.getElementById('loginPage').style.display = 'none';
+    document.getElementById('dashboard').classList.add('active');
+    refreshData();
+    if (statsRefreshTimer) clearInterval(statsRefreshTimer);
+    statsRefreshTimer = setInterval(refreshData, 30000);
+}
+
+document.getElementById('passwordInput').addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') login();
+});
+
+// ==================== 不蒜子真实数据 ====================
+var busuanziLoaded = false;
+
+function ensureBusuanzi() {
+    if (busuanziLoaded) return Promise.resolve();
+    return new Promise(function(resolve) {
+        var script = document.createElement('script');
+        script.src = '//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js';
+        script.async = true;
+        script.onload = function() {
+            busuanziLoaded = true;
+            setTimeout(resolve, 2000);
+        };
+        script.onerror = function() {
+            resolve();
+        };
+        document.head.appendChild(script);
+    });
+}
+
+function getBusuanziData() {
+    var pvEl = document.getElementById('busuanzi_value_site_pv');
+    var uvEl = document.getElementById('busuanzi_value_site_uv');
+    var pv = 0, uv = 0;
+    if (pvEl && pvEl.textContent && pvEl.textContent !== '...' && pvEl.textContent !== '') {
+        pv = parseInt(pvEl.textContent.replace(/,/g, '')) || 0;
+    }
+    if (uvEl && uvEl.textContent && uvEl.textContent !== '...' && uvEl.textContent !== '') {
+        uv = parseInt(uvEl.textContent.replace(/,/g, '')) || 0;
+    }
+    return { totalPV: pv, totalUV: uv };
+}
+
+async function refreshData() {
+    try {
+        await ensureBusuanzi();
+        var data = getBusuanziData();
+
+        if (data.totalPV === 0 && data.totalUV === 0) {
+            await new Promise(function(r) { setTimeout(r, 2000); });
+            data = getBusuanziData();
+        }
+
+        document.getElementById('totalPV').textContent = data.totalPV.toLocaleString();
+        document.getElementById('totalUV').textContent = data.totalUV.toLocaleString();
+
+        updateTicker(data);
+    } catch (e) {
+        document.getElementById('tickerContent').innerHTML =
+            '<span>加载失败：' + e.message + '</span>';
+    }
+}
+
+function updateTicker(data) {
+    var now = new Date();
+    var timeStr = now.toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+    var dateStr = now.toLocaleDateString('zh-CN');
+
+    var item =
+        '<span>总访问量：<span class="num">' + data.totalPV.toLocaleString() + '</span>次</span>' +
+        '<span class="sep">|</span>' +
+        '<span>独立访客：<span class="num">' + data.totalUV.toLocaleString() + '</span>人</span>' +
+        '<span class="sep">|</span>' +
+        '<span>数据更新于：<span class="num">' + dateStr + ' ' + timeStr + '</span></span>' +
+        '<span class="sep">|</span>' +
+        '<span>yunzhuan.icu 访问统计系统</span>' +
+        '<span class="sep">|</span>';
+
+    document.getElementById('tickerContent').innerHTML = item + item;
+}
+
+function goHome() {
+    window.open('/', '_blank');
+}
+
+// ==================== 初始化 ====================
+window.addEventListener('load', function() {
+    checkSession();
+});
+</script>
+
+<!-- Vercel Analytics -->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div style="text-align:center;padding:8px 0;font-size:0.75rem;color:#aaa;">
+    <a href="prerequisite/" style="color:#aaa;text-decoration:none;">Prerequisites</a>
+    <span style="margin:0 6px;">·</span>
+    <a href="intl-exams/index.html" style="color:#aaa;text-decoration:none;">International Exams</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="contact.html" style="color:#aaa;text-decoration:none;">Contact</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="javascript:window.scrollTo(0,0)" style="color:#aaa;text-decoration:none;">Back to top</a>
+    <span style="margin:0 6px;">·</span>
+    <a href="index.html" style="color:#aaa;text-decoration:none;">Home</a>
+</div>
+<!-- footer-links -->
+</body>
+</html>
