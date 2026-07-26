@@ -1,6 +1,6 @@
 # yunzhuan.icu
 
-> 最后更新：2026-07-26 00:00:00  
+> 最后更新：2026-07-27 00:00:00  
 > 域名：yunzhuan.icu  
 > 日期：2026/7/19 - 2027/7/18  
 > 状态：✅ 已部署上线  
@@ -186,6 +186,8 @@ yunzhuan.icu 是一个美国大学本科专业导航网站，涵盖 8 大类 44 
 
 **访问地址**：https://yunzhuan.icu/tests/
 
+**考试介绍页：**
+
 | 考试 | 页面 | 说明 |
 |------|------|------|
 | SAT | `tests/sat.html` | 美本入学学术能力测试，1600 分制 |
@@ -194,7 +196,23 @@ yunzhuan.icu 是一个美国大学本科专业导航网站，涵盖 8 大类 44 
 | IELTS | `tests/ielts.html` | 英语能力测试，9 分制 |
 | DET | `tests/det.html` | Duolingo 英语测试，160 分制 |
 
-每个考试页面包含：课程介绍、基本信息、考试结构、评分机制、考试时间与报名、备考策略。`tests/index.html` 提供五考试对比表。
+**备考资源页：**
+
+| 考试 | 页面 | 说明 |
+|------|------|------|
+| SAT 备考 | `tests/sat-prep.html` | 官方资源、推荐教材、12-16 周备考节奏、错题本规范 |
+| ACT 备考 | `tests/act-prep.html` | 官方资源、推荐教材、4 模块策略、送分策略 |
+| TOEFL 备考 | `tests/toefl-prep.html` | TPO 模考、推荐教材、4 模块策略、MyBest 拼分 |
+| IELTS 备考 | `tests/ielts-prep.html` | Cambridge 真题、推荐教材、4 模块策略、TRF 送分 |
+| DET 备考 | `tests/det-prep.html` | 官方 Practice Test、7 题型策略、自适应节奏 |
+
+**工具页：**
+
+| 工具 | 页面 | 说明 |
+|------|------|------|
+| 分数换算 | `tests/score-conversion.html` | SAT↔ACT、TOEFL↔IELTS↔DET 官方对照表 + 各梯队门槛 + 送分策略 |
+
+每个考试介绍页包含：课程介绍、基本信息、考试结构、评分机制、考试时间与报名、备考策略。`tests/index.html` 提供五考试对比表。
 
 ### 4.10 Universities（选校数据库）
 
@@ -211,11 +229,26 @@ yunzhuan.icu 是一个美国大学本科专业导航网站，涵盖 8 大类 44 
 | Hong Kong | `schools/hk/` | 香港本科 |
 | Singapore | `schools/sg/` | 新加坡本科 |
 
+**美国大学详情页（样板 8 所）：**
+
+| 学校 | 页面 | 说明 |
+|------|------|------|
+| Harvard | `schools/us/harvard.html` | 哈佛大学详情卡 |
+| MIT | `schools/us/mit.html` | 麻省理工学院详情卡 |
+| Stanford | `schools/us/stanford.html` | 斯坦福大学详情卡 |
+| Yale | `schools/us/yale.html` | 耶鲁大学详情卡 |
+| Princeton | `schools/us/princeton.html` | 普林斯顿大学详情卡 |
+| Columbia | `schools/us/columbia.html` | 哥伦比亚大学详情卡 |
+| UChicago | `schools/us/uchicago.html` | 芝加哥大学详情卡 |
+| UPenn | `schools/us/upenn.html` | 宾夕法尼亚大学详情卡 |
+
+每所学校详情页包含：学校简介、录取率、标化分数范围、热门专业、特色项目、申请要点。
+
 ### 4.11 Application Timeline（申请时间线）
 
 **访问地址**：https://yunzhuan.icu/timeline/
 
-按年级阶段拆分申请流程：
+**阶段总览页：**
 
 | 阶段 | 页面 | 重点 |
 |------|------|------|
@@ -223,16 +256,45 @@ yunzhuan.icu 是一个美国大学本科专业导航网站，涵盖 8 大类 44 
 | 准备期 | `timeline/grade-11.html` | GPA / 标化 / 活动 / 推荐信 / 选校 |
 | 申请期 | `timeline/grade-12.html` | ED/EA/RD 提交、文书定稿、面试、录取决策 |
 
+**月度清单页：**
+
+| 阶段 | 页面 | 重点 |
+|------|------|------|
+| 9-10 年级 | `timeline/grade-9-10-monthly.html` | 按月份拆解探索期任务 |
+| 11 年级 | `timeline/grade-11-monthly.html` | 按月份拆解准备期任务 |
+| 12 年级 | `timeline/grade-12-monthly.html` | 按月份拆解申请期任务 |
+
+每个月度清单页包含：当月核心任务、标化考试安排、活动规划、文书进度、选校进度等。
+
 ### 4.12 Essay Resources（文书资源库）
 
 **访问地址**：https://yunzhuan.icu/essays/
+
+**通用文书页：**
 
 | 类型 | 页面 | 说明 |
 |------|------|------|
 | Personal Statement | `essays/personal-statement.html` | 通用个人陈述框架 |
 | Common App Essay | `essays/common-app.html` | 7 题 650 字主文书，含题目分析与修改清单 |
-| Supplemental Essay | `essays/supplemental.html` | 学校特定补充文书 |
+| Supplemental Essay | `essays/supplemental.html` | 学校特定补充文书总览 |
 | UCAS Personal Statement | `essays/ucas.html` | 英国 UCAS 4000 字符个人陈述 |
+| Essay Process | `essays/process.html` | 文书写作全流程指南 |
+| Essay Pitfalls | `essays/pitfalls.html` | 文书避坑指南与常见错误 |
+
+**各校补充文书页（样板 8 所）：**
+
+| 学校 | 页面 | 说明 |
+|------|------|------|
+| Harvard | `essays/supplemental-harvard.html` | 哈佛大学补充文书 |
+| MIT | `essays/supplemental-mit.html` | 麻省理工学院补充文书 |
+| Stanford | `essays/supplemental-stanford.html` | 斯坦福大学补充文书 |
+| Yale | `essays/supplemental-yale.html` | 耶鲁大学补充文书 |
+| Princeton | `essays/supplemental-princeton.html` | 普林斯顿大学补充文书 |
+| Columbia | `essays/supplemental-columbia.html` | 哥伦比亚大学补充文书 |
+| UChicago | `essays/supplemental-uchicago.html` | 芝加哥大学补充文书 |
+| UPenn | `essays/supplemental-upenn.html` | 宾夕法尼亚大学补充文书 |
+
+每所学校补充文书页包含：必答题、选答题、题目分析、写作策略、范文思路。
 
 ---
 
@@ -279,15 +341,24 @@ yunzhuan.icu 是一个美国大学本科专业导航网站，涵盖 8 大类 44 
 ├── tests/                        # 标化考试中心
 │   ├── index.html                # 板块首页 + 五考试对比
 │   ├── sat.html / act.html / toefl.html / ielts.html / det.html
+│   ├── sat-prep.html / act-prep.html / toefl-prep.html / ielts-prep.html / det-prep.html
+│   └── score-conversion.html     # 分数换算对照表
 ├── schools/                      # 选校数据库
 │   ├── index.html                # 板块首页
-│   └── us/ uk/ ca/ au/ hk/ sg/   # 按国家/地区分目录
+│   ├── compare.html              # 选校对比工具
+│   ├── us/                       # 美国本科
+│   │   ├── index.html            # 美国大学列表
+│   │   └── harvard.html / mit.html / stanford.html / yale.html / princeton.html / columbia.html / uchicago.html / upenn.html
+│   └── uk/ ca/ au/ hk/ sg/       # 其他国家/地区
 ├── timeline/                     # 申请时间线
 │   ├── index.html                # 板块首页
-│   └── grade-9-10.html / grade-11.html / grade-12.html
+│   ├── grade-9-10.html / grade-11.html / grade-12.html
+│   └── grade-9-10-monthly.html / grade-11-monthly.html / grade-12-monthly.html
 ├── essays/                       # 文书资源库
 │   ├── index.html                # 板块首页
-│   └── personal-statement.html / common-app.html / supplemental.html / ucas.html
+│   ├── personal-statement.html / common-app.html / supplemental.html / ucas.html
+│   ├── process.html / pitfalls.html
+│   └── supplemental-harvard.html / supplemental-mit.html / supplemental-stanford.html / supplemental-yale.html / supplemental-princeton.html / supplemental-columbia.html / supplemental-uchicago.html / supplemental-upenn.html
 ├── js/
 │   ├── track.js                  # 访问跟踪脚本
 │   └── wechat-redirect.js        # 微信浏览器检测跳转
@@ -296,6 +367,11 @@ yunzhuan.icu 是一个美国大学本科专业导航网站，涵盖 8 大类 44 
 │   └── stats.js                  # 统计数据 API（Vercel KV）
 ├── snapshots/                    # 历史快照目录
 ├── snapshot.sh                   # 快照脚本
+├── gen_schools.py                # 批量生成学校详情页脚本
+├── gen_test_prep.py              # 批量生成备考页脚本
+├── gen_supplemental.py           # 批量生成补充文书页脚本
+├── gen_monthly.py                # 批量生成月度清单脚本
+├── gen_q.py                      # 批量生成题目脚本
 ├── DEV_GUIDE.md                  # 开发规范文档
 └── README.md                     # 本文档
 ```
@@ -487,10 +563,11 @@ git push origin main
 | v11.0 | 2026-07-25 | 新增 International Exams 板块：AL/IG/IB/AP 四类国际学科考试，A-Level 覆盖 CAIE/Edexcel IAL/AQA/OCR 四考试局，每局 12 门学科 |
 | v11.1 | 2026-07-25 | 全站底部导航统一加入 International Exams 入口，覆盖 542 个 HTML 页面 |
 | v12.0 | 2026-07-26 | 新增申请季四大板块：Standardized Tests（SAT/ACT/TOEFL/IELTS/DET）、Universities（美英加澳港新）、Timeline（9-10/11/12 年级）、Essays（PS/Common App/Supplemental/UCAS） |
+| v13.0 | 2026-07-27 | 新增 21 个详情页：8 所美国大学详情卡（Harvard/MIT/Stanford/Yale/Princeton/Columbia/UChicago/UPenn）、5 个标化备考页（SAT/ACT/TOEFL/IELTS/DET）、8 所学校补充文书页、3 个年级月度清单；新增分数换算工具页、文书流程/避坑页；新增 4 个 Python 批量生成脚本（gen_schools/gen_test_prep/gen_supplemental/gen_monthly） |
 
 ---
 
-*文档更新时间：2026-07-26*
+*文档更新时间：2026-07-27*
 
 ---
 
