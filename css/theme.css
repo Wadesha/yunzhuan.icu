@@ -1,0 +1,379 @@
+/* Theme Variables - Light (default) & Dark Mode */
+
+:root {
+    --bg-primary: #f5f5f5;
+    --bg-secondary: #ffffff;
+    --bg-tertiary: #f8f9ff;
+    --text-primary: #333333;
+    --text-secondary: #555555;
+    --text-tertiary: #666666;
+    --text-muted: #999999;
+    --text-faint: #aaaaaa;
+    --border-color: #e5e7eb;
+    --border-light: #f5f5f5;
+    --accent-primary: #667eea;
+    --accent-secondary: #764ba2;
+    --accent-light: #ede9fe;
+    --accent-text: #5b21b6;
+    --success-bg: #e8f5e9;
+    --success-border: #2e7d32;
+    --success-text: #1b5e20;
+    --warning-bg: #fff8e1;
+    --warning-border: #ff8f00;
+    --warning-text: #5d4037;
+    --error-bg: #ffebee;
+    --error-border: #c62828;
+    --error-text: #b71c1c;
+    --info-bg: #f0f9ff;
+    --info-border: #0284c7;
+    --info-text: #075985;
+    --shadow: 0 1px 3px rgba(0,0,0,0.05);
+    --shadow-md: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+[data-theme="dark"] {
+    --bg-primary: #0f1115;
+    --bg-secondary: #1a1d24;
+    --bg-tertiary: #222630;
+    --text-primary: #e5e7eb;
+    --text-secondary: #9ca3af;
+    --text-tertiary: #6b7280;
+    --text-muted: #4b5563;
+    --text-faint: #374151;
+    --border-color: #2d323b;
+    --border-light: #252932;
+    --accent-primary: #818cf8;
+    --accent-secondary: #a78bfa;
+    --accent-light: #312e81;
+    --accent-text: #c4b5fd;
+    --success-bg: #14532d;
+    --success-border: #22c55e;
+    --success-text: #86efac;
+    --warning-bg: #451a03;
+    --warning-border: #f59e0b;
+    --warning-text: #fcd34d;
+    --error-bg: #450a0a;
+    --error-border: #ef4444;
+    --error-text: #fca5a5;
+    --info-bg: #0c4a6e;
+    --info-border: #0ea5e9;
+    --info-text: #7dd3fc;
+    --shadow: 0 1px 3px rgba(0,0,0,0.3);
+    --shadow-md: 0 2px 8px rgba(0,0,0,0.4);
+}
+
+/* Theme toggle button */
+.theme-toggle {
+    background: none;
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    transition: all 0.2s;
+}
+.theme-toggle:hover {
+    border-color: var(--accent-primary);
+    color: var(--accent-primary);
+}
+
+/* Smooth transition for theme change */
+body, .section, .navbar, a, p, h1, h2, h3, h4, h5, h6, li {
+    transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* Apply theme to body */
+body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+}
+
+/* Navbar */
+.navbar {
+    border-bottom-color: var(--border-color) !important;
+}
+
+/* Logo stays same color */
+.logo {
+    color: var(--accent-primary) !important;
+}
+
+/* Nav links */
+.nav-links a {
+    color: var(--text-secondary) !important;
+}
+.nav-links a:hover {
+    color: var(--accent-primary) !important;
+}
+.nav-links .cn {
+    color: var(--text-muted) !important;
+}
+
+/* Section cards */
+.section {
+    background-color: var(--bg-secondary) !important;
+    box-shadow: var(--shadow) !important;
+}
+
+.section h2 {
+    color: var(--accent-primary) !important;
+    border-bottom-color: var(--accent-light) !important;
+}
+.section h2 .cn {
+    color: var(--text-muted) !important;
+}
+
+.section p {
+    color: var(--text-primary) !important;
+}
+
+/* Lists */
+.info-list li, .guide-list li, .course-list li {
+    border-bottom-color: var(--border-light) !important;
+    color: var(--text-secondary) !important;
+}
+.info-list li strong, .guide-list li strong, .course-list li strong {
+    color: var(--text-primary) !important;
+}
+
+/* Cards */
+.semester-card, .timeline-card, .idea-card, .card, .system-card {
+    background-color: var(--bg-tertiary) !important;
+    border-left-color: var(--accent-primary) !important;
+}
+.semester-card h3, .timeline-card h3, .idea-card h3, .card h3, .system-card h3 {
+    color: var(--accent-text) !important;
+}
+.semester-card p, .timeline-card p, .idea-card p, .card p, .system-card p {
+    color: var(--text-secondary) !important;
+}
+
+/* Tip/Warning/Success boxes */
+.tip-box {
+    background-color: var(--warning-bg) !important;
+    border-left-color: var(--warning-border) !important;
+    color: var(--warning-text) !important;
+}
+.tip-box strong {
+    color: var(--warning-border) !important;
+}
+
+.warning-box {
+    background-color: var(--error-bg) !important;
+    border-left-color: var(--error-border) !important;
+    color: var(--error-text) !important;
+}
+.warning-box strong {
+    color: var(--error-border) !important;
+}
+
+.success-box {
+    background-color: var(--success-bg) !important;
+    border-left-color: var(--success-border) !important;
+    color: var(--success-text) !important;
+}
+.success-box strong {
+    color: var(--success-border) !important;
+}
+
+.quiz-box {
+    background-color: var(--info-bg) !important;
+    border-color: var(--info-border) !important;
+}
+.quiz-box h4 {
+    color: var(--info-border) !important;
+}
+.quiz-box p {
+    color: var(--info-text) !important;
+}
+
+/* Tables */
+.salary-table th {
+    background-color: var(--accent-light) !important;
+    color: var(--accent-text) !important;
+}
+.salary-table td {
+    border-bottom-color: var(--border-light) !important;
+    color: var(--text-secondary) !important;
+}
+.salary-table tr:hover {
+    background-color: var(--bg-tertiary) !important;
+}
+
+/* Guide list links */
+.guide-list a {
+    color: var(--text-primary) !important;
+}
+.guide-list a:hover {
+    color: var(--accent-primary) !important;
+}
+.guide-title .cn {
+    color: var(--text-tertiary) !important;
+}
+.guide-desc {
+    color: var(--text-muted) !important;
+}
+.guide-count {
+    background-color: var(--accent-light) !important;
+    color: var(--accent-text) !important;
+}
+
+/* Salary bar */
+.salary-bar {
+    background-color: var(--accent-light) !important;
+}
+.salary-bar-fill {
+    background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary)) !important;
+}
+
+/* Filter tabs */
+.filter-tab {
+    background-color: var(--bg-secondary) !important;
+    border-color: var(--border-color) !important;
+    color: var(--text-secondary) !important;
+}
+.filter-tab.active {
+    background-color: var(--accent-primary) !important;
+    color: white !important;
+    border-color: var(--accent-primary) !important;
+}
+
+/* Major links */
+.major-link {
+    background-color: var(--bg-tertiary) !important;
+    border-color: var(--border-color) !important;
+    color: var(--text-primary) !important;
+}
+.major-link:hover {
+    border-color: var(--accent-primary) !important;
+    color: var(--accent-primary) !important;
+}
+.major-link .en {
+    color: var(--text-primary) !important;
+}
+.major-link .cn {
+    color: var(--text-muted) !important;
+}
+
+/* Category headers */
+.category h2 {
+    color: var(--accent-primary) !important;
+    border-bottom-color: var(--accent-light) !important;
+}
+.category h2 .en {
+    color: var(--accent-primary) !important;
+}
+.category h2 .cn {
+    color: var(--text-muted) !important;
+}
+.category h2 .count {
+    background-color: var(--accent-light) !important;
+    color: var(--accent-text) !important;
+}
+
+/* Stats */
+.stat-item {
+    background-color: var(--bg-tertiary) !important;
+    border-color: var(--border-color) !important;
+}
+.stat-item b {
+    color: var(--accent-primary) !important;
+}
+
+/* FAQ */
+.faq-item {
+    border-bottom-color: var(--border-light) !important;
+}
+.faq-question {
+    color: var(--text-primary) !important;
+}
+.faq-question .arrow {
+    color: var(--text-muted) !important;
+}
+.faq-answer {
+    color: var(--text-secondary) !important;
+}
+
+/* Search input */
+.search-box input {
+    background-color: var(--bg-secondary) !important;
+    border-color: var(--border-color) !important;
+    color: var(--text-primary) !important;
+}
+.search-box input:focus {
+    border-color: var(--accent-primary) !important;
+}
+
+/* Footer */
+.footer {
+    color: var(--text-muted) !important;
+}
+
+/* Footer links bar */
+.footer-links a {
+    color: var(--text-muted) !important;
+}
+.footer-links a:hover {
+    color: var(--accent-primary) !important;
+}
+
+/* Rank badge */
+.rank-badge {
+    background-color: var(--accent-primary) !important;
+    color: white !important;
+}
+.rank-badge.gold { background-color: #f59e0b !important; }
+.rank-badge.silver { background-color: #6b7280 !important; }
+.rank-badge.bronze { background-color: #cd7f32 !important; }
+
+/* Tag */
+.tag {
+    background-color: var(--accent-light) !important;
+    color: var(--accent-text) !important;
+}
+
+/* Meta text */
+.meta {
+    color: var(--accent-text) !important;
+}
+
+/* Pros-cons text colors */
+.pros { color: var(--success-border) !important; }
+.cons { color: var(--error-border) !important; }
+
+/* Growth indicators */
+.growth-up { color: #22c55e !important; }
+.growth-mid { color: #eab308 !important; }
+.growth-down { color: #ef4444 !important; }
+
+/* Inputs */
+input, textarea, select {
+    background-color: var(--bg-secondary) !important;
+    border-color: var(--border-color) !important;
+    color: var(--text-primary) !important;
+}
+input:focus, textarea:focus, select:focus {
+    border-color: var(--accent-primary) !important;
+}
+label {
+    color: var(--text-tertiary) !important;
+}
+
+/* Category tag */
+.category-tag {
+    background-color: var(--accent-light) !important;
+    color: var(--accent-text) !important;
+}
+
+/* Collapsible sections */
+details summary {
+    color: var(--text-primary) !important;
+}
+details[open] summary {
+    color: var(--accent-primary) !important;
+}
