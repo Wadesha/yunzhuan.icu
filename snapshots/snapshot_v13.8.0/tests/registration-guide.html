@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Guide - yunzhuan.icu</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 20px 16px;
+            background: #f5f5f5;
+            color: #333;
+        }
+        .back-link { color: #667eea; text-decoration: none; font-size: 0.85rem; margin-bottom: 12px; display: inline-block; }
+        .back-link:hover { text-decoration: underline; }
+        h1 { color: #333; margin-bottom: 4px; font-size: 1.4rem; }
+        .en-name { color: #888; font-size: 0.95rem; margin-bottom: 4px; font-weight: normal; }
+        .code-line { color: #888; font-size: 0.82rem; margin-bottom: 14px; }
+        .section {
+            background: white;
+            border-radius: 8px;
+            padding: 14px 18px;
+            margin-bottom: 10px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .section h2 {
+            color: #667eea;
+            margin-bottom: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        .section h2 .en { color: #999; font-size: 0.8rem; font-weight: normal; }
+        .section p { color: #333; line-height: 1.7; font-size: 0.92rem; }
+        .section p.cn-hint { color: #666; font-size: 0.85rem; margin-bottom: 6px; }
+        .topic-list { list-style: none; }
+        .topic-list li {
+            padding: 8px 10px;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        .topic-list li:last-child { border-bottom: none; }
+        .topic-list .topic-title { font-weight: 600; color: #333; }
+        .topic-list .topic-desc { color: #777; font-size: 0.82rem; margin-top: 2px; }
+        .meta-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+            margin-top: 6px;
+        }
+        .meta-table td {
+            padding: 6px 8px;
+            border-bottom: 1px solid #f0f0f0;
+            vertical-align: top;
+        }
+        .meta-table td.label { color: #888; width: 28%; }
+        .meta-table td.value { color: #333; }
+        .step-list { list-style: none; counter-reset: step; }
+        .step-list li {
+            position: relative;
+            padding: 10px 10px 10px 40px;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        .step-list li:last-child { border-bottom: none; }
+        .step-list li::before {
+            counter-increment: step;
+            content: counter(step);
+            position: absolute;
+            left: 10px;
+            top: 10px;
+            width: 22px;
+            height: 22px;
+            background: #667eea;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        .step-list .step-title { font-weight: 600; color: #333; }
+        .step-list .step-detail { color: #777; font-size: 0.82rem; margin-top: 2px; }
+        .warning-box {
+            background: #fff8e1;
+            border-left: 3px solid #ff8f00;
+            padding: 10px 14px;
+            border-radius: 0 6px 6px 0;
+            margin-top: 8px;
+            font-size: 0.85rem;
+            color: #5d4037;
+            line-height: 1.6;
+        }
+        .footer { text-align: center; margin-top: 20px; color: #999; font-size: 0.8rem; }
+        .exam-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 8px;
+            margin-top: 8px;
+        }
+        .exam-card {
+            background: #f8f9fa;
+            border-radius: 6px;
+            padding: 10px 12px;
+            border-left: 3px solid #667eea;
+        }
+        .exam-card .exam-name { color: #667eea; font-size: 0.88rem; font-weight: 600; }
+        .exam-card .exam-fee { color: #555; font-size: 0.8rem; margin-top: 4px; }
+    </style>
+    <link rel="stylesheet" href="/css/collapse.css">
+</head>
+<body>
+    <a href="index.html" class="back-link">&larr; Back to Standardized Tests</a>
+
+    <h1>Registration Guide</h1>
+    <p class="en-name">考试报名指南</p>
+    <p class="code-line">SAT · ACT · TOEFL · IELTS · AP · DET · PTE</p>
+
+    <div class="section">
+        <h2>Quick Reference <span class="en">报名速查</span></h2>
+        <div class="exam-grid">
+            <div class="exam-card">
+                <div class="exam-name">SAT</div>
+                <div class="exam-fee">~$109 (国际) · College Board · 提前约 1 个月报名</div>
+            </div>
+            <div class="exam-card">
+                <div class="exam-name">ACT</div>
+                <div class="exam-fee">~$176.50 (国际) · ACT.org · 提前约 1 个月报名</div>
+            </div>
+            <div class="exam-card">
+                <div class="exam-name">TOEFL iBT</div>
+                <div class="exam-fee">~$210-260 · ETS · 提前 1-2 个月报名</div>
+            </div>
+            <div class="exam-card">
+                <div class="exam-name">IELTS</div>
+                <div class="exam-fee">~$215-265 · British Council/IDP · 提前 1-2 个月报名</div>
+            </div>
+            <div class="exam-card">
+                <div class="exam-name">AP</div>
+                <div class="exam-fee">$98/科 (美国) · College Board · 学校统一报名或自考</div>
+            </div>
+            <div class="exam-card">
+                <div class="exam-name">DET (Duolingo)</div>
+                <div class="exam-fee">$59 · 随时报名随时考 · 线上考试</div>
+            </div>
+            <div class="exam-card">
+                <div class="exam-name">PTE Academic</div>
+                <div class="exam-fee">~$200-275 · 培生 · 提前 1-4 周报名</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>SAT Registration <span class="en">SAT 报名流程</span></h2>
+        <ol class="step-list">
+            <li>
+                <div class="step-title">注册 College Board 账号</div>
+                <div class="step-detail">在 collegeboard.org 注册，填写个人信息，注意姓名拼音与护照一致。</div>
+            </li>
+            <li>
+                <div class="step-title">选择考试日期和考点</div>
+                <div class="step-detail">进入 My SAT → Register for the SAT，选择考试日期和国家/城市，查看可用考点。</div>
+            </li>
+            <li>
+                <div class="step-title">填写个人信息</div>
+                <div class="step-detail">按要求填写学校、年级、意向专业等信息，带 * 的为必填项。</div>
+            </li>
+            <li>
+                <div class="step-title">上传照片</div>
+                <div class="step-detail">上传符合要求的证件照，考试当天需要带同一张照片的身份证件。</div>
+            </li>
+            <li>
+                <div class="step-title">选择送分学校（可选）</div>
+                <div class="step-detail">报名时可选择 4 所免费送分学校，考后 9 天内仍可修改。</div>
+            </li>
+            <li>
+                <div class="step-title">支付考试费</div>
+                <div class="step-detail">支持信用卡（Visa/MasterCard）、PayPal 等。国际考生约 $109。</div>
+            </li>
+            <li>
+                <div class="step-title">打印准考证</div>
+                <div class="step-detail">报名成功后在 Admission Ticket 页面打印，考试当天必须携带。</div>
+            </li>
+        </ol>
+        <div class="warning-box">
+            <strong>注意：</strong>国际考位紧张，建议提前 1-2 个月报名。常规报名截止后有逾期报名，需额外交费。改期/退考也有截止日期，错过无法退款。
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>ACT Registration <span class="en">ACT 报名流程</span></h2>
+        <ol class="step-list">
+            <li>
+                <div class="step-title">注册 ACT 账号</div>
+                <div class="step-detail">在 act.org 注册账号，创建学生档案，个人信息需与证件一致。</div>
+            </li>
+            <li>
+                <div class="step-title">选择考试类型和日期</div>
+                <div class="step-detail">选择 ACT (with writing 或 without writing)，选择考试日期。</div>
+            </li>
+            <li>
+                <div class="step-title">选择考点</div>
+                <div class="step-detail">按国家/城市搜索考点，国际考点通常在国际学校内。</div>
+            </li>
+            <li>
+                <div class="step-title">填写背景信息</div>
+                <div class="step-detail">填写学校、课程、兴趣等信息，用于成绩报告分析。</div>
+            </li>
+            <li>
+                <div class="step-title">上传照片</div>
+                <div class="step-detail">上传符合规格的正面证件照，考试当天核验身份。</div>
+            </li>
+            <li>
+                <div class="step-title">支付费用</div>
+                <div class="step-detail">国际考生约 $176.50 (无写作) / $196.50 (含写作)。</div>
+            </li>
+        </ol>
+    </div>
+
+    <div class="section">
+        <h2>TOEFL iBT Registration <span class="en">TOEFL 报名流程</span></h2>
+        <ol class="step-list">
+            <li>
+                <div class="step-title">注册 ETS 账号</div>
+                <div class="step-detail">在 ets.org/toefl 或 NEEA 托福报名官网注册，姓名拼音与护照一致。</div>
+            </li>
+            <li>
+                <div class="step-title">选择考试日期和考点</div>
+                <div class="step-detail">查看考位日历，选择日期和城市，TOEFL 场次多但热门日期紧张。</div>
+            </li>
+            <li>
+                <div class="step-title">确认报名信息</div>
+                <div class="step-detail">核对个人信息和考试信息，确认无误后进入支付。</div>
+            </li>
+            <li>
+                <div class="step-title">支付考试费</div>
+                <div class="step-detail">费用约 $210-260 不等，因地区而异。支持信用卡、支付宝（中国区）等。</div>
+            </li>
+            <li>
+                <div class="step-title">选择家考还是考场考</div>
+                <div class="step-detail">TOEFL iBT 有考场版和家庭版可选，家考需满足设备和环境要求。</div>
+            </li>
+        </ol>
+        <div class="warning-box">
+            <strong>家考注意：</strong>TOEFL Home Edition 需要安静独立的房间、电脑（Windows/Mac）、稳定网络、外接摄像头等。考前必须用 ETS 官方检测工具检查设备。
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>IELTS Registration <span class="en">IELTS 报名流程</span></h2>
+        <ol class="step-list">
+            <li>
+                <div class="step-title">选择考试类型</div>
+                <div class="step-detail">IELTS Academic（学术类，留学用）或 IELTS General Training（移民用）。</div>
+            </li>
+            <li>
+                <div class="step-title">选择考试方式</div>
+                <div class="step-detail">纸笔考试（Paper-based）或机考（Computer-delivered），机考出分更快（3-5天）。</div>
+            </li>
+            <li>
+                <div class="step-title">注册并预约</div>
+                <div class="step-detail">在 British Council 或 IDP 官网注册，选择考点、日期和场次。</div>
+            </li>
+            <li>
+                <div class="step-title">支付费用</div>
+                <div class="step-detail">费用约 $215-265，因地区和考试方式而异。</div>
+            </li>
+            <li>
+                <div class="step-title">口语考试预约</div>
+                <div class="step-detail">口语考试可能在笔试前后 7 天内，需提前预约时间或等分配。</div>
+            </li>
+        </ol>
+    </div>
+
+    <div class="section">
+        <h2>AP Registration <span class="en">AP 报名流程</span></h2>
+        <ul class="topic-list">
+            <li>
+                <div class="topic-title">学校有 AP 课程</div>
+                <div class="topic-desc">通过学校 AP Coordinator 统一报名，加入班级（join code），学校统一安排考试。</div>
+            </li>
+            <li>
+                <div class="topic-title">自学/学校没有 AP 课程</div>
+                <div class="topic-desc">联系附近有 AP 考点的学校，询问是否接受外部考生报名。美国本土可直接联系 AP Services。</div>
+            </li>
+            <li>
+                <div class="topic-title">国际考生报名</div>
+                <div class="topic-desc">中国地区通过授权考点报名（如 Prometric），或通过学校统一报名。香港/新加坡等地考点较多。</div>
+            </li>
+            <li>
+                <div class="topic-title">报名截止</div>
+                <div class="topic-desc">通常 11 月中下旬截止常规报名，之后至 3 月可逾期报名（需交逾期费）。</div>
+            </li>
+        </ul>
+        <div class="warning-box">
+            <strong>注意：</strong>AP 考试每年 5 月只有一次机会，错过只能等下一年。部分科目有 late testing，但需要符合条件（如时间冲突）。
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>DET / PTE Registration <span class="en">DET/PTE 报名</span></h2>
+        <ul class="topic-list">
+            <li>
+                <div class="topic-title">Duolingo English Test (DET)</div>
+                <div class="topic-desc">在 englishtest.duolingo.com 注册，支付 $59 后随时可以开始考试。线上考试，48 小时出分。</div>
+            </li>
+            <li>
+                <div class="topic-title">PTE Academic</div>
+                <div class="topic-desc">在 pearsonpte.com 注册，选择考点和日期，费用约 $200-275。全年多场次，2-5 天出分。</div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Common Issues <span class="en">常见问题</span></h2>
+        <table class="meta-table">
+            <tr><td class="label">考位满了怎么办</td><td class="value">定期刷考位，有人退考会空出位置；也可以考虑周边城市考点或家考（TOEFL/PTE）</td></tr>
+            <tr><td class="label">可以改期/取消吗</td><td class="value">可以，但有截止日期，超过截止日期可能无法退款或需交改期费</td></tr>
+            <tr><td class="label">姓名拼写错误</td><td class="value">必须与身份证件完全一致，考前发现错误尽快联系官方客服修改</td></tr>
+            <tr><td class="label">ID 要求</td><td class="value">国际考生通常需要护照，部分地区接受政府签发的带照片身份证</td></tr>
+            <tr><td class="label">考试当天忘带 ID</td><td class="value">不允许入场，考试费不退，需要重新报名</td></tr>
+            <tr><td class="label">成绩多久出</td><td class="value">SAT ~13天 / ACT ~2-8周 / TOEFL ~4-8天 / IELTS ~3-13天 / AP ~7月出分</td></tr>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>Tips & Reminders <span class="en">注意事项</span></h2>
+        <ul class="topic-list">
+            <li>
+                <div class="topic-title">提前规划考试时间</div>
+                <div class="topic-desc">热门考位（如 10 月、12 月 SAT）建议提前 2-3 个月报名，避免无考位。</div>
+            </li>
+            <li>
+                <div class="topic-title">准备好支付方式</div>
+                <div class="topic-desc">国际考试通常需要双币信用卡（Visa/MasterCard），提前确认额度和境外支付功能。</div>
+            </li>
+            <li>
+                <div class="topic-title">确认身份证件</div>
+                <div class="topic-desc">报名前确认护照有效期，考试日期时护照必须在有效期内。</div>
+            </li>
+            <li>
+                <div class="topic-title">报名后核对信息</div>
+                <div class="topic-desc">报名成功后仔细核对姓名、考试日期、考点等信息，有误及时联系客服修改。</div>
+            </li>
+            <li>
+                <div class="topic-title">设置日历提醒</div>
+                <div class="topic-desc">把考试日期、报名截止、改期截止、出分日期都记到日历上，避免错过。</div>
+            </li>
+        </ul>
+    </div>
+
+    <p class="footer">&copy; 2026 yunzhuan.icu | Registration Guide</p>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <div style="text-align:center;padding:8px 0;font-size:0.75rem;color:#aaa;">
+        <a href="../index.html" style="color:#aaa;text-decoration:none;">Home</a>
+        <span style="margin:0 6px;">&middot;</span>
+        <a href="../intl-exams/index.html" style="color:#aaa;text-decoration:none;">International Exams</a>
+        <span style="margin:0 6px;">&middot;</span>
+        <a href="../contact.html" style="color:#aaa;text-decoration:none;">Contact</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="javascript:window.scrollTo(0,0)" style="color:#aaa;text-decoration:none;">Back to top</a>
+    </div>
+</body>
+</html>
