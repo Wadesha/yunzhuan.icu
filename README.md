@@ -195,6 +195,7 @@ yunzhuan.icu 是一个美国大学本科专业导航网站，涵盖 8 大类 44 
 | TOEFL | `tests/toefl.html` | 英语能力测试，120 分制 |
 | IELTS | `tests/ielts.html` | 英语能力测试，9 分制 |
 | DET | `tests/det.html` | Duolingo 英语测试，160 分制 |
+| PTE | `tests/pte.html` | 培生学术英语考试，10-90 分制，AI 评分 |
 
 **备考资源页：**
 
@@ -205,6 +206,7 @@ yunzhuan.icu 是一个美国大学本科专业导航网站，涵盖 8 大类 44 
 | TOEFL 备考 | `tests/toefl-prep.html` | TPO 模考、推荐教材、4 模块策略、MyBest 拼分 |
 | IELTS 备考 | `tests/ielts-prep.html` | Cambridge 真题、推荐教材、4 模块策略、TRF 送分 |
 | DET 备考 | `tests/det-prep.html` | 官方 Practice Test、7 题型策略、自适应节奏 |
+| PTE 备考 | `tests/pte-prep.html` | 官方 Scored Practice Test、20 题型策略、高分值题型模板 |
 
 **工具页：**
 
@@ -339,9 +341,9 @@ yunzhuan.icu 是一个美国大学本科专业导航网站，涵盖 8 大类 44 
 │   ├── ib/                       # IB
 │   └── ap/                       # AP
 ├── tests/                        # 标化考试中心
-│   ├── index.html                # 板块首页 + 五考试对比
-│   ├── sat.html / act.html / toefl.html / ielts.html / det.html
-│   ├── sat-prep.html / act-prep.html / toefl-prep.html / ielts-prep.html / det-prep.html
+│   ├── index.html                # 板块首页 + 六考试对比
+│   ├── sat.html / act.html / toefl.html / ielts.html / det.html / pte.html
+│   ├── sat-prep.html / act-prep.html / toefl-prep.html / ielts-prep.html / det-prep.html / pte-prep.html
 │   └── score-conversion.html     # 分数换算对照表
 ├── schools/                      # 选校数据库
 │   ├── index.html                # 板块首页
@@ -564,6 +566,7 @@ git push origin main
 | v11.1 | 2026-07-25 | 全站底部导航统一加入 International Exams 入口，覆盖 542 个 HTML 页面 |
 | v12.0 | 2026-07-26 | 新增申请季四大板块：Standardized Tests（SAT/ACT/TOEFL/IELTS/DET）、Universities（美英加澳港新）、Timeline（9-10/11/12 年级）、Essays（PS/Common App/Supplemental/UCAS） |
 | v13.0 | 2026-07-27 | 新增 21 个详情页：8 所美国大学详情卡（Harvard/MIT/Stanford/Yale/Princeton/Columbia/UChicago/UPenn）、5 个标化备考页（SAT/ACT/TOEFL/IELTS/DET）、8 所学校补充文书页、3 个年级月度清单；新增分数换算工具页、文书流程/避坑页；新增 4 个 Python 批量生成脚本（gen_schools/gen_test_prep/gen_supplemental/gen_monthly） |
+| v13.1 | 2026-07-27 | 新增 PTE Academic 板块：介绍页 + 备考页，含 20 种题型全解析和高分值题型策略；tests 首页考试对比表从 5 个扩展为 6 个 |
 
 ---
 
