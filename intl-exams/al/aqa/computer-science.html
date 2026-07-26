@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A-Level Computer Science (AQA 7517) - yunzhuan.icu</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 20px 16px;
+            background: #f5f5f5;
+            color: #333;
+        }
+        .back-link { color: #667eea; text-decoration: none; font-size: 0.85rem; margin-bottom: 12px; display: inline-block; }
+        .back-link:hover { text-decoration: underline; }
+        h1 { color: #333; margin-bottom: 4px; font-size: 1.4rem; }
+        .en-name { color: #888; font-size: 0.95rem; margin-bottom: 4px; font-weight: normal; }
+        .code-line { color: #888; font-size: 0.82rem; margin-bottom: 14px; }
+        .section {
+            background: white;
+            border-radius: 8px;
+            padding: 14px 18px;
+            margin-bottom: 10px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .section h2 {
+            color: #667eea;
+            margin-bottom: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        .section h2 .en { color: #999; font-size: 0.8rem; font-weight: normal; }
+        .section p { color: #333; line-height: 1.7; font-size: 0.92rem; }
+        .section p.en { color: #888; font-size: 0.85rem; margin-top: 6px; }
+        .meta-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+            margin-top: 6px;
+        }
+        .meta-table td {
+            padding: 4px 8px;
+            border-bottom: 1px solid #f0f0f0;
+            vertical-align: top;
+        }
+        .meta-table td.label { color: #888; width: 28%; }
+        .meta-table td.value { color: #333; }
+        .level-tag {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-right: 6px;
+        }
+        .level-as { background: #e8f4fd; color: #1976d2; }
+        .level-a2 { background: #fce4ec; color: #c2185b; }
+        .topic-list { list-style: none; }
+        .topic-list li {
+            padding: 8px 10px;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        .topic-list li:last-child { border-bottom: none; }
+        .topic-list .topic-title { font-weight: 600; color: #333; }
+        .topic-list .topic-desc { color: #777; font-size: 0.82rem; margin-top: 2px; }
+        .footer { text-align: center; margin-top: 20px; color: #999; font-size: 0.8rem; }
+        .nav-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 8px;
+            margin-top: 16px;
+            padding: 12px 16px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            flex-wrap: wrap;
+        }
+        .nav-row a { color: #667eea; text-decoration: none; font-size: 0.88rem; }
+    </style>
+    <link rel="stylesheet" href="/css/collapse.css">
+</head>
+<body>
+    <a href="../index.html" class="back-link">← Back to A-Level Index</a>
+
+    <h1>A-Level Computer Science (AQA)</h1>
+    <p class="en-name">A-Level 计算机科学（AQA）</p>
+    <p class="code-line">AQA 7517</p>
+
+    <div class="section">
+        <h2>Course Overview <span class="en">课程介绍</span></h2>
+        <p style="color:#666;font-size:0.85rem;margin-bottom:6px;">AQA A-Level 计算机科学，线性结构，编程 + 理论 + 项目，含上机考试与编程 NEA。</p>
+        <p>A-Level Computer Science (AQA 7517) is a linear qualification combining computational thinking, programming, computer systems theory and an independent Non-Exam Assessment (NEA) programming project, examined by two terminal papers at the end of two years plus a portfolio-based NEA. The course covers programming paradigms, data structures, algorithms, computer architecture, networking, databases, Big Data and functional programming. It is a core subject for computer science, software engineering, AI, data science and games development applicants.</p>
+    </div>
+
+    <div class="section">
+        <h2>Key Facts <span class="en">基本信息</span></h2>
+        <table class="meta-table">
+            <tr><td class="label">Exam Board (考试局)</td><td class="value">Assessment and Qualifications Alliance (AQA)</td></tr>
+            <tr><td class="label">Specification Code</td><td class="value">AQA 7517</td></tr>
+            <tr><td class="label">Structure</td><td class="value">Linear structure, terminal exams at end of 2 years</td></tr>
+            <tr><td class="label">Grading (评分)</td><td class="value">A* - E (A* only for full A-Level)</td></tr>
+            <tr><td class="label">Exam Papers</td><td class="value">Paper 1 (on-screen programming) + Paper 2 (theory written) + NEA (programming project)</td></tr>
+            <tr><td class="label">Non-Exam Assessment</td><td class="value">NEA: independent programming project, analysed, designed, developed, tested and evaluated; 75 marks, 20% of A-Level</td></tr>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>AS / Year 1 Syllabus <span class="en">AS 阶段章节</span></h2>
+        <ul class="topic-list">
+            <li>
+                <div class="topic-title"><span class="level-tag level-as">AS</span>1. Fundamentals of programming</div>
+                <div class="topic-desc">Programming paradigms (imperative, object-oriented), data types, variables, sequences/selection/iteration, subroutines, parameters, recursion, exception handling, object-oriented concepts (classes, objects, inheritance, polymorphism)</div>
+            </li>
+            <li>
+                <div class="topic-title"><span class="level-tag level-as">AS</span>2. Fundamentals of data structures</div>
+                <div class="topic-desc">Arrays (1D and 2D), lists, tuples, records, stacks, queues, linked lists, graphs, trees, hash tables, dictionaries, choosing appropriate data structures</div>
+            </li>
+            <li>
+                <div class="topic-title"><span class="level-tag level-as">AS</span>3. Fundamentals of algorithms</div>
+                <div class="topic-desc">Sorting (bubble, merge, quick), searching (linear, binary), path finding (Dijkstra, A*), time and space complexity, Big-O notation, recursion</div>
+            </li>
+            <li>
+                <div class="topic-title"><span class="level-tag level-as">AS</span>4. Theory of computation</div>
+                <div class="topic-desc">Abstraction and automation, finite state machines, regular languages, Turing machines, computability and the halting problem</div>
+            </li>
+            <li>
+                <div class="topic-title"><span class="level-tag level-as">AS</span>5. Fundamentals of data representation</div>
+                <div class="topic-desc">Number systems (binary, hex), binary arithmetic, character sets (ASCII, Unicode), images, sound, data compression (lossless, lossy), encryption</div>
+            </li>
+            <li>
+                <div class="topic-title"><span class="level-tag level-as">AS</span>6. Fundamentals of computer systems</div>
+                <div class="topic-desc">Hardware and software, classification of programming languages, generations of languages, systems software, operating systems, types of operating system, role of an operating system</div>
+            </li>
+            <li>
+                <div class="topic-title"><span class="level-tag level-as">AS</span>7. Fundamentals of computer organisation and architecture</div>
+                <div class="topic-desc">Internal components of a computer, the processor (CPU), processor instruction set, assembly language, Boolean algebra, logic gates, logic circuits</div>
+            </li>
+            <li>
+                <div class="topic-title"><span class="level-tag level-as">AS</span>8. Consequences of uses of computing</div>
+                <div class="topic-desc">Individual, moral, social, cultural and legal issues, privacy, legislation (Data Protection, Computer Misuse, Copyright), professional bodies</div>
+            </li>
+            <li>
+                <div class="topic-title"><span class="level-tag level-as">AS</span>9. Fundamentals of communication and networking</div>
+                <div class="topic-desc">Communication methods, networking (LAN, WAN, topologies, client-server and peer-to-peer), TCP/IP protocol stack, protocols, network security and threats</div>
+            </li>
+            <li>
+                <div class="topic-title"><span class="level-tag level-as">AS</span>10. Systematic approach to problem solving</div>
+                <div class="topic-desc">Analysis, design, implementation, testing, evaluation and maintenance; computational thinking, decomposition, pattern recognition, abstraction</div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>A2 / Year 2 Syllabus <span class="en">A2 阶段章节</span></h2>
+        <ul class="topic-list">
+            <li>
+                <div class="topic-title"><span class="level-tag level-a2">A2</span>11. Fundamentals of databases</div>
+                <div class="topic-desc">Relational database model, normalisation (1NF, 2NF, 3NF), SQL (DDL, DML), entity-relationship diagrams, transaction processing, ACID</div>
+            </li>
+            <li>
+                <div class="topic-title"><span class="level-tag level-a2">A2</span>12. Big Data</div>
+                <div class="topic-desc">Characteristics of Big Data (volume, velocity, variety), distributed processing (MapReduce, Hadoop), NoSQL databases, data mining, ethical and privacy considerations</div>
+            </li>
+            <li>
+                <div class="topic-title"><span class="level-tag level-a2">A2</span>13. Fundamentals of functional programming</div>
+                <div class="topic-desc">Functional programming paradigm, function types, map and filter, list processing, first-class functions, function composition, lazy evaluation, Haskell or equivalent</div>
+            </li>
+            <li>
+                <div class="topic-title"><span class="level-tag level-a2">A2</span>14. Systematic approach to problem solving (advanced)</div>
+                <div class="topic-desc">Computational methods, algorithms, heuristics, performance modelling, limitations of computational methods</div>
+            </li>
+            <li>
+                <div class="topic-title"><span class="level-tag level-a2">A2</span>15. NEA: Programming project</div>
+                <div class="topic-desc">Independent project: analysis of a real problem, design, technical solution developed in a suitable programming language, testing, evaluation; documented portfolio submitted to AQA</div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Exam Structure (AQA 7517) <span class="en">考试结构</span></h2>
+        <table class="meta-table">
+            <tr><td class="label">Paper 1</td><td class="value">On-screen exam: programming, data structures, algorithms, theory of computation · 2h30m · 100 marks · 40% of A-Level</td></tr>
+            <tr><td class="label">Paper 2</td><td class="value">Written exam: computer systems, organisation, networking, databases, Big Data, functional programming, consequences · 2h30m · 100 marks · 40% of A-Level</td></tr>
+            <tr><td class="label">NEA</td><td class="value">Non-Exam Assessment: independent programming project (analysis, design, development, testing, evaluation) · 75 marks · 20% of A-Level</td></tr>
+            <tr><td class="label">Notes</td><td class="value">Linear structure, terminal exams at end of 2 years; preliminary material and skeleton code released for Paper 1; NEA marked by teacher and moderated by AQA</td></tr>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>Suitable Majors &amp; Pathway <span class="en">适用专业与衔接</span></h2>
+        <p style="color:#666;font-size:0.85rem;margin-bottom:6px;">CS、软件工程、AI、数据科学、游戏开发等方向核心科目，含编程项目 NEA。</p>
+        <p>A-Level Computer Science (AQA) is a core subject for computer science, software engineering, artificial intelligence, data science, cybersecurity, games development, electronics, and computational finance. The linear terminal exams combined with a substantial programming project reward algorithmic thinking, structured problem decomposition and disciplined software engineering, providing a strong foundation for university algorithms and data structures, computer architecture, databases, machine learning and software engineering modules. Often paired with Mathematics and Further Mathematics for top-tier CS applicants.</p>
+    </div>
+
+    <div class="nav-row">
+        <a href="../index.html">← A-Level Index</a>
+        <a href="geography.html">Next: Geography →</a>
+    </div>
+
+    <p class="footer">© 2026 yunzhuan.icu | A-Level Computer Science (AQA)</p>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <div style="text-align:center;padding:8px 0;font-size:0.75rem;color:#aaa;">
+        <a href="../../../index.html" style="color:#aaa;text-decoration:none;">Home</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="javascript:window.scrollTo(0,0)" style="color:#aaa;text-decoration:none;">Back to top</a>
+    </div>
+</body>
+</html>
