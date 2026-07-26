@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>深度学习 - Deep Learning - yunzhuan.icu</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 760px; margin: 0 auto; padding: 20px 16px; background: #f5f5f5; color: #333; }
+        .back-link { color: #667eea; text-decoration: none; font-size: 0.85rem; margin-bottom: 12px; display: inline-block; }
+        .back-link:hover { text-decoration: underline; }
+        h1 { color: #333; margin-bottom: 4px; font-size: 1.4rem; }
+        .en-name { color: #888; font-size: 0.95rem; margin-bottom: 14px; font-weight: normal; }
+        .section { background: white; border-radius: 8px; padding: 14px 18px; margin-bottom: 10px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+        .section h2 { color: #667eea; margin-bottom: 8px; font-size: 1rem; font-weight: 600; }
+        .section h2 .en { color: #999; font-size: 0.8rem; font-weight: normal; }
+        .section p { color: #333; line-height: 1.7; font-size: 0.92rem; }
+        .meta { font-size: 0.82rem; color: #888; margin-bottom: 8px; }
+        .footer { text-align: center; margin-top: 20px; color: #999; font-size: 0.8rem; }
+    </style>
+<link rel="stylesheet" href="/css/collapse.css">
+</head>
+<body>
+    <a href="../../index.html" class="back-link">← 返回首页</a>
+    <h1>深度学习</h1>
+    <p class="en-name">Deep Learning</p>
+    <div class="section">
+        <h2>课程介绍 <span class="en">Course Introduction</span></h2>
+        <p class="meta">学分：4 | 先修课：机器学习导论、线性代数 | 学期：第5学期</p>
+        <p>深度学习聚焦于多层神经网络模型的理论与实践。课程内容包括前馈神经网络、反向传播算法、卷积神经网络（CNN）、循环神经网络（RNN/LSTM）、Transformer架构、优化算法、正则化技术以及主流框架（PyTorch/TensorFlow）。学生将理解模型设计、训练技巧与表示学习原理，能够应用于图像、语音、自然语言等任务，是AI方向的核心进阶课程。</p>
+        <p style="margin-top:8px;">Deep Learning focuses on the theory and practice of multi-layer neural networks. Topics include feedforward networks, backpropagation, convolutional neural networks (CNNs), recurrent neural networks (RNN/LSTM), Transformers, optimization algorithms, regularization techniques, and mainstream frameworks such as PyTorch and TensorFlow. Students gain skills in model design, training, and representation learning, applicable to vision, speech, and language tasks—a core advanced AI course.</p>
+    </div>
+        <div class="section">
+        <h2>大作业 <span class="en">Final Project</span></h2>
+        <div>
+<p class="meta">作业标题：图像分类模型</p>
+        <p>使用深度学习框架实现图像分类模型，完成数据预处理、模型构建、训练优化和评估。对比CNN、ResNet等模型效果，撰写技术报告。</p>
+        <p style="margin-top:8px;">Implement image classification models using deep learning frameworks, complete data preprocessing, model construction, training optimization and evaluation. Compare CNN, ResNet and other models, write technical report.</p>
+        </div>
+    </div>
+    <div class="section">
+        <h2>实施步骤 <span class="en">Implementation Steps</span></h2>
+        <div><div style="background:#f0f4ff;padding:10px 14px;border-radius:6px;margin-bottom:12px;border-left:3px solid #667eea;font-size:0.88rem;">
+<b>📋 示例</b>：用卷积神经网络做一个图像分类器，比如区分猫狗图片或识别10种常见花卉。你需要用PyTorch搭建ResNet或VGG网络，在公开数据集上训练，调整超参数，最终让测试准确率达到85%以上。
+</div>
+
+<div class="step-item">
+    <div class="step-number">步骤 1</div>
+    <div class="step-title">数据集准备</div>
+    <div class="step-desc">收集图像分类数据集，进行数据增强（翻转、旋转、裁剪等）</div>
+    <div class="step-output">产出：增强后数据集</div>
+</div><div class="step-item">
+    <div class="step-number">步骤 2</div>
+    <div class="step-title">CNN模型设计</div>
+    <div class="step-desc">设计卷积神经网络结构，参考经典模型（LeNet、AlexNet、ResNet）</div>
+    <div class="step-output">产出：模型设计文档</div>
+</div><div class="step-item">
+    <div class="step-number">步骤 3</div>
+    <div class="step-title">模型实现与训练</div>
+    <div class="step-desc">使用深度学习框架实现模型，设置损失函数和优化器进行训练</div>
+    <div class="step-output">产出：训练好的模型</div>
+</div><div class="step-item">
+    <div class="step-number">步骤 4</div>
+    <div class="step-title">模型优化</div>
+    <div class="step-desc">应用正则化、批归一化、学习率调整等技巧提升性能</div>
+    <div class="step-output">产出：优化方案</div>
+</div><div class="step-item">
+    <div class="step-number">步骤 5</div>
+    <div class="step-title">文档提交</div>
+    <div class="step-desc">整理代码注释和实验报告</div>
+    <div class="step-output">产出：最终提交材料</div>
+</div><div style="margin-top:14px;padding-top:10px;border-top:1px solid #eee;">
+    <h3 style="font-size:0.9rem;color:#667eea;margin-bottom:8px;">Steps</h3><div class="step-item">
+    <div class="step-number">Step 1</div>
+    <div class="step-title">Dataset Preparation</div>
+    <div class="step-desc">Collect image classification dataset, apply augmentation</div>
+    <div class="step-output">Deliverable: Augmented Dataset</div>
+</div><div class="step-item">
+    <div class="step-number">Step 2</div>
+    <div class="step-title">CNN Model Design</div>
+    <div class="step-desc">Design CNN architecture, reference LeNet, AlexNet, ResNet</div>
+    <div class="step-output">Deliverable: Model Design Doc</div>
+</div><div class="step-item">
+    <div class="step-number">Step 3</div>
+    <div class="step-title">Implementation & Training</div>
+    <div class="step-desc">Implement with DL framework, set loss function and optimizer</div>
+    <div class="step-output">Deliverable: Trained Model</div>
+</div><div class="step-item">
+    <div class="step-number">Step 4</div>
+    <div class="step-title">Model Optimization</div>
+    <div class="step-desc">Apply regularization, batch norm, learning rate scheduling</div>
+    <div class="step-output">Deliverable: Optimization Plan</div>
+</div><div class="step-item">
+    <div class="step-number">Step 5</div>
+    <div class="step-title">Documentation</div>
+    <div class="step-desc">Prepare code comments and experimental report</div>
+    <div class="step-output">Deliverable: Final Submission</div>
+</div></div>
+        
+    <div class="course-nav" style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:16px;padding:12px 16px;background:white;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,0.05);flex-wrap:wrap;">
+    <a href="../ai.html" style="color:#667eea;text-decoration:none;font-size:0.88rem;">← 返回人工智能</a>
+    <a href="nlp.html" style="color:#667eea;text-decoration:none;font-size:0.88rem;">下一门：自然语言处理 →</a>
+    <a href="#" onclick="goRandomCourse();return false;" style="color:#667eea;text-decoration:none;font-size:0.88rem;">🎲 Random Course</a>
+</div>
+
+    <p class="footer">© 2026 yunzhuan.icu</p>
+<!-- Vercel Analytics -->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script defer src="/js/random-course.js"></script>
+<div style="text-align:center;padding:8px 0;font-size:0.75rem;color:#aaa;">
+    <a href="../../prerequisite/" style="color:#aaa;text-decoration:none;">Prerequisites</a>
+    <span style="margin:0 6px;">·</span>
+    <a href="../../intl-exams/index.html" style="color:#aaa;text-decoration:none;">International Exams</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="../../contact.html" style="color:#aaa;text-decoration:none;">Contact</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="javascript:window.scrollTo(0,0)" style="color:#aaa;text-decoration:none;">Back to top</a>
+    <span style="margin:0 6px;">·</span>
+    <a href="../../index.html" style="color:#aaa;text-decoration:none;">Home</a>
+</div>
+<!-- footer-links -->
+</body>
+</html>

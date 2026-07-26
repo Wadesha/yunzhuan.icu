@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>University Database - US / UK / Canada / Australia / HK / Singapore - yunzhuan.icu</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px 16px;
+            background: #f5f5f5;
+            color: #333;
+        }
+        .back-link {
+            color: #667eea;
+            text-decoration: none;
+            font-size: 0.85rem;
+            margin-bottom: 12px;
+            display: inline-block;
+        }
+        .back-link:hover { text-decoration: underline; }
+        h1 {
+            color: #333;
+            margin-bottom: 4px;
+            font-size: 1.5rem;
+        }
+        .subtitle {
+            color: #888;
+            font-size: 0.95rem;
+            margin-bottom: 18px;
+        }
+        .intro {
+            background: white;
+            border-radius: 8px;
+            padding: 14px 18px;
+            margin-bottom: 14px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            font-size: 0.92rem;
+            line-height: 1.7;
+            color: #444;
+        }
+        .system-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 12px;
+            margin-bottom: 18px;
+        }
+        .system-card {
+            display: block;
+            background: white;
+            border-radius: 8px;
+            padding: 14px 16px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            text-decoration: none;
+            border-left: 4px solid #667eea;
+            transition: all 0.15s ease;
+        }
+        .system-card:hover {
+            background: #f8f9ff;
+            border-left-color: #764ba2;
+        }
+        .system-card .cn {
+            color: #333;
+            font-size: 1.05rem;
+            font-weight: 600;
+            display: block;
+        }
+        .system-card .en {
+            color: #888;
+            font-size: 0.8rem;
+            display: block;
+            margin-top: 2px;
+        }
+        .system-card .desc {
+            color: #666;
+            font-size: 0.82rem;
+            line-height: 1.5;
+            margin-top: 8px;
+        }
+        .section {
+            background: white;
+            border-radius: 8px;
+            padding: 14px 18px;
+            margin-bottom: 10px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .section h2 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        .section h2 .en {
+            color: #999;
+            font-size: 0.8rem;
+            font-weight: normal;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+        }
+        th, td {
+            text-align: left;
+            padding: 8px 10px;
+            border-bottom: 1px solid #eee;
+            vertical-align: top;
+        }
+        th {
+            color: #555;
+            font-weight: 600;
+            background: #fafafa;
+        }
+        td.cn { color: #333; font-weight: 500; }
+        td.en { color: #888; font-size: 0.78rem; }
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            color: #999;
+            font-size: 0.8rem;
+        }
+    </style>
+    <link rel="stylesheet" href="/css/collapse.css">
+</head>
+<body>
+    <a href="../index.html" class="back-link">← Back to Home</a>
+
+    <h1>University Database</h1>
+    <p class="subtitle">US · UK · Canada · Australia · Hong Kong · Singapore <span style="color:#aaa;font-size:0.85rem;">选校数据库</span></p>
+
+    <div class="intro">
+        This section is a navigation hub for overseas undergraduate university information, organized by country. Browse representative universities across the US, UK, Canada, Australia, Hong Kong and Singapore, with quick access to rankings, application requirements, popular majors and degree structure. Each country page lists flagship schools grouped by tier.
+        <br><span style="color:#888;">按国家浏览海外大学信息，含排名、录取要求、优势专业等。</span>
+    </div>
+
+    <div class="system-grid">
+        <a href="us/index.html" class="system-card">
+            <span class="cn">United States</span>
+            <span class="en">美国大学</span>
+            <span class="desc">4000+ institutions, Common App application, SAT / ACT oriented, 4-year bachelor.<br><span style="color:#999;">美国大学 - 4000+ 院校，Common App 申请，SAT/ACT 为主。</span></span>
+        </a>
+        <a href="uk/index.html" class="system-card">
+            <span class="cn">United Kingdom</span>
+            <span class="en">英国大学</span>
+            <span class="desc">UCAS application, A-Level / IB oriented, 3-year bachelor (Scotland 4-year).<br><span style="color:#999;">英国大学 - UCAS 申请，A-Level/IB 为主，3 年制。</span></span>
+        </a>
+        <a href="ca/index.html" class="system-card">
+            <span class="cn">Canada</span>
+            <span class="en">加拿大大学</span>
+            <span class="desc">Provincial application systems, A-Level / IB / AP all accepted, 4-year bachelor.<br><span style="color:#999;">加拿大大学 - 各省独立申请，A-Level/IB/AP 均可，4 年制。</span></span>
+        </a>
+        <a href="au/index.html" class="system-card">
+            <span class="cn">Australia</span>
+            <span class="en">澳大利亚大学</span>
+            <span class="desc">Direct application, ATAR / A-Level / IB all accepted, 3-year bachelor.<br><span style="color:#999;">澳大利亚大学 - ATAR/A-Level/IB 均可，3 年制。</span></span>
+        </a>
+        <a href="hk/index.html" class="system-card">
+            <span class="cn">Hong Kong</span>
+            <span class="en">香港大学</span>
+            <span class="desc">Direct / JUPAS application, Gaokao / IB / A-Level all accepted, 4-year bachelor.<br><span style="color:#999;">香港大学 - 内地生高考/IB/A-Level 均可。</span></span>
+        </a>
+        <a href="sg/index.html" class="system-card">
+            <span class="cn">Singapore</span>
+            <span class="en">新加坡大学</span>
+            <span class="desc">Direct application, A-Level / IB / Gaokao all accepted, 4-year bachelor.<br><span style="color:#999;">新加坡大学 - A-Level/IB/高考均可。</span></span>
+        </a>
+    </div>
+
+    <div class="section">
+        <h2>Tools &amp; Samples <span class="en">工具与样板</span></h2>
+        <div class="system-grid">
+            <a href="compare.html" class="system-card">
+                <span class="cn">Compare Universities</span>
+                <span class="en">并排对比工具</span>
+                <span class="desc">选最多 3 所学校并排对比录取率、标化中段、学费、截止日等关键指标。<br><span style="color:#999;">选校对比工具，自动生成对照表。</span></span>
+            </a>
+            <a href="us/harvard.html" class="system-card">
+                <span class="cn">Harvard Profile (Sample)</span>
+                <span class="en">哈佛详情卡样板</span>
+                <span class="desc">学校详情卡样板页：录取率、标化 25-75 区间、学费、截止日、强势专业、申请要点。<br><span style="color:#999;">可复用模板生成其他学校详情页。</span></span>
+            </a>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Country Comparison <span class="en">国家对比</span></h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Item (项目)</th>
+                    <th>US</th>
+                    <th>UK</th>
+                    <th>Canada</th>
+                    <th>Australia</th>
+                    <th>Hong Kong</th>
+                    <th>Singapore</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="cn">Country (国家)</td>
+                    <td>United States</td>
+                    <td>United Kingdom</td>
+                    <td>Canada</td>
+                    <td>Australia</td>
+                    <td>Hong Kong SAR</td>
+                    <td>Singapore</td>
+                </tr>
+                <tr>
+                    <td class="cn">Application System (申请系统)</td>
+                    <td>Common App / Coalition / direct</td>
+                    <td>UCAS</td>
+                    <td>Provincial (OUAC etc.)</td>
+                    <td>Direct to university</td>
+                    <td>Direct / JUPAS</td>
+                    <td>Direct to university</td>
+                </tr>
+                <tr>
+                    <td class="cn">Bachelor Duration (本科学制)</td>
+                    <td>4 years</td>
+                    <td>3 years (Scotland 4)</td>
+                    <td>4 years</td>
+                    <td>3 years</td>
+                    <td>4 years</td>
+                    <td>4 years</td>
+                </tr>
+                <tr>
+                    <td class="cn">Popular Exams (主流考试)</td>
+                    <td>SAT / ACT / AP</td>
+                    <td>A-Level / IB</td>
+                    <td>A-Level / IB / AP</td>
+                    <td>ATAR / A-Level / IB</td>
+                    <td>IB / A-Level / Gaokao</td>
+                    <td>A-Level / IB / Gaokao</td>
+                </tr>
+                <tr>
+                    <td class="cn">Language (授课语言)</td>
+                    <td>English</td>
+                    <td>English</td>
+                    <td>English / French</td>
+                    <td>English</td>
+                    <td>English / Chinese</td>
+                    <td>English</td>
+                </tr>
+                <tr>
+                    <td class="cn">Tuition Range (学费区间, per year)</td>
+                    <td>USD 40k-65k</td>
+                    <td>GBP 25k-45k</td>
+                    <td>CAD 30k-60k</td>
+                    <td>AUD 35k-55k</td>
+                    <td>HKD 145k-185k</td>
+                    <td>SGD 38k-50k</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <p class="footer">© 2026 yunzhuan.icu | University Database</p>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <div style="text-align:center;padding:8px 0;font-size:0.75rem;color:#aaa;">
+        <a href="../index.html" style="color:#aaa;text-decoration:none;">Home</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="../intl-exams/index.html" style="color:#aaa;text-decoration:none;">International Exams</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="../contact.html" style="color:#aaa;text-decoration:none;">Contact</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="javascript:window.scrollTo(0,0)" style="color:#aaa;text-decoration:none;">Back to top</a>
+    </div>
+</body>
+</html>
