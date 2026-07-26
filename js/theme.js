@@ -1,28 +1,27 @@
-// Theme Toggle - Dark / Light Mode
+// Theme Toggle - Dark / Light Mode (Internal Testing Only)
 // Uses CSS variables + localStorage, no dependencies
+// Access via console: ThemeToggle.toggle() / ThemeToggle.set('dark')
 
 (function() {
     const THEME_KEY = 'yunzhuan_theme';
     const root = document.documentElement;
 
-    // Get saved theme or detect system preference
+    // Force light mode by default (internal testing only)
+    // Uncomment below to enable system preference detection
     function getInitialTheme() {
         const saved = localStorage.getItem(THEME_KEY);
         if (saved === 'light' || saved === 'dark') return saved;
-        // Detect system preference
-        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-            return 'dark';
-        }
-        return 'light';
+        return 'light'; // default to light for production
     }
 
     // Apply theme immediately (before DOM ready to avoid flash)
     const initialTheme = getInitialTheme();
     root.setAttribute('data-theme', initialTheme);
 
-    // Run after DOM is ready
+    // Toggle button is disabled in production (internal testing only)
+    // To test dark mode, open console and type: ThemeToggle.toggle()
+    /*
     document.addEventListener('DOMContentLoaded', function() {
-        // Add theme toggle button to navbar if navbar exists
         const navLinks = document.querySelector('.nav-links');
         if (navLinks) {
             const btn = document.createElement('button');
@@ -35,7 +34,6 @@
             navLinks.appendChild(btn);
         }
 
-        // Listen for system theme change
         if (window.matchMedia) {
             window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
                 if (!localStorage.getItem(THEME_KEY)) {
@@ -44,6 +42,7 @@
             });
         }
     });
+    */
 
     function toggleTheme() {
         const current = root.getAttribute('data-theme');
@@ -60,7 +59,7 @@
         }
     }
 
-    // Expose for manual use
+    // Expose for manual use (internal testing)
     window.ThemeToggle = {
         get: () => root.getAttribute('data-theme'),
         set: setTheme,

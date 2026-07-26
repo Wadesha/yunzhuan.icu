@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Version History - yunzhuan.icu</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -12,12 +13,19 @@
             margin: 0 auto;
             padding: 30px 16px;
             background: #f5f5f5;
-            color: #333;
+            color: #555;
         }
         .back-link { color: #667eea; text-decoration: none; font-size: 0.85rem; margin-bottom: 16px; display: inline-block; }
         .back-link:hover { text-decoration: underline; }
-        h1 { color: #333; margin-bottom: 4px; font-size: 1.5rem; }
+        h1 { color: #444; margin-bottom: 4px; font-size: 1.5rem; }
         .subtitle { color: #888; font-size: 0.9rem; margin-bottom: 24px; }
+        h2 {
+            color: #555;
+            font-size: 1rem;
+            margin: 24px 0 12px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid #e5e7eb;
+        }
         .version-list { list-style: none; }
         .version-item {
             background: white;
@@ -32,6 +40,19 @@
             background: #f8f9ff;
             border-left-color: #764ba2;
         }
+        .version-item.current {
+            border-left-color: #10b981;
+        }
+        .version-item.current .version-tag {
+            color: #10b981;
+        }
+        .version-item.planned {
+            border-left-style: dashed;
+            opacity: 0.7;
+        }
+        .version-item.planned .version-tag {
+            color: #888;
+        }
         .version-header {
             display: flex;
             justify-content: space-between;
@@ -39,17 +60,17 @@
             margin-bottom: 6px;
         }
         .version-tag {
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 600;
-            color: #333;
+            color: #555;
         }
         .version-date {
             font-size: 0.8rem;
-            color: #999;
+            color: #aaa;
         }
         .version-desc {
             color: #666;
-            font-size: 0.9rem;
+            font-size: 0.88rem;
             line-height: 1.6;
         }
         .version-actions {
@@ -75,15 +96,121 @@
         .version-actions a.secondary:hover {
             background: #d0d0d0;
         }
-        .footer { text-align: center; margin-top: 30px; color: #999; font-size: 0.8rem; }
+        .status-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            margin-left: 8px;
+            vertical-align: middle;
+        }
+        .status-badge.current {
+            background: #d1fae5;
+            color: #065f46;
+        }
+        .status-badge.planned {
+            background: #e5e7eb;
+            color: #6b7280;
+        }
+        .footer { text-align: center; margin-top: 30px; color: #bbb; font-size: 0.8rem; }
     </style>
 </head>
 <body>
-    <a href="../index.html" class="back-link">← Back to Home</a>
+    <a href="../index.html" class="back-link">&larr; Back to Home</a>
 
     <h1>Version History</h1>
-    <p class="subtitle">版本历史 · 点击进入对应版本的完整网站</p>
+    <p class="subtitle">版本历史 &middot; 点击进入对应版本的完整网站</p>
 
+    <h2>Current Version</h2>
+    <ul class="version-list">
+        <li class="version-item current">
+            <div class="version-header">
+                <span class="version-tag">v18.7.0 <span class="status-badge current">Current</span></span>
+                <span class="version-date">2026-07-27</span>
+            </div>
+            <p class="version-desc">视觉优化：字体颜色整体调淡（更柔和）；夜间模式转为内部测试（移除前端入口，控制台 ThemeToggle.toggle() 启用）；Snapshots 页面改版，补充 v14-v18 版本记录及未来版本规划</p>
+            <div class="version-actions">
+                <a href="../index.html">浏览当前版本</a>
+            </div>
+        </li>
+        <li class="version-item">
+            <div class="version-header">
+                <span class="version-tag">v18.6.0</span>
+                <span class="version-date">2026-07-27</span>
+            </div>
+            <p class="version-desc">首页优化：移除导航栏 logo（yunzhuan.icu），统计数字去背景纯文字化；夜间模式大幅完善（100+ 条覆盖规则）</p>
+            <div class="version-actions">
+                <span style="color:#ccc;font-size:0.8rem;">快照待补充</span>
+            </div>
+        </li>
+        <li class="version-item">
+            <div class="version-header">
+                <span class="version-tag">v18.5.0</span>
+                <span class="version-date">2026-07-27</span>
+            </div>
+            <p class="version-desc">Favicon 上线；功能联动：收藏按钮 + 相关学校推荐（favorites.js）；Supabase 用户系统完善（个人中心、收藏管理）</p>
+            <div class="version-actions">
+                <span style="color:#ccc;font-size:0.8rem;">快照待补充</span>
+            </div>
+        </li>
+        <li class="version-item">
+            <div class="version-header">
+                <span class="version-tag">v18.0.0</span>
+                <span class="version-date">2026-07-27</span>
+            </div>
+            <p class="version-desc">数据可视化：纯 CSS 柱状图（薪资页）+ SVG 雷达图（选校对比页），无第三方依赖；Supabase 用户系统激活（Auth + Database）；登录注册页、个人中心页</p>
+            <div class="version-actions">
+                <span style="color:#ccc;font-size:0.8rem;">快照待补充</span>
+            </div>
+        </li>
+    </ul>
+
+    <h2>Recent Versions</h2>
+    <ul class="version-list">
+        <li class="version-item">
+            <div class="version-header">
+                <span class="version-tag">v17.0.0</span>
+                <span class="version-date">2026-07-27</span>
+            </div>
+            <p class="version-desc">PWA 离线访问：manifest.json + service worker，可添加到桌面；全站搜索：search-index.json 生成脚本 + 搜索页（search.html）+ 所有页面导航栏搜索入口</p>
+            <div class="version-actions">
+                <span style="color:#ccc;font-size:0.8rem;">快照待补充</span>
+            </div>
+        </li>
+        <li class="version-item">
+            <div class="version-header">
+                <span class="version-tag">v16.0.0</span>
+                <span class="version-date">2026-07-27</span>
+            </div>
+            <p class="version-desc">深色模式（CSS 变量 + localStorage 持久化）；移动端底部导航 Tab 栏 + 汉堡菜单；面包屑导航；版本号移至版权信息后改名为 Version</p>
+            <div class="version-actions">
+                <span style="color:#ccc;font-size:0.8rem;">快照待补充</span>
+            </div>
+        </li>
+        <li class="version-item">
+            <div class="version-header">
+                <span class="version-tag">v15.0.0</span>
+                <span class="version-date">2026-07-27</span>
+            </div>
+            <p class="version-desc">核心课程板块上移到页面顶部（28 个专业页）；导航栏英文化（减少纯中文使用）；12 个新增专业详情页（扩展至 56 个专业）</p>
+            <div class="version-actions">
+                <span style="color:#ccc;font-size:0.8rem;">快照待补充</span>
+            </div>
+        </li>
+        <li class="version-item">
+            <div class="version-header">
+                <span class="version-tag">v14.0.0</span>
+                <span class="version-date">2026-07-27</span>
+            </div>
+            <p class="version-desc">申请工具板块：分数换算器、GPA 计算器、词汇量测试、申请 Checklist、选校对比、选校推荐、专业测评、费用计算、申请时间线（9 大工具）</p>
+            <div class="version-actions">
+                <span style="color:#ccc;font-size:0.8rem;">快照待补充</span>
+            </div>
+        </li>
+    </ul>
+
+    <h2>Available Snapshots</h2>
     <ul class="version-list">
         <li class="version-item">
             <div class="version-header">
@@ -197,6 +324,31 @@
         </li>
     </ul>
 
-    <p class="footer">© 2026 yunzhuan.icu | Version History</p>
+    <h2>Roadmap (Planned)</h2>
+    <ul class="version-list">
+        <li class="version-item planned">
+            <div class="version-header">
+                <span class="version-tag">v19.0.0 <span class="status-badge planned">Planned</span></span>
+                <span class="version-date">TBD</span>
+            </div>
+            <p class="version-desc"><strong>AI 申请助手：</strong>基于 LLM 的文书润色建议、选校推荐问答、专业匹配测评升级（互动式问答）；可能集成 OpenAI / Claude API</p>
+        </li>
+        <li class="version-item planned">
+            <div class="version-header">
+                <span class="version-tag">v18.9.0 <span class="status-badge planned">Planned</span></span>
+                <span class="version-date">TBD</span>
+            </div>
+            <p class="version-desc"><strong>性能 &amp; 体验优化：</strong>图片懒加载、关键 CSS 内联、404 友好页面（带搜索和导航建议）、页面加载过渡动画</p>
+        </li>
+        <li class="version-item planned">
+            <div class="version-header">
+                <span class="version-tag">v18.8.0 <span class="status-badge planned">Up Next</span></span>
+                <span class="version-date">TBD</span>
+            </div>
+            <p class="version-desc"><strong>搜索体验升级：</strong>键盘快捷键（/ 或 Ctrl+K 聚焦搜索框）、搜索建议/自动补全、分类筛选优化、搜索结果高亮</p>
+        </li>
+    </ul>
+
+    <p class="footer">&copy; 2026 yunzhuan.icu &middot; Version History</p>
 </body>
 </html>
