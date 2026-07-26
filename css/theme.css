@@ -692,3 +692,94 @@ details[open] summary {
         grid-template-columns: 1fr 1fr;
     }
 }
+
+/* ========== Favorite Button ========== */
+.fav-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border: 1px solid var(--border-color);
+    background: var(--bg-secondary);
+    color: var(--text-secondary);
+    border-radius: 6px;
+    font-size: 0.82rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: inherit;
+}
+
+.fav-btn:hover {
+    border-color: #f59e0b;
+    color: #f59e0b;
+}
+
+.fav-btn.active {
+    background: #fef3c7;
+    border-color: #f59e0b;
+    color: #d97706;
+}
+
+.fav-btn .star { font-size: 0.9rem; }
+.fav-btn.active .star { content: '⭐'; }
+
+.fav-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* ========== School Recommendations ========== */
+.school-recs {
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-light);
+}
+
+.school-recs h3 {
+    font-size: 0.95rem;
+    color: var(--text-primary);
+    margin-bottom: 12px;
+}
+
+.school-recs h3 .cn {
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    font-weight: normal;
+    margin-left: 6px;
+}
+
+.school-rec-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 8px;
+}
+
+.school-rec-card {
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 10px 12px;
+    text-decoration: none;
+    transition: all 0.2s;
+}
+
+.school-rec-card:hover {
+    border-color: var(--accent-primary);
+    transform: translateY(-1px);
+}
+
+.school-rec-name {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-bottom: 3px;
+}
+
+.school-rec-card:hover .school-rec-name {
+    color: var(--accent-primary);
+}
+
+.school-rec-meta {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+}
