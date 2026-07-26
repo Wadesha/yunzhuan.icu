@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application Systems Guide - 申请系统指南 - yunzhuan.icu</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 16px 20px;
+            background: #f5f5f5;
+            color: #333;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            margin-bottom: 16px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .logo {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #667eea;
+            text-decoration: none;
+        }
+        .logo span { color: #764ba2; }
+        .nav-links {
+            display: flex;
+            gap: 18px;
+            align-items: center;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: #555;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: color 0.15s;
+        }
+        .nav-links a:hover { color: #667eea; }
+        .nav-links .cn {
+            font-size: 0.7rem;
+            color: #aaa;
+            margin-left: 2px;
+        }
+        @media (max-width: 768px) {
+            .navbar { flex-wrap: wrap; gap: 8px; }
+            .nav-links { gap: 12px; }
+            .nav-links a { font-size: 0.78rem; }
+            .nav-links .cn { display: none; }
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 4px;
+            font-size: 1.5rem;
+        }
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 16px;
+            font-size: 0.9rem;
+        }
+        .section {
+            background: white;
+            border-radius: 8px;
+            padding: 14px 18px;
+            margin-bottom: 10px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .section h2 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        .section h2 .cn { color: #999; font-size: 0.8rem; font-weight: normal; margin-left: 6px; }
+        .section p { color: #333; line-height: 1.7; font-size: 0.92rem; margin-bottom: 8px; }
+        .tip-box {
+            background: #fff8e1;
+            border-left: 3px solid #ff8f00;
+            padding: 10px 14px;
+            border-radius: 0 6px 6px 0;
+            margin-top: 10px;
+            font-size: 0.82rem;
+            color: #5d4037;
+            line-height: 1.6;
+        }
+        .tip-box strong { color: #e65100; }
+        .success-box {
+            background: #e8f5e9;
+            border-left: 3px solid #2e7d32;
+            padding: 10px 14px;
+            border-radius: 0 6px 6px 0;
+            margin-top: 10px;
+            font-size: 0.82rem;
+            color: #1b5e20;
+            line-height: 1.6;
+        }
+        .success-box strong { color: #2e7d32; }
+        .warning-box {
+            background: #ffebee;
+            border-left: 3px solid #c62828;
+            padding: 10px 14px;
+            border-radius: 0 6px 6px 0;
+            margin-top: 10px;
+            font-size: 0.82rem;
+            color: #b71c1c;
+            line-height: 1.6;
+        }
+        .warning-box strong { color: #c62828; }
+        .info-list { list-style: none; }
+        .info-list li {
+            padding: 8px 0 8px 20px;
+            position: relative;
+            font-size: 0.88rem;
+            color: #444;
+            line-height: 1.5;
+            border-bottom: 1px solid #f5f5f5;
+        }
+        .info-list li:last-child { border-bottom: none; }
+        .info-list li::before {
+            content: '✦';
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-size: 0.7rem;
+            top: 11px;
+        }
+        .info-list li strong { color: #333; }
+        .system-card {
+            background: #f8f9ff;
+            padding: 14px;
+            border-radius: 8px;
+            border-left: 3px solid #667eea;
+            margin-bottom: 12px;
+        }
+        .system-card h3 {
+            font-size: 1rem;
+            color: #4338ca;
+            margin-bottom: 6px;
+        }
+        .system-card .meta {
+            font-size: 0.8rem;
+            color: #7c3aed;
+            margin-bottom: 8px;
+        }
+        .system-card p {
+            font-size: 0.86rem;
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 4px;
+        }
+        .system-card .pros-cons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 8px;
+            font-size: 0.8rem;
+        }
+        .system-card .pros { color: #166534; }
+        .system-card .cons { color: #991b1b; }
+        @media (max-width: 600px) {
+            .system-card .pros-cons { grid-template-columns: 1fr; }
+        }
+        .footer { text-align: center; margin-top: 20px; color: #999; font-size: 0.8rem; }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="../index.html" class="logo">yunzhuan<span>.icu</span></a>
+        <div class="nav-links">
+            <a href="../index.html">Majors<span class="cn">专业</span></a>
+            <a href="../schools/index.html">Schools<span class="cn">学校</span></a>
+            <a href="../tests/index.html">Tests<span class="cn">考试</span></a>
+            <a href="../guides/index.html">Guides<span class="cn">指南</span></a>
+            <a href="../resources.html">Resources<span class="cn">资源</span></a>
+            <a href="../contact.html">Contact<span class="cn">联系</span></a>
+        </div>
+    </nav>
+
+    <h1>Application Systems Guide</h1>
+    <p class="subtitle">美国大学申请系统指南 · Common App / Coalition / UC / 其他</p>
+
+    <div class="section">
+        <h2>Overview <span class="cn">概览</span></h2>
+        <p style="font-size:0.9rem;color:#555;">
+            美国大学本科申请有好几个系统，大部分学校用 Common App，
+            但也有一些学校有自己的系统或者用其他平台。
+            下面介绍一下主要的几个申请系统：
+        </p>
+    </div>
+
+    <div class="section">
+        <h2>Common App <span class="cn">通用申请系统</span></h2>
+        
+        <div class="system-card">
+            <h3>Common Application</h3>
+            <div class="meta">最常用 · 1000+ 所学校 · commonapp.org</div>
+            <p>
+                最主流的申请系统，美国和全世界 1000 多所大学都用它。
+                填一次基本信息，可以申请多所学校。
+                每所学校有自己的补充材料（supplement），包括额外的文书、问题等。
+            </p>
+            <div class="pros-cons">
+                <div class="pros">
+                    <strong>✅ 优点：</strong><br>
+                    · 大部分学校都用<br>
+                    · 填一次信息通用<br>
+                    · 系统比较成熟好用<br>
+                    · 推荐人系统方便
+                </div>
+                <div class="cons">
+                    <strong>❌ 缺点：</strong><br>
+                    · 高峰期可能崩<br>
+                    · 每所学校还要补很多东西<br>
+                    · 有的学校要的东西藏得深
+                </div>
+            </div>
+        </div>
+
+        <h3 style="font-size:0.95rem;color:#333;margin:10px 0 6px;">Common App 主要板块：</h3>
+        <ul class="info-list">
+            <li><strong>Profile：</strong>个人基本信息（姓名、地址、联系方式、家庭等）</li>
+            <li><strong>Family：</strong>家庭成员信息（父母学历、职业、兄弟姐妹等）</li>
+            <li><strong>Education：</strong>教育背景（高中、课程、成绩、排名等）</li>
+            <li><strong>Testing：</strong>标化考试成绩（SAT/ACT/TOEFL/IELTS 等）</li>
+            <li><strong>Activities：</strong>活动列表（最多 10 个）</li>
+            <li><strong>Writing：</strong>主文书（Personal Statement，7 选 1，650 字）</li>
+            <li><strong>Courses & Grades：</strong>部分学校要求 Self-Reported Courses</li>
+            <li><strong>My Colleges：</strong>添加学校，每所学校的补充材料在这里</li>
+            <li><strong>Recommenders：</strong>推荐人管理，邀请老师和 counselor</li>
+        </ul>
+
+        <div class="tip-box" style="margin-top:10px;">
+            <strong>💡 主文书题目（7 选 1）：</strong><br>
+            1. Background story（背景故事）<br>
+            2. Challenge / Obstacle（挑战与挫折）<br>
+            3. Questioning a belief（质疑信念）<br>
+            4. Gratitude（感恩）<br>
+            5. Personal growth（个人成长）<br>
+            6. Passion / Interest（爱好兴趣）<br>
+            7. Topic of your choice（自选题目）
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Coalition App <span class="cn">联盟申请系统</span></h2>
+        
+        <div class="system-card">
+            <h3>Coalition for College</h3>
+            <div class="meta">较少用 · 约 150 所学校 · coalitionforcollege.org</div>
+            <p>
+                比 Common App 年轻的系统，学校数量少一些，但有一些好学校在用
+                （比如 UT Austin、Florida、Washington 等）。特点是有 Locker 功能，
+                可以从 9 年级开始收集材料。
+            </p>
+            <div class="pros-cons">
+                <div class="pros">
+                    <strong>✅ 优点：</strong><br>
+                    · Locker 功能，长期规划<br>
+                    · 部分学校只用这个系统<br>
+                    · 界面比较简洁
+                </div>
+                <div class="cons">
+                    <strong>❌ 缺点：</strong><br>
+                    · 学校少<br>
+                    · 不如 Common App 成熟<br>
+                    · 很多学校两个系统都接受
+                </div>
+            </div>
+        </div>
+
+        <p style="font-size:0.86rem;color:#666;">
+            一般来说，如果学校两个系统都接受，选 Common App 就好。
+            如果学校只用 Coalition App，那就注册一个。
+        </p>
+    </div>
+
+    <div class="section">
+        <h2>UC Application <span class="cn">加州大学系统</span></h2>
+        
+        <div class="system-card">
+            <h3>University of California Application</h3>
+            <div class="meta">独立系统 · 9 所分校 · apply.universityofcalifornia.edu</div>
+            <p>
+                加州大学（UC）系列有自己独立的申请系统，9 所本科分校都在上面申请。
+                申请时间一般是 11 月 1-30 日（只有一个月！）。
+                不需要 Common App 那种主文书，而是 8 选 4 的 PIQs（Personal Insight Questions），
+                每篇 350 字。
+            </p>
+            <div class="pros-cons">
+                <div class="pros">
+                    <strong>✅ 优点：</strong><br>
+                    · 一次申请 9 所 UC<br>
+                    · 不需要推荐信<br>
+                    · Test-blind，不看标化<br>
+                    · 系统直观好用
+                </div>
+                <div class="cons">
+                    <strong>❌ 缺点：</strong><br>
+                    · 只有一个月申请期<br>
+                    · 4 篇文书有点多<br>
+                    · 只能申请 UC 系列
+                </div>
+            </div>
+        </div>
+
+        <h3 style="font-size:0.9rem;color:#333;margin:10px 0 6px;">UC 9 所分校：</h3>
+        <ul class="info-list">
+            <li>UC Berkeley（UCB / 伯克利）— 最强公立，理工科/商科顶尖</li>
+            <li>UCLA（洛杉矶）— 综合强，地理位置好</li>
+            <li>UC San Diego（UCSD / 圣地亚哥）— 理工科强</li>
+            <li>UC Santa Barbara（UCSB / 圣巴巴拉）— 环境美，物理系强</li>
+            <li>UC Irvine（UCI / 尔湾）— 安全，华人多</li>
+            <li>UC Davis（UCD / 戴维斯）— 兽医/农业强，小镇安静</li>
+            <li>UC Santa Cruz（UCSC / 圣克鲁兹）— 风景绝美，小众</li>
+            <li>UC Riverside（UCR / 河滨）— 录取率相对高</li>
+            <li>UC Merced（UCM / 默塞德）— 新校区，录取率高</li>
+        </ul>
+
+        <div class="tip-box" style="margin-top:10px;">
+            <strong>💡 提醒：</strong><br>
+            UC 申请 11 月就截止了！别等到 12 月才想起来！<br>
+            UC 不看推荐信，不看 SAT/ACT（Test-Blind），
+            主要看 GPA、课程难度、文书、活动。
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Other Systems <span class="cn">其他系统</span></h2>
+
+        <div class="system-card">
+            <h3>ApplyTexas</h3>
+            <div class="meta">德州公立大学 · applytexas.org</div>
+            <p>德州的公立大学系统用这个，比如 UT Austin、Texas A&M 等。
+            也有很多学校同时接受 Common App。</p>
+        </div>
+
+        <div class="system-card">
+            <h3>Cal State Apply</h3>
+            <div class="meta">加州州立大学 · calstate.edu</div>
+            <p>加州州立大学（CSU）系列的申请系统，和 UC 是两个不同的系统。
+            CSU 学校更多，但排名整体不如 UC。</p>
+        </div>
+
+        <div class="system-card">
+            <h3>学校自己的系统</h3>
+            <div class="meta">少数学校</div>
+            <p>有些学校有自己的申请系统（比如 Georgetown、MIT 以前有，现在也用 Common App 了）。
+            大部分学校都加入 Common App 了，但申请前还是确认一下。</p>
+        </div>
+
+        <div class="system-card">
+            <h3>QuestBridge</h3>
+            <div class="meta">低收入/优秀学生 · questbridge.org</div>
+            <p>针对低收入家庭优秀学生的奖学金项目，
+            匹配成功可以拿全额奖学金。适合成绩好但经济条件一般的学生。</p>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Which System Do I Need? <span class="cn">我需要用哪些系统</span></h2>
+        <p style="font-size:0.9rem;color:#555;">
+            看你申请的学校用什么：
+        </p>
+        <ul class="info-list">
+            <li><strong>Common App：</strong>大部分美国大学，必须有</li>
+            <li><strong>UC Application：</strong>申 UC 系列才需要</li>
+            <li><strong>Coalition App：</strong>只有几所学校只用它，看情况</li>
+            <li><strong>其他系统：</strong>看你申的学校具体要求</li>
+        </ul>
+        <div class="success-box" style="margin-top:10px;">
+            <strong>✅ 建议：</strong><br>
+            · 先列好你的学校清单<br>
+            · 查每所学校接受哪些申请系统<br>
+            · 优先用 Common App（大部分都接受）<br>
+            · UC 单独准备<br>
+            · 别漏了截止日期！每个系统截止时间可能不一样
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Tips for Applying <span class="cn">申请小贴士</span></h2>
+        
+        <div class="warning-box">
+            <strong>⚠️ 重要提醒：</strong><br>
+            · 所有信息要准确一致（姓名、生日等别填错）<br>
+            · 截止日期前提交，别卡最后一秒（服务器可能崩）<br>
+            · 提交前反复检查，提交后就改不了了<br>
+            · 推荐人要提前邀请，给老师留足够时间<br>
+            · 成绩单等材料要提前寄出
+        </div>
+
+        <ul class="info-list" style="margin-top:10px;">
+            <li><strong>提前注册账号：</strong>申请季之前就注册好，熟悉系统</li>
+            <li><strong>信息填准确：</strong>姓名和护照一致，生日别错</li>
+            <li><strong>活动列表：</strong>按重要性排序，写清楚职位和成就，量化成果</li>
+            <li><strong>文书：</strong>提前写，多改几稿，别照搬模板</li>
+            <li><strong>推荐信：</strong>提前找老师，给足够的时间（至少 1 个月）</li>
+            <li><strong>送分：</strong>标化送分要提前，别赶 deadline</li>
+            <li><strong>检查再检查：</strong>提交前每一页都好好检查一遍</li>
+            <li><strong>别卡最后一天：</strong>提前几天提交，避免意外</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Application Fee <span class="cn">申请费</span></h2>
+        <ul class="info-list">
+            <li><strong>Common App 学校：</strong>一般 $50-$100 每所，名校一般 $75-$85</li>
+            <li><strong>UC：</strong>$70 每所（国际生 $80），9 所全申要 $720</li>
+            <li><strong>Fee Waiver：</strong>经济困难的学生可以申请费减免，符合条件就免</li>
+            <li><strong>国际生费减免：</strong>部分学校给国际生也有 fee waiver，需要申请</li>
+        </ul>
+        <div class="tip-box">
+            <strong>💡 省钱技巧：</strong><br>
+            · 学校官网有时有免费申请的活动<br>
+            · 参加 info session 可能给 fee waiver<br>
+            · 申请 10 所左右就够了，别申太多浪费钱<br>
+            · 有的学校给国际生也可以申请 fee waiver，可以问问
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>After Submitting <span class="cn">提交之后</span></h2>
+        <ul class="info-list">
+            <li><strong>确认邮件：</strong>提交后会收到确认邮件，保存好</li>
+            <li><strong>查状态：</strong>每所学校有自己的 applicant portal，去查看申请状态</li>
+            <li><strong>补材料：</strong>如果材料不齐，学校会通知，赶紧补交</li>
+            <li><strong>更新成绩：</strong>期中/期末成绩出来后更新</li>
+            <li><strong>Waitlist：</strong>如果被放进 waitlist，可以写 love letter 表达兴趣</li>
+            <li><strong>结果：</strong>3-4 月陆续出结果，5 月 1 日前决定去哪</li>
+        </ul>
+    </div>
+
+    <p class="footer">&copy; 2026 yunzhuan.icu | Application Systems</p>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <div style="text-align:center;padding:8px 0;font-size:0.75rem;color:#aaa;">
+        <a href="../index.html" style="color:#aaa;text-decoration:none;">Home</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="../guides/index.html" style="color:#aaa;text-decoration:none;">Guides</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="../faq.html" style="color:#aaa;text-decoration:none;">FAQ</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="../contact.html" style="color:#aaa;text-decoration:none;">Contact</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="javascript:window.scrollTo(0,0)" style="color:#aaa;text-decoration:none;">Back to top</a>
+    </div>
+</body>
+</html>

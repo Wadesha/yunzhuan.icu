@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Major Salary & Career Outlook - 专业薪资与就业 - yunzhuan.icu</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 16px 20px;
+            background: #f5f5f5;
+            color: #333;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            margin-bottom: 16px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .logo {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #667eea;
+            text-decoration: none;
+        }
+        .logo span { color: #764ba2; }
+        .nav-links {
+            display: flex;
+            gap: 18px;
+            align-items: center;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: #555;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: color 0.15s;
+        }
+        .nav-links a:hover { color: #667eea; }
+        .nav-links .cn {
+            font-size: 0.7rem;
+            color: #aaa;
+            margin-left: 2px;
+        }
+        @media (max-width: 768px) {
+            .navbar { flex-wrap: wrap; gap: 8px; }
+            .nav-links { gap: 12px; }
+            .nav-links a { font-size: 0.78rem; }
+            .nav-links .cn { display: none; }
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 4px;
+            font-size: 1.5rem;
+        }
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 16px;
+            font-size: 0.9rem;
+        }
+        .section {
+            background: white;
+            border-radius: 8px;
+            padding: 14px 18px;
+            margin-bottom: 10px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .section h2 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        .section h2 .cn { color: #999; font-size: 0.8rem; font-weight: normal; margin-left: 6px; }
+        .section p { color: #333; line-height: 1.7; font-size: 0.92rem; margin-bottom: 8px; }
+        .tip-box {
+            background: #fff8e1;
+            border-left: 3px solid #ff8f00;
+            padding: 10px 14px;
+            border-radius: 0 6px 6px 0;
+            margin-top: 10px;
+            font-size: 0.82rem;
+            color: #5d4037;
+            line-height: 1.6;
+        }
+        .tip-box strong { color: #e65100; }
+        .salary-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.88rem;
+            margin-top: 8px;
+        }
+        .salary-table th {
+            background: #ede9fe;
+            color: #5b21b6;
+            padding: 8px 10px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.82rem;
+        }
+        .salary-table td {
+            padding: 8px 10px;
+            border-bottom: 1px solid #f5f5f5;
+            color: #444;
+        }
+        .salary-table tr:hover {
+            background: #f8f9ff;
+        }
+        .salary-bar {
+            height: 6px;
+            background: #ede9fe;
+            border-radius: 3px;
+            overflow: hidden;
+            min-width: 80px;
+        }
+        .salary-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 3px;
+        }
+        .rank-badge {
+            display: inline-block;
+            width: 22px;
+            height: 22px;
+            line-height: 22px;
+            text-align: center;
+            background: #667eea;
+            color: white;
+            border-radius: 50%;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        .rank-badge.gold { background: #f59e0b; }
+        .rank-badge.silver { background: #9ca3af; }
+        .rank-badge.bronze { background: #cd7f32; }
+        .footer { text-align: center; margin-top: 20px; color: #999; font-size: 0.8rem; }
+        .filter-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+        }
+        .filter-tab {
+            padding: 5px 12px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            font-size: 0.82rem;
+            cursor: pointer;
+            background: white;
+            transition: all 0.15s;
+        }
+        .filter-tab.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+        .growth-up { color: #16a34a; font-size: 0.8rem; }
+        .growth-mid { color: #ca8a04; font-size: 0.8rem; }
+        .growth-down { color: #dc2626; font-size: 0.8rem; }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="../index.html" class="logo">yunzhuan<span>.icu</span></a>
+        <div class="nav-links">
+            <a href="../index.html">Majors<span class="cn">专业</span></a>
+            <a href="../schools/index.html">Schools<span class="cn">学校</span></a>
+            <a href="../tests/index.html">Tests<span class="cn">考试</span></a>
+            <a href="../guides/index.html">Guides<span class="cn">指南</span></a>
+            <a href="../resources.html">Resources<span class="cn">资源</span></a>
+            <a href="../contact.html">Contact<span class="cn">联系</span></a>
+        </div>
+    </nav>
+
+    <h1>Major Salary & Career Outlook</h1>
+    <p class="subtitle">专业薪资与就业前景 · 美国本科</p>
+
+    <div class="section">
+        <p style="font-size:0.85rem;color:#666;">
+            数据来源：Payscale、BLS（美国劳工统计局）等，仅供参考。
+            实际薪资因地区、学校、个人能力而异。
+        </p>
+        <div class="filter-tabs">
+            <span class="filter-tab active" data-filter="all">All / 全部</span>
+            <span class="filter-tab" data-filter="stem">STEM</span>
+            <span class="filter-tab" data-filter="business">Business / 商科</span>
+            <span class="filter-tab" data-filter="arts">Arts & Humanities / 人文艺术</span>
+            <span class="filter-tab" data-filter="social">Social Sciences / 社科</span>
+        </div>
+
+        <table class="salary-table">
+            <thead>
+                <tr>
+                    <th style="width:40px;">#</th>
+                    <th>Major / 专业</th>
+                    <th style="width:110px;">Early Career<br><span style="font-weight:normal;font-size:0.75rem;color:#888;">起薪</span></th>
+                    <th style="width:110px;">Mid-Career<br><span style="font-weight:normal;font-size:0.75rem;color:#888;">中年薪资</span></th>
+                    <th style="width:90px;">Growth<br><span style="font-weight:normal;font-size:0.75rem;color:#888;">增长率</span></th>
+                </tr>
+            </thead>
+            <tbody id="salary-tbody">
+            </tbody>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>Highest Paying Majors <span class="cn">起薪最高的专业</span></h2>
+        <p style="font-size:0.88rem;color:#555;">
+            总体来说，STEM（尤其是工程和计算机）相关专业起薪最高，
+            商科其次，人文社科相对低一些。
+        </p>
+        <div class="tip-box">
+            <strong>💡 注意：</strong><br>
+            · 薪资只是选专业的一个因素，兴趣和能力也很重要<br>
+            · 起薪不代表天花板，很多专业越老越吃香<br>
+            · 不同地区薪资差异很大（加州/纽约 > 中部）<br>
+            · 学校牌子也有影响，名校毕业生起薪普遍更高
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Fastest Growing Fields <span class="cn">增长最快的领域</span></h2>
+        <table class="salary-table">
+            <thead>
+                <tr>
+                    <th>Field / 领域</th>
+                    <th style="width:100px;">Growth Rate</th>
+                    <th>Why / 原因</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>AI / Machine Learning<br><span style="font-size:0.8rem;color:#888;">人工智能/机器学习</span></td>
+                    <td><span class="growth-up">▲ 35%+</span></td>
+                    <td style="font-size:0.82rem;color:#666;">AI 爆发，所有科技公司都在抢人</td>
+                </tr>
+                <tr>
+                    <td>Cybersecurity<br><span style="font-size:0.8rem;color:#888;">网络安全</span></td>
+                    <td><span class="growth-up">▲ 32%</span></td>
+                    <td style="font-size:0.82rem;color:#666;">网络攻击越来越多，安全人才短缺</td>
+                </tr>
+                <tr>
+                    <td>Healthcare / Nursing<br><span style="font-size:0.8rem;color:#888;">医疗护理</span></td>
+                    <td><span class="growth-up">▲ 25-40%</span></td>
+                    <td style="font-size:0.82rem;color:#666;">人口老龄化，医护需求持续增长</td>
+                </tr>
+                <tr>
+                    <td>Data Science / Analytics<br><span style="font-size:0.8rem;color:#888;">数据科学</span></td>
+                    <td><span class="growth-up">▲ 25-35%</span></td>
+                    <td style="font-size:0.82rem;color:#666;">大数据时代，各行各业都需要数据分析</td>
+                </tr>
+                <tr>
+                    <td>Renewable Energy<br><span style="font-size:0.8rem;color:#888;">可再生能源</span></td>
+                    <td><span class="growth-up">▲ 20-30%</span></td>
+                    <td style="font-size:0.82rem;color:#666;">碳中和趋势，清洁能源快速发展</td>
+                </tr>
+                <tr>
+                    <td>Software Engineering<br><span style="font-size:0.8rem;color:#888;">软件工程</span></td>
+                    <td><span class="growth-up">▲ 22%</span></td>
+                    <td style="font-size:0.82rem;color:#666;">科技行业持续发展，软件需求大</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>By Industry <span class="cn">各行业薪资概览</span></h2>
+        <table class="salary-table">
+            <thead>
+                <tr>
+                    <th>Industry / 行业</th>
+                    <th style="width:110px;">Typical Entry Salary</th>
+                    <th style="width:110px;">Mid-Career</th>
+                    <th>Notes / 备注</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Tech / 科技</td>
+                    <td>$90k-$150k</td>
+                    <td>$150k-$250k+</td>
+                    <td style="font-size:0.82rem;color:#666;">硅谷最高，含股票期权收入</td>
+                </tr>
+                <tr>
+                    <td>Finance / 金融</td>
+                    <td>$80k-$120k</td>
+                    <td>$150k-$300k+</td>
+                    <td style="font-size:0.82rem;color:#666;">投行/对冲基金最高，但工作时间长</td>
+                </tr>
+                <tr>
+                    <td>Consulting / 咨询</td>
+                    <td>$75k-$100k</td>
+                    <td>$120k-$200k+</td>
+                    <td style="font-size:0.82rem;color:#666;">MBB 薪资最高，加班多但成长快</td>
+                </tr>
+                <tr>
+                    <td>Engineering / 工程</td>
+                    <td>$70k-$100k</td>
+                    <td>$100k-$160k</td>
+                    <td style="font-size:0.82rem;color:#666;">石油/计算机/电子工程最高</td>
+                </tr>
+                <tr>
+                    <td>Healthcare / 医疗</td>
+                    <td>$60k-$120k</td>
+                    <td>$100k-$200k+</td>
+                    <td style="font-size:0.82rem;color:#666;">医生最高但需要读医学院</td>
+                </tr>
+                <tr>
+                    <td>Marketing / 市场</td>
+                    <td>$50k-$70k</td>
+                    <td>$80k-$130k</td>
+                    <td style="font-size:0.82rem;color:#666;">数字营销增长快</td>
+                </tr>
+                <tr>
+                    <td>Education / 教育</td>
+                    <td>$40k-$60k</td>
+                    <td>$55k-$85k</td>
+                    <td style="font-size:0.82rem;color:#666;">公立学校有退休金保障</td>
+                </tr>
+                <tr>
+                    <td>Nonprofit / 非营利</td>
+                    <td>$35k-$55k</td>
+                    <td>$50k-$80k</td>
+                    <td style="font-size:0.82rem;color:#666;">薪资低但有意义</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>How to Choose? <span class="cn">怎么选专业？</span></h2>
+        <div class="tip-box">
+            <strong>💡 三个圈理论：</strong><br>
+            找三个圈的交集 —— 你喜欢的、你擅长的、能赚钱的。<br><br>
+            · <strong>只喜欢不擅长：</strong>可能找不到好工作，或者压力大<br>
+            · <strong>只擅长不喜欢：</strong>容易 burnout，做不长久<br>
+            · <strong>只赚钱不喜欢/不擅长：</strong>痛苦，也做不好<br>
+            · <strong>三者交集：</strong>最理想的状态
+        </div>
+        <p style="font-size:0.88rem;color:#555;margin-top:10px;">
+            另外，美国大学换专业很灵活，大一可以多探索，
+            很多人最终的专业和一开始想的不一样。不用太焦虑，先读起来再说！
+        </p>
+    </div>
+
+    <div class="section">
+        <h2>Beyond Salary <span class="cn">除了薪资还要考虑</span></h2>
+        <table class="salary-table">
+            <thead>
+                <tr>
+                    <th>Factor / 因素</th>
+                    <th>Why it matters / 为什么重要</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Work-Life Balance<br><span style="font-size:0.8rem;color:#888;">工作生活平衡</span></td>
+                    <td style="font-size:0.82rem;color:#666;">投行/科技加班多，政府/教育比较稳定</td>
+                </tr>
+                <tr>
+                    <td>Job Security<br><span style="font-size:0.8rem;color:#888;">工作稳定性</span></td>
+                    <td style="font-size:0.82rem;color:#666;">科技波动大，医疗/政府/教育比较稳</td>
+                </tr>
+                <tr>
+                    <td>Location<br><span style="font-size:0.8rem;color:#888;">工作地点</span></td>
+                    <td style="font-size:0.82rem;color:#666;">科技集中在加州/西雅图，金融在纽约</td>
+                </tr>
+                <tr>
+                    <td>H-1B Sponsorship<br><span style="font-size:0.8rem;color:#888;">签证支持</span></td>
+                    <td style="font-size:0.82rem;color:#666;">国际生找工作要考虑公司支不支持签证</td>
+                </tr>
+                <tr>
+                    <td>Career Growth<br><span style="font-size:0.8rem;color:#888;">职业发展</span></td>
+                    <td style="font-size:0.82rem;color:#666;">有的职业越老越值钱，有的是青春饭</td>
+                </tr>
+                <tr>
+                    <td>Job Satisfaction<br><span style="font-size:0.8rem;color:#888;">工作满意度</span></td>
+                    <td style="font-size:0.82rem;color:#666;">做喜欢的事情很重要，不然每天都痛苦</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <p class="footer">&copy; 2026 yunzhuan.icu | Salary Data</p>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <div style="text-align:center;padding:8px 0;font-size:0.75rem;color:#aaa;">
+        <a href="../index.html" style="color:#aaa;text-decoration:none;">Home</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="../rankings.html" style="color:#aaa;text-decoration:none;">Rankings</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="../guides/index.html" style="color:#aaa;text-decoration:none;">Guides</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="../contact.html" style="color:#aaa;text-decoration:none;">Contact</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="javascript:window.scrollTo(0,0)" style="color:#aaa;text-decoration:none;">Back to top</a>
+    </div>
+
+    <script>
+    const salaryData = [
+        { rank: 1, name: "Petroleum Engineering", cn: "石油工程", early: 97000, mid: 187000, growth: 3, category: "stem" },
+        { rank: 2, name: "Computer Engineering", cn: "计算机工程", early: 89000, mid: 172000, growth: 22, category: "stem" },
+        { rank: 3, name: "Computer Science", cn: "计算机科学", early: 87000, mid: 168000, growth: 22, category: "stem" },
+        { rank: 4, name: "Electrical Engineering", cn: "电子工程", early: 82000, mid: 158000, growth: 7, category: "stem" },
+        { rank: 5, name: "Aerospace Engineering", cn: "航空航天工程", early: 80000, mid: 155000, growth: 6, category: "stem" },
+        { rank: 6, name: "Chemical Engineering", cn: "化学工程", early: 78000, mid: 148000, growth: 8, category: "stem" },
+        { rank: 7, name: "Nuclear Engineering", cn: "核工程", early: 77000, mid: 145000, growth: 1, category: "stem" },
+        { rank: 8, name: "Mechanical Engineering", cn: "机械工程", early: 73000, mid: 138000, growth: 7, category: "stem" },
+        { rank: 9, name: "Data Science", cn: "数据科学", early: 78000, mid: 145000, growth: 35, category: "stem" },
+        { rank: 10, name: "Information Technology", cn: "信息技术", early: 72000, mid: 132000, growth: 15, category: "stem" },
+        { rank: 11, name: "Software Engineering", cn: "软件工程", early: 85000, mid: 160000, growth: 22, category: "stem" },
+        { rank: 12, name: "Civil Engineering", cn: "土木工程", early: 68000, mid: 125000, growth: 8, category: "stem" },
+        { rank: 13, name: "Biomedical Engineering", cn: "生物医学工程", early: 67000, mid: 122000, growth: 10, category: "stem" },
+        { rank: 14, name: "Statistics", cn: "统计学", early: 65000, mid: 120000, growth: 33, category: "stem" },
+        { rank: 15, name: "Math", cn: "数学", early: 62000, mid: 118000, growth: 8, category: "stem" },
+        { rank: 16, name: "Physics", cn: "物理学", early: 60000, mid: 115000, growth: 7, category: "stem" },
+        { rank: 17, name: "Economics", cn: "经济学", early: 62000, mid: 122000, growth: 13, category: "social" },
+        { rank: 18, name: "Finance", cn: "金融学", early: 65000, mid: 130000, growth: 9, category: "business" },
+        { rank: 19, name: "Accounting", cn: "会计学", early: 58000, mid: 108000, growth: 7, category: "business" },
+        { rank: 20, name: "Business Administration", cn: "工商管理", early: 55000, mid: 102000, growth: 9, category: "business" },
+        { rank: 21, name: "Marketing", cn: "市场营销", early: 52000, mid: 95000, growth: 10, category: "business" },
+        { rank: 22, name: "Human Resources", cn: "人力资源", early: 50000, mid: 88000, growth: 8, category: "business" },
+        { rank: 23, name: "Nursing", cn: "护理学", early: 68000, mid: 92000, growth: 9, category: "stem" },
+        { rank: 24, name: "Pharmacy", cn: "药学", early: 62000, mid: 118000, growth: 4, category: "stem" },
+        { rank: 25, name: "Architecture", cn: "建筑学", early: 55000, mid: 98000, growth: 3, category: "arts" },
+        { rank: 26, name: "Graphic Design", cn: "平面设计", early: 45000, mid: 75000, growth: 3, category: "arts" },
+        { rank: 27, name: "English Literature", cn: "英语文学", early: 42000, mid: 78000, growth: 3, category: "arts" },
+        { rank: 28, name: "History", cn: "历史学", early: 43000, mid: 80000, growth: 5, category: "arts" },
+        { rank: 29, name: "Philosophy", cn: "哲学", early: 42000, mid: 78000, growth: 5, category: "arts" },
+        { rank: 30, name: "Psychology", cn: "心理学", early: 45000, mid: 72000, growth: 14, category: "social" },
+        { rank: 31, name: "Political Science", cn: "政治学", early: 48000, mid: 88000, growth: 7, category: "social" },
+        { rank: 32, name: "Sociology", cn: "社会学", early: 43000, mid: 75000, growth: 7, category: "social" },
+        { rank: 33, name: "Communications", cn: "传播学", early: 48000, mid: 85000, growth: 6, category: "arts" },
+        { rank: 34, name: "Criminal Justice", cn: "刑事司法", early: 44000, mid: 70000, growth: 5, category: "social" },
+        { rank: 35, name: "Biology", cn: "生物学", early: 48000, mid: 85000, growth: 7, category: "stem" },
+        { rank: 36, name: "Chemistry", cn: "化学", early: 52000, mid: 95000, growth: 6, category: "stem" },
+        { rank: 37, name: "Environmental Science", cn: "环境科学", early: 50000, mid: 85000, growth: 8, category: "stem" },
+        { rank: 38, name: "Supply Chain", cn: "供应链管理", early: 58000, mid: 105000, growth: 8, category: "business" },
+        { rank: 39, name: "Hospitality", cn: "酒店管理", early: 42000, mid: 70000, growth: 12, category: "business" },
+        { rank: 40, name: "Art History", cn: "艺术史", early: 40000, mid: 65000, growth: 4, category: "arts" },
+    ];
+
+    const tbody = document.getElementById('salary-tbody');
+    const maxSalary = 200000;
+
+    function renderTable(filter = 'all') {
+        tbody.innerHTML = '';
+        let rank = 0;
+        salaryData
+            .filter(d => filter === 'all' || d.category === filter)
+            .sort((a, b) => b.early - a.early)
+            .forEach(d => {
+                rank++;
+                const barWidth = (d.mid / maxSalary * 100).toFixed(0);
+                let rankClass = '';
+                if (rank === 1) rankClass = 'gold';
+                else if (rank === 2) rankClass = 'silver';
+                else if (rank === 3) rankClass = 'bronze';
+                
+                let growthClass = 'growth-mid';
+                let growthIcon = '■';
+                if (d.growth >= 15) { growthClass = 'growth-up'; growthIcon = '▲'; }
+                else if (d.growth <= 5) { growthClass = 'growth-down'; growthIcon = '▼'; }
+                
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td><span class="rank-badge ${rankClass}">${rank}</span></td>
+                    <td>
+                        ${d.name}<br>
+                        <span style="font-size:0.78rem;color:#888;">${d.cn}</span>
+                        <div class="salary-bar" style="margin-top:4px;">
+                            <div class="salary-bar-fill" style="width:${barWidth}%"></div>
+                        </div>
+                    </td>
+                    <td>$${(d.early/1000).toFixed(0)}k</td>
+                    <td>$${(d.mid/1000).toFixed(0)}k</td>
+                    <td><span class="${growthClass}">${growthIcon} ${d.growth}%</span></td>
+                `;
+                tbody.appendChild(tr);
+            });
+    }
+
+    // Filter tabs
+    document.querySelectorAll('.filter-tab').forEach(tab => {
+        tab.addEventListener('click', function() {
+            document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+            this.classList.add('active');
+            renderTable(this.dataset.filter);
+        });
+    });
+
+    renderTable();
+    </script>
+</body>
+</html>

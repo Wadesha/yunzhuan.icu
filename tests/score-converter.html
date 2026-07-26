@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Score Converter - SAT/ACT/TOEFL/IELTS/DET - yunzhuan.icu</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 20px 16px;
+            background: #f5f5f5;
+            color: #333;
+        }
+        .back-link { color: #667eea; text-decoration: none; font-size: 0.85rem; margin-bottom: 12px; display: inline-block; }
+        .back-link:hover { text-decoration: underline; }
+        h1 { color: #333; margin-bottom: 4px; font-size: 1.4rem; }
+        .en-name { color: #888; font-size: 0.95rem; margin-bottom: 4px; font-weight: normal; }
+        .code-line { color: #888; font-size: 0.82rem; margin-bottom: 14px; }
+        .section {
+            background: white;
+            border-radius: 8px;
+            padding: 16px 18px;
+            margin-bottom: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .section h2 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        .section h2 .en { color: #999; font-size: 0.8rem; font-weight: normal; }
+        .section p { color: #333; line-height: 1.7; font-size: 0.92rem; }
+        .section p.cn-hint { color: #666; font-size: 0.85rem; margin-bottom: 6px; }
+        .converter-box {
+            background: #f8f9ff;
+            border-radius: 8px;
+            padding: 16px;
+            margin-top: 10px;
+        }
+        .converter-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+        .input-group label {
+            display: block;
+            font-size: 0.82rem;
+            color: #666;
+            margin-bottom: 4px;
+            font-weight: 500;
+        }
+        .input-group input, .input-group select {
+            width: 100%;
+            padding: 8px 10px;
+            border: 1px solid #d0d5dd;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            background: white;
+        }
+        .input-group input:focus, .input-group select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 2px rgba(102,126,234,0.15);
+        }
+        .result-display {
+            background: white;
+            border-radius: 6px;
+            padding: 12px 16px;
+            margin-top: 10px;
+            border-left: 3px solid #667eea;
+        }
+        .result-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 4px 0;
+            font-size: 0.9rem;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .result-row:last-child { border-bottom: none; }
+        .result-label { color: #666; }
+        .result-value { color: #333; font-weight: 600; font-size: 1rem; }
+        .result-value.highlight { color: #667eea; font-size: 1.1rem; }
+        .tabs {
+            display: flex;
+            gap: 4px;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+        }
+        .tab-btn {
+            padding: 6px 14px;
+            border: 1px solid #d0d5dd;
+            background: white;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            color: #555;
+            transition: all 0.15s;
+        }
+        .tab-btn:hover { background: #f5f5f5; }
+        .tab-btn.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        .note-box {
+            background: #fff8e1;
+            border-left: 3px solid #ff8f00;
+            padding: 10px 14px;
+            border-radius: 0 6px 6px 0;
+            margin-top: 10px;
+            font-size: 0.82rem;
+            color: #5d4037;
+            line-height: 1.6;
+        }
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.82rem;
+            margin-top: 10px;
+        }
+        .comparison-table th, .comparison-table td {
+            padding: 6px 8px;
+            text-align: center;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .comparison-table th {
+            background: #f8f9fa;
+            font-weight: 600;
+            color: #555;
+            font-size: 0.78rem;
+        }
+        .comparison-table tr:hover td { background: #f8f9ff; }
+        .footer { text-align: center; margin-top: 20px; color: #999; font-size: 0.8rem; }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-link">&larr; Back to Standardized Tests</a>
+
+    <h1>Score Converter</h1>
+    <p class="en-name">分数换算器</p>
+    <p class="code-line">SAT · ACT · TOEFL · IELTS · DET · AP</p>
+
+    <div class="section">
+        <h2>Score Conversion Tool <span class="en">分数换算工具</span></h2>
+        <p class="cn-hint">基于官方 concordance 数据的近似换算，仅供参考。各大学对分数的解读可能不同。</p>
+
+        <div class="tabs">
+            <button class="tab-btn active" onclick="switchTab('sat-act')">SAT ↔ ACT</button>
+            <button class="tab-btn" onclick="switchTab('toefl-ielts')">TOEFL ↔ IELTS</button>
+            <button class="tab-btn" onclick="switchTab('toefl-det')">TOEFL ↔ DET</button>
+            <button class="tab-btn" onclick="switchTab('all')">All at once</button>
+        </div>
+
+        <div class="converter-box">
+            <div id="tab-sat-act" class="tab-content active">
+                <div class="converter-row">
+                    <div class="input-group">
+                        <label>SAT Score (400-1600)</label>
+                        <input type="number" id="sat-score" min="400" max="1600" value="1400" oninput="convertSat()">
+                    </div>
+                    <div class="input-group">
+                        <label>ACT Score (1-36)</label>
+                        <input type="number" id="act-score" min="1" max="36" value="31" oninput="convertAct()">
+                    </div>
+                </div>
+                <div class="result-display" id="sat-act-result"></div>
+            </div>
+
+            <div id="tab-toefl-ielts" class="tab-content">
+                <div class="converter-row">
+                    <div class="input-group">
+                        <label>TOEFL iBT Score (0-120)</label>
+                        <input type="number" id="toefl-score" min="0" max="120" value="100" oninput="convertToefl()">
+                    </div>
+                    <div class="input-group">
+                        <label>IELTS Score (0-9)</label>
+                        <input type="number" id="ielts-score" min="0" max="9" step="0.5" value="7.0" oninput="convertIelts()">
+                    </div>
+                </div>
+                <div class="result-display" id="toefl-ielts-result"></div>
+            </div>
+
+            <div id="tab-toefl-det" class="tab-content">
+                <div class="converter-row">
+                    <div class="input-group">
+                        <label>TOEFL iBT Score (0-120)</label>
+                        <input type="number" id="toefl-det-score" min="0" max="120" value="100" oninput="convertToeflDet()">
+                    </div>
+                    <div class="input-group">
+                        <label>DET Score (10-160)</label>
+                        <input type="number" id="det-score" min="10" max="160" value="125" oninput="convertDet()">
+                    </div>
+                </div>
+                <div class="result-display" id="toefl-det-result"></div>
+            </div>
+
+            <div id="tab-all" class="tab-content">
+                <div class="converter-row">
+                    <div class="input-group">
+                        <label>Enter any score to see all equivalents</label>
+                        <input type="number" id="all-score" placeholder="e.g., 1400 SAT" value="1400">
+                    </div>
+                    <div class="input-group">
+                        <label>Score type</label>
+                        <select id="all-type" onchange="convertAll()">
+                            <option value="sat">SAT</option>
+                            <option value="act">ACT</option>
+                            <option value="toefl">TOEFL iBT</option>
+                            <option value="ielts">IELTS</option>
+                            <option value="det">DET (Duolingo)</option>
+                        </select>
+                    </div>
+                </div>
+                <button class="tab-btn active" onclick="convertAll()" style="width:100%;">Calculate Equivalents</button>
+                <div class="result-display" id="all-result" style="margin-top:12px;"></div>
+            </div>
+        </div>
+
+        <div class="note-box">
+            <strong>Note:</strong> Conversion data is based on official concordance tables (College Board / ACT / ETS / IELTS / Duolingo). These are approximate equivalences, not exact matches. Always check the specific requirements of each university.
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>SAT-ACT Concordance <span class="en">SAT-ACT 官方对照表</span></h2>
+        <p class="cn-hint">基于 College Board 和 ACT 联合发布的 concordance table。</p>
+        <table class="comparison-table">
+            <tr>
+                <th>SAT Total</th>
+                <th>ACT Composite</th>
+                <th>SAT Total</th>
+                <th>ACT Composite</th>
+            </tr>
+            <tr><td>1570-1600</td><td>36</td><td>1230-1250</td><td>26</td></tr>
+            <tr><td>1530-1560</td><td>35</td><td>1200-1220</td><td>25</td></tr>
+            <tr><td>1490-1520</td><td>34</td><td>1160-1190</td><td>24</td></tr>
+            <tr><td>1450-1480</td><td>33</td><td>1130-1150</td><td>23</td></tr>
+            <tr><td>1420-1440</td><td>32</td><td>1090-1120</td><td>22</td></tr>
+            <tr><td>1390-1410</td><td>31</td><td>1050-1080</td><td>21</td></tr>
+            <tr><td>1360-1380</td><td>30</td><td>1020-1040</td><td>20</td></tr>
+            <tr><td>1330-1350</td><td>29</td><td>980-1010</td><td>19</td></tr>
+            <tr><td>1300-1320</td><td>28</td><td>940-970</td><td>18</td></tr>
+            <tr><td>1260-1290</td><td>27</td><td>900-930</td><td>17</td></tr>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>TOEFL-IELTS Comparison <span class="en">TOEFL-IELTS 对照表</span></h2>
+        <p class="cn-hint">基于 ETS 官方研究数据，仅供参考。</p>
+        <table class="comparison-table">
+            <tr>
+                <th>TOEFL iBT</th>
+                <th>IELTS Band</th>
+                <th>TOEFL iBT</th>
+                <th>IELTS Band</th>
+            </tr>
+            <tr><td>118-120</td><td>9.0</td><td>78-79</td><td>6.5</td></tr>
+            <tr><td>115-117</td><td>8.5</td><td>74-77</td><td>6.0</td></tr>
+            <tr><td>110-114</td><td>8.0</td><td>65-73</td><td>6.0</td></tr>
+            <tr><td>107-109</td><td>7.5</td><td>59-64</td><td>5.5</td></tr>
+            <tr><td>102-106</td><td>7.5</td><td>53-58</td><td>5.5</td></tr>
+            <tr><td>98-101</td><td>7.0</td><td>46-52</td><td>5.0</td></tr>
+            <tr><td>94-97</td><td>7.0</td><td>35-45</td><td>4.5</td></tr>
+            <tr><td>92-93</td><td>6.5</td><td>32-34</td><td>4.5</td></tr>
+            <tr><td>87-91</td><td>6.5</td><td>0-31</td><td>0-4.0</td></tr>
+            <tr><td>83-86</td><td>6.5</td><td></td><td></td></tr>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>DET Score Comparison <span class="en">DET 多邻国对照表</span></h2>
+        <p class="cn-hint">基于 Duolingo 官方 concordance 研究。</p>
+        <table class="comparison-table">
+            <tr>
+                <th>DET</th>
+                <th>TOEFL iBT</th>
+                <th>IELTS</th>
+                <th>CEFR</th>
+            </tr>
+            <tr><td>155-160</td><td>117-120</td><td>8.5-9.0</td><td>C2</td></tr>
+            <tr><td>150</td><td>113-116</td><td>8.0-8.5</td><td>C2</td></tr>
+            <tr><td>145</td><td>109-112</td><td>7.5-8.0</td><td>C1</td></tr>
+            <tr><td>140</td><td>104-108</td><td>7.5</td><td>C1</td></tr>
+            <tr><td>135</td><td>99-103</td><td>7.0</td><td>C1</td></tr>
+            <tr><td>130</td><td>94-98</td><td>7.0</td><td>C1</td></tr>
+            <tr><td>125</td><td>89-93</td><td>6.5</td><td>B2</td></tr>
+            <tr><td>120</td><td>85-88</td><td>6.5</td><td>B2</td></tr>
+            <tr><td>115</td><td>79-84</td><td>6.0</td><td>B2</td></tr>
+            <tr><td>110</td><td>74-78</td><td>6.0</td><td>B2</td></tr>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>AP Score Conversion <span class="en">AP 分数参考</span></h2>
+        <p class="cn-hint">AP 5 分制对应的大学学分政策参考。各学校政策不同，请以学校官网为准。</p>
+        <table class="comparison-table">
+            <tr>
+                <th>AP Score</th>
+                <th>Description</th>
+                <th>Typical Credit</th>
+                <th>CEFR Equivalent</th>
+            </tr>
+            <tr><td>5</td><td>Extremely well qualified</td><td>Most colleges grant credit</td><td>-</td></tr>
+            <tr><td>4</td><td>Well qualified</td><td>Many colleges grant credit</td><td>-</td></tr>
+            <tr><td>3</td><td>Qualified</td><td>Some colleges grant credit</td><td>-</td></tr>
+            <tr><td>2</td><td>Possibly qualified</td><td>Rarely grants credit</td><td>-</td></tr>
+            <tr><td>1</td><td>No recommendation</td><td>No credit</td><td>-</td></tr>
+        </table>
+    </div>
+
+    <p class="footer">&copy; 2026 yunzhuan.icu | Score Converter</p>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <div style="text-align:center;padding:8px 0;font-size:0.75rem;color:#aaa;">
+        <a href="../index.html" style="color:#aaa;text-decoration:none;">Home</a>
+        <span style="margin:0 6px;">&middot;</span>
+        <a href="../intl-exams/index.html" style="color:#aaa;text-decoration:none;">International Exams</a>
+        <span style="margin:0 6px;">&middot;</span>
+        <a href="../contact.html" style="color:#aaa;text-decoration:none;">Contact</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="javascript:window.scrollTo(0,0)" style="color:#aaa;text-decoration:none;">Back to top</a>
+    </div>
+
+    <script>
+    // Tab switching
+    function switchTab(tabName) {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+        event.target.classList.add('active');
+        document.getElementById('tab-' + tabName).classList.add('active');
+    }
+
+    // SAT to ACT concordance data
+    const satToAct = [
+        { sat: 1600, act: 36 }, { sat: 1570, act: 36 }, { sat: 1560, act: 35 },
+        { sat: 1530, act: 35 }, { sat: 1520, act: 34 }, { sat: 1490, act: 34 },
+        { sat: 1480, act: 33 }, { sat: 1450, act: 33 }, { sat: 1440, act: 32 },
+        { sat: 1420, act: 32 }, { sat: 1410, act: 31 }, { sat: 1390, act: 31 },
+        { sat: 1380, act: 30 }, { sat: 1360, act: 30 }, { sat: 1350, act: 29 },
+        { sat: 1330, act: 29 }, { sat: 1320, act: 28 }, { sat: 1300, act: 28 },
+        { sat: 1290, act: 27 }, { sat: 1260, act: 27 }, { sat: 1250, act: 26 },
+        { sat: 1230, act: 26 }, { sat: 1220, act: 25 }, { sat: 1200, act: 25 },
+        { sat: 1190, act: 24 }, { sat: 1160, act: 24 }, { sat: 1150, act: 23 },
+        { sat: 1130, act: 23 }, { sat: 1120, act: 22 }, { sat: 1090, act: 22 },
+        { sat: 1080, act: 21 }, { sat: 1050, act: 21 }, { sat: 1040, act: 20 },
+        { sat: 1020, act: 20 }, { sat: 1010, act: 19 }, { sat: 980, act: 19 },
+        { sat: 970, act: 18 }, { sat: 940, act: 18 }, { sat: 930, act: 17 },
+        { sat: 900, act: 17 }
+    ];
+
+    function satToActScore(sat) {
+        if (sat >= 1570) return 36;
+        if (sat < 900) return null;
+        for (let i = 0; i < satToAct.length - 1; i++) {
+            if (sat >= satToAct[i + 1].sat) {
+                return satToAct[i].act;
+            }
+        }
+        return null;
+    }
+
+    function actToSatScore(act) {
+        if (act >= 36) return '1570-1600';
+        if (act < 17) return null;
+        for (let i = 0; i < satToAct.length; i++) {
+            if (satToAct[i].act === act) {
+                const high = satToAct[i].sat;
+                let low = high;
+                for (let j = i + 1; j < satToAct.length; j++) {
+                    if (satToAct[j].act === act) {
+                        low = satToAct[j].sat;
+                    } else {
+                        break;
+                    }
+                }
+                if (high === low) return high.toString();
+                return low + '-' + high;
+            }
+        }
+        return null;
+    }
+
+    // TOEFL to IELTS
+    function toeflToIelts(toefl) {
+        if (toefl >= 118) return 9.0;
+        if (toefl >= 115) return 8.5;
+        if (toefl >= 110) return 8.0;
+        if (toefl >= 102) return 7.5;
+        if (toefl >= 94) return 7.0;
+        if (toefl >= 83) return 6.5;
+        if (toefl >= 74) return 6.0;
+        if (toefl >= 59) return 5.5;
+        if (toefl >= 46) return 5.0;
+        if (toefl >= 35) return 4.5;
+        if (toefl >= 32) return 4.5;
+        if (toefl > 0) return '0-4.0';
+        return null;
+    }
+
+    function ieltsToToefl(ielts) {
+        if (ielts >= 9) return '118-120';
+        if (ielts >= 8.5) return '115-117';
+        if (ielts >= 8) return '110-114';
+        if (ielts >= 7.5) return '102-109';
+        if (ielts >= 7) return '94-101';
+        if (ielts >= 6.5) return '79-93';
+        if (ielts >= 6) return '60-78';
+        if (ielts >= 5.5) return '46-59';
+        if (ielts >= 5) return '35-45';
+        return null;
+    }
+
+    // DET conversion
+    function detToToefl(det) {
+        const table = [
+            { det: 160, toefl: 120 }, { det: 155, toefl: 117 }, { det: 150, toefl: 113 },
+            { det: 145, toefl: 109 }, { det: 140, toefl: 104 }, { det: 135, toefl: 99 },
+            { det: 130, toefl: 94 }, { det: 125, toefl: 89 }, { det: 120, toefl: 85 },
+            { det: 115, toefl: 79 }, { det: 110, toefl: 74 }, { det: 105, toefl: 67 },
+            { det: 100, toefl: 61 }, { det: 95, toefl: 54 }, { det: 90, toefl: 48 },
+            { det: 85, toefl: 41 }
+        ];
+        if (det >= 160) return '117-120';
+        if (det < 85) return null;
+        for (let i = 0; i < table.length - 1; i++) {
+            if (det >= table[i + 1].det) {
+                const high = table[i].toefl;
+                const low = table[i + 1].toefl - 1;
+                if (high === low + 1) return high.toString();
+                return low + '-' + high;
+            }
+        }
+        return null;
+    }
+
+    function detToIelts(det) {
+        if (det >= 155) return 8.5;
+        if (det >= 145) return 8.0;
+        if (det >= 135) return 7.0;
+        if (det >= 125) return 6.5;
+        if (det >= 115) return 6.0;
+        if (det >= 105) return 5.5;
+        if (det >= 95) return 5.0;
+        return null;
+    }
+
+    function toeflToDet(toefl) {
+        const table = [
+            { toefl: 120, det: 160 }, { toefl: 117, det: 155 }, { toefl: 113, det: 150 },
+            { toefl: 109, det: 145 }, { toefl: 104, det: 140 }, { toefl: 99, det: 135 },
+            { toefl: 94, det: 130 }, { toefl: 89, det: 125 }, { toefl: 85, det: 120 },
+            { toefl: 79, det: 115 }, { toefl: 74, det: 110 }
+        ];
+        if (toefl >= 117) return '155-160';
+        if (toefl < 74) return null;
+        for (let i = 0; i < table.length - 1; i++) {
+            if (toefl >= table[i + 1].toefl) {
+                const high = table[i].det;
+                const low = table[i + 1].det + 1;
+                if (high === low) return high.toString();
+                return low + '-' + high;
+            }
+        }
+        return null;
+    }
+
+    function convertSat() {
+        const sat = parseInt(document.getElementById('sat-score').value);
+        if (isNaN(sat) || sat < 400 || sat > 1600) {
+            document.getElementById('sat-act-result').innerHTML = '<div style="color:#e74c3c;font-size:0.85rem;">Please enter a valid SAT score (400-1600)</div>';
+            return;
+        }
+        const act = satToActScore(sat);
+        let html = '<div class="result-row"><span class="result-label">SAT Score</span><span class="result-value highlight">' + sat + '</span></div>';
+        if (act) {
+            html += '<div class="result-row"><span class="result-label">Equivalent ACT</span><span class="result-value">' + act + '</span></div>';
+            if (act >= 34) html += '<div class="result-row"><span class="result-label">Tier</span><span class="result-value" style="color:#2e7d32;">Top tier (Ivy+)</span></div>';
+            else if (act >= 31) html += '<div class="result-row"><span class="result-label">Tier</span><span class="result-value" style="color:#1565c0;">Competitive (Top 30)</span></div>';
+            else if (act >= 27) html += '<div class="result-row"><span class="result-label">Tier</span><span class="result-value" style="color:#7b1fa2;">Solid (Top 50-100)</span></div>';
+            else html += '<div class="result-row"><span class="result-label">Tier</span><span class="result-value" style="color:#ef6c00;">Moderate</span></div>';
+        }
+        document.getElementById('sat-act-result').innerHTML = html;
+    }
+
+    function convertAct() {
+        const act = parseInt(document.getElementById('act-score').value);
+        if (isNaN(act) || act < 1 || act > 36) {
+            document.getElementById('sat-act-result').innerHTML = '<div style="color:#e74c3c;font-size:0.85rem;">Please enter a valid ACT score (1-36)</div>';
+            return;
+        }
+        const sat = actToSatScore(act);
+        let html = '<div class="result-row"><span class="result-label">ACT Score</span><span class="result-value highlight">' + act + '</span></div>';
+        if (sat) {
+            html += '<div class="result-row"><span class="result-label">Equivalent SAT</span><span class="result-value">' + sat + '</span></div>';
+        }
+        document.getElementById('sat-act-result').innerHTML = html;
+    }
+
+    function convertToefl() {
+        const toefl = parseInt(document.getElementById('toefl-score').value);
+        if (isNaN(toefl) || toefl < 0 || toefl > 120) {
+            document.getElementById('toefl-ielts-result').innerHTML = '<div style="color:#e74c3c;font-size:0.85rem;">Please enter a valid TOEFL score (0-120)</div>';
+            return;
+        }
+        const ielts = toeflToIelts(toefl);
+        let html = '<div class="result-row"><span class="result-label">TOEFL iBT</span><span class="result-value highlight">' + toefl + '</span></div>';
+        if (ielts !== null) {
+            html += '<div class="result-row"><span class="result-label">Equivalent IELTS</span><span class="result-value">' + ielts + '</span></div>';
+            if (toefl >= 100) html += '<div class="result-row"><span class="result-label">Top 30 US Unis</span><span class="result-value" style="color:#2e7d32;">Meets requirement</span></div>';
+            else if (toefl >= 80) html += '<div class="result-row"><span class="result-label">Top 50-100 US</span><span class="result-value" style="color:#1565c0;">Meets requirement</span></div>';
+        }
+        document.getElementById('toefl-ielts-result').innerHTML = html;
+    }
+
+    function convertIelts() {
+        const ielts = parseFloat(document.getElementById('ielts-score').value);
+        if (isNaN(ielts) || ielts < 0 || ielts > 9) {
+            document.getElementById('toefl-ielts-result').innerHTML = '<div style="color:#e74c3c;font-size:0.85rem;">Please enter a valid IELTS score (0-9)</div>';
+            return;
+        }
+        const toefl = ieltsToToefl(ielts);
+        let html = '<div class="result-row"><span class="result-label">IELTS</span><span class="result-value highlight">' + ielts + '</span></div>';
+        if (toefl) {
+            html += '<div class="result-row"><span class="result-label">Equivalent TOEFL</span><span class="result-value">' + toefl + '</span></div>';
+        }
+        document.getElementById('toefl-ielts-result').innerHTML = html;
+    }
+
+    function convertToeflDet() {
+        const toefl = parseInt(document.getElementById('toefl-det-score').value);
+        if (isNaN(toefl) || toefl < 0 || toefl > 120) {
+            document.getElementById('toefl-det-result').innerHTML = '<div style="color:#e74c3c;font-size:0.85rem;">Please enter a valid TOEFL score (0-120)</div>';
+            return;
+        }
+        const det = toeflToDet(toefl);
+        let html = '<div class="result-row"><span class="result-label">TOEFL iBT</span><span class="result-value highlight">' + toefl + '</span></div>';
+        if (det) {
+            html += '<div class="result-row"><span class="result-label">Equivalent DET</span><span class="result-value">' + det + '</span></div>';
+        }
+        document.getElementById('toefl-det-result').innerHTML = html;
+    }
+
+    function convertDet() {
+        const det = parseInt(document.getElementById('det-score').value);
+        if (isNaN(det) || det < 10 || det > 160) {
+            document.getElementById('toefl-det-result').innerHTML = '<div style="color:#e74c3c;font-size:0.85rem;">Please enter a valid DET score (10-160)</div>';
+            return;
+        }
+        const toefl = detToToefl(det);
+        const ielts = detToIelts(det);
+        let html = '<div class="result-row"><span class="result-label">DET Score</span><span class="result-value highlight">' + det + '</span></div>';
+        if (toefl) html += '<div class="result-row"><span class="result-label">Equivalent TOEFL</span><span class="result-value">' + toefl + '</span></div>';
+        if (ielts) html += '<div class="result-row"><span class="result-label">Equivalent IELTS</span><span class="result-value">' + ielts + '</span></div>';
+        document.getElementById('toefl-det-result').innerHTML = html;
+    }
+
+    function convertAll() {
+        const score = parseFloat(document.getElementById('all-score').value);
+        const type = document.getElementById('all-type').value;
+        if (isNaN(score)) {
+            document.getElementById('all-result').innerHTML = '<div style="color:#e74c3c;font-size:0.85rem;">Please enter a valid score</div>';
+            return;
+        }
+
+        let html = '<div class="result-row"><span class="result-label">Input</span><span class="result-value highlight">' + score + ' ' + type.toUpperCase() + '</span></div>';
+
+        if (type === 'sat') {
+            const act = satToActScore(score);
+            if (act) html += '<div class="result-row"><span class="result-label">ACT Equivalent</span><span class="result-value">' + act + '</span></div>';
+        } else if (type === 'act') {
+            const sat = actToSatScore(score);
+            if (sat) html += '<div class="result-row"><span class="result-label">SAT Equivalent</span><span class="result-value">' + sat + '</span></div>';
+        } else if (type === 'toefl') {
+            const ielts = toeflToIelts(score);
+            const det = toeflToDet(score);
+            if (ielts !== null) html += '<div class="result-row"><span class="result-label">IELTS Equivalent</span><span class="result-value">' + ielts + '</span></div>';
+            if (det) html += '<div class="result-row"><span class="result-label">DET Equivalent</span><span class="result-value">' + det + '</span></div>';
+        } else if (type === 'ielts') {
+            const toefl = ieltsToToefl(score);
+            if (toefl) html += '<div class="result-row"><span class="result-label">TOEFL Equivalent</span><span class="result-value">' + toefl + '</span></div>';
+        } else if (type === 'det') {
+            const toefl = detToToefl(score);
+            const ielts = detToIelts(score);
+            if (toefl) html += '<div class="result-row"><span class="result-label">TOEFL Equivalent</span><span class="result-value">' + toefl + '</span></div>';
+            if (ielts) html += '<div class="result-row"><span class="result-label">IELTS Equivalent</span><span class="result-value">' + ielts + '</span></div>';
+        }
+
+        document.getElementById('all-result').innerHTML = html;
+    }
+
+    // Initialize
+    convertSat();
+    </script>
+</body>
+</html>

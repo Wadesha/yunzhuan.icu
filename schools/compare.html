@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Compare Universities - Side-by-Side - yunzhuan.icu</title>
+    <title>School Comparison Tool - US / UK / CA - yunzhuan.icu</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            max-width: 1000px;
+            max-width: 900px;
             margin: 0 auto;
             padding: 20px 16px;
             background: #f5f5f5;
@@ -16,146 +16,174 @@
         }
         .back-link { color: #667eea; text-decoration: none; font-size: 0.85rem; margin-bottom: 12px; display: inline-block; }
         .back-link:hover { text-decoration: underline; }
-        h1 { color: #333; margin-bottom: 4px; font-size: 1.5rem; }
-        .subtitle { color: #888; font-size: 0.95rem; margin-bottom: 14px; }
-        .intro {
+        h1 { color: #333; margin-bottom: 4px; font-size: 1.4rem; }
+        .en-name { color: #888; font-size: 0.95rem; margin-bottom: 4px; font-weight: normal; }
+        .code-line { color: #888; font-size: 0.82rem; margin-bottom: 14px; }
+        .section {
             background: white;
             border-radius: 8px;
             padding: 14px 18px;
-            margin-bottom: 14px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-            font-size: 0.92rem;
-            line-height: 1.7;
-            color: #444;
-        }
-        .selector {
-            background: white;
-            border-radius: 8px;
-            padding: 14px 18px;
-            margin-bottom: 14px;
+            margin-bottom: 10px;
             box-shadow: 0 1px 3px rgba(0,0,0,0.05);
         }
-        .selector h2 {
+        .section h2 {
             color: #667eea;
             margin-bottom: 10px;
             font-size: 1rem;
             font-weight: 600;
         }
-        .selector-grid {
+        .section h2 .en { color: #999; font-size: 0.8rem; font-weight: normal; }
+        .section p { color: #333; line-height: 1.7; font-size: 0.92rem; }
+        .section p.cn-hint { color: #666; font-size: 0.85rem; margin-bottom: 6px; }
+        .selector-row {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            grid-template-columns: 1fr 1fr 1fr;
             gap: 10px;
+            margin-bottom: 14px;
         }
-        .selector select {
+        .select-group label {
+            display: block;
+            font-size: 0.82rem;
+            color: #666;
+            margin-bottom: 4px;
+            font-weight: 500;
+        }
+        .select-group select {
             width: 100%;
             padding: 8px 10px;
-            border: 1px solid #ddd;
+            border: 1px solid #d0d5dd;
             border-radius: 6px;
-            font-size: 0.9rem;
+            font-size: 0.88rem;
             background: white;
-            color: #333;
         }
-        .compare-table {
+        .comparison-table {
             width: 100%;
             border-collapse: collapse;
             font-size: 0.85rem;
-            background: white;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-        }
-        .compare-table th, .compare-table td {
-            padding: 10px 12px;
-            border-bottom: 1px solid #eee;
-            vertical-align: top;
-            text-align: left;
-        }
-        .compare-table th {
-            background: #fafafa;
-            color: #555;
-            font-weight: 600;
-            font-size: 0.82rem;
-        }
-        .compare-table td.label { color: #888; font-weight: 500; width: 18%; }
-        .compare-table td.col-empty { color: #aaa; text-align: center; font-style: italic; }
-        .compare-table tr:last-child td { border-bottom: none; }
-        .school-name { color: #667eea; font-weight: 600; font-size: 0.95rem; }
-        .footer { text-align: center; margin-top: 20px; color: #999; font-size: 0.8rem; }
-        .note {
-            font-size: 0.82rem;
-            color: #888;
             margin-top: 10px;
+        }
+        .comparison-table th, .comparison-table td {
+            padding: 10px 12px;
+            text-align: left;
+            border-bottom: 1px solid #f0f0f0;
+            vertical-align: top;
+        }
+        .comparison-table th {
+            background: #f8f9ff;
+            font-weight: 600;
+            color: #667eea;
+            width: 25%;
+            font-size: 0.8rem;
+        }
+        .comparison-table tr:hover td { background: #f8f9ff; }
+        .comparison-table .school-name {
+            font-weight: 600;
+            color: #333;
+            font-size: 0.95rem;
+            margin-bottom: 2px;
+        }
+        .comparison-table .school-loc {
+            color: #888;
+            font-size: 0.78rem;
+        }
+        .empty-cell {
+            color: #ccc;
+            font-style: italic;
+            text-align: center;
+        }
+        .tag {
+            display: inline-block;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 0.72rem;
+            font-weight: 600;
+            margin-right: 4px;
+        }
+        .tag-reach { background: #fce4ec; color: #c2185b; }
+        .tag-match { background: #e8f5e9; color: #2e7d32; }
+        .tag-safety { background: #fff3e0; color: #ef6c00; }
+        .note-box {
+            background: #fff8e1;
+            border-left: 3px solid #ff8f00;
+            padding: 10px 14px;
+            border-radius: 0 6px 6px 0;
+            margin-top: 10px;
+            font-size: 0.82rem;
+            color: #5d4037;
             line-height: 1.6;
         }
+        .footer { text-align: center; margin-top: 20px; color: #999; font-size: 0.8rem; }
+        @media (max-width: 600px) {
+            .selector-row { grid-template-columns: 1fr; }
+            .comparison-table th { width: 30%; font-size: 0.75rem; }
+            .comparison-table td { font-size: 0.8rem; }
+        }
     </style>
-    <link rel="stylesheet" href="/css/collapse.css">
 </head>
 <body>
-    <a href="index.html" class="back-link">&larr; Back to University Database</a>
+    <a href="index.html" class="back-link">&larr; Back to Standardized Tests</a>
 
-    <h1>Compare Universities</h1>
-    <p class="subtitle">选校并排对比工具</p>
+    <h1>School Comparison Tool</h1>
+    <p class="en-name">选校对比工具</p>
+    <p class="code-line">US · UK · Canada · Side by side comparison</p>
 
-    <div class="intro">
-        Pick up to three schools from the database and compare their key admissions metrics side by side. Currently the comparison draws on a built-in sample dataset; as more school detail pages are added to <code>schools/</code>, the dropdown options will expand automatically.
-        <br><span style="color:#888;">选择最多三所学校进行并排对比，数据来自学校详情页汇总。</span>
-    </div>
+    <div class="section">
+        <h2>Select Schools to Compare <span class="en">选择要对比的学校</span></h2>
+        <p class="cn-hint">选择最多 3 所学校进行横向对比。数据为公开信息的估算，具体以学校官网为准。</p>
 
-    <div class="selector">
-        <h2>Select Schools <span class="en">选择学校</span></h2>
-        <div class="selector-grid">
-            <select id="school1">
-                <option value="">-- School 1 --</option>
-                <option value="harvard">Harvard University</option>
-                <option value="mit">MIT</option>
-                <option value="stanford">Stanford University</option>
-                <option value="yale">Yale University</option>
-                <option value="princeton">Princeton University</option>
-                <option value="columbia">Columbia University</option>
-                <option value="uchicago">University of Chicago</option>
-                <option value="upenn">University of Pennsylvania</option>
-            </select>
-            <select id="school2">
-                <option value="">-- School 2 --</option>
-                <option value="harvard">Harvard University</option>
-                <option value="mit">MIT</option>
-                <option value="stanford">Stanford University</option>
-                <option value="yale">Yale University</option>
-                <option value="princeton">Princeton University</option>
-                <option value="columbia">Columbia University</option>
-                <option value="uchicago">University of Chicago</option>
-                <option value="upenn">University of Pennsylvania</option>
-            </select>
-            <select id="school3">
-                <option value="">-- School 3 --</option>
-                <option value="harvard">Harvard University</option>
-                <option value="mit">MIT</option>
-                <option value="stanford">Stanford University</option>
-                <option value="yale">Yale University</option>
-                <option value="princeton">Princeton University</option>
-                <option value="columbia">Columbia University</option>
-                <option value="uchicago">University of Chicago</option>
-                <option value="upenn">University of Pennsylvania</option>
-            </select>
+        <div class="selector-row">
+            <div class="select-group">
+                <label>School 1</label>
+                <select id="school1" onchange="updateComparison()">
+                    <option value="">-- Select --</option>
+                </select>
+            </div>
+            <div class="select-group">
+                <label>School 2</label>
+                <select id="school2" onchange="updateComparison()">
+                    <option value="">-- Select --</option>
+                </select>
+            </div>
+            <div class="select-group">
+                <label>School 3</label>
+                <select id="school3" onchange="updateComparison()">
+                    <option value="">-- Select --</option>
+                </select>
+            </div>
         </div>
-        <p class="note">数据为近年公开区间，仅供选校参考；正式申请前请核对学校官网最新数据。</p>
+
+        <table class="comparison-table" id="compare-table">
+            <tbody id="compare-body">
+                <tr>
+                    <th>School</th>
+                    <td class="empty-cell">Select a school</td>
+                    <td class="empty-cell">Select a school</td>
+                    <td class="empty-cell">Select a school</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 
-    <table class="compare-table" id="compareTable">
-        <thead>
-            <tr>
-                <th>Metric (指标)</th>
-                <th id="h1" class="col-empty">School 1</th>
-                <th id="h2" class="col-empty">School 2</th>
-                <th id="h3" class="col-empty">School 3</th>
-            </tr>
-        </thead>
-        <tbody id="compareBody">
-            <tr><td class="label">--</td><td colspan="3" class="col-empty">Select schools above to load comparison.</td></tr>
-        </tbody>
-    </table>
+    <div class="section">
+        <h2>How to Build Your School List <span class="en">如何构建选校名单</span></h2>
+        <div class="note-box">
+            <strong>💡 Reach / Match / Safety 搭配原则：</strong><br>
+            · <span class="tag tag-reach">Reach</span> 冲刺校：录取率低或你的分数略低于中位数，2-4 所<br>
+            · <span class="tag tag-match">Match</span> 匹配校：你的分数在中位数附近，录取把握较大，3-5 所<br>
+            · <span class="tag tag-safety">Safety</span> 保底校：你的分数高于中位数，大概率录取，2-3 所<br>
+            · 总共建议 8-12 所学校，不要太多也不要太少
+        </div>
+        <div class="note-box" style="margin-top:8px;background:#e3f2fd;border-left-color:#1565c0;color:#0d47a1;">
+            <strong>📊 选校要考虑的因素：</strong><br>
+            · 学术：专业排名、课程设置、研究机会、师生比<br>
+            · 环境：城市/郊区/小镇、气候、校园文化、学生多样性<br>
+            · 经济：学费、奖学金、助学金、生活费<br>
+            · 就业：毕业去向、就业率、起薪、校友网络<br>
+            · 个人：学校氛围、社交生活、课外活动、与你的匹配度
+        </div>
+    </div>
 
-    <p class="footer">&copy; 2026 yunzhuan.icu | Compare Universities</p>
+    <p class="footer">&copy; 2026 yunzhuan.icu | School Comparison Tool</p>
     <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
     <div style="text-align:center;padding:8px 0;font-size:0.75rem;color:#aaa;">
         <a href="../index.html" style="color:#aaa;text-decoration:none;">Home</a>
@@ -168,127 +196,400 @@
     </div>
 
     <script>
-    const SCHOOL_DATA = {
-        harvard: {
-            name: "Harvard University", link: "us/harvard.html",
-            location: "Cambridge, MA", type: "Private · Ivy League",
-            accept: "~3.4%", sat: "1490-1580", act: "34-36",
-            tuition: "$59,320", intl: "~24%", enrollment: "~7,200",
-            deadline: "REA Nov 1 / RD Jan 1", system: "Common App"
+    const schoolData = {
+        // US Top Schools
+        'us-harvard': {
+            name: 'Harvard University', location: 'Cambridge, MA', country: 'US',
+            type: 'Private Ivy League', acceptance: '~4%',
+            tuition: '$62,000 + fees + room & board',
+            intlStudents: '~12%', ugrad: '~7,200',
+            satRange: '1490-1580', actRange: '34-36',
+            toeflMin: '100 (recommended)',
+            strong: ['Social Sciences', 'Biological Sciences', 'Humanities', 'Business', 'Economics'],
+            highlights: 'Ivy League, worlds most prestigious university, largest endowment',
+            tier: 'Reach'
         },
-        mit: {
-            name: "MIT", link: "#",
-            location: "Cambridge, MA", type: "Private · STEM-focused",
-            accept: "~4.5%", sat: "1520-1580", act: "35-36",
-            tuition: "$61,990", intl: "~11%", enrollment: "~4,600",
-            deadline: "EA Nov 1 / RD Jan 4", system: "MIT portal"
+        'us-stanford': {
+            name: 'Stanford University', location: 'Stanford, CA', country: 'US',
+            type: 'Private Research', acceptance: '~4%',
+            tuition: '$62,000 + fees + room & board',
+            intlStudents: '~11%', ugrad: '~7,600',
+            satRange: '1470-1570', actRange: '33-35',
+            toeflMin: '100 (recommended)',
+            strong: ['Engineering', 'Computer Science', 'Business', 'Bio Sciences', 'Economics'],
+            highlights: 'Located in Silicon Valley, top CS and engineering, entrepreneurial culture',
+            tier: 'Reach'
         },
-        stanford: {
-            name: "Stanford University", link: "#",
-            location: "Stanford, CA", type: "Private · Research",
-            accept: "~3.7%", sat: "1500-1570", act: "34-35",
-            tuition: "$65,127", intl: "~14%", enrollment: "~8,000",
-            deadline: "REA Nov 1 / RD Jan 5", system: "Common App"
+        'us-mit': {
+            name: 'MIT', location: 'Cambridge, MA', country: 'US',
+            type: 'Private Research', acceptance: '~4%',
+            tuition: '$60,000 + fees + room & board',
+            intlStudents: '~10%', ugrad: '~4,600',
+            satRange: '1500-1570', actRange: '34-36',
+            toeflMin: '100+ (recommended 109+)',
+            strong: ['Engineering', 'Computer Science', 'Physics', 'Mathematics', 'Economics'],
+            highlights: 'Best STEM university in the world, intense but collaborative',
+            tier: 'Reach'
         },
-        yale: {
-            name: "Yale University", link: "#",
-            location: "New Haven, CT", type: "Private · Ivy League",
-            accept: "~4.5%", sat: "1500-1560", act: "33-35",
-            tuition: "$64,700", intl: "~12%", enrollment: "~6,800",
-            deadline: "REA Nov 1 / RD Jan 2", system: "Common App"
+        'us-yale': {
+            name: 'Yale University', location: 'New Haven, CT', country: 'US',
+            type: 'Private Ivy League', acceptance: '~4.5%',
+            tuition: '$64,000 + fees + room & board',
+            intlStudents: '~12%', ugrad: '~6,500',
+            satRange: '1470-1560', actRange: '33-35',
+            toeflMin: '100 (recommended)',
+            strong: ['Law', 'Humanities', 'Social Sciences', 'Drama', 'Architecture'],
+            highlights: 'Residential college system, strong liberal arts, Law school top tier',
+            tier: 'Reach'
         },
-        princeton: {
-            name: "Princeton University", link: "#",
-            location: "Princeton, NJ", type: "Private · Ivy League",
-            accept: "~4.5%", sat: "1490-1580", act: "34-35",
-            tuition: "$59,710", intl: "~12%", enrollment: "~5,600",
-            deadline: "SCEA Nov 1 / RD Jan 1", system: "Common App"
+        'us-princeton': {
+            name: 'Princeton University', location: 'Princeton, NJ', country: 'US',
+            type: 'Private Ivy League', acceptance: '~4%',
+            tuition: '$62,000 + fees + room & board',
+            intlStudents: '~12%', ugrad: '~5,400',
+            satRange: '1480-1570', actRange: '33-35',
+            toeflMin: '100 (recommended)',
+            strong: ['Economics', 'Politics', 'Mathematics', 'Physics', 'History'],
+            highlights: 'Ivy League, strong in math/social sciences, generous financial aid',
+            tier: 'Reach'
         },
-        columbia: {
-            name: "Columbia University", link: "#",
-            location: "New York, NY", type: "Private · Ivy League",
-            accept: "~3.9%", sat: "1500-1560", act: "34-35",
-            tuition: "$68,400", intl: "~20%", enrollment: "~8,500",
-            deadline: "ED Nov 1 / RD Jan 1", system: "Common App"
+        'us-columbia': {
+            name: 'Columbia University', location: 'New York, NY', country: 'US',
+            type: 'Private Ivy League', acceptance: '~4%',
+            tuition: '$66,000 + fees + room & board',
+            intlStudents: '~18%', ugrad: '~8,100',
+            satRange: '1490-1570', actRange: '34-35',
+            toeflMin: '100 (recommended 105+)',
+            strong: ['Core Curriculum', 'Humanities', 'Social Sciences', 'Business', 'Engineering'],
+            highlights: 'Ivy League in NYC, Core Curriculum, global perspective',
+            tier: 'Reach'
         },
-        uchicago: {
-            name: "University of Chicago", link: "#",
-            location: "Chicago, IL", type: "Private · Research",
-            accept: "~5.0%", sat: "1510-1560", act: "34-35",
-            tuition: "$65,340", intl: "~16%", enrollment: "~7,500",
-            deadline: "ED1/EA Nov 1 / ED2/RD Jan 2", system: "Common App / Coalition"
+        'us-uchicago': {
+            name: 'University of Chicago', location: 'Chicago, IL', country: 'US',
+            type: 'Private Research', acceptance: '~6%',
+            tuition: '$65,000 + fees + room & board',
+            intlStudents: '~15%', ugrad: '~7,500',
+            satRange: '1480-1570', actRange: '33-35',
+            toeflMin: '100 (recommended 105+)',
+            strong: ['Economics', 'Physics', 'Mathematics', 'Humanities', 'Law'],
+            highlights: 'Intellectual and academic culture, strong economics and math',
+            tier: 'Reach'
         },
-        upenn: {
-            name: "University of Pennsylvania", link: "#",
-            location: "Philadelphia, PA", type: "Private · Ivy League",
-            accept: "~5.8%", sat: "1500-1560", act: "34-35",
-            tuition: "$61,710", intl: "~13%", enrollment: "~10,600",
-            deadline: "ED Nov 1 / RD Jan 5", system: "Common App / Coalition"
-        }
+        'us-upenn': {
+            name: 'University of Pennsylvania', location: 'Philadelphia, PA', country: 'US',
+            type: 'Private Ivy League', acceptance: '~6%',
+            tuition: '$66,000 + fees + room & board',
+            intlStudents: '~14%', ugrad: '~10,400',
+            satRange: '1470-1560', actRange: '33-35',
+            toeflMin: '100 (recommended)',
+            strong: ['Wharton Business', 'Finance', 'Engineering', 'Nursing', 'Communications'],
+            highlights: 'Ivy League, Wharton = best undergrad business school',
+            tier: 'Reach'
+        },
+        'us-duke': {
+            name: 'Duke University', location: 'Durham, NC', country: 'US',
+            type: 'Private Research', acceptance: '~6%',
+            tuition: '$64,000 + fees + room & board',
+            intlStudents: '~12%', ugrad: '~6,700',
+            satRange: '1460-1560', actRange: '33-35',
+            toeflMin: '100 (recommended)',
+            strong: ['Public Policy', 'Engineering', 'Business', 'Biology', 'Medicine'],
+            highlights: 'Beautiful campus, strong athletics, Duke Fuqua business school',
+            tier: 'Reach'
+        },
+        'us-jhu': {
+            name: 'Johns Hopkins University', location: 'Baltimore, MD', country: 'US',
+            type: 'Private Research', acceptance: '~7%',
+            tuition: '$62,000 + fees + room & board',
+            intlStudents: '~13%', ugrad: '~6,000',
+            satRange: '1470-1560', actRange: '33-35',
+            toeflMin: '100 (recommended)',
+            strong: ['Biomedical Engineering', 'Public Health', 'Medicine', 'International Studies'],
+            highlights: '#1 public health, top BME, research-focused',
+            tier: 'Reach'
+        },
+        'us-northwestern': {
+            name: 'Northwestern University', location: 'Evanston, IL', country: 'US',
+            type: 'Private Research', acceptance: '~7%',
+            tuition: '$65,000 + fees + room & board',
+            intlStudents: '~10%', ugrad: '~8,200',
+            satRange: '1450-1550', actRange: '33-35',
+            toeflMin: '100 (recommended)',
+            strong: ['Kellogg Business', 'Journalism', 'Engineering', 'Theater', 'Economics'],
+            highlights: 'Kellogg business, Medill journalism, strong on both academics and social life',
+            tier: 'Reach'
+        },
+        'us-berkeley': {
+            name: 'UC Berkeley', location: 'Berkeley, CA', country: 'US',
+            type: 'Public Research (UC)', acceptance: '~11%',
+            tuition: '$46,000 - $56,000 (out-of-state)',
+            intlStudents: '~17%', ugrad: '~32,000',
+            satRange: '1360-1520', actRange: '30-34',
+            toeflMin: '80 (minimum) / 100 (recommended)',
+            strong: ['Engineering', 'Computer Science', 'Business', 'Physics', 'Economics'],
+            highlights: '#1 public university in US, top engineering and CS, Silicon Valley proximity',
+            tier: 'Match'
+        },
+        'us-ucla': {
+            name: 'UCLA', location: 'Los Angeles, CA', country: 'US',
+            type: 'Public Research (UC)', acceptance: '~9%',
+            tuition: '$46,000 - $56,000 (out-of-state)',
+            intlStudents: '~12%', ugrad: '~32,000',
+            satRange: '1360-1530', actRange: '30-34',
+            toeflMin: '80 (minimum) / 100 (recommended)',
+            strong: ['Film/Television', 'Business', 'Psychology', 'Biology', 'Engineering'],
+            highlights: 'Beautiful campus in LA, strong film program, great weather',
+            tier: 'Match'
+        },
+        'us-umich': {
+            name: 'University of Michigan', location: 'Ann Arbor, MI', country: 'US',
+            type: 'Public Research', acceptance: '~18%',
+            tuition: '$57,000 (out-of-state)',
+            intlStudents: '~15%', ugrad: '~32,000',
+            satRange: '1340-1520', actRange: '30-34',
+            toeflMin: '100 (recommended)',
+            strong: ['Ross Business', 'Engineering', 'Computer Science', 'Public Policy'],
+            highlights: 'Top public university, strong across board, great school spirit',
+            tier: 'Match'
+        },
+        'us-nyu': {
+            name: 'New York University', location: 'New York, NY', country: 'US',
+            type: 'Private Research', acceptance: '~12%',
+            tuition: '$60,000 + fees + room & board',
+            intlStudents: '~28%', ugrad: '~29,000',
+            satRange: '1380-1500', actRange: '31-34',
+            toeflMin: '100 (recommended)',
+            strong: ['Stern Business', 'Film/Tisch', 'Law', 'Economics', 'Psychology'],
+            highlights: 'Campus = NYC itself, Stern = top business, Tisch = top film',
+            tier: 'Match'
+        },
+        'us-cmu': {
+            name: 'Carnegie Mellon University', location: 'Pittsburgh, PA', country: 'US',
+            type: 'Private Research', acceptance: '~11%',
+            tuition: '$63,000 + fees + room & board',
+            intlStudents: '~19%', ugrad: '~7,000',
+            satRange: '1450-1550', actRange: '33-35',
+            toeflMin: '102 (recommended)',
+            strong: ['Computer Science', 'Engineering', 'Business (Tepper)', 'Art & Design', 'HCI'],
+            highlights: 'Top CS school, SCS = elite, strong art-tech intersection',
+            tier: 'Reach'
+        },
+
+        // UK Schools
+        'uk-oxford': {
+            name: 'University of Oxford', location: 'Oxford, England', country: 'UK',
+            type: 'Public Collegiate', acceptance: '~17%',
+            tuition: '£36,065 - £46,200 (international)',
+            intlStudents: '~45%', ugrad: '~26,500',
+            alevel: 'A*A*A - AAA', ib: '38-42 (776 at HL)',
+            toeflMin: '100 (minimum) / 110 (higher)',
+            strong: ['PPE', 'Law', 'Medicine', 'Engineering', 'Computer Science', 'Humanities'],
+            highlights: 'Oldest English-speaking university, tutorial system, 38 colleges',
+            tier: 'Reach'
+        },
+        'uk-cambridge': {
+            name: 'University of Cambridge', location: 'Cambridge, England', country: 'UK',
+            type: 'Public Collegiate', acceptance: '~18%',
+            tuition: '£36,065 - £46,200 (international)',
+            intlStudents: '~40%', ugrad: '~24,500',
+            alevel: 'A*A*A - AAA', ib: '38-42 (776 at HL)',
+            toeflMin: '100 (minimum) / 110 (higher)',
+            strong: ['Mathematics', 'Physics', 'Engineering', 'Computer Science', 'Economics', 'Medicine'],
+            highlights: 'Best STEM in UK, 31 colleges, strong research culture',
+            tier: 'Reach'
+        },
+        'uk-imperial': {
+            name: 'Imperial College London', location: 'London, England', country: 'UK',
+            type: 'Public Research', acceptance: '~14%',
+            tuition: '£37,000 - £46,650 (international)',
+            intlStudents: '~50%', ugrad: '~20,000',
+            alevel: 'A*A*A - AAA', ib: '38-42 (766 at HL)',
+            toeflMin: '100 (minimum)',
+            strong: ['Engineering', 'Medicine', 'Computer Science', 'Physics', 'Business School'],
+            highlights: 'UKs only STEM-focused university, located in London',
+            tier: 'Reach'
+        },
+        'uk-ucl': {
+            name: 'UCL', location: 'London, England', country: 'UK',
+            type: 'Public Research', acceptance: '~22%',
+            tuition: '£29,000 - £38,000 (international)',
+            intlStudents: '~48%', ugrad: '~22,300',
+            alevel: 'A*AA - BBB', ib: '34-40 points',
+            toeflMin: '92-100 (depends on program)',
+            strong: ['Medicine', 'Laws', 'Economics', 'Architecture', 'Engineering', 'Psychology'],
+            highlights: 'Located in central London, very diverse student body, strong across disciplines',
+            tier: 'Match'
+        },
+        'uk-lse': {
+            name: 'LSE', location: 'London, England', country: 'UK',
+            type: 'Public Specialized', acceptance: '~8.5%',
+            tuition: '£26,000 - £32,000 (international)',
+            intlStudents: '~60%', ugrad: '~12,000',
+            alevel: 'A*AA - AAB', ib: '37-39 points (HL 766)',
+            toeflMin: '100 (minimum) / 107 (higher)',
+            strong: ['Economics', 'Law', 'Finance', 'Government', 'Social Policy', 'International Relations'],
+            highlights: 'Social sciences university, best in Europe for economics and finance, in central London',
+            tier: 'Reach'
+        },
+
+        // Canada
+        'ca-toronto': {
+            name: 'University of Toronto', location: 'Toronto, ON', country: 'Canada',
+            type: 'Public Research', acceptance: '~43%',
+            tuition: '$59,000 - $67,000 CAD (international)',
+            intlStudents: '~23%', ugrad: '~74,000',
+            alevel: 'AAA - A*A*A*', ib: '36-42 points',
+            toeflMin: '100 (minimum)',
+            strong: ['Rotman Commerce', 'Engineering', 'Computer Science', 'Life Sciences', 'Humanities'],
+            highlights: 'Canadas largest university, 3 campuses, strong research output',
+            tier: 'Match'
+        },
+        'ca-ubc': {
+            name: 'UBC', location: 'Vancouver, BC', country: 'Canada',
+            type: 'Public Research', acceptance: '~50%',
+            tuition: '$44,000 - $58,000 CAD (international)',
+            intlStudents: '~28%', ugrad: '~56,000',
+            alevel: 'AAB - AAA', ib: '32-38 points',
+            toeflMin: '90 (minimum) / 100 (recommended)',
+            strong: ['Sauder Business', 'Engineering', 'Computer Science', 'Forestry', 'Medicine'],
+            highlights: 'Beautiful campus in Vancouver, strong engineering and business, great lifestyle',
+            tier: 'Match'
+        },
+        'ca-mcgill': {
+            name: 'McGill University', location: 'Montreal, QC', country: 'Canada',
+            type: 'Public Research', acceptance: '~46%',
+            tuition: '$30,000 - $55,000 CAD (international)',
+            intlStudents: '~30%', ugrad: '~26,000',
+            alevel: 'AAB - A*AA', ib: '33-40 points',
+            toeflMin: '100 (minimum)',
+            strong: ['Medicine', 'Law', 'Desautels Management', 'Engineering', 'Science'],
+            highlights: 'Bilingual city, historic campus, strong medical and law schools',
+            tier: 'Match'
+        },
+        'ca-waterloo': {
+            name: 'University of Waterloo', location: 'Waterloo, ON', country: 'Canada',
+            type: 'Public Research', acceptance: '~53%',
+            tuition: '$46,000 - $58,000 CAD (international)',
+            intlStudents: '~26%', ugrad: '~40,000',
+            alevel: 'AAB - AAA', ib: '32-38 points',
+            toeflMin: '90 (minimum) / 100 (recommended for CS/Eng)',
+            strong: ['Computer Science', 'Engineering', 'Mathematics', 'Co-op Program', 'Quantum Computing'],
+            highlights: 'Best co-op program in Canada, top CS and engineering, Silicon Valley North',
+            tier: 'Match'
+        },
+
+        // Asia
+        'sg-nus': {
+            name: 'National University of Singapore', location: 'Singapore', country: 'Singapore',
+            type: 'Public Research', acceptance: '~5-7% (international)',
+            tuition: '$45,000 - $55,000 SGD (international)',
+            intlStudents: '~25%', ugrad: '~30,000',
+            alevel: 'A*AA - A*A*A*', ib: '38-44 points',
+            toeflMin: '100 (recommended)',
+            strong: ['Computing', 'Engineering', 'Business', 'Medicine', 'Law', 'Science'],
+            highlights: '#1 university in Asia, very competitive for international students',
+            tier: 'Reach'
+        },
+        'hk-hku': {
+            name: 'University of Hong Kong', location: 'Hong Kong', country: 'Hong Kong',
+            type: 'Public Research', acceptance: '~12% (non-local)',
+            tuition: '$185,000 HKD / year',
+            intlStudents: '~20%', ugrad: '~18,000',
+            alevel: 'A*AA - A*A*A*', ib: '36-43 points',
+            toeflMin: '93 (minimum)',
+            strong: ['Medicine', 'Dentistry', 'Law', 'Business', 'Engineering', 'Computer Science'],
+            highlights: 'HKs oldest university, strong medicine and dentistry, English instruction',
+            tier: 'Match'
+        },
     };
 
-    const FIELDS = [
-        ["Location", "location"],
-        ["Type", "type"],
-        ["Acceptance Rate", "accept"],
-        ["SAT Mid 50%", "sat"],
-        ["ACT Mid 50%", "act"],
-        ["Tuition (2025-26)", "tuition"],
-        ["Intl Students", "intl"],
-        ["Ugrad Enrollment", "enrollment"],
-        ["Application Deadline", "deadline"],
-        ["Application System", "system"]
-    ];
+    // Populate select dropdowns
+    function populateSelects() {
+        const selects = ['school1', 'school2', 'school3'];
+        const countries = {
+            'US - Top Private': ['us-harvard', 'us-stanford', 'us-mit', 'us-yale', 'us-princeton', 'us-columbia', 'us-uchicago', 'us-upenn', 'us-duke', 'us-jhu', 'us-northwestern', 'us-cmu'],
+            'US - Top Public': ['us-berkeley', 'us-ucla', 'us-umich'],
+            'US - Other Top': ['us-nyu'],
+            'UK - Top': ['uk-oxford', 'uk-cambridge', 'uk-imperial', 'uk-ucl', 'uk-lse'],
+            'Canada - Top': ['ca-toronto', 'ca-ubc', 'ca-mcgill', 'ca-waterloo'],
+            'Asia - Top': ['sg-nus', 'hk-hku'],
+        };
 
-    function render() {
-        const picks = [
-            document.getElementById('school1').value,
-            document.getElementById('school2').value,
-            document.getElementById('school3').value
-        ];
-        // headers
-        for (let i = 0; i < 3; i++) {
-            const th = document.getElementById('h' + (i+1));
-            const key = picks[i];
-            if (key && SCHOOL_DATA[key]) {
-                th.className = '';
-                th.innerHTML = '<span class="school-name">' + SCHOOL_DATA[key].name + '</span>';
-            } else {
-                th.className = 'col-empty';
-                th.textContent = 'School ' + (i+1);
+        selects.forEach(id => {
+            const sel = document.getElementById(id);
+            for (const group in countries) {
+                const optgroup = document.createElement('optgroup');
+                optgroup.label = group;
+                countries[group].forEach(key => {
+                    const opt = document.createElement('option');
+                    opt.value = key;
+                    opt.textContent = schoolData[key].name;
+                    optgroup.appendChild(opt);
+                });
+                sel.appendChild(optgroup);
             }
-        }
-        // body
-        const body = document.getElementById('compareBody');
-        body.innerHTML = '';
-        FIELDS.forEach(([label, field]) => {
-            const tr = document.createElement('tr');
-            let html = '<td class="label">' + label + '</td>';
-            for (let i = 0; i < 3; i++) {
-                const key = picks[i];
-                if (key && SCHOOL_DATA[key]) {
-                    let val = SCHOOL_DATA[key][field] || '-';
-                    if (field === 'name' && SCHOOL_DATA[key].link && SCHOOL_DATA[key].link !== '#') {
-                        val = '<a href="' + SCHOOL_DATA[key].link + '" style="color:#667eea;text-decoration:none;">' + val + '</a>';
-                    }
-                    html += '<td>' + val + '</td>';
-                } else {
-                    html += '<td class="col-empty">—</td>';
-                }
-            }
-            tr.innerHTML = html;
-            body.appendChild(tr);
         });
-        // if all empty, show hint
-        if (!picks[0] && !picks[1] && !picks[2]) {
-            body.innerHTML = '<tr><td class="label">--</td><td colspan="3" class="col-empty">Select schools above to load comparison.</td></tr>';
-        }
     }
 
-    document.getElementById('school1').addEventListener('change', render);
-    document.getElementById('school2').addEventListener('change', render);
-    document.getElementById('school3').addEventListener('change', render);
-    render();
+    function updateComparison() {
+        const keys = [
+            document.getElementById('school1').value,
+            document.getElementById('school2').value,
+            document.getElementById('school3').value,
+        ];
+        const schools = keys.map(k => schoolData[k] || null);
+
+        let html = '';
+
+        // Header row
+        html += '<tr><th>School</th>';
+        schools.forEach(s => {
+            if (s) {
+                const tierClass = s.tier === 'Reach' ? 'tag-reach' : s.tier === 'Match' ? 'tag-match' : 'tag-safety';
+                html += '<td><div class="school-name">' + s.name + '</div><div class="school-loc">' + s.location + '</div><div style="margin-top:4px;"><span class="tag ' + tierClass + '">' + s.tier + '</span></div></td>';
+            } else {
+                html += '<td class="empty-cell">--</td>';
+            }
+        });
+        html += '</tr>';
+
+        const rows = [
+            ['Country', 'country'],
+            ['Type', 'type'],
+            ['Acceptance Rate', 'acceptance'],
+            ['Tuition (intl)', 'tuition'],
+            ['Intl Students', 'intlStudents'],
+            ['Undergrad Enrollment', 'ugrad'],
+            ['SAT Range', 'satRange'],
+            ['ACT Range', 'actRange'],
+            ['A-Level Req', 'alevel'],
+            ['IB Req', 'ib'],
+            ['TOEFL', 'toeflMin'],
+            ['Strong Programs', 'strong'],
+            ['Highlights', 'highlights'],
+        ];
+
+        rows.forEach(([label, key]) => {
+            html += '<tr><th>' + label + '</th>';
+            schools.forEach(s => {
+                if (s && s[key]) {
+                    if (Array.isArray(s[key])) {
+                        html += '<td>' + s[key].join(', ') + '</td>';
+                    } else {
+                        html += '<td>' + s[key] + '</td>';
+                    }
+                } else {
+                    html += '<td class="empty-cell">—</td>';
+                }
+            });
+            html += '</tr>';
+        });
+
+        document.getElementById('compare-body').innerHTML = html;
+    }
+
+    populateSelects();
+    updateComparison();
     </script>
 </body>
 </html>

@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gap Year Guide - 间隔年指南 - yunzhuan.icu</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 16px 20px;
+            background: #f5f5f5;
+            color: #333;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            margin-bottom: 16px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .logo {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #667eea;
+            text-decoration: none;
+        }
+        .logo span { color: #764ba2; }
+        .nav-links {
+            display: flex;
+            gap: 18px;
+            align-items: center;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: #555;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: color 0.15s;
+        }
+        .nav-links a:hover { color: #667eea; }
+        .nav-links .cn {
+            font-size: 0.7rem;
+            color: #aaa;
+            margin-left: 2px;
+        }
+        @media (max-width: 768px) {
+            .navbar { flex-wrap: wrap; gap: 8px; }
+            .nav-links { gap: 12px; }
+            .nav-links a { font-size: 0.78rem; }
+            .nav-links .cn { display: none; }
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 4px;
+            font-size: 1.5rem;
+        }
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 16px;
+            font-size: 0.9rem;
+        }
+        .section {
+            background: white;
+            border-radius: 8px;
+            padding: 14px 18px;
+            margin-bottom: 10px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .section h2 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        .section h2 .cn { color: #999; font-size: 0.8rem; font-weight: normal; margin-left: 6px; }
+        .section p { color: #333; line-height: 1.7; font-size: 0.92rem; margin-bottom: 8px; }
+        .tip-box {
+            background: #fff8e1;
+            border-left: 3px solid #ff8f00;
+            padding: 10px 14px;
+            border-radius: 0 6px 6px 0;
+            margin-top: 10px;
+            font-size: 0.82rem;
+            color: #5d4037;
+            line-height: 1.6;
+        }
+        .tip-box strong { color: #e65100; }
+        .success-box {
+            background: #e8f5e9;
+            border-left: 3px solid #2e7d32;
+            padding: 10px 14px;
+            border-radius: 0 6px 6px 0;
+            margin-top: 10px;
+            font-size: 0.82rem;
+            color: #1b5e20;
+            line-height: 1.6;
+        }
+        .success-box strong { color: #2e7d32; }
+        .warning-box {
+            background: #ffebee;
+            border-left: 3px solid #c62828;
+            padding: 10px 14px;
+            border-radius: 0 6px 6px 0;
+            margin-top: 10px;
+            font-size: 0.82rem;
+            color: #b71c1c;
+            line-height: 1.6;
+        }
+        .warning-box strong { color: #c62828; }
+        .info-list { list-style: none; }
+        .info-list li {
+            padding: 8px 0 8px 20px;
+            position: relative;
+            font-size: 0.88rem;
+            color: #444;
+            line-height: 1.5;
+            border-bottom: 1px solid #f5f5f5;
+        }
+        .info-list li:last-child { border-bottom: none; }
+        .info-list li::before {
+            content: '✦';
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-size: 0.7rem;
+            top: 11px;
+        }
+        .info-list li strong { color: #333; }
+        .idea-card {
+            background: #f8f9ff;
+            padding: 12px;
+            border-radius: 8px;
+            border-left: 3px solid #667eea;
+            margin-bottom: 10px;
+        }
+        .idea-card h3 {
+            font-size: 0.92rem;
+            color: #4338ca;
+            margin-bottom: 4px;
+        }
+        .idea-card p {
+            font-size: 0.82rem;
+            color: #555;
+            line-height: 1.5;
+            margin-bottom: 4px;
+        }
+        .idea-card .tag {
+            display: inline-block;
+            padding: 1px 6px;
+            background: #ede9fe;
+            color: #5b21b6;
+            border-radius: 3px;
+            font-size: 0.72rem;
+            margin-right: 4px;
+        }
+        .footer { text-align: center; margin-top: 20px; color: #999; font-size: 0.8rem; }
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        @media (max-width: 600px) {
+            .two-col { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="../index.html" class="logo">yunzhuan<span>.icu</span></a>
+        <div class="nav-links">
+            <a href="../index.html">Majors<span class="cn">专业</span></a>
+            <a href="../schools/index.html">Schools<span class="cn">学校</span></a>
+            <a href="../tests/index.html">Tests<span class="cn">考试</span></a>
+            <a href="../guides/index.html">Guides<span class="cn">指南</span></a>
+            <a href="../resources.html">Resources<span class="cn">资源</span></a>
+            <a href="../contact.html">Contact<span class="cn">联系</span></a>
+        </div>
+    </nav>
+
+    <h1>Gap Year Guide</h1>
+    <p class="subtitle">间隔年指南 · 高中毕业 gap year 怎么过</p>
+
+    <div class="section">
+        <h2>What is a Gap Year? <span class="cn">什么是间隔年</span></h2>
+        <p style="font-size:0.9rem;color:#555;">
+            Gap Year（间隔年）就是在高中毕业和上大学之间，或者大学期间，
+            休学一年去做其他事情——旅行、工作、做志愿者、学习新技能等等。
+            在美国越来越流行，很多大学也支持学生 defer（推迟入学）一年去 gap。
+        </p>
+    </div>
+
+    <div class="section">
+        <h2>Pros & Cons <span class="cn">间隔年的利弊</span></h2>
+        <div class="two-col">
+            <div>
+                <h3 style="font-size:0.9rem;color:#22c55e;margin-bottom:6px;">✅ Pros / 好处</h3>
+                <ul class="info-list">
+                    <li>休息充电，避免 burnout</li>
+                    <li>探索兴趣，找到方向</li>
+                    <li>积累经历，简历更好看</li>
+                    <li>增长见识，开阔眼界</li>
+                    <li>比同龄人更成熟</li>
+                    <li>上大学后更有目标感</li>
+                    <li>赚到一些钱</li>
+                </ul>
+            </div>
+            <div>
+                <h3 style="font-size:0.9rem;color:#ef4444;margin-bottom:6px;">❌ Cons / 坏处</h3>
+                <ul class="info-list">
+                    <li>比同龄人晚一年毕业</li>
+                    <li>可能玩心收不回来</li>
+                    <li>需要花钱（如果是旅行）</li>
+                    <li>朋友都上大学了，可能孤单</li>
+                    <li>学习状态可能断档</li>
+                    <li>计划可能赶不上变化</li>
+                    <li>有的家长不理解</li>
+                </ul>
+            </div>
+        </div>
+        <div class="tip-box" style="margin-top:10px;">
+            <strong>💡 关键：</strong>Gap Year 不是浪费时间，只要你有计划、有收获，就是值得的。
+            最怕的是浑浑噩噩混一年，啥也没干成。
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Is It For You? <span class="cn">你适合 gap 吗</span></h2>
+        <div class="success-box">
+            <strong>✅ 适合 gap 的情况：</strong><br>
+            · 对未来方向很迷茫，不知道想学什么<br>
+            · 申请季太累了，想休息一下<br>
+            · 有明确的计划想做某件事<br>
+            · 想积累工作/社会经验<br>
+            · 想体验不一样的生活<br>
+            · 经济条件允许
+        </div>
+        <div class="warning-box" style="margin-top:8px;">
+            <strong>❌ 不建议 gap 的情况：</strong><br>
+            · 只是为了逃避学习/现实<br>
+            · 没有任何计划，就是想"玩一年"<br>
+            · 经济条件不允许<br>
+            · 自制力很差，gap 一年可能就废了<br>
+            · 专业是很连续的（比如某些理工科），断一年可能跟不上
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Gap Year Ideas <span class="cn">可以做什么</span></h2>
+        
+        <div class="idea-card">
+            <h3>🎓 学习/提升学术</h3>
+            <p><span class="tag">提升自己</span><span class="tag">低成本</span></p>
+            <p>
+                · 上大学先修课（AP、Coursera、edX）<br>
+                · 学一门新语言<br>
+                · 学编程/数据分析等技能<br>
+                · 做独立研究项目<br>
+                · 读很多书
+            </p>
+        </div>
+
+        <div class="idea-card">
+            <h3>💼 工作/实习</h3>
+            <p><span class="tag">赚钱</span><span class="tag">积累经验</span></p>
+            <p>
+                · 找实习（大公司/创业公司/NGO）<br>
+                · 做兼职（咖啡馆、零售店、家教）<br>
+                · 创业（小成本试试）<br>
+                · 做自由职业（设计、写作、编程）<br>
+                · 帮家里做事
+            </p>
+        </div>
+
+        <div class="idea-card">
+            <h3>🌍 旅行/探索</h3>
+            <p><span class="tag">长见识</span><span class="tag">花钱</span></p>
+            <p>
+                · 国内旅行/自驾游<br>
+                · 国外背包旅行<br>
+                · Working Holiday（打工度假签证）<br>
+                · 游学（边学边玩）<br>
+                ·  Road Trip
+            </p>
+        </div>
+
+        <div class="idea-card">
+            <h3>❤️ 志愿者/公益</h3>
+            <p><span class="tag">有意义</span><span class="tag">锻炼人</span></p>
+            <p>
+                · 国内支教<br>
+                · 国际志愿者项目<br>
+                · NGO 实习<br>
+                · 环境保护项目<br>
+                · 社区服务
+            </p>
+        </div>
+
+        <div class="idea-card">
+            <h3>🔬 科研/学术</h3>
+            <p><span class="tag">学术背景</span><span class="tag">申研加分</span></p>
+            <p>
+                · 大学实验室做 RA（研究助理）<br>
+                · 跟着教授做项目<br>
+                · 自己做研究写论文<br>
+                · 参加学术竞赛<br>
+                · 上暑校
+            </p>
+        </div>
+
+        <div class="idea-card">
+            <h3>🎨 兴趣/创意</h3>
+            <p><span class="tag">开心</span><span class="tag">探索自我</span></p>
+            <p>
+                · 学一门乐器<br>
+                · 学画画/摄影/设计<br>
+                · 写一本书/一个博客<br>
+                · 拍视频做 UP 主<br>
+                · 学做饭/烘焙
+            </p>
+        </div>
+
+        <div class="idea-card">
+            <h3>💪 个人成长</h3>
+            <p><span class="tag">改变自己</span><span class="tag">长期受益</span></p>
+            <p>
+                · 健身/减肥/练出好身材<br>
+                · 培养好习惯（早起、阅读、冥想）<br>
+                · 考驾照<br>
+                · 学做饭、做家务<br>
+                · 做心理咨询，解决心理问题
+            </p>
+        </div>
+
+        <div class="idea-card">
+            <h3>🏠 陪伴家人</h3>
+            <p><span class="tag">温暖</span><span class="tag">低成本</span></p>
+            <p>
+                · 出国前多陪陪父母家人<br>
+                · 帮家里做事<br>
+                · 和家人一起旅行<br>
+                · 学做家常菜，以后出国自己做<br>
+                · 多和爷爷奶奶姥姥姥爷在一起
+            </p>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>How to Plan <span class="cn">怎么规划</span></h2>
+        <ul class="info-list">
+            <li><strong>定目标：</strong>你 gap year 最想获得什么？技能？经验？休息？还是什么？</li>
+            <li><strong>选方向：</strong>从上面的 ideas 里挑 2-3 个最想做的，别贪多</li>
+            <li><strong>做预算：</strong>算一下大概要花多少钱，钱从哪来</li>
+            <li><strong>分阶段：</strong>把一年分成几个阶段，每个阶段有重点</li>
+            <li><strong>留弹性：</strong>不用计划得太满，给自己留调整空间</li>
+            <li><strong>找 accountability：</strong>告诉朋友/家人你的计划，让他们监督你</li>
+        </ul>
+        <div class="tip-box">
+            <strong>💡 示例计划：</strong><br>
+            · 6-8 月：旅行 + 休息放松<br>
+            · 9-12 月：实习/工作<br>
+            · 1-2 月：学新技能 + 做志愿者<br>
+            · 3-5 月：做一个个人项目 + 准备上大学<br>
+            · 不用完全填满，留一些自由时间
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>How to Defer <span class="cn">怎么申请 defer</span></h2>
+        <p style="font-size:0.88rem;color:#555;">
+            如果你已经被大学录取了，想 gap 一年，可以申请 defer enrollment（推迟入学）。
+        </p>
+        <ul class="info-list">
+            <li><strong>能不能 defer？</strong>大部分学校都可以，但政策不一样，有的很容易，有的要申请审批</li>
+            <li><strong>什么时候申请？</strong>确认入学（deposit）之后就可以联系学校了</li>
+            <li><strong>怎么申请？</strong>发邮件给 admissions office，说明你想 defer，以及原因</li>
+            <li><strong>需要什么理由？</strong>一般不需要太复杂的理由，说你想 gap year 积累经验就可以</li>
+            <li><strong>费用：</strong>一般 deposit 不退，有的学校可能要交一点占位费</li>
+            <li><strong>注意：</strong>defer 期间不能去其他全日制大学上学（不然就不是 defer 了）</li>
+        </ul>
+        <div class="warning-box">
+            <strong>⚠️ 注意：</strong><br>
+            · 每个学校政策不一样，一定要去官网查或者直接问招生办<br>
+            · 有的学校 gap year 期间不能申请其他学校<br>
+            · 奖学金/经济援助能不能 defer 也要问清楚
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Common Pitfalls <span class="cn">常见误区</span></h2>
+        <div class="warning-box">
+            <strong>❌ 别这样：</strong><br>
+            · 每天睡到中午，刷手机打游戏混日子<br>
+            · 计划太满，什么都想做，结果什么都没做好<br>
+            · 只旅行不学习不成长<br>
+            · 花太多钱，超出预算<br>
+            · gap 之前说要做很多事，gap 完了发现啥也没干<br>
+            · 完全不和外界接触
+        </div>
+        <div class="success-box" style="margin-top:8px;">
+            <strong>✅ 要这样：</strong><br>
+            · 有大致的计划和目标<br>
+            · 保持规律作息<br>
+            · 定期复盘进展<br>
+            · 保持学习和成长<br>
+            · 认识新朋友，保持社交<br>
+            · 记录经历（写日记/博客/拍视频）
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Before You Go Back <span class="cn">上大学前准备</span></h2>
+        <ul class="info-list">
+            <li><strong>提前 2-3 个月：</strong>确认 defer 状态，联系学校</li>
+            <li><strong>选课和住宿：</strong>注意申请时间，别错过了</li>
+            <li><strong>调整作息：</strong>从放假状态调整回学习状态</li>
+            <li><strong>复习一下：</strong>如果是理工科，可以复习一下数学等基础课</li>
+            <li><strong>行前准备：</strong>该买的买，该办的办（签证、机票、住宿等）</li>
+            <li><strong>心态调整：</strong>准备好迎接新的生活！</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Final Thoughts <span class="cn">最后想说</span></h2>
+        <div class="success-box">
+            <strong>❤️ Gap Year 不是浪费时间：</strong><br>
+            很多人担心 gap 一年会落后，但人生不是赛跑，不是越快越好。
+            一年的时间用来认识自己、探索世界、积累经验，
+            可能比在教室里迷迷糊糊上一年课更有价值。<br><br>
+            但前提是——你真的有规划、有行动、有收获。<br>
+            如果你确定想 gap，那就大胆去做吧！
+        </div>
+    </div>
+
+    <p class="footer">&copy; 2026 yunzhuan.icu | Gap Year Guide</p>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <div style="text-align:center;padding:8px 0;font-size:0.75rem;color:#aaa;">
+        <a href="../index.html" style="color:#aaa;text-decoration:none;">Home</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="../guides/index.html" style="color:#aaa;text-decoration:none;">Guides</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="../faq.html" style="color:#aaa;text-decoration:none;">FAQ</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="../contact.html" style="color:#aaa;text-decoration:none;">Contact</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="javascript:window.scrollTo(0,0)" style="color:#aaa;text-decoration:none;">Back to top</a>
+    </div>
+</body>
+</html>

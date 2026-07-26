@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Extracurricular Activities Guide - Boost Your Profile - yunzhuan.icu</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 16px 20px;
+            background: #f5f5f5;
+            color: #333;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            margin-bottom: 16px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .logo {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #667eea;
+            text-decoration: none;
+        }
+        .logo span { color: #764ba2; }
+        .nav-links {
+            display: flex;
+            gap: 18px;
+            align-items: center;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: #555;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: color 0.15s;
+        }
+        .nav-links a:hover { color: #667eea; }
+        .nav-links .cn {
+            font-size: 0.7rem;
+            color: #aaa;
+            margin-left: 2px;
+        }
+        @media (max-width: 768px) {
+            .navbar { flex-wrap: wrap; gap: 8px; }
+            .nav-links { gap: 12px; }
+            .nav-links a { font-size: 0.78rem; }
+            .nav-links .cn { display: none; }
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 4px;
+            font-size: 1.5rem;
+        }
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 16px;
+            font-size: 0.9rem;
+        }
+        .section {
+            background: white;
+            border-radius: 8px;
+            padding: 14px 18px;
+            margin-bottom: 10px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .section h2 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        .section h2 .cn { color: #999; font-size: 0.8rem; font-weight: normal; margin-left: 6px; }
+        .section p { color: #333; line-height: 1.7; font-size: 0.92rem; margin-bottom: 8px; }
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .category-card {
+            background: #f8f9ff;
+            padding: 12px;
+            border-radius: 8px;
+            border-left: 3px solid #667eea;
+        }
+        .category-card h3 {
+            font-size: 0.88rem;
+            color: #333;
+            margin-bottom: 4px;
+        }
+        .category-card p {
+            font-size: 0.8rem;
+            color: #666;
+            line-height: 1.5;
+        }
+        .activity-list { list-style: none; }
+        .activity-list li {
+            padding: 8px 0 8px 20px;
+            position: relative;
+            font-size: 0.88rem;
+            color: #444;
+            line-height: 1.5;
+            border-bottom: 1px solid #f5f5f5;
+        }
+        .activity-list li:last-child { border-bottom: none; }
+        .activity-list li::before {
+            content: '✦';
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-size: 0.7rem;
+            top: 10px;
+        }
+        .highlight-box {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 14px 18px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+        .highlight-box h2 {
+            color: white;
+            margin-bottom: 8px;
+        }
+        .highlight-box h2 .cn { color: rgba(255,255,255,0.8); }
+        .highlight-box p { color: rgba(255,255,255,0.92); font-size: 0.9rem; line-height: 1.6; }
+        .tip-box {
+            background: #fff8e1;
+            border-left: 3px solid #ff8f00;
+            padding: 10px 14px;
+            border-radius: 0 6px 6px 0;
+            margin-top: 10px;
+            font-size: 0.82rem;
+            color: #5d4037;
+            line-height: 1.6;
+        }
+        .tip-box strong { color: #e65100; }
+        .success-box {
+            background: #e8f5e9;
+            border-left: 3px solid #2e7d32;
+            padding: 10px 14px;
+            border-radius: 0 6px 6px 0;
+            margin-top: 10px;
+            font-size: 0.82rem;
+            color: #1b5e20;
+            line-height: 1.6;
+        }
+        .success-box strong { color: #2e7d32; }
+        .footer { text-align: center; margin-top: 20px; color: #999; font-size: 0.8rem; }
+        .tier-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.72rem;
+            font-weight: 600;
+            margin-right: 6px;
+        }
+        .tier-gold { background: #fef3c7; color: #92400e; }
+        .tier-silver { background: #f3f4f6; color: #4b5563; }
+        .tier-bronze { background: #fde8d1; color: #9a3412; }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="../index.html" class="logo">yunzhuan<span>.icu</span></a>
+        <div class="nav-links">
+            <a href="../index.html">Majors<span class="cn">专业</span></a>
+            <a href="../schools/index.html">Schools<span class="cn">学校</span></a>
+            <a href="../tests/index.html">Tests<span class="cn">考试</span></a>
+            <a href="../essays/index.html">Essays<span class="cn">文书</span></a>
+            <a href="../rankings.html">Rankings<span class="cn">排名</span></a>
+            <a href="../glossary.html">Glossary<span class="cn">术语</span></a>
+            <a href="../contact.html">Contact<span class="cn">联系</span></a>
+        </div>
+    </nav>
+
+    <h1>Extracurricular Activities Guide</h1>
+    <p class="subtitle">课外活动 & 背景提升指南</p>
+
+    <div class="highlight-box">
+        <h2>Why Extracurriculars Matter <span class="cn">为什么活动重要</span></h2>
+        <p>
+            顶尖大学不只是看分数，更看重你是怎样的人。课外活动能展示你的热情、领导力、影响力和独特性。
+            美国大学申请通常有 10 个活动列表位置，质量远比数量重要！
+        </p>
+    </div>
+
+    <div class="section">
+        <h2>Activity Categories <span class="cn">活动类型</span></h2>
+        <div class="category-grid">
+            <div class="category-card">
+                <h3>Academic / 学术</h3>
+                <p>竞赛、科研、学术俱乐部、发表论文等</p>
+            </div>
+            <div class="category-card">
+                <h3>Leadership / 领导力</h3>
+                <p>学生会、社团社长、组织活动、队长等</p>
+            </div>
+            <div class="category-card">
+                <h3>Community Service / 社区服务</h3>
+                <p>义工、支教、公益项目、社区贡献等</p>
+            </div>
+            <div class="category-card">
+                <h3>Arts / 艺术</h3>
+                <p>音乐、美术、戏剧、舞蹈、设计等</p>
+            </div>
+            <div class="category-card">
+                <h3>Athletics / 体育</h3>
+                <p>校队、俱乐部、个人运动项目等</p>
+            </div>
+            <div class="category-card">
+                <h3>Work / 工作</h3>
+                <p>实习、兼职、创业、家庭责任等</p>
+            </div>
+            <div class="category-card">
+                <h3>Research / 科研</h3>
+                <p>跟着教授做研究、独立研究项目等</p>
+            </div>
+            <div class="category-card">
+                <h3>Unique / 独特活动</h3>
+                <p>个人爱好、特殊经历、与众不同的事</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Activity Tiers <span class="cn">活动含金量分层</span></h2>
+        <p style="font-size:0.85rem;color:#666;margin-bottom:10px;">
+            不是所有活动都一样有价值。以下大致按含金量排序：
+        </p>
+        
+        <h3 style="font-size:0.9rem;color:#333;margin-bottom:6px;margin-top:10px;">
+            <span class="tier-badge tier-gold">Tier 1</span>国家级 / 国际级
+        </h3>
+        <ul class="activity-list">
+            <li>国际奥赛（IMO/IPhO/IChO/IOI 等）奖牌</li>
+            <li>全国性比赛一等奖 / 国家级奖项</li>
+            <li>发表学术论文（SCI/会议等）</li>
+            <li>知名公司核心实习（FLAG 等）</li>
+            <li>创业获得融资 / 营收可观</li>
+            <li>有影响力的社会公益项目（影响千人以上）</li>
+        </ul>
+
+        <h3 style="font-size:0.9rem;color:#333;margin-bottom:6px;margin-top:12px;">
+            <span class="tier-badge tier-silver">Tier 2</span>省级 / 地区级
+        </h3>
+        <ul class="activity-list">
+            <li>省级竞赛一等奖 / 地区级奖项</li>
+            <li>知名大学夏校（如 ROSS、PROMYS、SUMaC）</li>
+            <li>跟着大学教授做科研（有推荐信/成果）</li>
+            <li>学生会主席 / 社团社长（有实际成果）</li>
+            <li>校队队长 + 地区比赛成绩</li>
+            <li>创办有一定规模的社团/组织</li>
+        </ul>
+
+        <h3 style="font-size:0.9rem;color:#333;margin-bottom:6px;margin-top:12px;">
+            <span class="tier-badge tier-bronze">Tier 3</span>校级 / 参与级
+        </h3>
+        <ul class="activity-list">
+            <li>参加各种社团（普通成员）</li>
+            <li>志愿者活动（零散参与）</li>
+            <li>校级比赛奖项</li>
+            <li>普通夏校 / 游学项目</li>
+            <li>兴趣爱好（单纯个人参与）</li>
+        </ul>
+
+        <div class="tip-box">
+            <strong>💡 关键原则：</strong><br>
+            · 质量 > 数量：2-3 个深入的活动胜过 10 个打酱油的<br>
+            · 持续时间长 > 短期参与：坚持 2-3 年的活动比临时凑的好<br>
+            · 有领导力/影响力 > 普通参与：从成员做到社长，体现成长<br>
+            · 和专业方向相关 > 不相关：申请 CS 就多做点编程相关的
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>By Major <span class="cn">按专业推荐活动</span></h2>
+        
+        <h3 style="font-size:0.9rem;color:#333;margin-bottom:6px;">💻 Computer Science / 计算机</h3>
+        <ul class="activity-list">
+            <li>编程竞赛：USACO、Codeforces、NOIP/NOI、Kaggle</li>
+            <li>个人项目：做网站、App、开源项目放到 GitHub</li>
+            <li>科研：跟着教授做 AI/ML/CS 相关研究</li>
+            <li>实习：科技公司实习（哪怕是小公司）</li>
+            <li>夏校：ROSS、SUMaC、AI4ALL、UC Berkeley COSMOS</li>
+            <li>社团：编程社、机器人队（FRC/FTC）、CS 相关的 club</li>
+            <li>黑客松：参加 hackathon，组队做项目</li>
+        </ul>
+
+        <h3 style="font-size:0.9rem;color:#333;margin-bottom:6px;margin-top:12px;">🔬 Engineering / 工程</h3>
+        <ul class="activity-list">
+            <li>机器人竞赛：FRC、FTC、VEX、RoboMaster</li>
+            <li>工程竞赛：全国青少年科技创新大赛、ISEF</li>
+            <li>科研：跟着工程教授做实验/项目</li>
+            <li>实习：工程公司、制造业实习</li>
+            <li>夏校：ESAP、MIT LaunchX、Engineering Summer Academy</li>
+            <li>个人项目：做小发明、3D 打印、DIY 项目</li>
+        </ul>
+
+        <h3 style="font-size:0.9rem;color:#333;margin-bottom:6px;margin-top:12px;">💼 Business / 商科</h3>
+        <ul class="activity-list">
+            <li>商业竞赛：DECA、FBLA、商赛、创业比赛</li>
+            <li>创业/实习：自己做小生意、公司实习</li>
+            <li>金融相关：炒股/投资模拟、金融竞赛</li>
+            <li>学生会/社团组织：体现领导力和管理能力</li>
+            <li>夏校：LBW（Wharton）、YYGS、LaunchX</li>
+            <li>社会企业：把公益和商业结合的项目</li>
+        </ul>
+
+        <h3 style="font-size:0.9rem;color:#333;margin-bottom:6px;margin-top:12px;">🧬 Biology / Medical / 生物医学</h3>
+        <ul class="activity-list">
+            <li>生物竞赛：USABO、BBO、iGEM、奥赛</li>
+            <li>科研：在大学/医院实验室做生物/医学研究</li>
+            <li>夏校：RSI、SSP、Simons Summer Research</li>
+            <li>志愿/义工：医院志愿者、义诊、健康相关公益</li>
+            <li>发表论文：哪怕是共同作者也很有帮助</li>
+            <li>相关社团：生物社、医学社、心理健康社</li>
+        </ul>
+
+        <h3 style="font-size:0.9rem;color:#333;margin-bottom:6px;margin-top:12px;">📚 Social Sciences / 社科</h3>
+        <ul class="activity-list">
+            <li>辩论赛：NSDA、NHSDLC、辩论赛奖项</li>
+            <li>模拟联合国：MUN 参会、拿奖、办会</li>
+            <li>社会调研：自己做社会调查/研究</li>
+            <li>公益/义工：持续深入的社区服务</li>
+            <li>学生政府/学生会：体现领导力</li>
+            <li>夏校：YYGS、Pioneer、SSP（社科类）</li>
+        </ul>
+
+        <h3 style="font-size:0.9rem;color:#333;margin-bottom:6px;margin-top:12px;">🎨 Arts & Design / 艺术设计</h3>
+        <ul class="activity-list">
+            <li>艺术作品集：高质量的 portfolio 是关键</li>
+            <li>艺术比赛/展览：参加比赛、办个展、获奖</li>
+            <li>相关项目：设计网站、做品牌、拍电影等</li>
+            <li>夏校：艺术院校的夏校（RISD、Parsons 等）</li>
+            <li>社团：艺术社、摄影社、戏剧社、乐队</li>
+            <li>个人品牌：社交媒体展示作品（Behance、Instagram）</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Common Mistakes <span class="cn">常见误区</span></h2>
+        <div class="tip-box">
+            <strong>❌ 错误做法：</strong><br>
+            · 为了凑数参加一大堆活动，每个都浅尝辄止<br>
+            · 高三才开始"临时抱佛脚"做活动<br>
+            · 只做"高大上"但自己不感兴趣的活动<br>
+            · 花钱买一堆"水"的背景提升项目<br>
+            · 活动列表写得像简历，没有突出影响力
+        </div>
+        <div class="success-box" style="margin-top:8px;">
+            <strong>✅ 正确做法：</strong><br>
+            · 专注 2-3 个方向，做深做透<br>
+            · 从 9/10 年级就开始规划，循序渐进<br>
+            · 选自己真正感兴趣的，才能坚持和出成果<br>
+            · 用数据和成果体现影响力（影响了多少人、获得了什么、创造了什么）<br>
+            · 展现成长轨迹：从参与者到领导者
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Activity List Writing Tips <span class="cn">活动列表填写技巧</span></h2>
+        <ul class="activity-list">
+            <li><strong>用动词开头：</strong>Founded, Led, Organized, Developed, Conducted 等</li>
+            <li><strong>量化成果：</strong>用数字说话（管理 X 人、筹集 X 元、影响 X 人、获得 X 奖）</li>
+            <li><strong>突出成长：</strong>从 member → leader 的过程很重要</li>
+            <li><strong>按重要性排序：</strong>最牛的活动放第一个</li>
+            <li><strong>分类展示：</strong>体现你是一个"立体"的人，不是只会读书</li>
+            <li><strong>注意字数限制：</strong>Common App 活动描述只有 150 字符，要精炼</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Sample Activity List <span class="cn">活动列表示例</span></h2>
+        <p style="font-size:0.85rem;color:#666;margin-bottom:10px;">
+            一个申请 CS 的学生的活动列表（仅供参考，请勿照搬）：
+        </p>
+        <ol style="font-size:0.85rem;color:#444;line-height:1.8;padding-left:20px;">
+            <li>USACO 铂金组 / 全国前 50</li>
+            <li>创办编程社，担任社长，50+ 成员</li>
+            <li>跟着大学教授做 AI 科研（6 个月）</li>
+            <li>科技公司实习，做前端开发</li>
+            <li>GitHub 上两个开源项目，300+ stars</li>
+            <li>数学竞赛：AMC 12 130+，AIME 晋级</li>
+            <li>校游泳队队长，区级比赛银牌</li>
+            <li>义务教小朋友编程（30+ 学生，持续 1 年）</li>
+            <li>学校广播站技术负责人</li>
+            <li>个人爱好：摄影（5 年）</li>
+        </ol>
+    </div>
+
+    <p class="footer">&copy; 2026 yunzhuan.icu | EC Guide</p>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <div style="text-align:center;padding:8px 0;font-size:0.75rem;color:#aaa;">
+        <a href="../index.html" style="color:#aaa;text-decoration:none;">Home</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="../essays/index.html" style="color:#aaa;text-decoration:none;">Essays</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="../interviews/index.html" style="color:#aaa;text-decoration:none;">Interviews</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="../contact.html" style="color:#aaa;text-decoration:none;">Contact</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="javascript:window.scrollTo(0,0)" style="color:#aaa;text-decoration:none;">Back to top</a>
+    </div>
+</body>
+</html>

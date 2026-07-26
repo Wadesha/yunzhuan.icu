@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Abroad Guides - 留学指南中心 - yunzhuan.icu</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 16px 20px;
+            background: #f5f5f5;
+            color: #333;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            margin-bottom: 16px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .logo {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #667eea;
+            text-decoration: none;
+        }
+        .logo span { color: #764ba2; }
+        .nav-links {
+            display: flex;
+            gap: 18px;
+            align-items: center;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: #555;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: color 0.15s;
+        }
+        .nav-links a:hover { color: #667eea; }
+        .nav-links .cn {
+            font-size: 0.7rem;
+            color: #aaa;
+            margin-left: 2px;
+        }
+        @media (max-width: 768px) {
+            .navbar { flex-wrap: wrap; gap: 8px; }
+            .nav-links { gap: 12px; }
+            .nav-links a { font-size: 0.78rem; }
+            .nav-links .cn { display: none; }
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 4px;
+            font-size: 1.6rem;
+        }
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
+        .section {
+            background: white;
+            border-radius: 10px;
+            padding: 16px 20px;
+            margin-bottom: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .section h2 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #ede9fe;
+        }
+        .section h2 .cn { color: #999; font-size: 0.85rem; font-weight: normal; margin-left: 8px; }
+        .guide-list { list-style: none; }
+        .guide-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid #f5f5f5;
+        }
+        .guide-list li:last-child { border-bottom: none; }
+        .guide-list a {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-decoration: none;
+            color: #333;
+            transition: color 0.15s;
+        }
+        .guide-list a:hover { color: #667eea; }
+        .guide-title {
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+        .guide-title .cn {
+            color: #666;
+            font-weight: normal;
+            font-size: 0.85rem;
+            margin-left: 6px;
+        }
+        .guide-desc {
+            color: #888;
+            font-size: 0.82rem;
+            margin-top: 4px;
+        }
+        .guide-count {
+            background: #ede9fe;
+            color: #5b21b6;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.78rem;
+            font-weight: 500;
+        }
+        .footer { text-align: center; margin-top: 20px; color: #999; font-size: 0.8rem; }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="../index.html" class="logo">yunzhuan<span>.icu</span></a>
+        <div class="nav-links">
+            <a href="../index.html">Majors<span class="cn">专业</span></a>
+            <a href="../schools/index.html">Schools<span class="cn">学校</span></a>
+            <a href="../tests/index.html">Tests<span class="cn">考试</span></a>
+            <a href="../essays/index.html">Essays<span class="cn">文书</span></a>
+            <a href="../rankings.html">Rankings<span class="cn">排名</span></a>
+            <a href="index.html" style="color:#667eea;font-weight:600;">Guides<span class="cn">指南</span></a>
+            <a href="../resources.html">Resources<span class="cn">资源</span></a>
+            <a href="../contact.html">Contact<span class="cn">联系</span></a>
+        </div>
+    </nav>
+
+    <h1>Study Abroad Guides</h1>
+    <p class="subtitle">留学指南中心 · 从申请到毕业的全流程指南</p>
+
+    <div class="section">
+        <h2>Application / 申请阶段 <span class="cn">申请季</span></h2>
+        <ul class="guide-list">
+            <li>
+                <a href="../essays/essay-samples.html">
+                    <div>
+                        <div class="guide-title">Essay Samples <span class="cn">文书范文</span></div>
+                        <div class="guide-desc">Common App 主文书范文 + 解析，助你写出好文书</div>
+                    </div>
+                    <span class="guide-count">10篇</span>
+                </a>
+            </li>
+            <li>
+                <a href="../essays/ps-writing-guide.html">
+                    <div>
+                        <div class="guide-title">Personal Statement Guide <span class="cn">PS写作指南</span></div>
+                        <div class="guide-desc">从 brainstorm 到定稿，手把手教你写文书</div>
+                    </div>
+                    <span class="guide-count">完整指南</span>
+                </a>
+            </li>
+            <li>
+                <a href="../tests/application-checklist.html">
+                    <div>
+                        <div class="guide-title">Application Checklist <span class="cn">申请清单</span></div>
+                        <div class="guide-desc">美/英/加申请材料清单，进度自动保存</div>
+                    </div>
+                    <span class="guide-count">交互式</span>
+                </a>
+            </li>
+            <li>
+                <a href="../application-timeline.html">
+                    <div>
+                        <div class="guide-title">Application Timeline <span class="cn">申请时间线</span></div>
+                        <div class="guide-desc">从高二到大四，规划你的申请节奏</div>
+                    </div>
+                    <span class="guide-count">规划工具</span>
+                </a>
+            </li>
+            <li>
+                <a href="../interviews/index.html">
+                    <div>
+                        <div class="guide-title">Interview Guide <span class="cn">面试指南</span></div>
+                        <div class="guide-desc">美本/牛剑面试经验、常见问题、准备策略</div>
+                    </div>
+                    <span class="guide-count">4篇</span>
+                </a>
+            </li>
+            <li>
+                <a href="../glossary.html">
+                    <div>
+                        <div class="guide-title">Application Glossary <span class="cn">申请术语表</span></div>
+                        <div class="guide-desc">申请中常见英文缩写和专业术语解释</div>
+                    </div>
+                    <span class="guide-count">50+术语</span>
+                </a>
+            </li>
+            <li>
+                <a href="../faq.html">
+                    <div>
+                        <div class="guide-title">FAQ <span class="cn">常见问题</span></div>
+                        <div class="guide-desc">申请、签证、生活、就业常见问题解答</div>
+                    </div>
+                    <span class="guide-count">40+问题</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Tests & Scores <span class="cn">考试标化</span></h2>
+        <ul class="guide-list">
+            <li>
+                <a href="../tests/score-converter.html">
+                    <div>
+                        <div class="guide-title">Score Converter <span class="cn">分数换算器</span></div>
+                        <div class="guide-desc">SAT/ACT/TOEFL/IELTS/DET 分数换算</div>
+                    </div>
+                    <span class="guide-count">工具</span>
+                </a>
+            </li>
+            <li>
+                <a href="../tests/gpa-calculator.html">
+                    <div>
+                        <div class="guide-title">GPA Calculator <span class="cn">GPA计算器</span></div>
+                        <div class="guide-desc">4.0制/百分制/A-Level/IB 多种体系转换</div>
+                    </div>
+                    <span class="guide-count">工具</span>
+                </a>
+            </li>
+            <li>
+                <a href="../tests/vocab-test.html">
+                    <div>
+                        <div class="guide-title">Vocabulary Test <span class="cn">词汇量测试</span></div>
+                        <div class="guide-desc">测测你的英语词汇量有多少</div>
+                    </div>
+                    <span class="guide-count">测试</span>
+                </a>
+            </li>
+            <li>
+                <a href="../tests/igcse-prep.html">
+                    <div>
+                        <div class="guide-title">IGCSE Prep Guide <span class="cn">IGCSE备考</span></div>
+                        <div class="guide-desc">考试大纲、备考计划、资源推荐</div>
+                    </div>
+                    <span class="guide-count">指南</span>
+                </a>
+            </li>
+            <li>
+                <a href="../tests/ib-prep.html">
+                    <div>
+                        <div class="guide-title">IB Prep Guide <span class="cn">IB备考</span></div>
+                        <div class="guide-desc">IB 课程选择、备考策略、资源推荐</div>
+                    </div>
+                    <span class="guide-count">指南</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>School Selection / 选校<span class="cn">择校</span></h2>
+        <ul class="guide-list">
+            <li>
+                <a href="../schools/compare.html">
+                    <div>
+                        <div class="guide-title">School Compare <span class="cn">选校对比</span></div>
+                        <div class="guide-desc">多维度对比不同学校，帮你选校</div>
+                    </div>
+                    <span class="guide-count">工具</span>
+                </a>
+            </li>
+            <li>
+                <a href="../schools/matcher.html">
+                    <div>
+                        <div class="guide-title">School Matcher <span class="cn">选校推荐</span></div>
+                        <div class="guide-desc">根据你的背景智能推荐匹配学校</div>
+                    </div>
+                    <span class="guide-count">工具</span>
+                </a>
+            </li>
+            <li>
+                <a href="../rankings.html">
+                    <div>
+                        <div class="guide-title">Rankings <span class="cn">专业排名</span></div>
+                        <div class="guide-desc">各专业领域美国大学排名参考</div>
+                    </div>
+                    <span class="guide-count">排名</span>
+                </a>
+            </li>
+            <li>
+                <a href="../salary.html">
+                    <div>
+                        <div class="guide-title">Salary & Outlook <span class="cn">薪资就业</span></div>
+                        <div class="guide-desc">各专业薪资水平与就业前景</div>
+                    </div>
+                    <span class="guide-count">40+专业</span>
+                </a>
+            </li>
+            <li>
+                <a href="../cost-calculator.html">
+                    <div>
+                        <div class="guide-title">Cost Calculator <span class="cn">费用计算器</span></div>
+                        <div class="guide-desc">估算不同国家留学总费用</div>
+                    </div>
+                    <span class="guide-count">工具</span>
+                </a>
+            </li>
+            <li>
+                <a href="../scholarships/index.html">
+                    <div>
+                        <div class="guide-title">Scholarships <span class="cn">奖学金</span></div>
+                        <div class="guide-desc">美/英/加奖学金类型、申请策略</div>
+                    </div>
+                    <span class="guide-count">4篇</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Visa & Pre-Departure <span class="cn">签证与行前</span></h2>
+        <ul class="guide-list">
+            <li>
+                <a href="../visa-guide.html">
+                    <div>
+                        <div class="guide-title">Visa Guide <span class="cn">签证指南</span></div>
+                        <div class="guide-desc">美国 F-1 学生签证申请全流程</div>
+                    </div>
+                    <span class="guide-count">完整指南</span>
+                </a>
+            </li>
+            <li>
+                <a href="../predeparture.html">
+                    <div>
+                        <div class="guide-title">Pre-Departure Guide <span class="cn">行前准备</span></div>
+                        <div class="guide-desc">行李清单、出发前准备、海关注意事项</div>
+                    </div>
+                    <span class="guide-count">交互式</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>College Life / 校园生活 <span class="cn">美国大学</span></h2>
+        <ul class="guide-list">
+            <li>
+                <a href="../course-guide.html">
+                    <div>
+                        <div class="guide-title">Course Registration Guide <span class="cn">选课指南</span></div>
+                        <div class="guide-desc">新生选课攻略、四年规划、GPA技巧</div>
+                    </div>
+                    <span class="guide-count">完整指南</span>
+                </a>
+            </li>
+            <li>
+                <a href="../campus-life.html">
+                    <div>
+                        <div class="guide-title">Campus Life Guide <span class="cn">校园生活</span></div>
+                        <div class="guide-desc">吃喝住行学、社团活动、安全、文化适应</div>
+                    </div>
+                    <span class="guide-count">生存手册</span>
+                </a>
+            </li>
+            <li>
+                <a href="../career-guide.html">
+                    <div>
+                        <div class="guide-title">Internship & Career Guide <span class="cn">实习职业</span></div>
+                        <div class="guide-desc">找实习、简历、面试、职业规划</div>
+                    </div>
+                    <span class="guide-count">完整指南</span>
+                </a>
+            </li>
+            <li>
+                <a href="../extracurriculars.html">
+                    <div>
+                        <div class="guide-title">Extracurriculars Guide <span class="cn">背景提升</span></div>
+                        <div class="guide-desc">课外活动规划、竞赛、科研、志愿者</div>
+                    </div>
+                    <span class="guide-count">指南</span>
+                </a>
+            </li>
+            <li>
+                <a href="../major-quiz.html">
+                    <div>
+                        <div class="guide-title">Major Quiz <span class="cn">专业测评</span></div>
+                        <div class="guide-desc">测测你适合什么专业</div>
+                    </div>
+                    <span class="guide-count">测评</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Resources / 资源 <span class="cn">推荐</span></h2>
+        <ul class="guide-list">
+            <li>
+                <a href="../resources.html">
+                    <div>
+                        <div class="guide-title">Resources <span class="cn">留学资源</span></div>
+                        <div class="guide-desc">推荐网站、书籍、工具等</div>
+                    </div>
+                    <span class="guide-count">汇总</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <p class="footer">&copy; 2026 yunzhuan.icu | Study Abroad Guides</p>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <div style="text-align:center;padding:10px 0;font-size:0.75rem;color:#aaa;">
+        <a href="../index.html" style="color:#aaa;text-decoration:none;">Home</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="../contact.html" style="color:#aaa;text-decoration:none;">Contact</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="javascript:window.scrollTo(0,0)" style="color:#aaa;text-decoration:none;">Back to top</a>
+    </div>
+</body>
+</html>

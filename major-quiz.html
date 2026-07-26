@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Major Quiz - Find Your Perfect Major - yunzhuan.icu</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 20px 16px;
+            background: #f5f5f5;
+            color: #333;
+        }
+        .back-link { color: #667eea; text-decoration: none; font-size: 0.85rem; margin-bottom: 12px; display: inline-block; }
+        .back-link:hover { text-decoration: underline; }
+        h1 { color: #333; margin-bottom: 4px; font-size: 1.4rem; }
+        .en-name { color: #888; font-size: 0.95rem; margin-bottom: 4px; font-weight: normal; }
+        .code-line { color: #888; font-size: 0.82rem; margin-bottom: 14px; }
+        .section {
+            background: white;
+            border-radius: 8px;
+            padding: 16px 20px;
+            margin-bottom: 10px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .section h2 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        .section h2 .en { color: #999; font-size: 0.8rem; font-weight: normal; }
+        .section p { color: #333; line-height: 1.7; font-size: 0.92rem; }
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e9ecef;
+            border-radius: 4px;
+            margin-bottom: 14px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+            width: 0%;
+        }
+        .progress-text {
+            text-align: right;
+            font-size: 0.8rem;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        .question {
+            margin-bottom: 14px;
+        }
+        .question .q-text {
+            font-weight: 600;
+            color: #333;
+            font-size: 0.95rem;
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .option-btn {
+            text-align: left;
+            padding: 10px 14px;
+            border: 2px solid #e9ecef;
+            background: white;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.88rem;
+            color: #333;
+            transition: all 0.15s;
+            line-height: 1.4;
+        }
+        .option-btn:hover {
+            border-color: #667eea;
+            background: #f8f9ff;
+        }
+        .option-btn.selected {
+            border-color: #667eea;
+            background: #f0f4ff;
+            color: #3730a3;
+        }
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 16px;
+        }
+        .nav-btn {
+            padding: 8px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.88rem;
+            transition: all 0.15s;
+        }
+        .nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .nav-btn.prev {
+            background: #f5f5f5;
+            color: #666;
+        }
+        .nav-btn.prev:hover:not(:disabled) { background: #eee; }
+        .nav-btn.next {
+            background: #667eea;
+            color: white;
+        }
+        .nav-btn.next:hover:not(:disabled) { background: #5a67d8; }
+        .result-card {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 14px;
+            text-align: center;
+        }
+        .result-card .top-match {
+            font-size: 0.85rem;
+            opacity: 0.9;
+            margin-bottom: 6px;
+        }
+        .result-card .major-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+        .result-card .match-score {
+            font-size: 1.1rem;
+            opacity: 0.95;
+        }
+        .result-list { list-style: none; }
+        .result-list li {
+            padding: 10px 14px;
+            background: #f8f9ff;
+            border-radius: 8px;
+            margin-bottom: 6px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .result-list .major {
+            font-weight: 600;
+            color: #333;
+            font-size: 0.92rem;
+        }
+        .result-list .score-bar {
+            flex: 1;
+            margin: 0 12px;
+            height: 8px;
+            background: #e9ecef;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .result-list .score-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 4px;
+        }
+        .result-list .pct {
+            font-weight: 600;
+            color: #667eea;
+            font-size: 0.85rem;
+            min-width: 45px;
+            text-align: right;
+        }
+        .category-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 10px;
+        }
+        .category-tag {
+            padding: 4px 10px;
+            background: #f0fdf4;
+            color: #16a34a;
+            border-radius: 4px;
+            font-size: 0.78rem;
+            font-weight: 500;
+        }
+        .retake-btn {
+            width: 100%;
+            padding: 10px;
+            background: #f0f4ff;
+            color: #667eea;
+            border: 1px solid #c7d2fe;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            margin-top: 14px;
+            transition: all 0.15s;
+        }
+        .retake-btn:hover { background: #e0e7ff; }
+        .tip-box {
+            background: #fff8e1;
+            border-left: 3px solid #ff8f00;
+            padding: 10px 14px;
+            border-radius: 0 6px 6px 0;
+            margin-top: 10px;
+            font-size: 0.82rem;
+            color: #5d4037;
+            line-height: 1.6;
+        }
+        .footer { text-align: center; margin-top: 20px; color: #999; font-size: 0.8rem; }
+    </style>
+</head>
+<body>
+    <a href="../index.html" class="back-link">&larr; Back to Home</a>
+
+    <h1>Major Interest Quiz</h1>
+    <p class="en-name">专业兴趣测评</p>
+    <p class="code-line">12 questions · ~2 minutes · Find your fit</p>
+
+    <div class="section" id="quiz-section">
+        <h2>Quiz <span class="en">答题中</span></h2>
+        <div class="progress-bar"><div class="progress-fill" id="quiz-progress"></div></div>
+        <div class="progress-text" id="quiz-progress-text">0 / 12</div>
+        
+        <div id="question-container"></div>
+        
+        <div class="nav-buttons">
+            <button class="nav-btn prev" id="prev-btn" onclick="prevQuestion()" disabled>← Back</button>
+            <button class="nav-btn next" id="next-btn" onclick="nextQuestion()" disabled>Next →</button>
+        </div>
+    </div>
+
+    <div class="section" id="result-section" style="display:none;">
+        <h2>Your Results <span class="en">测评结果</span></h2>
+        <div class="result-card">
+            <div class="top-match">Your Top Match</div>
+            <div class="major-name" id="top-major">—</div>
+            <div class="match-score" id="top-score">—</div>
+        </div>
+        <p style="font-size:0.88rem;color:#555;margin-bottom:10px;">基于你的兴趣和能力，以下专业可能比较适合你：</p>
+        <ul class="result-list" id="result-list"></ul>
+        <div class="category-tags" id="category-tags"></div>
+        <button class="retake-btn" onclick="retakeQuiz()">🔄 Retake the Quiz / 重新测试</button>
+        <div class="tip-box" style="margin-top:14px;">
+            <strong>💡 温馨提示：</strong><br>
+            这只是一个参考性测评，帮助你探索可能的方向。选专业还需要结合：你的实际成绩、长远职业目标、价值观、地理位置偏好等因素。建议多方了解后再做决定。
+        </div>
+    </div>
+
+    <p class="footer">&copy; 2026 yunzhuan.icu | Major Quiz</p>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <div style="text-align:center;padding:8px 0;font-size:0.75rem;color:#aaa;">
+        <a href="../index.html" style="color:#aaa;text-decoration:none;">Home</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="../tests/index.html" style="color:#aaa;text-decoration:none;">Tests</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="../contact.html" style="color:#aaa;text-decoration:none;">Contact</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="javascript:window.scrollTo(0,0)" style="color:#aaa;text-decoration:none;">Back to top</a>
+    </div>
+
+    <script>
+    const questions = [
+        {
+            q: "你最喜欢哪类课程？",
+            options: [
+                { text: "数学和物理", scores: { cs: 2, engineering: 2, science: 1, business: 0 } },
+                { text: "编程和科技", scores: { cs: 3, engineering: 1, design: 1, business: 0 } },
+                { text: "商业和经济", scores: { business: 3, social: 1, cs: 0, engineering: 0 } },
+                { text: "生物和化学", scores: { biology: 3, science: 2, engineering: 0 } },
+                { text: "历史和社会", scores: { social: 3, humanities: 2, education: 1 } },
+                { text: "艺术和设计", scores: { arts: 3, design: 2, cs: 0 } },
+            ]
+        },
+        {
+            q: "课余时间你最可能在做什么？",
+            options: [
+                { text: "玩游戏/研究电子产品", scores: { cs: 2, engineering: 1, arts: 0 } },
+                { text: "做实验/研究科学问题", scores: { science: 2, biology: 2, engineering: 1 } },
+                { text: "看书/写文章/辩论", scores: { humanities: 2, social: 2, education: 1 } },
+                { text: "画画/设计/拍视频", scores: { arts: 3, design: 2, cs: 0 } },
+                { text: "组织活动/交朋友", scores: { business: 2, social: 1, education: 1 } },
+                { text: "运动/户外", scores: { biology: 1, education: 1, science: 0 } },
+            ]
+        },
+        {
+            q: "做小组项目时，你通常扮演什么角色？",
+            options: [
+                { text: "技术担当：负责写代码/做技术方案", scores: { cs: 3, engineering: 2, science: 1 } },
+                { text: "领导角色：统筹协调、分配任务", scores: { business: 2, education: 1, social: 1 } },
+                { text: "创意担当：出点子、设计视觉", scores: { arts: 2, design: 2, cs: 0 } },
+                { text: "分析担当：做数据分析、研究", scores: { science: 2, business: 1, social: 1 } },
+                { text: "写作担当：负责文字和报告", scores: { humanities: 2, social: 2, education: 1 } },
+            ]
+        },
+        {
+            q: "你理想的工作环境是？",
+            options: [
+                { text: "科技公司/创业公司", scores: { cs: 3, engineering: 1, business: 1 } },
+                { text: "医院/研究机构/实验室", scores: { biology: 3, science: 2, engineering: 0 } },
+                { text: "写字楼/金融机构", scores: { business: 3, social: 1, cs: 1 } },
+                { text: "学校/教育机构", scores: { education: 3, social: 1, biology: 0 } },
+                { text: "设计工作室/媒体公司", scores: { arts: 3, design: 2, social: 0 } },
+                { text: "NGO/政府/国际组织", scores: { social: 3, humanities: 1, education: 1 } },
+            ]
+        },
+        {
+            q: "你最看重工作中的什么？",
+            options: [
+                { text: "高薪和职业发展", scores: { cs: 2, business: 3, engineering: 1 } },
+                { text: "创造力和自我表达", scores: { arts: 3, design: 2, cs: 0 } },
+                { text: "帮助他人/社会贡献", scores: { education: 2, social: 2, biology: 2 } },
+                { text: "智力挑战/解决难题", scores: { science: 2, engineering: 2, cs: 2 } },
+                { text: "稳定和工作生活平衡", scores: { education: 2, biology: 1, business: 0 } },
+            ]
+        },
+        {
+            q: "你对编程的态度是？",
+            options: [
+                { text: "超喜欢！经常自己写东西", scores: { cs: 3, engineering: 1, science: 0 } },
+                { text: "有兴趣，但不太会", scores: { cs: 2, engineering: 1, design: 1 } },
+                { text: "一般，工作需要就学", scores: { business: 1, engineering: 1, science: 1 } },
+                { text: "不太感兴趣", scores: { arts: 1, education: 1, social: 2, biology: 1 } },
+            ]
+        },
+        {
+            q: "你更喜欢哪种类型的书/电影？",
+            options: [
+                { text: "科幻/悬疑/烧脑", scores: { science: 2, cs: 2, engineering: 1 } },
+                { text: "历史/传记/纪实", scores: { humanities: 3, social: 2, education: 0 } },
+                { text: "商业/人物/成功学", scores: { business: 3, social: 1, cs: 0 } },
+                { text: "艺术/设计/创意", scores: { arts: 3, design: 2, education: 0 } },
+                { text: "心理学/自我成长", scores: { social: 2, education: 1, biology: 1 } },
+            ]
+        },
+        {
+            q: "高中时你最强的科目是？",
+            options: [
+                { text: "数学/物理", scores: { engineering: 2, cs: 2, science: 2, business: 1 } },
+                { text: "生物/化学", scores: { biology: 3, science: 2, engineering: 0 } },
+                { text: "语文/英语/历史", scores: { humanities: 3, education: 1, social: 2 } },
+                { text: "经济/政治/社会学", scores: { social: 3, business: 2, humanities: 1 } },
+                { text: "美术/音乐/设计", scores: { arts: 3, design: 2, education: 0 } },
+            ]
+        },
+        {
+            q: "你更擅长？",
+            options: [
+                { text: "逻辑推理、解决问题", scores: { cs: 2, engineering: 2, science: 2 } },
+                { text: "动手实验、观察研究", scores: { biology: 2, science: 2, engineering: 1 } },
+                { text: "语言表达、写作沟通", scores: { humanities: 2, social: 2, education: 1 } },
+                { text: "艺术创作、视觉设计", scores: { arts: 3, design: 2, cs: 0 } },
+                { text: "组织管理、人际沟通", scores: { business: 2, education: 1, social: 2 } },
+            ]
+        },
+        {
+            q: "如果有一个学期可以去做任何事，你会选？",
+            options: [
+                { text: "做一个独立的软件项目", scores: { cs: 3, engineering: 1, design: 1 } },
+                { text: "参与一个科学研究项目", scores: { science: 3, biology: 2, engineering: 1 } },
+                { text: "创业/做一个小生意", scores: { business: 3, social: 1, cs: 1 } },
+                { text: "去支教/做志愿者", scores: { education: 2, social: 2, biology: 1 } },
+                { text: "学一门艺术/设计技能", scores: { arts: 3, design: 2, education: 0 } },
+                { text: "环游世界/体验不同文化", scores: { social: 2, humanities: 2, education: 1 } },
+            ]
+        },
+        {
+            q: "你对未来职业的期待更偏向？",
+            options: [
+                { text: "技术专家/工程师", scores: { cs: 2, engineering: 2, science: 1 } },
+                { text: "医生/科学家/研究员", scores: { biology: 3, science: 2, engineering: 0 } },
+                { text: "商业领袖/创业者", scores: { business: 3, social: 1, cs: 1 } },
+                { text: "设计师/艺术家/创作者", scores: { arts: 3, design: 2, cs: 0 } },
+                { text: "教育者/社会活动家", scores: { education: 2, social: 2, humanities: 1 } },
+            ]
+        },
+        {
+            q: "你觉得自己更偏？",
+            options: [
+                { text: "理性、逻辑强", scores: { cs: 2, engineering: 2, science: 2, business: 1 } },
+                { text: "感性、创造力强", scores: { arts: 3, design: 1, education: 1 } },
+                { text: "善于沟通、人来熟", scores: { business: 2, social: 2, education: 2 } },
+                { text: "细心、爱研究", scores: { science: 2, biology: 2, engineering: 1 } },
+                { text: "有领导力、爱折腾", scores: { business: 2, cs: 1, social: 1, education: 1 } },
+            ]
+        },
+    ];
+
+    const majorMap = {
+        cs: { name: "Computer Science / 计算机科学", en: "Computer Science", category: "computer" },
+        engineering: { name: "Engineering / 工程学", en: "Engineering", category: "engineering" },
+        science: { name: "Natural Sciences / 自然科学", en: "Natural Sciences", category: "science" },
+        business: { name: "Business & Finance / 商科金融", en: "Business", category: "business" },
+        biology: { name: "Biology & Health / 生物健康", en: "Biology & Health", category: "biology" },
+        social: { name: "Social Sciences / 社会科学", en: "Social Sciences", category: "social" },
+        arts: { name: "Arts & Design / 艺术设计", en: "Arts & Design", category: "arts" },
+        education: { name: "Education / 教育学", en: "Education", category: "education" },
+        humanities: { name: "Humanities / 人文学科", en: "Humanities", category: "social" },
+        design: { name: "Design & HCI / 设计交互", en: "Design & HCI", category: "arts" },
+    };
+
+    let currentQuestion = 0;
+    let answers = new Array(questions.length).fill(null);
+
+    function renderQuestion() {
+        const q = questions[currentQuestion];
+        const container = document.getElementById('question-container');
+        
+        let html = '<div class="question">';
+        html += '<div class="q-text">' + (currentQuestion + 1) + '. ' + q.q + '</div>';
+        html += '<div class="options">';
+        q.options.forEach((opt, i) => {
+            const selected = answers[currentQuestion] === i ? 'selected' : '';
+            html += '<button class="option-btn ' + selected + '" onclick="selectOption(' + i + ')">' + opt.text + '</button>';
+        });
+        html += '</div></div>';
+        container.innerHTML = html;
+
+        document.getElementById('quiz-progress').style.width = ((currentQuestion + 1) / questions.length * 100) + '%';
+        document.getElementById('quiz-progress-text').textContent = (currentQuestion + 1) + ' / ' + questions.length;
+        document.getElementById('prev-btn').disabled = currentQuestion === 0;
+        document.getElementById('next-btn').disabled = answers[currentQuestion] === null;
+        document.getElementById('next-btn').textContent = currentQuestion === questions.length - 1 ? 'See Results →' : 'Next →';
+    }
+
+    function selectOption(i) {
+        answers[currentQuestion] = i;
+        renderQuestion();
+    }
+
+    function prevQuestion() {
+        if (currentQuestion > 0) {
+            currentQuestion--;
+            renderQuestion();
+        }
+    }
+
+    function nextQuestion() {
+        if (answers[currentQuestion] === null) return;
+        if (currentQuestion < questions.length - 1) {
+            currentQuestion++;
+            renderQuestion();
+        } else {
+            showResults();
+        }
+    }
+
+    function calculateScores() {
+        const scores = {};
+        for (const key in majorMap) scores[key] = 0;
+        
+        answers.forEach((ans, qIdx) => {
+            if (ans === null) return;
+            const opt = questions[qIdx].options[ans];
+            for (const key in opt.scores) {
+                scores[key] = (scores[key] || 0) + opt.scores[key];
+            }
+        });
+        
+        const sorted = Object.entries(scores).sort((a, b) => b[1] - a[1]);
+        const maxScore = sorted[0][1];
+        return sorted.map(([key, score]) => ({
+            key,
+            score,
+            pct: maxScore > 0 ? Math.round((score / maxScore) * 100) : 0
+        }));
+    }
+
+    function showResults() {
+        const results = calculateScores();
+        const top = results[0];
+        
+        document.getElementById('quiz-section').style.display = 'none';
+        document.getElementById('result-section').style.display = 'block';
+        
+        document.getElementById('top-major').textContent = majorMap[top.key].name;
+        document.getElementById('top-score').textContent = top.pct + '% Match';
+        
+        const list = document.getElementById('result-list');
+        let html = '';
+        results.slice(0, 6).forEach(r => {
+            html += '<li>';
+            html += '<span class="major">' + majorMap[r.key].name + '</span>';
+            html += '<div class="score-bar"><div class="score-fill" style="width:' + r.pct + '%"></div></div>';
+            html += '<span class="pct">' + r.pct + '%</span>';
+            html += '</li>';
+        });
+        list.innerHTML = html;
+        
+        const topCategories = results.slice(0, 3).map(r => majorMap[r.key].name);
+        const tags = document.getElementById('category-tags');
+        tags.innerHTML = '<span style="font-size:0.82rem;color:#666;">你的主要兴趣方向：</span>' + 
+            topCategories.map(c => '<span class="category-tag">' + c + '</span>').join('');
+        
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function retakeQuiz() {
+        currentQuestion = 0;
+        answers = new Array(questions.length).fill(null);
+        document.getElementById('quiz-section').style.display = 'block';
+        document.getElementById('result-section').style.display = 'none';
+        renderQuestion();
+    }
+
+    // Initialize
+    renderQuestion();
+    </script>
+</body>
+</html>

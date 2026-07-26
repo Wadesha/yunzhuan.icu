@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scholarships - US / UK / Canada - yunzhuan.icu</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px 16px;
+            background: #f5f5f5;
+            color: #333;
+        }
+        .back-link { color: #667eea; text-decoration: none; font-size: 0.85rem; margin-bottom: 12px; display: inline-block; }
+        .back-link:hover { text-decoration: underline; }
+        h1 { color: #333; margin-bottom: 4px; font-size: 1.5rem; }
+        .subtitle { color: #888; font-size: 0.95rem; margin-bottom: 4px; }
+        .code-line { color: #888; font-size: 0.82rem; margin-bottom: 18px; }
+        .intro {
+            background: white;
+            border-radius: 8px;
+            padding: 14px 18px;
+            margin-bottom: 14px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            font-size: 0.92rem;
+            line-height: 1.7;
+            color: #444;
+        }
+        .country-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 12px;
+            margin-bottom: 18px;
+        }
+        .country-card {
+            display: block;
+            background: white;
+            border-radius: 8px;
+            padding: 16px 18px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            text-decoration: none;
+            border-left: 4px solid #667eea;
+            transition: all 0.15s ease;
+        }
+        .country-card:hover {
+            background: #f8f9ff;
+            border-left-color: #764ba2;
+        }
+        .country-card .cn {
+            color: #333;
+            font-size: 1.1rem;
+            font-weight: 600;
+            display: block;
+        }
+        .country-card .en {
+            color: #888;
+            font-size: 0.82rem;
+            display: block;
+            margin-top: 2px;
+        }
+        .country-card .desc {
+            color: #666;
+            font-size: 0.85rem;
+            line-height: 1.5;
+            margin-top: 8px;
+        }
+        .section {
+            background: white;
+            border-radius: 8px;
+            padding: 14px 18px;
+            margin-bottom: 10px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .section h2 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        .section h2 .en { color: #999; font-size: 0.8rem; font-weight: normal; }
+        .section p { color: #333; line-height: 1.7; font-size: 0.92rem; }
+        .tip-box {
+            background: #e8f5e9;
+            border-left: 3px solid #2e7d32;
+            padding: 10px 14px;
+            border-radius: 0 6px 6px 0;
+            margin-top: 10px;
+            font-size: 0.82rem;
+            color: #1b5e20;
+            line-height: 1.6;
+        }
+        .tip-box strong { color: #1b5e20; }
+        .warning-box {
+            background: #fff8e1;
+            border-left: 3px solid #ff8f00;
+            padding: 10px 14px;
+            border-radius: 0 6px 6px 0;
+            margin-top: 10px;
+            font-size: 0.82rem;
+            color: #5d4037;
+            line-height: 1.6;
+        }
+        .scholarship-list { list-style: none; }
+        .scholarship-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #f0f0f0;
+            line-height: 1.5;
+        }
+        .scholarship-list li:last-child { border-bottom: none; }
+        .scholarship-list .name { font-weight: 600; color: #333; font-size: 0.9rem; }
+        .scholarship-list .amount { color: #667eea; font-size: 0.82rem; font-weight: 600; }
+        .scholarship-list .desc { color: #666; font-size: 0.82rem; margin-top: 3px; }
+        .footer { text-align: center; margin-top: 20px; color: #999; font-size: 0.8rem; }
+        @media (max-width: 600px) {
+            .country-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <a href="../index.html" class="back-link">&larr; Back to Home</a>
+
+    <h1>Scholarships Guide</h1>
+    <p class="subtitle">奖学金指南</p>
+    <p class="code-line">US · UK · Canada · Merit-based · Need-based</p>
+
+    <div class="intro">
+        This section covers the major scholarship opportunities for international students applying to US, UK and Canadian universities. Scholarships can be merit-based (academic, talent), need-based (financial aid), or country-specific.
+        <br><span style="color:#888;">本板块介绍美国、英国、加拿大本科国际学生可申请的主要奖学金，包括学术奖学金、助学金、专项奖学金等。</span>
+    </div>
+
+    <div class="country-grid">
+        <a href="us-scholarships.html" class="country-card">
+            <span class="cn">US Scholarships</span>
+            <span class="en">美国奖学金</span>
+            <span class="desc">Need-blind, merit scholarships, Ivy League financial aid, and university-specific awards.<br><span style="color:#999;">Need-blind 助学金、学术奖学金、各大学奖学金介绍。</span></span>
+        </a>
+        <a href="uk-scholarships.html" class="country-card">
+            <span class="cn">UK Scholarships</span>
+            <span class="en">英国奖学金</span>
+            <span class="desc">Chevening, Commonwealth, university scholarships, and subject-specific awards.<br><span style="color:#999;">志奋领、联邦奖学金、各大学奖学金介绍。</span></span>
+        </a>
+        <a href="canada-scholarships.html" class="country-card">
+            <span class="cn">Canada Scholarships</span>
+            <span class="en">加拿大奖学金</span>
+            <span class="desc">Entrance scholarships, merit awards, and co-op / work-study opportunities.<br><span style="color:#999;">入学奖学金、学术奖学金、带薪实习介绍。</span></span>
+        </a>
+    </div>
+
+    <div class="section">
+        <h2>Scholarship Types <span class="en">奖学金类型</span></h2>
+        <ul class="scholarship-list">
+            <li>
+                <span class="name">Need-based Financial Aid</span> <span class="amount">助学金</span>
+                <div class="desc">根据家庭经济情况发放的助学金，美国顶尖私立大学多为 need-blind + meet full need，即不看经济状况录取且满足全部需求。</div>
+            </li>
+            <li>
+                <span class="name">Merit-based Scholarships</span> <span class="amount">学术奖学金</span>
+                <div class="desc">根据学术成绩、标化分数、课外活动等发放的奖学金，通常自动考虑，无需额外申请。</div>
+            </li>
+            <li>
+                <span class="name">Full-ride / Full-tuition</span> <span class="amount">全奖 / 全学费</span>
+                <div class="desc">Full-ride = 学费+住宿+生活费全包；Full-tuition = 只免学费。全奖非常难拿，一般是顶尖学生。</div>
+            </li>
+            <li>
+                <span class="name">Country / Government Awards</span> <span class="amount">国家/政府奖学金</span>
+                <div class="desc">如 Fulbright、Chevening、Commonwealth 等政府或机构资助的奖学金项目。</div>
+            </li>
+            <li>
+                <span class="name">Subject-specific Awards</span> <span class="amount">专业奖学金</span>
+                <div class="desc">针对特定学科领域的奖学金，如 STEM、艺术、体育等专项奖。</div>
+            </li>
+            <li>
+                <span class="name">External / Independent</span> <span class="amount">外部奖学金</span>
+                <div class="desc">基金会、企业、社会组织提供的独立奖学金，可与学校奖学金叠加。</div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Application Tips <span class="en">申请建议</span></h2>
+        <div class="tip-box">
+            <strong>💡 早规划、早准备：</strong>奖学金申请通常需要额外材料（奖学金文书、奖项证明等），建议 11 年级就开始研究目标学校的奖学金政策。
+        </div>
+        <div class="warning-box" style="margin-top:8px;">
+            <strong>⚠️ 注意截止日期：</strong>奖学金申请截止日通常早于普通申请截止日（如 11 月 1 日 vs 1 月 1 日），务必确认每所学校的具体日期。
+        </div>
+        <div class="tip-box" style="margin-top:8px;background:#e3f2fd;border-left-color:#1565c0;color:#0d47a1;">
+            <strong>📝 提高竞争力：</strong><br>
+            · 保持高 GPA 和标化分数<br>
+            · 有深度的课外活动（领导力、影响力）<br>
+            · 有亮点的奖项（国家级/国际级）<br>
+            · 真诚且有个人特色的奖学金文书
+        </div>
+    </div>
+
+    <p class="footer">&copy; 2026 yunzhuan.icu | Scholarships Guide</p>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <div style="text-align:center;padding:8px 0;font-size:0.75rem;color:#aaa;">
+        <a href="../index.html" style="color:#aaa;text-decoration:none;">Home</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="../tests/index.html" style="color:#aaa;text-decoration:none;">Standardized Tests</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="../schools/index.html" style="color:#aaa;text-decoration:none;">Universities</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="../essays/index.html" style="color:#aaa;text-decoration:none;">Essays</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="../contact.html" style="color:#aaa;text-decoration:none;">Contact</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="javascript:window.scrollTo(0,0)" style="color:#aaa;text-decoration:none;">Back to top</a>
+    </div>
+</body>
+</html>

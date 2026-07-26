@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Registration Guide - Tips for Freshmen - yunzhuan.icu</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 16px 20px;
+            background: #f5f5f5;
+            color: #333;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            margin-bottom: 16px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .logo {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #667eea;
+            text-decoration: none;
+        }
+        .logo span { color: #764ba2; }
+        .nav-links {
+            display: flex;
+            gap: 18px;
+            align-items: center;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: #555;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: color 0.15s;
+        }
+        .nav-links a:hover { color: #667eea; }
+        .nav-links .cn {
+            font-size: 0.7rem;
+            color: #aaa;
+            margin-left: 2px;
+        }
+        @media (max-width: 768px) {
+            .navbar { flex-wrap: wrap; gap: 8px; }
+            .nav-links { gap: 12px; }
+            .nav-links a { font-size: 0.78rem; }
+            .nav-links .cn { display: none; }
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 4px;
+            font-size: 1.5rem;
+        }
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 16px;
+            font-size: 0.9rem;
+        }
+        .section {
+            background: white;
+            border-radius: 8px;
+            padding: 14px 18px;
+            margin-bottom: 10px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .section h2 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        .section h2 .cn { color: #999; font-size: 0.8rem; font-weight: normal; margin-left: 6px; }
+        .section p { color: #333; line-height: 1.7; font-size: 0.92rem; margin-bottom: 8px; }
+        .tip-box {
+            background: #fff8e1;
+            border-left: 3px solid #ff8f00;
+            padding: 10px 14px;
+            border-radius: 0 6px 6px 0;
+            margin-top: 10px;
+            font-size: 0.82rem;
+            color: #5d4037;
+            line-height: 1.6;
+        }
+        .tip-box strong { color: #e65100; }
+        .success-box {
+            background: #e8f5e9;
+            border-left: 3px solid #2e7d32;
+            padding: 10px 14px;
+            border-radius: 0 6px 6px 0;
+            margin-top: 10px;
+            font-size: 0.82rem;
+            color: #1b5e20;
+            line-height: 1.6;
+        }
+        .success-box strong { color: #2e7d32; }
+        .warning-box {
+            background: #ffebee;
+            border-left: 3px solid #c62828;
+            padding: 10px 14px;
+            border-radius: 0 6px 6px 0;
+            margin-top: 10px;
+            font-size: 0.82rem;
+            color: #b71c1c;
+            line-height: 1.6;
+        }
+        .warning-box strong { color: #c62828; }
+        .course-list { list-style: none; }
+        .course-list li {
+            padding: 8px 0 8px 20px;
+            position: relative;
+            font-size: 0.88rem;
+            color: #444;
+            line-height: 1.5;
+            border-bottom: 1px solid #f5f5f5;
+        }
+        .course-list li:last-child { border-bottom: none; }
+        .course-list li::before {
+            content: '✦';
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-size: 0.7rem;
+            top: 11px;
+        }
+        .semester-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 10px;
+        }
+        .semester-card {
+            background: #f8f9ff;
+            padding: 12px;
+            border-radius: 8px;
+            border-left: 3px solid #667eea;
+        }
+        .semester-card h3 {
+            font-size: 0.9rem;
+            color: #4338ca;
+            margin-bottom: 6px;
+        }
+        .semester-card p {
+            font-size: 0.82rem;
+            color: #555;
+            line-height: 1.5;
+        }
+        @media (max-width: 600px) {
+            .semester-grid { grid-template-columns: 1fr; }
+        }
+        .footer { text-align: center; margin-top: 20px; color: #999; font-size: 0.8rem; }
+        .grade-badge {
+            display: inline-block;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.72rem;
+            font-weight: 600;
+            margin-right: 4px;
+        }
+        .grade-easy { background: #dcfce7; color: #166534; }
+        .grade-medium { background: #fef3c7; color: #92400e; }
+        .grade-hard { background: #fee2e2; color: #991b1b; }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="../index.html" class="logo">yunzhuan<span>.icu</span></a>
+        <div class="nav-links">
+            <a href="../index.html">Majors<span class="cn">专业</span></a>
+            <a href="../schools/index.html">Schools<span class="cn">学校</span></a>
+            <a href="../tests/index.html">Tests<span class="cn">考试</span></a>
+            <a href="../resources.html">Resources<span class="cn">资源</span></a>
+            <a href="../visa-guide.html">Visa<span class="cn">签证</span></a>
+            <a href="../contact.html">Contact<span class="cn">联系</span></a>
+        </div>
+    </nav>
+
+    <h1>Course Registration Guide</h1>
+    <p class="subtitle">新生选课指南 · 美国大学本科</p>
+
+    <div class="section">
+        <h2>Basics <span class="cn">选课基础</span></h2>
+        <p style="font-size:0.9rem;color:#555;">
+            美国大学本科一般 4 年毕业，总共需要修 120 个学分左右（每学期 15 学分 = 5 门课）。
+            课程分为以下几类：
+        </p>
+        <ul class="course-list">
+            <li><strong>Major Requirements / 专业必修课</strong>：你的专业要求上的课</li>
+            <li><strong>General Education / 通识教育课</strong>（GE / Gen Ed）：学校要求所有学生都得上的课，覆盖各个领域</li>
+            <li><strong>Electives / 选修课</strong>：自由选择的课，可以探索兴趣或者辅修</li>
+            <li><strong>Prerequisites / 先修课</strong>：上高阶课之前必须先上的基础课</li>
+        </ul>
+        <div class="tip-box">
+            <strong>💡 学分建议：</strong><br>
+            · 第一学期建议 12-15 学分（4-5 门课），不要选太多<br>
+            · 一般全日制学生每学期至少 12 学分（低于算 part-time，影响签证和奖学金）<br>
+            · 想 4 年毕业，平均每学期 15 学分
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Graduation Requirements <span class="cn">毕业要求</span></h2>
+        <div class="semester-grid">
+            <div class="semester-card">
+                <h3>Major / 专业</h3>
+                <p>约 40-60 学分，包含专业必修课和专业选修课。有的专业有不同的 concentration（方向）可以选。</p>
+            </div>
+            <div class="semester-card">
+                <h3>General Education / 通识</h3>
+                <p>约 30-50 学分，涵盖写作、数学、自然科学、社会科学、人文艺术、外语等各个领域。</p>
+            </div>
+            <div class="semester-card">
+                <h3>Electives / 选修</h3>
+                <p>约 20-30 学分，可以自由选，可以用来探索兴趣、辅修、或者水课拉 GPA。</p>
+            </div>
+            <div class="semester-card">
+                <h3>Minor / 辅修（可选）</h3>
+                <p>一般 15-20 学分，在主修之外再学一个小方向，增加竞争力。</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>First Semester Tips <span class="cn">第一学期选课建议</span></h2>
+        <div class="success-box">
+            <strong>✅ 推荐：</strong><br>
+            · 4-5 门课就好，别贪多<br>
+            · 2 门难课 + 2-3 门简单课，平衡一下<br>
+            · 至少一门写作/英语课，适应学术写作<br>
+            · 一门专业课（如果确定专业的话）<br>
+            · 一门通识课 + 一门感兴趣的选修课<br>
+            · 选一些上课时间好的，不要早八连轴转
+        </div>
+        <div class="warning-box" style="margin-top:8px;">
+            <strong>❌ 不推荐：</strong><br>
+            · 第一学期选 6+ 门课（会累死）<br>
+            · 全是难课/硬核课（GPA 会崩）<br>
+            · 全是水课（学不到东西，还浪费钱）<br>
+            · 选了一堆早八（很可能起不来）
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Sample 4-Year Plan <span class="cn">四年规划示例</span></h2>
+        <p style="font-size:0.85rem;color:#666;margin-bottom:10px;">
+            以计算机科学专业为例（仅供参考，每个学校要求不同）：
+        </p>
+        
+        <div class="semester-grid">
+            <div class="semester-card">
+                <h3>Freshman Fall / 大一上</h3>
+                <p>
+                    · Calculus I 微积分 I<br>
+                    · Intro to CS 计算机入门<br>
+                    · English Writing 英语写作<br>
+                    · Gen Ed 通识课<br>
+                    · Elective 选修课<br>
+                    <em style="color:#888;">共 15 学分</em>
+                </p>
+            </div>
+            <div class="semester-card">
+                <h3>Freshman Spring / 大一下</h3>
+                <p>
+                    · Calculus II 微积分 II<br>
+                    · Data Structures 数据结构<br>
+                    · Physics 物理 I<br>
+                    · Gen Ed 通识课<br>
+                    · Elective 选修课<br>
+                    <em style="color:#888;">共 16 学分</em>
+                </p>
+            </div>
+            <div class="semester-card">
+                <h3>Sophomore Fall / 大二上</h3>
+                <p>
+                    · Algorithms 算法<br>
+                    · Computer Systems 计算机系统<br>
+                    · Discrete Math 离散数学<br>
+                    · Probability 概率统计<br>
+                    · Gen Ed 通识课<br>
+                    <em style="color:#888;">共 16 学分</em>
+                </p>
+            </div>
+            <div class="semester-card">
+                <h3>Sophomore Spring / 大二下</h3>
+                <p>
+                    · Database 数据库<br>
+                    · Operating Systems 操作系统<br>
+                    · Linear Algebra 线性代数<br>
+                    · Gen Ed 通识课<br>
+                    · Elective 选修课<br>
+                    <em style="color:#888;">共 15 学分</em>
+                </p>
+            </div>
+            <div class="semester-card">
+                <h3>Junior Year / 大三</h3>
+                <p>
+                    · 专业核心课（AI/网络/安全等方向）<br>
+                    · 专业选修课<br>
+                    · 开始考虑科研/实习<br>
+                    · 通识课收尾<br>
+                    · 可以考虑辅修
+                </p>
+            </div>
+            <div class="semester-card">
+                <h3>Senior Year / 大四</h3>
+                <p>
+                    · 高阶专业课<br>
+                    · Capstone Project / 毕设<br>
+                    · 剩余的通识/选修<br>
+                    · 找工作/申研<br>
+                    · 享受最后一年！
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>How to Pick Good Classes <span class="cn">怎么选好课</span></h2>
+        <ul class="course-list">
+            <li><strong>看 Rate My Professor：</strong>查教授评价，选给分好、讲课清楚的教授</li>
+            <li><strong>问学长学姐：</strong>加入 CSSA/中国学生群，问过来人经验</li>
+            <li><strong>看课程大纲（Syllabus）：</strong>了解作业量、考试形式、评分标准</li>
+            <li><strong>注意先修课要求：</strong>别选了上不了，因为缺 prereq</li>
+            <li><strong>平衡难度：</strong>难课和水课搭配，别一学期全是硬核课</li>
+            <li><strong>看上课时间：</strong>考虑自己是早起鸟还是夜猫子，别选太多早八</li>
+            <li><strong>试听/加退选：</strong>开学第一周一般可以 add/drop，不满意可以换</li>
+        </ul>
+        <div class="tip-box">
+            <strong>💡 Rate My Professor：</strong><br>
+            美国大学生常用的教授评价网站，搜学校和教授名字就能看到学生评价和给分情况。
+            主要看：Overall Quality（整体质量）、Would take again（再选率）、Level of Difficulty（难度）。
+            注意：评价有主观性，参考就行，别全信。
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Easy vs Hard Classes <span class="cn">难易度参考</span></h2>
+        <p style="font-size:0.85rem;color:#666;margin-bottom:8px;">
+            以下是常见课程的大致难度（因学校和教授而异，仅供参考）：
+        </p>
+        
+        <h3 style="font-size:0.9rem;color:#333;margin-bottom:6px;margin-top:10px;">
+            <span class="grade-badge grade-easy">Easy 水课</span>
+            适合拉 GPA / 满足通识
+        </h3>
+        <ul class="course-list">
+            <li>Intro to Psychology / 心理学入门</li>
+            <li>Sociology / 社会学入门</li>
+            <li>Film Studies / 电影研究</li>
+            <li>Music Appreciation / 音乐欣赏</li>
+            <li>Art History / 艺术史（看教授）</li>
+            <li>Public Speaking / 公共演讲（有的简单有的难）</li>
+            <li>Astronomy / 天文学（概念型的比较简单）</li>
+            <li>Physical Education / 体育课（一般都水）</li>
+        </ul>
+
+        <h3 style="font-size:0.9rem;color:#333;margin-bottom:6px;margin-top:12px;">
+            <span class="grade-badge grade-medium">Medium 中等</span>
+            需要花时间但不太难
+        </h3>
+        <ul class="course-list">
+            <li>Intro to Statistics / 统计学入门</li>
+            <li>Microeconomics / 微观经济学</li>
+            <li>Macroeconomics / 宏观经济学</li>
+            <li>College Writing / 大学写作</li>
+            <li>Intro to Business / 商学入门</li>
+            <li>Biology I / 生物入门</li>
+            <li>Chemistry I / 化学入门</li>
+        </ul>
+
+        <h3 style="font-size:0.9rem;color:#333;margin-bottom:6px;margin-top:12px;">
+            <span class="grade-badge grade-hard">Hard 硬核</span>
+            需要大量时间精力
+        </h3>
+        <ul class="course-list">
+            <li>Organic Chemistry / 有机化学（传说中的 weed-out class）</li>
+            <li>Physics with Calc / 带微积分的物理</li>
+            <li>Data Structures & Algorithms / 数据结构与算法</li>
+            <li>Multivariable Calculus / 多元微积分</li>
+            <li>Linear Algebra / 线性代数（看教授）</li>
+            <li>Real Analysis / 实分析</li>
+            <li>Operating Systems / 操作系统</li>
+            <li>Any upper-level engineering / 高阶工程课</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Important Terms <span class="cn">重要概念</span></h2>
+        <ul class="course-list">
+            <li><strong>Add/Drop Period：</strong>加退选期，开学前 1-2 周，可以随意加减课，不影响成绩单</li>
+            <li><strong>Pass/Fail：</strong>通过/不通过，不算 GPA，过了就拿学分。有的通识课可以选这个模式</li>
+            <li><strong>Withdraw (W)：</strong>退课，过了 add/drop 期退课会有 W 记录，不影响 GPA，但影响不好看</li>
+            <li><strong>Audit：</strong>旁听，不拿学分也不算成绩，可以体验一下</li>
+            <li><strong>Waitlist：</strong>候补名单，课满了可以排 waitlist，有人退了就能进</li>
+            <li><strong>Prerequisite：</strong>先修课，上这门课之前必须先过的课</li>
+            <li><strong>Corequisite：</strong>同修课，必须和这门课同时上的课（比如实验课）</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>GPA Tips <span class="cn">GPA 相关</span></h2>
+        <div class="success-box">
+            <strong>✅ 保持高 GPA 的技巧：</strong><br>
+            · 第一学期别选太难的课，先适应<br>
+            · 上课去听，别翘课（ attendance 算分的！）<br>
+            · 作业按时交，别拖延<br>
+            · 考前好好复习，别临时抱佛脚<br>
+            · 利用 office hour（教授答疑时间）<br>
+            · 组学习小组，和同学一起学<br>
+            · 难课和水课搭配，保证 GPA
+        </div>
+        <div class="tip-box" style="margin-top:10px;">
+            <strong>💡 GPA 重要性：</strong><br>
+            · 申研/申博：非常重要（3.5+ 比较稳，3.8+ 有竞争力）<br>
+            · 找工作：大部分公司不看 GPA（但要有实习和项目）<br>
+            · 奖学金：很多奖学金有 GPA 要求<br>
+            · 但也别把 GPA 看得太重，经历和能力也很重要
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Common Mistakes <span class="cn">常见误区</span></h2>
+        <div class="warning-box">
+            <strong>❌ 不要做：</strong><br>
+            · 第一学期选太多课（适应不过来会崩）<br>
+            · 全选水课（学不到东西，浪费学费）<br>
+            · 全选难课（GPA 崩了影响很大）<br>
+            · 只看教授给分好不好，不看学什么<br>
+            · 选了课不去上（很多课 attendance 算分）<br>
+            · 拖到最后一秒才选课（好课都被抢光了）
+        </div>
+        <div class="success-box" style="margin-top:8px;">
+            <strong>✅ 应该做：</strong><br>
+            · 提前研究课程和教授<br>
+            · 准备备选方案，喜欢的课满了有 backup<br>
+            · 难易搭配，平衡 workload<br>
+            · 开学第一周试听，不合适赶紧换<br>
+            · 有问题找 advisor（学术顾问）<br>
+            · 享受探索的过程！
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Resources <span class="cn">实用资源</span></h2>
+        <ul class="course-list">
+            <li><strong>Rate My Professor：</strong>www.ratemyprofessors.com - 查教授评价</li>
+            <li><strong>学校官网：</strong>课程目录、毕业要求、选课系统都在那里</li>
+            <li><strong>Advisor / 学术顾问：</strong>有问题就约 appointment 问</li>
+            <li><strong>学长学姐：</strong>最靠谱的信息来源</li>
+            <li><strong>Reddit：</strong>r/college、你们学校的 subreddit</li>
+            <li><strong>中国学生学者联合会（CSSA）：</strong>新生群里有很多选课经验</li>
+        </ul>
+    </div>
+
+    <p class="footer">&copy; 2026 yunzhuan.icu | Course Guide</p>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <div style="text-align:center;padding:8px 0;font-size:0.75rem;color:#aaa;">
+        <a href="../index.html" style="color:#aaa;text-decoration:none;">Home</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="../resources.html" style="color:#aaa;text-decoration:none;">Resources</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="../contact.html" style="color:#aaa;text-decoration:none;">Contact</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="javascript:window.scrollTo(0,0)" style="color:#aaa;text-decoration:none;">Back to top</a>
+    </div>
+</body>
+</html>
