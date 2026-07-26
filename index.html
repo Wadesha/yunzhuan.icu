@@ -17,7 +17,7 @@
         }
         .navbar {
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-start;
             align-items: center;
             padding: 12px 0;
             margin-bottom: 16px;
@@ -76,16 +76,14 @@
             flex-wrap: wrap;
         }
         .stat-item {
-            background: white;
-            padding: 6px 14px;
-            border-radius: 6px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            padding: 0;
             font-size: 0.85rem;
             color: #666;
         }
         .stat-item b {
             color: #667eea;
-            margin-right: 4px;
+            margin-right: 3px;
+            font-size: 1rem;
         }
         .category {
             background: white;
@@ -188,7 +186,7 @@
 </head>
 <body>
     <nav class="navbar">
-        <a href="index.html" class="logo">yunzhuan<span>.icu</span></a>
+        <a href="index.html" class="logo" style="display:none;">yunzhuan<span>.icu</span></a>
         <div class="nav-links">
             <a href="index.html">Majors<span class="cn">专业</span></a>
             <a href="schools/index.html">Schools<span class="cn">学校</span></a>
@@ -332,7 +330,7 @@
         </div>
     </div>
 
-    <p class="footer">© 2026 yunzhuan.icu &nbsp;|&nbsp; Version v18.5.0</p>
+    <p class="footer">© 2026 yunzhuan.icu &nbsp;|&nbsp; Version v18.6.0</p>
 <!-- Vercel Analytics -->
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 <div style="text-align:center;padding:8px 0;font-size:0.75rem;color:#aaa;">

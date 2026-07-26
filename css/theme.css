@@ -783,3 +783,248 @@ details[open] summary {
     font-size: 0.72rem;
     color: var(--text-muted);
 }
+
+/* ========== Dark Mode Overrides (higher specificity) ==========
+   For pages with inline styles that don't use CSS variables */
+
+[data-theme="dark"] .stats,
+[data-theme="dark"] .stat-item,
+[data-theme="dark"] .category,
+[data-theme="dark"] .section,
+[data-theme="dark"] .guide-list,
+[data-theme="dark"] .info-list,
+[data-theme="dark"] .course-list,
+[data-theme="dark"] .semester-card,
+[data-theme="dark"] .timeline-card,
+[data-theme="dark"] .idea-card,
+[data-theme="dark"] .card,
+[data-theme="dark"] .system-card,
+[data-theme="dark"] .note-box,
+[data-theme="dark"] .tip-box,
+[data-theme="dark"] .warning-box,
+[data-theme="dark"] .success-box,
+[data-theme="dark"] .quiz-box,
+[data-theme="dark"] .major-link,
+[data-theme="dark"] .filter-tab,
+[data-theme="dark"] .related-card,
+[data-theme="dark"] .school-rec-card,
+[data-theme="dark"] .chart-container,
+[data-theme="dark"] .radar-section {
+    background-color: var(--bg-secondary) !important;
+    border-color: var(--border-color) !important;
+    color: var(--text-primary) !important;
+}
+
+[data-theme="dark"] h1,
+[data-theme="dark"] h2,
+[data-theme="dark"] h3,
+[data-theme="dark"] h4,
+[data-theme="dark"] h5,
+[data-theme="dark"] h6 {
+    color: var(--text-primary) !important;
+}
+
+[data-theme="dark"] h1 .cn,
+[data-theme="dark"] h2 .cn,
+[data-theme="dark"] h3 .cn,
+[data-theme="dark"] .subtitle,
+[data-theme="dark"] .en-name,
+[data-theme="dark"] .code-line,
+[data-theme="dark"] .cn-hint {
+    color: var(--text-secondary) !important;
+}
+
+[data-theme="dark"] p,
+[data-theme="dark"] li,
+[data-theme="dark"] td,
+[data-theme="dark"] span {
+    color: var(--text-secondary) !important;
+}
+
+[data-theme="dark"] .logo,
+[data-theme="dark"] a.logo {
+    color: var(--accent-primary) !important;
+}
+
+[data-theme="dark"] a {
+    color: var(--text-secondary) !important;
+}
+
+[data-theme="dark"] a:hover {
+    color: var(--accent-primary) !important;
+}
+
+[data-theme="dark"] .category h2,
+[data-theme="dark"] .category h2 .en,
+[data-theme="dark"] .section h2 {
+    color: var(--accent-primary) !important;
+    border-bottom-color: var(--accent-light) !important;
+}
+
+[data-theme="dark"] .category h2 .cn,
+[data-theme="dark"] .section h2 .cn,
+[data-theme="dark"] .section h2 .en {
+    color: var(--text-muted) !important;
+}
+
+[data-theme="dark"] .stat-item b {
+    color: var(--accent-primary) !important;
+}
+
+[data-theme="dark"] .major-link .en {
+    color: var(--text-primary) !important;
+}
+
+[data-theme="dark"] .major-link .cn,
+[data-theme="dark"] .category .count {
+    color: var(--text-muted) !important;
+    background: transparent !important;
+}
+
+[data-theme="dark"] .salary-table th {
+    background: var(--accent-light) !important;
+    color: var(--accent-text) !important;
+}
+
+[data-theme="dark"] .salary-table td,
+[data-theme="dark"] .comparison-table td,
+[data-theme="dark"] .comparison-table th {
+    border-bottom-color: var(--border-light) !important;
+    color: var(--text-secondary) !important;
+}
+
+[data-theme="dark"] .salary-table tr:hover,
+[data-theme="dark"] .comparison-table tr:hover td {
+    background: var(--bg-tertiary) !important;
+}
+
+[data-theme="dark"] .comparison-table th {
+    background: var(--accent-light) !important;
+    color: var(--accent-text) !important;
+}
+
+[data-theme="dark"] .school-loc,
+[data-theme="dark"] .list-item-meta,
+[data-theme="dark"] .empty-state {
+    color: var(--text-muted) !important;
+}
+
+[data-theme="dark"] .tag {
+    background: var(--accent-light) !important;
+    color: var(--accent-text) !important;
+}
+
+[data-theme="dark"] .tag-reach {
+    background: rgba(244, 63, 94, 0.2) !important;
+    color: #fb7185 !important;
+}
+
+[data-theme="dark"] .tag-match {
+    background: rgba(34, 197, 94, 0.2) !important;
+    color: #4ade80 !important;
+}
+
+[data-theme="dark"] .tag-safety {
+    background: rgba(245, 158, 11, 0.2) !important;
+    color: #fbbf24 !important;
+}
+
+[data-theme="dark"] .chart-container {
+    background: var(--bg-tertiary) !important;
+    border-color: var(--border-color) !important;
+}
+
+[data-theme="dark"] .chart-title,
+[data-theme="dark"] .bar-label,
+[data-theme="dark"] .radar-legend {
+    color: var(--text-secondary) !important;
+}
+
+[data-theme="dark"] .fav-btn {
+    background: var(--bg-secondary) !important;
+    border-color: var(--border-color) !important;
+    color: var(--text-secondary) !important;
+}
+
+[data-theme="dark"] .fav-btn:hover {
+    border-color: #f59e0b !important;
+    color: #f59e0b !important;
+}
+
+[data-theme="dark"] .fav-btn.active {
+    background: rgba(245, 158, 11, 0.15) !important;
+    border-color: #f59e0b !important;
+    color: #fbbf24 !important;
+}
+
+[data-theme="dark"] .mobile-tab-bar {
+    background: var(--bg-secondary) !important;
+    border-top-color: var(--border-color) !important;
+}
+
+[data-theme="dark"] .mobile-tab-item {
+    color: var(--text-tertiary) !important;
+}
+
+[data-theme="dark"] .mobile-tab-item.active {
+    color: var(--accent-primary) !important;
+}
+
+[data-theme="dark"] .mobile-nav-dropdown {
+    background: var(--bg-secondary) !important;
+    border-color: var(--border-color) !important;
+}
+
+[data-theme="dark"] .user-dropdown {
+    background: var(--bg-secondary) !important;
+    border-color: var(--border-color) !important;
+}
+
+[data-theme="dark"] .user-dropdown a,
+[data-theme="dark"] .user-dropdown button {
+    color: var(--text-primary) !important;
+}
+
+[data-theme="dark"] .user-dropdown a:hover,
+[data-theme="dark"] .user-dropdown button:hover {
+    background: var(--bg-tertiary) !important;
+    color: var(--accent-primary) !important;
+}
+
+[data-theme="dark"] .breadcrumb .current {
+    color: var(--text-primary) !important;
+}
+
+[data-theme="dark"] .auth-card {
+    background: var(--bg-secondary) !important;
+    color: var(--text-primary) !important;
+}
+
+[data-theme="dark"] .tabs .tab.active {
+    color: var(--accent-primary) !important;
+    border-bottom-color: var(--accent-primary) !important;
+}
+
+[data-theme="dark"] .form-group label {
+    color: var(--text-tertiary) !important;
+}
+
+[data-theme="dark"] .stat-card {
+    background: var(--bg-tertiary) !important;
+}
+
+[data-theme="dark"] .stat-value {
+    color: var(--accent-primary) !important;
+}
+
+[data-theme="dark"] .stat-label {
+    color: var(--text-muted) !important;
+}
+
+[data-theme="dark"] .list-item {
+    border-bottom-color: var(--border-light) !important;
+}
+
+[data-theme="dark"] .list-item-title a {
+    color: var(--text-primary) !important;
+}
