@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 11 Monthly Task List - Application Timeline - yunzhuan.icu</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px 16px;
+            background: #f5f5f5;
+            color: #333;
+        }
+        .back-link {
+            color: #667eea;
+            text-decoration: none;
+            font-size: 0.85rem;
+            margin-bottom: 12px;
+            display: inline-block;
+        }
+        .back-link:hover { text-decoration: underline; }
+        h1 {
+            color: #333;
+            margin-bottom: 4px;
+            font-size: 1.5rem;
+        }
+        .subtitle {
+            color: #888;
+            font-size: 0.95rem;
+            margin-bottom: 18px;
+        }
+        .intro {
+            background: white;
+            border-radius: 8px;
+            padding: 14px 18px;
+            margin-bottom: 14px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            font-size: 0.92rem;
+            line-height: 1.7;
+            color: #444;
+        }
+        .month-card {
+            background: white;
+            border-radius: 8px;
+            padding: 14px 18px;
+            margin-bottom: 10px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            border-left: 4px solid #667eea;
+        }
+        .month-header {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+        .month-name {
+            color: #667eea;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        .month-name .en {
+            color: #999;
+            font-size: 0.8rem;
+            font-weight: normal;
+            margin-left: 6px;
+        }
+        .month-focus {
+            color: #888;
+            font-size: 0.82rem;
+            font-style: italic;
+        }
+        .task-list { list-style: none; }
+        .task-list li {
+            padding: 6px 10px;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 0.88rem;
+            line-height: 1.6;
+            color: #444;
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+        }
+        .task-list li:last-child { border-bottom: none; }
+        .task-list li:before {
+            content: "[ ]";
+            color: #aaa;
+            font-family: monospace;
+            flex-shrink: 0;
+        }
+        .task-tag {
+            display: inline-block;
+            padding: 1px 6px;
+            border-radius: 3px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin-right: 6px;
+            flex-shrink: 0;
+        }
+        .tag-academic { background: #e8f4fd; color: #1976d2; }
+        .tag-test { background: #fce4ec; color: #c2185b; }
+        .tag-essay { background: #f3e5f5; color: #7b1fa2; }
+        .tag-school { background: #e8f5e9; color: #2e7d32; }
+        .tag-activity { background: #fff3e0; color: #ef6c00; }
+        .tag-rec { background: #fce4ec; color: #c2185b; }
+        .task-link {
+            color: #667eea;
+            text-decoration: none;
+            border-bottom: 1px dotted #667eea;
+        }
+        .task-link:hover { text-decoration: underline; }
+        .footer { text-align: center; margin-top: 20px; color: #999; font-size: 0.8rem; }
+        .legend {
+            background: white;
+            border-radius: 8px;
+            padding: 10px 18px;
+            margin-bottom: 14px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            font-size: 0.82rem;
+            color: #555;
+        }
+        .legend b { color: #333; }
+    </style>
+    <link rel="stylesheet" href="/css/collapse.css">
+</head>
+<body>
+    <a href="index.html" class="back-link">&larr; Back to Application Timeline</a>
+    <a href="grade-11.html" class="back-link" style="margin-left:10px;">Grade 11 Overview &rarr;</a>
+
+    <h1>Grade 11 Monthly Tasks</h1>
+    <p class="subtitle">11 年级月度任务清单 · Monthly breakdown</p>
+
+    <div class="intro">
+        This page breaks Grade 11 (the most critical preparation year) into month-by-month tasks. Each month lists 3-6 concrete actions tagged by category (academics, standardized tests, essays, school list, activities, recommendations). Tasks link to relevant resources across the site where available.
+        <br><span style="color:#888;">把 11 年级拆成 12 个月的清单，每月 3-6 条具体任务，可直接对照执行。</span>
+    </div>
+
+    <div class="legend">
+        <b>Tags:</b>
+        <span class="task-tag tag-academic">Academic</span>
+        <span class="task-tag tag-test">Test</span>
+        <span class="task-tag tag-essay">Essay</span>
+        <span class="task-tag tag-school">School</span>
+        <span class="task-tag tag-activity">Activity</span>
+        <span class="task-tag tag-rec">Rec Letter</span>
+    </div>
+
+    <div class="month-card">
+        <div class="month-header">
+            <div class="month-name">September <span class="en">9 月 · 学年开局</span></div>
+            <div class="month-focus">Focus: Course load &amp; activity plan</div>
+        </div>
+        <ul class="task-list">
+            <li><span class="task-tag tag-academic">Academic</span>Confirm AP/IB HL/A-Level course selection aligned with target major; verify with counselor that rigor is appropriate.</li>
+            <li><span class="task-tag tag-test">Test</span>Register for the December or March SAT/ACT if not already taken; first official sitting target = January.</li>
+            <li><span class="task-tag tag-activity">Activity</span>Pick 1-2 long-term activities to deepen; identify a leadership or project opportunity for spring.</li>
+            <li><span class="task-tag tag-school">School</span>Begin a school research spreadsheet: name, location, deadlines, mid-50% scores, essay prompts. See <a href="../schools/compare.html" class="task-link">Compare tool</a>.</li>
+        </ul>
+    </div>
+
+    <div class="month-card">
+        <div class="month-header">
+            <div class="month-name">October <span class="en">10 月 · 首考准备</span></div>
+            <div class="month-focus">Focus: SAT/ACT prep intensifies</div>
+        </div>
+        <ul class="task-list">
+            <li><span class="task-tag tag-test">Test</span>Take a full Bluebook / ACT official practice test under timed conditions; analyze error patterns. See <a href="../tests/sat-prep.html" class="task-link">SAT Prep</a>.</li>
+            <li><span class="task-tag tag-test">Test</span>If TOEFL/IELTS not yet final, schedule a December sitting.</li>
+            <li><span class="task-tag tag-activity">Activity</span>Document fall activities with measurable outcomes (hours, impact, deliverables) for resume use.</li>
+            <li><span class="task-tag tag-rec">Rec Letter</span>Identify 2 teachers (typically 1 STEM + 1 humanities) to ask for recommendations in spring.</li>
+        </ul>
+    </div>
+
+    <div class="month-card">
+        <div class="month-header">
+            <div class="month-name">November <span class="en">11 月 · 首考冲刺</span></div>
+            <div class="month-focus">Focus: First SAT/ACT sitting</div>
+        </div>
+        <ul class="task-list">
+            <li><span class="task-tag tag-test">Test</span>Take the November SAT or ACT (first official sitting). Don't expect final score — this is calibration.</li>
+            <li><span class="task-tag tag-academic">Academic</span>Midterm grades matter; some schools see mid-year reports. Protect GPA above all else.</li>
+            <li><span class="task-tag tag-school">School</span>Attend 2-3 college info sessions (virtual or in-person); take notes in the research spreadsheet.</li>
+            <li><span class="task-tag tag-essay">Essay</span>Begin Common App prompt brainstorming; list 10 candidate stories. See <a href="../essays/process.html" class="task-link">Essay Process</a>.</li>
+        </ul>
+    </div>
+
+    <div class="month-card">
+        <div class="month-header">
+            <div class="month-name">December <span class="en">12 月 · 成绩复盘</span></div>
+            <div class="month-focus">Focus: Score review &amp; essay topic lock</div>
+        </div>
+        <ul class="task-list">
+            <li><span class="task-tag tag-test">Test</span>Receive November scores; decide whether to retake in March or May based on score gap to target schools. Use <a href="../tests/score-conversion.html" class="task-link">Score Conversion</a>.</li>
+            <li><span class="task-tag tag-essay">Essay</span>Lock the Common App main essay topic before winter break; complete a 15-minute free-write.</li>
+            <li><span class="task-tag tag-activity">Activity</span>Plan a winter break project: independent research, internship, or community initiative.</li>
+            <li><span class="task-tag tag-school">School</span>Narrow school list to 12-15 candidates; categorize as reach/match/safety.</li>
+        </ul>
+    </div>
+
+    <div class="month-card">
+        <div class="month-header">
+            <div class="month-name">January <span class="en">1 月 · 二考与文书起稿</span></div>
+            <div class="month-focus">Focus: SAT/ACT retake &amp; essay draft v1</div>
+        </div>
+        <ul class="task-list">
+            <li><span class="task-tag tag-test">Test</span>Take January SAT/ACT retake if needed. This is the last sitting that comfortably fits RD timelines.</li>
+            <li><span class="task-tag tag-essay">Essay</span>Complete Common App draft v1 (600-700 words, scene-first opening). Don't polish yet.</li>
+            <li><span class="task-tag tag-academic">Academic</span>Begin AP/IB/A-Level exam prep; create a topic-by-topic review schedule through May.</li>
+            <li><span class="task-tag tag-rec">Rec Letter</span>Formally request recommendations from 2 teachers + counselor; share brag sheet.</li>
+        </ul>
+    </div>
+
+    <div class="month-card">
+        <div class="month-header">
+            <div class="month-name">February <span class="en">2 月 · 文书打磨</span></div>
+            <div class="month-focus">Focus: Essay revision rounds</div>
+        </div>
+        <ul class="task-list">
+            <li><span class="task-tag tag-essay">Essay</span>Run Round 1 structural revision on Common App essay: theme clarity, opening hook, ending closure.</li>
+            <li><span class="task-tag tag-test">Test</span>If TOEFL/IELTS still below target, take February sitting.</li>
+            <li><span class="task-tag tag-school">School</span>Verify each candidate school's deadlines, essay prompts, and recommendation requirements on official websites.</li>
+            <li><span class="task-tag tag-activity">Activity</span>Submit competition entries or research abstracts with February deadlines (AMC, science fairs).</li>
+        </ul>
+    </div>
+
+    <div class="month-card">
+        <div class="month-header">
+            <div class="month-name">March <span class="en">3 月 · 二考 / 三考</span></div>
+            <div class="month-focus">Focus: Final SAT/ACT + essay draft v2</div>
+        </div>
+        <ul class="task-list">
+            <li><span class="task-tag tag-test">Test</span>Take March SAT (US) or March ACT if retaking. Aim to finalize SAT/ACT score by end of March.</li>
+            <li><span class="task-tag tag-essay">Essay</span>Complete Common App draft v2 (Round 2: detail &amp; specificity). Get first external reader feedback.</li>
+            <li><span class="task-tag tag-school">School</span>Finalize school list to 8-12 across reach/match/safety; verify fit with current scores.</li>
+            <li><span class="task-tag tag-academic">Academic</span>Spring semester grades — maintain upward trend; avoid senior-year-style slacking.</li>
+        </ul>
+    </div>
+
+    <div class="month-card">
+        <div class="month-header">
+            <div class="month-name">April <span class="en">4 月 · 补充文书起步</span></div>
+            <div class="month-focus">Focus: Supplemental essay outlines</div>
+        </div>
+        <ul class="task-list">
+            <li><span class="task-tag tag-essay">Essay</span>Outline supplemental essays for top 5 schools; identify which main-essay story to reuse vs. write fresh. See <a href="../essays/supplemental-harvard.html" class="task-link">Harvard supplement sample</a>.</li>
+            <li><span class="task-tag tag-school">School</span>Visit 2-3 campuses (in-person or virtual tour); update research spreadsheet with culture notes.</li>
+            <li><span class="task-tag tag-test">Test</span>Take April ACT if needed; this is typically the last ACT sitting for ED/EA timelines.</li>
+            <li><span class="task-tag tag-activity">Activity</span>Wrap up spring leadership deliverables; document final outcomes for activity list.</li>
+        </ul>
+    </div>
+
+    <div class="month-card">
+        <div class="month-header">
+            <div class="month-name">May <span class="en">5 月 · AP/IB/A-Level 考试</span></div>
+            <div class="month-focus">Focus: Subject exams &amp; essay draft v3</div>
+        </div>
+        <ul class="task-list">
+            <li><span class="task-tag tag-academic">Academic</span>Take AP / IB / A-Level exams in May. These scores are reported to colleges.</li>
+            <li><span class="task-tag tag-test">Test</span>Take SAT Subject Tests (if still offered by target schools) or May SAT.</li>
+            <li><span class="task-tag tag-essay">Essay</span>Complete Common App draft v3 (Round 3: voice &amp; flow); do final read-aloud.</li>
+            <li><span class="task-tag tag-rec">Rec Letter</span>Check in with recommenders; confirm they have everything needed to write over summer.</li>
+        </ul>
+    </div>
+
+    <div class="month-card">
+        <div class="month-header">
+            <div class="month-name">June <span class="en">6 月 · 学年收尾</span></div>
+            <div class="month-focus">Focus: Final transcripts &amp; last SAT</div>
+        </div>
+        <ul class="task-list">
+            <li><span class="task-tag tag-test">Test</span>Take June SAT/ACT if still below target; this is the last sitting for comfortable RD timelines.</li>
+            <li><span class="task-tag tag-academic">Academic</span>Year-end transcript — these are the grades admissions officers will see most closely.</li>
+            <li><span class="task-tag tag-essay">Essay</span>Lock Common App main essay as "final draft pending summer review." Don't reopen unless feedback demands it.</li>
+            <li><span class="task-tag tag-school">School</span>Finalize school list to 8-12; map each school's deadlines to a master calendar.</li>
+        </ul>
+    </div>
+
+    <div class="month-card">
+        <div class="month-header">
+            <div class="month-name">July <span class="en">7 月 · 补充文书集中写</span></div>
+            <div class="month-focus">Focus: Supplemental essays draft v1</div>
+        </div>
+        <ul class="task-list">
+            <li><span class="task-tag tag-essay">Essay</span>Draft v1 of all supplemental essays for top 5 schools. Each school = 1 week of focused writing.</li>
+            <li><span class="task-tag tag-essay">Essay</span>Run <a href="../essays/pitfalls.html" class="task-link">pitfalls self-audit</a> on Common App main essay; fix any flagged issues.</li>
+            <li><span class="task-tag tag-school">School</span>Begin CSS Profile (financial aid) draft for early schools; collect tax documents.</li>
+            <li><span class="task-tag tag-activity">Activity</span>Complete a summer project with tangible output (paper, code repo, portfolio piece).</li>
+        </ul>
+    </div>
+
+    <div class="month-card">
+        <div class="month-header">
+            <div class="month-name">August <span class="en">8 月 · Common App 开放</span></div>
+            <div class="month-focus">Focus: Application finalization</div>
+        </div>
+        <ul class="task-list">
+            <li><span class="task-tag tag-school">School</span>Common App opens August 1; fill out biographical info, activity list, and add schools to list.</li>
+            <li><span class="task-tag tag-essay">Essay</span>Finalize Common App main essay; complete supplemental essays for ED/EA schools.</li>
+            <li><span class="task-tag tag-test">Test</span>Send official SAT/ACT/TOEFL scores to ED/EA schools (allow 2-3 weeks for delivery).</li>
+            <li><span class="task-tag tag-rec">Rec Letter</span>Confirm recommenders have submitted or are on track to submit by deadline.</li>
+            <li><span class="task-tag tag-school">School</span>Submit ED/EA applications by November 1 — verify all materials arrived.</li>
+        </ul>
+    </div>
+
+    <p class="footer">&copy; 2026 yunzhuan.icu | Grade 11 Monthly Tasks</p>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <div style="text-align:center;padding:8px 0;font-size:0.75rem;color:#aaa;">
+        <a href="../index.html" style="color:#aaa;text-decoration:none;">Home</a>
+        <span style="margin:0 6px;">&middot;</span>
+        <a href="../intl-exams/index.html" style="color:#aaa;text-decoration:none;">International Exams</a>
+        <span style="margin:0 6px;">&middot;</span>
+        <a href="../contact.html" style="color:#aaa;text-decoration:none;">Contact</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="javascript:window.scrollTo(0,0)" style="color:#aaa;text-decoration:none;">Back to top</a>
+    </div>
+</body>
+</html>

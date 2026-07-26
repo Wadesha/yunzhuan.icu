@@ -603,6 +603,7 @@ git push origin vX.Y.Z
 | v13.2.0 | 2026-07-27 | 正式版本：Contact & Feedback 系统上线（Giscus 评论 + 4 种反馈渠道 + 全站 596 页底部 Contact 导航）；快照脚本升级支持版本号命名 |
 | v13.3.0 | 2026-07-27 | 美国大学扩充：新增 12 所大学详情页（JHU/Northwestern/Duke/UCB/UCLA/UMich/CMU/NYU/BU/UIUC/GaTech/UW）；全站底部导航英文化（352 页从中文改为英文） |
 | v13.4.0 | 2026-07-27 | 英国大学板块上线：8 所大学详情页（Oxford/Cambridge/IC/UCL/LSE/KCL/Edinburgh/Manchester），UCAS 申请体系、A-Level/IB 成绩要求、英国特色内容；专业导航核心课程上移到页面顶部（28 个专业页） |
+| v13.5.0 | 2026-07-27 | 标化考试扩充：新增 AP 备考指南、标化考试全年时间轴、7 大考试报名指南；首页移动端样式优化（专业卡片更紧凑）；修复首页版本入口显示 |
 
 ---
 
