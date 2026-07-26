@@ -17,17 +17,13 @@
         }
         .navbar {
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-start;
             align-items: center;
             padding: 14px 0;
-            border-bottom: 1px solid #e5e7eb;
             margin-bottom: 24px;
         }
         .logo {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: #667eea;
-            text-decoration: none;
+            display: none;
         }
         .logo span { color: #764ba2; }
         .nav-links { display: flex; gap: 16px; align-items: center; }
@@ -54,11 +50,12 @@
             margin-left: 8px;
         }
         .search-box {
+            position: relative;
             margin-bottom: 20px;
         }
         .search-box input {
             width: 100%;
-            padding: 12px 16px;
+            padding: 12px 100px 12px 16px;
             border: 2px solid #e5e7eb;
             border-radius: 10px;
             font-size: 1rem;
@@ -68,6 +65,66 @@
         }
         .search-box input:focus {
             border-color: #667eea;
+        }
+        .search-kbd {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 0.75rem;
+            color: #aaa;
+            background: #f0f0f0;
+            padding: 3px 8px;
+            border-radius: 4px;
+            border: 1px solid #e0e0e0;
+            font-family: monospace;
+            pointer-events: none;
+        }
+        .suggestions {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            margin-top: 4px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            z-index: 100;
+            display: none;
+            max-height: 320px;
+            overflow-y: auto;
+        }
+        .suggestions.show { display: block; }
+        .suggestion-item {
+            padding: 10px 16px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.15s;
+            border-bottom: 1px solid #f5f5f5;
+        }
+        .suggestion-item:last-child { border-bottom: none; }
+        .suggestion-item:hover,
+        .suggestion-item.active {
+            background: #f8f9ff;
+        }
+        .suggestion-title {
+            font-size: 0.9rem;
+            color: #333;
+        }
+        .suggestion-cat {
+            font-size: 0.72rem;
+            color: #999;
+            flex-shrink: 0;
+            margin-left: 12px;
+        }
+        .suggestion-item mark {
+            background: #fef08a;
+            color: inherit;
+            padding: 0 1px;
+            border-radius: 2px;
         }
         .filters {
             display: flex;
@@ -192,6 +249,8 @@
 
     <div class="search-box">
         <input type="text" id="searchInput" placeholder="Search majors, schools, guides, tools... 搜索专业、学校、指南、工具..." autocomplete="off">
+        <span class="search-kbd">/</span>
+        <div class="suggestions" id="suggestions"></div>
     </div>
 
     <div class="filters" id="filters"></div>
@@ -201,7 +260,7 @@
         <div class="loading">Loading index... 正在加载搜索索引...</div>
     </div>
 
-    <p class="footer">© 2026 yunzhuan.icu &nbsp;|&nbsp; Version v17.1.0</p>
+    <p class="footer">© 2026 yunzhuan.icu &nbsp;|&nbsp; Version v18.9.0</p>
 
 <script>
 (function() {
@@ -212,6 +271,8 @@
     const resultsEl = document.getElementById('results');
     const statsEl = document.getElementById('stats');
     const filtersEl = document.getElementById('filters');
+    const suggestionsEl = document.getElementById('suggestions');
+    let activeSuggestion = -1;
 
     async function loadIndex() {
         try {
@@ -323,11 +384,59 @@
         }).join('');
     }
 
+    function showSuggestions(query) {
+        if (!query.trim() || allPages.length === 0) {
+            suggestionsEl.classList.remove('show');
+            suggestionsEl.innerHTML = '';
+            activeSuggestion = -1;
+            return;
+        }
+        const q = query.toLowerCase().trim();
+        const matches = allPages
+            .filter(p => currentCategory === 'all' || p.category === currentCategory)
+            .filter(p => p.title.toLowerCase().includes(q))
+            .slice(0, 8);
+
+        if (matches.length === 0) {
+            suggestionsEl.classList.remove('show');
+            suggestionsEl.innerHTML = '';
+            activeSuggestion = -1;
+            return;
+        }
+
+        suggestionsEl.innerHTML = matches.map((p, i) => `
+            <div class="suggestion-item" data-index="${i}" data-url="${p.url}">
+                <span class="suggestion-title">${highlight(p.title, query)}</span>
+                <span class="suggestion-cat">${p.category}</span>
+            </div>
+        `).join('');
+        suggestionsEl.classList.add('show');
+        activeSuggestion = -1;
+
+        suggestionsEl.querySelectorAll('.suggestion-item').forEach(item => {
+            item.addEventListener('click', () => {
+                window.location.href = item.dataset.url;
+            });
+        });
+    }
+
+    function setActiveSuggestion(idx) {
+        const items = suggestionsEl.querySelectorAll('.suggestion-item');
+        if (items.length === 0) return;
+        items.forEach(i => i.classList.remove('active'));
+        if (idx < 0) idx = items.length - 1;
+        if (idx >= items.length) idx = 0;
+        activeSuggestion = idx;
+        items[idx].classList.add('active');
+        items[idx].scrollIntoView({ block: 'nearest' });
+    }
+
     let searchTimeout;
     input.addEventListener('input', () => {
         clearTimeout(searchTimeout);
         searchTimeout = setTimeout(() => {
             doSearch();
+            showSuggestions(input.value);
             const url = new URL(window.location);
             if (input.value.trim()) {
                 url.searchParams.set('q', input.value);
@@ -341,7 +450,50 @@
     input.addEventListener('keydown', (e) => {
         if (e.key === 'Enter') {
             e.preventDefault();
+            if (activeSuggestion >= 0 && suggestionsEl.classList.contains('show')) {
+                const items = suggestionsEl.querySelectorAll('.suggestion-item');
+                if (items[activeSuggestion]) {
+                    window.location.href = items[activeSuggestion].dataset.url;
+                    return;
+                }
+            }
             doSearch();
+            suggestionsEl.classList.remove('show');
+        } else if (e.key === 'ArrowDown') {
+            e.preventDefault();
+            if (suggestionsEl.classList.contains('show')) {
+                setActiveSuggestion(activeSuggestion + 1);
+            }
+        } else if (e.key === 'ArrowUp') {
+            e.preventDefault();
+            if (suggestionsEl.classList.contains('show')) {
+                setActiveSuggestion(activeSuggestion - 1);
+            }
+        } else if (e.key === 'Escape') {
+            suggestionsEl.classList.remove('show');
+            activeSuggestion = -1;
+        }
+    });
+
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.search-box')) {
+            suggestionsEl.classList.remove('show');
+            activeSuggestion = -1;
+        }
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === '/' && document.activeElement !== input && !e.ctrlKey && !e.metaKey) {
+            const tag = (e.target.tagName || '').toLowerCase();
+            if (tag === 'input' || tag === 'textarea' || e.target.isContentEditable) return;
+            e.preventDefault();
+            input.focus();
+            input.select();
+        }
+        if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+            e.preventDefault();
+            input.focus();
+            input.select();
         }
     });
 

@@ -1028,3 +1028,17 @@ details[open] summary {
 [data-theme="dark"] .list-item-title a {
     color: var(--text-primary) !important;
 }
+
+/* Subtle page fade-in (progressive enhancement) */
+@keyframes fadeIn {
+    from { opacity: 0.95; transform: translateY(2px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+body {
+    animation: fadeIn 0.25s ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    body { animation: none !important; }
+}
