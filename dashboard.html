@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application Dashboard - yunzhuan.icu</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px 16px;
+            background: #f5f5f5;
+            color: #333;
+        }
+        .back-link { color: #667eea; text-decoration: none; font-size: 0.85rem; margin-bottom: 12px; display: inline-block; }
+        .back-link:hover { text-decoration: underline; }
+        h1 { color: #333; margin-bottom: 4px; font-size: 1.5rem; }
+        .subtitle { color: #888; font-size: 0.95rem; margin-bottom: 14px; }
+        .intro {
+            background: white;
+            border-radius: 8px;
+            padding: 14px 18px;
+            margin-bottom: 14px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            font-size: 0.92rem;
+            line-height: 1.7;
+            color: #444;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 12px;
+            margin-bottom: 14px;
+        }
+        .card {
+            background: white;
+            border-radius: 8px;
+            padding: 14px 18px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            border-left: 4px solid #667eea;
+        }
+        .card h2 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        .card h2 .en { color: #999; font-size: 0.8rem; font-weight: normal; }
+        .form-row {
+            display: grid;
+            grid-template-columns: 130px 1fr;
+            gap: 8px;
+            margin-bottom: 8px;
+            align-items: center;
+            font-size: 0.88rem;
+        }
+        .form-row label { color: #555; }
+        .form-row input, .form-row select {
+            padding: 6px 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 0.88rem;
+            width: 100%;
+        }
+        .stat-mini {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            padding: 4px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .stat-mini:last-child { border-bottom: none; }
+        .stat-mini .label { color: #888; }
+        .stat-mini .value { color: #333; font-weight: 600; }
+        .progress-bar {
+            background: #f0f0f0;
+            border-radius: 3px;
+            height: 8px;
+            margin-top: 4px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            background: #667eea;
+            height: 100%;
+            transition: width 0.3s;
+        }
+        .check-list { list-style: none; font-size: 0.85rem; }
+        .check-list li {
+            padding: 5px 0;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            color: #444;
+            line-height: 1.5;
+        }
+        .check-list li:last-child { border-bottom: none; }
+        .check-list input[type="checkbox"] { margin-top: 3px; flex-shrink: 0; }
+        .check-list input[type="checkbox"]:checked + label { color: #aaa; text-decoration: line-through; }
+        .btn-row { margin-top: 10px; display: flex; gap: 8px; flex-wrap: wrap; }
+        .btn {
+            display: inline-block;
+            padding: 6px 14px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 0.82rem;
+            border: none;
+            cursor: pointer;
+        }
+        .btn:hover { background: #5568d3; }
+        .btn-secondary { background: #f8f9fa; color: #667eea; border: 1px solid #ddd; }
+        .btn-secondary:hover { background: #e8eaf6; }
+        .footer { text-align: center; margin-top: 20px; color: #999; font-size: 0.8rem; }
+        .note { font-size: 0.78rem; color: #888; margin-top: 8px; line-height: 1.6; }
+    </style>
+    <link rel="stylesheet" href="/css/collapse.css">
+</head>
+<body>
+    <a href="index.html" class="back-link">&larr; Back to Home</a>
+
+    <h1>Application Dashboard</h1>
+    <p class="subtitle">申请清单仪表盘 · Local tracking</p>
+
+    <div class="intro">
+        A single-page personal tracker for your application season. Enter your test scores, target schools and essay progress below — all data is stored locally in your browser (localStorage), nothing is uploaded. Use the quick links to jump to relevant resources across the site.
+        <br><span style="color:#888;">单页申请跟踪面板：分数 / 选校 / 文书 / 待办，数据存浏览器本地，不会上传。</span>
+    </div>
+
+    <div class="grid">
+        <div class="card">
+            <h2>Standardized Scores <span class="en">标化成绩</span></h2>
+            <div class="form-row">
+                <label>SAT Total</label>
+                <input type="number" id="sat-score" placeholder="400-1600">
+            </div>
+            <div class="form-row">
+                <label>ACT Composite</label>
+                <input type="number" id="act-score" placeholder="1-36">
+            </div>
+            <div class="form-row">
+                <label>TOEFL iBT</label>
+                <input type="number" id="toefl-score" placeholder="0-120">
+            </div>
+            <div class="form-row">
+                <label>IELTS</label>
+                <input type="number" id="ielts-score" placeholder="0-9" step="0.5">
+            </div>
+            <div class="form-row">
+                <label>Duolingo</label>
+                <input type="number" id="det-score" placeholder="10-160">
+            </div>
+            <p class="note">填入后自动保存到本地。对照分数可看 <a href="tests/score-conversion.html" style="color:#667eea;">Score Conversion</a>。</p>
+        </div>
+
+        <div class="card">
+            <h2>School List <span class="en">选校名单</span></h2>
+            <div id="school-list-stats">
+                <div class="stat-mini"><span class="label">Reach (冲刺)</span><span class="value" id="reach-count">0</span></div>
+                <div class="stat-mini"><span class="label">Match (匹配)</span><span class="value" id="match-count">0</span></div>
+                <div class="stat-mini"><span class="label">Safety (保底)</span><span class="value" id="safety-count">0</span></div>
+                <div class="stat-mini"><span class="label">Total</span><span class="value" id="total-count">0</span></div>
+            </div>
+            <p style="margin-top:10px;font-size:0.85rem;color:#555;">目标 8-12 所，建议 reach:match:safety = 3:5:2。</p>
+            <div class="btn-row">
+                <a href="schools/compare.html" class="btn btn-secondary">Compare tool</a>
+                <a href="schools/us/harvard.html" class="btn btn-secondary">Sample school card</a>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Essay Progress <span class="en">文书进度</span></h2>
+            <div class="stat-mini">
+                <span class="label">Common App main</span>
+                <span class="value" id="essay-ca-status">Not started</span>
+            </div>
+            <div class="progress-bar"><div class="progress-fill" id="essay-ca-bar" style="width:0%"></div></div>
+            <div class="stat-mini" style="margin-top:8px;">
+                <span class="label">Supplemental essays</span>
+                <span class="value" id="essay-sup-status">0 / 5 schools</span>
+            </div>
+            <div class="progress-bar"><div class="progress-fill" id="essay-sup-bar" style="width:0%"></div></div>
+            <div class="stat-mini" style="margin-top:8px;">
+                <span class="label">UCAS PS</span>
+                <span class="value" id="essay-ucas-status">Not started</span>
+            </div>
+            <div class="btn-row">
+                <a href="essays/process.html" class="btn btn-secondary">Writing process</a>
+                <a href="essays/pitfalls.html" class="btn btn-secondary">Pitfalls check</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="card" style="margin-bottom:14px;">
+        <h2>Application Checklist <span class="en">申请清单</span></h2>
+        <p style="font-size:0.85rem;color:#666;margin-bottom:8px;">勾选状态自动保存在浏览器，下次访问仍在。</p>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:8px 24px;">
+            <ul class="check-list" style="grid-column:auto;">
+                <li><input type="checkbox" id="t1"><label for="t1">Common App account created</label></li>
+                <li><input type="checkbox" id="t2"><label for="t2">Biographical info filled</label></li>
+                <li><input type="checkbox" id="t3"><label for="t3">Activity list drafted (10 max)</label></li>
+                <li><input type="checkbox" id="t4"><label for="t4">Common App main essay finalized</label></li>
+                <li><input type="checkbox" id="t5"><label for="t5">Recommendations requested (2 teachers + counselor)</label></li>
+                <li><input type="checkbox" id="t6"><label for="t6">Brag sheet shared with recommenders</label></li>
+                <li><input type="checkbox" id="t7"><label for="t7">SAT/ACT score sent to ED/EA schools</label></li>
+                <li><input type="checkbox" id="t8"><label for="t8">TOEFL/IELTS score sent</label></li>
+            </ul>
+            <ul class="check-list" style="grid-column:auto;">
+                <li><input type="checkbox" id="t9"><label for="t9">Supplemental essays for ED/EA schools done</label></li>
+                <li><input type="checkbox" id="t10"><label for="t10">CSS Profile submitted (if aid needed)</label></li>
+                <li><input type="checkbox" id="t11"><label for="t11">FAFSA submitted (US students only)</label></li>
+                <li><input type="checkbox" id="t12"><label for="t12">ED/EA application submitted (Nov 1)</label></li>
+                <li><input type="checkbox" id="t13"><label for="t13">RD supplemental essays done</label></li>
+                <li><input type="checkbox" id="t14"><label for="t14">All official scores sent to RD schools</label></li>
+                <li><input type="checkbox" id="t15"><label for="t15">RD applications submitted (Jan 1)</label></li>
+                <li><input type="checkbox" id="t16"><label for="t16">Mid-year report sent</label></li>
+            </ul>
+        </div>
+        <p class="note">完整月度任务见 <a href="timeline/grade-11-monthly.html" style="color:#667eea;">Grade 11 Monthly Tasks</a> / <a href="timeline/grade-12.html" style="color:#667eea;">Grade 12 Timeline</a>。</p>
+    </div>
+
+    <p class="footer">&copy; 2026 yunzhuan.icu | Application Dashboard</p>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <div style="text-align:center;padding:8px 0;font-size:0.75rem;color:#aaa;">
+        <a href="index.html" style="color:#aaa;text-decoration:none;">Home</a>
+        <span style="margin:0 6px;">&middot;</span>
+        <a href="intl-exams/index.html" style="color:#aaa;text-decoration:none;">International Exams</a>
+        <span style="margin:0 6px;">&middot;</span>
+        <a href="tests/index.html" style="color:#aaa;text-decoration:none;">Standardized Tests</a>
+        <span style="margin:0 6px;">&middot;</span>
+        <a href="schools/index.html" style="color:#aaa;text-decoration:none;">Universities</a>
+        <span style="margin:0 6px;">&middot;</span>
+        <a href="timeline/index.html" style="color:#aaa;text-decoration:none;">Timeline</a>
+        <span style="margin:0 6px;">&middot;</span>
+        <a href="essays/index.html" style="color:#aaa;text-decoration:none;">Essays</a>
+        <span style="margin:0 6px;">&middot;</span>
+        <a href="javascript:window.scrollTo(0,0)" style="color:#aaa;text-decoration:none;">Back to top</a>
+    </div>
+
+    <script>
+    const KEY = 'yunzhuan_dashboard_v1';
+    let state = JSON.parse(localStorage.getItem(KEY) || '{}');
+    if (!state.scores) state.scores = {};
+    if (!state.essayProgress) state.essayProgress = { ca: 0, sup: 0, ucas: 0 };
+    if (!state.checklist) state.checklist = {};
+
+    function save() {
+        localStorage.setItem(KEY, JSON.stringify(state));
+    }
+
+    function loadScores() {
+        ['sat','act','toefl','ielts','det'].forEach(k => {
+            const el = document.getElementById(k + '-score');
+            if (state.scores[k]) el.value = state.scores[k];
+            el.addEventListener('input', e => {
+                state.scores[k] = e.target.value;
+                save();
+            });
+        });
+    }
+
+    const ESSAY_LABELS = ['Not started', 'Brainstorm', 'Draft v1', 'Draft v2', 'Final draft', 'Submitted'];
+    function renderEssay() {
+        const ca = state.essayProgress.ca || 0;
+        document.getElementById('essay-ca-status').textContent = ESSAY_LABELS[ca];
+        document.getElementById('essay-ca-bar').style.width = (ca / 5 * 100) + '%';
+        const sup = state.essayProgress.sup || 0;
+        document.getElementById('essay-sup-status').textContent = sup + ' / 5 schools';
+        document.getElementById('essay-sup-bar').style.width = (sup / 5 * 100) + '%';
+        const ucas = state.essayProgress.ucas || 0;
+        document.getElementById('essay-ucas-status').textContent = ESSAY_LABELS[ucas];
+    }
+
+    function loadChecklist() {
+        for (let i = 1; i <= 16; i++) {
+            const el = document.getElementById('t' + i);
+            if (state.checklist['t' + i]) el.checked = true;
+            el.addEventListener('change', e => {
+                state.checklist['t' + i] = e.target.checked;
+                save();
+            });
+        }
+    }
+
+    // School list: stored externally in this minimal version, just static counters
+    document.getElementById('reach-count').textContent = '0';
+    document.getElementById('match-count').textContent = '0';
+    document.getElementById('safety-count').textContent = '0';
+    document.getElementById('total-count').textContent = '0';
+
+    loadScores();
+    renderEssay();
+    loadChecklist();
+    </script>
+</body>
+</html>

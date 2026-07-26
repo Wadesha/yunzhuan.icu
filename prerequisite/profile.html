@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>用户档案 v20260722-81</title>
+<link rel="stylesheet" href="css/user.css">
+</head>
+<body>
+<noscript><div style="background:#f8d7da;color:#721c24;padding:10px;">请开启JavaScript</div></noscript>
+<div id="debugBar" style="display:none;background:#ff6b6b;color:white;padding:8px 12px;font-size:13px;font-weight:bold;border-bottom:2px solid #ee5253;">
+  [v20260722-81] profile.html | commit: <span id="d_commit">page-89de3bb</span> | 
+  slot_token: <span id="d1">检查中</span> | 
+  user_data: <span id="d2">检查中</span> |
+  user.js: <span id="d6">未加载</span> |
+  CloudSlot: <span id="d3">检查中</span> |
+  supabase: <span id="d4">检查中</span> |
+  错误: <span id="d5">无</span>
+</div>
+<script>
+var PAGE_BUILD = { version: 'v20260722-81', commit: '89de3bb', module: 'profile.html' };
+
+if (new URLSearchParams(window.location.search).get('debug') === '1') {
+  document.getElementById('debugBar').style.display = 'block';
+}
+
+window.onerror = function(msg, url, line) {
+  var el = document.getElementById('d5');
+  if (el) el.textContent = msg + ' (' + url + ':' + line + ')';
+};
+try {
+  document.getElementById('d1').textContent = localStorage.getItem('slot_token') ? '有' : '无';
+  document.getElementById('d2').textContent = localStorage.getItem('prereq_user_v1') ? '有' : '无';
+} catch(e) {
+  document.getElementById('d1').textContent = 'ERR:' + e.message;
+}
+
+function checkCloudSlot() {
+  var d3 = document.getElementById('d3');
+  var d4 = document.getElementById('d4');
+  var d6 = document.getElementById('d6');
+  var dc = document.getElementById('d_commit');
+  
+  if (typeof CloudSlot !== 'undefined') {
+    d3.textContent = '已加载';
+    d6.textContent = '已加载';
+    if (typeof BUILD_INFO !== 'undefined') {
+      d6.textContent = '已加载(' + BUILD_INFO.version + '/' + BUILD_INFO.commit + ')';
+      dc.textContent = 'page-' + PAGE_BUILD.commit + ' / js-' + BUILD_INFO.commit;
+    }
+  } else if (typeof window.userJsLoaded !== 'undefined') {
+    d6.textContent = '已加载但无CloudSlot(v' + (window.userJsVersion || '?') + ')';
+  }
+  
+  if (typeof supabaseReady !== 'undefined') {
+    if (supabaseReady) {
+      d4.textContent = '就绪';
+    } else if (typeof window.supabaseLoadStatus !== 'undefined') {
+      d4.textContent = window.supabaseLoadStatus;
+    } else {
+      d4.textContent = '加载中';
+    }
+  } else if (typeof window.supabaseLoadStatus !== 'undefined') {
+    d4.textContent = window.supabaseLoadStatus;
+  }
+}
+
+var checkCount = 0;
+var checkTimer = setInterval(function() {
+  checkCount++;
+  checkCloudSlot();
+  if (checkCount > 30) clearInterval(checkTimer);
+}, 500);
+</script>
+<div class="profile-page">
+  <a href="index.html" class="back-btn">← 返回首页</a>
+
+  <div class="profile-header">
+    <div class="profile-avatar">●</div>
+    <div class="profile-name">学习者</div>
+    <div class="profile-id">ID: <span id="userId">--</span></div>
+    <div style="margin-top:12px;font-size:1.6rem;">● <span id="totalCoin">0</span></div>
+    <div style="font-size:0.9rem;">等级 <span id="level">1</span></div>
+    <div style="font-size:0.75rem;margin-top:8px;" id="loginStatus">未登录</div>
+  </div>
+
+  <div class="profile-stats">
+    <div class="stat-card">
+      <div class="v" id="statAnswered">0</div>
+      <div class="l">总答题数</div>
+    </div>
+    <div class="stat-card">
+      <div class="v" id="statCorrect">0</div>
+      <div class="l">正确数</div>
+    </div>
+    <div class="stat-card">
+      <div class="v" id="statSessions">0</div>
+      <div class="l">刷题次数</div>
+    </div>
+    <div class="stat-card">
+      <div class="v" id="statStreak">0</div>
+      <div class="l">最高连击</div>
+    </div>
+  </div>
+
+  <div style="margin-top:16px;">
+    <div class="section-title">课程学习进度</div>
+    <div class="course-progress-list" id="courseProgress">
+      <div style="text-align:center;color:#999;padding:20px;">暂无学习记录</div>
+    </div>
+  </div>
+
+  <div style="margin-top:16px;">
+    <div class="section-title">数据存储说明</div>
+    <div style="background:#f0f4ff;border-radius:8px;padding:14px;font-size:0.85rem;color:#555;">
+      <p style="margin-bottom:8px;">当前数据存储在本地浏览器中，清除浏览器缓存会导致数据丢失。</p>
+      <p>预留：后续将支持云端同步，登录后数据自动保存到服务器。</p>
+    </div>
+    
+    <div style="margin-top:12px;text-align:center;">
+      <a href="login.html" style="display:inline-block;padding:8px 24px;background:#667eea;color:white;border-radius:20px;text-decoration:none;font-size:0.85rem;" id="loginBtn">去登录</a>
+      <button onclick="logout()" style="display:none;padding:8px 24px;background:#f0f0f0;color:#666;border:none;border-radius:20px;font-size:0.85rem;cursor:pointer;" id="logoutBtn">登出</button>
+      <button onclick="uploadToCloud()" style="display:none;margin-left:8px;padding:8px 24px;background:#fff3e0;color:#f57c00;border:none;border-radius:20px;font-size:0.85rem;cursor:pointer;" id="uploadBtn">上传到云端</button>
+      <button onclick="syncFromCloud()" style="display:none;margin-left:8px;padding:8px 24px;background:#e3f2fd;color:#1976d2;border:none;border-radius:20px;font-size:0.85rem;cursor:pointer;" id="syncBtn">从云端下载</button>
+    </div>
+  </div>
+
+  <div style="margin-top:16px;text-align:center;">
+    <button onclick="clearData()" style="padding:8px 20px;background:#ffebee;color:#c62828;border:none;border-radius:6px;font-size:0.85rem;cursor:pointer;">重置所有数据</button>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js?v=7"></script>
+<script src="js/user.js?v=7"></script>
+<script src="js/footer.js"></script>
+<script>
+function loadData() {
+  const user = UserStorage.getUser();
+  
+  document.getElementById('userId').textContent = user.userId;
+  document.getElementById('totalCoin').textContent = user.coin;
+  document.getElementById('level').textContent = user.level;
+  
+  document.getElementById('statAnswered').textContent = user.totalAnswered;
+  document.getElementById('statCorrect').textContent = user.totalCorrect;
+  document.getElementById('statSessions').textContent = user.totalSessions;
+  document.getElementById('statStreak').textContent = user.maxStreak;
+  
+  // 显示课程进度
+  const cp = user.courseProgress;
+  const keys = Object.keys(cp);
+  if (keys.length === 0) return;
+  
+  let html = '';
+  keys.forEach(courseId => {
+    const p = cp[courseId];
+    const percent = p.answered > 0 ? Math.round(p.correct / p.answered * 100) : 0;
+    html += `
+    <div class="progress-item">
+      <span style="font-size:0.88rem;color:#333;">${courseId}</span>
+      <div class="progress-bar-mini">
+        <div class="progress-fill-mini" style="width:${percent}%"></div>
+      </div>
+      <span style="font-size:0.85rem;color:#666;">${p.correct}/${p.answered} (${percent}%)</span>
+    </div>`;
+  });
+  
+  document.getElementById('courseProgress').innerHTML = html;
+}
+
+function updateLoginStatus() {
+  const loggedIn = CloudSlot.isLoggedIn();
+  const token = CloudSlot.getToken();
+  
+  document.getElementById('loginStatus').textContent = loggedIn ? '已登录' : '未登录';
+  document.getElementById('loginStatus').style.color = loggedIn ? '#a5d6a7' : '#ffcc80';
+  
+  document.getElementById('loginBtn').style.display = loggedIn ? 'none' : 'inline-block';
+  document.getElementById('logoutBtn').style.display = loggedIn ? 'inline-block' : 'none';
+  document.getElementById('uploadBtn').style.display = loggedIn ? 'inline-block' : 'none';
+  document.getElementById('syncBtn').style.display = loggedIn ? 'inline-block' : 'none';
+  
+  if (loggedIn && token) {
+    document.getElementById('userId').textContent = token.phone || 'slot_' + token.slot_id.substring(0, 8);
+  }
+}
+
+function logout() {
+  if (confirm('确定要登出吗？')) {
+    CloudSlot.logout();
+    updateLoginStatus();
+    loadData();
+  }
+}
+
+async function uploadToCloud() {
+  if (!confirm('确定要把本地数据上传到云端吗？这会覆盖云端数据。')) return;
+  const user = UserStorage.getUser();
+  const result = await CloudSlot.kvSet('user_data', user);
+  if (result.success) {
+    alert('上传成功');
+  } else {
+    alert('上传失败: ' + (result.error || '未知错误'));
+  }
+}
+
+async function syncFromCloud() {
+  const result = await UserStorage.syncFromCloud();
+  if (result) {
+    alert('下载成功，本地数据已更新');
+    loadData();
+  } else {
+    alert('下载失败或云端无数据，请先上传');
+  }
+}
+
+function clearData() {
+  if (confirm('确定要重置所有数据吗？此操作不可恢复。')) {
+    Storage.resetUser();
+    location.reload();
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  loadData();
+  updateLoginStatus();
+});
+</script>
+<div style="text-align:center;padding:8px 0;font-size:0.75rem;color:#aaa;">
+    <a href="../index.html" style="color:#aaa;text-decoration:none;">Home</a>
+    <span style="margin:0 6px;">·</span>
+    <a href="../intl-exams/index.html" style="color:#aaa;text-decoration:none;">International Exams</a>
+    <span style="margin:0 6px;">·</span>
+    <a href="javascript:window.scrollTo(0,0)" style="color:#aaa;text-decoration:none;">Back to top</a>
+</div>
+</body>
+</html>

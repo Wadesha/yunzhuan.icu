@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>美国大学专业导航 - yunzhuan.icu</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px 16px;
+            background: #f5f5f5;
+            color: #333;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 4px;
+            font-size: 1.5rem;
+        }
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 16px;
+            font-size: 0.9rem;
+        }
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+        .stat-item {
+            background: white;
+            padding: 6px 14px;
+            border-radius: 6px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            font-size: 0.85rem;
+            color: #666;
+        }
+        .stat-item b {
+            color: #667eea;
+            margin-right: 4px;
+        }
+        .category {
+            background: white;
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin-bottom: 10px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .category h2 {
+            color: #333;
+            margin-bottom: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+        }
+        .category h2 .en {
+            color: #999;
+            font-size: 0.8rem;
+            font-weight: normal;
+        }
+        .category .count {
+            font-size: 0.75rem;
+            color: #888;
+            font-weight: normal;
+        }
+        .major-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 6px;
+        }
+        .major-link {
+            display: block;
+            padding: 6px 10px;
+            background: #f8f9fa;
+            border-radius: 4px;
+            text-decoration: none;
+            color: #333;
+            transition: all 0.15s ease;
+            border-left: 3px solid #667eea;
+            font-size: 0.88rem;
+            line-height: 1.3;
+        }
+        .major-link:hover {
+            background: #e8eaf6;
+            border-left-color: #764ba2;
+        }
+        .major-link .cn {
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        .major-link .en {
+            font-size: 0.75rem;
+            color: #888;
+            margin-left: 4px;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            color: #999;
+            font-size: 0.8rem;
+        }
+        @media (max-width: 768px) {
+            h1 { font-size: 1.3rem; }
+            .major-list { grid-template-columns: 1fr; }
+            .major-link .en { display: block; margin-left: 0; margin-top: 2px; }
+        }
+    </style>
+</head>
+<body>
+    <h1>美国大学专业导航</h1>
+    <p class="subtitle">American University Majors Navigation</p>
+
+    <div class="stats">
+        <div class="stat-item"><b>8</b>专业分类</div>
+        <div class="stat-item"><b>44</b>专业数量</div>
+    </div>
+
+    <div class="category">
+        <h2>计算机类 <span class="en">Computer</span> <span class="count">7个专业</span></h2>
+        <div class="major-list">
+            <a href="computer/cs.html" class="major-link"><span class="cn">计算机科学</span><span class="en">Computer Science</span></a>
+            <a href="computer/software.html" class="major-link"><span class="cn">软件工程</span><span class="en">Software Engineering</span></a>
+            <a href="computer/ai.html" class="major-link"><span class="cn">人工智能</span><span class="en">Artificial Intelligence</span></a>
+            <a href="computer/data.html" class="major-link"><span class="cn">数据科学</span><span class="en">Data Science</span></a>
+            <a href="computer/cyber.html" class="major-link"><span class="cn">网络安全</span><span class="en">Cybersecurity</span></a>
+            <a href="computer/info.html" class="major-link"><span class="cn">信息系统</span><span class="en">Information Systems</span></a>
+            <a href="computer/hci.html" class="major-link"><span class="cn">人机交互</span><span class="en">Human-Computer Interaction</span></a>
+        </div>
+    </div>
+
+    <div class="category">
+        <h2>工程类 <span class="en">Engineering</span> <span class="count">7个专业</span></h2>
+        <div class="major-list">
+            <a href="engineering/electrical.html" class="major-link"><span class="cn">电气工程</span><span class="en">Electrical Engineering</span></a>
+            <a href="engineering/mechanical.html" class="major-link"><span class="cn">机械工程</span><span class="en">Mechanical Engineering</span></a>
+            <a href="engineering/biomedical.html" class="major-link"><span class="cn">生物医学工程</span><span class="en">Biomedical Engineering</span></a>
+            <a href="engineering/civil.html" class="major-link"><span class="cn">土木工程</span><span class="en">Civil Engineering</span></a>
+            <a href="engineering/chemical.html" class="major-link"><span class="cn">化学工程</span><span class="en">Chemical Engineering</span></a>
+            <a href="engineering/industrial.html" class="major-link"><span class="cn">工业工程</span><span class="en">Industrial Engineering</span></a>
+            <a href="engineering/aerospace.html" class="major-link"><span class="cn">航空航天工程</span><span class="en">Aerospace Engineering</span></a>
+        </div>
+    </div>
+
+    <div class="category">
+        <h2>商科类 <span class="en">Business</span> <span class="count">7个专业</span></h2>
+        <div class="major-list">
+            <a href="business/finance.html" class="major-link"><span class="cn">金融学</span><span class="en">Finance</span></a>
+            <a href="business/accounting.html" class="major-link"><span class="cn">会计学</span><span class="en">Accounting</span></a>
+            <a href="business/analytics.html" class="major-link"><span class="cn">商业分析</span><span class="en">Business Analytics</span></a>
+            <a href="business/marketing.html" class="major-link"><span class="cn">市场营销</span><span class="en">Marketing</span></a>
+            <a href="business/management.html" class="major-link"><span class="cn">管理学</span><span class="en">Management</span></a>
+            <a href="business/international.html" class="major-link"><span class="cn">国际商务</span><span class="en">International Business</span></a>
+            <a href="business/supply.html" class="major-link"><span class="cn">供应链管理</span><span class="en">Supply Chain Management</span></a>
+        </div>
+    </div>
+
+    <div class="category">
+        <h2>生物与健康类 <span class="en">Biology &amp; Health</span> <span class="count">6个专业</span></h2>
+        <div class="major-list">
+            <a href="biology/biomedical.html" class="major-link"><span class="cn">生物医学科学</span><span class="en">Biomedical Sciences</span></a>
+            <a href="biology/nursing.html" class="major-link"><span class="cn">护理学</span><span class="en">Nursing</span></a>
+            <a href="biology/molecular.html" class="major-link"><span class="cn">分子生物学</span><span class="en">Molecular Biology</span></a>
+            <a href="biology/public.html" class="major-link"><span class="cn">公共卫生</span><span class="en">Public Health</span></a>
+            <a href="biology/neuroscience.html" class="major-link"><span class="cn">神经科学</span><span class="en">Neuroscience</span></a>
+            <a href="biology/biochemistry.html" class="major-link"><span class="cn">生物化学</span><span class="en">Biochemistry</span></a>
+        </div>
+    </div>
+
+    <div class="category">
+        <h2>社会科学类 <span class="en">Social Sciences</span> <span class="count">6个专业</span></h2>
+        <div class="major-list">
+            <a href="social/economics.html" class="major-link"><span class="cn">经济学</span><span class="en">Economics</span></a>
+            <a href="social/psychology.html" class="major-link"><span class="cn">心理学</span><span class="en">Psychology</span></a>
+            <a href="social/political.html" class="major-link"><span class="cn">政治学</span><span class="en">Political Science</span></a>
+            <a href="social/sociology.html" class="major-link"><span class="cn">社会学</span><span class="en">Sociology</span></a>
+            <a href="social/history.html" class="major-link"><span class="cn">历史学</span><span class="en">History</span></a>
+            <a href="social/anthropology.html" class="major-link"><span class="cn">人类学</span><span class="en">Anthropology</span></a>
+        </div>
+    </div>
+
+    <div class="category">
+        <h2>自然科学类 <span class="en">Natural Sciences</span> <span class="count">4个专业</span></h2>
+        <div class="major-list">
+            <a href="science/physics.html" class="major-link"><span class="cn">物理学</span><span class="en">Physics</span></a>
+            <a href="science/chemistry.html" class="major-link"><span class="cn">化学</span><span class="en">Chemistry</span></a>
+            <a href="science/mathematics.html" class="major-link"><span class="cn">数学</span><span class="en">Mathematics</span></a>
+            <a href="science/environmental.html" class="major-link"><span class="cn">环境科学</span><span class="en">Environmental Science</span></a>
+        </div>
+    </div>
+
+    <div class="category">
+        <h2>艺术类 <span class="en">Arts</span> <span class="count">4个专业</span></h2>
+        <div class="major-list">
+            <a href="arts/fine-arts.html" class="major-link"><span class="cn">艺术</span><span class="en">Fine Arts</span></a>
+            <a href="arts/music.html" class="major-link"><span class="cn">音乐</span><span class="en">Music</span></a>
+            <a href="arts/design.html" class="major-link"><span class="cn">设计</span><span class="en">Design</span></a>
+            <a href="arts/communication.html" class="major-link"><span class="cn">传媒</span><span class="en">Communication</span></a>
+        </div>
+    </div>
+
+    <div class="category">
+        <h2>教育类 <span class="en">Education</span> <span class="count">3个专业</span></h2>
+        <div class="major-list">
+            <a href="education/education.html" class="major-link"><span class="cn">教育学</span><span class="en">Education</span></a>
+            <a href="education/special.html" class="major-link"><span class="cn">特殊教育</span><span class="en">Special Education</span></a>
+            <a href="education/early.html" class="major-link"><span class="cn">幼儿教育</span><span class="en">Early Childhood Education</span></a>
+        </div>
+    </div>
+
+    <p class="footer">© 2026 yunzhuan.icu</p>
+</body>
+</html>
