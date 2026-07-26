@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile - yunzhuan.icu</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px 16px 40px;
+            background: var(--bg-primary, #f5f5f5);
+            color: var(--text-primary, #333);
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 0;
+            border-bottom: 1px solid #e5e7eb;
+            margin-bottom: 24px;
+        }
+        .logo {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #667eea;
+            text-decoration: none;
+        }
+        .logo span { color: #764ba2; }
+        .nav-links { display: flex; gap: 16px; align-items: center; }
+        .nav-links a {
+            color: #555;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        .nav-links a:hover { color: #667eea; }
+        .nav-links .cn { color: #999; font-size: 0.8rem; margin-left: 2px; }
+
+        h1 { font-size: 1.5rem; margin-bottom: 6px; }
+        .subtitle { color: #888; font-size: 0.9rem; margin-bottom: 20px; }
+
+        .section {
+            background: white;
+            border-radius: 8px;
+            padding: 18px 20px;
+            margin-bottom: 14px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .section h2 {
+            color: #667eea;
+            margin-bottom: 12px;
+            font-size: 1.05rem;
+            font-weight: 600;
+        }
+        .section h2 .cn { color: #999; font-size: 0.85rem; font-weight: normal; margin-left: 6px; }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+        .avatar {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        .profile-info .email { font-size: 0.9rem; color: #555; }
+        .profile-info .member-since { font-size: 0.78rem; color: #999; margin-top: 2px; }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 10px;
+        }
+        .stat-card {
+            background: #f8f9ff;
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+        }
+        .stat-value { font-size: 1.4rem; font-weight: 700; color: #667eea; }
+        .stat-label { font-size: 0.75rem; color: #888; margin-top: 2px; }
+
+        .list-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #f5f5f5;
+        }
+        .list-item:last-child { border-bottom: none; }
+        .list-item-title { font-size: 0.9rem; font-weight: 500; }
+        .list-item-title a { color: #333; text-decoration: none; }
+        .list-item-title a:hover { color: #667eea; }
+        .list-item-meta { font-size: 0.75rem; color: #999; margin-top: 2px; }
+        .list-item-remove {
+            background: none;
+            border: none;
+            color: #ef4444;
+            cursor: pointer;
+            font-size: 0.78rem;
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
+        .list-item-remove:hover { background: #fef2f2; }
+
+        .empty-state {
+            text-align: center;
+            padding: 30px 20px;
+            color: #aaa;
+            font-size: 0.88rem;
+        }
+        .empty-state .icon { font-size: 2rem; margin-bottom: 8px; }
+
+        .btn {
+            padding: 8px 16px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85rem;
+        }
+        .btn:hover { opacity: 0.9; }
+        .btn-secondary {
+            background: white;
+            color: #667eea;
+            border: 1px solid #667eea;
+        }
+
+        .loading { text-align: center; padding: 40px; color: #999; }
+
+        .footer { text-align: center; margin-top: 30px; color: #999; font-size: 0.8rem; }
+
+        @media (max-width: 768px) {
+            body { padding: 12px 10px 60px; }
+            .nav-links a .cn { display: none; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
+    <link rel="stylesheet" href="css/theme.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#667eea">
+    <script src="js/theme.js"></script>
+    <script>
+    window.SUPABASE_CONFIG = {
+        url: 'https://otfjbzjvkoectpejhxar.supabase.co',
+        anonKey: 'sb_publishable_SBRF6ewKH-se3dNlqFwsXQ_lObhamTr'
+    };
+    </script>
+    <script src="js/auth.js"></script>
+    <script src="js/mobile-nav.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="index.html" class="logo">yunzhuan<span>.icu</span></a>
+        <div class="nav-links">
+            <a href="index.html">Home<span class="cn">首页</span></a>
+            <a href="guides/index.html">Guides<span class="cn">指南</span></a>
+            <a href="search.html">Search<span class="cn">搜索</span></a>
+        </div>
+    </nav>
+
+    <h1>My Profile</h1>
+    <p class="subtitle">个人中心 · 管理你的收藏、选校和学习进度</p>
+
+    <div id="not-logged-in" style="display:none;">
+        <div class="section" style="text-align:center;">
+            <div style="font-size:3rem;margin-bottom:10px;">🔐</div>
+            <p style="margin-bottom:14px;color:#666;">Please sign in to view your profile</p>
+            <a href="login.html" class="btn">Sign In / 登录</a>
+        </div>
+    </div>
+
+    <div id="profile-content">
+        <div class="loading">Loading... 加载中...</div>
+    </div>
+
+    <p class="footer">© 2026 yunzhuan.icu &nbsp;|&nbsp; Version v18.0.0</p>
+
+<script>
+(function() {
+    function escapeHtml(s) {
+        return (s || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    }
+
+    function renderProfile(user, profile) {
+        const email = user.email || '';
+        const initial = (email.charAt(0) || 'U').toUpperCase();
+
+        const favorites = window._favorites || [];
+        const schoolList = window._schoolList || [];
+
+        const content = document.getElementById('profile-content');
+        content.innerHTML = `
+            <div class="section">
+                <div class="profile-header">
+                    <div class="avatar">${initial}</div>
+                    <div class="profile-info">
+                        <div style="font-weight:600;font-size:1.05rem;">${escapeHtml(profile?.display_name || email)}</div>
+                        <div class="email">${escapeHtml(email)}</div>
+                        <div class="member-since">Member since ${profile?.created_at ? new Date(profile.created_at).toLocaleDateString() : ''}</div>
+                    </div>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-value">${profile?.coins || 0}</div>
+                        <div class="stat-label">Coins / 金币</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">Lv.${profile?.level || 1}</div>
+                        <div class="stat-label">Level / 等级</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">${favorites.length}</div>
+                        <div class="stat-label">Favorites / 收藏</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">${schoolList.length}</div>
+                        <div class="stat-label">Schools / 选校</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section" id="favorites">
+                <h2>My Favorites <span class="cn">我的收藏</span></h2>
+                ${favorites.length === 0 ? `
+                    <div class="empty-state">
+                        <div class="icon">⭐</div>
+                        <p>No favorites yet</p>
+                        <p style="font-size:0.78rem;margin-top:4px;">Browse schools and majors to add favorites</p>
+                    </div>
+                ` : `
+                    ${favorites.map(f => `
+                        <div class="list-item">
+                            <div>
+                                <div class="list-item-title">
+                                    <a href="${escapeHtml(f.item_url || '#')}">${escapeHtml(f.item_title || f.item_id)}</a>
+                                </div>
+                                <div class="list-item-meta">${escapeHtml(f.item_type || '')} · ${f.created_at ? new Date(f.created_at).toLocaleDateString() : ''}</div>
+                            </div>
+                            <button class="list-item-remove" onclick="removeFavorite('${f.item_type}', '${f.item_id}')">Remove</button>
+                        </div>
+                    `).join('')}
+                `}
+            </div>
+
+            <div class="section" id="schools">
+                <h2>My School List <span class="cn">我的选校名单</span></h2>
+                ${schoolList.length === 0 ? `
+                    <div class="empty-state">
+                        <div class="icon">🎓</div>
+                        <p>No schools added yet</p>
+                        <p style="font-size:0.78rem;margin-top:4px;">Build your school list in the compare tool</p>
+                    </div>
+                ` : `
+                    ${schoolList.map(s => `
+                        <div class="list-item">
+                            <div>
+                                <div class="list-item-title">${escapeHtml(s.school_name || s.school_id)}</div>
+                                <div class="list-item-meta">${escapeHtml(s.tier || '')} ${s.status ? '· ' + escapeHtml(s.status) : ''}</div>
+                            </div>
+                            <button class="list-item-remove" onclick="removeSchool('${s.school_id}')">Remove</button>
+                        </div>
+                    `).join('')}
+                `}
+            </div>
+
+            <div class="section">
+                <h2>Account <span class="cn">账户</span></h2>
+                <div style="display:flex;gap:10px;flex-wrap:wrap;">
+                    <button class="btn btn-secondary" onclick="signOut()">Sign Out / 退出登录</button>
+                </div>
+            </div>
+        `;
+    }
+
+    window.removeFavorite = async function(type, id) {
+        if (!confirm('Remove this favorite?')) return;
+        try {
+            await window.DB.removeFavorite(type, id);
+            loadData();
+        } catch (e) {
+            alert('Failed: ' + e.message);
+        }
+    };
+
+    window.removeSchool = async function(schoolId) {
+        if (!confirm('Remove this school from your list?')) return;
+        try {
+            await window.DB.removeSchoolFromList(schoolId);
+            loadData();
+        } catch (e) {
+            alert('Failed: ' + e.message);
+        }
+    };
+
+    window.signOut = async function() {
+        if (!confirm('Sign out?')) return;
+        try {
+            await window.Auth.signOut();
+            window.location.href = 'index.html';
+        } catch (e) {
+            alert('Sign out failed: ' + e.message);
+        }
+    };
+
+    async function loadData() {
+        try {
+            const [profile, favorites, schoolList] = await Promise.all([
+                window.DB.getProfile(),
+                window.DB.getFavorites(),
+                window.DB.getSchoolList()
+            ]);
+            window._favorites = favorites;
+            window._schoolList = schoolList;
+            renderProfile(window.Auth.getUser(), profile);
+        } catch (e) {
+            console.error('Load data error:', e);
+            renderProfile(window.Auth.getUser(), null);
+        }
+    }
+
+    if (window.Auth) {
+        window.Auth.ready(function(user) {
+            if (!user) {
+                document.getElementById('not-logged-in').style.display = 'block';
+                document.getElementById('profile-content').style.display = 'none';
+                return;
+            }
+            loadData();
+        });
+    }
+})();
+</script>
+</body>
+</html>

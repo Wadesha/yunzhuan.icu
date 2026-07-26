@@ -164,9 +164,124 @@
         .growth-up { color: #16a34a; font-size: 0.8rem; }
         .growth-mid { color: #ca8a04; font-size: 0.8rem; }
         .growth-down { color: #dc2626; font-size: 0.8rem; }
+        .chart-container {
+            margin: 12px 0 16px;
+            padding: 12px;
+            background: #fafaff;
+            border-radius: 8px;
+            border: 1px solid #eef2ff;
+        }
+        .chart-title {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .chart-title .toggle {
+            font-size: 0.75rem;
+            font-weight: normal;
+        }
+        .chart-title .toggle button {
+            padding: 3px 10px;
+            border: 1px solid #ddd;
+            background: white;
+            border-radius: 12px;
+            font-size: 0.72rem;
+            cursor: pointer;
+            margin-left: 4px;
+            transition: all 0.15s;
+        }
+        .chart-title .toggle button.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+        .bar-chart {
+            display: flex;
+            align-items: flex-end;
+            gap: 10px;
+            height: 200px;
+            padding: 0 8px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .bar-group {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            min-width: 0;
+        }
+        .bar-bars {
+            display: flex;
+            gap: 3px;
+            align-items: flex-end;
+            height: 160px;
+            width: 100%;
+            justify-content: center;
+        }
+        .bar {
+            width: 14px;
+            border-radius: 4px 4px 0 0;
+            position: relative;
+            transition: height 0.4s ease, background 0.2s;
+            cursor: pointer;
+        }
+        .bar.early { background: linear-gradient(to top, #667eea, #818cf8); }
+        .bar.mid { background: linear-gradient(to top, #764ba2, #a78bfa); }
+        .bar:hover { opacity: 0.85; }
+        .bar-label {
+            font-size: 0.65rem;
+            color: #666;
+            text-align: center;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            width: 100%;
+        }
+        .bar-value {
+            font-size: 0.6rem;
+            color: #888;
+            font-weight: 600;
+        }
+        .chart-legend {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            margin-top: 10px;
+            font-size: 0.75rem;
+            color: #666;
+        }
+        .chart-legend span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .chart-legend .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 2px;
+        }
+        .chart-legend .dot.early { background: #667eea; }
+        .chart-legend .dot.mid { background: #764ba2; }
+        @media (max-width: 768px) {
+            .bar-chart { height: 160px; gap: 6px; }
+            .bar-bars { height: 120px; }
+            .bar { width: 10px; }
+            .bar-label { font-size: 0.55rem; }
+            .chart-container { padding: 8px; }
+        }
     </style>
     <link rel="stylesheet" href="./css/theme.css">
+    <link rel="manifest" href="./manifest.json">
+    <meta name="theme-color" content="#667eea">
     <script src="./js/theme.js"></script>
+    <script src="./js/pwa.js"></script>
+    <script src="./js/mobile-nav.js"></script>
+    <script src="./js/breadcrumbs.js"></script>
 </head>
 <body>
     <nav class="navbar">
@@ -177,6 +292,7 @@
             <a href="../tests/index.html">Tests<span class="cn">考试</span></a>
             <a href="../guides/index.html">Guides<span class="cn">指南</span></a>
             <a href="../resources.html">Resources<span class="cn">资源</span></a>
+            <a href="search.html">Search<span class="cn">搜索</span></a>
             <a href="../contact.html">Contact<span class="cn">联系</span></a>
         </div>
     </nav>
@@ -195,6 +311,22 @@
             <span class="filter-tab" data-filter="business">Business / 商科</span>
             <span class="filter-tab" data-filter="arts">Arts & Humanities / 人文艺术</span>
             <span class="filter-tab" data-filter="social">Social Sciences / 社科</span>
+        </div>
+
+        <div class="chart-container">
+            <div class="chart-title">
+                <span>Salary Comparison Chart <span style="color:#999;font-weight:normal;font-size:0.75rem;">薪资对比图</span></span>
+                <span class="toggle">
+                    <button class="chart-toggle active" data-type="both">Both</button>
+                    <button class="chart-toggle" data-type="early">Early</button>
+                    <button class="chart-toggle" data-type="mid">Mid</button>
+                </span>
+            </div>
+            <div class="bar-chart" id="barChart"></div>
+            <div class="chart-legend">
+                <span><span class="dot early"></span> Early Career / 起薪</span>
+                <span><span class="dot mid"></span> Mid-Career / 中年</span>
+            </div>
         </div>
 
         <table class="salary-table">
@@ -498,6 +630,62 @@
     });
 
     renderTable();
+
+    let currentChartType = 'both';
+    let currentFilter = 'all';
+
+    function renderChart(filter = 'all', type = 'both') {
+        const chart = document.getElementById('barChart');
+        const topN = 10;
+        const data = salaryData
+            .filter(d => filter === 'all' || d.category === filter)
+            .sort((a, b) => b.early - a.early)
+            .slice(0, topN);
+
+        const maxVal = type === 'early' ? 100000 : type === 'mid' ? 200000 : 200000;
+        const maxHeight = 160;
+
+        chart.innerHTML = data.map(d => {
+            const earlyHeight = (d.early / maxVal * maxHeight).toFixed(1);
+            const midHeight = (d.mid / maxVal * maxHeight).toFixed(1);
+            const shortName = d.name.replace(' Engineering', ' Eng').replace(' Science', ' Sci').replace(' Administration', ' Admin');
+
+            let bars = '';
+            if (type === 'both' || type === 'early') {
+                bars += `<div class="bar early" style="height:${earlyHeight}px" title="${d.name} Early: $${(d.early/1000).toFixed(0)}k"></div>`;
+            }
+            if (type === 'both' || type === 'mid') {
+                bars += `<div class="bar mid" style="height:${midHeight}px" title="${d.name} Mid: $${(d.mid/1000).toFixed(0)}k"></div>`;
+            }
+
+            return `
+                <div class="bar-group">
+                    <div class="bar-bars">${bars}</div>
+                    <div class="bar-label">${shortName}</div>
+                </div>
+            `;
+        }).join('');
+    }
+
+    document.querySelectorAll('.chart-toggle').forEach(btn => {
+        btn.addEventListener('click', function() {
+            document.querySelectorAll('.chart-toggle').forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            currentChartType = this.dataset.type;
+            renderChart(currentFilter, currentChartType);
+        });
+    });
+
+    const origFilterTabs = document.querySelectorAll('.filter-tab');
+    origFilterTabs.forEach(tab => {
+        const origClick = tab.onclick;
+        tab.addEventListener('click', function() {
+            currentFilter = this.dataset.filter;
+            setTimeout(() => renderChart(currentFilter, currentChartType), 0);
+        });
+    });
+
+    renderChart();
     </script>
 </body>
 </html>

@@ -1,0 +1,25 @@
+{
+    "name": "yunzhuan.icu - College Application Hub",
+    "short_name": "yunzhuan",
+    "description": "US college majors, application tools, and study abroad guides",
+    "start_url": "/index.html",
+    "scope": "/",
+    "display": "standalone",
+    "background_color": "#f5f5f5",
+    "theme_color": "#667eea",
+    "orientation": "portrait-primary",
+    "icons": [
+        {
+            "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' fill='%23667eea' rx='32'/%3E%3Ctext x='96' y='115' text-anchor='middle' font-family='Arial, sans-serif' font-size='72' font-weight='bold' fill='white'%3E%F0%9F%8E%93%3C/text%3E%3C/svg%3E",
+            "sizes": "192x192",
+            "type": "image/svg+xml",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' fill='%23667eea' rx='86'/%3E%3Ctext x='256' y='310' text-anchor='middle' font-family='Arial, sans-serif' font-size='200' font-weight='bold' fill='white'%3E%F0%9F%8E%93%3C/text%3E%3C/svg%3E",
+            "sizes": "512x512",
+            "type": "image/svg+xml",
+            "purpose": "any maskable"
+        }
+    ]
+}
