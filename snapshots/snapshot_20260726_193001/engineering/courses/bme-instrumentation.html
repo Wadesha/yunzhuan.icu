@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>生物仪器 - Bioinstrumentation - yunzhuan.icu</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 760px; margin: 0 auto; padding: 20px 16px; background: #f5f5f5; color: #333; }
+        .back-link { color: #667eea; text-decoration: none; font-size: 0.85rem; margin-bottom: 12px; display: inline-block; }
+        .back-link:hover { text-decoration: underline; }
+        h1 { color: #333; margin-bottom: 4px; font-size: 1.4rem; }
+        .en-name { color: #888; font-size: 0.95rem; margin-bottom: 14px; font-weight: normal; }
+        .section { background: white; border-radius: 8px; padding: 14px 18px; margin-bottom: 10px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+        .section h2 { color: #667eea; margin-bottom: 8px; font-size: 1rem; font-weight: 600; }
+        .section h2 .en { color: #999; font-size: 0.8rem; font-weight: normal; }
+        .section p { color: #333; line-height: 1.7; font-size: 0.92rem; }
+        .meta { font-size: 0.82rem; color: #888; margin-bottom: 8px; }
+        .footer { text-align: center; margin-top: 20px; color: #999; font-size: 0.8rem; }
+    </style>
+<link rel="stylesheet" href="/css/collapse.css">
+</head>
+<body>
+    <a href="../../index.html" class="back-link">← 返回首页</a>
+    <h1>生物仪器</h1>
+    <p class="en-name">Bioinstrumentation</p>
+    <div class="section">
+        <h2>课程介绍 <span class="en">Course Introduction</span></h2>
+        <p class="meta">学分：3 | 先修课：电路、信号与系统 | 学期：第五学期</p>
+        <p>本课程讲授生物医学测量与仪器的原理与设计方法，涵盖传感器原理、信号调理、放大电路、滤波、模数转换与数据采集系统。学生学习心电图、脑电图、血氧、血压等生理信号的采集与处理技术，掌握噪声抑制、共模抑制、安全隔离等关键设计要点。课程结合现代医疗监护设备与可穿戴传感系统案例，培养硬件电路与系统集成能力。</p>
+        <p style="margin-top:8px;">This course covers principles and design of biomedical measurement instrumentation, including sensors, signal conditioning, amplifiers, filtering, A/D conversion, and data acquisition. Students learn acquisition and processing of ECG, EEG, SpO2, and blood pressure signals, with emphasis on noise reduction, common-mode rejection, and safety isolation. Cases include modern monitoring devices and wearable sensors, building hardware and system integration skills.</p>
+    </div>
+    <div class="section">
+        <h2>大作业 <span class="en">Final Project</span></h2>
+        <div>
+<p class="meta">作业标题：心电信号采集与处理系统设计 / ECG Signal Acquisition and Processing System Design</p>
+        <p>设计心电信号采集与处理系统，包括电极导联、模拟前端放大滤波、ADC采集与数字滤波。实现噪声抑制与波形检测功能。</p>
+        <p style="margin-top:8px;">Design an ECG signal acquisition and processing system, including electrode leads, analog front-end amplification and filtering, ADC acquisition and digital filtering. Implement noise suppression and waveform detection functions.</p>
+        </div>
+    </div>
+    <div class="section">
+        <h2>实施步骤 <span class="en">Implementation Steps</span></h2>
+<div>
+<div style="background:#f0f4ff;padding:10px 14px;border-radius:6px;margin-bottom:12px;border-left:3px solid #667eea;font-size:0.88rem;">
+<b>📋 示例</b>：设计一套真实的心电信号采集系统，比如可穿戴式单导联心电仪。你需要设计电极导联、仪表放大器和带通滤波电路，用ADC采样，然后在STM32上实现数字滤波和R波检测算法，测试静息和运动状态下的心率测量精度。
+</div>
+
+
+
+<div class="step-item">
+    <div class="step-number">步骤 1</div>
+    <div class="step-title">系统需求分析</div>
+    <div class="step-desc">
+        本步骤对生物医学工程问题进行深入分析，明确临床需求和技术指标。生物医学工程的核心是将工程技术与医学需求相结合，需要从临床应用场景出发，分析生理机制、技术可行性和安全要求。通过文献调研和临床需求调研确定设计输入。
+        <br><br>
+        • 检索PubMed、IEEE Xplore等数据库，调研国内外研究现状和技术发展趋势<br>• 分析临床应用场景和用户需求，明确适应症、使用人群和关键性能指标<br>• 识别技术难点和风险点，制定技术路线和关键性能参数指标
+    </div>
+    <div class="step-output">产出：需求分析报告（含文献综述、临床需求、技术指标、风险分析、技术路线） ｜ 质量标准：调研充分、需求明确、指标合理、技术路线可行</div>
+</div>
+<div class="step-item">
+    <div class="step-number">步骤 2</div>
+    <div class="step-title">模拟前端设计</div>
+    <div class="step-desc">
+        本步骤进行生物医学系统或器械的方案设计，将临床需求转化为具体的技术方案。生物医学设计需同时考虑功能性、生物相容性、安全性和法规合规性，在多目标约束下寻求最优解。采用模块化设计方法，确保系统可验证、可制造、可维护。
+        <br><br>
+        • 进行系统架构设计，划分功能模块，确定各模块接口规范和通信协议<br>• 选择关键元器件和材料，依据ISO 10993或GB/T 16886评估生物相容性<br>• 设计电路原理图或机械结构，使用Altium Designer或SolidWorks完成详细设计
+    </div>
+    <div class="step-output">产出：设计文档（含系统架构图、原理图/结构图、BOM表、材料选型说明、接口规范） ｜ 质量标准：设计合理、参数正确、材料合规、满足临床需求</div>
+</div>
+<div class="step-item">
+    <div class="step-number">步骤 3</div>
+    <div class="step-title">数据采集设计</div>
+    <div class="step-desc">
+        本步骤进行生物医学系统或器械的方案设计，将临床需求转化为具体的技术方案。生物医学设计需同时考虑功能性、生物相容性、安全性和法规合规性，在多目标约束下寻求最优解。采用模块化设计方法，确保系统可验证、可制造、可维护。
+        <br><br>
+        • 进行系统架构设计，划分功能模块，确定各模块接口规范和通信协议<br>• 选择关键元器件和材料，依据ISO 10993或GB/T 16886评估生物相容性<br>• 设计电路原理图或机械结构，使用Altium Designer或SolidWorks完成详细设计
+    </div>
+    <div class="step-output">产出：设计文档（含系统架构图、原理图/结构图、BOM表、材料选型说明、接口规范） ｜ 质量标准：设计合理、参数正确、材料合规、满足临床需求</div>
+</div>
+<div class="step-item">
+    <div class="step-number">步骤 4</div>
+    <div class="step-title">数字滤波与算法</div>
+    <div class="step-desc">
+        本步骤是生物医学工程项目的重要环节，将工程技术与医学需求紧密结合解决临床问题。生物医学工程需严格遵循医疗器械相关法规和标准，确保安全性和有效性。采用专业的生物学、医学和工程学交叉方法开展工作。
+        <br><br>
+        • 依据医疗器械相关法规（如NMPA、FDA、CE）和标准（ISO、GB、YY）开展工作<br>• 使用专业工具（MATLAB/COMSOL/SolidWorks/SPSS等）进行设计、计算和数据分析<br>• 进行生物相容性和安全性评估，确保符合临床应用要求
+    </div>
+    <div class="step-output">产出：专业报告（含方法描述、实验数据、分析结果、风险评估、结论建议） ｜ 质量标准：方法合规、数据准确、安全有效、符合医学伦理</div>
+</div>
+<div class="step-item">
+    <div class="step-number">步骤 5</div>
+    <div class="step-title">系统测试与报告</div>
+    <div class="step-desc">
+        本步骤对生物医学系统进行全面测试验证，确保功能性能满足设计要求和相关标准。生物医学产品的测试需严格遵循ISO 13485质量体系和相关医疗器械标准，确保测试结果的可重复性和可信度。通过台架试验、模拟试验和动物实验多级别验证。
+        <br><br>
+        • 制定测试方案和测试用例，依据YY/T或ISO医疗器械标准确定测试方法和合格判据<br>• 进行功能测试、性能测试、安全性测试和电磁兼容性(EMC)测试<br>• 记录测试数据，分析偏差原因，对不合格项进行整改和回归验证
+    </div>
+    <div class="step-output">产出：测试报告（含测试方案、测试用例、原始数据、结果分析、不合格项整改记录） ｜ 质量标准：测试覆盖全面、方法符合标准、数据完整可追溯、所有关键项合格</div>
+</div>
+            
+
+<div style="margin-top:14px;padding-top:10px;border-top:1px solid #eee;">
+    <h3 style="font-size:0.9rem;color:#667eea;margin-bottom:8px;">Steps</h3>
+<div class="step-item">
+    <div class="step-number">Step 1</div>
+    <div class="step-title">System Requirements Analysis</div>
+    <div class="step-desc">
+        This step conducts in-depth analysis of biomedical engineering problems, clarifying clinical requirements and technical specifications. The core of biomedical engineering is combining engineering technology with medical needs, requiring analysis of physiological mechanisms, technical feasibility and safety requirements starting from clinical application scenarios. Determine design inputs through literature review and clinical needs investigation.
+        <br><br>
+        • Search databases such as PubMed and IEEE Xplore, investigate domestic and international research status and technology development trends<br>• Analyze clinical application scenarios and user needs, clarify indications, target population and key performance indicators<br>• Identify technical difficulties and risk points, develop technical route and key performance parameter specifications
+    </div>
+    <div class="step-output">Deliverable: Requirements analysis report (including literature review, clinical needs, technical specifications, risk analysis, technical route) | Quality standard: Thorough investigation, clear requirements, reasonable specifications, feasible technical route</div>
+</div>
+<div class="step-item">
+    <div class="step-number">Step 2</div>
+    <div class="step-title">Analog Front-End Design</div>
+    <div class="step-desc">
+        This step performs biomedical system or device scheme design, translating clinical needs into specific technical solutions. Biomedical design must simultaneously consider functionality, biocompatibility, safety and regulatory compliance, seeking optimal solutions under multi-objective constraints. Adopt modular design methods to ensure system verifiability, manufacturability and maintainability.
+        <br><br>
+        • Perform system architecture design, divide functional modules, determine interface specifications and communication protocols for each module<br>• Select key components and materials, evaluate biocompatibility according to ISO 10993 or GB/T 16886<br>• Design circuit schematics or mechanical structures, complete detailed design using Altium Designer or SolidWorks
+    </div>
+    <div class="step-output">Deliverable: Design document (including system architecture diagram, schematic/structural diagram, BOM table, material selection description, interface specifications) | Quality standard: Reasonable design, correct parameters, compliant materials, meeting clinical needs</div>
+</div>
+<div class="step-item">
+    <div class="step-number">Step 3</div>
+    <div class="step-title">Data Acquisition Design</div>
+    <div class="step-desc">
+        This step performs biomedical system or device scheme design, translating clinical needs into specific technical solutions. Biomedical design must simultaneously consider functionality, biocompatibility, safety and regulatory compliance, seeking optimal solutions under multi-objective constraints. Adopt modular design methods to ensure system verifiability, manufacturability and maintainability.
+        <br><br>
+        • Perform system architecture design, divide functional modules, determine interface specifications and communication protocols for each module<br>• Select key components and materials, evaluate biocompatibility according to ISO 10993 or GB/T 16886<br>• Design circuit schematics or mechanical structures, complete detailed design using Altium Designer or SolidWorks
+    </div>
+    <div class="step-output">Deliverable: Design document (including system architecture diagram, schematic/structural diagram, BOM table, material selection description, interface specifications) | Quality standard: Reasonable design, correct parameters, compliant materials, meeting clinical needs</div>
+</div>
+<div class="step-item">
+    <div class="step-number">Step 4</div>
+    <div class="step-title">Digital Filtering and Algorithm</div>
+    <div class="step-desc">
+        This step is an important element in biomedical engineering projects, closely integrating engineering technology with medical needs to solve clinical problems. Biomedical engineering must strictly follow relevant medical device regulations and standards, ensuring safety and effectiveness. Work is carried out using interdisciplinary methods of biology, medicine and engineering.
+        <br><br>
+        • Work according to relevant medical device regulations (NMPA, FDA, CE) and standards (ISO, GB, YY)<br>• Use professional tools (MATLAB/COMSOL/SolidWorks/SPSS, etc.) for design, calculation and data analysis<br>• Perform biocompatibility and safety evaluation, ensuring compliance with clinical application requirements
+    </div>
+    <div class="step-output">Deliverable: Professional report (including method description, experimental data, analysis results, risk assessment, conclusions and suggestions) | Quality standard: Compliant methods, accurate data, safe and effective, compliant with medical ethics</div>
+</div>
+<div class="step-item">
+    <div class="step-number">Step 5</div>
+    <div class="step-title">System Testing and Report</div>
+    <div class="step-desc">
+        This step conducts comprehensive testing and verification of biomedical systems, ensuring functional performance meets design requirements and relevant standards. Testing of biomedical products must strictly follow ISO 13485 quality system and relevant medical device standards, ensuring test result repeatability and credibility. Multi-level verification through bench tests, simulation tests and animal experiments.
+        <br><br>
+        • Develop test plan and test cases, determine test methods and acceptance criteria according to YY/T or ISO medical device standards<br>• Perform functional testing, performance testing, safety testing and electromagnetic compatibility (EMC) testing<br>• Record test data, analyze deviation causes, conduct corrective actions and regression verification for non-conforming items
+    </div>
+    <div class="step-output">Deliverable: Test report (including test plan, test cases, raw data, result analysis, non-conformity correction records) | Quality standard: Comprehensive test coverage, standard-compliant methods, complete traceable data, all critical items qualified</div>
+</div>
+            </div>
+        </div>
+    <div class="course-nav" style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:16px;padding:12px 16px;background:white;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,0.05);flex-wrap:wrap;">
+    <a href="../biomedical.html" style="color:#667eea;text-decoration:none;font-size:0.88rem;">← 返回生物医学工程</a>
+    <a href="bme-imaging.html" style="color:#667eea;text-decoration:none;font-size:0.88rem;">下一门：医学影像 →</a>
+    <a href="#" onclick="goRandomCourse();return false;" style="color:#667eea;text-decoration:none;font-size:0.88rem;">🎲 随机课程</a>
+</div>
+
+    <p class="footer">© 2026 yunzhuan.icu</p>
+<!-- Vercel Analytics -->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script defer src="/js/random-course.js"></script>
+<div style="text-align:center;padding:8px 0;font-size:0.75rem;color:#aaa;">
+    <a href="../../prerequisite/" style="color:#aaa;text-decoration:none;">先修课程导航</a>
+    <span style="margin:0 6px;">·</span>
+    <a href="../../intl-exams/index.html" style="color:#aaa;text-decoration:none;">International Exams</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="javascript:window.scrollTo(0,0)" style="color:#aaa;text-decoration:none;">回到顶部</a>
+    <span style="margin:0 6px;">·</span>
+    <a href="../../index.html" style="color:#aaa;text-decoration:none;">网站首页</a>
+</div>
+<!-- footer-links -->
+</body>
+</html>

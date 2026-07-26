@@ -1,16 +1,21 @@
 #!/bin/bash
 
 timestamp=$(date +"%Y%m%d_%H%M%S")
-snapshot_dir="snapshots"
-source_file="index.html"
-snapshot_file="${snapshot_dir}/index_${timestamp}.html"
+snapshot_root="snapshots"
+snapshot_dir="${snapshot_root}/snapshot_${timestamp}"
 
 mkdir -p "${snapshot_dir}"
 
-cp "${source_file}" "${snapshot_file}"
+find . -name "*.html" -not -path "./snapshots/*" -not -path "./node_modules/*" | while read file; do
+    rel_path="${file#./}"
+    target_dir="${snapshot_dir}/$(dirname "${rel_path}")"
+    mkdir -p "${target_dir}"
+    cp "${file}" "${snapshot_dir}/${rel_path}"
+done
 
-echo "✅ 快照已保存: ${snapshot_file}"
+echo "✅ 全站快照已保存: ${snapshot_dir}"
+echo "📊 已备份 HTML 文件数: $(find "${snapshot_dir}" -name "*.html" | wc -l)"
 
-git add "${snapshot_file}"
+git add "${snapshot_dir}"
 
 echo "✅ 快照已添加到 git"
