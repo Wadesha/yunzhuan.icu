@@ -601,6 +601,7 @@ git push origin vX.Y.Z
 | v13.1.0 | 2026-07-27 | 正式版本：版本管理系统上线（全站快照 + Git Tag + 三重回退机制）；版本历史索引页 snapshots/index.html |
 | v13.2 | 2026-07-27 | 新增 Contact & Feedback 页面：Formspree 在线表单、GitHub Issues 入口、Email、Giscus 评论区、贡献指南；首页底部导航新增 Contact 入口 |
 | v13.2.0 | 2026-07-27 | 正式版本：Contact & Feedback 系统上线（Giscus 评论 + 4 种反馈渠道 + 全站 596 页底部 Contact 导航）；快照脚本升级支持版本号命名 |
+| v13.3.0 | 2026-07-27 | 美国大学扩充：新增 12 所大学详情页（JHU/Northwestern/Duke/UCB/UCLA/UMich/CMU/NYU/BU/UIUC/GaTech/UW）；全站底部导航英文化（352 页从中文改为英文） |
 
 ---
 
