@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>微积分I - Calculus I - 先修课程</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 20px 16px;
+            background: #f5f5f5;
+            color: #333;
+        }
+        .back-link {
+            color: #667eea;
+            text-decoration: none;
+            font-size: 0.85rem;
+            margin-bottom: 12px;
+            display: inline-block;
+        }
+        .back-link:hover { text-decoration: underline; }
+        h1 {
+            color: #333;
+            margin-bottom: 4px;
+            font-size: 1.4rem;
+        }
+        .en-name {
+            color: #888;
+            font-size: 0.95rem;
+            margin-bottom: 14px;
+            font-weight: normal;
+        }
+        .section {
+            background: white;
+            border-radius: 8px;
+            padding: 14px 18px;
+            margin-bottom: 10px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .section h2 {
+            color: #667eea;
+            margin-bottom: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        .section h2 .en { color: #999; font-size: 0.8rem; font-weight: normal; }
+        .section p {
+            color: #333;
+            line-height: 1.7;
+            font-size: 0.92rem;
+        }
+        .meta { font-size: 0.82rem; color: #888; margin-bottom: 8px; }
+        .demo-box {
+            background: #f0f4ff;
+            padding: 10px 14px;
+            border-radius: 6px;
+            margin-top: 10px;
+            border-left: 3px solid #667eea;
+            font-size: 0.88rem;
+        }
+        .demo-box b { color: #667eea; }
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            color: #999;
+            font-size: 0.8rem;
+        }
+    </style>
+<link rel="stylesheet" href="../../css/user.css">
+</head>
+<body>
+    <a href="../../index.html" class="back-link">← 返回首页</a>
+    
+    <h1>微积分I</h1>
+    <p class="en-name">Calculus I</p>
+
+    <div class="section">
+        <h2>课程介绍 <span class="en">Course Introduction</span></h2>
+        <p class="meta">学分：4 | 建议学期：第1学期</p>
+        <p>微积分是高等数学的核心，学习极限、导数、积分等概念。掌握求导法则、微分应用、不定积分和定积分计算，培养用微积分思维分析变化率和累积量的能力。</p>
+        <p style="margin-top:8px;">Calculus is the core of advanced mathematics, covering limits, derivatives, and integrals. Master differentiation rules, differential applications, and integral calculations to analyze rates of change and accumulation.</p>
+        <p style="margin-top:10px;color:#667eea;font-size:0.85rem;">提示：建议先理解本课程介绍和示例，然后点击下方按钮进行刷题自测。</p>
+    </div>
+
+    <div class="section">
+        <h2>学习示例 <span class="en">Learning Example</span></h2>
+        <div class="demo-box">
+            <b>示例：</b>比如计算一辆汽车的瞬时速度：如果位置函数是s(t) = t² + 3t，那么速度就是导数v(t) = s'(t) = 2t + 3。当t=5秒时，瞬时速度就是13米/秒。这就是导数的物理意义。
+        </div>
+        <div class="demo-box" style="margin-top:8px;border-left-color:#764ba2;">
+            <b>Example:</b> Example: Calculate instantaneous velocity of a car. If position function is s(t) = t² + 3t, velocity is the derivative v(t) = 2t + 3. At t=5s, velocity is 13 m/s. This illustrates the physical meaning of derivatives.
+        </div>
+    </div>
+    <div class="course-nav" style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:16px;padding:12px 16px;background:white;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,0.05);flex-wrap:wrap;">
+        <a href="../physics.html" style="color:#667eea;text-decoration:none;font-size:0.88rem;">← 返回物理学</a>
+        <a href="math-algebra.html" style="color:#667eea;text-decoration:none;font-size:0.88rem;">上一门：代数基础 →</a>
+        <a href="math-calc2.html" style="color:#667eea;text-decoration:none;font-size:0.88rem;">下一门：微积分II →</a>
+        <a href="../../index.html" style="color:#667eea;text-decoration:none;font-size:0.88rem;">首页</a>
+    </div>
+    <div class="quiz-entry" style="background:white;border-radius:8px;padding:16px 18px;margin-top:16px;box-shadow:0 1px 3px rgba(0,0,0,0.05);text-align:center;">
+        <p style="color:#666;font-size:0.88rem;margin-bottom:10px;">通过刷题快速了解 微积分I 的核心概念</p>
+        <a href="../../quiz/index.html?course=math-calc1" style="display:inline-block;padding:10px 32px;background:#667eea;color:white;border-radius:22px;text-decoration:none;font-size:0.95rem;">开始刷题</a>
+    </div>
+
+
+
+        <div class="global-nav" style="margin-top:18px;padding:14px 16px;background:white;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,0.05);font-size:0.85rem;">
+        <div style="margin-bottom:8px;color:#666;"><b>快速导航：</b></div>
+        <div style="display:flex;flex-wrap:wrap;gap:10px;">
+            <a href="../../index.html" style="color:#667eea;text-decoration:none;">← 返回专业</a>
+            <a href="../../index.html" style="color:#667eea;text-decoration:none;">首页</a>
+            <a href="https://yunzhuan.icu/" style="color:#667eea;text-decoration:none;" target="_blank">主站 yunzhuan.icu →</a>
+        </div>
+    </div>
+    <!-- enhanced-links -->
+<div style="text-align:center;padding:8px 0;font-size:0.75rem;color:#aaa;">
+        <a href="../../../index.html" style="color:#aaa;text-decoration:none;">Home</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="../../../intl-exams/index.html" style="color:#aaa;text-decoration:none;">International Exams</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="../../../contact.html" style="color:#aaa;text-decoration:none;">Contact</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="javascript:window.scrollTo(0,0)" style="color:#aaa;text-decoration:none;">Back to top</a>
+    </div>
+<p class="footer">© 2026 yunzhuan.icu | 先修课程导航</p>
+<script src="../../js/user.js"></script>
+</body>
+</html>

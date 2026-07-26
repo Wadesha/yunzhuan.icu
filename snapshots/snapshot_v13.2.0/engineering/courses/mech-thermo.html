@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>热力学 - Thermodynamics - yunzhuan.icu</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 760px; margin: 0 auto; padding: 20px 16px; background: #f5f5f5; color: #333; }
+        .back-link { color: #667eea; text-decoration: none; font-size: 0.85rem; margin-bottom: 12px; display: inline-block; }
+        .back-link:hover { text-decoration: underline; }
+        h1 { color: #333; margin-bottom: 4px; font-size: 1.4rem; }
+        .en-name { color: #888; font-size: 0.95rem; margin-bottom: 14px; font-weight: normal; }
+        .section { background: white; border-radius: 8px; padding: 14px 18px; margin-bottom: 10px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+        .section h2 { color: #667eea; margin-bottom: 8px; font-size: 1rem; font-weight: 600; }
+        .section h2 .en { color: #999; font-size: 0.8rem; font-weight: normal; }
+        .section p { color: #333; line-height: 1.7; font-size: 0.92rem; }
+        .meta { font-size: 0.82rem; color: #888; margin-bottom: 8px; }
+        .footer { text-align: center; margin-top: 20px; color: #999; font-size: 0.8rem; }
+    </style>
+<link rel="stylesheet" href="/css/collapse.css">
+</head>
+<body>
+    <a href="../../index.html" class="back-link">← 返回首页</a>
+    <h1>热力学</h1>
+    <p class="en-name">Thermodynamics</p>
+    <div class="section">
+        <h2>课程介绍 <span class="en">Course Introduction</span></h2>
+        <p class="meta">学分：3 | 先修课：微积分、大学物理 | 学期：大三上</p>
+        <p>工程热力学是研究热能与机械能相互转换规律的一门学科，是机械工程尤其是能源动力方向的重要基础课。内容包括热力学基本概念、热力学第一定律与第二定律、理想气体与实际气体的性质、热力过程与热力循环、熵分析与火用分析、动力循环（朗肯、布雷顿）与制冷循环等。学生将掌握能量转换与利用的分析方法。</p>
+        <p style="margin-top:8px;">Engineering Thermodynamics studies the conversion between thermal and mechanical energy, a key foundation for mechanical and energy engineering. Topics include basic concepts, the first and second laws, ideal and real gas properties, thermodynamic processes and cycles, entropy and exergy analysis, and power cycles (Rankine, Brayton) and refrigeration cycles. Students master energy conversion analysis methods.</p>
+    </div>
+    <div class="section">
+        <h2>大作业 <span class="en">Final Project</span></h2>
+        <div>
+<p class="meta">作业标题：蒸汽动力循环热力分析与效率优化 / Steam Power Cycle Thermodynamic Analysis and Efficiency Optimization</p>
+        <p>针对朗肯循环进行热力分析，计算循环效率、功比与火用损失，分析再热与回热对循环性能的改善。</p>
+        <p style="margin-top:8px;">Conduct thermodynamic analysis of a Rankine cycle, computing cycle efficiency, work ratio and exergy destruction, and analyzing the performance improvement from reheat and regeneration.</p>
+        </div>
+    </div>
+    <div class="section">
+        <h2>实施步骤 <span class="en">Implementation Steps</span></h2>
+<div>
+<div style="background:#f0f4ff;padding:10px 14px;border-radius:6px;margin-bottom:12px;border-left:3px solid #667eea;font-size:0.88rem;">
+<b>📋 示例</b>：分析一个真实的蒸汽动力循环，比如某电厂600MW机组的朗肯循环。你需要计算锅炉、汽轮机、冷凝器和给水泵各设备的能量转换效率，然后对比加入再热和回热后的循环效率提升，算算一年能省多少吨标准煤。
+</div>
+
+
+
+<div class="step-item">
+    <div class="step-number">步骤 1</div>
+    <div class="step-title">循环模型建立</div>
+    <div class="step-desc">
+        本步骤建立机械系统的动力学或有限元模型，为精确分析和优化提供数值工具。机械系统建模需要准确描述系统的质量、刚度、阻尼和约束特性，通过合理简化捕捉系统的主要动力学行为。模型验证是确保分析结果可信的关键环节。
+        <br><br>
+        • 使用ANSYS或ABAQUS建立有限元模型，划分网格、定义材料属性、设置边界条件和载荷<br>• 建立多体动力学模型，使用ADAMS进行运动学和动力学仿真，分析运动轨迹和动力载荷<br>• 进行模型验证，通过模态试验或解析解对比，确保模型频率和振型误差在10%以内
+    </div>
+    <div class="step-output">产出：仿真模型（含有限元/动力学模型、网格收敛性、材料参数、验证结果） ｜ 质量标准：模型准确、网格合理、验证充分、与试验/理论偏差<10%</div>
+</div>
+<div class="step-item">
+    <div class="step-number">步骤 2</div>
+    <div class="step-title">热力参数计算</div>
+    <div class="step-desc">
+        本步骤进行机械零部件的详细计算，验证强度、刚度和稳定性等设计指标。力学计算是机械设计的基础，依据材料力学、弹性力学和机械设计理论，确保零部件在工作载荷下安全可靠。采用解析计算与有限元计算相结合、互相验证的方法。
+        <br><br>
+        • 进行受力分析和内力计算，绘制剪力图、弯矩图和扭矩图，确定危险截面<br>• 应用强度理论（第一、第二、第三、第四强度理论）进行强度校核，计算安全系数<br>• 进行刚度计算（变形计算）和稳定性计算，确保挠度、转角和临界应力满足要求
+    </div>
+    <div class="step-output">产出：计算书（含受力分析、内力图、强度校核、刚度校核、稳定性计算） ｜ 质量标准：计算模型正确、公式应用得当、结果准确、安全系数足够</div>
+</div>
+<div class="step-item">
+    <div class="step-number">步骤 3</div>
+    <div class="step-title">效率与火用分析</div>
+    <div class="step-desc">
+        本步骤对机械工程问题进行深入分析，明确设计要求和约束条件。机械设计需从功能需求、载荷条件、工作环境等多方面综合分析，确定设计输入和技术指标。通过需求分析和失效模式分析，为后续方案设计奠定基础。
+        <br><br>
+        • 分析机器的功能要求和性能指标，包括运动参数、动力参数、精度要求和寿命要求<br>• 确定载荷条件和工作环境，计算名义载荷和设计载荷，考虑动载、冲击和疲劳效应<br>• 识别主要失效模式（断裂、变形、磨损、腐蚀、失稳等），确定相应的设计准则
+    </div>
+    <div class="step-output">产出：设计需求分析报告（含功能需求、性能指标、载荷分析、失效模式、设计准则） ｜ 质量标准：需求明确、分析深入、载荷准确、准则合理</div>
+</div>
+<div class="step-item">
+    <div class="step-number">步骤 4</div>
+    <div class="step-title">再热回热改进</div>
+    <div class="step-desc">
+        本步骤是机械工程设计的关键环节，运用力学原理和工程方法解决机械系统问题。机械工程强调安全可靠，每一步都需要严谨的力学计算和充分的验证。采用成熟的设计理论和专业CAD/CAE工具保证设计质量。
+        <br><br>
+        • 依据机械设计规范和标准，制定详细的设计方案和计算方法<br>• 使用专业软件（SolidWorks/ANSYS/ADAMS/AutoCAD等）进行设计、建模和分析<br>• 进行强度、刚度、稳定性、疲劳等多方面校核，确保设计安全可靠
+    </div>
+    <div class="step-output">产出：机械设计报告（含设计图纸、计算书、仿真分析、选型说明） ｜ 质量标准：设计规范、计算准确、校核充分、安全可靠</div>
+</div>
+<div class="step-item">
+    <div class="step-number">步骤 5</div>
+    <div class="step-title">优化分析与报告</div>
+    <div class="step-desc">
+        本步骤对机械工程问题进行深入分析，明确设计要求和约束条件。机械设计需从功能需求、载荷条件、工作环境等多方面综合分析，确定设计输入和技术指标。通过需求分析和失效模式分析，为后续方案设计奠定基础。
+        <br><br>
+        • 分析机器的功能要求和性能指标，包括运动参数、动力参数、精度要求和寿命要求<br>• 确定载荷条件和工作环境，计算名义载荷和设计载荷，考虑动载、冲击和疲劳效应<br>• 识别主要失效模式（断裂、变形、磨损、腐蚀、失稳等），确定相应的设计准则
+    </div>
+    <div class="step-output">产出：设计需求分析报告（含功能需求、性能指标、载荷分析、失效模式、设计准则） ｜ 质量标准：需求明确、分析深入、载荷准确、准则合理</div>
+</div>
+            
+
+<div style="margin-top:14px;padding-top:10px;border-top:1px solid #eee;">
+    <h3 style="font-size:0.9rem;color:#667eea;margin-bottom:8px;">Steps</h3>
+<div class="step-item">
+    <div class="step-number">Step 1</div>
+    <div class="step-title">Cycle Model Setup</div>
+    <div class="step-desc">
+        This step establishes dynamic or finite element models of mechanical systems, providing numerical tools for precise analysis and optimization. Mechanical system modeling requires accurate description of system mass, stiffness, damping and constraint characteristics, capturing main dynamic behaviors of the system through reasonable simplification. Model validation is a key link to ensure credible analysis results.
+        <br><br>
+        • Build finite element models using ANSYS or ABAQUS, mesh the model, define material properties, set boundary conditions and loads<br>• Establish multi-body dynamics model, perform kinematic and dynamic simulation using ADAMS, analyze motion trajectory and dynamic loads<br>• Perform model validation, compare with modal test or analytical solutions, ensuring model frequency and mode shape error within 10%
+    </div>
+    <div class="step-output">Deliverable: Simulation model (including FEM/dynamics model, mesh convergence, material parameters, validation results) | Quality standard: Accurate model, reasonable mesh, sufficient validation, deviation from test/theory <10%</div>
+</div>
+<div class="step-item">
+    <div class="step-number">Step 2</div>
+    <div class="step-title">Thermodynamic Parameter Calculation</div>
+    <div class="step-desc">
+        This step performs detailed calculation of mechanical components, verifying design indicators such as strength, stiffness and stability. Mechanics calculation is the foundation of mechanical design, based on mechanics of materials, elasticity and mechanical design theory, ensuring components are safe and reliable under working loads. Combine analytical calculation with finite element calculation for mutual verification.
+        <br><br>
+        • Perform force analysis and internal force calculation, draw shear force diagram, bending moment diagram and torque diagram, determine critical sections<br>• Apply strength theories (first, second, third, fourth strength theory) for strength verification, calculate safety factor<br>• Perform stiffness calculation (deformation calculation) and stability calculation, ensuring deflection, rotation angle and critical stress meet requirements
+    </div>
+    <div class="step-output">Deliverable: Calculation document (including force analysis, internal force diagrams, strength verification, stiffness verification, stability calculation) | Quality standard: Correct calculation model, proper formula application, accurate results, sufficient safety factor</div>
+</div>
+<div class="step-item">
+    <div class="step-number">Step 3</div>
+    <div class="step-title">Efficiency and Exergy Analysis</div>
+    <div class="step-desc">
+        This step conducts in-depth analysis of mechanical engineering problems, clarifying design requirements and constraint conditions. Mechanical design requires comprehensive analysis from functional requirements, load conditions, working environment and other aspects, determining design inputs and technical specifications. Lay the foundation for subsequent scheme design through requirements analysis and failure mode analysis.
+        <br><br>
+        • Analyze machine functional requirements and performance specifications, including motion parameters, power parameters, accuracy requirements and life requirements<br>• Determine load conditions and working environment, calculate nominal load and design load, considering dynamic load, impact and fatigue effects<br>• Identify main failure modes (fracture, deformation, wear, corrosion, instability, etc.), determine corresponding design criteria
+    </div>
+    <div class="step-output">Deliverable: Design requirements analysis report (including functional requirements, performance specifications, load analysis, failure modes, design criteria) | Quality standard: Clear requirements, in-depth analysis, accurate loads, reasonable criteria</div>
+</div>
+<div class="step-item">
+    <div class="step-number">Step 4</div>
+    <div class="step-title">Reheat and Regeneration Improvement</div>
+    <div class="step-desc">
+        This step is a critical element in mechanical engineering design, using mechanics principles and engineering methods to solve mechanical system problems. Mechanical engineering emphasizes safety and reliability, requiring rigorous mechanical calculation and sufficient verification at every step. Use mature design theories and professional CAD/CAE tools to ensure design quality.
+        <br><br>
+        • Develop detailed design schemes and calculation methods according to mechanical design specifications and standards<br>• Use professional software (SolidWorks/ANSYS/ADAMS/AutoCAD, etc.) for design, modeling and analysis<br>• Perform multi-faceted verification such as strength, stiffness, stability and fatigue, ensuring design is safe and reliable
+    </div>
+    <div class="step-output">Deliverable: Mechanical design report (including design drawings, calculation document, simulation analysis, selection description) | Quality standard: Standard design, accurate calculation, sufficient verification, safe and reliable</div>
+</div>
+<div class="step-item">
+    <div class="step-number">Step 5</div>
+    <div class="step-title">Optimization Analysis and Report</div>
+    <div class="step-desc">
+        This step conducts in-depth analysis of mechanical engineering problems, clarifying design requirements and constraint conditions. Mechanical design requires comprehensive analysis from functional requirements, load conditions, working environment and other aspects, determining design inputs and technical specifications. Lay the foundation for subsequent scheme design through requirements analysis and failure mode analysis.
+        <br><br>
+        • Analyze machine functional requirements and performance specifications, including motion parameters, power parameters, accuracy requirements and life requirements<br>• Determine load conditions and working environment, calculate nominal load and design load, considering dynamic load, impact and fatigue effects<br>• Identify main failure modes (fracture, deformation, wear, corrosion, instability, etc.), determine corresponding design criteria
+    </div>
+    <div class="step-output">Deliverable: Design requirements analysis report (including functional requirements, performance specifications, load analysis, failure modes, design criteria) | Quality standard: Clear requirements, in-depth analysis, accurate loads, reasonable criteria</div>
+</div>
+            </div>
+        </div>
+    <div class="course-nav" style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:16px;padding:12px 16px;background:white;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,0.05);flex-wrap:wrap;">
+    <a href="../mechanical.html" style="color:#667eea;text-decoration:none;font-size:0.88rem;">← 返回机械工程</a>
+    <a href="mech-fluid.html" style="color:#667eea;text-decoration:none;font-size:0.88rem;">下一门：流体力学 →</a>
+    <a href="#" onclick="goRandomCourse();return false;" style="color:#667eea;text-decoration:none;font-size:0.88rem;">🎲 随机课程</a>
+</div>
+
+    <p class="footer">© 2026 yunzhuan.icu</p>
+<!-- Vercel Analytics -->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script defer src="/js/random-course.js"></script>
+<div style="text-align:center;padding:8px 0;font-size:0.75rem;color:#aaa;">
+    <a href="../../prerequisite/" style="color:#aaa;text-decoration:none;">先修课程导航</a>
+    <span style="margin:0 6px;">·</span>
+    <a href="../../intl-exams/index.html" style="color:#aaa;text-decoration:none;">International Exams</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="../../contact.html" style="color:#aaa;text-decoration:none;">Contact</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="javascript:window.scrollTo(0,0)" style="color:#aaa;text-decoration:none;">回到顶部</a>
+    <span style="margin:0 6px;">·</span>
+    <a href="../../index.html" style="color:#aaa;text-decoration:none;">网站首页</a>
+</div>
+<!-- footer-links -->
+</body>
+</html>
