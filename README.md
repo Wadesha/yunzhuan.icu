@@ -432,17 +432,19 @@ Vercel 自动申请和续期 Let's Encrypt 证书，HTTPS 自动启用。
 
 ---
 
-## 10. 快照机制
+## 10. 快照机制与版本管理
 
-### 10.1 功能说明
+### 10.1 全站快照备份
 
-每次更新前创建带时间戳的 HTML 快照备份，方便回溯历史版本。
+每次重要更新前创建全站 HTML 快照备份，方便回溯历史版本和快速回退。
 
-### 10.2 命名规则
+### 10.2 快照命名规则
 
 ```
-snapshots/index_YYYYMMDD_HHMMSS.html
+snapshots/snapshot_YYYYMMDD_HHMMSS/
 ```
+
+每个快照目录下保留完整的网站目录结构，包含所有 HTML 文件。
 
 ### 10.3 使用方式
 
@@ -450,8 +452,37 @@ snapshots/index_YYYYMMDD_HHMMSS.html
 ./snapshot.sh
 git add .
 git commit -m "描述更新内容"
+git tag vX.Y.Z
 git push origin main
+git push origin vX.Y.Z
 ```
+
+### 10.4 版本号规则
+
+采用语义化版本号：`主版本.次版本.修订号`（如 v13.1.0）
+
+| 级别 | 说明 | 示例 |
+|------|------|------|
+| 主版本 | 重大架构变更、板块级新增 | v13.0.0 → v14.0.0 |
+| 次版本 | 新功能、新页面批量新增 | v13.0.0 → v13.1.0 |
+| 修订号 | Bug 修复、小范围内容更新 | v13.1.0 → v13.1.1 |
+
+### 10.5 回退机制
+
+| 回退方式 | 适用场景 | 操作方法 |
+|---------|---------|---------|
+| Git Tag 回退 | 代码级回退 | `git revert <tag>` 创建反向提交，或 `git reset --hard <tag>` 后 force push |
+| Vercel 回退 | 生产环境回退 | Vercel Dashboard → Deployments → 选择历史版本 → "Promote to Production" |
+| 快照恢复 | 单文件/局部恢复 | 从 `snapshots/` 目录找到对应版本文件，复制覆盖即可 |
+
+### 10.6 发布流程
+
+1. 本地开发和测试
+2. 运行 `./snapshot.sh` 创建全站快照
+3. `git add . && git commit -m "描述"`
+4. `git tag vX.Y.Z` 打版本标签
+5. `git push origin main && git push origin vX.Y.Z`
+6. Vercel 自动部署到生产环境
 
 ---
 
