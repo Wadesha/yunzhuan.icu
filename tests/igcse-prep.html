@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IGCSE Preparation Guide - yunzhuan.icu</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 20px 16px;
+            background: #f5f5f5;
+            color: #333;
+        }
+        .back-link { color: #667eea; text-decoration: none; font-size: 0.85rem; margin-bottom: 12px; display: inline-block; }
+        .back-link:hover { text-decoration: underline; }
+        h1 { color: #333; margin-bottom: 4px; font-size: 1.4rem; }
+        .en-name { color: #888; font-size: 0.95rem; margin-bottom: 4px; font-weight: normal; }
+        .code-line { color: #888; font-size: 0.82rem; margin-bottom: 14px; }
+        .section {
+            background: white;
+            border-radius: 8px;
+            padding: 14px 18px;
+            margin-bottom: 10px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .section h2 {
+            color: #667eea;
+            margin-bottom: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        .section h2 .en { color: #999; font-size: 0.8rem; font-weight: normal; }
+        .section p { color: #333; line-height: 1.7; font-size: 0.92rem; }
+        .section p.cn-hint { color: #666; font-size: 0.85rem; margin-bottom: 6px; }
+        .topic-list { list-style: none; }
+        .topic-list li {
+            padding: 8px 10px;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        .topic-list li:last-child { border-bottom: none; }
+        .topic-list .topic-title { font-weight: 600; color: #333; }
+        .topic-list .topic-desc { color: #777; font-size: 0.82rem; margin-top: 2px; }
+        .meta-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+            margin-top: 6px;
+        }
+        .meta-table td {
+            padding: 6px 8px;
+            border-bottom: 1px solid #f0f0f0;
+            vertical-align: top;
+        }
+        .meta-table td.label { color: #888; width: 30%; }
+        .meta-table td.value { color: #333; }
+        .subject-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 8px;
+            margin-top: 8px;
+        }
+        .subject-card {
+            background: #f8f9fa;
+            border-radius: 6px;
+            padding: 10px 12px;
+            border-left: 3px solid #667eea;
+        }
+        .subject-card .subject-name { color: #667eea; font-size: 0.88rem; font-weight: 600; }
+        .subject-card .subject-detail { color: #555; font-size: 0.8rem; margin-top: 4px; line-height: 1.4; }
+        .phase-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 8px;
+            margin-top: 8px;
+        }
+        .phase-card {
+            background: #f8f9fa;
+            border-radius: 6px;
+            padding: 10px 12px;
+            border-left: 3px solid #764ba2;
+        }
+        .phase-card .phase-name { color: #764ba2; font-size: 0.85rem; font-weight: 600; }
+        .phase-card .phase-detail { color: #555; font-size: 0.82rem; margin-top: 4px; line-height: 1.5; }
+        .footer { text-align: center; margin-top: 20px; color: #999; font-size: 0.8rem; }
+    </style>
+    <link rel="stylesheet" href="/css/collapse.css">
+</head>
+<body>
+    <a href="index.html" class="back-link">&larr; Back to Standardized Tests</a>
+    <a href="../intl-exams/ig/biology.html" class="back-link" style="margin-left:10px;">IG Subjects &rarr;</a>
+
+    <h1>IGCSE Preparation</h1>
+    <p class="en-name">IGCSE 备考指南</p>
+    <p class="code-line">Cambridge · Edexcel · 70+ subjects · Grades 9-1 · study plan</p>
+
+    <div class="section">
+        <h2>About IGCSE <span class="en">IGCSE 简介</span></h2>
+        <p class="cn-hint">IGCSE（International General Certificate of Secondary Education）是剑桥国际考试委员会的初中毕业证书，全球最流行的国际初中课程。</p>
+        <table class="meta-table">
+            <tr><td class="label">Awarding Bodies</td><td class="value">CAIE (Cambridge) · Pearson Edexcel · OxfordAQA</td></tr>
+            <tr><td class="label">Number of Subjects</td><td class="value">70+ subjects across all boards</td></tr>
+            <tr><td class="label">Grade Scale</td><td class="value">9-1 (9 = highest, 1 = lowest) / A*-G (legacy)</td></tr>
+            <tr><td class="label">Exam Sessions</td><td class="value">May/June · October/November · January (Edexcel)</td></tr>
+            <tr><td class="label">Typical Number</td><td class="value">8-10 subjects (2-3 years, Grades 9-10)</td></tr>
+            <tr><td class="label">Exam Duration</td><td class="value">1-3 hours per paper (varies by subject)</td></tr>
+            <tr><td class="label">Recognition</td><td class="value">Globally recognized by universities and employers</td></tr>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>Popular Subjects <span class="en">热门科目</span></h2>
+        <p class="cn-hint">中国学生常选科目组合，理科和商科选择较多。</p>
+        <div class="subject-grid">
+            <div class="subject-card">
+                <div class="subject-name">Sciences</div>
+                <div class="subject-detail">Biology, Chemistry, Physics, Combined Science (Double Award), Co-ordinated Sciences</div>
+            </div>
+            <div class="subject-card">
+                <div class="subject-name">Mathematics</div>
+                <div class="subject-detail">Mathematics (0580/0626), Additional Mathematics, International Mathematics</div>
+            </div>
+            <div class="subject-card">
+                <div class="subject-name">Languages</div>
+                <div class="subject-detail">English as First Language, English as Second Language, Chinese (Mandarin), French, Spanish</div>
+            </div>
+            <div class="subject-card">
+                <div class="subject-name">Humanities</div>
+                <div class="subject-detail">Geography, History, Economics, Business Studies, Accounting, Sociology</div>
+            </div>
+            <div class="subject-card">
+                <div class="subject-name">Technology</div>
+                <div class="subject-detail">Computer Science, ICT, Design & Technology, Food & Nutrition</div>
+            </div>
+            <div class="subject-card">
+                <div class="subject-name">Arts</div>
+                <div class="subject-detail">Art & Design, Music, Drama, Media Studies</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Grading System <span class="en">评分体系</span></h2>
+        <table class="meta-table">
+            <tr><td class="label">Grade 9</td><td class="value">最高等级，前约 5% 学生，相当于 A**</td></tr>
+            <tr><td class="label">Grade 8</td><td class="value">相当于 A*</td></tr>
+            <tr><td class="label">Grade 7</td><td class="value">相当于 A</td></tr>
+            <tr><td class="label">Grade 6</td><td class="value">相当于 B</td></tr>
+            <tr><td class="label">Grade 5</td><td class="value">相当于 C+，通常是高中/大学的最低要求</td></tr>
+            <tr><td class="label">Grade 4</td><td class="value">相当于 C，标准通过线</td></tr>
+            <tr><td class="label">Grades 3-1</td><td class="value">相当于 D-G，低于通过线</td></tr>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>Study Plan <span class="en">备考节奏</span></h2>
+        <p class="cn-hint">2 年制 IGCSE 推荐节奏（9-10 年级）。</p>
+        <div class="phase-grid">
+            <div class="phase-card">
+                <div class="phase-name">Year 1 · Foundation (Grade 9)</div>
+                <div class="phase-detail">跟学校课程进度系统学习，每章学完做章节练习，打好基础。期末做第一次完整模拟考。</div>
+            </div>
+            <div class="phase-card">
+                <div class="phase-name">Year 2 · Deepening (Term 1)</div>
+                <div class="phase-detail">继续学习剩余内容，同时开始复习第一学年内容。分单元刷题，整理错题本。</div>
+            </div>
+            <div class="phase-card">
+                <div class="phase-name">Easter · Revision</div>
+                <div class="phase-detail">春假是备考黄金期。用 2-3 周时间把所有科目过一遍，重点攻克薄弱环节。开始做历年真题。</div>
+            </div>
+            <div class="phase-card">
+                <div class="phase-name">May/June · Final Sprint</div>
+                <div class="phase-detail">每科做 3-5 套完整真题，严格计时。回归课本和错题本，查漏补缺。考前调整作息。</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Official Resources <span class="en">官方资源</span></h2>
+        <ul class="topic-list">
+            <li>
+                <div class="topic-title">CAIE Past Papers</div>
+                <div class="topic-desc">剑桥官网可下载历年真题（Past Papers）、评分标准（Mark Scheme）、考官报告（Examiner Report）。</div>
+            </li>
+            <li>
+                <div class="topic-title">Edexcel Past Papers</div>
+                <div class="topic-desc">Pearson Qualifications 网站下载历年真题和评分标准，Edexcel 每年题量更丰富。</div>
+            </li>
+            <li>
+                <div class="topic-title">Syllabus / Specification</div>
+                <div class="topic-desc">每科的考试大纲（Syllabus/Specification），明确考试范围、题型、权重，备考前必须通读。</div>
+            </li>
+            <li>
+                <div class="topic-title">Example Candidate Responses</div>
+                <div class="topic-desc">官方发布的不同分数段的考生答题样本，了解评分标准和答题套路。</div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Recommended Textbooks <span class="en">推荐教材</span></h2>
+        <table class="meta-table">
+            <tr><td class="label">Cambridge University Press</td><td class="value">剑桥官方出版的 IGCSE 系列教材，最权威，内容最全面</td></tr>
+            <tr><td class="label">Hodder Education</td><td class="value">Hodder 的 IGCSE 系列，讲解清晰，练习丰富</td></tr>
+            <tr><td class="label">Oxford University Press</td><td class="value">牛津出版社 Complete IGCSE 系列，适合自学</td></tr>
+            <tr><td class="label">CGP IGCSE</td><td class="value">英国本土最流行的教辅，幽默易懂，复习指南（Revision Guide）尤其推荐</td></tr>
+            <tr><td class="label">Collins IGCSE</td><td class="value">Collins 的复习笔记和练习册，适合考前冲刺</td></tr>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>Exam Tips <span class="en">考试技巧</span></h2>
+        <ul class="topic-list">
+            <li>
+                <div class="topic-title">Past Papers 是王道</div>
+                <div class="topic-desc">IGCSE 考点相对固定，多做真题最有效。建议每科至少做 5 年真题，做完对照 Mark Scheme 分析。</div>
+            </li>
+            <li>
+                <div class="topic-title">Command Words 很重要</div>
+                <div class="topic-desc">题目中的命令词（Describe / Explain / Evaluate / Compare / Calculate）决定了答题深度，答非所问会丢分。</div>
+            </li>
+            <li>
+                <div class="topic-title">Time Management</div>
+                <div class="topic-desc">根据分值分配时间。1 分的题不要写 3 行，6 分的题要有 3 个以上要点。</div>
+            </li>
+            <li>
+                <div class="topic-title">Keywords 得分点</div>
+                <div class="topic-desc">Mark Scheme 是按关键词给分的，复习时注意积累各章节的专业术语和关键词。</div>
+            </li>
+            <li>
+                <div class="topic-title">Practicals (理科)</div>
+                <div class="topic-desc">实验题占分不少，一定要掌握实验方法、变量控制、数据处理和结论分析的套路。</div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Subject Selection Tips <span class="en">选科建议</span></h2>
+        <ul class="topic-list">
+            <li>
+                <div class="topic-title">保底 5 门核心课</div>
+                <div class="topic-desc">英语、数学、语文（母语）、两门理科或社科，这是大多数高中和大学的基本要求。</div>
+            </li>
+            <li>
+                <div class="topic-title">结合未来方向</div>
+                <div class="topic-desc">想学生物医学就选生物+化学+数学；想学工程就选物理+数学+进阶数学；想学商科就选经济+商务+数学。</div>
+            </li>
+            <li>
+                <div class="topic-title">不要选太多</div>
+                <div class="topic-desc">8-10 门足够了，与其 12 门都是 B，不如 8 门都是 A/A*。质量比数量重要。</div>
+            </li>
+            <li>
+                <div class="topic-title">兴趣 + 能力平衡</div>
+                <div class="topic-desc">选自己感兴趣且能学好的科目。完全不感兴趣但硬撑的科目很难拿高分。</div>
+            </li>
+        </ul>
+    </div>
+
+    <p class="footer">&copy; 2026 yunzhuan.icu | IGCSE Preparation</p>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <div style="text-align:center;padding:8px 0;font-size:0.75rem;color:#aaa;">
+        <a href="../index.html" style="color:#aaa;text-decoration:none;">Home</a>
+        <span style="margin:0 6px;">&middot;</span>
+        <a href="../intl-exams/index.html" style="color:#aaa;text-decoration:none;">International Exams</a>
+        <span style="margin:0 6px;">&middot;</span>
+        <a href="../contact.html" style="color:#aaa;text-decoration:none;">Contact</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="javascript:window.scrollTo(0,0)" style="color:#aaa;text-decoration:none;">Back to top</a>
+    </div>
+</body>
+</html>
