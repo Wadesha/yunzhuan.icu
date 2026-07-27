@@ -132,6 +132,7 @@
             color: #555;
         }
         .tech-box ul { margin-left: 18px; }
+        .tech-box ol { margin-left: 18px; }
         .tech-box code {
             background: #e0e7ff;
             color: #4338ca;
@@ -139,6 +140,34 @@
             border-radius: 3px;
             font-size: 0.78em;
             font-family: monospace;
+        }
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.8rem;
+            margin: 8px 0;
+        }
+        .data-table th, .data-table td {
+            padding: 6px 10px;
+            text-align: left;
+            border-bottom: 1px solid #e0e7ff;
+        }
+        .data-table th {
+            background: #eef2ff;
+            color: #4338ca;
+            font-weight: 600;
+            font-size: 0.78rem;
+        }
+        .data-table tr:hover { background: #f5f7ff; }
+        .tech-box pre {
+            background: #1e1b4b;
+            color: #c7d2fe;
+            padding: 12px;
+            border-radius: 6px;
+            overflow-x: auto;
+            font-size: 0.78rem;
+            line-height: 1.5;
+            margin: 8px 0;
         }
         .pros-cons {
             display: grid;
@@ -326,6 +355,304 @@
             </ul>
             <p style="margin-top:6px;"><strong>推荐：</strong>Markdown 先行（开发成本最低），后续再上 TipTap 富文本。</p>
         </div>
+    </div>
+
+    <!-- v22.5.0 - 国际竞赛体系 -->
+    <div class="version-block">
+        <div class="version-header">
+            <span class="version-tag">v22.5.0</span>
+            <span class="version-status status-idea">Idea</span>
+        </div>
+        <p class="version-desc"><strong>国际竞赛体系</strong> — 常见国际竞赛全收录，按学科分类、难度分级、适合专业推荐，帮助学生找到适合自己的背景提升竞赛。</p>
+
+        <div class="section-title">为什么单独做竞赛板块</div>
+        <ul class="feature-list">
+            <li>背景提升是美本申请的核心环节，竞赛是最主流的背景提升方式之一</li>
+            <li>竞赛信息分散，学生和家长不知道有哪些、怎么选、什么时候参加</li>
+            <li>与专业页、学校页可形成强关联（"CS 专业推荐参加哪些竞赛"）</li>
+            <li>SEO 流量入口："xx 竞赛含金量"、"xx 竞赛报名时间" 等长尾词</li>
+        </ul>
+
+        <div class="section-title">竞赛分类架构（8 大类 + 40+ 核心竞赛）</div>
+
+        <div class="tech-box">
+            <h4>🔬 1. 数理科学类（Mathematics & Sciences）</h4>
+            <table class="data-table">
+                <thead>
+                    <tr><th>竞赛名称</th><th>缩写</th><th>难度</th><th>适合年级</th><th>含金量</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>AMC 8 / 10 / 12</td><td>AMC</td><td>⭐⭐⭐⭐</td><td>8-12 年级</td><td>极高</td></tr>
+                    <tr><td>AIME 美国数学邀请赛</td><td>AIME</td><td>⭐⭐⭐⭐⭐</td><td>10-12 年级</td><td>极高</td></tr>
+                    <tr><td>USA(J)MO 数学奥赛</td><td>USAMO</td><td>⭐⭐⭐⭐⭐</td><td>10-12 年级</td><td>顶级</td></tr>
+                    <tr><td>Physics Bowl 物理碗</td><td>—</td><td>⭐⭐⭐</td><td>9-12 年级</td><td>高</td></tr>
+                    <tr><td>UKChO 英国化学奥赛</td><td>UKChO</td><td>⭐⭐⭐⭐</td><td>11-12 年级</td><td>高</td></tr>
+                    <tr><td>USNCO 美国化学奥赛</td><td>USNCO</td><td>⭐⭐⭐⭐</td><td>10-12 年级</td><td>高</td></tr>
+                    <tr><td>BBO 英国生物奥赛</td><td>BBO</td><td>⭐⭐⭐</td><td>9-12 年级</td><td>中高</td></tr>
+                    <tr><td>USABO 美国生物奥赛</td><td>USABO</td><td>⭐⭐⭐⭐</td><td>10-12 年级</td><td>高</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="tech-box">
+            <h4>💻 2. 计算机与工程类（Computer Science & Engineering）</h4>
+            <table class="data-table">
+                <thead>
+                    <tr><th>竞赛名称</th><th>缩写</th><th>难度</th><th>适合年级</th><th>含金量</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>USACO 信息学奥赛</td><td>USACO</td><td>⭐⭐⭐⭐⭐</td><td>9-12 年级</td><td>极高</td></tr>
+                    <tr><td>CCC 加拿大计算机竞赛</td><td>CCC</td><td>⭐⭐⭐</td><td>9-12 年级</td><td>中高</td></tr>
+                    <tr><td>VEX 机器人竞赛</td><td>VEX</td><td>⭐⭐⭐⭐</td><td>6-12 年级</td><td>高</td></tr>
+                    <tr><td>FRC 机器人竞赛</td><td>FRC</td><td>⭐⭐⭐⭐</td><td>9-12 年级</td><td>高</td></tr>
+                    <tr><td>Google Science Fair</td><td>GSF</td><td>⭐⭐⭐⭐⭐</td><td>13-18 岁</td><td>顶级</td></tr>
+                    <tr><td>ISEF 国际科学与工程大奖赛</td><td>ISEF</td><td>⭐⭐⭐⭐⭐</td><td>9-12 年级</td><td>顶级</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="tech-box">
+            <h4>📊 3. 商科与经济类（Business & Economics）</h4>
+            <table class="data-table">
+                <thead>
+                    <tr><th>竞赛名称</th><th>缩写</th><th>难度</th><th>适合年级</th><th>含金量</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>NEC 全美经济学挑战赛</td><td>NEC</td><td>⭐⭐⭐</td><td>9-12 年级</td><td>高</td></tr>
+                    <tr><td>IEO 国际经济学奥赛</td><td>IEO</td><td>⭐⭐⭐⭐</td><td>9-12 年级</td><td>高</td></tr>
+                    <tr><td>FBLA 未来商业领袖</td><td>FBLA</td><td>⭐⭐⭐</td><td>9-12 年级</td><td>中高</td></tr>
+                    <tr><td>DECA 商业挑战赛</td><td>DECA</td><td>⭐⭐⭐</td><td>9-12 年级</td><td>中高</td></tr>
+                    <tr><td>KWHS 沃顿商赛</td><td>KWHS</td><td>⭐⭐⭐⭐</td><td>9-12 年级</td><td>极高</td></tr>
+                    <tr><td>Marshall 社创挑战赛</td><td>—</td><td>⭐⭐⭐⭐</td><td>9-12 年级</td><td>高</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="tech-box">
+            <h4>🌍 4. 人文社科类（Humanities & Social Sciences）</h4>
+            <table class="data-table">
+                <thead>
+                    <tr><th>竞赛名称</th><th>缩写</th><th>难度</th><th>适合年级</th><th>含金量</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>NHSDLC 美式辩论联赛</td><td>NHSDLC</td><td>⭐⭐⭐</td><td>7-12 年级</td><td>中高</td></tr>
+                    <tr><td>NSDA 演讲与辩论</td><td>NSDA</td><td>⭐⭐⭐⭐</td><td>6-12 年级</td><td>高</td></tr>
+                    <tr><td>John Locke 论文竞赛</td><td>—</td><td>⭐⭐⭐⭐⭐</td><td>10-12 年级</td><td>极高</td></tr>
+                    <tr><td>Marshall 论文竞赛</td><td>—</td><td>⭐⭐⭐⭐⭐</td><td>11-12 年级</td><td>极高</td></tr>
+                    <tr><td>HiMCM 数学建模竞赛</td><td>HiMCM</td><td>⭐⭐⭐⭐</td><td>9-12 年级</td><td>高</td></tr>
+                    <tr><td>CTB 全球创新研究大挑战</td><td>CTB</td><td>⭐⭐⭐</td><td>9-12 年级</td><td>中高</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="tech-box">
+            <h4>🎨 5. 艺术与设计类（Arts & Design）</h4>
+            <ul class="feature-list">
+                <li>Scholastic Art & Writing Awards — 美国中学生艺术写作大赛</li>
+                <li>YoungArts — 国家青年艺术基金会</li>
+                <li>Rhode Island Design Competition — 罗德岛设计竞赛</li>
+                <li>NYU Tisch 艺术竞赛</li>
+                <li>国际青少年绘画大赛（多种）</li>
+            </ul>
+        </div>
+
+        <div class="tech-box">
+            <h4>🗣️ 6. 语言与写作类（Language & Writing）</h4>
+            <ul class="feature-list">
+                <li>NSDA / NHSDLC 辩论（已列在人文类，交叉）</li>
+                <li>John Locke Institute 论文竞赛</li>
+                <li>New York Times 写作竞赛系列</li>
+                <li>The Concord Review — 历史论文发表</li>
+                <li>Polymath 多学科论文竞赛</li>
+            </ul>
+        </div>
+
+        <div class="tech-box">
+            <h4>🔬 7. 科研类（Research & Innovation）</h4>
+            <ul class="feature-list">
+                <li>ISEF / Regeneron STS — 顶级科学竞赛</li>
+                <li>Google Science Fair</li>
+                <li>丘成桐中学科学奖（Yau Award）</li>
+                <li>CTB 全球创新研究大挑战</li>
+                <li>China Thinks Big 中国大智汇</li>
+            </ul>
+        </div>
+
+        <div class="tech-box">
+            <h4>🌏 8. 综合类 & 夏校竞赛（Summer Programs）</h4>
+            <ul class="feature-list">
+                <li>RSI 科学暑期研究院（MIT）</li>
+                <li>MITES / E2@MIT</li>
+                <li>Telluride Association Summer Program (TASP)</li>
+                <li>HSMC 斯坦福数学营</li>
+                <li>SUMaC / PROMYS / Ross Program — 数学营</li>
+                <li>YYGS 耶鲁全球青年学者</li>
+            </ul>
+        </div>
+
+        <div class="section-title">页面结构设计</div>
+        <ul class="feature-list">
+            <li><code>/competitions/index.html</code> — 竞赛总览页（8 大分类 + 搜索 + 筛选器）</li>
+            <li><code>/competitions/math.html</code> — 数学竞赛分类页</li>
+            <li><code>/competitions/cs.html</code> — 计算机竞赛分类页</li>
+            <li><code>/competitions/amc.html</code> — 单个竞赛详情页（模板化）</li>
+            <li><code>/competitions/major-cs.html</code> — 按专业推荐竞赛（CS 专业推荐竞赛 Top 10）</li>
+        </ul>
+
+        <div class="section-title">单个竞赛详情页内容模板</div>
+        <div class="tech-box">
+            <h4>📄 标准竞赛详情页结构</h4>
+            <ol>
+                <li><strong>基本信息卡片</strong>：全称、缩写、主办方、官网、报名时间、比赛时间、参赛费用</li>
+                <li><strong>竞赛简介</strong>：历史、规模、影响力</li>
+                <li><strong>参赛资格</strong>：年级、地域、前置要求</li>
+                <li><strong>比赛形式</strong>：个人/团队、线上/线下、题型、时长、轮次</li>
+                <li><strong>难度分级</strong>：入门 / 进阶 / 顶级（5 星制）</li>
+                <li><strong>含金量评估</strong>：藤校认可度、对申请帮助程度</li>
+                <li><strong>适合专业</strong>：关联专业列表（可跳转专业页）</li>
+                <li><strong>获奖率 / 分数线</strong>：近年数据（如有）</li>
+                <li><strong>备考建议</strong>：推荐书籍、网站、备考周期</li>
+                <li><strong>相关竞赛</strong>：同类型/同难度推荐</li>
+                <li><strong>常见问题 FAQ</strong></li>
+            </ol>
+        </div>
+
+        <div class="section-title">逐步实现步骤（分 3 期）</div>
+
+        <div class="tech-box">
+            <h4>Phase 1：信息架构搭建（MVP，约 10 个核心竞赛）</h4>
+            <ul class="feature-list">
+                <li>✅ 创建 <code>/competitions/</code> 目录和总览页</li>
+                <li>✅ 8 大分类导航 + 分类页（静态列表）</li>
+                <li>✅ 先做 10 个最高频竞赛的详情页（AMC / USACO / NEC / John Locke / VEX / Physics Bowl / BBO / UKChO / HiMCM / KWHS）</li>
+                <li>✅ 统一详情页模板，可复用</li>
+                <li>✅ 每个竞赛页加"适合专业"关联链接，导流到专业页</li>
+            </ul>
+            <p style="margin-top:6px;"><strong>目标：</strong>验证内容需求，SEO 长尾词起量</p>
+        </div>
+
+        <div class="tech-box">
+            <h4>Phase 2：扩量 + 工具化（40+ 竞赛，工具辅助）</h4>
+            <ul class="feature-list">
+                <li>🔄 补齐 8 大类所有核心竞赛详情页（约 40 个）</li>
+                <li>🔄 竞赛筛选器：按学科 / 难度 / 年级 / 含金量 / 时间筛选</li>
+                <li>🔄 竞赛日历：按时间轴展示全年竞赛报名/比赛时间</li>
+                <li>🔄 按专业推荐竞赛功能（"CS 专业必参加的 5 个竞赛"）</li>
+                <li>🔄 竞赛对比工具（类似学校对比，选 2-3 个竞赛对比）</li>
+            </ul>
+            <p style="margin-top:6px;"><strong>目标：</strong>成为国内最全的国际竞赛中文信息库</p>
+        </div>
+
+        <div class="tech-box">
+            <h4>Phase 3：社区 + 个性化（用户系统打通）</h4>
+            <ul class="feature-list">
+                <li>💡 我的竞赛规划（用户可添加到个人计划，关联 Dashboard）</li>
+                <li>💡 竞赛组队功能（找队友，尤其是团队赛）</li>
+                <li>💡 用户经验分享（过来人竞赛备考经验）</li>
+                <li>💡 个性化推荐（根据目标专业 + 当前年级推荐竞赛路径）</li>
+                <li>💡 竞赛进度追踪（报名/备考/比赛/获奖状态）</li>
+            </ul>
+            <p style="margin-top:6px;"><strong>目标：</strong>从信息库升级为竞赛规划平台，依赖 v21 用户系统</p>
+        </div>
+
+        <div class="section-title">技术方案讨论</div>
+
+        <div class="tech-box">
+            <h4>🗂️ 数据结构设计</h4>
+            <p style="margin-bottom:8px;">纯静态方案（推荐初期）：</p>
+            <pre><code>
+// competitions.js — 竞赛数据（静态 JSON）
+const competitions = [
+  {
+    id: 'amc12',
+    name: 'AMC 12',
+    fullName: 'American Mathematics Competition 12',
+    category: 'math',
+    difficulty: 4,        // 1-5
+    prestige: 5,          // 含金量 1-5
+    grades: ['10', '11', '12'],
+    organizer: 'MAA',
+    website: 'https://www.maa.org/math-competitions',
+    region: 'global',
+    type: 'individual',
+    format: '笔试 · 25 题 · 75 分钟',
+    date: '每年 2 月',
+    fee: '约 ¥80-150',
+    relatedMajors: ['cs', 'math', 'physics', 'engineering'],
+    relatedComps: ['aime', 'usamo'],
+    tags: ['数学', '顶级', '理工科必选']
+  },
+  // ...
+]
+            </code></pre>
+            <p style="margin-top:8px;"><strong>选型：</strong>初期纯静态 JSON + 静态页面生成，SEO 友好、开发成本最低；后期数据量大了再考虑数据库。</p>
+        </div>
+
+        <div class="tech-box">
+            <h4>🔍 筛选器实现方案</h4>
+            <div class="pros-cons">
+                <div class="pros">
+                    <h5>纯前端筛选（推荐）</h5>
+                    <ul>
+                        <li>开发快，无需后端</li>
+                        <li>响应快，无网络延迟</li>
+                        <li>适合 40-100 条数据规模</li>
+                        <li>可静态托管</li>
+                    </ul>
+                </div>
+                <div class="cons">
+                    <h5>后端筛选</h5>
+                    <ul>
+                        <li>支持复杂查询</li>
+                        <li>数据量大时性能好</li>
+                        <li>开发成本高</li>
+                        <li>需要运维</li>
+                    </ul>
+                </div>
+            </div>
+            <p style="margin-top:8px;"><strong>推荐：</strong>Phase 1/2 纯前端筛选（数据量 < 200 条完全没问题），到 Phase 3 再考虑后端。</p>
+        </div>
+
+        <div class="tech-box">
+            <h4>📅 竞赛日历组件</h4>
+            <ul class="feature-list">
+                <li>月视图 / 列表视图切换</li>
+                <li>按月份展示：报名开始、报名截止、比赛日期</li>
+                <li>点击跳转到对应竞赛详情页</li>
+                <li>可按分类筛选只看某类竞赛</li>
+                <li>技术选型：FullCalendar（功能全但重）vs 手写简易版（轻量）</li>
+            </ul>
+            <p style="margin-top:6px;"><strong>推荐：</strong>手写简易月历 + 时间线列表，满足 80% 需求，包体小体验好。</p>
+        </div>
+
+        <div class="tech-box">
+            <h4>🔗 与现有模块的联动</h4>
+            <ul class="feature-list">
+                <li><strong>专业页</strong>：每个专业页底部加"推荐参加的竞赛"区块（Top 5）</li>
+                <li><strong>学校页</strong>：部分学校页可关联"该校学生常参加的竞赛"</li>
+                <li><strong>Roadmap / Timeline</strong>：按年级推荐竞赛路径（9 年级入门 → 10 年级进阶 → 11 年级冲顶）</li>
+                <li><strong>Dashboard</strong>（v21 后）：用户可添加竞赛到自己的规划，追踪进度</li>
+                <li><strong>AI Assistant</strong>（v23 后）：AI 推荐个性化竞赛方案</li>
+            </ul>
+        </div>
+
+        <div class="tech-box">
+            <h4>📈 SEO 策略</h4>
+            <ul class="feature-list">
+                <li>长尾关键词："xx 竞赛含金量"、"xx 竞赛报名时间"、"xx 竞赛难不难"</li>
+                <li>对比类："AMC 和 AIME 区别"、"NEC 和 FBLA 哪个好"</li>
+                <li>推荐类："CS 专业推荐什么竞赛"、"申请藤校需要什么竞赛"</li>
+                <li>时间类："2026 年 AMC 报名时间"、"上半年有什么竞赛"</li>
+                <li>结构化数据：每个竞赛页加 <code>Event</code> / <code>Course</code> schema 标记</li>
+            </ul>
+        </div>
+
+        <div class="section-title">开发预估</div>
+        <ul class="feature-list">
+            <li><strong>Phase 1（MVP）</strong>：总览页 + 8 分类 + 10 个详情页 — 约 1-2 天</li>
+            <li><strong>Phase 2（扩量）</strong>：补齐 40+ 详情页 + 筛选器 + 竞赛日历 — 约 3-5 天</li>
+            <li><strong>Phase 3（社区）</strong>：用户系统打通 + 组队 + 个性化 — 依赖 v21/v22</li>
+        </ul>
     </div>
 
     <!-- v23.0.0 -->
