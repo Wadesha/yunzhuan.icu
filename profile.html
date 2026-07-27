@@ -40,7 +40,24 @@
         .nav-links .cn { color: #999; font-size: 0.8rem; margin-left: 2px; }
 
         h1 { font-size: 1.5rem; margin-bottom: 6px; }
-        .subtitle { color: #888; font-size: 0.9rem; margin-bottom: 20px; }
+        .subtitle { color: #888; font-size: 0.9rem; margin-bottom: 14px; }
+
+        .demo-banner {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border: 1px solid #fcd34d;
+            color: #92400e;
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: 0.82rem;
+            margin-bottom: 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .demo-banner strong { color: #78350f; }
+        .demo-banner .btn { font-size: 0.75rem; padding: 4px 10px; }
 
         .section {
             background: white;
@@ -75,6 +92,7 @@
             font-size: 1.5rem;
             font-weight: 600;
         }
+        .profile-info .name { font-weight: 600; font-size: 1.05rem; }
         .profile-info .email { font-size: 0.9rem; color: #555; }
         .profile-info .member-since { font-size: 0.78rem; color: #999; margin-top: 2px; }
 
@@ -115,13 +133,17 @@
         }
         .list-item-remove:hover { background: #fef2f2; }
 
-        .empty-state {
-            text-align: center;
-            padding: 30px 20px;
-            color: #aaa;
-            font-size: 0.88rem;
+        .tier-tag {
+            display: inline-block;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            margin-right: 6px;
         }
-        .empty-state .icon { font-size: 2rem; margin-bottom: 8px; }
+        .tier-reach { background: #fee2e2; color: #dc2626; }
+        .tier-match { background: #dbeafe; color: #2563eb; }
+        .tier-safety { background: #dcfce7; color: #16a34a; }
 
         .btn {
             padding: 8px 16px;
@@ -138,8 +160,7 @@
             color: #667eea;
             border: 1px solid #667eea;
         }
-
-        .loading { text-align: center; padding: 40px; color: #999; }
+        .btn-secondary:hover { background: #f5f3ff; }
 
         .footer { text-align: center; margin-top: 30px; color: #999; font-size: 0.8rem; }
 
@@ -153,13 +174,6 @@
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#667eea">
     <script src="js/theme.js"></script>
-    <script>
-    window.SUPABASE_CONFIG = {
-        url: 'https://otfjbzjvkoectpejhxar.supabase.co',
-        anonKey: 'sb_publishable_SBRF6ewKH-se3dNlqFwsXQ_lObhamTr'
-    };
-    </script>
-    <script src="js/auth.js"></script>
     <script src="js/mobile-nav.js"></script>
 </head>
 <body>
@@ -173,176 +187,139 @@
     </nav>
 
     <h1>My Profile</h1>
-    <p class="subtitle">个人中心 · 管理你的收藏、选校和学习进度</p>
+    <p class="subtitle">个人中心 · Demo Preview</p>
 
-    <div id="not-logged-in" style="display:none;">
-        <div class="section" style="text-align:center;">
-            <div style="font-size:3rem;margin-bottom:10px;">🔐</div>
-            <p style="margin-bottom:14px;color:#666;">Please sign in to view your profile</p>
-            <a href="login.html" class="btn">Sign In / 登录</a>
+    <div class="demo-banner">
+        <span><strong>👋 Demo Mode</strong> — 以下为示例数据，展示个人中心完整功能。用户系统详见 Roadmap v21。</span>
+        <a href="roadmap.html" class="btn btn-secondary">View Roadmap</a>
+    </div>
+
+    <div class="section">
+        <div class="profile-header">
+            <div class="avatar">D</div>
+            <div class="profile-info">
+                <div class="name">Demo User</div>
+                <div class="email">demo@yunzhuan.icu</div>
+                <div class="member-since">Member since Mar 15, 2026</div>
+            </div>
+        </div>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-value">128</div>
+                <div class="stat-label">Coins / 金币</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">Lv.3</div>
+                <div class="stat-label">Level / 等级</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">8</div>
+                <div class="stat-label">Favorites / 收藏</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">10</div>
+                <div class="stat-label">Schools / 选校</div>
+            </div>
         </div>
     </div>
 
-    <div id="profile-content">
-        <div class="loading">Loading... 加载中...</div>
+    <div class="section">
+        <h2>My Favorites <span class="cn">我的收藏</span></h2>
+        <div class="list-item">
+            <div>
+                <div class="list-item-title"><a href="majors/cs.html">Computer Science</a></div>
+                <div class="list-item-meta">Major · Added Mar 20, 2026</div>
+            </div>
+            <button class="list-item-remove" onclick="alert('Demo mode: remove would go here')">Remove</button>
+        </div>
+        <div class="list-item">
+            <div>
+                <div class="list-item-title"><a href="schools/us/harvard.html">Harvard University</a></div>
+                <div class="list-item-meta">School · Added Mar 22, 2026</div>
+            </div>
+            <button class="list-item-remove" onclick="alert('Demo mode: remove would go here')">Remove</button>
+        </div>
+        <div class="list-item">
+            <div>
+                <div class="list-item-title"><a href="essays/prompts/common-app.html">Common App Prompts 2026</a></div>
+                <div class="list-item-meta">Essay · Added Mar 25, 2026</div>
+            </div>
+            <button class="list-item-remove" onclick="alert('Demo mode: remove would go here')">Remove</button>
+        </div>
+        <div class="list-item">
+            <div>
+                <div class="list-item-title"><a href="tests/sat.html">SAT Complete Guide</a></div>
+                <div class="list-item-meta">Test Guide · Added Mar 18, 2026</div>
+            </div>
+            <button class="list-item-remove" onclick="alert('Demo mode: remove would go here')">Remove</button>
+        </div>
+        <p style="font-size:0.78rem;color:#999;margin-top:8px;">… and 4 more</p>
     </div>
 
-    <p class="footer">© 2026 yunzhuan.icu &nbsp;|&nbsp; Version v18.0.0</p>
-
-<script>
-(function() {
-    function escapeHtml(s) {
-        return (s || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-    }
-
-    function renderProfile(user, profile) {
-        const email = user.email || '';
-        const initial = (email.charAt(0) || 'U').toUpperCase();
-
-        const favorites = window._favorites || [];
-        const schoolList = window._schoolList || [];
-
-        const content = document.getElementById('profile-content');
-        content.innerHTML = `
-            <div class="section">
-                <div class="profile-header">
-                    <div class="avatar">${initial}</div>
-                    <div class="profile-info">
-                        <div style="font-weight:600;font-size:1.05rem;">${escapeHtml(profile?.display_name || email)}</div>
-                        <div class="email">${escapeHtml(email)}</div>
-                        <div class="member-since">Member since ${profile?.created_at ? new Date(profile.created_at).toLocaleDateString() : ''}</div>
-                    </div>
+    <div class="section">
+        <h2>My School List <span class="cn">我的选校名单</span></h2>
+        <div class="list-item">
+            <div>
+                <div class="list-item-title">
+                    <span class="tier-tag tier-reach">Reach</span>
+                    Harvard University
                 </div>
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <div class="stat-value">${profile?.coins || 0}</div>
-                        <div class="stat-label">Coins / 金币</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-value">Lv.${profile?.level || 1}</div>
-                        <div class="stat-label">Level / 等级</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-value">${favorites.length}</div>
-                        <div class="stat-label">Favorites / 收藏</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-value">${schoolList.length}</div>
-                        <div class="stat-label">Schools / 选校</div>
-                    </div>
+                <div class="list-item-meta">US · Ivy League · Applied</div>
+            </div>
+            <button class="list-item-remove" onclick="alert('Demo mode')">Remove</button>
+        </div>
+        <div class="list-item">
+            <div>
+                <div class="list-item-title">
+                    <span class="tier-tag tier-reach">Reach</span>
+                    Stanford University
                 </div>
+                <div class="list-item-meta">US · Applied</div>
             </div>
-
-            <div class="section" id="favorites">
-                <h2>My Favorites <span class="cn">我的收藏</span></h2>
-                ${favorites.length === 0 ? `
-                    <div class="empty-state">
-                        <div class="icon">⭐</div>
-                        <p>No favorites yet</p>
-                        <p style="font-size:0.78rem;margin-top:4px;">Browse schools and majors to add favorites</p>
-                    </div>
-                ` : `
-                    ${favorites.map(f => `
-                        <div class="list-item">
-                            <div>
-                                <div class="list-item-title">
-                                    <a href="${escapeHtml(f.item_url || '#')}">${escapeHtml(f.item_title || f.item_id)}</a>
-                                </div>
-                                <div class="list-item-meta">${escapeHtml(f.item_type || '')} · ${f.created_at ? new Date(f.created_at).toLocaleDateString() : ''}</div>
-                            </div>
-                            <button class="list-item-remove" onclick="removeFavorite('${f.item_type}', '${f.item_id}')">Remove</button>
-                        </div>
-                    `).join('')}
-                `}
-            </div>
-
-            <div class="section" id="schools">
-                <h2>My School List <span class="cn">我的选校名单</span></h2>
-                ${schoolList.length === 0 ? `
-                    <div class="empty-state">
-                        <div class="icon">🎓</div>
-                        <p>No schools added yet</p>
-                        <p style="font-size:0.78rem;margin-top:4px;">Build your school list in the compare tool</p>
-                    </div>
-                ` : `
-                    ${schoolList.map(s => `
-                        <div class="list-item">
-                            <div>
-                                <div class="list-item-title">${escapeHtml(s.school_name || s.school_id)}</div>
-                                <div class="list-item-meta">${escapeHtml(s.tier || '')} ${s.status ? '· ' + escapeHtml(s.status) : ''}</div>
-                            </div>
-                            <button class="list-item-remove" onclick="removeSchool('${s.school_id}')">Remove</button>
-                        </div>
-                    `).join('')}
-                `}
-            </div>
-
-            <div class="section">
-                <h2>Account <span class="cn">账户</span></h2>
-                <div style="display:flex;gap:10px;flex-wrap:wrap;">
-                    <button class="btn btn-secondary" onclick="signOut()">Sign Out / 退出登录</button>
+            <button class="list-item-remove" onclick="alert('Demo mode')">Remove</button>
+        </div>
+        <div class="list-item">
+            <div>
+                <div class="list-item-title">
+                    <span class="tier-tag tier-match">Match</span>
+                    University of Michigan
                 </div>
+                <div class="list-item-meta">US · Public · In progress</div>
             </div>
-        `;
-    }
+            <button class="list-item-remove" onclick="alert('Demo mode')">Remove</button>
+        </div>
+        <div class="list-item">
+            <div>
+                <div class="list-item-title">
+                    <span class="tier-tag tier-match">Match</span>
+                    NYU
+                </div>
+                <div class="list-item-meta">US · In progress</div>
+            </div>
+            <button class="list-item-remove" onclick="alert('Demo mode')">Remove</button>
+        </div>
+        <div class="list-item">
+            <div>
+                <div class="list-item-title">
+                    <span class="tier-tag tier-safety">Safety</span>
+                    UIUC
+                </div>
+                <div class="list-item-meta">US · Public · Planning</div>
+            </div>
+            <button class="list-item-remove" onclick="alert('Demo mode')">Remove</button>
+        </div>
+        <p style="font-size:0.78rem;color:#999;margin-top:8px;">… and 5 more (3 reach · 5 match · 2 safety)</p>
+    </div>
 
-    window.removeFavorite = async function(type, id) {
-        if (!confirm('Remove this favorite?')) return;
-        try {
-            await window.DB.removeFavorite(type, id);
-            loadData();
-        } catch (e) {
-            alert('Failed: ' + e.message);
-        }
-    };
+    <div class="section">
+        <h2>Account <span class="cn">账户</span></h2>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;">
+            <button class="btn btn-secondary" onclick="location.href='login.html'">Sign Out / 退出登录 (Demo)</button>
+            <button class="btn btn-secondary" onclick="alert('Demo: settings not available yet')">Settings / 设置</button>
+        </div>
+        <p style="font-size:0.78rem;color:#999;margin-top:10px;">用户系统完整实现计划在 v21 版本，详见 <a href="roadmap.html" style="color:#667eea;text-decoration:none;">Roadmap</a>。</p>
+    </div>
 
-    window.removeSchool = async function(schoolId) {
-        if (!confirm('Remove this school from your list?')) return;
-        try {
-            await window.DB.removeSchoolFromList(schoolId);
-            loadData();
-        } catch (e) {
-            alert('Failed: ' + e.message);
-        }
-    };
-
-    window.signOut = async function() {
-        if (!confirm('Sign out?')) return;
-        try {
-            await window.Auth.signOut();
-            window.location.href = 'index.html';
-        } catch (e) {
-            alert('Sign out failed: ' + e.message);
-        }
-    };
-
-    async function loadData() {
-        try {
-            const [profile, favorites, schoolList] = await Promise.all([
-                window.DB.getProfile(),
-                window.DB.getFavorites(),
-                window.DB.getSchoolList()
-            ]);
-            window._favorites = favorites;
-            window._schoolList = schoolList;
-            renderProfile(window.Auth.getUser(), profile);
-        } catch (e) {
-            console.error('Load data error:', e);
-            renderProfile(window.Auth.getUser(), null);
-        }
-    }
-
-    if (window.Auth) {
-        window.Auth.ready(function(user) {
-            if (!user) {
-                document.getElementById('not-logged-in').style.display = 'block';
-                document.getElementById('profile-content').style.display = 'none';
-                return;
-            }
-            loadData();
-        });
-    }
-})();
-</script>
+    <p class="footer">© 2026 yunzhuan.icu &nbsp;|&nbsp; v20.2.0 Demo Preview</p>
 </body>
 </html>

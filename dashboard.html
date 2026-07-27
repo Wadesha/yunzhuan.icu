@@ -115,6 +115,21 @@
         .btn:hover { background: #5568d3; }
         .btn-secondary { background: #f8f9fa; color: #667eea; border: 1px solid #ddd; }
         .btn-secondary:hover { background: #e8eaf6; }
+        .demo-banner {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border: 1px solid #fcd34d;
+            color: #92400e;
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: 0.82rem;
+            margin-bottom: 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+        }
+        .demo-banner strong { color: #78350f; }
+        .demo-banner .btn { font-size: 0.75rem; padding: 4px 10px; }
         .footer { text-align: center; margin-top: 20px; color: #999; font-size: 0.8rem; }
         .note { font-size: 0.78rem; color: #888; margin-top: 8px; line-height: 1.6; }
     </style>
@@ -124,7 +139,12 @@
     <a href="index.html" class="back-link">&larr; Back to Home</a>
 
     <h1>Application Dashboard</h1>
-    <p class="subtitle">申请清单仪表盘 · Local tracking</p>
+    <p class="subtitle">申请清单仪表盘 · Demo mode</p>
+
+    <div class="demo-banner">
+        <span><strong>👋 Demo Mode</strong> — 这是示例数据，展示完整功能。可随意修改，数据存在你浏览器本地。</span>
+        <button class="btn" onclick="loadDemoData()">Load demo data</button>
+    </div>
 
     <div class="intro">
         A single-page personal tracker for your application season. Enter your test scores, target schools and essay progress below — all data is stored locally in your browser (localStorage), nothing is uploaded. Use the quick links to jump to relevant resources across the site.
@@ -160,15 +180,15 @@
         <div class="card">
             <h2>School List <span class="en">选校名单</span></h2>
             <div id="school-list-stats">
-                <div class="stat-mini"><span class="label">Reach (冲刺)</span><span class="value" id="reach-count">0</span></div>
-                <div class="stat-mini"><span class="label">Match (匹配)</span><span class="value" id="match-count">0</span></div>
-                <div class="stat-mini"><span class="label">Safety (保底)</span><span class="value" id="safety-count">0</span></div>
-                <div class="stat-mini"><span class="label">Total</span><span class="value" id="total-count">0</span></div>
+                <div class="stat-mini"><span class="label">Reach (冲刺)</span><span class="value" id="reach-count">3</span></div>
+                <div class="stat-mini"><span class="label">Match (匹配)</span><span class="value" id="match-count">5</span></div>
+                <div class="stat-mini"><span class="label">Safety (保底)</span><span class="value" id="safety-count">2</span></div>
+                <div class="stat-mini"><span class="label">Total</span><span class="value" id="total-count">10</span></div>
             </div>
             <p style="margin-top:10px;font-size:0.85rem;color:#555;">目标 8-12 所，建议 reach:match:safety = 3:5:2。</p>
             <div class="btn-row">
                 <a href="schools/compare.html" class="btn btn-secondary">Compare tool</a>
-                <a href="schools/us/harvard.html" class="btn btn-secondary">Sample school card</a>
+                <a href="schools/us/harvard.html" class="btn btn-secondary">Sample school</a>
             </div>
         </div>
 
@@ -289,10 +309,23 @@
     }
 
     // School list: stored externally in this minimal version, just static counters
-    document.getElementById('reach-count').textContent = '0';
-    document.getElementById('match-count').textContent = '0';
-    document.getElementById('safety-count').textContent = '0';
-    document.getElementById('total-count').textContent = '0';
+    function updateSchoolCounts() {
+        document.getElementById('reach-count').textContent = '3';
+        document.getElementById('match-count').textContent = '5';
+        document.getElementById('safety-count').textContent = '2';
+        document.getElementById('total-count').textContent = '10';
+    }
+    updateSchoolCounts();
+
+    function loadDemoData() {
+        state = {
+            scores: { sat: 1480, act: 33, toefl: 108, ielts: 7.5, det: 135 },
+            essayProgress: { ca: 4, sup: 3, ucas: 2 },
+            checklist: { t1: true, t2: true, t3: true, t4: true, t5: true, t6: true, t7: true, t8: true, t9: false, t10: false, t11: false, t12: false, t13: false, t14: false, t15: false, t16: false }
+        };
+        save();
+        location.reload();
+    }
 
     loadScores();
     renderEssay();

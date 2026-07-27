@@ -139,18 +139,11 @@
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#667eea">
     <script src="js/theme.js"></script>
-    <script>
-    window.SUPABASE_CONFIG = {
-        url: 'https://otfjbzjvkoectpejhxar.supabase.co',
-        anonKey: 'sb_publishable_SBRF6ewKH-se3dNlqFwsXQ_lObhamTr'
-    };
-    </script>
-    <script src="js/auth.js"></script>
 </head>
 <body>
     <div class="auth-card">
         <div class="logo">yunzhuan<span>.icu</span></div>
-        <p class="subtitle">Sign in to save your progress & favorites</p>
+        <p class="subtitle">Demo Preview · 登录功能预览版</p>
 
         <div class="tabs">
             <div class="tab active" data-tab="signin">Sign In</div>
@@ -158,22 +151,24 @@
         </div>
 
         <div class="error-msg" id="errorMsg"></div>
-        <div class="success-msg" id="successMsg"></div>
+        <div class="success-msg" id="successMsg" style="display:block;">
+            👋 <strong>Demo mode</strong> — 输入任意邮箱密码即可预览登录后效果。
+        </div>
 
         <div class="form-panel active" id="signin-panel">
             <form id="signin-form">
                 <div class="form-group">
                 <label>Email</label>
-                <input type="email" id="signin-email" required>
+                <input type="email" id="signin-email" value="demo@yunzhuan.icu" required>
             </div>
             <div class="form-group">
                 <label>Password</label>
-                <input type="password" id="signin-password" required>
+                <input type="password" id="signin-password" value="demo1234" required>
             </div>
             <div class="forgot-link">
                 <a href="#" id="forgot-link">Forgot password?</a>
             </div>
-            <button type="submit" class="btn" id="signin-btn">Sign In</button>
+            <button type="submit" class="btn" id="signin-btn">Sign In (Demo)</button>
             </form>
         </div>
 
@@ -181,13 +176,13 @@
             <form id="signup-form">
                 <div class="form-group">
                 <label>Email</label>
-                <input type="email" id="signup-email" required>
+                <input type="email" id="signup-email" placeholder="your@email.com" required>
             </div>
             <div class="form-group">
                 <label>Password (min 6 characters)</label>
                 <input type="password" id="signup-password" minlength="6" required>
             </div>
-            <button type="submit" class="btn" id="signup-btn">Create Account</button>
+            <button type="submit" class="btn" id="signup-btn">Create Account (Demo)</button>
             </form>
         </div>
 
@@ -228,64 +223,46 @@
         });
     });
 
-    document.getElementById('signin-form').addEventListener('submit', async function(e) {
+    document.getElementById('signin-form').addEventListener('submit', function(e) {
         e.preventDefault();
         hideMessages();
-        const email = document.getElementById('signin-email').value;
-        const password = document.getElementById('signin-password').value;
         const btn = document.getElementById('signin-btn');
         btn.disabled = true;
         btn.textContent = 'Signing in...';
 
-        try {
-            if (!window.Auth) throw new Error('Auth not loaded');
-            await window.Auth.signIn(email, password);
-            showSuccess('Signed in! Redirecting...');
-            setTimeout(() => {
-                const params = new URLSearchParams(window.location.search);
-                const redirect = params.get('redirect') || 'index.html';
-                window.location.href = redirect;
-            }, 500);
-        } catch (err) {
-            showError(err.message || 'Sign in failed');
-            btn.disabled = false;
-            btn.textContent = 'Sign In';
-        }
+        setTimeout(() => {
+            localStorage.setItem('yunzhuan_demo_user', JSON.stringify({
+                email: document.getElementById('signin-email').value,
+                name: 'Demo User',
+                joined: new Date().toISOString()
+            }));
+            const params = new URLSearchParams(window.location.search);
+            const redirect = params.get('redirect') || 'profile.html';
+            window.location.href = redirect;
+        }, 600);
     });
 
-    document.getElementById('signup-form').addEventListener('submit', async function(e) {
+    document.getElementById('signup-form').addEventListener('submit', function(e) {
         e.preventDefault();
         hideMessages();
-        const email = document.getElementById('signup-email').value;
-        const password = document.getElementById('signup-password').value;
         const btn = document.getElementById('signup-btn');
         btn.disabled = true;
         btn.textContent = 'Creating account...';
 
-        try {
-            if (!window.Auth) throw new Error('Auth not loaded');
-            await window.Auth.signUp(email, password);
-            showSuccess('Account created! Check your email to confirm, then sign in.');
-            tabs[0].click();
-            document.getElementById('signin-email').value = email;
-        } catch (err) {
-            showError(err.message || 'Sign up failed');
+        setTimeout(() => {
+            showSuccess('✅ Demo: Account created! Switch to Sign In tab to continue.');
             btn.disabled = false;
-            btn.textContent = 'Create Account';
-        }
+            btn.textContent = 'Create Account (Demo)';
+            tabs[0].click();
+            document.getElementById('signin-email').value = document.getElementById('signup-email').value;
+        }, 800);
     });
 
-    document.getElementById('forgot-link').addEventListener('click', async function(e) {
+    document.getElementById('forgot-link').addEventListener('click', function(e) {
         e.preventDefault();
         const email = prompt('Enter your email to reset password:');
         if (!email) return;
-        try {
-            if (!window.Auth) throw new Error('Auth not loaded');
-            await window.Auth.resetPassword(email);
-            showSuccess('Password reset email sent! Check your inbox.');
-        } catch (err) {
-            showError(err.message || 'Failed to send reset email');
-        }
+        showSuccess('📧 Demo: Password reset email would be sent to ' + email);
     });
 
     const params = new URLSearchParams(window.location.search);
