@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roadmap - 产品路线图 & 技术规划 - yunzhuan.icu</title>
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 0 16px 40px;
+            background: #f5f5f5;
+            color: #333;
+            line-height: 1.7;
+        }
+        .navbar {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            padding: 12px 0;
+            margin-bottom: 20px;
+        }
+        .logo { display: none; }
+        .nav-links {
+            display: flex;
+            gap: 14px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: #555;
+            font-size: 0.82rem;
+            font-weight: 500;
+            transition: color 0.15s;
+            white-space: nowrap;
+        }
+        .nav-links a:hover { color: #667eea; }
+        .nav-links .cn {
+            font-size: 0.65rem;
+            color: #bbb;
+            margin-left: 2px;
+        }
+        h1 {
+            font-size: 1.6rem;
+            color: #333;
+            margin-bottom: 6px;
+        }
+        .subtitle {
+            color: #888;
+            font-size: 0.9rem;
+            margin-bottom: 28px;
+        }
+        .version-block {
+            background: white;
+            border-radius: 10px;
+            padding: 24px 28px;
+            margin-bottom: 18px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .version-header {
+            display: flex;
+            align-items: baseline;
+            gap: 12px;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+        }
+        .version-tag {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #333;
+        }
+        .version-status {
+            font-size: 0.72rem;
+            padding: 3px 10px;
+            border-radius: 10px;
+            font-weight: 500;
+        }
+        .status-planned { background: #fef3c7; color: #92400e; }
+        .status-exploring { background: #dbeafe; color: #1e40af; }
+        .status-idea { background: #f3e8ff; color: #6b21a8; }
+        .version-desc {
+            color: #555;
+            margin-bottom: 16px;
+            font-size: 0.92rem;
+        }
+        .section-title {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #667eea;
+            margin: 18px 0 8px;
+            padding-bottom: 4px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .section-title:first-child { margin-top: 0; }
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 10px;
+        }
+        .feature-list li {
+            padding: 6px 0 6px 18px;
+            position: relative;
+            color: #444;
+            font-size: 0.88rem;
+        }
+        .feature-list li::before {
+            content: "○";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-size: 0.7rem;
+            top: 8px;
+        }
+        .tech-box {
+            background: #f8f9ff;
+            border: 1px solid #e0e7ff;
+            border-radius: 8px;
+            padding: 14px 18px;
+            margin: 10px 0;
+        }
+        .tech-box h4 {
+            font-size: 0.85rem;
+            color: #4338ca;
+            margin-bottom: 6px;
+        }
+        .tech-box p, .tech-box li {
+            font-size: 0.82rem;
+            color: #555;
+        }
+        .tech-box ul { margin-left: 18px; }
+        .tech-box code {
+            background: #e0e7ff;
+            color: #4338ca;
+            padding: 1px 5px;
+            border-radius: 3px;
+            font-size: 0.78em;
+            font-family: monospace;
+        }
+        .pros-cons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin: 10px 0;
+        }
+        .pros, .cons {
+            padding: 10px 14px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+        }
+        .pros { background: #f0fdf4; border: 1px solid #bbf7d0; }
+        .cons { background: #fef2f2; border: 1px solid #fecaca; }
+        .pros h5, .cons h5 {
+            font-size: 0.78rem;
+            margin-bottom: 4px;
+        }
+        .pros h5 { color: #166534; }
+        .cons h5 { color: #991b1b; }
+        .pros ul, .cons ul { margin-left: 16px; }
+        .pros li { color: #166534; }
+        .cons li { color: #991b1b; }
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 18px;
+            border-top: 1px solid #e5e7eb;
+            font-size: 0.8rem;
+            color: #999;
+        }
+        @media (max-width: 600px) {
+            .version-block { padding: 18px 16px; }
+            .pros-cons { grid-template-columns: 1fr; }
+            .nav-links .cn { display: none; }
+        }
+    </style>
+    <link rel="stylesheet" href="css/theme.css">
+    <script src="js/theme.js"></script>
+    <script src="js/search-shortcut.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="index.html" class="logo">yunzhuan<span>.icu</span></a>
+        <div class="nav-links">
+            <a href="index.html">Majors<span class="cn">专业</span></a>
+            <a href="schools/index.html">Schools<span class="cn">学校</span></a>
+            <a href="essays/index.html">Essays<span class="cn">文书</span></a>
+            <a href="guides/index.html">Guides<span class="cn">指南</span></a>
+            <a href="search.html">Search<span class="cn">搜索</span></a>
+        </div>
+    </nav>
+
+    <h1>Product Roadmap</h1>
+    <p class="subtitle">产品路线图 &middot; 技术规划与讨论 &middot; 所有内容均为规划，尚未实施</p>
+
+    <!-- v21.0.0 -->
+    <div class="version-block">
+        <div class="version-header">
+            <span class="version-tag">v21.0.0</span>
+            <span class="version-status status-planned">Planned</span>
+        </div>
+        <p class="version-desc"><strong>个人中心 &amp; 学习路径系统</strong> — 基于 Supabase 的完整用户数据体系，包含收藏夹、学习路径、申请进度 Tracker、截止日期提醒。</p>
+
+        <div class="section-title">核心功能</div>
+        <ul class="feature-list">
+            <li>个人中心 Dashboard — 总览收藏、进度、最近浏览</li>
+            <li>收藏夹增强 — 专业/学校/文章分类收藏，支持自定义分组</li>
+            <li>申请进度 Tracker — 可视化申请时间线，每所学校单独跟踪</li>
+            <li>截止日期提醒 — 邮件/浏览器通知推送</li>
+            <li>学习路径规划 — 按目标专业推荐课程、考试、活动规划</li>
+            <li>Profile 页面 — 公开/私密设置，展示申请背景（可选）</li>
+        </ul>
+
+        <div class="section-title">技术方案讨论</div>
+
+        <div class="tech-box">
+            <h4>🔌 数据层：Supabase Database vs Vercel KV</h4>
+            <p><strong>现状：</strong>已有 Supabase Auth 和 Vercel KV（统计用）</p>
+            <div class="pros-cons">
+                <div class="pros">
+                    <h5>Supabase Database 方案</h5>
+                    <ul>
+                        <li>关系型数据，适合复杂查询</li>
+                        <li>RLS 行级安全，数据隔离</li>
+                        <li>与已有 Auth 无缝集成</li>
+                        <li>支持实时订阅</li>
+                    </ul>
+                </div>
+                <div class="cons">
+                    <h5>Vercel KV 方案</h5>
+                    <ul>
+                        <li>Redis 速度快</li>
+                        <li>与现有统计代码复用</li>
+                        <li>但不适合复杂关系数据</li>
+                        <li>查询能力有限</li>
+                    </ul>
+                </div>
+            </div>
+            <p style="margin-top:8px;"><strong>推荐：</strong>用户数据用 Supabase Database，KV 继续存访问统计。两套各尽其职。</p>
+        </div>
+
+        <div class="tech-box">
+            <h4>📅 截止日期提醒实现方案</h4>
+            <ul>
+                <li><strong>方案 A：</strong>浏览器 Notification API + Service Worker 定时检查（纯前端，无需后端）</li>
+                <li><strong>方案 B：</strong>Vercel Cron Job + 邮件推送（需要用户邮箱，用 Resend / SendGrid）</li>
+                <li><strong>方案 C：</strong>Web Push Notification（VAPID 协议，可离线推送）</li>
+            </ul>
+            <p style="margin-top:6px;"><strong>推荐：</strong>先做方案 A（零成本），后续迭代加方案 C。邮件提醒作为高优先级功能单独评估。</p>
+        </div>
+
+        <div class="tech-box">
+            <h4>🧭 学习路径数据结构</h4>
+            <p>用 JSON 配置化驱动，每个专业对应一条学习路径：</p>
+            <ul style="margin-top:4px;">
+                <li><code>freshman</code> / <code>sophomore</code> / <code>junior</code> / <code>senior</code> 四个阶段</li>
+                <li>每阶段包含：课程、标化、活动、科研、竞赛建议</li>
+                <li>用户可勾选完成，自动计算完成度百分比</li>
+                <li>数据存在 Supabase <code>user_progress</code> 表</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- v22.0.0 -->
+    <div class="version-block">
+        <div class="version-header">
+            <span class="version-tag">v22.0.0</span>
+            <span class="version-status status-exploring">Exploring</span>
+        </div>
+        <p class="version-desc"><strong>社区系统 &amp; UGC 内容</strong> — 用户生成内容平台，包括问答、经验分享、评论互动。</p>
+
+        <div class="section-title">核心功能</div>
+        <ul class="feature-list">
+            <li>问答社区 — 提问、回答、点赞、收藏</li>
+            <li>经验分享投稿 — 用户可发布自己的申请故事</li>
+            <li>评论系统 — 所有文章/专业/学校页支持评论</li>
+            <li>用户等级体系 — 贡献值、徽章、等级</li>
+            <li>关注系统 — 关注学长学姐，动态推送</li>
+        </ul>
+
+        <div class="section-title">技术方案讨论</div>
+
+        <div class="tech-box">
+            <h4>💬 评论系统选型</h4>
+            <div class="pros-cons">
+                <div class="pros">
+                    <h5>Giscus (GitHub Discussions)</h5>
+                    <ul>
+                        <li>零后端，开箱即用</li>
+                        <li>GitHub 账号体系</li>
+                        <li>支持深色模式</li>
+                        <li>无广告，开源</li>
+                    </ul>
+                </div>
+                <div class="cons">
+                    <h5>自建评论系统</h5>
+                    <ul>
+                        <li>完全可控，可定制</li>
+                        <li>与站内账号体系打通</li>
+                        <li>开发成本高</li>
+                        <li>需要反垃圾机制</li>
+                    </ul>
+                </div>
+            </div>
+            <p style="margin-top:8px;"><strong>推荐：</strong>第一阶段用 Giscus 快速上线，验证需求。用户量起来后再考虑自建。</p>
+        </div>
+
+        <div class="tech-box">
+            <h4>🛡️ 内容审核方案</h4>
+            <ul>
+                <li><strong>前置审核：</strong>新用户首帖需审核（人工 + 关键词过滤）</li>
+                <li><strong>自动审核：</strong>接入第三方内容审核 API（如阿里云内容安全、腾讯云内容安全）</li>
+                <li><strong>用户举报：</strong>每帖带举报按钮，社区共治</li>
+                <li><strong>成本预估：</strong>第三方 API 约 ¥0.002/次，1 万条内容 ¥20，早期可接受</li>
+            </ul>
+        </div>
+
+        <div class="tech-box">
+            <h4>⚡ 富文本编辑器选择</h4>
+            <ul>
+                <li><strong>TipTap：</strong>基于 ProseMirror，现代、轻量、可扩展（推荐）</li>
+                <li><strong>Quill：</strong>成熟稳定，生态好，但包体较大</li>
+                <li><strong>Markdown 编辑器：</strong>如 EasyMDE，技术向用户友好，但普通用户有门槛</li>
+            </ul>
+            <p style="margin-top:6px;"><strong>推荐：</strong>Markdown 先行（开发成本最低），后续再上 TipTap 富文本。</p>
+        </div>
+    </div>
+
+    <!-- v23.0.0 -->
+    <div class="version-block">
+        <div class="version-header">
+            <span class="version-tag">v23.0.0</span>
+            <span class="version-status status-idea">Idea</span>
+        </div>
+        <p class="version-desc"><strong>AI 深度集成 &amp; 个性化推荐</strong> — 全场景 AI 赋能，从选校到文书一站式智能辅助。</p>
+
+        <div class="section-title">核心功能</div>
+        <ul class="feature-list">
+            <li>AI 选校匹配 — 输入背景自动生成选校名单，带录取概率评估</li>
+            <li>AI 文书润色 — 多维度评分（语言/逻辑/个性展现/匹配度）</li>
+            <li>AI 面试模拟 — 语音对话模拟校友面试，实时反馈</li>
+            <li>个性化推荐 — 基于浏览历史推荐相关专业/学校/文章</li>
+            <li>ChatGPT 插件 — 网站内容接入 GPTs，对话式获取信息</li>
+        </ul>
+
+        <div class="section-title">技术方案讨论</div>
+
+        <div class="tech-box">
+            <h4>🤖 AI 选校匹配算法</h4>
+            <p><strong>核心思路：</strong>基于历史录取数据 + 用户背景特征，计算匹配度。</p>
+            <ul style="margin-top:6px;">
+                <li><strong>输入特征：</strong>GPA、标化、学校背景、专业方向、科研/实习/竞赛、意向国家/排名</li>
+                <li><strong>算法选型：</strong>
+                    <ul style="margin-top:4px;">
+                        <li>方案 A：规则引擎（权重打分）— 可解释性强，易调优，冷启动友好</li>
+                        <li>方案 B：协同过滤 / 向量检索 — 需要大量用户数据，越用越准</li>
+                        <li>方案 C：LLM 直接生成 — 简单粗暴，但不稳定，成本高</li>
+                    </ul>
+                </li>
+            </ul>
+            <p style="margin-top:8px;"><strong>推荐：</strong>先方案 A（规则引擎）上线，积累数据后迭代到方案 B。LLM 作为补充，生成自然语言解释。</p>
+        </div>
+
+        <div class="tech-box">
+            <h4>💰 AI 成本估算</h4>
+            <ul>
+                <li><strong>gpt-4o-mini：</strong>输入 $0.15 / 1M tokens，输出 $0.60 / 1M tokens</li>
+                <li><strong>Claude 3.5 Sonnet：</strong>输入 $3 / 1M tokens，输出 $15 / 1M tokens</li>
+                <li><strong>单次文书润色：</strong>约 5k 输入 + 2k 输出 = $0.00195（GPT-4o mini）</li>
+                <li><strong>1000 次/天：</strong>约 $2/天，$60/月，可接受</li>
+                <li><strong>注意：</strong>需要做 rate limit 和用户配额，防止滥用</li>
+            </ul>
+        </div>
+
+        <div class="tech-box">
+            <h4>🔍 推荐系统技术栈</h4>
+            <ul>
+                <li><strong>冷启动阶段：</strong>基于标签的推荐（专业/学校/文章打 tag，按 tag 关联推荐）</li>
+                <li><strong>有数据后：</strong>
+                    <ul style="margin-top:4px;">
+                        <li>向量相似度：用 embeddings 计算内容相似度（OpenAI text-embedding-3-small）</li>
+                        <li>协同过滤：基于用户行为矩阵分解</li>
+                    </ul>
+                </li>
+                <li><strong>存储：</strong>pgvector（Postgres 扩展，Supabase 支持）+ 缓存层（KV）</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- v24.0.0+ 远期构想 -->
+    <div class="version-block">
+        <div class="version-header">
+            <span class="version-tag">v24.0+</span>
+            <span class="version-status status-idea">Dreaming</span>
+        </div>
+        <p class="version-desc"><strong>远期构想</strong> — 更远期的产品方向，待市场验证。</p>
+
+        <div class="section-title">可能的方向</div>
+        <ul class="feature-list">
+            <li><strong>移动端 App：</strong>React Native / Flutter 跨平台，推送提醒更及时</li>
+            <li><strong>留学中介 SaaS：</strong>给顾问用的后台管理系统（客户管理、进度跟踪、文书协作）</li>
+            <li><strong>海外租房/机票/保险：</strong>行后服务对接，佣金模式</li>
+            <li><strong>AI Video 模拟面试：</strong>摄像头 + 语音，实时表情和表达分析</li>
+            <li><strong>社区 Marketplace：</strong>学长学姐 1v1 咨询撮合平台（抽佣模式）</li>
+        </ul>
+
+        <div class="tech-box">
+            <h4>💡 技术选型思考原则</h4>
+            <ul>
+                <li><strong>渐进式增强：</strong>先做最简单的版本验证需求，再逐步加复杂度</li>
+                <li><strong>能用 SaaS 绝不自建：</strong>评论用 Giscus，邮件用 Resend，搜索用 Algolia，省下来的时间做核心功能</li>
+                <li><strong>保持静态优先：</strong>核心内容页保持纯静态，动态功能通过 JS + API 增强，不影响 SEO 和性能</li>
+                <li><strong>数据可迁移：</strong>尽量用标准协议和格式，避免厂商锁定</li>
+                <li><strong>成本敏感：</strong>免费额度优先，按量付费可控，初期避免大额固定成本</li>
+            </ul>
+        </div>
+    </div>
+
+    <p class="footer">© 2026 yunzhuan.icu &nbsp;|&nbsp; Product Roadmap v20.1.0</p>
+</body>
+</html>

@@ -272,8 +272,10 @@ body {
     color: var(--text-muted) !important;
 }
 .category h2 .count {
-    background-color: var(--accent-light) !important;
-    color: var(--accent-text) !important;
+    background: none !important;
+    color: var(--text-muted) !important;
+    font-weight: normal !important;
+    padding: 0 !important;
 }
 
 /* Stats */
@@ -333,8 +335,10 @@ body {
 
 /* Tag */
 .tag {
-    background-color: var(--accent-light) !important;
-    color: var(--accent-text) !important;
+    background: none !important;
+    color: var(--text-muted) !important;
+    padding: 0 !important;
+    font-size: 0.8em !important;
 }
 
 /* Meta text */
