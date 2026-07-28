@@ -36,7 +36,7 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
 .v-badge { display: inline-block; border: 1px solid #111111; padding: 0 6px; font-size: 0.7rem; font-weight: 700; }
 </style>
 </head>
-<body>
+<body data-subject="alevel">
 
 <div class="nav">
   <a href="../../../index.html">Home</a> <span class="sep">/</span>
@@ -50,7 +50,7 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
 <p class="subtitle">知识点掌握度 · 错题记录 · 进度统计</p>
 
 <h2>知识点掌握度</h2>
-<table>
+<table class="mastery-table">
   <tr>
     <th>知识点</th>
     <th>已做题</th>
@@ -117,7 +117,7 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
 </table>
 
 <h2>错题本（模拟）</h2>
-<table>
+<table class="error-table">
   <tr>
     <th>题号</th>
     <th>知识点</th>
@@ -182,5 +182,6 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <a href="javascript:window.scrollTo(0,0)">Back to top</a>
 </div>
 
+<script src="../../../js/practice-engine.js"></script>
 </body>
 </html>
