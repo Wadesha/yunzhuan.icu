@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mobile App 移动端</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      line-height: 1.6;
+      color: #000;
+      background-color: #fff;
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    a {
+      color: #0066cc;
+      text-decoration: none;
+    }
+    
+    a:hover {
+      text-decoration: underline;
+    }
+    
+    /* 导航栏 */
+    .navbar {
+      padding: 16px 0;
+      border-bottom: 1px solid #ddd;
+      margin-bottom: 24px;
+    }
+    
+    .navbar h1 {
+      font-size: 18px;
+      font-weight: 600;
+    }
+    
+    .navbar nav {
+      margin-top: 12px;
+    }
+    
+    .navbar nav a {
+      margin-right: 16px;
+      font-size: 14px;
+    }
+    
+    /* 标题 */
+    .page-title {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 32px;
+      padding-bottom: 16px;
+      border-bottom: 2px solid #000;
+    }
+    
+    /* 章节 */
+    .section {
+      margin-bottom: 40px;
+    }
+    
+    .section-title {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+    
+    .section-content {
+      font-size: 15px;
+    }
+    
+    /* 功能列表 */
+    .feature-list {
+      list-style: none;
+    }
+    
+    .feature-list li {
+      padding: 12px 0;
+      border-bottom: 1px solid #eee;
+    }
+    
+    .feature-list li:last-child {
+      border-bottom: none;
+    }
+    
+    .feature-name {
+      font-weight: 600;
+      display: block;
+      margin-bottom: 4px;
+    }
+    
+    .feature-desc {
+      color: #555;
+      font-size: 14px;
+    }
+    
+    /* 安装指引 */
+    .install-steps {
+      list-style: decimal;
+      padding-left: 24px;
+    }
+    
+    .install-steps li {
+      margin-bottom: 12px;
+    }
+    
+    /* 对比表 */
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 16px;
+      font-size: 14px;
+    }
+    
+    .comparison-table th,
+    .comparison-table td {
+      border: 1px solid #ddd;
+      padding: 12px;
+      text-align: center;
+    }
+    
+    .comparison-table th {
+      background-color: #f5f5f5;
+      font-weight: 600;
+    }
+    
+    .comparison-table td:first-child {
+      text-align: left;
+      font-weight: 500;
+    }
+    
+    /* 截图占位符 */
+    .screenshots {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-top: 16px;
+    }
+    
+    .screenshot-placeholder {
+      aspect-ratio: 9/16;
+      background-color: #f0f0f0;
+      border: 1px solid #ddd;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #888;
+      font-size: 14px;
+    }
+    
+    /* 路线图 */
+    .roadmap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+    
+    .roadmap-step {
+      padding: 12px 24px;
+      border: 1px solid #000;
+      font-weight: 500;
+    }
+    
+    .roadmap-arrow {
+      font-size: 20px;
+      color: #666;
+    }
+    
+    /* PWA安装提示 */
+    .pwa-install-prompt {
+      display: none;
+      padding: 16px;
+      background-color: #f0f7ff;
+      border: 1px solid #0066cc;
+      margin-top: 16px;
+    }
+    
+    .pwa-install-prompt.show {
+      display: block;
+    }
+    
+    .pwa-install-prompt p {
+      margin-bottom: 12px;
+    }
+    
+    .btn {
+      display: inline-block;
+      padding: 8px 16px;
+      background-color: #0066cc;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    
+    .btn:hover {
+      background-color: #0055aa;
+    }
+    
+    .btn-secondary {
+      background-color: #fff;
+      color: #0066cc;
+      border: 1px solid #0066cc;
+    }
+    
+    .btn-secondary:hover {
+      background-color: #f0f7ff;
+    }
+  </style>
+</head>
+<body>
+  <!-- 导航栏 -->
+  <header class="navbar">
+    <h1>📱 Mobile App 移动端</h1>
+    <nav>
+      <a href="#pwa-features">PWA 功能</a>
+      <a href="#install">安装指引</a>
+      <a href="#comparison">功能对比</a>
+      <a href="#screenshots">应用截图</a>
+      <a href="#roadmap">发展路线</a>
+    </nav>
+  </header>
+
+  <!-- 标题 -->
+  <h2 class="page-title">Mobile App 移动端</h2>
+
+  <!-- PWA功能说明 -->
+  <section id="pwa-features" class="section">
+    <h3 class="section-title">PWA 功能说明</h3>
+    <div class="section-content">
+      <p>Progressive Web App（渐进式Web应用）结合了Web和原生应用的优势，提供更流畅的移动端体验：</p>
+      <ul class="feature-list">
+        <li>
+          <span class="feature-name">离线缓存</span>
+          <span class="feature-desc">通过Service Worker实现资源缓存，支持断网访问已缓存内容，提升加载速度和用户体验。</span>
+        </li>
+        <li>
+          <span class="feature-name">推送通知</span>
+          <span class="feature-desc">即使应用未运行也能接收重要消息推送，保持用户及时获取最新动态和提醒。</span>
+        </li>
+        <li>
+          <span class="feature-name">安装到桌面</span>
+          <span class="feature-desc">支持添加到手机主屏幕，像原生应用一样独立运行，全屏体验，无需浏览器地址栏。</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 下载/安装指引 -->
+  <section id="install" class="section">
+    <h3 class="section-title">下载/安装指引</h3>
+    <div class="section-content">
+      <p><strong>iOS 用户：</strong></p>
+      <ol class="install-steps">
+        <li>使用Safari浏览器访问本站</li>
+        <li>点击底部"分享"按钮（向上箭头图标）</li>
+        <li>选择"添加到主屏幕"</li>
+        <li>在弹出的对话框中点击"添加"</li>
+      </ol>
+      
+      <p style="margin-top: 16px;"><strong>Android 用户：</strong></p>
+      <ol class="install-steps">
+        <li>使用Chrome浏览器访问本站</li>
+        <li>等待底部出现"添加到主屏幕"提示</li>
+        <li>点击"安装"按钮</li>
+        <li>或在浏览器菜单中选择"安装应用"</li>
+      </ol>
+      
+      <p style="margin-top: 16px;"><strong>桌面用户：</strong></p>
+      <ol class="install-steps">
+        <li>在浏览器地址栏右侧寻找安装图标</li>
+        <li>点击安装图标，选择"安装"</li>
+        <li>应用将作为独立窗口运行</li>
+      </ol>
+
+      <!-- PWA安装提示 -->
+      <div id="pwaPrompt" class="pwa-install-prompt">
+        <p>📥 检测到您的设备支持安装此应用，是否立即安装？</p>
+        <button class="btn" onclick="installPWA()">立即安装</button>
+        <button class="btn btn-secondary" style="margin-left: 8px;" onclick="dismissPWAPrompt()">稍后提醒</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 功能对比表 -->
+  <section id="comparison" class="section">
+    <h3 class="section-title">功能对比：Web vs PWA vs Native App</h3>
+    <div class="section-content">
+      <table class="comparison-table">
+        <thead>
+          <tr>
+            <th>功能</th>
+            <th>Web</th>
+            <th>PWA</th>
+            <th>Native App</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>离线访问</td>
+            <td>✗</td>
+            <td>✓</td>
+            <td>✓</td>
+          </tr>
+          <tr>
+            <td>推送通知</td>
+            <td>✗</td>
+            <td>✓</td>
+            <td>✓</td>
+          </tr>
+          <tr>
+            <td>摄像头</td>
+            <td>✗</td>
+            <td>△</td>
+            <td>✓</td>
+          </tr>
+          <tr>
+            <td>后台运行</td>
+            <td>✗</td>
+            <td>✗</td>
+            <td>✓</td>
+          </tr>
+          <tr>
+            <td>应用商店</td>
+            <td>✗</td>
+            <td>✗</td>
+            <td>✓</td>
+          </tr>
+        </tbody>
+      </table>
+      <p style="margin-top: 12px; font-size: 13px; color: #666;">
+        符号说明：✓ 完全支持 | △ 部分支持 | ✗ 不支持
+      </p>
+    </div>
+  </section>
+
+  <!-- 模拟截图占位符 -->
+  <section id="screenshots" class="section">
+    <h3 class="section-title">应用截图</h3>
+    <div class="section-content">
+      <div class="screenshots">
+        <div class="screenshot-placeholder">首页截图</div>
+        <div class="screenshot-placeholder">功能页截图</div>
+        <div class="screenshot-placeholder">设置页截图</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 路线图 -->
+  <section id="roadmap" class="section">
+    <h3 class="section-title">发展路线图</h3>
+    <div class="section-content">
+      <p>我们采用渐进式策略，分阶段提供最佳的移动端体验：</p>
+      <div class="roadmap">
+        <div class="roadmap-step">PWA（当前）</div>
+        <span class="roadmap-arrow">→</span>
+        <div class="roadmap-step">React Native（未来）</div>
+      </div>
+      <p style="margin-top: 16px; font-size: 14px; color: #555;">
+        第一阶段通过PWA快速提供移动端能力，后续根据用户需求和使用数据，考虑开发React Native原生应用以获得更完整的设备能力支持。
+      </p>
+    </div>
+  </section>
+
+  <script>
+    // PWA安装检测
+    let deferredPrompt;
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      document.getElementById('pwaPrompt').classList.add('show');
+    });
+
+    function installPWA() {
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then((choiceResult) => {
+          if (choiceResult.outcome === 'accepted') {
+            console.log('User accepted the install prompt');
+          }
+          deferredPrompt = null;
+          document.getElementById('pwaPrompt').classList.remove('show');
+        });
+      }
+    }
+
+    function dismissPWAPrompt() {
+      document.getElementById('pwaPrompt').classList.remove('show');
+    }
+
+    // 检测是否已安装PWA
+    window.addEventListener('appinstalled', () => {
+      console.log('PWA installed successfully');
+      document.getElementById('pwaPrompt').classList.remove('show');
+    });
+  </script>
+  <script src="js/back-to-top.js"></script>
+</body>
+</html>

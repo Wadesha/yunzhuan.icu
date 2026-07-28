@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Deadline Reminders 截止日期提醒</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 20px;
+      background: #fff;
+      color: #000;
+      line-height: 1.6;
+    }
+
+    a {
+      color: #0066cc;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* Navigation */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid #ddd;
+      margin-bottom: 20px;
+    }
+
+    .logo {
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .back-home {
+      color: #0066cc;
+    }
+
+    /* Title */
+    h1 {
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+
+    /* Role Selector */
+    .role-selector {
+      margin-bottom: 20px;
+    }
+
+    .role-selector label {
+      font-weight: bold;
+      margin-right: 10px;
+    }
+
+    .role-selector select {
+      padding: 5px 10px;
+      font-size: 14px;
+    }
+
+    /* Calendar */
+    .calendar {
+      margin-bottom: 30px;
+    }
+
+    .calendar h2 {
+      font-size: 20px;
+      margin-bottom: 15px;
+    }
+
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 2px;
+      border: 1px solid #ddd;
+    }
+
+    .calendar-header {
+      background: #f5f5f5;
+      padding: 8px;
+      text-align: center;
+      font-weight: bold;
+      font-size: 12px;
+    }
+
+    .calendar-day {
+      min-height: 60px;
+      padding: 5px;
+      border: 1px solid #eee;
+      font-size: 12px;
+    }
+
+    .calendar-day.empty {
+      background: #fafafa;
+    }
+
+    .calendar-day.today {
+      background: #e8f4f8;
+    }
+
+    .calendar-day .day-number {
+      font-weight: bold;
+      margin-bottom: 3px;
+    }
+
+    .calendar-day .deadline-marker {
+      font-size: 10px;
+      background: #fff3cd;
+      padding: 1px 3px;
+      margin-top: 2px;
+      display: block;
+    }
+
+    .calendar-day .deadline-marker.urgent {
+      background: #f8d7da;
+    }
+
+    /* Upcoming List */
+    .upcoming-list {
+      margin-bottom: 30px;
+    }
+
+    .upcoming-list h2 {
+      font-size: 20px;
+      margin-bottom: 15px;
+    }
+
+    .deadline-item {
+      padding: 12px;
+      border: 1px solid #ddd;
+      margin-bottom: 10px;
+      background: #fafafa;
+    }
+
+    .deadline-item.urgent {
+      border-left: 4px solid #dc3545;
+      background: #fff5f5;
+    }
+
+    .deadline-item .deadline-name {
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    .deadline-item .deadline-date {
+      color: #666;
+      font-size: 14px;
+      margin-top: 5px;
+    }
+
+    .deadline-item .days-left {
+      font-size: 14px;
+      margin-top: 5px;
+    }
+
+    .deadline-item .days-left.urgent {
+      color: #dc3545;
+      font-weight: bold;
+    }
+
+    .deadline-type {
+      display: inline-block;
+      font-size: 11px;
+      padding: 2px 6px;
+      background: #e9ecef;
+      margin-left: 8px;
+      border-radius: 3px;
+    }
+
+    /* Notification Toggle */
+    .notification-toggle {
+      margin-bottom: 30px;
+      padding: 15px;
+      border: 1px solid #ddd;
+      background: #fafafa;
+    }
+
+    .notification-toggle h2 {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    .toggle-switch {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .switch {
+      position: relative;
+      width: 50px;
+      height: 26px;
+      background: #ccc;
+      border-radius: 13px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .switch.active {
+      background: #28a745;
+    }
+
+    .switch::after {
+      content: '';
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      width: 20px;
+      height: 20px;
+      background: #fff;
+      border-radius: 50%;
+      transition: transform 0.3s;
+    }
+
+    .switch.active::after {
+      transform: translateX(24px);
+    }
+
+    .notification-status {
+      font-size: 14px;
+      color: #666;
+      margin-top: 8px;
+    }
+
+    /* Countdown */
+    .countdown {
+      margin-bottom: 30px;
+      padding: 20px;
+      border: 1px solid #ddd;
+      background: #fafafa;
+    }
+
+    .countdown h2 {
+      font-size: 18px;
+      margin-bottom: 15px;
+    }
+
+    .countdown-item {
+      margin-bottom: 15px;
+    }
+
+    .countdown-item .countdown-name {
+      font-weight: bold;
+    }
+
+    .countdown-timer {
+      display: flex;
+      gap: 15px;
+      margin-top: 8px;
+    }
+
+    .countdown-unit {
+      text-align: center;
+    }
+
+    .countdown-unit .value {
+      font-size: 28px;
+      font-weight: bold;
+      display: block;
+    }
+
+    .countdown-unit .label {
+      font-size: 12px;
+      color: #666;
+    }
+
+    .type-application { background: #d4edda; }
+    .type-test { background: #cce5ff; }
+    .type-financial { background: #fff3cd; }
+    .type-document { background: #e2e3e5; }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav>
+    <div class="logo">📅 Deadline Tracker</div>
+    <a href="/" class="back-home">← 返回首页</a>
+  </nav>
+
+  <!-- Title -->
+  <h1>Deadline Reminders 截止日期提醒</h1>
+
+  <!-- Role Selector -->
+  <div class="role-selector">
+    <label for="role">选择角色：</label>
+    <select id="role">
+      <option value="student">Student 学生</option>
+      <option value="parent">Parent 家长</option>
+    </select>
+  </div>
+
+  <!-- Calendar View -->
+  <div class="calendar">
+    <h2>月历视图 - 2025年11月</h2>
+    <div class="calendar-grid">
+      <div class="calendar-header">日</div>
+      <div class="calendar-header">一</div>
+      <div class="calendar-header">二</div>
+      <div class="calendar-header">三</div>
+      <div class="calendar-header">四</div>
+      <div class="calendar-header">五</div>
+      <div class="calendar-header">六</div>
+      <!-- Week 1 -->
+      <div class="calendar-day empty"></div>
+      <div class="calendar-day empty"></div>
+      <div class="calendar-day empty"></div>
+      <div class="calendar-day empty"></div>
+      <div class="calendar-day empty"></div>
+      <div class="calendar-day empty"></div>
+      <div class="calendar-day" id="day-1">
+        <div class="day-number">1</div>
+        <span class="deadline-marker urgent">ED/EA</span>
+      </div>
+      <!-- Week 2 -->
+      <div class="calendar-day" id="day-2"><div class="day-number">2</div></div>
+      <div class="calendar-day" id="day-3"><div class="day-number">3</div></div>
+      <div class="calendar-day" id="day-4"><div class="day-number">4</div></div>
+      <div class="calendar-day" id="day-5"><div class="day-number">5</div></div>
+      <div class="calendar-day" id="day-6"><div class="day-number">6</div></div>
+      <div class="calendar-day" id="day-7"><div class="day-number">7</div></div>
+      <div class="calendar-day" id="day-8"><div class="day-number">8</div></div>
+      <!-- Week 3 -->
+      <div class="calendar-day" id="day-9"><div class="day-number">9</div></div>
+      <div class="calendar-day" id="day-10"><div class="day-number">10</div></div>
+      <div class="calendar-day" id="day-11"><div class="day-number">11</div></div>
+      <div class="calendar-day" id="day-12"><div class="day-number">12</div></div>
+      <div class="calendar-day" id="day-13"><div class="day-number">13</div></div>
+      <div class="calendar-day" id="day-14"><div class="day-number">14</div></div>
+      <div class="calendar-day" id="day-15">
+        <div class="day-number">15</div>
+        <span class="deadline-marker">CSS Profile</span>
+      </div>
+      <!-- Week 4 -->
+      <div class="calendar-day" id="day-16"><div class="day-number">16</div></div>
+      <div class="calendar-day" id="day-17"><div class="day-number">17</div></div>
+      <div class="calendar-day" id="day-18"><div class="day-number">18</div></div>
+      <div class="calendar-day" id="day-19"><div class="day-number">19</div></div>
+      <div class="calendar-day" id="day-20"><div class="day-number">20</div></div>
+      <div class="calendar-day" id="day-21"><div class="day-number">21</div></div>
+      <div class="calendar-day" id="day-22"><div class="day-number">22</div></div>
+      <!-- Week 5 -->
+      <div class="calendar-day" id="day-23"><div class="day-number">23</div></div>
+      <div class="calendar-day" id="day-24"><div class="day-number">24</div></div>
+      <div class="calendar-day" id="day-25"><div class="day-number">25</div></div>
+      <div class="calendar-day" id="day-26"><div class="day-number">26</div></div>
+      <div class="calendar-day" id="day-27"><div class="day-number">27</div></div>
+      <div class="calendar-day" id="day-28"><div class="day-number">28</div></div>
+      <div class="calendar-day" id="day-29"><div class="day-number">29</div></div>
+      <!-- Week 6 -->
+      <div class="calendar-day" id="day-30"><div class="day-number">30</div></div>
+    </div>
+  </div>
+
+  <!-- Upcoming Deadlines -->
+  <div class="upcoming-list">
+    <h2>即将到期列表</h2>
+    <div id="deadline-list"></div>
+  </div>
+
+  <!-- Notification Toggle -->
+  <div class="notification-toggle">
+    <h2>浏览器通知</h2>
+    <div class="toggle-switch">
+      <div class="switch" id="notification-switch"></div>
+      <span id="notification-label">开启通知提醒</span>
+    </div>
+    <div class="notification-status" id="notification-status">当前状态：未开启</div>
+  </div>
+
+  <!-- Countdown -->
+  <div class="countdown">
+    <h2>倒计时</h2>
+    <div id="countdown-display"></div>
+  </div>
+
+  <script>
+    // Deadline Data
+    const DEADLINES = [
+      { name: 'Harvard ED', date: '2025-11-01', type: 'application' },
+      { name: 'MIT EA', date: '2025-11-01', type: 'application' },
+      { name: 'Stanford RD', date: '2026-01-05', type: 'application' },
+      { name: 'SAT Registration (Oct)', date: '2025-09-20', type: 'test' },
+      { name: 'CSS Profile', date: '2025-11-15', type: 'financial' },
+      { name: 'FAFSA', date: '2025-10-01', type: 'financial' },
+      { name: 'Recommendation Request', date: '2025-10-15', type: 'document' },
+    ];
+
+    const typeLabels = {
+      application: '申请',
+      test: '考试',
+      financial: '财务',
+      document: '文件'
+    };
+
+    // Calculate days until deadline
+    function getDaysUntil(dateStr) {
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      const deadline = new Date(dateStr);
+      const diffTime = deadline - today;
+      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+      return diffDays;
+    }
+
+    // Format date
+    function formatDate(dateStr) {
+      const date = new Date(dateStr);
+      const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 
+                       'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+      return `${months[date.getMonth()]} ${date.getDate()}`;
+    }
+
+    // Render upcoming deadlines
+    function renderDeadlineList() {
+      const container = document.getElementById('deadline-list');
+      
+      // Sort by days left
+      const sortedDeadlines = DEADLINES
+        .map(d => ({ ...d, daysLeft: getDaysUntil(d.date) }))
+        .sort((a, b) => a.daysLeft - b.daysLeft);
+
+      let html = '';
+      sortedDeadlines.forEach(deadline => {
+        const isUrgent = deadline.daysLeft <= 7 && deadline.daysLeft >= 0;
+        const isPast = deadline.daysLeft < 0;
+        
+        if (!isPast) {
+          html += `
+            <div class="deadline-item ${isUrgent ? 'urgent' : ''}">
+              <div class="deadline-name">
+                ${deadline.name}
+                <span class="deadline-type type-${deadline.type}">${typeLabels[deadline.type]}</span>
+              </div>
+              <div class="deadline-date">${formatDate(deadline.date)}</div>
+              <div class="days-left ${isUrgent ? 'urgent' : ''}">
+                ${deadline.daysLeft === 0 ? '今天截止！' : 
+                  deadline.daysLeft < 0 ? '已过期' : 
+                  `还剩 ${deadline.daysLeft} 天`}
+              </div>
+            </div>
+          `;
+        }
+      });
+      
+      container.innerHTML = html;
+    }
+
+    // Notification toggle
+    function initNotificationToggle() {
+      const switchEl = document.getElementById('notification-switch');
+      const statusEl = document.getElementById('notification-status');
+      const labelEl = document.getElementById('notification-label');
+      
+      // Check localStorage for saved preference
+      const isEnabled = localStorage.getItem('notificationsEnabled') === 'true';
+      if (isEnabled) {
+        switchEl.classList.add('active');
+        statusEl.textContent = '当前状态：已开启';
+        labelEl.textContent = '关闭通知提醒';
+      }
+
+      switchEl.addEventListener('click', () => {
+        const isActive = switchEl.classList.toggle('active');
+        localStorage.setItem('notificationsEnabled', isActive);
+        
+        if (isActive) {
+          statusEl.textContent = '当前状态：已开启';
+          labelEl.textContent = '关闭通知提醒';
+        } else {
+          statusEl.textContent = '当前状态：未开启';
+          labelEl.textContent = '开启通知提醒';
+        }
+      });
+    }
+
+    // Render countdown
+    function renderCountdown() {
+      const container = document.getElementById('countdown-display');
+      const nextDeadline = DEADLINES
+        .map(d => ({ ...d, daysLeft: getDaysUntil(d.date) }))
+        .filter(d => d.daysLeft > 0)
+        .sort((a, b) => a.daysLeft - b.daysLeft)[0];
+
+      if (!nextDeadline) {
+        container.innerHTML = '<p>没有即将到来的截止日期</p>';
+        return;
+      }
+
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      const deadline = new Date(nextDeadline.date);
+      const diff = deadline - today;
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+      container.innerHTML = `
+        <div class="countdown-item">
+          <div class="countdown-name">${nextDeadline.name} - ${formatDate(nextDeadline.date)}</div>
+          <div class="countdown-timer">
+            <div class="countdown-unit">
+              <span class="value">${days}</span>
+              <span class="label">天</span>
+            </div>
+            <div class="countdown-unit">
+              <span class="value">${hours}</span>
+              <span class="label">时</span>
+            </div>
+            <div class="countdown-unit">
+              <span class="value">${minutes}</span>
+              <span class="label">分</span>
+            </div>
+            <div class="countdown-unit">
+              <span class="value">${seconds}</span>
+              <span class="label">秒</span>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    // Initialize
+    renderDeadlineList();
+    initNotificationToggle();
+    renderCountdown();
+
+    // Update countdown every second
+    setInterval(renderCountdown, 1000);
+  </script>
+
+  <script src="js/back-to-top.js"></script>
+</body>
+</html>

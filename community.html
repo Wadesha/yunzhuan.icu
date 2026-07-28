@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Community Q&A 社区问答</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      line-height: 1.6;
+      color: #000;
+      background-color: #fff;
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 0 20px 40px;
+    }
+
+    a {
+      color: #0066cc;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* 导航栏 */
+    nav {
+      padding: 15px 0;
+      border-bottom: 1px solid #ddd;
+      margin-bottom: 20px;
+    }
+
+    nav a {
+      margin-right: 20px;
+      font-weight: 500;
+    }
+
+    /* 标题 */
+    h1 {
+      font-size: 28px;
+      margin-bottom: 20px;
+      color: #000;
+    }
+
+    /* 标签筛选 */
+    .filter-tabs {
+      margin-bottom: 20px;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 10px;
+    }
+
+    .filter-tabs button {
+      background: none;
+      border: none;
+      color: #0066cc;
+      padding: 8px 16px;
+      margin-right: 5px;
+      cursor: pointer;
+      font-size: 14px;
+      border-radius: 3px;
+    }
+
+    .filter-tabs button:hover {
+      background-color: #f5f5f5;
+    }
+
+    .filter-tabs button.active {
+      background-color: #0066cc;
+      color: #fff;
+    }
+
+    /* 发帖按钮 */
+    .new-post-btn {
+      display: inline-block;
+      background-color: #0066cc;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+      border: none;
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    .new-post-btn:hover {
+      background-color: #0052a3;
+    }
+
+    /* 主内容区域 */
+    .content-wrapper {
+      display: flex;
+      gap: 30px;
+    }
+
+    .main-content {
+      flex: 1;
+    }
+
+    .sidebar {
+      width: 220px;
+      flex-shrink: 0;
+    }
+
+    /* 帖子列表 */
+    .post-list {
+      list-style: none;
+    }
+
+    .post-item {
+      padding: 15px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .post-item:last-child {
+      border-bottom: none;
+    }
+
+    .post-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: #000;
+      margin-bottom: 8px;
+      cursor: pointer;
+    }
+
+    .post-title:hover {
+      color: #0066cc;
+    }
+
+    .post-meta {
+      font-size: 13px;
+      color: #666;
+      margin-bottom: 8px;
+    }
+
+    .post-meta span {
+      margin-right: 15px;
+    }
+
+    .post-tags {
+      display: inline;
+    }
+
+    .post-tags .tag {
+      display: inline-block;
+      background-color: #f0f0f0;
+      color: #666;
+      padding: 2px 8px;
+      border-radius: 3px;
+      font-size: 12px;
+      margin-right: 5px;
+    }
+
+    .post-tags .tag.application { background-color: #e3f2fd; color: #1565c0; }
+    .post-tags .tag.essay { background-color: #fff3e0; color: #e65100; }
+    .post-tags .tag.test { background-color: #e8f5e9; color: #2e7d32; }
+    .post-tags .tag.school { background-color: #f3e5f5; color: #7b1fa2; }
+    .post-tags .tag.competition { background-color: #fce4ec; color: #c2185b; }
+    .post-tags .tag.document { background-color: #fff8e1; color: #f57f17; }
+
+    .like-btn {
+      background: none;
+      border: 1px solid #ddd;
+      padding: 3px 10px;
+      border-radius: 3px;
+      cursor: pointer;
+      font-size: 13px;
+      color: #666;
+      margin-left: 10px;
+    }
+
+    .like-btn:hover {
+      border-color: #0066cc;
+      color: #0066cc;
+    }
+
+    .like-btn.liked {
+      background-color: #fff3e0;
+      border-color: #e65100;
+      color: #e65100;
+    }
+
+    /* 侧边栏 */
+    .sidebar-section {
+      margin-bottom: 25px;
+    }
+
+    .sidebar-section h3 {
+      font-size: 15px;
+      color: #000;
+      margin-bottom: 10px;
+      padding-bottom: 5px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .sidebar-section ul {
+      list-style: none;
+    }
+
+    .sidebar-section li {
+      padding: 5px 0;
+      font-size: 14px;
+    }
+
+    .hot-topic {
+      color: #0066cc;
+      cursor: pointer;
+    }
+
+    .hot-topic:hover {
+      text-decoration: underline;
+    }
+
+    .active-user {
+      color: #666;
+    }
+
+    .active-user strong {
+      color: #000;
+    }
+
+    @media (max-width: 760px) {
+      .content-wrapper {
+        flex-direction: column;
+      }
+      .sidebar {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- 导航栏 -->
+  <nav>
+    <a href="#">首页</a>
+    <a href="#">社区</a>
+    <a href="#">资源</a>
+    <a href="#">关于</a>
+  </nav>
+
+  <!-- 标题 -->
+  <h1>Community Q&A 社区问答</h1>
+
+  <!-- 标签筛选 -->
+  <div class="filter-tabs">
+    <button class="active" data-filter="recent">Recent</button>
+    <button data-filter="hot">Hot</button>
+    <button data-filter="unanswered">Unanswered</button>
+    <button data-filter="my-questions">My Questions</button>
+  </div>
+
+  <!-- 发帖按钮 -->
+  <button class="new-post-btn" onclick="alert('发帖功能模拟 - 需要登录')">+ 发新帖</button>
+
+  <!-- 主内容区域 -->
+  <div class="content-wrapper">
+    <!-- 帖子列表 -->
+    <div class="main-content">
+      <ul class="post-list" id="postList"></ul>
+    </div>
+
+    <!-- 侧边栏 -->
+    <div class="sidebar">
+      <div class="sidebar-section">
+        <h3>热门话题</h3>
+        <ul>
+          <li><span class="hot-topic">#ED/EA策略</span> (128)</li>
+          <li><span class="hot-topic">#文书技巧</span> (95)</li>
+          <li><span class="hot-topic">#SAT备考</span> (87)</li>
+          <li><span class="hot-topic">#推荐信</span> (64)</li>
+          <li><span class="hot-topic">#夏校选择</span> (52)</li>
+        </ul>
+      </div>
+      <div class="sidebar-section">
+        <h3>活跃用户</h3>
+        <ul>
+          <li class="active-user"><strong>Alice</strong> - 156 帖子</li>
+          <li class="active-user"><strong>Bob</strong> - 132 帖子</li>
+          <li class="active-user"><strong>Carol</strong> - 98 帖子</li>
+          <li class="active-user"><strong>David</strong> - 87 帖子</li>
+          <li class="active-user"><strong>Emma</strong> - 76 帖子</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // 模拟数据
+    const POSTS = [
+      { id: 1, title: 'ED和EA有什么区别？', author: 'Alice', time: '2h ago', replies: 15, likes: 32, tags: ['application'] },
+      { id: 2, title: 'Common App文书第5题怎么写？', author: 'Bob', time: '5h ago', replies: 28, likes: 56, tags: ['essay'] },
+      { id: 3, title: 'SAT 1500分能申什么学校？', author: 'Carol', time: '1d ago', replies: 42, likes: 89, tags: ['test', 'school'] },
+      { id: 4, title: 'USACO Gold对申请有帮助吗？', author: 'David', time: '2d ago', replies: 18, likes: 45, tags: ['competition'] },
+      { id: 5, title: '推荐信应该找哪位老师？', author: 'Emma', time: '3d ago', replies: 22, likes: 67, tags: ['document'] }
+    ];
+
+    // 标签名称映射
+    const tagNames = {
+      'application': '申请',
+      'essay': '文书',
+      'test': '标化',
+      'school': '选校',
+      'competition': '竞赛',
+      'document': '材料'
+    };
+
+    // 从 localStorage 获取点赞状态
+    function getLikedPosts() {
+      const liked = localStorage.getItem('likedPosts');
+      return liked ? JSON.parse(liked) : {};
+    }
+
+    // 保存点赞状态到 localStorage
+    function saveLikedPosts(liked) {
+      localStorage.setItem('likedPosts', JSON.stringify(liked));
+    }
+
+    // 渲染帖子列表
+    function renderPosts(filter = 'recent') {
+      const postList = document.getElementById('postList');
+      const likedPosts = getLikedPosts();
+
+      let filteredPosts = [...POSTS];
+
+      // 根据筛选条件过滤
+      if (filter === 'hot') {
+        filteredPosts.sort((a, b) => b.likes - a.likes);
+      } else if (filter === 'unanswered') {
+        filteredPosts = filteredPosts.filter(p => p.replies === 0);
+      } else if (filter === 'my-questions') {
+        // 模拟：只显示作者为 Alice 的帖子
+        filteredPosts = filteredPosts.filter(p => p.author === 'Alice');
+      }
+
+      postList.innerHTML = filteredPosts.map(post => {
+        const isLiked = likedPosts[post.id];
+        const currentLikes = isLiked ? post.likes + 1 : post.likes;
+
+        return `
+          <li class="post-item">
+            <div class="post-title">${post.title}</div>
+            <div class="post-meta">
+              <span>${post.author}</span>
+              <span>${post.time}</span>
+              <span>${post.replies} 回复</span>
+              <span>${currentLikes} 点赞</span>
+            </div>
+            <div class="post-tags">
+              ${post.tags.map(tag => `<span class="tag ${tag}">${tagNames[tag] || tag}</span>`).join('')}
+            </div>
+            <button class="like-btn ${isLiked ? 'liked' : ''}" onclick="toggleLike(${post.id})">
+              ${isLiked ? '已赞' : '点赞'}
+            </button>
+          </li>
+        `;
+      }).join('');
+    }
+
+    // 切换点赞状态
+    function toggleLike(postId) {
+      const likedPosts = getLikedPosts();
+
+      if (likedPosts[postId]) {
+        delete likedPosts[postId];
+      } else {
+        likedPosts[postId] = true;
+      }
+
+      saveLikedPosts(likedPosts);
+
+      // 获取当前活动的筛选标签
+      const activeFilter = document.querySelector('.filter-tabs button.active');
+      const filter = activeFilter ? activeFilter.dataset.filter : 'recent';
+
+      renderPosts(filter);
+    }
+
+    // 标签筛选事件
+    document.querySelectorAll('.filter-tabs button').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.filter-tabs button').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        renderPosts(this.dataset.filter);
+      });
+    });
+
+    // 初始渲染
+    renderPosts();
+  </script>
+
+  <script src="js/back-to-top.js"></script>
+</body>
+</html>

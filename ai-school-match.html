@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI School Match - AI选校匹配</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      line-height: 1.6;
+      color: #000;
+      background-color: #fff;
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 0 20px 40px;
+    }
+
+    a {
+      color: #0066cc;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* 导航栏 */
+    nav {
+      padding: 15px 0;
+      border-bottom: 1px solid #ddd;
+      margin-bottom: 30px;
+    }
+
+    nav a {
+      margin-right: 20px;
+      font-weight: 500;
+    }
+
+    /* 标题 */
+    h1 {
+      font-size: 28px;
+      margin-bottom: 30px;
+      padding-bottom: 15px;
+      border-bottom: 2px solid #000;
+    }
+
+    h2 {
+      font-size: 20px;
+      margin: 25px 0 15px;
+    }
+
+    h3 {
+      font-size: 16px;
+      margin: 20px 0 10px;
+    }
+
+    /* 表单 */
+    .form-section {
+      background: #f9f9f9;
+      padding: 20px;
+      margin-bottom: 30px;
+      border: 1px solid #ddd;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 500;
+    }
+
+    .form-group input,
+    .form-group select {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+    }
+
+    .form-row {
+      display: flex;
+      gap: 20px;
+    }
+
+    .form-row .form-group {
+      flex: 1;
+    }
+
+    button {
+      background: #0066cc;
+      color: #fff;
+      border: none;
+      padding: 12px 30px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      background: #0052a3;
+    }
+
+    button:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+    }
+
+    /* 结果区域 */
+    .results-section {
+      display: none;
+    }
+
+    .category {
+      margin-bottom: 30px;
+    }
+
+    .category-title {
+      font-size: 18px;
+      font-weight: bold;
+      padding: 10px;
+      margin-bottom: 15px;
+    }
+
+    .category.reach .category-title {
+      background: #ffe6e6;
+      color: #cc0000;
+    }
+
+    .category.match .category-title {
+      background: #fff3e6;
+      color: #cc6600;
+    }
+
+    .category.safety .category-title {
+      background: #e6f7e6;
+      color: #006600;
+    }
+
+    .school-card {
+      border: 1px solid #ddd;
+      padding: 15px;
+      margin-bottom: 15px;
+      background: #fff;
+    }
+
+    .school-name {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .school-stats {
+      display: flex;
+      gap: 30px;
+      margin-bottom: 10px;
+    }
+
+    .stat {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      color: #666;
+    }
+
+    .stat-value {
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    .reasons {
+      margin-top: 10px;
+      font-size: 14px;
+    }
+
+    .reasons-title {
+      font-weight: 500;
+      margin-bottom: 5px;
+    }
+
+    .reasons ul {
+      margin-left: 20px;
+    }
+
+    .reasons li {
+      margin-bottom: 3px;
+    }
+
+    /* AI说明 */
+    .ai-note {
+      background: #f0f0f0;
+      padding: 15px;
+      margin-top: 30px;
+      border-left: 3px solid #0066cc;
+      font-size: 14px;
+    }
+
+    .ai-note h3 {
+      margin-top: 0;
+    }
+
+    /* 加载状态 */
+    .loading {
+      text-align: center;
+      padding: 40px;
+      display: none;
+    }
+
+    .loading::after {
+      content: "正在分析匹配...";
+      animation: dots 1.5s infinite;
+    }
+
+    @keyframes dots {
+      0%, 20% { content: "正在分析匹配."; }
+      40% { content: "正在分析匹配.."; }
+      60%, 100% { content: "正在分析匹配..."; }
+    }
+  </style>
+</head>
+<body>
+  <!-- 导航栏 -->
+  <nav>
+    <a href="#home">首页</a>
+    <a href="#match">选校匹配</a>
+    <a href="#schools">学校库</a>
+    <a href="#about">关于</a>
+  </nav>
+
+  <!-- 标题 -->
+  <h1>AI School Match AI选校匹配</h1>
+
+  <!-- 输入表单 -->
+  <div class="form-section">
+    <h2>填写您的信息</h2>
+    <form id="matchForm">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="gpa">GPA</label>
+          <input type="number" id="gpa" step="0.01" min="0" max="4.0" value="3.8" required>
+        </div>
+        <div class="form-group">
+          <label for="sat">SAT</label>
+          <input type="number" id="sat" min="400" max="1600" value="1500">
+        </div>
+        <div class="form-group">
+          <label for="act">ACT</label>
+          <input type="number" id="act" min="1" max="36" value="34">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="toefl">TOEFL</label>
+          <input type="number" id="toefl" min="0" max="120" value="110">
+        </div>
+        <div class="form-group">
+          <label for="major">目标专业</label>
+          <select id="major">
+            <option value="cs" selected>Computer Science</option>
+            <option value="engineering">Engineering</option>
+            <option value="business">Business</option>
+            <option value="arts">Arts & Humanities</option>
+            <option value="science">Natural Sciences</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="budget">预算 ($/年)</label>
+          <input type="number" id="budget" min="0" value="60000">
+        </div>
+        <div class="form-group">
+          <label for="location">地理偏好</label>
+          <select id="location">
+            <option value="east" selected>东海岸</option>
+            <option value="west">西海岸</option>
+            <option value="midwest">中西部</option>
+            <option value="south">南部</option>
+            <option value="any">不限</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="size">学校规模</label>
+          <select id="size">
+            <option value="small">小型 (&lt;5000)</option>
+            <option value="medium" selected>中型 (5000-15000)</option>
+            <option value="large">大型 (&gt;15000)</option>
+          </select>
+        </div>
+      </div>
+
+      <button type="submit" id="matchBtn">运行匹配</button>
+    </form>
+  </div>
+
+  <!-- 加载状态 -->
+  <div class="loading" id="loading"></div>
+
+  <!-- 结果展示 -->
+  <div class="results-section" id="results">
+    <h2>匹配结果</h2>
+
+    <!-- Reach -->
+    <div class="category reach">
+      <div class="category-title">Reach - 冲刺学校</div>
+      <div id="reach-schools"></div>
+    </div>
+
+    <!-- Match -->
+    <div class="category match">
+      <div class="category-title">Match - 匹配学校</div>
+      <div id="match-schools"></div>
+    </div>
+
+    <!-- Safety -->
+    <div class="category safety">
+      <div class="category-title">Safety - 保底学校</div>
+      <div id="safety-schools"></div>
+    </div>
+
+    <!-- AI说明 -->
+    <div class="ai-note">
+      <h3>AI分析说明</h3>
+      <p>本系统基于您提供的数据，结合历史录取数据、学校排名、专业强度等多维度因素进行智能匹配分析。</p>
+      <ul style="margin-top: 10px; margin-left: 20px;">
+        <li><strong>冲刺学校 (Reach)</strong>：录取概率较低，但值得尝试申请</li>
+        <li><strong>匹配学校 (Match)</strong>：您的背景与学校录取要求较为匹配</li>
+        <li><strong>保底学校 (Safety)</strong>：录取概率较高，可作为保底选择</li>
+      </ul>
+      <p style="margin-top: 10px; font-size: 12px; color: #666;">* 结果仅供参考，实际录取结果受多因素影响，包括申请文书、课外活动、推荐信等。</p>
+    </div>
+  </div>
+
+  <script>
+    // 模拟数据
+    const INPUT = { gpa: 3.8, sat: 1500, toefl: 110, major: 'cs', budget: 60000 };
+    const MATCH_RESULTS = {
+      reach: [
+        { name: 'MIT', probability: '15%', match: 78, reasons: ['SAT略低', '竞赛奖项不足'] },
+        { name: 'Stanford', probability: '12%', match: 75, reasons: ['竞争激烈', '需独特活动'] }
+      ],
+      match: [
+        { name: 'CMU', probability: '45%', match: 88, reasons: ['GPA匹配', 'CS排名高'] },
+        { name: 'Cornell', probability: '52%', match: 85, reasons: ['标化匹配', 'ED优势'] },
+        { name: 'Georgia Tech', probability: '60%', match: 90, reasons: ['公立性价比', '就业强'] }
+      ],
+      safety: [
+        { name: 'Purdue', probability: '85%', match: 92, reasons: ['GPA超过均值', 'CS项目强'] },
+        { name: 'UMass Amherst', probability: '90%', match: 88, reasons: ['录取率高', '性价比'] }
+      ]
+    };
+
+    // 表单提交处理
+    document.getElementById('matchForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      // 获取表单数据
+      const formData = {
+        gpa: parseFloat(document.getElementById('gpa').value),
+        sat: parseInt(document.getElementById('sat').value) || null,
+        act: parseInt(document.getElementById('act').value) || null,
+        toefl: parseInt(document.getElementById('toefl').value) || null,
+        major: document.getElementById('major').value,
+        budget: parseInt(document.getElementById('budget').value) || null,
+        location: document.getElementById('location').value,
+        size: document.getElementById('size').value
+      };
+
+      // 显示加载状态
+      document.getElementById('loading').style.display = 'block';
+      document.getElementById('results').style.display = 'none';
+      document.getElementById('matchBtn').disabled = true;
+
+      // 模拟API调用延迟
+      setTimeout(function() {
+        renderResults(MATCH_RESULTS);
+        document.getElementById('loading').style.display = 'none';
+        document.getElementById('results').style.display = 'block';
+        document.getElementById('matchBtn').disabled = false;
+      }, 1500);
+    });
+
+    // 渲染结果
+    function renderResults(data) {
+      renderCategory('reach-schools', data.reach);
+      renderCategory('match-schools', data.match);
+      renderCategory('safety-schools', data.safety);
+    }
+
+    // 渲染单个类别
+    function renderCategory(containerId, schools) {
+      const container = document.getElementById(containerId);
+      container.innerHTML = '';
+
+      schools.forEach(function(school) {
+        const card = document.createElement('div');
+        card.className = 'school-card';
+        card.innerHTML = `
+          <div class="school-name">${school.name}</div>
+          <div class="school-stats">
+            <div class="stat">
+              <span class="stat-label">录取概率</span>
+              <span class="stat-value">${school.probability}</span>
+            </div>
+            <div class="stat">
+              <span class="stat-label">匹配度</span>
+              <span class="stat-value">${school.match}%</span>
+            </div>
+          </div>
+          <div class="reasons">
+            <div class="reasons-title">优势分析：</div>
+            <ul>
+              ${school.reasons.map(r => `<li>${r}</li>`).join('')}
+            </ul>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+  </script>
+  <script src="js/back-to-top.js"></script>
+</body>
+</html>

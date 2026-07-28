@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Competition Teams 竞赛组队</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      line-height: 1.6;
+      color: #000;
+      background: #fff;
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    a {
+      color: #0066cc;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    nav {
+      margin-bottom: 30px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid #ccc;
+    }
+    nav a {
+      margin-right: 20px;
+    }
+    h1 {
+      font-size: 28px;
+      margin-bottom: 25px;
+    }
+    h2 {
+      font-size: 20px;
+      margin: 25px 0 15px 0;
+    }
+    .competition-selector {
+      margin-bottom: 25px;
+    }
+    .competition-selector button {
+      padding: 8px 16px;
+      margin-right: 10px;
+      margin-bottom: 10px;
+      background: #fff;
+      border: 1px solid #ccc;
+      cursor: pointer;
+    }
+    .competition-selector button.active {
+      background: #0066cc;
+      color: #fff;
+      border-color: #0066cc;
+    }
+    .team-card {
+      border: 1px solid #ccc;
+      padding: 15px;
+      margin-bottom: 15px;
+    }
+    .team-card h3 {
+      margin-bottom: 10px;
+    }
+    .team-info {
+      margin-bottom: 10px;
+    }
+    .team-info span {
+      display: inline-block;
+      margin-right: 15px;
+    }
+    .skills {
+      margin-bottom: 10px;
+    }
+    .skill-tag {
+      display: inline-block;
+      padding: 2px 8px;
+      margin-right: 5px;
+      margin-bottom: 5px;
+      border: 1px solid #666;
+      font-size: 12px;
+    }
+    .status-recruiting {
+      color: #006600;
+    }
+    .status-full {
+      color: #999;
+    }
+    button.apply-btn {
+      padding: 6px 12px;
+      background: #0066cc;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+    button.apply-btn:hover {
+      background: #0055aa;
+    }
+    button.apply-btn:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+    }
+    .form-group textarea {
+      height: 80px;
+    }
+    .submit-btn {
+      padding: 10px 20px;
+      background: #0066cc;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+    .submit-btn:hover {
+      background: #0055aa;
+    }
+    .my-teams {
+      background: #f5f5f5;
+      padding: 15px;
+      margin-top: 30px;
+    }
+    .my-team-item {
+      padding: 10px;
+      margin-bottom: 10px;
+      background: #fff;
+      border: 1px solid #ccc;
+    }
+    .message {
+      padding: 10px;
+      margin: 10px 0;
+      background: #f0f0f0;
+      border-left: 3px solid #0066cc;
+    }
+    .message.success {
+      border-color: #006600;
+      background: #f0fff0;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="index.html">首页</a>
+    <a href="competition-teams.html">竞赛组队</a>
+    <a href="my-courses.html">我的课程</a>
+  </nav>
+
+  <h1>Competition Teams 竞赛组队</h1>
+
+  <div class="competition-selector">
+    <button class="active" data-competition="all">全部</button>
+    <button data-competition="usaco">USACO</button>
+    <button data-competition="himcm">HiMCM</button>
+    <button data-competition="frc">FRC</button>
+    <button data-competition="isef">ISEF</button>
+  </div>
+
+  <h2>现有队伍</h2>
+  <div id="team-list"></div>
+
+  <h2>创建新队伍</h2>
+  <form id="create-team-form">
+    <div class="form-group">
+      <label for="team-name">队伍名称</label>
+      <input type="text" id="team-name" required>
+    </div>
+    <div class="form-group">
+      <label for="team-competition">竞赛类型</label>
+      <select id="team-competition" required>
+        <option value="">请选择</option>
+        <option value="usaco">USACO</option>
+        <option value="himcm">HiMCM</option>
+        <option value="frc">FRC</option>
+        <option value="isef">ISEF</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="team-needed">需要人数</label>
+      <input type="number" id="team-needed" min="1" max="10" value="3" required>
+    </div>
+    <div class="form-group">
+      <label for="team-skills">技能要求（逗号分隔）</label>
+      <input type="text" id="team-skills" placeholder="如: Python, Algorithms">
+    </div>
+    <div class="form-group">
+      <label for="team-desc">队伍描述</label>
+      <textarea id="team-desc"></textarea>
+    </div>
+    <button type="submit" class="submit-btn">创建队伍</button>
+  </form>
+
+  <div class="my-teams">
+    <h2>我的队伍</h2>
+    <div id="my-teams-list"></div>
+  </div>
+
+  <div id="message-area"></div>
+
+  <script>
+    const TEAMS = [
+      { name: 'USACO Warriors', competition: 'usaco', members: 2, needed: 3, leader: 'Alice', skills: ['Python', 'Algorithms'], status: 'recruiting' },
+      { name: 'HiMCM Mathletes', competition: 'himcm', members: 3, needed: 4, leader: 'Bob', skills: ['Math', 'Writing'], status: 'recruiting' },
+      { name: 'FRC Robotics', competition: 'frc', members: 5, needed: 6, leader: 'Carol', skills: ['CAD', 'Programming'], status: 'full' },
+      { name: 'ISEF Research', competition: 'isef', members: 1, needed: 2, leader: 'David', skills: ['Biology', 'Data Analysis'], status: 'recruiting' }
+    ];
+
+    let currentFilter = 'all';
+
+    function getCompetitionLabel(competition) {
+      const labels = {
+        usaco: 'USACO',
+        himcm: 'HiMCM',
+        frc: 'FRC',
+        isef: 'ISEF'
+      };
+      return labels[competition] || competition;
+    }
+
+    function renderTeams() {
+      const container = document.getElementById('team-list');
+      const applications = JSON.parse(localStorage.getItem('teamApplications') || '[]');
+
+      const filteredTeams = currentFilter === 'all'
+        ? TEAMS
+        : TEAMS.filter(t => t.competition === currentFilter);
+
+      container.innerHTML = filteredTeams.map((team, index) => {
+        const isFull = team.status === 'full';
+        const hasApplied = applications.includes(team.name);
+
+        return `
+          <div class="team-card">
+            <h3>${team.name}</h3>
+            <div class="team-info">
+              <span><strong>竞赛:</strong> ${getCompetitionLabel(team.competition)}</span>
+              <span><strong>人数:</strong> ${team.members}/${team.needed}</span>
+              <span><strong>队长:</strong> ${team.leader}</span>
+              <span class="status-${team.status}">
+                <strong>状态:</strong> ${isFull ? '已满员' : '招募中'}
+              </span>
+            </div>
+            <div class="skills">
+              <strong>技能:</strong>
+              ${team.skills.map(s => `<span class="skill-tag">${s}</span>`).join('')}
+            </div>
+            <button class="apply-btn"
+                    data-index="${index}"
+                    data-name="${team.name}"
+                    ${isFull || hasApplied ? 'disabled' : ''}>
+              ${hasApplied ? '已申请' : (isFull ? '已满员' : '申请加入')}
+            </button>
+          </div>
+        `;
+      }).join('');
+
+      document.querySelectorAll('.apply-btn').forEach(btn => {
+        btn.addEventListener('click', handleApply);
+      });
+    }
+
+    function handleApply(e) {
+      const teamName = e.target.dataset.name;
+      const applications = JSON.parse(localStorage.getItem('teamApplications') || '[]');
+
+      if (!applications.includes(teamName)) {
+        applications.push(teamName);
+        localStorage.setItem('teamApplications', JSON.stringify(applications));
+        showMessage(`已成功申请加入 "${teamName}"`, 'success');
+        renderTeams();
+      }
+    }
+
+    function showMessage(text, type) {
+      const area = document.getElementById('message-area');
+      area.innerHTML = `<div class="message ${type}">${text}</div>`;
+      setTimeout(() => {
+        area.innerHTML = '';
+      }, 3000);
+    }
+
+    function setupCompetitionFilter() {
+      document.querySelectorAll('.competition-selector button').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          document.querySelectorAll('.competition-selector button').forEach(b => b.classList.remove('active'));
+          e.target.classList.add('active');
+          currentFilter = e.target.dataset.competition;
+          renderTeams();
+        });
+      });
+    }
+
+    function setupCreateForm() {
+      document.getElementById('create-team-form').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const name = document.getElementById('team-name').value;
+        const competition = document.getElementById('team-competition').value;
+        const needed = parseInt(document.getElementById('team-needed').value);
+        const skillsText = document.getElementById('team-skills').value;
+        const skills = skillsText ? skillsText.split(',').map(s => s.trim()).filter(s => s) : [];
+
+        TEAMS.unshift({
+          name,
+          competition,
+          members: 1,
+          needed,
+          leader: '我',
+          skills,
+          status: 'recruiting'
+        });
+
+        renderTeams();
+        renderMyTeams();
+        e.target.reset();
+        showMessage(`队伍 "${name}" 创建成功`, 'success');
+      });
+    }
+
+    function renderMyTeams() {
+      const container = document.getElementById('my-teams-list');
+      const myTeams = TEAMS.filter(t => t.leader === '我');
+
+      if (myTeams.length === 0) {
+        container.innerHTML = '<p>您还没有创建队伍。</p>';
+        return;
+      }
+
+      container.innerHTML = myTeams.map(team => `
+        <div class="my-team-item">
+          <strong>${team.name}</strong>
+          <span>(${getCompetitionLabel(team.competition)})</span>
+          <span>- ${team.members}/${team.needed} 人</span>
+          <span class="status-${team.status}">${team.status === 'full' ? '已满员' : '招募中'}</span>
+        </div>
+      `).join('');
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      setupCompetitionFilter();
+      setupCreateForm();
+      renderTeams();
+      renderMyTeams();
+    });
+  </script>
+  <script src="js/back-to-top.js"></script>
+</body>
+</html>
