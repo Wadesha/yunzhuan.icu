@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Harvard — 模拟成绩单 | 模拟全流程</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; max-width: 820px; margin: 0 auto; padding: 24px 16px 48px; background: #ffffff; color: #111111; line-height: 1.7; font-size: 15px; }
+  a { color: #111111; text-decoration: none; border-bottom: 1px solid #cccccc; }
+  a:hover { border-bottom-color: #111111; }
+  .nav { padding-bottom: 12px; margin-bottom: 20px; border-bottom: 1px solid #e0e0e0; font-size: 0.88rem; color: #888888; }
+  .nav a { color: #111111; }
+  .nav .sep { color: #cccccc; margin: 0 6px; }
+  .mock { border: 1px dashed #888888; color: #555555; padding: 8px 12px; font-size: 0.78rem; margin-bottom: 18px; }
+  h1 { font-size: 1.5rem; margin-bottom: 4px; }
+  h2 { font-size: 1.1rem; font-weight: 700; margin: 24px 0 8px; padding-bottom: 6px; border-bottom: 1px solid #111111; }
+  p, li { margin-bottom: 8px; color: #111111; }
+  .muted { color: #888888; font-size: 0.85rem; }
+  .transcript { border: 1px solid #111111; padding: 18px 22px; margin: 12px 0; background: #ffffff; }
+  .transcript .head { text-align: center; border-bottom: 2px solid #111111; padding-bottom: 8px; margin-bottom: 12px; }
+  .transcript .head .school { font-weight: 700; font-size: 1.05rem; }
+  .transcript .head .sub { color: #888888; font-size: 0.78rem; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.82rem; margin: 8px 0; }
+  th, td { border: 1px solid #e0e0e0; padding: 5px 8px; text-align: left; }
+  th { background: #ffffff; border-bottom: 1px solid #111111; font-weight: 700; }
+  .row-head { background: #ffffff; font-weight: 700; }
+  .gpa-row td { font-weight: 700; }
+  .ap-row td { background: #ffffff; }
+  ol, ul { margin-left: 22px; margin-bottom: 12px; }
+</style>
+</head>
+<body>
+
+<div class="nav">
+  <a href="../index.html">Home</a> <span class="sep">/</span>
+  <a href="../simulate-school.html">模拟入口</a> <span class="sep">/</span>
+  <a href="summary.html">Harvard</a> <span class="sep">/</span>
+  ⑪ 模拟成绩单
+</div>
+
+<div class="mock">模拟数据 · 提交给 Harvard 的高中成绩单 · 含 GPA 走势 + AP 分数</div>
+
+<h1>Harvard — 模拟成绩单</h1>
+<p class="muted">北京某重点中学国际部 · 9-12 年级完整成绩单（模拟）</p>
+
+<div class="transcript">
+  <div class="head">
+    <div class="school">Beijing National Day School · International Division</div>
+    <div class="sub">Official High School Transcript · Cumulative</div>
+  </div>
+
+  <table>
+    <tr><td>学生姓名 / Name</td><td>Li Ming（模拟）</td><td>学号 / ID</td><td>2023001</td></tr>
+    <tr><td>入学日期 / Enrolled</td><td>Sep 2022</td><td>预计毕业 / Expected Grad</td><td>Jun 2026</td></tr>
+    <tr><td>班级排名 / Class Rank</td><td>Top 5% (8/180)</td><td>GPA 体系 / Scale</td><td>Unweighted 4.0 / Weighted 5.0</td></tr>
+  </table>
+
+  <h3>9 年级（2022-2023）— GPA 3.88 / 4.0</h3>
+  <table>
+    <tr><th>课程</th><th>难度</th><th>学期 1</th><th>学期 2</th><th>学年</th></tr>
+    <tr><td>English 9 Honors</td><td>Honors</td><td>A</td><td>A-</td><td>A-</td></tr>
+    <tr><td>Algebra II Honors</td><td>Honors</td><td>A+</td><td>A+</td><td>A+</td></tr>
+    <tr><td>World History</td><td>Regular</td><td>A</td><td>A</td><td>A</td></tr>
+    <tr><td>Physics</td><td>Regular</td><td>A-</td><td>A</td><td>A-</td></tr>
+    <tr><td>Chinese Literature</td><td>Regular</td><td>A+</td><td>A+</td><td>A+</td></tr>
+    <tr><td>PE / 体育</td><td>Regular</td><td>P</td><td>P</td><td>P</td></tr>
+  </table>
+
+  <h3>10 年级（2023-2024）— GPA 3.93 / 4.0</h3>
+  <table>
+    <tr><th>课程</th><th>难度</th><th>学期 1</th><th>学期 2</th><th>学年</th></tr>
+    <tr><td>English 10 Honors</td><td>Honors</td><td>A</td><td>A</td><td>A</td></tr>
+    <tr><td>Pre-Calculus Honors</td><td>Honors</td><td>A+</td><td>A+</td><td>A+</td></tr>
+    <tr><td>Chemistry Honors</td><td>Honors</td><td>A</td><td>A-</td><td>A-</td></tr>
+    <tr><td>AP Computer Science A</td><td>AP</td><td>A+</td><td>A+</td><td>A+</td></tr>
+    <tr><td>Chinese Literature</td><td>Honors</td><td>A</td><td>A</td><td>A</td></tr>
+    <tr><td>USACO Training (校外)</td><td>—</td><td>—</td><td>—</td><td>Gold</td></tr>
+  </table>
+
+  <h3>11 年级（2024-2025）— GPA 3.95 / 4.0</h3>
+  <table>
+    <tr><th>课程</th><th>难度</th><th>学期 1</th><th>学期 2</th><th>学年</th></tr>
+    <tr><td>AP English Language</td><td>AP</td><td>A</td><td>A</td><td>A</td></tr>
+    <tr><td>AP Calculus BC</td><td>AP</td><td>A+</td><td>A+</td><td>A+</td></tr>
+    <tr><td>AP Physics C: Mechanics</td><td>AP</td><td>A+</td><td>A</td><td>A</td></tr>
+    <tr><td>AP Computer Science A (Retake)</td><td>AP</td><td>—</td><td>A+</td><td>A+</td></tr>
+    <tr><td>AI &amp; Ethics (学校新课)</td><td>Honors</td><td>A+</td><td>A+</td><td>A+</td></tr>
+    <tr><td>Chinese Literature</td><td>Honors</td><td>A</td><td>A</td><td>A</td></tr>
+  </table>
+  <p class="muted">AP 考试分数（5 月）：CS A 5 · Calculus BC 5 · Physics C 5 · English Language 4</p>
+
+  <h3>12 年级（2025-2026，秋季学期）— GPA 3.97 / 4.0</h3>
+  <table>
+    <tr><th>课程</th><th>难度</th><th>学期 1</th></tr>
+    <tr><td>AP Statistics</td><td>AP</td><td>A+</td></tr>
+    <tr><td>AP Macroeconomics</td><td>AP</td><td>A</td></tr>
+    <tr><td>Advanced Algorithms (校开发课程)</td><td>Honors</td><td>A+</td></tr>
+    <tr><td>AP English Literature</td><td>AP</td><td>A</td></tr>
+    <tr><td>Multivariable Calculus (校开设)</td><td>Honors</td><td>A+</td></tr>
+  </table>
+
+  <h3>累计 GPA（9-12 年级）</h3>
+  <table>
+    <tr class="gpa-row"><td>Unweighted GPA</td><td><strong>3.95 / 4.0</strong></td><td>Weighted GPA</td><td><strong>4.62 / 5.0</strong></td></tr>
+  </table>
+
+  <h3>学校升学顾问评语</h3>
+  <p>"Li Ming is one of the most intellectually generous students I have worked with. He is equally comfortable leading a research presentation and tutoring a struggling peer. He will be a transformative presence in any college community."</p>
+  <p class="muted">Wang Li, College Counselor · 2025-09-12</p>
+</div>
+
+<h2>成绩走势</h2>
+<p>GPA 从 9 年级 3.88 → 10 年级 3.93 → 11 年级 3.95 → 12 年级（秋）3.97，逐年上升，与申请叙事一致。</p>
+
+<h2>继续</h2>
+<ol>
+  <li><a href="summary.html">① 摘要</a></li>
+  <li><a href="distribution.html">② 录取分布</a></li>
+  <li><a href="activities.html">③ 活动清单</a></li>
+  <li><a href="reading.html">④ 推荐阅读</a></li>
+  <li><a href="competitions.html">⑤ 推荐竞赛</a></li>
+  <li><a href="essays.html">⑥ 文书题目原文</a></li>
+  <li><a href="essay-draft.html">⑦ 文书初稿</a></li>
+  <li><a href="supplements.html">⑧ 补充材料</a></li>
+  <li><a href="recommendations.html">⑨ 推荐信</a></li>
+  <li><a href="interview.html">⑩ 模拟面试</a></li>
+  <li><a href="transcript.html">⑪ 模拟成绩单（当前）</a></li>
+  <li><a href="checklist.html">⑫ 申请 Checklist</a></li>
+  <li><a href="result.html">⑬ 模拟 Offer</a></li>
+  <li><a href="financial.html">⑭ 财务通知</a></li>
+  <li><a href="pre-arrival.html">⑮ 入学前</a></li>
+</ol>
+
+<script src="../js/back-to-top.js"></script>
+</body>
+</html>
