@@ -134,6 +134,7 @@
         .note { font-size: 0.78rem; color: #888; margin-top: 8px; line-height: 1.6; }
     </style>
     <link rel="stylesheet" href="/css/collapse.css">
+    <script src="js/app-data.js"></script>
 </head>
 <body>
     <a href="index.html" class="back-link">&larr; Back to Home</a>
@@ -177,7 +178,10 @@
     <div id="student-view">
     <div class="demo-banner">
         <span><strong>Demo Mode</strong> — 示例数据展示完整功能，数据存在浏览器本地。</span>
-        <button class="btn" onclick="loadDemoData()">Load demo data</button>
+        <div>
+            <button class="btn btn-secondary" onclick="syncData()">Sync with Tracker & Path</button>
+            <button class="btn" onclick="loadDemoData()">Load demo data</button>
+        </div>
     </div>
 
     <div class="intro">
@@ -328,23 +332,24 @@
         document.querySelector(`.role-btn[onclick="switchRole('${savedRole}')"]`)?.click();
     }
 
-    const KEY = 'yunzhuan_dashboard_v1';
-    let state = JSON.parse(localStorage.getItem(KEY) || '{}');
-    if (!state.scores) state.scores = {};
+    let state = AppData.load();
     if (!state.essayProgress) state.essayProgress = { ca: 0, sup: 0, ucas: 0 };
-    if (!state.checklist) state.checklist = {};
 
     function save() {
-        localStorage.setItem(KEY, JSON.stringify(state));
+        AppData.save(state);
     }
 
     function loadScores() {
+        const profile = AppData.getProfile();
+        const scoreMap = { sat: profile.sat, act: profile.act, toefl: profile.toefl, ielts: profile.ielts, det: profile.duolingo };
         ['sat','act','toefl','ielts','det'].forEach(k => {
             const el = document.getElementById(k + '-score');
-            if (state.scores[k]) el.value = state.scores[k];
+            if (scoreMap[k]) el.value = scoreMap[k];
             el.addEventListener('input', e => {
-                state.scores[k] = e.target.value;
-                save();
+                const profile = AppData.getProfile();
+                const keyMap = { sat: 'sat', act: 'act', toefl: 'toefl', ielts: 'ielts', det: 'duolingo' };
+                profile[keyMap[k]] = e.target.value;
+                AppData.setProfile(profile);
             });
         });
     }
@@ -362,12 +367,12 @@
     }
 
     function loadChecklist() {
+        const checklist = AppData.getChecklist();
         for (let i = 1; i <= 16; i++) {
             const el = document.getElementById('t' + i);
-            if (state.checklist['t' + i]) el.checked = true;
+            if (checklist['t' + i]) el.checked = true;
             el.addEventListener('change', e => {
-                state.checklist['t' + i] = e.target.checked;
-                save();
+                AppData.toggleCheck('t' + i);
             });
         }
     }
@@ -381,13 +386,16 @@
     }
     updateSchoolCounts();
 
+    function syncData() {
+        alert('数据已同步');
+    }
+
     function loadDemoData() {
-        state = {
-            scores: { sat: 1480, act: 33, toefl: 108, ielts: 7.5, det: 135 },
-            essayProgress: { ca: 4, sup: 3, ucas: 2 },
-            checklist: { t1: true, t2: true, t3: true, t4: true, t5: true, t6: true, t7: true, t8: true, t9: false, t10: false, t11: false, t12: false, t13: false, t14: false, t15: false, t16: false }
-        };
-        save();
+        AppData.setProfile({ sat: 1480, act: 33, toefl: 108, ielts: 7.5, duolingo: 135 });
+        state = AppData.load();
+        state.essayProgress = { ca: 4, sup: 3, ucas: 2 };
+        state.checklist = { t1: true, t2: true, t3: true, t4: true, t5: true, t6: true, t7: true, t8: true, t9: false, t10: false, t11: false, t12: false, t13: false, t14: false, t15: false, t16: false };
+        AppData.save(state);
         location.reload();
     }
 

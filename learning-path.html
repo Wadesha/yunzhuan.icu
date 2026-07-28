@@ -436,6 +436,7 @@
     </style>
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#1a1a1a">
+    <script src="js/app-data.js"></script>
 </head>
 <body>
     <nav class="navbar">
@@ -455,6 +456,14 @@
         <p class="subtitle">Plan your 4-year high school journey toward your target major</p>
         <p class="subtitle-cn">学习路径规划 · 按年级分阶段 · 标化 · 活动 · 竞赛 · 申请</p>
     </section>
+
+    <div id="profileBar" style="margin-bottom: 24px; padding: 12px 16px; background: #f8f8f8; border-radius: 6px; font-size: 0.9rem; color: #555; display: flex; gap: 16px; flex-wrap: wrap; align-items: center;">
+        <span><strong>Target Major:</strong> <span id="profileMajor">--</span></span>
+        <span style="color:#ddd;">|</span>
+        <span><strong>GPA:</strong> <span id="profileGpa">--</span></span>
+        <span style="color:#ddd;">|</span>
+        <span><strong>SAT:</strong> <span id="profileSat">--</span></span>
+    </div>
 
     <div class="role-tabs">
         <button class="role-tab active" data-role="student" onclick="switchRole('student')">Student<span class="cn">学生</span></button>
@@ -789,14 +798,19 @@ const COUNSELOR_STUDENTS = [
 
 /* =================== STATE =================== */
 let currentMajor = 'cs';
-const STORAGE_KEY = 'learningPath_checks_v1';
+const GRADE_KEYS = ['grade9', 'grade10', 'grade11', 'grade12'];
 
-function loadChecks() {
-    try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; }
-    catch (e) { return {}; }
+function isChecked(major, grade, index) {
+    const progress = AppData.getPathProgress(major);
+    return (progress[grade] || []).includes(index);
 }
-function saveChecks(obj) {
-    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(obj)); } catch (e) {}
+
+function updateProfileBar() {
+    const profile = AppData.getProfile();
+    const majorLabel = PATHS[currentMajor] ? PATHS[currentMajor].label : currentMajor;
+    document.getElementById('profileMajor').textContent = majorLabel;
+    document.getElementById('profileGpa').textContent = profile.gpa != null ? profile.gpa : '--';
+    document.getElementById('profileSat').textContent = profile.sat != null ? profile.sat : '--';
 }
 
 /* =================== ROLE SWITCH =================== */
@@ -813,25 +827,28 @@ function switchRole(role) {
 function switchMajor(major) {
     currentMajor = major;
     document.getElementById('majorCn').textContent = PATHS[major].labelCn;
+    updateProfileBar();
     renderPath();
 }
 
 /* =================== RENDER PATH =================== */
 function renderPath() {
     const path = PATHS[currentMajor];
-    const checks = loadChecks();
     const container = document.getElementById('pathContainer');
     let html = '';
 
     path.grades.forEach((grade, gi) => {
+        const gradeKey = GRADE_KEYS[gi];
         const gradeId = currentMajor + '_g' + gi;
         // count completion for this grade header
         let total = 0, done = 0;
-        grade.sections.forEach(sec => {
+        let flatIndex = 0;
+        grade.sections.forEach((sec, si) => {
             sec.items.forEach((item, ii) => {
                 total++;
-                if (checks[gradeId + '_s' + grade.sections.indexOf(sec) + '_i' + ii]) done++;
+                if (isChecked(currentMajor, gradeKey, flatIndex + ii)) done++;
             });
+            flatIndex += sec.items.length;
         });
         const gradePct = total ? Math.round(done / total * 100) : 0;
         const isOpen = gi <= 1; // first two grades open by default
@@ -843,18 +860,21 @@ function renderPath() {
         html += '</div>';
         html += '<div class="grade-body' + (isOpen ? ' open' : '') + '">';
 
+        flatIndex = 0;
         grade.sections.forEach((sec, si) => {
             html += '<div class="cat">';
             html += '<div class="cat-name">' + sec.name + '</div>';
             html += '<ul>';
             sec.items.forEach((item, ii) => {
+                const idx = flatIndex + ii;
                 const itemId = gradeId + '_s' + si + '_i' + ii;
-                const checked = checks[itemId];
+                const checked = isChecked(currentMajor, gradeKey, idx);
                 html += '<li' + (checked ? ' class="done"' : '') + '>';
-                html += '<input type="checkbox" id="' + itemId + '"' + (checked ? ' checked' : '') + ' onchange="toggleCheck(\'' + itemId + '\')">';
+                html += '<input type="checkbox" id="' + itemId + '"' + (checked ? ' checked' : '') + ' onchange="toggleCheck(\'' + currentMajor + '\', \'' + gradeKey + '\', ' + idx + ', this)">';
                 html += '<label for="' + itemId + '">' + item + '</label>';
                 html += '</li>';
             });
+            flatIndex += sec.items.length;
             html += '</ul>';
             html += '</div>';
         });
@@ -875,21 +895,15 @@ function toggleGrade(headEl) {
 }
 
 /* =================== CHECKBOX =================== */
-function toggleCheck(itemId) {
-    const checks = loadChecks();
-    const cb = document.getElementById(itemId);
+function toggleCheck(major, grade, index, cb) {
+    AppData.togglePathCheck(major, grade, index);
     const li = cb.closest('li');
-    if (cb.checked) {
-        checks[itemId] = true;
-        li.classList.add('done');
-    } else {
-        delete checks[itemId];
-        li.classList.remove('done');
-    }
-    saveChecks(checks);
+    if (cb.checked) li.classList.add('done');
+    else li.classList.remove('done');
     updateProgress();
     // update the per-grade percentage label
-    const gradeId = itemId.replace(/_s\d+_i\d+$/, '');
+    const gi = GRADE_KEYS.indexOf(grade);
+    const gradeId = major + '_g' + gi;
     updateGradePct(gradeId);
 }
 
@@ -908,16 +922,19 @@ function updateGradePct(gradeId) {
 
 /* =================== PROGRESS BAR =================== */
 function updateProgress() {
-    const checks = loadChecks();
     const path = PATHS[currentMajor];
+    const progress = AppData.getPathProgress(currentMajor);
     let total = 0, done = 0;
     path.grades.forEach((grade, gi) => {
-        grade.sections.forEach((sec, si) => {
+        const gradeKey = GRADE_KEYS[gi];
+        const checkedSet = new Set(progress[gradeKey] || []);
+        let flatIndex = 0;
+        grade.sections.forEach((sec) => {
             sec.items.forEach((item, ii) => {
                 total++;
-                const itemId = currentMajor + '_g' + gi + '_s' + si + '_i' + ii;
-                if (checks[itemId]) done++;
+                if (checkedSet.has(flatIndex + ii)) done++;
             });
+            flatIndex += sec.items.length;
         });
     });
     const pct = total ? Math.round(done / total * 100) : 0;
@@ -971,6 +988,12 @@ function toggleStudent(headEl) {
 }
 
 /* =================== INIT =================== */
+const profile = AppData.getProfile();
+const savedMajor = profile.targetMajor || 'cs';
+currentMajor = savedMajor;
+document.getElementById('majorSelect').value = savedMajor;
+document.getElementById('majorCn').textContent = PATHS[savedMajor].labelCn;
+updateProfileBar();
 renderPath();
 renderCounselor();
 </script>

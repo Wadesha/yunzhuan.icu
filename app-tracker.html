@@ -152,6 +152,19 @@
             color: #111;
         }
 
+        /* Profile bar */
+        .profile-section { margin-bottom: 20px; }
+        .profile-bar {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            font-size: 0.9rem;
+            color: #555;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .profile-bar strong { color: #111; font-weight: 600; }
+
         /* Kanban stages */
         .stage-group { margin-bottom: 28px; }
         .stage-header {
@@ -394,6 +407,7 @@
             .nav-links a { font-size: 0.8rem; }
         }
     </style>
+    <script src="js/app-data.js"></script>
 </head>
 <body>
     <nav class="navbar">
@@ -413,6 +427,14 @@
         <h1>Application Tracker</h1>
         <p class="subtitle">申请进度跟踪 · Track your college applications end-to-end</p>
     </header>
+
+    <section class="profile-section" id="profileSection" style="display:none;">
+        <div class="profile-bar">
+            <span class="profile-item">GPA: <strong id="profileGpa">--</strong></span>
+            <span class="profile-item">SAT: <strong id="profileSat">--</strong></span>
+            <span class="profile-item">Target Major: <strong id="profileMajor">--</strong></span>
+        </div>
+    </section>
 
     <section class="role-section">
         <span class="label">View as:</span>
@@ -467,6 +489,7 @@
         <a href="roadmap.html">Roadmap</a>
         <a href="contact.html">Contact</a>
         <p>© 2026 yunzhuan.icu · Application Tracker</p>
+        <p style="font-size:0.75rem;color:#aaa;margin-top:6px;">Data Source: Shared</p>
     </div>
 
     <script src="js/back-to-top.js"></script>
@@ -499,24 +522,15 @@
             { name: 'Cathy Liu',  grade: 'Grade 12', schools: 12, submitted: 4, admitted: 0, todo: 'Finish Stanford short answers' }
         ];
 
-        const STORAGE_KEY = 'appTrackerSchools_v1';
         let currentRole = 'student';
-        let schools = [];
+        let schools = AppData.getSchools();
+        if (!Array.isArray(schools) || schools.length === 0) {
+            schools = JSON.parse(JSON.stringify(DEFAULT_SCHOOLS));
+        }
 
         // ===== Data persistence =====
-        function loadSchools() {
-            try {
-                const stored = localStorage.getItem(STORAGE_KEY);
-                schools = stored ? JSON.parse(stored) : JSON.parse(JSON.stringify(DEFAULT_SCHOOLS));
-            } catch (e) {
-                schools = JSON.parse(JSON.stringify(DEFAULT_SCHOOLS));
-            }
-            if (!Array.isArray(schools) || schools.length === 0) {
-                schools = JSON.parse(JSON.stringify(DEFAULT_SCHOOLS));
-            }
-        }
         function saveSchools() {
-            try { localStorage.setItem(STORAGE_KEY, JSON.stringify(schools)); } catch (e) {}
+            AppData.setSchools(schools);
         }
         function resetSchools() {
             schools = JSON.parse(JSON.stringify(DEFAULT_SCHOOLS));
@@ -586,7 +600,7 @@
             const countdownClass = isPast ? 'past' : (isUrgent ? 'urgent' : '');
 
             let resultTag = '';
-            if (s.result) {
+            if (s.result && s.result !== 'pending') {
                 const label = s.result.charAt(0).toUpperCase() + s.result.slice(1);
                 resultTag = ' <span class="result-tag ' + s.result + '">[' + label + ']</span>';
             }
@@ -617,10 +631,29 @@
         // ===== Deadlines =====
         function renderDeadlines() {
             const list = document.getElementById('deadlineList');
-            const upcoming = schools
+
+            // School deadlines from tracker
+            const schoolItems = schools
                 .filter(s => !['submitted', 'interview', 'decision'].includes(s.stage))
-                .map(s => ({ name: s.name, type: s.type, deadline: s.deadline, days: daysUntil(s.deadline) }))
-                .sort((a, b) => a.days - b.days);
+                .map(s => ({ name: s.name, type: s.type, deadline: s.deadline, days: daysUntil(s.deadline) }));
+
+            // Dashboard deadlines from shared data
+            const dashboardItems = AppData.getDeadlines()
+                .map(d => ({ name: d.name, type: d.type, deadline: d.date, days: daysUntil(d.date) }))
+                .filter(d => d.days <= 60);
+
+            // Merge and deduplicate
+            const seen = new Set();
+            const upcoming = [];
+            [...schoolItems, ...dashboardItems].forEach(item => {
+                const key = item.name + '|' + item.deadline;
+                if (!seen.has(key)) {
+                    seen.add(key);
+                    upcoming.push(item);
+                }
+            });
+            upcoming.sort((a, b) => a.days - b.days);
+
             if (upcoming.length === 0) {
                 list.innerHTML = '<li style="color:#aaa;font-style:italic;">No upcoming deadlines.</li>';
                 return;
@@ -652,6 +685,21 @@
             document.getElementById('rateNote').textContent = decided > 0
                 ? 'Admission rate: ' + rate + '% (' + admitted + ' admitted of ' + decided + ' decided)'
                 : 'No decisions received yet.';
+        }
+
+        // ===== Profile =====
+        function renderProfile() {
+            const profile = AppData.getProfile();
+            const section = document.getElementById('profileSection');
+            if (profile && (profile.gpa || profile.sat || profile.targetMajor)) {
+                section.style.display = '';
+                document.getElementById('profileGpa').textContent = profile.gpa != null ? profile.gpa : '--';
+                document.getElementById('profileSat').textContent = profile.sat != null ? profile.sat : '--';
+                const majorMap = { cs: 'Computer Science', finance: 'Finance', 'mechanical-engineering': 'Mechanical Engineering' };
+                document.getElementById('profileMajor').textContent = majorMap[profile.targetMajor] || profile.targetMajor || '--';
+            } else {
+                section.style.display = 'none';
+            }
         }
 
         // ===== Counselor view =====
@@ -702,6 +750,7 @@
         }
 
         function renderAll() {
+            renderProfile();
             renderStats();
             renderKanban();
             renderDeadlines();
@@ -710,7 +759,6 @@
 
         // ===== Init =====
         function init() {
-            loadSchools();
             document.querySelectorAll('.role-tab').forEach(t => {
                 t.addEventListener('click', () => setRole(t.dataset.role));
             });
