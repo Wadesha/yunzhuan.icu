@@ -148,20 +148,20 @@
   </div>
 </div>
 
-<h2>迭代路线图</h2>
+<h2>迭代路线图（v11–v15 考纲细分 + 数据打通）</h2>
 <table>
-  <tr><th>版本</th><th>目标</th><th>每科题量</th><th>状态</th></tr>
-  <tr><td>v1</td><td>骨架 + 考纲框架 + 3 道样题</td><td>3</td><td><span class="badge badge-dashed">Done</span></td></tr>
-  <tr><td>v2</td><td>考纲完善 + 10 道题</td><td>10</td><td><span class="badge badge-dashed">Done</span></td></tr>
-  <tr><td>v3</td><td>知识点分组刷题</td><td>20</td><td><span class="badge badge-dashed">Done</span></td></tr>
-  <tr><td>v4</td><td>错题本功能（localStorage）</td><td>20</td><td><span class="badge badge-dashed">Done</span></td></tr>
-  <tr><td>v5</td><td>计时模式 + 难度分级 + 50 题</td><td>50</td><td><span class="badge badge-dashed">Done</span></td></tr>
-  <tr><td>v6</td><td>合并入 v5</td><td>—</td><td><span class="badge badge-dashed">Merged</span></td></tr>
-  <tr><td>v7</td><td>解析完善（每题详细解析）</td><td>50+</td><td><span class="badge badge-dashed">Done</span></td></tr>
-  <tr><td>v8</td><td>模拟测试卷（完整一套）</td><td>50+</td><td><span class="badge badge-dashed">Done</span></td></tr>
-  <tr><td>v9</td><td>数据分析仪表盘</td><td>50+</td><td><span class="badge badge-dashed">Done</span></td></tr>
-  <tr><td>v10</td><td>定稿（扩充至 120 题/科，960 题总库）</td><td>120</td><td><span class="badge">Current</span></td></tr>
+  <tr><th>版本</th><th>目标</th><th>核心输出</th><th>状态</th></tr>
+  <tr><td>v10</td><td>题库定稿（8 科 × 120 题 = 960 题）</td><td>Practice 题目覆盖 + 解析 + 计时 + 难度 + 模拟卷</td><td><span class="badge badge-dashed">Done</span></td></tr>
+  <tr><td>v11</td><td>考纲按官方结构细分到 Topic 级（IB 6 科组 / AL 5 科 / SAT R&W+Math Domain / AP CED Unit 等）</td><td>8 科 Syllabus 均不再是示例，完整拆 Paper/Unit/Topic 三级</td><td><span class="badge">Current</span></td></tr>
+  <tr><td>v12</td><td>考纲 Topic ↔ Practice 题目双向对齐</td><td>每题标注 topic code；Syllabus 每个 topic 列出对应 Q 编号 + 锚点跳转</td><td><span class="badge badge-dashed">Next</span></td></tr>
+  <tr><td>v13</td><td>结构化考纲 JSON 数据层</td><td>js/syllabus-data.js：subject → unit → topic → sub-topic，含权重/对应题 ID 映射</td><td><span class="badge badge-dashed">Planned</span></td></tr>
+  <tr><td>v14</td><td>按 Topic 分块局部刷题入口</td><td>Syllabus 每个 topic 加"刷本题(X 题)"按钮，URL 参数筛选跳 practice 局部练习</td><td><span class="badge badge-dashed">Planned</span></td></tr>
+  <tr><td>v15</td><td>考纲覆盖率仪表盘 + 自适应路径</td><td>Dashboard 新增 Coverage 热力图 + 薄弱 topic 排序 + 个性化 Study Schedule</td><td><span class="badge badge-dashed">Planned</span></td></tr>
 </table>
+
+<div class="box-dashed" style="margin-top:16px;">
+  <strong>v11 拆分方法</strong> · IB：Group 1-6 每科展开 HL/SL + 对应 Paper 结构；A-Level：Math / Physics / Chemistry / Biology / Economics 各拆 AS + A2；SAT：R&W（Craft/Info/Conventions/Expression 4 domain）+ Math（Algebra/Advanced/PSD/Geom）各拆 3 层 skill；AP：按官方 CED 的 Unit 1–N 及 Learning Objective；TOEFL / IELTS：按 4 section × 题型/能力点；IGCSE：0580 Math / 0625 Phy / 0620 Chem / 0610 Bio / 0455 Econ 各拆 Core / Extended 对应 Topic。所有 syllabus v-badge 升级为 v2。
+</div>
 
 <div class="footer">
   <a href="../../index.html">Home</a> <span class="sep" style="color:#ccc;margin:0 6px;">·</span>
