@@ -9,7 +9,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            max-width: 1100px;
+            max-width: 960px;
             margin: 0 auto;
             padding: 0 16px 20px;
             background: #f5f5f5;
@@ -153,6 +153,20 @@
             color: #999;
             font-size: 0.8rem;
         }
+        .home-search-bar {
+            margin: 12px 0;
+        }
+        .home-search-bar input {
+            width: 100%;
+            padding: 10px 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            outline: none;
+            transition: border-color 0.15s;
+            background: white;
+        }
+        .home-search-bar input:focus { border-color: #667eea; }
         @media (max-width: 1024px) {
             .major-list { grid-template-columns: repeat(3, 1fr); }
         }
@@ -190,18 +204,19 @@
     <script src="js/nav-user.js"></script>
     <script src="js/favorites.js"></script>
     <script src="js/search-shortcut.js"></script>
+    <script src="js/back-to-top.js"></script>
 </head>
 <body>
     <nav class="navbar">
-        <a href="index.html" class="logo" style="display:none;">yunzhuan<span>.icu</span></a>
+        <a href="index.html" class="logo">yunzhuan<span>.icu</span></a>
         <div class="nav-links">
             <a href="index.html" style="color:#667eea;font-weight:600;">Majors<span class="cn">专业</span></a>
             <a href="schools/index.html">Schools<span class="cn">学校</span></a>
             <a href="tests/index.html">Tests<span class="cn">考试</span></a>
             <a href="essays/index.html">Essays<span class="cn">文书</span></a>
-            <a href="rankings/index.html">Rankings<span class="cn">排名</span></a>
+            <a href="rankings.html">Rankings<span class="cn">排名</span></a>
             <a href="guides/index.html">Guides<span class="cn">指南</span></a>
-            <a href="glossary/index.html">Glossary<span class="cn">术语</span></a>
+            <a href="glossary.html">Glossary<span class="cn">术语</span></a>
             <a href="scholarships/index.html">Scholarships<span class="cn">奖学金</span></a>
             <a href="interviews/index.html">Interviews<span class="cn">面试</span></a>
             <a href="search.html">Search<span class="cn">搜索</span></a>
@@ -210,17 +225,22 @@
         </div>
     </nav>
 
+    <div class="home-search-bar">
+        <input type="text" id="homeSearch" placeholder="🔍 Search majors, schools, tools... / 搜索专业、学校、工具..." autocomplete="off">
+    </div>
+
     <h1>US College Majors Navigation</h1>
     <p class="subtitle">美国大学专业导航</p>
 
     <div class="stats">
         <div class="stat-item"><b>8</b> Categories</div>
         <div class="stat-item"><b>56</b> Majors</div>
-        <div class="stat-item"><b>10</b> Tools</div>
+        <div class="stat-item"><b>15+</b> Tools</div>
+        <div class="stat-item"><b>36</b> Competitions</div>
     </div>
 
     <div class="category">
-        <h2><span class="en">Tools</span> <span class="cn">申请工具</span> <span class="count">10 tools</span></h2>
+        <h2><span class="en">Tools</span> <span class="cn">申请工具</span> <span class="count">15 tools</span></h2>
         <div class="major-list">
             <a href="tests/score-converter.html" class="major-link"><span class="en">Score Converter</span> <span class="cn">分数换算器</span></a>
             <a href="tests/gpa-calculator.html" class="major-link"><span class="en">GPA Calculator</span> <span class="cn">GPA计算器</span></a>
@@ -232,6 +252,11 @@
             <a href="cost-calculator.html" class="major-link"><span class="en">Cost Calculator</span> <span class="cn">费用计算</span></a>
             <a href="application-timeline.html" class="major-link"><span class="en">Timeline</span> <span class="cn">申请时间线</span></a>
             <a href="ai-assistant.html" class="major-link"><span class="en">AI Assistant</span> <span class="cn">AI申请助手</span></a>
+            <a href="tests/score-conversion.html" class="major-link"><span class="en">Score Conversion</span> <span class="cn">成绩换算表</span></a>
+            <a href="tests/exam-timeline.html" class="major-link"><span class="en">Exam Timeline</span> <span class="cn">考试时间线</span></a>
+            <a href="tests/registration-guide.html" class="major-link"><span class="en">Registration Guide</span> <span class="cn">报名指南</span></a>
+            <a href="competitions/calendar.html" class="major-link"><span class="en">Comp Calendar</span> <span class="cn">竞赛日历</span></a>
+            <a href="salary.html" class="major-link"><span class="en">Salary & Outlook</span> <span class="cn">薪资前景</span></a>
         </div>
     </div>
 
@@ -386,5 +411,12 @@
         <a href="roadmap.html" style="color:#aaa;text-decoration:none;">Roadmap</a>
 </div>
 <!-- footer-links -->
+<script>
+document.getElementById('homeSearch').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' && this.value.trim()) {
+        window.location.href = 'search.html?q=' + encodeURIComponent(this.value.trim());
+    }
+});
+</script>
 </body>
 </html>

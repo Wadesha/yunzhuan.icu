@@ -9,7 +9,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
             padding: 20px 16px;
             background: #f5f5f5;
@@ -183,10 +183,10 @@
     <meta name="theme-color" content="#667eea">
     <script src="./js/theme.js"></script>
     <script>
-    window.SUPABASE_CONFIG = {{
+    window.SUPABASE_CONFIG = {
         url: 'https://otfjbzjvkoectpejhxar.supabase.co',
         anonKey: 'sb_publishable_SBRF6ewKH-se3dNlqFwsXQ_lObhamTr'
-    }};
+    };
     </script>
     <script src="./js/auth.js"></script>
     <script src="./js/favorites.js"></script>
@@ -209,9 +209,9 @@
                 <span class="label">GitHub Issues</span>
                 <span class="desc">Bug 反馈 / 功能建议 / 技术讨论<br>最推荐，便于追踪和归档</span>
             </a>
-            <a href="mailto:your-email@example.com" class="contact-card">
+            <a href="mailto:13114793260@163.com" class="contact-card">
                 <span class="label">Email</span>
-                <span class="desc">商务合作 / 隐私问题 / 其他<br>your-email@example.com</span>
+                <span class="desc">商务合作 / 隐私问题 / 其他<br>13114793260@163.com</span>
             </a>
             <a href="#comment-form" class="contact-card">
                 <span class="label">Online Form</span>
@@ -297,8 +297,8 @@
         <p>有什么想说的？欢迎在下方留言（基于 GitHub Discussions，需要 GitHub 账号）：</p>
         <div class="giscus-container" id="giscus">
             <p style="text-align:center;color:#aaa;font-size:0.85rem;padding:20px 0;">
-                💬 评论区待启用<br>
-                <span style="font-size:0.78rem;">Giscus 配置完成后即可在此留言</span>
+                💬 Loading comments...<br>
+                <span style="font-size:0.78rem;">评论加载中，基于 GitHub Discussions</span>
             </p>
         </div>
         <script>
@@ -348,5 +348,6 @@
         <span style="margin:0 6px;">·</span>
         <a href="javascript:window.scrollTo(0,0)" style="color:#aaa;text-decoration:none;">Back to top</a>
     </div>
+<script src="./js/back-to-top.js"></script>
 </body>
 </html>

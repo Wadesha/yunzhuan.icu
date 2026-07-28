@@ -30,7 +30,7 @@
 
     const RELATED_MAP = {
         'salary.html': [
-            { url: 'majors/cs.html', title: 'Computer Science', desc: 'CS 专业详解' },
+            { url: 'computer/cs.html', title: 'Computer Science', desc: 'CS 专业详解' },
             { url: 'schools/compare.html', title: 'School Compare', desc: '选校对比' },
             { url: 'career-guide.html', title: 'Career Guide', desc: '职业发展' },
             { url: 'rankings.html', title: 'Rankings', desc: '专业排名' },

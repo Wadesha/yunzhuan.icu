@@ -117,6 +117,110 @@
         }
         td.cn { color: #333; font-weight: 500; }
         td.en { color: #888; font-size: 0.78rem; }
+        .filters {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .search-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 8px 14px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            background: white;
+            outline: none;
+            transition: border-color 0.15s;
+        }
+        .search-input:focus { border-color: #667eea; }
+        .filter-groups {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 14px;
+        }
+        .filter-group {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .filter-label { font-size: 0.78rem; color: #888; min-width: 50px; }
+        .filter-btn {
+            padding: 3px 10px;
+            border: 1px solid #ddd;
+            background: white;
+            border-radius: 14px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.15s;
+            color: #555;
+        }
+        .filter-btn:hover { border-color: #667eea; color: #667eea; }
+        .filter-btn.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+        .school-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 10px;
+            margin-bottom: 18px;
+        }
+        .school-card {
+            display: block;
+            background: white;
+            border-radius: 8px;
+            padding: 12px 14px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            text-decoration: none;
+            border-left: 4px solid #667eea;
+            transition: all 0.15s ease;
+        }
+        .school-card:hover {
+            background: #f8f9ff;
+            border-left-color: #764ba2;
+        }
+        .school-card .cn {
+            color: #333;
+            font-size: 0.98rem;
+            font-weight: 600;
+            display: block;
+        }
+        .school-card .en {
+            color: #888;
+            font-size: 0.78rem;
+            display: block;
+            margin-top: 2px;
+        }
+        .school-meta {
+            display: flex;
+            gap: 5px;
+            margin-top: 8px;
+            flex-wrap: wrap;
+        }
+        .badge {
+            font-size: 0.68rem;
+            padding: 1px 6px;
+            border-radius: 3px;
+            background: #f0f0f0;
+            color: #666;
+        }
+        .badge.type-private { background: #fef3c7; color: #92400e; }
+        .badge.type-public { background: #e0e7ff; color: #3730a3; }
+        .badge.tier-reach { background: #fee2e2; color: #991b1b; }
+        .badge.tier-match { background: #dbeafe; color: #1e40af; }
+        .badge.tier-safety { background: #dcfce7; color: #166534; }
+        #noResults {
+            display: none;
+            text-align: center;
+            padding: 40px;
+            color: #999;
+        }
         .footer {
             text-align: center;
             margin-top: 20px;
@@ -168,6 +272,251 @@
             <span class="en">新加坡大学</span>
             <span class="desc">Direct application, A-Level / IB / Gaokao all accepted, 4-year bachelor.<br><span style="color:#999;">新加坡大学 - A-Level/IB/高考均可。</span></span>
         </a>
+    </div>
+
+    <div class="section">
+        <h2>Featured Schools <span class="en">精选学校</span></h2>
+        <div class="filters">
+            <input type="text" id="searchInput" placeholder="🔍 搜索学校名称 / Search schools..." class="search-input">
+        </div>
+        <div class="filter-groups">
+            <div class="filter-group">
+                <span class="filter-label">国家:</span>
+                <button class="filter-btn active" data-group="country" data-value="all">全部</button>
+                <button class="filter-btn" data-group="country" data-value="us">🇺🇸 美国</button>
+                <button class="filter-btn" data-group="country" data-value="uk">🇬🇧 英国</button>
+                <button class="filter-btn" data-group="country" data-value="ca">🇨🇦 加拿大</button>
+                <button class="filter-btn" data-group="country" data-value="au">🇦🇺 澳洲</button>
+                <button class="filter-btn" data-group="country" data-value="hk">🇭🇰 香港</button>
+                <button class="filter-btn" data-group="country" data-value="sg">🇸🇬 新加坡</button>
+            </div>
+            <div class="filter-group">
+                <span class="filter-label">类型:</span>
+                <button class="filter-btn active" data-group="type" data-value="all">全部</button>
+                <button class="filter-btn" data-group="type" data-value="public">公立</button>
+                <button class="filter-btn" data-group="type" data-value="private">私立</button>
+            </div>
+            <div class="filter-group">
+                <span class="filter-label">难度:</span>
+                <button class="filter-btn active" data-group="tier" data-value="all">全部</button>
+                <button class="filter-btn" data-group="tier" data-value="reach">Reach 冲刺</button>
+                <button class="filter-btn" data-group="tier" data-value="match">Match 匹配</button>
+                <button class="filter-btn" data-group="tier" data-value="safety">Safety 保底</button>
+            </div>
+        </div>
+        <div class="school-grid" id="schoolGrid">
+            <a href="us/harvard.html" class="school-card" data-country="us" data-type="private" data-tier="reach">
+                <span class="cn">哈佛大学</span>
+                <span class="en">Harvard University</span>
+                <div class="school-meta">
+                    <span class="badge">🇺🇸 美国</span>
+                    <span class="badge type-private">私立</span>
+                    <span class="badge tier-reach">Reach</span>
+                </div>
+            </a>
+            <a href="us/index.html" class="school-card" data-country="us" data-type="private" data-tier="reach">
+                <span class="cn">斯坦福大学</span>
+                <span class="en">Stanford University</span>
+                <div class="school-meta">
+                    <span class="badge">🇺🇸 美国</span>
+                    <span class="badge type-private">私立</span>
+                    <span class="badge tier-reach">Reach</span>
+                </div>
+            </a>
+            <a href="us/index.html" class="school-card" data-country="us" data-type="private" data-tier="reach">
+                <span class="cn">麻省理工学院</span>
+                <span class="en">Massachusetts Institute of Technology</span>
+                <div class="school-meta">
+                    <span class="badge">🇺🇸 美国</span>
+                    <span class="badge type-private">私立</span>
+                    <span class="badge tier-reach">Reach</span>
+                </div>
+            </a>
+            <a href="us/index.html" class="school-card" data-country="us" data-type="private" data-tier="reach">
+                <span class="cn">普林斯顿大学</span>
+                <span class="en">Princeton University</span>
+                <div class="school-meta">
+                    <span class="badge">🇺🇸 美国</span>
+                    <span class="badge type-private">私立</span>
+                    <span class="badge tier-reach">Reach</span>
+                </div>
+            </a>
+            <a href="us/index.html" class="school-card" data-country="us" data-type="public" data-tier="reach">
+                <span class="cn">加州大学洛杉矶分校</span>
+                <span class="en">University of California, Los Angeles</span>
+                <div class="school-meta">
+                    <span class="badge">🇺🇸 美国</span>
+                    <span class="badge type-public">公立</span>
+                    <span class="badge tier-reach">Reach</span>
+                </div>
+            </a>
+            <a href="us/index.html" class="school-card" data-country="us" data-type="public" data-tier="reach">
+                <span class="cn">加州大学伯克利分校</span>
+                <span class="en">University of California, Berkeley</span>
+                <div class="school-meta">
+                    <span class="badge">🇺🇸 美国</span>
+                    <span class="badge type-public">公立</span>
+                    <span class="badge tier-reach">Reach</span>
+                </div>
+            </a>
+            <a href="us/index.html" class="school-card" data-country="us" data-type="private" data-tier="match">
+                <span class="cn">纽约大学</span>
+                <span class="en">New York University</span>
+                <div class="school-meta">
+                    <span class="badge">🇺🇸 美国</span>
+                    <span class="badge type-private">私立</span>
+                    <span class="badge tier-match">Match</span>
+                </div>
+            </a>
+            <a href="us/index.html" class="school-card" data-country="us" data-type="public" data-tier="match">
+                <span class="cn">加州大学戴维斯分校</span>
+                <span class="en">University of California, Davis</span>
+                <div class="school-meta">
+                    <span class="badge">🇺🇸 美国</span>
+                    <span class="badge type-public">公立</span>
+                    <span class="badge tier-match">Match</span>
+                </div>
+            </a>
+            <a href="us/index.html" class="school-card" data-country="us" data-type="public" data-tier="match">
+                <span class="cn">华盛顿大学</span>
+                <span class="en">University of Washington</span>
+                <div class="school-meta">
+                    <span class="badge">🇺🇸 美国</span>
+                    <span class="badge type-public">公立</span>
+                    <span class="badge tier-match">Match</span>
+                </div>
+            </a>
+            <a href="us/index.html" class="school-card" data-country="us" data-type="public" data-tier="safety">
+                <span class="cn">宾州州立大学</span>
+                <span class="en">Pennsylvania State University</span>
+                <div class="school-meta">
+                    <span class="badge">🇺🇸 美国</span>
+                    <span class="badge type-public">公立</span>
+                    <span class="badge tier-safety">Safety</span>
+                </div>
+            </a>
+            <a href="uk/index.html" class="school-card" data-country="uk" data-type="public" data-tier="reach">
+                <span class="cn">牛津大学</span>
+                <span class="en">University of Oxford</span>
+                <div class="school-meta">
+                    <span class="badge">🇬🇧 英国</span>
+                    <span class="badge type-public">公立</span>
+                    <span class="badge tier-reach">Reach</span>
+                </div>
+            </a>
+            <a href="uk/index.html" class="school-card" data-country="uk" data-type="public" data-tier="reach">
+                <span class="cn">剑桥大学</span>
+                <span class="en">University of Cambridge</span>
+                <div class="school-meta">
+                    <span class="badge">🇬🇧 英国</span>
+                    <span class="badge type-public">公立</span>
+                    <span class="badge tier-reach">Reach</span>
+                </div>
+            </a>
+            <a href="uk/index.html" class="school-card" data-country="uk" data-type="public" data-tier="reach">
+                <span class="cn">伦敦大学学院</span>
+                <span class="en">University College London</span>
+                <div class="school-meta">
+                    <span class="badge">🇬🇧 英国</span>
+                    <span class="badge type-public">公立</span>
+                    <span class="badge tier-reach">Reach</span>
+                </div>
+            </a>
+            <a href="uk/index.html" class="school-card" data-country="uk" data-type="public" data-tier="match">
+                <span class="cn">爱丁堡大学</span>
+                <span class="en">University of Edinburgh</span>
+                <div class="school-meta">
+                    <span class="badge">🇬🇧 英国</span>
+                    <span class="badge type-public">公立</span>
+                    <span class="badge tier-match">Match</span>
+                </div>
+            </a>
+            <a href="ca/index.html" class="school-card" data-country="ca" data-type="public" data-tier="reach">
+                <span class="cn">多伦多大学</span>
+                <span class="en">University of Toronto</span>
+                <div class="school-meta">
+                    <span class="badge">🇨🇦 加拿大</span>
+                    <span class="badge type-public">公立</span>
+                    <span class="badge tier-reach">Reach</span>
+                </div>
+            </a>
+            <a href="ca/index.html" class="school-card" data-country="ca" data-type="public" data-tier="match">
+                <span class="cn">英属哥伦比亚大学</span>
+                <span class="en">University of British Columbia</span>
+                <div class="school-meta">
+                    <span class="badge">🇨🇦 加拿大</span>
+                    <span class="badge type-public">公立</span>
+                    <span class="badge tier-match">Match</span>
+                </div>
+            </a>
+            <a href="ca/index.html" class="school-card" data-country="ca" data-type="public" data-tier="reach">
+                <span class="cn">麦吉尔大学</span>
+                <span class="en">McGill University</span>
+                <div class="school-meta">
+                    <span class="badge">🇨🇦 加拿大</span>
+                    <span class="badge type-public">公立</span>
+                    <span class="badge tier-reach">Reach</span>
+                </div>
+            </a>
+            <a href="au/index.html" class="school-card" data-country="au" data-type="public" data-tier="match">
+                <span class="cn">墨尔本大学</span>
+                <span class="en">University of Melbourne</span>
+                <div class="school-meta">
+                    <span class="badge">🇦🇺 澳洲</span>
+                    <span class="badge type-public">公立</span>
+                    <span class="badge tier-match">Match</span>
+                </div>
+            </a>
+            <a href="au/index.html" class="school-card" data-country="au" data-type="public" data-tier="match">
+                <span class="cn">新南威尔士大学</span>
+                <span class="en">University of New South Wales</span>
+                <div class="school-meta">
+                    <span class="badge">🇦🇺 澳洲</span>
+                    <span class="badge type-public">公立</span>
+                    <span class="badge tier-match">Match</span>
+                </div>
+            </a>
+            <a href="hk/index.html" class="school-card" data-country="hk" data-type="public" data-tier="reach">
+                <span class="cn">香港大学</span>
+                <span class="en">The University of Hong Kong</span>
+                <div class="school-meta">
+                    <span class="badge">🇭🇰 香港</span>
+                    <span class="badge type-public">公立</span>
+                    <span class="badge tier-reach">Reach</span>
+                </div>
+            </a>
+            <a href="hk/index.html" class="school-card" data-country="hk" data-type="public" data-tier="reach">
+                <span class="cn">香港科技大学</span>
+                <span class="en">Hong Kong University of Science and Technology</span>
+                <div class="school-meta">
+                    <span class="badge">🇭🇰 香港</span>
+                    <span class="badge type-public">公立</span>
+                    <span class="badge tier-reach">Reach</span>
+                </div>
+            </a>
+            <a href="sg/index.html" class="school-card" data-country="sg" data-type="public" data-tier="reach">
+                <span class="cn">新加坡国立大学</span>
+                <span class="en">National University of Singapore</span>
+                <div class="school-meta">
+                    <span class="badge">🇸🇬 新加坡</span>
+                    <span class="badge type-public">公立</span>
+                    <span class="badge tier-reach">Reach</span>
+                </div>
+            </a>
+            <a href="sg/index.html" class="school-card" data-country="sg" data-type="public" data-tier="reach">
+                <span class="cn">南洋理工大学</span>
+                <span class="en">Nanyang Technological University</span>
+                <div class="school-meta">
+                    <span class="badge">🇸🇬 新加坡</span>
+                    <span class="badge type-public">公立</span>
+                    <span class="badge tier-reach">Reach</span>
+                </div>
+            </a>
+        </div>
+        <div id="noResults">
+            <p>😕 未找到匹配的学校</p>
+            <p style="font-size:0.8rem;margin-top:4px;">试试调整筛选条件</p>
+        </div>
     </div>
 
     <div class="section">
@@ -270,5 +619,62 @@
         <span style="margin:0 6px;">·</span>
         <a href="javascript:window.scrollTo(0,0)" style="color:#aaa;text-decoration:none;">Back to top</a>
     </div>
+    <script src="../js/back-to-top.js"></script>
+    <script>
+    (function() {
+        const searchInput = document.getElementById('searchInput');
+        const noResults = document.getElementById('noResults');
+        const cards = document.querySelectorAll('.school-card');
+        const filters = { country: 'all', type: 'all', tier: 'all', search: '' };
+
+        function applyFilters() {
+            let visible = 0;
+            cards.forEach(function(card) {
+                const cn = (card.querySelector('.cn') ? card.querySelector('.cn').textContent : '').toLowerCase();
+                const en = (card.querySelector('.en') ? card.querySelector('.en').textContent : '').toLowerCase();
+                const country = card.dataset.country;
+                const type = card.dataset.type;
+                const tier = card.dataset.tier;
+
+                let show = true;
+                if (filters.search) {
+                    if (!cn.includes(filters.search) && !en.includes(filters.search)) {
+                        show = false;
+                    }
+                }
+                if (filters.country !== 'all' && country !== filters.country) show = false;
+                if (filters.type !== 'all' && type !== filters.type) show = false;
+                if (filters.tier !== 'all' && tier !== filters.tier) show = false;
+
+                card.style.display = show ? '' : 'none';
+                if (show) visible++;
+            });
+            noResults.style.display = visible === 0 ? 'block' : 'none';
+        }
+
+        document.querySelectorAll('.filter-btn').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                const group = this.dataset.group;
+                const value = this.dataset.value;
+                filters[group] = value;
+                document.querySelectorAll('.filter-btn[data-group="' + group + '"]').forEach(function(b) {
+                    b.classList.remove('active');
+                });
+                this.classList.add('active');
+                applyFilters();
+            });
+        });
+
+        let searchTimer;
+        searchInput.addEventListener('input', function() {
+            clearTimeout(searchTimer);
+            const self = this;
+            searchTimer = setTimeout(function() {
+                filters.search = self.value.trim().toLowerCase();
+                applyFilters();
+            }, 200);
+        });
+    })();
+    </script>
 </body>
 </html>

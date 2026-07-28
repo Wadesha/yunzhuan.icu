@@ -49,21 +49,21 @@
         'economics': [
             { id: 'us-harvard', name: 'Harvard', tier: 'Reach', path: 'schools/us/harvard.html' },
             { id: 'us-mit', name: 'MIT', tier: 'Reach', path: 'schools/us/mit.html' },
-            { id: 'us-chicago', name: 'U Chicago', tier: 'Reach', path: 'schools/us/chicago.html' },
+            { id: 'us-chicago', name: 'U Chicago', tier: 'Reach', path: 'schools/us/uchicago.html' },
             { id: 'us-duke', name: 'Duke', tier: 'Reach', path: 'schools/us/duke.html' },
             { id: 'uk-lse', name: 'LSE', tier: 'Reach', path: 'schools/uk/lse.html' },
         ],
         'finance': [
-            { id: 'us-penn', name: 'UPenn (Wharton)', tier: 'Reach', path: 'schools/us/penn.html' },
-            { id: 'us-chicago', name: 'U Chicago', tier: 'Reach', path: 'schools/us/chicago.html' },
+            { id: 'us-penn', name: 'UPenn (Wharton)', tier: 'Reach', path: 'schools/us/upenn.html' },
+            { id: 'us-chicago', name: 'U Chicago', tier: 'Reach', path: 'schools/us/uchicago.html' },
             { id: 'us-stanford', name: 'Stanford', tier: 'Reach', path: 'schools/us/stanford.html' },
             { id: 'uk-lse', name: 'LSE', tier: 'Reach', path: 'schools/uk/lse.html' },
             { id: 'us-nyu', name: 'NYU Stern', tier: 'Match', path: 'schools/us/nyu.html' },
         ],
         'business-administration': [
-            { id: 'us-penn', name: 'UPenn (Wharton)', tier: 'Reach', path: 'schools/us/penn.html' },
+            { id: 'us-penn', name: 'UPenn (Wharton)', tier: 'Reach', path: 'schools/us/upenn.html' },
             { id: 'us-stanford', name: 'Stanford', tier: 'Reach', path: 'schools/us/stanford.html' },
-            { id: 'us-chicago', name: 'U Chicago', tier: 'Reach', path: 'schools/us/chicago.html' },
+            { id: 'us-chicago', name: 'U Chicago', tier: 'Reach', path: 'schools/us/uchicago.html' },
             { id: 'us-northwestern', name: 'Northwestern', tier: 'Match', path: 'schools/us/northwestern.html' },
             { id: 'us-umich', name: 'U Michigan', tier: 'Match', path: 'schools/us/umich.html' },
         ],
@@ -82,7 +82,7 @@
             { id: 'us-ucla', name: 'UCLA', tier: 'Match', path: 'schools/us/ucla.html' },
         ],
         'architecture': [
-            { id: 'us-cornell', name: 'Cornell', tier: 'Reach', path: 'schools/us/cornell.html' },
+            { id: 'us-columbia', name: 'Columbia', tier: 'Reach', path: 'schools/us/columbia.html' },
             { id: 'us-berkeley', name: 'UC Berkeley', tier: 'Reach', path: 'schools/us/berkeley.html' },
             { id: 'us-ucla', name: 'UCLA', tier: 'Match', path: 'schools/us/ucla.html' },
             { id: 'uk-cambridge', name: 'Cambridge', tier: 'Reach', path: 'schools/uk/cambridge.html' },
@@ -119,7 +119,7 @@
             };
         }
 
-        if ((path.includes('/majors/') || path.includes('/science/') || path.includes('/engineering/') ||
+        if ((path.includes('/majors/') || path.includes('/computer/') || path.includes('/science/') || path.includes('/engineering/') ||
              path.includes('/business/') || path.includes('/humanities/') || path.includes('/art/') ||
              path.includes('/social/') || path.includes('/health/') || path.includes('/education/'))
              && path.endsWith('.html')) {
@@ -220,6 +220,62 @@
         return section;
     }
 
+    function buildCompetitionRecommendations(majorId) {
+        if (!window.MAJOR_COMPETITIONS || !window.COMPETITIONS) return null;
+
+        const MAJOR_ID_ALIASES = {
+            'economics': 'econ',
+            'mathematics': 'math',
+            'psychology': 'psych',
+            'mechanical': 'engineering',
+            'mechanical-engineering': 'engineering',
+            'electrical': 'engineering',
+            'electrical-engineering': 'engineering',
+            'civil': 'engineering',
+            'chemical': 'chemistry',
+            'political': 'polisci',
+            'political-science': 'polisci',
+            'communications': 'comm',
+            'communication': 'comm',
+            'fine-arts': 'arts',
+            'music': 'arts',
+            'design': 'arts',
+            'business-administration': 'business',
+            'marketing': 'business',
+            'management': 'business',
+            'accounting': 'finance',
+            'international': 'business',
+            'data': 'cs',
+            'data-science': 'cs',
+            'ai': 'cs',
+            'software': 'cs'
+        };
+
+        const key = MAJOR_ID_ALIASES[majorId] || majorId;
+        const compIds = window.MAJOR_COMPETITIONS[key];
+        if (!compIds || compIds.length === 0) return null;
+
+        const prefix = getPrefix();
+        const cards = compIds.map(function(id) {
+            const comp = window.COMPETITIONS.find(function(c) { return c.id === id; });
+            if (!comp) return '';
+            const stars = '★'.repeat(comp.difficulty) + '☆'.repeat(5 - comp.difficulty);
+            return '<a href="' + prefix + 'competitions/' + comp.id + '.html" class="school-rec-card">' +
+                '<div class="school-rec-name">' + comp.name + '</div>' +
+                '<div class="school-rec-meta">' + comp.cnName + ' · ' + stars + ' · ' + comp.format + '</div>' +
+                '</a>';
+        }).filter(Boolean).join('');
+
+        if (!cards) return null;
+
+        const section = document.createElement('div');
+        section.className = 'school-recs';
+        section.innerHTML = '<h3>Recommended Competitions <span class="cn">推荐竞赛</span></h3>' +
+            '<div class="school-rec-grid">' + cards + '</div>';
+
+        return section;
+    }
+
     function init() {
         const pageInfo = getCurrentPageInfo();
         if (!pageInfo) return;
@@ -245,6 +301,13 @@
                 const footer = document.querySelector('.footer');
                 if (footer) {
                     footer.parentNode.insertBefore(recs, footer);
+                }
+            }
+            const compRecs = buildCompetitionRecommendations(pageInfo.id);
+            if (compRecs) {
+                const footer = document.querySelector('.footer');
+                if (footer) {
+                    footer.parentNode.insertBefore(compRecs, footer);
                 }
             }
         }

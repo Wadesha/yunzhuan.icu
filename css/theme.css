@@ -1046,3 +1046,42 @@ body {
 @media (prefers-reduced-motion: reduce) {
     body { animation: none !important; }
 }
+
+/* Print styles */
+@media print {
+    .navbar, .nav-links, .back-link, .footer, .breadcrumbs,
+    .fav-btn, .school-recs, .related-section, #backToTop,
+    .home-search-bar, .filter-groups, .filters, .cat-nav,
+    .view-toggle, .demo-banner, .contact-grid, .comment-section,
+    script, style {
+        display: none !important;
+    }
+    body {
+        max-width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        font-size: 11pt !important;
+        color: #000 !important;
+        background: white !important;
+    }
+    h1, h2, h3 {
+        page-break-after: avoid;
+    }
+    .category, .section, .stat-card, .month-card {
+        page-break-inside: avoid;
+        box-shadow: none !important;
+        border: 1px solid #ccc !important;
+    }
+    a {
+        color: #000 !important;
+        text-decoration: none !important;
+    }
+    a[href]:after {
+        content: " (" attr(href) ")";
+        font-size: 0.8em;
+        color: #666;
+    }
+    a[href^="#"]:after, a[href^="javascript"]:after {
+        content: "";
+    }
+}
