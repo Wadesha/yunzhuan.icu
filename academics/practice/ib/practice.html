@@ -46,15 +46,15 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   Practice
 </div>
 
-<h1>IB Practice Questions <span class="v-badge">v4</span></h1>
-<p class="subtitle">v4 · 20 道题 · 答题+错题本</p>
+<h1>IB Practice Questions <span class="v-badge">v5</span></h1>
+<p class="subtitle">v5 · 50 道题 · 计时+难度分级</p>
 
 <h2>Sample Questions</h2>
 
-<h3>Mathematics (7 questions)</h3>
+<h3>Mathematics (19 questions)</h3>
 
 <div class="q">
-  <div class="q-num">Q1 · IB Math AA HL · Calculus</div>
+  <div class="q-num">Q1 · IB Math AA HL · Calculus · Medium</div>
   <p class="q-text">Find the maximum value of f(x) = x³ - 6x² + 9x + 2 on the interval [0, 4].</p>
   <ul class="q-choices">
     <li>A) 6</li>
@@ -151,10 +151,178 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<h3>Physics (6 questions)</h3>
+<div class="q">
+  <div class="q-num">Q21 · IB Math AA HL · Sequences · Easy</div>
+  <p class="q-text">Find the 10th term of the arithmetic sequence 3, 7, 11, 15, ...</p>
+  <ul class="q-choices">
+    <li>A) 39</li>
+    <li>B) 43</li>
+    <li>C) 41</li>
+    <li>D) 47</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> A) 39. a_n = a_1 + (n-1)d = 3 + 9×4 = 39.
+  </div>
+</div>
 
 <div class="q">
-  <div class="q-num">Q2 · IB Physics HL · Mechanics</div>
+  <div class="q-num">Q22 · IB Math AA HL · Binomial Theorem · Medium</div>
+  <p class="q-text">Find the coefficient of x³ in the expansion of (1 + 2x)⁵.</p>
+  <ul class="q-choices">
+    <li>A) 10</li>
+    <li>B) 40</li>
+    <li>C) 80</li>
+    <li>D) 32</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> C) 80. C(5,3)·(2x)³ = 10·8x³ = 80x³, so the coefficient is 80.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q23 · IB Math AA HL · Complex Numbers · Medium</div>
+  <p class="q-text">Find the modulus of the complex number z = 3 + 4i.</p>
+  <ul class="q-choices">
+    <li>A) 7</li>
+    <li>B) 5</li>
+    <li>C) 25</li>
+    <li>D) 1</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) 5. |z| = √(3² + 4²) = √25 = 5.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q24 · IB Math AA HL · Integration · Hard</div>
+  <p class="q-text">Evaluate ∫ x·e^x dx.</p>
+  <ul class="q-choices">
+    <li>A) x·e^x + C</li>
+    <li>B) e^x(x - 1) + C</li>
+    <li>C) e^x(x + 1) + C</li>
+    <li>D) (1/2)x²·e^x + C</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) e^x(x - 1) + C. Using parts with u=x, dv=e^x dx: ∫x·e^x dx = x·e^x - ∫e^x dx = x·e^x - e^x = e^x(x-1) + C.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q25 · IB Math AI HL · Probability Distributions · Medium</div>
+  <p class="q-text">A fair coin is tossed 5 times. What is the probability of getting exactly 3 heads?</p>
+  <ul class="q-choices">
+    <li>A) 5/32</li>
+    <li>B) 10/32</li>
+    <li>C) 1/8</li>
+    <li>D) 3/16</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) 10/32. P(X=3) = C(5,3)·(1/2)⁵ = 10/32 = 5/16.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q26 · IB Math AA HL · Matrices · Hard</div>
+  <p class="q-text">Given matrix A = [[2, 1], [1, 3]], find A² (the matrix product A·A).</p>
+  <ul class="q-choices">
+    <li>A) [[5, 5], [5, 10]]</li>
+    <li>B) [[4, 3], [3, 10]]</li>
+    <li>C) [[5, 4], [4, 10]]</li>
+    <li>D) [[4, 1], [1, 9]]</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> A) [[5, 5], [5, 10]]. Row-by-column: row 1 = [2·2+1·1, 2·1+1·3] = [5, 5]; row 2 = [1·2+3·1, 1·1+3·3] = [5, 10].
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q27 · IB Math AA HL · Limits · Medium</div>
+  <p class="q-text">Evaluate lim(x→2) (x² - 4)/(x - 2).</p>
+  <ul class="q-choices">
+    <li>A) 0</li>
+    <li>B) 4</li>
+    <li>C) undefined</li>
+    <li>D) 2</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) 4. Factor: (x-2)(x+2)/(x-2) = x+2 → 4 as x→2.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q28 · IB Math AA HL · Trigonometric Identities · Hard</div>
+  <p class="q-text">Simplify: sin²θ + cos²θ + tan²θ.</p>
+  <ul class="q-choices">
+    <li>A) 1</li>
+    <li>B) sec²θ</li>
+    <li>C) 2</li>
+    <li>D) tan²θ</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) sec²θ. Using sin²θ + cos²θ = 1, the expression becomes 1 + tan²θ = sec²θ.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q29 · IB Math AA HL · Logarithms · Medium</div>
+  <p class="q-text">Solve: log(x) + log(x+3) = 1 (base 10).</p>
+  <ul class="q-choices">
+    <li>A) 2</li>
+    <li>B) -5</li>
+    <li>C) 2 or -5</li>
+    <li>D) 5</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> A) 2. log(x(x+3))=1, x(x+3)=10, x²+3x-10=0, (x-2)(x+5)=0, x=2 (x=-5 rejected since log of negative is undefined).
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q30 · IB Math AA HL · Optimization · Hard</div>
+  <p class="q-text">A rectangle has perimeter 20 m. What is the maximum possible area?</p>
+  <ul class="q-choices">
+    <li>A) 25 m²</li>
+    <li>B) 20 m²</li>
+    <li>C) 16 m²</li>
+    <li>D) 100 m²</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> A) 25 m². If length = x, width = 10-x, area = x(10-x) = 10x - x². Maximum at x = 5: area = 25 m² (square is optimal).
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q31 · IB Math AA HL · Differential Equations · Hard</div>
+  <p class="q-text">Solve dy/dx = 2x, given y(0) = 3.</p>
+  <ul class="q-choices">
+    <li>A) y = x² + 3</li>
+    <li>B) y = 2x² + 3</li>
+    <li>C) y = x² + C</li>
+    <li>D) y = 2x + 3</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> A) y = x² + 3. Integrate: y = x² + C. Use y(0)=3: C = 3. So y = x² + 3.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q32 · IB Math AA HL · Vector Geometry · Medium</div>
+  <p class="q-text">Find the dot product of vectors a = (2, -1, 3) and b = (4, 2, -1).</p>
+  <ul class="q-choices">
+    <li>A) 3</li>
+    <li>B) 8</li>
+    <li>C) 5</li>
+    <li>D) -3</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> A) 3. a·b = (2)(4) + (-1)(2) + (3)(-1) = 8 - 2 - 3 = 3.
+  </div>
+</div>
+
+<h3>Physics (16 questions)</h3>
+
+<div class="q">
+  <div class="q-num">Q2 · IB Physics HL · Mechanics · Easy</div>
   <p class="q-text">A ball is thrown vertically upward at 20 m/s. What is the maximum height reached? (g = 10 m/s²)</p>
   <ul class="q-choices">
     <li>A) 10 m</li>
@@ -237,10 +405,150 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<h3>Economics, Business & Chemistry (7 questions)</h3>
+<div class="q">
+  <div class="q-num">Q33 · IB Physics HL · Circular Motion · Easy</div>
+  <p class="q-text">A car goes around a circular track of radius 50 m at constant speed 10 m/s. What is its centripetal acceleration?</p>
+  <ul class="q-choices">
+    <li>A) 1 m/s²</li>
+    <li>B) 2 m/s²</li>
+    <li>C) 5 m/s²</li>
+    <li>D) 0 m/s²</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) 2 m/s². a_c = v²/r = 100/50 = 2 m/s².
+  </div>
+</div>
 
 <div class="q">
-  <div class="q-num">Q3 · IB Economics HL · Microeconomics</div>
+  <div class="q-num">Q34 · IB Physics HL · SHM · Medium</div>
+  <p class="q-text">A mass on a spring has period 2π s. If the spring constant k = 10 N/m, what is the mass? (Take π² ≈ 10)</p>
+  <ul class="q-choices">
+    <li>A) 0.1 kg</li>
+    <li>B) 1 kg</li>
+    <li>C) 10 kg</li>
+    <li>D) 100 kg</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> C) 10 kg. T = 2π√(m/k). With T = 2π: √(m/k) = 1, so m = k = 10 kg.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q35 · IB Physics HL · Electromagnetic Induction · Medium</div>
+  <p class="q-text">A magnetic flux through a coil changes from 0.05 Wb to 0.15 Wb in 0.2 s. The coil has 50 turns. What is the magnitude of the induced EMF?</p>
+  <ul class="q-choices">
+    <li>A) 5 V</li>
+    <li>B) 25 V</li>
+    <li>C) 2.5 V</li>
+    <li>D) 50 V</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) 25 V. EMF = N·|ΔΦ|/Δt = 50 × (0.10)/0.2 = 25 V.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q36 · IB Physics HL · Nuclear Physics · Hard</div>
+  <p class="q-text">A radioactive isotope has a half-life of 6 hours. If you start with 80 g, how much remains after 18 hours?</p>
+  <ul class="q-choices">
+    <li>A) 10 g</li>
+    <li>B) 20 g</li>
+    <li>C) 40 g</li>
+    <li>D) 5 g</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> A) 10 g. 18 hours = 3 half-lives. 80 → 40 → 20 → 10 g.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q37 · IB Physics HL · Optics · Medium</div>
+  <p class="q-text">A converging lens has focal length 20 cm. An object is placed 60 cm from the lens. At what distance from the lens is the image formed?</p>
+  <ul class="q-choices">
+    <li>A) 15 cm</li>
+    <li>B) 30 cm</li>
+    <li>C) 20 cm</li>
+    <li>D) 12 cm</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) 30 cm. 1/v = 1/f - 1/u = 1/20 - 1/60 = 2/60 = 1/30, so v = 30 cm.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q38 · IB Physics HL · Capacitors · Medium</div>
+  <p class="q-text">A 10 μF capacitor is charged by a 12 V battery. What charge is stored?</p>
+  <ul class="q-choices">
+    <li>A) 120 μC</li>
+    <li>B) 1.2 μC</li>
+    <li>C) 12 μC</li>
+    <li>D) 1200 μC</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> A) 120 μC. Q = CV = 10 × 12 = 120 μC.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q39 · IB Physics HL · Magnetism · Hard</div>
+  <p class="q-text">A wire of length 0.5 m carries current 4 A perpendicular to a magnetic field of 0.2 T. What is the force on the wire?</p>
+  <ul class="q-choices">
+    <li>A) 0.4 N</li>
+    <li>B) 0.04 N</li>
+    <li>C) 4 N</li>
+    <li>D) 2 N</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> A) 0.4 N. F = BIL = 0.2 × 4 × 0.5 = 0.4 N.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q40 · IB Physics HL · Quantum · Medium</div>
+  <p class="q-text">In the photoelectric effect, if light of frequency below the threshold frequency is shone on a metal, what happens?</p>
+  <ul class="q-choices">
+    <li>A) Electrons are emitted with low KE</li>
+    <li>B) No electrons are emitted</li>
+    <li>C) Electrons are emitted with high KE</li>
+    <li>D) The metal becomes positively charged</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) No electrons are emitted. Below the threshold frequency, no electrons are emitted regardless of intensity.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q41 · IB Physics HL · Thermodynamics · Easy</div>
+  <p class="q-text">How much heat is needed to raise the temperature of 2 kg of water by 5°C? (Specific heat capacity of water = 4200 J/kg·°C)</p>
+  <ul class="q-choices">
+    <li>A) 42000 J</li>
+    <li>B) 4200 J</li>
+    <li>C) 8400 J</li>
+    <li>D) 21000 J</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> A) 42000 J. Q = mcΔT = 2 × 4200 × 5 = 42000 J.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q42 · IB Physics HL · Fluids · Medium</div>
+  <p class="q-text">What is the pressure at a depth of 10 m in water? (Density of water = 1000 kg/m³, g = 10 m/s²)</p>
+  <ul class="q-choices">
+    <li>A) 10000 Pa</li>
+    <li>B) 100000 Pa</li>
+    <li>C) 1000 Pa</li>
+    <li>D) 100 Pa</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) 100000 Pa. P = ρgh = 1000 × 10 × 10 = 100000 Pa = 100 kPa.
+  </div>
+</div>
+
+<h3>Economics, Business & Chemistry (15 questions)</h3>
+
+<div class="q">
+  <div class="q-num">Q3 · IB Economics HL · Microeconomics · Easy</div>
   <p class="q-text">Which of the following will cause a shift of the demand curve to the right?</p>
   <ul class="q-choices">
     <li>A) A decrease in the price of the good</li>
@@ -337,8 +645,120 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
+<div class="q">
+  <div class="q-num">Q43 · IB Economics HL · Market Failure · Medium</div>
+  <p class="q-text">Which of the following is an example of a negative externality?</p>
+  <ul class="q-choices">
+    <li>A) Vaccination programs</li>
+    <li>B) Pollution from a factory</li>
+    <li>C) Public parks</li>
+    <li>D) Education subsidies</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B). Negative externalities impose costs on third parties. Pollution is a classic example. The other options are positive externalities or public goods.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q44 · IB Economics HL · Monetary Policy · Easy</div>
+  <p class="q-text">To combat inflation, a central bank should:</p>
+  <ul class="q-choices">
+    <li>A) Lower interest rates</li>
+    <li>B) Increase interest rates</li>
+    <li>C) Buy government bonds</li>
+    <li>D) Decrease reserve requirements</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) Increase interest rates. Contractionary monetary policy raises rates to reduce money supply and aggregate demand.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q45 · IB Economics HL · Exchange Rates · Medium</div>
+  <p class="q-text">If the US dollar appreciates against the Japanese yen, what happens to US exports to Japan?</p>
+  <ul class="q-choices">
+    <li>A) They become cheaper for Japanese buyers</li>
+    <li>B) They become more expensive for Japanese buyers</li>
+    <li>C) They remain the same price</li>
+    <li>D) They become zero</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) They become more expensive for Japanese buyers. A stronger USD means Japanese buyers need more yen to purchase the same US goods.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q46 · IB Business Management HL · Accounting · Medium</div>
+  <p class="q-text">A company has current assets of $200,000 and current liabilities of $100,000. What is the current ratio?</p>
+  <ul class="q-choices">
+    <li>A) 0.5</li>
+    <li>B) 2</li>
+    <li>C) 1.5</li>
+    <li>D) 3</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) 2. Current ratio = Current assets / Current liabilities = 200,000 / 100,000 = 2.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q47 · IB Business Management HL · HRM · Easy</div>
+  <p class="q-text">According to Maslow's hierarchy of needs, which need is at the highest level?</p>
+  <ul class="q-choices">
+    <li>A) Safety</li>
+    <li>B) Physiological</li>
+    <li>C) Self-actualization</li>
+    <li>D) Esteem</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> C) Self-actualization. Maslow's hierarchy from lowest to highest: physiological, safety, love/belonging, esteem, self-actualization.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q48 · IB Chemistry HL · Kinetics · Medium</div>
+  <p class="q-text">Which factor does NOT increase the rate of a chemical reaction?</p>
+  <ul class="q-choices">
+    <li>A) Increasing temperature</li>
+    <li>B) Increasing concentration</li>
+    <li>C) Adding a catalyst</li>
+    <li>D) Decreasing surface area</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> D) Decreasing surface area. Decreasing surface area reduces the rate of reaction by lowering collision frequency.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q49 · IB Chemistry HL · Equilibrium · Hard</div>
+  <p class="q-text">For the exothermic reaction N₂ + 3H₂ ⇌ 2NH₃, what happens to the equilibrium when temperature is increased?</p>
+  <ul class="q-choices">
+    <li>A) Equilibrium shifts right</li>
+    <li>B) Equilibrium shifts left</li>
+    <li>C) No change</li>
+    <li>D) Reaction stops</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) Equilibrium shifts left. For an exothermic reaction, increasing temperature shifts equilibrium toward the reactants (the endothermic direction).
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q50 · IB Chemistry HL · Acids & Bases · Medium</div>
+  <p class="q-text">What is the pH of a solution with [H⁺] = 1×10⁻⁴ M?</p>
+  <ul class="q-choices">
+    <li>A) 4</li>
+    <li>B) 10</li>
+    <li>C) 0.0001</li>
+    <li>D) 14</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> A) 4. pH = -log[H⁺] = -log(10⁻⁴) = 4.
+  </div>
+</div>
+
 <div class="box-dashed">
-  <strong>v4: 点击选项答题，自动记录到错题本（localStorage）。</strong>
+  <strong>v5: 点击选项答题，自动记录到错题本（localStorage），支持计时和难度筛选。</strong>
 </div>
 
 <div class="footer">

@@ -117,12 +117,76 @@
       }
     });
 
-    // Stats bar
+    // Stats bar + controls
     var stats = document.createElement('div');
     stats.style.cssText = 'border:1px solid #111;padding:10px 14px;margin:16px 0;font-size:0.85rem;';
     updateStats(stats);
     var h2 = document.querySelector('h2');
     if (h2) h2.parentNode.insertBefore(stats, h2.nextSibling);
+
+    // Timer
+    var timerDiv = document.createElement('div');
+    timerDiv.style.cssText = 'display:inline-block;margin-right:16px;';
+    var timerLabel = document.createElement('span');
+    timerLabel.textContent = '⏱ 00:00';
+    timerLabel.style.cssText = 'font-variant-numeric:tabular-nums;';
+    var timerBtn = document.createElement('button');
+    timerBtn.textContent = 'Start Timer';
+    timerBtn.style.cssText = 'border:1px solid #111;background:#fff;color:#111;padding:2px 8px;font-size:0.8rem;cursor:pointer;font-family:inherit;margin-left:6px;';
+    var timerInterval = null;
+    var timerSeconds = 0;
+    var timerRunning = false;
+    timerBtn.addEventListener('click', function() {
+      if (timerRunning) {
+        clearInterval(timerInterval);
+        timerRunning = false;
+        timerBtn.textContent = 'Resume';
+      } else {
+        timerRunning = true;
+        timerBtn.textContent = 'Pause';
+        timerInterval = setInterval(function() {
+          timerSeconds++;
+          var m = Math.floor(timerSeconds / 60);
+          var s = timerSeconds % 60;
+          timerLabel.textContent = '⏱ ' + String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0');
+        }, 1000);
+      }
+    });
+    timerDiv.appendChild(timerLabel);
+    timerDiv.appendChild(timerBtn);
+    stats.appendChild(timerDiv);
+
+    // Difficulty filter
+    var filterDiv = document.createElement('div');
+    filterDiv.style.cssText = 'display:inline-block;margin-right:16px;';
+    var filterLabel = document.createElement('span');
+    filterLabel.textContent = 'Filter: ';
+    filterDiv.appendChild(filterLabel);
+    ['All', 'Easy', 'Medium', 'Hard'].forEach(function(level) {
+      var btn = document.createElement('button');
+      btn.textContent = level;
+      btn.style.cssText = 'border:1px solid #e0e0e0;background:#fff;color:#555;padding:1px 6px;font-size:0.78rem;cursor:pointer;font-family:inherit;margin-right:3px;';
+      if (level === 'All') { btn.style.border = '1px solid #111'; btn.style.color = '#111'; btn.style.fontWeight = '700'; }
+      btn.addEventListener('click', function() {
+        filterDiv.querySelectorAll('button').forEach(function(b) {
+          b.style.border = '1px solid #e0e0e0'; b.style.color = '#555'; b.style.fontWeight = 'normal';
+        });
+        btn.style.border = '1px solid #111'; btn.style.color = '#111'; btn.style.fontWeight = '700';
+        questions.forEach(function(q) {
+          var qNum = q.querySelector('.q-num');
+          if (qNum) {
+            var text = qNum.textContent.toLowerCase();
+            if (level === 'All' || text.indexOf(level.toLowerCase()) >= 0) {
+              q.style.display = '';
+            } else {
+              q.style.display = 'none';
+            }
+          }
+        });
+      });
+      filterDiv.appendChild(btn);
+    });
+    stats.appendChild(filterDiv);
 
     // Clear button
     var clearBtn = document.createElement('button');

@@ -46,15 +46,15 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   Practice
 </div>
 
-<h1>A-Level Practice Questions <span class="v-badge">v4</span></h1>
-<p class="subtitle">v4 · 20 道题 · 答题+错题本</p>
+<h1>A-Level Practice Questions <span class="v-badge">v5</span></h1>
+<p class="subtitle">v5 · 50 道题 · 计时+难度分级</p>
 
 <h2>Sample Questions</h2>
 
-<h3>Mathematics (7 questions)</h3>
+<h3>Mathematics (19 questions)</h3>
 
 <div class="q">
-  <div class="q-num">Q1 · A-Level Math (P1) · Quadratics</div>
+  <div class="q-num">Q1 · A-Level Math (P1) · Quadratics · Easy</div>
   <p class="q-text">Solve the equation x² - 5x + 6 = 0.</p>
   <ul class="q-choices">
     <li>A) x=1, x=6</li>
@@ -151,10 +151,178 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<h3>Physics (6 questions)</h3>
+<div class="q">
+  <div class="q-num">Q21 · A-Level Math (P1) · Partial Fractions · Medium</div>
+  <p class="q-text">Express 1/((x+1)(x-1)) in partial fractions.</p>
+  <ul class="q-choices">
+    <li>A) 1/(2(x-1)) - 1/(2(x+1))</li>
+    <li>B) 1/(x-1) + 1/(x+1)</li>
+    <li>C) 1/((x-1)(x+1)) (cannot be split)</li>
+    <li>D) 2/(x-1) - 2/(x+1)</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> A) 1/(2(x-1)) - 1/(2(x+1)). Solving 1 = A(x-1) + B(x+1) gives A = 1/2, B = -1/2.
+  </div>
+</div>
 
 <div class="q">
-  <div class="q-num">Q2 · A-Level Physics · Electricity</div>
+  <div class="q-num">Q22 · A-Level Math (P3) · Maclaurin Series · Hard</div>
+  <p class="q-text">What is the Maclaurin series expansion of e^x up to the x² term?</p>
+  <ul class="q-choices">
+    <li>A) 1 + x + x²/2</li>
+    <li>B) 1 + x + x²</li>
+    <li>C) 1 + x²/2</li>
+    <li>D) x + x²/2</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> A) 1 + x + x²/2. e^x = 1 + x + x²/2! + ... = 1 + x + x²/2 + ...
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q23 · A-Level Math (P3) · Implicit Differentiation · Hard</div>
+  <p class="q-text">Find dy/dx if x² + y² = 25.</p>
+  <ul class="q-choices">
+    <li>A) -x/y</li>
+    <li>B) -y/x</li>
+    <li>C) x/y</li>
+    <li>D) y/x</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> A) -x/y. Differentiating implicitly: 2x + 2y(dy/dx) = 0 → dy/dx = -x/y.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q24 · A-Level Math (P2) · Parametric Equations · Medium</div>
+  <p class="q-text">Given x = t² and y = 2t, find dy/dx in terms of t.</p>
+  <ul class="q-choices">
+    <li>A) 1/t</li>
+    <li>B) 2t</li>
+    <li>C) t</li>
+    <li>D) 4t</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> A) 1/t. dy/dx = (dy/dt)/(dx/dt) = 2/(2t) = 1/t.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q25 · A-Level Math (P2) · Numerical Integration · Medium</div>
+  <p class="q-text">Using the trapezoidal rule with 2 strips, approximate ∫₀² x² dx (use x = 0, 1, 2).</p>
+  <ul class="q-choices">
+    <li>A) 3</li>
+    <li>B) 5</li>
+    <li>C) 2.67</li>
+    <li>D) 4</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> A) 3. Trapezoidal: (h/2)[f(0) + 2f(1) + f(2)] = (1/2)[0 + 2(1) + 4] = (1/2)(6) = 3.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q26 · A-Level Math (FP1) · Complex Numbers · Medium</div>
+  <p class="q-text">Find the value of i⁴, where i = √(-1).</p>
+  <ul class="q-choices">
+    <li>A) 1</li>
+    <li>B) -1</li>
+    <li>C) i</li>
+    <li>D) -i</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> A) 1. i² = -1, so i⁴ = (i²)² = (-1)² = 1.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q27 · A-Level Math (FP1) · Matrices · Hard</div>
+  <p class="q-text">Find the determinant of matrix M = [[3, 2], [4, 5]].</p>
+  <ul class="q-choices">
+    <li>A) 7</li>
+    <li>B) 23</li>
+    <li>C) 15</li>
+    <li>D) -7</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> A) 7. det = (3×5) - (2×4) = 15 - 8 = 7.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q28 · A-Level Math (P3) · Differential Equations · Hard</div>
+  <p class="q-text">Solve dy/dx = y, given y(0) = 2.</p>
+  <ul class="q-choices">
+    <li>A) y = 2e^x</li>
+    <li>B) y = e^x + 2</li>
+    <li>C) y = 2x</li>
+    <li>D) y = 2e^(2x)</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> A) y = 2e^x. Separate variables: dy/y = dx → ln|y| = x + C → y = Ae^x. Using y(0)=2: A = 2. So y = 2e^x.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q29 · A-Level Math (P2) · Binomial Expansion · Easy</div>
+  <p class="q-text">Find the first three terms in the expansion of (1 + x)⁴.</p>
+  <ul class="q-choices">
+    <li>A) 1 + 4x + 6x²</li>
+    <li>B) 1 + x + x²</li>
+    <li>C) 1 + 4x + 4x²</li>
+    <li>D) 4 + 4x + 6x²</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> A) 1 + 4x + 6x². (1+x)⁴ = 1 + 4x + 6x² + 4x³ + x⁴.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q30 · A-Level Math (P2) · Trigonometric Equations · Medium</div>
+  <p class="q-text">Solve cos(x) = 0.5 for 0° ≤ x ≤ 360°.</p>
+  <ul class="q-choices">
+    <li>A) 60° only</li>
+    <li>B) 60° and 300°</li>
+    <li>C) 60° and 120°</li>
+    <li>D) 30° and 150°</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) 60° and 300°. cos(60°) = 0.5 and cos(300°) = cos(-60°) = cos(60°) = 0.5.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q31 · A-Level Math (P3) · Vector Lines · Hard</div>
+  <p class="q-text">The line L has equation r = (1, 2, 3) + t(2, 1, -1). What is the position vector of the point on L when t = 2?</p>
+  <ul class="q-choices">
+    <li>A) (3, 3, 2)</li>
+    <li>B) (5, 4, 1)</li>
+    <li>C) (2, 1, -1)</li>
+    <li>D) (3, 4, 1)</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) (5, 4, 1). Substitute t = 2: (1+2(2), 2+2(1), 3+2(-1)) = (5, 4, 1).
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q32 · A-Level Math (P1) · Recurrence Relations · Easy</div>
+  <p class="q-text">A sequence is defined by u(n+1) = 2·u(n) + 1, with u(1) = 1. Find u(3).</p>
+  <ul class="q-choices">
+    <li>A) 3</li>
+    <li>B) 5</li>
+    <li>C) 7</li>
+    <li>D) 9</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> C) 7. u(2) = 2(1) + 1 = 3, u(3) = 2(3) + 1 = 7.
+  </div>
+</div>
+
+<h3>Physics (16 questions)</h3>
+
+<div class="q">
+  <div class="q-num">Q2 · A-Level Physics · Electricity · Medium</div>
   <p class="q-text">A resistor of 6Ω and a resistor of 3Ω are connected in parallel across a 12V battery. What is the total current?</p>
   <ul class="q-choices">
     <li>A) 2A</li>
@@ -237,10 +405,150 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<h3>Economics, Chemistry & Biology (7 questions)</h3>
+<div class="q">
+  <div class="q-num">Q33 · A-Level Physics · Circular Motion · Easy</div>
+  <p class="q-text">An object moves in a circle of radius 4 m at speed 6 m/s. What is its centripetal acceleration?</p>
+  <ul class="q-choices">
+    <li>A) 9 m/s²</li>
+    <li>B) 1.5 m/s²</li>
+    <li>C) 24 m/s²</li>
+    <li>D) 6 m/s²</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> A) 9 m/s². a_c = v²/r = 36/4 = 9 m/s².
+  </div>
+</div>
 
 <div class="q">
-  <div class="q-num">Q3 · A-Level Economics · Macroeconomics</div>
+  <div class="q-num">Q34 · A-Level Physics · SHM · Medium</div>
+  <p class="q-text">A simple pendulum has length 1 m. What is its period on Earth? (g = 10 m/s², π² ≈ 10)</p>
+  <ul class="q-choices">
+    <li>A) 2 s</li>
+    <li>B) 1 s</li>
+    <li>C) π s</li>
+    <li>D) 0.5 s</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> A) 2 s. T = 2π√(L/g) = 2π√(0.1) = 2π/√10 ≈ 2π/π = 2 s (using π² ≈ 10, so π ≈ √10).
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q35 · A-Level Physics · Magnetic Fields · Medium</div>
+  <p class="q-text">An electron moves at 2×10⁶ m/s perpendicular to a magnetic field of 0.5 T. What is the magnetic force? (e = 1.6×10⁻¹⁹ C)</p>
+  <ul class="q-choices">
+    <li>A) 1.6×10⁻¹³ N</li>
+    <li>B) 1.6×10⁻¹⁹ N</li>
+    <li>C) 1×10⁶ N</li>
+    <li>D) 4×10⁻¹³ N</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> A) 1.6×10⁻¹³ N. F = qvB = 1.6×10⁻¹⁹ × 2×10⁶ × 0.5 = 1.6×10⁻¹³ N.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q36 · A-Level Physics · Nuclear Physics · Hard</div>
+  <p class="q-text">In the nuclear fission of U-235, what particle initiates the reaction?</p>
+  <ul class="q-choices">
+    <li>A) Proton</li>
+    <li>B) Neutron</li>
+    <li>C) Electron</li>
+    <li>D) Alpha particle</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) Neutron. U-235 absorbs a slow (thermal) neutron, becoming unstable U-236 which then fissions.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q37 · A-Level Physics · Capacitors · Medium</div>
+  <p class="q-text">Two capacitors of 2 μF and 3 μF are connected in parallel. What is the total capacitance?</p>
+  <ul class="q-choices">
+    <li>A) 1.2 μF</li>
+    <li>B) 5 μF</li>
+    <li>C) 6 μF</li>
+    <li>D) 1.5 μF</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) 5 μF. In parallel, C_total = C₁ + C₂ = 2 + 3 = 5 μF.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q38 · A-Level Physics · Electromagnetic Induction · Hard</div>
+  <p class="q-text">A coil of 100 turns has its flux change from 0.04 Wb to 0.10 Wb in 0.3 s. What is the magnitude of the induced EMF?</p>
+  <ul class="q-choices">
+    <li>A) 20 V</li>
+    <li>B) 10 V</li>
+    <li>C) 30 V</li>
+    <li>D) 2 V</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> A) 20 V. EMF = N·|ΔΦ|/Δt = 100 × (0.10 - 0.04)/0.3 = 100 × 0.06/0.3 = 20 V.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q39 · A-Level Physics · Thermodynamics · Medium</div>
+  <p class="q-text">An ideal gas undergoes isothermal expansion. Which statement is true?</p>
+  <ul class="q-choices">
+    <li>A) Internal energy increases</li>
+    <li>B) Temperature decreases</li>
+    <li>C) Internal energy stays constant</li>
+    <li>D) No work is done</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> C) Internal energy stays constant. In an isothermal process, temperature is constant, so the internal energy of an ideal gas remains unchanged.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q40 · A-Level Physics · Optics · Medium</div>
+  <p class="q-text">Light travels from air (n=1) into glass (n=1.5). If the angle of incidence is 30°, what is the angle of refraction? (sin 30° = 0.5)</p>
+  <ul class="q-choices">
+    <li>A) 19.5°</li>
+    <li>B) 45°</li>
+    <li>C) 60°</li>
+    <li>D) 15°</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> A) 19.5°. Snell's law: 1·sin 30° = 1.5·sin θ₂, so sin θ₂ = 0.5/1.5 ≈ 0.333, giving θ₂ ≈ 19.5°.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q41 · A-Level Physics · Gravitational Fields · Hard</div>
+  <p class="q-text">The gravitational field strength at the surface of a planet is g. At twice the radius from the planet's center, the field strength is:</p>
+  <ul class="q-choices">
+    <li>A) g/2</li>
+    <li>B) g/4</li>
+    <li>C) g/8</li>
+    <li>D) 2g</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) g/4. Gravitational field strength g ∝ 1/r². Doubling r reduces g by a factor of 4.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q42 · A-Level Physics · Radioactivity · Easy</div>
+  <p class="q-text">Which type of radiation is stopped by a sheet of paper?</p>
+  <ul class="q-choices">
+    <li>A) Alpha</li>
+    <li>B) Beta</li>
+    <li>C) Gamma</li>
+    <li>D) Neutron</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> A) Alpha. Alpha particles have low penetration and are stopped by paper or a few cm of air.
+  </div>
+</div>
+
+<h3>Economics, Chemistry & Biology (15 questions)</h3>
+
+<div class="q">
+  <div class="q-num">Q3 · A-Level Economics · Macroeconomics · Medium</div>
   <p class="q-text">Which policy is most effective to reduce demand-pull inflation?</p>
   <ul class="q-choices">
     <li>A) Increase government spending</li>
@@ -337,8 +645,120 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
+<div class="q">
+  <div class="q-num">Q43 · A-Level Economics · Market Structures · Medium</div>
+  <p class="q-text">In perfect competition, which statement is true about individual firms?</p>
+  <ul class="q-choices">
+    <li>A) They can set their own prices</li>
+    <li>B) They are price takers</li>
+    <li>C) They have significant market power</li>
+    <li>D) They produce differentiated products</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) They are price takers. In perfect competition, firms are price takers with no individual market power, selling homogeneous products.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q44 · A-Level Economics · Monetary Policy · Easy</div>
+  <p class="q-text">Which action represents expansionary monetary policy?</p>
+  <ul class="q-choices">
+    <li>A) Increasing interest rates</li>
+    <li>B) Selling government bonds</li>
+    <li>C) Decreasing interest rates</li>
+    <li>D) Increasing reserve requirements</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> C) Decreasing interest rates. Lower interest rates stimulate borrowing and spending, expanding the economy.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q45 · A-Level Economics · Balance of Payments · Medium</div>
+  <p class="q-text">A country's exports exceed its imports. This results in:</p>
+  <ul class="q-choices">
+    <li>A) A current account deficit</li>
+    <li>B) A current account surplus</li>
+    <li>C) A capital account deficit</li>
+    <li>D) No effect on balance of payments</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) A current account surplus. Exports > imports means a positive trade balance, contributing to a current account surplus.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q46 · A-Level Chemistry · Esters · Medium</div>
+  <p class="q-text">What is formed when ethanol reacts with ethanoic acid in the presence of sulfuric acid?</p>
+  <ul class="q-choices">
+    <li>A) Ethyl ethanoate</li>
+    <li>B) Ethanol ethanoate</li>
+    <li>C) Diethyl ether</li>
+    <li>D) Ethene</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> A) Ethyl ethanoate. Esterification: CH₃COOH + C₂H₅OH → CH₃COOC₂H₅ + H₂O.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q47 · A-Level Chemistry · Electrolysis · Hard</div>
+  <p class="q-text">During the electrolysis of molten NaCl, what is produced at the cathode?</p>
+  <ul class="q-choices">
+    <li>A) Chlorine gas</li>
+    <li>B) Sodium metal</li>
+    <li>C) Oxygen gas</li>
+    <li>D) Hydrogen gas</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) Sodium metal. Na⁺ is reduced to Na at the cathode: Na⁺ + e⁻ → Na.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q48 · A-Level Biology · Enzymes · Medium</div>
+  <p class="q-text">What effect does a competitive inhibitor have on an enzyme's Km?</p>
+  <ul class="q-choices">
+    <li>A) Increases Km</li>
+    <li>B) Decreases Km</li>
+    <li>C) No effect on Km</li>
+    <li>D) Eliminates Km</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> A) Increases Km. Competitive inhibitors increase the apparent Km (more substrate is needed to reach half Vmax) without affecting Vmax.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q49 · A-Level Biology · Photosynthesis · Easy</div>
+  <p class="q-text">Where do the light-dependent reactions of photosynthesis occur?</p>
+  <ul class="q-choices">
+    <li>A) Stroma</li>
+    <li>B) Thylakoid membrane</li>
+    <li>C) Matrix</li>
+    <li>D) Cytoplasm</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) Thylakoid membrane. Light-dependent reactions occur in the thylakoid membrane of chloroplasts; the Calvin cycle occurs in the stroma.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q50 · A-Level Biology · Genetics · Hard</div>
+  <p class="q-text">In humans, hemophilia is X-linked recessive. If a carrier mother and unaffected father have children, what is the probability that a son will have hemophilia?</p>
+  <ul class="q-choices">
+    <li>A) 25%</li>
+    <li>B) 50%</li>
+    <li>C) 100%</li>
+    <li>D) 0%</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) 50%. Mother is X^H X^h, father is X^H Y. Sons inherit Y from father and one X from mother, so 50% chance of inheriting X^h (hemophilia).
+  </div>
+</div>
+
 <div class="box-dashed">
-  <strong>v4: 点击选项答题，自动记录到错题本（localStorage）。</strong>
+  <strong>v5: 点击选项答题，自动记录到错题本（localStorage），支持计时和难度筛选。</strong>
 </div>
 
 <div class="footer">

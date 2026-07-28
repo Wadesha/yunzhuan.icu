@@ -46,15 +46,15 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   Practice
 </div>
 
-<h1>AP Practice Questions <span class="v-badge">v4</span></h1>
-<p class="subtitle">v4 · 20 道题 · 答题+错题本</p>
+<h1>AP Practice Questions <span class="v-badge">v5</span></h1>
+<p class="subtitle">v5 · 50 道题 · 计时+难度分级</p>
 
 <h2>Sample Questions</h2>
 
-<h3>Group 1 · Calculus & Math (8 questions)</h3>
+<h3>Group 1 · Calculus & Math (20 questions)</h3>
 
 <div class="q">
-  <div class="q-num">Q1 · AP Calculus BC · Integration</div>
+  <div class="q-num">Q1 · AP Calculus BC · Integration · Easy</div>
   <p class="q-text">Evaluate ∫(2x + 3) dx.</p>
   <ul class="q-choices">
     <li>A) x² + 3x + C</li>
@@ -165,10 +165,178 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<h3>Group 2 · Science (6 questions)</h3>
+<div class="q">
+  <div class="q-num">Q21 · AP Calculus BC · Chain Rule · Easy</div>
+  <p class="q-text">Find dy/dx if y = (3x + 1)⁴.</p>
+  <ul class="q-choices">
+    <li>A) 4(3x + 1)³</li>
+    <li>B) 12(3x + 1)³</li>
+    <li>C) (3x + 1)³</li>
+    <li>D) 12x³</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) 12(3x + 1)³. Chain rule: 4(3x + 1)³ × d/dx(3x + 1) = 4(3x + 1)³ × 3 = 12(3x + 1)³.
+  </div>
+</div>
 
 <div class="q">
-  <div class="q-num">Q2 · AP Chemistry · Stoichiometry</div>
+  <div class="q-num">Q22 · AP Calculus BC · Product Rule · Medium</div>
+  <p class="q-text">Find dy/dx if y = x² · sin(x).</p>
+  <ul class="q-choices">
+    <li>A) 2x · cos(x)</li>
+    <li>B) 2x · sin(x) + x² · cos(x)</li>
+    <li>C) x² · cos(x)</li>
+    <li>D) 2x · cos(x) + x² · sin(x)</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) 2x · sin(x) + x² · cos(x). Product rule: (fg)' = f'g + fg', with f = x², g = sin(x).
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q23 · AP Calculus BC · Quotient Rule · Medium</div>
+  <p class="q-text">Find dy/dx if y = (x² + 1) / (x − 1).</p>
+  <ul class="q-choices">
+    <li>A) [2x(x − 1) − (x² + 1)] / (x − 1)²</li>
+    <li>B) (x² + 1) / (x − 1)²</li>
+    <li>C) 2x / (x − 1)</li>
+    <li>D) [2x(x − 1) + (x² + 1)] / (x − 1)²</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> A) [2x(x − 1) − (x² + 1)] / (x − 1)². Quotient rule: (f/g)' = (f'g − fg') / g².
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q24 · AP Calculus AB · Riemann Sums · Medium</div>
+  <p class="q-text">Approximate ∫₀² x² dx using a right Riemann sum with n = 4 subintervals.</p>
+  <ul class="q-choices">
+    <li>A) 1.75</li>
+    <li>B) 3.75</li>
+    <li>C) 5.75</li>
+    <li>D) 8</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) 3.75. Δx = 0.5. Heights at x = 0.5, 1, 1.5, 2 are 0.25, 1, 2.25, 4. Sum = 0.5 × (0.25 + 1 + 2.25 + 4) = 0.5 × 7.5 = 3.75.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q25 · AP Calculus BC · Taylor Series · Hard</div>
+  <p class="q-text">What are the first three non-zero terms of the Maclaurin series for eˣ?</p>
+  <ul class="q-choices">
+    <li>A) 1 + x + x²/2</li>
+    <li>B) 1 + x + x²</li>
+    <li>C) x + x²/2 + x³/6</li>
+    <li>D) 1 − x + x²/2</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> A) 1 + x + x²/2. eˣ = Σ xⁿ/n! = 1 + x + x²/2! + x³/3! + ...
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q26 · AP Calculus AB · Related Rates · Hard</div>
+  <p class="q-text">A spherical balloon's radius increases at 2 cm/s. When r = 5 cm, what is dV/dt? (V = 4/3 πr³)</p>
+  <ul class="q-choices">
+    <li>A) 20π cm³/s</li>
+    <li>B) 40π cm³/s</li>
+    <li>C) 100π cm³/s</li>
+    <li>D) 200π cm³/s</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> D) 200π cm³/s. dV/dt = 4πr² · dr/dt = 4π(25)(2) = 200π.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q27 · AP Calculus AB · Optimization · Hard</div>
+  <p class="q-text">Find the dimensions of the rectangle with maximum area and perimeter 20.</p>
+  <ul class="q-choices">
+    <li>A) 5 × 5</li>
+    <li>B) 4 × 6</li>
+    <li>C) 3 × 7</li>
+    <li>D) 2 × 8</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> A) 5 × 5. With perimeter 20 (so length + width = 10), max area A = w(10 − w) is maximized at w = 5, giving a 5 × 5 square (area 25).
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q28 · AP Calculus BC · Slope Fields · Medium</div>
+  <p class="q-text">A slope field has horizontal line segments (slope 0) at every point along the x-axis (y = 0). Which differential equation matches?</p>
+  <ul class="q-choices">
+    <li>A) dy/dx = x</li>
+    <li>B) dy/dx = y</li>
+    <li>C) dy/dx = x + y</li>
+    <li>D) dy/dx = xy</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) dy/dx = y. When y = 0, slope = 0; segments are horizontal everywhere on the x-axis.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q29 · AP Calculus BC · Parametric Derivatives · Hard</div>
+  <p class="q-text">If x = t² and y = t³, find dy/dx at t = 2.</p>
+  <ul class="q-choices">
+    <li>A) 2</li>
+    <li>B) 3</li>
+    <li>C) 4</li>
+    <li>D) 6</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) 3. dy/dx = (dy/dt) / (dx/dt) = 3t² / 2t = 3t/2. At t = 2: 3(2)/2 = 3.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q30 · AP Calculus BC · Polar Area · Hard</div>
+  <p class="q-text">Find the area enclosed by the polar curve r = 2 (a circle of radius 2).</p>
+  <ul class="q-choices">
+    <li>A) 2π</li>
+    <li>B) 4π</li>
+    <li>C) 8π</li>
+    <li>D) 16π</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) 4π. A = ½ ∫₀²π r² dθ = ½ ∫₀²π 4 dθ = ½ × 4 × 2π = 4π.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q31 · AP Calculus BC · Improper Integrals · Hard</div>
+  <p class="q-text">Evaluate ∫₁^∞ 1/x² dx.</p>
+  <ul class="q-choices">
+    <li>A) 0</li>
+    <li>B) 1</li>
+    <li>C) ∞</li>
+    <li>D) 2</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) 1. ∫₁^∞ x⁻² dx = [−x⁻¹]₁^∞ = 0 − (−1) = 1.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q32 · AP Calculus BC · Logistic Growth · Medium</div>
+  <p class="q-text">In logistic growth, the population grows fastest when:</p>
+  <ul class="q-choices">
+    <li>A) Population is near 0</li>
+    <li>B) Population equals half the carrying capacity</li>
+    <li>C) Population equals the carrying capacity</li>
+    <li>D) Population exceeds the carrying capacity</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) Population equals half the carrying capacity. The inflection point of the logistic curve occurs at K/2, where growth rate is maximal.
+  </div>
+</div>
+
+<h3>Group 2 · Science (16 questions)</h3>
+
+<div class="q">
+  <div class="q-num">Q2 · AP Chemistry · Stoichiometry · Medium</div>
   <p class="q-text">How many moles of H₂O are produced when 2 moles of H₂ react with excess O₂? 2H₂ + O₂ → 2H₂O</p>
   <ul class="q-choices">
     <li>A) 1</li>
@@ -251,10 +419,150 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<h3>Group 3 · History & CS (6 questions)</h3>
+<div class="q">
+  <div class="q-num">Q33 · AP Chemistry · Acid-Base Titration · Medium</div>
+  <p class="q-text">In a titration, 25 mL of HCl requires 20 mL of 0.1 M NaOH for neutralization. What is [HCl]?</p>
+  <ul class="q-choices">
+    <li>A) 0.04 M</li>
+    <li>B) 0.08 M</li>
+    <li>C) 0.125 M</li>
+    <li>D) 0.5 M</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) 0.08 M. M₁V₁ = M₂V₂ → M₁ × 25 = 0.1 × 20 → M₁ = 2/25 = 0.08 M.
+  </div>
+</div>
 
 <div class="q">
-  <div class="q-num">Q3 · AP US History · Period 3</div>
+  <div class="q-num">Q34 · AP Chemistry · Buffers · Hard</div>
+  <p class="q-text">Which combination forms a buffer solution?</p>
+  <ul class="q-choices">
+    <li>A) HCl and NaCl</li>
+    <li>B) NaOH and NaCl</li>
+    <li>C) CH₃COOH and CH₃COONa</li>
+    <li>D) HNO₃ and KNO₃</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> C) CH₃COOH and CH₃COONa. A buffer requires a weak acid (CH₃COOH) and its conjugate base (CH₃COO⁻ from sodium acetate). Strong acids/bases do not form buffers.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q35 · AP Chemistry · Thermodynamics · Hard</div>
+  <p class="q-text">For a reaction to be spontaneous at all temperatures, which must be true? (ΔG = ΔH − TΔS)</p>
+  <ul class="q-choices">
+    <li>A) ΔH < 0, ΔS < 0</li>
+    <li>B) ΔH > 0, ΔS > 0</li>
+    <li>C) ΔH < 0, ΔS > 0</li>
+    <li>D) ΔH > 0, ΔS < 0</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> C) ΔH < 0, ΔS > 0. With ΔH negative and ΔS positive, ΔG = ΔH − TΔS is always negative, so the reaction is always spontaneous.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q36 · AP Chemistry · Electrochemistry · Hard</div>
+  <p class="q-text">In a galvanic cell, oxidation occurs at the:</p>
+  <ul class="q-choices">
+    <li>A) Cathode</li>
+    <li>B) Anode</li>
+    <li>C) Salt bridge</li>
+    <li>D) Voltmeter</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) Anode. Oxidation always occurs at the anode (in both galvanic and electrolytic cells); electrons flow from anode to cathode.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q37 · AP Biology · Natural Selection · Medium</div>
+  <p class="q-text">Industrial melanism in peppered moths (Biston betularia) is a classic example of:</p>
+  <ul class="q-choices">
+    <li>A) Genetic drift</li>
+    <li>B) Natural selection</li>
+    <li>C) Gene flow</li>
+    <li>D) Random mutation pressure</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) Natural selection. Darker moths had higher fitness in polluted (soot-darkened) areas, an example of directional selection.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q38 · AP Biology · Genetic Drift · Medium</div>
+  <p class="q-text">The bottleneck effect (a population shrinking dramatically) is an example of:</p>
+  <ul class="q-choices">
+    <li>A) Natural selection</li>
+    <li>B) Genetic drift</li>
+    <li>C) Gene flow</li>
+    <li>D) Sexual selection</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) Genetic drift. The bottleneck effect causes random changes in allele frequencies due to a sharp population reduction.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q39 · AP Biology · Ecology · Easy</div>
+  <p class="q-text">Which biome is characterized by permafrost and low-growing vegetation?</p>
+  <ul class="q-choices">
+    <li>A) Tropical rainforest</li>
+    <li>B) Tundra</li>
+    <li>C) Desert</li>
+    <li>D) Grassland</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) Tundra. Tundra has permafrost, short growing seasons, and low-growing plants adapted to cold.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q40 · AP Biology · Cell Signaling · Medium</div>
+  <p class="q-text">A signal molecule that binds to a receptor on the cell surface is called a:</p>
+  <ul class="q-choices">
+    <li>A) Steroid hormone</li>
+    <li>B) Second messenger</li>
+    <li>C) Ligand</li>
+    <li>D) Transcription factor</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> C) Ligand. A ligand is a signaling molecule that binds to a specific receptor, often triggering a response inside the cell.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q41 · AP Biology · Gene Regulation · Hard</div>
+  <p class="q-text">The lac operon in E. coli is induced (turned on) in the presence of:</p>
+  <ul class="q-choices">
+    <li>A) Glucose</li>
+    <li>B) Lactose</li>
+    <li>C) Tryptophan</li>
+    <li>D) Sucrose</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) Lactose. Lactose binds to the repressor, causing it to release the operator and allowing transcription of lactose-metabolism genes.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q42 · AP Biology · Lab Techniques · Medium</div>
+  <p class="q-text">Which technique is used to amplify a specific segment of DNA?</p>
+  <ul class="q-choices">
+    <li>A) Gel electrophoresis</li>
+    <li>B) PCR</li>
+    <li>C) Centrifugation</li>
+    <li>D) Column chromatography</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) PCR. The Polymerase Chain Reaction amplifies specific DNA sequences exponentially through cycles of denaturation, annealing, and extension.
+  </div>
+</div>
+
+<h3>Group 3 · History & CS (14 questions)</h3>
+
+<div class="q">
+  <div class="q-num">Q3 · AP US History · Period 3 · Medium</div>
   <p class="q-text">Which event directly led to the writing of the Federalist Papers?</p>
   <ul class="q-choices">
     <li>A) The Boston Tea Party</li>
@@ -337,8 +645,120 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
+<div class="q">
+  <div class="q-num">Q43 · AP US History · Reconstruction · Medium</div>
+  <p class="q-text">The 13th Amendment to the US Constitution (1865):</p>
+  <ul class="q-choices">
+    <li>A) Granted women the right to vote</li>
+    <li>B) Abolished slavery and involuntary servitude</li>
+    <li>C) Granted citizenship to all persons born in the US</li>
+    <li>D) Guaranteed voting rights regardless of race</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) Abolished slavery and involuntary servitude. (Citizenship was the 14th; voting rights regardless of race were the 15th; women's suffrage was the 19th.)
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q44 · AP US History · Gilded Age · Medium</div>
+  <p class="q-text">The Gilded Age (late 1800s) was characterized by:</p>
+  <ul class="q-choices">
+    <li>A) Reduced economic inequality</li>
+    <li>B) Industrial expansion and political corruption</li>
+    <li>C) Strict government regulation of monopolies</li>
+    <li>D) Mass immigration from Asia only</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) Industrial expansion and political corruption. The era saw rapid industrialization, the rise of robber barons, and widespread political graft, beneath a "gilded" surface.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q45 · AP US History · Progressive Era · Medium</div>
+  <p class="q-text">Which was a major goal of the Progressive Era (1890s–1920s)?</p>
+  <ul class="q-choices">
+    <li>A) Expanding slavery into new territories</li>
+    <li>B) Reducing government regulation of business</li>
+    <li>C) Reforming government and reducing corruption</li>
+    <li>D) Repealing women's suffrage</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> C) Reforming government and reducing corruption. Progressives sought political, social, and economic reforms including direct primaries, antitrust laws, and women's suffrage.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q46 · AP US History · Cold War · Hard</div>
+  <p class="q-text">The US policy of containment during the Cold War aimed to:</p>
+  <ul class="q-choices">
+    <li>A) Defeat the Soviet Union militarily</li>
+    <li>B) Prevent the spread of communism</li>
+    <li>C) Annex Soviet territory</li>
+    <li>D) Spread democracy directly into Russia</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) Prevent the spread of communism. Containment, articulated by George Kennan in the "Long Telegram," sought to stop communism from expanding beyond its existing borders.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q47 · AP US History · Civil Rights · Medium</div>
+  <p class="q-text">Brown v. Board of Education (1954) ruled that:</p>
+  <ul class="q-choices">
+    <li>A) Segregation in public schools was unconstitutional</li>
+    <li>B) Slavery was abolished nationwide</li>
+    <li>C) Women had a constitutional right to vote</li>
+    <li>D) Poll taxes in federal elections were illegal</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> A) Segregation in public schools was unconstitutional. The unanimous decision overturned the "separate but equal" doctrine of Plessy v. Ferguson in public education.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q48 · AP Computer Science A · Recursion · Hard</div>
+  <p class="q-text">What is the output of: public static int f(int n) { if (n == 0) return 1; return n * f(n − 1); } f(4)?</p>
+  <ul class="q-choices">
+    <li>A) 4</li>
+    <li>B) 16</li>
+    <li>C) 24</li>
+    <li>D) 120</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> C) 24. The method computes 4! = 4 × 3 × 2 × 1 = 24 recursively.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q49 · AP Computer Science A · Linked Lists · Medium</div>
+  <p class="q-text">What is the main advantage of a linked list over an array?</p>
+  <ul class="q-choices">
+    <li>A) Faster random access by index</li>
+    <li>B) Easier insertion/deletion at a known node</li>
+    <li>C) Less memory usage per element</li>
+    <li>D) Built-in sorting</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) Easier insertion/deletion at a known node. Linked lists allow O(1) insertion/deletion when the node position is known, since only pointers are updated (no shifting). Arrays allow O(1) random access.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q50 · AP Statistics · Hypothesis Testing · Hard</div>
+  <p class="q-text">A hypothesis test yields a p-value of 0.03 at significance level α = 0.05. The correct conclusion is to:</p>
+  <ul class="q-choices">
+    <li>A) Fail to reject H₀</li>
+    <li>B) Reject H₀</li>
+    <li>C) Accept H₀ as proven true</li>
+    <li>D) Cannot determine without the sample size</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) Reject H₀. Since p < α (0.03 < 0.05), there is sufficient evidence to reject the null hypothesis at the 0.05 level. We never "accept" H₀; we only fail to reject it.
+  </div>
+</div>
+
 <div class="box-dashed">
-  <strong>v4: 点击选项答题，自动记录到错题本（localStorage）。</strong>
+  <strong>v5: 点击选项答题，自动记录到错题本（localStorage），支持计时与难度分级。</strong>
 </div>
 
 <div class="footer">
