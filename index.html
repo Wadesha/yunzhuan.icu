@@ -8,566 +8,405 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            max-width: 960px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            max-width: 760px;
             margin: 0 auto;
-            padding: 0 16px 20px;
-            background: #fafafa;
-            color: #333;
-            line-height: 1.6;
+            padding: 0 20px 40px;
+            background: #ffffff;
+            color: #1a1a1a;
+            line-height: 1.7;
+            font-size: 16px;
         }
 
-        /* 导航 */
+        /* Navigation */
         .navbar {
+            border-bottom: 1px solid #e0e0e0;
+            padding: 16px 0;
+            margin-bottom: 32px;
+        }
+        .nav-inner {
             display: flex;
-            justify-content: flex-start;
+            justify-content: space-between;
             align-items: center;
-            padding: 12px 0;
-            margin-bottom: 0;
             flex-wrap: wrap;
-            gap: 6px;
+            gap: 12px;
         }
         .logo {
-            font-weight: 700;
-            font-size: 0.95rem;
-            color: #4f46e5;
+            font-weight: 600;
+            font-size: 1rem;
+            color: #1a1a1a;
             text-decoration: none;
-            margin-right: 8px;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 4px 8px 4px 4px;
-            border-radius: 6px;
         }
         .logo-icon {
-            width: 24px;
-            height: 24px;
-            background: #4f46e5;
-            border-radius: 5px;
-            display: flex;
+            background: #1a1a1a;
+            color: white;
+            width: 22px;
+            height: 22px;
+            border-radius: 4px;
+            display: inline-flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.75rem;
-            color: white;
-            flex-shrink: 0;
+            font-size: 0.7rem;
+            margin-right: 6px;
+            vertical-align: middle;
         }
-        .logo-text { line-height: 1; }
-        .logo-text span { color: #7c3aed; }
         .nav-links {
             display: flex;
-            gap: 14px;
-            align-items: center;
+            gap: 18px;
             flex-wrap: wrap;
         }
         .nav-links a {
+            color: #333;
             text-decoration: none;
-            color: #555;
-            font-size: 0.82rem;
-            font-weight: 500;
-            white-space: nowrap;
-            transition: color 0.15s;
+            font-size: 0.9rem;
         }
-        .nav-links a:hover { color: #4f46e5; }
+        .nav-links a:hover {
+            color: #0066cc;
+            text-decoration: underline;
+        }
         .nav-links .cn {
-            font-size: 0.65rem;
-            color: #bbb;
+            color: #999;
+            font-size: 0.75rem;
             margin-left: 2px;
         }
 
         /* Hero */
         .hero {
-            text-align: center;
-            padding: 40px 0 24px;
+            margin-bottom: 40px;
         }
         .hero h1 {
-            font-size: 2rem;
-            color: #1e293b;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #111;
             margin-bottom: 8px;
-            letter-spacing: -0.5px;
+            line-height: 1.2;
         }
-        .hero h1 .accent { color: #4f46e5; }
-        .hero .tagline {
-            font-size: 1rem;
-            color: #64748b;
+        .hero .subtitle {
+            font-size: 1.05rem;
+            color: #555;
             margin-bottom: 20px;
         }
-        .hero .tagline-cn {
-            font-size: 0.85rem;
-            color: #94a3b8;
-            margin-bottom: 20px;
+        .hero .subtitle-cn {
+            font-size: 0.9rem;
+            color: #888;
+            margin-bottom: 24px;
         }
-        .hero-search {
-            max-width: 500px;
-            margin: 0 auto;
-        }
-        .hero-search input {
+        .search-box {
             width: 100%;
-            padding: 12px 20px;
-            border: 2px solid #e2e8f0;
-            border-radius: 12px;
-            font-size: 0.95rem;
-            outline: none;
-            transition: border-color 0.15s;
-            background: white;
+            max-width: 500px;
         }
-        .hero-search input:focus { border-color: #4f46e5; }
+        .search-box input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 1rem;
+            outline: none;
+        }
+        .search-box input:focus {
+            border-color: #1a1a1a;
+        }
 
-        /* 数据条 */
-        .data-bar {
+        /* Data */
+        .data-row {
             display: flex;
-            justify-content: center;
-            gap: 28px;
-            padding: 20px 0;
+            gap: 24px;
+            padding: 16px 0;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 32px;
             flex-wrap: wrap;
         }
-        .data-item {
-            text-align: center;
+        .data-row span {
+            font-size: 0.9rem;
+            color: #666;
         }
-        .data-item .num {
-            font-size: 1.6rem;
-            font-weight: 700;
-            display: block;
+        .data-row .num {
+            font-weight: 600;
+            color: #111;
         }
-        .data-item .label {
-            font-size: 0.78rem;
-            color: #94a3b8;
-        }
-        .data-item:nth-child(1) .num { color: #4f46e5; }
-        .data-item:nth-child(2) .num { color: #059669; }
-        .data-item:nth-child(3) .num { color: #d97706; }
-        .data-item:nth-child(4) .num { color: #dc2626; }
-        .data-item:nth-child(5) .num { color: #7c3aed; }
-        .data-item:nth-child(6) .num { color: #0891b2; }
 
-        /* 功能亮点 */
+        /* Features - pure text columns */
         .features {
-            margin-top: 16px;
+            margin-bottom: 48px;
         }
-        .section-heading {
-            font-size: 1.1rem;
+        .features h2 {
+            font-size: 1.3rem;
             font-weight: 700;
-            color: #1e293b;
-            margin: 28px 0 12px;
-            padding-bottom: 6px;
-            border-bottom: 2px solid #e2e8f0;
+            margin-bottom: 24px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #111;
         }
-        .feature-grid {
+        .feature-cols {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
         }
-        .feature-card {
-            background: white;
-            border-radius: 10px;
-            padding: 16px 18px;
-            border-left: 4px solid #ccc;
-            transition: transform 0.15s, box-shadow 0.15s;
+        .feature-block h3 {
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #111;
         }
-        .feature-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        .feature-block p {
+            font-size: 0.88rem;
+            color: #555;
+            margin-bottom: 12px;
         }
-        .feature-card h3 {
-            font-size: 0.95rem;
-            font-weight: 700;
+        .feature-block ul {
+            list-style: none;
+            padding: 0;
+        }
+        .feature-block ul li {
+            font-size: 0.88rem;
             margin-bottom: 4px;
         }
-        .feature-card .desc {
-            font-size: 0.82rem;
-            color: #64748b;
-            margin-bottom: 8px;
-        }
-        .feature-card .links {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 4px 8px;
-        }
-        .feature-card .links a {
-            font-size: 0.78rem;
+        .feature-block ul li a {
+            color: #0066cc;
             text-decoration: none;
-            color: #4f46e5;
-            transition: color 0.15s;
         }
-        .feature-card .links a:hover { text-decoration: underline; }
-        .feature-card .links a::after { content: " ·"; color: #cbd5e1; }
-        .feature-card .links a:last-child::after { content: ""; }
-
-        /* 主题色 */
-        .fc-blue { border-left-color: #4f46e5; }
-        .fc-blue h3 { color: #4f46e5; }
-        .fc-green { border-left-color: #059669; }
-        .fc-green h3 { color: #059669; }
-        .fc-amber { border-left-color: #d97706; }
-        .fc-amber h3 { color: #d97706; }
-        .fc-red { border-left-color: #dc2626; }
-        .fc-red h3 { color: #dc2626; }
-        .fc-purple { border-left-color: #7c3aed; }
-        .fc-purple h3 { color: #7c3aed; }
-        .fc-cyan { border-left-color: #0891b2; }
-        .fc-cyan h3 { color: #0891b2; }
-
-        /* 版本进度 */
-        .version-progress {
-            background: white;
-            border-radius: 10px;
-            padding: 20px 24px;
-            margin: 20px 0;
+        .feature-block ul li a:hover {
+            text-decoration: underline;
         }
-        .version-progress h3 {
-            font-size: 0.95rem;
+        .feature-block ul li .pipe {
+            color: #ccc;
+            margin: 0 6px;
+        }
+
+        /* Version Progress - simple list */
+        .version-section {
+            margin-bottom: 48px;
+        }
+        .version-section h2 {
+            font-size: 1.3rem;
             font-weight: 700;
-            margin-bottom: 12px;
-            color: #1e293b;
+            margin-bottom: 24px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #111;
         }
-        .vp-row {
+        .version-list {
+            list-style: none;
+            padding: 0;
+        }
+        .version-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+            font-size: 0.92rem;
             display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 5px 0;
-            font-size: 0.82rem;
+            gap: 12px;
         }
-        .vp-version {
-            font-weight: 700;
-            min-width: 70px;
-        }
-        .vp-bar {
-            flex: 1;
-            height: 8px;
-            background: #e2e8f0;
-            border-radius: 4px;
-            overflow: hidden;
-        }
-        .vp-fill {
-            height: 100%;
-            border-radius: 4px;
-        }
-        .vp-label {
-            font-size: 0.75rem;
-            color: #64748b;
-            min-width: 200px;
-        }
-        .vp-status {
-            font-size: 0.72rem;
+        .version-list .ver {
             font-weight: 600;
-            padding: 2px 8px;
-            border-radius: 8px;
+            color: #333;
+            min-width: 60px;
         }
-        .st-done { background: #d1fae5; color: #065f46; }
-        .st-active { background: #dbeafe; color: #1e40af; }
-        .st-planned { background: #fef3c7; color: #92400e; }
-        .st-idea { background: #f3e8ff; color: #6b21a8; }
+        .version-list .status {
+            font-size: 0.78rem;
+            color: #888;
+            min-width: 60px;
+        }
+        .version-list .status.done { color: #2e7d32; }
+        .version-list .status.active { color: #1565c0; }
+        .version-list .status.planned { color: #cc7a00; }
+        .version-list .status.idea { color: #7b1fa2; }
+        .version-list .desc {
+            color: #555;
+        }
+        .version-list .desc a {
+            color: #0066cc;
+            text-decoration: none;
+        }
 
         /* CTA */
         .cta {
+            padding: 32px 0;
             text-align: center;
-            padding: 28px 0;
+            border-top: 1px solid #eee;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 32px;
         }
         .cta p {
-            color: #64748b;
-            font-size: 0.88rem;
-            margin-bottom: 12px;
+            font-size: 1rem;
+            color: #333;
+            margin-bottom: 16px;
         }
-        .cta-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-        .cta-buttons a {
+        .cta a {
             display: inline-block;
-            padding: 8px 20px;
-            border-radius: 8px;
-            font-size: 0.85rem;
-            font-weight: 600;
+            padding: 10px 24px;
+            background: #1a1a1a;
+            color: white;
             text-decoration: none;
-            transition: opacity 0.15s;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            margin: 0 4px;
         }
-        .cta-buttons a:hover { opacity: 0.85; }
-        .btn-primary { background: #4f46e5; color: white; }
-        .btn-secondary { background: #f1f5f9; color: #475569; }
+        .cta a.secondary {
+            background: white;
+            color: #1a1a1a;
+            border: 1px solid #ccc;
+        }
 
+        /* Footer */
         .footer {
-            text-align: center;
-            margin-top: 20px;
-            color: #999;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
+            color: #888;
+            padding-top: 24px;
+            border-top: 1px solid #eee;
         }
         .footer-links {
-            text-align: center;
-            padding: 8px 0;
-            font-size: 0.75rem;
+            margin-bottom: 12px;
         }
         .footer-links a {
-            color: #aaa;
+            color: #666;
             text-decoration: none;
+            margin-right: 10px;
         }
-        .footer-links a:hover { color: #4f46e5; }
+        .footer-links a:hover {
+            color: #0066cc;
+        }
 
         @media (max-width: 768px) {
-            .hero h1 { font-size: 1.4rem; }
-            .hero .tagline { font-size: 0.88rem; }
-            .data-bar { gap: 16px; }
-            .data-item .num { font-size: 1.3rem; }
-            .feature-grid { grid-template-columns: 1fr; }
-            .vp-label { display: none; }
-            .navbar { flex-wrap: wrap; gap: 6px; }
-            .nav-links { gap: 10px; }
-            .nav-links a { font-size: 0.75rem; }
+            body { padding: 0 16px 24px; }
+            .hero h1 { font-size: 1.6rem; }
+            .feature-cols { grid-template-columns: 1fr; gap: 24px; }
+            .nav-links { gap: 12px; }
+            .nav-links a { font-size: 0.8rem; }
             .nav-links .cn { display: none; }
+            .data-row { gap: 16px; }
         }
     </style>
     <link rel="stylesheet" href="css/theme.css">
     <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#4f46e5">
+    <meta name="theme-color" content="#1a1a1a">
     <script src="js/theme.js"></script>
-    <script>
-    window.SUPABASE_CONFIG = {
-        url: 'https://otfjbzjvkoectpejhxar.supabase.co',
-        anonKey: 'sb_publishable_SBRF6ewKH-se3dNlqFwsXQ_lObhamTr'
-    };
-    </script>
-    <script src="js/auth.js"></script>
-    <script src="js/pwa.js"></script>
     <script src="js/mobile-nav.js"></script>
     <script src="js/breadcrumbs.js"></script>
-    <script src="js/nav-user.js"></script>
-    <script src="js/favorites.js"></script>
-    <script src="js/search-shortcut.js"></script>
     <script src="js/back-to-top.js"></script>
 </head>
 <body>
     <nav class="navbar">
-        <a href="index.html" class="logo"><span class="logo-icon">🎓</span><span class="logo-text">yunzhuan<span>.icu</span></span></a>
-        <div class="nav-links">
-            <a href="index.html" style="color:#4f46e5;font-weight:600;">Majors<span class="cn">专业</span></a>
-            <a href="schools/index.html">Schools<span class="cn">学校</span></a>
-            <a href="tests/index.html">Tests<span class="cn">考试</span></a>
-            <a href="essays/index.html">Essays<span class="cn">文书</span></a>
-            <a href="rankings.html">Rankings<span class="cn">排名</span></a>
-            <a href="guides/index.html">Guides<span class="cn">指南</span></a>
-            <a href="glossary.html">Glossary<span class="cn">术语</span></a>
-            <a href="scholarships/index.html">Scholarships<span class="cn">奖学金</span></a>
-            <a href="interviews/index.html">Interviews<span class="cn">面试</span></a>
-            <a href="search.html">Search<span class="cn">搜索</span></a>
-            <a href="contact.html">Contact<span class="cn">联系</span></a>
-            <a href="competitions/index.html" style="color:#4f46e5;font-weight:600;">Competitions<span class="cn">竞赛</span></a>
+        <div class="nav-inner">
+            <a href="index.html" class="logo"><span class="logo-icon">🎓</span>yunzhuan.icu</a>
+            <div class="nav-links">
+                <a href="schools/index.html">Schools<span class="cn">学校</span></a>
+                <a href="tests/index.html">Tests<span class="cn">考试</span></a>
+                <a href="essays/index.html">Essays<span class="cn">文书</span></a>
+                <a href="competitions/index.html">Competitions<span class="cn">竞赛</span></a>
+                <a href="search.html">Search<span class="cn">搜索</span></a>
+            </div>
         </div>
     </nav>
 
-    <!-- Hero -->
     <section class="hero">
-        <h1>留美申请 <span class="accent">一站式导航</span></h1>
-        <p class="tagline">From choosing your major to submitting your application</p>
-        <p class="tagline-cn">专业选择 · 学校对比 · 标化考试 · 文书指导 · 国际竞赛 · 申请工具</p>
-        <div class="hero-search">
-            <input type="text" id="homeSearch" placeholder="Search majors, schools, tools... / 搜索专业、学校、工具..." autocomplete="off">
+        <h1>留美申请一站式导航</h1>
+        <p class="subtitle">From choosing your major to submitting your application</p>
+        <p class="subtitle-cn">专业选择 · 学校对比 · 标化考试 · 文书指导 · 国际竞赛 · 申请工具</p>
+        <div class="search-box">
+            <input type="text" id="homeSearch" placeholder="Search majors, schools, tools..." autocomplete="off">
         </div>
     </section>
 
-    <!-- 数据条 -->
-    <div class="data-bar">
-        <div class="data-item"><span class="num">56</span><span class="label">Majors 专业</span></div>
-        <div class="data-item"><span class="num">40+</span><span class="label">Schools 学校</span></div>
-        <div class="data-item"><span class="num">15+</span><span class="label">Tools 工具</span></div>
-        <div class="data-item"><span class="num">36</span><span class="label">Competitions 竞赛</span></div>
-        <div class="data-item"><span class="num">8</span><span class="label">Categories 分类</span></div>
-        <div class="data-item"><span class="num">700+</span><span class="label">Pages 页面</span></div>
+    <div class="data-row">
+        <span><span class="num">56</span> Majors</span>
+        <span><span class="num">40+</span> Schools</span>
+        <span><span class="num">15+</span> Tools</span>
+        <span><span class="num">36</span> Competitions</span>
+        <span><span class="num">700+</span> Pages</span>
     </div>
 
-    <!-- 功能亮点 -->
     <div class="features">
-        <h2 class="section-heading">Core Features 核心功能</h2>
-        <div class="feature-grid">
-
-            <div class="feature-card fc-blue">
-                <h3>Majors 专业百科</h3>
-                <p class="desc">8大分类 56个专业，课程设置、就业前景、薪资数据一目了然</p>
-                <div class="links">
-                    <a href="computer/cs.html">CS</a>
-                    <a href="business/finance.html">Finance</a>
-                    <a href="engineering/mechanical.html">Mechanical Eng</a>
-                    <a href="social/economics.html">Economics</a>
-                    <a href="biology/neuroscience.html">Neuroscience</a>
-                    <a href="major-quiz.html">Major Quiz 测评</a>
-                    <a href="salary.html">Salary 薪资</a>
-                    <a href="rankings.html">Rankings 排名</a>
-                </div>
+        <h2>Features</h2>
+        <div class="feature-cols">
+            <div class="feature-block">
+                <h3>Majors</h3>
+                <p>56 majors across 8 categories, with curriculum, career outlook, and salary data.</p>
+                <ul>
+                    <li><a href="computer/cs.html">Computer Science</a> <span class="pipe">|</span> <a href="business/finance.html">Finance</a></li>
+                    <li><a href="engineering/mechanical.html">Mechanical Engineering</a> <span class="pipe">|</span> <a href="social/economics.html">Economics</a></li>
+                    <li><a href="major-quiz.html">Major Quiz</a> <span class="pipe">|</span> <a href="salary.html">Salary Outlook</a></li>
+                </ul>
             </div>
-
-            <div class="feature-card fc-green">
-                <h3>Schools 选校系统</h3>
-                <p class="desc">6个国家 40+所大学，支持多维筛选、对比和智能推荐</p>
-                <div class="links">
-                    <a href="schools/index.html">All Schools</a>
-                    <a href="schools/compare.html">Compare 对比</a>
-                    <a href="schools/matcher.html">Matcher 推荐</a>
-                    <a href="schools/us/harvard.html">Harvard</a>
-                    <a href="schools/us/mit.html">MIT</a>
-                    <a href="schools/uk/oxford.html">Oxford</a>
-                </div>
+            <div class="feature-block">
+                <h3>Schools</h3>
+                <p>40+ universities in 6 countries with filtering, comparison, and recommendation.</p>
+                <ul>
+                    <li><a href="schools/index.html">All Schools</a> <span class="pipe">|</span> <a href="schools/compare.html">Compare</a></li>
+                    <li><a href="schools/matcher.html">School Matcher</a></li>
+                    <li><a href="schools/us/harvard.html">Harvard</a> <span class="pipe">|</span> <a href="schools/us/mit.html">MIT</a> <span class="pipe">|</span> <a href="schools/uk/oxford.html">Oxford</a></li>
+                </ul>
             </div>
-
-            <div class="feature-card fc-amber">
-                <h3>Tests 标化考试</h3>
-                <p class="desc">SAT/ACT/TOEFL/IELTS/AP 全覆盖，备考工具 + 时间线规划</p>
-                <div class="links">
-                    <a href="tests/sat.html">SAT</a>
-                    <a href="tests/act.html">ACT</a>
-                    <a href="tests/toefl.html">TOEFL</a>
-                    <a href="tests/ielts.html">IELTS</a>
-                    <a href="tests/ap-prep.html">AP</a>
-                    <a href="tests/score-converter.html">Score Converter</a>
-                    <a href="tests/gpa-calculator.html">GPA Calculator</a>
-                    <a href="tests/vocab-test.html">Vocab Test</a>
-                    <a href="tests/exam-timeline.html">Exam Timeline</a>
-                </div>
+            <div class="feature-block">
+                <h3>Tests</h3>
+                <p>SAT, ACT, TOEFL, IELTS, AP — prep tools and timeline planning.</p>
+                <ul>
+                    <li><a href="tests/sat.html">SAT</a> <span class="pipe">|</span> <a href="tests/act.html">ACT</a> <span class="pipe">|</span> <a href="tests/toefl.html">TOEFL</a></li>
+                    <li><a href="tests/ielts.html">IELTS</a> <span class="pipe">|</span> <a href="tests/ap-prep.html">AP</a></li>
+                    <li><a href="tests/score-converter.html">Score Converter</a> <span class="pipe">|</span> <a href="tests/gpa-calculator.html">GPA Calculator</a></li>
+                </ul>
             </div>
-
-            <div class="feature-card fc-red">
-                <h3>Competitions 国际竞赛</h3>
-                <p class="desc">8大分类 36项竞赛，含金量评级、难度分析、竞赛日历</p>
-                <div class="links">
-                    <a href="competitions/index.html">All Competitions</a>
-                    <a href="competitions/math.html">Math</a>
-                    <a href="competitions/cs.html">CS</a>
-                    <a href="competitions/business.html">Business</a>
-                    <a href="competitions/calendar.html">Calendar 日历</a>
-                </div>
+            <div class="feature-block">
+                <h3>Competitions</h3>
+                <p>36 competitions across 8 categories with difficulty and prestige ratings.</p>
+                <ul>
+                    <li><a href="competitions/index.html">All Competitions</a></li>
+                    <li><a href="competitions/math.html">Math</a> <span class="pipe">|</span> <a href="competitions/cs.html">CS</a> <span class="pipe">|</span> <a href="competitions/business.html">Business</a></li>
+                    <li><a href="competitions/calendar.html">Competition Calendar</a></li>
+                </ul>
             </div>
-
-            <div class="feature-card fc-purple">
-                <h3>Application 申请工具</h3>
-                <p class="desc">从选校到提交，全流程工具链辅助申请</p>
-                <div class="links">
-                    <a href="tests/application-checklist.html">Checklist</a>
-                    <a href="application-timeline.html">Timeline</a>
-                    <a href="cost-calculator.html">Cost Calculator</a>
-                    <a href="application-systems.html">App Systems</a>
-                    <a href="ai-assistant.html">AI Assistant</a>
-                </div>
+            <div class="feature-block">
+                <h3>Application Tools</h3>
+                <p>End-to-end toolchain from school selection to submission.</p>
+                <ul>
+                    <li><a href="tests/application-checklist.html">Checklist</a> <span class="pipe">|</span> <a href="application-timeline.html">Timeline</a></li>
+                    <li><a href="cost-calculator.html">Cost Calculator</a> <span class="pipe">|</span> <a href="ai-assistant.html">AI Assistant</a></li>
+                </ul>
             </div>
-
-            <div class="feature-card fc-cyan">
-                <h3>Resources 资源中心</h3>
-                <p class="desc">文书范例、面试题库、奖学金信息、申请指南</p>
-                <div class="links">
-                    <a href="essays/index.html">Essays</a>
-                    <a href="interviews/index.html">Interviews</a>
-                    <a href="scholarships/index.html">Scholarships</a>
-                    <a href="guides/index.html">Guides</a>
-                    <a href="glossary.html">Glossary</a>
-                    <a href="faq.html">FAQ</a>
-                    <a href="career-guide.html">Career Guide</a>
-                </div>
+            <div class="feature-block">
+                <h3>Resources</h3>
+                <p>Essay examples, interview questions, scholarships, and guides.</p>
+                <ul>
+                    <li><a href="essays/index.html">Essays</a> <span class="pipe">|</span> <a href="interviews/index.html">Interviews</a></li>
+                    <li><a href="scholarships/index.html">Scholarships</a> <span class="pipe">|</span> <a href="guides/index.html">Guides</a></li>
+                    <li><a href="glossary.html">Glossary</a> <span class="pipe">|</span> <a href="faq.html">FAQ</a></li>
+                </ul>
             </div>
-
         </div>
     </div>
 
-    <!-- 版本进度 -->
-    <div class="version-progress">
-        <h3>Version Progress 版本进度</h3>
-
-        <div class="vp-row">
-            <span class="vp-version" style="color:#059669;">v20.5</span>
-            <div class="vp-bar"><div class="vp-fill" style="width:100%;background:#059669;"></div></div>
-            <span class="vp-status st-done">Done</span>
-            <span class="vp-label">竞赛体系 + Bug修复 + 筛选推广</span>
-        </div>
-
-        <div class="vp-row">
-            <span class="vp-version" style="color:#059669;">v20.4</span>
-            <div class="vp-bar"><div class="vp-fill" style="width:100%;background:#059669;"></div></div>
-            <span class="vp-status st-done">Done</span>
-            <span class="vp-label">竞赛MVP + 视觉优化 + 导航重构</span>
-        </div>
-
-        <div class="vp-row">
-            <span class="vp-version" style="color:#059669;">v20.0</span>
-            <div class="vp-bar"><div class="vp-fill" style="width:100%;background:#059669;"></div></div>
-            <span class="vp-status st-done">Done</span>
-            <span class="vp-label">专业百科 + 学校系统 + PWA</span>
-        </div>
-
-        <div class="vp-row">
-            <span class="vp-version" style="color:#1e40af;">v21.0</span>
-            <div class="vp-bar"><div class="vp-fill" style="width:15%;background:#3b82f6;"></div></div>
-            <span class="vp-status st-active">Active</span>
-            <span class="vp-label">个人中心 + 学习路径 + 申请Tracker</span>
-        </div>
-
-        <div class="vp-row">
-            <span class="vp-version" style="color:#92400e;">v22.0</span>
-            <div class="vp-bar"><div class="vp-fill" style="width:5%;background:#f59e0b;"></div></div>
-            <span class="vp-status st-planned">Planned</span>
-            <span class="vp-label">社区系统 + UGC + 评论互动</span>
-        </div>
-
-        <div class="vp-row">
-            <span class="vp-version" style="color:#92400e;">v22.5</span>
-            <div class="vp-bar"><div class="vp-fill" style="width:40%;background:#f59e0b;"></div></div>
-            <span class="vp-status st-planned">Planned</span>
-            <span class="vp-label">竞赛Phase3: 组队 + 个性化推荐</span>
-        </div>
-
-        <div class="vp-row">
-            <span class="vp-version" style="color:#6b21a8;">v23.0</span>
-            <div class="vp-bar"><div class="vp-fill" style="width:0%;background:#a855f7;"></div></div>
-            <span class="vp-status st-idea">Idea</span>
-            <span class="vp-label">AI深度集成 + 选校匹配 + 文书润色</span>
-        </div>
-
-        <div class="vp-row">
-            <span class="vp-version" style="color:#6b21a8;">v24.0</span>
-            <div class="vp-bar"><div class="vp-fill" style="width:0%;background:#a855f7;"></div></div>
-            <span class="vp-status st-idea">Idea</span>
-            <span class="vp-label">移动App + 中介SaaS + 海外租房</span>
-        </div>
-
-        <p style="margin-top:12px;font-size:0.78rem;color:#94a3b8;">
-            详细技术方案见 <a href="roadmap.html" style="color:#4f46e5;">Roadmap</a>
+    <div class="version-section">
+        <h2>Version Progress</h2>
+        <ul class="version-list">
+            <li><span class="ver">v20.6</span><span class="status done">Done</span><span class="desc">首页产品化改造 — <a href="roadmap.html">Roadmap</a></span></li>
+            <li><span class="ver">v20.5</span><span class="status done">Done</span><span class="desc">竞赛体系 Phase 2 + Bug 修复 + 筛选推广</span></li>
+            <li><span class="ver">v20.4</span><span class="status done">Done</span><span class="desc">竞赛 MVP + 视觉优化 + 导航重构</span></li>
+            <li><span class="ver">v20.0</span><span class="status done">Done</span><span class="desc">专业百科 + 学校系统 + PWA</span></li>
+            <li><span class="ver">v21.0</span><span class="status active">Active</span><span class="desc">个人中心 + 学习路径 + 申请 Tracker</span></li>
+            <li><span class="ver">v22.0</span><span class="status planned">Planned</span><span class="desc">社区系统 + UGC + 评论互动</span></li>
+            <li><span class="ver">v22.5</span><span class="status planned">Planned</span><span class="desc">竞赛 Phase 3: 组队 + 个性化推荐</span></li>
+            <li><span class="ver">v23.0</span><span class="status idea">Idea</span><span class="desc">AI 深度集成 + 选校匹配 + 文书润色</span></li>
+            <li><span class="ver">v24.0</span><span class="status idea">Idea</span><span class="desc">移动 App + 中介 SaaS + 海外租房</span></li>
+        </ul>
+        <p style="font-size:0.85rem;color:#666;margin-top:16px;">
+            Technical details: <a href="roadmap.html">Product Roadmap</a>
         </p>
     </div>
 
-    <!-- CTA -->
     <div class="cta">
         <p>Ready to start your application journey?</p>
-        <div class="cta-buttons">
-            <a href="search.html" class="btn-primary">Start Searching</a>
-            <a href="major-quiz.html" class="btn-secondary">Take Major Quiz</a>
-            <a href="competitions/index.html" class="btn-secondary">Explore Competitions</a>
-        </div>
+        <a href="search.html">Start Searching</a>
+        <a href="major-quiz.html" class="secondary">Take Major Quiz</a>
     </div>
 
-    <p class="footer">© 2026 yunzhuan.icu &nbsp;|&nbsp; Version v20.6.0</p>
-<!-- Vercel Analytics -->
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<div class="footer-links">
-    <a href="prerequisite/">Prerequisites</a>
-    <span style="margin:0 6px;">·</span>
-    <a href="intl-exams/index.html">International Exams</a>
-    <span style="margin:0 6px;">·</span>
-    <a href="tests/index.html">Standardized Tests</a>
-    <span style="margin:0 6px;">·</span>
-    <a href="schools/index.html">Universities</a>
-    <span style="margin:0 6px;">·</span>
-    <a href="essays/index.html">Essays</a>
-    <span style="margin:0 6px;">·</span>
-    <a href="scholarships/index.html">Scholarships</a>
-    <span style="margin:0 6px;">·</span>
-    <a href="interviews/index.html">Interviews</a>
-    <span style="margin:0 6px;">·</span>
-    <a href="dashboard.html">Dashboard</a>
-    <span style="margin:0 6px;">·</span>
-    <a href="contact.html">Contact</a>
-    <span style="margin:0 6px;">·</span>
-    <a href="snapshots/index.html">Snapshots</a>
-    <span style="margin:0 6px;">·</span>
-    <a href="ai-assistant.html">AI Assistant</a>
-    <span style="margin:0 6px;">·</span>
-    <a href="roadmap.html">Roadmap</a>
-</div>
-<!-- footer-links -->
+    <div class="footer">
+        <div class="footer-links">
+            <a href="rankings.html">Rankings</a>
+            <a href="prerequisite/">Prerequisites</a>
+            <a href="scholarships/index.html">Scholarships</a>
+            <a href="contact.html">Contact</a>
+            <a href="snapshots/index.html">Snapshots</a>
+            <a href="roadmap.html">Roadmap</a>
+        </div>
+        <p>© 2026 yunzhuan.icu · v20.7.0</p>
+    </div>
 <script>
 document.getElementById('homeSearch').addEventListener('keydown', function(e) {
     if (e.key === 'Enter' && this.value.trim()) {
