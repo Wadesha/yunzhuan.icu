@@ -46,19 +46,20 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   Practice
 </div>
 
-<h1>ACT Practice Questions <span class="v-badge">v10</span></h1>
-<p class="subtitle">v10 · 120 道题 · 定稿版</p>
+<h1>ACT Practice Questions <span class="v-badge">v12-beta</span></h1>
+<p class="subtitle">v12-beta · 120题·topic-code与锚点 · 与Syllabus v3双向对齐</p>
 
 <div class="box-dashed">
   <strong>v10: 点击选项答题，自动记录到错题本（localStorage）。</strong>
+  <p style="margin-top:6px;">v12新增：考纲Topic↔Q编号双向锚点直达（点击Topic后Q编号直接跳题；每题q-num前Topic Code对应Syllabus对应条目）</p>
 </div>
 
 <h2>样题</h2>
 
 <h3>Group 1 · Math (8 questions)</h3>
 
-<div class="q">
-  <div class="q-num">Q1 · ACT Math · Pre-Algebra · Medium</div>
+<div class="q" id="q-1">
+  <div class="q-num">Q1 【M-PAEA-41】 · ACT Math · Pre-Algebra · Medium</div>
   <div class="q-text">A shirt is marked up 40% from its cost of $25. What is the selling price?</div>
   <ul class="q-choices">
     <li>A) $10</li>
@@ -70,8 +71,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B) $35. Markup = 40% × $25 = $10，Selling price = $25 + $10 = $35.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q4 · ACT Math · Coordinate Geometry · Medium</div>
+<div class="q" id="q-2">
+  <div class="q-num">Q4 【M-IACG-52】 · ACT Math · Coordinate Geometry · Medium</div>
   <div class="q-text">What is the slope of the line passing through (2, 3) and (6, 11)?</div>
   <ul class="q-choices">
     <li>A) 1/2</li>
@@ -83,8 +84,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B) 2. Slope = (11 − 3) / (6 − 2) = 8 / 4 = 2.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q5 · ACT Math · Plane Geometry · Easy</div>
+<div class="q" id="q-3">
+  <div class="q-num">Q5 【M-PGT-61】 · ACT Math · Plane Geometry · Easy</div>
   <div class="q-text">What is the sum of interior angles of a hexagon?</div>
   <ul class="q-choices">
     <li>A) 360°</li>
@@ -96,8 +97,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> C) 720°. Sum = (n − 2) × 180 = (6 − 2) × 180 = 720°.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q9 · ACT Math · Trigonometry · Hard</div>
+<div class="q" id="q-4">
+  <div class="q-num">Q9 【M-PGT-62】 · ACT Math · Trigonometry · Hard</div>
   <div class="q-text">If sin(θ) = 3/5 and θ is in the first quadrant, what is cos(θ)?</div>
   <ul class="q-choices">
     <li>A) 3/4</li>
@@ -109,8 +110,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B) 4/5. sin² + cos² = 1，cos² = 1 − 9/25 = 16/25，cos = 4/5（第一象限为正值）。</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q11 · ACT Math · Pre-Algebra · Easy</div>
+<div class="q" id="q-5">
+  <div class="q-num">Q11 【M-PAEA-41】 · ACT Math · Pre-Algebra · Easy</div>
   <div class="q-text">What is 25% of 80?</div>
   <ul class="q-choices">
     <li>A) 15</li>
@@ -122,8 +123,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B) 20. 0.25 × 80 = 20.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q12 · ACT Math · Elementary Algebra · Medium</div>
+<div class="q" id="q-6">
+  <div class="q-num">Q12 【M-PAEA-42】 · ACT Math · Elementary Algebra · Medium</div>
   <div class="q-text">If 3x − 7 = 14, what is x?</div>
   <ul class="q-choices">
     <li>A) 5</li>
@@ -135,8 +136,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> C) 7. 3x = 21，x = 7.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q13 · ACT Math · Intermediate Algebra · Hard</div>
+<div class="q" id="q-7">
+  <div class="q-num">Q13 【M-IACG-51】 · ACT Math · Intermediate Algebra · Hard</div>
   <div class="q-text">If f(x) = x² − 3x + 2, what are the roots?</div>
   <ul class="q-choices">
     <li>A) x = 1, x = 2</li>
@@ -148,8 +149,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> A) x = 1, x = 2. 因式分解：(x − 1)(x − 2) = 0，故 x = 1 或 x = 2.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q14 · ACT Math · Plane Geometry · Medium</div>
+<div class="q" id="q-8">
+  <div class="q-num">Q14 【M-PGT-61】 · ACT Math · Plane Geometry · Medium</div>
   <div class="q-text">A circle has diameter 10. What is its circumference? (π ≈ 3.14)</div>
   <ul class="q-choices">
     <li>A) 15.7</li>
@@ -163,8 +164,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
 
 <h3>Group 2 · English (5 questions)</h3>
 
-<div class="q">
-  <div class="q-num">Q2 · ACT English · Usage · Easy</div>
+<div class="q" id="q-9">
+  <div class="q-num">Q2 【E-CSE-33】 · ACT English · Usage · Easy</div>
   <div class="q-text">Choose the best version: &ldquo;Neither the students nor the teacher _____ aware of the schedule change.&rdquo;</div>
   <ul class="q-choices">
     <li>A) was</li>
@@ -176,8 +177,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> A) was. 在 &ldquo;neither…nor&rdquo; 结构中，谓语动词与最近的主语保持一致（&ldquo;teacher&rdquo; 为单数），故用 was.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q6 · ACT English · Rhetoric · Medium</div>
+<div class="q" id="q-10">
+  <div class="q-num">Q6 【E-PW-11】 · ACT English · Rhetoric · Medium</div>
   <div class="q-text">Which sentence best concludes this paragraph about climate change research? The paragraph discusses recent findings on ocean temperature rise.</div>
   <ul class="q-choices">
     <li>A) &ldquo;In conclusion, more research is needed.&rdquo;</li>
@@ -189,8 +190,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> C). 该句综合了段落的研究发现，并给出有力的结论性观点。</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q10 · ACT English · Sentence Structure · Easy</div>
+<div class="q" id="q-11">
+  <div class="q-num">Q10 【E-CSE-32】 · ACT English · Sentence Structure · Easy</div>
   <div class="q-text">Choose the correct sentence:</div>
   <ul class="q-choices">
     <li>A) Walking down the street, the rain started to fall.</li>
@@ -202,8 +203,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> E) Both C and D. C 与 D 都修正了悬垂修饰语；A 与 B 存在悬垂修饰语错误。</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q15 · ACT English · Usage · Easy</div>
+<div class="q" id="q-12">
+  <div class="q-num">Q15 【E-CSE-33】 · ACT English · Usage · Easy</div>
   <div class="q-text">Choose the correct form: &ldquo;She has _____ the book already.&rdquo;</div>
   <ul class="q-choices">
     <li>A) read</li>
@@ -215,8 +216,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> A) read. 现在完成时结构：has + 过去分词。</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q16 · ACT English · Rhetoric · Medium</div>
+<div class="q" id="q-13">
+  <div class="q-num">Q16 【E-PW-11】 · ACT English · Rhetoric · Medium</div>
   <div class="q-text">Which transition best connects: &ldquo;The data shows increased sales. _____, customer satisfaction has declined.&rdquo;</div>
   <ul class="q-choices">
     <li>A) Therefore</li>
@@ -230,8 +231,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
 
 <h3>Group 3 · Reading (3 questions)</h3>
 
-<div class="q">
-  <div class="q-num">Q7 · ACT Reading · Inference · Hard</div>
+<div class="q" id="q-14">
+  <div class="q-num">Q7 【R-IKI-91】 · ACT Reading · Inference · Hard</div>
   <div class="q-text">Passage: &ldquo;The old lighthouse stood as a silent sentinel, its lamp long extinguished, guarding memories of ships that would never return.&rdquo; The description of the lighthouse suggests:</div>
   <ul class="q-choices">
     <li>A) It is still functional</li>
@@ -243,8 +244,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B). &ldquo;silent&rdquo;、&ldquo;long extinguished&rdquo;、&ldquo;never return&rdquo; 等词营造出失落与怀旧的氛围。</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q17 · ACT Reading · Main Idea · Medium</div>
+<div class="q" id="q-15">
+  <div class="q-num">Q17 【R-KID-71】 · ACT Reading · Main Idea · Medium</div>
   <div class="q-text">Passage: &ldquo;Climate scientists have observed that Arctic ice is melting at an unprecedented rate, with summer sea ice extent decreasing by 40% since 1979.&rdquo; What is the main idea?</div>
   <ul class="q-choices">
     <li>A) Arctic ice melting is a serious and accelerating problem</li>
@@ -256,8 +257,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> A). 文段强调北极海冰以前所未有的速度加速消融，是一个严峻且加剧的问题。</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q18 · ACT Reading · Detail · Easy</div>
+<div class="q" id="q-16">
+  <div class="q-num">Q18 【R-KID-72】 · ACT Reading · Detail · Easy</div>
   <div class="q-text">Passage: &ldquo;The library, built in 1895, was donated by philanthropist Andrew Carnegie.&rdquo; When was the library built?</div>
   <ul class="q-choices">
     <li>A) 1859</li>
@@ -271,8 +272,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
 
 <h3>Group 4 · Science (4 questions)</h3>
 
-<div class="q">
-  <div class="q-num">Q3 · ACT Science · Data Interpretation · Easy</div>
+<div class="q" id="q-17">
+  <div class="q-num">Q3 【S-DR-101】 · ACT Science · Data Interpretation · Easy</div>
   <div class="q-text">An experiment measures plant growth under different light colors. After 14 days, plants under blue light grew 12 cm, red light 15 cm, green light 3 cm, and white light 10 cm. What is the average growth across all conditions?</div>
   <ul class="q-choices">
     <li>A) 8 cm</li>
@@ -284,8 +285,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> C) 10 cm. (12 + 15 + 3 + 10) / 4 = 40 / 4 = 10 cm.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q8 · ACT Science · Research Summary · Medium</div>
+<div class="q" id="q-18">
+  <div class="q-num">Q8 【S-RS-111】 · ACT Science · Research Summary · Medium</div>
   <div class="q-text">Experiment: Students tested 3 fertilizers (A, B, C) on tomato plants. After 6 weeks: A = 25 cm, B = 32 cm, C = 18 cm, Control = 15 cm. Which fertilizer produced the greatest percentage increase over control?</div>
   <ul class="q-choices">
     <li>A) Fertilizer A</li>
@@ -297,8 +298,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B). A: (25 − 15) / 15 = 67%，B: (32 − 15) / 15 = 113%，C: (18 − 15) / 15 = 20%. B 的增长率最高。</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q19 · ACT Science · Data Interpretation · Medium</div>
+<div class="q" id="q-19">
+  <div class="q-num">Q19 【S-DR-101】 · ACT Science · Data Interpretation · Medium</div>
   <div class="q-text">An experiment measures reaction time at different temperatures: 20°C → 0.5s, 30°C → 0.3s, 40°C → 0.2s. What is the trend?</div>
   <ul class="q-choices">
     <li>A) Higher temp → slower reaction</li>
@@ -310,8 +311,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B) Higher temp → faster reaction. 温度升高时反应时间变短，即反应更快。</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q20 · ACT Science · Conflicting Viewpoints · Hard</div>
+<div class="q" id="q-20">
+  <div class="q-num">Q20 【S-CV-121】 · ACT Science · Conflicting Viewpoints · Hard</div>
   <div class="q-text">Scientist A claims CO₂ is the main driver of climate change. Scientist B claims solar activity is. A key difference in their arguments is:</div>
   <ul class="q-choices">
     <li>A) Both agree on CO₂</li>
@@ -325,8 +326,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
 
 <h3>Group 5 · Math (NEW) (12 questions)</h3>
 
-<div class="q">
-  <div class="q-num">Q21 · ACT Math · Pre-Algebra · Easy</div>
+<div class="q" id="q-21">
+  <div class="q-num">Q21 【M-PAEA-41】 · ACT Math · Pre-Algebra · Easy</div>
   <div class="q-text">What is 1/4 + 0.5?</div>
   <ul class="q-choices">
     <li>A) 0.25</li>
@@ -338,8 +339,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> C) 0.75. 1/4 = 0.25，0.25 + 0.50 = 0.75.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q22 · ACT Math · Pre-Algebra · Easy</div>
+<div class="q" id="q-22">
+  <div class="q-num">Q22 【M-PAEA-41】 · ACT Math · Pre-Algebra · Easy</div>
   <div class="q-text">A jacket costs $80. With a 15% discount, what is the sale price?</div>
   <ul class="q-choices">
     <li>A) $12</li>
@@ -351,8 +352,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> C) $68. Discount = 0.15 × 80 = $12，$80 − $12 = $68.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q23 · ACT Math · Pre-Algebra · Medium</div>
+<div class="q" id="q-23">
+  <div class="q-num">Q23 【M-PAEA-41】 · ACT Math · Pre-Algebra · Medium</div>
   <div class="q-text">The ratio of cats to dogs in a shelter is 3:5. If there are 40 dogs, how many cats are there?</div>
   <ul class="q-choices">
     <li>A) 8</li>
@@ -364,8 +365,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> C) 24. 3/5 = x/40，x = 3 × 8 = 24.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q24 · ACT Math · Pre-Algebra · Medium</div>
+<div class="q" id="q-24">
+  <div class="q-num">Q24 【M-PAEA-41】 · ACT Math · Pre-Algebra · Medium</div>
   <div class="q-text">If 5 workers can build a wall in 12 days, how many days would it take 6 workers to build the same wall (assuming equal rates)?</div>
   <ul class="q-choices">
     <li>A) 8</li>
@@ -377,8 +378,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B) 10. Total work = 5 × 12 = 60 worker-days；60 ÷ 6 = 10 days.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q25 · ACT Math · Elementary Algebra · Easy</div>
+<div class="q" id="q-25">
+  <div class="q-num">Q25 【M-PAEA-42】 · ACT Math · Elementary Algebra · Easy</div>
   <div class="q-text">Solve 2x + 5 = 17.</div>
   <ul class="q-choices">
     <li>A) 4</li>
@@ -390,8 +391,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B) 6. 2x = 12，x = 6.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q26 · ACT Math · Elementary Algebra · Medium</div>
+<div class="q" id="q-26">
+  <div class="q-num">Q26 【M-PAEA-42】 · ACT Math · Elementary Algebra · Medium</div>
   <div class="q-text">Expand (x + 3)(x − 2).</div>
   <ul class="q-choices">
     <li>A) x² + x − 6</li>
@@ -403,8 +404,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> A) x² + x − 6. x² − 2x + 3x − 6 = x² + x − 6.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q27 · ACT Math · Intermediate Algebra · Hard</div>
+<div class="q" id="q-27">
+  <div class="q-num">Q27 【M-IACG-51】 · ACT Math · Intermediate Algebra · Hard</div>
   <div class="q-text">Factor 2x² + 7x + 3.</div>
   <ul class="q-choices">
     <li>A) (2x + 1)(x + 3)</li>
@@ -416,8 +417,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> A) (2x + 1)(x + 3). 验证：2x² + 6x + x + 3 = 2x² + 7x + 3 ✓.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q28 · ACT Math · Coordinate Geometry · Easy</div>
+<div class="q" id="q-28">
+  <div class="q-num">Q28 【M-IACG-52】 · ACT Math · Coordinate Geometry · Easy</div>
   <div class="q-text">What is the y-intercept of the line y = 3x − 7?</div>
   <ul class="q-choices">
     <li>A) 3</li>
@@ -429,8 +430,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> D) −7. y = mx + b，b = −7.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q29 · ACT Math · Coordinate Geometry · Medium</div>
+<div class="q" id="q-29">
+  <div class="q-num">Q29 【M-IACG-52】 · ACT Math · Coordinate Geometry · Medium</div>
   <div class="q-text">What is the distance between the points (1, 2) and (4, 6)?</div>
   <ul class="q-choices">
     <li>A) 3</li>
@@ -442,8 +443,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> C) 5. d = √((4 − 1)² + (6 − 2)²) = √(9 + 16) = √25 = 5.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q30 · ACT Math · Plane Geometry · Medium</div>
+<div class="q" id="q-30">
+  <div class="q-num">Q30 【M-PGT-61】 · ACT Math · Plane Geometry · Medium</div>
   <div class="q-text">In a triangle, two angles measure 50° and 60°. What is the measure of the third angle?</div>
   <ul class="q-choices">
     <li>A) 50°</li>
@@ -455,8 +456,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> C) 70°. 三角形内角和 = 180°，第三角 = 180 − 50 − 60 = 70°.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q31 · ACT Math · Plane Geometry · Hard</div>
+<div class="q" id="q-31">
+  <div class="q-num">Q31 【M-PGT-61】 · ACT Math · Plane Geometry · Hard</div>
   <div class="q-text">A circle has area 49π. What is its circumference?</div>
   <ul class="q-choices">
     <li>A) 7π</li>
@@ -468,8 +469,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B) 14π. A = πr² = 49π → r = 7；C = 2πr = 14π.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q32 · ACT Math · Pre-Algebra · Easy</div>
+<div class="q" id="q-32">
+  <div class="q-num">Q32 【M-PAEA-41】 · ACT Math · Pre-Algebra · Easy</div>
   <div class="q-text">A fair 6-sided die is rolled. What is the probability of rolling a number greater than 4?</div>
   <ul class="q-choices">
     <li>A) 1/6</li>
@@ -483,8 +484,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
 
 <h3>Group 6 · English (NEW) (8 questions)</h3>
 
-<div class="q">
-  <div class="q-num">Q33 · ACT English · Punctuation · Easy</div>
+<div class="q" id="q-33">
+  <div class="q-num">Q33 【E-CSE-31】 · ACT English · Punctuation · Easy</div>
   <div class="q-text">Choose the correctly punctuated version:</div>
   <ul class="q-choices">
     <li>A) After, the long hike we rested.</li>
@@ -496,8 +497,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> C). 引导性介词短语后需用逗号分隔主句。</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q34 · ACT English · Punctuation · Medium</div>
+<div class="q" id="q-34">
+  <div class="q-num">Q34 【E-CSE-31】 · ACT English · Punctuation · Medium</div>
   <div class="q-text">Which sentence uses a semicolon correctly?</div>
   <ul class="q-choices">
     <li>A) Although tired; she finished the race.</li>
@@ -509,8 +510,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> C). 分号用于连接两个独立分句。</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q35 · ACT English · Usage · Easy</div>
+<div class="q" id="q-35">
+  <div class="q-num">Q35 【E-CSE-33】 · ACT English · Usage · Easy</div>
   <div class="q-text">Choose the correct verb: &ldquo;Each of the students _____ a textbook.&rdquo;</div>
   <ul class="q-choices">
     <li>A) have</li>
@@ -522,8 +523,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B) has. &ldquo;Each&rdquo; 为单数主语，谓语动词用单数。</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q36 · ACT English · Sentence Structure · Medium</div>
+<div class="q" id="q-36">
+  <div class="q-num">Q36 【E-CSE-32】 · ACT English · Sentence Structure · Medium</div>
   <div class="q-text">Choose the version that maintains parallel structure: &ldquo;She likes hiking, _____, and reading.&rdquo;</div>
   <ul class="q-choices">
     <li>A) to swim</li>
@@ -535,8 +536,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> C) swimming. 列举的并列动作须保持 -ing 形式。</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q37 · ACT English · Rhetoric · Hard</div>
+<div class="q" id="q-37">
+  <div class="q-num">Q37 【E-PW-11】 · ACT English · Rhetoric · Hard</div>
   <div class="q-text">Choose the best word: &ldquo;The CEO's decision was _____, as it affected thousands of employees.&rdquo;</div>
   <ul class="q-choices">
     <li>A) trivial</li>
@@ -548,8 +549,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B) momentous. 影响数千员工 → 决定 &ldquo;重大&rdquo;。</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q38 · ACT English · Rhetoric · Medium</div>
+<div class="q" id="q-38">
+  <div class="q-num">Q38 【E-PW-11】 · ACT English · Rhetoric · Medium</div>
   <div class="q-text">Which sentence is least redundant?</div>
   <ul class="q-choices">
     <li>A) The new innovation was surprising.</li>
@@ -561,8 +562,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B). &ldquo;innovation&rdquo; 本身已含 &ldquo;new&rdquo; 之意，省略 new 避免冗余。</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q39 · ACT English · Rhetoric · Easy</div>
+<div class="q" id="q-39">
+  <div class="q-num">Q39 【E-PW-11】 · ACT English · Rhetoric · Easy</div>
   <div class="q-text">Choose the best transition: &ldquo;I studied all night. _____, I passed the exam.&rdquo;</div>
   <ul class="q-choices">
     <li>A) However</li>
@@ -574,8 +575,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B) Therefore. 前后句构成因果关系。</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q40 · ACT English · Rhetoric · Hard</div>
+<div class="q" id="q-40">
+  <div class="q-num">Q40 【E-PW-11】 · ACT English · Rhetoric · Hard</div>
   <div class="q-text">Which sentence should come FIRST in a paragraph arguing for investment in renewable energy?</div>
   <ul class="q-choices">
     <li>A) &ldquo;Solar panels have dropped 90% in cost since 2010.&rdquo;</li>
@@ -589,8 +590,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
 
 <h3>Group 7 · Reading (NEW) (5 questions)</h3>
 
-<div class="q">
-  <div class="q-num">Q41 · ACT Reading · Main Idea · Easy</div>
+<div class="q" id="q-41">
+  <div class="q-num">Q41 【R-KID-71】 · ACT Reading · Main Idea · Easy</div>
   <div class="q-text">Passage: &ldquo;Recycling programs in major cities have reduced landfill waste by an average of 30% over the past decade, though participation rates still vary widely by neighborhood.&rdquo; What is the main idea?</div>
   <ul class="q-choices">
     <li>A) Recycling is useless</li>
@@ -602,8 +603,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B). 文段既肯定减排成效，又指出参与率不均。</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q42 · ACT Reading · Detail · Medium</div>
+<div class="q" id="q-42">
+  <div class="q-num">Q42 【R-KID-72】 · ACT Reading · Detail · Medium</div>
   <div class="q-text">Passage: &ldquo;The Great Migration (1916–1970) saw approximately six million African Americans relocate from the rural South to cities in the North and West.&rdquo; How many people migrated during the Great Migration?</div>
   <ul class="q-choices">
     <li>A) 1 million</li>
@@ -615,8 +616,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> C) 6 million. 文中明确 &ldquo;six million&rdquo;。</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q43 · ACT Reading · Inference · Hard</div>
+<div class="q" id="q-43">
+  <div class="q-num">Q43 【R-IKI-91】 · ACT Reading · Inference · Hard</div>
   <div class="q-text">Passage: &ldquo;Maria glanced at the clock, then at the empty doorway, then back at the clock. The kettle whistled, but she didn't move.&rdquo; What can be inferred?</div>
   <ul class="q-choices">
     <li>A) Maria is thirsty</li>
@@ -628,8 +629,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B). 反复看钟、看门口、忽略水壶 → 焦急等待某人。</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q44 · ACT Reading · Vocabulary · Medium</div>
+<div class="q" id="q-44">
+  <div class="q-num">Q44 【R-CS-81】 · ACT Reading · Vocabulary · Medium</div>
   <div class="q-text">Passage: &ldquo;The professor's lecture was esoteric, understood by only a handful of specialists.&rdquo; As used, &ldquo;esoteric&rdquo; most nearly means:</div>
   <ul class="q-choices">
     <li>A) basic</li>
@@ -641,8 +642,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B) obscure. 上下文 &ldquo;only a handful&rdquo; 暗示其晦涩难懂。</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q45 · ACT Reading · Inference · Hard</div>
+<div class="q" id="q-45">
+  <div class="q-num">Q45 【R-IKI-91】 · ACT Reading · Inference · Hard</div>
   <div class="q-text">Passage: &ldquo;Oh, what a brilliant idea to schedule a beach trip during monsoon season. Truly a stroke of genius.&rdquo; The author's tone is:</div>
   <ul class="q-choices">
     <li>A) sincere praise</li>
@@ -656,8 +657,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
 
 <h3>Group 8 · Science (NEW) (5 questions)</h3>
 
-<div class="q">
-  <div class="q-num">Q46 · ACT Science · Data Interpretation · Easy</div>
+<div class="q" id="q-46">
+  <div class="q-num">Q46 【S-DR-101】 · ACT Science · Data Interpretation · Easy</div>
   <div class="q-text">A data table records: Trial 1 → 5.2s, Trial 2 → 5.4s, Trial 3 → 5.3s. What is the average reaction time?</div>
   <ul class="q-choices">
     <li>A) 5.0 s</li>
@@ -669,8 +670,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B) 5.3 s. (5.2 + 5.4 + 5.3) / 3 = 15.9 / 3 = 5.3.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q47 · ACT Science · Data Representation · Medium</div>
+<div class="q" id="q-47">
+  <div class="q-num">Q47 【S-DR-102】 · ACT Science · Data Representation · Medium</div>
   <div class="q-text">A line graph shows temperature rising linearly from 20°C at t = 0 min to 60°C at t = 10 min. What is the temperature at t = 5 min?</div>
   <ul class="q-choices">
     <li>A) 25°C</li>
@@ -682,8 +683,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> C) 40°C. 线性增长，t = 5 为中点，对应 20 + (60 − 20)/2 = 40°C.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q48 · ACT Science · Research Summary · Medium</div>
+<div class="q" id="q-48">
+  <div class="q-num">Q48 【S-RS-111】 · ACT Science · Research Summary · Medium</div>
   <div class="q-text">A study tests a new drug's effect on blood pressure. Which control group is most appropriate?</div>
   <ul class="q-choices">
     <li>A) Patients taking a different blood pressure drug</li>
@@ -695,8 +696,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B). 对照组服用安慰剂，以隔离药物本身的效果。</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q49 · ACT Science · Conflicting Viewpoints · Hard</div>
+<div class="q" id="q-49">
+  <div class="q-num">Q49 【S-CV-121】 · ACT Science · Conflicting Viewpoints · Hard</div>
   <div class="q-text">Scientist A: Species decline is caused by habitat loss. Scientist B: Species decline is caused by climate change. Which finding would best support Scientist A over Scientist B?</div>
   <ul class="q-choices">
     <li>A) Species decline correlates with rising temperatures</li>
@@ -708,8 +709,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B). 在 &ldquo;温度不变但森林砍伐高&rdquo; 的地区物种衰退最严重，支持栖息地丧失为主要原因。</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q50 · ACT Science · Research Summary · Easy</div>
+<div class="q" id="q-50">
+  <div class="q-num">Q50 【S-RS-111】 · ACT Science · Research Summary · Easy</div>
   <div class="q-text">An experiment tests 3 fertilizers on plant height after 4 weeks: A = 15 cm, B = 22 cm, Control = 10 cm. Fertilizer B's percentage increase over the control is approximately:</div>
   <ul class="q-choices">
     <li>A) 50%</li>
@@ -723,8 +724,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
 
 <h3>Group 9 · Math (25 questions)</h3>
 
-<div class="q">
-  <div class="q-num">Q51 · ACT Math · Pre-Algebra · Easy</div>
+<div class="q" id="q-51">
+  <div class="q-num">Q51 【M-PAEA-41】 · ACT Math · Pre-Algebra · Easy</div>
   <div class="q-text">What is 3/5 as a decimal?</div>
   <ul class="q-choices">
     <li>A) 0.35</li>
@@ -736,8 +737,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B) 0.6. 3 ÷ 5 = 0.6.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q52 · ACT Math · Pre-Algebra · Easy</div>
+<div class="q" id="q-52">
+  <div class="q-num">Q52 【M-PAEA-41】 · ACT Math · Pre-Algebra · Easy</div>
   <div class="q-text">What is 0.4 × 0.5?</div>
   <ul class="q-choices">
     <li>A) 0.02</li>
@@ -749,8 +750,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B) 0.20. 0.4 × 0.5 = 0.20.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q53 · ACT Math · Pre-Algebra · Medium</div>
+<div class="q" id="q-53">
+  <div class="q-num">Q53 【M-PAEA-41】 · ACT Math · Pre-Algebra · Medium</div>
   <div class="q-text">A store marks up an item 30% above its $50 cost. A customer then uses a 10% off coupon. What does the customer pay?</div>
   <ul class="q-choices">
     <li>A) $52</li>
@@ -762,8 +763,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> C) $58.50. 标价 = 50 × 1.30 = $65；打折 = 65 × 0.90 = $58.50.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q54 · ACT Math · Pre-Algebra · Medium</div>
+<div class="q" id="q-54">
+  <div class="q-num">Q54 【M-PAEA-41】 · ACT Math · Pre-Algebra · Medium</div>
   <div class="q-text">The ratio of apples to oranges is 2:7. If there are 63 fruits total, how many are apples?</div>
   <ul class="q-choices">
     <li>A) 9</li>
@@ -775,8 +776,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B) 14. 2 + 7 = 9 parts；63 / 9 = 7 per part；apples = 2 × 7 = 14.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q55 · ACT Math · Pre-Algebra · Hard</div>
+<div class="q" id="q-55">
+  <div class="q-num">Q55 【M-PAEA-41】 · ACT Math · Pre-Algebra · Hard</div>
   <div class="q-text">A bag has 4 red, 3 blue, and 5 green marbles. Two marbles are drawn without replacement. What is the probability both are green?</div>
   <ul class="q-choices">
     <li>A) 1/12</li>
@@ -788,8 +789,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B) 5/33. 第一次：5/12；第二次：4/11；(5/12)(4/11) = 20/132 = 5/33.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q56 · ACT Math · Pre-Algebra · Medium</div>
+<div class="q" id="q-56">
+  <div class="q-num">Q56 【M-PAEA-41】 · ACT Math · Pre-Algebra · Medium</div>
   <div class="q-text">What is the least common multiple of 6 and 8?</div>
   <ul class="q-choices">
     <li>A) 12</li>
@@ -801,8 +802,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B) 24. 6 = 2×3，8 = 2³；LCM = 2³ × 3 = 24.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q57 · ACT Math · Pre-Algebra · Easy</div>
+<div class="q" id="q-57">
+  <div class="q-num">Q57 【M-PAEA-41】 · ACT Math · Pre-Algebra · Easy</div>
   <div class="q-text">What is the mean of 4, 8, 6, 10, 2?</div>
   <ul class="q-choices">
     <li>A) 5</li>
@@ -814,8 +815,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B) 6. (4 + 8 + 6 + 10 + 2) / 5 = 30 / 5 = 6.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q58 · ACT Math · Pre-Algebra · Medium</div>
+<div class="q" id="q-58">
+  <div class="q-num">Q58 【M-PAEA-41】 · ACT Math · Pre-Algebra · Medium</div>
   <div class="q-text">What is the 7th term of the arithmetic sequence 3, 7, 11, 15, …?</div>
   <ul class="q-choices">
     <li>A) 19</li>
@@ -827,8 +828,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> C) 27. 公差 = 4；a₇ = 3 + 6(4) = 27.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q59 · ACT Math · Elementary Algebra · Easy</div>
+<div class="q" id="q-59">
+  <div class="q-num">Q59 【M-PAEA-42】 · ACT Math · Elementary Algebra · Easy</div>
   <div class="q-text">Solve 5x − 3 = 2x + 9.</div>
   <ul class="q-choices">
     <li>A) 2</li>
@@ -840,8 +841,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> C) 4. 3x = 12，x = 4.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q60 · ACT Math · Elementary Algebra · Medium</div>
+<div class="q" id="q-60">
+  <div class="q-num">Q60 【M-PAEA-42】 · ACT Math · Elementary Algebra · Medium</div>
   <div class="q-text">Simplify 3(x + 2) − 2(x − 4).</div>
   <ul class="q-choices">
     <li>A) x − 2</li>
@@ -853,8 +854,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B) x + 14. 3x + 6 − 2x + 8 = x + 14.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q61 · ACT Math · Elementary Algebra · Medium</div>
+<div class="q" id="q-61">
+  <div class="q-num">Q61 【M-PAEA-42】 · ACT Math · Elementary Algebra · Medium</div>
   <div class="q-text">Expand (2x − 3)².</div>
   <ul class="q-choices">
     <li>A) 4x² − 9</li>
@@ -866,8 +867,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> C) 4x² − 12x + 9. (2x)² − 2(2x)(3) + 3² = 4x² − 12x + 9.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q62 · ACT Math · Elementary Algebra · Hard</div>
+<div class="q" id="q-62">
+  <div class="q-num">Q62 【M-PAEA-42】 · ACT Math · Elementary Algebra · Hard</div>
   <div class="q-text">A rectangle&rsquo;s length is 3 more than twice its width. If the perimeter is 36, what is the width?</div>
   <ul class="q-choices">
     <li>A) 4</li>
@@ -879,8 +880,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B) 5. 设宽 w，长 2w + 3；2(w + 2w + 3) = 36，3w + 3 = 18，3w = 15，w = 5.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q63 · ACT Math · Intermediate Algebra · Medium</div>
+<div class="q" id="q-63">
+  <div class="q-num">Q63 【M-IACG-51】 · ACT Math · Intermediate Algebra · Medium</div>
   <div class="q-text">What are the roots of x² − 5x + 6 = 0?</div>
   <ul class="q-choices">
     <li>A) x = 1, x = 6</li>
@@ -892,8 +893,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B) x = 2, x = 3. (x − 2)(x − 3) = 0.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q64 · ACT Math · Intermediate Algebra · Hard</div>
+<div class="q" id="q-64">
+  <div class="q-num">Q64 【M-IACG-51】 · ACT Math · Intermediate Algebra · Hard</div>
   <div class="q-text">For what value of k does x² + kx + 9 = 0 have exactly one real solution?</div>
   <ul class="q-choices">
     <li>A) 3</li>
@@ -905,8 +906,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> C) ±6. 判别式 = k² − 36 = 0 → k = ±6.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q65 · ACT Math · Intermediate Algebra · Medium</div>
+<div class="q" id="q-65">
+  <div class="q-num">Q65 【M-IACG-51】 · ACT Math · Intermediate Algebra · Medium</div>
   <div class="q-text">If f(x) = x² − 2x, what is f(−3)?</div>
   <ul class="q-choices">
     <li>A) 3</li>
@@ -918,8 +919,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> D) 15. f(−3) = 9 + 6 = 15.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q66 · ACT Math · Intermediate Algebra · Hard</div>
+<div class="q" id="q-66">
+  <div class="q-num">Q66 【M-IACG-51】 · ACT Math · Intermediate Algebra · Hard</div>
   <div class="q-text">Solve 2x² − 5x − 3 ≤ 0.</div>
   <ul class="q-choices">
     <li>A) x ≤ −1/2 or x ≥ 3</li>
@@ -931,8 +932,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B) −1/2 ≤ x ≤ 3. 因式 (2x + 1)(x − 3) ≤ 0，根 −1/2 与 3 之间为负.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q67 · ACT Math · Intermediate Algebra · Medium</div>
+<div class="q" id="q-67">
+  <div class="q-num">Q67 【M-IACG-51】 · ACT Math · Intermediate Algebra · Medium</div>
   <div class="q-text">Simplify (x³ · x⁵) / x⁴.</div>
   <ul class="q-choices">
     <li>A) x²</li>
@@ -944,8 +945,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B) x⁴. x³⁺⁵⁻⁴ = x⁴.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q68 · ACT Math · Coordinate Geometry · Easy</div>
+<div class="q" id="q-68">
+  <div class="q-num">Q68 【M-IACG-52】 · ACT Math · Coordinate Geometry · Easy</div>
   <div class="q-text">What is the slope of the line y = −2x + 5?</div>
   <ul class="q-choices">
     <li>A) 5</li>
@@ -957,8 +958,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> C) −2. y = mx + b 中 m = −2.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q69 · ACT Math · Coordinate Geometry · Medium</div>
+<div class="q" id="q-69">
+  <div class="q-num">Q69 【M-IACG-52】 · ACT Math · Coordinate Geometry · Medium</div>
   <div class="q-text">What is the midpoint of the segment with endpoints (−2, 4) and (6, 8)?</div>
   <ul class="q-choices">
     <li>A) (2, 6)</li>
@@ -970,8 +971,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> A) (2, 6). ((−2+6)/2, (4+8)/2) = (2, 6).</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q70 · ACT Math · Coordinate Geometry · Hard</div>
+<div class="q" id="q-70">
+  <div class="q-num">Q70 【M-IACG-52】 · ACT Math · Coordinate Geometry · Hard</div>
   <div class="q-text">Which equation represents a line parallel to y = 3x − 2 passing through (1, 4)?</div>
   <ul class="q-choices">
     <li>A) y = 3x + 1</li>
@@ -983,8 +984,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> A) y = 3x + 1. 平行 → 斜率 3；过 (1,4)：4 = 3(1) + b → b = 1.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q71 · ACT Math · Coordinate Geometry · Medium</div>
+<div class="q" id="q-71">
+  <div class="q-num">Q71 【M-IACG-52】 · ACT Math · Coordinate Geometry · Medium</div>
   <div class="q-text">What is the distance between (−3, 1) and (5, 7)?</div>
   <ul class="q-choices">
     <li>A) 8</li>
@@ -996,8 +997,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B) 10. d = √((5+3)² + (7−1)²) = √(64 + 36) = √100 = 10.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q72 · ACT Math · Plane Geometry · Easy</div>
+<div class="q" id="q-72">
+  <div class="q-num">Q72 【M-PGT-61】 · ACT Math · Plane Geometry · Easy</div>
   <div class="q-text">Two angles are complementary. If one is 35°, what is the other?</div>
   <ul class="q-choices">
     <li>A) 45°</li>
@@ -1009,8 +1010,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B) 55°. 互补角和为 90°；90 − 35 = 55°.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q73 · ACT Math · Plane Geometry · Medium</div>
+<div class="q" id="q-73">
+  <div class="q-num">Q73 【M-PGT-61】 · ACT Math · Plane Geometry · Medium</div>
   <div class="q-text">A triangle has sides 5, 12, 13. What is its area?</div>
   <ul class="q-choices">
     <li>A) 30</li>
@@ -1022,8 +1023,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> A) 30. 5-12-13 为直角三角形；面积 = (1/2)(5)(12) = 30.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q74 · ACT Math · Plane Geometry · Hard</div>
+<div class="q" id="q-74">
+  <div class="q-num">Q74 【M-PGT-61】 · ACT Math · Plane Geometry · Hard</div>
   <div class="q-text">A square is inscribed in a circle of radius 5. What is the area of the square?</div>
   <ul class="q-choices">
     <li>A) 25</li>
@@ -1035,8 +1036,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B) 50. 对角线 = 直径 = 10；面积 = (1/2)(d²) = (1/2)(100) = 50.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q75 · ACT Math · Trigonometry · Medium</div>
+<div class="q" id="q-75">
+  <div class="q-num">Q75 【M-PGT-62】 · ACT Math · Trigonometry · Medium</div>
   <div class="q-text">If cos(θ) = 1/2 and θ is in the first quadrant, what is θ?</div>
   <ul class="q-choices">
     <li>A) 30°</li>
@@ -1050,8 +1051,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
 
 <h3>Group 10 · English (18 questions)</h3>
 
-<div class="q">
-  <div class="q-num">Q76 · ACT English · Usage · Easy</div>
+<div class="q" id="q-76">
+  <div class="q-num">Q76 【E-CSE-33】 · ACT English · Usage · Easy</div>
   <div class="q-text">Choose the correct verb: &ldquo;The committee _____ already reached a decision.&rdquo;</div>
   <ul class="q-choices">
     <li>A) have</li>
@@ -1063,8 +1064,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B) has. &ldquo;committee&rdquo; 作为整体作单数主语.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q77 · ACT English · Usage · Medium</div>
+<div class="q" id="q-77">
+  <div class="q-num">Q77 【E-CSE-33】 · ACT English · Usage · Medium</div>
   <div class="q-text">Choose the correct pronoun: &ldquo;The award was given to _____ and Marcus.&rdquo;</div>
   <ul class="q-choices">
     <li>A) he</li>
@@ -1076,8 +1077,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B) him. 介词 &ldquo;to&rdquo; 后接宾格.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q78 · ACT English · Sentence Structure · Medium</div>
+<div class="q" id="q-78">
+  <div class="q-num">Q78 【E-CSE-32】 · ACT English · Sentence Structure · Medium</div>
   <div class="q-text">Which sentence corrects the misplaced modifier? &ldquo;The dog bit the man with the leash.&rdquo;</div>
   <ul class="q-choices">
     <li>A) The dog bit the man with the leash.</li>
@@ -1089,8 +1090,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> C). 修饰语须紧邻 &ldquo;dog&rdquo;，表示 &ldquo;牵着皮带的狗&rdquo;.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q79 · ACT English · Sentence Structure · Easy</div>
+<div class="q" id="q-79">
+  <div class="q-num">Q79 【E-CSE-32】 · ACT English · Sentence Structure · Easy</div>
   <div class="q-text">Choose the parallel structure: &ldquo;She wanted to swim, _____, and to run.&rdquo;</div>
   <ul class="q-choices">
     <li>A) bike</li>
@@ -1102,8 +1103,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> C) to bike. 与 &ldquo;to swim&rdquo;、&ldquo;to run&rdquo; 并列，须用不定式.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q80 · ACT English · Usage · Medium</div>
+<div class="q" id="q-80">
+  <div class="q-num">Q80 【E-CSE-33】 · ACT English · Usage · Medium</div>
   <div class="q-text">Choose the correct tense: &ldquo;When I called, she _____ dinner.&rdquo;</div>
   <ul class="q-choices">
     <li>A) cooks</li>
@@ -1115,8 +1116,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> C) was cooking. 过去进行时表示过去某时刻正在进行的动作.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q81 · ACT English · Usage · Hard</div>
+<div class="q" id="q-81">
+  <div class="q-num">Q81 【E-CSE-33】 · ACT English · Usage · Hard</div>
   <div class="q-text">Choose the correct verb: &ldquo;A number of students _____ absent today.&rdquo;</div>
   <ul class="q-choices">
     <li>A) is</li>
@@ -1128,8 +1129,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> C) are. &ldquo;a number of&rdquo; 后接复数谓语.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q82 · ACT English · Punctuation · Easy</div>
+<div class="q" id="q-82">
+  <div class="q-num">Q82 【E-CSE-31】 · ACT English · Punctuation · Easy</div>
   <div class="q-text">Which sentence uses a comma correctly?</div>
   <ul class="q-choices">
     <li>A) She bought apples, oranges and, bananas.</li>
@@ -1141,8 +1142,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> C). 列举项之间用逗号分隔（含牛津逗号）.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q83 · ACT English · Punctuation · Medium</div>
+<div class="q" id="q-83">
+  <div class="q-num">Q83 【E-CSE-31】 · ACT English · Punctuation · Medium</div>
   <div class="q-text">Which sentence uses the semicolon correctly?</div>
   <ul class="q-choices">
     <li>A) She studied hard; therefore, she passed.</li>
@@ -1154,8 +1155,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> A). 分号连接两个独立分句，&ldquo;therefore&rdquo; 后用逗号.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q84 · ACT English · Punctuation · Medium</div>
+<div class="q" id="q-84">
+  <div class="q-num">Q84 【E-CSE-31】 · ACT English · Punctuation · Medium</div>
   <div class="q-text">Which sentence uses the colon correctly?</div>
   <ul class="q-choices">
     <li>A) The teacher said: &ldquo;Open your books.&rdquo;</li>
@@ -1167,8 +1168,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> A). 冒号可用于引出正式引语，前须为完整句子.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q85 · ACT English · Punctuation · Easy</div>
+<div class="q" id="q-85">
+  <div class="q-num">Q85 【E-CSE-31】 · ACT English · Punctuation · Easy</div>
   <div class="q-text">Which sentence uses the apostrophe correctly?</div>
   <ul class="q-choices">
     <li>A) The childrens toys were scattered.</li>
@@ -1180,8 +1181,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B). &ldquo;children&rdquo; 已是复数，所有格直接加 &lsquo;s.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q86 · ACT English · Rhetoric · Medium</div>
+<div class="q" id="q-86">
+  <div class="q-num">Q86 【E-PW-11】 · ACT English · Rhetoric · Medium</div>
   <div class="q-text">Which sentence would best OPEN an essay about the benefits of exercise?</div>
   <ul class="q-choices">
     <li>A) &ldquo;In conclusion, exercise is good.&rdquo;</li>
@@ -1193,8 +1194,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B). 主题句应概括全文论点，而非结论或例证.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q87 · ACT English · Rhetoric · Hard</div>
+<div class="q" id="q-87">
+  <div class="q-num">Q87 【E-PW-11】 · ACT English · Rhetoric · Hard</div>
   <div class="q-text">Which sentence most effectively supports the claim: &ldquo;Reading fiction builds empathy.&rdquo;</div>
   <ul class="q-choices">
     <li>A) &ldquo;Fiction is popular.&rdquo;</li>
@@ -1206,8 +1207,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B). 具体研究数据最直接支持论点.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q88 · ACT English · Rhetoric · Medium</div>
+<div class="q" id="q-88">
+  <div class="q-num">Q88 【E-PW-11】 · ACT English · Rhetoric · Medium</div>
   <div class="q-text">Which version is most concise and clear?</div>
   <ul class="q-choices">
     <li>A) Due to the fact that it was raining, the game was cancelled on account of rain.</li>
@@ -1219,8 +1220,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B). 最简洁明了，无冗余.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q89 · ACT English · Rhetoric · Hard</div>
+<div class="q" id="q-89">
+  <div class="q-num">Q89 【E-PW-11】 · ACT English · Rhetoric · Hard</div>
   <div class="q-text">Which sentence should be DELETED to improve paragraph unity? (Paragraph argues that public transportation reduces traffic.)</div>
   <ul class="q-choices">
     <li>A) &ldquo;Cities with robust transit systems report 30% less congestion.&rdquo;</li>
@@ -1232,8 +1233,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> C). 个人轶事与论点无关，破坏段落统一性.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q90 · ACT English · Sentence Structure · Easy</div>
+<div class="q" id="q-90">
+  <div class="q-num">Q90 【E-CSE-32】 · ACT English · Sentence Structure · Easy</div>
   <div class="q-text">Which is a complete sentence?</div>
   <ul class="q-choices">
     <li>A) Running through the park.</li>
@@ -1245,8 +1246,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> C) The dog barked loudly. 含独立主语与谓语，为完整句子.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q91 · ACT English · Sentence Structure · Medium</div>
+<div class="q" id="q-91">
+  <div class="q-num">Q91 【E-CSE-32】 · ACT English · Sentence Structure · Medium</div>
   <div class="q-text">Choose the correct sentence:</div>
   <ul class="q-choices">
     <li>A) She is smarter than me.</li>
@@ -1258,8 +1259,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B) She is smarter than I. &ldquo;than&rdquo; 后接主格代词（&ldquo;than I am&rdquo; 省略）.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q92 · ACT English · Sentence Structure · Hard</div>
+<div class="q" id="q-92">
+  <div class="q-num">Q92 【E-CSE-32】 · ACT English · Sentence Structure · Hard</div>
   <div class="q-text">Which sentence avoids a comma splice?</div>
   <ul class="q-choices">
     <li>A) It was late, I went home.</li>
@@ -1271,8 +1272,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B). 用并列连词 &ldquo;so&rdquo; 连接两个独立分句，避免逗号拼接.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q93 · ACT English · Usage · Hard</div>
+<div class="q" id="q-93">
+  <div class="q-num">Q93 【E-CSE-33】 · ACT English · Usage · Hard</div>
   <div class="q-text">Choose the correct pronoun: &ldquo;Everyone should bring _____ own calculator.&rdquo;</div>
   <ul class="q-choices">
     <li>A) their</li>
@@ -1286,8 +1287,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
 
 <h3>Group 11 · Reading (12 questions)</h3>
 
-<div class="q">
-  <div class="q-num">Q94 · ACT Reading · Main Idea · Medium</div>
+<div class="q" id="q-94">
+  <div class="q-num">Q94 【R-KID-71】 · ACT Reading · Main Idea · Medium</div>
   <div class="q-text">Passage (prose fiction): &ldquo;The old house creaked and groaned in the wind, as if remembering the family that had long since abandoned it. Dust coated every surface like fine gray snow.&rdquo; The passage primarily establishes:</div>
   <ul class="q-choices">
     <li>A) A warm family reunion</li>
@@ -1299,8 +1300,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B). &ldquo;abandoned&rdquo;、&ldquo;dust&rdquo; 等词营造废弃衰败氛围.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q95 · ACT Reading · Inference · Hard</div>
+<div class="q" id="q-95">
+  <div class="q-num">Q95 【R-IKI-91】 · ACT Reading · Inference · Hard</div>
   <div class="q-text">Passage (prose fiction): &ldquo;James folded the letter carefully, pressing each crease flat with his thumb, then placed it in the drawer with the others—all unanswered.&rdquo; What can be inferred about James?</div>
   <ul class="q-choices">
     <li>A) He enjoys writing letters</li>
@@ -1312,8 +1313,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B). 整齐折叠却 &ldquo;all unanswered&rdquo; 暗示有意回避回复.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q96 · ACT Reading · Detail · Easy</div>
+<div class="q" id="q-96">
+  <div class="q-num">Q96 【R-KID-72】 · ACT Reading · Detail · Easy</div>
   <div class="q-text">Passage (humanities): &ldquo;Van Gogh created &lsquo;The Starry Night&rsquo; in 1889 while living in an asylum at Saint-Rémy-de-Provence.&rdquo; Where was Van Gogh living when he painted &ldquo;The Starry Night&rdquo;?</div>
   <ul class="q-choices">
     <li>A) Paris</li>
@@ -1325,8 +1326,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> C). 文中明确 &ldquo;in an asylum at Saint-Rémy-de-Provence&rdquo;.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q97 · ACT Reading · Vocabulary · Medium</div>
+<div class="q" id="q-97">
+  <div class="q-num">Q97 【R-CS-81】 · ACT Reading · Vocabulary · Medium</div>
   <div class="q-text">Passage (humanities): &ldquo;The critic&rsquo;s review was vitriolic, attacking the artist&rsquo;s work with unrelenting bitterness.&rdquo; As used, &ldquo;vitriolic&rdquo; most nearly means:</div>
   <ul class="q-choices">
     <li>A) praising</li>
@@ -1338,8 +1339,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> C) caustic. &ldquo;bitterness&rdquo; 暗示刻薄、尖刻.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q98 · ACT Reading · Main Idea · Medium</div>
+<div class="q" id="q-98">
+  <div class="q-num">Q98 【R-KID-71】 · ACT Reading · Main Idea · Medium</div>
   <div class="q-text">Passage (social science): &ldquo;The development of the interstate highway system in the 1950s transformed American suburbia, enabling commuters to live far from city centers while reshaping the national economy.&rdquo; The main idea is:</div>
   <ul class="q-choices">
     <li>A) Highways were expensive to build</li>
@@ -1351,8 +1352,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B). 文段核心是州际系统对郊区生活与经济的重塑.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q99 · ACT Reading · Inference · Hard</div>
+<div class="q" id="q-99">
+  <div class="q-num">Q99 【R-IKI-91】 · ACT Reading · Inference · Hard</div>
   <div class="q-text">Passage (social science): &ldquo;When the factory closed, unemployment in the town tripled within six months. Local businesses soon shuttered as residents had less disposable income.&rdquo; The closing of the factory caused:</div>
   <ul class="q-choices">
     <li>A) An increase in population</li>
@@ -1364,8 +1365,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B). 工厂关闭 → 失业增加 → 消费减少 → 本地商铺倒闭.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q100 · ACT Reading · Detail · Easy</div>
+<div class="q" id="q-100">
+  <div class="q-num">Q100 【R-KID-72】 · ACT Reading · Detail · Easy</div>
   <div class="q-text">Passage (natural science): &ldquo;The Pacific Ring of Fire is a seismically active zone where roughly 75% of the world&rsquo;s volcanoes are located.&rdquo; Approximately what percentage of the world&rsquo;s volcanoes are in the Ring of Fire?</div>
   <ul class="q-choices">
     <li>A) 25%</li>
@@ -1377,8 +1378,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> C) 75%. 文中明确 &ldquo;75%&rdquo;.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q101 · ACT Reading · Inference · Medium</div>
+<div class="q" id="q-101">
+  <div class="q-num">Q101 【R-IKI-91】 · ACT Reading · Inference · Medium</div>
   <div class="q-text">Passage (natural science): &ldquo;The enzyme&rsquo;s activity dropped sharply above 45°C, consistent with the protein beginning to denature at elevated temperatures.&rdquo; It can be inferred that:</div>
   <ul class="q-choices">
     <li>A) Higher temperatures always improve enzyme function</li>
@@ -1390,8 +1391,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B). &ldquo;denature&rdquo; 暗示蛋白质结构被破坏，活性下降.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q102 · ACT Reading · Inference · Hard</div>
+<div class="q" id="q-102">
+  <div class="q-num">Q102 【R-IKI-91】 · ACT Reading · Inference · Hard</div>
   <div class="q-text">Passage (prose fiction): &ldquo;What a splendid idea—another meeting that could have been an email. How ever do they think of these things?&rdquo; The narrator&rsquo;s tone is:</div>
   <ul class="q-choices">
     <li>A) genuinely enthusiastic</li>
@@ -1403,8 +1404,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B) sarcastic. 字面赞美与实际不满构成反讽.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q103 · ACT Reading · Detail · Medium</div>
+<div class="q" id="q-103">
+  <div class="q-num">Q103 【R-KID-72】 · ACT Reading · Detail · Medium</div>
   <div class="q-text">Passage (humanities): &ldquo;Beethoven first gained fame as a pianist in Vienna. Later, he began losing his hearing, yet continued composing. His Ninth Symphony premiered in 1824, three years before his death.&rdquo; Which event happened first?</div>
   <ul class="q-choices">
     <li>A) He began losing his hearing</li>
@@ -1416,8 +1417,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B). 文中顺序：先成名 → 后失聪 → 第九交响曲 → 去世.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q104 · ACT Reading · Inference · Medium</div>
+<div class="q" id="q-104">
+  <div class="q-num">Q104 【R-IKI-91】 · ACT Reading · Inference · Medium</div>
   <div class="q-text">Passage (social science): &ldquo;Unlike traditional classrooms, where instruction is uniform, Montessori classrooms allow students to choose activities at their own pace.&rdquo; The passage contrasts the two by emphasizing:</div>
   <ul class="q-choices">
     <li>A) Cost differences</li>
@@ -1429,8 +1430,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B). 对比核心是 &ldquo;uniform instruction&rdquo; vs &ldquo;student choice&rdquo;.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q105 · ACT Reading · Inference · Hard</div>
+<div class="q" id="q-105">
+  <div class="q-num">Q105 【R-IKI-91】 · ACT Reading · Inference · Hard</div>
   <div class="q-text">Passage (natural science): &ldquo;The discovery, long dismissed as a measurement error, turned out to reveal an entirely new class of subatomic particles.&rdquo; The author&rsquo;s attitude toward the discovery is:</div>
   <ul class="q-choices">
     <li>A) dismissive</li>
@@ -1444,8 +1445,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
 
 <h3>Group 12 · Science (15 questions)</h3>
 
-<div class="q">
-  <div class="q-num">Q106 · ACT Science · Data Interpretation · Easy</div>
+<div class="q" id="q-106">
+  <div class="q-num">Q106 【S-DR-101】 · ACT Science · Data Interpretation · Easy</div>
   <div class="q-text">A biology data table shows heart rates (bpm): Resting 70, Walking 95, Running 140, Sprinting 175. What is the heart rate during walking?</div>
   <ul class="q-choices">
     <li>A) 70 bpm</li>
@@ -1457,8 +1458,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B) 95 bpm. 直接读表.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q107 · ACT Science · Data Interpretation · Medium</div>
+<div class="q" id="q-107">
+  <div class="q-num">Q107 【S-DR-101】 · ACT Science · Data Interpretation · Medium</div>
   <div class="q-text">A chemistry experiment records pH at different acid concentrations: 0.1 M → pH 1, 0.01 M → pH 2, 0.001 M → pH 3. What is the relationship?</div>
   <ul class="q-choices">
     <li>A) Higher concentration → higher pH</li>
@@ -1470,8 +1471,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B). 浓度越高，pH 越低（酸性越强）.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q108 · ACT Science · Data Interpretation · Medium</div>
+<div class="q" id="q-108">
+  <div class="q-num">Q108 【S-DR-101】 · ACT Science · Data Interpretation · Medium</div>
   <div class="q-text">A physics graph shows an object&rsquo;s velocity increasing from 0 to 20 m/s over 4 seconds. What is the acceleration?</div>
   <ul class="q-choices">
     <li>A) 0 m/s²</li>
@@ -1483,8 +1484,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B) 5 m/s². a = Δv / Δt = 20 / 4 = 5.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q109 · ACT Science · Data Interpretation · Easy</div>
+<div class="q" id="q-109">
+  <div class="q-num">Q109 【S-DR-101】 · ACT Science · Data Interpretation · Easy</div>
   <div class="q-text">A geology table lists mineral hardness (Mohs): Talc 1, Gypsum 2, Quartz 7, Diamond 10. Which is the hardest?</div>
   <ul class="q-choices">
     <li>A) Talc</li>
@@ -1496,8 +1497,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> D) Diamond. Mohs 硬度最高（10）.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q110 · ACT Science · Data Representation · Medium</div>
+<div class="q" id="q-110">
+  <div class="q-num">Q110 【S-DR-102】 · ACT Science · Data Representation · Medium</div>
   <div class="q-text">An astronomy chart shows a star&rsquo;s apparent brightness over time, dimming and brightening in a regular 5-day cycle. This pattern indicates the star is likely:</div>
   <ul class="q-choices">
     <li>A) Stationary</li>
@@ -1509,8 +1510,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B). 规律周期性亮度变化是变星的特征.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q111 · ACT Science · Research Summary · Medium</div>
+<div class="q" id="q-111">
+  <div class="q-num">Q111 【S-RS-111】 · ACT Science · Research Summary · Medium</div>
   <div class="q-text">A biology study tests antibiotic effectiveness on bacteria. Plates were incubated at 37°C for 24 hours. Why is 37°C an appropriate temperature?</div>
   <ul class="q-choices">
     <li>A) It freezes the bacteria</li>
@@ -1522,8 +1523,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B). 37°C 接近人体温度，是所测细菌的自然生长环境.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q112 · ACT Science · Research Summary · Hard</div>
+<div class="q" id="q-112">
+  <div class="q-num">Q112 【S-RS-111】 · ACT Science · Research Summary · Hard</div>
   <div class="q-text">A chemistry experiment tests reaction rate at 4 temperatures, finding rate doubles for every 10°C increase. If the rate at 20°C is 2 mol/L·s, what is it at 40°C?</div>
   <ul class="q-choices">
     <li>A) 2 mol/L·s</li>
@@ -1535,8 +1536,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> D) 8 mol/L·s. 20→30 翻倍为 4；30→40 再翻倍为 8.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q113 · ACT Science · Research Summary · Medium</div>
+<div class="q" id="q-113">
+  <div class="q-num">Q113 【S-RS-111】 · ACT Science · Research Summary · Medium</div>
   <div class="q-text">A physics experiment drops objects of different masses from the same height. All land simultaneously (in a vacuum). This demonstrates that:</div>
   <ul class="q-choices">
     <li>A) Heavier objects fall faster</li>
@@ -1548,8 +1549,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> C). 真空中无空气阻力，所有物体加速度相同（g）.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q114 · ACT Science · Research Summary · Hard</div>
+<div class="q" id="q-114">
+  <div class="q-num">Q114 【S-RS-111】 · ACT Science · Research Summary · Hard</div>
   <div class="q-text">An earth science study measures erosion rates on slopes of 5°, 15°, and 30° over one year. Erosion increases with slope angle. To isolate the effect of vegetation, the next experiment should:</div>
   <ul class="q-choices">
     <li>A) Vary slope angle only</li>
@@ -1561,8 +1562,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B). 控制坡度不变，对比有植被与无植被，以隔离植被效果.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q115 · ACT Science · Conflicting Viewpoints · Hard</div>
+<div class="q" id="q-115">
+  <div class="q-num">Q115 【S-CV-121】 · ACT Science · Conflicting Viewpoints · Hard</div>
   <div class="q-text">Biologist A: Predation by foxes controls rabbit populations. Biologist B: Disease is the primary control. Which observation best supports Biologist A?</div>
   <ul class="q-choices">
     <li>A) Rabbit populations fluctuate seasonally</li>
@@ -1574,8 +1575,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B). 在无疾病但狐狸密度高的地区兔群衰退最严重，支持捕食假说.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q116 · ACT Science · Conflicting Viewpoints · Medium</div>
+<div class="q" id="q-116">
+  <div class="q-num">Q116 【S-CV-121】 · ACT Science · Conflicting Viewpoints · Medium</div>
   <div class="q-text">Chemist A: A reaction is exothermic. Chemist B: The same reaction is endothermic. The best way to resolve this is to:</div>
   <ul class="q-choices">
     <li>A) Ask a third chemist</li>
@@ -1587,8 +1588,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B). 直接测量反应过程中的温度变化即可判断吸热/放热.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q117 · ACT Science · Conflicting Viewpoints · Hard</div>
+<div class="q" id="q-117">
+  <div class="q-num">Q117 【S-CV-121】 · ACT Science · Conflicting Viewpoints · Hard</div>
   <div class="q-text">Physicist A: Light is a wave. Physicist B: Light is a particle. The photoelectric effect (light ejecting electrons from metal) best supports which view?</div>
   <ul class="q-choices">
     <li>A) Wave only</li>
@@ -1600,8 +1601,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B) Particle (photon) model. 光电效应中光的粒子性解释电子的发射.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q118 · ACT Science · Conflicting Viewpoints · Medium</div>
+<div class="q" id="q-118">
+  <div class="q-num">Q118 【S-CV-121】 · ACT Science · Conflicting Viewpoints · Medium</div>
   <div class="q-text">Astronomer A: Pluto is a planet. Astronomer B: Pluto is a dwarf planet. Astronomer B&rsquo;s classification is based primarily on Pluto&rsquo;s:</div>
   <ul class="q-choices">
     <li>A) Color</li>
@@ -1613,8 +1614,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B). 行星定义要求 &ldquo;清除轨道邻域&rdquo;，冥王星未满足此条件.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q119 · ACT Science · Data Interpretation · Easy</div>
+<div class="q" id="q-119">
+  <div class="q-num">Q119 【S-DR-101】 · ACT Science · Data Interpretation · Easy</div>
   <div class="q-text">A biology table shows four cell types and their chromosome numbers: Human 46, Fruit fly 8, Dog 78, Cat 38. Which organism has the most chromosomes?</div>
   <ul class="q-choices">
     <li>A) Human</li>
@@ -1626,8 +1627,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> C) Dog. 78 条最多.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q120 · ACT Science · Research Summary · Medium</div>
+<div class="q" id="q-120">
+  <div class="q-num">Q120 【S-RS-111】 · ACT Science · Research Summary · Medium</div>
   <div class="q-text">A physics experiment measures the period of a pendulum at different lengths. Results: 0.25 m → 1.0 s, 1.0 m → 2.0 s, 2.25 m → 3.0 s. What is the relationship between length and period?</div>
   <ul class="q-choices">
     <li>A) Period is constant</li>

@@ -46,19 +46,20 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   Practice
 </div>
 
-<h1>A-Level Practice Questions <span class="v-badge">v10</span></h1>
-<p class="subtitle">v10 · 120 道题 · 定稿版</p>
+<h1>A-Level Practice Questions <span class="v-badge">v12-beta</span></h1>
+<p class="subtitle">v12-beta·120题·topic-code与锚点·与Syllabus v3双向对齐</p>
 
 <div class="box-dashed">
   <strong>v10: 点击选项答题，自动记录到错题本（localStorage）。</strong>
+  <br>v12新增：考纲Topic ↔ Q编号双向锚点直达（锚点#q-N跳题；topic-code反查考纲）
 </div>
 
 <h2>Sample Questions</h2>
 
 <h3>Mathematics (19 questions)</h3>
 
-<div class="q">
-  <div class="q-num">Q1 · A-Level Math (P1) · Quadratics · Easy</div>
+<div class="q" id="q-1">
+  <div class="q-num">【M-P1-12】Q1 · A-Level Math (P1) · Quadratics · Easy</div>
   <p class="q-text">Solve the equation x² - 5x + 6 = 0.</p>
   <ul class="q-choices">
     <li>A) x=1, x=6</li>
@@ -71,8 +72,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q4 · A-Level Math (P2) · Logarithms · Medium</div>
+<div class="q" id="q-2">
+  <div class="q-num">【M-P2-21】Q4 · A-Level Math (P2) · Logarithms · Medium</div>
   <p class="q-text">Solve: log₃(x) = 2.</p>
   <ul class="q-choices">
     <li>A) 6</li>
@@ -85,8 +86,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q5 · A-Level Math (P3) · Vectors · Hard</div>
+<div class="q" id="q-3">
+  <div class="q-num">【M-P3-36】Q5 · A-Level Math (P3) · Vectors · Hard</div>
   <p class="q-text">Given vectors a = (1, 2, 3) and b = (2, -1, 1), find a·b.</p>
   <ul class="q-choices">
     <li>A) 3</li>
@@ -99,8 +100,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q11 · A-Level Math (P1) · Algebra · Easy</div>
+<div class="q" id="q-4">
+  <div class="q-num">【M-P1-11】Q11 · A-Level Math (P1) · Algebra · Easy</div>
   <p class="q-text">Simplify: (2x²)³.</p>
   <ul class="q-choices">
     <li>A) 6x⁵</li>
@@ -113,8 +114,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q12 · A-Level Math (P2) · Trigonometry · Medium</div>
+<div class="q" id="q-5">
+  <div class="q-num">【M-P2-23】Q12 · A-Level Math (P2) · Trigonometry · Medium</div>
   <p class="q-text">Solve: sin(x) = 0.5 for 0° ≤ x ≤ 360°.</p>
   <ul class="q-choices">
     <li>A) 30° only</li>
@@ -127,8 +128,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q13 · A-Level Math (P3) · Differentiation · Medium</div>
+<div class="q" id="q-6">
+  <div class="q-num">【M-P3-35】Q13 · A-Level Math (P3) · Differentiation · Medium</div>
   <p class="q-text">Find dy/dx if y = e^(3x).</p>
   <ul class="q-choices">
     <li>A) 3e^(3x)</li>
@@ -141,8 +142,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q14 · A-Level Math (P4) · Integration · Hard</div>
+<div class="q" id="q-7">
+  <div class="q-num">【M-P3-35】Q14 · A-Level Math (P4) · Integration · Hard</div>
   <p class="q-text">Evaluate ∫₀¹ (3x² + 2x) dx.</p>
   <ul class="q-choices">
     <li>A) 2</li>
@@ -155,8 +156,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q21 · A-Level Math (P1) · Partial Fractions · Medium</div>
+<div class="q" id="q-8">
+  <div class="q-num">【M-P3-31】Q21 · A-Level Math (P1) · Partial Fractions · Medium</div>
   <p class="q-text">Express 1/((x+1)(x-1)) in partial fractions.</p>
   <ul class="q-choices">
     <li>A) 1/(2(x-1)) - 1/(2(x+1))</li>
@@ -169,8 +170,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q22 · A-Level Math (P3) · Maclaurin Series · Hard</div>
+<div class="q" id="q-9">
+  <div class="q-num">【M-P3-33】Q22 · A-Level Math (P3) · Maclaurin Series · Hard</div>
   <p class="q-text">What is the Maclaurin series expansion of e^x up to the x² term?</p>
   <ul class="q-choices">
     <li>A) 1 + x + x²/2</li>
@@ -183,8 +184,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q23 · A-Level Math (P3) · Implicit Differentiation · Hard</div>
+<div class="q" id="q-10">
+  <div class="q-num">【M-P3-35】Q23 · A-Level Math (P3) · Implicit Differentiation · Hard</div>
   <p class="q-text">Find dy/dx if x² + y² = 25.</p>
   <ul class="q-choices">
     <li>A) -x/y</li>
@@ -197,8 +198,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q24 · A-Level Math (P2) · Parametric Equations · Medium</div>
+<div class="q" id="q-11">
+  <div class="q-num">【M-P3-34】Q24 · A-Level Math (P2) · Parametric Equations · Medium</div>
   <p class="q-text">Given x = t² and y = 2t, find dy/dx in terms of t.</p>
   <ul class="q-choices">
     <li>A) 1/t</li>
@@ -211,8 +212,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q25 · A-Level Math (P2) · Numerical Integration · Medium</div>
+<div class="q" id="q-12">
+  <div class="q-num">【M-P2-26】Q25 · A-Level Math (P2) · Numerical Integration · Medium</div>
   <p class="q-text">Using the trapezoidal rule with 2 strips, approximate ∫₀² x² dx (use x = 0, 1, 2).</p>
   <ul class="q-choices">
     <li>A) 3</li>
@@ -225,8 +226,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q26 · A-Level Math (FP1) · Complex Numbers · Medium</div>
+<div class="q" id="q-13">
+  <div class="q-num">【M-P4-42】Q26 · A-Level Math (FP1) · Complex Numbers · Medium</div>
   <p class="q-text">Find the value of i⁴, where i = √(-1).</p>
   <ul class="q-choices">
     <li>A) 1</li>
@@ -239,8 +240,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q27 · A-Level Math (FP1) · Matrices · Hard</div>
+<div class="q" id="q-14">
+  <div class="q-num">【M-P4-41】Q27 · A-Level Math (FP1) · Matrices · Hard</div>
   <p class="q-text">Find the determinant of matrix M = [[3, 2], [4, 5]].</p>
   <ul class="q-choices">
     <li>A) 7</li>
@@ -253,8 +254,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q28 · A-Level Math (P3) · Differential Equations · Hard</div>
+<div class="q" id="q-15">
+  <div class="q-num">【M-P4-43】Q28 · A-Level Math (P3) · Differential Equations · Hard</div>
   <p class="q-text">Solve dy/dx = y, given y(0) = 2.</p>
   <ul class="q-choices">
     <li>A) y = 2e^x</li>
@@ -267,8 +268,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q29 · A-Level Math (P2) · Binomial Expansion · Easy</div>
+<div class="q" id="q-16">
+  <div class="q-num">【M-P2-22】Q29 · A-Level Math (P2) · Binomial Expansion · Easy</div>
   <p class="q-text">Find the first three terms in the expansion of (1 + x)⁴.</p>
   <ul class="q-choices">
     <li>A) 1 + 4x + 6x²</li>
@@ -281,8 +282,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q30 · A-Level Math (P2) · Trigonometric Equations · Medium</div>
+<div class="q" id="q-17">
+  <div class="q-num">【M-P2-23】Q30 · A-Level Math (P2) · Trigonometric Equations · Medium</div>
   <p class="q-text">Solve cos(x) = 0.5 for 0° ≤ x ≤ 360°.</p>
   <ul class="q-choices">
     <li>A) 60° only</li>
@@ -295,8 +296,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q31 · A-Level Math (P3) · Vector Lines · Hard</div>
+<div class="q" id="q-18">
+  <div class="q-num">【M-P3-36】Q31 · A-Level Math (P3) · Vector Lines · Hard</div>
   <p class="q-text">The line L has equation r = (1, 2, 3) + t(2, 1, -1). What is the position vector of the point on L when t = 2?</p>
   <ul class="q-choices">
     <li>A) (3, 3, 2)</li>
@@ -309,8 +310,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q32 · A-Level Math (P1) · Recurrence Relations · Easy</div>
+<div class="q" id="q-19">
+  <div class="q-num">【M-P1-11】Q32 · A-Level Math (P1) · Recurrence Relations · Easy</div>
   <p class="q-text">A sequence is defined by u(n+1) = 2·u(n) + 1, with u(1) = 1. Find u(3).</p>
   <ul class="q-choices">
     <li>A) 3</li>
@@ -325,8 +326,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
 
 <h3>Physics (16 questions)</h3>
 
-<div class="q">
-  <div class="q-num">Q2 · A-Level Physics · Electricity · Medium</div>
+<div class="q" id="q-20">
+  <div class="q-num">【P-AS-16】Q2 · A-Level Physics · Electricity · Medium</div>
   <p class="q-text">A resistor of 6Ω and a resistor of 3Ω are connected in parallel across a 12V battery. What is the total current?</p>
   <ul class="q-choices">
     <li>A) 2A</li>
@@ -339,8 +340,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q6 · A-Level Physics · Mechanics · Medium</div>
+<div class="q" id="q-21">
+  <div class="q-num">【P-AS-13】Q6 · A-Level Physics · Mechanics · Medium</div>
   <p class="q-text">A 2 kg object accelerates at 5 m/s². What net force acts on it?</p>
   <ul class="q-choices">
     <li>A) 2.5 N</li>
@@ -353,8 +354,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q7 · A-Level Physics · Quantum · Hard</div>
+<div class="q" id="q-22">
+  <div class="q-num">【P-A2-24】Q7 · A-Level Physics · Quantum · Hard</div>
   <p class="q-text">What is the de Broglie wavelength of an electron (mass 9.1×10⁻³¹ kg) moving at 1×10⁷ m/s? (h = 6.6×10⁻³⁴ J·s)</p>
   <ul class="q-choices">
     <li>A) 7.3×10⁻¹¹ m</li>
@@ -367,8 +368,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q15 · A-Level Physics · Mechanics · Easy</div>
+<div class="q" id="q-23">
+  <div class="q-num">【P-AS-12】Q15 · A-Level Physics · Mechanics · Easy</div>
   <p class="q-text">A ball is dropped from rest. How far does it fall in 3 seconds? (g = 10 m/s²)</p>
   <ul class="q-choices">
     <li>A) 30 m</li>
@@ -381,8 +382,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q16 · A-Level Physics · Waves · Medium</div>
+<div class="q" id="q-24">
+  <div class="q-num">【P-AS-15】Q16 · A-Level Physics · Waves · Medium</div>
   <p class="q-text">A sound wave has wavelength 0.5 m and speed 340 m/s. What is its frequency?</p>
   <ul class="q-choices">
     <li>A) 170 Hz</li>
@@ -395,8 +396,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q17 · A-Level Physics · Fields · Hard</div>
+<div class="q" id="q-25">
+  <div class="q-num">【P-A2-22】Q17 · A-Level Physics · Fields · Hard</div>
   <p class="q-text">The gravitational potential energy of a 5 kg mass at height 10 m is: (g = 9.8 m/s²)</p>
   <ul class="q-choices">
     <li>A) 490 J</li>
@@ -409,8 +410,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q33 · A-Level Physics · Circular Motion · Easy</div>
+<div class="q" id="q-26">
+  <div class="q-num">【P-A2-21】Q33 · A-Level Physics · Circular Motion · Easy</div>
   <p class="q-text">An object moves in a circle of radius 4 m at speed 6 m/s. What is its centripetal acceleration?</p>
   <ul class="q-choices">
     <li>A) 9 m/s²</li>
@@ -423,8 +424,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q34 · A-Level Physics · SHM · Medium</div>
+<div class="q" id="q-27">
+  <div class="q-num">【P-A2-23】Q34 · A-Level Physics · SHM · Medium</div>
   <p class="q-text">A simple pendulum has length 1 m. What is its period on Earth? (g = 10 m/s², π² ≈ 10)</p>
   <ul class="q-choices">
     <li>A) 2 s</li>
@@ -437,8 +438,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q35 · A-Level Physics · Magnetic Fields · Medium</div>
+<div class="q" id="q-28">
+  <div class="q-num">【P-A2-26】Q35 · A-Level Physics · Magnetic Fields · Medium</div>
   <p class="q-text">An electron moves at 2×10⁶ m/s perpendicular to a magnetic field of 0.5 T. What is the magnetic force? (e = 1.6×10⁻¹⁹ C)</p>
   <ul class="q-choices">
     <li>A) 1.6×10⁻¹³ N</li>
@@ -451,8 +452,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q36 · A-Level Physics · Nuclear Physics · Hard</div>
+<div class="q" id="q-29">
+  <div class="q-num">【P-AS-17】Q36 · A-Level Physics · Nuclear Physics · Hard</div>
   <p class="q-text">In the nuclear fission of U-235, what particle initiates the reaction?</p>
   <ul class="q-choices">
     <li>A) Proton</li>
@@ -465,8 +466,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q37 · A-Level Physics · Capacitors · Medium</div>
+<div class="q" id="q-30">
+  <div class="q-num">【P-A2-25】Q37 · A-Level Physics · Capacitors · Medium</div>
   <p class="q-text">Two capacitors of 2 μF and 3 μF are connected in parallel. What is the total capacitance?</p>
   <ul class="q-choices">
     <li>A) 1.2 μF</li>
@@ -479,8 +480,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q38 · A-Level Physics · Electromagnetic Induction · Hard</div>
+<div class="q" id="q-31">
+  <div class="q-num">【P-A2-26】Q38 · A-Level Physics · Electromagnetic Induction · Hard</div>
   <p class="q-text">A coil of 100 turns has its flux change from 0.04 Wb to 0.10 Wb in 0.3 s. What is the magnitude of the induced EMF?</p>
   <ul class="q-choices">
     <li>A) 20 V</li>
@@ -493,8 +494,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q39 · A-Level Physics · Thermodynamics · Medium</div>
+<div class="q" id="q-32">
+  <div class="q-num">【P-A2-24】Q39 · A-Level Physics · Thermodynamics · Medium</div>
   <p class="q-text">An ideal gas undergoes isothermal expansion. Which statement is true?</p>
   <ul class="q-choices">
     <li>A) Internal energy increases</li>
@@ -507,8 +508,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q40 · A-Level Physics · Optics · Medium</div>
+<div class="q" id="q-33">
+  <div class="q-num">【P-AS-15】Q40 · A-Level Physics · Optics · Medium</div>
   <p class="q-text">Light travels from air (n=1) into glass (n=1.5). If the angle of incidence is 30°, what is the angle of refraction? (sin 30° = 0.5)</p>
   <ul class="q-choices">
     <li>A) 19.5°</li>
@@ -521,8 +522,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q41 · A-Level Physics · Gravitational Fields · Hard</div>
+<div class="q" id="q-34">
+  <div class="q-num">【P-A2-22】Q41 · A-Level Physics · Gravitational Fields · Hard</div>
   <p class="q-text">The gravitational field strength at the surface of a planet is g. At twice the radius from the planet's center, the field strength is:</p>
   <ul class="q-choices">
     <li>A) g/2</li>
@@ -535,8 +536,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q42 · A-Level Physics · Radioactivity · Easy</div>
+<div class="q" id="q-35">
+  <div class="q-num">【P-AS-17】Q42 · A-Level Physics · Radioactivity · Easy</div>
   <p class="q-text">Which type of radiation is stopped by a sheet of paper?</p>
   <ul class="q-choices">
     <li>A) Alpha</li>
@@ -551,8 +552,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
 
 <h3>Economics, Chemistry & Biology (15 questions)</h3>
 
-<div class="q">
-  <div class="q-num">Q3 · A-Level Economics · Macroeconomics · Medium</div>
+<div class="q" id="q-36">
+  <div class="q-num">【E-A2-23】Q3 · A-Level Economics · Macroeconomics · Medium</div>
   <p class="q-text">Which policy is most effective to reduce demand-pull inflation?</p>
   <ul class="q-choices">
     <li>A) Increase government spending</li>
@@ -565,8 +566,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q8 · A-Level Economics · Microeconomics · Medium</div>
+<div class="q" id="q-37">
+  <div class="q-num">【E-AS-12】Q8 · A-Level Economics · Microeconomics · Medium</div>
   <p class="q-text">If the price elasticity of demand is -0.5, a 10% increase in price will cause quantity demanded to:</p>
   <ul class="q-choices">
     <li>A) Increase by 5%</li>
@@ -579,8 +580,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q9 · A-Level Chemistry · Organic · Hard</div>
+<div class="q" id="q-38">
+  <div class="q-num">【C-AS-19】Q9 · A-Level Chemistry · Organic · Hard</div>
   <p class="q-text">What is the product of the nucleophilic substitution reaction between CH₃Br and OH⁻?</p>
   <ul class="q-choices">
     <li>A) CH₃OH</li>
@@ -593,8 +594,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q10 · A-Level Biology · Genetics · Medium</div>
+<div class="q" id="q-39">
+  <div class="q-num">【B-A2-24】Q10 · A-Level Biology · Genetics · Medium</div>
   <p class="q-text">In a dihybrid cross between two heterozygous individuals (AaBb × AaBb), what is the probability of offspring with genotype aabb?</p>
   <ul class="q-choices">
     <li>A) 1/16</li>
@@ -607,8 +608,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q18 · A-Level Chemistry · Acids & Bases · Hard</div>
+<div class="q" id="q-40">
+  <div class="q-num">【C-A2-22】Q18 · A-Level Chemistry · Acids & Bases · Hard</div>
   <p class="q-text">What is the pH of a 0.001 M HCl solution?</p>
   <ul class="q-choices">
     <li>A) 1</li>
@@ -621,8 +622,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q19 · A-Level Biology · Molecular Biology · Medium</div>
+<div class="q" id="q-41">
+  <div class="q-num">【B-AS-16】Q19 · A-Level Biology · Molecular Biology · Medium</div>
   <p class="q-text">What is the role of mRNA in protein synthesis?</p>
   <ul class="q-choices">
     <li>A) Carries amino acids</li>
@@ -635,8 +636,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q20 · A-Level Economics · Microeconomics · Easy</div>
+<div class="q" id="q-42">
+  <div class="q-num">【E-AS-12】Q20 · A-Level Economics · Microeconomics · Easy</div>
   <p class="q-text">What type of good has income elasticity > 1?</p>
   <ul class="q-choices">
     <li>A) Inferior good</li>
@@ -649,8 +650,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q43 · A-Level Economics · Market Structures · Medium</div>
+<div class="q" id="q-43">
+  <div class="q-num">【E-A2-21】Q43 · A-Level Economics · Market Structures · Medium</div>
   <p class="q-text">In perfect competition, which statement is true about individual firms?</p>
   <ul class="q-choices">
     <li>A) They can set their own prices</li>
@@ -663,8 +664,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q44 · A-Level Economics · Monetary Policy · Easy</div>
+<div class="q" id="q-44">
+  <div class="q-num">【E-A2-23】Q44 · A-Level Economics · Monetary Policy · Easy</div>
   <p class="q-text">Which action represents expansionary monetary policy?</p>
   <ul class="q-choices">
     <li>A) Increasing interest rates</li>
@@ -677,8 +678,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q45 · A-Level Economics · Balance of Payments · Medium</div>
+<div class="q" id="q-45">
+  <div class="q-num">【E-A2-25】Q45 · A-Level Economics · Balance of Payments · Medium</div>
   <p class="q-text">A country's exports exceed its imports. This results in:</p>
   <ul class="q-choices">
     <li>A) A current account deficit</li>
@@ -691,8 +692,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q46 · A-Level Chemistry · Esters · Medium</div>
+<div class="q" id="q-46">
+  <div class="q-num">【C-AS-19】Q46 · A-Level Chemistry · Esters · Medium</div>
   <p class="q-text">What is formed when ethanol reacts with ethanoic acid in the presence of sulfuric acid?</p>
   <ul class="q-choices">
     <li>A) Ethyl ethanoate</li>
@@ -705,8 +706,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q47 · A-Level Chemistry · Electrolysis · Hard</div>
+<div class="q" id="q-47">
+  <div class="q-num">【C-A2-21】Q47 · A-Level Chemistry · Electrolysis · Hard</div>
   <p class="q-text">During the electrolysis of molten NaCl, what is produced at the cathode?</p>
   <ul class="q-choices">
     <li>A) Chlorine gas</li>
@@ -719,8 +720,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q48 · A-Level Biology · Enzymes · Medium</div>
+<div class="q" id="q-48">
+  <div class="q-num">【B-AS-13】Q48 · A-Level Biology · Enzymes · Medium</div>
   <p class="q-text">What effect does a competitive inhibitor have on an enzyme's Km?</p>
   <ul class="q-choices">
     <li>A) Increases Km</li>
@@ -733,8 +734,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q49 · A-Level Biology · Photosynthesis · Easy</div>
+<div class="q" id="q-49">
+  <div class="q-num">【B-A2-21】Q49 · A-Level Biology · Photosynthesis · Easy</div>
   <p class="q-text">Where do the light-dependent reactions of photosynthesis occur?</p>
   <ul class="q-choices">
     <li>A) Stroma</li>
@@ -747,8 +748,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q50 · A-Level Biology · Genetics · Hard</div>
+<div class="q" id="q-50">
+  <div class="q-num">【B-A2-24】Q50 · A-Level Biology · Genetics · Hard</div>
   <p class="q-text">In humans, hemophilia is X-linked recessive. If a carrier mother and unaffected father have children, what is the probability that a son will have hemophilia?</p>
   <ul class="q-choices">
     <li>A) 25%</li>
@@ -763,8 +764,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
 
 <h3>Additional Mathematics (15 questions)</h3>
 
-<div class="q">
-  <div class="q-num">Q51 · A-Level Math (P1) · Differentiation · Easy</div>
+<div class="q" id="q-51">
+  <div class="q-num">【M-P1-16】Q51 · A-Level Math (P1) · Differentiation · Easy</div>
   <p class="q-text">Find dy/dx if y = x³ + 2x² - 5x + 1.</p>
   <ul class="q-choices">
     <li>A) 3x² + 4x - 5</li>
@@ -777,8 +778,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q52 · A-Level Math (P2) · Integration · Easy</div>
+<div class="q" id="q-52">
+  <div class="q-num">【M-P1-17】Q52 · A-Level Math (P2) · Integration · Easy</div>
   <p class="q-text">Evaluate ∫(2x + 3) dx.</p>
   <ul class="q-choices">
     <li>A) x² + 3x + C</li>
@@ -791,8 +792,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q53 · A-Level Math (P1) · Arithmetic Series · Easy</div>
+<div class="q" id="q-53">
+  <div class="q-num">【M-P1-11】Q53 · A-Level Math (P1) · Arithmetic Series · Easy</div>
   <p class="q-text">Find the sum of the first 10 terms of the arithmetic series with first term a=2 and common difference d=3.</p>
   <ul class="q-choices">
     <li>A) 155</li>
@@ -805,8 +806,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q54 · A-Level Math (P2) · Geometric Series · Medium</div>
+<div class="q" id="q-54">
+  <div class="q-num">【M-P2-22】Q54 · A-Level Math (P2) · Geometric Series · Medium</div>
   <p class="q-text">Find the sum to infinity of the geometric series with first term a=6 and common ratio r=1/3.</p>
   <ul class="q-choices">
     <li>A) 9</li>
@@ -819,8 +820,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q55 · A-Level Math (P3) · Trigonometric Identities · Medium</div>
+<div class="q" id="q-55">
+  <div class="q-num">【M-P2-23】Q55 · A-Level Math (P3) · Trigonometric Identities · Medium</div>
   <p class="q-text">Simplify: sin²θ + cos²θ.</p>
   <ul class="q-choices">
     <li>A) 1</li>
@@ -833,8 +834,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q56 · A-Level Math (P3) · Differentiation (Chain Rule) · Medium</div>
+<div class="q" id="q-56">
+  <div class="q-num">【M-P2-24】Q56 · A-Level Math (P3) · Differentiation (Chain Rule) · Medium</div>
   <p class="q-text">Find dy/dx if y = (2x + 1)⁵.</p>
   <ul class="q-choices">
     <li>A) 10(2x + 1)⁴</li>
@@ -847,8 +848,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q57 · A-Level Math (M1) · Kinematics (SUVAT) · Easy</div>
+<div class="q" id="q-57">
+  <div class="q-num">【M-Mech-51】Q57 · A-Level Math (M1) · Kinematics (SUVAT) · Easy</div>
   <p class="q-text">A car accelerates uniformly from rest to 20 m/s in 5 seconds. Find the distance travelled.</p>
   <ul class="q-choices">
     <li>A) 50 m</li>
@@ -861,8 +862,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q58 · A-Level Math (M1) · Forces & Friction · Medium</div>
+<div class="q" id="q-58">
+  <div class="q-num">【M-Mech-52】Q58 · A-Level Math (M1) · Forces & Friction · Medium</div>
   <p class="q-text">A 10 kg block rests on a rough horizontal surface with μ=0.2. What horizontal force is needed to just move the block? (g=10 m/s²)</p>
   <ul class="q-choices">
     <li>A) 20 N</li>
@@ -875,8 +876,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q59 · A-Level Math (M2) · Projectiles · Hard</div>
+<div class="q" id="q-59">
+  <div class="q-num">【M-Mech-55】Q59 · A-Level Math (M2) · Projectiles · Hard</div>
   <p class="q-text">A projectile is launched at 30° with speed 20 m/s. What is the maximum height reached? (g=10 m/s²)</p>
   <ul class="q-choices">
     <li>A) 5 m</li>
@@ -889,8 +890,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q60 · A-Level Math (S1) · Probability · Easy</div>
+<div class="q" id="q-60">
+  <div class="q-num">【M-Stat-62】Q60 · A-Level Math (S1) · Probability · Easy</div>
   <p class="q-text">A fair die is rolled. What is the probability of rolling an even number?</p>
   <ul class="q-choices">
     <li>A) 1/2</li>
@@ -903,8 +904,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q61 · A-Level Math (S1) · Binomial Distribution · Medium</div>
+<div class="q" id="q-61">
+  <div class="q-num">【M-Stat-63】Q61 · A-Level Math (S1) · Binomial Distribution · Medium</div>
   <p class="q-text">X ~ B(5, 0.4). Find P(X=2).</p>
   <ul class="q-choices">
     <li>A) 0.3456</li>
@@ -917,8 +918,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q62 · A-Level Math (S2) · Normal Distribution · Medium</div>
+<div class="q" id="q-62">
+  <div class="q-num">【M-Stat-64】Q62 · A-Level Math (S2) · Normal Distribution · Medium</div>
   <p class="q-text">X ~ N(50, 100). Find P(X < 60). (Z < 1 corresponds to Φ(1)=0.8413)</p>
   <ul class="q-choices">
     <li>A) 0.8413</li>
@@ -931,8 +932,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q63 · A-Level Math (S2) · Hypothesis Testing · Hard</div>
+<div class="q" id="q-63">
+  <div class="q-num">【M-Stat-66】Q63 · A-Level Math (S2) · Hypothesis Testing · Hard</div>
   <p class="q-text">In a hypothesis test, the p-value is 0.03 and the significance level is 5%. What decision is made?</p>
   <ul class="q-choices">
     <li>A) Reject H₀</li>
@@ -945,8 +946,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q64 · A-Level Math (P4) · Integration by Parts · Hard</div>
+<div class="q" id="q-64">
+  <div class="q-num">【M-P3-35】Q64 · A-Level Math (P4) · Integration by Parts · Hard</div>
   <p class="q-text">Using integration by parts, find ∫x·eˣ dx.</p>
   <ul class="q-choices">
     <li>A) eˣ(x - 1) + C</li>
@@ -959,8 +960,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q65 · A-Level Math (P3) · Numerical Methods (Newton-Raphson) · Hard</div>
+<div class="q" id="q-65">
+  <div class="q-num">【M-P4-45】Q65 · A-Level Math (P3) · Numerical Methods (Newton-Raphson) · Hard</div>
   <p class="q-text">Using Newton-Raphson method with x₀=1 for f(x) = x² - 2, what is x₁?</p>
   <ul class="q-choices">
     <li>A) 1.5</li>
@@ -975,8 +976,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
 
 <h3>Additional Physics (10 questions)</h3>
 
-<div class="q">
-  <div class="q-num">Q66 · A-Level Physics (AS) · Materials · Easy</div>
+<div class="q" id="q-66">
+  <div class="q-num">【P-AS-14】Q66 · A-Level Physics (AS) · Materials · Easy</div>
   <p class="q-text">What is the SI unit of Young's modulus?</p>
   <ul class="q-choices">
     <li>A) Pa (Pascals)</li>
@@ -989,8 +990,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q67 · A-Level Physics (AS) · Waves · Medium</div>
+<div class="q" id="q-67">
+  <div class="q-num">【P-AS-15】Q67 · A-Level Physics (AS) · Waves · Medium</div>
   <p class="q-text">Two coherent waves meet and produce a minimum (dark fringe). The path difference between the waves is:</p>
   <ul class="q-choices">
     <li>A) Odd multiple of λ/2</li>
@@ -1003,8 +1004,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q68 · A-Level Physics (A2) · Fields (Electric) · Medium</div>
+<div class="q" id="q-68">
+  <div class="q-num">【P-A2-26】Q68 · A-Level Physics (A2) · Fields (Electric) · Medium</div>
   <p class="q-text">Two point charges +Q and -Q are separated by distance d. At the midpoint between them, the electric field is:</p>
   <ul class="q-choices">
     <li>A) Directed toward the negative charge</li>
@@ -1017,8 +1018,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q69 · A-Level Physics (A2) · Particle Physics · Hard</div>
+<div class="q" id="q-69">
+  <div class="q-num">【P-A2-24】Q69 · A-Level Physics (A2) · Particle Physics · Hard</div>
   <p class="q-text">Which of the following is a lepton?</p>
   <ul class="q-choices">
     <li>A) Electron</li>
@@ -1031,8 +1032,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q70 · A-Level Physics (A2) · Thermodynamics · Medium</div>
+<div class="q" id="q-70">
+  <div class="q-num">【P-A2-24】Q70 · A-Level Physics (A2) · Thermodynamics · Medium</div>
   <p class="q-text">The first law of thermodynamics is a statement of:</p>
   <ul class="q-choices">
     <li>A) Conservation of energy</li>
@@ -1045,8 +1046,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q71 · A-Level Physics (AS) · Electricity (Internal Resistance) · Medium</div>
+<div class="q" id="q-71">
+  <div class="q-num">【P-AS-16】Q71 · A-Level Physics (AS) · Electricity (Internal Resistance) · Medium</div>
   <p class="q-text">A battery has EMF=12V and internal resistance r=1Ω. When supplying current I=2A, what is the terminal voltage?</p>
   <ul class="q-choices">
     <li>A) 10 V</li>
@@ -1059,8 +1060,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q72 · A-Level Physics (A2) · Medical Physics · Easy</div>
+<div class="q" id="q-72">
+  <div class="q-num">【P-A2-27】Q72 · A-Level Physics (A2) · Medical Physics · Easy</div>
   <p class="q-text">Which imaging modality uses ionizing electromagnetic radiation?</p>
   <ul class="q-choices">
     <li>A) X-ray</li>
@@ -1073,8 +1074,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q73 · A-Level Physics (M2) · Moments · Easy</div>
+<div class="q" id="q-73">
+  <div class="q-num">【M-Mech-52】Q73 · A-Level Physics (M2) · Moments · Easy</div>
   <p class="q-text">A 2 m uniform beam of weight 100 N is pivoted at its center. A 50 N weight is hung 0.5 m left of center. What distance right of center must a 25 N weight be placed to balance?</p>
   <ul class="q-choices">
     <li>A) 1.0 m</li>
@@ -1087,8 +1088,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q74 · A-Level Physics (A2) · Nuclear Physics · Hard</div>
+<div class="q" id="q-74">
+  <div class="q-num">【P-AS-17】Q74 · A-Level Physics (A2) · Nuclear Physics · Hard</div>
   <p class="q-text">The half-life of a radioactive sample is 10 days. What fraction of the original sample remains after 30 days?</p>
   <ul class="q-choices">
     <li>A) 1/8</li>
@@ -1101,8 +1102,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q75 · A-Level Physics (AS) · Mechanics (Energy) · Easy</div>
+<div class="q" id="q-75">
+  <div class="q-num">【P-AS-13】Q75 · A-Level Physics (AS) · Mechanics (Energy) · Easy</div>
   <p class="q-text">A 2 kg object is lifted to 5 m height. What is its gravitational potential energy? (g=9.8 m/s²)</p>
   <ul class="q-choices">
     <li>A) 98 J</li>
@@ -1117,8 +1118,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
 
 <h3>Additional Chemistry (10 questions)</h3>
 
-<div class="q">
-  <div class="q-num">Q76 · A-Level Chemistry (AS) · Period 3 Elements · Easy</div>
+<div class="q" id="q-76">
+  <div class="q-num">【C-AS-14】Q76 · A-Level Chemistry (AS) · Period 3 Elements · Easy</div>
   <p class="q-text">Which Period 3 element has the highest first ionization energy?</p>
   <ul class="q-choices">
     <li>A) Argon (Ar)</li>
@@ -1131,8 +1132,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q77 · A-Level Chemistry (A2) · Transition Metals · Medium</div>
+<div class="q" id="q-77">
+  <div class="q-num">【C-A2-24】Q77 · A-Level Chemistry (A2) · Transition Metals · Medium</div>
   <p class="q-text">What is the oxidation state of Cu in [Cu(NH₃)₄]²⁺?</p>
   <ul class="q-choices">
     <li>A) +2</li>
@@ -1145,8 +1146,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q78 · A-Level Chemistry (A2) · Organic (Arenes) · Medium</div>
+<div class="q" id="q-78">
+  <div class="q-num">【C-A2-25】Q78 · A-Level Chemistry (A2) · Organic (Arenes) · Medium</div>
   <p class="q-text">What type of reaction do benzene rings typically undergo?</p>
   <ul class="q-choices">
     <li>A) Electrophilic substitution</li>
@@ -1159,8 +1160,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q79 · A-Level Chemistry (A2) · Organic (Carbonyls) · Easy</div>
+<div class="q" id="q-79">
+  <div class="q-num">【C-A2-25】Q79 · A-Level Chemistry (A2) · Organic (Carbonyls) · Easy</div>
   <p class="q-text">Which reagent is used to distinguish aldehydes from ketones, producing a silver mirror with aldehydes?</p>
   <ul class="q-choices">
     <li>A) Tollens' reagent</li>
@@ -1173,8 +1174,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q80 · A-Level Chemistry (A2) · Organic (Carboxylic Acids) · Medium</div>
+<div class="q" id="q-80">
+  <div class="q-num">【C-A2-25】Q80 · A-Level Chemistry (A2) · Organic (Carboxylic Acids) · Medium</div>
   <p class="q-text">When carboxylic acid reacts with PCl₅, the product is:</p>
   <ul class="q-choices">
     <li>A) Acyl chloride</li>
@@ -1187,8 +1188,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q81 · A-Level Chemistry (A2) · Physical (Kinetics) · Medium</div>
+<div class="q" id="q-81">
+  <div class="q-num">【C-A2-23】Q81 · A-Level Chemistry (A2) · Physical (Kinetics) · Medium</div>
   <p class="q-text">A reaction is first order with respect to reactant A. If [A] doubles, the rate:</p>
   <ul class="q-choices">
     <li>A) Doubles</li>
@@ -1201,8 +1202,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q82 · A-Level Chemistry (A2) · Physical (Equilibria) · Hard</div>
+<div class="q" id="q-82">
+  <div class="q-num">【C-A2-23】Q82 · A-Level Chemistry (A2) · Physical (Equilibria) · Hard</div>
   <p class="q-text">For the equilibrium N₂(g) + 3H₂(g) ⇌ 2NH₃(g) ΔH = -92 kJ/mol, which change increases the yield of ammonia?</p>
   <ul class="q-choices">
     <li>A) Increasing pressure</li>
@@ -1215,8 +1216,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q83 · A-Level Chemistry (AS) · Group 2 · Easy</div>
+<div class="q" id="q-83">
+  <div class="q-num">【C-AS-14】Q83 · A-Level Chemistry (AS) · Group 2 · Easy</div>
   <p class="q-text">Going down Group 2, the first ionization energy:</p>
   <ul class="q-choices">
     <li>A) Decreases</li>
@@ -1229,8 +1230,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q84 · A-Level Chemistry (A2) · Electrochemistry · Hard</div>
+<div class="q" id="q-84">
+  <div class="q-num">【C-A2-21】Q84 · A-Level Chemistry (A2) · Electrochemistry · Hard</div>
   <p class="q-text">Standard electrode potentials: Cu²⁺/Cu = +0.34 V, Zn²⁺/Zn = -0.76 V. What is the EMF of a Cu-Zn cell?</p>
   <ul class="q-choices">
     <li>A) 1.10 V</li>
@@ -1243,8 +1244,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q85 · A-Level Chemistry (A2) · Organic (Polymers) · Easy</div>
+<div class="q" id="q-85">
+  <div class="q-num">【C-A2-25】Q85 · A-Level Chemistry (A2) · Organic (Polymers) · Easy</div>
   <p class="q-text">Polyethene is formed from ethene monomers by what type of polymerization?</p>
   <ul class="q-choices">
     <li>A) Addition polymerization</li>
@@ -1259,8 +1260,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
 
 <h3>Additional Biology (10 questions)</h3>
 
-<div class="q">
-  <div class="q-num">Q86 · A-Level Biology (AS) · Cell Structure · Easy</div>
+<div class="q" id="q-86">
+  <div class="q-num">【B-AS-11】Q86 · A-Level Biology (AS) · Cell Structure · Easy</div>
   <p class="q-text">Which organelle is the site of aerobic respiration in eukaryotic cells?</p>
   <ul class="q-choices">
     <li>A) Mitochondrion</li>
@@ -1273,8 +1274,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q87 · A-Level Biology (AS) · Biological Molecules · Medium</div>
+<div class="q" id="q-87">
+  <div class="q-num">【B-AS-12】Q87 · A-Level Biology (AS) · Biological Molecules · Medium</div>
   <p class="q-text">Which bond holds the two strands of the DNA double helix together?</p>
   <ul class="q-choices">
     <li>A) Hydrogen bonds</li>
@@ -1287,8 +1288,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q88 · A-Level Biology (AS) · Gas Exchange · Medium</div>
+<div class="q" id="q-88">
+  <div class="q-num">【B-AS-17】Q88 · A-Level Biology (AS) · Gas Exchange · Medium</div>
   <p class="q-text">In mammalian lungs, gas exchange occurs in the:</p>
   <ul class="q-choices">
     <li>A) Alveoli</li>
@@ -1301,8 +1302,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q89 · A-Level Biology (A2) · Energy Transfers · Easy</div>
+<div class="q" id="q-89">
+  <div class="q-num">【B-A2-21】Q89 · A-Level Biology (A2) · Energy Transfers · Easy</div>
   <p class="q-text">Where does the Krebs cycle (citric acid cycle) occur in eukaryotes?</p>
   <ul class="q-choices">
     <li>A) Mitochondrial matrix</li>
@@ -1315,8 +1316,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q90 · A-Level Biology (A2) · Responses & Homeostasis · Medium</div>
+<div class="q" id="q-90">
+  <div class="q-num">【B-A2-22】Q90 · A-Level Biology (A2) · Responses & Homeostasis · Medium</div>
   <p class="q-text">When blood glucose concentration rises above normal, the pancreas releases:</p>
   <ul class="q-choices">
     <li>A) Insulin</li>
@@ -1329,8 +1330,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q91 · A-Level Biology (A2) · Inheritance · Hard</div>
+<div class="q" id="q-91">
+  <div class="q-num">【B-A2-24】Q91 · A-Level Biology (A2) · Inheritance · Hard</div>
   <p class="q-text">In a population, the frequency of the recessive allele (a) is 0.3. What is the frequency of heterozygotes under Hardy-Weinberg equilibrium?</p>
   <ul class="q-choices">
     <li>A) 0.42</li>
@@ -1343,8 +1344,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q92 · A-Level Biology (A2) · Populations & Evolution · Medium</div>
+<div class="q" id="q-92">
+  <div class="q-num">【B-A2-24】Q92 · A-Level Biology (A2) · Populations & Evolution · Medium</div>
   <p class="q-text">Which type of natural selection favors extreme phenotypes over the intermediate phenotype?</p>
   <ul class="q-choices">
     <li>A) Disruptive selection</li>
@@ -1357,8 +1358,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q93 · A-Level Biology (A2) · Ecosystems · Easy</div>
+<div class="q" id="q-93">
+  <div class="q-num">【B-A2-25】Q93 · A-Level Biology (A2) · Ecosystems · Easy</div>
   <p class="q-text">What percentage of energy is typically transferred from one trophic level to the next?</p>
   <ul class="q-choices">
     <li>A) ~10%</li>
@@ -1371,8 +1372,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q94 · A-Level Biology (AS) · Cell Division · Medium</div>
+<div class="q" id="q-94">
+  <div class="q-num">【B-AS-15】Q94 · A-Level Biology (AS) · Cell Division · Medium</div>
   <p class="q-text">Which stage of mitosis involves sister chromatids being pulled to opposite poles?</p>
   <ul class="q-choices">
     <li>A) Anaphase</li>
@@ -1385,8 +1386,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q95 · A-Level Biology (A2) · Genetics (Gene Tech) · Hard</div>
+<div class="q" id="q-95">
+  <div class="q-num">【B-A2-25】Q95 · A-Level Biology (A2) · Genetics (Gene Tech) · Hard</div>
   <p class="q-text">Which enzyme is used to cut DNA at specific recognition sequences in genetic engineering?</p>
   <ul class="q-choices">
     <li>A) Restriction endonuclease</li>
@@ -1401,8 +1402,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
 
 <h3>Additional Economics & Business (15 questions)</h3>
 
-<div class="q">
-  <div class="q-num">Q96 · A-Level Economics (AS) · Micro (Costs) · Easy</div>
+<div class="q" id="q-96">
+  <div class="q-num">【E-AS-13】Q96 · A-Level Economics (AS) · Micro (Costs) · Easy</div>
   <p class="q-text">Total cost = $500 at Q=10 and $550 at Q=11. What is the marginal cost of the 11th unit?</p>
   <ul class="q-choices">
     <li>A) $50</li>
@@ -1415,8 +1416,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q97 · A-Level Economics (A2) · Micro (Monopoly) · Medium</div>
+<div class="q" id="q-97">
+  <div class="q-num">【E-A2-21】Q97 · A-Level Economics (A2) · Micro (Monopoly) · Medium</div>
   <p class="q-text">Compared to perfect competition, a single-price monopoly typically produces:</p>
   <ul class="q-choices">
     <li>A) Less output at a higher price</li>
@@ -1429,8 +1430,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q98 · A-Level Economics (AS) · Macro (AD-AS) · Easy</div>
+<div class="q" id="q-98">
+  <div class="q-num">【E-AS-15】Q98 · A-Level Economics (AS) · Macro (AD-AS) · Easy</div>
   <p class="q-text">Which of the following is NOT a component of Aggregate Demand (AD)?</p>
   <ul class="q-choices">
     <li>A) Imports (M)</li>
@@ -1443,8 +1444,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q99 · A-Level Economics (A2) · Macro (Economic Growth) · Medium</div>
+<div class="q" id="q-99">
+  <div class="q-num">【E-A2-24】Q99 · A-Level Economics (A2) · Macro (Economic Growth) · Medium</div>
   <p class="q-text">Long-run economic growth is best represented by:</p>
   <ul class="q-choices">
     <li>A) An outward shift in the LRAS curve</li>
@@ -1457,8 +1458,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q100 · A-Level Economics (A2) · International Trade · Hard</div>
+<div class="q" id="q-100">
+  <div class="q-num">【E-A2-25】Q100 · A-Level Economics (A2) · International Trade · Hard</div>
   <p class="q-text">According to comparative advantage, trade between two countries is beneficial if:</p>
   <ul class="q-choices">
     <li>A) Each has lower opportunity cost in producing one good</li>
@@ -1471,8 +1472,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q101 · A-Level Economics (A2) · Labour Markets · Medium</div>
+<div class="q" id="q-101">
+  <div class="q-num">【E-A2-22】Q101 · A-Level Economics (A2) · Labour Markets · Medium</div>
   <p class="q-text">An increase in the minimum wage above the equilibrium wage in a competitive labour market will most likely cause:</p>
   <ul class="q-choices">
     <li>A) Unemployment (excess supply of labour)</li>
@@ -1485,8 +1486,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q102 · A-Level Economics (A2) · Development Economics · Easy</div>
+<div class="q" id="q-102">
+  <div class="q-num">【E-A2-26】Q102 · A-Level Economics (A2) · Development Economics · Easy</div>
   <p class="q-text">Which of the following is typically an indicator of economic development (not just growth)?</p>
   <ul class="q-choices">
     <li>A) Rising Human Development Index (HDI)</li>
@@ -1499,8 +1500,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q103 · A-Level Business (AS) · Marketing (4Ps) · Easy</div>
+<div class="q" id="q-103">
+  <div class="q-num">【E-AS-13】Q103 · A-Level Business (AS) · Marketing (4Ps) · Easy</div>
   <p class="q-text">Which is NOT one of the traditional 4 Ps of marketing?</p>
   <ul class="q-choices">
     <li>A) People</li>
@@ -1513,8 +1514,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q104 · A-Level Business (AS) · Finance (Ratios) · Medium</div>
+<div class="q" id="q-104">
+  <div class="q-num">【E-AS-13】Q104 · A-Level Business (AS) · Finance (Ratios) · Medium</div>
   <p class="q-text">Current assets = $200k, Current liabilities = $100k, Inventories = $80k. What is the acid test (quick) ratio?</p>
   <ul class="q-choices">
     <li>A) 1.2</li>
@@ -1527,8 +1528,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q105 · A-Level Business (A2) · Investment Appraisal · Hard</div>
+<div class="q" id="q-105">
+  <div class="q-num">【E-A2-24】Q105 · A-Level Business (A2) · Investment Appraisal · Hard</div>
   <p class="q-text">A project costs $1000 and yields net cash flows of $600 at end of Year 1 and $720 at end of Year 2. What is the payback period?</p>
   <ul class="q-choices">
     <li>A) 1 year and 8 months</li>
@@ -1541,8 +1542,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q106 · A-Level Business (AS) · Operations Management · Easy</div>
+<div class="q" id="q-106">
+  <div class="q-num">【E-AS-13】Q106 · A-Level Business (AS) · Operations Management · Easy</div>
   <p class="q-text">Just-in-time (JIT) production primarily aims to:</p>
   <ul class="q-choices">
     <li>A) Minimize inventory and waste</li>
@@ -1555,8 +1556,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q107 · A-Level Business (AS) · HR (Motivation) · Medium</div>
+<div class="q" id="q-107">
+  <div class="q-num">【E-A2-22】Q107 · A-Level Business (AS) · HR (Motivation) · Medium</div>
   <p class="q-text">According to Maslow's hierarchy, which is the lowest level need?</p>
   <ul class="q-choices">
     <li>A) Physiological needs</li>
@@ -1569,8 +1570,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q108 · A-Level Business (A2) · Strategic Planning · Medium</div>
+<div class="q" id="q-108">
+  <div class="q-num">【E-A2-21】Q108 · A-Level Business (A2) · Strategic Planning · Medium</div>
   <p class="q-text">In SWOT analysis, which pair represent external factors?</p>
   <ul class="q-choices">
     <li>A) Opportunities and Threats</li>
@@ -1583,8 +1584,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q109 · A-Level Business (A2) · Competitive Strategy · Hard</div>
+<div class="q" id="q-109">
+  <div class="q-num">【E-A2-21】Q109 · A-Level Business (A2) · Competitive Strategy · Hard</div>
   <p class="q-text">According to Porter's generic strategies, offering a unique, differentiated product to a broad market is:</p>
   <ul class="q-choices">
     <li>A) Differentiation strategy</li>
@@ -1597,8 +1598,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q110 · A-Level Economics (AS) · Macro (Circular Flow) · Easy</div>
+<div class="q" id="q-110">
+  <div class="q-num">【E-AS-15】Q110 · A-Level Economics (AS) · Macro (Circular Flow) · Easy</div>
   <p class="q-text">In the circular flow of income, which of the following is a leakage (withdrawal)?</p>
   <ul class="q-choices">
     <li>A) Savings</li>
@@ -1613,8 +1614,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
 
 <h3>Psychology, Law, Computer Science & Sociology (10 questions)</h3>
 
-<div class="q">
-  <div class="q-num">Q111 · A-Level Psychology · Memory (MSM) · Easy</div>
+<div class="q" id="q-111">
+  <div class="q-num">【B-A2-23】Q111 · A-Level Psychology · Memory (MSM) · Easy</div>
   <p class="q-text">According to the Multi-Store Model, the approximate capacity and duration of short-term memory (STM) are:</p>
   <ul class="q-choices">
     <li>A) 7±2 items; 18-30 seconds</li>
@@ -1627,8 +1628,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q112 · A-Level Psychology · Social Influence · Medium</div>
+<div class="q" id="q-112">
+  <div class="q-num">【B-A2-23】Q112 · A-Level Psychology · Social Influence · Medium</div>
   <p class="q-text">Milgram's famous obedience study found that most participants:</p>
   <ul class="q-choices">
     <li>A) Administered what they believed were lethal electric shocks to the "learner"</li>
@@ -1641,8 +1642,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q113 · A-Level Psychology · Psychopathology · Hard</div>
+<div class="q" id="q-113">
+  <div class="q-num">【B-A2-23】Q113 · A-Level Psychology · Psychopathology · Hard</div>
   <p class="q-text">The cognitive approach to explaining depression emphasizes:</p>
   <ul class="q-choices">
     <li>A) Negative, irrational thought patterns (cognitive triad)</li>
@@ -1655,8 +1656,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q114 · A-Level Law · Legal System · Easy</div>
+<div class="q" id="q-114">
+  <div class="q-num">【B-A2-23】Q114 · A-Level Law · Legal System · Easy</div>
   <p class="q-text">In English common law, the doctrine of stare decisis means:</p>
   <ul class="q-choices">
     <li>A) Courts must follow precedents from higher courts in similar cases</li>
@@ -1669,8 +1670,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q115 · A-Level Law · Criminal Law · Medium</div>
+<div class="q" id="q-115">
+  <div class="q-num">【B-A2-23】Q115 · A-Level Law · Criminal Law · Medium</div>
   <p class="q-text">The two essential elements (actus reus and mens rea) required for most criminal offences are:</p>
   <ul class="q-choices">
     <li>A) Guilty act and guilty mind</li>
@@ -1683,8 +1684,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q116 · A-Level Computer Science · Data Structures · Easy</div>
+<div class="q" id="q-116">
+  <div class="q-num">【M-P4-41】Q116 · A-Level Computer Science · Data Structures · Easy</div>
   <p class="q-text">Which data structure follows the LIFO (Last In, First Out) principle?</p>
   <ul class="q-choices">
     <li>A) Stack</li>
@@ -1697,8 +1698,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q117 · A-Level Computer Science · Algorithms (Searching) · Medium</div>
+<div class="q" id="q-117">
+  <div class="q-num">【M-P4-41】Q117 · A-Level Computer Science · Algorithms (Searching) · Medium</div>
   <p class="q-text">Binary search operates on a data set that is:</p>
   <ul class="q-choices">
     <li>A) Sorted</li>
@@ -1711,8 +1712,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q118 · A-Level Computer Science · OOP · Hard</div>
+<div class="q" id="q-118">
+  <div class="q-num">【M-P4-41】Q118 · A-Level Computer Science · OOP · Hard</div>
   <p class="q-text">Which OOP concept allows a subclass to provide a specific implementation of a method already defined in its superclass?</p>
   <ul class="q-choices">
     <li>A) Polymorphism (method overriding)</li>
@@ -1725,8 +1726,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q119 · A-Level Sociology · Family · Easy</div>
+<div class="q" id="q-119">
+  <div class="q-num">【B-A2-25】Q119 · A-Level Sociology · Family · Easy</div>
   <p class="q-text">A nuclear family typically consists of:</p>
   <ul class="q-choices">
     <li>A) Two parents and their dependent children</li>
@@ -1739,8 +1740,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q120 · A-Level Sociology · Education · Medium</div>
+<div class="q" id="q-120">
+  <div class="q-num">【B-A2-25】Q120 · A-Level Sociology · Education · Medium</div>
   <p class="q-text">Functionalists view the education system as primarily:</p>
   <ul class="q-choices">
     <li>A) A way to socialize children into shared values and role allocation (sifting/sorting)</li>
