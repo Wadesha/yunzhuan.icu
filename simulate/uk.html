@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UK Application Full Simulation | yunzhuan.icu</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; max-width: 820px; margin: 0 auto; padding: 24px 16px 48px; background: #ffffff; color: #111111; line-height: 1.8; font-size: 15px; }
+  a { color: #111111; text-decoration: none; border-bottom: 1px solid #cccccc; }
+  a:hover { border-bottom-color: #111111; }
+  .nav { padding-bottom: 12px; margin-bottom: 20px; border-bottom: 1px solid #e0e0e0; font-size: 0.88rem; }
+  .nav a { color: #111111; }
+  .nav .sep { color: #cccccc; margin: 0 6px; }
+  .mock { border: 1px dashed #888888; color: #555555; padding: 8px 12px; font-size: 0.78rem; margin-bottom: 24px; }
+  h1 { font-size: 1.6rem; margin-bottom: 4px; }
+  h2 { font-size: 1.1rem; font-weight: 700; margin: 28px 0 8px; padding-bottom: 6px; border-bottom: 1px solid #111111; }
+  h3 { font-size: 0.98rem; font-weight: 700; margin: 16px 0 4px; }
+  p, li { margin-bottom: 8px; color: #111111; }
+  .muted { color: #888888; font-size: 0.85rem; }
+  .box { border: 1px solid #111111; padding: 14px 18px; margin: 12px 0; background: #ffffff; }
+  .box .title { font-weight: 700; margin-bottom: 6px; }
+  .prompt { border: 1px solid #111111; padding: 10px 14px; margin: 10px 0; background: #ffffff; }
+  .prompt .label { font-size: 0.7rem; color: #888888; font-weight: 700; letter-spacing: 0.05em; margin-bottom: 4px; }
+  .prompt .limit { color: #888888; font-size: 0.78rem; margin-top: 4px; }
+  .letterhead { text-align: center; border-bottom: 3px double #111111; padding-bottom: 12px; margin-bottom: 14px; }
+  .letterhead .crest { font-weight: 700; font-size: 1.05rem; letter-spacing: 0.08em; }
+  .salutation { font-weight: 700; margin: 14px 0 10px; }
+  .signature { margin-top: 28px; }
+  .signature .line { border-top: 1px solid #111111; width: 180px; margin-bottom: 4px; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.85rem; margin: 8px 0; }
+  th, td { border: 1px solid #e0e0e0; padding: 6px 10px; text-align: left; }
+  th { background: #ffffff; border-bottom: 2px solid #111111; font-weight: 700; }
+  .status { display: inline-block; border: 1px solid #111111; padding: 1px 6px; font-size: 0.68rem; font-weight: 700; }
+  .status.done { border-width: 2px; }
+  .status.pending { border-color: #888888; color: #888888; }
+  .status.missing { border-style: dashed; }
+  ul, ol { margin-left: 22px; margin-bottom: 12px; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 640px) { .grid { grid-template-columns: 1fr; } }
+  .tag { display: inline-block; border: 1px solid #111111; padding: 1px 6px; font-size: 0.7rem; margin-right: 4px; font-weight: 700; }
+</style>
+</head>
+<body>
+
+<div class="nav">
+  <a href="../index.html">Home</a> <span class="sep">/</span>
+  <a href="index.html">Full Simulation</a> <span class="sep">/</span>
+  United Kingdom
+</div>
+
+<div class="mock">模拟数据 · 英国本科申请全流程 · UCAS 系统 · 画像：11年级 / CS</div>
+
+<h1>United Kingdom — Application Full Simulation</h1>
+<p class="muted">基于"Li Ming"画像的英国 G5 大学（Oxford/Cambridge/Imperial/LSE/UCL）申请全流程仿真</p>
+
+<h2>你的画像</h2>
+<div class="box">
+  <div class="title">基础信息</div>
+  <ul>
+    <li>年级：11 年级（2026 Fall 申请季）</li>
+    <li>目标专业：Computer Science / Mathematics & Computer Science</li>
+    <li>UCAS Tariff 预估：168 points（4×A* in A-Level 等效）</li>
+    <li>语言：IELTS 7.5 / 9.0</li>
+    <li>竞赛：IMO 金牌（相当于 A*A*A*A* 额外加分）</li>
+    <li>课外活动：AI 社团 / 公益编程教学 / USACO 铂金</li>
+  </ul>
+</div>
+
+<!-- TIMELINE -->
+<h2>① 申请时间线（UCAS 2026 Cycle）</h2>
+<table>
+  <tr><th>时间</th><th>事项</th></tr>
+  <tr><td>2025.09.01</td><td>UCAS 开放注册，开始填 PS 和申请</td></tr>
+  <tr><td>2025.10.15</td><td><strong>牛津/剑桥/医学/兽医/法律</strong> 截止（需面试）</td></tr>
+  <tr><td>2025.11 - 12</td><td>面试阶段（Oxford/Cambridge 面试约 2-3 天）</td></tr>
+  <tr><td>2026.01.15</td><td>大部分 UCAS 课程截止</td></tr>
+  <tr><td>2026.02 - 03</td><td>更多大学面试（部分专业）</td></tr>
+  <tr><td>2026.05</td><td>所有 offer 截止日（Firm Choice / Insurance Choice 确认）</td></tr>
+  <tr><td>2026.08.15</td><td>A-Level 放榜日（Results Day）— 确认成绩</td></tr>
+  <tr><td>2026.08 - 09</td><td>UCAS Track 更新、Firm 确认、签证申请</td></tr>
+  <tr><td>2026.10.05</td><td>UCAS 最终截止（Clearing 开放）</td></tr>
+</table>
+
+<h2>UCAS 申请要点</h2>
+<ul>
+  <li>最多申请 <strong>5 所大学</strong>，不分第一志愿/第二志愿（英国特色）</li>
+  <li>所有学校共用 <strong>1 篇 Personal Statement</strong>（不针对特定学校）</li>
+  <li>1 封 <strong>Academic Reference</strong>（由学校老师提交）</li>
+  <li>录取通常基于"预估成绩"（Predicted Grades）+ PS + 推荐信</li>
+  <li>部分专业（CS、数学、经济等）需额外考试（MAT/STEP/TMUA 等）</li>
+</ul>
+
+<!-- PS -->
+<h2>② Personal Statement（574 字）</h2>
+
+<div class="box">
+  <div class="title">你的 PS 初稿</div>
+  <pre style="white-space:pre-wrap; font-family: inherit; font-size: 0.88rem; line-height: 1.85;">
+I became interested in computer science when I discovered that a few lines of code could make a computer do what I wanted. Since then, I have pursued this passion through academic study, competitive programming, and community outreach. Academically, I have studied Computer Science through AP courses (achieving a 5 in CS A) and self-study, and I will sit A-Level Computer Science in 2026. My mathematical training—culminating in a gold medal at the 2025 International Mathematical Olympiad (IMO)—has equipped me with the analytical foundation essential for advanced CS study.
+
+Competitive programming has been a particular focus: I reached the Platinum division of USACO (Top 30 nationally) and participated in the Putnam Mathematical Competition, where my team placed in the top 50. These experiences have taught me not only how to solve algorithmic problems under pressure, but how to think about the complexity and elegance of solutions—habits I believe transfer directly to university-level computer science research.
+
+Beyond competitions, I founded my school's AI club, which has grown to 30 active members. I designed a curriculum covering machine learning fundamentals, and organized our school's first hackathon, which attracted 60+ participants. I have also volunteered for two consecutive summers teaching Python to students in rural Yunnan province, where I saw firsthand how access to technology can transform educational outcomes. This experience motivated me to research low-bandwidth, low-resource AI models—work that I hope to continue at university.
+
+I am particularly interested in the intersection of theoretical computer science and its real-world applications. I would welcome the opportunity to study Computer Science at a UK university, where the tradition of rigorous theoretical CS (as exemplified by the work of Alan Turing and Tony Hoare) continues to thrive alongside cutting-edge research in AI and machine learning. I am excited by the prospect of contributing to this tradition, and I believe my background in both theory and practice will enable me to engage meaningfully with the academic community.
+  </pre>
+  <p class="muted">字数：574 / 4000（上限 4000，建议 500-600 字）</p>
+</div>
+
+<h3>PS 写作评分（模拟）</h3>
+<table>
+  <tr><th>维度</th><th>评分</th><th>评语</th></tr>
+  <tr><td>学术深度</td><td>9/10</td><td>IMO + USACO + 理论/应用结合，符合英国 CS 强项</td></tr>
+  <tr><td>与申请专业相关</td><td>10/10</td><td>紧扣 CS，未偏移</td></tr>
+  <tr><td>独特性</td><td>8/10</td><td>云南公益故事有区分度</td></tr>
+  <tr><td>语言与结构</td><td>8/10</td><td>流畅，但可考虑增加具体数字</td></tr>
+  <tr><td>综合</td><td colspan="2"><strong>8.8/10</strong></td></tr>
+</table>
+
+<!-- REFERENCE -->
+<h2>③ Academic Reference</h2>
+<div class="box">
+  <div class="title">推荐人：Mr. Chen Hao（CS 老师）</div>
+  <p style="font-size:0.88rem;">"Li Ming is the strongest Computer Science student I have taught in nine years. His mathematical depth (IMO gold) combined with his practical skills (USACO Platinum, AI club founder) make him uniquely qualified for a top CS programme. He is intellectually curious, self-directed, and has demonstrated the ability to think deeply about both the theoretical foundations and societal implications of computing. I have no hesitation in recommending him as a candidate for any leading CS degree in the UK."</p>
+</div>
+
+<!-- INTERVIEW (OxFord/Cambridge) -->
+<h2>④ 模拟面试（Oxford/Cambridge 形式 · 30 分钟）</h2>
+<p class="muted">牛剑面试以"学科面试"著称，关注思维过程而非最终答案。通常是 2-3 位面试官与你围绕学科问题深入讨论。</p>
+
+<div class="box">
+  <div class="title">典型面试问题（Computer Science / Mathematics & CS）</div>
+</div>
+
+<div class="box">
+  <p><strong>Q1.</strong> "How would you determine if a string of brackets is balanced? What is the time complexity? Can you do it with constant memory?"</p>
+  <p class="muted">考察：数据结构（栈）、算法复杂度、空间优化思路</p>
+  <p><strong>你的回答：</strong>用栈跟踪未匹配的左括号，遇到右括号弹出。时间 O(n)，空间最坏 O(n)。空间优化可以用计数法（+1/-1），但对于多种括号类型（{},[],()）仍需栈。面试官可能追问具体实现边界。</p>
+  <div class="tag">评分：Strong</div>
+</div>
+
+<div class="box">
+  <p><strong>Q2.</strong> "A function f(n) is defined as: f(1)=1, f(n)=2*f(n-1)+1. What is the closed form?"</p>
+  <p class="muted">考察：递推数列、数学归纳法、时间复杂度思维</p>
+  <p><strong>你的回答：</strong>特征方程法或展开法。f(n) = 2^n - 1。数学归纳法可证：f(1)=1=2^1-1 ✓；假设 f(k)=2^k-1；则 f(k+1)=2(2^k-1)+1=2^(k+1)-2+1=2^(k+1)-1 ✓。</p>
+  <div class="tag">评分：Excellent</div>
+</div>
+
+<div class="box">
+  <p><strong>Q3.</strong> "What is the difference between a Turing machine and a computer? Could a Turing machine run Minecraft?"</p>
+  <p class="muted">考察：可计算性理论、图灵完备性、抽象计算模型与现实的关系</p>
+  <p><strong>你的回答：</strong>Turing Machine 是抽象计算模型，计算机是物理实现。理论上图灵完备（Turing-complete）的系统都能模拟 TM，因此 Minecraft（Java 实现，图灵完备）在理论上可被 TM 模拟，但效率极低。图灵论题（Church-Turing Thesis）认为任何可计算问题都可被 TM 计算。</p>
+  <div class="tag">评分：Strong</div>
+</div>
+
+<p class="muted">面试综合：<strong>8.5/10 — 数学和 CS 基本功扎实，思维过程清晰</strong></p>
+
+<!-- CHECKLIST -->
+<h2>⑤ UCAS Checklist</h2>
+<table>
+  <tr><th>#</th><th>材料</th><th>时间</th><th>状态</th></tr>
+  <tr><td>1</td><td>UCAS 注册 + 个人信息</td><td>9 月</td><td><span class="status done">Done</span></td></tr>
+  <tr><td>2</td><td>5 所大学选择</td><td>10 月</td><td><span class="status done">Done</span></td></tr>
+  <tr><td>3</td><td>Personal Statement</td><td>10 月</td><td><span class="status done">Done</span></td></tr>
+  <tr><td>4</td><td>Academic Reference</td><td>10 月</td><td><span class="status done">Done</span></td></tr>
+  <tr><td>5</td><td>预估成绩（Predicted Grades）</td><td>10 月</td><td><span class="status done">Done</span></td></tr>
+  <tr><td>6</td><td>MAT/STEP/TMUA 报名（如需）</td><td>10 月</td><td><span class="status pending">Pending</span></td></tr>
+  <tr><td>7</td><td>IELTS/TOEFL 送分</td><td>10 月</td><td><span class="status done">Done</span></td></tr>
+  <tr><td>8</td><td>UCAS 提交（Pay + Track）</td><td>10/15</td><td><span class="status done">Done</span></td></tr>
+</table>
+
+<!-- RESULT -->
+<h2>⑥ 模拟 Offer</h2>
+
+<div class="letterhead">
+  <div class="crest">SAMPLE RUSSELL GROUP UNIVERSITY</div>
+  <div class="sub" style="font-size:0.72rem; color:#888;">Admissions Office · Oxford, UK</div>
+</div>
+
+<p>15 January 2026</p>
+<p style="font-weight:700;">Dear Li Ming,</p>
+
+<p>We are delighted to offer you a conditional place on our <strong>Computer Science (BSc)</strong> programme, starting in October 2026. This offer is made on the basis of your UCAS application, your academic reference, and your performance at interview in December 2025.</p>
+
+<p>This is a <strong>conditional offer</strong>, subject to you achieving the following by 31 August 2026:</p>
+<ul>
+  <li>A-Level: A*A*A*A (including Computer Science and Mathematics)</li>
+  <li>IELTS: 7.5 overall (with no component below 7.0) — if not already achieved</li>
+</ul>
+
+<p>Your application demonstrated exceptional academic achievement, particularly your IMO gold medal and USACO Platinum ranking, which placed you in the top 0.5% of international applicants for Computer Science. Your interview performance was impressive, showing strong analytical skills and a genuine engagement with the subject.</p>
+
+<p>To accept this offer, please reply via UCAS Track by <strong>15 May 2026</strong>. If you hold an unconditional firm choice elsewhere, you may wish to release this offer through UCAS.</p>
+
+<p>Congratulations. We look forward to welcoming you.</p>
+
+<div class="signature">
+  <div class="line"></div>
+  <p><strong>Director of Undergraduate Admissions</strong><br>Sample Russell Group University</p>
+</div>
+
+<div class="grid">
+  <div class="box">
+    <div class="title">你的优势</div>
+    <ul>
+      <li>IMO 金牌（英国 G5 非常看重）</li>
+      <li>CS + 数学双重强背景</li>
+      <li>PS 紧扣学术，符合英国风格</li>
+    </ul>
+  </div>
+  <div class="box">
+    <div class="title">你的风险</div>
+    <ul>
+      <li>英国 CS 面试数学味重，需持续训练</li>
+      <li>A-Level 预估成绩需学校签字确认</li>
+      <li>需关注 MAT/STEP 考试安排</li>
+    </ul>
+  </div>
+</div>
+
+<p class="muted">→ 返回国家选择：<a href="index.html">其他国家模拟</a> · <a href="../index.html">首页</a></p>
+
+</body>
+</html>

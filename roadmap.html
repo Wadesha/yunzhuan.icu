@@ -1090,36 +1090,14 @@ const competitions = [
             <li><strong>返回路径：</strong>每个细节页顶部固定"← 返回 {学校名} 模拟页"，保证可逆浏览</li>
         </ul>
 
-        <div class="section-title">数据组织结构</div>
+        <div class="section-title">数据组织结构（v26.1 已更新：按国家而非学校）</div>
         <pre>
 /simulate/
-  index.html                    # 模拟入口（选择学校 / 选择画像）
-  school.html                   # 单校模拟页容器（公共模板）
-  persona/
-    grade-11-us-cs.json         # 11年级美国方向CS典型画像
-    grade-12-uk-econ.json       # 12年级英国方向经济典型画像
-    ...
-  schools/
-    harvard/
-      summary.html              # 摘要 + 录取概率
-      distribution.html         # 录取分布
-      activities.html           # 活动清单
-      reading.html              # 推荐阅读
-      competitions.html         # 推荐竞赛
-      essays.html               # 文书题原文
-      essay-draft.html          # 文书初稿 + 批注
-      supplements.html          # 补充材料
-      recommendations.html      # 模拟推荐信
-      interview.html            # 模拟面试
-      transcript.html           # 模拟成绩单
-      checklist.html            # 申请Checklist
-      result.html               # 模拟Offer/Waitlist/Reject
-      financial.html            # 财务通知
-      pre-arrival.html          # 入学前流程
-    mit/
-      ...
-    oxford/
-      ...</pre>
+  index.html                    # 模拟入口（选择国家）
+  us.html                       # 美国全流程模拟（通用 Ivy/Top 30 模板）
+  uk.html                       # 英国全流程模拟（通用 G5/Russell Group 模板）
+  au.html                       # 澳洲全流程模拟（通用 Group of Eight 模板）</pre>
+        <p class="muted">v26 核心决策：按"国家"而非"学校"组织模拟内容。原因：(1) 维护成本低（3-6 个国家 vs. 50+ 学校）；(2) 更符合"全球留学"定位；(3) 通用模板可覆盖同一国家 90% 的申请场景；(4) 用户在实际申请时可以再细化到具体学校。后续可扩展：ca.html 加拿大 / hk.html 香港 / sg.html 新加坡 / de.html 德国。</p>
         <div class="tech-box">
             <h4>细节数据生成策略</h4>
             <ul>

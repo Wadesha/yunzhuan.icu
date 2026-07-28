@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>US Application Full Simulation | yunzhuan.icu</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; max-width: 820px; margin: 0 auto; padding: 24px 16px 48px; background: #ffffff; color: #111111; line-height: 1.8; font-size: 15px; }
+  a { color: #111111; text-decoration: none; border-bottom: 1px solid #cccccc; }
+  a:hover { border-bottom-color: #111111; }
+  .nav { padding-bottom: 12px; margin-bottom: 20px; border-bottom: 1px solid #e0e0e0; font-size: 0.88rem; }
+  .nav a { color: #111111; }
+  .nav .sep { color: #cccccc; margin: 0 6px; }
+  .mock { border: 1px dashed #888888; color: #555555; padding: 8px 12px; font-size: 0.78rem; margin-bottom: 24px; }
+  h1 { font-size: 1.6rem; margin-bottom: 4px; }
+  h2 { font-size: 1.1rem; font-weight: 700; margin: 28px 0 8px; padding-bottom: 6px; border-bottom: 1px solid #111111; }
+  h3 { font-size: 0.98rem; font-weight: 700; margin: 16px 0 4px; }
+  p, li { margin-bottom: 8px; color: #111111; }
+  .muted { color: #888888; font-size: 0.85rem; }
+  .stage { font-size: 0.72rem; color: #888888; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 4px; }
+  .box { border: 1px solid #111111; padding: 14px 18px; margin: 12px 0; background: #ffffff; }
+  .box .title { font-weight: 700; margin-bottom: 6px; }
+  .prompt { border: 1px solid #111111; padding: 10px 14px; margin: 10px 0; background: #ffffff; }
+  .prompt .label { font-size: 0.7rem; color: #888888; font-weight: 700; letter-spacing: 0.05em; margin-bottom: 4px; text-transform: uppercase; }
+  .prompt .limit { color: #888888; font-size: 0.78rem; margin-top: 4px; }
+  .letterhead { text-align: center; border-bottom: 3px double #111111; padding-bottom: 12px; margin-bottom: 14px; }
+  .letterhead .crest { font-weight: 700; font-size: 1.05rem; letter-spacing: 0.08em; }
+  .salutation { font-weight: 700; margin: 14px 0 10px; }
+  .signature { margin-top: 28px; }
+  .signature .line { border-top: 1px solid #111111; width: 180px; margin-bottom: 4px; }
+  .qa { border: 1px solid #111111; padding: 12px 16px; margin: 8px 0; }
+  .qa .q { font-weight: 700; margin-bottom: 4px; }
+  .qa .a { background: #ffffff; border-left: 2px solid #111111; padding: 6px 10px; margin-top: 6px; font-size: 0.9rem; }
+  .score { display: inline-block; border: 1px solid #111111; padding: 1px 6px; font-size: 0.7rem; margin-top: 4px; font-weight: 700; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.85rem; margin: 8px 0; }
+  th, td { border: 1px solid #e0e0e0; padding: 6px 10px; text-align: left; }
+  th { background: #ffffff; border-bottom: 2px solid #111111; font-weight: 700; }
+  .status { display: inline-block; border: 1px solid #111111; padding: 1px 6px; font-size: 0.68rem; font-weight: 700; }
+  .status.done { border-width: 2px; }
+  .status.pending { border-color: #888888; color: #888888; }
+  .status.missing { border-style: dashed; }
+  ul, ol { margin-left: 22px; margin-bottom: 12px; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 640px) { .grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<div class="nav">
+  <a href="../index.html">Home</a> <span class="sep">/</span>
+  <a href="index.html">Full Simulation</a> <span class="sep">/</span>
+  United States
+</div>
+
+<div class="mock">模拟数据 · 美国本科申请全流程 · 2026 Fall · 画像：11年级 / CS / GPA 3.95 / SAT 1520</div>
+
+<h1>United States — Application Full Simulation</h1>
+<p class="muted">基于"Li Ming"画像的美国 Top 30 大学申请全流程仿真</p>
+
+<h2>你的画像（Profile）</h2>
+<div class="box">
+  <div class="title">基础信息</div>
+  <ul>
+    <li>年级：11 年级（2026 Fall 申请季）</li>
+    <li>目标专业：Computer Science</li>
+    <li>GPA：3.95 / 4.0 Unweighted · 4.62 / 5.0 Weighted</li>
+    <li>SAT：1520 / 1600（预计 10 月二刷目标 1560+）</li>
+    <li>TOEFL：108 / 120</li>
+    <li>AP：CS A (5), Calculus BC (5), Physics C (5), English Lang (4)</li>
+  </ul>
+  <div class="title">核心活动</div>
+  <ul>
+    <li>IMO 金牌 · CMU 夏校 · 校内 AI 社团创始人 · 山区公益编程课讲师</li>
+  </ul>
+</div>
+
+<!-- TIMELINE -->
+<h2>① 申请时间线（2025.9 - 2026.5）</h2>
+<table>
+  <tr><th>时间</th><th>EA/ED 路径</th><th>RD 路径</th></tr>
+  <tr><td>2025.09</td><td colspan="2" style="text-align:center;">Common App 开放，开始填文书</td></tr>
+  <tr><td>2025.10</td><td>SAT 二刷（如有）+ 送分</td><td>SAT 二刷 + 送分</td></tr>
+  <tr><td>2025.11.01</td><td>EA/ED 截止（大部分 Top 20）</td><td>早申截止</td></tr>
+  <tr><td>2025.12.15</td><td>EA 放榜（Harvard/Princeton/Yale 等）</td><td>—</td></tr>
+  <tr><td>2026.01.01</td><td>—</td><td>RD 截止</td></tr>
+  <tr><td>2026.02</td><td>Deferred → RD 继续等待</td><td>Mid-year Report 提交</td></tr>
+  <tr><td>2026.03 - 04</td><td>—</td><td>RD 放榜（3 月底 - 4 月初）</td></tr>
+  <tr><td>2026.05.01</td><td colspan="2" style="text-align:center;">录取确认截止（National Decision Day）</td></tr>
+</table>
+
+<!-- ESSAYS -->
+<h2>② 文书（Essays）</h2>
+
+<h3>Common App 主文书（7 选 1）</h3>
+<div class="prompt">
+  <div class="label">Prompt 1</div>
+  <p>Some students have a background, identity, interest, or talent that is so meaningful they believe their application would be incomplete without it. If this sounds like you, then please share your story.</p>
+  <div class="limit">字数上限：650 字</div>
+</div>
+
+<div class="box">
+  <div class="title">你的文书初稿（v1，612 字）</div>
+  <pre style="white-space:pre-wrap; font-family: inherit; font-size: 0.88rem; line-height: 1.85;">
+It was 2 a.m. in a computer lab in Yunnan, and twenty middle-schoolers were staring at me like I was speaking another language. I was teaching them Python.
+
+Three years earlier, I had been one of them—a quiet kid in a city middle school who stumbled into coding through an online video and discovered that I could build things that worked. By 10th grade I had won USACO gold; by 11th I was on the IMO team. None of it had felt unfair. The competitions were hard, the teachers were good, the resources were abundant. The pattern of "effort → result" had always held.
+
+Then in the summer of 2024 I taught a five-day Python camp at a rural middle school in Yunnan. The students were eager, sharp, and curious—the same materials that had launched me bored them within an hour. They did not lack talent. They lacked access: to faster computers, to mentors, to a community that took them seriously. A girl named Mei asked me a question about loops that I had answered in my sleep a hundred times. I realized, embarrassed, that I had been assuming the entire world had the same starting line I did.
+
+That summer I went back twice. I rewrote the curriculum around their questions, not mine. I translated every example into problems from their village. I started a WeChat group that is still active. Two of the students later entered the provincial programming contest—their school's first entries in five years.
+
+I want to study computer science not to build better algorithms but to build better access. The same gift I was given—someone who answered my boring questions without rolling their eyes—I want to give away at scale. Whether that means research on AI for low-resource languages, or a startup in ed-tech, or a career in policy, I want to spend my four years here learning how to make the starting line fairer than mine was.
+  </pre>
+</div>
+
+<h3>补充文书示例（以 Top 20 综合大学为例）</h3>
+<div class="prompt">
+  <div class="label">Supplement 1</div>
+  <p>How will your life experiences, background, or perspective contribute to a campus community that values diversity, equity, and inclusion?</p>
+  <div class="limit">200 字以内</div>
+</div>
+<div class="prompt">
+  <div class="label">Supplement 2</div>
+  <p>Briefly describe an academic assignment that sparked your intellectual curiosity and led you to want to learn more.</p>
+  <div class="limit">150 字以内</div>
+</div>
+<div class="prompt">
+  <div class="label">Supplement 3（工学院 CS 方向）</div>
+  <p>Describe how your academic interests, activities, and/or work experience have prepared you to thrive in the School of Engineering.</p>
+  <div class="limit">300 字以内</div>
+</div>
+
+<!-- RECOMMENDATIONS -->
+<h2>③ 推荐信（3 封）</h2>
+<div class="box">
+  <div class="title">推荐人列表</div>
+  <ul>
+    <li><strong>升学顾问（Counselor）：</strong>Ms. Wang Li — "200 名学生中 Top 2-3，慷慨、谦逊、压力下镇定"</li>
+    <li><strong>CS 任课老师：</strong>Mr. Chen Hao — "9 年教过最强的 CS 学生，凌晨 3 点的 bug 展现韧劲"</li>
+    <li><strong>校外 AI 导师：</strong>Dr. Liu Yang（清华）— "找出 baseline 模型偏见的洞察力达研究生水平"</li>
+  </ul>
+  <p class="muted">三封信互相呼应：云南公益 → 伦理思考 → 低资源 NLP 研究，形成统一画像。</p>
+</div>
+
+<!-- INTERVIEW -->
+<h2>④ 模拟面试（校友面试 30-45 分钟）</h2>
+
+<div class="qa">
+  <div class="q">Q1. Tell me about yourself.</div>
+  <div class="a">我今年 11 年级，在北京读高中。我从小喜欢数学和编程，10 年级时创办了学校 AI 社团。去年暑假我去云南乡村教 Python，那些孩子改变了我对"教育"的看法，所以我想研究 AI 在低资源场景下的应用。</div>
+  <span class="score">评分：8/10</span>
+</div>
+
+<div class="qa">
+  <div class="q">Q2. Why Computer Science?</div>
+  <div class="a">第一次感受到 CS 的力量是在云南。那些孩子的问题不是"能不能学"，而是"用得起吗"。我意识到一个算法如果在 4GB 内存上跑不起来，那它对 90% 的世界是没用的。CS 在我眼里不是"造最聪明的 AI"，而是"让 AI 在最普通的硬件上也跑得动"。</div>
+  <span class="score">评分：9/10</span>
+</div>
+
+<div class="qa">
+  <div class="q">Q3. Tell me about a time you failed.</div>
+  <div class="a">高一时 USACO 铂金组月赛，我交了卷才发现用了错误的输入格式，连续 3 道题零分。那次以后我学会了"先写测试再写代码"——只有真正被它咬过的人才知道价值。</div>
+  <span class="score">评分：8/10</span>
+</div>
+
+<div class="qa">
+  <div class="q">Q4. What's a book that changed you?</div>
+  <div class="a">Mindstorms by Seymour Papert。他讲的"通过创造来学习"的哲学，正好解释了我在云南看到的现象——孩子们不是不能学，是没人给他们一个可以"创造"的工具。</div>
+  <span class="score">评分：9/10</span>
+</div>
+
+<div class="qa">
+  <div class="q">Q5. What would you ask me?</div>
+  <div class="a">您当年在读本科时最受益的一门课是什么？您对现在 AI 领域"能力越大责任越大"这句话怎么看？</div>
+  <span class="score">评分：9/10</span>
+</div>
+
+<p class="muted">面试综合评分：<strong>8.8/10 — Strong Recommend</strong></p>
+
+<!-- CHECKLIST -->
+<h2>⑤ 申请 Checklist</h2>
+<table>
+  <tr><th>#</th><th>材料</th><th>截止</th><th>状态</th></tr>
+  <tr><td>1</td><td>Common App 主文书</td><td>11/1 EA</td><td><span class="status done">Done</span></td></tr>
+  <tr><td>2</td><td>补充文书 3 篇</td><td>11/1 EA</td><td><span class="status done">Done</span></td></tr>
+  <tr><td>3</td><td>活动清单（10 项）</td><td>11/1 EA</td><td><span class="status done">Done</span></td></tr>
+  <tr><td>4</td><td>Counselor 推荐信</td><td>11/1 EA</td><td><span class="status done">Done</span></td></tr>
+  <tr><td>5</td><td>Teacher × 2 推荐信</td><td>11/1 EA</td><td><span class="status done">Done</span></td></tr>
+  <tr><td>6</td><td>高中成绩单</td><td>11/1 EA</td><td><span class="status done">Done</span></td></tr>
+  <tr><td>7</td><td>SAT/TOEFL 送分</td><td>11/1 EA</td><td><span class="status done">Done</span></td></tr>
+  <tr><td>8</td><td>Optional Video（90s）</td><td>11/1 EA</td><td><span class="status done">Done</span></td></tr>
+  <tr><td>9</td><td>CSS Profile（资助）</td><td>11/1 EA</td><td><span class="status pending">Pending</span></td></tr>
+  <tr><td>10</td><td>Mid-year Report</td><td>2/1 RD</td><td><span class="status pending">Pending</span></td></tr>
+</table>
+
+<!-- RESULT -->
+<h2>⑥ 模拟 Offer（EA 录取结果）</h2>
+
+<div class="letterhead">
+  <div class="crest">SAMPLE IVY UNIVERSITY</div>
+  <div class="sub" style="font-size:0.72rem; color:#888;">Office of Admissions · Cambridge, MA 02138</div>
+</div>
+
+<p>December 15, 2025</p>
+<p style="font-weight:700;">Dear Li Ming,</p>
+
+<p>On behalf of the Admissions Committee, I am delighted to inform you that you have been admitted to the Class of 2030 under our Restrictive Early Action plan. The Committee was deeply impressed by your academic record, your commitment to expanding access to computer science education, and the thoughtfulness of your supplemental essays.</p>
+
+<p>As a member of the Class of 2030, you will join approximately 1,650 students chosen from 56,000 total applicants. We are confident you will contribute distinctively to our community of scholars.</p>
+
+<p>Your financial aid eligibility has been provisionally determined and is detailed in the accompanying notification. Please note your admission is contingent upon continued strong academic performance through the remainder of your secondary school career.</p>
+
+<p>To confirm your place, please submit your enrollment reply by <strong>January 1, 2026</strong>. Early Action is non-binding — you retain the freedom to apply to and enroll at any institution.</p>
+
+<div class="signature">
+  <div class="line"></div>
+  <p><strong>Director of Admissions and Financial Aid</strong><br>Sample Ivy University</p>
+</div>
+
+<hr style="border:0; border-top:1px solid #111; margin: 24px 0;">
+
+<h3>模拟录取分析</h3>
+<div class="grid">
+  <div class="box">
+    <div class="title">你的优势</div>
+    <ul>
+      <li>IMO 金牌（国际级顶尖竞赛）</li>
+      <li>CS + 公益的差异化故事</li>
+      <li>3 封强推荐信 + AI 研究经历</li>
+    </ul>
+  </div>
+  <div class="box">
+    <div class="title">你的风险</div>
+    <ul>
+      <li>SAT 1520 略低于 Ivy 均分（建议 10 月刷到 1560+）</li>
+      <li>TOEFL 108 够但不突出</li>
+      <li>需确保 12 年级 GPA 不滑坡</li>
+    </ul>
+  </div>
+</div>
+
+<p class="muted">→ 返回国家选择：<a href="index.html">其他国家模拟</a> · <a href="../index.html">首页</a></p>
+
+</body>
+</html>
