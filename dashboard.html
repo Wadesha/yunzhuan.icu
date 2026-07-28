@@ -139,16 +139,50 @@
     <a href="index.html" class="back-link">&larr; Back to Home</a>
 
     <h1>Application Dashboard</h1>
-    <p class="subtitle">申请清单仪表盘 · Demo mode</p>
+    <p class="subtitle">申请清单仪表盘 · v21.0 Preview</p>
 
+    <!-- Role Selector -->
+    <div style="margin-bottom:14px;padding:10px 14px;background:white;border-radius:8px;border:1px solid #e0e0e0;">
+        <span style="font-size:0.85rem;color:#555;margin-right:10px;">Role:</span>
+        <button class="btn btn-secondary role-btn active" onclick="switchRole('student')" style="font-size:0.78rem;padding:4px 12px;">Student</button>
+        <button class="btn btn-secondary role-btn" onclick="switchRole('parent')" style="font-size:0.78rem;padding:4px 12px;">Parent</button>
+        <button class="btn btn-secondary role-btn" onclick="switchRole('counselor')" style="font-size:0.78rem;padding:4px 12px;">Counselor</button>
+        <span id="role-hint" style="font-size:0.78rem;color:#888;margin-left:8px;"></span>
+    </div>
+
+    <!-- Quick Links to v21 features -->
+    <div class="intro" style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;">
+        <span style="font-size:0.88rem;color:#555;">v21.0 Tools:</span>
+        <a href="learning-path.html" class="btn btn-secondary" style="font-size:0.78rem;">Learning Path 学习路径</a>
+        <a href="app-tracker.html" class="btn btn-secondary" style="font-size:0.78rem;">App Tracker 申请跟踪</a>
+        <a href="profile.html" class="btn btn-secondary" style="font-size:0.78rem;">Profile 个人资料</a>
+    </div>
+
+    <!-- Counselor View (hidden by default) -->
+    <div id="counselor-view" style="display:none;margin-bottom:14px;">
+        <div class="card" style="margin-bottom:10px;">
+            <h2>Counselor Overview <span class="en">顾问概览</span></h2>
+            <div class="stat-mini"><span class="label">Total Students</span><span class="value">3</span></div>
+            <div class="stat-mini"><span class="label">Avg Progress</span><span class="value">63%</span></div>
+            <div class="stat-mini"><span class="label">Need Attention</span><span class="value" style="color:#dc2626;">1</span></div>
+        </div>
+        <div class="card">
+            <h2>Students <span class="en">学生列表</span></h2>
+            <div class="stat-mini"><span class="label">Alice Wang (G11, CS)</span><span class="value">65%</span></div>
+            <div class="stat-mini"><span class="label">Bob Li (G10, Finance)</span><span class="value">40%</span></div>
+            <div class="stat-mini"><span class="label">Carol Zhang (G12, Eng)</span><span class="value" style="color:#dc2626;">85% — ED pending</span></div>
+        </div>
+    </div>
+
+    <div id="student-view">
     <div class="demo-banner">
-        <span><strong>👋 Demo Mode</strong> — 这是示例数据，展示完整功能。可随意修改，数据存在你浏览器本地。</span>
+        <span><strong>Demo Mode</strong> — 示例数据展示完整功能，数据存在浏览器本地。</span>
         <button class="btn" onclick="loadDemoData()">Load demo data</button>
     </div>
 
     <div class="intro">
-        A single-page personal tracker for your application season. Enter your test scores, target schools and essay progress below — all data is stored locally in your browser (localStorage), nothing is uploaded. Use the quick links to jump to relevant resources across the site.
-        <br><span style="color:#888;">单页申请跟踪面板：分数 / 选校 / 文书 / 待办，数据存浏览器本地，不会上传。</span>
+        A single-page personal tracker for your application season. Enter your test scores, target schools and essay progress below — all data is stored locally in your browser (localStorage), nothing is uploaded.
+        <br><span style="color:#888;">单页申请跟踪面板：分数 / 选校 / 文书 / 待办，数据存浏览器本地。</span>
     </div>
 
     <div class="grid">
@@ -242,8 +276,9 @@
         </div>
         <p class="note">完整月度任务见 <a href="timeline/grade-11-monthly.html" style="color:#667eea;">Grade 11 Monthly Tasks</a> / <a href="timeline/grade-12.html" style="color:#667eea;">Grade 12 Timeline</a>。</p>
     </div>
+    </div><!-- /student-view -->
 
-    <p class="footer">&copy; 2026 yunzhuan.icu | Application Dashboard</p>
+    <p class="footer">&copy; 2026 yunzhuan.icu | Application Dashboard · v21.0</p>
     <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
     <div style="text-align:center;padding:8px 0;font-size:0.75rem;color:#aaa;">
         <a href="index.html" style="color:#aaa;text-decoration:none;">Home</a>
@@ -264,6 +299,35 @@
     </div>
 
     <script>
+    // Role switching
+    function switchRole(role) {
+        document.querySelectorAll('.role-btn').forEach(b => b.classList.remove('active'));
+        event.target.classList.add('active');
+        const studentView = document.getElementById('student-view');
+        const counselorView = document.getElementById('counselor-view');
+        const hint = document.getElementById('role-hint');
+        if (role === 'student') {
+            studentView.style.display = '';
+            counselorView.style.display = 'none';
+            hint.textContent = 'Full access — edit scores, checklist, essays';
+        } else if (role === 'parent') {
+            studentView.style.display = '';
+            counselorView.style.display = 'none';
+            hint.textContent = 'Read-only — viewing child progress';
+            document.querySelectorAll('#student-view input').forEach(i => i.disabled = true);
+        } else if (role === 'counselor') {
+            studentView.style.display = 'none';
+            counselorView.style.display = '';
+            hint.textContent = 'Multi-student overview';
+        }
+        localStorage.setItem('dash_role', role);
+    }
+    // Restore role
+    const savedRole = localStorage.getItem('dash_role') || 'student';
+    if (savedRole !== 'student') {
+        document.querySelector(`.role-btn[onclick="switchRole('${savedRole}')"]`)?.click();
+    }
+
     const KEY = 'yunzhuan_dashboard_v1';
     let state = JSON.parse(localStorage.getItem(KEY) || '{}');
     if (!state.scores) state.scores = {};

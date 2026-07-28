@@ -281,14 +281,55 @@
             <li>Dashboard / Profile / Login 页面已存在（模拟展示模式）</li>
         </ul>
 
-        <div class="section-title">待实施功能</div>
+        <div class="section-title">用户角色体系</div>
+        <p style="font-size:0.88rem;color:#555;margin-bottom:10px;">不同角色看到不同的界面和功能，模拟数据先行，后续接入真实权限系统。</p>
+
+        <div class="tech-box">
+            <h4>角色定义与权限矩阵</h4>
+            <table class="data-table">
+                <thead>
+                    <tr><th>角色</th><th>英文</th><th>核心权限</th><th>数据范围</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>学生</td><td>Student</td><td>个人Dashboard / 学习路径 / 申请Tracker / 收藏 / 测评</td><td>仅自己的数据</td></tr>
+                    <tr><td>家长</td><td>Parent</td><td>查看孩子进度 / 费用计算 / 时间线概览 / 消息通知</td><td>关联孩子的数据（只读）</td></tr>
+                    <tr><td>顾问</td><td>Counselor</td><td>多学生管理 / 批量跟踪 / 备注 / 资源共享 / 数据导出</td><td>所有关联学生</td></tr>
+                    <tr><td>管理员</td><td>Admin</td><td>内容管理 / 用户管理 / 数据统计 / 系统配置</td><td>全站数据</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="tech-box">
+            <h4>技术实现方案</h4>
+            <ul>
+                <li><strong>当前阶段（模拟）：</strong>用 localStorage 存储 role 字段，页面根据 role 显示/隐藏区块，数据为预设模拟值</li>
+                <li><strong>中期（Supabase RLS）：</strong>Supabase Row Level Security 按角色过滤数据，<code>auth.uid() = user_id</code> 或 <code>parent_id = auth.uid()</code></li>
+                <li><strong>长期（RBAC）：</strong>引入 <code>user_roles</code> 表 + Supabase Auth Hook，支持细粒度权限控制</li>
+            </ul>
+            <p style="margin-top:6px;"><strong>数据结构设计：</strong></p>
+            <pre>-- profiles 表
+profiles (
+  id UUID REFERENCES auth.users,
+  role TEXT DEFAULT 'student', -- student | parent | counselor | admin
+  display_name TEXT,
+  avatar_url TEXT,
+  grade INT,               -- 学生年级
+  target_major TEXT,       -- 目标专业
+  target_schools TEXT[],   -- 目标学校
+  parent_of UUID[],        -- 家长关联的学生ID
+  counselor_students UUID[] -- 顾问关联的学生列表
+)</pre>
+        </div>
+
+        <div class="section-title">v21.0 实施计划（模拟数据先行）</div>
         <ul class="feature-list">
-            <li>个人中心 Dashboard — 总览收藏、进度、最近浏览</li>
-            <li>收藏夹增强 — 专业/学校/文章分类收藏，支持自定义分组</li>
-            <li>申请进度 Tracker — 可视化申请时间线，每所学校单独跟踪</li>
-            <li>截止日期提醒 — 邮件/浏览器通知推送</li>
-            <li>学习路径规划 — 按目标专业推荐课程、考试、活动规划</li>
-            <li>Profile 页面 — 公开/私密设置，展示申请背景（可选）</li>
+            <li><strong>个人中心 Dashboard</strong> — 角色切换 / 总览卡片 / 进度环形图 / 最近活动 / 快捷入口</li>
+            <li><strong>学习路径系统</strong> — 按年级(9-12)分阶段 / 课程规划 / 标化时间线 / 活动建议 / 竞赛推荐 / 勾选完成度</li>
+            <li><strong>申请 Tracker</strong> — 每所学校独立跟踪 / 申请阶段(选校→文书→提交→面试→录取) / 截止日期倒计时 / 录取结果统计</li>
+            <li><strong>收藏夹增强</strong> — 分类收藏(专业/学校/竞赛/文章) / 自定义分组 / 导出 PDF</li>
+            <li><strong>截止日期提醒</strong> — 浏览器通知 / 倒计时组件 / 月历视图</li>
+            <li><strong>家长视图</strong> — 只读模式查看孩子进度 / 费用汇总 / 消息通知</li>
+            <li><strong>顾问工作台</strong> — 多学生列表 / 批量操作 / 备注 / 数据导出</li>
         </ul>
 
         <div class="section-title">技术方案讨论</div>
@@ -403,6 +444,26 @@
                 <li><strong>Markdown 编辑器：</strong>如 EasyMDE，技术向用户友好，但普通用户有门槛</li>
             </ul>
             <p style="margin-top:6px;"><strong>推荐：</strong>Markdown 先行（开发成本最低），后续再上 TipTap 富文本。</p>
+        </div>
+
+        <div class="section-title">技术实现方案</div>
+        <div class="tech-box">
+            <h4>用户角色扩展</h4>
+            <ul>
+                <li>社区角色继承 v21 的 RBAC 体系</li>
+                <li>新增内容创作者角色（Contributor）：可投稿经验分享</li>
+                <li>新增版主角色（Moderator）：可审核/删除/置顶帖子</li>
+                <li>用户等级基于贡献值自动升级</li>
+            </ul>
+        </div>
+        <div class="tech-box">
+            <h4>数据架构</h4>
+            <pre>-- UGC 内容表
+posts (id, author_id, title, content, category, status, created_at)
+comments (id, post_id, author_id, content, parent_id, created_at)
+reactions (id, user_id, target_type, target_id, type)
+follows (follower_id, followee_id, created_at)
+user_badges (user_id, badge_id, awarded_at)</pre>
         </div>
     </div>
 
@@ -702,6 +763,26 @@ const competitions = [
             <li><strong>Phase 2（扩量）</strong>：补齐 36 个详情页 + 多维筛选器 + 竞赛日历 + 搜索 — ✅ 已完成（v20.5.0）</li>
             <li><strong>Phase 3（社区）</strong>：用户系统打通 + 组队 + 个性化 — 依赖 v21/v22</li>
         </ul>
+
+        <div class="section-title">技术实现方案</div>
+        <div class="tech-box">
+            <h4>竞赛组队系统</h4>
+            <ul>
+                <li>队伍管理：创建/加入/退出队伍，队长权限</li>
+                <li>匹配算法：按专业、年级、技能标签匹配队友</li>
+                <li>队内协作：共享备赛资料、讨论区、进度同步</li>
+                <li>数据结构：<code>teams</code> 表 + <code>team_members</code> 关联表</li>
+            </ul>
+        </div>
+        <div class="tech-box">
+            <h4>个性化推荐引擎</h4>
+            <ul>
+                <li>基于用户 profile（年级/专业/兴趣/已有竞赛）计算推荐</li>
+                <li>规则引擎 v1：if grade=10 && major=cs then recommend USACO+AMC</li>
+                <li>协同过滤 v2：相似用户参加了什么竞赛</li>
+                <li>LLM 推荐 v3：GPT 分析用户背景生成个性化竞赛路径</li>
+            </ul>
+        </div>
     </div>
 
     <!-- v23.0.0 -->
@@ -763,6 +844,26 @@ const competitions = [
                 <li><strong>存储：</strong>pgvector（Postgres 扩展，Supabase 支持）+ 缓存层（KV）</li>
             </ul>
         </div>
+
+        <div class="section-title">技术实现方案</div>
+        <div class="tech-box">
+            <h4>AI 选校匹配</h4>
+            <ul>
+                <li>输入：GPA + 标化 + 专业 + 预算 + 地理位置偏好</li>
+                <li>匹配：历史录取数据 + 用户画像 → 推荐Reach/Match/Safety</li>
+                <li>模型：初期规则引擎 → 中期协同过滤 → 后期LLM推理</li>
+                <li>数据源：CDS (Common Data Set) + IPEDS + 自有录取数据</li>
+            </ul>
+        </div>
+        <div class="tech-box">
+            <h4>AI 文书润色</h4>
+            <ul>
+                <li>功能：语法检查 / 用词优化 / 结构建议 / 主题契合度评分</li>
+                <li>模型：GPT-4 / Claude，prompt engineering + few-shot learning</li>
+                <li>隐私：用户可选"不存储原文"模式</li>
+                <li>限制：每用户每日免费 3 次，超出需订阅</li>
+            </ul>
+        </div>
     </div>
 
     <!-- v24.0.0+ 远期构想 -->
@@ -792,9 +893,29 @@ const competitions = [
                 <li><strong>成本敏感：</strong>免费额度优先，按量付费可控，初期避免大额固定成本</li>
             </ul>
         </div>
+
+        <div class="section-title">技术实现方案</div>
+        <div class="tech-box">
+            <h4>移动端策略</h4>
+            <ul>
+                <li>方案A：PWA 增强（离线缓存 + 推送通知 + 安装到桌面）</li>
+                <li>方案B：React Native 跨平台App（iOS + Android）</li>
+                <li>方案C：Flutter 跨平台App</li>
+                <li>推荐：先 PWA 验证需求，再上 React Native</li>
+            </ul>
+        </div>
+        <div class="tech-box">
+            <h4>中介 SaaS 平台</h4>
+            <ul>
+                <li>多租户架构：每个中介机构独立空间</li>
+                <li>顾问工作台增强：CRM + 学生管理 + 合同 + 业绩</li>
+                <li>家长端：实时查看申请进度 + 费用明细</li>
+                <li>定价：按学生数 / 按功能模块 / 按使用量</li>
+            </ul>
+        </div>
     </div>
 
-    <p class="footer">© 2026 yunzhuan.icu &nbsp;|&nbsp; Product Roadmap v20.6.0</p>
+    <p class="footer">© 2026 yunzhuan.icu &nbsp;|&nbsp; Product Roadmap v20.8.0</p>
 <script src="./js/back-to-top.js"></script>
 </body>
 </html>
