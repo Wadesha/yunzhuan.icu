@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Life Guide - Surviving College - yunzhuan.icu</title>
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 16px 20px;
+            background: #f5f5f5;
+            color: #333;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            margin-bottom: 16px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .logo {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #667eea;
+            text-decoration: none;
+        }
+        .logo span { color: #764ba2; }
+        .nav-links {
+            display: flex;
+            gap: 18px;
+            align-items: center;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: #555;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: color 0.15s;
+        }
+        .nav-links a:hover { color: #667eea; }
+        .nav-links .cn {
+            font-size: 0.7rem;
+            color: #aaa;
+            margin-left: 2px;
+        }
+        @media (max-width: 768px) {
+            .navbar { flex-wrap: wrap; gap: 8px; }
+            .nav-links { gap: 12px; }
+            .nav-links a { font-size: 0.78rem; }
+            .nav-links .cn { display: none; }
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 4px;
+            font-size: 1.5rem;
+        }
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 16px;
+            font-size: 0.9rem;
+        }
+        .section {
+            background: white;
+            border-radius: 8px;
+            padding: 14px 18px;
+            margin-bottom: 10px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .section h2 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        .section h2 .cn { color: #999; font-size: 0.8rem; font-weight: normal; margin-left: 6px; }
+        .section p { color: #333; line-height: 1.7; font-size: 0.92rem; margin-bottom: 8px; }
+        .tip-box {
+            background: #fff8e1;
+            border-left: 3px solid #ff8f00;
+            padding: 10px 14px;
+            border-radius: 0 6px 6px 0;
+            margin-top: 10px;
+            font-size: 0.82rem;
+            color: #5d4037;
+            line-height: 1.6;
+        }
+        .tip-box strong { color: #e65100; }
+        .success-box {
+            background: #e8f5e9;
+            border-left: 3px solid #2e7d32;
+            padding: 10px 14px;
+            border-radius: 0 6px 6px 0;
+            margin-top: 10px;
+            font-size: 0.82rem;
+            color: #1b5e20;
+            line-height: 1.6;
+        }
+        .success-box strong { color: #2e7d32; }
+        .warning-box {
+            background: #ffebee;
+            border-left: 3px solid #c62828;
+            padding: 10px 14px;
+            border-radius: 0 6px 6px 0;
+            margin-top: 10px;
+            font-size: 0.82rem;
+            color: #b71c1c;
+            line-height: 1.6;
+        }
+        .warning-box strong { color: #c62828; }
+        .info-list { list-style: none; }
+        .info-list li {
+            padding: 8px 0 8px 20px;
+            position: relative;
+            font-size: 0.88rem;
+            color: #444;
+            line-height: 1.5;
+            border-bottom: 1px solid #f5f5f5;
+        }
+        .info-list li:last-child { border-bottom: none; }
+        .info-list li::before {
+            content: '✦';
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-size: 0.7rem;
+            top: 11px;
+        }
+        .info-list li strong { color: #333; }
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 10px;
+        }
+        .card {
+            background: #f8f9ff;
+            padding: 12px;
+            border-radius: 8px;
+            border-left: 3px solid #667eea;
+        }
+        .card h3 {
+            font-size: 0.9rem;
+            color: #4338ca;
+            margin-bottom: 6px;
+        }
+        .card p {
+            font-size: 0.82rem;
+            color: #555;
+            line-height: 1.5;
+        }
+        @media (max-width: 600px) {
+            .grid-2 { grid-template-columns: 1fr; }
+        }
+        .footer { text-align: center; margin-top: 20px; color: #999; font-size: 0.8rem; }
+    </style>
+    <link rel="stylesheet" href="./css/theme.css">
+    <link rel="manifest" href="./manifest.json">
+    <meta name="theme-color" content="#667eea">
+    <script src="./js/theme.js"></script>
+    <script>
+    window.SUPABASE_CONFIG = {{
+        url: 'https://otfjbzjvkoectpejhxar.supabase.co',
+        anonKey: 'sb_publishable_SBRF6ewKH-se3dNlqFwsXQ_lObhamTr'
+    }};
+    </script>
+    <script src="./js/auth.js"></script>
+    <script src="./js/favorites.js"></script>
+    <script src="./js/pwa.js"></script>
+    <script src="./js/mobile-nav.js"></script>
+    <script src="./js/breadcrumbs.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="../index.html" class="logo">yunzhuan<span>.icu</span></a>
+        <div class="nav-links">
+            <a href="../index.html">Majors<span class="cn">专业</span></a>
+            <a href="../schools/index.html">Schools<span class="cn">学校</span></a>
+            <a href="../tests/index.html">Tests<span class="cn">考试</span></a>
+            <a href="../resources.html">Resources<span class="cn">资源</span></a>
+            <a href="../visa-guide.html">Visa<span class="cn">签证</span></a>
+            <a href="search.html">Search<span class="cn">搜索</span></a>
+            <a href="../contact.html">Contact<span class="cn">联系</span></a>
+        </div>
+    </nav>
+
+    <h1>Campus Life Guide</h1>
+    <p class="subtitle">校园生活指南 · 美国大学新生生存手册</p>
+
+    <div class="section">
+        <h2>Dining & Food <span class="cn">吃喝</span></h2>
+        <ul class="info-list">
+            <li><strong>Meal Plan / 食堂餐计划：</strong>大部分学校要求新生强制买，有不同套餐（每周 10/14/19/无限制餐等），选适合自己的</li>
+            <li><strong>Dining Hall / 食堂：</strong>一般是自助，有不同的 station（披萨、沙拉、汉堡、亚洲餐等），美国大学食堂其实还不错</li>
+            <li><strong>Food Court / 美食广场：</strong>学生中心一般有快餐（Subway、Chipotle、Panda Express 等连锁）</li>
+            <li><strong>Coffee Shop / 咖啡店：</strong>校园里一般有 Starbucks、Dunkin'，学习必备</li>
+            <li><strong>外卖：</strong>Uber Eats、DoorDash、Grubhub 都可以用，就是贵</li>
+            <li><strong>自己做饭：</strong>宿舍有厨房可以自己做，省钱又好吃</li>
+            <li><strong>中国超市：</strong>一般大城市都有 H Mart、99 Ranch 等，可以买亚洲食材</li>
+        </ul>
+        <div class="tip-box">
+            <strong>💡 省钱技巧：</strong><br>
+            · 食堂吃腻了可以偶尔出去吃，别天天外卖（贵！）<br>
+            · 自己做饭最省钱，还健康<br>
+            · 超市有会员/学生折扣<br>
+            · Amazon Fresh / Whole Foods 学生有优惠
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Housing <span class="cn">住宿</span></h2>
+        <div class="grid-2">
+            <div class="card">
+                <h3>Dorm / 宿舍</h3>
+                <p>
+                    新生一般强制住校，方便认识新朋友。<br><br>
+                    · 单人间 / 双人间 / 三人间<br>
+                    · 公共浴室 or 独立卫浴（价格不同）<br>
+                    · 公共厨房 / 休息室 / 洗衣房<br>
+                    · RA（Resident Assistant）管事儿的<br>
+                    · 一般包水电网
+                </p>
+            </div>
+            <div class="card">
+                <h3>Off-Campus / 校外</h3>
+                <p>
+                    大二以后很多人搬出去住，更自由更便宜。<br><br>
+                    · Apartment / House<br>
+                    · 和朋友合租<br>
+                    · 自己交水电网<br>
+                    · 离学校可能远一点<br>
+                    · 需要买家具
+                </p>
+            </div>
+        </div>
+        <div class="tip-box" style="margin-top:10px;">
+            <strong>💡 宿舍小贴士：</strong><br>
+            · 选宿舍前看看 Google Map 看位置，离教学楼远的冬天很惨<br>
+            · 和室友提前聊聊生活习惯（熬夜？干净吗？）<br>
+            · 宿舍一般有家具，不用带太多东西<br>
+            · 校外租房要趁早，好房子抢得快
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Transportation <span class="cn">交通</span></h2>
+        <ul class="info-list">
+            <li><strong>Campus Bus / 校车：</strong>大部分学校有免费校车，覆盖校园和周边</li>
+            <li><strong>步行/自行车：</strong>校园不大的话走路/骑车最方便</li>
+            <li><strong>公共交通：</strong>大城市有地铁/公交，学生一般有折扣</li>
+            <li><strong>Uber / Lyft：</strong>打车软件，方便但贵</li>
+            <li><strong>买车：</strong>村里的学校基本人人有车，二手车几千刀</li>
+            <li><strong>飞机：</strong>放假回国/出去玩，提前订便宜</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Study & Academic <span class="cn">学习</span></h2>
+        <ul class="info-list">
+            <li><strong>Library / 图书馆：</strong>学习圣地，有单人隔间、小组讨论室、打印机</li>
+            <li><strong>Office Hour / 教授答疑时间：</strong>每周固定时间，有问题直接去问，教授人都很好</li>
+            <li><strong>TA / 助教：</strong>研究生当助教，改作业带讨论课，也有 office hour</li>
+            <li><strong>Tutoring / 辅导：</strong>学校一般有免费辅导中心，各种科目都有</li>
+            <li><strong>Study Group / 学习小组：</strong>和同学一起学，效率更高</li>
+            <li><strong>Writing Center / 写作中心：</strong>帮你改作文、论文，免费的！</li>
+            <li><strong>Academic Advisor / 学术顾问：</strong>选课、专业、学业问题都找TA</li>
+        </ul>
+        <div class="success-box">
+            <strong>✅ 学习建议：</strong><br>
+            · 别翘课！很多课 attendance 算分<br>
+            · 作业按时交，别拖延<br>
+            · 考前好好复习，别临时抱佛脚<br>
+            · 利用学校的免费资源（tutoring、writing center 等）<br>
+            · 有问题及时问，别憋着
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Clubs & Activities <span class="cn">社团活动</span></h2>
+        <p style="font-size:0.9rem;color:#555;">
+            美国大学社团超级多，开学第一周一般有 Club Fair / Involvement Fair，
+            各个社团都会摆摊招新，大胆去逛！
+        </p>
+        <ul class="info-list">
+            <li><strong>学术类：</strong>各专业的社、辩论社、学术竞赛队</li>
+            <li><strong>文化类：</strong>CSSA（中国学生学者联合会）、日本社、韩国社</li>
+            <li><strong>兴趣类：</strong>音乐、舞蹈、摄影、动漫、游戏社</li>
+            <li><strong>运动类：</strong>各种球队、健身社、户外社</li>
+            <li><strong>公益类：</strong>志愿者社团</li>
+            <li><strong>兄弟会/姐妹会（Greek Life）：</strong>社交为主，有的很疯，慎入</li>
+        </ul>
+        <div class="tip-box">
+            <strong>💡 建议：</strong><br>
+            · 开学第一周可以多试几个社团，找到喜欢的<br>
+            · 不用加太多，2-3 个就够了，学业为主<br>
+            · 是认识新朋友的好地方<br>
+            · CSSA 一定要加！中国学长学姐会帮你很多
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Health & Wellness <span class="cn">健康医疗</span></h2>
+        <ul class="info-list">
+            <li><strong>Student Health Center / 校医院：</strong>学校里的医院，一般有医生护士，看小病很方便</li>
+            <li><strong>Counseling Center / 心理咨询中心：</strong>免费心理咨询，压力大可以去聊</li>
+            <li><strong>Gym / 健身房：</strong>学费一般包了，免费健身</li>
+            <li><strong>医疗保险：</strong>必须买，学校的保险一般够用</li>
+            <li><strong>药店：</strong>CVS、Walgreens 到处都有</li>
+        </ul>
+        <div class="warning-box">
+            <strong>⚠️ 注意：</strong><br>
+            · 美国看病超级贵！一定要有保险<br>
+            · 小毛病去校医院，便宜方便<br>
+            · 急诊去急诊贵得离谱，不是急症别随便去 ER<br>
+            · 心理压力大很正常，去心理咨询中心聊聊，别硬扛
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Money & Finance <span class="cn">花钱省钱</span></h2>
+        <ul class="info-list">
+            <li><strong>Tuition / 学费：</strong>最贵的部分，一般一学期交一次</li>
+            <li><strong>Textbooks / 教材：</strong>超级贵！别买新书，租书/二手/电子版</li>
+            <li><strong>学生折扣：</strong>很多地方有学生折扣（Amazon Prime、Spotify、Apple Music 等）</li>
+            <li><strong>兼职：</strong>校园里可以打工（图书馆、食堂、助教等），校外打工需要 SSN</li>
+            <li><strong>奖学金/FAFSA：</strong>国际生奖学金比较少，但可以试试</li>
+            <li><strong>Budget / 预算：</strong>每个月大概 $1000-2000 生活费（看地区）</li>
+        </ul>
+        <div class="tip-box">
+            <strong>💡 省钱技巧：</strong><br>
+            · 教材：Chegg / Amazon 租书，或者找 PDF<br>
+            · 吃饭：自己做 < 食堂 < 外卖<br>
+            · 购物：等打折的时候买，用学生折扣<br>
+            · 机票：提前订，转机便宜<br>
+            · 二手：Facebook Marketplace、学长学姐群
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Safety <span class="cn">安全</span></h2>
+        <div class="warning-box">
+            <strong>⚠️ 安全第一！</strong><br>
+            · 晚上别一个人走夜路，尤其是偏僻的地方别去<br>
+            · 学校一般有 Campus Safety / Campus Police，有紧急情况打他们电话<br>
+            · 很多学校有免费 Escort Service，晚了可以叫人陪你走<br>
+            · 贵重物品看好，别乱放<br>
+            · 租房选安全的区<br>
+            · 下载学校的安全 APP，紧急情况一键报警
+        </div>
+        <div class="success-box" style="margin-top:8px;">
+            <strong>✅ 安全习惯：</strong><br>
+            · 出门告诉室友你去哪<br>
+            · 手机保持有电<br>
+            · 记住学校报警电话<br>
+            · 别喝陌生人给的饮料<br>
+            · 提高警惕，但也别太紧张
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Culture Shock <span class="cn">文化适应</span></h2>
+        <p style="font-size:0.9rem;color:#555;">
+            刚到美国肯定会有不适应，这很正常，给自己时间。
+        </p>
+        <ul class="info-list">
+            <li><strong>语言：</strong>刚来听不懂很正常，几个月就好了，大胆说</li>
+            <li><strong>饮食：</strong>美国食物可能不习惯，可以自己做，也有中餐馆</li>
+            <li><strong>社交：</strong>美国人比较直接，有什么说什么，别害羞</li>
+            <li><strong>课堂：</strong>美国课堂鼓励提问和讨论，大胆发言</li>
+            <li><strong>想家：</strong>很正常，多和家人视频，多交朋友</li>
+            <li><strong>朋友：</strong>既有中国朋友也有外国朋友，别只混中国人圈子</li>
+        </ul>
+        <div class="success-box">
+            <strong>❤️ 给自己一点时间：</strong><br>
+            文化冲击是正常的，每个人都会经历。一般几个月到半年就适应了。
+            别给自己太大压力，慢慢来，享受这个过程！
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Freshman Tips <span class="cn">新生忠告</span></h2>
+        <div class="success-box">
+            <strong>✅ 要做的：</strong><br>
+            · 多出去走走，探索校园和城市<br>
+            · 参加活动，认识新朋友<br>
+            · 利用学校的各种资源（免费的！）<br>
+            · 保持健康，别天天熬夜<br>
+            · 管理好时间，别拖延<br>
+            · 尝试新事物，走出舒适区<br>
+            · 享受大学时光！
+        </div>
+        <div class="warning-box" style="margin-top:8px;">
+            <strong>❌ 不要做的：</strong><br>
+            · 别只待在宿舍天天打游戏<br>
+            · 别翘课太多<br>
+            · 别只混中国人圈子（但也可以有中国朋友）<br>
+            · 别乱花钱<br>
+            · 别太焦虑，大家都一样<br>
+            · 别忘记和家人联系
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Useful Apps <span class="cn">实用APP</span></h2>
+        <ul class="info-list">
+            <li><strong>学习：</strong>Canvas / Blackboard（选课系统）、Notion、Quizlet、Grammarly</li>
+            <li><strong>吃饭：</strong>Uber Eats、DoorDash、Yelp、麦当劳APP</li>
+            <li><strong>交通：</strong>Uber、Lyft、Google Maps、Waze</li>
+            <li><strong>社交：</strong>Instagram、TikTok、Discord、GroupMe</li>
+            <li><strong>生活：</strong>Amazon、Venmo（转账）、Spotify、Netflix</li>
+            <li><strong>学校：</strong>下载你们学校的APP，看课表、校车、安全通知等</li>
+        </ul>
+    </div>
+
+    <p class="footer">&copy; 2026 yunzhuan.icu | Campus Life</p>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <div style="text-align:center;padding:8px 0;font-size:0.75rem;color:#aaa;">
+        <a href="../index.html" style="color:#aaa;text-decoration:none;">Home</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="../course-guide.html" style="color:#aaa;text-decoration:none;">Courses</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="../resources.html" style="color:#aaa;text-decoration:none;">Resources</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="../contact.html" style="color:#aaa;text-decoration:none;">Contact</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="javascript:window.scrollTo(0,0)" style="color:#aaa;text-decoration:none;">Back to top</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Common Interview Questions - Sample Answers - yunzhuan.icu</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px 16px;
+            background: #f5f5f5;
+            color: #333;
+        }
+        .back-link { color: #667eea; text-decoration: none; font-size: 0.85rem; margin-bottom: 12px; display: inline-block; }
+        .back-link:hover { text-decoration: underline; }
+        h1 { color: #333; margin-bottom: 4px; font-size: 1.4rem; }
+        .en-name { color: #888; font-size: 0.95rem; margin-bottom: 4px; font-weight: normal; }
+        .code-line { color: #888; font-size: 0.82rem; margin-bottom: 14px; }
+        .section {
+            background: white;
+            border-radius: 8px;
+            padding: 14px 18px;
+            margin-bottom: 10px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .section h2 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        .section h2 .en { color: #999; font-size: 0.8rem; font-weight: normal; }
+        .section p { color: #333; line-height: 1.7; font-size: 0.92rem; }
+        .q-block {
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .q-block:last-child { border-bottom: none; }
+        .q {
+            font-weight: 600;
+            color: #333;
+            font-size: 0.95rem;
+            margin-bottom: 8px;
+        }
+        .tag {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin-right: 6px;
+        }
+        .tag-gettoknow { background: #e3f2fd; color: #1565c0; }
+        .tag-fit { background: #f3e5f5; color: #7b1fa2; }
+        .tag-leadership { background: #fff3e0; color: #ef6c00; }
+        .tag-challenge { background: #ffebee; color: #c62828; }
+        .tag-why { background: #e8f5e9; color: #2e7d32; }
+        .answer-hint {
+            background: #f8f9ff;
+            border-left: 3px solid #667eea;
+            padding: 10px 14px;
+            border-radius: 0 6px 6px 0;
+            font-size: 0.82rem;
+            color: #555;
+            line-height: 1.6;
+        }
+        .answer-hint strong { color: #667eea; }
+        .example-box {
+            background: #f0fdf4;
+            border-left: 3px solid #22c55e;
+            padding: 10px 14px;
+            border-radius: 0 6px 6px 0;
+            font-size: 0.82rem;
+            color: #374151;
+            line-height: 1.6;
+            margin-top: 6px;
+        }
+        .example-box strong { color: #16a34a; }
+        .tip-box {
+            background: #e8f5e9;
+            border-left: 3px solid #2e7d32;
+            padding: 10px 14px;
+            border-radius: 0 6px 6px 0;
+            margin-top: 10px;
+            font-size: 0.82rem;
+            color: #1b5e20;
+            line-height: 1.6;
+        }
+        .tip-box strong { color: #1b5e20; }
+        .warning-box {
+            background: #fff8e1;
+            border-left: 3px solid #ff8f00;
+            padding: 10px 14px;
+            border-radius: 0 6px 6px 0;
+            margin-top: 10px;
+            font-size: 0.82rem;
+            color: #5d4037;
+            line-height: 1.6;
+        }
+        .footer { text-align: center; margin-top: 20px; color: #999; font-size: 0.8rem; }
+    </style>
+    <link rel="stylesheet" href="../css/theme.css">
+    <link rel="manifest" href="../manifest.json">
+    <meta name="theme-color" content="#667eea">
+    <script src="../js/theme.js"></script>
+    <script src="../js/pwa.js"></script>
+    <script src="../js/mobile-nav.js"></script>
+    <script src="../js/breadcrumbs.js"></script>
+</head>
+<body>
+    <a href="index.html" class="back-link">&larr; Back to Interviews</a>
+
+    <h1>Common Interview Questions</h1>
+    <p class="en-name">常见面试问题</p>
+    <p class="code-line">With answer frameworks and examples</p>
+
+    <div class="section">
+        <h2>Get to Know You Questions <span class="en">了解你这个人</span></h2>
+
+        <div class="q-block">
+            <span class="tag tag-gettoknow">高频</span>
+            <div class="q">Tell me about yourself. / Walk me through your resume.</div>
+            <div class="answer-hint">
+                <strong>答题思路：</strong> 准备一个 1-2 分钟的"电梯演讲"。不要按时间顺序罗列经历，要有一条主线。结构：现在在做什么 → 你的热情/兴趣是什么 → 为什么走上这条路 → 未来想做什么。
+            </div>
+            <div class="example-box">
+                <strong>参考例子（CS 方向学生）：</strong><br>
+                "I'm currently a senior at XX High School, where I've been really focused on computer science and technology. I first got into coding in 10th grade when I built a simple study tool for my classmates, and that experience made me realize I love building things that solve real problems. Since then, I've done a few internships at local tech companies, led our school's coding club, and worked on a personal project using AI to help students with learning disabilities. In college, I want to deepen my CS foundation while also exploring human-computer interaction, because I think the most interesting problems are at the intersection of technology and people."
+            </div>
+        </div>
+
+        <div class="q-block">
+            <span class="tag tag-gettoknow">常见</span>
+            <div class="q">What are your greatest strengths / weaknesses?</div>
+            <div class="answer-hint">
+                <strong>答题思路：</strong> 优点要有具体例子支撑；缺点要真实但同时展示你如何改进（不要说"我是完美主义者"这种烂大街的）。
+            </div>
+            <div class="example-box">
+                <strong>Strength 例子：</strong><br>
+                "One of my biggest strengths is that I'm really persistent. Last year when I was working on my science fair project, my initial experimental design didn't work after three months. Instead of giving up, I went back to the literature, talked to my mentor, and completely redesigned my approach. It was frustrating at the time, but that persistence paid off when I won second place at the regional fair."<br><br>
+                <strong>Weakness 例子：</strong><br>
+                "I used to be the kind of person who wanted to do everything myself, because I thought if you want something done right, you have to do it. But when I became president of the environmental club, I realized that's not sustainable or effective. I've been working on delegating more and trusting my team members. It's still a work in progress, but I've learned that giving others ownership leads to better ideas and a more motivated team."
+            </div>
+        </div>
+
+        <div class="q-block">
+            <span class="tag tag-gettoknow">常见</span>
+            <div class="q">What do you like to do for fun? / What are your hobbies?</div>
+            <div class="answer-hint">
+                <strong>答题思路：</strong> 展示你的多面性和热情。不要只说学习，也不要说太浅的。选 2-3 个你真正喜欢、能讲出故事的爱好。
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Why School / Why Major <span class="en">为什么选我们/为什么选这个专业</span></h2>
+
+        <div class="q-block">
+            <span class="tag tag-why">必问</span>
+            <div class="q">Why do you want to attend our university?</div>
+            <div class="answer-hint">
+                <strong>答题思路：</strong> 一定要具体！不要说"you have a good CS program"。要提到：具体的课程、教授、研究机会、特色项目、学校氛围、资源等。3-4个具体原因，每个讲清楚为什么对你重要。
+            </div>
+            <div class="example-box">
+                <strong>不好的回答：</strong>"It's a really good school and has a strong computer science department."<br><br>
+                <strong>好的回答：</strong>"I'm particularly drawn to Stanford because of the interdisciplinary opportunities it offers. I want to study CS, but I'm also really interested in cognitive science, and Stanford's Symbolic Systems program perfectly combines both. I'm also excited about the research being done in the HCI lab, especially Professor XXX's work on accessible technology — that's something I've been passionate about since I built an app for visually impaired users last year. And coming from a small high school, I think the residential college system would be a great way to build community while still being part of a larger research university."
+            </div>
+        </div>
+
+        <div class="q-block">
+            <span class="tag tag-why">必问</span>
+            <div class="q">Why do you want to study [your major]?</div>
+            <div class="answer-hint">
+                <strong>答题思路：</strong> 讲一个"起源故事"——你是怎么对这个领域产生兴趣的？你做了什么探索？你未来想用这个专业做什么？要有具体的经历和例子。
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Behavioral Questions <span class="en">行为类问题</span></h2>
+
+        <div class="q-block">
+            <span class="tag tag-leadership">常见</span>
+            <div class="q">Tell me about a time you showed leadership.</div>
+            <div class="answer-hint">
+                <strong>答题思路：</strong> 用 STAR 方法。重点是你做了什么、你如何影响了他人、你学到了什么。领导力不一定是当 president，可以是发起一个项目、带领一个小组、激励别人等。
+            </div>
+        </div>
+
+        <div class="q-block">
+            <span class="tag tag-challenge">常见</span>
+            <div class="q">Tell me about a challenge or failure you've overcome.</div>
+            <div class="answer-hint">
+                <strong>答题思路：</strong> 选一个真实的、有意义的挑战。不要选太小的事，也不要选太严重的（心理问题等除非你能处理得很好）。重点是你如何应对、你从中学到了什么、你成长了多少。
+            </div>
+            <div class="example-box">
+                <strong>注意：</strong> 不要把失败归咎于别人，要展现反思和成长。面试官想看的是 resilience 和 growth mindset。
+            </div>
+        </div>
+
+        <div class="q-block">
+            <span class="tag tag-challenge">常见</span>
+            <div class="q">Tell me about a time you worked in a team.</div>
+            <div class="answer-hint">
+                <strong>答题思路：</strong> 选一个具体的团队项目。描述你的角色、团队如何合作、遇到了什么冲突或挑战、你如何解决、结果如何。
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Other Common Questions <span class="en">其他常见问题</span></h2>
+
+        <div class="q-block">
+            <span class="tag tag-fit">常见</span>
+            <div class="q">What will you contribute to our campus community?</div>
+            <div class="answer-hint">
+                <strong>答题思路：</strong> 面试官想知道你会不会积极参与校园生活，而不只是去上课。把你的经历、热情和校园资源联系起来。
+            </div>
+        </div>
+
+        <div class="q-block">
+            <span class="tag tag-gettoknow">常见</span>
+            <div class="q">Who is someone you admire? / What book has influenced you?</div>
+            <div class="answer-hint">
+                <strong>答题思路：</strong> 选一个真实的、你能讲出具体原因的。不要选太俗套的（除非你有独特的角度）。重点是这个人/这本书如何影响了你的思想或行动。
+            </div>
+        </div>
+
+        <div class="q-block">
+            <span class="tag tag-why">常见</span>
+            <div class="q">Where do you see yourself in 5-10 years?</div>
+            <div class="answer-hint">
+                <strong>答题思路：</strong> 不用说出精确的计划，但要有一个方向。展示你有目标、有抱负，同时承认你也期待在大学探索。
+            </div>
+        </div>
+
+        <div class="q-block">
+            <span class="tag tag-why">必问</span>
+            <div class="q">What questions do you have for me?</div>
+            <div class="answer-hint">
+                <strong>答题思路：</strong> 一定要准备 3-5 个好问题！这展示你的兴趣和思考深度。问面试官个人经历相关的问题通常很有效。
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>How to Prepare Your Stories <span class="en">如何准备你的故事库</span></h2>
+        <div class="tip-box">
+            <strong>💡 准备 5-8 个核心故事：</strong><br>
+            · 领导力经历<br>
+            · 克服挑战/失败<br>
+            · 团队合作<br>
+            · 学术热情/探索<br>
+            · 社区服务/社会影响<br>
+            · 创意/创新项目<br>
+            · 你最大的成就<br>
+            · 一次重要的选择/转折点
+        </div>
+        <div class="warning-box" style="margin-top:8px;">
+            <strong>⚠️ 每个故事都应该：</strong><br>
+            · 有具体的细节（时间、地点、人物、数字）<br>
+            · 突出你的角色和行动（"我做了什么"而不是"我们"）<br>
+            · 有反思和成长（你学到了什么？）<br>
+            · 能灵活运用于多个问题（一个好故事可以回答多个问题）
+        </div>
+    </div>
+
+    <p class="footer">&copy; 2026 yunzhuan.icu | Common Interview Questions</p>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <div style="text-align:center;padding:8px 0;font-size:0.75rem;color:#aaa;">
+        <a href="../index.html" style="color:#aaa;text-decoration:none;">Home</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="index.html" style="color:#aaa;text-decoration:none;">Interviews</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="../essays/index.html" style="color:#aaa;text-decoration:none;">Essays</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="../contact.html" style="color:#aaa;text-decoration:none;">Contact</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="javascript:window.scrollTo(0,0)" style="color:#aaa;text-decoration:none;">Back to top</a>
+    </div>
+</body>
+</html>

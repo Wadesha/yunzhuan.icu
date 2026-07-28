@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application Checklist - US / UK / CA - yunzhuan.icu</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 20px 16px;
+            background: #f5f5f5;
+            color: #333;
+        }
+        .back-link { color: #667eea; text-decoration: none; font-size: 0.85rem; margin-bottom: 12px; display: inline-block; }
+        .back-link:hover { text-decoration: underline; }
+        h1 { color: #333; margin-bottom: 4px; font-size: 1.4rem; }
+        .en-name { color: #888; font-size: 0.95rem; margin-bottom: 4px; font-weight: normal; }
+        .code-line { color: #888; font-size: 0.82rem; margin-bottom: 14px; }
+        .section {
+            background: white;
+            border-radius: 8px;
+            padding: 14px 18px;
+            margin-bottom: 10px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .section h2 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        .section h2 .en { color: #999; font-size: 0.8rem; font-weight: normal; }
+        .section p { color: #333; line-height: 1.7; font-size: 0.92rem; }
+        .section p.cn-hint { color: #666; font-size: 0.85rem; margin-bottom: 6px; }
+        .tabs {
+            display: flex;
+            gap: 4px;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+        }
+        .tab-btn {
+            padding: 6px 14px;
+            border: 1px solid #d0d5dd;
+            background: white;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            color: #555;
+            transition: all 0.15s;
+        }
+        .tab-btn:hover { background: #f5f5f5; }
+        .tab-btn.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        .checklist { list-style: none; }
+        .checklist li {
+            padding: 8px 10px;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            cursor: pointer;
+        }
+        .checklist li:hover { background: #f8f9ff; }
+        .checklist li:last-child { border-bottom: none; }
+        .checklist input[type="checkbox"] {
+            margin-top: 3px;
+            flex-shrink: 0;
+            cursor: pointer;
+            width: 16px;
+            height: 16px;
+            accent-color: #667eea;
+        }
+        .checklist .item-text { color: #333; }
+        .checklist .item-text.done {
+            text-decoration: line-through;
+            color: #aaa;
+        }
+        .checklist .item-sub {
+            color: #888;
+            font-size: 0.78rem;
+            margin-top: 2px;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e9ecef;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+            width: 0%;
+        }
+        .progress-text {
+            text-align: right;
+            font-size: 0.8rem;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        .category-title {
+            font-weight: 600;
+            color: #667eea;
+            font-size: 0.9rem;
+            margin: 14px 0 6px;
+            padding-bottom: 4px;
+            border-bottom: 2px solid #e8eaf6;
+        }
+        .category-title:first-child { margin-top: 0; }
+        .reset-btn {
+            padding: 6px 14px;
+            border: 1px solid #d0d5dd;
+            background: white;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            color: #666;
+            margin-top: 10px;
+        }
+        .reset-btn:hover { background: #f5f5f5; }
+        .tip-box {
+            background: #e8f5e9;
+            border-left: 3px solid #2e7d32;
+            padding: 10px 14px;
+            border-radius: 0 6px 6px 0;
+            margin-top: 10px;
+            font-size: 0.82rem;
+            color: #1b5e20;
+            line-height: 1.6;
+        }
+        .footer { text-align: center; margin-top: 20px; color: #999; font-size: 0.8rem; }
+    </style>
+    <link rel="stylesheet" href="../css/theme.css">
+    <link rel="manifest" href="../manifest.json">
+    <meta name="theme-color" content="#667eea">
+    <script src="../js/theme.js"></script>
+    <script src="../js/pwa.js"></script>
+    <script src="../js/mobile-nav.js"></script>
+    <script src="../js/breadcrumbs.js"></script>
+</head>
+<body>
+    <a href="index.html" class="back-link">&larr; Back to Standardized Tests</a>
+    <a href="../timeline/index.html" class="back-link" style="margin-left:10px;">Timeline &rarr;</a>
+
+    <h1>Application Checklist</h1>
+    <p class="en-name">申请 Checklist</p>
+    <p class="code-line">US / UK / Canada · 自动保存进度 · localStorage</p>
+
+    <div class="section">
+        <h2>Select Application Destination <span class="en">选择申请方向</span></h2>
+        <div class="tabs">
+            <button class="tab-btn active" onclick="switchTab('us')">US Undergrad</button>
+            <button class="tab-btn" onclick="switchTab('uk')">UK Undergrad</button>
+            <button class="tab-btn" onclick="switchTab('ca')">Canada Undergrad</button>
+        </div>
+
+        <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+        <div class="progress-text" id="progress-text">0 / 0 items completed</div>
+
+        <div id="tab-us" class="tab-content active"></div>
+        <div id="tab-uk" class="tab-content"></div>
+        <div id="tab-ca" class="tab-content"></div>
+
+        <button class="reset-btn" onclick="resetChecklist()">Reset current checklist</button>
+    </div>
+
+    <div class="section">
+        <h2>Tips & Notes <span class="en">注意事项</span></h2>
+        <div class="tip-box">
+            <strong>💡 进度自动保存：</strong>你的勾选进度会自动保存在浏览器本地（localStorage），下次打开还在。不同申请方向的进度独立保存。
+        </div>
+        <div class="tip-box" style="margin-top:8px;background:#fff8e1;border-left-color:#ff8f00;color:#5d4037;">
+            <strong>⏰ 建议提前规划：</strong>美本建议 11 年级暑假开始准备文书，英国建议 12 年级开学前完成 PS 初稿，加拿大建议 12 年级上学期开始申请。
+        </div>
+        <div class="tip-box" style="margin-top:8px;background:#e3f2fd;border-left-color:#1565c0;color:#0d47a1;">
+            <strong>📝 材料清单：</strong>成绩单、标化成绩（可选）、推荐信、文书、活动列表、财产证明、护照/身份证件，这些是所有申请系统基本都需要的。
+        </div>
+    </div>
+
+    <p class="footer">&copy; 2026 yunzhuan.icu | Application Checklist</p>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <div style="text-align:center;padding:8px 0;font-size:0.75rem;color:#aaa;">
+        <a href="../index.html" style="color:#aaa;text-decoration:none;">Home</a>
+        <span style="margin:0 6px;">&middot;</span>
+        <a href="../intl-exams/index.html" style="color:#aaa;text-decoration:none;">International Exams</a>
+        <span style="margin:0 6px;">&middot;</span>
+        <a href="../contact.html" style="color:#aaa;text-decoration:none;">Contact</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="javascript:window.scrollTo(0,0)" style="color:#aaa;text-decoration:none;">Back to top</a>
+    </div>
+
+    <script>
+    // Checklist data
+    const checklists = {
+        us: {
+            'Standardized Tests': [
+                { text: 'Take SAT or ACT (if required/optional)', sub: '目标分数: 1450+/33+ 为前30水准' },
+                { text: 'Take TOEFL or IELTS', sub: '国际学生必交，目标: 105+/7.5+' },
+                { text: 'AP / IB exams (if applicable)', sub: '5分/7分有优势，用于换学分和展示学术能力' },
+                { text: 'Send official score reports', sub: '考后送分，提前了解送分时间' },
+            ],
+            'Academic & Transcripts': [
+                { text: 'Request high school transcript', sub: '9-12年级成绩单，找guidance counselor' },
+                { text: 'School profile (if available)', sub: '学校简介，counselor提交' },
+                { text: 'Mid-year report (for RD)', sub: '12年级上学期成绩，RD需要' },
+                { text: 'Final transcript (after admission)', sub: '录取后提交最终成绩单' },
+            ],
+            'Letters of Recommendation': [
+                { text: 'Ask 2 teachers for recommendations', sub: '11-12年级主科老师，提前1-2个月问' },
+                { text: 'Ask counselor for recommendation', sub: '学校顾问推荐信，Common App必交' },
+                { text: 'Provide recommenders with your resume/brag sheet', sub: '给推荐人提供你的活动列表和成就，方便写得具体' },
+                { text: 'Follow up and thank recommenders', sub: '截止前一周确认提交，提交后写感谢信' },
+            ],
+            'Essays & Personal Statement': [
+                { text: 'Brainstorm essay topics', sub: '头脑风暴，列出10-20个可能的故事' },
+                { text: 'Write Common App Personal Statement (650 words)', sub: '主文书，所有学校共用，建议改5-8稿' },
+                { text: 'Write supplemental essays for each school', sub: 'Why School、Why Major、活动、社区等，每校2-5篇' },
+                { text: 'Get feedback from teachers/mentors', sub: '找人给反馈，英语老师或升学顾问' },
+                { text: 'Edit and proofread all essays', sub: '最终检查语法、拼写、字数' },
+            ],
+            'Activities & Honors': [
+                { text: 'Complete Common App Activities section', sub: '最多10项活动，按重要性排序，描述要具体量化' },
+                { text: 'List Honors & Awards', sub: '最多5项，国家级/国际级放前面' },
+                { text: 'Prepare resume/CV (optional)', sub: '有些学校或奖学金可能需要' },
+            ],
+            'Application Forms': [
+                { text: 'Create Common App account', sub: '8月1日开放，提前注册填信息' },
+                { text: 'Fill out Common App basic information', sub: '个人信息、家庭、教育、考试等' },
+                { text: 'Add colleges to your list', sub: 'Reach/Match/Safety 搭配，建议8-12所' },
+                { text: 'Complete each colleges supplements', sub: '每校的补充问题和文书' },
+                { text: 'Invite recommenders and counselor', sub: '在Common App里邀请推荐人' },
+                { text: 'Pay application fees or request fee waiver', sub: '每校$70-100，经济困难可申请免申请费' },
+                { text: 'Review and submit each application', sub: '提交前仔细检查两遍！' },
+            ],
+            'Financial Aid & Scholarships': [
+                { text: 'Research scholarship opportunities', sub: '学校奖学金 + 外部奖学金' },
+                { text: 'CSS Profile (if applying for aid)', sub: '美国本土学生助学金，国际生视学校而定' },
+                { text: 'Prepare financial documents', sub: '财产证明、银行存款证明等' },
+                { text: 'FAFSA (US citizens/permanent residents)', sub: '美国公民/绿卡学生联邦助学金' },
+            ],
+            'After Submission': [
+                { text: 'Check application portals for each school', sub: '每校会发portal账号，跟踪申请状态' },
+                { text: 'Submit any additional materials', sub: '补交材料、更新成绩等' },
+                { text: 'Prepare for interviews (if offered)', sub: '校友面试或AO面试，提前练习' },
+                { text: 'Wait for decisions', sub: 'ED: 12月中；EA: 12月-2月；RD: 3月底-4月初' },
+                { text: 'Compare offers and make decision', sub: '5月1日前决定去哪所，交定金' },
+            ],
+        },
+        uk: {
+            'Standardized Tests': [
+                { text: 'A-Level / IB predicted grades', sub: '预估分很重要，由学校提交' },
+                { text: 'Take IELTS or TOEFL', sub: '国际学生需要，目标: 7.0+/100+，顶尖校7.5+/110+' },
+                { text: ' Admissions tests (if required)', sub: 'Oxford/Cambridge/LSE等校的特定专业考试，如 MAT/PAT/TSA/LNAT' },
+                { text: 'Register for admissions tests early', sub: '牛剑考试通常10月底/11月初' },
+            ],
+            'Academic & Transcripts': [
+                { text: 'Request predicted grades from school', sub: 'A2/IB2预估分，由学校提交给UCAS' },
+                { text: 'Get official transcript of completed grades', sub: '已考出的成绩，IGCSE/AS等' },
+                { text: 'School reference letter', sub: '学校老师/顾问推荐信，通过UCAS提交' },
+            ],
+            'Personal Statement': [
+                { text: 'Research course thoroughly', sub: '英国PS围绕学术兴趣，先搞清楚课程内容' },
+                { text: 'Brainstorm academic interests and experiences', sub: '80%学术，20%课外，重点讲为什么想学这个专业' },
+                { text: 'Write first draft of Personal Statement (4000 chars, 47 lines)', sub: 'UCAS PS，所有学校共用，4000字符/47行' },
+                { text: 'Get feedback from teachers', sub: '学科老师和升学顾问给反馈' },
+                { text: 'Edit to meet character/line limit', sub: '严格控制字数，4000字符/47行，超出会被截断' },
+                { text: 'Final proofread', sub: '检查拼写、语法、标点' },
+            ],
+            'UCAS Application': [
+                { text: 'Register on UCAS', sub: 'UCAS Apply，注册账号' },
+                { text: 'Fill out personal details', sub: '个人信息、教育背景、就业经历等' },
+                { text: 'Choose up to 5 courses/universities', sub: '最多5个选择，牛津剑桥只能选一个' },
+                { text: 'Enter personal statement', sub: '粘贴PS，检查格式' },
+                { text: 'Add reference', sub: '推荐人信息，让老师上传' },
+                { text: 'Pay application fee', sub: '£27.50 (5 choices) / £22.50 (1 choice)' },
+                { text: 'Submit before deadline', sub: 'Oxbridge/Medicine: 10月15日；其他: 1月31日' },
+            ],
+            'Interviews & Tests': [
+                { text: 'Prepare for admissions tests', sub: 'MAT/PAT/TSA/LNAT/UKCAT等，提前刷真题' },
+                { text: 'Practice subject interviews (Oxbridge)', sub: '牛剑面试是学术面试，找老师模拟面试' },
+                { text: 'Prepare for video interviews', sub: '有些专业要求录制视频回答问题' },
+                { text: 'Attend interviews (if invited)', sub: '牛剑12月面试，其他校可能有也可能没有' },
+            ],
+            'After Submission': [
+                { text: 'Track offers via UCAS Track', sub: 'UCAS Track跟踪申请状态' },
+                { text: 'Reply to offers by deadline', sub: '收到所有offer后回复，Firm + Insurance' },
+                { text: 'Meet conditional offer requirements', sub: '达到con offer的成绩要求' },
+                { text: 'Apply for student visa (Tier 4)', sub: '拿到uncon offer后办签证' },
+                { text: 'Arrange accommodation', sub: '申请学校宿舍或校外租房' },
+                { text: 'Apply for scholarships', sub: '学校奖学金和外部奖学金' },
+            ],
+        },
+        ca: {
+            'Standardized Tests': [
+                { text: 'Take IELTS or TOEFL', sub: '国际学生需要，目标: 6.5+/90+，顶尖校7.0+/100+' },
+                { text: 'SAT or ACT (optional/recommended)', sub: '加拿大学校通常不强制要求，但高分有帮助' },
+                { text: 'AP / IB / A-Level results', sub: '预修课程成绩可换学分，也增加竞争力' },
+            ],
+            'Academic Requirements': [
+                { text: 'Request high school transcript', sub: '高中成绩单，11和12年级成绩最重要' },
+                { text: 'Prerequisite courses check', sub: '确认目标专业的前置课程要求（如工程需要物理+微积分）' },
+                { text: 'Predicted grades (if still in school)', sub: '在读学生需要学校提供预估分' },
+                { text: 'Official final transcript (after graduation)', sub: '毕业后提交最终成绩单' },
+            ],
+            'Reference & Documents': [
+                { text: 'Ask for reference letter(s)', sub: '有些学校需要，提前1-2个月问老师' },
+                { text: 'Prepare personal profile / statement', sub: '有些学校需要补充文书或个人简介' },
+                { text: 'Prepare supplementary application (if required)', sub: '如Waterloo AIF、UBC个人简介、工程作品集等' },
+                { text: 'Translate documents (if not English)', sub: '非英文文件需要公证翻译' },
+            ],
+            'Applications (Province by Province)': [
+                { text: 'Ontario universities: apply through OUAC 105', sub: '安大略省大学统一申请系统OUAC 105通道' },
+                { text: 'BC universities: apply directly or through EducationPlannerBC', sub: 'BC省可通过EducationPlannerBC或直接申请' },
+                { text: 'Quebec universities: apply directly', sub: '魁北克省大学直接申请（如McGill）' },
+                { text: 'Other provinces: apply directly to each university', sub: '其他省通常直接申请各校' },
+                { text: 'Check all deadlines carefully', sub: '各省各校截止日不同，注意每个日期' },
+            ],
+            'Specific Program Requirements': [
+                { text: 'Engineering: check math/physics prerequisites', sub: '工程类通常要求12年级数学、物理、化学' },
+                { text: 'Business: check math requirements', sub: '商科通常要求12年级数学' },
+                { text: 'Computer Science: check math prerequisites', sub: 'CS通常要求12年级高级函数+微积分' },
+                { text: 'Architecture/Art: prepare portfolio', sub: '建筑/艺术专业需要作品集' },
+                { text: 'Waterloo: complete AIF & video interview', sub: '滑铁卢需要AIF表格和视频面试' },
+            ],
+            'After Submission': [
+                { text: 'Check application status regularly', sub: '每校有自己的portal，定期查看' },
+                { text: 'Submit any additional documents promptly', sub: '收到补交请求尽快处理' },
+                { text: 'Apply for scholarships and bursaries', sub: '入学奖学金和助学金，很多自动考虑' },
+                { text: 'Apply for residence (on-campus housing)', sub: '宿舍申请通常有单独截止日' },
+                { text: 'Accept offer by deadline', sub: '确认offer并交押金' },
+                { text: 'Apply for study permit (visa)', sub: '拿到录取后办加拿大学生签证' },
+                { text: 'Apply for CAQ (if Quebec)', sub: '魁北克省需要额外办CAQ' },
+            ],
+        },
+    };
+
+    let currentTab = 'us';
+
+    function switchTab(tab) {
+        currentTab = tab;
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+        event.target.classList.add('active');
+        document.getElementById('tab-' + tab).classList.add('active');
+        renderChecklist(tab);
+        updateProgress(tab);
+    }
+
+    function renderChecklist(tab) {
+        const container = document.getElementById('tab-' + tab);
+        const data = checklists[tab];
+        const saved = JSON.parse(localStorage.getItem('checklist-' + tab) || '{}');
+
+        let html = '';
+        for (const category in data) {
+            html += '<div class="category-title">' + category + '</div><ul class="checklist">';
+            data[category].forEach((item, idx) => {
+                const key = category + '-' + idx;
+                const checked = saved[key] ? 'checked' : '';
+                const doneClass = saved[key] ? 'done' : '';
+                html += '<li onclick="toggleItem(\'' + tab + '\', \'' + key + '\', event)">';
+                html += '<input type="checkbox" id="chk-' + tab + '-' + key + '" ' + checked + ' onclick="event.stopPropagation(); toggleItem(\'' + tab + '\', \'' + key + '\', event)">';
+                html += '<div><div class="item-text ' + doneClass + '" id="text-' + tab + '-' + key + '">' + item.text + '</div>';
+                if (item.sub) html += '<div class="item-sub">' + item.sub + '</div>';
+                html += '</div></li>';
+            });
+            html += '</ul>';
+        }
+        container.innerHTML = html;
+    }
+
+    function toggleItem(tab, key, event) {
+        if (event && event.target.tagName === 'INPUT') {
+            event.stopPropagation();
+        }
+        const saved = JSON.parse(localStorage.getItem('checklist-' + tab) || '{}');
+        saved[key] = !saved[key];
+        localStorage.setItem('checklist-' + tab, JSON.stringify(saved));
+
+        const checkbox = document.getElementById('chk-' + tab + '-' + key);
+        const textEl = document.getElementById('text-' + tab + '-' + key);
+        if (checkbox) {
+            checkbox.checked = saved[key];
+            if (saved[key]) {
+                textEl.classList.add('done');
+            } else {
+                textEl.classList.remove('done');
+            }
+        }
+        updateProgress(tab);
+    }
+
+    function updateProgress(tab) {
+        const data = checklists[tab];
+        const saved = JSON.parse(localStorage.getItem('checklist-' + tab) || '{}');
+        let total = 0;
+        let completed = 0;
+        for (const category in data) {
+            data[category].forEach((item, idx) => {
+                total++;
+                const key = category + '-' + idx;
+                if (saved[key]) completed++;
+            });
+        }
+        const pct = total > 0 ? Math.round((completed / total) * 100) : 0;
+        document.getElementById('progress-fill').style.width = pct + '%';
+        document.getElementById('progress-text').textContent = completed + ' / ' + total + ' items completed (' + pct + '%)';
+    }
+
+    function resetChecklist() {
+        if (confirm('Reset the current checklist? All progress will be lost.')) {
+            localStorage.removeItem('checklist-' + currentTab);
+            renderChecklist(currentTab);
+            updateProgress(currentTab);
+        }
+    }
+
+    // Initialize
+    renderChecklist('us');
+    updateProgress('us');
+    </script>
+</body>
+</html>

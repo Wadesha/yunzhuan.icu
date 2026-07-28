@@ -984,6 +984,31 @@ const MAJOR_COMPETITIONS = {
     'comm': ['nsda', 'nyt-contest']
 };
 
+// 从 date 字段解析出月份（用于日历展示）
+COMPETITIONS.forEach(comp => {
+    if (comp.months) return;
+    const monthMap = {
+        '1月': 1, '2月': 2, '3月': 3, '4月': 4, '5月': 5, '6月': 6,
+        '7月': 7, '8月': 8, '9月': 9, '10月': 10, '11月': 11, '12月': 12,
+        '1 月': 1, '2 月': 2, '3 月': 3, '4 月': 4, '5 月': 5, '6 月': 6,
+        '7 月': 7, '8 月': 8, '9 月': 9, '10 月': 10, '11 月': 11, '12 月': 12,
+        'Jan': 1, 'Feb': 2, 'Mar': 3, 'Apr': 4, 'May': 5, 'Jun': 6,
+        'Jul': 7, 'Aug': 8, 'Sep': 9, 'Oct': 10, 'Nov': 11, 'Dec': 12
+    };
+    const months = new Set();
+    Object.keys(monthMap).forEach(key => {
+        if (comp.date.includes(key)) months.add(monthMap[key]);
+    });
+    // 一些大致推断
+    if (comp.date.includes('全年') || comp.date.includes('滚动')) {
+        for (let i = 1; i <= 12; i++) months.add(i);
+    }
+    if (months.size === 0) {
+        months.add(3); // 默认 3 月
+    }
+    comp.months = Array.from(months).sort((a, b) => a - b);
+});
+
 // 导出
 if (typeof window !== 'undefined') {
     window.COMPETITIONS = COMPETITIONS;

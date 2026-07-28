@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile - yunzhuan.icu</title>
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px 16px 40px;
+            background: var(--bg-primary, #f5f5f5);
+            color: var(--text-primary, #333);
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 0;
+            border-bottom: 1px solid #e5e7eb;
+            margin-bottom: 24px;
+        }
+        .logo {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #667eea;
+            text-decoration: none;
+        }
+        .logo span { color: #764ba2; }
+        .nav-links { display: flex; gap: 16px; align-items: center; }
+        .nav-links a {
+            color: #555;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        .nav-links a:hover { color: #667eea; }
+        .nav-links .cn { color: #999; font-size: 0.8rem; margin-left: 2px; }
+
+        h1 { font-size: 1.5rem; margin-bottom: 6px; }
+        .subtitle { color: #888; font-size: 0.9rem; margin-bottom: 14px; }
+
+        .demo-banner {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border: 1px solid #fcd34d;
+            color: #92400e;
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: 0.82rem;
+            margin-bottom: 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .demo-banner strong { color: #78350f; }
+        .demo-banner .btn { font-size: 0.75rem; padding: 4px 10px; }
+
+        .section {
+            background: white;
+            border-radius: 8px;
+            padding: 18px 20px;
+            margin-bottom: 14px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .section h2 {
+            color: #667eea;
+            margin-bottom: 12px;
+            font-size: 1.05rem;
+            font-weight: 600;
+        }
+        .section h2 .cn { color: #999; font-size: 0.85rem; font-weight: normal; margin-left: 6px; }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+        .avatar {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        .profile-info .name { font-weight: 600; font-size: 1.05rem; }
+        .profile-info .email { font-size: 0.9rem; color: #555; }
+        .profile-info .member-since { font-size: 0.78rem; color: #999; margin-top: 2px; }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 10px;
+        }
+        .stat-card {
+            background: #f8f9ff;
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+        }
+        .stat-value { font-size: 1.4rem; font-weight: 700; color: #667eea; }
+        .stat-label { font-size: 0.75rem; color: #888; margin-top: 2px; }
+
+        .list-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #f5f5f5;
+        }
+        .list-item:last-child { border-bottom: none; }
+        .list-item-title { font-size: 0.9rem; font-weight: 500; }
+        .list-item-title a { color: #333; text-decoration: none; }
+        .list-item-title a:hover { color: #667eea; }
+        .list-item-meta { font-size: 0.75rem; color: #999; margin-top: 2px; }
+        .list-item-remove {
+            background: none;
+            border: none;
+            color: #ef4444;
+            cursor: pointer;
+            font-size: 0.78rem;
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
+        .list-item-remove:hover { background: #fef2f2; }
+
+        .tier-tag {
+            display: inline-block;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            margin-right: 6px;
+        }
+        .tier-reach { background: #fee2e2; color: #dc2626; }
+        .tier-match { background: #dbeafe; color: #2563eb; }
+        .tier-safety { background: #dcfce7; color: #16a34a; }
+
+        .btn {
+            padding: 8px 16px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85rem;
+        }
+        .btn:hover { opacity: 0.9; }
+        .btn-secondary {
+            background: white;
+            color: #667eea;
+            border: 1px solid #667eea;
+        }
+        .btn-secondary:hover { background: #f5f3ff; }
+
+        .footer { text-align: center; margin-top: 30px; color: #999; font-size: 0.8rem; }
+
+        @media (max-width: 768px) {
+            body { padding: 12px 10px 60px; }
+            .nav-links a .cn { display: none; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
+    <link rel="stylesheet" href="css/theme.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#667eea">
+    <script src="js/theme.js"></script>
+    <script src="js/mobile-nav.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="index.html" class="logo">yunzhuan<span>.icu</span></a>
+        <div class="nav-links">
+            <a href="index.html">Home<span class="cn">首页</span></a>
+            <a href="guides/index.html">Guides<span class="cn">指南</span></a>
+            <a href="search.html">Search<span class="cn">搜索</span></a>
+        </div>
+    </nav>
+
+    <h1>My Profile</h1>
+    <p class="subtitle">个人中心 · Demo Preview</p>
+
+    <div class="demo-banner">
+        <span><strong>👋 Demo Mode</strong> — 以下为示例数据，展示个人中心完整功能。用户系统详见 Roadmap v21。</span>
+        <a href="roadmap.html" class="btn btn-secondary">View Roadmap</a>
+    </div>
+
+    <div class="section">
+        <div class="profile-header">
+            <div class="avatar">D</div>
+            <div class="profile-info">
+                <div class="name">Demo User</div>
+                <div class="email">demo@yunzhuan.icu</div>
+                <div class="member-since">Member since Mar 15, 2026</div>
+            </div>
+        </div>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-value">128</div>
+                <div class="stat-label">Coins / 金币</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">Lv.3</div>
+                <div class="stat-label">Level / 等级</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">8</div>
+                <div class="stat-label">Favorites / 收藏</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">10</div>
+                <div class="stat-label">Schools / 选校</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>My Favorites <span class="cn">我的收藏</span></h2>
+        <div class="list-item">
+            <div>
+                <div class="list-item-title"><a href="majors/cs.html">Computer Science</a></div>
+                <div class="list-item-meta">Major · Added Mar 20, 2026</div>
+            </div>
+            <button class="list-item-remove" onclick="alert('Demo mode: remove would go here')">Remove</button>
+        </div>
+        <div class="list-item">
+            <div>
+                <div class="list-item-title"><a href="schools/us/harvard.html">Harvard University</a></div>
+                <div class="list-item-meta">School · Added Mar 22, 2026</div>
+            </div>
+            <button class="list-item-remove" onclick="alert('Demo mode: remove would go here')">Remove</button>
+        </div>
+        <div class="list-item">
+            <div>
+                <div class="list-item-title"><a href="essays/prompts/common-app.html">Common App Prompts 2026</a></div>
+                <div class="list-item-meta">Essay · Added Mar 25, 2026</div>
+            </div>
+            <button class="list-item-remove" onclick="alert('Demo mode: remove would go here')">Remove</button>
+        </div>
+        <div class="list-item">
+            <div>
+                <div class="list-item-title"><a href="tests/sat.html">SAT Complete Guide</a></div>
+                <div class="list-item-meta">Test Guide · Added Mar 18, 2026</div>
+            </div>
+            <button class="list-item-remove" onclick="alert('Demo mode: remove would go here')">Remove</button>
+        </div>
+        <p style="font-size:0.78rem;color:#999;margin-top:8px;">… and 4 more</p>
+    </div>
+
+    <div class="section">
+        <h2>My School List <span class="cn">我的选校名单</span></h2>
+        <div class="list-item">
+            <div>
+                <div class="list-item-title">
+                    <span class="tier-tag tier-reach">Reach</span>
+                    Harvard University
+                </div>
+                <div class="list-item-meta">US · Ivy League · Applied</div>
+            </div>
+            <button class="list-item-remove" onclick="alert('Demo mode')">Remove</button>
+        </div>
+        <div class="list-item">
+            <div>
+                <div class="list-item-title">
+                    <span class="tier-tag tier-reach">Reach</span>
+                    Stanford University
+                </div>
+                <div class="list-item-meta">US · Applied</div>
+            </div>
+            <button class="list-item-remove" onclick="alert('Demo mode')">Remove</button>
+        </div>
+        <div class="list-item">
+            <div>
+                <div class="list-item-title">
+                    <span class="tier-tag tier-match">Match</span>
+                    University of Michigan
+                </div>
+                <div class="list-item-meta">US · Public · In progress</div>
+            </div>
+            <button class="list-item-remove" onclick="alert('Demo mode')">Remove</button>
+        </div>
+        <div class="list-item">
+            <div>
+                <div class="list-item-title">
+                    <span class="tier-tag tier-match">Match</span>
+                    NYU
+                </div>
+                <div class="list-item-meta">US · In progress</div>
+            </div>
+            <button class="list-item-remove" onclick="alert('Demo mode')">Remove</button>
+        </div>
+        <div class="list-item">
+            <div>
+                <div class="list-item-title">
+                    <span class="tier-tag tier-safety">Safety</span>
+                    UIUC
+                </div>
+                <div class="list-item-meta">US · Public · Planning</div>
+            </div>
+            <button class="list-item-remove" onclick="alert('Demo mode')">Remove</button>
+        </div>
+        <p style="font-size:0.78rem;color:#999;margin-top:8px;">… and 5 more (3 reach · 5 match · 2 safety)</p>
+    </div>
+
+    <div class="section">
+        <h2>Account <span class="cn">账户</span></h2>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;">
+            <button class="btn btn-secondary" onclick="location.href='login.html'">Sign Out / 退出登录 (Demo)</button>
+            <button class="btn btn-secondary" onclick="alert('Demo: settings not available yet')">Settings / 设置</button>
+        </div>
+        <p style="font-size:0.78rem;color:#999;margin-top:10px;">用户系统完整实现计划在 v21 版本，详见 <a href="roadmap.html" style="color:#667eea;text-decoration:none;">Roadmap</a>。</p>
+    </div>
+
+    <p class="footer">© 2026 yunzhuan.icu &nbsp;|&nbsp; v20.2.0 Demo Preview</p>
+</body>
+</html>

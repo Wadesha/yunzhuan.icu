@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IB Diploma Preparation Guide - yunzhuan.icu</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 20px 16px;
+            background: #f5f5f5;
+            color: #333;
+        }
+        .back-link { color: #667eea; text-decoration: none; font-size: 0.85rem; margin-bottom: 12px; display: inline-block; }
+        .back-link:hover { text-decoration: underline; }
+        h1 { color: #333; margin-bottom: 4px; font-size: 1.4rem; }
+        .en-name { color: #888; font-size: 0.95rem; margin-bottom: 4px; font-weight: normal; }
+        .code-line { color: #888; font-size: 0.82rem; margin-bottom: 14px; }
+        .section {
+            background: white;
+            border-radius: 8px;
+            padding: 14px 18px;
+            margin-bottom: 10px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .section h2 {
+            color: #667eea;
+            margin-bottom: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        .section h2 .en { color: #999; font-size: 0.8rem; font-weight: normal; }
+        .section p { color: #333; line-height: 1.7; font-size: 0.92rem; }
+        .section p.cn-hint { color: #666; font-size: 0.85rem; margin-bottom: 6px; }
+        .topic-list { list-style: none; }
+        .topic-list li {
+            padding: 8px 10px;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        .topic-list li:last-child { border-bottom: none; }
+        .topic-list .topic-title { font-weight: 600; color: #333; }
+        .topic-list .topic-desc { color: #777; font-size: 0.82rem; margin-top: 2px; }
+        .meta-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+            margin-top: 6px;
+        }
+        .meta-table td {
+            padding: 6px 8px;
+            border-bottom: 1px solid #f0f0f0;
+            vertical-align: top;
+        }
+        .meta-table td.label { color: #888; width: 30%; }
+        .meta-table td.value { color: #333; }
+        .subject-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 8px;
+            margin-top: 8px;
+        }
+        .subject-card {
+            background: #f8f9fa;
+            border-radius: 6px;
+            padding: 10px 12px;
+            border-left: 3px solid #667eea;
+        }
+        .subject-card .subject-name { color: #667eea; font-size: 0.88rem; font-weight: 600; }
+        .subject-card .subject-detail { color: #555; font-size: 0.8rem; margin-top: 4px; line-height: 1.4; }
+        .core-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 8px;
+            margin-top: 8px;
+        }
+        .core-card {
+            background: #f8f9fa;
+            border-radius: 6px;
+            padding: 10px 12px;
+            border-left: 3px solid #764ba2;
+        }
+        .core-card .core-name { color: #764ba2; font-size: 0.85rem; font-weight: 600; }
+        .core-card .core-detail { color: #555; font-size: 0.8rem; margin-top: 4px; line-height: 1.5; }
+        .footer { text-align: center; margin-top: 20px; color: #999; font-size: 0.8rem; }
+    </style>
+    <link rel="stylesheet" href="/css/collapse.css">
+</head>
+<body>
+    <a href="index.html" class="back-link">&larr; Back to Standardized Tests</a>
+    <a href="../intl-exams/ib/biology.html" class="back-link" style="margin-left:10px;">IB Subjects &rarr;</a>
+
+    <h1>IB Diploma Preparation</h1>
+    <p class="en-name">IB 备考指南</p>
+    <p class="code-line">IBDP · 6 subjects + Core · Grades 7-1 · 45 max · TOK/EE/CAS</p>
+
+    <div class="section">
+        <h2>About IB Diploma <span class="en">IB 文凭简介</span></h2>
+        <p class="cn-hint">IBDP（International Baccalaureate Diploma Programme）是国际文凭组织的高中文凭课程，以全面性和学术严谨著称，全球顶尖大学广泛认可。</p>
+        <table class="meta-table">
+            <tr><td class="label">Administered by</td><td class="value">International Baccalaureate Organization (IBO)</td></tr>
+            <tr><td class="label">Duration</td><td class="value">2 years (Grades 11-12)</td></tr>
+            <tr><td class="label">Number of Subjects</td><td class="value">6 subjects (3 HL + 3 SL, or 4 HL + 2 SL)</td></tr>
+            <tr><td class="label">Core Components</td><td class="value">TOK · EE · CAS</td></tr>
+            <tr><td class="label">Max Score</td><td class="value">45 points (42 subjects + 3 Core bonus)</td></tr>
+            <tr><td class="label">Grade Scale</td><td class="value">7-1 per subject (7 = highest)</td></tr>
+            <tr><td class="label">Exam Sessions</td><td class="value">May (Northern Hemisphere) · November (Southern Hemisphere)</td></tr>
+            <tr><td class="label">Passing Score</td><td class="value">24 points minimum + Core requirements met</td></tr>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>6 Subject Groups <span class="en">六大学科组</span></h2>
+        <p class="cn-hint">从每个学科组选一门课，每门课选 HL（High Level，240 学时）或 SL（Standard Level，150 学时）。</p>
+        <div class="subject-grid">
+            <div class="subject-card">
+                <div class="subject-name">Group 1: Studies in Language & Literature</div>
+                <div class="subject-detail">Language A: Literature, Language A: Language and Literature, Literature and Performance</div>
+            </div>
+            <div class="subject-card">
+                <div class="subject-name">Group 2: Language Acquisition</div>
+                <div class="subject-detail">Language B (SL/HL/ab initio), Classical Languages (Latin/Greek)</div>
+            </div>
+            <div class="subject-card">
+                <div class="subject-name">Group 3: Individuals & Societies</div>
+                <div class="subject-detail">Economics, Business Management, Psychology, History, Geography, Philosophy, Global Politics, Anthropology</div>
+            </div>
+            <div class="subject-card">
+                <div class="subject-name">Group 4: Sciences</div>
+                <div class="subject-detail">Biology, Chemistry, Physics, Computer Science, Design Technology, Environmental Systems, Sport Science</div>
+            </div>
+            <div class="subject-card">
+                <div class="subject-name">Group 5: Mathematics</div>
+                <div class="subject-detail">Mathematics: Analysis and Approaches (AA), Mathematics: Applications and Interpretation (AI)</div>
+            </div>
+            <div class="subject-card">
+                <div class="subject-name">Group 6: The Arts (可选)</div>
+                <div class="subject-detail">Visual Arts, Music, Theatre, Film, Dance, Literature and Performance</div>
+            </div>
+        </div>
+        <p style="margin-top:8px;font-size:0.82rem;color:#888;">💡 第 6 组艺术可以不选，用其他组的课替代。中国学生常见组合：数理化+经济+中英，共 6 门。</p>
+    </div>
+
+    <div class="section">
+        <h2>The Core: TOK / EE / CAS <span class="en">三大核心要素</span></h2>
+        <p class="cn-hint">这是 IB 区别于其他课程的特色，也是拿到文凭的必要条件。</p>
+        <div class="core-grid">
+            <div class="core-card">
+                <div class="core-name">TOK (Theory of Knowledge)</div>
+                <div class="core-detail">知识论：反思"我们怎么知道我们所知道的"。含 1600 字论文和展览展示，最高可获得 3 分加分。</div>
+            </div>
+            <div class="core-card">
+                <div class="core-name">EE (Extended Essay)</div>
+                <div class="core-detail">拓展论文：4000 字独立研究论文，自选学科和题目，有导师指导。培养学术研究能力，最高可加 3 分。</div>
+            </div>
+            <div class="core-card">
+                <div class="core-name">CAS (Creativity/Activity/Service)</div>
+                <div class="core-detail">创造、行动、服务：18 个月内完成至少 150 小时的课外活动，需要 7 个学习成果。不评分但必须完成才能毕业。</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Scoring System <span class="en">评分体系</span></h2>
+        <table class="meta-table">
+            <tr><td class="label">每科分数</td><td class="value">7-1 分，7 最高，1 最低</td></tr>
+            <tr><td class="label">6 科总分</td><td class="value">42 分（6 × 7）</td></tr>
+            <tr><td class="label">核心加分</td><td class="value">TOK + EE 最多 3 分（A+A=3, A+B=3, B+B=2, etc.）</td></tr>
+            <tr><td class="label">满分</td><td class="value">45 分（42 + 3）</td></tr>
+            <tr><td class="label">及格线</td><td class="value">24 分 + 满足所有 Core 要求</td></tr>
+            <tr><td class="label">全球平均分</td><td class="value">约 30-32 分（因年而异）</td></tr>
+            <tr><td class="label">牛剑录取平均</td><td class="value">约 38-42 分（HL 776+）</td></tr>
+            <tr><td class="label">藤校录取平均</td><td class="value">约 39-43 分</td></tr>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>IA vs Exam <span class="en">内部评估 vs 外部考试</span></h2>
+        <p class="cn-hint">IB 每门课都有内部评估（IA），占最终成绩的 20-50%，不要忽视！</p>
+        <table class="meta-table">
+            <tr><td class="label">External Assessment</td><td class="value">5 月大考，占 50-80%。包括 Paper 1/2/3 等笔试。</td></tr>
+            <tr><td class="label">Internal Assessment (IA)</td><td class="value">学校评估后 IB 抽样再评分，占 20-50%。每门课形式不同。</td></tr>
+            <tr><td class="label">理科 IA</td><td class="value">独立实验报告（约 12 页），占 20%</td></tr>
+            <tr><td class="label">数学 IA</td><td class="value">数学探索论文（约 12-20 页），占 20%</td></tr>
+            <tr><td class="label">人文社科 IA</td><td class="value">评论、研究报告、实地调查报告等，占 20-30%</td></tr>
+            <tr><td class="label">语言 IA</td><td class="value">口语表达、写作作业等，占 25-50%</td></tr>
+            <tr><td class="label">艺术 IA</td><td class="value">作品集、展览、过程档案等，占 50-60%</td></tr>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>Study Plan <span class="en">两年备考规划</span></h2>
+        <ul class="topic-list">
+            <li>
+                <div class="topic-title">DP1 (Grade 11) · 打基础</div>
+                <div class="topic-desc">跟上课程进度，适应 IB 的学习强度和节奏。确定 EE 选题和 TOK 论文方向。每学期末做好复习。</div>
+            </li>
+            <li>
+                <div class="topic-title">DP1 暑假 · 黄金期</div>
+                <div class="topic-desc">完成 EE 初稿，开始 IA 实验/研究，提前学完 DP2 部分内容。这是最关键的假期，利用好能领先一大步。</div>
+            </li>
+            <li>
+                <div class="topic-title">DP2 第一学期 · 冲刺 IA</div>
+                <div class="topic-desc">所有 IA 定稿提交，EE 定稿，TOK 论文和展览完成。同时继续新课程学习，时间管理极其重要。</div>
+            </li>
+            <li>
+                <div class="topic-title">DP2 春假 · 真题启动</div>
+                <div class="topic-desc">开始做历年真题，每科至少 2-3 套。整理错题本，查漏补缺。模拟考后重点突破薄弱科目。</div>
+            </li>
+            <li>
+                <div class="topic-title">5 月大考 · 最后冲刺</div>
+                <div class="topic-desc">每科 3-5 套完整真题模考。回归课本和错题本，调整作息。考完一科放一科，不要对答案影响下一门。</div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Official & Recommended Resources <span class="en">资源推荐</span></h2>
+        <ul class="topic-list">
+            <li>
+                <div class="topic-title">IBO 官方资源</div>
+                <div class="topic-desc">每科 Subject Guide（大纲）、Past Papers、Mark Schemes、Subject Reports。学校通常有账号。</div>
+            </li>
+            <li>
+                <div class="topic-title">IB Questionbank</div>
+                <div class="topic-desc">IB 官方题库，按知识点分类的历年真题，刷题神器。学校 IB  coordinator 有账号。</div>
+            </li>
+            <li>
+                <div class="topic-title">Oxford IB Diploma Programme</div>
+                <div class="topic-desc">牛津出版社的 IB 教材系列，最权威，内容全面，适合系统学习。</div>
+            </li>
+            <li>
+                <div class="topic-title">Cambridge IB Diploma</div>
+                <div class="topic-desc">剑桥大学出版社的 IB 教材，讲解清晰，练习丰富。</div>
+            </li>
+            <li>
+                <div class="topic-title">Revision Village (数学)</div>
+                <div class="topic-desc">IB 数学备考网站，题库大、讲解好，AA 和 AI 都有，强烈推荐。</div>
+            </li>
+            <li>
+                <div class="topic-title">IB ++ / Bioninja</div>
+                <div class="topic-desc">IB 生物/化学/物理等理科的免费复习网站，知识点总结清晰。</div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Subject Selection Tips <span class="en">选科建议</span></h2>
+        <ul class="topic-list">
+            <li>
+                <div class="topic-title">HL 选 3 门还是 4 门？</div>
+                <div class="topic-desc">大多数人选 3 HL。4 HL 只建议学霸且目标明确的学生，多一门 HL 会大幅增加工作量，性价比不高。</div>
+            </li>
+            <li>
+                <div class="topic-title">哪些 HL 比较"难"？</div>
+                <div class="topic-desc">公认难度：Further Math > Math AA HL > Physics HL > Chemistry HL > Economics HL。选之前了解清楚课程内容。</div>
+            </li>
+            <li>
+                <div class="topic-title">结合大学专业要求</div>
+                <div class="topic-desc">工程/物理方向：Math AA HL + Physics HL 基本是标配；医学/生物：Chemistry HL + Biology HL；商科：Math AI/AA + Business/Economics。</div>
+            </li>
+            <li>
+                <div class="topic-title">不要忽视兴趣</div>
+                <div class="topic-desc">IB 压力很大，选自己感兴趣的科目更容易坚持。不要因为"别人说简单"就选不感兴趣的科目。</div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Survival Tips <span class="en">IB 生存指南</span></h2>
+        <ul class="topic-list">
+            <li>
+                <div class="topic-title">时间管理是第一要义</div>
+                <div class="topic-desc">IA、EE、TOK 各种 deadline 叠加，没有好的时间管理会崩。用日历/任务管理工具，提前规划，不要拖到最后。</div>
+            </li>
+            <li>
+                <div class="topic-title">Procrastination is the enemy</div>
+                <div class="topic-desc">拖延是 IB 学生最大的杀手。EE 暑假写好初稿和最后一周才写，质量天差地别。</div>
+            </li>
+            <li>
+                <div class="topic-title">主动找老师要反馈</div>
+                <div class="topic-desc">IA 和 EE 老师只能给一次正式反馈，但你可以在非正式场合多问。主动的学生成绩不会差。</div>
+            </li>
+            <li>
+                <div class="topic-title">照顾好身心健康</div>
+                <div class="topic-desc">IB 压力大是正常的，但不要以牺牲健康为代价。保证睡眠、运动、社交。学不下去的时候休息比硬撑更有效。</div>
+            </li>
+            <li>
+                <div class="topic-title">和同学组队学习</div>
+                <div class="topic-desc">互相讲题、分享笔记、一起做 IA，比单打独斗效率高很多。IB 不是零和游戏，大家好才是真的好。</div>
+            </li>
+        </ul>
+    </div>
+
+    <p class="footer">&copy; 2026 yunzhuan.icu | IB Diploma Preparation</p>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <div style="text-align:center;padding:8px 0;font-size:0.75rem;color:#aaa;">
+        <a href="../index.html" style="color:#aaa;text-decoration:none;">Home</a>
+        <span style="margin:0 6px;">&middot;</span>
+        <a href="../intl-exams/index.html" style="color:#aaa;text-decoration:none;">International Exams</a>
+        <span style="margin:0 6px;">&middot;</span>
+        <a href="../contact.html" style="color:#aaa;text-decoration:none;">Contact</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="javascript:window.scrollTo(0,0)" style="color:#aaa;text-decoration:none;">Back to top</a>
+    </div>
+</body>
+</html>

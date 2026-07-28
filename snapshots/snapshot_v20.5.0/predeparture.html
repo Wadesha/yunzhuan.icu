@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pre-Departure Guide - What to Bring & Prepare - yunzhuan.icu</title>
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 16px 20px;
+            background: #f5f5f5;
+            color: #333;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            margin-bottom: 16px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .logo {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #667eea;
+            text-decoration: none;
+        }
+        .logo span { color: #764ba2; }
+        .nav-links {
+            display: flex;
+            gap: 18px;
+            align-items: center;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: #555;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: color 0.15s;
+        }
+        .nav-links a:hover { color: #667eea; }
+        .nav-links .cn {
+            font-size: 0.7rem;
+            color: #aaa;
+            margin-left: 2px;
+        }
+        @media (max-width: 768px) {
+            .navbar { flex-wrap: wrap; gap: 8px; }
+            .nav-links { gap: 12px; }
+            .nav-links a { font-size: 0.78rem; }
+            .nav-links .cn { display: none; }
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 4px;
+            font-size: 1.5rem;
+        }
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 16px;
+            font-size: 0.9rem;
+        }
+        .section {
+            background: white;
+            border-radius: 8px;
+            padding: 14px 18px;
+            margin-bottom: 10px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .section h2 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        .section h2 .cn { color: #999; font-size: 0.8rem; font-weight: normal; margin-left: 6px; }
+        .checklist { list-style: none; }
+        .checklist li {
+            padding: 6px 0 6px 24px;
+            position: relative;
+            font-size: 0.88rem;
+            color: #444;
+            line-height: 1.5;
+        }
+        .checklist li::before {
+            content: '☐';
+            position: absolute;
+            left: 0;
+            color: #999;
+            font-size: 0.85rem;
+            cursor: pointer;
+        }
+        .checklist li.checked {
+            text-decoration: line-through;
+            color: #aaa;
+        }
+        .checklist li.checked::before {
+            content: '☑';
+            color: #22c55e;
+        }
+        .tip-box {
+            background: #fff8e1;
+            border-left: 3px solid #ff8f00;
+            padding: 10px 14px;
+            border-radius: 0 6px 6px 0;
+            margin-top: 10px;
+            font-size: 0.82rem;
+            color: #5d4037;
+            line-height: 1.6;
+        }
+        .tip-box strong { color: #e65100; }
+        .warning-box {
+            background: #ffebee;
+            border-left: 3px solid #c62828;
+            padding: 10px 14px;
+            border-radius: 0 6px 6px 0;
+            margin-top: 10px;
+            font-size: 0.82rem;
+            color: #b71c1c;
+            line-height: 1.6;
+        }
+        .warning-box strong { color: #c62828; }
+        .success-box {
+            background: #e8f5e9;
+            border-left: 3px solid #2e7d32;
+            padding: 10px 14px;
+            border-radius: 0 6px 6px 0;
+            margin-top: 10px;
+            font-size: 0.82rem;
+            color: #1b5e20;
+            line-height: 1.6;
+        }
+        .success-box strong { color: #2e7d32; }
+        .category-tag {
+            display: inline-block;
+            padding: 2px 8px;
+            background: #ede9fe;
+            color: #5b21b6;
+            border-radius: 4px;
+            font-size: 0.78rem;
+            font-weight: 500;
+            margin-left: 6px;
+        }
+        .footer { text-align: center; margin-top: 20px; color: #999; font-size: 0.8rem; }
+        .timeline-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .timeline-card {
+            background: #f8f9ff;
+            padding: 12px;
+            border-radius: 8px;
+            border-left: 3px solid #667eea;
+        }
+        .timeline-card h3 {
+            font-size: 0.88rem;
+            color: #4338ca;
+            margin-bottom: 4px;
+        }
+        .timeline-card p {
+            font-size: 0.8rem;
+            color: #666;
+            line-height: 1.5;
+        }
+    </style>
+    <link rel="stylesheet" href="./css/theme.css">
+    <link rel="manifest" href="./manifest.json">
+    <meta name="theme-color" content="#667eea">
+    <script src="./js/theme.js"></script>
+    <script>
+    window.SUPABASE_CONFIG = {{
+        url: 'https://otfjbzjvkoectpejhxar.supabase.co',
+        anonKey: 'sb_publishable_SBRF6ewKH-se3dNlqFwsXQ_lObhamTr'
+    }};
+    </script>
+    <script src="./js/auth.js"></script>
+    <script src="./js/favorites.js"></script>
+    <script src="./js/pwa.js"></script>
+    <script src="./js/mobile-nav.js"></script>
+    <script src="./js/breadcrumbs.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="../index.html" class="logo">yunzhuan<span>.icu</span></a>
+        <div class="nav-links">
+            <a href="../index.html">Majors<span class="cn">专业</span></a>
+            <a href="../schools/index.html">Schools<span class="cn">学校</span></a>
+            <a href="../tests/index.html">Tests<span class="cn">考试</span></a>
+            <a href="../resources.html">Resources<span class="cn">资源</span></a>
+            <a href="../visa-guide.html">Visa<span class="cn">签证</span></a>
+            <a href="search.html">Search<span class="cn">搜索</span></a>
+            <a href="../contact.html">Contact<span class="cn">联系</span></a>
+        </div>
+    </nav>
+
+    <h1>Pre-Departure Guide</h1>
+    <p class="subtitle">行前准备指南 · 美国本科版</p>
+
+    <div class="section">
+        <h2>Timeline <span class="cn">时间线</span></h2>
+        <div class="timeline-grid">
+            <div class="timeline-card">
+                <h3>3 Months Before</h3>
+                <p>办签证、订机票、找住宿、体检打疫苗、办信用卡</p>
+            </div>
+            <div class="timeline-card">
+                <h3>1 Month Before</h3>
+                <p>收拾行李、办手机卡、银行开户准备、选课、联系 roommate</p>
+            </div>
+            <div class="timeline-card">
+                <h3>1 Week Before</h3>
+                <p>最后确认行程、换美元现金、整理重要文件、和家人朋友告别</p>
+            </div>
+            <div class="timeline-card">
+                <h3>Day of Departure</h3>
+                <p>带好证件、提前到机场、过海关准备、出发！</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Documents <span class="cn">证件文件类</span> <span class="category-tag">最重要！</span></h2>
+        <p style="font-size:0.82rem;color:#666;margin-bottom:8px;">
+            <strong>重要：</strong>这些文件一定要随身带，不要托运！建议复印/扫描备份。
+        </p>
+        <ul class="checklist" id="docs-list">
+            <li>护照（有效期 6 个月以上）+ F-1 签证页</li>
+            <li>I-20 表格原件（签字）</li>
+            <li>录取通知书（offer letter）</li>
+            <li>SEVIS 费缴费收据</li>
+            <li>高中毕业证 + 成绩单原件（中英文盖章）</li>
+            <li>标化成绩单原件（SAT/ACT/TOEFL 等）</li>
+            <li>体检证明 + 疫苗接种记录（学校要求的表格）</li>
+            <li>资金证明（存款证明等）</li>
+            <li>身份证（国内用）</li>
+            <li>驾照（如果有，国内驾照可在美国短期使用）</li>
+            <li>机票行程单</li>
+            <li>住宿确认单（宿舍/租房合同）</li>
+            <li>保险卡/保险信息</li>
+            <li>证件照（几张 2 寸白底备用）</li>
+        </ul>
+        <div class="warning-box" style="margin-top:10px;">
+            <strong>⚠️ 特别注意：</strong><br>
+            · 所有重要文件都扫描一份存在云端（Google Drive/iCloud）<br>
+            · 再打印一份复印件，和原件分开放<br>
+            · 护照首页和签证页拍照存手机里
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Money & Banking <span class="cn">钱财与银行</span></h2>
+        <ul class="checklist" id="money-list">
+            <li>美元现金（$1000-$2000 应急用，不要带太多）</li>
+            <li>双币信用卡（Visa/Mastercard，父母副卡也行）</li>
+            <li>银联卡（部分地方可以用，备用）</li>
+            <li>旅行支票（可选，不如现金方便）</li>
+            <li>了解学校附近的银行（到了再开户）</li>
+            <li>记下信用卡境外客服电话</li>
+        </ul>
+        <div class="tip-box">
+            <strong>💡 建议：</strong><br>
+            · 现金不要带太多，美国基本都可以刷卡<br>
+            · 到了之后尽快开美国银行账户（Chase、BoA、Wells Fargo 等都可以）<br>
+            · 记得开通信用卡的境外消费功能
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Clothing <span class="cn">衣物类</span></h2>
+        <p style="font-size:0.82rem;color:#666;margin-bottom:8px;">
+            看学校所在地区气候准备，美国衣服不贵，可以到了再买。
+        </p>
+        <ul class="checklist" id="clothes-list">
+            <li>内衣袜子（多带点，舒适为主）</li>
+            <li>睡衣</li>
+            <li>日常 T 恤/卫衣/休闲裤（美国衣服便宜，带一些就行）</li>
+            <li>外套（根据气候：羽绒服/风衣/棒球服）</li>
+            <li>正装（一套西装/礼服，presentation 或正式场合用）</li>
+            <li>运动鞋（至少两双）</li>
+            <li>拖鞋（室内穿，美国宿舍一般是地毯）</li>
+            <li>泳衣（学校有泳池/海边）</li>
+            <li>运动服</li>
+            <li>秋衣秋裤/保暖内衣（北方寒冷地区必备）</li>
+            <li>帽子/围巾/手套（寒冷地区）</li>
+            <li>雨具（雨伞/雨衣）</li>
+        </ul>
+        <div class="tip-box">
+            <strong>💡 经验：</strong><br>
+            · 美国衣服真的不贵，尤其是打折的时候，不用带太多<br>
+            · 身材娇小的女生可以多带点，美国最小码可能还是大<br>
+            · 内衣袜子可以多带，舒服的不好买
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Electronics <span class="cn">电子产品</span></h2>
+        <ul class="checklist" id="electronics-list">
+            <li>笔记本电脑 + 充电器（必备！）</li>
+            <li>手机 + 充电器</li>
+            <li>平板/电子书阅读器（可选）</li>
+            <li>耳机</li>
+            <li>充电宝（注意容量，要符合航空公司规定）</li>
+            <li>转换插头 + 插线板（美国是 110V，插头是两扁一圆）</li>
+            <li>U盘 / 移动硬盘（备份资料）</li>
+            <li>相机（可选）</li>
+            <li>计算器（部分专业/考试需要，如 TI-84）</li>
+            <li>手表</li>
+        </ul>
+        <div class="tip-box">
+            <strong>💡 提示：</strong><br>
+            · 大部分电子产品是宽电压（100-240V），不用变压器<br>
+            · 但插头形状不一样，需要转换头<br>
+            · 手机可以到了再办合约机，或者国内解锁机带过去用
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Daily Necessities <span class="cn">生活用品</span></h2>
+        <p style="font-size:0.82rem;color:#666;margin-bottom:8px;">
+            这些美国都能买到，带少量应急的就行。
+        </p>
+        <ul class="checklist" id="daily-list">
+            <li>洗漱用品旅行装（前几天用的）</li>
+            <li>毛巾浴巾（一套应急）</li>
+            <li>床上用品（宿舍一般可以租，也可以到了再买）</li>
+            <li>常用药品（感冒药、肠胃药、消炎药、过敏药等）</li>
+            <li>眼镜（多配一副备用！美国配眼镜贵）</li>
+            <li>隐形眼镜/护理液（带够，美国贵）</li>
+            <li>雨伞</li>
+            <li>水杯/保温杯</li>
+            <li>指甲刀套装</li>
+            <li>小锁（锁宿舍抽屉/衣柜）</li>
+        </ul>
+        <div class="warning-box">
+            <strong>⚠️ 药品注意：</strong><br>
+            · 带药品要保留原包装和说明书<br>
+            · 不要带中药/中成药，容易被海关查<br>
+            · 处方药要带处方和医生证明（英文）<br>
+            · 不要带太多，够 1-3 个月用量就行
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Food & Snacks <span class="cn">食物类</span></h2>
+        <p style="font-size:0.82rem;color:#666;margin-bottom:8px;">
+            美国大部分东西都能买到（中国超市/网购），不用带太多。
+        </p>
+        <ul class="checklist" id="food-list">
+            <li>少量零食（前几天解馋用）</li>
+            <li>调料/干货（少量，美国亚洲超市基本都有）</li>
+            <li>家乡特产（少量，思乡的时候吃）</li>
+        </ul>
+        <div class="warning-box">
+            <strong>⚠️ 海关禁止：</strong><br>
+            · 肉类、蛋类、奶制品（包括方便面里的肉酱包！）<br>
+            · 新鲜水果、蔬菜<br>
+            · 种子、植物<br>
+            · 这些不要带！查到会被没收甚至罚款
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Study Supplies <span class="cn">学习用品</span></h2>
+        <ul class="checklist" id="study-list">
+            <li>笔（几支就行，美国也有）</li>
+            <li>笔记本（少量）</li>
+            <li>计算器（如果专业需要）</li>
+            <li>专业书（可选，美国教材很贵，可以找电子版）</li>
+            <li>书包/背包</li>
+        </ul>
+        <div class="tip-box">
+            <strong>💡 省钱技巧：</strong><br>
+            · 教材超级贵！不要在学校书店买新书<br>
+            · 可以找学长学姐买二手，或者租书（Chegg、Amazon）<br>
+            · 很多课有 PDF 电子版，先找找看
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>To Do Before Leaving <span class="cn">出发前要做的事</span></h2>
+        <ul class="checklist" id="todo-list">
+            <li>拿到签证并核对信息</li>
+            <li>订机票（考虑行李额、转机时间）</li>
+            <li>确认住宿（宿舍申请 / 校外租房）</li>
+            <li>体检 + 打疫苗（按学校要求）</li>
+            <li>买国际学生健康保险</li>
+            <li>办国际信用卡 / 副卡</li>
+            <li>换美元现金</li>
+            <li>办理离校手续，拿齐成绩单和毕业证</li>
+            <li>扫描/备份所有重要文件</li>
+            <li>开通手机国际漫游（短期用）</li>
+            <li>办一张美国手机卡（可提前在网上买）</li>
+            <li>告诉银行你要出国（不然卡可能被冻）</li>
+            <li>选课 / Orientation 注册</li>
+            <li>联系室友 / 学长学姐</li>
+            <li>收拾行李，称重（不要超重！）</li>
+            <li>和家人朋友好好告别</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>At the Airport & Customs <span class="cn">机场与海关</span></h2>
+        <div class="success-box">
+            <strong>✅ 要做的：</strong><br>
+            · 提前 3 小时到机场（国际航班）<br>
+            · 证件文件随身带，不要托运<br>
+            · 入境表（飞机上填）<br>
+            · 海关问答如实回答，大方自信<br>
+            · 过海关时准备好：护照 + I-20 + 录取信 + 资金证明<br>
+            · 行李过海关可能会被抽查
+        </div>
+        <div class="warning-box" style="margin-top:8px;">
+            <strong>❌ 不要做的：</strong><br>
+            · 不要带违禁品（肉蛋奶、新鲜果蔬等）<br>
+            · 不要带超过 $10,000 现金（超过要申报）<br>
+            · 不要帮陌生人带东西<br>
+            · 不要对海关撒谎
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>After Arrival <span class="cn">到了之后</span></h2>
+        <ul class="checklist" id="arrival-list">
+            <li>学校报到 / 参加 International Student Orientation</li>
+            <li>办学生证（Student ID）</li>
+            <li>开银行账户 + 办银行卡</li>
+            <li>办手机卡（AT&T / T-Mobile / Verizon）</li>
+            <li>买医保 / 确认学校保险</li>
+            <li>买公交车票 / 了解校园交通</li>
+            <li>办社保号（SSN，如果有校园工作的话）</li>
+            <li>注册课程 / 见 advisor</li>
+            <li>买生活用品（Walmart / Target / Amazon）</li>
+            <li>熟悉校园和周边</li>
+            <li>认识新朋友！</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Pro Tips <span class="cn">过来人的经验</span></h2>
+        <div class="tip-box">
+            <strong>💡 行李：</strong><br>
+            · 28 寸箱子 2 个 + 登机箱 1 个 + 背包 1 个，差不多了<br>
+            · 注意航空公司的行李重量限制（一般托运每件 23kg）<br>
+            · 箱子上贴个醒目的贴纸，方便认领<br>
+            · 随身包里放一套换洗衣物，以防托运行李丢了
+        </div>
+        <div class="tip-box" style="margin-top:10px;">
+            <strong>💡 生活：</strong><br>
+            · 美国什么都有卖，不用什么都从国内带<br>
+            · 但一些亚洲零食调料可以少带点，解思乡之苦<br>
+            · 亚马逊 prime 学生有半年免费，购物很方便<br>
+            · 有问题找国际学生办公室（ISO/ISS），他们就是帮你的
+        </div>
+        <div class="success-box" style="margin-top:10px;">
+            <strong>❤️ 最后：</strong><br>
+            第一次出国肯定会紧张和不适应，这很正常。给自己一点时间，慢慢都会好起来的。
+            多出去走走，多交朋友，体验不一样的生活。祝你一切顺利！
+        </div>
+    </div>
+
+    <p class="footer">&copy; 2026 yunzhuan.icu | Pre-Departure Guide</p>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <div style="text-align:center;padding:8px 0;font-size:0.75rem;color:#aaa;">
+        <a href="../index.html" style="color:#aaa;text-decoration:none;">Home</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="../visa-guide.html" style="color:#aaa;text-decoration:none;">Visa</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="../resources.html" style="color:#aaa;text-decoration:none;">Resources</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="../contact.html" style="color:#aaa;text-decoration:none;">Contact</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="javascript:window.scrollTo(0,0)" style="color:#aaa;text-decoration:none;">Back to top</a>
+    </div>
+
+    <script>
+    // Make checklist items clickable
+    document.querySelectorAll('.checklist li').forEach(li => {
+        li.addEventListener('click', function() {
+            this.classList.toggle('checked');
+            saveState();
+        });
+    });
+
+    // Save to localStorage
+    function saveState() {
+        const state = {};
+        document.querySelectorAll('.checklist').forEach((list, idx) => {
+            const items = [];
+            list.querySelectorAll('li').forEach((li, i) => {
+                if (li.classList.contains('checked')) items.push(i);
+            });
+            state['list_' + idx] = items;
+        });
+        localStorage.setItem('predeparture_state', JSON.stringify(state));
+    }
+
+    // Load from localStorage
+    function loadState() {
+        try {
+            const state = JSON.parse(localStorage.getItem('predeparture_state') || '{}');
+            document.querySelectorAll('.checklist').forEach((list, idx) => {
+                const items = state['list_' + idx] || [];
+                list.querySelectorAll('li').forEach((li, i) => {
+                    if (items.includes(i)) li.classList.add('checked');
+                });
+            });
+        } catch(e) {}
+    }
+
+    loadState();
+    </script>
+</body>
+</html>

@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Assistant - yunzhuan.icu</title>
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 16px;
+            background: #f5f5f5;
+            color: #333;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .navbar {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            padding: 12px 0;
+            margin-bottom: 12px;
+        }
+        .logo { display: none; }
+        .nav-links { display: flex; gap: 16px; align-items: center; }
+        .nav-links a {
+            color: #555;
+            text-decoration: none;
+            font-size: 0.85rem;
+        }
+        .nav-links a:hover { color: #667eea; }
+        .nav-links .cn {
+            color: #999;
+            font-size: 0.75rem;
+            margin-left: 2px;
+        }
+
+        .chat-header {
+            text-align: center;
+            margin-bottom: 12px;
+        }
+        .chat-header h1 {
+            font-size: 1.2rem;
+            color: #333;
+            margin-bottom: 4px;
+        }
+        .chat-header p {
+            font-size: 0.8rem;
+            color: #888;
+        }
+        .chat-header .beta-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            background: #fef3c7;
+            color: #92400e;
+            border-radius: 10px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            margin-left: 6px;
+            vertical-align: middle;
+        }
+
+        .chat-container {
+            flex: 1;
+            overflow-y: auto;
+            background: white;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .message {
+            margin-bottom: 14px;
+            display: flex;
+            gap: 10px;
+        }
+        .message.user {
+            flex-direction: row-reverse;
+        }
+        .message-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+        }
+        .message.assistant .message-avatar {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+        .message.user .message-avatar {
+            background: #e5e7eb;
+        }
+        .message-bubble {
+            max-width: 75%;
+            padding: 10px 14px;
+            border-radius: 12px;
+            line-height: 1.6;
+            font-size: 0.9rem;
+        }
+        .message.assistant .message-bubble {
+            background: #f8f9ff;
+            color: #333;
+            border-top-left-radius: 4px;
+        }
+        .message.user .message-bubble {
+            background: #667eea;
+            color: white;
+            border-top-right-radius: 4px;
+        }
+        .message-bubble p { margin-bottom: 8px; }
+        .message-bubble p:last-child { margin-bottom: 0; }
+        .message-bubble ul, .message-bubble ol {
+            margin-left: 20px;
+            margin-bottom: 8px;
+        }
+        .message-bubble li { margin-bottom: 4px; }
+        .message-bubble code {
+            background: rgba(0,0,0,0.06);
+            padding: 1px 5px;
+            border-radius: 3px;
+            font-size: 0.85em;
+        }
+
+        .typing-indicator {
+            display: flex;
+            gap: 4px;
+            padding: 12px 16px;
+        }
+        .typing-indicator span {
+            width: 8px;
+            height: 8px;
+            background: #aaa;
+            border-radius: 50%;
+            animation: typing 1.4s infinite ease-in-out;
+        }
+        .typing-indicator span:nth-child(1) { animation-delay: 0s; }
+        .typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
+        .typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes typing {
+            0%, 60%, 100% { transform: translateY(0); opacity: 0.5; }
+            30% { transform: translateY(-6px); opacity: 1; }
+        }
+
+        .quick-actions {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 10px;
+        }
+        .quick-btn {
+            padding: 6px 12px;
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 16px;
+            font-size: 0.8rem;
+            color: #666;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+        .quick-btn:hover {
+            border-color: #667eea;
+            color: #667eea;
+            background: #f8f9ff;
+        }
+
+        .input-area {
+            position: relative;
+        }
+        .input-wrapper {
+            display: flex;
+            gap: 8px;
+            align-items: flex-end;
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 8px;
+            transition: border-color 0.2s;
+        }
+        .input-wrapper:focus-within {
+            border-color: #667eea;
+        }
+        #messageInput {
+            flex: 1;
+            border: none;
+            outline: none;
+            resize: none;
+            font-family: inherit;
+            font-size: 0.9rem;
+            color: #333;
+            background: transparent;
+            max-height: 120px;
+            line-height: 1.5;
+            padding: 6px 8px;
+        }
+        .send-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: background 0.2s;
+            flex-shrink: 0;
+        }
+        .send-btn:hover { background: #5a67d8; }
+        .send-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        .disclaimer {
+            text-align: center;
+            font-size: 0.72rem;
+            color: #aaa;
+            margin-top: 8px;
+        }
+
+        .welcome-screen {
+            text-align: center;
+            padding: 40px 20px;
+        }
+        .welcome-icon {
+            font-size: 3rem;
+            margin-bottom: 16px;
+        }
+        .welcome-title {
+            font-size: 1.3rem;
+            color: #333;
+            margin-bottom: 8px;
+        }
+        .welcome-desc {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        .welcome-actions {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        .welcome-action {
+            padding: 12px;
+            background: #f8f9ff;
+            border: 1px solid #e0e7ff;
+            border-radius: 8px;
+            cursor: pointer;
+            text-align: left;
+            transition: all 0.15s;
+        }
+        .welcome-action:hover {
+            background: #eef2ff;
+            border-color: #667eea;
+        }
+        .welcome-action .wa-icon {
+            font-size: 1.2rem;
+            margin-bottom: 4px;
+        }
+        .welcome-action .wa-title {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 2px;
+        }
+        .welcome-action .wa-desc {
+            font-size: 0.75rem;
+            color: #888;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid #e5e7eb;
+            font-size: 0.75rem;
+            color: #999;
+        }
+        .footer a { color: #999; text-decoration: none; }
+        .footer a:hover { color: #667eea; }
+
+        @media (max-width: 600px) {
+            body { padding: 10px; }
+            .message-bubble { max-width: 85%; font-size: 0.85rem; }
+            .welcome-actions { grid-template-columns: 1fr; }
+        }
+    </style>
+    <link rel="stylesheet" href="css/theme.css">
+    <script src="js/theme.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="index.html" class="logo">yunzhuan<span>.icu</span></a>
+        <div class="nav-links">
+            <a href="index.html">Home<span class="cn">首页</span></a>
+            <a href="search.html">Search<span class="cn">搜索</span></a>
+        </div>
+    </nav>
+
+    <div class="chat-header">
+        <h1>AI Assistant <span class="beta-badge">Beta</span></h1>
+        <p>你的留学申请 AI 助手 · Your College Application Assistant</p>
+    </div>
+
+    <div class="quick-actions">
+        <button class="quick-btn" onclick="sendQuick('帮我选校')">🎯 选校推荐</button>
+        <button class="quick-btn" onclick="sendQuick('润色文书')">✍️ 文书润色</button>
+        <button class="quick-btn" onclick="sendQuick('专业推荐')">📚 专业推荐</button>
+        <button class="quick-btn" onclick="sendQuick('申请时间线')">📅 时间规划</button>
+    </div>
+
+    <div class="chat-container" id="chatContainer">
+        <div class="welcome-screen" id="welcomeScreen">
+            <div class="welcome-icon">🎓</div>
+            <h2 class="welcome-title">Hi, how can I help?</h2>
+            <p class="welcome-desc">
+                我可以帮你选校、润色文书、推荐专业、规划申请时间线。<br>
+                有什么问题尽管问！
+            </p>
+            <div class="welcome-actions">
+                <div class="welcome-action" onclick="sendQuick('帮我评估一下选校名单')">
+                    <div class="wa-icon">🎯</div>
+                    <div class="wa-title">选校评估</div>
+                    <div class="wa-desc">分析你的选校名单是否合理</div>
+                </div>
+                <div class="welcome-action" onclick="sendQuick('帮我润色这篇文书')">
+                    <div class="wa-icon">✍️</div>
+                    <div class="wa-title">文书润色</div>
+                    <div class="wa-desc">优化语言、结构和表达</div>
+                </div>
+                <div class="welcome-action" onclick="sendQuick('我适合什么专业')">
+                    <div class="wa-icon">📚</div>
+                    <div class="wa-title">专业推荐</div>
+                    <div class="wa-desc">根据兴趣和背景推荐专业</div>
+                </div>
+                <div class="welcome-action" onclick="sendQuick('12年级申请时间线')">
+                    <div class="wa-icon">📅</div>
+                    <div class="wa-title">时间规划</div>
+                    <div class="wa-desc">制定申请季月度计划</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="input-area">
+        <div class="input-wrapper">
+            <textarea id="messageInput" placeholder="问我任何关于留学申请的问题...  (Enter 发送, Shift+Enter 换行)" rows="1"></textarea>
+            <button class="send-btn" id="sendBtn" onclick="sendMessage()">Send</button>
+        </div>
+        <p class="disclaimer">AI 生成内容仅供参考，不构成专业建议。请结合实际情况判断。</p>
+    </div>
+
+    <p class="footer">© 2026 yunzhuan.icu &nbsp;|&nbsp; Version v19.1.0</p>
+
+<script>
+(function() {
+    const chatContainer = document.getElementById('chatContainer');
+    const welcomeScreen = document.getElementById('welcomeScreen');
+    const messageInput = document.getElementById('messageInput');
+    const sendBtn = document.getElementById('sendBtn');
+    const conversationHistory = [];
+    const STORAGE_KEY = 'yunzhuan_ai_history';
+
+    // Load history from localStorage
+    function loadHistory() {
+        try {
+            const saved = localStorage.getItem(STORAGE_KEY);
+            if (saved) {
+                const msgs = JSON.parse(saved);
+                conversationHistory.push(...msgs);
+                renderHistory();
+            }
+        } catch (e) { /* ignore */ }
+    }
+
+    function saveHistory() {
+        try {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(conversationHistory.slice(-30)));
+        } catch (e) { /* ignore */ }
+    }
+
+    function renderHistory() {
+        if (conversationHistory.length === 0) return;
+        if (welcomeScreen) welcomeScreen.style.display = 'none';
+        conversationHistory.forEach(msg => {
+            appendMessageDOM(msg.role, msg.content);
+        });
+    }
+
+    function appendMessageDOM(role, content) {
+        const msgDiv = document.createElement('div');
+        msgDiv.className = 'message ' + role;
+        msgDiv.innerHTML = `
+            <div class="message-avatar">${role === 'assistant' ? 'AI' : '🙂'}</div>
+            <div class="message-bubble">${formatMessage(content)}</div>
+        `;
+        chatContainer.appendChild(msgDiv);
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+        return msgDiv;
+    }
+
+    // Auto-resize textarea
+    messageInput.addEventListener('input', function() {
+        this.style.height = 'auto';
+        this.style.height = Math.min(this.scrollHeight, 120) + 'px';
+    });
+
+    // Send on Enter (not Shift+Enter)
+    messageInput.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            sendMessage();
+        }
+    });
+
+    window.sendQuick = function(text) {
+        messageInput.value = text;
+        sendMessage();
+    };
+
+    function formatMessage(text) {
+        return text
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/\n/g, '<br>')
+            .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+            .replace(/`([^`]+)`/g, '<code>$1</code>');
+    }
+
+    function showTyping() {
+        const typingDiv = document.createElement('div');
+        typingDiv.className = 'message assistant';
+        typingDiv.id = 'typingIndicator';
+        typingDiv.innerHTML = `
+            <div class="message-avatar">AI</div>
+            <div class="message-bubble">
+                <div class="typing-indicator">
+                    <span></span><span></span><span></span>
+                </div>
+            </div>
+        `;
+        chatContainer.appendChild(typingDiv);
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+        return typingDiv;
+    }
+
+    function hideTyping(el) {
+        if (el && el.parentNode) el.parentNode.removeChild(el);
+        else {
+            const e = document.getElementById('typingIndicator');
+            if (e) e.remove();
+        }
+    }
+
+    // Mock responses (fallback when API not available)
+    const MOCK_RESPONSES = {
+        '选校': '选校评估需要考虑你的：\n\n**1. 硬实力**\n- GPA / 标化成绩（SAT/ACT/托福/雅思）\n- 课程难度（AP/IB/A-Level）\n\n**2. 软实力**\n- 课外活动 / 科研 / 竞赛\n- 文书质量\n\n**3. 匹配度**\n- 专业方向是否匹配学校强项\n- 地理位置、学校规模、文化偏好\n\n你可以告诉我你的背景，我来帮你评估！',
+        '润色': '文书润色我可以帮你：\n\n**语言层面**\n- 语法和拼写修正\n- 用词更精准地道\n- 句式多样性优化\n\n**结构层面**\n- 开头 hook 更吸引人\n- 故事线更清晰\n- 结尾升华\n\n**内容层面**\n- 是否展现了你的特质\n- 是否与目标学校匹配\n- "Show, don\'t tell" 原则\n\n把文书贴过来，我来帮你看看！',
+        '专业': '选专业可以从几个维度考虑：\n\n**兴趣 & 热情** - 你平时喜欢研究什么？\n**能力 & 优势** - 你擅长哪些科目？\n**职业前景** - 毕业后想做什么工作？\n**收入预期** - 薪资水平是否达标？\n**性格匹配** - 偏研究型 / 应用型 / 社交型？\n\n告诉我你的兴趣和优势，我来推荐几个适合的专业方向！',
+        '时间': '12 年级申请季关键时间点：\n\n**8-9 月**：确定选校名单、准备文书素材、找老师写推荐信\n**10 月**：完成主文书初稿、ED/EA 学校调研\n**11 月 1 日**：大部分 ED/EA 截止\n**12 月**：RD 文书冲刺、期末考试\n**1 月 1 日**：大部分 RD 截止\n**3-4 月**：录取结果陆续放出\n**5 月 1 日**：决定入读学校\n\n需要更详细的月度规划可以问我！'
+    };
+
+    function getMockResponse(text) {
+        const lower = text.toLowerCase();
+        for (const keyword in MOCK_RESPONSES) {
+            if (lower.includes(keyword)) {
+                return MOCK_RESPONSES[keyword];
+            }
+        }
+        return '这是一个很好的问题！\n\n我是你的留学申请 AI 助手，可以帮你：\n- 🎯 **选校评估与推荐**\n- ✍️ **文书润色与建议**\n- 📚 **专业方向推荐**\n- 📅 **申请时间规划**\n\n目前我还在 Beta 测试阶段（演示模式），接入真实 LLM API 后会更智能。你也可以把你的具体情况告诉我，我来尽力帮助你！\n\n**提示**：问题越具体，回答越有针对性。比如不要只问"帮我选校"，而是告诉我"GPA 3.8，托福 105，想学 CS，推荐几所学校"。';
+    }
+
+    // Call real API
+    async function callAI(message, history) {
+        try {
+            const response = await fetch('/api/ai-chat', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    message: message,
+                    history: history.slice(-10)
+                })
+            });
+
+            if (!response.ok) {
+                const data = await response.json().catch(() => ({}));
+                if (response.status === 500 && data.error && data.error.includes('not configured')) {
+                    return { reply: getMockResponse(message), mock: true };
+                }
+                throw new Error(data.error || 'API error');
+            }
+
+            const data = await response.json();
+            return { reply: data.reply, mock: false, model: data.model };
+        } catch (e) {
+            // Fallback to mock on network / config errors
+            console.log('AI API unavailable, using mock:', e.message);
+            return { reply: getMockResponse(message), mock: true, error: e.message };
+        }
+    }
+
+    window.sendMessage = async function() {
+        const text = messageInput.value.trim();
+        if (!text) return;
+
+        // Hide welcome screen
+        if (welcomeScreen) welcomeScreen.style.display = 'none';
+
+        // Add user message
+        appendMessageDOM('user', text);
+        conversationHistory.push({ role: 'user', content: text });
+        saveHistory();
+
+        messageInput.value = '';
+        messageInput.style.height = 'auto';
+        sendBtn.disabled = true;
+
+        // Show typing indicator
+        const typingEl = showTyping();
+
+        // Call AI
+        const result = await callAI(text, conversationHistory);
+
+        hideTyping(typingEl);
+        sendBtn.disabled = false;
+
+        let reply = result.reply;
+        if (result.mock && !conversationHistory.some(m => m.role === 'assistant')) {
+            reply += '\n\n⚠️ *当前为演示模式，回复为预设内容。部署到 Vercel 并配置 OPENAI_API_KEY 环境变量后可启用真实 AI。*';
+        }
+
+        appendMessageDOM('assistant', reply);
+        conversationHistory.push({ role: 'assistant', content: reply });
+        saveHistory();
+    };
+
+    // Global keyboard shortcut: / to focus
+    document.addEventListener('keydown', function(e) {
+        const tag = (e.target.tagName || '').toLowerCase();
+        const isTyping = tag === 'input' || tag === 'textarea' || e.target.isContentEditable;
+        if (e.key === '/' && !isTyping && !e.ctrlKey && !e.metaKey) {
+            e.preventDefault();
+            messageInput.focus();
+        }
+    });
+
+    // Init
+    loadHistory();
+    setTimeout(() => messageInput.focus(), 300);
+})();
+</script>
+</body>
+</html>

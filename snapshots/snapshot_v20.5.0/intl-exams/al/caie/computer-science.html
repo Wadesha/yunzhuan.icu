@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A-Level Computer Science (CAIE 9618) - yunzhuan.icu</title>
+    <link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 20px 16px;
+            background: #f5f5f5;
+            color: #333;
+        }
+        .back-link { color: #667eea; text-decoration: none; font-size: 0.85rem; margin-bottom: 12px; display: inline-block; }
+        .back-link:hover { text-decoration: underline; }
+        h1 { color: #333; margin-bottom: 4px; font-size: 1.4rem; }
+        .en-name { color: #888; font-size: 0.95rem; margin-bottom: 4px; font-weight: normal; }
+        .code-line { color: #888; font-size: 0.82rem; margin-bottom: 14px; }
+        .section {
+            background: white;
+            border-radius: 8px;
+            padding: 14px 18px;
+            margin-bottom: 10px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .section h2 {
+            color: #667eea;
+            margin-bottom: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        .section h2 .en { color: #999; font-size: 0.8rem; font-weight: normal; }
+        .section p { color: #333; line-height: 1.7; font-size: 0.92rem; }
+        .section p.en { color: #888; font-size: 0.85rem; margin-top: 6px; }
+        .meta-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+            margin-top: 6px;
+        }
+        .meta-table td {
+            padding: 4px 8px;
+            border-bottom: 1px solid #f0f0f0;
+            vertical-align: top;
+        }
+        .meta-table td.label { color: #888; width: 28%; }
+        .meta-table td.value { color: #333; }
+        .level-tag {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-right: 6px;
+        }
+        .level-as { background: #e8f4fd; color: #1976d2; }
+        .level-a2 { background: #fce4ec; color: #c2185b; }
+        .topic-list { list-style: none; }
+        .topic-list li {
+            padding: 8px 10px;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        .topic-list li:last-child { border-bottom: none; }
+        .topic-list .topic-title { font-weight: 600; color: #333; }
+        .topic-list .topic-desc { color: #777; font-size: 0.82rem; margin-top: 2px; }
+        .footer { text-align: center; margin-top: 20px; color: #999; font-size: 0.8rem; }
+        .nav-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 8px;
+            margin-top: 16px;
+            padding: 12px 16px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            flex-wrap: wrap;
+        }
+        .nav-row a { color: #667eea; text-decoration: none; font-size: 0.88rem; }
+    </style>
+    <link rel="stylesheet" href="/css/collapse.css">
+</head>
+<body>
+    <a href="../index.html" class="back-link">← Back to A-Level Index</a>
+
+    <h1>A-Level Computer Science</h1>
+    <p class="en-name">A-Level 计算机科学</p>
+    <p class="code-line">CAIE 9618</p>
+
+    <div class="section">
+        <h2>Course Overview <span class="en">课程介绍</span></h2>
+        <p style="color:#666;font-size:0.85rem;margin-bottom:6px;">CAIE 高级计算机科学，涵盖原理、算法与编程实践，A2 引入人工智能。</p>
+        <p>A-Level Computer Science is a UK advanced secondary course split into AS (Year 1) and A2 (Year 2). It covers computer principles, data representation and transmission, hardware & software, databases, cybersecurity, algorithm design and programming practice. A2 introduces artificial intelligence and advanced algorithms. It emphasises computational thinking, problem solving and programming. A core subject for computer science, software engineering, AI, data science and information engineering.</p>
+    </div>
+
+    <div class="section">
+        <h2>Key Facts <span class="en">基本信息</span></h2>
+        <table class="meta-table">
+            <tr><td class="label">Exam Board (考试局)</td><td class="value">CAIE (Cambridge Assessment International Education)</td></tr>
+            <tr><td class="label">CAIE Code (代码)</td><td class="value">9618</td></tr>
+            <tr><td class="label">Duration (学制)</td><td class="value">2 years (AS + A2)</td></tr>
+            <tr><td class="label">Grading (评分)</td><td class="value">A* - E (A* only for full A-Level)</td></tr>
+            <tr><td class="label">Exam Structure (CAIE)</td><td class="value">AS: Paper 1/2 · A2: Paper 3/4</td></tr>
+            <tr><td class="label">Coursework (课程作业)</td><td class="value">Paper 4 (A2) is an on-computer programming practical exam</td></tr>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>AS Syllabus <span class="en">AS 阶段章节</span></h2>
+        <ul class="topic-list">
+            <li>
+                <div class="topic-title"><span class="level-tag level-as">AS</span>1. Information Representation</div>
+                <div class="topic-desc">Binary and hexadecimal, number system conversion, character encoding, image and sound representation</div>
+            </li>
+            <li>
+                <div class="topic-title"><span class="level-tag level-as">AS</span>2. Data Transmission</div>
+                <div class="topic-desc">Transmission media, serial and parallel transmission, error detection and correction, data compression</div>
+            </li>
+            <li>
+                <div class="topic-title"><span class="level-tag level-as">AS</span>3. Hardware</div>
+                <div class="topic-desc">Computer architecture, CPU and registers, memory hierarchy, I/O devices</div>
+            </li>
+            <li>
+                <div class="topic-title"><span class="level-tag level-as">AS</span>4. Software and Software Development</div>
+                <div class="topic-desc">System and application software, translators, software development lifecycle</div>
+            </li>
+            <li>
+                <div class="topic-title"><span class="level-tag level-as">AS</span>5. Relational Database Modelling</div>
+                <div class="topic-desc">Entity-relationship diagrams, normalisation, primary and foreign keys, basic SQL</div>
+            </li>
+            <li>
+                <div class="topic-title"><span class="level-tag level-as">AS</span>6. System Software</div>
+                <div class="topic-desc">Operating system functions, file management, interrupts and scheduling, virtual memory</div>
+            </li>
+            <li>
+                <div class="topic-title"><span class="level-tag level-as">AS</span>7. Security, Privacy and Data Integrity</div>
+                <div class="topic-desc">Encryption, firewalls, data validation, privacy protection</div>
+            </li>
+            <li>
+                <div class="topic-title"><span class="level-tag level-as">AS</span>8. Ethics and Ownership</div>
+                <div class="topic-desc">Intellectual property, software copyright, AI ethics, digital divide</div>
+            </li>
+            <li>
+                <div class="topic-title"><span class="level-tag level-as">AS</span>9. Algorithm Design and Problem-solving</div>
+                <div class="topic-desc">Flowcharts and pseudocode, algorithm efficiency, abstraction and decomposition</div>
+            </li>
+            <li>
+                <div class="topic-title"><span class="level-tag level-as">AS</span>10. Data Structures and Data Types</div>
+                <div class="topic-desc">Arrays, records, linked lists, stacks and queues, static and dynamic structures</div>
+            </li>
+            <li>
+                <div class="topic-title"><span class="level-tag level-as">AS</span>11. Programming and Software Development</div>
+                <div class="topic-desc">Variables and constants, control structures, subroutines, modular design</div>
+            </li>
+            <li>
+                <div class="topic-title"><span class="level-tag level-as">AS</span>12. Algorithms (Linear Search, Bubble Sort)</div>
+                <div class="topic-desc">Linear and binary search, bubble sort, algorithm complexity analysis</div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>A2 Syllabus <span class="en">A2 阶段章节</span></h2>
+        <ul class="topic-list">
+            <li>
+                <div class="topic-title"><span class="level-tag level-a2">A2</span>13. Data Representation (Advanced)</div>
+                <div class="topic-desc">Floating point representation, user-defined data types, file organisation</div>
+            </li>
+            <li>
+                <div class="topic-title"><span class="level-tag level-a2">A2</span>14. Communication and Internet Technologies</div>
+                <div class="topic-desc">Network protocols, TCP/IP, HTTP/DNS, network topologies</div>
+            </li>
+            <li>
+                <div class="topic-title"><span class="level-tag level-a2">A2</span>15. Hardware (Advanced)</div>
+                <div class="topic-desc">Parallel processing, GPU, virtualisation, dedicated processors</div>
+            </li>
+            <li>
+                <div class="topic-title"><span class="level-tag level-a2">A2</span>16. System Software and Virtual Machines</div>
+                <div class="topic-desc">Virtual machine principles, interpreted execution, advanced interrupt handling</div>
+            </li>
+            <li>
+                <div class="topic-title"><span class="level-tag level-a2">A2</span>17. Security</div>
+                <div class="topic-desc">Public key encryption, digital signatures, security protocols, intrusion detection</div>
+            </li>
+            <li>
+                <div class="topic-title"><span class="level-tag level-a2">A2</span>18. Artificial Intelligence</div>
+                <div class="topic-desc">AI definition and classification, machine learning basics, neural networks, expert systems</div>
+            </li>
+            <li>
+                <div class="topic-title"><span class="level-tag level-a2">A2</span>19. Computational Thinking and Problem-solving</div>
+                <div class="topic-desc">Recursion, divide and conquer, dynamic programming, algorithm analysis</div>
+            </li>
+            <li>
+                <div class="topic-title"><span class="level-tag level-a2">A2</span>20. Algorithms (Advanced)</div>
+                <div class="topic-desc">Insertion and quick sort, Dijkstra, tree traversal, hash lookup</div>
+            </li>
+            <li>
+                <div class="topic-title"><span class="level-tag level-a2">A2</span>21. Recursion and Abstract Data Types</div>
+                <div class="topic-desc">Linked lists, trees, graphs, recursive implementation, ADT design</div>
+            </li>
+            <li>
+                <div class="topic-title"><span class="level-tag level-a2">A2</span>22. Programming Paradigms</div>
+                <div class="topic-desc">Object-oriented, functional, event-driven, paradigm comparison</div>
+            </li>
+            <li>
+                <div class="topic-title"><span class="level-tag level-a2">A2</span>23. File Organisation and Database (Advanced)</div>
+                <div class="topic-desc">Sequential and indexed files, transactions and concurrency, advanced SQL</div>
+            </li>
+            <li>
+                <div class="topic-title"><span class="level-tag level-a2">A2</span>24. Practical Programming Project</div>
+                <div class="topic-desc">On-computer programming exam, program design, debugging and testing, documentation</div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Exam Structure (CAIE 9618) <span class="en">考试结构</span></h2>
+        <table class="meta-table">
+            <tr><td class="label">Paper 1</td><td class="value">AS Theory Fundamentals · 1h30m · 50% of AS / 25% of A-Level</td></tr>
+            <tr><td class="label">Paper 2</td><td class="value">AS Basic Problem-solving and Programming · 2h · 50% of AS / 25% of A-Level</td></tr>
+            <tr><td class="label">Paper 3</td><td class="value">A2 Advanced Theory · 1h30m · 25% of A-Level</td></tr>
+            <tr><td class="label">Paper 4</td><td class="value">A2 Practical (on-computer programming) · 2h30m · 25% of A-Level</td></tr>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>Suitable Majors <span class="en">适用专业与衔接</span></h2>
+        <p style="color:#666;font-size:0.85rem;margin-bottom:6px;">计算机科学、软件工程、人工智能、数据科学等专业的核心基础科目。</p>
+        <p>A-Level Computer Science is a key subject for computer science, software engineering, AI, data science, cybersecurity, information systems, information engineering, game development and electrical & electronic engineering. Most UK university CS programmes recommend A-Level Computer Science (often paired with Mathematics). It provides a solid foundation for university data structures, algorithm analysis, operating systems and database systems.</p>
+    </div>
+
+    <div class="nav-row">
+        <a href="../index.html">← A-Level Index</a>
+        <a href="geography.html">Next: Geography →</a>
+    </div>
+
+    <p class="footer">© 2026 yunzhuan.icu | A-Level Computer Science (CAIE)</p>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <div style="text-align:center;padding:8px 0;font-size:0.75rem;color:#aaa;">
+        <a href="../../../index.html" style="color:#aaa;text-decoration:none;">Home</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="../../index.html" style="color:#aaa;text-decoration:none;">International Exams</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="../../../contact.html" style="color:#aaa;text-decoration:none;">Contact</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="javascript:window.scrollTo(0,0)" style="color:#aaa;text-decoration:none;">Back to top</a>
+    </div>
+</body>
+</html>

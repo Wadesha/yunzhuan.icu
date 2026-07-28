@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AP Preparation Guide - yunzhuan.icu</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 20px 16px;
+            background: #f5f5f5;
+            color: #333;
+        }
+        .back-link { color: #667eea; text-decoration: none; font-size: 0.85rem; margin-bottom: 12px; display: inline-block; }
+        .back-link:hover { text-decoration: underline; }
+        h1 { color: #333; margin-bottom: 4px; font-size: 1.4rem; }
+        .en-name { color: #888; font-size: 0.95rem; margin-bottom: 4px; font-weight: normal; }
+        .code-line { color: #888; font-size: 0.82rem; margin-bottom: 14px; }
+        .section {
+            background: white;
+            border-radius: 8px;
+            padding: 14px 18px;
+            margin-bottom: 10px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .section h2 {
+            color: #667eea;
+            margin-bottom: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        .section h2 .en { color: #999; font-size: 0.8rem; font-weight: normal; }
+        .section p { color: #333; line-height: 1.7; font-size: 0.92rem; }
+        .section p.cn-hint { color: #666; font-size: 0.85rem; margin-bottom: 6px; }
+        .topic-list { list-style: none; }
+        .topic-list li {
+            padding: 8px 10px;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        .topic-list li:last-child { border-bottom: none; }
+        .topic-list .topic-title { font-weight: 600; color: #333; }
+        .topic-list .topic-desc { color: #777; font-size: 0.82rem; margin-top: 2px; }
+        .meta-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+            margin-top: 6px;
+        }
+        .meta-table td {
+            padding: 6px 8px;
+            border-bottom: 1px solid #f0f0f0;
+            vertical-align: top;
+        }
+        .meta-table td.label { color: #888; width: 32%; }
+        .meta-table td.value { color: #333; }
+        .phase-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 8px;
+            margin-top: 8px;
+        }
+        .phase-card {
+            background: #f8f9fa;
+            border-radius: 6px;
+            padding: 10px 12px;
+            border-left: 3px solid #667eea;
+        }
+        .phase-card .phase-name { color: #667eea; font-size: 0.85rem; font-weight: 600; }
+        .phase-card .phase-detail { color: #555; font-size: 0.82rem; margin-top: 4px; line-height: 1.5; }
+        .subject-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 8px;
+            margin-top: 8px;
+        }
+        .subject-card {
+            background: #f8f9fa;
+            border-radius: 6px;
+            padding: 10px 12px;
+            border-left: 3px solid #764ba2;
+        }
+        .subject-card .subject-name { color: #764ba2; font-size: 0.88rem; font-weight: 600; }
+        .subject-card .subject-detail { color: #555; font-size: 0.8rem; margin-top: 4px; line-height: 1.4; }
+        .footer { text-align: center; margin-top: 20px; color: #999; font-size: 0.8rem; }
+    </style>
+    <link rel="stylesheet" href="/css/collapse.css">
+</head>
+<body>
+    <a href="index.html" class="back-link">&larr; Back to Standardized Tests</a>
+    <a href="../intl-exams/ap/biology.html" class="back-link" style="margin-left:10px;">AP Subjects &rarr;</a>
+
+    <h1>AP Preparation</h1>
+    <p class="en-name">AP 备考指南</p>
+    <p class="code-line">38 subjects · May exams · college credit · study plan</p>
+
+    <div class="section">
+        <h2>About AP <span class="en">AP 简介</span></h2>
+        <p class="cn-hint">AP（Advanced Placement）是美国大学理事会主办的大学预修课程，全球高中生均可报考。</p>
+        <table class="meta-table">
+            <tr><td class="label">Administered by</td><td class="value">College Board</td></tr>
+            <tr><td class="label">Number of Subjects</td><td class="value">38 subjects across 6 disciplines</td></tr>
+            <tr><td class="label">Score Range</td><td class="value">1 - 5 (5 = extremely well qualified)</td></tr>
+            <tr><td class="label">Exam Duration</td><td class="value">2 - 3 hours (varies by subject)</td></tr>
+            <tr><td class="label">Exam Dates</td><td class="value">Two weeks in May (regular + late testing)</td></tr>
+            <tr><td class="label">Frequency</td><td class="value">Once per year</td></tr>
+            <tr><td class="label">Cost (per exam)</td><td class="value">$98 USD (US) / varies by region</td></tr>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>Popular Subjects <span class="en">热门科目</span></h2>
+        <p class="cn-hint">按学科分类，中国学生常选科目标注★。</p>
+        <div class="subject-grid">
+            <div class="subject-card">
+                <div class="subject-name">Mathematics & Computer</div>
+                <div class="subject-detail">Calculus AB/BC ★, Statistics ★, Computer Science A ★, Computer Science Principles, Precalculus</div>
+            </div>
+            <div class="subject-card">
+                <div class="subject-name">Sciences</div>
+                <div class="subject-detail">Biology ★, Chemistry ★, Physics 1/2 ★, Physics C (E&M / Mechanics), Environmental Science</div>
+            </div>
+            <div class="subject-card">
+                <div class="subject-name">Social Sciences</div>
+                <div class="subject-detail">Microeconomics ★, Macroeconomics ★, Psychology ★, US Government, Comparative Government, Human Geography</div>
+            </div>
+            <div class="subject-card">
+                <div class="subject-name">Humanities</div>
+                <div class="subject-detail">English Language ★, English Literature, US History, World History, European History, Art History</div>
+            </div>
+            <div class="subject-card">
+                <div class="subject-name">World Languages</div>
+                <div class="subject-detail">Chinese Language & Culture ★, Spanish, French, German, Italian, Japanese, Latin, Spanish Literature</div>
+            </div>
+            <div class="subject-card">
+                <div class="subject-name">Arts & Capstone</div>
+                <div class="subject-detail">Studio Art (2D/3D/Drawing), Music Theory, Research, Seminar, Capstone Diploma</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Official Resources <span class="en">官方资源</span></h2>
+        <p class="cn-hint">备考以 College Board 官方资料为核心。</p>
+        <ul class="topic-list">
+            <li>
+                <div class="topic-title">AP Classroom</div>
+                <div class="topic-desc">College Board 官方在线平台，含 FRQ 真题、单元测验、个人进度报告，学校注册 AP 课程后可免费使用。</div>
+            </li>
+            <li>
+                <div class="topic-title">Past Exam Questions (College Board)</div>
+                <div class="topic-desc">官网发布的历年 FRQ 真题及评分标准（Scoring Guidelines），是 FRQ 备考最重要的资源。</div>
+            </li>
+            <li>
+                <div class="topic-title">Course and Exam Description (CED)</div>
+                <div class="topic-desc">每门科目官方大纲，明确考试范围、题型分布、权重，备考前必须通读。</div>
+            </li>
+            <li>
+                <div class="topic-title">AP Daily Videos</div>
+                <div class="topic-desc">AP Classroom 内置官方课程视频，由 College Board 认证教师录制，覆盖全部知识点。</div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Recommended Prep Books <span class="en">推荐教材</span></h2>
+        <table class="meta-table">
+            <tr><td class="label">Princeton Review (Cracking the AP)</td><td class="value">知识点讲解清晰，适合入门和一轮复习，题目难度略低于真题</td></tr>
+            <tr><td class="label">Barron's AP</td><td class="value">内容全面深入，难度略高于真题，适合冲 5 分</td></tr>
+            <tr><td class="label">5 Steps to a 5</td><td class="value">分阶段学习计划设计合理，自学友好</td></tr>
+            <tr><td class="label">AMSCO (历史/社科)</td><td class="value">历史类科目神书，内容贴近考试，条理清晰</td></tr>
+            <tr><td class="label">CliffsNotes (文学/语言)</td><td class="value">英语类科目备考经典，文学作品分析到位</td></tr>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>Study Plan <span class="en">备考节奏</span></h2>
+        <p class="cn-hint">建议 12-16 周完成备考周期，按以下四阶段推进。</p>
+        <div class="phase-grid">
+            <div class="phase-card">
+                <div class="phase-name">Phase 1 · Foundation (Week 1-5)</div>
+                <div class="phase-detail">通读 CED 大纲，用 Princeton/Barron 按章节系统学习知识点，每章后做配套练习题，建立知识框架。</div>
+            </div>
+            <div class="phase-card">
+                <div class="phase-name">Phase 2 · Deepening (Week 6-10)</div>
+                <div class="phase-detail">分单元刷题，重点突破 MCQ 选择题正确率，开始接触 FRQ，整理错题本和知识盲区。</div>
+            </div>
+            <div class="phase-card">
+                <div class="phase-name">Phase 3 · Mock Exams (Week 11-14)</div>
+                <div class="phase-detail">每周 1-2 套完整模考，严格计时，适应考试节奏。重点训练 FRQ 答题套路和时间分配。</div>
+            </div>
+            <div class="phase-card">
+                <div class="phase-name">Phase 4 · Final Review (Week 15-16)</div>
+                <div class="phase-detail">回归错题本和知识框架，重点复习高频考点和自己的薄弱环节，考前 1-2 天保持手感即可。</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Exam Format Tips <span class="en">题型策略</span></h2>
+        <ul class="topic-list">
+            <li>
+                <div class="topic-title">Multiple Choice (MCQ)</div>
+                <div class="topic-desc">通常占 50% 分数。使用排除法提高正确率，不会的题标记后跳过，最后回来猜。答错不扣分，不要空题。</div>
+            </li>
+            <li>
+                <div class="topic-title">Free Response (FRQ)</div>
+                <div class="topic-desc">通常占 50% 分数。先读题列提纲再写，按点作答，关键词明确。写得多长不一定高分，踩点才给分。</div>
+            </li>
+            <li>
+                <div class="topic-title">Time Management</div>
+                <div class="topic-desc">MCQ 每题控制在 1-1.5 分钟，FRQ 先做有把握的题。考前必须完整模考 2-3 次以建立时间感。</div>
+            </li>
+            <li>
+                <div class="topic-title">Calculator Policy</div>
+                <div class="topic-desc">微积分、统计、物理、化学等科目允许使用计算器，考前熟悉计算器功能，不要考试当天才用新计算器。</div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Score & Credit <span class="en">分数与换学分</span></h2>
+        <table class="meta-table">
+            <tr><td class="label">Score 5</td><td class="value">Extremely well qualified - 顶尖大学通常可换学分</td></tr>
+            <tr><td class="label">Score 4</td><td class="value">Well qualified - 多数公立大学和部分私立可换学分</td></tr>
+            <tr><td class="label">Score 3</td><td class="value">Qualified - 部分学校可换选修课学分，顶尖校可能不认可</td></tr>
+            <tr><td class="label">Score Send</td><td class="value">考后 10-15 天出分，可通过 College Board 送分，$15/所（常规）</td></tr>
+            <tr><td class="label">Credit Policy</td><td class="value">各校换学分政策不同，需在学校官网 AP Credit Policy 查询</td></tr>
+            <tr><td class="label">Score Cancellation</td><td class="value">考后可取消成绩，不记录在成绩单上，免费</td></tr>
+            <tr><td class="label">Score Withhold</td><td class="value">可向特定学校隐瞒成绩，$10/校/年</td></tr>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>Test Day Checklist <span class="en">考试当日清单</span></h2>
+        <ul class="topic-list">
+            <li><div class="topic-title">ID</div><div class="topic-desc">护照或政府签发带照片证件，姓名与报名一致。</div></li>
+            <li><div class="topic-title">AP ID Label</div><div class="topic-desc">学生包内的 AP ID 贴纸，每场考试都要贴到答题卡上。</div></li>
+            <li><div class="topic-title">Pens & Pencils</div><div class="topic-desc">2 支以上 No.2 铅笔（MCQ）+ 蓝/黑色钢笔（FRQ）。</div></li>
+            <li><div class="topic-title">Calculator</div><div class="topic-desc">符合政策的计算器 + 备用电池，微积分/统计/物理/化学需要。</div></li>
+            <li><div class="topic-title">Watch</div><div class="topic-desc">无智能功能的普通手表，用于计时（考场可能有钟但不一定清楚）。</div></li>
+            <li><div class="topic-title">Snack & Water</div><div class="topic-desc">休息时补充能量，放在考场外指定位置。</div></li>
+            <li><div class="topic-title">Arrival</div><div class="topic-desc">提前 30 分钟到达考场，15 分钟后迟到可能不允许入场。</div></li>
+        </ul>
+    </div>
+
+    <p class="footer">&copy; 2026 yunzhuan.icu | AP Preparation</p>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <div style="text-align:center;padding:8px 0;font-size:0.75rem;color:#aaa;">
+        <a href="../index.html" style="color:#aaa;text-decoration:none;">Home</a>
+        <span style="margin:0 6px;">&middot;</span>
+        <a href="../intl-exams/index.html" style="color:#aaa;text-decoration:none;">International Exams</a>
+        <span style="margin:0 6px;">&middot;</span>
+        <a href="../contact.html" style="color:#aaa;text-decoration:none;">Contact</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="javascript:window.scrollTo(0,0)" style="color:#aaa;text-decoration:none;">Back to top</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oxbridge Interviews - Oxford / Cambridge - yunzhuan.icu</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px 16px;
+            background: #f5f5f5;
+            color: #333;
+        }
+        .back-link { color: #667eea; text-decoration: none; font-size: 0.85rem; margin-bottom: 12px; display: inline-block; }
+        .back-link:hover { text-decoration: underline; }
+        h1 { color: #333; margin-bottom: 4px; font-size: 1.4rem; }
+        .en-name { color: #888; font-size: 0.95rem; margin-bottom: 4px; font-weight: normal; }
+        .code-line { color: #888; font-size: 0.82rem; margin-bottom: 14px; }
+        .section {
+            background: white;
+            border-radius: 8px;
+            padding: 14px 18px;
+            margin-bottom: 10px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .section h2 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        .section h2 .en { color: #999; font-size: 0.8rem; font-weight: normal; }
+        .section p { color: #333; line-height: 1.7; font-size: 0.92rem; }
+        .section p.cn-hint { color: #666; font-size: 0.85rem; margin-bottom: 6px; }
+        .tag {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin-right: 6px;
+        }
+        .tag-subject { background: #e3f2fd; color: #1565c0; }
+        .tag-general { background: #f3e5f5; color: #7b1fa2; }
+        .tag-technique { background: #e8f5e9; color: #2e7d32; }
+        .sample-q {
+            background: #f8f9ff;
+            border-left: 3px solid #667eea;
+            padding: 10px 14px;
+            margin: 8px 0;
+            border-radius: 0 6px 6px 0;
+        }
+        .sample-q .q {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 6px;
+        }
+        .sample-q .hint {
+            color: #666;
+            font-size: 0.82rem;
+            line-height: 1.6;
+        }
+        .subject-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-top: 8px;
+        }
+        .subject-card {
+            background: #f8f9ff;
+            padding: 10px 12px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+        }
+        .subject-card .name { font-weight: 600; color: #333; margin-bottom: 4px; }
+        .subject-card .count { color: #667eea; font-size: 0.78rem; }
+        .tip-box {
+            background: #e8f5e9;
+            border-left: 3px solid #2e7d32;
+            padding: 10px 14px;
+            border-radius: 0 6px 6px 0;
+            margin-top: 10px;
+            font-size: 0.82rem;
+            color: #1b5e20;
+            line-height: 1.6;
+        }
+        .tip-box strong { color: #1b5e20; }
+        .warning-box {
+            background: #fff8e1;
+            border-left: 3px solid #ff8f00;
+            padding: 10px 14px;
+            border-radius: 0 6px 6px 0;
+            margin-top: 10px;
+            font-size: 0.82rem;
+            color: #5d4037;
+            line-height: 1.6;
+        }
+        .footer { text-align: center; margin-top: 20px; color: #999; font-size: 0.8rem; }
+        @media (max-width: 600px) {
+            .subject-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+    <link rel="stylesheet" href="../css/theme.css">
+    <link rel="manifest" href="../manifest.json">
+    <meta name="theme-color" content="#667eea">
+    <script src="../js/theme.js"></script>
+    <script src="../js/pwa.js"></script>
+    <script src="../js/mobile-nav.js"></script>
+    <script src="../js/breadcrumbs.js"></script>
+</head>
+<body>
+    <a href="index.html" class="back-link">&larr; Back to Interviews</a>
+
+    <h1>Oxbridge Interviews</h1>
+    <p class="en-name">牛津剑桥面试</p>
+    <p class="code-line">Academic interviews · Tutorial style · Sample questions · Preparation</p>
+
+    <div class="section">
+        <h2>What is an Oxbridge Interview? <span class="en">面试是什么样的？</span></h2>
+        <p class="cn-hint">牛剑面试不是测试你知道多少，而是测试你<b>如何思考</b>。面试形式类似牛津剑桥特有的 tutorial/supervision 教学方式，导师会和你讨论学术问题，看你的思维过程。</p>
+        <div class="tip-box">
+            <strong>💡 核心本质：</strong><br>
+            · 面试官不是在找"正确答案"，而是在找"正确的思考方式"<br>
+            · 他们想看到你如何处理不熟悉的问题<br>
+            · 考察你的学术潜力和对学科的热情<br>
+            · 模拟未来导师制教学的感觉
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Interview Structure <span class="en">面试结构</span></h2>
+        <ul style="list-style:none;">
+            <li style="padding:6px 0;border-bottom:1px solid #f0f0f0;">
+                <strong>数量：</strong>通常 2-3 场面试，每场 20-45 分钟
+            </li>
+            <li style="padding:6px 0;border-bottom:1px solid #f0f0f0;">
+                <strong>面试官：</strong>通常 2 位面试官（1 位主导 + 1 位记录/辅助）
+            </li>
+            <li style="padding:6px 0;border-bottom:1px solid #f0f0f0;">
+                <strong>内容：</strong>几乎全是学术问题，围绕你申请的专业
+            </li>
+            <li style="padding:6px 0;border-bottom:1px solid #f0f0f0;">
+                <strong>材料：</strong>可能会给你一篇文章/题目/材料，先读 15-30 分钟后面试讨论
+            </li>
+            <li style="padding:6px 0;">
+                <strong>形式：</strong>线上（Zoom/Teams）或线下（去英国面试）
+            </li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Common Subjects & Sample Questions <span class="en">各学科样题</span></h2>
+        
+        <div class="sample-q">
+            <span class="tag tag-subject">Maths</span>
+            <div class="q">How would you prove that the square root of 2 is irrational?</div>
+            <div class="hint">思路：反证法（proof by contradiction）。假设 √2 = a/b（最简分数），推出矛盾。关键是展示你的推理过程，而不只是答案。</div>
+        </div>
+
+        <div class="sample-q">
+            <span class="tag tag-subject">Physics</span>
+            <div class="q">If you could drill a hole straight through the Earth from one side to the other, and drop a ball down it, what would happen?</div>
+            <div class="hint">思路：简谐运动（SHM）。球会在两端之间来回振荡。需要考虑引力随半径变化的关系。不用怕不会，试着一步步推。</div>
+        </div>
+
+        <div class="sample-q">
+            <span class="tag tag-subject">Economics</span>
+            <div class="q">Why is there poverty difficult to measure?</div>
+            <div class="hint">思路：绝对贫困 vs 相对贫困、购买力平价、不同国家生活成本、收入vs 多维贫困（教育、健康、机会）。展示多角度思考。</div>
+        </div>
+
+        <div class="sample-q">
+            <span class="tag tag-subject">Medicine</span>
+            <div class="q">Why do we have red blood cells?</div>
+            <div class="hint">思路：运输氧气和二氧化碳。血红蛋白的作用。为什么是红细胞而不是把血红蛋白直接溶解在血浆里？表面积与体积比。</div>
+        </div>
+
+        <div class="sample-q">
+            <span class="tag tag-subject">PPE / Philosophy</span>
+            <div class="q">Should we legalize all drugs?</div>
+            <div class="hint">思路：从多个角度分析——个人自由、公共健康、犯罪率、经济成本、社会公平。不是要一个答案，是看你论证的结构和逻辑。</div>
+        </div>
+
+        <div class="sample-q">
+            <span class="tag tag-subject">Engineering</span>
+            <div class="q">How would you design a gravity dam for holding back water?</div>
+            <div class="hint">思路：受力分析、材料、形状为什么是三角形/梯形？底部宽上窄？考虑水压分布、抗倾覆、抗滑移。一步步推导。</div>
+        </div>
+
+        <div class="sample-q">
+            <span class="tag tag-subject">Computer Science</span>
+            <div class="q">How do pirates divide a cake between n people fairly?</div>
+            <div class="hint">思路：经典的 fair division 问题。"I cut you choose" 的扩展到 n 个人。算法思维、公平性定义、博弈论思路。</div>
+        </div>
+
+        <div class="sample-q">
+            <span class="tag tag-subject">English Literature</span>
+            <div class="q">Why do you think a character in [book]?（给你一首诗/一段文字，让你分析。</div>
+            <div class="hint">思路：仔细读文本，找证据，分析语言、结构、主题。不是要"正确"解读，是看你如何从文本出发的论证能力。</div>
+        </div>
+
+        <div class="sample-q">
+            <span class="tag tag-subject">History</span>
+            <div class="q">Is violence always wrong?</div>
+            <div class="hint">思路：定义 什么是"暴力"？什么情境下？不同历史/不同文化的定义一样吗？目的 vs 结果？展示你的论证结构。</div>
+        </div>
+
+        <div class="sample-q">
+            <span class="tag tag-subject">Law</span>
+            <div class="q">「你觉得法律应该惩罚未遂和既遂一样严重吗？</div>
+            <div class="hint">思路：报应主义vs后果主义、威慑、道德可责性、证据问题。多角度论证你的立场的论证能力，角度思考。</div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Key Techniques <span class="en">核心技巧</span></h2>
+        <div class="tip-box">
+            <strong>💡 <span class="tag tag-technique">Think Aloud</span> 边想边说
+            <br>最重要的技巧！把你的思考过程说出来。面试官想知道你是怎么想的，哪怕还没到答案。
+        </div>
+        <div class="tip-box" style="margin-top:8px;background:#e3f2fd;border-left-color:#1565c0;color:#0d47a1;">
+            <strong>💡 <span class="tag tag-technique">Take Your Time</span> 慢慢来
+            <br>不用马上回答。可以停下来思考几秒钟没关系。说 "Can I have a moment to think?" 完全没问题。
+        </div>
+        <div class="tip-box" style="margin-top:8px;background:#f3e5f5;border-left-color:#7b1fa2;color:#4a148c;">
+            <strong>💡 <span class="tag tag-technique">Ask Questions</span> 问问题澄清
+            <br>题目没懂就问。 "When you say X, do you mean Y?" 这展示你的批判性思维。
+        </div>
+        <div class="tip-box" style="margin-top:8px;background:#fff3e0;border-left-color:#ef6c00;color:#e65100;">
+            <strong>💡 <span class="tag tag-technique">Be Ready to Be Challenged</span> 接受挑战
+            <br>面试官可能会质疑你、反驳你、给你新信息。这不是你错了——这是面试的正常部分！看你能不能回应、调整、学习。
+        </div>
+        <div class="warning-box" style="margin-top:10px;">
+            <strong>⚠️ 常见误区：</strong><br>
+            · 以为要答对所有问题——错！不会很正常<br>
+            · 不敢说"我不知道"——可以说不知道，但要说你会怎么想<br>
+            · 被反驳就慌——他们就是想看你的反应<br>
+            · 背诵准备好的答案——他们听得出来
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Preparation Strategy <span class="en">准备策略</span></h2>
+        <ul style="list-style:none;">
+            <li style="padding:6px 0;border-bottom:1px solid #f0f0f0;">
+                <strong>1. 深入掌握 A-Level/IB 课内知识</strong>
+                <div style="color:#666;font-size:0.82rem;margin-top:4px;">确保你完全理解课内的内容，能解释清楚"为什么"。</div>
+            </li>
+            <li style="padding:6px 0;border-bottom:1px solid #f0f0f0;">
+                <strong>2. 拓展阅读</strong>
+                <div style="color:#666;font-size:0.82rem;margin-top:4px;">读专业相关的书籍、文章、播客。PS 里提到的一定要深入了解。</div>
+            </li>
+            <li style="padding:6px 0;border-bottom:1px solid #f0f0f0;">
+                <strong>3. 做模拟面试</strong>
+                <div style="color:#666;font-size:0.82rem;margin-top:4px;">找老师、学长、家长模拟。至少 3-5 次模拟面试。</div>
+            </li>
+            <li style="padding:6px 0;border-bottom:1px solid #f0f0f0;">
+                <strong>4. 练习 past questions</strong>
+                <div style="color:#666;font-size:0.82rem;margin-top:4px;">牛津剑桥官网有样题，自己练的时候边想边说练习。</div>
+            </li>
+            <li style="padding:6px 0;border-bottom:1px solid #f0f0f0;">
+                <strong>5. 熟悉你的 PS</strong>
+                <div style="color:#666;font-size:0.82rem;margin-top:4px;">你 PS 里说过的书/项目，每一个都可能被问到。</div>
+            </li>
+            <li style="padding:6px 0;">
+                <strong>6. 了解学院和导师</strong>
+                <div style="color:#666;font-size:0.82rem;margin-top:4px;">知道你申请的学院特点、导师研究方向。不用太深，了解就行。</div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>What If You Get Stuck? <span class="en">卡壳了怎么办？</span></h2>
+        <div class="tip-box">
+            <strong>💡 卡壳应对话术：</strong><br>
+            · "That's an interesting question. Let me think about that for a moment."<br>
+            · "I'm not sure about the exact answer, but here's how I'd approach it..."<br>
+            · "If I understand correctly, you're asking about...?" 先确认问题)<br>
+            · "Would it be something like...?" (提出你的想法，然后等反馈)<br>
+            · 被指出方向就说："Oh, I see what you mean. So that changes things because..."
+        </div>
+    </div>
+
+    <p class="footer">&copy; 2026 yunzhuan.icu | Oxbridge Interviews</p>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <div style="text-align:center;padding:8px 0;font-size:0.75rem;color:#aaa;">
+        <a href="../index.html" style="color:#aaa;text-decoration:none;">Home</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="index.html" style="color:#aaa;text-decoration:none;">Interviews</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="../tests/index.html" style="color:#aaa;text-decoration:none;">Tests</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="../contact.html" style="color:#aaa;text-decoration:none;">Contact</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="javascript:window.scrollTo(0,0)" style="color:#aaa;text-decoration:none;">Back to top</a>
+    </div>
+</body>
+</html>

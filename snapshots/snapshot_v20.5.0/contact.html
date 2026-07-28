@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact & Feedback - yunzhuan.icu</title>
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px 16px;
+            background: #f5f5f5;
+            color: #333;
+        }
+        .back-link {
+            color: #667eea;
+            text-decoration: none;
+            font-size: 0.85rem;
+            margin-bottom: 12px;
+            display: inline-block;
+        }
+        .back-link:hover { text-decoration: underline; }
+        h1 {
+            color: #333;
+            margin-bottom: 4px;
+            font-size: 1.5rem;
+        }
+        .subtitle {
+            color: #888;
+            font-size: 0.95rem;
+            margin-bottom: 4px;
+        }
+        .code-line {
+            color: #888;
+            font-size: 0.82rem;
+            margin-bottom: 18px;
+        }
+        .section {
+            background: white;
+            border-radius: 8px;
+            padding: 18px 20px;
+            margin-bottom: 14px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .section h2 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        .section h2 .en {
+            color: #999;
+            font-size: 0.8rem;
+            font-weight: normal;
+        }
+        .section p {
+            color: #555;
+            line-height: 1.7;
+            font-size: 0.92rem;
+        }
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 12px;
+            margin-top: 12px;
+        }
+        .contact-card {
+            display: block;
+            background: #f8f9fa;
+            border-radius: 6px;
+            padding: 14px 16px;
+            text-decoration: none;
+            border-left: 3px solid #667eea;
+            transition: all 0.15s ease;
+        }
+        .contact-card:hover {
+            background: #f0f2ff;
+            border-left-color: #764ba2;
+        }
+        .contact-card .label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #333;
+        }
+        .contact-card .desc {
+            font-size: 0.8rem;
+            color: #888;
+            margin-top: 4px;
+            line-height: 1.5;
+        }
+        form {
+            margin-top: 12px;
+        }
+        .form-group {
+            margin-bottom: 12px;
+        }
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            color: #555;
+            margin-bottom: 4px;
+            font-weight: 500;
+        }
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-family: inherit;
+            background: #fff;
+            color: #333;
+        }
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        .submit-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background 0.15s ease;
+        }
+        .submit-btn:hover {
+            background: #5a67d8;
+        }
+        .form-note {
+            font-size: 0.78rem;
+            color: #aaa;
+            margin-top: 8px;
+        }
+        .contrib-list {
+            list-style: none;
+            margin-top: 10px;
+        }
+        .contrib-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: #555;
+        }
+        .contrib-list li:last-child { border-bottom: none; }
+        .contrib-list .step {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            font-size: 0.75rem;
+            padding: 2px 8px;
+            border-radius: 4px;
+            margin-right: 8px;
+            font-weight: 600;
+        }
+        .giscus-container {
+            margin-top: 14px;
+        }
+        .footer { text-align: center; margin-top: 20px; color: #999; font-size: 0.8rem; }
+    </style>
+    <link rel="stylesheet" href="./css/theme.css">
+    <link rel="manifest" href="./manifest.json">
+    <meta name="theme-color" content="#667eea">
+    <script src="./js/theme.js"></script>
+    <script>
+    window.SUPABASE_CONFIG = {{
+        url: 'https://otfjbzjvkoectpejhxar.supabase.co',
+        anonKey: 'sb_publishable_SBRF6ewKH-se3dNlqFwsXQ_lObhamTr'
+    }};
+    </script>
+    <script src="./js/auth.js"></script>
+    <script src="./js/favorites.js"></script>
+    <script src="./js/pwa.js"></script>
+    <script src="./js/mobile-nav.js"></script>
+    <script src="./js/breadcrumbs.js"></script>
+</head>
+<body>
+    <a href="index.html" class="back-link">← Back to Home</a>
+
+    <h1>Contact &amp; Feedback</h1>
+    <p class="subtitle">联系我们 / 反馈建议</p>
+    <p class="code-line">Questions · Bug reports · Feature requests · Contributions</p>
+
+    <div class="section">
+        <h2>Quick Contact <span class="en">快速联系</span></h2>
+        <p>选择你最方便的方式联系我们：</p>
+        <div class="contact-grid">
+            <a href="https://github.com/Wadesha/yunzhuan.icu/issues" target="_blank" class="contact-card">
+                <span class="label">GitHub Issues</span>
+                <span class="desc">Bug 反馈 / 功能建议 / 技术讨论<br>最推荐，便于追踪和归档</span>
+            </a>
+            <a href="mailto:your-email@example.com" class="contact-card">
+                <span class="label">Email</span>
+                <span class="desc">商务合作 / 隐私问题 / 其他<br>your-email@example.com</span>
+            </a>
+            <a href="#comment-form" class="contact-card">
+                <span class="label">Online Form</span>
+                <span class="desc">在线留言 / 快速反馈<br>填写下方表单即可</span>
+            </a>
+            <a href="#comments" class="contact-card">
+                <span class="label">Giscus Comments</span>
+                <span class="desc">公开讨论 / 社区交流<br>基于 GitHub Discussions</span>
+            </a>
+        </div>
+    </div>
+
+    <div class="section" id="comment-form">
+        <h2>Feedback Form <span class="en">在线反馈</span></h2>
+        <p>有任何建议、问题或想法，欢迎通过以下方式告诉我们：</p>
+        <div class="contact-grid" style="margin-top:14px;">
+            <a href="https://github.com/Wadesha/yunzhuan.icu/issues/new/choose" target="_blank" class="contact-card">
+                <span class="label">New Issue</span>
+                <span class="desc">提交 Bug / 功能建议<br>最推荐，便于追踪和归档</span>
+            </a>
+            <a href="https://github.com/Wadesha/yunzhuan.icu/discussions" target="_blank" class="contact-card">
+                <span class="label">Discussions</span>
+                <span class="desc">公开讨论 / 提问交流<br>基于 GitHub Discussions</span>
+            </a>
+            <a href="#comments" class="contact-card">
+                <span class="label">Page Comments</span>
+                <span class="desc">本页留言 / 快速反馈<br>需 GitHub 账号登录</span>
+            </a>
+            <a href="mailto:13114793260@163.com" class="contact-card">
+                <span class="label">Email</span>
+                <span class="desc">商务合作 / 隐私问题<br>13114793260@163.com</span>
+            </a>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>How to Request Features <span class="en">如何提需求</span></h2>
+        <p>如果你希望我们增加新功能、新页面或新内容，可以按照以下方式提出：</p>
+        <ul class="contrib-list">
+            <li>
+                <span class="step">1</span>
+                <strong>GitHub Issues</strong>：在 <a href="https://github.com/Wadesha/yunzhuan.icu/issues" target="_blank" style="color:#667eea;">仓库 Issues</a> 中创建一条，详细描述你的需求。
+            </li>
+            <li>
+                <span class="step">2</span>
+                <strong>Discussions 讨论</strong>：在 <a href="https://github.com/Wadesha/yunzhuan.icu/discussions" target="_blank" style="color:#667eea;">Discussions</a> 中发帖交流，适合开放性讨论。
+            </li>
+            <li>
+                <span class="step">3</span>
+                <strong>页面留言</strong>：在本页底部 Giscus 评论区留言，适合小建议和快速交流。
+            </li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Contributing <span class="en">参与开发</span></h2>
+        <p>欢迎参与网站建设！以下是一些参与方式：</p>
+        <ul class="contrib-list">
+            <li>
+                <span class="step">代码</span>
+                Fork 仓库，修改后提交 Pull Request。
+            </li>
+            <li>
+                <span class="step">内容</span>
+                补充学科内容、学校信息、考试资料等，提交 PR 或发邮件。
+            </li>
+            <li>
+                <span class="step">翻译</span>
+                帮助完善中英文双语内容，确保表述准确地道。
+            </li>
+            <li>
+                <span class="step">反馈</span>
+                发现 Bug 或有好点子，通过 Issues 告诉我们。
+            </li>
+        </ul>
+        <p style="margin-top:12px;font-size:0.85rem;color:#888;">
+            仓库地址：<a href="https://github.com/Wadesha/yunzhuan.icu" target="_blank" style="color:#667eea;">github.com/Wadesha/yunzhuan.icu</a>
+        </p>
+    </div>
+
+    <div class="section" id="comments">
+        <h2>Discussion <span class="en">留言讨论</span></h2>
+        <p>有什么想说的？欢迎在下方留言（基于 GitHub Discussions，需要 GitHub 账号）：</p>
+        <div class="giscus-container" id="giscus">
+            <p style="text-align:center;color:#aaa;font-size:0.85rem;padding:20px 0;">
+                💬 评论区待启用<br>
+                <span style="font-size:0.78rem;">Giscus 配置完成后即可在此留言</span>
+            </p>
+        </div>
+        <script>
+            var giscusConfig = {
+                repo: "Wadesha/yunzhuan.icu",
+                repoId: "R_kgDOTc213w",
+                category: "General",
+                categoryId: "DIC_kwDOTc21384DCBjM",
+                mapping: "pathname",
+                strict: "0",
+                reactionsEnabled: "1",
+                emitMetadata: "0",
+                inputPosition: "bottom",
+                theme: "preferred_color_scheme",
+                lang: "en"
+            };
+            if (giscusConfig.repoId && giscusConfig.categoryId) {
+                var s = document.createElement("script");
+                s.src = "https://giscus.app/client.js";
+                s.setAttribute("data-repo", giscusConfig.repo);
+                s.setAttribute("data-repo-id", giscusConfig.repoId);
+                s.setAttribute("data-category", giscusConfig.category);
+                s.setAttribute("data-category-id", giscusConfig.categoryId);
+                s.setAttribute("data-mapping", giscusConfig.mapping);
+                s.setAttribute("data-strict", giscusConfig.strict);
+                s.setAttribute("data-reactions-enabled", giscusConfig.reactionsEnabled);
+                s.setAttribute("data-emit-metadata", giscusConfig.emitMetadata);
+                s.setAttribute("data-input-position", giscusConfig.inputPosition);
+                s.setAttribute("data-theme", giscusConfig.theme);
+                s.setAttribute("data-lang", giscusConfig.lang);
+                s.crossOrigin = "anonymous";
+                s.async = true;
+                document.getElementById("giscus").innerHTML = "";
+                document.getElementById("giscus").appendChild(s);
+            }
+        </script>
+    </div>
+
+    <p class="footer">© 2026 yunzhuan.icu | Contact &amp; Feedback</p>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <div style="text-align:center;padding:8px 0;font-size:0.75rem;color:#aaa;">
+        <a href="index.html" style="color:#aaa;text-decoration:none;">Home</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="intl-exams/index.html" style="color:#aaa;text-decoration:none;">International Exams</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="contact.html" style="color:#aaa;text-decoration:none;">Contact</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="javascript:window.scrollTo(0,0)" style="color:#aaa;text-decoration:none;">Back to top</a>
+    </div>
+</body>
+</html>

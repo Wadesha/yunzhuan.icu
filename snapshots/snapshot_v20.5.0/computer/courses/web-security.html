@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web安全 - Web Security - yunzhuan.icu</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 760px; margin: 0 auto; padding: 20px 16px; background: #f5f5f5; color: #333; }
+        .back-link { color: #667eea; text-decoration: none; font-size: 0.85rem; margin-bottom: 12px; display: inline-block; }
+        .back-link:hover { text-decoration: underline; }
+        h1 { color: #333; margin-bottom: 4px; font-size: 1.4rem; }
+        .en-name { color: #888; font-size: 0.95rem; margin-bottom: 14px; font-weight: normal; }
+        .section { background: white; border-radius: 8px; padding: 14px 18px; margin-bottom: 10px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+        .section h2 { color: #667eea; margin-bottom: 8px; font-size: 1rem; font-weight: 600; }
+        .section h2 .en { color: #999; font-size: 0.8rem; font-weight: normal; }
+        .section p { color: #333; line-height: 1.7; font-size: 0.92rem; }
+        .meta { font-size: 0.82rem; color: #888; margin-bottom: 8px; }
+        .footer { text-align: center; margin-top: 20px; color: #999; font-size: 0.8rem; }
+    </style>
+<link rel="stylesheet" href="/css/collapse.css">
+</head>
+<body>
+    <a href="../../index.html" class="back-link">← 返回首页</a>
+    <h1>Web安全</h1>
+    <p class="en-name">Web Security</p>
+    <div class="section">
+        <h2>课程介绍 <span class="en">Course Introduction</span></h2>
+        <p class="meta">学分：3 | 先修课：计算机网络、数据库系统 | 学期：第6学期</p>
+        <p>Web安全课程聚焦Web应用的安全威胁与防护技术。涵盖OWASP Top 10漏洞，包括SQL注入、XSS、CSRF、SSRF、文件上传漏洞、反序列化漏洞、认证与会话管理缺陷等。学生将学习漏洞原理、渗透测试方法、安全编码规范，以及Web应用防火墙（WAF）的配置与使用。</p>
+        <p style="margin-top:8px;">Web Security focuses on security threats and protection techniques for web applications. The course covers OWASP Top 10 vulnerabilities including SQL injection, XSS, CSRF, SSRF, file upload vulnerabilities, deserialization flaws, and authentication/session management defects. Students learn vulnerability principles, penetration testing methods, secure coding standards, and configuration of Web Application Firewalls (WAF).</p>
+    </div>
+        <div class="section">
+        <h2>大作业 <span class="en">Final Project</span></h2>
+        <div>
+<p class="meta">作业标题：Web应用渗透测试与漏洞修复</p>
+        <p>对给定Web应用进行渗透测试，发现并验证SQL注入、XSS、CSRF等漏洞，编写漏洞利用PoC，提出修复方案并实施代码加固，提交测试报告与修复前后对比。</p>
+        <p style="margin-top:8px;">Perform penetration testing on a given web application, identify and verify vulnerabilities such as SQL injection, XSS, and CSRF, write proof-of-concept exploits, propose and implement fixes, and submit a test report with before-and-after comparison.</p>
+        </div>
+    </div>
+    <div class="section">
+        <h2>实施步骤 <span class="en">Implementation Steps</span></h2>
+        <div><div style="background:#f0f4ff;padding:10px 14px;border-radius:6px;margin-bottom:12px;border-left:3px solid #667eea;font-size:0.88rem;">
+<b>📋 示例</b>：对一个Web应用做渗透测试并修复漏洞，比如一个开源的博客系统。你需要用Burp Suite或OWASP ZAP扫描常见漏洞（SQL注入、XSS、CSRF），利用漏洞获取敏感数据，然后编写修复代码并验证安全性。
+</div>
+
+<div class="step-item">
+    <div class="step-number">步骤 1</div>
+    <div class="step-title">漏洞扫描</div>
+    <div class="step-desc">使用扫描工具对目标网站进行安全扫描，识别潜在漏洞</div>
+    <div class="step-output">产出：扫描报告</div>
+</div><div class="step-item">
+    <div class="step-number">步骤 2</div>
+    <div class="step-title">漏洞验证</div>
+    <div class="step-desc">手动验证SQL注入、XSS、CSRF等漏洞的存在性</div>
+    <div class="step-output">产出：漏洞验证报告</div>
+</div><div class="step-item">
+    <div class="step-number">步骤 3</div>
+    <div class="step-title">漏洞利用与修复</div>
+    <div class="step-desc">分析漏洞利用方式，提出修复方案并验证修复效果</div>
+    <div class="step-output">产出：修复方案</div>
+</div><div class="step-item">
+    <div class="step-number">步骤 4</div>
+    <div class="step-title">安全加固</div>
+    <div class="step-desc">实施安全加固措施，包括输入过滤、输出编码、权限控制等</div>
+    <div class="step-output">产出：加固方案</div>
+</div><div class="step-item">
+    <div class="step-number">步骤 5</div>
+    <div class="step-title">安全报告</div>
+    <div class="step-desc">撰写完整的安全评估报告</div>
+    <div class="step-output">产出：安全评估报告</div>
+</div><div style="margin-top:14px;padding-top:10px;border-top:1px solid #eee;">
+    <h3 style="font-size:0.9rem;color:#667eea;margin-bottom:8px;">Steps</h3><div class="step-item">
+    <div class="step-number">Step 1</div>
+    <div class="step-title">Vulnerability Scanning</div>
+    <div class="step-desc">Scan target website, identify potential vulnerabilities</div>
+    <div class="step-output">Deliverable: Scan Report</div>
+</div><div class="step-item">
+    <div class="step-number">Step 2</div>
+    <div class="step-title">Vulnerability Verification</div>
+    <div class="step-desc">Manually verify SQL injection, XSS, CSRF vulnerabilities</div>
+    <div class="step-output">Deliverable: Verification Report</div>
+</div><div class="step-item">
+    <div class="step-number">Step 3</div>
+    <div class="step-title">Exploitation & Fix</div>
+    <div class="step-desc">Analyze exploitation methods, propose and verify fixes</div>
+    <div class="step-output">Deliverable: Fix Plan</div>
+</div><div class="step-item">
+    <div class="step-number">Step 4</div>
+    <div class="step-title">Security Hardening</div>
+    <div class="step-desc">Implement input filtering, output encoding, access control</div>
+    <div class="step-output">Deliverable: Hardening Plan</div>
+</div><div class="step-item">
+    <div class="step-number">Step 5</div>
+    <div class="step-title">Security Report</div>
+    <div class="step-desc">Prepare comprehensive security assessment report</div>
+    <div class="step-output">Deliverable: Security Assessment Report</div>
+</div></div>
+        
+    <div class="course-nav" style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:16px;padding:12px 16px;background:white;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,0.05);flex-wrap:wrap;">
+    <a href="../cyber.html" style="color:#667eea;text-decoration:none;font-size:0.88rem;">← 返回网络安全</a>
+    <a href="digital-forensics.html" style="color:#667eea;text-decoration:none;font-size:0.88rem;">下一门：数字取证 →</a>
+    <a href="#" onclick="goRandomCourse();return false;" style="color:#667eea;text-decoration:none;font-size:0.88rem;">🎲 Random Course</a>
+</div>
+
+    <p class="footer">© 2026 yunzhuan.icu</p>
+<!-- Vercel Analytics -->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script defer src="/js/random-course.js"></script>
+<div style="text-align:center;padding:8px 0;font-size:0.75rem;color:#aaa;">
+    <a href="../../prerequisite/" style="color:#aaa;text-decoration:none;">Prerequisites</a>
+    <span style="margin:0 6px;">·</span>
+    <a href="../../intl-exams/index.html" style="color:#aaa;text-decoration:none;">International Exams</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="../../contact.html" style="color:#aaa;text-decoration:none;">Contact</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="javascript:window.scrollTo(0,0)" style="color:#aaa;text-decoration:none;">Back to top</a>
+    <span style="margin:0 6px;">·</span>
+    <a href="../../index.html" style="color:#aaa;text-decoration:none;">Home</a>
+</div>
+<!-- footer-links -->
+</body>
+</html>

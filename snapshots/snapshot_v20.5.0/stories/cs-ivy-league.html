@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>双非到藤校 CS：我是如何逆袭的 - yunzhuan.icu</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 780px;
+            margin: 0 auto;
+            padding: 0 16px 30px;
+            background: #f5f5f5;
+            color: #333;
+            line-height: 1.7;
+        }
+        .navbar {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            padding: 12px 0;
+            margin-bottom: 20px;
+        }
+        .logo { display: none; }
+        .nav-links {
+            display: flex;
+            gap: 18px;
+            align-items: center;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: #555;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: color 0.15s;
+        }
+        .nav-links a:hover { color: #667eea; }
+        .nav-links .cn {
+            font-size: 0.7rem;
+            color: #999;
+            margin-left: 2px;
+        }
+        .back-link {
+            color: #667eea;
+            text-decoration: none;
+            font-size: 0.85rem;
+            margin-bottom: 12px;
+            display: inline-block;
+        }
+        .back-link:hover { text-decoration: underline; }
+        .article-cover {
+            height: 160px;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            border-radius: 12px;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+        }
+        .article-category {
+            display: inline-block;
+            font-size: 0.75rem;
+            padding: 3px 10px;
+            border-radius: 12px;
+            background: #ede9fe;
+            color: #5b21b6;
+            margin-bottom: 12px;
+        }
+        h1 {
+            font-size: 1.6rem;
+            color: #333;
+            margin-bottom: 12px;
+            line-height: 1.4;
+        }
+        .article-meta {
+            display: flex;
+            gap: 16px;
+            color: #888;
+            font-size: 0.82rem;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .article-body {
+            background: white;
+            padding: 28px 32px;
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            margin-bottom: 24px;
+        }
+        .article-body h2 {
+            font-size: 1.2rem;
+            color: #333;
+            margin: 28px 0 12px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid #667eea;
+            display: inline-block;
+        }
+        .article-body h2:first-child { margin-top: 0; }
+        .article-body h3 {
+            font-size: 1.05rem;
+            color: #444;
+            margin: 20px 0 8px;
+        }
+        .article-body p {
+            margin-bottom: 14px;
+            color: #444;
+        }
+        .article-body ul, .article-body ol {
+            margin: 10px 0 14px 24px;
+        }
+        .article-body li { margin-bottom: 6px; color: #444; }
+        .article-body strong { color: #667eea; }
+        .article-body blockquote {
+            border-left: 4px solid #667eea;
+            padding: 8px 16px;
+            margin: 16px 0;
+            background: #f8f9ff;
+            color: #555;
+            border-radius: 0 6px 6px 0;
+        }
+        .highlight-box {
+            background: linear-gradient(135deg, #f8f9ff 0%, #eef2ff 100%);
+            border: 1px solid #e0e7ff;
+            padding: 16px 20px;
+            border-radius: 8px;
+            margin: 18px 0;
+        }
+        .highlight-box .title {
+            font-weight: 600;
+            color: #4338ca;
+            margin-bottom: 6px;
+            font-size: 0.95rem;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin: 16px 0;
+        }
+        .stat-card {
+            background: #f8f9ff;
+            padding: 12px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .stat-card .num {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #667eea;
+        }
+        .stat-card .label {
+            font-size: 0.75rem;
+            color: #888;
+            margin-top: 2px;
+        }
+        .comments-section {
+            background: white;
+            padding: 24px 28px;
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .comments-section h2 {
+            font-size: 1.1rem;
+            color: #333;
+            margin-bottom: 16px;
+        }
+        .comments-placeholder {
+            text-align: center;
+            padding: 30px 20px;
+            color: #888;
+            background: #fafafa;
+            border-radius: 8px;
+            border: 1px dashed #e5e7eb;
+        }
+        .comments-placeholder .icon {
+            font-size: 2rem;
+            margin-bottom: 8px;
+        }
+        .comments-placeholder p {
+            font-size: 0.88rem;
+            margin-bottom: 6px;
+        }
+        .comments-placeholder code {
+            background: #f0f0f0;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 0.8rem;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 24px;
+            padding-top: 16px;
+            border-top: 1px solid #e5e7eb;
+            font-size: 0.8rem;
+            color: #999;
+        }
+        @media (max-width: 600px) {
+            .article-body { padding: 20px 18px; }
+            h1 { font-size: 1.3rem; }
+            .stats-grid { grid-template-columns: repeat(3, 1fr); gap: 6px; }
+            .nav-links .cn { display: none; }
+        }
+    </style>
+    <link rel="stylesheet" href="../css/theme.css">
+    <script src="../js/theme.js"></script>
+    <script src="../js/search-shortcut.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="../index.html" class="logo">yunzhuan<span>.icu</span></a>
+        <div class="nav-links">
+            <a href="../index.html">Home<span class="cn">首页</span></a>
+            <a href="../majors/index.html">Majors<span class="cn">专业</span></a>
+            <a href="../schools/index.html">Schools<span class="cn">学校</span></a>
+            <a href="../guides/index.html">Guides<span class="cn">指南</span></a>
+            <a href="index.html" style="color:#667eea;font-weight:600;">Stories<span class="cn">经验</span></a>
+            <a href="../search.html">Search<span class="cn">搜索</span></a>
+        </div>
+    </nav>
+
+    <a href="index.html" class="back-link">&larr; Back to Stories</a>
+
+    <div class="article-cover">💻</div>
+
+    <span class="article-category">CS / 计算机</span>
+    <h1>双非到藤校 CS：我是如何逆袭的</h1>
+
+    <div class="article-meta">
+        <span>作者：匿名校友</span>
+        <span>2026 Fall</span>
+        <span>8 分钟阅读</span>
+    </div>
+
+    <div class="article-body">
+        <p>先报背景：国内双非一本，CS 专业，GPA 3.4/4.0，托福 105，GRE 325+3.5。两段国内实习，一段水科研，无牛推。最后录取了 Columbia MSCS、Cornell MEng、USC MSCS 等。</p>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="num">3.4</div>
+                <div class="label">GPA</div>
+            </div>
+            <div class="stat-card">
+                <div class="num">105</div>
+                <div class="label">TOEFL</div>
+            </div>
+            <div class="stat-card">
+                <div class="num">325</div>
+                <div class="label">GRE</div>
+            </div>
+        </div>
+
+        <h2>背景短板分析</h2>
+        <p>说实话，我最开始对申请藤校是不抱希望的。双非+GPA不高，在 CS 这个热门方向里基本就是"彩票"级别。但我最后还是拿到了 Columbia 的录取，我觉得主要是<strong>背景提升的策略</strong>做对了。</p>
+
+        <p>先说说我的短板：</p>
+        <ul>
+            <li>本科学校双非，在国内知名度不高</li>
+            <li>GPA 3.4，对于 CS 硕士申请来说偏低</li>
+            <li>没有顶级大厂实习（只有两段中小厂）</li>
+            <li>没有顶会论文，科研经历很水</li>
+        </ul>
+
+        <h2>我做对了什么</h2>
+
+        <h3>1. 精准的选校定位</h3>
+        <p>我没有盲目冲所有藤校，而是做了详细的调研。Columbia 的 MSCS 项目规模相对大一些，对背景多样性比较包容；Cornell MEng 是职业导向，更看重实习经历。这些都是我的"机会点"。</p>
+
+        <div class="highlight-box">
+            <div class="title">💡 选校策略</div>
+            <p>不要只看排名，要研究每个项目的<strong>招生偏好</strong>。有的项目偏科研（要论文），有的偏就业（要实习），有的看重多样性。找到和你背景匹配的项目，比盲目冲高排名有用得多。</p>
+        </div>
+
+        <h3>2. 文书讲了一个好故事</h3>
+        <p>我的文书主线是：<strong>"从迷茫到找到方向"</strong>。大一大二 GPA 不高是因为不知道自己想做什么，后来通过实习和项目找到了自己的兴趣方向（我选的是 NLP），然后在这个方向上持续深耕。</p>
+
+        <blockquote>
+            "Admissions officers don't care about your perfect GPA — they care about your trajectory and your story."
+        </blockquote>
+
+        <p>关键是要<strong>解释清楚你的低GPA原因</strong>，但不要找借口，而是展示成长和进步。我大三的 GPA 是 3.8，这也是一个上升趋势的证明。</p>
+
+        <h3>3. 推荐信有真实细节</h3>
+        <p>虽然没有牛推，但我的两封学术推荐信都是和我有深入合作的老师写的。我提前半年就开始跟老师做项目，每周都有交流，所以推荐信里有很多具体的故事和细节，而不是泛泛的"this student is excellent"。</p>
+
+        <h2>时间线复盘</h2>
+
+        <h3>申请前一年（大三上）</h3>
+        <ul>
+            <li>确定申请方向：CS - NLP track</li>
+            <li>开始刷托福，目标 105+</li>
+            <li>加入实验室做科研</li>
+        </ul>
+
+        <h3>申请年 3-6 月</h3>
+        <ul>
+            <li>GRE 出分 325+3.5</li>
+            <li>确定选校名单（8 所学校）</li>
+            <li>开始写文书初稿</li>
+        </ul>
+
+        <h3>申请年 9-12 月</h3>
+        <ul>
+            <li>推荐信全部搞定</li>
+            <li>文书改了 5 版以上</li>
+            <li>12 月中旬前提交完所有申请</li>
+        </ul>
+
+        <h2>给学弟学妹的建议</h2>
+
+        <ol>
+            <li><strong>不要因为背景不好就放弃</strong> — 美国大学录取是 holistic review，短板可以用长板弥补</li>
+            <li><strong>早规划，早准备</strong> — 我是大三才开始准备，其实有点晚了，越早准备越从容</li>
+            <li><strong>文书一定要找人改</strong> — 自己写的东西永远有盲点，找学长学姐或者专业人士看看</li>
+            <li><strong>心态要稳</strong> — 申请季焦虑是正常的，按部就班做好每件事，结果不会差</li>
+        </ol>
+
+        <div class="highlight-box">
+            <div class="title">🎯 最后想说</div>
+            <p>双非不是原罪，GPA 不高也不代表你不行。美国研究生申请看的是<strong>整体 package</strong>，找到你的亮点，把它放大，讲一个让人信服的故事，你就有机会。</p>
+            <p>祝大家都能拿到梦校 offer！</p>
+        </div>
+    </div>
+
+    <div class="comments-section">
+        <h2>💬 Comments 评论区</h2>
+        <div class="comments-placeholder" id="commentsContainer">
+            <div class="icon">💬</div>
+            <p>评论系统待接入</p>
+            <p style="font-size:0.8rem;">支持 Giscus / Utterances 等 GitHub 评论系统</p>
+            <p style="font-size:0.75rem;margin-top:8px;">配置后自动启用：<code>REPO_OWNER/REPO_NAME</code></p>
+        </div>
+    </div>
+
+    <p class="footer">© 2026 yunzhuan.icu &nbsp;|&nbsp; Version v20.0.0</p>
+
+<script>
+// Giscus comment system loader
+// Uncomment and configure to enable:
+/*
+function loadComments() {
+    const script = document.createElement('script');
+    script.src = 'https://giscus.app/client.js';
+    script.setAttribute('data-repo', 'YOUR_GITHUB_REPO');
+    script.setAttribute('data-repo-id', 'YOUR_REPO_ID');
+    script.setAttribute('data-category', 'General');
+    script.setAttribute('data-category-id', 'YOUR_CATEGORY_ID');
+    script.setAttribute('data-mapping', 'pathname');
+    script.setAttribute('data-strict', '0');
+    script.setAttribute('data-reactions-enabled', '1');
+    script.setAttribute('data-emit-metadata', '0');
+    script.setAttribute('data-input-position', 'bottom');
+    script.setAttribute('data-theme', 'light');
+    script.setAttribute('data-lang', 'en');
+    script.crossOrigin = 'anonymous';
+    script.async = true;
+    document.getElementById('commentsContainer').innerHTML = '';
+    document.getElementById('commentsContainer').appendChild(script);
+}
+loadComments();
+*/
+</script>
+</body>
+</html>

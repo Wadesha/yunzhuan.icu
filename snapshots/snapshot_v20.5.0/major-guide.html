@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to Choose a Major - 专业选择指南 - yunzhuan.icu</title>
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 16px 20px;
+            background: #f5f5f5;
+            color: #333;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            margin-bottom: 16px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .logo {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #667eea;
+            text-decoration: none;
+        }
+        .logo span { color: #764ba2; }
+        .nav-links {
+            display: flex;
+            gap: 18px;
+            align-items: center;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: #555;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: color 0.15s;
+        }
+        .nav-links a:hover { color: #667eea; }
+        .nav-links .cn {
+            font-size: 0.7rem;
+            color: #aaa;
+            margin-left: 2px;
+        }
+        @media (max-width: 768px) {
+            .navbar { flex-wrap: wrap; gap: 8px; }
+            .nav-links { gap: 12px; }
+            .nav-links a { font-size: 0.78rem; }
+            .nav-links .cn { display: none; }
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 4px;
+            font-size: 1.5rem;
+        }
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 16px;
+            font-size: 0.9rem;
+        }
+        .section {
+            background: white;
+            border-radius: 8px;
+            padding: 14px 18px;
+            margin-bottom: 10px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .section h2 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        .section h2 .cn { color: #999; font-size: 0.8rem; font-weight: normal; margin-left: 6px; }
+        .section p { color: #333; line-height: 1.7; font-size: 0.92rem; margin-bottom: 8px; }
+        .tip-box {
+            background: #fff8e1;
+            border-left: 3px solid #ff8f00;
+            padding: 10px 14px;
+            border-radius: 0 6px 6px 0;
+            margin-top: 10px;
+            font-size: 0.82rem;
+            color: #5d4037;
+            line-height: 1.6;
+        }
+        .tip-box strong { color: #e65100; }
+        .success-box {
+            background: #e8f5e9;
+            border-left: 3px solid #2e7d32;
+            padding: 10px 14px;
+            border-radius: 0 6px 6px 0;
+            margin-top: 10px;
+            font-size: 0.82rem;
+            color: #1b5e20;
+            line-height: 1.6;
+        }
+        .success-box strong { color: #2e7d32; }
+        .warning-box {
+            background: #ffebee;
+            border-left: 3px solid #c62828;
+            padding: 10px 14px;
+            border-radius: 0 6px 6px 0;
+            margin-top: 10px;
+            font-size: 0.82rem;
+            color: #b71c1c;
+            line-height: 1.6;
+        }
+        .warning-box strong { color: #c62828; }
+        .info-list { list-style: none; }
+        .info-list li {
+            padding: 8px 0 8px 20px;
+            position: relative;
+            font-size: 0.88rem;
+            color: #444;
+            line-height: 1.5;
+            border-bottom: 1px solid #f5f5f5;
+        }
+        .info-list li:last-child { border-bottom: none; }
+        .info-list li::before {
+            content: '✦';
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-size: 0.7rem;
+            top: 11px;
+        }
+        .info-list li strong { color: #333; }
+        .three-circles {
+            display: flex;
+            justify-content: center;
+            margin: 15px 0;
+            position: relative;
+            height: 180px;
+        }
+        .circle {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-align: center;
+            position: absolute;
+            opacity: 0.8;
+        }
+        .circle-1 { background: #fecaca; color: #991b1b; top: 0; left: 50%; transform: translateX(-80%); }
+        .circle-2 { background: #bfdbfe; color: #1e40af; top: 0; left: 50%; transform: translateX(-20%); }
+        .circle-3 { background: #bbf7d0; color: #166534; top: 60px; left: 50%; transform: translateX(-50%); }
+        .circle-overlap {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: #c4b5fd;
+            color: #4c1d95;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: 700;
+            position: absolute;
+            top: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            text-align: center;
+        }
+        .footer { text-align: center; margin-top: 20px; color: #999; font-size: 0.8rem; }
+        .step-number {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            line-height: 24px;
+            text-align: center;
+            background: #667eea;
+            color: white;
+            border-radius: 50%;
+            font-size: 0.78rem;
+            font-weight: 600;
+            margin-right: 8px;
+        }
+        .quiz-box {
+            background: #f0f9ff;
+            border: 1px solid #bae6fd;
+            border-radius: 8px;
+            padding: 12px;
+            margin: 10px 0;
+        }
+        .quiz-box h4 {
+            color: #0369a1;
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+        }
+        .quiz-box p {
+            font-size: 0.85rem;
+            color: #555;
+            line-height: 1.6;
+        }
+    </style>
+    <link rel="stylesheet" href="./css/theme.css">
+    <link rel="manifest" href="./manifest.json">
+    <meta name="theme-color" content="#667eea">
+    <script src="./js/theme.js"></script>
+    <script>
+    window.SUPABASE_CONFIG = {{
+        url: 'https://otfjbzjvkoectpejhxar.supabase.co',
+        anonKey: 'sb_publishable_SBRF6ewKH-se3dNlqFwsXQ_lObhamTr'
+    }};
+    </script>
+    <script src="./js/auth.js"></script>
+    <script src="./js/favorites.js"></script>
+    <script src="./js/pwa.js"></script>
+    <script src="./js/mobile-nav.js"></script>
+    <script src="./js/breadcrumbs.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="../index.html" class="logo">yunzhuan<span>.icu</span></a>
+        <div class="nav-links">
+            <a href="../index.html">Majors<span class="cn">专业</span></a>
+            <a href="../schools/index.html">Schools<span class="cn">学校</span></a>
+            <a href="../tests/index.html">Tests<span class="cn">考试</span></a>
+            <a href="../guides/index.html">Guides<span class="cn">指南</span></a>
+            <a href="../resources.html">Resources<span class="cn">资源</span></a>
+            <a href="search.html">Search<span class="cn">搜索</span></a>
+            <a href="../contact.html">Contact<span class="cn">联系</span></a>
+        </div>
+    </nav>
+
+    <h1>How to Choose a Major</h1>
+    <p class="subtitle">专业选择完全指南 · 美国本科</p>
+
+    <div class="section">
+        <h2>Good News! <span class="cn">好消息</span></h2>
+        <div class="success-box">
+            <strong>🎉 美国大学换专业很灵活！</strong><br>
+            很多人大一入学还不确定专业，或者入学后换专业。
+            美国大学鼓励探索，一般大二结束再 declare major（定专业）都可以。
+            所以不用太焦虑，先读起来，慢慢找方向！
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>The Three Circles <span class="cn">三个圈理论</span></h2>
+        <p style="font-size:0.9rem;color:#555;text-align:center;">
+            理想的专业是这三个圈的交集：
+        </p>
+        <div class="three-circles">
+            <div class="circle circle-1">What you<br>love<br>你热爱的</div>
+            <div class="circle circle-2">What you're<br>good at<br>你擅长的</div>
+            <div class="circle circle-3">What the<br>world needs<br>有价值的</div>
+            <div class="circle-overlap">Ideal<br>Major</div>
+        </div>
+        <p style="font-size:0.85rem;color:#666;text-align:center;margin-top:10px;">
+            三者交集 = 理想专业 / 理想职业
+        </p>
+    </div>
+
+    <div class="section">
+        <h2>Step 1: Know Yourself <span class="cn">第一步：了解自己</span></h2>
+        
+        <div class="quiz-box">
+            <h4>🤔 问问自己这些问题：</h4>
+            <p>
+                1. 我平时喜欢做什么？（不给钱也愿意做的事）<br>
+                2. 我做什么的时候最投入、最开心？<br>
+                3. 我擅长什么？什么事别人觉得难我觉得简单？<br>
+                4. 我最关心什么问题？<br>
+                5. 我理想的工作是什么样的？<br>
+                6. 我想过什么样的生活？
+            </p>
+        </div>
+
+        <ul class="info-list">
+            <li><strong>兴趣是最大的动力：</strong>学自己喜欢的东西，再苦也觉得值</li>
+            <li><strong>但光有兴趣不够：</strong>也要考虑你有没有天赋，能不能做好</li>
+            <li><strong>还要考虑现实：</strong>就业前景、薪资、工作环境等</li>
+            <li><strong>没有完美答案：</strong>大部分人找不到完美的交集，找相对接近的就好</li>
+        </ul>
+
+        <div class="tip-box">
+            <strong>💡 小测试：</strong><br>
+            你可以做一些职业性格测试来了解自己，比如：<br>
+            · MBTI 性格测试<br>
+            · Holland Code 职业兴趣测试<br>
+            · CliftonStrengths 优势识别器<br>
+            · 还有我们的 <a href="major-quiz.html" style="color:#667eea;">专业测评工具</a><br>
+            这些只是参考，不要迷信，但可以帮你了解自己。
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Step 2: Explore Options <span class="cn">第二步：探索选项</span></h2>
+        <p style="font-size:0.9rem;color:#555;">
+            很多人只知道几个热门专业，其实美国大学有上百个专业可以选！
+            多了解一些，也许你会发现自己真正喜欢的。
+        </p>
+
+        <h3 style="font-size:0.9rem;color:#333;margin:10px 0 6px;">怎么探索：</h3>
+        <ul class="info-list">
+            <li><strong>上各种课：</strong>通识教育课就是让你探索的，选不同领域的课试试</li>
+            <li><strong>读专业介绍：</strong>去学校官网看各专业的课程设置和毕业要求</li>
+            <li><strong>看职业前景：</strong>了解这个专业毕业后能做什么、薪资如何</li>
+            <li><strong>找人聊：</strong>和学长学姐、教授、行业里的人聊聊</li>
+            <li><strong>实习/体验：</strong>有机会去实习或者 shadow（跟着上班一天）看看</li>
+            <li><strong>做项目：</strong>自己做点小项目，看看喜不喜欢</li>
+            <li><strong>看书/视频：</strong>了解这个领域在做什么</li>
+        </ul>
+
+        <div class="tip-box">
+            <strong>💡 别被名字骗了：</strong><br>
+            很多专业名字听起来和实际上的内容很不一样。
+            比如"认知科学"听起来像心理学，但其实包含计算机、语言学、哲学等很多东西。
+            一定要去看具体学什么课程，而不是只看名字！
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Step 3: Narrow Down <span class="cn">第三步：缩小范围</span></h2>
+        <p style="font-size:0.9rem;color:#555;">
+            探索之后，你可能有几个候选专业了。接下来可以从这几个维度来比较：
+        </p>
+
+        <table style="width:100%;border-collapse:collapse;font-size:0.85rem;margin-top:8px;">
+            <tr style="background:#ede9fe;">
+                <th style="padding:8px;text-align:left;color:#5b21b6;">维度</th>
+                <th style="padding:8px;text-align:left;color:#5b21b6;">思考</th>
+            </tr>
+            <tr style="border-bottom:1px solid #f5f5f5;">
+                <td style="padding:8px;"><strong>兴趣</strong></td>
+                <td style="padding:8px;color:#666;">我有多喜欢这个领域？</td>
+            </tr>
+            <tr style="border-bottom:1px solid #f5f5f5;">
+                <td style="padding:8px;"><strong>能力</strong></td>
+                <td style="padding:8px;color:#666;">我擅长吗？学起来吃力吗？</td>
+            </tr>
+            <tr style="border-bottom:1px solid #f5f5f5;">
+                <td style="padding:8px;"><strong>就业前景</strong></td>
+                <td style="padding:8px;color:#666;">好找工作吗？薪资怎么样？</td>
+            </tr>
+            <tr style="border-bottom:1px solid #f5f5f5;">
+                <td style="padding:8px;"><strong>工作内容</strong></td>
+                <td style="padding:8px;color:#666;">毕业后具体做什么工作？我喜欢吗？</td>
+            </tr>
+            <tr style="border-bottom:1px solid #f5f5f5;">
+                <td style="padding:8px;"><strong>工作环境</strong></td>
+                <td style="padding:8px;color:#666;">坐办公室？跑现场？出差多吗？</td>
+            </tr>
+            <tr style="border-bottom:1px solid #f5f5f5;">
+                <td style="padding:8px;"><strong>工作强度</strong></td>
+                <td style="padding:8px;color:#666;">996 还是朝九晚五？Work-life balance 如何？</td>
+            </tr>
+            <tr style="border-bottom:1px solid #f5f5f5;">
+                <td style="padding:8px;"><strong>稳定性</strong></td>
+                <td style="padding:8px;color:#666;">会不会容易被裁员？行业波动大吗？</td>
+            </tr>
+            <tr style="border-bottom:1px solid #f5f5f5;">
+                <td style="padding:8px;"><strong>发展空间</strong></td>
+                <td style="padding:8px;color:#666;">天花板高吗？越老越值钱还是青春饭？</td>
+            </tr>
+            <tr>
+                <td style="padding:8px;"><strong>读研必要性</strong></td>
+                <td style="padding:8px;color:#666;">本科毕业能找到工作吗？需要读研吗？</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>Step 4: Try It Out <span class="cn">第四步：亲身尝试</span></h2>
+        <p style="font-size:0.9rem;color:#555;">
+            光想是没用的，最好的方法是亲身体验一下。
+        </p>
+        <ul class="info-list">
+            <li><strong>上入门课：</strong>选这个专业的入门课，看看你喜不喜欢、能不能跟上</li>
+            <li><strong>做小项目：</strong>自己做点小项目，体验一下实际工作内容</li>
+            <li><strong>实习：</strong>暑假找个相关实习，最直接的体验</li>
+            <li><strong>Job Shadowing：</strong>跟着从业者上一天班，看看他们每天做什么</li>
+            <li><strong>读行业资讯：</strong>关注这个领域的新闻和公众号，看看是不是你感兴趣的</li>
+            <li><strong>加入社团：</strong>加入相关的学生社团，认识同好</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Step 5: Make a Decision <span class="cn">第五步：做决定</span></h2>
+        <p style="font-size:0.9rem;color:#555;">
+            收集了足够信息之后，该做决定了。
+        </p>
+        <div class="success-box">
+            <strong>✅ 做决定的方法：</strong><br>
+            · 列 pros and cons（优缺点清单）<br>
+            · 给每个维度打分（1-10分），加权算总分<br>
+            · 想象一下 5 年/10 年后的生活，你更想要哪种？<br>
+            · 听从内心——纠结到最后的两个选项，选让你更兴奋的那个<br>
+            · 不用追求完美，没有"错误"的选择
+        </div>
+        <div class="tip-box" style="margin-top:10px;">
+            <strong>💡 记住：</strong><br>
+            选专业不是一辈子的事。很多人毕业后做的工作和专业不对口，
+            或者工作几年后转行。你还有很多机会调整方向，不用一选定终身。
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Common Mistakes <span class="cn">常见误区</span></h2>
+        <div class="warning-box">
+            <strong>❌ 别踩这些坑：</strong><br>
+            · 只看名字选专业，不看具体学什么<br>
+            · 听爸妈/亲戚说什么好就学什么，不考虑自己<br>
+            · 什么热门学什么，不考虑自己合不合适<br>
+            · 只看钱，不考虑兴趣和长期发展<br>
+            · 觉得选了专业就定终身了，不敢选<br>
+            · 拖延到最后一刻随便选一个<br>
+            · 盲目跟风，同学学什么我学什么
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Popular Majors Overview <span class="cn">热门专业概览</span></h2>
+        
+        <h3 style="font-size:0.9rem;color:#333;margin:10px 0 6px;">🚀 高薪好就业</h3>
+        <ul class="info-list">
+            <li><strong>Computer Science / 计算机：</strong>起薪高，需求大，就业面广，但竞争也激烈</li>
+            <li><strong>Engineering / 工程类：</strong>各种工程都不错，就业稳定</li>
+            <li><strong>Finance / 金融：</strong>起薪高，上限高，但工作强度大</li>
+            <li><strong>Data Science / 数据科学：</strong>新兴热门，需求增长快</li>
+        </ul>
+
+        <h3 style="font-size:0.9rem;color:#333;margin:12px 0 6px;">📚 稳定但需要深造</h3>
+        <ul class="info-list">
+            <li><strong>Pre-Med / 医学预科：</strong>医生收入高，但要读医学院，时间长成本高</li>
+            <li><strong>Pre-Law / 法学预科：</strong>律师收入高，但法学院竞争激烈</li>
+            <li><strong>Psychology / 心理学：</strong>感兴趣的人多，但本科就业一般，建议读研</li>
+            <li><strong>Biology / 生物：</strong>科研方向好，但本科就业一般，大多读研</li>
+        </ul>
+
+        <h3 style="font-size:0.9rem;color:#333;margin:12px 0 6px;">💼 商科类</h3>
+        <ul class="info-list">
+            <li><strong>Business Admin / 工商管理：</strong>万金油，就业面广但竞争大</li>
+            <li><strong>Accounting / 会计：</strong>就业稳定，越老越吃香</li>
+            <li><strong>Marketing / 市场：</strong>适合社交能力强的人</li>
+            <li><strong>Supply Chain / 供应链：</strong>需求稳定，就业不错</li>
+        </ul>
+
+        <h3 style="font-size:0.9rem;color:#333;margin:12px 0 6px;">🎨 创意/人文类</h3>
+        <ul class="info-list">
+            <li><strong>Design / 设计：</strong>UX/UI 设计就业不错，纯艺术难一点</li>
+            <li><strong>Communications / 传播：</strong>就业面广，媒体/公关/市场都可以</li>
+            <li><strong>English / 文学：</strong>热爱就好，就业需要自己找方向</li>
+            <li><strong>History / 历史：</strong>看似没用，但培养的思维能力很有价值</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Double Major & Minor <span class="cn">双专业和辅修</span></h2>
+        <p style="font-size:0.9rem;color:#555;">
+            选不定？可以考虑组合一下：
+        </p>
+        <ul class="info-list">
+            <li><strong>Double Major / 双专业：</strong>同时读两个专业，学的多但也累</li>
+            <li><strong>Minor / 辅修：</strong>在主专业之外再学一个小方向，负担小很多</li>
+            <li><strong>Joint Major / 联合专业：</strong>两个领域结合的专业（如 CS + Math）</li>
+            <li><strong>Interdisciplinary / 跨学科：</strong>自己组合课程，定制你的专业</li>
+        </ul>
+        <div class="tip-box">
+            <strong>💡 热门组合：</strong><br>
+            · CS + 任何专业（都很吃香）<br>
+            · 经济 + 数学（金融/量化方向）<br>
+            · 心理 + 生物（认知神经科学）<br>
+            · 设计 + CS（HCI / UX）<br>
+            · 商科 + 数据分析（商业分析）
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Still Not Sure? <span class="cn">还是不确定？</span></h2>
+        <div class="success-box">
+            <strong>❤️ 没关系！</strong><br>
+            美国大学的好处就是灵活：<br>
+            · 很多人大二甚至大三才定专业<br>
+            · 定了也可以换<br>
+            · 可以双专业、辅修、跨学科<br>
+            · 本科只是第一步，研究生还可以转方向<br>
+            · 毕业后转行的人也很多<br><br>
+            人生很长，选专业只是其中一步，不用追求完美。
+            选择一个你不讨厌、也有前景的方向，先读起来，
+            在路上你会慢慢找到真正想要的。
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Tools to Help <span class="cn">帮助你的工具</span></h2>
+        <ul class="info-list">
+            <li><a href="major-quiz.html" style="color:#667eea;">专业兴趣测评</a> — 测测你适合什么专业</li>
+            <li><a href="salary.html" style="color:#667eea;">薪资与就业前景</a> — 各专业薪资数据</li>
+            <li><a href="rankings.html" style="color:#667eea;">专业排名</a> — 各专业领域学校排名</li>
+            <li><a href="../index.html" style="color:#667eea;">专业导航</a> — 56个专业详细介绍</li>
+        </ul>
+    </div>
+
+    <p class="footer">&copy; 2026 yunzhuan.icu | Choose Your Major</p>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <div style="text-align:center;padding:8px 0;font-size:0.75rem;color:#aaa;">
+        <a href="../index.html" style="color:#aaa;text-decoration:none;">Home</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="major-quiz.html" style="color:#aaa;text-decoration:none;">Major Quiz</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="../guides/index.html" style="color:#aaa;text-decoration:none;">Guides</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="../contact.html" style="color:#aaa;text-decoration:none;">Contact</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="javascript:window.scrollTo(0,0)" style="color:#aaa;text-decoration:none;">Back to top</a>
+    </div>
+</body>
+</html>
