@@ -915,7 +915,236 @@ const competitions = [
         </div>
     </div>
 
-    <p class="footer">© 2026 yunzhuan.icu &nbsp;|&nbsp; Product Roadmap v20.8.0</p>
+    <!-- v25.0.0 - 协作架构：核心成员小范围测试 -->
+    <div class="version-block">
+        <div class="version-header">
+            <span class="version-tag">v25.0.0</span>
+            <span class="version-status status-idea">Idea</span>
+        </div>
+        <p class="version-desc"><strong>协作架构 &amp; 核心成员小范围测试平台</strong> — 平台已邀请多位有影响力的准备阶段核心成员参与产品共建，本版本构建支撑多角色协作、多端访问、版本快照对比、可控邀请机制的整套基础架构，让外部专家可以在受控环境下完整体验产品并提供反馈。</p>
+
+        <div class="section-title">为什么需要这个版本</div>
+        <ul class="feature-list">
+            <li><strong>前期投入大需要验证：</strong>平台已投入大量资源邀请核心成员，需要为他们提供顺畅、专属、可持续的体验通道</li>
+            <li><strong>反馈质量决定后续方向：</strong>核心成员具有行业经验和影响力，他们对产品结构、内容深度、交互细节的反馈会显著影响后续版本规划</li>
+            <li><strong>持续参与需要仪式感：</strong>让成员感到被重视（有专属空间、能看到自己的反馈被采纳），是建立长期合作的关键</li>
+            <li><strong>风险控制：</strong>在产品还未对公众开放前，所有外部访问必须可追溯、可撤销、可限定功能范围</li>
+            <li><strong>沉淀共创资产：</strong>成员提供的选校建议、文书范例、行业洞察可以沉淀为产品的差异化壁垒</li>
+        </ul>
+
+        <div class="section-title">整体架构思路</div>
+        <ul class="feature-list">
+            <li>采用"主站 + 协作后台"双空间模式：主站保持静态公开访问，协作后台是受限私有空间</li>
+            <li>基于"邀请码 + 角色 + 过期时间"的三段式准入机制，确保每位成员访问范围清晰可控</li>
+            <li>所有协作内容（建议、评论、共创文档）都进入独立存储，与公开内容物理隔离</li>
+            <li>每次重大改版自动生成版本快照，成员可并排对比新旧版本，给出针对性反馈</li>
+            <li>提供"成员专属仪表盘"：看到自己关注的功能点、待办反馈、被采纳建议的统计</li>
+        </ul>
+
+        <div class="section-title">核心模块清单</div>
+        <ul class="feature-list">
+            <li><strong>角色体系：</strong>Admin（产品负责人）、Curator（内容共建者）、Mentor（行业顾问）、Observer（观察员）四类角色，权限逐级递减</li>
+            <li><strong>邀请码系统：</strong>每位核心成员生成专属邀请码，可设置有效期、可用次数、绑定邮箱/IP 范围</li>
+            <li><strong>协作后台入口：</strong><code>/collab</code> 私有路径，公开搜索引擎不收录，需登录访问</li>
+            <li><strong>功能点反馈面板：</strong>任何页面右上角固定"反馈"按钮，点击可针对当前页面提交结构化反馈</li>
+            <li><strong>版本快照对比：</strong>支持任意两个版本间的页面 diff 视图，并排显示改动区域</li>
+            <li><strong>成员贡献榜：</strong>统计每位成员的反馈数、被采纳数、参与讨论数，形成正反馈循环</li>
+            <li><strong>私信/讨论：</strong>核心成员之间、成员与产品负责人之间可发起异步讨论（基于评论嵌套结构）</li>
+            <li><strong>导出权限：</strong>Admin 可一键导出所有反馈为 CSV/Markdown，用于复盘和归档</li>
+        </ul>
+
+        <div class="section-title">技术实现方案</div>
+        <div class="tech-box">
+            <h4>准入控制</h4>
+            <ul>
+                <li>邀请码 = HMAC 签名 + 过期时间 + 角色标识 + 一次性随机串，前端校验 + 后端二次校验</li>
+                <li>登录态使用 HttpOnly Cookie + SameSite=Lax，JWT 短期（2小时）+ Refresh Token 长期（30天）</li>
+                <li>IP 绑定可选开启，开启后异地登录需重新验证邀请码</li>
+                <li>敏感操作（导出数据、修改成员角色）需二次确认 + 操作日志</li>
+            </ul>
+        </div>
+        <div class="tech-box">
+            <h4>数据存储与隔离</h4>
+            <ul>
+                <li>公开内容：继续使用纯静态文件 + JSON 数据，部署在 CDN</li>
+                <li>协作内容：使用 Supabase（Postgres + Row Level Security），按 member_id 强制隔离</li>
+                <li>RLS 策略示例：<code>feedback.member_id = auth.uid() OR auth.role() = 'admin'</code></li>
+                <li>公开页面与协作数据通过前端 JS 异步拉取，不影响主站 SEO</li>
+            </ul>
+        </div>
+        <div class="tech-box">
+            <h4>反馈面板前端实现</h4>
+            <pre>
+// 注入到所有公开页面的浮动反馈按钮
+(function() {
+  if (!window.CollabUser) return;
+  const btn = document.createElement('div');
+  btn.className = 'collab-feedback-btn';
+  btn.innerHTML = '反馈';
+  btn.onclick = () => openFeedbackPanel(location.pathname);
+  document.body.appendChild(btn);
+})();</pre>
+        </div>
+        <div class="tech-box">
+            <h4>版本快照对比</h4>
+            <ul>
+                <li>每次部署触发 <code>scripts/snapshot.sh</code>，对全站 HTML 生成 SHA + 行级 diff 索引</li>
+                <li>快照存储在 <code>/snapshots/vXX/</code>，保留最近 10 个版本</li>
+                <li>对比页用 <code>jsdiff</code> 库做文本 diff，可视化用 <code>diff2html</code></li>
+                <li>成员可对任一 diff 区域直接添加评论，形成"看改动 + 提建议"闭环</li>
+            </ul>
+        </div>
+        <div class="tech-box">
+            <h4>成员体验流程</h4>
+            <ol>
+                <li>产品负责人通过 Admin 后台创建成员账号 + 角色 + 邀请码</li>
+                <li>邀请码通过加密邮件/私信发送，附简短说明（功能 + 体验重点 + 反馈方式）</li>
+                <li>成员访问 <code>/collab/join?code=xxx</code> 完成首次登录，绑定邮箱</li>
+                <li>登录后看到"今日体验重点"列表（产品负责人每天更新 1-3 个体验任务）</li>
+                <li>成员按任务体验，反馈自动关联到当前路径</li>
+                <li>每周生成成员个人简报：本周访问了哪些功能、提交了多少反馈、哪些被采纳</li>
+            </ol>
+        </div>
+
+        <div class="section-title">推广节奏与成功标准</div>
+        <div class="pros-cons">
+            <div class="pros">
+                <h5>短期收益（2-4 周）</h5>
+                <ul>
+                    <li>获得 10-20 位核心成员的系统性反馈</li>
+                    <li>在正式公开发布前发现关键可用性问题</li>
+                    <li>沉淀 50+ 条高质量建议进入产品 backlog</li>
+                </ul>
+            </div>
+            <div class="cons">
+                <h5>风险与控制</h5>
+                <ul>
+                    <li>成员流失：定期一对一沟通，了解诉求变化</li>
+                    <li>数据泄露：邀请码 + RLS 双重防护，敏感操作日志全留痕</li>
+                    <li>反馈过载：Admin 端每日整理，按优先级回复</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- v26.0.0 - 全流程模拟体验 -->
+    <div class="version-block">
+        <div class="version-header">
+            <span class="version-tag">v26.0.0</span>
+            <span class="version-status status-idea">Idea</span>
+        </div>
+        <p class="version-desc"><strong>全流程模拟体验 &amp; 个性化模拟结果</strong> — 用户填写或自动生成个性化档案后，系统为该用户模拟出从选校、前期材料准备、中期申请提交、后期录取结果的全套场景化内容；点击任意大学卡片即可看到"如果我申请这所学校，我在该校的完整画像、模拟材料、模拟面试、模拟 Offer/拒信"。所有内容先使用模拟数据占位，未来 v27 接入真实数据源。</p>
+
+        <div class="section-title">为什么需要这个版本</div>
+        <ul class="feature-list">
+            <li><strong>大幅提升体验感：</strong>从"看百科"升级为"看到自己"，让用户在使用产品过程中产生情感连接</li>
+            <li><strong>解决决策焦虑：</strong>学生家长最大的痛点是"不知道最终结果"，模拟结果可帮助用户提前建立合理预期</li>
+            <li><strong>建立数据资产：</strong>用户填写的档案本身就是高质量数据，反哺个性化推荐引擎</li>
+            <li><strong>差异化竞争力：</strong>市面上还没有产品能为单个用户生成"全流程、个性化、可点击"的模拟体验</li>
+            <li><strong>占位先行：</strong>先做模拟数据 → 验证用户付费意愿 → 再投入资源接入真实数据</li>
+        </ul>
+
+        <div class="section-title">核心模块清单</div>
+        <ul class="feature-list">
+            <li><strong>个性化档案：</strong>姓名/年级/目标国家/意向专业/当前 GPA/活动/奖项/竞赛/语言成绩/标化预估分 10+ 维度</li>
+            <li><strong>档案自动生成：</strong>用户未填写时，按年级 + 目标国家自动生成"典型学生"画像作为占位</li>
+            <li><strong>选校清单：</strong>基于档案 + 历届录取数据，为用户生成 Reach/Match/Safety 三档共 15-20 所推荐学校</li>
+            <li><strong>学校专属模拟页：</strong>点击任意学校卡片，弹出"我在该校的完整档案"全屏视图</li>
+            <li><strong>三阶段模拟：</strong>前期（活动清单 + 文书素材）、中期（申请材料包 + 模拟面试）、后期（模拟 Offer/拒信 + 理由分析）</li>
+            <li><strong>材料评分：</strong>对用户的模拟材料从招生官视角打分（学术 / 活动 / 文书 / 面试四维度）</li>
+            <li><strong>录取概率：</strong>基于历史数据 + 相似画像，给出 0-100% 录取概率和置信区间</li>
+            <li><strong>时间线占位：</strong>根据目标国家，自动生成该年度 9 月-次年 8 月每月应该做什么的任务清单</li>
+            <li><strong>导出与分享：</strong>用户可导出整份模拟报告为 PDF，或生成可分享的匿名链接</li>
+        </ul>
+
+        <div class="section-title">学校专属模拟页内容结构</div>
+        <ul class="feature-list">
+            <li><strong>顶部：</strong>学校 Logo + 校训 + 录取率 + 你的录取概率（环形图）</li>
+            <li><strong>第一屏：</strong>你在该校的位置 — 历年录取者 GPA 分布中的你（高亮当前值）</li>
+            <li><strong>第二屏：</strong>前期材料 — 推荐参加的活动、推荐打的竞赛、推荐阅读的书单</li>
+            <li><strong>第三屏：</strong>文书题目模拟 — 该校往年文书题 + 一份"你的模拟初稿" + 改进建议</li>
+            <li><strong>第四屏：</strong>面试模拟 — 该校常见面试问题 + 你的模拟回答 + 评估分数</li>
+            <li><strong>第五屏：</strong>模拟结果 — Offer / Waitlist / Reject 三种结果之一 + 详细理由 + 改进建议</li>
+            <li><strong>侧边栏：</strong>对比同档次 3 所学校的录取概率柱状图</li>
+        </ul>
+
+        <div class="section-title">技术实现方案</div>
+        <div class="tech-box">
+            <h4>档案与画像引擎</h4>
+            <ul>
+                <li>用户档案：localStorage 存本地 + 可选登录后云端同步（Supabase）</li>
+                <li>画像模板：<code>data/personas/*.json</code> 按年级 + 目标国家预置 8 套典型画像</li>
+                <li>画像合并：用户填写的字段覆盖模板对应字段，未填写字段保留模板值</li>
+                <li>画像导出：<code>profile.toJSON()</code> 提供统一序列化</li>
+            </ul>
+        </div>
+        <div class="tech-box">
+            <h4>录取概率算法（模拟版）</h4>
+            <pre>
+function calcChance(user, school) {
+  // 简化版 - 仅用于模拟演示
+  const userScore = (
+    user.gpa * 0.4 +
+    user.testScore / 1600 * 0.3 +
+    user.activities.length * 2 +
+    user.awards.length * 5
+  );
+  const schoolAvg = school.avgAdmitScore;
+  const stddev = school.stddev || 10;
+  const z = (userScore - schoolAvg) / stddev;
+  const prob = 1 / (1 + Math.exp(-z)); // sigmoid
+  return Math.round(prob * 100);
+}</pre>
+        </div>
+        <div class="tech-box">
+            <h4>学校专属模拟页</h4>
+            <ul>
+                <li>URL 结构：<code>/simulate/school.html?school=harvard&profile=xxx</code></li>
+                <li>所有学校共享同一份 <code>simulate-school.html</code> 模板，通过 URL 参数渲染</li>
+                <li>每个学校预置 <code>data/simulate/harvard.json</code>，包含该校专属文案、面试题、文书题、Offer 模板</li>
+                <li>模拟结果采用加权随机 + 画像匹配，确保同一用户每次刷新结果稳定（同 profile 同 school 同结果）</li>
+            </ul>
+        </div>
+        <div class="tech-box">
+            <h4>数据来源策略</h4>
+            <ol>
+                <li><strong>Phase 1（v26 默认）：</strong>纯模拟数据，存储在 <code>data/simulate/*.json</code>，约 200 KB 静态文件</li>
+                <li><strong>Phase 2（v27 规划）：</strong>接入 Common Data Set、IPEDS、各校官网公布的录取统计</li>
+                <li><strong>Phase 3（v28 远期）：</strong>接入第三方数据服务（如 CollegeVine、Cappex）增强录取概率算法</li>
+                <li>所有真实数据接入前必须经过人工校验 + 样本测试，确保不出现荒谬预测</li>
+            </ol>
+        </div>
+        <div class="tech-box">
+            <h4>PDF 导出</h4>
+            <ul>
+                <li>客户端使用 <code>html2canvas</code> + <code>jspdf</code> 生成 PDF</li>
+                <li>PDF 模板：封面（学校 Logo + 用户名 + 模拟日期）+ 4-5 页内容（每屏一页）</li>
+                <li>文件名：<code>simulate_{school}_{date}.pdf</code></li>
+            </ul>
+        </div>
+
+        <div class="section-title">推广节奏与成功标准</div>
+        <div class="pros-cons">
+            <div class="pros">
+                <h5>短期收益（4-6 周）</h5>
+                <ul>
+                    <li>用户平均停留时长预计提升 3-5 倍</li>
+                    <li>档案填写率作为关键北极星指标，目标 30%+</li>
+                    <li>建立"全流程模拟"差异化标签，支撑后续商业化</li>
+                </ul>
+            </div>
+            <div class="cons">
+                <h5>风险与控制</h5>
+                <ul>
+                    <li>模拟结果被用户误读为真实预测：所有页面加"模拟数据"显著标识 + 免责声明</li>
+                    <li>数据生成质量不达标：建立内部 review 流程，每所学校 3 人抽查</li>
+                    <li>开发成本高：分 3 个子版本 v26.1（档案）/ v26.2（学校页）/ v26.3（导出）逐步发布</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <p class="footer">© 2026 yunzhuan.icu &nbsp;|&nbsp; Product Roadmap v26.0.0</p>
 <script src="./js/back-to-top.js"></script>
 </body>
 </html>

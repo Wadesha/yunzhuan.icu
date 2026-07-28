@@ -13,7 +13,7 @@
             margin: 0 auto;
             padding: 0 20px 40px;
             background: #ffffff;
-            color: #1a1a1a;
+            color: #111111;
             line-height: 1.7;
             font-size: 16px;
         }
@@ -34,12 +34,12 @@
         .logo {
             font-weight: 600;
             font-size: 1rem;
-            color: #1a1a1a;
+            color: #111111;
             text-decoration: none;
         }
         .logo-icon {
-            background: #1a1a1a;
-            color: white;
+            background: #111111;
+            color: #ffffff;
             width: 22px;
             height: 22px;
             border-radius: 4px;
@@ -56,16 +56,15 @@
             flex-wrap: wrap;
         }
         .nav-links a {
-            color: #333;
+            color: #111111;
             text-decoration: none;
             font-size: 0.9rem;
         }
         .nav-links a:hover {
-            color: #0066cc;
             text-decoration: underline;
         }
         .nav-links .cn {
-            color: #999;
+            color: #888888;
             font-size: 0.75rem;
             margin-left: 2px;
         }
@@ -77,18 +76,18 @@
         .hero h1 {
             font-size: 2.2rem;
             font-weight: 700;
-            color: #111;
+            color: #111111;
             margin-bottom: 8px;
             line-height: 1.2;
         }
         .hero .subtitle {
             font-size: 1.05rem;
-            color: #555;
+            color: #555555;
             margin-bottom: 20px;
         }
         .hero .subtitle-cn {
             font-size: 0.9rem;
-            color: #888;
+            color: #888888;
             margin-bottom: 24px;
         }
         .search-box {
@@ -98,13 +97,15 @@
         .search-box input {
             width: 100%;
             padding: 12px 16px;
-            border: 1px solid #ccc;
+            border: 1px solid #e0e0e0;
+            background: #ffffff;
+            color: #111111;
             border-radius: 6px;
             font-size: 1rem;
             outline: none;
         }
         .search-box input:focus {
-            border-color: #1a1a1a;
+            border-color: #111111;
         }
 
         /* Data */
@@ -112,17 +113,17 @@
             display: flex;
             gap: 24px;
             padding: 16px 0;
-            border-bottom: 1px solid #eee;
+            border-bottom: 1px solid #eeeeee;
             margin-bottom: 32px;
             flex-wrap: wrap;
         }
         .data-row span {
             font-size: 0.9rem;
-            color: #666;
+            color: #555555;
         }
         .data-row .num {
-            font-weight: 600;
-            color: #111;
+            font-weight: 700;
+            color: #111111;
         }
 
         /* Features - pure text columns */
@@ -134,7 +135,8 @@
             font-weight: 700;
             margin-bottom: 24px;
             padding-bottom: 10px;
-            border-bottom: 2px solid #111;
+            border-bottom: 2px solid #111111;
+            color: #111111;
         }
         .feature-cols {
             display: grid;
@@ -148,11 +150,11 @@
             font-size: 1.05rem;
             font-weight: 600;
             margin-bottom: 6px;
-            color: #111;
+            color: #111111;
         }
         .feature-block p {
             font-size: 0.88rem;
-            color: #555;
+            color: #888888;
             margin-bottom: 12px;
         }
         .feature-block ul {
@@ -162,16 +164,18 @@
         .feature-block ul li {
             font-size: 0.88rem;
             margin-bottom: 4px;
+            color: #555555;
         }
         .feature-block ul li a {
-            color: #0066cc;
+            color: #111111;
             text-decoration: none;
+            border-bottom: 1px solid #cccccc;
         }
         .feature-block ul li a:hover {
-            text-decoration: underline;
+            border-bottom-color: #111111;
         }
         .feature-block ul li .pipe {
-            color: #ccc;
+            color: #cccccc;
             margin: 0 6px;
         }
 
@@ -184,7 +188,8 @@
             font-weight: 700;
             margin-bottom: 24px;
             padding-bottom: 10px;
-            border-bottom: 2px solid #111;
+            border-bottom: 2px solid #111111;
+            color: #111111;
         }
         .version-list {
             list-style: none;
@@ -192,79 +197,94 @@
         }
         .version-list li {
             padding: 8px 0;
-            border-bottom: 1px solid #eee;
+            border-bottom: 1px solid #eeeeee;
             font-size: 0.92rem;
             display: flex;
             gap: 12px;
+            color: #555555;
         }
         .version-list .ver {
-            font-weight: 600;
-            color: #333;
+            font-weight: 700;
+            color: #111111;
             min-width: 60px;
         }
         .version-list .status {
-            font-size: 0.78rem;
-            color: #888;
+            font-size: 0.72rem;
             min-width: 60px;
+            padding: 2px 8px;
+            border: 1px solid #111111;
+            border-radius: 2px;
+            text-align: center;
+            color: #111111;
+            background: #ffffff;
+            font-weight: 600;
+            height: fit-content;
+            align-self: center;
         }
-        .version-list .status.done { color: #2e7d32; }
-        .version-list .status.active { color: #1565c0; }
-        .version-list .status.planned { color: #cc7a00; }
-        .version-list .status.idea { color: #7b1fa2; }
+        /* 通过边框粗细区分版本状态，避免彩色文字 */
+        .version-list li .status { border-width: 1px; font-weight: 500; }
+        .version-list li .status.done { border-width: 3px; font-weight: 700; }
+        .version-list li .status.active { border-width: 2px dashed #111111; font-weight: 700; }
+        .version-list li .status.planned { border-width: 1px dashed #888888; color: #555555; }
+        .version-list li .status.idea { border-width: 1px dotted #888888; color: #888888; }
         .version-list .desc {
-            color: #555;
+            color: #555555;
         }
         .version-list .desc a {
-            color: #0066cc;
+            color: #111111;
             text-decoration: none;
+            border-bottom: 1px solid #cccccc;
+        }
+        .version-list .desc a:hover {
+            border-bottom-color: #111111;
         }
 
         /* CTA */
         .cta {
             padding: 32px 0;
             text-align: center;
-            border-top: 1px solid #eee;
-            border-bottom: 1px solid #eee;
+            border-top: 1px solid #eeeeee;
+            border-bottom: 1px solid #eeeeee;
             margin-bottom: 32px;
         }
         .cta p {
             font-size: 1rem;
-            color: #333;
+            color: #555555;
             margin-bottom: 16px;
         }
         .cta a {
             display: inline-block;
             padding: 10px 24px;
-            background: #1a1a1a;
-            color: white;
+            background: #111111;
+            color: #ffffff;
             text-decoration: none;
             border-radius: 4px;
             font-size: 0.9rem;
             margin: 0 4px;
         }
         .cta a.secondary {
-            background: white;
-            color: #1a1a1a;
-            border: 1px solid #ccc;
+            background: #ffffff;
+            color: #111111;
+            border: 1px solid #111111;
         }
 
         /* Footer */
         .footer {
             font-size: 0.85rem;
-            color: #888;
+            color: #888888;
             padding-top: 24px;
-            border-top: 1px solid #eee;
+            border-top: 1px solid #eeeeee;
         }
         .footer-links {
             margin-bottom: 12px;
         }
         .footer-links a {
-            color: #666;
+            color: #555555;
             text-decoration: none;
             margin-right: 10px;
         }
         .footer-links a:hover {
-            color: #0066cc;
+            color: #111111;
         }
 
         @media (max-width: 768px) {
@@ -398,8 +418,10 @@
             <li><span class="ver">v22.5</span><span class="status planned">Demo</span><span class="desc"><a href="competition-teams.html">竞赛组队</a> + <a href="recommendations.html">个性化推荐</a></span></li>
             <li><span class="ver">v23.0</span><span class="status idea">Demo</span><span class="desc"><a href="ai-school-match.html">AI选校</a> + <a href="ai-essay-polish.html">AI文书润色</a></span></li>
             <li><span class="ver">v24.0</span><span class="status idea">Demo</span><span class="desc"><a href="mobile-app.html">移动端</a> + <a href="agency-saas.html">中介SaaS</a></span></li>
+            <li><span class="ver">v25.0</span><span class="status idea">Demo</span><span class="desc"><a href="collab.html">协作架构</a> + 核心成员小范围测试平台</span></li>
+            <li><span class="ver">v26.0</span><span class="status idea">Demo</span><span class="desc"><a href="simulate-school.html">全流程模拟</a> + 个性化档案 + 学校专属模拟页</span></li>
         </ul>
-        <p style="font-size:0.85rem;color:#666;margin-top:16px;">
+        <p style="font-size:0.85rem;color:#888888;margin-top:16px;">
             All versions use mock data — 技术细节见 <a href="roadmap.html">Product Roadmap</a>
         </p>
     </div>
