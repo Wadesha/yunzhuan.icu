@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>US Undergraduate Interviews - Alumni / AO / Tips - yunzhuan.icu</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px 16px;
+            background: #f5f5f5;
+            color: #333;
+        }
+        .back-link { color: #667eea; text-decoration: none; font-size: 0.85rem; margin-bottom: 12px; display: inline-block; }
+        .back-link:hover { text-decoration: underline; }
+        h1 { color: #333; margin-bottom: 4px; font-size: 1.4rem; }
+        .en-name { color: #888; font-size: 0.95rem; margin-bottom: 4px; font-weight: normal; }
+        .code-line { color: #888; font-size: 0.82rem; margin-bottom: 14px; }
+        .section {
+            background: white;
+            border-radius: 8px;
+            padding: 14px 18px;
+            margin-bottom: 10px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .section h2 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        .section h2 .en { color: #999; font-size: 0.8rem; font-weight: normal; }
+        .section p { color: #333; line-height: 1.7; font-size: 0.92rem; }
+        .section p.cn-hint { color: #666; font-size: 0.85rem; margin-bottom: 6px; }
+        .question-list { list-style: none; }
+        .question-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #f0f0f0;
+            line-height: 1.5;
+        }
+        .question-list li:last-child { border-bottom: none; }
+        .question-list .q { font-weight: 500; color: #333; font-size: 0.9rem; }
+        .question-list .tip { color: #666; font-size: 0.82rem; margin-top: 4px; }
+        .tag {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin-right: 6px;
+        }
+        .tag-alumni { background: #e3f2fd; color: #1565c0; }
+        .tag-ao { background: #f3e5f5; color: #7b1fa2; }
+        .tag-video { background: #fff3e0; color: #ef6c00; }
+        .tag-info { background: #e8f5e9; color: #2e7d32; }
+        .tip-box {
+            background: #e8f5e9;
+            border-left: 3px solid #2e7d32;
+            padding: 10px 14px;
+            border-radius: 0 6px 6px 0;
+            margin-top: 10px;
+            font-size: 0.82rem;
+            color: #1b5e20;
+            line-height: 1.6;
+        }
+        .tip-box strong { color: #1b5e20; }
+        .warning-box {
+            background: #fff8e1;
+            border-left: 3px solid #ff8f00;
+            padding: 10px 14px;
+            border-radius: 0 6px 6px 0;
+            margin-top: 10px;
+            font-size: 0.82rem;
+            color: #5d4037;
+            line-height: 1.6;
+        }
+        .star-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+            margin-top: 8px;
+        }
+        .star-table th, .star-table td {
+            padding: 8px 10px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        .star-table th {
+            background: #f8f9ff;
+            color: #667eea;
+            font-weight: 600;
+            font-size: 0.8rem;
+        }
+        .footer { text-align: center; margin-top: 20px; color: #999; font-size: 0.8rem; }
+    </style>
+    <link rel="stylesheet" href="../css/theme.css">
+    <link rel="manifest" href="../manifest.json">
+    <meta name="theme-color" content="#667eea">
+    <script src="../js/theme.js"></script>
+    <script src="../js/pwa.js"></script>
+    <script src="../js/mobile-nav.js"></script>
+    <script src="../js/breadcrumbs.js"></script>
+</head>
+<body>
+    <a href="index.html" class="back-link">&larr; Back to Interviews</a>
+
+    <h1>US Undergraduate Interviews</h1>
+    <p class="en-name">美国本科面试</p>
+    <p class="code-line">Alumni interviews · AO interviews · Common questions · Preparation</p>
+
+    <div class="section">
+        <h2>Interview Types <span class="en">面试类型</span></h2>
+        <table class="star-table">
+            <thead>
+                <tr>
+                    <th>Type</th>
+                    <th>Who</th>
+                    <th>Format</th>
+                    <th>Weight</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Alumni Interview</strong></td>
+                    <td>当地校友志愿者</td>
+                    <td>线下/线上，30-60min</td>
+                    <td>中等，信息性为主</td>
+                </tr>
+                <tr>
+                    <td><strong>AO Interview</strong></td>
+                    <td>招生官</td>
+                    <td>线上面试</td>
+                    <td>较高，评估性</td>
+                </tr>
+                <tr>
+                    <td><strong>InitialView / Vericant</strong></td>
+                    <td>第三方机构</td>
+                    <td>视频录制</td>
+                    <td>中等，国际生常见</td>
+                </tr>
+                <tr>
+                    <td><strong>Informational</strong></td>
+                    <td>在校生/校友</td>
+                    <td>聊天式</td>
+                    <td>很低，信息交流</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="tip-box" style="margin-top:10px;">
+            <strong>💡 注意：</strong>大部分 Ivy 和 Top 20 学校的面试是 optional 或者 by invitation only，不是所有申请者都有面试机会。没有面试不代表你被拒了。
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Most Common Questions <span class="en">最常见的问题</span></h2>
+        <ul class="question-list">
+            <li>
+                <span class="tag tag-alumni">高频</span>
+                <span class="q">Tell me about yourself / Walk me through your resume.</span>
+                <div class="tip">自我介绍，准备 1-2 分钟的版本，突出你的主线和热情。不要背诵简历，要讲你的故事。</div>
+            </li>
+            <li>
+                <span class="tag tag-alumni">高频</span>
+                <span class="q">Why are you interested in our university?</span>
+                <div class="tip">为什么选我们学校？一定要具体：课程、教授、项目、氛围、资源。不要说 "it's a good school"。</div>
+            </li>
+            <li>
+                <span class="tag tag-alumni">高频</span>
+                <span class="q">Why do you want to study [your major]?</span>
+                <div class="tip">为什么选这个专业？讲你的起源故事、探索经历、未来目标。要有具体的例子。</div>
+            </li>
+            <li>
+                <span class="tag tag-alumni">高频</span>
+                <span class="q">What's your favorite activity / What do you do for fun?</span>
+                <div class="tip">你最喜欢的活动/课余做什么？展示你的个性和热情，不要只说学习。</div>
+            </li>
+            <li>
+                <span class="tag tag-ao">常见</span>
+                <span class="q">What is your greatest strength / weakness?</span>
+                <div class="tip">优缺点。优点要有例子支撑；缺点要真实但同时展示你如何改进。</div>
+            </li>
+            <li>
+                <span class="tag tag-ao">常见</span>
+                <span class="q">Tell me about a challenge / failure you've overcome.</span>
+                <div class="tip">讲一个挑战或失败的经历，重点是你从中学到了什么，而不是困难本身。</div>
+            </li>
+            <li>
+                <span class="tag tag-ao">常见</span>
+                <span class="q">What do you want to contribute to our campus community?</span>
+                <div class="tip">你能为校园带来什么？展示你会积极参与，而不只是索取。</div>
+            </li>
+            <li>
+                <span class="tag tag-video">常见</span>
+                <span class="q">What book / movie has influenced you?</span>
+                <div class="tip">什么书或电影影响了你？提前准备好1-2个，并能讲出为什么。</div>
+            </li>
+            <li>
+                <span class="tag tag-alumni">高频</span>
+                <span class="q">What questions do you have for me?</span>
+                <div class="tip">你有什么问题问我？一定要准备 3-5 个好问题！这展示你的兴趣和思考深度。</div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Good Questions to Ask Interviewers <span class="en">问面试官的好问题</span></h2>
+        <ul class="question-list">
+            <li>
+                <span class="q">What was your favorite part of your experience at [School]?</span>
+                <div class="tip">你在学校最喜欢的经历是什么？——适用于校友面试，能引出真实故事</div>
+            </li>
+            <li>
+                <span class="q">How would you describe the culture of the [specific department/major]?</span>
+                <div class="tip">你觉得某个系/专业的氛围是怎样的？——展示你对专业的深入关注</div>
+            </li>
+            <li>
+                <span class="q">What's one thing you wish you'd known before starting at [School]?</span>
+                <div class="tip">如果重来一次，你希望入学前就知道什么？——很真实的好问题</div>
+            </li>
+            <li>
+                <span class="q">Can you tell me more about [specific program / research / club]?</span>
+                <div class="tip">能详细说说某个具体项目/研究/社团吗？——展示你做了功课</div>
+            </li>
+            <li>
+                <span class="q">How has the university changed since you were a student?</span>
+                <div class="tip">从你毕业到现在，学校有什么变化？——适用于老校友</div>
+            </li>
+        </ul>
+        <div class="warning-box" style="margin-top:10px;">
+            <strong>⚠️ 不要问这些：</strong><br>
+            · 官网就能查到的基础信息（录取率、排名、学费等）<br>
+            · "What are my chances of getting in?"<br>
+            · 太宽泛的问题（"Tell me about the school"）<br>
+            · 只关于 party / social life 的问题
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>STAR Method <span class="en">STAR 答题法</span></h2>
+        <p class="cn-hint">回答行为类问题（讲经历的）推荐用 STAR 结构，清晰有条理：</p>
+        <ul class="question-list">
+            <li>
+                <span class="q"><strong>S</strong>ituation — 情境</span>
+                <div class="tip">背景是什么？你当时面临什么情况？1-2 句话交代清楚。</div>
+            </li>
+            <li>
+                <span class="q"><strong>T</strong>ask — 任务</span>
+                <div class="tip">你的目标/任务是什么？你需要解决什么问题？</div>
+            </li>
+            <li>
+                <span class="q"><strong>A</strong>ction — 行动</span>
+                <div class="tip">你具体做了什么？<strong>重点是"你"</strong>做了什么，而不是"我们"。这部分是核心。</div>
+            </li>
+            <li>
+                <span class="q"><strong>R</strong>esult — 结果</span>
+                <div class="tip">结果如何？你学到了什么？有什么影响？尽量量化。</div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Preparation Timeline <span class="en">准备时间线</span></h2>
+        <ul class="question-list">
+            <li>
+                <span class="q"><strong>4-6 周前：</strong>深度了解学校</span>
+                <div class="tip">研究学校官网、课程、特色项目、学生博客。列出 5-10 个你喜欢这所学校的具体原因。</div>
+            </li>
+            <li>
+                <span class="q"><strong>3-4 周前：</strong>准备故事库</span>
+                <div class="tip">准备 5-8 个核心故事（领导力、挑战、失败、团队合作、学术热情等），每个用 STAR 结构整理。</div>
+            </li>
+            <li>
+                <span class="q"><strong>2 周前：</strong>模拟面试</span>
+                <div class="tip">找老师、学长、朋友做 mock interview，练习口语表达和临场反应。至少模拟 2-3 次。</div>
+            </li>
+            <li>
+                <span class="q"><strong>1 周前：</strong>细化打磨</span>
+                <div class="tip">录自己的回答，检查语速、用词、逻辑。准备好问面试官的问题。</div>
+            </li>
+            <li>
+                <span class="q"><strong>前一天：</strong>放松调整</span>
+                <div class="tip">不要背新东西了。复习你的故事点和 Why School。睡好觉，穿好衣服，提前 10 分钟到。</div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Do's and Don'ts <span class="en">注意事项</span></h2>
+        <div class="tip-box">
+            <strong>✅ DO：</strong><br>
+            · 做你自己，真诚自然<br>
+            · 具体，用例子说话<br>
+            · 展示热情和好奇心<br>
+            · 眼神交流（线上看镜头）<br>
+            · 面试后 24 小时内发感谢信
+        </div>
+        <div class="warning-box" style="margin-top:8px;">
+            <strong>❌ DON'T：</strong><br>
+            · 背诵稿子（听着很假）<br>
+            · 夸夸其谈或贬低别人<br>
+            · 只谈论成绩和标化<br>
+            · 回答太长（每个问题 1-2 分钟为佳）<br>
+            · 迟到（线上提前测试设备）
+        </div>
+    </div>
+
+    <p class="footer">&copy; 2026 yunzhuan.icu | US Interviews</p>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <div style="text-align:center;padding:8px 0;font-size:0.75rem;color:#aaa;">
+        <a href="../index.html" style="color:#aaa;text-decoration:none;">Home</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="index.html" style="color:#aaa;text-decoration:none;">Interviews</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="../essays/index.html" style="color:#aaa;text-decoration:none;">Essays</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="../contact.html" style="color:#aaa;text-decoration:none;">Contact</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="javascript:window.scrollTo(0,0)" style="color:#aaa;text-decoration:none;">Back to top</a>
+    </div>
+</body>
+</html>

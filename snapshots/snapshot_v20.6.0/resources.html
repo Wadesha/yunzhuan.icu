@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Abroad Resources - Useful Websites, Books & Tools - yunzhuan.icu</title>
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 16px 20px;
+            background: #f5f5f5;
+            color: #333;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            margin-bottom: 16px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .logo {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #667eea;
+            text-decoration: none;
+        }
+        .logo span { color: #764ba2; }
+        .nav-links {
+            display: flex;
+            gap: 18px;
+            align-items: center;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: #555;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: color 0.15s;
+        }
+        .nav-links a:hover { color: #667eea; }
+        .nav-links .cn {
+            font-size: 0.7rem;
+            color: #aaa;
+            margin-left: 2px;
+        }
+        @media (max-width: 768px) {
+            .navbar { flex-wrap: wrap; gap: 8px; }
+            .nav-links { gap: 12px; }
+            .nav-links a { font-size: 0.78rem; }
+            .nav-links .cn { display: none; }
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 4px;
+            font-size: 1.5rem;
+        }
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 16px;
+            font-size: 0.9rem;
+        }
+        .section {
+            background: white;
+            border-radius: 8px;
+            padding: 14px 18px;
+            margin-bottom: 10px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .section h2 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        .section h2 .cn { color: #999; font-size: 0.8rem; font-weight: normal; margin-left: 6px; }
+        .resource-card {
+            padding: 10px 12px;
+            background: #f8f9ff;
+            border-radius: 6px;
+            margin-bottom: 8px;
+            border-left: 3px solid #667eea;
+        }
+        .resource-card h3 {
+            font-size: 0.9rem;
+            color: #333;
+            margin-bottom: 3px;
+        }
+        .resource-card h3 a {
+            color: #4338ca;
+            text-decoration: none;
+        }
+        .resource-card h3 a:hover { text-decoration: underline; }
+        .resource-card p {
+            font-size: 0.82rem;
+            color: #666;
+            line-height: 1.5;
+        }
+        .resource-card .tag {
+            display: inline-block;
+            padding: 1px 6px;
+            background: #e0e7ff;
+            color: #4338ca;
+            border-radius: 3px;
+            font-size: 0.7rem;
+            margin-right: 4px;
+            font-weight: 500;
+        }
+        .footer { text-align: center; margin-top: 20px; color: #999; font-size: 0.8rem; }
+    </style>
+    <link rel="stylesheet" href="./css/theme.css">
+    <link rel="manifest" href="./manifest.json">
+    <meta name="theme-color" content="#667eea">
+    <script src="./js/theme.js"></script>
+    <script>
+    window.SUPABASE_CONFIG = {{
+        url: 'https://otfjbzjvkoectpejhxar.supabase.co',
+        anonKey: 'sb_publishable_SBRF6ewKH-se3dNlqFwsXQ_lObhamTr'
+    }};
+    </script>
+    <script src="./js/auth.js"></script>
+    <script src="./js/favorites.js"></script>
+    <script src="./js/pwa.js"></script>
+    <script src="./js/mobile-nav.js"></script>
+    <script src="./js/breadcrumbs.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="../index.html" class="logo">yunzhuan<span>.icu</span></a>
+        <div class="nav-links">
+            <a href="../index.html">Majors<span class="cn">专业</span></a>
+            <a href="../schools/index.html">Schools<span class="cn">学校</span></a>
+            <a href="../tests/index.html">Tests<span class="cn">考试</span></a>
+            <a href="../essays/index.html">Essays<span class="cn">文书</span></a>
+            <a href="../rankings.html">Rankings<span class="cn">排名</span></a>
+            <a href="../glossary.html">Glossary<span class="cn">术语</span></a>
+            <a href="search.html">Search<span class="cn">搜索</span></a>
+            <a href="../contact.html">Contact<span class="cn">联系</span></a>
+        </div>
+    </nav>
+
+    <h1>Study Abroad Resources</h1>
+    <p class="subtitle">留学资源推荐 · 网站、书籍、工具</p>
+
+    <div class="section">
+        <h2>Official Sites <span class="cn">官方网站</span></h2>
+        
+        <div class="resource-card">
+            <h3><a href="https://www.commonapp.org" target="_blank">Common Application</a></h3>
+            <p>
+                <span class="tag">申请</span>
+                通用申请系统，美国 1000+ 所大学使用。填一份申请可以申多所学校。
+            </p>
+        </div>
+        
+        <div class="resource-card">
+            <h3><a href="https://www.coalitionforcollegeaccess.org" target="_blank">Coalition Application</a></h3>
+            <p>
+                <span class="tag">申请</span>
+                另一个通用申请系统，约 150 所学校使用。
+            </p>
+        </div>
+        
+        <div class="resource-card">
+            <h3><a href="https://www.collegeboard.org" target="_blank">College Board</a></h3>
+            <p>
+                <span class="tag">考试</span>
+                SAT、AP、PSAT 的官方主办机构。报名、查分、送分都在这里。
+            </p>
+        </div>
+        
+        <div class="resource-card">
+            <h3><a href="https://www.act.org" target="_blank">ACT</a></h3>
+            <p>
+                <span class="tag">考试</span>
+                ACT 考试官方网站。
+            </p>
+        </div>
+        
+        <div class="resource-card">
+            <h3><a href="https://www.ets.org/toefl" target="_blank">TOEFL / ETS</a></h3>
+            <p>
+                <span class="tag">考试</span>
+                托福考试官方网站，报名、查分、送分。
+            </p>
+        </div>
+        
+        <div class="resource-card">
+            <h3><a href="https://www.ielts.org" target="_blank">IELTS</a></h3>
+            <p>
+                <span class="tag">考试</span>
+                雅思考试官方网站。
+            </p>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>School Research <span class="cn">学校研究</span></h2>
+        
+        <div class="resource-card">
+            <h3><a href="https://www.collegeconfidential.com" target="_blank">College Confidential</a></h3>
+            <p>
+                <span class="tag">论坛</span>
+                美国最大的大学申请论坛，有各种学校讨论和数据。信息鱼龙混杂，注意甄别。
+            </p>
+        </div>
+        
+        <div class="resource-card">
+            <h3><a href="https://www.niche.com" target="_blank">Niche</a></h3>
+            <p>
+                <span class="tag">排名/评价</span>
+                大学排名和学生真实评价，可以看学校各方面的评分和评论。
+            </p>
+        </div>
+        
+        <div class="resource-card">
+            <h3><a href="https://www.usnews.com/best-colleges" target="_blank">US News College Rankings</a></h3>
+            <p>
+                <span class="tag">排名</span>
+                最知名的美国大学排名（虽然争议也很大）。
+            </p>
+        </div>
+        
+        <div class="resource-card">
+            <h3><a href="https://www.princetonreview.com" target="_blank">Princeton Review</a></h3>
+            <p>
+                <span class="tag">排名/备考</span>
+                大学排名、学生评价、备考资源。
+            </p>
+        </div>
+        
+        <div class="resource-card">
+            <h3><a href="https://www.unigo.com" target="_blank">Unigo</a></h3>
+            <p>
+                <span class="tag">评价</span>
+                学生真实评价和奖学金信息。
+            </p>
+        </div>
+        
+        <div class="resource-card">
+            <h3><a href="https://www.collegeinsider.com" target="_blank">College Navigator</a></h3>
+            <p>
+                <span class="tag">数据</span>
+                美国教育部的官方大学数据工具，可以查学费、录取率、毕业率等详细数据。
+            </p>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Test Prep <span class="cn">考试备考</span></h2>
+        
+        <div class="resource-card">
+            <h3><a href="https://www.khanacademy.org/test-prep" target="_blank">Khan Academy - SAT Prep</a></h3>
+            <p>
+                <span class="tag">免费</span>
+                官方合作的免费 SAT 备考资源，和 College Board 合作，质量很高。
+            </p>
+        </div>
+        
+        <div class="resource-card">
+            <h3><a href="https://collegereadiness.collegeboard.org/sat/practice/full-length-practice-tests" target="_blank">Official SAT Practice Tests</a></h3>
+            <p>
+                <span class="tag">免费</span>
+                College Board 官方发布的 SAT 全真模考题，备考必备。
+            </p>
+        </div>
+        
+        <div class="resource-card">
+            <h3><a href="https://www.ets.org/toefl/prepare" target="_blank">TOEFL Official Prep</a></h3>
+            <p>
+                <span class="tag">官方</span>
+                托福官方备考资源，有免费样题和付费模考。
+            </p>
+        </div>
+        
+        <div class="resource-card">
+            <h3><a href="https://www.cracksat.net" target="_blank">CrackSAT</a></h3>
+            <p>
+                <span class="tag">免费</span>
+                大量 SAT/ACT/AP 真题和练习资源。
+            </p>
+        </div>
+        
+        <div class="resource-card">
+            <h3><a href="https://www.quizlet.com" target="_blank">Quizlet</a></h3>
+            <p>
+                <span class="tag">背单词</span>
+                很流行的背单词/闪卡工具，有很多现成的单词卡组。
+            </p>
+        </div>
+        
+        <div class="resource-card">
+            <h3><a href="https://apps.ankiweb.net" target="_blank">Anki</a></h3>
+            <p>
+                <span class="tag">背单词</span>
+                强大的间隔重复记忆软件，适合深度背单词和记忆知识点。
+            </p>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Essay & Writing <span class="cn">文书写作</span></h2>
+        
+        <div class="resource-card">
+            <h3><a href="https://www.commonapp.org/blog" target="_blank">Common App Blog</a></h3>
+            <p>
+                <span class="tag">文书</span>
+                Common App 官方博客，有很多申请和文书建议。
+            </p>
+        </div>
+        
+        <div class="resource-card">
+            <h3><a href="https://www.johnshopkins.edu/admissions/undergrad/essays-that-worked" target="_blank">Johns Hopkins Essays that Worked</a></h3>
+            <p>
+                <span class="tag">范文</span>
+                JHU 官方发布的成功申请文书，附有招生官点评。
+            </p>
+        </div>
+        
+        <div class="resource-card">
+            <h3><a href="https://www.nytimes.com/2022/11/09/learning/essays-college-admissions-personal-statement.html" target="_blank">NYT - Personal Statement Essays</a></h3>
+            <p>
+                <span class="tag">范文</span>
+                纽约时报每年刊登的优秀大学申请文书。
+            </p>
+        </div>
+        
+        <div class="resource-card">
+            <h3><a href="https://www.grammarly.com" target="_blank">Grammarly</a></h3>
+            <p>
+                <span class="tag">工具</span>
+                语法检查和写作润色工具，免费版就够用了。
+            </p>
+        </div>
+        
+        <div class="resource-card">
+            <h3><a href="https://hemingwayapp.com" target="_blank">Hemingway Editor</a></h3>
+            <p>
+                <span class="tag">工具</span>
+                帮你简化复杂句子、提升写作可读性的工具。
+            </p>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Scholarships <span class="cn">奖学金</span></h2>
+        
+        <div class="resource-card">
+            <h3><a href="https://www.fastweb.com" target="_blank">Fastweb</a></h3>
+            <p>
+                <span class="tag">搜索</span>
+                最大的奖学金搜索引擎之一，可以根据你的背景匹配奖学金。
+            </p>
+        </div>
+        
+        <div class="resource-card">
+            <h3><a href="https://www.scholarships.com" target="_blank">Scholarships.com</a></h3>
+            <p>
+                <span class="tag">搜索</span>
+                另一个大型奖学金搜索平台。
+            </p>
+        </div>
+        
+        <div class="resource-card">
+            <h3><a href="https://bigfuture.collegeboard.org/pay-for-college" target="_blank">College Board - Pay for College</a></h3>
+            <p>
+                <span class="tag">助学金</span>
+                College Board 的大学费用和奖学金资源。
+            </p>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>YouTube Channels <span class="cn">YouTube 频道</span></h2>
+        
+        <div class="resource-card">
+            <h3><a href="https://www.youtube.com/c/CollegeEssayGuy" target="_blank">College Essay Guy</a></h3>
+            <p>
+                <span class="tag">文书</span>
+                非常有名的大学申请文书导师，有很多文书写作方法和示例。
+            </p>
+        </div>
+        
+        <div class="resource-card">
+            <h3><a href="https://www.youtube.com/c/PrepScholarSAT" target="_blank">PrepScholar</a></h3>
+            <p>
+                <span class="tag">备考</span>
+                SAT/ACT 备考技巧和策略。
+            </p>
+        </div>
+        
+        <div class="resource-card">
+            <h3><a href="https://www.youtube.com/c/ThomasFrank" target="_blank">Thomas Frank</a></h3>
+            <p>
+                <span class="tag">学习方法</span>
+                学习方法、效率提升、时间管理，适合留学生。
+            </p>
+        </div>
+        
+        <div class="resource-card">
+            <h3><a href="https://www.youtube.com/c/ElizabethFilips" target="_blank">Elizabeth Filips</a></h3>
+            <p>
+                <span class="tag">学习方法</span>
+                英国医学生的学习方法和效率分享，质量很高。
+            </p>
+        </div>
+        
+        <div class="resource-card">
+            <h3><a href="https://www.youtube.com/results?search_query=college+vlog" target="_blank">College Vloggers</a></h3>
+            <p>
+                <span class="tag">校园生活</span>
+                搜索 "college move-in vlog"、"day in the life" 等，看真实的大学生活。
+            </p>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Books <span class="cn">推荐书籍</span></h2>
+        
+        <div class="resource-card">
+            <h3>"The College Essay Guidebook" — College Essay Guy</h3>
+            <p>
+                <span class="tag">文书</span>
+                非常实用的大学申请文书指南，有方法、有示例、有练习。
+            </p>
+        </div>
+        
+        <div class="resource-card">
+            <h3>"On Writing Well" — William Zinsser</h3>
+            <p>
+                <span class="tag">写作</span>
+                英文非虚构写作的经典书，对提升写作能力很有帮助。
+            </p>
+        </div>
+        
+        <div class="resource-card">
+            <h3>"The Elements of Style" — Strunk & White</h3>
+            <p>
+                <span class="tag">写作</span>
+                英文写作的经典小册子，薄薄一本但全是干货。
+            </p>
+        </div>
+        
+        <div class="resource-card">
+            <h3>"A People's History of the United States" — Howard Zinn</h3>
+            <p>
+                <span class="tag">人文</span>
+                美国历史的另一个视角，对写文书、理解美国社会很有帮助。
+            </p>
+        </div>
+        
+        <div class="resource-card">
+            <h3>"Outliers" — Malcolm Gladwell</h3>
+            <p>
+                <span class="tag">思维</span>
+                关于成功的故事和分析，能启发思考，也能当阅读材料。
+            </p>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Productivity Tools <span class="cn">效率工具</span></h2>
+        
+        <div class="resource-card">
+            <h3><a href="https://www.notion.so" target="_blank">Notion</a></h3>
+            <p>
+                <span class="tag">管理</span>
+                全能的笔记和项目管理工具，可以用来做选校跟踪、申请进度管理。
+            </p>
+        </div>
+        
+        <div class="resource-card">
+            <h3><a href="https://www.google.com/sheets/about/" target="_blank">Google Sheets</a></h3>
+            <p>
+                <span class="tag">管理</span>
+                用表格来做选校列表和申请进度跟踪，简单实用。
+            </p>
+        </div>
+        
+        <div class="resource-card">
+            <h3><a href="https://trello.com" target="_blank">Trello</a></h3>
+            <p>
+                <span class="tag">管理</span>
+                看板形式的任务管理工具，适合管理申请进度。
+            </p>
+        </div>
+        
+        <div class="resource-card">
+            <h3><a href="https://www.notion.so/templates/college-applications" target="_blank">Notion College App Templates</a></h3>
+            <p>
+                <span class="tag">模板</span>
+                网上有很多现成的大学申请 Notion 模板，可以直接用。
+            </p>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Other Useful Tools <span class="cn">其他实用工具</span></h2>
+        
+        <div class="resource-card">
+            <h3><a href="/cost-calculator.html">Cost Calculator / 费用计算器</a></h3>
+            <p>
+                <span class="tag">本站</span>
+                计算不同国家留学费用的工具。
+            </p>
+        </div>
+        
+        <div class="resource-card">
+            <h3><a href="/tests/score-converter.html">Score Converter / 分数换算器</a></h3>
+            <p>
+                <span class="tag">本站</span>
+                SAT / ACT / TOEFL / IELTS / Duolingo 分数换算。
+            </p>
+        </div>
+        
+        <div class="resource-card">
+            <h3><a href="/tests/gpa-calculator.html">GPA Calculator / GPA 计算器</a></h3>
+            <p>
+                <span class="tag">本站</span>
+                各种评分体系的 GPA 计算和转换。
+            </p>
+        </div>
+        
+        <div class="resource-card">
+            <h3><a href="/application-timeline.html">Application Timeline / 申请时间线</a></h3>
+            <p>
+                <span class="tag">本站</span>
+                申请时间规划和进度追踪。
+            </p>
+        </div>
+        
+        <div class="resource-card">
+            <h3><a href="/schools/matcher.html">School Matcher / 选校推荐</a></h3>
+            <p>
+                <span class="tag">本站</span>
+                根据你的成绩背景智能推荐匹配学校。
+            </p>
+        </div>
+    </div>
+
+    <p class="footer">&copy; 2026 yunzhuan.icu | Resources</p>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <div style="text-align:center;padding:8px 0;font-size:0.75rem;color:#aaa;">
+        <a href="../index.html" style="color:#aaa;text-decoration:none;">Home</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="../contact.html" style="color:#aaa;text-decoration:none;">Contact</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="javascript:window.scrollTo(0,0)" style="color:#aaa;text-decoration:none;">Back to top</a>
+    </div>
+<script src="./js/back-to-top.js"></script>
+</body>
+</html>

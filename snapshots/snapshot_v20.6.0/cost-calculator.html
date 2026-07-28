@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Abroad Cost Calculator - US / UK / CA / SG / HK - yunzhuan.icu</title>
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px 16px;
+            background: #f5f5f5;
+            color: #333;
+        }
+        .back-link { color: #667eea; text-decoration: none; font-size: 0.85rem; margin-bottom: 12px; display: inline-block; }
+        .back-link:hover { text-decoration: underline; }
+        h1 { color: #333; margin-bottom: 4px; font-size: 1.4rem; }
+        .en-name { color: #888; font-size: 0.95rem; margin-bottom: 4px; font-weight: normal; }
+        .code-line { color: #888; font-size: 0.82rem; margin-bottom: 14px; }
+        .section {
+            background: white;
+            border-radius: 8px;
+            padding: 14px 18px;
+            margin-bottom: 10px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .section h2 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        .section h2 .en { color: #999; font-size: 0.8rem; font-weight: normal; }
+        .section p { color: #333; line-height: 1.7; font-size: 0.92rem; }
+        .country-tabs {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 14px;
+            flex-wrap: wrap;
+        }
+        .country-btn {
+            padding: 6px 14px;
+            border: 2px solid #e9ecef;
+            background: white;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            color: #555;
+            transition: all 0.15s;
+        }
+        .country-btn:hover { border-color: #c7d2fe; }
+        .country-btn.active {
+            border-color: #667eea;
+            background: #f0f4ff;
+            color: #667eea;
+            font-weight: 600;
+        }
+        .input-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+        .input-group label {
+            display: block;
+            font-size: 0.8rem;
+            color: #666;
+            margin-bottom: 4px;
+            font-weight: 500;
+        }
+        .input-group input, .input-group select {
+            width: 100%;
+            padding: 8px 10px;
+            border: 1px solid #d0d5dd;
+            border-radius: 6px;
+            font-size: 0.88rem;
+        }
+        .result-box {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 16px 20px;
+            border-radius: 8px;
+            margin-top: 14px;
+            text-align: center;
+        }
+        .result-box .total {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 2px;
+        }
+        .result-box .label {
+            font-size: 0.85rem;
+            opacity: 0.9;
+        }
+        .result-breakdown {
+            margin-top: 12px;
+        }
+        .breakdown-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 0.88rem;
+        }
+        .breakdown-row:last-child { border-bottom: none; }
+        .breakdown-row .name { color: #555; }
+        .breakdown-row .val { font-weight: 600; color: #333; }
+        .compare-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 10px;
+            margin-top: 12px;
+        }
+        .compare-card {
+            background: #f8f9ff;
+            padding: 12px;
+            border-radius: 8px;
+            border-left: 3px solid #667eea;
+        }
+        .compare-card .country {
+            font-weight: 600;
+            color: #333;
+            font-size: 0.9rem;
+            margin-bottom: 6px;
+        }
+        .compare-card .amount {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #667eea;
+            margin-bottom: 4px;
+        }
+        .compare-card .period {
+            font-size: 0.78rem;
+            color: #888;
+        }
+        .tip-box {
+            background: #e8f5e9;
+            border-left: 3px solid #2e7d32;
+            padding: 10px 14px;
+            border-radius: 0 6px 6px 0;
+            margin-top: 10px;
+            font-size: 0.82rem;
+            color: #1b5e20;
+            line-height: 1.6;
+        }
+        .tip-box strong { color: #1b5e20; }
+        .warning-box {
+            background: #fff8e1;
+            border-left: 3px solid #ff8f00;
+            padding: 10px 14px;
+            border-radius: 0 6px 6px 0;
+            margin-top: 10px;
+            font-size: 0.82rem;
+            color: #5d4037;
+            line-height: 1.6;
+        }
+        .footer { text-align: center; margin-top: 20px; color: #999; font-size: 0.8rem; }
+        @media (max-width: 600px) {
+            .input-row { grid-template-columns: 1fr; }
+            .compare-grid { grid-template-columns: 1fr 1fr; }
+        }
+    </style>
+    <link rel="stylesheet" href="./css/theme.css">
+    <link rel="manifest" href="./manifest.json">
+    <meta name="theme-color" content="#667eea">
+    <script src="./js/theme.js"></script>
+    <script>
+    window.SUPABASE_CONFIG = {{
+        url: 'https://otfjbzjvkoectpejhxar.supabase.co',
+        anonKey: 'sb_publishable_SBRF6ewKH-se3dNlqFwsXQ_lObhamTr'
+    }};
+    </script>
+    <script src="./js/auth.js"></script>
+    <script src="./js/favorites.js"></script>
+    <script src="./js/pwa.js"></script>
+    <script src="./js/mobile-nav.js"></script>
+    <script src="./js/breadcrumbs.js"></script>
+</head>
+<body>
+    <a href="../index.html" class="back-link">&larr; Back to Home</a>
+
+    <h1>Study Abroad Cost Calculator</h1>
+    <p class="en-name">留学费用计算器</p>
+    <p class="code-line">US · UK · Canada · Singapore · Hong Kong</p>
+
+    <div class="section">
+        <h2>Country Comparison <span class="en">各国费用对比</span></h2>
+        <p style="font-size:0.85rem;color:#666;margin-bottom:8px;">以下为本科一年的大致费用估算（含学费+生活费），具体因学校、地区、专业而异。</p>
+        <div class="compare-grid">
+            <div class="compare-card">
+                <div class="country">🇺🇸 US / 美国</div>
+                <div class="amount">$55k-$85k</div>
+                <div class="period">per year / USD</div>
+            </div>
+            <div class="compare-card">
+                <div class="country">🇬🇧 UK / 英国</div>
+                <div class="amount">£35k-£55k</div>
+                <div class="period">per year / GBP</div>
+            </div>
+            <div class="compare-card">
+                <div class="country">🇨🇦 Canada / 加拿大</div>
+                <div class="amount">$45k-$70k</div>
+                <div class="period">per year / CAD</div>
+            </div>
+            <div class="compare-card">
+                <div class="country">🇸🇬 Singapore / 新加坡</div>
+                <div class="amount">$40k-$60k</div>
+                <div class="period">per year / SGD</div>
+            </div>
+            <div class="compare-card">
+                <div class="country">🇭🇰 Hong Kong / 香港</div>
+                <div class="amount">$25k-$45k</div>
+                <div class="period">per year / HKD</div>
+            </div>
+            <div class="compare-card">
+                <div class="country">🇦🇺 Australia / 澳洲</div>
+                <div class="amount">$50k-$70k</div>
+                <div class="period">per year / AUD</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Custom Calculator <span class="en">自定义计算</span></h2>
+        <p style="font-size:0.85rem;color:#666;margin-bottom:10px;">选择国家和学校档次，或手动输入各项费用，计算总预算。</p>
+        
+        <div class="country-tabs">
+            <button class="country-btn active" onclick="selectCountry('us')">🇺🇸 US</button>
+            <button class="country-btn" onclick="selectCountry('uk')">🇬🇧 UK</button>
+            <button class="country-btn" onclick="selectCountry('ca')">🇨🇦 Canada</button>
+            <button class="country-btn" onclick="selectCountry('sg')">🇸🇬 Singapore</button>
+            <button class="country-btn" onclick="selectCountry('hk')">🇭🇰 Hong Kong</button>
+            <button class="country-btn" onclick="selectCountry('au')">🇦🇺 Australia</button>
+        </div>
+
+        <div class="input-row">
+            <div class="input-group">
+                <label>School Tier / 学校档次</label>
+                <select id="tier-select" onchange="updateTier()">
+                    <option value="top">Top Private / 顶尖私立</option>
+                    <option value="mid">Mid-range / 中等</option>
+                    <option value="public">Public / 公立</option>
+                    <option value="low">Low-cost / 性价比</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label>Program Duration / 学制</label>
+                <select id="years-select" onchange="calculate()">
+                    <option value="4">4 years (Bachelor)</option>
+                    <option value="3">3 years (UK/HK)</option>
+                    <option value="2">2 years (Associate)</option>
+                    <option value="1">1 year (Foundation)</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="input-row">
+            <div class="input-group">
+                <label>Tuition per year / 年学费 (本币)</label>
+                <input type="number" id="tuition-input" value="55000" onchange="calculate()">
+            </div>
+            <div class="input-group">
+                <label>Living Costs / 年生活费 (本币)</label>
+                <input type="number" id="living-input" value="18000" onchange="calculate()">
+            </div>
+        </div>
+
+        <div class="input-row">
+            <div class="input-group">
+                <label>Books & Supplies / 书本费</label>
+                <input type="number" id="books-input" value="1200" onchange="calculate()">
+            </div>
+            <div class="input-group">
+                <label>Health Insurance / 医保</label>
+                <input type="number" id="insurance-input" value="2000" onchange="calculate()">
+            </div>
+        </div>
+
+        <div class="input-row">
+            <div class="input-group">
+                <label>Travel / 交通机票 (每年往返)</label>
+                <input type="number" id="travel-input" value="1500" onchange="calculate()">
+            </div>
+            <div class="input-group">
+                <label>Misc / 其他杂费</label>
+                <input type="number" id="misc-input" value="2000" onchange="calculate()">
+            </div>
+        </div>
+
+        <div class="input-row">
+            <div class="input-group">
+                <label>Scholarships / 奖学金 (每年)</label>
+                <input type="number" id="scholarship-input" value="0" onchange="calculate()">
+            </div>
+            <div class="input-group">
+                <label>Currency / 货币</label>
+                <input type="text" id="currency-input" value="USD" readonly>
+            </div>
+        </div>
+
+        <div class="result-box">
+            <div class="total" id="yearly-total">$0</div>
+            <div class="label">Estimated Cost Per Year / 每年估算</div>
+        </div>
+
+        <div class="result-breakdown">
+            <div class="breakdown-row">
+                <span class="name">Tuition / 学费</span>
+                <span class="val" id="breakdown-tuition">$0</span>
+            </div>
+            <div class="breakdown-row">
+                <span class="name">Living / 生活费</span>
+                <span class="val" id="breakdown-living">$0</span>
+            </div>
+            <div class="breakdown-row">
+                <span class="name">Books & Supplies / 书本材料</span>
+                <span class="val" id="breakdown-books">$0</span>
+            </div>
+            <div class="breakdown-row">
+                <span class="name">Insurance / 医保</span>
+                <span class="val" id="breakdown-insurance">$0</span>
+            </div>
+            <div class="breakdown-row">
+                <span class="name">Travel / 交通</span>
+                <span class="val" id="breakdown-travel">$0</span>
+            </div>
+            <div class="breakdown-row">
+                <span class="name">Misc / 其他</span>
+                <span class="val" id="breakdown-misc">$0</span>
+            </div>
+            <div class="breakdown-row" style="color:#16a34a;">
+                <span class="name" style="color:#16a34a;">Scholarships / 奖学金 (-)</span>
+                <span class="val" id="breakdown-scholarship" style="color:#16a34a;">-$0</span>
+            </div>
+            <div class="breakdown-row" style="border-top:2px solid #e5e7eb;padding-top:10px;">
+                <span class="name" style="font-weight:600;">Total (all years) / 总费用</span>
+                <span class="val" id="total-all" style="color:#667eea;font-size:1rem;">$0</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Money-saving Tips <span class="en">省钱小贴士</span></h2>
+        <div class="tip-box">
+            <strong>💡 降低费用的方法：</strong><br>
+            · 申请奖学金和助学金（merit + need-based）<br>
+            · 选择公立学校（学费比私立低很多）<br>
+            · 选 co-op / work-study 项目，带薪实习赚学费<br>
+            · 住在校外合租（比宿舍便宜）<br>
+            · 申请校园打工（每周 10-20 小时）<br>
+            · 申请 Resident Assistant（RA，免住宿费）
+        </div>
+        <div class="warning-box" style="margin-top:10px;">
+            <strong>⚠️ 注意事项：</strong><br>
+            · 以上只是估算，实际费用因学校和地区差异很大<br>
+            · 汇率波动可能影响实际花费<br>
+            · 学费每年通常会涨 3-5%<br>
+            · 签证需要提供资金证明，一般是第一年总费用的金额
+        </div>
+    </div>
+
+    <p class="footer">&copy; 2026 yunzhuan.icu | Cost Calculator</p>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <div style="text-align:center;padding:8px 0;font-size:0.75rem;color:#aaa;">
+        <a href="../index.html" style="color:#aaa;text-decoration:none;">Home</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="../scholarships/index.html" style="color:#aaa;text-decoration:none;">Scholarships</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="../tests/index.html" style="color:#aaa;text-decoration:none;">Tests</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="../contact.html" style="color:#aaa;text-decoration:none;">Contact</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="javascript:window.scrollTo(0,0)" style="color:#aaa;text-decoration:none;">Back to top</a>
+    </div>
+
+    <script>
+    const countryData = {
+        us: {
+            currency: 'USD',
+            symbol: '$',
+            tiers: {
+                top: { tuition: 60000, living: 20000, books: 1500, insurance: 2500, travel: 1500, misc: 2500 },
+                mid: { tuition: 45000, living: 18000, books: 1200, insurance: 2000, travel: 1500, misc: 2000 },
+                public: { tuition: 35000, living: 16000, books: 1200, insurance: 2000, travel: 1500, misc: 1500 },
+                low: { tuition: 20000, living: 12000, books: 1000, insurance: 1500, travel: 1500, misc: 1000 },
+            },
+            years: '4'
+        },
+        uk: {
+            currency: 'GBP',
+            symbol: '£',
+            tiers: {
+                top: { tuition: 42000, living: 15000, books: 1000, insurance: 500, travel: 800, misc: 2000 },
+                mid: { tuition: 30000, living: 12000, books: 800, insurance: 500, travel: 800, misc: 1500 },
+                public: { tuition: 22000, living: 10000, books: 800, insurance: 500, travel: 800, misc: 1200 },
+                low: { tuition: 15000, living: 9000, books: 600, insurance: 500, travel: 800, misc: 1000 },
+            },
+            years: '3'
+        },
+        ca: {
+            currency: 'CAD',
+            symbol: 'CAD $',
+            tiers: {
+                top: { tuition: 55000, living: 18000, books: 1500, insurance: 800, travel: 1500, misc: 2000 },
+                mid: { tuition: 45000, living: 15000, books: 1200, insurance: 800, travel: 1500, misc: 1500 },
+                public: { tuition: 35000, living: 14000, books: 1000, insurance: 800, travel: 1500, misc: 1200 },
+                low: { tuition: 25000, living: 12000, books: 800, insurance: 800, travel: 1500, misc: 1000 },
+            },
+            years: '4'
+        },
+        sg: {
+            currency: 'SGD',
+            symbol: 'S$',
+            tiers: {
+                top: { tuition: 50000, living: 18000, books: 800, insurance: 500, travel: 1000, misc: 2000 },
+                mid: { tuition: 35000, living: 15000, books: 600, insurance: 500, travel: 1000, misc: 1500 },
+                public: { tuition: 25000, living: 12000, books: 500, insurance: 500, travel: 1000, misc: 1200 },
+                low: { tuition: 18000, living: 10000, books: 400, insurance: 500, travel: 1000, misc: 800 },
+            },
+            years: '3'
+        },
+        hk: {
+            currency: 'HKD',
+            symbol: 'HK$',
+            tiers: {
+                top: { tuition: 180000, living: 120000, books: 5000, insurance: 2000, travel: 5000, misc: 10000 },
+                mid: { tuition: 150000, living: 90000, books: 4000, insurance: 2000, travel: 5000, misc: 8000 },
+                public: { tuition: 120000, living: 80000, books: 3000, insurance: 2000, travel: 5000, misc: 6000 },
+                low: { tuition: 80000, living: 60000, books: 2000, insurance: 2000, travel: 5000, misc: 5000 },
+            },
+            years: '4'
+        },
+        au: {
+            currency: 'AUD',
+            symbol: 'A$',
+            tiers: {
+                top: { tuition: 50000, living: 25000, books: 1500, insurance: 2000, travel: 2000, misc: 3000 },
+                mid: { tuition: 40000, living: 22000, books: 1200, insurance: 1500, travel: 2000, misc: 2500 },
+                public: { tuition: 35000, living: 20000, books: 1000, insurance: 1500, travel: 2000, misc: 2000 },
+                low: { tuition: 25000, living: 18000, books: 800, insurance: 1500, travel: 2000, misc: 1500 },
+            },
+            years: '3'
+        },
+    };
+
+    let currentCountry = 'us';
+
+    function selectCountry(country) {
+        currentCountry = country;
+        document.querySelectorAll('.country-btn').forEach(b => b.classList.remove('active'));
+        event.target.classList.add('active');
+        
+        const data = countryData[country];
+        document.getElementById('currency-input').value = data.currency;
+        document.getElementById('years-select').value = data.years;
+        updateTier();
+    }
+
+    function updateTier() {
+        const tier = document.getElementById('tier-select').value;
+        const data = countryData[currentCountry].tiers[tier];
+        
+        document.getElementById('tuition-input').value = data.tuition;
+        document.getElementById('living-input').value = data.living;
+        document.getElementById('books-input').value = data.books;
+        document.getElementById('insurance-input').value = data.insurance;
+        document.getElementById('travel-input').value = data.travel;
+        document.getElementById('misc-input').value = data.misc;
+        
+        calculate();
+    }
+
+    function calculate() {
+        const tuition = parseFloat(document.getElementById('tuition-input').value) || 0;
+        const living = parseFloat(document.getElementById('living-input').value) || 0;
+        const books = parseFloat(document.getElementById('books-input').value) || 0;
+        const insurance = parseFloat(document.getElementById('insurance-input').value) || 0;
+        const travel = parseFloat(document.getElementById('travel-input').value) || 0;
+        const misc = parseFloat(document.getElementById('misc-input').value) || 0;
+        const scholarship = parseFloat(document.getElementById('scholarship-input').value) || 0;
+        const years = parseInt(document.getElementById('years-select').value) || 4;
+        const symbol = countryData[currentCountry].symbol;
+
+        const yearly = tuition + living + books + insurance + travel + misc - scholarship;
+        const total = yearly * years;
+
+        document.getElementById('yearly-total').textContent = symbol + formatNum(yearly);
+        
+        document.getElementById('breakdown-tuition').textContent = symbol + formatNum(tuition);
+        document.getElementById('breakdown-living').textContent = symbol + formatNum(living);
+        document.getElementById('breakdown-books').textContent = symbol + formatNum(books);
+        document.getElementById('breakdown-insurance').textContent = symbol + formatNum(insurance);
+        document.getElementById('breakdown-travel').textContent = symbol + formatNum(travel);
+        document.getElementById('breakdown-misc').textContent = symbol + formatNum(misc);
+        document.getElementById('breakdown-scholarship').textContent = '-' + symbol + formatNum(scholarship);
+        document.getElementById('total-all').textContent = symbol + formatNum(total);
+    }
+
+    function formatNum(n) {
+        return n.toLocaleString(undefined, { maximumFractionDigits: 0 });
+    }
+
+    // Initialize
+    updateTier();
+    </script>
+<script src="./js/back-to-top.js"></script>
+</body>
+</html>

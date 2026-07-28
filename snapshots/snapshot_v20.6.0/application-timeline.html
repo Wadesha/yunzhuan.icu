@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application Timeline Planner - yunzhuan.icu</title>
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px 16px;
+            background: #f5f5f5;
+            color: #333;
+        }
+        .back-link { color: #667eea; text-decoration: none; font-size: 0.85rem; margin-bottom: 12px; display: inline-block; }
+        .back-link:hover { text-decoration: underline; }
+        h1 { color: #333; margin-bottom: 4px; font-size: 1.4rem; }
+        .en-name { color: #888; font-size: 0.95rem; margin-bottom: 4px; font-weight: normal; }
+        .code-line { color: #888; font-size: 0.82rem; margin-bottom: 14px; }
+        .section {
+            background: white;
+            border-radius: 8px;
+            padding: 14px 18px;
+            margin-bottom: 10px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .section h2 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        .section h2 .en { color: #999; font-size: 0.8rem; font-weight: normal; }
+        .section p { color: #333; line-height: 1.7; font-size: 0.92rem; }
+        .country-tabs {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 14px;
+            flex-wrap: wrap;
+        }
+        .country-btn {
+            padding: 6px 14px;
+            border: 2px solid #e9ecef;
+            background: white;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            color: #555;
+            transition: all 0.15s;
+        }
+        .country-btn:hover { border-color: #c7d2fe; }
+        .country-btn.active {
+            border-color: #667eea;
+            background: #f0f4ff;
+            color: #667eea;
+            font-weight: 600;
+        }
+        .timeline {
+            position: relative;
+            padding-left: 20px;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 6px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #e0e7ff;
+        }
+        .timeline-item {
+            position: relative;
+            margin-bottom: 14px;
+            padding-bottom: 14px;
+            border-bottom: 1px solid #f5f5f5;
+        }
+        .timeline-item:last-child { border-bottom: none; margin-bottom: 0; }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -17px;
+            top: 4px;
+            width: 12px;
+            height: 12px;
+            background: #667eea;
+            border-radius: 50%;
+            border: 2px solid white;
+            box-shadow: 0 0 0 2px #c7d2fe;
+        }
+        .timeline-item.completed::before {
+            background: #22c55e;
+            box-shadow: 0 0 0 2px #bbf7d0;
+        }
+        .timeline-item.current::before {
+            background: #f59e0b;
+            box-shadow: 0 0 0 2px #fde68a;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 0 2px #fde68a; }
+            50% { box-shadow: 0 0 0 5px #fde68a; }
+        }
+        .timeline-period {
+            font-weight: 600;
+            color: #667eea;
+            font-size: 0.9rem;
+            margin-bottom: 4px;
+        }
+        .timeline-item.current .timeline-period { color: #d97706; }
+        .timeline-item.completed .timeline-period { color: #16a34a; }
+        .timeline-title {
+            font-weight: 600;
+            color: #333;
+            font-size: 0.92rem;
+            margin-bottom: 4px;
+        }
+        .timeline-tasks {
+            list-style: none;
+            font-size: 0.85rem;
+            color: #555;
+        }
+        .timeline-tasks li {
+            padding: 3px 0 3px 14px;
+            position: relative;
+            line-height: 1.5;
+        }
+        .timeline-tasks li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: #c7d2fe;
+        }
+        .progress-card {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 14px 18px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .progress-card .label { font-size: 0.85rem; opacity: 0.9; }
+        .progress-card .value { font-size: 1.6rem; font-weight: 700; }
+        .progress-card .bar {
+            flex: 1;
+            margin: 0 16px;
+            height: 10px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        .progress-card .fill {
+            height: 100%;
+            background: white;
+            border-radius: 5px;
+            transition: width 0.3s;
+        }
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px;
+            margin-top: 8px;
+        }
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.85rem;
+            color: #555;
+            cursor: pointer;
+            padding: 6px 8px;
+            border-radius: 6px;
+            transition: background 0.15s;
+        }
+        .checkbox-item:hover { background: #f8f9ff; }
+        .checkbox-item input { cursor: pointer; }
+        .checkbox-item.checked { color: #16a34a; text-decoration: line-through; opacity: 0.7; }
+        @media (max-width: 600px) {
+            .checkbox-group { grid-template-columns: 1fr; }
+            .progress-card { flex-direction: column; gap: 8px; text-align: center; }
+            .progress-card .bar { width: 100%; margin: 0; }
+        }
+        .tip-box {
+            background: #e8f5e9;
+            border-left: 3px solid #2e7d32;
+            padding: 10px 14px;
+            border-radius: 0 6px 6px 0;
+            margin-top: 10px;
+            font-size: 0.82rem;
+            color: #1b5e20;
+            line-height: 1.6;
+        }
+        .footer { text-align: center; margin-top: 20px; color: #999; font-size: 0.8rem; }
+    </style>
+    <link rel="stylesheet" href="./css/theme.css">
+    <link rel="manifest" href="./manifest.json">
+    <meta name="theme-color" content="#667eea">
+    <script src="./js/theme.js"></script>
+    <script>
+    window.SUPABASE_CONFIG = {{
+        url: 'https://otfjbzjvkoectpejhxar.supabase.co',
+        anonKey: 'sb_publishable_SBRF6ewKH-se3dNlqFwsXQ_lObhamTr'
+    }};
+    </script>
+    <script src="./js/auth.js"></script>
+    <script src="./js/favorites.js"></script>
+    <script src="./js/pwa.js"></script>
+    <script src="./js/mobile-nav.js"></script>
+    <script src="./js/breadcrumbs.js"></script>
+</head>
+<body>
+    <a href="../index.html" class="back-link">&larr; Back to Home</a>
+
+    <h1>Application Timeline Planner</h1>
+    <p class="en-name">申请时间线规划</p>
+    <p class="code-line">Track your progress · Auto-saved locally</p>
+
+    <div class="section">
+        <h2>Destination <span class="en">目标国家</span></h2>
+        <div class="country-tabs">
+            <button class="country-btn active" onclick="selectDest('us')">🇺🇸 US</button>
+            <button class="country-btn" onclick="selectDest('uk')">🇬🇧 UK</button>
+            <button class="country-btn" onclick="selectDest('ca')">🇨🇦 Canada</button>
+            <button class="country-btn" onclick="selectDest('common')">🌐 General</button>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Overall Progress <span class="en">总进度</span></h2>
+        <div class="progress-card">
+            <div>
+                <div class="label">Completion / 完成度</div>
+                <div class="value" id="progress-pct">0%</div>
+            </div>
+            <div class="bar"><div class="fill" id="progress-fill" style="width:0%"></div></div>
+            <div style="text-align:right;">
+                <div class="label">Tasks / 任务</div>
+                <div class="value" id="progress-count">0/0</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Timeline <span class="en">时间线</span></h2>
+        <div class="timeline" id="timeline"></div>
+    </div>
+
+    <div class="section">
+        <h2>Tips <span class="en">小贴士</span></h2>
+        <div class="tip-box">
+            <strong>💡 规划建议：</strong><br>
+            · 标化考试尽量在高二结束前考完，给高三留足时间写文书<br>
+            · 选校名单建议在高三上学期开学前确定<br>
+            · 文书初稿建议在 9 月前完成，留足时间反复修改<br>
+            · 推荐信提前 2-3 个月找老师要，给老师充足时间<br>
+            · ED/EA 截止通常在 11 月 1 日，RD 在 1 月 1 日左右<br>
+            · 所有时间点请以学校官网为准！
+        </div>
+    </div>
+
+    <p class="footer">&copy; 2026 yunzhuan.icu | Timeline Planner</p>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <div style="text-align:center;padding:8px 0;font-size:0.75rem;color:#aaa;">
+        <a href="../index.html" style="color:#aaa;text-decoration:none;">Home</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="../tests/application-checklist.html" style="color:#aaa;text-decoration:none;">Checklist</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="../contact.html" style="color:#aaa;text-decoration:none;">Contact</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="javascript:window.scrollTo(0,0)" style="color:#aaa;text-decoration:none;">Back to top</a>
+    </div>
+
+    <script>
+    const timelines = {
+        us: [
+            {
+                period: 'Grade 9 / Freshman Year (9年级)',
+                title: '探索与打基础',
+                tasks: [
+                    '保持好的 GPA（尤其是核心课程）',
+                    '参加课外活动，发展兴趣爱好',
+                    '开始了解美国大学和专业',
+                    '多阅读，提升英语能力',
+                    '尝试不同类型的课程，发现自己的兴趣',
+                ]
+            },
+            {
+                period: 'Grade 10 / Sophomore Year (10年级)',
+                title: '规划与积累',
+                tasks: [
+                    '维持高 GPA，选有挑战的课程（AP/Honors）',
+                    '参加 PSAT 摸底考试',
+                    '开始准备 SAT/ACT',
+                    '深入参与 2-3 个课外活动',
+                    '暑假做有意义的事（夏校/科研/实习/义工）',
+                    '开始建立选校名单初稿',
+                ]
+            },
+            {
+                period: 'Grade 11 / Junior Year (11年级)',
+                title: '冲刺标化与软实力',
+                tasks: [
+                    '保持 GPA（这一年最重要！）',
+                    '考 SAT/ACT（目标 3-5 月首考，6-10 月刷分）',
+                    '考 AP/IB 考试',
+                    '参加竞赛、科研、夏校等提升背景',
+                    '确定选校名单（10-15 所）',
+                    '找推荐人（提前和老师搞好关系）',
+                    '暑假写文书初稿',
+                ]
+            },
+            {
+                period: 'Summer before Grade 12 / 高三前暑假',
+                title: '文书与申请准备',
+                tasks: [
+                    '完成 Common App / Coalition 主文书',
+                    '完成各学校补充文书初稿',
+                    '准备活动列表和奖项列表',
+                    '和推荐老师确认推荐信',
+                    '最终确定选校名单（ED/EA/RD 搭配）',
+                    '准备成绩单和在读证明',
+                ]
+            },
+            {
+                period: 'Grade 12 Fall / 高三上 (9-11月)',
+                title: '提交早申',
+                tasks: [
+                    '开学后找 counselor 要成绩单',
+                    '修改和润色所有文书',
+                    '10 月底前完成 ED/EA 学校所有材料',
+                    '11 月 1 日前提交 ED/EA 申请',
+                    '11 月继续准备 RD 学校文书',
+                    '如有需要，11 月再考一次 SAT/ACT',
+                ]
+            },
+            {
+                period: 'Grade 12 Winter / 高三冬 (12-1月)',
+                title: '提交常规申请',
+                tasks: [
+                    '12 月中旬：ED1 出结果（录取/拒/defer）',
+                    '12 月底前完成所有 RD 学校文书',
+                    '1 月 1 日-1 月 15 日：提交大部分 RD 申请',
+                    'UC 系统截止 11 月 30 日（注意！）',
+                    '保持 GPA，不能掉链子',
+                ]
+            },
+            {
+                period: 'Grade 12 Spring / 高三春 (2-4月)',
+                title: '等待结果与面试',
+                tasks: [
+                    '参加校友面试（如有）',
+                    '2-3 月：陆续收到录取结果',
+                    '4 月 1 日：大部分学校出结果',
+                    '比较录取offer，做最终决定',
+                    '5 月 1 日前交 deposit 确认入读',
+                ]
+            },
+            {
+                period: 'After May / 5月之后',
+                title: '行前准备',
+                tasks: [
+                    '申请 I-20',
+                    '预约签证面试（F-1学生签）',
+                    '订机票、找住宿',
+                    '体检、打疫苗',
+                    '参加新生线上 orientation',
+                    '办银行卡、手机卡等',
+                    '准备行李，出发！',
+                ]
+            },
+        ],
+        uk: [
+            {
+                period: 'Year 12 / AS Level',
+                title: '探索与规划',
+                tasks: [
+                    '确定 A-Level/IB 科目选择',
+                    '保持好成绩（AS 成绩很重要）',
+                    '开始了解英国大学和专业',
+                    '参加相关的课外活动和竞赛',
+                    '暑假做相关实习或科研',
+                    '准备 UKCAT/BMAT/LNAT 等专项考试（如需要）',
+                ]
+            },
+            {
+                period: 'Year 13 / A2 Level (上学期)',
+                title: '提交申请',
+                tasks: [
+                    '9 月：开始写 Personal Statement',
+                    '9-10 月：找老师写推荐信',
+                    '10 月 15 日：牛津/剑桥/医学/兽医截止',
+                    '1 月 26 日：大部分专业截止',
+                    '提交 UCAS 申请',
+                    '继续保持 A2 成绩',
+                ]
+            },
+            {
+                period: 'Nov - Mar / 面试季',
+                title: '面试与等待',
+                tasks: [
+                    '11-12 月：牛津剑桥面试',
+                    '12 月-3 月：陆续收到 offer',
+                    '准备笔试和面试（牛剑）',
+                    '收到 conditional offer 后确定目标分数',
+                ]
+            },
+            {
+                period: 'May - August / 考试与结果',
+                title: '最终考试与确认',
+                tasks: [
+                    '5-6 月：A-Level/IB 大考',
+                    '8 月：出成绩',
+                    '达到条件：firm offer 确认',
+                    '未达条件：走 Clearing / Adjustment',
+                    '8-9 月：办签证、订机票、找住宿',
+                ]
+            },
+            {
+                period: 'September / 9月',
+                title: '入学',
+                tasks: [
+                    '行前准备（签证、体检、机票、住宿）',
+                    '参加 Freshers Week',
+                    '注册入学',
+                    '开银行账户、注册 GP',
+                ]
+            },
+        ],
+        ca: [
+            {
+                period: 'Grade 11 / 高二',
+                title: '准备期',
+                tasks: [
+                    '保持高 GPA（11 年级成绩很重要）',
+                    '考雅思/托福（如需）',
+                    '开始了解加拿大大学和专业',
+                    '参加课外活动和竞赛',
+                    '暑假做相关实习或夏校',
+                ]
+            },
+            {
+                period: 'Grade 12 Fall / 高三上 (9-11月)',
+                title: '提交申请',
+                tasks: [
+                    '9-10 月：准备申请材料',
+                    '10-11 月：OUAC / 各学校系统开放',
+                    '提交成绩单和语言成绩',
+                    '写个人陈述（部分专业需要）',
+                    '11 月开始陆续有 early offer',
+                ]
+            },
+            {
+                period: 'Grade 12 Winter / 高三冬 (12-2月)',
+                title: '等待录取',
+                tasks: [
+                    '12-2 月：陆续收到 offer',
+                    '保持 12 年级成绩（很多学校看 mid-year）',
+                    '补充材料（如有要求）',
+                    '比较 offer，考虑奖学金',
+                ]
+            },
+            {
+                period: 'Grade 12 Spring / 高三春 (3-5月)',
+                title: '确认入读',
+                tasks: [
+                    '3-5 月：大部分 offer 出完',
+                    '5-6 月：确认入读，交 deposit',
+                    '申请宿舍',
+                    '申请学习许可（学签）',
+                ]
+            },
+            {
+                period: 'Summer / 暑假',
+                title: '行前准备',
+                tasks: [
+                    '办签证（学习许可+小签）',
+                    '订机票、找住宿',
+                    '体检',
+                    '办银行卡、手机卡',
+                    '准备行李',
+                    '8-9 月出发！',
+                ]
+            },
+        ],
+        common: [
+            {
+                period: '24 Months Before / 前2年',
+                title: '早期规划',
+                tasks: [
+                    '保持好的学术成绩（GPA）',
+                    '参加课外活动，发展兴趣',
+                    '提升英语能力',
+                    '开始了解目标国家和大学',
+                    '初步确定专业方向',
+                ]
+            },
+            {
+                period: '18 Months Before / 前1.5年',
+                title: '标化与背景提升',
+                tasks: [
+                    '准备并参加语言考试（托福/雅思）',
+                    '准备并参加学术考试（SAT/ACT/A-Level/AP）',
+                    '深入参与课外活动',
+                    '参加竞赛、科研、实习、夏校',
+                    '建立选校名单',
+                ]
+            },
+            {
+                period: '12 Months Before / 前1年',
+                title: '申请准备',
+                tasks: [
+                    '最终确定选校名单',
+                    '找推荐人，要推荐信',
+                    '写文书（PS/CV/活动列表）',
+                    '准备成绩单和在读证明',
+                    '暑假完成文书初稿',
+                ]
+            },
+            {
+                period: '3-6 Months Before / 前3-6月',
+                title: '提交申请',
+                tasks: [
+                    '修改和润色所有文书',
+                    '提交申请（注意各学校截止日期）',
+                    '补交补充材料',
+                    '参加面试（如有）',
+                    '保持 GPA 不下降',
+                ]
+            },
+            {
+                period: '0-3 Months Before / 前0-3月',
+                title: '等待与决定',
+                tasks: [
+                    '等待录取结果',
+                    '比较 offer 和奖学金',
+                    '确认入读学校',
+                    '交 deposit',
+                ]
+            },
+            {
+                period: 'Before Departure / 行前',
+                title: '行前准备',
+                tasks: [
+                    '申请学生签证',
+                    '申请学校宿舍或找校外住宿',
+                    '订机票',
+                    '体检、打疫苗',
+                    '办银行卡、手机卡',
+                    '参加 orientation',
+                    '收拾行李，出发！',
+                ]
+            },
+        ]
+    };
+
+    let currentDest = 'us';
+    let checkedTasks = JSON.parse(localStorage.getItem('timeline_checked') || '{}');
+
+    function selectDest(dest) {
+        currentDest = dest;
+        document.querySelectorAll('.country-btn').forEach(b => b.classList.remove('active'));
+        event.target.classList.add('active');
+        renderTimeline();
+    }
+
+    function renderTimeline() {
+        const timeline = timelines[currentDest];
+        const container = document.getElementById('timeline');
+        let html = '';
+        let totalChecked = 0;
+        let totalTasks = 0;
+        
+        timeline.forEach((phase, phaseIdx) => {
+            const phaseKey = currentDest + '_' + phaseIdx;
+            let phaseChecked = 0;
+            
+            let tasksHtml = '<ul class="timeline-tasks">';
+            phase.tasks.forEach((task, taskIdx) => {
+                const taskKey = phaseKey + '_' + taskIdx;
+                const isChecked = checkedTasks[taskKey] || false;
+                if (isChecked) phaseChecked++;
+                totalTasks++;
+                tasksHtml += '<li>';
+                tasksHtml += '<label class="checkbox-item ' + (isChecked ? 'checked' : '') + '">';
+                tasksHtml += '<input type="checkbox" ' + (isChecked ? 'checked' : '') + ' onchange="toggleTask(\'' + taskKey + '\', this)">';
+                tasksHtml += task + '</label></li>';
+            });
+            tasksHtml += '</ul>';
+            
+            if (isChecked) phaseChecked++; 
+            totalChecked += phaseChecked;
+            
+            let statusClass = '';
+            if (phaseChecked === phase.tasks.length) statusClass = 'completed';
+            else if (phaseChecked > 0) statusClass = 'current';
+            
+            html += '<div class="timeline-item ' + statusClass + '">';
+            html += '<div class="timeline-period">' + phase.period + '</div>';
+            html += '<div class="timeline-title">' + phase.title + ' (' + phaseChecked + '/' + phase.tasks.length + ')</div>';
+            html += tasksHtml;
+            html += '</div>';
+        });
+        
+        container.innerHTML = html;
+        
+        const pct = totalTasks > 0 ? Math.round((totalChecked / totalTasks) * 100) : 0;
+        document.getElementById('progress-pct').textContent = pct + '%';
+        document.getElementById('progress-fill').style.width = pct + '%';
+        document.getElementById('progress-count').textContent = totalChecked + '/' + totalTasks;
+    }
+
+    function toggleTask(key, checkbox) {
+        if (checkbox.checked) {
+            checkedTasks[key] = true;
+        } else {
+            delete checkedTasks[key];
+        }
+        localStorage.setItem('timeline_checked', JSON.stringify(checkedTasks));
+        renderTimeline();
+    }
+
+    // Initialize
+    renderTimeline();
+    </script>
+<script src="./js/back-to-top.js"></script>
+</body>
+</html>

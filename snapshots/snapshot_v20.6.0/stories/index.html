@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Success Stories - 申请经验分享 - yunzhuan.icu</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 16px 30px;
+            background: #f5f5f5;
+            color: #333;
+        }
+        .navbar {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            padding: 12px 0;
+            margin-bottom: 16px;
+        }
+        .logo { display: none; }
+        .nav-links {
+            display: flex;
+            gap: 18px;
+            align-items: center;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: #555;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: color 0.15s;
+        }
+        .nav-links a:hover { color: #667eea; }
+        .nav-links .cn {
+            font-size: 0.7rem;
+            color: #999;
+            margin-left: 2px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 4px;
+            font-size: 1.5rem;
+        }
+        .subtitle {
+            text-align: center;
+            color: #888;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+        }
+        .stories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 14px;
+        }
+        .story-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            transition: all 0.2s;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+        }
+        .story-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .story-cover {
+            height: 120px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: white;
+        }
+        .story-cover.engineering { background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); }
+        .story-cover.business { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+        .story-cover.cs { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+        .story-cover.transfer { background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); }
+        .story-content {
+            padding: 14px 16px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .story-category {
+            display: inline-block;
+            font-size: 0.7rem;
+            padding: 2px 8px;
+            border-radius: 10px;
+            background: #ede9fe;
+            color: #5b21b6;
+            margin-bottom: 8px;
+            width: fit-content;
+        }
+        .story-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 6px;
+            line-height: 1.4;
+        }
+        .story-card:hover .story-title { color: #667eea; }
+        .story-desc {
+            font-size: 0.82rem;
+            color: #666;
+            line-height: 1.5;
+            margin-bottom: 10px;
+            flex: 1;
+        }
+        .story-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.75rem;
+            color: #999;
+            padding-top: 8px;
+            border-top: 1px solid #f0f0f0;
+        }
+        .story-tags {
+            display: flex;
+            gap: 4px;
+            flex-wrap: wrap;
+        }
+        .story-tag {
+            font-size: 0.7rem;
+            color: #888;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 16px;
+            border-top: 1px solid #e5e7eb;
+            font-size: 0.8rem;
+            color: #999;
+        }
+        @media (max-width: 600px) {
+            .stories-grid { grid-template-columns: 1fr; }
+            .nav-links .cn { display: none; }
+        }
+    </style>
+    <link rel="stylesheet" href="../css/theme.css">
+    <script src="../js/theme.js"></script>
+    <script src="../js/search-shortcut.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="../index.html" class="logo">yunzhuan<span>.icu</span></a>
+        <div class="nav-links">
+            <a href="../index.html">Home<span class="cn">首页</span></a>
+            <a href="../majors/index.html">Majors<span class="cn">专业</span></a>
+            <a href="../schools/index.html">Schools<span class="cn">学校</span></a>
+            <a href="../guides/index.html">Guides<span class="cn">指南</span></a>
+            <a href="index.html" style="color:#667eea;font-weight:600;">Stories<span class="cn">经验</span></a>
+            <a href="../search.html">Search<span class="cn">搜索</span></a>
+        </div>
+    </nav>
+
+    <h1>Success Stories</h1>
+    <p class="subtitle">真实申请经验分享 &middot; 学长学姐的留学故事</p>
+
+    <div class="stories-grid">
+        <a href="cs-ivy-league.html" class="story-card">
+            <div class="story-cover cs">💻</div>
+            <div class="story-content">
+                <span class="story-category">CS / 计算机</span>
+                <h3 class="story-title">双非到藤校 CS：我是如何逆袭的</h3>
+                <p class="story-desc">GPA 3.4，无牛推，无顶级实习，最后拿到 Columbia CS 录取。分享我的背景提升策略和文书思路。</p>
+                <div class="story-meta">
+                    <span>Columbia MSCS</span>
+                    <span>8 min read</span>
+                </div>
+            </div>
+        </a>
+
+        <a href="business-undergrad.html" class="story-card">
+            <div class="story-cover business">📈</div>
+            <div class="story-content">
+                <span class="story-category">Business / 本科</span>
+                <h3 class="story-title">美本商科 Top 10 申请全记录</h3>
+                <p class="story-desc">从活动规划到文书打磨，Stern / Ross / McCombs 录取者分享商科本科申请的核心要素。</p>
+                <div class="story-meta">
+                    <span>NYU Stern</span>
+                    <span>12 min read</span>
+                </div>
+            </div>
+        </a>
+
+        <a href="engineering-phd.html" class="story-card">
+            <div class="story-cover engineering">🔬</div>
+            <div class="story-content">
+                <span class="story-category">Engineering / PhD</span>
+                <h3 class="story-title">全奖 EE PhD 申请：套磁是王道</h3>
+                <p class="story-desc">收到 MIT / Stanford / Berkeley 全奖 PhD offer。分享我的科研经历、套磁策略和选导师心得。</p>
+                <div class="story-meta">
+                    <span>MIT EECS PhD</span>
+                    <span>15 min read</span>
+                </div>
+            </div>
+        </a>
+
+        <a href="transfer-story.html" class="story-card">
+            <div class="story-cover transfer">🔄</div>
+            <div class="story-content">
+                <span class="story-category">Transfer / 转学</span>
+                <h3 class="story-title">从社区大学到 UC Berkeley</h3>
+                <p class="story-desc">TAG 协议 + 精心规划，两年社区大学后成功转入 UC Berkeley。转学生的时间管理与选课策略。</p>
+                <div class="story-meta">
+                    <span>UC Berkeley Transfer</span>
+                    <span>10 min read</span>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <p class="footer">© 2026 yunzhuan.icu &nbsp;|&nbsp; Version v20.0.0</p>
+</body>
+</html>

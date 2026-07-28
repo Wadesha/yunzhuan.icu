@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Statement Writing Guide - yunzhuan.icu</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px 16px;
+            background: #f5f5f5;
+            color: #333;
+        }
+        .back-link { color: #667eea; text-decoration: none; font-size: 0.85rem; margin-bottom: 12px; display: inline-block; }
+        .back-link:hover { text-decoration: underline; }
+        h1 { color: #333; margin-bottom: 4px; font-size: 1.4rem; }
+        .en-name { color: #888; font-size: 0.95rem; margin-bottom: 4px; font-weight: normal; }
+        .code-line { color: #888; font-size: 0.82rem; margin-bottom: 14px; }
+        .section {
+            background: white;
+            border-radius: 8px;
+            padding: 14px 18px;
+            margin-bottom: 10px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .section h2 {
+            color: #667eea;
+            margin-bottom: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        .section h2 .en { color: #999; font-size: 0.8rem; font-weight: normal; }
+        .section p { color: #333; line-height: 1.7; font-size: 0.92rem; }
+        .section p.cn-hint { color: #666; font-size: 0.85rem; margin-bottom: 6px; }
+        .step-list { list-style: none; counter-reset: step; }
+        .step-list li {
+            position: relative;
+            padding: 10px 10px 10px 40px;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        .step-list li:last-child { border-bottom: none; }
+        .step-list li::before {
+            counter-increment: step;
+            content: counter(step);
+            position: absolute;
+            left: 10px;
+            top: 10px;
+            width: 22px;
+            height: 22px;
+            background: #667eea;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        .step-list .step-title { font-weight: 600; color: #333; }
+        .step-list .step-detail { color: #777; font-size: 0.82rem; margin-top: 2px; }
+        .topic-list { list-style: none; }
+        .topic-list li {
+            padding: 8px 10px;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        .topic-list li:last-child { border-bottom: none; }
+        .topic-list .topic-title { font-weight: 600; color: #333; }
+        .topic-list .topic-desc { color: #777; font-size: 0.82rem; margin-top: 2px; }
+        .meta-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+            margin-top: 6px;
+        }
+        .meta-table td {
+            padding: 6px 8px;
+            border-bottom: 1px solid #f0f0f0;
+            vertical-align: top;
+        }
+        .meta-table td.label { color: #888; width: 28%; }
+        .meta-table td.value { color: #333; }
+        .warning-box {
+            background: #ffebee;
+            border-left: 3px solid #c62828;
+            padding: 10px 14px;
+            border-radius: 0 6px 6px 0;
+            margin-top: 8px;
+            font-size: 0.85rem;
+            color: #b71c1c;
+            line-height: 1.6;
+        }
+        .tip-box {
+            background: #e8f5e9;
+            border-left: 3px solid #2e7d32;
+            padding: 10px 14px;
+            border-radius: 0 6px 6px 0;
+            margin-top: 8px;
+            font-size: 0.85rem;
+            color: #1b5e20;
+            line-height: 1.6;
+        }
+        .prompt-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 8px;
+            margin-top: 8px;
+        }
+        .prompt-card {
+            background: #f8f9fa;
+            border-radius: 6px;
+            padding: 10px 12px;
+            border-left: 3px solid #764ba2;
+        }
+        .prompt-card .prompt-num { color: #764ba2; font-size: 0.8rem; font-weight: 600; }
+        .prompt-card .prompt-text { color: #444; font-size: 0.82rem; margin-top: 4px; line-height: 1.4; }
+        .footer { text-align: center; margin-top: 20px; color: #999; font-size: 0.8rem; }
+    </style>
+    <link rel="stylesheet" href="/css/collapse.css">
+</head>
+<body>
+    <a href="index.html" class="back-link">&larr; Back to Essay Resources</a>
+
+    <h1>PS Writing Guide</h1>
+    <p class="en-name">Personal Statement 写作指南</p>
+    <p class="code-line">Common App · brainstorming · structure · editing · 650 words</p>
+
+    <div class="section">
+        <h2>What is a Personal Statement? <span class="en">什么是主文书</span></h2>
+        <p class="cn-hint">Personal Statement（简称 PS）是 Common App 等申请系统中的主文书，650 字限制，是你向招生官展示"你是谁"的最重要机会。</p>
+        <table class="meta-table">
+            <tr><td class="label">Word Limit</td><td class="value">650 词（建议 550-650，不要太少也不要超）</td></tr>
+            <tr><td class="label">Purpose</td><td class="value">展示你的个性、价值观、成长经历，让招生官记住你</td></tr>
+            <tr><td class="label">Audience</td><td class="value">招生官（每份文书阅读时间约 2-5 分钟）</td></tr>
+            <tr><td class="label">Common App Prompts</td><td class="value">7 个题目任选其一，也可以写 Prompt 7（自由命题）</td></tr>
+            <tr><td class="label">Tone</td><td class="value">真诚、自然、有反思，不要太正式也不要太随意</td></tr>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>Common App 2026 Prompts <span class="en">Common App 文书题目</span></h2>
+        <p class="cn-hint">7 个题目任选其一。选哪个都行，招生官不会因为题目给分，关键是内容。</p>
+        <div class="prompt-grid">
+            <div class="prompt-card">
+                <div class="prompt-num">Prompt 1</div>
+                <div class="prompt-text">Some students have a background, identity, interest, or talent that is so meaningful they believe their application would be incomplete without it. If this sounds like you, then please share your story.</div>
+            </div>
+            <div class="prompt-card">
+                <div class="prompt-num">Prompt 2</div>
+                <div class="prompt-text">The lessons we take from obstacles we encounter can be fundamental to later success. Recount a time when you faced a challenge, setback, or failure. How did it affect you, and what did you learn from the experience?</div>
+            </div>
+            <div class="prompt-card">
+                <div class="prompt-num">Prompt 3</div>
+                <div class="prompt-text">Reflect on a time when you questioned or challenged a belief or idea. What prompted your thinking? What was the outcome?</div>
+            </div>
+            <div class="prompt-card">
+                <div class="prompt-num">Prompt 4</div>
+                <div class="prompt-text">Reflect on something that someone has done for you that has made you happy or thankful in a surprising way. How has this gratitude affected or motivated you?</div>
+            </div>
+            <div class="prompt-card">
+                <div class="prompt-num">Prompt 5</div>
+                <div class="prompt-text">Discuss an accomplishment, event, or realization that sparked a period of personal growth and a new understanding of yourself or others.</div>
+            </div>
+            <div class="prompt-card">
+                <div class="prompt-num">Prompt 6</div>
+                <div class="prompt-text">Describe a topic, idea, or concept you find so engaging that it makes you lose all track of time. Why does it captivate you? What or who do you turn to when you want to learn more?</div>
+            </div>
+            <div class="prompt-card">
+                <div class="prompt-num">Prompt 7</div>
+                <div class="prompt-text">Share an essay on any topic of your choice. It can be one you've already written, one that responds to a different prompt, or one of your own design.</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Brainstorming <span class="en">头脑风暴</span></h2>
+        <p class="cn-hint">不要急着写，先花 1-2 天时间想故事。好故事比好文笔更重要。</p>
+        <ol class="step-list">
+            <li>
+                <div class="step-title">列 20 件塑造了你的事</div>
+                <div class="step-detail">不用是"大事"，可以是很小的事：一次失败、一次旅行、一个习惯、一本书、一个人、一个爱好。只要对你有意义就写下来。</div>
+            </li>
+            <li>
+                <div class="step-title">每件事问自己三个问题</div>
+                <div class="step-detail">为什么这件事重要？我从中学到了什么？这件事如何影响了今天的我？能回答上来的才是好素材。</div>
+            </li>
+            <li>
+                <div class="step-title">找"你的主题"</div>
+                <div class="step-detail">你的 20 件事里有没有反复出现的主题？比如：好奇心、克服困难、帮助他人、创造力、追求卓越？找到那个最核心的主题。</div>
+            </li>
+            <li>
+                <div class="step-title">选一个最有代表性的故事</div>
+                <div class="step-detail">不要写流水账（"我做了 A 然后 B 然后 C"），选一个具体的故事，以小见大。</div>
+            </li>
+        </ol>
+        <div class="tip-box">
+            <strong>避坑提醒：</strong>不要写"假大空"的题材。赢了比赛、做了慈善、去了第三世界国家——这些题材不是不能写，但太多人写了，很难写出新意。写你真正独特的经历，哪怕看起来"小"。
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Structure Formula <span class="en">万能结构公式</span></h2>
+        <p class="cn-hint">好的 PS 不是散文，是有结构的故事。用这个结构不容易出错。</p>
+        <ul class="topic-list">
+            <li>
+                <div class="topic-title">Hook (开头 50-100 词)</div>
+                <div class="topic-desc">用一个具体的场景、对话、细节、或反差开头，吸引读者继续读。不要用"我从小就对...感兴趣"这种烂大街的开头。</div>
+            </li>
+            <li>
+                <div class="topic-title">Context (背景 100-150 词)</div>
+                <div class="topic-desc">交代故事发生的背景：你是谁、当时什么情况、有什么问题或挑战。不要太长，快速进入正题。</div>
+            </li>
+            <li>
+                <div class="topic-title">Conflict / Challenge (冲突 150-200 词)</div>
+                <div class="topic-desc">故事的核心：你遇到了什么困难、挑战、或转折点？你的挣扎是什么？越具体越好。</div>
+            </li>
+            <li>
+                <div class="topic-title">Action / Change (行动/转变 150-200 词)</div>
+                <div class="topic-desc">你做了什么？你是怎么应对的？你的想法或行为发生了什么变化？这是展示你性格的关键部分。</div>
+            </li>
+            <li>
+                <div class="topic-title">Reflection (反思 100-150 词)</div>
+                <div class="topic-desc">最重要的部分！你从中学到了什么？这件事如何影响了今天的你？和你的未来、专业、价值观有什么联系？</div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Show, Don't Tell <span class="en">展示而非陈述</span></h2>
+        <p class="cn-hint">这是写作中最重要的原则，也是中国学生最容易犯的错误。</p>
+        <table class="meta-table">
+            <tr><td class="label">❌ Tell (陈述)</td><td class="value">"I am a very persistent person who never gives up in the face of difficulties."</td></tr>
+            <tr><td class="label">✅ Show (展示)</td><td class="value">"I had failed the experiment 17 times. On the 18th attempt, at 2:47 AM, the solution finally turned the shade of blue I'd been dreaming about for three weeks."</td></tr>
+            <tr><td class="label">❌ Tell</td><td class="value">"My grandmother is the most important person in my life and she taught me so much."</td></tr>
+            <tr><td class="label">✅ Show</td><td class="value">"Every Sunday morning, my grandmother and I made dumplings together. Her hands, wrinkled like dried leaves but steady as a compass, showed me how to fold the wrapper just so — 'Not too tight, not too loose, just like life,' she'd say."</td></tr>
+        </table>
+        <div class="tip-box">
+            <strong>技巧：</strong>多写具体细节（时间、地点、动作、对话、感官描写），少用形容词（勇敢、聪明、善良、努力）。让读者从细节中自己得出结论，而不是你直接告诉他们。
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Editing Process <span class="en">修改流程</span></h2>
+        <p class="cn-hint">好文章都是改出来的。建议至少改 5-8 稿，花 3-6 周时间。</p>
+        <ol class="step-list">
+            <li>
+                <div class="step-title">Vomit Draft (烂初稿)</div>
+                <div class="step-detail">不要管字数、不要管语法、不要管好不好，先把所有想法都写下来。目标是写完，不是写好。1-2 天完成。</div>
+            </li>
+            <li>
+                <div class="step-title">Content Edit (内容修改)</div>
+                <div class="step-detail">故事清楚吗？有成长变化吗？反思够深吗？结构合理吗？先改大方向，再改细节。</div>
+            </li>
+            <li>
+                <div class="step-title">Word Count Cut (缩字数)</div>
+                <div class="step-detail">从 1000+ 词砍到 650 词以内。删多余的形容词、删不重要的细节、合并句子。每删一个字都在让文章变更好。</div>
+            </li>
+            <li>
+                <div class="step-title">Line Edit (逐句润色)</div>
+                <div class="step-detail">每句话都问自己：这句话能更简洁吗？能用更生动的词吗？有没有更有力的表达方式？</div>
+            </li>
+            <li>
+                <div class="step-title">Get Feedback (寻求反馈)</div>
+                <div class="step-detail">给英语老师、升学顾问、学长学姐看。但记住：意见可以听，最终决定权在你。不要为了迎合别人改得不像你自己。</div>
+            </li>
+            <li>
+                <div class="step-title">Final Polish (最终润色)</div>
+                <div class="step-detail">检查语法、拼写、标点。大声读出来，确保听起来自然。放几天再最后看一遍。</div>
+            </li>
+        </ol>
+    </div>
+
+    <div class="section">
+        <h2>Common Mistakes <span class="en">常见错误</span></h2>
+        <div class="warning-box">
+            <strong>绝对不要做的事：</strong><br>
+            · 不要抄范文或用 AI 写的内容（Turnitin 能检测到）<br>
+            · 不要写简历式流水账（活动列表已经写过了）<br>
+            · 不要试图展示所有优点（贪多嚼不烂，讲好一个故事就行）<br>
+            · 不要用太复杂的词和句子（招生官想看到真实的你，不是字典）<br>
+            · 不要在最后一段才说"这就是为什么我想学生物"（太突兀，要自然融入）
+        </div>
+        <ul class="topic-list">
+            <li>
+                <div class="topic-title">Mistake 1: 写"成功故事"但没有挣扎</div>
+                <div class="topic-desc">如果你写"我参加比赛然后赢了"，招生官不会记住你。他们想看的是你如何面对困难、如何失败、如何从失败中学习。</div>
+            </li>
+            <li>
+                <div class="topic-title">Mistake 2: 假大空的题材</div>
+                <div class="topic-desc">去非洲支教、爬珠峰、创办非营利组织——这些题材不是不能写，但 90% 的人写不好，因为不够真实。写你真正的生活。</div>
+            </li>
+            <li>
+                <div class="topic-title">Mistake 3: 反思不够深</div>
+                <div class="topic-desc">很多学生写了一个好故事，但最后只说"这件事让我学到了很多"。学到了什么？具体说出来！反思占分至少 30%。</div>
+            </li>
+            <li>
+                <div class="topic-title">Mistake 4: 试图"猜"招生官想看什么</div>
+                <div class="topic-desc">你猜不准的。招生官能看出来你在装。做你自己，写你真正在乎的东西。真诚比"完美"更有力量。</div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Timeline <span class="en">时间规划</span></h2>
+        <table class="meta-table">
+            <tr><td class="label">11 年级暑假（7-8 月）</td><td class="value">头脑风暴 + 烂初稿 + 第 2-3 稿，搞定主文书初稿</td></tr>
+            <tr><td class="label">9 月</td><td class="value">主文书修改到终稿，开始写补充文书</td></tr>
+            <tr><td class="label">10 月</td><td class="value">补充文书修改，ED/EA 学校文书定稿</td></tr>
+            <tr><td class="label">11 月</td><td class="value">ED/EA 提交，RD 学校文书开始</td></tr>
+            <tr><td class="label">12 月</td><td class="value">RD 文书修改、定稿、提交</td></tr>
+            <tr><td class="label">1 月</td><td class="value">最后一批 RD 截止，提交后就别想了</td></tr>
+        </table>
+        <div class="tip-box">
+            <strong>建议：</strong>主文书越早开始越好。暑假搞定主文书，开学后压力会小很多。不要等到最后一周才写，你写不出来的。
+        </div>
+    </div>
+
+    <p class="footer">&copy; 2026 yunzhuan.icu | PS Writing Guide</p>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <div style="text-align:center;padding:8px 0;font-size:0.75rem;color:#aaa;">
+        <a href="../index.html" style="color:#aaa;text-decoration:none;">Home</a>
+        <span style="margin:0 6px;">&middot;</span>
+        <a href="../intl-exams/index.html" style="color:#aaa;text-decoration:none;">International Exams</a>
+        <span style="margin:0 6px;">&middot;</span>
+        <a href="../contact.html" style="color:#aaa;text-decoration:none;">Contact</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="javascript:window.scrollTo(0,0)" style="color:#aaa;text-decoration:none;">Back to top</a>
+    </div>
+</body>
+</html>

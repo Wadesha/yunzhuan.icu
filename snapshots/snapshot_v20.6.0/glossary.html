@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application Glossary - Common Terms & Abbreviations - yunzhuan.icu</title>
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 16px 20px;
+            background: #f5f5f5;
+            color: #333;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            margin-bottom: 16px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .logo {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #667eea;
+            text-decoration: none;
+        }
+        .logo span { color: #764ba2; }
+        .nav-links {
+            display: flex;
+            gap: 18px;
+            align-items: center;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: #555;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: color 0.15s;
+        }
+        .nav-links a:hover { color: #667eea; }
+        .nav-links .cn {
+            font-size: 0.7rem;
+            color: #aaa;
+            margin-left: 2px;
+        }
+        @media (max-width: 768px) {
+            .navbar { flex-wrap: wrap; gap: 8px; }
+            .nav-links { gap: 12px; }
+            .nav-links a { font-size: 0.78rem; }
+            .nav-links .cn { display: none; }
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 4px;
+            font-size: 1.5rem;
+        }
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 16px;
+            font-size: 0.9rem;
+        }
+        .search-bar {
+            margin-bottom: 16px;
+        }
+        .search-bar input {
+            width: 100%;
+            padding: 10px 14px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            transition: border-color 0.15s;
+        }
+        .search-bar input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        .section {
+            background: white;
+            border-radius: 8px;
+            padding: 14px 18px;
+            margin-bottom: 10px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .section h2 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        .section h2 .cn { color: #999; font-size: 0.8rem; font-weight: normal; margin-left: 6px; }
+        .glossary-item {
+            padding: 10px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .glossary-item:last-child { border-bottom: none; }
+        .term {
+            font-weight: 700;
+            color: #333;
+            font-size: 0.92rem;
+            margin-bottom: 2px;
+        }
+        .term .pron {
+            font-weight: normal;
+            font-size: 0.8rem;
+            color: #999;
+            margin-left: 6px;
+        }
+        .definition {
+            font-size: 0.85rem;
+            color: #555;
+            line-height: 1.6;
+        }
+        .definition .example {
+            display: block;
+            margin-top: 4px;
+            font-style: italic;
+            color: #888;
+            font-size: 0.8rem;
+        }
+        .tag {
+            display: inline-block;
+            padding: 1px 6px;
+            background: #e0e7ff;
+            color: #4338ca;
+            border-radius: 3px;
+            font-size: 0.7rem;
+            margin-left: 6px;
+            font-weight: 500;
+        }
+        .letter-nav {
+            display: flex;
+            gap: 4px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 14px;
+        }
+        .letter-nav a {
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 4px;
+            text-decoration: none;
+            color: #666;
+            font-size: 0.8rem;
+            font-weight: 600;
+            transition: all 0.15s;
+        }
+        .letter-nav a:hover {
+            background: #f0f4ff;
+            border-color: #c7d2fe;
+            color: #667eea;
+        }
+        .footer { text-align: center; margin-top: 20px; color: #999; font-size: 0.8rem; }
+    </style>
+    <link rel="stylesheet" href="./css/theme.css">
+    <link rel="manifest" href="./manifest.json">
+    <meta name="theme-color" content="#667eea">
+    <script src="./js/theme.js"></script>
+    <script>
+    window.SUPABASE_CONFIG = {{
+        url: 'https://otfjbzjvkoectpejhxar.supabase.co',
+        anonKey: 'sb_publishable_SBRF6ewKH-se3dNlqFwsXQ_lObhamTr'
+    }};
+    </script>
+    <script src="./js/auth.js"></script>
+    <script src="./js/favorites.js"></script>
+    <script src="./js/pwa.js"></script>
+    <script src="./js/mobile-nav.js"></script>
+    <script src="./js/breadcrumbs.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="../index.html" class="logo">yunzhuan<span>.icu</span></a>
+        <div class="nav-links">
+            <a href="../index.html">Majors<span class="cn">专业</span></a>
+            <a href="../schools/index.html">Schools<span class="cn">学校</span></a>
+            <a href="../tests/index.html">Tests<span class="cn">考试</span></a>
+            <a href="../rankings.html">Rankings<span class="cn">排名</span></a>
+            <a href="../scholarships/index.html">Scholarships<span class="cn">奖学金</span></a>
+            <a href="../interviews/index.html">Interviews<span class="cn">面试</span></a>
+            <a href="search.html">Search<span class="cn">搜索</span></a>
+            <a href="../contact.html">Contact<span class="cn">联系</span></a>
+        </div>
+    </nav>
+
+    <h1>Application Glossary</h1>
+    <p class="subtitle">申请术语表 · 常见英文缩写和专业术语</p>
+
+    <div class="search-bar">
+        <input type="text" id="search-input" placeholder="🔍 Search terms / 搜索术语..." oninput="searchTerms()">
+    </div>
+
+    <div class="letter-nav" id="letter-nav">
+        <a href="#A">A</a><a href="#B">B</a><a href="#C">C</a><a href="#D">D</a>
+        <a href="#E">E</a><a href="#F">F</a><a href="#G">G</a><a href="#H">H</a>
+        <a href="#I">I</a><a href="#J">J</a><a href="#L">L</a><a href="#M">M</a>
+        <a href="#N">N</a><a href="#O">O</a><a href="#P">P</a><a href="#R">R</a>
+        <a href="#S">S</a><a href="#T">T</a><a href="#U">U</a><a href="#W">W</a>
+        <a href="#Y">Y</a>
+    </div>
+
+    <div id="glossary-container">
+    <div class="section" id="A">
+        <h2>A <span class="cn">A开头</span></h2>
+        <div class="glossary-item" data-term="admissions ACT AP">
+            <div class="term">Admissions <span class="tag">通用</span></div>
+            <div class="definition">
+                录取/招生。大学审核申请材料并决定是否录取学生的过程。
+            </div>
+        </div>
+        <div class="glossary-item" data-term="ACT">
+            <div class="term">ACT <span class="tag">考试</span></div>
+            <div class="definition">
+                American College Test，美国大学入学考试之一。包含英语、数学、阅读、科学四个部分，满分 36 分。
+                <span class="example">"I got a 32 on my ACT."</span>
+            </div>
+        </div>
+        <div class="glossary-item" data-term="AP">
+            <div class="term">AP <span class="tag">课程/考试</span></div>
+            <div class="definition">
+                Advanced Placement，大学先修课程。由 College Board 提供的高中阶段大学水平课程，考试通过后可换大学学分。满分 5 分。
+                <span class="example">"I'm taking 5 AP classes this year."</span>
+            </div>
+        </div>
+        <div class="glossary-item" data-term="EA ED">
+            <div class="term">EA / Early Action <span class="tag">申请</span></div>
+            <div class="definition">
+                早行动。提前申请的一种，通常 11 月 1 日截止，12 月出结果。特点是 non-binding（非绑定），录取后可以不去。
+                <span class="example">区别于 ED（Early Decision），ED 是绑定的，录取了必须去。</span>
+            </div>
+        </div>
+        <div class="glossary-item" data-term="ED">
+            <div class="term">ED / Early Decision <span class="tag">申请</span></div>
+            <div class="definition">
+                早决定。提前申请的一种，binding（绑定）性质。如果录取了必须入学，不能再申请其他学校。通常只能申一所 ED 学校。
+                <span class="example">ED1 一般 11/1 截止，ED2 一般 1/1 截止。</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="section" id="B">
+        <h2>B <span class="cn">B开头</span></h2>
+        <div class="glossary-item" data-term="bachelor BA BS">
+            <div class="term">Bachelor's Degree <span class="tag">学位</span></div>
+            <div class="definition">
+                学士学位。本科四年（或三年）毕业后获得的学位。常见的有 B.A.（文学士）和 B.S.（理学士）。
+                <span class="example">"I'm getting a Bachelor of Science in Computer Science."</span>
+            </div>
+        </div>
+        <div class="glossary-item" data-term="blind need-blind">
+            <div class="term">Need-Blind <span class="tag">录取</span></div>
+            <div class="definition">
+                需求无关录取。学校在录取时不考虑学生是否需要经济资助，只看学术和个人能力。
+                <span class="example">HYPSM 等顶尖私立校都是 need-blind for US students。</span>
+            </div>
+        </div>
+        <div class="glossary-item" data-term="bowdoin">
+            <div class="term">Bowdoin <span class="tag">学校</span></div>
+            <div class="definition">
+                Bowdoin College，鲍登学院，美国顶尖文理学院之一，位于缅因州。
+            </div>
+        </div>
+    </div>
+
+    <div class="section" id="C">
+        <h2>C <span class="cn">C开头</span></h2>
+        <div class="glossary-item" data-term="Common App">
+            <div class="term">Common App <span class="tag">申请</span></div>
+            <div class="definition">
+                Common Application，通用申请系统。美国和其他国家 1000+ 所大学共用的在线申请平台，填一份可以申多所学校。
+                <span class="example">"I submitted my Common App last week."</span>
+            </div>
+        </div>
+        <div class="glossary-item" data-term="Coalition App">
+            <div class="term">Coalition App <span class="tag">申请</span></div>
+            <div class="definition">
+                Coalition Application，另一个通用申请系统，使用学校比 Common App 少一些。约 150 所学校使用。
+            </div>
+        </div>
+        <div class="glossary-item" data-term="counselor">
+            <div class="term">Counselor <span class="tag">人物</span></div>
+            <div class="definition">
+                升学指导老师/辅导员。高中里负责学生升学规划、写学校推荐信（counselor recommendation）的老师。
+                <span class="example">"My counselor wrote my recommendation letter."</span>
+            </div>
+        </div>
+        <div class="glossary-item" data-term="class rank">
+            <div class="term">Class Rank <span class="tag">成绩</span></div>
+            <div class="definition">
+                班级排名。学生在年级中的成绩排名，通常用百分比表示（如 top 10%）。很多美国高中已经不提供排名了。
+            </div>
+        </div>
+        <div class="glossary-item" data-term="core curriculum">
+            <div class="term">Core Curriculum <span class="tag">课程</span></div>
+            <div class="definition">
+                核心课程。大学要求所有学生必须修的通识课程，不管专业是什么。比如哥大的 Core、芝加哥的 Core 都很有名。
+            </div>
+        </div>
+    </div>
+
+    <div class="section" id="D">
+        <h2>D <span class="cn">D开头</span></h2>
+        <div class="glossary-item" data-term="Defer">
+            <div class="term">Defer / Deferred <span class="tag">录取结果</span></div>
+            <div class="definition">
+                延后/推迟决定。ED/EA 申请后没有直接录取或拒绝，而是被放到 RD 池中再次审核。
+                <span class="example">"I got deferred from my ED school, now I'm waiting for RD."</span>
+            </div>
+        </div>
+        <div class="glossary-item" data-term="Dual Enrollment">
+            <div class="term">Dual Enrollment <span class="tag">课程</span></div>
+            <div class="definition">
+                双录取/同时注册。高中时同时在当地大学修课，既算高中学分也算大学学分。
+            </div>
+        </div>
+    </div>
+
+    <div class="section" id="E">
+        <h2>E <span class="cn">E开头</span></h2>
+        <div class="glossary-item" data-term="EC Extracurricular">
+            <div class="term">EC / Extracurricular <span class="tag">活动</span></div>
+            <div class="definition">
+                课外活动。申请中的重要部分，包括竞赛、社团、义工、运动、艺术、科研等。
+                <span class="example">"Common App 有 10 个活动列表位置。"</span>
+            </div>
+        </div>
+        <div class="glossary-item" data-term="EDII ED2">
+            <div class="term">ED II / ED2 <span class="tag">申请</span></div>
+            <div class="definition">
+                第二轮早决定。有些学校提供两轮 ED，ED2 截止日期通常和 RD 差不多（1 月初），但仍是 binding。
+            </div>
+        </div>
+        <div class="glossary-item" data-term="Essay">
+            <div class="term">Essay <span class="tag">文书</span></div>
+            <div class="definition">
+                申请文书。大学申请中需要写的文章，包括主文书（personal statement）和各学校的补充文书（supplements）。
+            </div>
+        </div>
+    </div>
+
+    <div class="section" id="F">
+        <h2>F <span class="cn">F开头</span></h2>
+        <div class="glossary-item" data-term="FAFSA">
+            <div class="term">FAFSA <span class="tag">资助</span></div>
+            <div class="definition">
+                Free Application for Federal Student Aid，美国联邦学生资助申请表。美国公民/绿卡学生用来申请联邦助学金和贷款。国际学生一般不需要。
+            </div>
+        </div>
+        <div class="glossary-item" data-term="financial aid">
+            <div class="term">Financial Aid <span class="tag">资助</span></div>
+            <div class="definition">
+                经济资助/助学金。学校给学生的经济帮助，包括奖学金（scholarship）、助学金（grant）、贷款（loan）和工读（work-study）。
+            </div>
+        </div>
+        <div class="glossary-item" data-term="GPA">
+            <div class="term">GPA <span class="tag">成绩</span></div>
+            <div class="definition">
+                Grade Point Average，平均绩点。学生学业成绩的平均值，通常 4.0 为满分。有 weighted（加权，AP/IB 课加权重）和 unweighted（不加权）两种。
+            </div>
+        </div>
+    </div>
+
+    <div class="section" id="G">
+        <h2>G <span class="cn">G开头</span></h2>
+        <div class="glossary-item" data-term="GRE">
+            <div class="term">GRE <span class="tag">考试</span></div>
+            <div class="definition">
+                Graduate Record Examination，研究生入学考试。申请美国研究生院用的，本科申请不需要。
+            </div>
+        </div>
+    </div>
+
+    <div class="section" id="H">
+        <h2>H <span class="cn">H开头</span></h2>
+        <div class="glossary-item" data-term="Harvard">
+            <div class="term">HYPSM <span class="tag">学校</span></div>
+            <div class="definition">
+                Harvard, Yale, Princeton, Stanford, MIT 的缩写，美国最顶尖的五所大学，俗称"大藤+斯坦福麻省理工"。
+            </div>
+        </div>
+        <div class="glossary-item" data-term="honors">
+            <div class="term">Honors Class <span class="tag">课程</span></div>
+            <div class="definition">
+                荣誉课程。高中里比普通课程难度高的课，难度低于 AP/IB，但算 GPA 时可能有加权。
+            </div>
+        </div>
+    </div>
+
+    <div class="section" id="I">
+        <h2>I <span class="cn">I开头</span></h2>
+        <div class="glossary-item" data-term="IB">
+            <div class="term">IB <span class="tag">课程/考试</span></div>
+            <div class="definition">
+                International Baccalaureate，国际文凭课程。一个国际课程体系，有 Diploma Programme（DP）两年制，难度较高，被全球大学认可。满分 45 分。
+            </div>
+        </div>
+        <div class="glossary-item" data-term="IELTS">
+            <div class="term">IELTS <span class="tag">考试</span></div>
+            <div class="definition">
+                International English Language Testing System，雅思考试。英语语言能力测试，英国、澳洲、加拿大等国家的大学普遍接受，美国大部分大学也接受。满分 9 分。
+            </div>
+        </div>
+        <div class="glossary-item" data-term="Ivy League">
+            <div class="term">Ivy League <span class="tag">学校</span></div>
+            <div class="definition">
+                常春藤联盟。美国东北部八所顶尖私立大学的体育联盟，后来成为顶尖名校的代名词。
+                <span class="example">八所：Brown, Columbia, Cornell, Dartmouth, Harvard, Penn, Princeton, Yale</span>
+            </div>
+        </div>
+        <div class="glossary-item" data-term="international student">
+            <div class="term">International Student <span class="tag">身份</span></div>
+            <div class="definition">
+                国际学生。非美国公民/绿卡持有者，需要申请 F-1 学生签证去美国读书。
+            </div>
+        </div>
+    </div>
+
+    <div class="section" id="L">
+        <h2>L <span class="cn">L开头</span></h2>
+        <div class="glossary-item" data-term="LAC Liberal Arts College">
+            <div class="term">LAC / Liberal Arts College <span class="tag">学校类型</span></div>
+            <div class="definition">
+                文理学院。美国本科教育的一种类型，小班教学，注重通识教育和本科教学，规模通常比大学小。
+                <span class="example">知名 LAC：Williams, Amherst, Swarthmore, Pomona, Wellesley</span>
+            </div>
+        </div>
+        <div class="glossary-item" data-term="Letter of Rec">
+            <div class="term">LOR / Letter of Recommendation <span class="tag">申请材料</span></div>
+            <div class="definition">
+                推荐信。老师或辅导员为学生写的推荐信件，是申请材料的一部分。通常需要 2-3 封。
+            </div>
+        </div>
+    </div>
+
+    <div class="section" id="M">
+        <h2>M <span class="cn">M开头</span></h2>
+        <div class="glossary-item" data-term="merit scholarship">
+            <div class="term">Merit Scholarship <span class="tag">奖学金</span></div>
+            <div class="definition">
+                优秀奖学金。基于学生学术、艺术、体育等方面的优秀表现颁发的奖学金，不需要考虑家庭经济状况。
+                <span class="example">vs. Need-based aid（基于经济需要的资助）</span>
+            </div>
+        </div>
+        <div class="glossary-item" data-term="Mid-year Report">
+            <div class="term">Mid-year Report <span class="tag">申请材料</span></div>
+            <div class="definition">
+                期中成绩报告。高三上学期的成绩单，通常 1-2 月由 counselor 提交给大学。
+            </div>
+        </div>
+    </div>
+
+    <div class="section" id="N">
+        <h2>N <span class="cn">N开头</span></h2>
+        <div class="glossary-item" data-term="Need-based Aid">
+            <div class="term">Need-based Aid <span class="tag">资助</span></div>
+            <div class="definition">
+                需求型助学金。根据学生家庭经济状况发放的资助，家庭收入越低，可能获得的资助越多。
+            </div>
+        </div>
+    </div>
+
+    <div class="section" id="O">
+        <h2>O <span class="cn">O开头</span></h2>
+        <div class="glossary-item" data-term="offer admission offer">
+            <div class="term">Offer <span class="tag">录取</span></div>
+            <div class="definition">
+                录取通知。大学发给学生的录取决定，正式说法是 admission offer / letter of admission。
+            </div>
+        </div>
+        <div class="glossary-item" data-term="Orientation">
+            <div class="term">Orientation <span class="tag">入学</span></div>
+            <div class="definition">
+                新生Orientation/迎新周。开学前的新生欢迎活动，帮助新生熟悉校园、选课、认识同学等。
+            </div>
+        </div>
+    </div>
+
+    <div class="section" id="P">
+        <h2>P <span class="cn">P开头</span></h2>
+        <div class="glossary-item" data-term="PS Personal Statement">
+            <div class="term">Personal Statement <span class="tag">文书</span></div>
+            <div class="definition">
+                个人陈述/主文书。Common App 等申请系统中的主文书，650 字以内，讲你的个人故事。
+            </div>
+        </div>
+        <div class="glossary-item" data-term="PSAT">
+            <div class="term">PSAT <span class="tag">考试</span></div>
+            <div class="definition">
+                Preliminary SAT，SAT 预考/摸底考试。10-11 年级考，主要用来热身和争取 National Merit 奖学金（美国学生）。
+            </div>
+        </div>
+        <div class="glossary-item" data-term="RD Regular Decision">
+            <div class="term">RD / Regular Decision <span class="tag">申请</span></div>
+            <div class="definition">
+                常规申请/正常批。大多数学生申请的批次，通常 1 月截止，3-4 月出结果。non-binding，录取了可以选择去不去。
+            </div>
+        </div>
+        <div class="glossary-item" data-term="RA">
+            <div class="term">RA <span class="tag">校园生活</span></div>
+            <div class="definition">
+                Resident Assistant，宿舍助理。大学里负责宿舍管理的学生，通常可以免住宿费，是省钱的好方法。
+            </div>
+        </div>
+        <div class="glossary-item" data-term="Rolling Admissions">
+            <div class="term">Rolling Admissions <span class="tag">申请</span></div>
+            <div class="definition">
+                滚动录取。没有固定截止日期，学校收到申请就审核，录满为止。先到先得，建议尽早申请。
+            </div>
+        </div>
+    </div>
+
+    <div class="section" id="R">
+        <h2>R <span class="cn">R开头</span></h2>
+        <div class="glossary-item" data-term="Rejection">
+            <div class="term">Rejection <span class="tag">录取结果</span></div>
+            <div class="definition">
+                拒信。大学没有录取你。也被称为"ding"、"reject"。
+                <span class="example">"I got rejected from my dream school, but that's okay."</span>
+            </div>
+        </div>
+        <div class="glossary-item" data-term="research">
+            <div class="term">Research <span class="tag">活动</span></div>
+            <div class="definition">
+                科研/研究。跟着教授或独立做的学术研究，是申请中含金量很高的课外活动。
+            </div>
+        </div>
+        <div class="glossary-item" data-term="ROTC">
+            <div class="term">ROTC <span class="tag">项目</span></div>
+            <div class="definition">
+                Reserve Officers' Training Corps，后备军官训练团。美国大学的军事训练项目，毕业后去军队服役，可以获得学费资助。
+            </div>
+        </div>
+    </div>
+
+    <div class="section" id="S">
+        <h2>S <span class="cn">S开头</span></h2>
+        <div class="glossary-item" data-term="SAT">
+            <div class="term">SAT <span class="tag">考试</span></div>
+            <div class="definition">
+                Scholastic Assessment Test，美国大学入学考试。包含 Reading & Writing 和 Math 两个部分，满分 1600 分。由 College Board 主办。
+            </div>
+        </div>
+        <div class="glossary-item" data-term="SAT Subject Test">
+            <div class="term">SAT Subject Test <span class="tag">考试</span></div>
+            <div class="definition">
+                SAT 科目考试。单科的 SAT 考试（如数学、物理、化学等），College Board 已于 2021 年取消了这些考试。
+            </div>
+        </div>
+        <div class="glossary-item" data-term="scholarship">
+            <div class="term">Scholarship <span class="tag">奖学金</span></div>
+            <div class="definition">
+                奖学金。不需要偿还的经济资助，可以基于成绩（merit-based）、需要（need-based）或特定条件。
+            </div>
+        </div>
+        <div class="glossary-item" data-term="Supplement Essays">
+            <div class="term">Supplements / Supplemental Essays <span class="tag">文书</span></div>
+            <div class="definition">
+                补充文书。除了主文书外，各大学要求的额外短文，通常问"为什么选我们学校""为什么选这个专业"之类的问题。
+                <span class="example">"USC 有好多 supplement！"</span>
+            </div>
+        </div>
+        <div class="glossary-item" data-term="SCEA REA">
+            <div class="term">SCEA / REA <span class="tag">申请</span></div>
+            <div class="definition">
+                Single-Choice Early Action / Restrictive Early Action，限制性早行动。
+                类似 EA（非绑定），但有限制：一般只能申一所私立校的 EA/ED。
+                <span class="example">Harvard, Yale, Princeton 是 SCEA；Stanford 是 REA。</span>
+            </div>
+        </div>
+        <div class="glossary-item" data-term="student visa F1">
+            <div class="term">Student Visa / F-1 Visa <span class="tag">签证</span></div>
+            <div class="definition">
+                学生签证。国际学生去美国读全日制学位课程需要申请的签证类型。由美国大使馆/领事馆签发。
+            </div>
+        </div>
+        <div class="glossary-item" data-term="Safety School">
+            <div class="term">Safety School <span class="tag">选校</span></div>
+            <div class="definition">
+                保底校/安全校。录取概率很大的学校，你的成绩远高于学校的平均水平。
+                <span class="example">选校要有冲刺（reach）、匹配（match）、保底（safety）三个层次。</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="section" id="T">
+        <h2>T <span class="cn">T开头</span></h2>
+        <div class="glossary-item" data-term="TOEFL">
+            <div class="term">TOEFL <span class="tag">考试</span></div>
+            <div class="definition">
+                Test of English as a Foreign Language，托福考试。英语语言能力测试，由 ETS 主办，美国大学最普遍接受的语言考试。满分 120 分。
+            </div>
+        </div>
+        <div class="glossary-item" data-term="Transcript">
+            <div class="term">Transcript <span class="tag">申请材料</span></div>
+            <div class="definition">
+                成绩单。官方的高中成绩记录，需要学校盖章，由 counselor 发送给大学。
+            </div>
+        </div>
+        <div class="glossary-item" data-term="T20 T30">
+            <div class="term">T20 / T30 <span class="tag">排名</span></div>
+            <div class="definition">
+                Top 20 / Top 30。美国大学排名前 20 或前 30 的学校。留学生圈子常用说法。
+            </div>
+        </div>
+    </div>
+
+    <div class="section" id="U">
+        <h2>U <span class="cn">U开头</span></h2>
+        <div class="glossary-item" data-term="UC">
+            <div class="term">UC <span class="tag">学校系统</span></div>
+            <div class="definition">
+                University of California，加州大学系统。加州的公立大学系统，有 9 所分校：Berkeley, UCLA, UCSD, UCSB, UCI, UCD, UCSC, UCR, UCM。
+            </div>
+        </div>
+        <div class="glossary-item" data-term="Undecided">
+            <div class="term">Undecided <span class="tag">专业</span></div>
+            <div class="definition">
+                未定专业。申请时还不确定学什么专业，先进去再探索。很多美国大学允许甚至鼓励大一大二再定专业。
+            </div>
+        </div>
+    </div>
+
+    <div class="section" id="W">
+        <h2>W <span class="cn">W开头</span></h2>
+        <div class="glossary-item" data-term="Waitlist">
+            <div class="term">Waitlist <span class="tag">录取结果</span></div>
+            <div class="definition">
+                候补名单/等待列表。学校没有直接录取你也没有拒绝你，如果有人拒绝 offer 空出名额，可能会从 waitlist 中补录。
+                <span class="example">"I got waitlisted. Should I send a LOCI?"</span>
+            </div>
+        </div>
+        <div class="glossary-item" data-term="Work-study">
+            <div class="term">Work-study <span class="tag">资助</span></div>
+            <div class="definition">
+                工读/勤工俭学。校园打工项目，学生可以在校园里工作（如图书馆、食堂、办公室）赚取生活费。
+            </div>
+        </div>
+    </div>
+
+    <div class="section" id="Y">
+        <h2>Y <span class="cn">Y开头</span></h2>
+        <div class="glossary-item" data-term="Yield">
+            <div class="term">Yield <span class="tag">录取</span></div>
+            <div class="definition">
+                入学率/入读率。被录取的学生中实际选择入学的比例。Yield 越高说明学校越受欢迎。
+                <span class="example">Harvard 的 yield 很高，因为被录取的人几乎都去。</span>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <div class="section" id="no-results" style="display:none;">
+        <h2>No results <span class="cn">没有找到</span></h2>
+        <p style="color:#888;font-size:0.88rem;">没有找到匹配的术语，试试其他关键词？</p>
+    </div>
+
+    <p class="footer">&copy; 2026 yunzhuan.icu | Glossary</p>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <div style="text-align:center;padding:8px 0;font-size:0.75rem;color:#aaa;">
+        <a href="../index.html" style="color:#aaa;text-decoration:none;">Home</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="../essays/index.html" style="color:#aaa;text-decoration:none;">Essays</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="../contact.html" style="color:#aaa;text-decoration:none;">Contact</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="javascript:window.scrollTo(0,0)" style="color:#aaa;text-decoration:none;">Back to top</a>
+    </div>
+
+    <script>
+    function searchTerms() {
+        const query = document.getElementById('search-input').value.toLowerCase().trim();
+        const items = document.querySelectorAll('.glossary-item');
+        const sections = document.querySelectorAll('.section');
+        const letterNav = document.getElementById('letter-nav');
+        const noResults = document.getElementById('no-results');
+        
+        let hasResults = false;
+        
+        items.forEach(item => {
+            const term = item.dataset ? (item.dataset.term || '') : '';
+            const text = item.textContent.toLowerCase();
+            const match = !query || text.includes(query) || term.toLowerCase().includes(query);
+            item.style.display = match ? '' : 'none';
+            if (match) hasResults = true;
+        });
+        
+        sections.forEach(section => {
+            const items = section.querySelectorAll('.glossary-item');
+            let anyVisible = false;
+            items.forEach(item => {
+                if (item.style.display !== 'none') anyVisible = true;
+            });
+            section.style.display = anyVisible ? '' : 'none';
+        });
+        
+        noResults.style.display = hasResults ? 'none' : 'block';
+        letterNav.style.display = query ? 'none' : 'flex';
+    }
+    </script>
+<script src="./js/back-to-top.js"></script>
+</body>
+</html>

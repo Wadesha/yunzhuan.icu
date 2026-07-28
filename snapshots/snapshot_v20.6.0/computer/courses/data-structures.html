@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数据结构 - Data Structures - yunzhuan.icu</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 900px; margin: 0 auto; padding: 20px 16px; background: #f5f5f5; color: #333; }
+        .back-link { color: #667eea; text-decoration: none; font-size: 0.85rem; margin-bottom: 12px; display: inline-block; }
+        .back-link:hover { text-decoration: underline; }
+        h1 { color: #333; margin-bottom: 4px; font-size: 1.4rem; }
+        .en-name { color: #888; font-size: 0.95rem; margin-bottom: 14px; font-weight: normal; }
+        .section { background: white; border-radius: 8px; padding: 14px 18px; margin-bottom: 10px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+        .section h2 { color: #667eea; margin-bottom: 8px; font-size: 1rem; font-weight: 600; }
+        .section h2 .en { color: #999; font-size: 0.8rem; font-weight: normal; }
+        .section p { color: #333; line-height: 1.7; font-size: 0.92rem; }
+        .meta { font-size: 0.82rem; color: #888; margin-bottom: 8px; }
+        .footer { text-align: center; margin-top: 20px; color: #999; font-size: 0.8rem; }
+    </style>
+<link rel="stylesheet" href="/css/collapse.css">
+</head>
+<body>
+    <a href="../../index.html" class="back-link">← 返回首页</a>
+    <h1>数据结构</h1>
+    <p class="en-name">Data Structures</p>
+    <div class="section">
+        <h2>课程介绍 <span class="en">Course Introduction</span></h2>
+        <p class="meta">学分：4 | 先修课：程序设计基础、离散数学 | 学期：第2学期</p>
+        <p>数据结构是软件工程专业的核心基础课程，研究数据的逻辑结构、存储结构及相应算法。主要内容包括线性表、栈、队列、串、数组、树与二叉树、图、散列表，以及排序与查找算法。课程强调时间复杂度与空间复杂度分析，培养学生根据实际问题选择合适数据结构的能力，为后续算法设计、操作系统、数据库等课程奠定坚实基础。</p>
+        <p style="margin-top:8px;">Data Structures is a core foundation course in software engineering, covering logical and storage structures of data along with associated algorithms. Topics include lists, stacks, queues, strings, arrays, trees and binary trees, graphs, hash tables, as well as sorting and searching algorithms. The course emphasizes complexity analysis and cultivates the ability to choose appropriate structures for real problems, laying groundwork for algorithms, operating systems, and databases.</p>
+    </div>
+        <div class="section">
+        <h2>大作业 <span class="en">Final Project</span></h2>
+        <div>
+<p class="meta">作业标题：校园导航系统</p>
+        <p>学生需设计并实现一个校园地图导航系统，使用图结构存储地点与路径信息。要求实现Dijkstra与Floyd最短路径算法，支持景点查询、路径规划与最短距离计算。需采用合适的图存储结构，并提供命令行或图形界面。提交可运行程序、源代码及设计文档。</p>
+        <p style="margin-top:8px;">Students design and implement a campus navigation system using a graph to store locations and paths. Requirements include Dijkstra and Floyd shortest path algorithms, landmark query, route planning, and distance calculation. Deliverables include a runnable program, source code, and design documentation with an appropriate graph representation.</p>
+        </div>
+    </div>
+    <div class="section">
+        <h2>实施步骤 <span class="en">Implementation Steps</span></h2>
+        <div><div style="background:#f0f4ff;padding:10px 14px;border-radius:6px;margin-bottom:12px;border-left:3px solid #667eea;font-size:0.88rem;">
+<b>📋 示例</b>：实现几种核心数据结构并解决实际问题，比如用二叉搜索树实现一个能自动排序的词典，或用哈希表实现一个高效的缓存系统。你需要自己写代码实现插入、删除、查找操作，并分析每种操作的时间复杂度。
+</div>
+
+<div class="step-item">
+    <div class="step-number">步骤 1</div>
+    <div class="step-title">图数据建模</div>
+    <div class="step-desc">分析校园地图需求，设计图结构存储地点与路径信息，选择邻接矩阵或邻接表表示法</div>
+    <div class="step-output">产出：图数据结构设计文档</div>
+</div><div class="step-item">
+    <div class="step-number">步骤 2</div>
+    <div class="step-title">最短路径算法实现</div>
+    <div class="step-desc">实现Dijkstra单源最短路径算法和Floyd-Warshall多源最短路径算法</div>
+    <div class="step-output">产出：算法源代码</div>
+</div><div class="step-item">
+    <div class="step-number">步骤 3</div>
+    <div class="step-title">路径规划功能开发</div>
+    <div class="step-desc">开发景点查询、路径规划、距离计算功能，提供命令行或图形界面交互</div>
+    <div class="step-output">产出：功能模块代码</div>
+</div><div class="step-item">
+    <div class="step-number">步骤 4</div>
+    <div class="step-title">算法测试验证</div>
+    <div class="step-desc">设计测试用例验证算法正确性，分析时间复杂度和空间复杂度</div>
+    <div class="step-output">产出：测试报告与复杂度分析</div>
+</div><div class="step-item">
+    <div class="step-number">步骤 5</div>
+    <div class="step-title">文档整理提交</div>
+    <div class="step-desc">整理代码注释、编写设计文档和使用说明</div>
+    <div class="step-output">产出：完整项目文档</div>
+</div><div style="margin-top:14px;padding-top:10px;border-top:1px solid #eee;">
+    <h3 style="font-size:0.9rem;color:#667eea;margin-bottom:8px;">Steps</h3><div class="step-item">
+    <div class="step-number">Step 1</div>
+    <div class="step-title">Graph Data Modeling</div>
+    <div class="step-desc">Analyze campus map requirements, design graph structure for locations and paths</div>
+    <div class="step-output">Deliverable: Graph Structure Design Doc</div>
+</div><div class="step-item">
+    <div class="step-number">Step 2</div>
+    <div class="step-title">Shortest Path Algorithm</div>
+    <div class="step-desc">Implement Dijkstra and Floyd-Warshall shortest path algorithms</div>
+    <div class="step-output">Deliverable: Algorithm Source Code</div>
+</div><div class="step-item">
+    <div class="step-number">Step 3</div>
+    <div class="step-title">Route Planning Development</div>
+    <div class="step-desc">Develop landmark query, route planning, and distance calculation</div>
+    <div class="step-output">Deliverable: Feature Module Code</div>
+</div><div class="step-item">
+    <div class="step-number">Step 4</div>
+    <div class="step-title">Algorithm Testing</div>
+    <div class="step-desc">Design test cases to validate correctness, analyze complexity</div>
+    <div class="step-output">Deliverable: Test Report & Complexity Analysis</div>
+</div><div class="step-item">
+    <div class="step-number">Step 5</div>
+    <div class="step-title">Documentation</div>
+    <div class="step-desc">Prepare code comments, design documentation, and user manual</div>
+    <div class="step-output">Deliverable: Complete Project Documentation</div>
+</div></div>
+        
+    <div class="course-nav" style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:16px;padding:12px 16px;background:white;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,0.05);flex-wrap:wrap;">
+    <a href="../cs.html" style="color:#667eea;text-decoration:none;font-size:0.88rem;">← 返回计算机科学</a>
+    <a href="algorithms.html" style="color:#667eea;text-decoration:none;font-size:0.88rem;">下一门：算法设计与分析 →</a>
+    <a href="#" onclick="goRandomCourse();return false;" style="color:#667eea;text-decoration:none;font-size:0.88rem;">🎲 Random Course</a>
+</div>
+
+    <p class="footer">© 2026 yunzhuan.icu</p>
+<!-- Vercel Analytics -->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script defer src="/js/random-course.js"></script>
+<div style="text-align:center;padding:8px 0;font-size:0.75rem;color:#aaa;">
+    <a href="../../prerequisite/" style="color:#aaa;text-decoration:none;">Prerequisites</a>
+    <span style="margin:0 6px;">·</span>
+    <a href="../../intl-exams/index.html" style="color:#aaa;text-decoration:none;">International Exams</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="../../contact.html" style="color:#aaa;text-decoration:none;">Contact</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="javascript:window.scrollTo(0,0)" style="color:#aaa;text-decoration:none;">Back to top</a>
+    <span style="margin:0 6px;">·</span>
+    <a href="../../index.html" style="color:#aaa;text-decoration:none;">Home</a>
+</div>
+<!-- footer-links -->
+</body>
+</html>

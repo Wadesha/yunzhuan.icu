@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ - Frequently Asked Questions - yunzhuan.icu</title>
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 16px 20px;
+            background: #f5f5f5;
+            color: #333;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            margin-bottom: 16px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .logo {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #667eea;
+            text-decoration: none;
+        }
+        .logo span { color: #764ba2; }
+        .nav-links {
+            display: flex;
+            gap: 18px;
+            align-items: center;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: #555;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: color 0.15s;
+        }
+        .nav-links a:hover { color: #667eea; }
+        .nav-links .cn {
+            font-size: 0.7rem;
+            color: #aaa;
+            margin-left: 2px;
+        }
+        @media (max-width: 768px) {
+            .navbar { flex-wrap: wrap; gap: 8px; }
+            .nav-links { gap: 12px; }
+            .nav-links a { font-size: 0.78rem; }
+            .nav-links .cn { display: none; }
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 4px;
+            font-size: 1.5rem;
+        }
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 16px;
+            font-size: 0.9rem;
+        }
+        .section {
+            background: white;
+            border-radius: 8px;
+            padding: 14px 18px;
+            margin-bottom: 10px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .section h2 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        .section h2 .cn { color: #999; font-size: 0.8rem; font-weight: normal; margin-left: 6px; }
+        .faq-item {
+            border-bottom: 1px solid #f5f5f5;
+            padding: 10px 0;
+            cursor: pointer;
+        }
+        .faq-item:last-child { border-bottom: none; }
+        .faq-question {
+            font-weight: 600;
+            font-size: 0.92rem;
+            color: #333;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .faq-question .arrow {
+            color: #999;
+            font-size: 0.8rem;
+            transition: transform 0.2s;
+        }
+        .faq-item.active .faq-question .arrow {
+            transform: rotate(180deg);
+        }
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            font-size: 0.88rem;
+            color: #555;
+            line-height: 1.7;
+        }
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+            padding-top: 8px;
+        }
+        .footer { text-align: center; margin-top: 20px; color: #999; font-size: 0.8rem; }
+        .search-box {
+            margin-bottom: 16px;
+            text-align: center;
+        }
+        .search-box input {
+            width: 100%;
+            max-width: 400px;
+            padding: 10px 16px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            outline: none;
+            transition: border-color 0.15s;
+        }
+        .search-box input:focus {
+            border-color: #667eea;
+        }
+    </style>
+    <link rel="stylesheet" href="./css/theme.css">
+    <link rel="manifest" href="./manifest.json">
+    <meta name="theme-color" content="#667eea">
+    <script src="./js/theme.js"></script>
+    <script>
+    window.SUPABASE_CONFIG = {{
+        url: 'https://otfjbzjvkoectpejhxar.supabase.co',
+        anonKey: 'sb_publishable_SBRF6ewKH-se3dNlqFwsXQ_lObhamTr'
+    }};
+    </script>
+    <script src="./js/auth.js"></script>
+    <script src="./js/favorites.js"></script>
+    <script src="./js/pwa.js"></script>
+    <script src="./js/mobile-nav.js"></script>
+    <script src="./js/breadcrumbs.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="../index.html" class="logo">yunzhuan<span>.icu</span></a>
+        <div class="nav-links">
+            <a href="../index.html">Majors<span class="cn">专业</span></a>
+            <a href="../schools/index.html">Schools<span class="cn">学校</span></a>
+            <a href="../tests/index.html">Tests<span class="cn">考试</span></a>
+            <a href="../guides/index.html">Guides<span class="cn">指南</span></a>
+            <a href="../resources.html">Resources<span class="cn">资源</span></a>
+            <a href="search.html">Search<span class="cn">搜索</span></a>
+            <a href="../contact.html">Contact<span class="cn">联系</span></a>
+        </div>
+    </nav>
+
+    <h1>Frequently Asked Questions</h1>
+    <p class="subtitle">留学常见问题 · FAQ</p>
+
+    <div class="search-box">
+        <input type="text" id="searchInput" placeholder="Search questions... / 搜索问题...">
+    </div>
+
+    <div class="section" id="apply-section">
+        <h2>Application / 申请 <span class="cn">申请相关</span></h2>
+        
+        <div class="faq-item">
+            <div class="faq-question">
+                <span>美国本科申请需要准备什么材料？</span>
+                <span class="arrow">▼</span>
+            </div>
+            <div class="faq-answer">
+                主要包括：高中成绩单、标化成绩（SAT/ACT，可选）、语言成绩（TOEFL/IELTS/DET）、
+                文书（Personal Statement + Supplemental Essays）、推荐信（2-3封）、活动列表、
+                申请费（或费减免）。部分学校可能需要面试。
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">
+                <span>ED / EA / RD / REA 都是什么意思？</span>
+                <span class="arrow">▼</span>
+            </div>
+            <div class="faq-answer">
+                <strong>ED (Early Decision)：</strong>提前决定，具有约束力，录了必须去，只能申一所。<br>
+                <strong>EA (Early Action)：</strong>提前行动，不具约束力，录了可以不去，可以多申。<br>
+                <strong>REA (Restrictive Early Action)：</strong>限制性提前行动，只能申这一所私立的 EA/ED，但可以申公立 EA。<br>
+                <strong>RD (Regular Decision)：</strong>常规申请，截止日期一般 1 月，3-4 月出结果。
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">
+                <span>SAT/ACT 现在还需要考吗？</span>
+                <span class="arrow">▼</span>
+            </div>
+            <div class="faq-answer">
+                疫情后很多学校变成了 Test-Optional（可选提交），但如果能考出高分还是建议提交，
+                尤其是想冲名校的话。Top 20 还是有很多人提交的。Test-Blind 学校是完全不看标化的
+                （如 UC 系列）。具体看每个学校的政策。
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">
+                <span>GPA 有多重要？</span>
+                <span class="arrow">▼</span>
+            </div>
+            <div class="faq-answer">
+                GPA（尤其是加权 GPA）是申请中最重要的因素之一。招生官会看你的成绩趋势、
+                课程难度（AP/IB/Honor）、学校排名等。一般来说：<br>
+                · Top 30: 3.8+ （加权 4.0+）<br>
+                · Top 50: 3.5+<br>
+                · Top 100: 3.0+<br>
+                当然这不是绝对的，还要看其他方面。
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">
+                <span>课外活动重要吗？需要多少个？</span>
+                <span class="arrow">▼</span>
+            </div>
+            <div class="faq-answer">
+                美国大学非常看重课外活动，但不是看数量，而是看质量和深度。Common App 可以填 10 个活动，
+                但 3-5 个有深度的活动比 10 个水活动好得多。招生官喜欢看到长期投入、领导力、影响力。
+                比如：社团 leadership、科研、竞赛获奖、创业、志愿者等。
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">
+                <span>推荐信找谁写？</span>
+                <span class="arrow">▼</span>
+            </div>
+            <div class="faq-answer">
+                一般需要 2 封学科老师推荐信 + 1 封 counselor（升学顾问）推荐信。
+                老师最好是 11-12 年级教过你的，而且比较了解你。不一定要找职位最高的，
+                找真正了解你、能写出具体故事的老师。
+            </div>
+        </div>
+    </div>
+
+    <div class="section" id="school-section">
+        <h2>School Selection / 选校 <span class="cn">择校</span></h2>
+
+        <div class="faq-item">
+            <div class="faq-question">
+                <span>美国大学有多少种类型？</span>
+                <span class="arrow">▼</span>
+            </div>
+            <div class="faq-answer">
+                · <strong>综合性大学（University）：</strong>有本科+研究生，规模大，专业全，资源多。<br>
+                · <strong>文理学院（LAC）：</strong>只有本科，规模小，注重通识教育，师生比高。<br>
+                · <strong>公立大学：</strong>学费便宜（州内更便宜），规模大，如 UC 系列。<br>
+                · <strong>私立大学：</strong>学费贵，奖学金可能多，师生比高。<br>
+                · <strong>社区大学（CC）：</strong>两年制，可以转学到四年制大学。
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">
+                <span>选校应该考虑哪些因素？</span>
+                <span class="arrow">▼</span>
+            </div>
+            <div class="faq-answer">
+                · 排名（综合排名 + 专业排名）<br>
+                · 地理位置（城市/农村，气候，就业机会）<br>
+                · 学费 + 奖学金/经济援助<br>
+                · 学校规模（大 U vs 文理学院）<br>
+                · 专业设置和课程<br>
+                · 校园文化和氛围<br>
+                · 就业率和校友网络<br>
+                · 国际生比例和支持
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">
+                <span>怎么知道学校适不适合我？</span>
+                <span class="arrow">▼</span>
+            </div>
+            <div class="faq-answer">
+                · 有条件的话去访校（Campus Visit）最直观<br>
+                · 参加线上 info session<br>
+                · 看学校官网和社交媒体<br>
+                · 找在读学生/校友聊<br>
+                · 看 Niche、College Confidential 等网站的学生评价<br>
+                · 考虑你喜欢的环境（大/小、城市/乡村、学术/社交等）
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">
+                <span>申请多少所学校合适？</span>
+                <span class="arrow">▼</span>
+            </div>
+            <div class="faq-answer">
+                一般建议 8-12 所，分三档：<br>
+                · <strong>Safety / 保底校：</strong>2-3 所，大概率能录的<br>
+                · <strong>Match / 匹配校：</strong>4-6 所，和你水平差不多的<br>
+                · <strong>Reach / 冲刺校：</strong>2-3 所，有点难但也有可能的<br>
+                不要申太多，精力有限，每所学校的文书都要认真写。
+            </div>
+        </div>
+    </div>
+
+    <div class="section" id="money-section">
+        <h2>Cost & Scholarship / 费用与奖学金 <span class="cn">钱的问题</span></h2>
+
+        <div class="faq-item">
+            <div class="faq-question">
+                <span>美国读本科一年要多少钱？</span>
+                <span class="arrow">▼</span>
+            </div>
+            <div class="faq-answer">
+                差别很大：<br>
+                · <strong>私立大学：</strong>$70,000-$90,000/年（学费+生活费+其他）<br>
+                · <strong>公立大学（州外）：</strong>$50,000-$70,000/年<br>
+                · <strong>公立大学（州内）：</strong>$25,000-$40,000/年（但国际生一般算州外）<br>
+                · <strong>文理学院：</strong>$70,000-$85,000/年<br>
+                四年下来大概 200-350 万人民币。
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">
+                <span>国际生能拿奖学金吗？</span>
+                <span class="arrow">▼</span>
+            </div>
+            <div class="faq-answer">
+                可以，但不如美国本土学生多。主要有几种：<br>
+                · <strong>Need-Blind + Full Need：</strong>录取不看你需要多少钱，录了给你全奖。
+                只有少数学校对国际生是 need-blind（如哈佛、耶鲁、普林斯顿、MIT、Amherst 等）。<br>
+                · <strong>Merit-Based：</strong>按成绩给的奖学金，和需求无关。很多学校有。<br>
+                · <strong>Scholarship：</strong>各种专项奖学金，需要单独申请。
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">
+                <span>可以打工赚钱吗？</span>
+                <span class="arrow">▼</span>
+            </div>
+            <div class="faq-answer">
+                可以，但有限制：<br>
+                · 校园内打工：每周不超过 20 小时，假期可以全职<br>
+                · CPT：上学期间实习，需要和专业相关<br>
+                · OPT：毕业后实习，12个月，STEM专业可以延24个月<br>
+                · 校外黑工：别碰！违法的，会被遣返
+            </div>
+        </div>
+    </div>
+
+    <div class="section" id="visa-section">
+        <h2>Visa / 签证 <span class="cn">签证相关</span></h2>
+
+        <div class="faq-item">
+            <div class="faq-question">
+                <span>F-1 签证什么时候办？</span>
+                <span class="arrow">▼</span>
+            </div>
+            <div class="faq-answer">
+                拿到 I-20 就可以预约了。最早可以在开学前 120 天（4个月）申请。
+                建议拿到 offer 后尽快办，旺季可能要约很久。面签通过后一般 3-5 个工作日出签。
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">
+                <span>签证被拒了怎么办？</span>
+                <span class="arrow">▼</span>
+            </div>
+            <div class="faq-answer">
+                别慌，可以再签。先想想为什么被拒，常见原因：<br>
+                · 有移民倾向（最常见，证明你毕业会回国）<br>
+                · 资金证明不足<br>
+                · 材料不齐/有问题<br>
+                · 签证官心情不好（真的有）<br>
+                准备好再约，第二次过的概率也不低。
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">
+                <span>签证有效期是多久？</span>
+                <span class="arrow">▼</span>
+            </div>
+            <div class="faq-answer">
+                中国学生的 F-1 签证一般是 5 年有效。但注意：<br>
+                · 签证有效期 ≠ 在美国合法停留时间<br>
+                · 只要你是全日制学生、I-20 有效，即使签证过期了也可以待在美国<br>
+                · 但如果出境了，签证过期了就需要续签才能再进来
+            </div>
+        </div>
+    </div>
+
+    <div class="section" id="life-section">
+        <h2>Life in US / 留学生活 <span class="cn">生活相关</span></h2>
+
+        <div class="faq-item">
+            <div class="faq-question">
+                <span>刚去美国听不懂课怎么办？</span>
+                <span class="arrow">▼</span>
+            </div>
+            <div class="faq-answer">
+                很正常！几乎每个人都经历过。解决办法：<br>
+                · 课前预习，知道大概讲什么<br>
+                · 录课（先问教授能不能录）<br>
+                · 坐前排，认真听，看教授的肢体语言<br>
+                · 多和同学交流，组学习小组<br>
+                · 一般 1-3 个月就适应了，别焦虑
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">
+                <span>住宿舍还是校外租房？</span>
+                <span class="arrow">▼</span>
+            </div>
+            <div class="faq-answer">
+                <strong>宿舍：</strong>方便，省事儿，认识新朋友，一般包水电网，但贵，可能吵。<br>
+                <strong>校外：</strong>便宜，自由，空间大，但要自己操心水电网家具，离学校可能远。<br>
+                建议大一住宿舍，方便适应和交朋友，大二以后可以考虑搬出去。
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">
+                <span>在美国看病贵吗？</span>
+                <span class="arrow">▼</span>
+            </div>
+            <div class="faq-answer">
+                非常贵！所以一定要有医疗保险。学校一般会强制买保险，学费里已经包含了。
+                小毛病去校医院（Student Health Center），便宜方便。
+                不是急症不要随便去 Emergency Room（急诊），几千刀起步。
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">
+                <span>怎么交朋友？会被歧视吗？</span>
+                <span class="arrow">▼</span>
+            </div>
+            <div class="faq-answer">
+                交朋友的渠道：宿舍、课堂、社团、运动队、工作等。主动一点，美国人都很友好。
+                关于歧视：大部分地方是友好的，大学尤其包容。
+                可能会遇到一些 ignorant 的人，但不用在意。
+                遇到严重的歧视可以向学校举报。
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">
+                <span>想家了/不适应怎么办？</span>
+                <span class="arrow">▼</span>
+            </div>
+            <div class="faq-answer">
+                文化冲击（Culture Shock）是正常的，每个人都会经历。<br>
+                · 多和家人朋友视频<br>
+                · 认识中国朋友，但也别只混中国人圈子<br>
+                · 多出去走走，探索新地方<br>
+                · 培养兴趣爱好<br>
+                · 有心理问题可以去学校 Counseling Center，免费的<br>
+                · 一般几个月到半年就适应了
+            </div>
+        </div>
+    </div>
+
+    <div class="section" id="after-section">
+        <h2>After Graduation / 毕业后 <span class="cn">毕业去向</span></h2>
+
+        <div class="faq-item">
+            <div class="faq-question">
+                <span>毕业后能留在美国工作吗？</span>
+                <span class="arrow">▼</span>
+            </div>
+            <div class="faq-answer">
+                可以。流程一般是：<br>
+                1. <strong>OPT：</strong>毕业后 12 个月实习期（STEM 专业可以延 24 个月，共 3 年）<br>
+                2. <strong>H-1B：</strong>工作签证，需要公司 sponsor，每年抽签<br>
+                3. <strong>绿卡：</strong>公司帮你办，或者其他途径<br>
+                找工作时要问清楚公司支不支持 H-1B。
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">
+                <span>本科毕业直接工作还是读研？</span>
+                <span class="arrow">▼</span>
+            </div>
+            <div class="faq-answer">
+                看专业和个人规划：<br>
+                · 计算机、工程等好找工作的专业，可以先工作<br>
+                · 想做科研/学术，读博<br>
+                · 想转专业或者进更高端的岗位，可以读硕<br>
+                · 能先工作就先工作，有经验再读更好<br>
+                很多人工作几年后再回去读书，更知道自己想学什么。
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">
+                <span>美国大学本科含金量高吗？回国认可度怎么样？</span>
+                <span class="arrow">▼</span>
+            </div>
+            <div class="faq-answer">
+                总体来说认可度还是很高的，尤其是 Top 50 的学校。
+                但现在海归越来越多，光有学历不够，还要看能力和实习经历。
+                如果想回国发展，建议：<br>
+                · 尽量去知名度高的学校<br>
+                · 多做实习和项目<br>
+                · 利用好校友资源
+            </div>
+        </div>
+    </div>
+
+    <p class="footer">&copy; 2026 yunzhuan.icu | FAQ</p>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <div style="text-align:center;padding:8px 0;font-size:0.75rem;color:#aaa;">
+        <a href="../index.html" style="color:#aaa;text-decoration:none;">Home</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="../guides/index.html" style="color:#aaa;text-decoration:none;">Guides</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="../contact.html" style="color:#aaa;text-decoration:none;">Contact</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="javascript:window.scrollTo(0,0)" style="color:#aaa;text-decoration:none;">Back to top</a>
+    </div>
+
+    <script>
+    // FAQ toggle
+    document.querySelectorAll('.faq-item').forEach(item => {
+        item.addEventListener('click', function() {
+            this.classList.toggle('active');
+        });
+    });
+
+    // Search
+    document.getElementById('searchInput').addEventListener('input', function(e) {
+        const query = e.target.value.toLowerCase();
+        document.querySelectorAll('.faq-item').forEach(item => {
+            const text = item.textContent.toLowerCase();
+            if (text.includes(query)) {
+                item.style.display = '';
+            } else {
+                item.style.display = 'none';
+            }
+        });
+        // Hide sections with no visible items
+        document.querySelectorAll('.section').forEach(section => {
+            const visibleItems = section.querySelectorAll('.faq-item:not([style*="display: none"])');
+            if (visibleItems.length === 0) {
+                section.style.display = 'none';
+            } else {
+                section.style.display = '';
+            }
+        });
+    });
+    </script>
+<script src="./js/back-to-top.js"></script>
+</body>
+</html>

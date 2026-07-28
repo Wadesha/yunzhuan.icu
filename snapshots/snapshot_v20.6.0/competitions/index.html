@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>International Competitions - yunzhuan.icu</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 16px 20px;
+            background: #f5f5f5;
+            color: #333;
+        }
+        .navbar {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            padding: 12px 0;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+        .logo {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #667eea;
+            text-decoration: none;
+        }
+        .logo span { color: #764ba2; }
+        .nav-links {
+            display: flex;
+            gap: 14px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: #555;
+            font-size: 0.82rem;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+        .nav-links a:hover { color: #667eea; }
+        .nav-links .cn { font-size: 0.65rem; color: #bbb; margin-left: 2px; }
+
+        h1 { font-size: 1.5rem; margin-bottom: 4px; }
+        .subtitle { color: #666; font-size: 0.9rem; margin-bottom: 16px; }
+
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+        .stat-item { padding: 0; font-size: 0.85rem; color: #666; }
+        .stat-item b { color: #667eea; margin-right: 3px; font-size: 1rem; }
+
+        .filters {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .search-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 8px 14px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            background: white;
+            outline: none;
+            transition: border-color 0.15s;
+        }
+        .search-input:focus { border-color: #667eea; }
+        .filter-groups {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 14px;
+        }
+        .filter-group {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .filter-label { font-size: 0.78rem; color: #888; min-width: 50px; }
+        .filter-btn {
+            padding: 3px 10px;
+            border: 1px solid #ddd;
+            background: white;
+            border-radius: 14px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.15s;
+            color: #555;
+        }
+        .filter-btn:hover { border-color: #667eea; color: #667eea; }
+        .filter-btn.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .cat-nav {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+        .cat-card {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 14px;
+            background: white;
+            border-radius: 8px;
+            text-decoration: none;
+            color: #333;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            transition: all 0.15s;
+        }
+        .cat-card:hover { box-shadow: 0 2px 8px rgba(102,126,234,0.2); transform: translateY(-1px); }
+        .cat-card .icon { font-size: 1.3rem; }
+        .cat-card .name { font-weight: 600; font-size: 0.85rem; }
+        .cat-card .cn { font-size: 0.72rem; color: #999; }
+        .cat-card .count { font-size: 0.72rem; color: #888; margin-left: auto; }
+
+        .category {
+            background: white;
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin-bottom: 10px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .category h2 {
+            color: #333;
+            margin-bottom: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+        }
+        .category h2 .cn { color: #999; font-size: 0.8rem; font-weight: normal; }
+        .category h2 .count { font-size: 0.75rem; color: #888; font-weight: normal; margin-left: auto; }
+
+        .comp-list {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 6px;
+        }
+        .comp-card {
+            display: block;
+            padding: 8px 10px;
+            background: #f8f9fa;
+            border-radius: 6px;
+            text-decoration: none;
+            color: #333;
+            transition: all 0.15s;
+            border-left: 3px solid transparent;
+        }
+        .comp-card:hover { background: #e8eaf6; border-left-color: #667eea; }
+        .comp-card .comp-name { font-weight: 600; font-size: 0.85rem; }
+        .comp-card .comp-cn { font-size: 0.72rem; color: #888; margin-top: 1px; }
+        .comp-card .comp-meta {
+            display: flex;
+            gap: 6px;
+            margin-top: 4px;
+            font-size: 0.68rem;
+            color: #999;
+        }
+        .comp-card .star { color: #f59e0b; }
+        .comp-card .featured-badge {
+            display: inline-block;
+            background: #fef3c7;
+            color: #92400e;
+            font-size: 0.62rem;
+            padding: 1px 5px;
+            border-radius: 3px;
+            margin-left: 4px;
+        }
+
+        .demo-banner {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border: 1px solid #fcd34d;
+            color: #92400e;
+            padding: 8px 14px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            margin-bottom: 14px;
+        }
+        .demo-banner strong { color: #78350f; }
+
+        .footer { text-align: center; margin-top: 20px; color: #999; font-size: 0.8rem; }
+
+        @media (max-width: 1024px) {
+            .comp-list { grid-template-columns: repeat(3, 1fr); }
+        }
+        @media (max-width: 768px) {
+            h1 { font-size: 1.1rem; }
+            body { padding: 0 10px 16px; }
+            .subtitle { font-size: 0.78rem; margin-bottom: 10px; }
+            .stats { gap: 6px; margin-bottom: 10px; }
+            .stat-item { padding: 4px 10px; font-size: 0.75rem; }
+            .cat-nav { grid-template-columns: repeat(2, 1fr); }
+            .comp-list { grid-template-columns: repeat(2, 1fr); gap: 4px; }
+            .comp-card { padding: 6px 8px; font-size: 0.78rem; }
+            .comp-card .comp-name { font-size: 0.8rem; }
+        }
+        @media (max-width: 480px) {
+            .comp-list { grid-template-columns: 1fr; }
+        }
+    </style>
+    <link rel="stylesheet" href="../css/theme.css">
+    <link rel="manifest" href="../manifest.json">
+    <meta name="theme-color" content="#667eea">
+    <script src="../js/theme.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="../index.html" class="logo">yunzhuan<span>.icu</span></a>
+        <div class="nav-links">
+            <a href="../index.html">Majors<span class="cn">专业</span></a>
+            <a href="../schools/index.html">Schools<span class="cn">学校</span></a>
+            <a href="../tests/index.html">Tests<span class="cn">考试</span></a>
+            <a href="../essays/index.html">Essays<span class="cn">文书</span></a>
+            <a href="../guides/index.html">Guides<span class="cn">指南</span></a>
+            <a href="../search.html">Search<span class="cn">搜索</span></a>
+            <a href="index.html" style="color:#667eea;font-weight:600;">Competitions<span class="cn">竞赛</span></a>
+        </div>
+    </nav>
+
+    <h1>International Competitions</h1>
+    <p class="subtitle">国际竞赛导航 · 背景提升必备</p>
+
+    <div class="stats">
+        <div class="stat-item"><b>8</b> Categories</div>
+        <div class="stat-item"><b>36</b> Competitions</div>
+        <div class="stat-item"><b>10</b> Featured</div>
+    </div>
+
+    <div class="demo-banner">
+        <strong>📋 Demo Mode</strong> — 竞赛数据为模拟示例，展示完整功能架构。后续将联网获取最新报名时间和赛程信息。
+    </div>
+
+    <div class="cat-nav" id="catNav"></div>
+
+    <div class="filters">
+        <input type="text" id="searchInput" placeholder="🔍 Search competitions / 搜索竞赛..." class="search-input">
+    </div>
+
+    <div class="filter-groups">
+        <div class="filter-group">
+            <span class="filter-label">类型:</span>
+            <button class="filter-btn active" data-group="type" data-value="all">全部</button>
+            <button class="filter-btn" data-group="type" data-value="individual">个人</button>
+            <button class="filter-btn" data-group="type" data-value="team">团队</button>
+            <button class="filter-btn" data-group="type" data-value="free">免费</button>
+            <button class="filter-btn" data-group="type" data-value="featured">⭐精选</button>
+        </div>
+        <div class="filter-group">
+            <span class="filter-label">难度:</span>
+            <button class="filter-btn active" data-group="difficulty" data-value="all">全部</button>
+            <button class="filter-btn" data-group="difficulty" data-value="1-2">入门</button>
+            <button class="filter-btn" data-group="difficulty" data-value="3">中等</button>
+            <button class="filter-btn" data-group="difficulty" data-value="4">较难</button>
+            <button class="filter-btn" data-group="difficulty" data-value="5">顶级</button>
+        </div>
+        <div class="filter-group">
+            <span class="filter-label">年级:</span>
+            <button class="filter-btn active" data-group="grade" data-value="all">全部</button>
+            <button class="filter-btn" data-group="grade" data-value="9-">9年级以下</button>
+            <button class="filter-btn" data-group="grade" data-value="9-10">9-10年级</button>
+            <button class="filter-btn" data-group="grade" data-value="11-12">11-12年级</button>
+        </div>
+        <div class="filter-group">
+            <span class="filter-label">地区:</span>
+            <button class="filter-btn active" data-group="region" data-value="all">全部</button>
+            <button class="filter-btn" data-group="region" data-value="global">全球</button>
+            <button class="filter-btn" data-group="region" data-value="us">美国</button>
+            <button class="filter-btn" data-group="region" data-value="china">中国</button>
+        </div>
+    </div>
+
+    <div id="compContainer"></div>
+    <div id="noResults" style="display:none;text-align:center;padding:40px;color:#999;">
+        <p>😕 没有找到匹配的竞赛</p>
+        <p style="font-size:0.8rem;margin-top:4px;">试试调整筛选条件</p>
+    </div>
+
+    <p class="footer">© 2026 yunzhuan.icu &nbsp;|&nbsp; v20.5.0 &nbsp;|&nbsp; <a href="../roadmap.html" style="color:#aaa;text-decoration:none;">Roadmap</a></p>
+
+    <script src="../js/competitions.js"></script>
+    <script>
+    (function() {
+        const catNav = document.getElementById('catNav');
+        const container = document.getElementById('compContainer');
+        const noResults = document.getElementById('noResults');
+        const searchInput = document.getElementById('searchInput');
+
+        const filters = { type: 'all', difficulty: 'all', grade: 'all', region: 'all', search: '' };
+
+        CATEGORIES.forEach(cat => {
+            const count = COMPETITIONS.filter(c => c.category === cat.id).length;
+            const card = document.createElement('a');
+            card.className = 'cat-card';
+            card.href = cat.id + '.html';
+            card.innerHTML = `
+                <span class="icon">${cat.icon}</span>
+                <div>
+                    <div class="name">${cat.name}</div>
+                    <div class="cn">${cat.cnName}</div>
+                </div>
+                <span class="count">${count}</span>
+            `;
+            catNav.appendChild(card);
+        });
+
+        function matchFilter(comp) {
+            if (filters.search) {
+                const q = filters.search.toLowerCase();
+                if (!comp.name.toLowerCase().includes(q) &&
+                    !comp.cnName.toLowerCase().includes(q) &&
+                    !comp.fullName.toLowerCase().includes(q) &&
+                    !comp.tags.some(t => t.toLowerCase().includes(q))) {
+                    return false;
+                }
+            }
+            if (filters.type === 'featured' && !comp.featured) return false;
+            if (filters.type === 'individual' && comp.type !== 'individual') return false;
+            if (filters.type === 'team' && comp.type !== 'team') return false;
+            if (filters.type === 'free') {
+                const isFree = comp.fee.includes('免费') || comp.fee.includes('Free');
+                if (!isFree) return false;
+            }
+            if (filters.difficulty !== 'all') {
+                if (filters.difficulty === '1-2' && comp.difficulty > 2) return false;
+                if (filters.difficulty === '3' && comp.difficulty !== 3) return false;
+                if (filters.difficulty === '4' && comp.difficulty !== 4) return false;
+                if (filters.difficulty === '5' && comp.difficulty !== 5) return false;
+            }
+            if (filters.grade !== 'all') {
+                const grades = comp.grades.map(Number);
+                if (filters.grade === '9-' && !grades.some(g => g < 9)) return false;
+                if (filters.grade === '9-10' && !(grades.includes(9) || grades.includes(10))) return false;
+                if (filters.grade === '11-12' && !(grades.includes(11) || grades.includes(12))) return false;
+            }
+            if (filters.region !== 'all' && comp.region !== filters.region) return false;
+            return true;
+        }
+
+        function renderCompetitions() {
+            container.innerHTML = '';
+            let total = 0;
+            CATEGORIES.forEach(cat => {
+                let comps = COMPETITIONS.filter(c => c.category === cat.id && matchFilter(c));
+                if (comps.length === 0) return;
+                total += comps.length;
+
+                const section = document.createElement('div');
+                section.className = 'category';
+                section.innerHTML = `
+                    <h2>
+                        <span>${cat.icon} ${cat.name}</span>
+                        <span class="cn">${cat.cnName}</span>
+                        <span class="count">${comps.length} competitions</span>
+                    </h2>
+                    <div class="comp-list"></div>
+                `;
+                const list = section.querySelector('.comp-list');
+                comps.forEach(comp => {
+                    const card = document.createElement('a');
+                    card.className = 'comp-card';
+                    card.href = comp.id + '.html';
+                    const stars = '★'.repeat(comp.prestige) + '☆'.repeat(5 - comp.prestige);
+                    card.innerHTML = `
+                        <div class="comp-name">${comp.name}${comp.featured ? '<span class="featured-badge">精选</span>' : ''}</div>
+                        <div class="comp-cn">${comp.cnName}</div>
+                        <div class="comp-meta">
+                            <span class="star">${stars}</span>
+                            <span>${comp.type === 'team' ? '团队' : '个人'}</span>
+                            <span>难度${comp.difficulty}</span>
+                        </div>
+                    `;
+                    list.appendChild(card);
+                });
+                container.appendChild(section);
+            });
+            noResults.style.display = total === 0 ? 'block' : 'none';
+        }
+
+        renderCompetitions();
+
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const group = this.dataset.group;
+                const value = this.dataset.value;
+                filters[group] = value;
+                document.querySelectorAll(`.filter-btn[data-group="${group}"]`).forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                renderCompetitions();
+            });
+        });
+
+        let searchTimer;
+        searchInput.addEventListener('input', function() {
+            clearTimeout(searchTimer);
+            searchTimer = setTimeout(() => {
+                filters.search = this.value.trim();
+                renderCompetitions();
+            }.bind(this), 200);
+        });
+    })();
+    </script>
+<script src="../js/back-to-top.js"></script>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CS & Engineering Competitions - yunzhuan.icu</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 1100px; margin: 0 auto; padding: 0 16px 20px; background: #f5f5f5; color: #333; }
+        .navbar { display: flex; justify-content: flex-start; align-items: center; padding: 12px 0; margin-bottom: 16px; flex-wrap: wrap; gap: 6px; }
+        .logo { font-weight: 700; font-size: 1.1rem; color: #667eea; text-decoration: none; }
+        .logo span { color: #764ba2; }
+        .nav-links { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+        .nav-links a { text-decoration: none; color: #555; font-size: 0.82rem; font-weight: 500; white-space: nowrap; }
+        .nav-links a:hover { color: #667eea; }
+        .nav-links .cn { font-size: 0.65rem; color: #bbb; margin-left: 2px; }
+        .breadcrumb { font-size: 0.8rem; color: #888; margin-bottom: 12px; }
+        .breadcrumb a { color: #667eea; text-decoration: none; }
+        h1 { font-size: 1.4rem; margin-bottom: 4px; }
+        .subtitle { color: #666; font-size: 0.9rem; margin-bottom: 16px; }
+        .comp-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+        .comp-card { display: block; padding: 14px; background: white; border-radius: 8px; text-decoration: none; color: #333; box-shadow: 0 1px 3px rgba(0,0,0,0.05); transition: all 0.15s; border-left: 3px solid transparent; }
+        .comp-card:hover { box-shadow: 0 2px 8px rgba(102,126,234,0.15); border-left-color: #667eea; transform: translateY(-1px); }
+        .comp-card .comp-name { font-weight: 600; font-size: 0.95rem; color: #333; }
+        .comp-card .comp-fullname { font-size: 0.75rem; color: #999; margin-top: 2px; }
+        .comp-card .comp-cn { font-size: 0.82rem; color: #555; margin-top: 4px; }
+        .comp-card .comp-meta { display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap; }
+        .comp-card .badge { font-size: 0.68rem; padding: 2px 6px; border-radius: 3px; background: #f0f4ff; color: #667eea; }
+        .comp-card .badge.difficulty { background: #fef3c7; color: #92400e; }
+        .comp-card .badge.team { background: #dbeafe; color: #2563eb; }
+        .comp-card .badge.free { background: #dcfce7; color: #16a34a; }
+        .comp-card .star { color: #f59e0b; font-size: 0.75rem; }
+        .comp-card .comp-intro { font-size: 0.78rem; color: #666; margin-top: 6px; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        .footer { text-align: center; margin-top: 20px; color: #999; font-size: 0.8rem; }
+        @media (max-width: 768px) { .comp-grid { grid-template-columns: repeat(2, 1fr); } h1 { font-size: 1.1rem; } body { padding: 0 10px 16px; } }
+        @media (max-width: 480px) { .comp-grid { grid-template-columns: 1fr; } }
+    </style>
+    <link rel="stylesheet" href="../css/theme.css">
+    <script src="../js/theme.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="../index.html" class="logo">yunzhuan<span>.icu</span></a>
+        <div class="nav-links">
+            <a href="../index.html">Majors<span class="cn">专业</span></a>
+            <a href="../schools/index.html">Schools<span class="cn">学校</span></a>
+            <a href="../tests/index.html">Tests<span class="cn">考试</span></a>
+            <a href="../essays/index.html">Essays<span class="cn">文书</span></a>
+            <a href="../guides/index.html">Guides<span class="cn">指南</span></a>
+            <a href="../search.html">Search<span class="cn">搜索</span></a>
+            <a href="index.html" style="color:#667eea;font-weight:600;">Competitions<span class="cn">竞赛</span></a>
+        </div>
+    </nav>
+    <div class="breadcrumb"><a href="index.html">Competitions</a> / <span id="bcCat">Category</span></div>
+    <h1 id="pageTitle">Category</h1>
+    <p class="subtitle" id="pageSubtitle"></p>
+    <div class="comp-grid" id="compGrid"></div>
+    <p class="footer">© 2026 yunzhuan.icu &nbsp;|&nbsp; v20.4.0</p>
+    <script src="../js/competitions.js"></script>
+    <script>
+    (function() {
+        const catId = 'cs';
+        const cat = CATEGORIES.find(c => c.id === catId);
+        const comps = COMPETITIONS.filter(c => c.category === catId);
+        document.title = cat.name + ' Competitions - yunzhuan.icu';
+        document.getElementById('bcCat').textContent = cat.name;
+        document.getElementById('pageTitle').textContent = cat.icon + ' ' + cat.name;
+        document.getElementById('pageSubtitle').textContent = cat.cnName + ' · ' + comps.length + ' competitions';
+        const grid = document.getElementById('compGrid');
+        comps.forEach(comp => {
+            const stars = '★'.repeat(comp.prestige) + '☆'.repeat(5 - comp.prestige);
+            const isFree = comp.fee.includes('免费') || comp.fee.includes('Free');
+            const card = document.createElement('a');
+            card.className = 'comp-card';
+            card.href = comp.id + '.html';
+            card.innerHTML = `
+                <div class="comp-name">${comp.name}</div>
+                <div class="comp-fullname">${comp.fullName}</div>
+                <div class="comp-cn">${comp.cnName}</div>
+                <div class="comp-meta">
+                    <span class="star">${stars}</span>
+                    <span class="badge difficulty">难度 ${comp.difficulty}/5</span>
+                    ${comp.type === 'team' ? '<span class="badge team">团队</span>' : '<span class="badge">个人</span>'}
+                    ${isFree ? '<span class="badge free">免费</span>' : ''}
+                </div>
+                <div class="comp-intro">${comp.intro}</div>
+            `;
+            grid.appendChild(card);
+        });
+    })();
+    </script>
+</body>
+</html>

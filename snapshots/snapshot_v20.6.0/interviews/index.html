@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interview Guide - US / UK / Canada - yunzhuan.icu</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px 16px;
+            background: #f5f5f5;
+            color: #333;
+        }
+        .back-link { color: #667eea; text-decoration: none; font-size: 0.85rem; margin-bottom: 12px; display: inline-block; }
+        .back-link:hover { text-decoration: underline; }
+        h1 { color: #333; margin-bottom: 4px; font-size: 1.5rem; }
+        .subtitle { color: #888; font-size: 0.95rem; margin-bottom: 4px; }
+        .code-line { color: #888; font-size: 0.82rem; margin-bottom: 18px; }
+        .intro {
+            background: white;
+            border-radius: 8px;
+            padding: 14px 18px;
+            margin-bottom: 14px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            font-size: 0.92rem;
+            line-height: 1.7;
+            color: #444;
+        }
+        .country-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 12px;
+            margin-bottom: 18px;
+        }
+        .country-card {
+            display: block;
+            background: white;
+            border-radius: 8px;
+            padding: 16px 18px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            text-decoration: none;
+            border-left: 4px solid #667eea;
+            transition: all 0.15s ease;
+        }
+        .country-card:hover {
+            background: #f8f9ff;
+            border-left-color: #764ba2;
+        }
+        .country-card .cn {
+            color: #333;
+            font-size: 1.1rem;
+            font-weight: 600;
+            display: block;
+        }
+        .country-card .en {
+            color: #888;
+            font-size: 0.82rem;
+            display: block;
+            margin-top: 2px;
+        }
+        .country-card .desc {
+            color: #666;
+            font-size: 0.85rem;
+            line-height: 1.5;
+            margin-top: 8px;
+        }
+        .section {
+            background: white;
+            border-radius: 8px;
+            padding: 14px 18px;
+            margin-bottom: 10px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .section h2 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        .section h2 .en { color: #999; font-size: 0.8rem; font-weight: normal; }
+        .section p { color: #333; line-height: 1.7; font-size: 0.92rem; }
+        .tip-box {
+            background: #e8f5e9;
+            border-left: 3px solid #2e7d32;
+            padding: 10px 14px;
+            border-radius: 0 6px 6px 0;
+            margin-top: 10px;
+            font-size: 0.82rem;
+            color: #1b5e20;
+            line-height: 1.6;
+        }
+        .tip-box strong { color: #1b5e20; }
+        .warning-box {
+            background: #fff8e1;
+            border-left: 3px solid #ff8f00;
+            padding: 10px 14px;
+            border-radius: 0 6px 6px 0;
+            margin-top: 10px;
+            font-size: 0.82rem;
+            color: #5d4037;
+            line-height: 1.6;
+        }
+        .question-list { list-style: none; }
+        .question-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #f0f0f0;
+            line-height: 1.5;
+        }
+        .question-list li:last-child { border-bottom: none; }
+        .question-list .q { font-weight: 500; color: #333; font-size: 0.9rem; }
+        .question-list .a { color: #666; font-size: 0.82rem; margin-top: 4px; }
+        .category-tag {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin-right: 6px;
+            background: #f3e5f5;
+            color: #7b1fa2;
+        }
+        .footer { text-align: center; margin-top: 20px; color: #999; font-size: 0.8rem; }
+        @media (max-width: 600px) {
+            .country-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+    <link rel="stylesheet" href="../css/theme.css">
+    <link rel="manifest" href="../manifest.json">
+    <meta name="theme-color" content="#667eea">
+    <script src="../js/theme.js"></script>
+    <script src="../js/pwa.js"></script>
+    <script src="../js/mobile-nav.js"></script>
+    <script src="../js/breadcrumbs.js"></script>
+</head>
+<body>
+    <a href="../index.html" class="back-link">&larr; Back to Home</a>
+
+    <h1>Interview Guide</h1>
+    <p class="subtitle">面试指南</p>
+    <p class="code-line">US · UK (Oxbridge) · Canada · Tips & Common Questions</p>
+
+    <div class="intro">
+        This section covers the interview process for US, UK and Canadian university admissions, including common questions, preparation strategies, and country-specific differences.
+        <br><span style="color:#888;">本板块介绍美国、英国（含牛剑）、加拿大大学本科申请的面试流程、常见问题、准备策略和注意事项。</span>
+    </div>
+
+    <div class="country-grid">
+        <a href="us-interview.html" class="country-card">
+            <span class="cn">US Interviews</span>
+            <span class="en">美国本科面试</span>
+            <span class="desc">Alumni interviews, AO interviews, common questions, and preparation tips.<br><span style="color:#999;">校友面试、AO 面试、常见问题和准备策略。</span></span>
+        </a>
+        <a href="oxbridge-interview.html" class="country-card">
+            <span class="cn">Oxbridge Interviews</span>
+            <span class="en">牛津剑桥面试</span>
+            <span class="desc">Academic subject interviews, tutorial style, sample questions, and preparation.<br><span style="color:#999;">学术面试、导师制风格、样题和备考建议。</span></span>
+        </a>
+        <a href="common-questions.html" class="country-card">
+            <span class="cn">Common Questions</span>
+            <span class="en">常见问题</span>
+            <span class="desc">Most frequently asked interview questions with sample answer approaches.<br><span style="color:#999;">最高频面试问题及答题思路参考。</span></span>
+        </a>
+    </div>
+
+    <div class="section">
+        <h2>Interview Types <span class="en">面试类型</span></h2>
+        <ul class="question-list">
+            <li>
+                <span class="category-tag">US</span>
+                <span class="q">Alumni Interview（校友面试）</span>
+                <div class="a">最常见的美国大学面试形式，由当地校友进行，30-60 分钟，信息性大于筛选性。大多数 Ivy 和 Top 20 都有。</div>
+            </li>
+            <li>
+                <span class="category-tag">US</span>
+                <span class="q">Admissions Officer Interview（AO 面试）</span>
+                <div class="a">招生官面试，相对较少，有些学校是可选的（evaluative），有些只是信息性的（informational）。</div>
+            </li>
+            <li>
+                <span class="category-tag">US</span>
+                <span class="q">Video / Virtual Interview</span>
+                <div class="a">近年越来越普遍，Zoom、InitialView、Vericant 等第三方或学校自己的视频面试。</div>
+            </li>
+            <li>
+                <span class="category-tag">UK</span>
+                <span class="q">Oxbridge Academic Interview</span>
+                <div class="a">牛津剑桥的学术面试，围绕你申请的学科展开，导师制风格，考察思维方式而非知识量。</div>
+            </li>
+            <li>
+                <span class="category-tag">UK</span>
+                <span class="q">Other UK University Interviews</span>
+                <div class="a">医学、建筑、艺术等特殊专业可能有面试，其他大部分英国本科专业不需要面试。</div>
+            </li>
+            <li>
+                <span class="category-tag">Canada</span>
+                <span class="q">Video Interview / Supplementary App</span>
+                <div class="a">加拿大大学面试不多，但 Waterloo、UBC Sauder、Rotman Commerce 等专业有视频面试或补充申请。</div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>General Preparation Tips <span class="en">通用准备建议</span></h2>
+        <div class="tip-box">
+            <strong>💡 面试前必做：</strong><br>
+            · 深入了解你申请的学校和专业（课程、教授、特色项目）<br>
+            · 准备好你的故事：为什么选这个专业？为什么选这所学校？<br>
+            · 回顾你的活动列表和文书，确保能讲出每个经历的细节<br>
+            · 准备 2-3 个有深度、能体现你个人特质的故事
+        </div>
+        <div class="warning-box" style="margin-top:10px;">
+            <strong>⚠️ 常见坑：</strong><br>
+            · 背稿痕迹太明显——自然对话比完美背诵更重要<br>
+            · 回答太长——30 秒到 2 分钟比较合适，看问题<br>
+            · 对学校了解太浅——不要只说 "you have a good CS program"<br>
+            · 问的问题太基础——不要问官网就能查到的答案
+        </div>
+        <div class="tip-box" style="margin-top:8px;background:#f3e5f5;border-left-color:#7b1fa2;color:#4a148c;">
+            <strong>🎯 面试的核心目标：</strong><br>
+            · 展示你是谁（性格、价值观、热情）<br>
+            · 展示你对学校/专业的了解和兴趣<br>
+            · 展示你的沟通能力和思维方式<br>
+            · 让面试官记住你（正面的）
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>US vs UK vs Canada <span class="en">三国面试对比</span></h2>
+        <ul class="question-list">
+            <li>
+                <span class="category-tag">US</span>
+                <span class="q">性格 + 故事 + fit</span>
+                <div class="a">美国面试更看重你是怎样的人、你的故事、你和学校的匹配度。大部分是 conversation 风格。</div>
+            </li>
+            <li>
+                <span class="category-tag">UK</span>
+                <span class="q">学术 + 思维方式</span>
+                <div class="a">牛剑面试完全围绕学科，考察你的学术潜力和思考方式，不是看你已经知道多少。</div>
+            </li>
+            <li>
+                <span class="category-tag">Canada</span>
+                <span class="q">补充评估</span>
+                <div class="a">加拿大大部分专业不需要面试，只有少数热门专业（商科、工程、滑铁卢）有视频面试或补充表格。</div>
+            </li>
+        </ul>
+    </div>
+
+    <p class="footer">&copy; 2026 yunzhuan.icu | Interview Guide</p>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <div style="text-align:center;padding:8px 0;font-size:0.75rem;color:#aaa;">
+        <a href="../index.html" style="color:#aaa;text-decoration:none;">Home</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="../tests/index.html" style="color:#aaa;text-decoration:none;">Tests</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="../essays/index.html" style="color:#aaa;text-decoration:none;">Essays</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="../scholarships/index.html" style="color:#aaa;text-decoration:none;">Scholarships</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="../contact.html" style="color:#aaa;text-decoration:none;">Contact</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="javascript:window.scrollTo(0,0)" style="color:#aaa;text-decoration:none;">Back to top</a>
+    </div>
+<script src="../js/back-to-top.js"></script>
+</body>
+</html>

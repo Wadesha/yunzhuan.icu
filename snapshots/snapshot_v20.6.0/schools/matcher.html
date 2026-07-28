@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Matcher - Smart College Recommendations - yunzhuan.icu</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px 16px;
+            background: #f5f5f5;
+            color: #333;
+        }
+        .back-link { color: #667eea; text-decoration: none; font-size: 0.85rem; margin-bottom: 12px; display: inline-block; }
+        .back-link:hover { text-decoration: underline; }
+        h1 { color: #333; margin-bottom: 4px; font-size: 1.4rem; }
+        .en-name { color: #888; font-size: 0.95rem; margin-bottom: 4px; font-weight: normal; }
+        .code-line { color: #888; font-size: 0.82rem; margin-bottom: 14px; }
+        .section {
+            background: white;
+            border-radius: 8px;
+            padding: 14px 18px;
+            margin-bottom: 10px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .section h2 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        .section h2 .en { color: #999; font-size: 0.8rem; font-weight: normal; }
+        .input-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        .input-group label {
+            display: block;
+            font-size: 0.8rem;
+            color: #666;
+            margin-bottom: 4px;
+            font-weight: 500;
+        }
+        .input-group input, .input-group select {
+            width: 100%;
+            padding: 8px 10px;
+            border: 1px solid #d0d5dd;
+            border-radius: 6px;
+            font-size: 0.88rem;
+        }
+        .match-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-top: 14px;
+            transition: all 0.2s;
+        }
+        .match-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4); }
+        .results-section { display: none; }
+        .results-section.show { display: block; }
+        .tier-group { margin-bottom: 14px; }
+        .tier-title {
+            font-weight: 600;
+            font-size: 0.92rem;
+            margin-bottom: 8px;
+            padding: 6px 12px;
+            border-radius: 6px;
+            display: inline-block;
+        }
+        .tier-reach .tier-title { background: #fef3c7; color: #92400e; }
+        .tier-match .tier-title { background: #dbeafe; color: #1e40af; }
+        .tier-safety .tier-title { background: #dcfce7; color: #166534; }
+        .school-card {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 12px;
+            background: #fafafa;
+            border-radius: 8px;
+            margin-bottom: 6px;
+            border-left: 3px solid #e5e7eb;
+        }
+        .tier-reach .school-card { border-left-color: #f59e0b; }
+        .tier-match .school-card { border-left-color: #3b82f6; }
+        .tier-safety .school-card { border-left-color: #22c55e; }
+        .school-name {
+            font-weight: 600;
+            color: #333;
+            font-size: 0.9rem;
+        }
+        .school-info {
+            font-size: 0.78rem;
+            color: #888;
+            margin-top: 2px;
+        }
+        .match-pct {
+            font-weight: 700;
+            font-size: 0.95rem;
+            min-width: 50px;
+            text-align: right;
+        }
+        .tier-reach .match-pct { color: #f59e0b; }
+        .tier-match .match-pct { color: #3b82f6; }
+        .tier-safety .match-pct { color: #22c55e; }
+        .summary-card {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 16px 20px;
+            border-radius: 8px;
+            margin-bottom: 14px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            text-align: center;
+            gap: 10px;
+        }
+        .summary-item .num {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        .summary-item .label {
+            font-size: 0.78rem;
+            opacity: 0.9;
+        }
+        .summary-item + .summary-item { border-left: 1px solid rgba(255,255,255,0.2); }
+        .tip-box {
+            background: #fff8e1;
+            border-left: 3px solid #ff8f00;
+            padding: 10px 14px;
+            border-radius: 0 6px 6px 0;
+            margin-top: 10px;
+            font-size: 0.82rem;
+            color: #5d4037;
+            line-height: 1.6;
+        }
+        .footer { text-align: center; margin-top: 20px; color: #999; font-size: 0.8rem; }
+        @media (max-width: 600px) {
+            .input-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+    <link rel="stylesheet" href="../css/theme.css">
+    <link rel="manifest" href="../manifest.json">
+    <meta name="theme-color" content="#667eea">
+    <script src="../js/theme.js"></script>
+    <script src="../js/pwa.js"></script>
+    <script src="../js/mobile-nav.js"></script>
+    <script src="../js/breadcrumbs.js"></script>
+</head>
+<body>
+    <a href="../index.html" class="back-link">&larr; Back to Home</a>
+
+    <h1>School Matcher</h1>
+    <p class="en-name">选校智能推荐</p>
+    <p class="code-line">Enter your profile → Get matched schools</p>
+
+    <div class="section">
+        <h2>Your Profile <span class="en">输入你的背景</span></h2>
+        <div class="input-grid">
+            <div class="input-group">
+                <label>GPA (4.0 scale) / GPA</label>
+                <input type="number" id="gpa-input" value="3.7" step="0.01" min="0" max="4.0">
+            </div>
+            <div class="input-group">
+                <label>SAT / SAT分数</label>
+                <input type="number" id="sat-input" value="1450" min="400" max="1600">
+            </div>
+            <div class="input-group">
+                <label>TOEFL / 托福</label>
+                <input type="number" id="toefl-input" value="105" min="0" max="120">
+            </div>
+            <div class="input-group">
+                <label>Intended Major / 意向专业</label>
+                <select id="major-select">
+                    <option value="cs">Computer Science / 计算机</option>
+                    <option value="engineering">Engineering / 工程</option>
+                    <option value="business">Business / 商科</option>
+                    <option value="biology">Biology / 生物/医学</option>
+                    <option value="social">Social Sciences / 社科</option>
+                    <option value="arts">Arts & Humanities / 人文艺术</option>
+                    <option value="undecided">Undecided / 未定</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label>School Type / 学校类型</label>
+                <select id="type-select">
+                    <option value="any">Any / 都可以</option>
+                    <option value="private">Private / 私立</option>
+                    <option value="public">Public / 公立</option>
+                    <option value="liberal">Liberal Arts / 文理学院</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label>Region / 地区偏好</label>
+                <select id="region-select">
+                    <option value="any">Any / 都可以</option>
+                    <option value="east">East Coast / 东海岸</option>
+                    <option value="west">West Coast / 西海岸</option>
+                    <option value="midwest">Midwest / 中西部</option>
+                    <option value="south">South / 南部</option>
+                </select>
+            </div>
+        </div>
+        <button class="match-btn" onclick="matchSchools()">🎯 Find My Schools / 找匹配学校</button>
+    </div>
+
+    <div class="section results-section" id="results-section">
+        <h2>Your Matches <span class="en">匹配结果</span></h2>
+        
+        <div class="summary-card">
+            <div class="summary-item">
+                <div class="num" id="reach-count">0</div>
+                <div class="label">Reach / 冲刺</div>
+            </div>
+            <div class="summary-item">
+                <div class="num" id="match-count">0</div>
+                <div class="label">Match / 匹配</div>
+            </div>
+            <div class="summary-item">
+                <div class="num" id="safety-count">0</div>
+                <div class="label">Safety / 保底</div>
+            </div>
+        </div>
+
+        <div class="tier-group tier-reach" id="reach-group">
+            <div class="tier-title">🚀 Reach Schools / 冲刺校</div>
+            <div id="reach-list"></div>
+        </div>
+
+        <div class="tier-group tier-match" id="match-group">
+            <div class="tier-title">🎯 Match Schools / 匹配校</div>
+            <div id="match-list"></div>
+        </div>
+
+        <div class="tier-group tier-safety" id="safety-group">
+            <div class="tier-title">🛡️ Safety Schools / 保底校</div>
+            <div id="safety-list"></div>
+        </div>
+
+        <div class="tip-box">
+            <strong>💡 选校建议：</strong><br>
+            · 建议选校名单包含 3-5 所冲刺、4-6 所匹配、2-3 所保底<br>
+            · 匹配度只是基于分数的大致估算，还要考虑课外活动、文书、推荐信等软实力<br>
+            · 不同专业录取难度差异很大（如 CS 普遍比文科高 50-100 分 SAT）<br>
+            · 学校官网的录取数据是最准确的，这里只是参考！
+        </div>
+    </div>
+
+    <p class="footer">&copy; 2026 yunzhuan.icu | School Matcher</p>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <div style="text-align:center;padding:8px 0;font-size:0.75rem;color:#aaa;">
+        <a href="../index.html" style="color:#aaa;text-decoration:none;">Home</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="../schools/compare.html" style="color:#aaa;text-decoration:none;">Compare</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="../contact.html" style="color:#aaa;text-decoration:none;">Contact</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="javascript:window.scrollTo(0,0)" style="color:#aaa;text-decoration:none;">Back to top</a>
+    </div>
+
+    <script>
+    const schools = [
+        { name: "Harvard University", en: "Harvard", type: "private", region: "east", sat: [1480, 1580], gpa: 3.9, toefl: 110, acceptance: 4, majorBoost: { social: 10, humanities: 10, business: 8 } },
+        { name: "MIT", en: "MIT", type: "private", region: "east", sat: [1510, 1570], gpa: 3.9, toefl: 108, acceptance: 4, majorBoost: { cs: 15, engineering: 15, science: 10 } },
+        { name: "Stanford University", en: "Stanford", type: "private", region: "west", sat: [1470, 1570], gpa: 3.9, toefl: 108, acceptance: 4, majorBoost: { cs: 12, engineering: 10, business: 8 } },
+        { name: "Princeton University", en: "Princeton", type: "private", region: "east", sat: [1480, 1570], gpa: 3.9, toefl: 108, acceptance: 6, majorBoost: { social: 8, humanities: 8, engineering: 8 } },
+        { name: "Yale University", en: "Yale", type: "private", region: "east", sat: [1470, 1560], gpa: 3.9, toefl: 108, acceptance: 5, majorBoost: { humanities: 10, social: 10, arts: 8 } },
+        { name: "University of Chicago", en: "UChicago", type: "private", region: "midwest", sat: [1500, 1570], gpa: 3.9, toefl: 106, acceptance: 6, majorBoost: { economics: 10, social: 8, humanities: 8 } },
+        { name: "Johns Hopkins University", en: "JHU", type: "private", region: "east", sat: [1470, 1560], gpa: 3.85, toefl: 105, acceptance: 7, majorBoost: { biology: 12, science: 10, engineering: 8 } },
+        { name: "University of Pennsylvania", en: "UPenn", type: "private", region: "east", sat: [1470, 1560], gpa: 3.85, toefl: 106, acceptance: 6, majorBoost: { business: 12, cs: 8, social: 8 } },
+        { name: "Duke University", en: "Duke", type: "private", region: "south", sat: [1460, 1560], gpa: 3.85, toefl: 105, acceptance: 6, majorBoost: { biology: 8, engineering: 8, business: 8 } },
+        { name: "Brown University", en: "Brown", type: "private", region: "east", sat: [1460, 1550], gpa: 3.85, toefl: 105, acceptance: 6, majorBoost: { cs: 8, arts: 10, social: 8 } },
+        { name: "Dartmouth College", en: "Dartmouth", type: "private", region: "east", sat: [1440, 1540], gpa: 3.8, toefl: 104, acceptance: 6, majorBoost: { business: 8, engineering: 6 } },
+        { name: "Columbia University", en: "Columbia", type: "private", region: "east", sat: [1470, 1560], gpa: 3.85, toefl: 105, acceptance: 4, majorBoost: { humanities: 8, social: 8, engineering: 8 } },
+        { name: "Cornell University", en: "Cornell", type: "private", region: "east", sat: [1430, 1540], gpa: 3.8, toefl: 103, acceptance: 9, majorBoost: { engineering: 10, cs: 8, agriculture: 6 } },
+        { name: "Vanderbilt University", en: "Vanderbilt", type: "private", region: "south", sat: [1450, 1540], gpa: 3.8, toefl: 104, acceptance: 7, majorBoost: { education: 8, biology: 8, business: 6 } },
+        { name: "Northwestern University", en: "Northwestern", type: "private", region: "midwest", sat: [1440, 1540], gpa: 3.8, toefl: 105, acceptance: 7, majorBoost: { journalism: 10, business: 8, arts: 8 } },
+        { name: "UC Berkeley", en: "UC Berkeley", type: "public", region: "west", sat: [1360, 1500], gpa: 3.7, toefl: 95, acceptance: 15, majorBoost: { cs: 10, engineering: 8, business: 8 } },
+        { name: "UCLA", en: "UCLA", type: "public", region: "west", sat: [1340, 1480], gpa: 3.7, toefl: 93, acceptance: 11, majorBoost: { arts: 8, biology: 8, business: 6 } },
+        { name: "University of Michigan", en: "UMich", type: "public", region: "midwest", sat: [1340, 1480], gpa: 3.7, toefl: 92, acceptance: 18, majorBoost: { engineering: 10, business: 8, cs: 8 } },
+        { name: "Carnegie Mellon University", en: "CMU", type: "private", region: "east", sat: [1450, 1550], gpa: 3.85, toefl: 102, acceptance: 13, majorBoost: { cs: 15, engineering: 10, arts: 8 } },
+        { name: "Georgetown University", en: "Georgetown", type: "private", region: "east", sat: [1380, 1490], gpa: 3.75, toefl: 100, acceptance: 12, majorBoost: { business: 8, social: 10, international: 8 } },
+        { name: "USC", en: "USC", type: "private", region: "west", sat: [1340, 1480], gpa: 3.7, toefl: 95, acceptance: 12, majorBoost: { cs: 8, business: 8, arts: 10 } },
+        { name: "University of Virginia", en: "UVA", type: "public", region: "south", sat: [1310, 1460], gpa: 3.7, toefl: 90, acceptance: 20, majorBoost: { business: 8, social: 6 } },
+        { name: "University of North Carolina", en: "UNC Chapel Hill", type: "public", region: "south", sat: [1300, 1450], gpa: 3.65, toefl: 90, acceptance: 20, majorBoost: { business: 6, biology: 6, social: 6 } },
+        { name: "Wake Forest University", en: "Wake Forest", type: "private", region: "south", sat: [1320, 1470], gpa: 3.7, toefl: 95, acceptance: 22, majorBoost: { business: 6, biology: 6 } },
+        { name: "New York University", en: "NYU", type: "private", region: "east", sat: [1330, 1470], gpa: 3.7, toefl: 95, acceptance: 13, majorBoost: { business: 10, arts: 10, cs: 6 } },
+        { name: "Boston College", en: "BC", type: "private", region: "east", sat: [1320, 1450], gpa: 3.65, toefl: 93, acceptance: 17, majorBoost: { business: 8, education: 6 } },
+        { name: "University of Florida", en: "UF", type: "public", region: "south", sat: [1290, 1430], gpa: 3.6, toefl: 85, acceptance: 30, majorBoost: { engineering: 6, business: 6 } },
+        { name: "UC San Diego", en: "UCSD", type: "public", region: "west", sat: [1270, 1430], gpa: 3.6, toefl: 88, acceptance: 28, majorBoost: { engineering: 8, biology: 8, cs: 6 } },
+        { name: "UC Davis", en: "UC Davis", type: "public", region: "west", sat: [1240, 1400], gpa: 3.55, toefl: 85, acceptance: 43, majorBoost: { biology: 8, agriculture: 6 } },
+        { name: "UC Irvine", en: "UC Irvine", type: "public", region: "west", sat: [1230, 1400], gpa: 3.55, toefl: 83, acceptance: 29, majorBoost: { biology: 6, cs: 6 } },
+        { name: "University of Wisconsin", en: "UW-Madison", type: "public", region: "midwest", sat: [1260, 1420], gpa: 3.55, toefl: 83, acceptance: 54, majorBoost: { business: 6, engineering: 6 } },
+        { name: "University of Texas", en: "UT Austin", type: "public", region: "south", sat: [1240, 1420], gpa: 3.55, toefl: 82, acceptance: 31, majorBoost: { engineering: 8, business: 8, cs: 6 } },
+        { name: "Georgia Tech", en: "Georgia Tech", type: "public", region: "south", sat: [1320, 1480], gpa: 3.7, toefl: 95, acceptance: 18, majorBoost: { engineering: 12, cs: 10 } },
+        { name: "Williams College", en: "Williams", type: "liberal", region: "east", sat: [1410, 1540], gpa: 3.85, toefl: 105, acceptance: 9, majorBoost: { economics: 8, social: 8, humanities: 8 } },
+        { name: "Amherst College", en: "Amherst", type: "liberal", region: "east", sat: [1400, 1530], gpa: 3.85, toefl: 105, acceptance: 9, majorBoost: { social: 8, humanities: 8 } },
+        { name: "Swarthmore College", en: "Swarthmore", type: "liberal", region: "east", sat: [1420, 1540], gpa: 3.85, toefl: 105, acceptance: 9, majorBoost: { engineering: 6, science: 8, social: 6 } },
+        { name: "Pomona College", en: "Pomona", type: "liberal", region: "west", sat: [1400, 1530], gpa: 3.85, toefl: 105, acceptance: 7, majorBoost: { science: 8, social: 6, arts: 6 } },
+        { name: "Wellesley College", en: "Wellesley", type: "liberal", region: "east", sat: [1370, 1500], gpa: 3.8, toefl: 103, acceptance: 16, majorBoost: { social: 8, humanities: 8, biology: 6 } },
+        { name: "Colgate University", en: "Colgate", type: "liberal", region: "east", sat: [1340, 1470], gpa: 3.7, toefl: 100, acceptance: 17, majorBoost: { social: 6, humanities: 6 } },
+        { name: "Hamilton College", en: "Hamilton", type: "liberal", region: "east", sat: [1330, 1460], gpa: 3.7, toefl: 100, acceptance: 12, majorBoost: { economics: 6, social: 6, humanities: 6 } },
+    ];
+
+    function calculateMatch(school, profile) {
+        let score = 0;
+        
+        const satMid = (school.sat[0] + school.sat[1]) / 2;
+        const satDiff = Math.abs(profile.sat - satMid);
+        if (profile.sat >= school.sat[1]) score += 25;
+        else if (profile.sat >= school.sat[0]) score += 20;
+        else if (profile.sat >= school.sat[0] - 50) score += 12;
+        else if (profile.sat >= school.sat[0] - 100) score += 5;
+        else score += 0;
+        
+        const gpaDiff = profile.gpa - school.gpa;
+        if (profile.gpa >= school.gpa + 0.1) score += 25;
+        else if (profile.gpa >= school.gpa) score += 20;
+        else if (profile.gpa >= school.gpa - 0.1) score += 14;
+        else if (profile.gpa >= school.gpa - 0.2) score += 8;
+        else if (profile.gpa >= school.gpa - 0.3) score += 3;
+        else score += 0;
+        
+        if (profile.toefl >= school.toefl + 5) score += 15;
+        else if (profile.toefl >= school.toefl) score += 12;
+        else if (profile.toefl >= school.toefl - 5) score += 7;
+        else if (profile.toefl >= school.toefl - 10) score += 3;
+        else score += 0;
+        
+        const majorBoost = school.majorBoost?.[profile.major] || 0;
+        score += majorBoost;
+        
+        if (profile.type !== 'any' && school.type === profile.type) score += 5;
+        if (profile.region !== 'any' && school.region === profile.region) score += 3;
+        
+        if (school.acceptance >= 30) score += 10;
+        else if (school.acceptance >= 15) score += 5;
+        else if (school.acceptance >= 8) score += 2;
+        
+        score = Math.min(score, 100);
+        score = Math.max(score, 5);
+        
+        return Math.round(score);
+    }
+
+    function matchSchools() {
+        const profile = {
+            gpa: parseFloat(document.getElementById('gpa-input').value) || 3.5,
+            sat: parseFloat(document.getElementById('sat-input').value) || 1400,
+            toefl: parseFloat(document.getElementById('toefl-input').value) || 100,
+            major: document.getElementById('major-select').value,
+            type: document.getElementById('type-select').value,
+            region: document.getElementById('region-select').value,
+        };
+        
+        const results = schools.map(s => ({
+            ...s,
+            matchScore: calculateMatch(s, profile)
+        })).sort((a, b) => b.matchScore - a.matchScore);
+        
+        const reach = results.filter(s => s.matchScore >= 60 && s.matchScore < 75).slice(0, 6);
+        const match = results.filter(s => s.matchScore >= 75 && s.matchScore < 90).slice(0, 8);
+        const safety = results.filter(s => s.matchScore >= 90).slice(0, 6);
+        
+        if (reach.length < 3) {
+            const more = results.filter(s => s.matchScore < 60).slice(0, 3 - reach.length);
+            reach.push(...more);
+        }
+        if (safety.length < 2) {
+            const more = results.filter(s => s.matchScore < 90 && s.matchScore >= 75).slice(-3);
+            if (more.length > 0) safety.push(...more.slice(-2));
+        }
+        
+        document.getElementById('reach-count').textContent = reach.length;
+        document.getElementById('match-count').textContent = match.length;
+        document.getElementById('safety-count').textContent = safety.length;
+        
+        renderSchoolList('reach-list', reach);
+        renderSchoolList('match-list', match);
+        renderSchoolList('safety-list', safety);
+        
+        document.getElementById('results-section').classList.add('show');
+        document.getElementById('results-section').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function renderSchoolList(containerId, list) {
+        const container = document.getElementById(containerId);
+        if (list.length === 0) {
+            container.innerHTML = '<p style="color:#999;font-size:0.85rem;padding:8px 0;">No matches found</p>';
+            return;
+        }
+        container.innerHTML = list.map(s => `
+            <div class="school-card">
+                <div>
+                    <div class="school-name">${s.name}</div>
+                    <div class="school-info">${s.type.charAt(0).toUpperCase() + s.type.slice(1)} · SAT ${s.sat[0]}-${s.sat[1]} · Acceptance ${s.acceptance}%</div>
+                </div>
+                <div class="match-pct">${s.matchScore}%</div>
+            </div>
+        `).join('');
+    }
+    </script>
+<script src="../js/back-to-top.js"></script>
+</body>
+</html>
