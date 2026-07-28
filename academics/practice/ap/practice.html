@@ -46,8 +46,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   Practice
 </div>
 
-<h1>AP Practice Questions <span class="v-badge">v5</span></h1>
-<p class="subtitle">v5 · 50 道题 · 计时+难度分级</p>
+<h1>AP Practice Questions <span class="v-badge">v10</span></h1>
+<p class="subtitle">v10 · 120 道题 · 定稿版</p>
 
 <h2>Sample Questions</h2>
 
@@ -757,8 +757,994 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   </div>
 </div>
 
+<h3>Group 4 · Calculus & Math Extension (25 questions)</h3>
+
+<div class="q">
+  <div class="q-num">Q51 · AP Calculus BC · Squeeze Theorem · Medium</div>
+  <p class="q-text">Use the squeeze theorem to find lim(x→0) x² sin(1/x).</p>
+  <ul class="q-choices">
+    <li>A) 0</li>
+    <li>B) 1</li>
+    <li>C) ∞</li>
+    <li>D) Does not exist</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> A) 0. Since −1 ≤ sin(1/x) ≤ 1, we have −x² ≤ x² sin(1/x) ≤ x². Both bounds → 0 as x → 0, so the limit is 0.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q52 · AP Calculus AB · Continuity · Medium</div>
+  <p class="q-text">For what value of k is f(x) = { (x² − 1)/(x − 1) if x ≠ 1; k if x = 1 } continuous at x = 1?</p>
+  <ul class="q-choices">
+    <li>A) 0</li>
+    <li>B) 1</li>
+    <li>C) 2</li>
+    <li>D) Undefined</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> C) 2. lim(x→1) (x² − 1)/(x − 1) = lim(x→1) (x + 1) = 2. For continuity, k must equal this limit.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q53 · AP Calculus AB · Trig Derivatives · Easy</div>
+  <p class="q-text">Find d/dx [cos(x)].</p>
+  <ul class="q-choices">
+    <li>A) sin(x)</li>
+    <li>B) −sin(x)</li>
+    <li>C) −cos(x)</li>
+    <li>D) −tan(x)</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) −sin(x). The derivative of cos(x) is −sin(x).
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q54 · AP Calculus BC · U-Substitution · Medium</div>
+  <p class="q-text">Evaluate ∫ 2x · (x² + 1)⁵ dx.</p>
+  <ul class="q-choices">
+    <li>A) (x² + 1)⁶ / 6 + C</li>
+    <li>B) (x² + 1)⁵ / 5 + C</li>
+    <li>C) 2(x² + 1)⁶ / 6 + C</li>
+    <li>D) (x² + 1)⁶ + C</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> A) (x² + 1)⁶ / 6 + C. Let u = x² + 1, du = 2x dx. ∫ u⁵ du = u⁶/6 + C = (x² + 1)⁶/6 + C.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q55 · AP Calculus AB · Area Between Curves · Medium</div>
+  <p class="q-text">Find the area between y = x and y = x² from x = 0 to x = 1.</p>
+  <ul class="q-choices">
+    <li>A) 1/6</li>
+    <li>B) 1/3</li>
+    <li>C) 1/2</li>
+    <li>D) 5/6</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> A) 1/6. ∫₀¹ (x − x²) dx = [x²/2 − x³/3]₀¹ = 1/2 − 1/3 = 1/6.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q56 · AP Calculus BC · Volume of Revolution · Hard</div>
+  <p class="q-text">Find the volume when y = √x from x = 0 to x = 4 is revolved about the x-axis.</p>
+  <ul class="q-choices">
+    <li>A) 8π</li>
+    <li>B) 16π</li>
+    <li>C) 32π</li>
+    <li>D) 64π</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> A) 8π. V = π ∫₀⁴ (√x)² dx = π ∫₀⁴ x dx = π × 8 = 8π.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q57 · AP Calculus AB · Separable DEs · Medium</div>
+  <p class="q-text">Solve dy/dx = y, with y(0) = 2.</p>
+  <ul class="q-choices">
+    <li>A) y = 2eˣ</li>
+    <li>B) y = e²ˣ</li>
+    <li>C) y = 2x + 2</li>
+    <li>D) y = ln(x) + 2</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> A) y = 2eˣ. Separating: dy/y = dx → ln|y| = x + C → y = Aeˣ. Using y(0) = 2 gives A = 2.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q58 · AP Calculus BC · Geometric Series · Hard</div>
+  <p class="q-text">For what values of r does Σ(n=0 to ∞) rⁿ converge?</p>
+  <ul class="q-choices">
+    <li>A) r > 1</li>
+    <li>B) |r| > 1</li>
+    <li>C) |r| < 1</li>
+    <li>D) All real r</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> C) |r| < 1. A geometric series converges if and only if the common ratio has absolute value less than 1, summing to 1/(1 − r).
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q59 · AP Calculus BC · Parametric Arc Length · Hard</div>
+  <p class="q-text">For the parametric curve x = t², y = t³, set up the arc length integral from t = 0 to t = 2.</p>
+  <ul class="q-choices">
+    <li>A) ∫₀² √(4t² + 9t⁴) dt</li>
+    <li>B) ∫₀² √(t⁴ + t⁶) dt</li>
+    <li>C) ∫₀² (t² + t³) dt</li>
+    <li>D) ∫₀² √(2t + 3t²) dt</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> A) ∫₀² √(4t² + 9t⁴) dt. Arc length = ∫ √((dx/dt)² + (dy/dt)²) dt = ∫ √(4t² + 9t⁴) dt.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q60 · AP Calculus BC · Sequence Convergence · Medium</div>
+  <p class="q-text">Does the sequence aₙ = (−1)ⁿ / n converge?</p>
+  <ul class="q-choices">
+    <li>A) Yes, to 0</li>
+    <li>B) Yes, to 1</li>
+    <li>C) Yes, oscillates between ±1</li>
+    <li>D) No, it diverges</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> A) Yes, to 0. Although the sign alternates, the magnitude 1/n → 0, so the sequence converges to 0.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q61 · AP Calculus BC · Maclaurin Series · Hard</div>
+  <p class="q-text">What is the Maclaurin series for sin(x)?</p>
+  <ul class="q-choices">
+    <li>A) 1 + x + x²/2 + ...</li>
+    <li>B) x − x³/3! + x⁵/5! − ...</li>
+    <li>C) 1 − x²/2! + x⁴/4! − ...</li>
+    <li>D) x + x²/2 + x³/3 + ...</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) x − x³/3! + x⁵/5! − .... sin(x) = Σ(−1)ⁿ x^(2n+1) / (2n+1)!.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q62 · AP Calculus BC · Ratio Test · Hard</div>
+  <p class="q-text">Using the ratio test on Σ(n=1 to ∞) n! / 10ⁿ, the series:</p>
+  <ul class="q-choices">
+    <li>A) Converges (ratio < 1)</li>
+    <li>B) Diverges (ratio > 1)</li>
+    <li>C) Inconclusive (ratio = 1)</li>
+    <li>D) Converges to 0</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) Diverges (ratio > 1). Ratio = (n+1)! / 10^(n+1) × 10ⁿ / n! = (n+1)/10 → ∞ as n → ∞, so the series diverges.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q63 · AP Calculus BC · Integral Test · Hard</div>
+  <p class="q-text">Use the integral test on Σ(n=1 to ∞) 1/(n² + 1). The series:</p>
+  <ul class="q-choices">
+    <li>A) Diverges</li>
+    <li>B) Converges (integral converges)</li>
+    <li>C) Inconclusive</li>
+    <li>D) Converges to π</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) Converges. ∫₁^∞ dx/(x² + 1) = [arctan x]₁^∞ = π/2 − π/4 = π/4 (finite), so the series converges by the integral test.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q64 · AP Calculus BC · Comparison Test · Hard</div>
+  <p class="q-text">Does Σ(n=1 to ∞) 1/(n² + n) converge?</p>
+  <ul class="q-choices">
+    <li>A) Yes, by comparison with Σ 1/n²</li>
+    <li>B) No, by comparison with Σ 1/n</li>
+    <li>C) Inconclusive</li>
+    <li>D) Yes, by comparison with Σ 1/n³</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> A) Yes, by comparison with Σ 1/n². Since 1/(n² + n) < 1/n² for all n ≥ 1, and Σ 1/n² converges (p-series, p > 1), the series converges by direct comparison.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q65 · AP Calculus BC · Power Series · Hard</div>
+  <p class="q-text">What is the radius of convergence of Σ(n=0 to ∞) xⁿ / n! ?</p>
+  <ul class="q-choices">
+    <li>A) 0</li>
+    <li>B) 1</li>
+    <li>C) e</li>
+    <li>D) ∞</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> D) ∞. Using the ratio test: |a(n+1)/aₙ| = |x| / (n + 1) → 0 < 1 for all x, so the series converges for all real x.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q66 · AP Calculus BC · Arc Length · Hard</div>
+  <p class="q-text">Set up the arc length integral of y = x^(3/2) from x = 0 to x = 4.</p>
+  <ul class="q-choices">
+    <li>A) ∫₀⁴ √(1 + (3/2)²x) dx</li>
+    <li>B) ∫₀⁴ √(1 + 9x/4) dx</li>
+    <li>C) ∫₀⁴ √(1 + (9/4)x) dx</li>
+    <li>D) All of the above (equivalent forms)</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> D) All of the above (equivalent forms). y' = (3/2)x^(1/2), so 1 + (y')² = 1 + (9/4)x. The integral is ∫₀⁴ √(1 + 9x/4) dx.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q67 · AP Calculus BC · Surface Area · Hard</div>
+  <p class="q-text">The surface area formula for rotating y = f(x) from a to b about the x-axis is:</p>
+  <ul class="q-choices">
+    <li>A) 2π ∫ y · √(1 + (dy/dx)²) dx</li>
+    <li>B) 2π ∫ y dx</li>
+    <li>C) π ∫ y² dx</li>
+    <li>D) ∫ √(1 + (dy/dx)²) dx</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> A) 2π ∫ y · √(1 + (dy/dx)²) dx. Surface area = 2π ∫ y ds, where ds = √(1 + (dy/dx)²) dx is the arc length element.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q68 · AP Calculus BC · Logistic Growth · Medium</div>
+  <p class="q-text">A population grows logistically with carrying capacity K. As t → ∞, the population size approaches:</p>
+  <ul class="q-choices">
+    <li>A) 0</li>
+    <li>B) K/2</li>
+    <li>C) K</li>
+    <li>D) ∞</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> C) K. The logistic curve approaches the carrying capacity K asymptotically as t → ∞.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q69 · AP Calculus AB · Euler's Method · Medium</div>
+  <p class="q-text">Given dy/dx = y with y(0) = 1, use Euler's method with step h = 0.1 to estimate y(0.2).</p>
+  <ul class="q-choices">
+    <li>A) 1.21</li>
+    <li>B) 1.22</li>
+    <li>C) 1.231</li>
+    <li>D) 1.4641</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> A) 1.21. Step 1: y(0.1) ≈ 1 + 0.1 × 1 = 1.1. Step 2: y(0.2) ≈ 1.1 + 0.1 × 1.1 = 1.21.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q70 · AP Calculus BC · Slope Fields · Medium</div>
+  <p class="q-text">A slope field has all segments with slope 1 (regardless of x, y). Which DE matches?</p>
+  <ul class="q-choices">
+    <li>A) dy/dx = 1</li>
+    <li>B) dy/dx = x</li>
+    <li>C) dy/dx = y</li>
+    <li>D) dy/dx = x + y</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> A) dy/dx = 1. The slope is constant (1) at every point, matching dy/dx = 1.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q71 · AP Calculus AB · Midpoint Riemann Sum · Medium</div>
+  <p class="q-text">Approximate ∫₀² x² dx using a midpoint Riemann sum with n = 4 subintervals.</p>
+  <ul class="q-choices">
+    <li>A) 2.5</li>
+    <li>B) 2.625</li>
+    <li>C) 3.75</li>
+    <li>D) 5.75</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) 2.625. Δx = 0.5. Midpoints: 0.25, 0.75, 1.25, 1.75. Sum = 0.5 × (0.0625 + 0.5625 + 1.5625 + 3.0625) = 0.5 × 5.25 = 2.625.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q72 · AP Calculus AB · Fundamental Theorem · Easy</div>
+  <p class="q-text">If F(x) = ∫₀ˣ f(t) dt, then F'(x) = ?</p>
+  <ul class="q-choices">
+    <li>A) 0</li>
+    <li>B) f(x)</li>
+    <li>C) F(x)</li>
+    <li>D) f'(x)</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) f(x). By the Fundamental Theorem of Calculus (Part 1), the derivative of an integral function is the integrand evaluated at the upper limit.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q73 · AP Calculus AB · Mean Value Theorem · Medium</div>
+  <p class="q-text">For f(x) = x² on [1, 3], what value of c satisfies the MVT?</p>
+  <ul class="q-choices">
+    <li>A) 1</li>
+    <li>B) 2</li>
+    <li>C) 3</li>
+    <li>D) 4</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) 2. Average rate = (f(3) − f(1)) / (3 − 1) = (9 − 1) / 2 = 4. f'(x) = 2x = 4 → x = 2.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q74 · AP Calculus AB · Related Rates · Hard</div>
+  <p class="q-text">A 10 ft ladder leans against a wall. The bottom slides away at 2 ft/s. When the bottom is 6 ft from the wall, how fast is the top sliding down?</p>
+  <ul class="q-choices">
+    <li>A) 1.5 ft/s</li>
+    <li>B) 8/3 ft/s</li>
+    <li>C) 3 ft/s</li>
+    <li>D) 4 ft/s</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> A) 1.5 ft/s. x² + y² = 100. When x = 6, y = 8. Differentiate: 2x · dx/dt + 2y · dy/dt = 0 → 12(2) + 16 · dy/dt = 0 → dy/dt = −24/16 = −1.5 ft/s.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q75 · AP Calculus AB · Optimization · Hard</div>
+  <p class="q-text">An open-top box is made from a 12 × 12 inch square by cutting equal squares from corners and folding. What corner size maximizes volume?</p>
+  <ul class="q-choices">
+    <li>A) 1 inch</li>
+    <li>B) 2 inches</li>
+    <li>C) 3 inches</li>
+    <li>D) 4 inches</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) 2 inches. V = x(12 − 2x)². dV/dx = (12 − 2x)² − 4x(12 − 2x) = (12 − 2x)(12 − 6x). Setting dV/dx = 0 gives x = 2 (the valid interior critical point).
+  </div>
+</div>
+
+<h3>Group 5 · Science Extension (25 questions)</h3>
+
+<div class="q">
+  <div class="q-num">Q76 · AP Chemistry · Quantum Numbers · Medium</div>
+  <p class="q-text">Which set of quantum numbers is NOT valid?</p>
+  <ul class="q-choices">
+    <li>A) n = 2, ℓ = 1, mℓ = 0, ms = +1/2</li>
+    <li>B) n = 3, ℓ = 2, mℓ = −1, ms = −1/2</li>
+    <li>C) n = 3, ℓ = 3, mℓ = 0, ms = +1/2</li>
+    <li>D) n = 1, ℓ = 0, mℓ = 0, ms = +1/2</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> C) n = 3, ℓ = 3, mℓ = 0, ms = +1/2. ℓ must be in the range 0 to n − 1, so for n = 3, ℓ can only be 0, 1, or 2.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q77 · AP Chemistry · Electronegativity · Medium</div>
+  <p class="q-text">Which element has the highest electronegativity?</p>
+  <ul class="q-choices">
+    <li>A) Na</li>
+    <li>B) Mg</li>
+    <li>C) O</li>
+    <li>D) F</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> D) F. Fluorine has the highest electronegativity (4.0 on the Pauling scale); it increases toward the top-right of the periodic table (excluding noble gases).
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q78 · AP Chemistry · Hybridization · Medium</div>
+  <p class="q-text">What is the hybridization of the central atom in CH₄?</p>
+  <ul class="q-choices">
+    <li>A) sp</li>
+    <li>B) sp²</li>
+    <li>C) sp³</li>
+    <li>D) sp³d</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> C) sp³. Carbon forms 4 single bonds (tetrahedral geometry, 109.5°), requiring sp³ hybridization.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q79 · AP Chemistry · Hydrogen Bonding · Medium</div>
+  <p class="q-text">Which substance exhibits hydrogen bonding between molecules?</p>
+  <ul class="q-choices">
+    <li>A) CH₄</li>
+    <li>B) H₂S</li>
+    <li>C) NH₃</li>
+    <li>D) CCl₄</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> C) NH₃. Hydrogen bonding requires H bonded to N, O, or F. NH₃ has N−H bonds, allowing strong dipole-dipole hydrogen bonds.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q80 · AP Chemistry · Hess's Law · Medium</div>
+  <p class="q-text">Given: (1) C + O₂ → CO₂, ΔH = −394 kJ; (2) 2CO + O₂ → 2CO₂, ΔH = −566 kJ. Find ΔH for 2C + O₂ → 2CO.</p>
+  <ul class="q-choices">
+    <li>A) −960 kJ</li>
+    <li>B) −222 kJ</li>
+    <li>C) +222 kJ</li>
+    <li>D) +172 kJ</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) −222 kJ. Reverse (2) and add 2 × (1): 2 × (−394) − (−566) = −788 + 566 = −222 kJ.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q81 · AP Chemistry · Rate Law · Hard</div>
+  <p class="q-text">For A + B → C, doubling [A] doubles the rate, but doubling [B] has no effect. The rate law is:</p>
+  <ul class="q-choices">
+    <li>A) Rate = k[A][B]</li>
+    <li>B) Rate = k[A]²</li>
+    <li>C) Rate = k[A]</li>
+    <li>D) Rate = k[B]</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> C) Rate = k[A]. First-order in A (rate doubles when [A] doubles), zero-order in B.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q82 · AP Chemistry · Le Chatelier · Hard</div>
+  <p class="q-text">For N₂(g) + 3H₂(g) ⇌ 2NH₃(g), ΔH < 0. Which change increases NH₃ yield?</p>
+  <ul class="q-choices">
+    <li>A) Increasing temperature</li>
+    <li>B) Decreasing pressure</li>
+    <li>C) Removing NH₃ as it forms</li>
+    <li>D) Adding a catalyst</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> C) Removing NH₃ as it forms. Removing a product shifts equilibrium to the right, increasing NH₃ yield. (A shifts left, B shifts left, D speeds both equally.)
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q83 · AP Chemistry · Weak Acid pH · Hard</div>
+  <p class="q-text">A 0.1 M weak acid HA (Ka = 1 × 10⁻⁵) has [H⁺] approximately:</p>
+  <ul class="q-choices">
+    <li>A) 10⁻⁶ M</li>
+    <li>B) 10⁻⁵ M</li>
+    <li>C) 10⁻³ M</li>
+    <li>D) 10⁻¹ M</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> C) 10⁻³ M. For weak acids: [H⁺] = √(Ka × C) = √(10⁻⁵ × 0.1) = √10⁻⁶ = 10⁻³ M. pH ≈ 3.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q84 · AP Chemistry · Nernst Equation · Hard</div>
+  <p class="q-text">In the Nernst equation E = E° − (RT/nF) ln Q, what does Q represent?</p>
+  <ul class="q-choices">
+    <li>A) Charge transferred</li>
+    <li>B) Reaction quotient</li>
+    <li>C) Heat of reaction</li>
+    <li>D) Equilibrium constant</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) Reaction quotient. Q is the reaction quotient (same form as K but using current concentrations); at equilibrium Q = K and E = 0.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q85 · AP Chemistry · Functional Groups · Medium</div>
+  <p class="q-text">Which functional group is present in ethanol (CH₃CH₂OH)?</p>
+  <ul class="q-choices">
+    <li>A) Aldehyde</li>
+    <li>B) Ketone</li>
+    <li>C) Hydroxyl (alcohol)</li>
+    <li>D) Carboxylic acid</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> C) Hydroxyl (alcohol). The −OH group attached to a carbon defines an alcohol.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q86 · AP Biology · Water Properties · Easy</div>
+  <p class="q-text">Water's high specific heat is due to:</p>
+  <ul class="q-choices">
+    <li>A) Covalent bonds within molecules</li>
+    <li>B) Hydrogen bonds between molecules</li>
+    <li>C) Its low molecular mass</li>
+    <li>D) Hydrophobic interactions</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) Hydrogen bonds between molecules. Extensive hydrogen bonding requires significant energy to break, giving water a high specific heat capacity.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q87 · AP Biology · Membrane Transport · Medium</div>
+  <p class="q-text">Which transport mechanism requires ATP?</p>
+  <ul class="q-choices">
+    <li>A) Diffusion</li>
+    <li>B) Osmosis</li>
+    <li>C) Facilitated diffusion</li>
+    <li>D) Active transport</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> D) Active transport. Active transport moves substances against their concentration gradient, requiring energy (ATP).
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q88 · AP Biology · Cellular Respiration · Hard</div>
+  <p class="q-text">In eukaryotes, the Krebs cycle takes place in the:</p>
+  <ul class="q-choices">
+    <li>A) Cytoplasm</li>
+    <li>B) Mitochondrial matrix</li>
+    <li>C) Inner mitochondrial membrane</li>
+    <li>D) Chloroplast</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) Mitochondrial matrix. The Krebs (citric acid) cycle occurs in the mitochondrial matrix; the electron transport chain is on the inner membrane.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q89 · AP Biology · Mendelian Genetics · Medium</div>
+  <p class="q-text">In a dihybrid cross (AaBb × AaBb), the expected phenotypic ratio is:</p>
+  <ul class="q-choices">
+    <li>A) 1 : 1</li>
+    <li>B) 3 : 1</li>
+    <li>C) 9 : 3 : 3 : 1</li>
+    <li>D) 1 : 2 : 1</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> C) 9 : 3 : 3 : 1. Independent assortment in a dihybrid cross produces a 9:3:3:1 phenotypic ratio in the F2 generation.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q90 · AP Biology · Transcription · Hard</div>
+  <p class="q-text">During transcription, the template DNA strand 3'−ATGC−5' produces which mRNA sequence?</p>
+  <ul class="q-choices">
+    <li>A) 5'−AUGC−3'</li>
+    <li>B) 5'−UACG−3'</li>
+    <li>C) 3'−UACG−5'</li>
+    <li>D) 5'−TACG−3'</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) 5'−UACG−3'. mRNA is synthesized 5'→3' antiparallel to the template, with U replacing T: A→U, T→A, G→C, C→G.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q91 · AP Biology · Fitness · Medium</div>
+  <p class="q-text">In evolutionary biology, "fitness" refers to:</p>
+  <ul class="q-choices">
+    <li>A) Physical strength</li>
+    <li>B) An organism's ability to survive and reproduce</li>
+    <li>C) Speed of movement</li>
+    <li>D) Resistance to disease</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) An organism's ability to survive and reproduce. Evolutionary fitness is measured by reproductive success — the passing of genes to future generations.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q92 · AP Biology · Energy Pyramid · Medium</div>
+  <p class="q-text">In an energy pyramid, the typical efficiency of energy transfer between trophic levels is about:</p>
+  <ul class="q-choices">
+    <li>A) 1%</li>
+    <li>B) 10%</li>
+    <li>C) 50%</li>
+    <li>D) 90%</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) 10%. The "10% rule" — only about 10% of energy at one trophic level is available to the next; the rest is lost as heat/metabolism.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q93 · AP Chemistry · Limiting Reactant · Hard</div>
+  <p class="q-text">2H₂ + O₂ → 2H₂O. If 5 mol H₂ reacts with 2 mol O₂, what is the limiting reactant and how much H₂O is produced?</p>
+  <ul class="q-choices">
+    <li>A) H₂ limiting, 5 mol H₂O</li>
+    <li>B) O₂ limiting, 4 mol H₂O</li>
+    <li>C) H₂ limiting, 2.5 mol H₂O</li>
+    <li>D) O₂ limiting, 2 mol H₂O</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) O₂ limiting, 4 mol H₂O. Stoichiometry: 5 mol H₂ needs 2.5 mol O₂, but only 2 mol O₂ available. O₂ is limiting; 2 mol O₂ × (2 H₂O / O₂) = 4 mol H₂O.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q94 · AP Biology · Enzymes · Medium</div>
+  <p class="q-text">The "induced fit" model of enzyme action describes:</p>
+  <ul class="q-choices">
+    <li>A) A rigid lock-and-key interaction</li>
+    <li>B) The enzyme changing shape to fit the substrate</li>
+    <li>C) The substrate changing shape to fit the enzyme</li>
+    <li>D) Random binding of substrates</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) The enzyme changing shape to fit the substrate. Induced fit: the enzyme's active site molds around the substrate upon binding, enhancing catalysis.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q95 · AP Biology · Light Reactions · Hard</div>
+  <p class="q-text">The light-dependent reactions of photosynthesis occur in the:</p>
+  <ul class="q-choices">
+    <li>A) Stroma</li>
+    <li>B) Thylakoid membrane</li>
+    <li>C) Matrix</li>
+    <li>D) Cytoplasm</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) Thylakoid membrane. Light reactions (including photosystems I and II, electron transport, ATP/NADPH synthesis) occur in the thylakoid membranes; the Calvin cycle is in the stroma.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q96 · AP Chemistry · Ideal Gas Law · Medium</div>
+  <p class="q-text">At 300 K and 2 atm, 1 mol of an ideal gas occupies what volume? (R = 0.0821 L·atm/mol·K)</p>
+  <ul class="q-choices">
+    <li>A) 6.15 L</li>
+    <li>B) 12.3 L</li>
+    <li>C) 24.6 L</li>
+    <li>D) 49.2 L</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) 12.3 L. PV = nRT → V = nRT / P = (1 × 0.0821 × 300) / 2 = 24.63 / 2 = 12.3 L.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q97 · AP Biology · Mitosis vs Meiosis · Medium</div>
+  <p class="q-text">Which is true of meiosis but NOT mitosis?</p>
+  <ul class="q-choices">
+    <li>A) Produces identical daughter cells</li>
+    <li>B) Reduces chromosome number by half</li>
+    <li>C) Occurs in somatic cells</li>
+    <li>D) Has one division</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) Reduces chromosome number by half. Meiosis produces haploid gametes through two divisions; mitosis produces identical diploid somatic cells.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q98 · AP Biology · Chloroplast · Medium</div>
+  <p class="q-text">Which pigment absorbs primarily red and blue wavelengths for photosynthesis?</p>
+  <ul class="q-choices">
+    <li>A) Chlorophyll a</li>
+    <li>B) Carotene</li>
+    <li>C) Xanthophyll</li>
+    <li>D) Hemoglobin</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> A) Chlorophyll a. Chlorophyll a absorbs red and blue light, reflecting green (which is why plants appear green); it is the primary photosynthetic pigment.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q99 · AP Chemistry · Molarity · Medium</div>
+  <p class="q-text">What is the molarity of 0.5 mol NaCl dissolved in 250 mL of solution?</p>
+  <ul class="q-choices">
+    <li>A) 0.125 M</li>
+    <li>B) 0.5 M</li>
+    <li>C) 2 M</li>
+    <li>D) 125 M</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> C) 2 M. M = moles / liters = 0.5 / 0.250 = 2 M.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q100 · AP Biology · DNA Structure · Medium</div>
+  <p class="q-text">In DNA, adenine pairs with:</p>
+  <ul class="q-choices">
+    <li>A) Cytosine</li>
+    <li>B) Guanine</li>
+    <li>C) Thymine</li>
+    <li>D) Uracil</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> C) Thymine. In DNA, A pairs with T (2 hydrogen bonds); G pairs with C (3 hydrogen bonds). In RNA, A pairs with U.
+  </div>
+</div>
+
+<h3>Group 6 · History, CS & Stats Extension (20 questions)</h3>
+
+<div class="q">
+  <div class="q-num">Q101 · AP US History · Period 1 · Medium</div>
+  <p class="q-text">The Columbian Exchange refers to the exchange of:</p>
+  <ul class="q-choices">
+    <li>A) Goods only between Europe and Asia</li>
+    <li>B) Plants, animals, diseases, and ideas between the Old and New Worlds</li>
+    <li>C) Slaves between Africa and Europe only</li>
+    <li>D) Technologies between China and the Americas</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) Plants, animals, diseases, and ideas between the Old and New Worlds. Following Columbus's voyages, this exchange transformed both hemispheres; smallpox devastated Native American populations.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q102 · AP US History · Period 2 · Medium</div>
+  <p class="q-text">The Mayflower Compact (1620) is significant because it:</p>
+  <ul class="q-choices">
+    <li>A) Established religious freedom in America</li>
+    <li>B) Established the principle of self-government</li>
+    <li>C) Created the Massachusetts Bay Colony</li>
+    <li>D) Granted independence from Britain</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) Established the principle of self-government. Signed by Pilgrims before landing, it created a "civil body politic" — an early example of consent of the governed.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q103 · AP US History · Period 5 · Medium</div>
+  <p class="q-text">A direct cause of the American Civil War was:</p>
+  <ul class="q-choices">
+    <li>A) The Boston Massacre</li>
+    <li>B) The election of Abraham Lincoln in 1860</li>
+    <li>C) The Mexican-American War</li>
+    <li>D) The Industrial Revolution</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) The election of Abraham Lincoln in 1860. Lincoln's anti-slavery stance led Southern states to secede, beginning with South Carolina in December 1860.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q104 · AP US History · Period 7 · Hard</div>
+  <p class="q-text">The New Deal (1933) was President Franklin Roosevelt's response to:</p>
+  <ul class="q-choices">
+    <li>A) World War I</li>
+    <li>B) The Great Depression</li>
+    <li>C) The Cold War</li>
+    <li>D) The Vietnam War</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) The Great Depression. The New Deal was a series of programs (Social Security, WPA, FDIC, etc.) to provide relief, recovery, and reform during the Depression.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q105 · AP US History · Period 8 · Hard</div>
+  <p class="q-text">The Gulf of Tonkin Resolution (1964) authorized:</p>
+  <ul class="q-choices">
+    <li>A) US entry into World War II</li>
+    <li>B) US military action in Vietnam</li>
+    <li>C) The invasion of Cuba</li>
+    <li>D) The end of the Korean War</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) US military action in Vietnam. Following reported attacks on US ships, Congress granted President Johnson broad military powers in Vietnam, escalating US involvement.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q106 · AP World History · River Valley Civilizations · Easy</div>
+  <p class="q-text">Which ancient civilization developed along the Indus River?</p>
+  <ul class="q-choices">
+    <li>A) Sumerian</li>
+    <li>B) Egyptian</li>
+    <li>C) Harappan (Indus Valley)</li>
+    <li>D) Shang</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> C) Harappan (Indus Valley). The Harappan or Indus Valley civilization flourished along the Indus River (modern Pakistan) around 2600–1900 BCE.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q107 · AP World History · Silk Road · Medium</div>
+  <p class="q-text">The Silk Road was important because it:</p>
+  <ul class="q-choices">
+    <li>A) Only transported silk</li>
+    <li>B) Connected Europe, the Middle East, and Asia for trade and cultural exchange</li>
+    <li>C) Was a single road from China to Rome</li>
+    <li>D) Was used only by armies</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) Connected Europe, the Middle East, and Asia for trade and cultural exchange. The Silk Road network carried silk, spices, religions (Buddhism, Islam), and technologies between civilizations.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q108 · AP Macroeconomics · Supply & Demand · Medium</div>
+  <p class="q-text">If the price of a good rises, what happens to quantity demanded (law of demand)?</p>
+  <ul class="q-choices">
+    <li>A) Increases</li>
+    <li>B) Decreases</li>
+    <li>C) Stays the same</li>
+    <li>D) Becomes zero</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) Decreases. The law of demand states that, ceteris paribus, quantity demanded decreases as price increases.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q109 · AP Macroeconomics · Fiscal Policy · Hard</div>
+  <p class="q-text">To combat a recession, the government should use:</p>
+  <ul class="q-choices">
+    <li>A) Contractionary fiscal policy (raise taxes, cut spending)</li>
+    <li>B) Expansionary fiscal policy (cut taxes, increase spending)</li>
+    <li>C) Raise interest rates</li>
+    <li>D) Decrease the money supply</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) Expansionary fiscal policy (cut taxes, increase spending). Cutting taxes and increasing government spending stimulate aggregate demand during a recession.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q110 · AP Microeconomics · Elasticity · Medium</div>
+  <p class="q-text">If a 10% price increase causes a 5% decrease in quantity demanded, demand is:</p>
+  <ul class="q-choices">
+    <li>A) Elastic</li>
+    <li>B) Inelastic</li>
+    <li>C) Unit elastic</li>
+    <li>D) Perfectly elastic</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) Inelastic. Price elasticity = |%ΔQ / %ΔP| = 5/10 = 0.5 < 1, so demand is inelastic (quantity is less responsive than price).
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q111 · AP CSA · Methods · Easy</div>
+  <p class="q-text">What does the keyword "void" indicate in a Java method?</p>
+  <ul class="q-choices">
+    <li>A) The method returns an integer</li>
+    <li>B) The method returns nothing</li>
+    <li>C) The method is private</li>
+    <li>D) The method takes no parameters</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) The method returns nothing. void means the method performs an action but does not return a value.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q112 · AP CSA · Classes · Medium</div>
+  <p class="q-text">In Java, what is a constructor?</p>
+  <ul class="q-choices">
+    <li>A) A method that destroys objects</li>
+    <li>B) A special method that initializes a new object</li>
+    <li>C) A variable that holds class data</li>
+    <li>D) A loop that creates objects</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) A special method that initializes a new object. Constructors have the same name as the class and are called with the new keyword.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q113 · AP CSA · Inheritance · Hard</div>
+  <p class="q-text">In Java, which keyword is used to inherit from a superclass?</p>
+  <ul class="q-choices">
+    <li>A) implements</li>
+    <li>B) inherits</li>
+    <li>C) extends</li>
+    <li>D) superclass</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> C) extends. The extends keyword establishes inheritance from a class (extends for classes, implements for interfaces).
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q114 · AP CSA · Recursion · Hard</div>
+  <p class="q-text">What is the output of: public static int f(int n) { if (n <= 1) return n; return f(n − 1) + f(n − 2); } f(5)?</p>
+  <ul class="q-choices">
+    <li>A) 3</li>
+    <li>B) 5</li>
+    <li>C) 8</li>
+    <li>D) 13</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) 5. The method computes the Fibonacci sequence: f(0)=0, f(1)=1, f(2)=1, f(3)=2, f(4)=3, f(5)=5.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q115 · AP CSA · Sorting · Medium</div>
+  <p class="q-text">What is the worst-case time complexity of bubble sort?</p>
+  <ul class="q-choices">
+    <li>A) O(n)</li>
+    <li>B) O(n log n)</li>
+    <li>C) O(n²)</li>
+    <li>D) O(2ⁿ)</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> C) O(n²). Bubble sort uses nested loops, each iterating up to n times, giving worst-case O(n²).
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q116 · AP CSA · Searching · Easy</div>
+  <p class="q-text">Binary search requires the data to be:</p>
+  <ul class="q-choices">
+    <li>A) Sorted</li>
+    <li>B) Random</li>
+    <li>C) Stored as a linked list</li>
+    <li>D) Duplicates only</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> A) Sorted. Binary search works by repeatedly halving a sorted list; it cannot function on unsorted data.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q117 · AP CSP · Data · Easy</div>
+  <p class="q-text">How many bits are in one byte?</p>
+  <ul class="q-choices">
+    <li>A) 4</li>
+    <li>B) 8</li>
+    <li>C) 16</li>
+    <li>D) 32</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) 8. One byte equals 8 bits, allowing values from 0 to 255.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q118 · AP CSP · Algorithms · Medium</div>
+  <p class="q-text">What is the time complexity of linear search?</p>
+  <ul class="q-choices">
+    <li>A) O(1)</li>
+    <li>B) O(log n)</li>
+    <li>C) O(n)</li>
+    <li>D) O(n²)</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> C) O(n). Linear search may need to examine every element, giving O(n) time complexity.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q119 · AP CSP · Internet · Medium</div>
+  <p class="q-text">What does HTTP stand for?</p>
+  <ul class="q-choices">
+    <li>A) HyperText Transfer Protocol</li>
+    <li>B) High Transfer Text Protocol</li>
+    <li>C) HyperText Transmission Process</li>
+    <li>D) Host Transfer Type Protocol</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> A) HyperText Transfer Protocol. HTTP is the protocol used for transmitting web pages over the internet.
+  </div>
+</div>
+
+<div class="q">
+  <div class="q-num">Q120 · AP Statistics · Regression · Hard</div>
+  <p class="q-text">A least-squares regression line has r² = 0.81. This means:</p>
+  <ul class="q-choices">
+    <li>A) 81% of the variation in y is explained by the linear relationship with x</li>
+    <li>B) The correlation is 0.81</li>
+    <li>C) 19% of variation is explained</li>
+    <li>D) The slope is 0.81</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> A) 81% of the variation in y is explained by the linear relationship with x. r² (coefficient of determination) gives the fraction of variance in y explained by the model; here r = ±0.9.
+  </div>
+</div>
+
 <div class="box-dashed">
-  <strong>v5: 点击选项答题，自动记录到错题本（localStorage），支持计时与难度分级。</strong>
+  <strong>v10: 点击选项答题，自动记录到错题本（localStorage），支持计时与难度分级，120 道题定稿版。</strong>
 </div>
 
 <div class="footer">
