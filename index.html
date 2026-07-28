@@ -138,8 +138,11 @@
         }
         .feature-cols {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 32px;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 28px;
+        }
+        @media (max-width: 768px) {
+            .feature-cols { grid-template-columns: 1fr; gap: 24px; }
         }
         .feature-block h3 {
             font-size: 1.05rem;
@@ -267,7 +270,6 @@
         @media (max-width: 768px) {
             body { padding: 0 16px 24px; }
             .hero h1 { font-size: 1.6rem; }
-            .feature-cols { grid-template-columns: 1fr; gap: 24px; }
             .nav-links { gap: 12px; }
             .nav-links a { font-size: 0.8rem; }
             .nav-links .cn { display: none; }
@@ -302,7 +304,7 @@
     <section class="hero">
         <h1>全球留学一站式导航</h1>
         <p class="subtitle">From choosing your major to submitting your application, worldwide</p>
-        <p class="subtitle-cn">专业体系以美国为主要参考 · 学校覆盖美/英/加/澳/港/新 · 标化 · 文书 · 竞赛 · 工具</p>
+        <p class="subtitle-cn">专业 · 学校 · 标化 · 文书 · 竞赛 · 工具 · 覆盖美/英/加/澳/港/新</p>
         <div class="search-box">
             <input type="text" id="homeSearch" placeholder="Search majors, schools, tools..." autocomplete="off">
         </div>
@@ -353,6 +355,16 @@
                     <li><a href="competitions/index.html">All Competitions</a></li>
                     <li><a href="competitions/math.html">Math</a> <span class="pipe">|</span> <a href="competitions/cs.html">CS</a> <span class="pipe">|</span> <a href="competitions/business.html">Business</a></li>
                     <li><a href="competitions/calendar.html">Competition Calendar</a></li>
+                </ul>
+            </div>
+            <div class="feature-block">
+                <h3>Global Study</h3>
+                <p>Guides, timelines, costs, and scholarships for 6 countries.</p>
+                <ul>
+                    <li><a href="uk-ucas-guide.html">UK</a> <span class="pipe">|</span> <a href="canada-guide.html">Canada</a> <span class="pipe">|</span> <a href="australia-guide.html">Australia</a></li>
+                    <li><a href="hongkong-guide.html">Hong Kong</a> <span class="pipe">|</span> <a href="singapore-guide.html">Singapore</a></li>
+                    <li><a href="intl-timeline.html">Timeline</a> <span class="pipe">|</span> <a href="language-tests.html">Languages</a></li>
+                    <li><a href="cost-comparison.html">Cost Compare</a> <span class="pipe">|</span> <a href="intl-scholarships.html">Scholarships</a></li>
                 </ul>
             </div>
             <div class="feature-block">
