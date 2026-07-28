@@ -46,19 +46,20 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   Practice
 </div>
 
-<h1>SAT Practice Questions <span class="v-badge">v10</span></h1>
-<p class="subtitle">v10 · 120 道题 · 定稿版</p>
+<h1>SAT Practice Questions <span class="v-badge">v12-beta</span></h1>
+<p class="subtitle">v12-beta · 120题·每Q加topic-code &amp; 锚点 · v12双向锚点映射中SAT验证版</p>
 
 <div class="box-dashed">
   <strong>v10: 点击选项答题，自动记录到错题本（localStorage）。</strong>
+  <p style="margin-top:6px;">v12新增：考纲Topic↔Q编号双向锚点直达（点击Topic后Q编号直接跳题；每题q-num前Topic Code对应Syllabus对应条目）</p>
 </div>
 
 <h2>样题</h2>
 
 <h3>Group 1 · Math — Algebra &amp; Advanced Math (7 questions)</h3>
 
-<div class="q">
-  <div class="q-num">Q1 · SAT Math · Algebra · Medium</div>
+<div class="q" id="q-1">
+  <div class="q-num">Q1 【M-Alg-1a】 · SAT Math · Algebra · Medium</div>
   <div class="q-text">If 3x + 7 = 22, what is the value of x?</div>
   <ul class="q-choices">
     <li>A) 3</li>
@@ -69,8 +70,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B) 5. 3x = 22 − 7 = 15，x = 5.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q2 · SAT Math · Advanced Math · Hard</div>
+<div class="q" id="q-2">
+  <div class="q-num">Q2 【M-Adv-2a】 · SAT Math · Advanced Math · Hard</div>
   <div class="q-text">If f(x) = x² − 4x + 3, for what values of x does f(x) = 0?</div>
   <ul class="q-choices">
     <li>A) x = 1, x = 3</li>
@@ -81,8 +82,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> A) x = 1, x = 3. 因式分解：(x − 1)(x − 3) = 0，故 x = 1 或 x = 3.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q6 · SAT Math · Advanced Math · Hard</div>
+<div class="q" id="q-3">
+  <div class="q-num">Q6 【M-Adv-2c】 · SAT Math · Advanced Math · Hard</div>
   <div class="q-text">If f(x) = 2ˣ and f(a) = 32, what is the value of a?</div>
   <ul class="q-choices">
     <li>A) 4</li>
@@ -93,8 +94,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B) 5. 2^a = 32 = 2⁵，故 a = 5.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q11 · SAT Math · Algebra · Easy</div>
+<div class="q" id="q-4">
+  <div class="q-num">Q11 【M-Alg-1a】 · SAT Math · Algebra · Easy</div>
   <div class="q-text">If 2(x + 3) = 14, what is x?</div>
   <ul class="q-choices">
     <li>A) 2</li>
@@ -105,8 +106,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B) 4. 2x + 6 = 14，2x = 8，x = 4.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q12 · SAT Math · Algebra · Medium</div>
+<div class="q" id="q-5">
+  <div class="q-num">Q12 【M-Alg-1a】 · SAT Math · Algebra · Medium</div>
   <div class="q-text">If x/y = 3 and y = 6, what is x?</div>
   <ul class="q-choices">
     <li>A) 2</li>
@@ -117,8 +118,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> D) 18. x = 3y = 3 × 6 = 18.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q13 · SAT Math · Advanced Math · Medium</div>
+<div class="q" id="q-6">
+  <div class="q-num">Q13 【M-Adv-2a】 · SAT Math · Advanced Math · Medium</div>
   <div class="q-text">If g(x) = x² + 2x − 3, what is g(−1)?</div>
   <ul class="q-choices">
     <li>A) −4</li>
@@ -129,8 +130,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> A) −4. g(−1) = (−1)² + 2(−1) − 3 = 1 − 2 − 3 = −4.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q14 · SAT Math · Advanced Math · Hard</div>
+<div class="q" id="q-7">
+  <div class="q-num">Q14 【M-Adv-2a】 · SAT Math · Advanced Math · Hard</div>
   <div class="q-text">How many real solutions does x² + 4 = 0 have?</div>
   <ul class="q-choices">
     <li>A) 0</li>
@@ -143,8 +144,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
 
 <h3>Group 2 · Math — Problem Solving, Data &amp; Geometry (5 questions)</h3>
 
-<div class="q">
-  <div class="q-num">Q4 · SAT Math · Problem Solving · Easy</div>
+<div class="q" id="q-8">
+  <div class="q-num">Q4 【M-PSD-3b】 · SAT Math · Problem Solving · Easy</div>
   <div class="q-text">A store sells 3 apples for $1.50. How much would 5 apples cost?</div>
   <ul class="q-choices">
     <li>A) $2.00</li>
@@ -155,8 +156,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B) $2.50. Unit price = $1.50 / 3 = $0.50，5 × $0.50 = $2.50.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q5 · SAT Math · Geometry · Medium</div>
+<div class="q" id="q-9">
+  <div class="q-num">Q5 【M-GT-4c】 · SAT Math · Geometry · Medium</div>
   <div class="q-text">A right triangle has legs of 5 and 12. What is the hypotenuse?</div>
   <ul class="q-choices">
     <li>A) 13</li>
@@ -167,8 +168,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> A) 13. c = √(5² + 12²) = √(25 + 144) = √169 = 13.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q7 · SAT Math · Data Analysis · Medium</div>
+<div class="q" id="q-10">
+  <div class="q-num">Q7 【M-PSD-3c】 · SAT Math · Data Analysis · Medium</div>
   <div class="q-text">In a survey of 200 students, 120 play sports and 80 play an instrument. If 40 do both, how many do neither?</div>
   <ul class="q-choices">
     <li>A) 0</li>
@@ -179,8 +180,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B) 40. Neither = 200 − (120 + 80 − 40) = 200 − 160 = 40.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q10 · SAT Math · Geometry · Easy</div>
+<div class="q" id="q-11">
+  <div class="q-num">Q10 【M-GT-4a】 · SAT Math · Geometry · Easy</div>
   <div class="q-text">What is the area of a rectangle with length 8 and width 5?</div>
   <ul class="q-choices">
     <li>A) 13</li>
@@ -191,8 +192,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> C) 40. Area = length × width = 8 × 5 = 40.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q15 · SAT Math · Data Analysis · Medium</div>
+<div class="q" id="q-12">
+  <div class="q-num">Q15 【M-PSD-3b】 · SAT Math · Data Analysis · Medium</div>
   <div class="q-text">The average of 3, 7, 8, x is 6. What is x?</div>
   <ul class="q-choices">
     <li>A) 4</li>
@@ -205,8 +206,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
 
 <h3>Group 3 · Reading &amp; Writing (6 questions)</h3>
 
-<div class="q">
-  <div class="q-num">Q3 · SAT Reading &amp; Writing · Standard English Conventions · Easy</div>
+<div class="q" id="q-13">
+  <div class="q-num">Q3 【RW-Conv-3c】 · SAT Reading &amp; Writing · Standard English Conventions · Easy</div>
   <div class="q-text">Choose the best version of the underlined portion: &ldquo;The team of researchers, who had been studying the effects of climate change on coral reefs, _____ their findings in a leading journal.&rdquo;</div>
   <ul class="q-choices">
     <li>A) has published</li>
@@ -217,8 +218,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> D) published. 句子描述一个已完成的过去动作，主语 &ldquo;team&rdquo;（单数）后接非限制性定语从句 &ldquo;who had been studying&rdquo;，主句谓语应使用一般过去时表示已完成的动作。</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q8 · SAT Reading &amp; Writing · Information &amp; Ideas · Medium</div>
+<div class="q" id="q-14">
+  <div class="q-num">Q8 【RW-Info-2b】 · SAT Reading &amp; Writing · Information &amp; Ideas · Medium</div>
   <div class="q-text">Passage: &ldquo;Despite its reputation for isolation, Japan maintained active trade relationships with the Netherlands and China throughout the Edo period (1603-1868).&rdquo; What is the main idea of this sentence?</div>
   <ul class="q-choices">
     <li>A) Japan was completely isolated during the Edo period</li>
@@ -229,8 +230,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B). 该句将日本 &ldquo;isolated&rdquo; 的名声与其实际保持的活跃贸易关系进行对比。</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q9 · SAT Reading &amp; Writing · Craft &amp; Structure · Hard</div>
+<div class="q" id="q-15">
+  <div class="q-num">Q9 【RW-Craft-1a】 · SAT Reading &amp; Writing · Craft &amp; Structure · Hard</div>
   <div class="q-text">&ldquo;The scientist's findings were _____, contradicting decades of established wisdom.&rdquo; Which word best fits?</div>
   <ul class="q-choices">
     <li>A) conventional</li>
@@ -241,8 +242,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> C) groundbreaking. 空格处需表达 &ldquo;与既有定论相悖&rdquo; 之意，&ldquo;groundbreaking&rdquo;（创新的、革命性的）最贴合。</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q16 · SAT Reading &amp; Writing · Standard English Conventions · Easy</div>
+<div class="q" id="q-16">
+  <div class="q-num">Q16 【RW-Conv-3c】 · SAT Reading &amp; Writing · Standard English Conventions · Easy</div>
   <div class="q-text">Choose the correct word: &ldquo;The students _____ happy with their results.&rdquo;</div>
   <ul class="q-choices">
     <li>A) is</li>
@@ -253,8 +254,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B) are. 复数主语 &ldquo;students&rdquo; 需搭配复数谓语动词。</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q17 · SAT Reading &amp; Writing · Standard English Conventions · Medium</div>
+<div class="q" id="q-17">
+  <div class="q-num">Q17 【RW-Conv-3a】 · SAT Reading &amp; Writing · Standard English Conventions · Medium</div>
   <div class="q-text">Which sentence uses a semicolon correctly?</div>
   <ul class="q-choices">
     <li>A) I went to the store; and bought milk.</li>
@@ -265,8 +266,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B). 分号用于连接两个独立分句。</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q18 · SAT Reading &amp; Writing · Information &amp; Ideas · Hard</div>
+<div class="q" id="q-18">
+  <div class="q-num">Q18 【RW-Info-2c】 · SAT Reading &amp; Writing · Information &amp; Ideas · Hard</div>
   <div class="q-text">Passage: &ldquo;The author's use of first-person narration creates an intimacy that third-person could not achieve.&rdquo; What is the author's purpose in using first-person?</div>
   <ul class="q-choices">
     <li>A) To confuse readers</li>
@@ -279,8 +280,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
 
 <h3>Group 4 · Additional (2 questions)</h3>
 
-<div class="q">
-  <div class="q-num">Q19 · SAT Math · Problem Solving · Easy</div>
+<div class="q" id="q-19">
+  <div class="q-num">Q19 【M-PSD-3a】 · SAT Math · Problem Solving · Easy</div>
   <div class="q-text">What is 15% of 200?</div>
   <ul class="q-choices">
     <li>A) 15</li>
@@ -291,8 +292,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> C) 30. 0.15 × 200 = 30.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q20 · SAT Reading &amp; Writing · Craft &amp; Structure · Medium</div>
+<div class="q" id="q-20">
+  <div class="q-num">Q20 【RW-Expr-4a】 · SAT Reading &amp; Writing · Craft &amp; Structure · Medium</div>
   <div class="q-text">Choose the best transition: &ldquo;The hike was exhausting. _____, the view from the summit made it worthwhile.&rdquo;</div>
   <ul class="q-choices">
     <li>A) Therefore</li>
@@ -305,8 +306,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
 
 <h3>Group 5 · Math — Algebra (NEW) (8 questions)</h3>
 
-<div class="q">
-  <div class="q-num">Q21 · SAT Math · Algebra · Easy</div>
+<div class="q" id="q-21">
+  <div class="q-num">Q21 【M-Alg-1a】 · SAT Math · Algebra · Easy</div>
   <div class="q-text">If x + y = 7 and x − y = 1, what are the values of x and y?</div>
   <ul class="q-choices">
     <li>A) x = 3, y = 4</li>
@@ -317,8 +318,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B) x = 4, y = 3. 两式相加得 2x = 8，x = 4；代入得 y = 3.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q22 · SAT Math · Algebra · Medium</div>
+<div class="q" id="q-22">
+  <div class="q-num">Q22 【M-Alg-1a】 · SAT Math · Algebra · Medium</div>
   <div class="q-text">What is the greatest integer that satisfies 3(x − 2) ≤ 2x + 1?</div>
   <ul class="q-choices">
     <li>A) 5</li>
@@ -329,8 +330,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> C) 7. 3x − 6 ≤ 2x + 1，x ≤ 7，最大整数为 7.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q23 · SAT Math · Algebra · Medium</div>
+<div class="q" id="q-23">
+  <div class="q-num">Q23 【M-Alg-1c】 · SAT Math · Algebra · Medium</div>
   <div class="q-text">Solve |2x − 3| = 5.</div>
   <ul class="q-choices">
     <li>A) x = 1 only</li>
@@ -341,8 +342,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> D) x = −1 or x = 4. 由 2x − 3 = 5 得 x = 4；由 2x − 3 = −5 得 x = −1.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q24 · SAT Math · Algebra · Easy</div>
+<div class="q" id="q-24">
+  <div class="q-num">Q24 【M-Alg-1d】 · SAT Math · Algebra · Easy</div>
   <div class="q-text">A car travels at 60 mph for 2.5 hours. How far does it travel?</div>
   <ul class="q-choices">
     <li>A) 120 miles</li>
@@ -353,8 +354,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B) 150 miles. distance = rate × time = 60 × 2.5 = 150.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q25 · SAT Math · Algebra · Hard</div>
+<div class="q" id="q-25">
+  <div class="q-num">Q25 【M-Alg-1d】 · SAT Math · Algebra · Hard</div>
   <div class="q-text">Pipe A fills a tank in 4 hours; Pipe B fills the same tank in 6 hours. If both pipes work together, how many hours does it take to fill the tank?</div>
   <ul class="q-choices">
     <li>A) 2.0</li>
@@ -365,8 +366,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B) 2.4. 合速 = 1/4 + 1/6 = 5/12 per hour，1 ÷ (5/12) = 12/5 = 2.4 hours.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q26 · SAT Math · Algebra · Medium</div>
+<div class="q" id="q-26">
+  <div class="q-num">Q26 【M-Alg-1a】 · SAT Math · Algebra · Medium</div>
   <div class="q-text">How many liters of a 20% acid solution must be added to 10 liters of a 50% acid solution to produce a 30% acid solution?</div>
   <ul class="q-choices">
     <li>A) 10 L</li>
@@ -377,8 +378,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> C) 20 L. 设加 x L：(0.20x + 0.50·10) / (x + 10) = 0.30，0.20x + 5 = 0.30x + 3，0.10x = 2，x = 20.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q27 · SAT Math · Algebra · Easy</div>
+<div class="q" id="q-27">
+  <div class="q-num">Q27 【M-Alg-1a】 · SAT Math · Algebra · Easy</div>
   <div class="q-text">Tom is 3 years older than his sister. The sum of their ages is 25. How old is Tom?</div>
   <ul class="q-choices">
     <li>A) 11</li>
@@ -389,8 +390,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B) 14. 设妹妹 x 岁，Tom 为 x + 3；x + (x + 3) = 25，2x = 22，x = 11，Tom = 14.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q28 · SAT Math · Algebra · Medium</div>
+<div class="q" id="q-28">
+  <div class="q-num">Q28 【M-Alg-1d】 · SAT Math · Algebra · Medium</div>
   <div class="q-text">A train travels 240 miles at a certain speed. On the return trip it goes 20 mph slower and takes 1 hour longer. What was the original speed?</div>
   <ul class="q-choices">
     <li>A) 60 mph</li>
@@ -403,8 +404,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
 
 <h3>Group 6 · Math — Advanced/Data/Geometry (NEW) (12 questions)</h3>
 
-<div class="q">
-  <div class="q-num">Q29 · SAT Math · Advanced Math · Medium</div>
+<div class="q" id="q-29">
+  <div class="q-num">Q29 【M-Adv-2a】 · SAT Math · Advanced Math · Medium</div>
   <div class="q-text">What is the vertex of the parabola y = x² − 4x + 1?</div>
   <ul class="q-choices">
     <li>A) (2, −3)</li>
@@ -415,8 +416,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> A) (2, −3). x = −b/2a = 4/2 = 2，y = 4 − 8 + 1 = −3.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q30 · SAT Math · Advanced Math · Hard</div>
+<div class="q" id="q-30">
+  <div class="q-num">Q30 【M-Adv-2b】 · SAT Math · Advanced Math · Hard</div>
   <div class="q-text">If x = 2 is a root of x³ − 3x² + kx − 4 = 0, what is the value of k?</div>
   <ul class="q-choices">
     <li>A) 2</li>
@@ -427,8 +428,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> C) 4. 代入 x = 2：8 − 12 + 2k − 4 = 0，2k = 8，k = 4.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q31 · SAT Math · Advanced Math · Medium</div>
+<div class="q" id="q-31">
+  <div class="q-num">Q31 【M-Adv-2a】 · SAT Math · Advanced Math · Medium</div>
   <div class="q-text">A bacteria population doubles every hour. If it starts at 100, what is the population after 5 hours?</div>
   <ul class="q-choices">
     <li>A) 500</li>
@@ -439,8 +440,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> D) 3200. P = 100 × 2⁵ = 100 × 32 = 3200.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q32 · SAT Math · Data Analysis · Easy</div>
+<div class="q" id="q-32">
+  <div class="q-num">Q32 【M-PSD-3a】 · SAT Math · Data Analysis · Easy</div>
   <div class="q-text">A bar chart shows quarterly sales: Q1 = 200, Q2 = 300, Q3 = 250, Q4 = 400. What is the total annual sales?</div>
   <ul class="q-choices">
     <li>A) 950</li>
@@ -451,8 +452,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> C) 1150. 200 + 300 + 250 + 400 = 1150.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q33 · SAT Math · Data Analysis · Medium</div>
+<div class="q" id="q-33">
+  <div class="q-num">Q33 【M-PSD-3b】 · SAT Math · Data Analysis · Medium</div>
   <div class="q-text">A scatterplot of two variables shows a strong negative linear correlation. Which best describes the relationship?</div>
   <ul class="q-choices">
     <li>A) As x increases, y increases</li>
@@ -463,8 +464,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B) As x increases, y decreases. 负相关表示 x 增大时 y 减小.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q34 · SAT Math · Data Analysis · Easy</div>
+<div class="q" id="q-34">
+  <div class="q-num">Q34 【M-PSD-3c】 · SAT Math · Data Analysis · Easy</div>
   <div class="q-text">A bag contains 3 red, 2 blue, and 5 green marbles. What is the probability of drawing a green marble?</div>
   <ul class="q-choices">
     <li>A) 1/10</li>
@@ -475,8 +476,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B) 1/2. 5 / (3 + 2 + 5) = 5/10 = 1/2.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q35 · SAT Math · Data Analysis · Hard</div>
+<div class="q" id="q-35">
+  <div class="q-num">Q35 【M-PSD-3c】 · SAT Math · Data Analysis · Hard</div>
   <div class="q-text">From a group of 8 people, how many distinct committees of 3 can be formed?</div>
   <ul class="q-choices">
     <li>A) 24</li>
@@ -487,8 +488,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B) 56. C(8,3) = 8! / (3!·5!) = (8·7·6) / (3·2·1) = 56.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q36 · SAT Math · Geometry · Medium</div>
+<div class="q" id="q-36">
+  <div class="q-num">Q36 【M-GT-4a】 · SAT Math · Geometry · Medium</div>
   <div class="q-text">Two similar triangles have corresponding sides in the ratio 2:3. If the smaller triangle has area 12, what is the area of the larger triangle?</div>
   <ul class="q-choices">
     <li>A) 18</li>
@@ -499,8 +500,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B) 27. 面积比为边长比的平方：(3/2)² = 9/4，12 × 9/4 = 27.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q37 · SAT Math · Advanced Math · Hard</div>
+<div class="q" id="q-37">
+  <div class="q-num">Q37 【M-Adv-2a】 · SAT Math · Advanced Math · Hard</div>
   <div class="q-text">What is the radius of the circle whose equation is (x − 2)² + (y + 3)² = 49?</div>
   <ul class="q-choices">
     <li>A) 7</li>
@@ -511,8 +512,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> A) 7. r² = 49，r = 7. 圆心为 (2, −3).</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q38 · SAT Math · Geometry · Medium</div>
+<div class="q" id="q-38">
+  <div class="q-num">Q38 【M-GT-4c】 · SAT Math · Geometry · Medium</div>
   <div class="q-text">In a right triangle with legs of length 3 and 4, what is sin(θ) where θ is the angle opposite the side of length 4?</div>
   <ul class="q-choices">
     <li>A) 3/5</li>
@@ -523,8 +524,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B) 4/5. 斜边 = √(9 + 16) = 5，sin(θ) = 对边 / 斜边 = 4/5.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q39 · SAT Math · Geometry · Easy</div>
+<div class="q" id="q-39">
+  <div class="q-num">Q39 【M-GT-4a】 · SAT Math · Geometry · Easy</div>
   <div class="q-text">What is the volume of a cube with side length 4?</div>
   <ul class="q-choices">
     <li>A) 16</li>
@@ -535,8 +536,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> C) 64. V = s³ = 4³ = 64.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q40 · SAT Math · Geometry · Medium</div>
+<div class="q" id="q-40">
+  <div class="q-num">Q40 【M-GT-4a】 · SAT Math · Geometry · Medium</div>
   <div class="q-text">What is the surface area of a cube with side length 3?</div>
   <ul class="q-choices">
     <li>A) 27</li>
@@ -549,8 +550,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
 
 <h3>Group 7 · Reading &amp; Writing (NEW) (10 questions)</h3>
 
-<div class="q">
-  <div class="q-num">Q41 · SAT Reading &amp; Writing · Standard English Conventions · Easy</div>
+<div class="q" id="q-41">
+  <div class="q-num">Q41 【RW-Conv-3c】 · SAT Reading &amp; Writing · Standard English Conventions · Easy</div>
   <div class="q-text">Choose the correct verb: &ldquo;The list of items _____ on the table.&rdquo;</div>
   <ul class="q-choices">
     <li>A) is</li>
@@ -561,8 +562,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> A) is. 主语为单数 &ldquo;list&rdquo;，介词短语 &ldquo;of items&rdquo; 不影响主谓一致。</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q42 · SAT Reading &amp; Writing · Standard English Conventions · Medium</div>
+<div class="q" id="q-42">
+  <div class="q-num">Q42 【RW-Conv-3c】 · SAT Reading &amp; Writing · Standard English Conventions · Medium</div>
   <div class="q-text">Choose the correct pronoun: &ldquo;Each student must submit _____ own essay by Friday.&rdquo;</div>
   <ul class="q-choices">
     <li>A) their</li>
@@ -573,8 +574,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> D) his or her. &ldquo;Each student&rdquo; 为单数，正式写作中应搭配单数代词。</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q43 · SAT Reading &amp; Writing · Standard English Conventions · Medium</div>
+<div class="q" id="q-43">
+  <div class="q-num">Q43 【RW-Conv-3c】 · SAT Reading &amp; Writing · Standard English Conventions · Medium</div>
   <div class="q-text">Choose the version that maintains parallel structure: &ldquo;She enjoys hiking, _____, and cycling on weekends.&rdquo;</div>
   <ul class="q-choices">
     <li>A) to swim</li>
@@ -585,8 +586,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B) swimming. 列举的并列动作须保持 -ing 形式。</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q44 · SAT Reading &amp; Writing · Craft &amp; Structure · Hard</div>
+<div class="q" id="q-44">
+  <div class="q-num">Q44 【RW-Expr-4a】 · SAT Reading &amp; Writing · Craft &amp; Structure · Hard</div>
   <div class="q-text">Choose the best transition: &ldquo;Studies show that daily exercise reduces stress. _____, a 2023 meta-analysis confirmed that even 15 minutes of activity lowers cortisol levels.&rdquo;</div>
   <ul class="q-choices">
     <li>A) Therefore</li>
@@ -597,8 +598,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B) For instance. 后句为前述主张提供具体例证，而非因果或转折。</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q45 · SAT Reading &amp; Writing · Information &amp; Ideas · Medium</div>
+<div class="q" id="q-45">
+  <div class="q-num">Q45 【RW-Info-2c】 · SAT Reading &amp; Writing · Information &amp; Ideas · Medium</div>
   <div class="q-text">Passage: &ldquo;Honeybees communicate the location of food sources through a &lsquo;waggle dance,&rsquo; encoding both direction and distance in the angle and duration of their movements.&rdquo; What is the main idea?</div>
   <ul class="q-choices">
     <li>A) Bees cannot communicate</li>
@@ -609,8 +610,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> C). 文段核心是蜜蜂通过 &ldquo;摇摆舞&rdquo; 传递食物的方位与距离。</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q46 · SAT Reading &amp; Writing · Information &amp; Ideas · Hard</div>
+<div class="q" id="q-46">
+  <div class="q-num">Q46 【RW-Info-2b】 · SAT Reading &amp; Writing · Information &amp; Ideas · Hard</div>
   <div class="q-text">Passage: &ldquo;The library's lights flickered once, then went dark. Outside, the wind rattled the windows as Maria reached for her phone.&rdquo; What can reasonably be inferred?</div>
   <ul class="q-choices">
     <li>A) Maria was already asleep</li>
@@ -621,8 +622,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B). 灯灭 + 风摇窗 → 暴风雨中的停电，可合理推断。</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q47 · SAT Reading &amp; Writing · Craft &amp; Structure · Medium</div>
+<div class="q" id="q-47">
+  <div class="q-num">Q47 【RW-Craft-1a】 · SAT Reading &amp; Writing · Craft &amp; Structure · Medium</div>
   <div class="q-text">&ldquo;The senator's speech was _____; it managed to offend nearly every faction in the room.&rdquo; Which word best fits the context?</div>
   <ul class="q-choices">
     <li>A) unifying</li>
@@ -633,8 +634,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> C) incendiary. 得罪所有派系暗示言辞 &ldquo;煽动性&rdquo;、&ldquo;挑动性&rdquo;。</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q48 · SAT Reading &amp; Writing · Standard English Conventions · Easy</div>
+<div class="q" id="q-48">
+  <div class="q-num">Q48 【RW-Conv-3a】 · SAT Reading &amp; Writing · Standard English Conventions · Easy</div>
   <div class="q-text">Which sentence is grammatically correct?</div>
   <ul class="q-choices">
     <li>A) I went home, I ate dinner.</li>
@@ -645,8 +646,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> C) I went home and ate dinner. 用并列连词连接两个谓语，避免逗号拼接与句子片段。</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q49 · SAT Reading &amp; Writing · Standard English Conventions · Easy</div>
+<div class="q" id="q-49">
+  <div class="q-num">Q49 【RW-Conv-3a】 · SAT Reading &amp; Writing · Standard English Conventions · Easy</div>
   <div class="q-text">Which sentence uses the apostrophe correctly?</div>
   <ul class="q-choices">
     <li>A) The dogs leash is red.</li>
@@ -657,8 +658,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B) The dog's leash is red. 单数所有格在词尾加 &lsquo;s.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q50 · SAT Reading &amp; Writing · Standard English Conventions · Medium</div>
+<div class="q" id="q-50">
+  <div class="q-num">Q50 【RW-Conv-3a】 · SAT Reading &amp; Writing · Standard English Conventions · Medium</div>
   <div class="q-text">Choose the correctly punctuated version:</div>
   <ul class="q-choices">
     <li>A) After the long meeting we, went to lunch.</li>
@@ -671,8 +672,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
 
 <h3>Group 8 · Math — Algebra (18 questions)</h3>
 
-<div class="q">
-  <div class="q-num">Q51 · SAT Math · Algebra · Easy</div>
+<div class="q" id="q-51">
+  <div class="q-num">Q51 【M-Alg-1a】 · SAT Math · Algebra · Easy</div>
   <div class="q-text">If 5x − 2 = 3x + 10, what is the value of x?</div>
   <ul class="q-choices">
     <li>A) 4</li>
@@ -683,8 +684,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B) 6. 5x − 3x = 10 + 2，2x = 12，x = 6.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q52 · SAT Math · Algebra · Medium</div>
+<div class="q" id="q-52">
+  <div class="q-num">Q52 【M-Alg-1a】 · SAT Math · Algebra · Medium</div>
   <div class="q-text">If 2x + 3y = 12 and 3x − y = 7, what is the value of x + y?</div>
   <ul class="q-choices">
     <li>A) 3</li>
@@ -695,8 +696,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> C) 5. 由第二式 y = 3x − 7，代入第一式：2x + 3(3x − 7) = 12，11x = 33，x = 3，y = 2，x + y = 5.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q53 · SAT Math · Algebra · Medium</div>
+<div class="q" id="q-53">
+  <div class="q-num">Q53 【M-Alg-1a】 · SAT Math · Algebra · Medium</div>
   <div class="q-text">Which values of x satisfy both 2x − 5 &lt; 7 and x + 1 ≥ 0?</div>
   <ul class="q-choices">
     <li>A) x &lt; 6</li>
@@ -707,8 +708,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> C) −1 ≤ x &lt; 6. 2x &lt; 12 → x &lt; 6；x ≥ −1；交集为 −1 ≤ x &lt; 6.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q54 · SAT Math · Algebra · Medium</div>
+<div class="q" id="q-54">
+  <div class="q-num">Q54 【M-Alg-1c】 · SAT Math · Algebra · Medium</div>
   <div class="q-text">Solve |3x + 1| = 7.</div>
   <ul class="q-choices">
     <li>A) x = 2 only</li>
@@ -719,8 +720,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> C) x = 2 or x = −8/3. 由 3x + 1 = 7 得 x = 2；由 3x + 1 = −7 得 3x = −8，x = −8/3.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q55 · SAT Math · Algebra · Easy</div>
+<div class="q" id="q-55">
+  <div class="q-num">Q55 【M-Alg-1b】 · SAT Math · Algebra · Easy</div>
   <div class="q-text">A runner completes a 10 km race in 40 minutes. What is the average speed in km/h?</div>
   <ul class="q-choices">
     <li>A) 12</li>
@@ -731,8 +732,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B) 15. 40 min = 2/3 h，speed = 10 ÷ (2/3) = 15 km/h.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q56 · SAT Math · Algebra · Hard</div>
+<div class="q" id="q-56">
+  <div class="q-num">Q56 【M-Alg-1b】 · SAT Math · Algebra · Hard</div>
   <div class="q-text">Two workers can complete a job in 6 and 12 hours respectively. If they work together, how long will the job take?</div>
   <ul class="q-choices">
     <li>A) 3 hours</li>
@@ -743,8 +744,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B) 4 hours. 合速 = 1/6 + 1/12 = 3/12 = 1/4 per hour，1 ÷ (1/4) = 4 hours.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q57 · SAT Math · Algebra · Medium</div>
+<div class="q" id="q-57">
+  <div class="q-num">Q57 【M-Alg-1a】 · SAT Math · Algebra · Medium</div>
   <div class="q-text">How many liters of pure water must be added to 8 liters of a 25% salt solution to produce a 20% salt solution?</div>
   <ul class="q-choices">
     <li>A) 1 L</li>
@@ -755,8 +756,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B) 2 L. 盐量 = 0.25 × 8 = 2；设加水 x L：2 / (8 + x) = 0.20，2 = 1.6 + 0.2x，0.2x = 0.4，x = 2.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q58 · SAT Math · Algebra · Easy</div>
+<div class="q" id="q-58">
+  <div class="q-num">Q58 【M-Alg-1a】 · SAT Math · Algebra · Easy</div>
   <div class="q-text">A father is 4 times as old as his son. In 20 years, he will be twice as old. How old is the son now?</div>
   <ul class="q-choices">
     <li>A) 5</li>
@@ -767,8 +768,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B) 10. 设儿子 x 岁，父亲 4x；4x + 20 = 2(x + 20)，4x + 20 = 2x + 40，2x = 20，x = 10.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q59 · SAT Math · Algebra · Medium</div>
+<div class="q" id="q-59">
+  <div class="q-num">Q59 【M-Alg-1b】 · SAT Math · Algebra · Medium</div>
   <div class="q-text">A boat travels 24 km downstream in 2 hours and 24 km upstream in 4 hours. What is the speed of the current?</div>
   <ul class="q-choices">
     <li>A) 1.5 km/h</li>
@@ -779,8 +780,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> C) 3 km/h. 下流速 = 24/2 = 12；上流速 = 24/4 = 6；水流 = (12 − 6)/2 = 3.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q60 · SAT Math · Algebra · Easy</div>
+<div class="q" id="q-60">
+  <div class="q-num">Q60 【M-Alg-1a】 · SAT Math · Algebra · Easy</div>
   <div class="q-text">A jacket originally priced at $80 is on sale for 25% off. What is the sale price?</div>
   <ul class="q-choices">
     <li>A) $20</li>
@@ -791,8 +792,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> C) $60. Discount = 0.25 × 80 = $20；$80 − $20 = $60.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q61 · SAT Math · Algebra · Medium</div>
+<div class="q" id="q-61">
+  <div class="q-num">Q61 【M-Alg-1a】 · SAT Math · Algebra · Medium</div>
   <div class="q-text">The ratio of boys to girls in a class is 3:4. If there are 28 students total, how many boys are there?</div>
   <ul class="q-choices">
     <li>A) 7</li>
@@ -803,8 +804,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B) 12. 3 + 4 = 7 parts；28 / 7 = 4 per part；boys = 3 × 4 = 12.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q62 · SAT Math · Algebra · Easy</div>
+<div class="q" id="q-62">
+  <div class="q-num">Q62 【M-Alg-1a】 · SAT Math · Algebra · Easy</div>
   <div class="q-text">If 5/8 = x/24, what is the value of x?</div>
   <ul class="q-choices">
     <li>A) 3</li>
@@ -815,8 +816,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B) 15. x = 5 × 24 / 8 = 5 × 3 = 15.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q63 · SAT Math · Algebra · Medium</div>
+<div class="q" id="q-63">
+  <div class="q-num">Q63 【M-Alg-1a】 · SAT Math · Algebra · Medium</div>
   <div class="q-text">A store buys pens at $0.50 each and sells them at $0.80 each. How many pens must be sold to make a profit of $120?</div>
   <ul class="q-choices">
     <li>A) 150</li>
@@ -827,8 +828,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> D) 400. 每支利润 = $0.80 − $0.50 = $0.30；120 / 0.30 = 400.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q64 · SAT Math · Algebra · Medium</div>
+<div class="q" id="q-64">
+  <div class="q-num">Q64 【M-Alg-1a】 · SAT Math · Algebra · Medium</div>
   <div class="q-text">If 4(x − 3) = 2(x + 5) + 2, what is the value of x?</div>
   <ul class="q-choices">
     <li>A) 6</li>
@@ -839,8 +840,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> D) 12. 4x − 12 = 2x + 10 + 2，4x − 2x = 12 + 12，2x = 24，x = 12.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q65 · SAT Math · Algebra · Hard</div>
+<div class="q" id="q-65">
+  <div class="q-num">Q65 【M-Alg-1a】 · SAT Math · Algebra · Hard</div>
   <div class="q-text">If 3x + 2y = 14 and 2x − 3y = 5, what is the value of x?</div>
   <ul class="q-choices">
     <li>A) 2</li>
@@ -851,8 +852,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> C) 4. 第一式 ×3 加 第二式 ×2：13x = 52，x = 4；代入得 y = 1.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q66 · SAT Math · Algebra · Hard</div>
+<div class="q" id="q-66">
+  <div class="q-num">Q66 【M-Alg-1a】 · SAT Math · Algebra · Hard</div>
   <div class="q-text">For what integer values of x is 2x + 3 &gt; 7 and 5x − 1 &lt; 24 both true?</div>
   <ul class="q-choices">
     <li>A) x = 2, 3, 4</li>
@@ -863,8 +864,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B) x = 3, 4. 2x &gt; 4 → x &gt; 2；5x &lt; 25 → x &lt; 5；故 2 &lt; x &lt; 5，整数 x = 3, 4.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q67 · SAT Math · Algebra · Medium</div>
+<div class="q" id="q-67">
+  <div class="q-num">Q67 【M-Alg-1a】 · SAT Math · Algebra · Medium</div>
   <div class="q-text">A price increases from $40 to $52. What is the percent increase?</div>
   <ul class="q-choices">
     <li>A) 12%</li>
@@ -875,8 +876,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> C) 30%. 增加 = 52 − 40 = 12；12 / 40 = 0.30 = 30%.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q68 · SAT Math · Algebra · Hard</div>
+<div class="q" id="q-68">
+  <div class="q-num">Q68 【M-Alg-1b】 · SAT Math · Algebra · Hard</div>
   <div class="q-text">A sum of $5,000 is invested at 4% annual simple interest. How much interest is earned after 3 years?</div>
   <ul class="q-choices">
     <li>A) $200</li>
@@ -889,8 +890,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
 
 <h3>Group 9 · Math — Advanced Math, Data &amp; Geometry (27 questions)</h3>
 
-<div class="q">
-  <div class="q-num">Q69 · SAT Math · Advanced Math · Medium</div>
+<div class="q" id="q-69">
+  <div class="q-num">Q69 【M-Adv-2a】 · SAT Math · Advanced Math · Medium</div>
   <div class="q-text">What is the vertex of the parabola y = x² + 6x + 5?</div>
   <ul class="q-choices">
     <li>A) (−3, −4)</li>
@@ -901,8 +902,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> A) (−3, −4). x = −b/2a = −6/2 = −3；y = 9 − 18 + 5 = −4.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q70 · SAT Math · Advanced Math · Hard</div>
+<div class="q" id="q-70">
+  <div class="q-num">Q70 【M-Adv-2a】 · SAT Math · Advanced Math · Hard</div>
   <div class="q-text">How many distinct real roots does 2x² − 4x + 5 = 0 have?</div>
   <ul class="q-choices">
     <li>A) 0</li>
@@ -913,8 +914,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> A) 0. 判别式 = (−4)² − 4(2)(5) = 16 − 40 = −24 &lt; 0，无实数根.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q71 · SAT Math · Advanced Math · Medium</div>
+<div class="q" id="q-71">
+  <div class="q-num">Q71 【M-Adv-2b】 · SAT Math · Advanced Math · Medium</div>
   <div class="q-text">Factor x³ − 8 completely.</div>
   <ul class="q-choices">
     <li>A) (x − 2)(x² + 2x + 4)</li>
@@ -925,8 +926,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> A) (x − 2)(x² + 2x + 4). 立方差公式：a³ − b³ = (a − b)(a² + ab + b²).</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q72 · SAT Math · Advanced Math · Hard</div>
+<div class="q" id="q-72">
+  <div class="q-num">Q72 【M-Adv-2b】 · SAT Math · Advanced Math · Hard</div>
   <div class="q-text">If x + 2 is a factor of x³ + 2x² − kx − 8, what is the value of k?</div>
   <ul class="q-choices">
     <li>A) 2</li>
@@ -937,8 +938,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B) 4. 因式定理：f(−2) = 0 → −8 + 8 + 2k − 8 = 0 → 2k = 8 → k = 4.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q73 · SAT Math · Advanced Math · Medium</div>
+<div class="q" id="q-73">
+  <div class="q-num">Q73 【M-Adv-2a】 · SAT Math · Advanced Math · Medium</div>
   <div class="q-text">The population of a town grows by 5% each year. If the current population is 4,000, what will it be after 2 years?</div>
   <ul class="q-choices">
     <li>A) 4,200</li>
@@ -949,8 +950,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> C) 4,410. 4000 × 1.05² = 4000 × 1.1025 = 4,410.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q74 · SAT Math · Advanced Math · Hard</div>
+<div class="q" id="q-74">
+  <div class="q-num">Q74 【M-Adv-2c】 · SAT Math · Advanced Math · Hard</div>
   <div class="q-text">If 3ˣ = 81 and 2ʸ = 32, what is x + y?</div>
   <ul class="q-choices">
     <li>A) 7</li>
@@ -961,8 +962,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B) 9. 3ˣ = 3⁴ → x = 4；2ʸ = 2⁵ → y = 5；x + y = 9.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q75 · SAT Math · Advanced Math · Medium</div>
+<div class="q" id="q-75">
+  <div class="q-num">Q75 【M-Adv-2d】 · SAT Math · Advanced Math · Medium</div>
   <div class="q-text">Simplify (x² − 9) / (x − 3) for x ≠ 3.</div>
   <ul class="q-choices">
     <li>A) x + 3</li>
@@ -973,8 +974,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> A) x + 3. 分子 = (x − 3)(x + 3)，约去 (x − 3) 得 x + 3.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q76 · SAT Math · Advanced Math · Medium</div>
+<div class="q" id="q-76">
+  <div class="q-num">Q76 【M-Adv-2c】 · SAT Math · Advanced Math · Medium</div>
   <div class="q-text">Solve √(2x + 1) = 5.</div>
   <ul class="q-choices">
     <li>A) 8</li>
@@ -985,8 +986,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B) 12. 两边平方：2x + 1 = 25，2x = 24，x = 12.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q77 · SAT Math · Advanced Math · Easy</div>
+<div class="q" id="q-77">
+  <div class="q-num">Q77 【M-Adv-2a】 · SAT Math · Advanced Math · Easy</div>
   <div class="q-text">If f(x) = 3x − 5, what is f(4)?</div>
   <ul class="q-choices">
     <li>A) 7</li>
@@ -997,8 +998,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> A) 7. f(4) = 3(4) − 5 = 12 − 5 = 7.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q78 · SAT Math · Advanced Math · Medium</div>
+<div class="q" id="q-78">
+  <div class="q-num">Q78 【M-Adv-2a】 · SAT Math · Advanced Math · Medium</div>
   <div class="q-text">If f(x) = x² + 1 and g(x) = 2x, what is f(g(3))?</div>
   <ul class="q-choices">
     <li>A) 13</li>
@@ -1009,8 +1010,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> D) 37. g(3) = 6；f(6) = 36 + 1 = 37.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q79 · SAT Math · Advanced Math · Medium</div>
+<div class="q" id="q-79">
+  <div class="q-num">Q79 【M-Adv-2d】 · SAT Math · Advanced Math · Medium</div>
   <div class="q-text">If f(x) = 2x + 3, what is f⁻¹(7)?</div>
   <ul class="q-choices">
     <li>A) 2</li>
@@ -1021,8 +1022,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> A) 2. 反函数：f⁻¹(y) = (y − 3)/2；f⁻¹(7) = (7 − 3)/2 = 2.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q80 · SAT Math · Advanced Math · Easy</div>
+<div class="q" id="q-80">
+  <div class="q-num">Q80 【M-Adv-2c】 · SAT Math · Advanced Math · Easy</div>
   <div class="q-text">What is the domain of f(x) = √x?</div>
   <ul class="q-choices">
     <li>A) All real numbers</li>
@@ -1033,8 +1034,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B) x ≥ 0. 平方根下被开方数须非负.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q81 · SAT Math · Data Analysis · Easy</div>
+<div class="q" id="q-81">
+  <div class="q-num">Q81 【M-PSD-3b】 · SAT Math · Data Analysis · Easy</div>
   <div class="q-text">A table shows monthly rainfall: Jan 30 mm, Feb 25 mm, Mar 40 mm, Apr 35 mm. What is the total rainfall?</div>
   <ul class="q-choices">
     <li>A) 100 mm</li>
@@ -1045,8 +1046,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> C) 130 mm. 30 + 25 + 40 + 35 = 130.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q82 · SAT Math · Data Analysis · Medium</div>
+<div class="q" id="q-82">
+  <div class="q-num">Q82 【M-PSD-3b】 · SAT Math · Data Analysis · Medium</div>
   <div class="q-text">A scatterplot shows a line of best fit with equation y = 2x + 1. What is the predicted y when x = 5?</div>
   <ul class="q-choices">
     <li>A) 7</li>
@@ -1057,8 +1058,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> C) 11. y = 2(5) + 1 = 11.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q83 · SAT Math · Data Analysis · Easy</div>
+<div class="q" id="q-83">
+  <div class="q-num">Q83 【M-PSD-3c】 · SAT Math · Data Analysis · Easy</div>
   <div class="q-text">A fair coin is flipped 3 times. What is the probability of getting exactly 2 heads?</div>
   <ul class="q-choices">
     <li>A) 1/8</li>
@@ -1069,8 +1070,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B) 3/8. 总结果 2³ = 8；恰好 2 次正面的情况 = C(3,2) = 3；3/8.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q84 · SAT Math · Data Analysis · Medium</div>
+<div class="q" id="q-84">
+  <div class="q-num">Q84 【M-PSD-3c】 · SAT Math · Data Analysis · Medium</div>
   <div class="q-text">From a group of 5 boys and 4 girls, how many committees of 3 with exactly 1 boy and 2 girls can be formed?</div>
   <ul class="q-choices">
     <li>A) 12</li>
@@ -1081,8 +1082,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> C) 30. C(5,1) × C(4,2) = 5 × 6 = 30.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q85 · SAT Math · Data Analysis · Medium</div>
+<div class="q" id="q-85">
+  <div class="q-num">Q85 【M-PSD-3c】 · SAT Math · Data Analysis · Medium</div>
   <div class="q-text">How many ways can 4 books be arranged on a shelf?</div>
   <ul class="q-choices">
     <li>A) 4</li>
@@ -1093,8 +1094,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> C) 24. 4! = 4 × 3 × 2 × 1 = 24.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q86 · SAT Math · Data Analysis · Easy</div>
+<div class="q" id="q-86">
+  <div class="q-num">Q86 【M-PSD-3b】 · SAT Math · Data Analysis · Easy</div>
   <div class="q-text">What is the median of 4, 7, 2, 9, 5?</div>
   <ul class="q-choices">
     <li>A) 4</li>
@@ -1105,8 +1106,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B) 5. 排序：2, 4, 5, 7, 9；中位数为中间值 5.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q87 · SAT Math · Data Analysis · Hard</div>
+<div class="q" id="q-87">
+  <div class="q-num">Q87 【M-PSD-3a】 · SAT Math · Data Analysis · Hard</div>
   <div class="q-text">A poll of 500 voters has a margin of error of ±4%. If 52% favor Candidate A, what is the confidence interval?</div>
   <ul class="q-choices">
     <li>A) 48% to 56%</li>
@@ -1117,8 +1118,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> A) 48% to 56%. 52% ± 4% = (48%, 56%).</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q88 · SAT Math · Geometry · Medium</div>
+<div class="q" id="q-88">
+  <div class="q-num">Q88 【M-GT-4a】 · SAT Math · Geometry · Medium</div>
   <div class="q-text">Two similar triangles have perimeters in ratio 3:5. If the smaller has area 18, what is the area of the larger?</div>
   <ul class="q-choices">
     <li>A) 30</li>
@@ -1129,8 +1130,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> C) 50. 周长比 = 边长比 = 3:5；面积比 = (5/3)² = 25/9；18 × 25/9 = 50.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q89 · SAT Math · Geometry · Medium</div>
+<div class="q" id="q-89">
+  <div class="q-num">Q89 【M-GT-4c】 · SAT Math · Geometry · Medium</div>
   <div class="q-text">In right triangle ABC with legs 6 and 8, what is cos(θ) where θ is the angle opposite the side of length 6?</div>
   <ul class="q-choices">
     <li>A) 3/5</li>
@@ -1141,8 +1142,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B) 4/5. 斜边 = √(36 + 64) = 10；cos(θ) = 邻边/斜边 = 8/10 = 4/5.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q90 · SAT Math · Geometry · Medium</div>
+<div class="q" id="q-90">
+  <div class="q-num">Q90 【M-GT-4b】 · SAT Math · Geometry · Medium</div>
   <div class="q-text">A circle has equation x² + y² = 25. What is its diameter?</div>
   <ul class="q-choices">
     <li>A) 5</li>
@@ -1153,8 +1154,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B) 10. r² = 25，r = 5，diameter = 2r = 10.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q91 · SAT Math · Geometry · Hard</div>
+<div class="q" id="q-91">
+  <div class="q-num">Q91 【M-GT-4a】 · SAT Math · Geometry · Hard</div>
   <div class="q-text">A sector of a circle with radius 6 has a central angle of 60°. What is the area of the sector? (Use π ≈ 3.14)</div>
   <ul class="q-choices">
     <li>A) 6.28</li>
@@ -1165,8 +1166,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> C) 18.84. 面积 = (60/360) × π × 6² = (1/6) × 3.14 × 36 = 18.84.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q92 · SAT Math · Geometry · Easy</div>
+<div class="q" id="q-92">
+  <div class="q-num">Q92 【M-GT-4a】 · SAT Math · Geometry · Easy</div>
   <div class="q-text">What is the volume of a rectangular box with dimensions 3 × 4 × 5?</div>
   <ul class="q-choices">
     <li>A) 12</li>
@@ -1177,8 +1178,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> C) 60. V = l × w × h = 3 × 4 × 5 = 60.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q93 · SAT Math · Geometry · Medium</div>
+<div class="q" id="q-93">
+  <div class="q-num">Q93 【M-GT-4a】 · SAT Math · Geometry · Medium</div>
   <div class="q-text">What is the surface area of a cylinder with radius 2 and height 5? (Use π ≈ 3.14)</div>
   <ul class="q-choices">
     <li>A) 28</li>
@@ -1189,8 +1190,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> D) 87.92. SA = 2πr² + 2πrh = 2(3.14)(4) + 2(3.14)(2)(5) = 25.12 + 62.8 = 87.92.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q94 · SAT Math · Geometry · Medium</div>
+<div class="q" id="q-94">
+  <div class="q-num">Q94 【M-GT-4b】 · SAT Math · Geometry · Medium</div>
   <div class="q-text">What is the midpoint of the segment with endpoints (2, −3) and (8, 5)?</div>
   <ul class="q-choices">
     <li>A) (3, 1)</li>
@@ -1201,8 +1202,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B) (5, 1). 中点 = ((2+8)/2, (−3+5)/2) = (5, 1).</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q95 · SAT Math · Geometry · Medium</div>
+<div class="q" id="q-95">
+  <div class="q-num">Q95 【M-GT-4c】 · SAT Math · Geometry · Medium</div>
   <div class="q-text">In a right triangle, if sin(θ) = 5/13 and θ is acute, what is tan(θ)?</div>
   <ul class="q-choices">
     <li>A) 5/12</li>
@@ -1215,8 +1216,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
 
 <h3>Group 10 · Reading &amp; Writing (25 questions)</h3>
 
-<div class="q">
-  <div class="q-num">Q96 · SAT Reading &amp; Writing · Standard English Conventions · Easy</div>
+<div class="q" id="q-96">
+  <div class="q-num">Q96 【RW-Conv-3c】 · SAT Reading &amp; Writing · Standard English Conventions · Easy</div>
   <div class="q-text">Choose the correct verb: &ldquo;The group of tourists _____ arriving at noon.&rdquo;</div>
   <ul class="q-choices">
     <li>A) is</li>
@@ -1227,8 +1228,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> A) is. 集体名词 &ldquo;group&rdquo; 作为整体作单数主语.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q97 · SAT Reading &amp; Writing · Standard English Conventions · Medium</div>
+<div class="q" id="q-97">
+  <div class="q-num">Q97 【RW-Conv-3b】 · SAT Reading &amp; Writing · Standard English Conventions · Medium</div>
   <div class="q-text">Choose the correct verb: &ldquo;Neither the manager nor the employees _____ satisfied with the new policy.&rdquo;</div>
   <ul class="q-choices">
     <li>A) was</li>
@@ -1239,8 +1240,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B) were. &ldquo;neither…nor&rdquo; 中谓语与最近主语 &ldquo;employees&rdquo;（复数）一致.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q98 · SAT Reading &amp; Writing · Standard English Conventions · Medium</div>
+<div class="q" id="q-98">
+  <div class="q-num">Q98 【RW-Conv-3c】 · SAT Reading &amp; Writing · Standard English Conventions · Medium</div>
   <div class="q-text">Choose the correct pronoun: &ldquo;Between you and _____, the project is behind schedule.&rdquo;</div>
   <ul class="q-choices">
     <li>A) I</li>
@@ -1251,8 +1252,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B) me. 介词 &ldquo;between&rdquo; 后接宾格代词.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q99 · SAT Reading &amp; Writing · Standard English Conventions · Medium</div>
+<div class="q" id="q-99">
+  <div class="q-num">Q99 【RW-Conv-3c】 · SAT Reading &amp; Writing · Standard English Conventions · Medium</div>
   <div class="q-text">Choose the version that maintains parallel structure: &ldquo;The report was thorough, accurate, and _____.&rdquo;</div>
   <ul class="q-choices">
     <li>A) easy to read</li>
@@ -1263,8 +1264,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> A) easy to read. 与 &ldquo;thorough&rdquo;、&ldquo;accurate&rdquo; 并列，须用形容词性结构.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q100 · SAT Reading &amp; Writing · Standard English Conventions · Hard</div>
+<div class="q" id="q-100">
+  <div class="q-num">Q100 【RW-Conv-3c】 · SAT Reading &amp; Writing · Standard English Conventions · Hard</div>
   <div class="q-text">Which sentence avoids a dangling modifier?</div>
   <ul class="q-choices">
     <li>A) Walking to school, the rain started.</li>
@@ -1275,8 +1276,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B). 修饰语须与主语逻辑一致；&ldquo;I&rdquo; 才能 &ldquo;walk to school&rdquo;.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q101 · SAT Reading &amp; Writing · Standard English Conventions · Medium</div>
+<div class="q" id="q-101">
+  <div class="q-num">Q101 【RW-Conv-3c】 · SAT Reading &amp; Writing · Standard English Conventions · Medium</div>
   <div class="q-text">Choose the correct tense: &ldquo;By the time we arrived, the movie _____.&rdquo;</div>
   <ul class="q-choices">
     <li>A) started</li>
@@ -1287,8 +1288,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> C) had started. 过去完成时表示在过去某时间点之前已发生的动作.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q102 · SAT Reading &amp; Writing · Standard English Conventions · Easy</div>
+<div class="q" id="q-102">
+  <div class="q-num">Q102 【RW-Conv-3a】 · SAT Reading &amp; Writing · Standard English Conventions · Easy</div>
   <div class="q-text">Choose the correctly punctuated sentence:</div>
   <ul class="q-choices">
     <li>A) Let&rsquo;s eat Grandma.</li>
@@ -1299,8 +1300,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B) Let&rsquo;s eat, Grandma. 直接称呼前后用逗号；&ldquo;let&rsquo;s&rdquo; 含撇号.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q103 · SAT Reading &amp; Writing · Standard English Conventions · Medium</div>
+<div class="q" id="q-103">
+  <div class="q-num">Q103 【RW-Conv-3a】 · SAT Reading &amp; Writing · Standard English Conventions · Medium</div>
   <div class="q-text">Which sentence uses the semicolon correctly?</div>
   <ul class="q-choices">
     <li>A) She loves painting; and drawing.</li>
@@ -1311,8 +1312,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B). 分号连接两个独立分句.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q104 · SAT Reading &amp; Writing · Standard English Conventions · Medium</div>
+<div class="q" id="q-104">
+  <div class="q-num">Q104 【RW-Conv-3a】 · SAT Reading &amp; Writing · Standard English Conventions · Medium</div>
   <div class="q-text">Which sentence uses the colon correctly?</div>
   <ul class="q-choices">
     <li>A) The recipe requires: flour, sugar, and eggs.</li>
@@ -1323,8 +1324,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> C). 冒号前须为完整句子，后接列表或解释.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q105 · SAT Reading &amp; Writing · Standard English Conventions · Easy</div>
+<div class="q" id="q-105">
+  <div class="q-num">Q105 【RW-Conv-3a】 · SAT Reading &amp; Writing · Standard English Conventions · Easy</div>
   <div class="q-text">Which sentence uses the apostrophe correctly?</div>
   <ul class="q-choices">
     <li>A) Its a beautiful day.</li>
@@ -1335,8 +1336,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B) It&rsquo;s a beautiful day. &ldquo;it&rsquo;s&rdquo; = &ldquo;it is&rdquo; 的缩写.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q106 · SAT Reading &amp; Writing · Standard English Conventions · Medium</div>
+<div class="q" id="q-106">
+  <div class="q-num">Q106 【RW-Conv-3a】 · SAT Reading &amp; Writing · Standard English Conventions · Medium</div>
   <div class="q-text">Which sentence uses dashes correctly?</div>
   <ul class="q-choices">
     <li>A) The result—surprisingly—was positive.</li>
@@ -1347,8 +1348,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> A). 破折号成对使用，分隔插入语.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q107 · SAT Reading &amp; Writing · Craft &amp; Structures · Medium</div>
+<div class="q" id="q-107">
+  <div class="q-num">Q107 【RW-Expr-4a】 · SAT Reading &amp; Writing · Craft &amp; Structures · Medium</div>
   <div class="q-text">Choose the best transition: &ldquo;The team practiced daily. _____, they still lost the championship.&rdquo;</div>
   <ul class="q-choices">
     <li>A) Therefore</li>
@@ -1359,8 +1360,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> C) Nevertheless. 前后构成转折让步关系.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q108 · SAT Reading &amp; Writing · Craft &amp; Structures · Hard</div>
+<div class="q" id="q-108">
+  <div class="q-num">Q108 【RW-Expr-4a】 · SAT Reading &amp; Writing · Craft &amp; Structures · Hard</div>
   <div class="q-text">Choose the best transition: &ldquo;Renewable energy adoption has grown rapidly. _____, fossil fuels still account for over 80% of global energy use.&rdquo;</div>
   <ul class="q-choices">
     <li>A) In addition</li>
@@ -1371,8 +1372,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> C) Even so. 让步转折，强调尽管增长但化石燃料仍占主导.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q109 · SAT Reading &amp; Writing · Information &amp; Ideas · Medium</div>
+<div class="q" id="q-109">
+  <div class="q-num">Q109 【RW-Info-2b】 · SAT Reading &amp; Writing · Information &amp; Ideas · Medium</div>
   <div class="q-text">Passage: &ldquo;The invention of the printing press by Gutenberg in the 15th century democratized knowledge, making books accessible to far more people than ever before.&rdquo; What is the main idea?</div>
   <ul class="q-choices">
     <li>A) Gutenberg invented books</li>
@@ -1383,8 +1384,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B). 核心是印刷术使知识民主化、更易获取.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q110 · SAT Reading &amp; Writing · Information &amp; Ideas · Easy</div>
+<div class="q" id="q-110">
+  <div class="q-num">Q110 【RW-Craft-1d】 · SAT Reading &amp; Writing · Information &amp; Ideas · Easy</div>
   <div class="q-text">Passage: &ldquo;Photosynthesis occurs in the chloroplasts of plant cells, converting sunlight, water, and carbon dioxide into glucose and oxygen.&rdquo; Where does photosynthesis take place?</div>
   <ul class="q-choices">
     <li>A) Mitochondria</li>
@@ -1395,8 +1396,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> C) Chloroplasts. 文中明确指出 &ldquo;in the chloroplasts&rdquo;.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q111 · SAT Reading &amp; Writing · Information &amp; Ideas · Hard</div>
+<div class="q" id="q-111">
+  <div class="q-num">Q111 【RW-Info-2c】 · SAT Reading &amp; Writing · Information &amp; Ideas · Hard</div>
   <div class="q-text">Passage: &ldquo;She smiled politely at the guest, but her fingers tightened around the teacup until her knuckles went white.&rdquo; What can be inferred about the character?</div>
   <ul class="q-choices">
     <li>A) She is genuinely happy</li>
@@ -1407,8 +1408,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B). 礼貌微笑与紧握茶杯的细节对比，暗示压抑的紧张情绪.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q112 · SAT Reading &amp; Writing · Craft &amp; Structures · Medium</div>
+<div class="q" id="q-112">
+  <div class="q-num">Q112 【RW-Craft-1a】 · SAT Reading &amp; Writing · Craft &amp; Structures · Medium</div>
   <div class="q-text">&ldquo;The ancient manuscript was so _____ that only three scholars in the world could decipher it.&rdquo; Which word best fits?</div>
   <ul class="q-choices">
     <li>A) common</li>
@@ -1419,8 +1420,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> C) cryptic. &ldquo;只有三人能解读&rdquo; 暗示晦涩难懂.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q113 · SAT Reading &amp; Writing · Craft &amp; Structures · Medium</div>
+<div class="q" id="q-113">
+  <div class="q-num">Q113 【RW-Expr-4b】 · SAT Reading &amp; Writing · Craft &amp; Structures · Medium</div>
   <div class="q-text">&ldquo;The author begins by describing the problem, then presents evidence, and finally proposes a solution.&rdquo; What is the function of the second paragraph in such a structure?</div>
   <ul class="q-choices">
     <li>A) To introduce the problem</li>
@@ -1431,8 +1432,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B). 在问题—证据—解决方案结构中，第二段通常呈现证据.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q114 · SAT Reading &amp; Writing · Information &amp; Ideas · Medium</div>
+<div class="q" id="q-114">
+  <div class="q-num">Q114 【RW-Info-2c】 · SAT Reading &amp; Writing · Information &amp; Ideas · Medium</div>
   <div class="q-text">Passage: &ldquo;The documentary does not merely inform; it urges viewers to take immediate environmental action.&rdquo; The author&rsquo;s primary purpose is to:</div>
   <ul class="q-choices">
     <li>A) Entertain</li>
@@ -1443,8 +1444,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B) Persuade. &ldquo;urges viewers to take action&rdquo; 表明劝说意图.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q115 · SAT Reading &amp; Writing · Craft &amp; Structures · Hard</div>
+<div class="q" id="q-115">
+  <div class="q-num">Q115 【RW-Expr-4c】 · SAT Reading &amp; Writing · Craft &amp; Structures · Hard</div>
   <div class="q-text">&ldquo;The CEO&rsquo;s memo was perfunctory, offering praise so generic it bordered on insult.&rdquo; The author&rsquo;s tone is:</div>
   <ul class="q-choices">
     <li>A) admiring</li>
@@ -1455,8 +1456,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B) critical. &ldquo;bordered on insult&rdquo; 表达对敷衍表扬的批评.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q116 · SAT Reading &amp; Writing · Craft &amp; Structures · Medium</div>
+<div class="q" id="q-116">
+  <div class="q-num">Q116 【RW-Craft-1b】 · SAT Reading &amp; Writing · Craft &amp; Structures · Medium</div>
   <div class="q-text">&ldquo;A history textbook presents events chronologically with objective analysis.&rdquo; This describes which text structure?</div>
   <ul class="q-choices">
     <li>A) Cause and effect</li>
@@ -1467,8 +1468,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B) Chronological. 按时间顺序呈现事件.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q117 · SAT Reading &amp; Writing · Craft &amp; Structures · Hard</div>
+<div class="q" id="q-117">
+  <div class="q-num">Q117 【RW-Craft-1c】 · SAT Reading &amp; Writing · Craft &amp; Structures · Hard</div>
   <div class="q-text">&ldquo;The argument that social media causes depression relies solely on correlational data, ignoring confounding variables.&rdquo; The author&rsquo;s main critique is that the argument:</div>
   <ul class="q-choices">
     <li>A) Uses too many variables</li>
@@ -1479,8 +1480,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B). 批评核心是仅凭相关数据推断因果，忽视了混杂变量.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q118 · SAT Reading &amp; Writing · Information &amp; Ideas · Medium</div>
+<div class="q" id="q-118">
+  <div class="q-num">Q118 【RW-Info-2d】 · SAT Reading &amp; Writing · Information &amp; Ideas · Medium</div>
   <div class="q-text">Passage with data: &ldquo;In 2010, solar capacity was 40 GW; by 2020, it had grown to 760 GW.&rdquo; By approximately what factor did solar capacity increase?</div>
   <ul class="q-choices">
     <li>A) 5</li>
@@ -1491,8 +1492,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> C) 19. 760 / 40 = 19.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q119 · SAT Reading &amp; Writing · Craft &amp; Structures · Hard</div>
+<div class="q" id="q-119">
+  <div class="q-num">Q119 【RW-Expr-4a】 · SAT Reading &amp; Writing · Craft &amp; Structures · Hard</div>
   <div class="q-text">Choose the best transition: &ldquo;The candidate promised lower taxes. _____, her opponent argued that tax cuts would reduce funding for public services.&rdquo;</div>
   <ul class="q-choices">
     <li>A) Similarly</li>
@@ -1503,8 +1504,8 @@ ul, ol { margin-left: 22px; margin-bottom: 12px; }
   <div class="q-answer"><strong>Answer:</strong> B) In contrast. 两位候选人观点对立，构成对比.</div>
 </div>
 
-<div class="q">
-  <div class="q-num">Q120 · SAT Reading &amp; Writing · Information &amp; Ideas · Medium</div>
+<div class="q" id="q-120">
+  <div class="q-num">Q120 【RW-Info-2a】 · SAT Reading &amp; Writing · Information &amp; Ideas · Medium</div>
   <div class="q-text">Passage: &ldquo;A 2024 study found that students who read 30 minutes daily scored 15% higher on vocabulary tests than non-readers.&rdquo; According to the passage, daily reading is associated with:</div>
   <ul class="q-choices">
     <li>A) Lower test scores</li>
