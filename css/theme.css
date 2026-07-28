@@ -101,7 +101,27 @@ body {
 /* Logo stays same color */
 .logo {
     color: var(--accent-primary) !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    font-size: 0.95rem !important;
+    padding: 4px 8px 4px 4px !important;
+    border-radius: 6px !important;
 }
+.logo-icon {
+    width: 24px !important;
+    height: 24px !important;
+    background: #4f46e5 !important;
+    border-radius: 5px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 0.75rem !important;
+    color: white !important;
+    flex-shrink: 0 !important;
+}
+.logo-text { line-height: 1 !important; }
+.logo-text span { color: #7c3aed !important; }
 
 /* Nav links */
 .nav-links a {
@@ -228,7 +248,7 @@ body {
     background-color: var(--accent-light) !important;
 }
 .salary-bar-fill {
-    background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary)) !important;
+    background: var(--accent-primary) !important;
 }
 
 /* Filter tabs */
@@ -848,6 +868,12 @@ details[open] summary {
 [data-theme="dark"] .logo,
 [data-theme="dark"] a.logo {
     color: var(--accent-primary) !important;
+}
+[data-theme="dark"] .logo-icon {
+    background: var(--accent-primary) !important;
+}
+[data-theme="dark"] .logo-text span {
+    color: var(--accent-secondary) !important;
 }
 
 [data-theme="dark"] a {
