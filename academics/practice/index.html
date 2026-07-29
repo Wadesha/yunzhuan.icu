@@ -23,7 +23,9 @@
   th, td { border: 1px solid #e0e0e0; padding: 6px 10px; text-align: left; vertical-align: top; }
   th { background: #ffffff; border-bottom: 2px solid #111111; font-weight: 700; }
   .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 16px 0; }
-  @media (max-width: 768px) { .grid { grid-template-columns: 1fr; } }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 16px 0; }
+  @media (max-width: 768px) { .grid { grid-template-columns: 1fr; } .grid-3 { grid-template-columns: 1fr; } }
+  @media (min-width: 769px) and (max-width: 1024px) { .grid-3 { grid-template-columns: 1fr 1fr; } }
   .card { border: 1px solid #e0e0e0; padding: 14px 16px; background: #ffffff; }
   .card h3 { margin-top: 0; }
   .card .desc { font-size: 0.82rem; color: #555555; margin-bottom: 8px; }
@@ -68,12 +70,55 @@
   </div>
 </div>
 
+<h2>按年级阶段快速进入</h2>
+<div class="grid-3">
+  <div class="card">
+    <h3>9-10 年级 · 探索期</h3>
+    <p class="desc">IGCSE 打基础 / TOEFL 入门词汇 / 竞赛试水</p>
+    <div class="links">
+      <a href="igcse/syllabus.html">IGCSE Syllabus</a>
+      <a href="igcse/intro.html">IGCSE Intro</a>
+      <a href="igcse/practice.html">IGCSE Practice</a>
+      <a href="toefl/intro.html">TOEFL Intro</a>
+    </div>
+  </div>
+  <div class="card">
+    <h3>11 年级 · 攻坚期</h3>
+    <p class="desc">IB/AP/A-Level 选科定课 / SAT/ACT 冲刺 / 竞赛冲奖</p>
+    <div class="links">
+      <a href="ib/intro.html">IB Intro</a>
+      <a href="ap/intro.html">AP Intro</a>
+      <a href="alevel/intro.html">A-Level Intro</a>
+      <a href="sat/intro.html">SAT Intro</a>
+      <a href="act/intro.html">ACT Intro</a>
+      <a href="mock-test.html">Mock Test</a>
+    </div>
+  </div>
+  <div class="card">
+    <h3>12 年级 · 申请季</h3>
+    <p class="desc">薄弱 Topic 补漏 / Mock Test 全真模考 / 分数达标确认</p>
+    <div class="links">
+      <a href="dashboard.html">Dashboard</a>
+      <a href="sat/intro.html">SAT Intro</a>
+      <a href="act/intro.html">ACT Intro</a>
+      <a href="toefl/intro.html">TOEFL Intro</a>
+      <a href="ielts/intro.html">IELTS Intro</a>
+      <a href="mock-test.html">Mock Test</a>
+      <a href="sat/tracker.html">SAT Tracker</a>
+      <a href="act/tracker.html">ACT Tracker</a>
+      <a href="toefl/tracker.html">TOEFL Tracker</a>
+      <a href="ielts/tracker.html">IELTS Tracker</a>
+    </div>
+  </div>
+</div>
+
 <h2>课程体系</h2>
 <div class="grid">
   <div class="card">
     <h3>IB Diploma</h3>
     <p class="desc">6 大学科组 · 45 分满分 · 考纲 + 样题 + 追踪</p>
     <div class="links">
+      <a href="ib/intro.html">Intro</a>
       <a href="ib/syllabus.html">Syllabus</a>
       <a href="ib/practice.html">Practice</a>
       <a href="ib/tracker.html">Tracker</a>
@@ -83,6 +128,7 @@
     <h3>A-Level</h3>
     <p class="desc">AS + A2 · A*-E · 考纲 + 样题 + 追踪</p>
     <div class="links">
+      <a href="alevel/intro.html">Intro</a>
       <a href="alevel/syllabus.html">Syllabus</a>
       <a href="alevel/practice.html">Practice</a>
       <a href="alevel/tracker.html">Tracker</a>
@@ -92,6 +138,7 @@
     <h3>IGCSE</h3>
     <p class="desc">Core + Extended · A*-G · 考纲 + 样题 + 追踪</p>
     <div class="links">
+      <a href="igcse/intro.html">Intro</a>
       <a href="igcse/syllabus.html">Syllabus</a>
       <a href="igcse/practice.html">Practice</a>
       <a href="igcse/tracker.html">Tracker</a>
@@ -99,11 +146,13 @@
   </div>
   <div class="card">
     <h3>AP</h3>
-    <p class="desc">38 门科目 · 1-5 分 · 考纲 + 样题 + 追踪</p>
+    <p class="desc">38 门科目 · 1-5 分 · 考纲 + 样题 + 追踪 + FRQ</p>
     <div class="links">
+      <a href="ap/intro.html">Intro</a>
       <a href="ap/syllabus.html">Syllabus</a>
       <a href="ap/practice.html">Practice</a>
       <a href="ap/tracker.html">Tracker</a>
+      <a href="ap/frq.html">FRQ</a>
     </div>
   </div>
 </div>
@@ -114,6 +163,7 @@
     <h3>SAT</h3>
     <p class="desc">Digital · 400-1600 · Reading & Writing + Math</p>
     <div class="links">
+      <a href="sat/intro.html">Intro</a>
       <a href="sat/syllabus.html">Syllabus</a>
       <a href="sat/practice.html">Practice</a>
       <a href="sat/tracker.html">Tracker</a>
@@ -123,6 +173,7 @@
     <h3>ACT</h3>
     <p class="desc">English + Math + Reading + Science · 1-36</p>
     <div class="links">
+      <a href="act/intro.html">Intro</a>
       <a href="act/syllabus.html">Syllabus</a>
       <a href="act/practice.html">Practice</a>
       <a href="act/tracker.html">Tracker</a>
@@ -132,23 +183,27 @@
     <h3>TOEFL</h3>
     <p class="desc">Reading + Listening + Speaking + Writing · 0-120</p>
     <div class="links">
+      <a href="toefl/intro.html">Intro</a>
       <a href="toefl/syllabus.html">Syllabus</a>
       <a href="toefl/practice.html">Practice</a>
       <a href="toefl/tracker.html">Tracker</a>
+      <a href="toefl/subjective.html">Writing/Speaking</a>
     </div>
   </div>
   <div class="card">
     <h3>IELTS</h3>
     <p class="desc">Listening + Reading + Writing + Speaking · 0-9.0</p>
     <div class="links">
+      <a href="ielts/intro.html">Intro</a>
       <a href="ielts/syllabus.html">Syllabus</a>
       <a href="ielts/practice.html">Practice</a>
       <a href="ielts/tracker.html">Tracker</a>
+      <a href="ielts/subjective.html">Writing/Speaking</a>
     </div>
   </div>
 </div>
 
-<h2>迭代路线图（v11–v15 考纲细分 + 数据打通）</h2>
+<h2>迭代路线图（v11–v18 考纲→功能→体验全打通）</h2>
 <table>
   <tr><th>版本</th><th>目标</th><th>核心输出</th><th>状态</th></tr>
   <tr><td>v10</td><td>题库定稿（8 科 × 120 题 = 960 题）</td><td>Practice 题目覆盖 + 解析 + 计时 + 难度 + 模拟卷</td><td><span class="badge badge-dashed">Done</span></td></tr>
@@ -156,11 +211,19 @@
   <tr><td>v12</td><td>考纲 Topic ↔ Practice 题目双向对齐</td><td>每题标注 topic-code；Syllabus 每个 topic 列出对应 Q 锚点跳转</td><td><span class="badge badge-dashed">Done</span></td></tr>
   <tr><td>v13</td><td>结构化考纲 JSON 数据层</td><td>js/syllabus-data.js：8科418个topic含权重/前置依赖/题映射API</td><td><span class="badge badge-dashed">Done</span></td></tr>
   <tr><td>v14</td><td>按 Topic 分块局部刷题入口</td><td>practice-engine.js v5：?topic=xxx URL参数筛选 + 筛选banner</td><td><span class="badge badge-dashed">Done</span></td></tr>
-  <tr><td>v15</td><td>考纲覆盖率仪表盘 + 自适应路径</td><td>Dashboard v15：Coverage热力图 + 薄弱topic排序 + Study Schedule</td><td><span class="badge">Current</span></td></tr>
+  <tr><td>v15</td><td>考纲覆盖率仪表盘 + 自适应路径</td><td>Dashboard v15：Coverage热力图 + 薄弱topic排序 + Study Schedule</td><td><span class="badge badge-dashed">Done</span></td></tr>
+  <tr><td>v16</td><td>Dashboard可视化 + 数据互通</td><td>覆盖率真色块热力图(Paper折叠) + 7天自适应排期+错题专练Tab + JSON导入导出 + AppData Profile联动</td><td><span class="badge badge-dashed">Done</span></td></tr>
+  <tr><td>v17</td><td>刷题体验升级 + 入门引导</td><td>practice-engine v6浮动导航(Prev/Next/Go+计数) + Dark Mode切换 + 8科Intro入门页(权重速览TOP10) + 首页年级阶段入口(9-10/11/12三档)</td><td><span class="badge badge-dashed">Done</span></td></tr>
+  <tr><td>v18</td><td>题目解析+讲义全配套 + 主观题</td><td>8科×120题逐题解析(考点/解法/干扰项) + 每科Topic讲义卡片(概念/技巧/易错点) + 权重配比API + Mock Test真实结构出卷+自适应难度 + TOEFL/IELTS/AP主观题专项页</td><td><span class="badge">Done</span></td></tr>
+  <tr><td>v19</td><td>数据可视化 + 云同步(规划中)</td><td>Chart.js 折线柱状图 + 云端账号保存进度 + 多人比较/排行榜(可选)</td><td><span class="badge badge-dashed">Future</span></td></tr>
 </table>
 
 <div class="box-dashed" style="margin-top:16px;">
   <strong>v11 拆分方法</strong> · IB：Group 1-6 每科展开 HL/SL + 对应 Paper 结构；A-Level：Math / Physics / Chemistry / Biology / Economics 各拆 AS + A2；SAT：R&W（Craft/Info/Conventions/Expression 4 domain）+ Math（Algebra/Advanced/PSD/Geom）各拆 3 层 skill；AP：按官方 CED 的 Unit 1–N 及 Learning Objective；TOEFL / IELTS：按 4 section × 题型/能力点；IGCSE：0580 Math / 0625 Phy / 0620 Chem / 0610 Bio / 0455 Econ 各拆 Core / Extended 对应 Topic。所有 syllabus v-badge 升级为 v2。
+</div>
+
+<div class="box-dashed" style="margin-top:10px;">
+  <strong>v16–v18 全景说明</strong> · <em>v16 Dashboard 深度</em>：真色块热力图(0-60%红/60-80%黄/80-100%绿/未做灰)+Paper手风琴折叠；7天21槽位Round-Robin去重排期×每日目标题数输入 + 错题专练Tab；JSON导入导出(带时间戳文件名)；AppData Profile速览卡 + 分数阈值掌握度Hint。<em>v17 体验+引导</em>：practice-engine v6右下角固定浮动导航栏(Prev/Next/题号跳转Go+实时已答计数器)+Dark Mode一键切换(localStorage记忆)；8科Intro页(考纲结构权重表+TOP10高频Topic带进度显示+三步走路径)；首页插入9-10探索 / 11攻坚 / 12申请季 三档年级入口卡；8科卡片统一追加Intro链接。<em>v18 内容+主观题</em>：960题逐题解析(考点/三段解法/干扰项三错因)+Show Answer按钮改为"Show Answer + Explanation"；每科Topic讲义卡(#topicNotes，URL?topic=单张模式/默认列表模式，含概念定义/技巧要点/易错提醒+去刷题锚点)；权重配比allocateQuestionsByWeight API(SAT 120题精确匹配)；Mock Test按权重抽题+前10题正确率阈值(≤50%降/≥80%升)自动调整后10题难度；TOEFL/IELTS/AP主观题页(Writing/Speaking/FRQ/分步Rubric+计时器+localStorage答题历史)。
 </div>
 
 <div class="footer">

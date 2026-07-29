@@ -1,6 +1,6 @@
 /**
- * Practice Engine v5 (v14)
- * 答题 + 错题本 + localStorage 持久化 + Topic筛选(?topic=xxx)
+ * Practice Engine v6 (v15)
+ * 答题 + 错题本 + localStorage 持久化 + Topic筛选(?topic=xxx) + 浮动导航栏 + Dark Mode
  */
 (function() {
   'use strict';
@@ -87,6 +87,174 @@
     return { topic: topicParam, matched: matched };
   }
 
+  // --- Helper: get visible questions (display:none skipped) ---
+  function getVisibleQuestions(questions) {
+    var visible = [];
+    questions.forEach(function(q) {
+      if (q.style.display !== 'none') visible.push(q);
+    });
+    return visible;
+  }
+
+  // --- v6 B2: Floating Navigation Bar ---
+  function initFloatingNav(questions, updateAllStats) {
+    var navDiv = document.createElement('div');
+    navDiv.style.cssText = 'position:fixed;right:16px;bottom:16px;z-index:9999;background:#fff;border:1px solid #111;padding:8px 10px;font-size:0.8rem;display:flex;align-items:center;gap:6px;flex-wrap:wrap;max-width:340px;box-shadow:0 2px 8px rgba(0,0,0,0.1);';
+
+    // Prev button
+    var prevBtn = document.createElement('button');
+    prevBtn.textContent = '← Prev';
+    prevBtn.style.cssText = 'border:1px solid #111;background:#fff;padding:3px 8px;cursor:pointer;font-family:inherit;font-size:0.8rem;';
+
+    // Next button
+    var nextBtn = document.createElement('button');
+    nextBtn.textContent = 'Next →';
+    nextBtn.style.cssText = 'border:1px solid #111;background:#fff;padding:3px 8px;cursor:pointer;font-family:inherit;font-size:0.8rem;';
+
+    // Go input + button
+    var goInput = document.createElement('input');
+    goInput.type = 'text';
+    goInput.placeholder = '#';
+    goInput.style.cssText = 'border:1px solid #111;padding:3px 5px;width:38px;font-family:inherit;font-size:0.8rem;';
+
+    var goBtn = document.createElement('button');
+    goBtn.textContent = 'Go';
+    goBtn.style.cssText = 'border:1px solid #111;background:#fff;padding:3px 8px;cursor:pointer;font-family:inherit;font-size:0.8rem;';
+
+    // Counter
+    var counter = document.createElement('span');
+    counter.style.cssText = 'margin-left:4px;white-space:nowrap;';
+
+    // Dark mode toggle button (B4)
+    var darkBtn = document.createElement('button');
+    darkBtn.textContent = '☀︎';
+    darkBtn.title = 'Toggle Dark Mode';
+    darkBtn.style.cssText = 'border:1px solid #111;background:#fff;padding:3px 7px;cursor:pointer;font-family:inherit;font-size:0.85rem;margin-left:2px;';
+
+    navDiv.appendChild(prevBtn);
+    navDiv.appendChild(nextBtn);
+    navDiv.appendChild(goInput);
+    navDiv.appendChild(goBtn);
+    navDiv.appendChild(counter);
+    navDiv.appendChild(darkBtn);
+
+    document.body.appendChild(navDiv);
+
+    // --- Navigation Logic ---
+    function findCurrentVisibleIndex() {
+      var visible = getVisibleQuestions(questions);
+      if (visible.length === 0) return -1;
+      var scrollY = window.scrollY + window.innerHeight / 3;
+      for (var i = 0; i < visible.length; i++) {
+        var top = visible[i].offsetTop;
+        if (top >= scrollY) return i === 0 ? 0 : i - 1;
+      }
+      return visible.length - 1;
+    }
+
+    function scrollToVisibleIndex(idx) {
+      var visible = getVisibleQuestions(questions);
+      if (idx < 0) idx = 0;
+      if (idx >= visible.length) idx = visible.length - 1;
+      if (visible[idx]) {
+        visible[idx].scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+
+    prevBtn.addEventListener('click', function() {
+      var curIdx = findCurrentVisibleIndex();
+      scrollToVisibleIndex(curIdx - 1);
+    });
+
+    nextBtn.addEventListener('click', function() {
+      var curIdx = findCurrentVisibleIndex();
+      scrollToVisibleIndex(curIdx + 1);
+    });
+
+    function doGo() {
+      var val = parseInt(goInput.value, 10);
+      var visible = getVisibleQuestions(questions);
+      if (!isNaN(val) && val >= 1 && val <= visible.length) {
+        scrollToVisibleIndex(val - 1);
+      }
+      goInput.value = '';
+    }
+
+    goBtn.addEventListener('click', doGo);
+    goInput.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') doGo();
+    });
+
+    // --- Counter update function (for reuse) ---
+    function updateCounter() {
+      var visible = getVisibleQuestions(questions);
+      var recs = getRecords();
+      var answeredVisible = 0;
+      visible.forEach(function(q) {
+        var qid = q.getAttribute('data-qid');
+        if (qid && recs[qid]) answeredVisible++;
+      });
+      counter.textContent = answeredVisible + ' / ' + visible.length;
+    }
+
+    // Dark mode toggle handler setup
+    navDiv._darkBtn = darkBtn;
+    navDiv._updateCounter = updateCounter;
+
+    return {
+      navDiv: navDiv,
+      updateCounter: updateCounter
+    };
+  }
+
+  // --- v6 B4: Dark Mode ---
+  function initDarkMode(darkBtn, navDiv) {
+    // Inject dark mode styles
+    var style = document.createElement('style');
+    style.textContent = [
+      'html.dark { background:#111; }',
+      'html.dark body { background:#0b0b0b !important; color:#e5e5e5; }',
+      'html.dark a { color:#e5e5e5; border-color:#555; }',
+      'html.dark h1,html.dark h2,html.dark h3 { color:#f5f5f5; border-color:#555; }',
+      'html.dark th,html.dark td,html.dark .box,html.dark .box-dashed,html.dark .v-info,html.dark .card,html.dark .stat,html.dark .q,html.dark .paper-block { border-color:#444 !important; }',
+      'html.dark th { background:#1a1a1a; }',
+      'html.dark .muted { color:#888; }',
+      'html.dark input,html.dark button { background:#1a1a1a; color:#e5e5e5; border-color:#555; }'
+    ].join('\n');
+    document.head.appendChild(style);
+
+    function applyDark(isDark) {
+      if (isDark) {
+        document.documentElement.classList.add('dark');
+        darkBtn.textContent = '☾';
+        // Update nav bar background/border for dark mode
+        if (navDiv) {
+          navDiv.style.background = '#1a1a1a';
+          navDiv.style.border = '1px solid #555';
+        }
+      } else {
+        document.documentElement.classList.remove('dark');
+        darkBtn.textContent = '☀︎';
+        if (navDiv) {
+          navDiv.style.background = '#fff';
+          navDiv.style.border = '1px solid #111';
+        }
+      }
+    }
+
+    // Restore from localStorage
+    var savedDark = localStorage.getItem('darkMode');
+    var isDark = savedDark === '1';
+    applyDark(isDark);
+
+    // Toggle handler
+    darkBtn.addEventListener('click', function() {
+      var isDarkNow = !document.documentElement.classList.contains('dark');
+      localStorage.setItem('darkMode', isDarkNow ? '1' : '0');
+      applyDark(isDarkNow);
+    });
+  }
+
   // --- Practice Page Logic ---
   function initPracticePage() {
     var questions = document.querySelectorAll('.q');
@@ -97,6 +265,7 @@
 
     questions.forEach(function(q, idx) {
       var qid = q.getAttribute('data-qid') || ('q' + (idx + 1));
+      q.setAttribute('data-qid', qid); // ensure qid is set for later lookups
       var choices = q.querySelectorAll('.q-choices li');
       var answerDiv = q.querySelector('.q-answer');
       var correctLetter = '';
@@ -142,6 +311,10 @@
           var isCorrect = letter === correctLetter;
           markAnswer(li, isCorrect);
           recordAnswer(qid, letter, isCorrect, topic);
+
+          // v6: update all stats counters after answer
+          if (window._yzNavUpdater) window._yzNavUpdater();
+          if (window._yzStatsUpdater) window._yzStatsUpdater();
         });
       });
 
@@ -163,7 +336,13 @@
     var stats = document.createElement('div');
     stats.style.cssText = 'border:1px solid #111;padding:10px 14px;margin:16px 0;font-size:0.85rem;';
     var visibleCount = filterResult ? filterResult.matched : questions.length;
-    updateStats(stats, visibleCount);
+
+    function doUpdateStats() {
+      updateStats(stats, visibleCount);
+    }
+    doUpdateStats();
+    window._yzStatsUpdater = doUpdateStats;
+
     var h2 = document.querySelector('h2');
     if (h2) h2.parentNode.insertBefore(stats, h2.nextSibling);
 
@@ -226,6 +405,11 @@
             }
           }
         });
+        // v6: refresh nav counter + top stats visible count after difficulty filter
+        var newVisible = getVisibleQuestions(questions);
+        visibleCount = newVisible.length;
+        if (window._yzNavUpdater) window._yzNavUpdater();
+        if (window._yzStatsUpdater) window._yzStatsUpdater();
       });
       filterDiv.appendChild(btn);
     });
@@ -242,6 +426,13 @@
       }
     });
     stats.appendChild(clearBtn);
+
+    // --- v6: Initialize Floating Nav (B2) + Dark Mode (B4) ---
+    var navResult = initFloatingNav(questions);
+    navResult.updateCounter();
+    window._yzNavUpdater = navResult.updateCounter;
+
+    initDarkMode(navResult.navDiv._darkBtn, navResult.navDiv);
   }
 
   function markAnswer(li, isCorrect) {
@@ -264,7 +455,7 @@
     });
     var rate = total > 0 ? Math.round(correct / total * 100) : 0;
     var displayTotal = totalCount || total;
-    statsDiv.innerHTML = '<strong>Progress:</strong> ' + total + ' answered · ' + correct + ' correct · ' + rate + '% accuracy' + (totalCount ? ' · Showing ' + totalCount + ' questions' : '');
+    statsDiv.innerHTML = '<strong>Progress:</strong> ' + total + ' answered · ' + correct + ' correct · ' + rate + '% accuracy' + (totalCount ? ' · Showing ' + displayTotal + ' questions' : '');
   }
 
   // --- Tracker Page Logic ---

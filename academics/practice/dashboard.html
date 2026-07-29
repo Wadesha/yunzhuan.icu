@@ -44,6 +44,68 @@
   .path-list li:last-child { border-bottom: none; }
   .path-list .path-action { font-weight: 700; }
   .path-list .path-meta { color: #888888; font-size: 0.8rem; }
+  .schedule-toolbar { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; margin: 12px 0 16px; padding: 12px 14px; border: 1px solid #e0e0e0; background: #fafafa; }
+  .schedule-toolbar label { font-size: 0.85rem; color: #555; font-weight: 600; }
+  .schedule-toolbar input[type=number] { width: 80px; padding: 6px 10px; border: 1px solid #cccccc; font-size: 0.9rem; border-radius: 3px; }
+  .schedule-tabs { display: inline-flex; border: 1px solid #111; margin-left: auto; }
+  .schedule-tabs button { background: #fff; border: none; padding: 8px 16px; font-size: 0.85rem; cursor: pointer; font-weight: 600; border-right: 1px solid #111; }
+  .schedule-tabs button:last-child { border-right: none; }
+  .schedule-tabs button.active { background: #111; color: #fff; }
+  .schedule-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 10px; margin: 14px 0; }
+  @media (max-width: 768px) { .schedule-grid { grid-template-columns: repeat(2, 1fr); } }
+  .day-card { border: 1px solid #e0e0e0; background: #fff; padding: 10px; min-height: 140px; }
+  .day-card .day-label { font-weight: 700; font-size: 0.85rem; padding-bottom: 6px; border-bottom: 2px solid #111; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; }
+  .day-card .day-qcount { font-size: 0.72rem; color: #888; font-weight: 500; }
+  .day-card .topic-item { padding: 5px 0; border-bottom: 1px dashed #e0e0e0; font-size: 0.8rem; }
+  .day-card .topic-item:last-child { border-bottom: none; }
+  .day-card .topic-item a { font-weight: 600; display: block; }
+  .day-card .topic-meta { color: #888; font-size: 0.72rem; margin-top: 2px; }
+  .wrong-list { list-style: none; margin-left: 0; }
+  .wrong-list li { padding: 10px 0; border-bottom: 1px solid #e0e0e0; }
+  .wrong-list li:last-child { border-bottom: none; }
+  .wrong-list .wrong-action { font-weight: 700; }
+  .wrong-list .wrong-meta { color: #888; font-size: 0.8rem; }
+  .wrong-count-badge { display: inline-block; background: #b00020; color: #fff; padding: 1px 6px; font-size: 0.7rem; border-radius: 10px; font-weight: 700; margin-left: 6px; }
+  .priority-pill { display: inline-block; padding: 1px 5px; font-size: 0.68rem; border: 1px solid #aaa; border-radius: 3px; margin-right: 4px; color: #555; }
+  .empty-day { color: #bbb; font-size: 0.75rem; font-style: italic; padding-top: 8px; }
+  .coverage-subject { margin-bottom: 36px; }
+  .coverage-summary { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; border: 1px solid #e0e0e0; padding: 12px 16px; margin-bottom: 20px; background: #ffffff; }
+  .coverage-legend { display: flex; align-items: center; gap: 14px; font-size: 0.78rem; color: #555; }
+  .legend-item { display: inline-flex; align-items: center; gap: 6px; }
+  .legend-swatch { width: 18px; height: 18px; border: 1px solid #e0e0e0; display: inline-block; }
+  .legend-red { background: #fecaca; }
+  .legend-yellow { background: #fef08a; }
+  .legend-green { background: #bbf7d0; }
+  .legend-gray { background: #f3f4f6; }
+  .paper-block { border: 1px solid #e0e0e0; margin-bottom: 12px; background: #ffffff; }
+  .paper-header { display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; cursor: pointer; user-select: none; background: #fafafa; border-bottom: 1px solid #e0e0e0; }
+  .paper-header:hover { background: #f3f4f6; }
+  .paper-title { font-weight: 700; font-size: 0.9rem; display: flex; align-items: center; gap: 8px; }
+  .paper-toggle { transition: transform 0.2s ease; font-size: 0.75rem; color: #888; width: 16px; display: inline-block; text-align: center; }
+  .paper-block.collapsed .paper-toggle { transform: rotate(-90deg); }
+  .paper-meta { font-size: 0.78rem; color: #888; }
+  .coverage-table { margin: 0; border: none; font-size: 0.78rem; }
+  .coverage-table th { border-bottom: 1px solid #e0e0e0; padding: 8px 10px; font-size: 0.76rem; background: #f9fafb; }
+  .coverage-table td { border: none; border-top: 1px solid #f0f0f0; padding: 8px 10px; vertical-align: middle; }
+  .coverage-table tr:first-child td { border-top: none; }
+  .heat-red { background: #fecaca; }
+  .heat-yellow { background: #fef08a; }
+  .heat-green { background: #bbf7d0; }
+  .heat-gray { background: #f3f4f6; }
+  .paper-content { display: block; }
+  .paper-block.collapsed .paper-content { display: none; }
+  .data-toolbar { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; border: 1px dashed #888888; padding: 10px 14px; margin: 12px 0; }
+  .data-toolbar button { background: #fff; border: 1px solid #111; padding: 6px 14px; font-size: 0.82rem; cursor: pointer; font-weight: 600; }
+  .data-toolbar button:hover { background: #111; color: #fff; }
+  .profile-card { border: 1px solid #111; padding: 16px 18px; margin: 12px 0; }
+  .profile-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 10px 0 14px; }
+  @media (max-width: 768px) { .profile-grid { grid-template-columns: repeat(2, 1fr); } }
+  .profile-item { font-size: 0.85rem; }
+  .profile-item .pi-label { color: #888; font-size: 0.72rem; margin-bottom: 2px; }
+  .profile-item .pi-value { font-weight: 700; color: #111; }
+  .profile-footer { border-top: 1px dashed #ccc; padding-top: 10px; font-size: 0.78rem; color: #888; }
+  .mastery-hint { display: inline-block; margin-left: 6px; font-size: 0.68rem; padding: 1px 5px; border: 1px solid #888; color: #555; font-weight: 600; }
+  .mastery-hint.target { border-color: #111; color: #111; }
 </style>
 </head>
 <body data-subject="dashboard">
@@ -59,6 +121,11 @@
 <p class="subtitle">v15 · 全科目数据分析 · 考纲覆盖率 · 知识点掌握度 · 自适应学习路径</p>
 
 <h2>总览</h2>
+<div class="data-toolbar" id="dataToolbar">
+  <button id="btnExportData">Export Practice Data</button>
+  <button id="btnImportData">Import Practice Data</button>
+  <input type="file" id="fileImportData" accept=".json" style="display:none;">
+</div>
 <div class="stats">
   <div class="stat">
     <div class="stat-value" id="statTotal">960</div>
@@ -80,6 +147,11 @@
     <div class="stat-value" id="statStreak">0</div>
     <div class="stat-label">连续打卡 (天)</div>
   </div>
+</div>
+
+<h2>Profile 联动（C3 新增）</h2>
+<div id="profileCard" class="profile-card">
+  <p class="muted">AppData 未加载</p>
 </div>
 
 <h2>各科掌握度</h2>
@@ -322,8 +394,55 @@
     document.getElementById('statStreak').textContent = streak;
   }
 
+  // --- Score hint thresholds ---
+  var SCORE_HINTS = {
+    sat: [
+      { threshold: 1500, text: 'Target reached', cls: 'target' },
+      { threshold: 1400, text: 'Near target', cls: '' },
+      { threshold: 1300, text: 'Needs work', cls: '' }
+    ],
+    act: [
+      { threshold: 34, text: 'Target reached', cls: 'target' },
+      { threshold: 32, text: 'Near target', cls: '' },
+      { threshold: 30, text: 'Needs work', cls: '' }
+    ],
+    toefl: [
+      { threshold: 110, text: 'Target reached', cls: 'target' },
+      { threshold: 100, text: 'Near target', cls: '' },
+      { threshold: 90, text: 'Needs work', cls: '' }
+    ],
+    ielts: [
+      { threshold: 7.5, text: 'Target reached', cls: 'target' },
+      { threshold: 7.0, text: 'Near target', cls: '' },
+      { threshold: 6.5, text: 'Needs work', cls: '' }
+    ]
+  };
+
+  function getScoreHint(subject, profile) {
+    if (!profile) return null;
+    var score = profile[subject];
+    if (score === undefined || score === null || score === '') return null;
+    var rules = SCORE_HINTS[subject];
+    if (!rules) return null;
+    var scoreNum = parseFloat(score);
+    if (isNaN(scoreNum)) return null;
+    for (var i = 0; i < rules.length; i++) {
+      if (scoreNum >= rules[i].threshold) {
+        return { text: rules[i].text, cls: rules[i].cls };
+      }
+    }
+    return null;
+  }
+
   // --- Render mastery table ---
   function renderMastery(data) {
+    var profile = null;
+    try {
+      if (window.AppData && typeof window.AppData.getProfile === 'function') {
+        profile = window.AppData.getProfile();
+      }
+    } catch(e) {}
+
     var rows = document.querySelectorAll('#masteryTable tr[data-subject]');
     rows.forEach(function(tr) {
       var s = tr.getAttribute('data-subject');
@@ -334,8 +453,148 @@
       var levelCell = tr.querySelector('.c-level');
       levelCell.textContent = level;
       levelCell.className = 'c-level ' + labelClass(level);
+
+      var hint = getScoreHint(s, profile);
+      var existingHint = levelCell.querySelector('.mastery-hint');
+      if (existingHint) existingHint.remove();
+      if (hint) {
+        var hintSpan = document.createElement('span');
+        hintSpan.className = 'mastery-hint ' + (hint.cls || '');
+        hintSpan.textContent = hint.text;
+        levelCell.appendChild(hintSpan);
+      }
+
       tr.querySelector('.c-last').textContent = st.lastTs ? fmtDate(st.lastTs) : '—';
     });
+  }
+
+  // --- B3: JSON Import/Export ---
+  function exportPracticeData() {
+    try {
+      var raw = localStorage.getItem('yz_practice_data') || '{}';
+      var ts = new Date();
+      var stamp = ts.getFullYear() +
+        String(ts.getMonth() + 1).padStart(2, '0') +
+        String(ts.getDate()).padStart(2, '0') + '_' +
+        String(ts.getHours()).padStart(2, '0') +
+        String(ts.getMinutes()).padStart(2, '0') +
+        String(ts.getSeconds()).padStart(2, '0');
+      var blob = new Blob([raw], { type: 'application/json' });
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement('a');
+      a.href = url;
+      a.download = 'yz_practice_data_' + stamp + '.json';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      setTimeout(function() { URL.revokeObjectURL(url); }, 100);
+    } catch(e) {
+      alert('导出失败: ' + e.message);
+    }
+  }
+
+  function importPracticeData(file) {
+    if (!file) return;
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      try {
+        var content = e.target.result;
+        JSON.parse(content);
+        localStorage.setItem('yz_practice_data', content);
+        alert('导入成功，即将刷新页面');
+        setTimeout(function() { location.reload(); }, 300);
+      } catch(err) {
+        alert('导入失败: JSON 格式无效');
+      }
+    };
+    reader.onerror = function() {
+      alert('读取文件失败');
+    };
+    reader.readAsText(file);
+  }
+
+  function setupDataToolbar() {
+    var btnExport = document.getElementById('btnExportData');
+    var btnImport = document.getElementById('btnImportData');
+    var fileInput = document.getElementById('fileImportData');
+
+    if (btnExport) {
+      btnExport.addEventListener('click', exportPracticeData);
+    }
+    if (btnImport && fileInput) {
+      btnImport.addEventListener('click', function() {
+        fileInput.click();
+      });
+      fileInput.addEventListener('change', function(e) {
+        if (e.target.files && e.target.files[0]) {
+          importPracticeData(e.target.files[0]);
+        }
+        fileInput.value = '';
+      });
+    }
+  }
+
+  // --- C3: Profile Card ---
+  function renderProfile() {
+    var card = document.getElementById('profileCard');
+    if (!card) return;
+
+    var profile = null;
+    try {
+      if (window.AppData && typeof window.AppData.getProfile === 'function') {
+        profile = window.AppData.getProfile();
+      }
+    } catch(e) {}
+
+    while (card.firstChild) card.removeChild(card.firstChild);
+
+    if (!profile) {
+      var p = document.createElement('p');
+      p.className = 'muted';
+      p.textContent = 'AppData 未加载';
+      card.appendChild(p);
+      return;
+    }
+
+    var grid = document.createElement('div');
+    grid.className = 'profile-grid';
+
+    function addItem(label, value) {
+      var item = document.createElement('div');
+      item.className = 'profile-item';
+      var lbl = document.createElement('div');
+      lbl.className = 'pi-label';
+      lbl.textContent = label;
+      var val = document.createElement('div');
+      val.className = 'pi-value';
+      val.textContent = value || '—';
+      item.appendChild(lbl);
+      item.appendChild(val);
+      grid.appendChild(item);
+    }
+
+    addItem('姓名', profile.name || '匿名');
+    addItem('目标专业', profile.targetMajor || '—');
+
+    var schoolsTop3 = '';
+    if (profile.targetSchools && Array.isArray(profile.targetSchools)) {
+      schoolsTop3 = profile.targetSchools.slice(0, 3).join(', ');
+    }
+    addItem('目标学校 (前3)', schoolsTop3 || '—');
+
+    addItem('GPA', profile.gpa !== undefined && profile.gpa !== '' ? profile.gpa : '—');
+    addItem('SAT', profile.sat !== undefined && profile.sat !== '' ? profile.sat : '—');
+    addItem('ACT', profile.act !== undefined && profile.act !== '' ? profile.act : '—');
+    addItem('TOEFL', profile.toefl !== undefined && profile.toefl !== '' ? profile.toefl : '—');
+    addItem('IELTS', profile.ielts !== undefined && profile.ielts !== '' ? profile.ielts : '—');
+    addItem('Duolingo', profile.duolingo !== undefined && profile.duolingo !== '' ? profile.duolingo : '—');
+
+    card.appendChild(grid);
+
+    var footer = document.createElement('div');
+    footer.className = 'profile-footer';
+    footer.textContent = 'Profile 与刷题数据独立存储 · 分数变化会同步影响 Dashboard';
+    card.appendChild(footer);
   }
 
   // --- Render heatmap ---
@@ -476,6 +735,18 @@
       '目标：清理错题本 · 预计 15 min');
   }
 
+  function heatClassFor(acc, done) {
+    if (!done) return 'heat-gray';
+    if (acc === null) return 'heat-gray';
+    if (acc < 60) return 'heat-red';
+    if (acc < 80) return 'heat-yellow';
+    return 'heat-green';
+  }
+
+  function togglePaper(paperBlock) {
+    paperBlock.classList.toggle('collapsed');
+  }
+
   // --- v15: Syllabus Coverage Heatmap ---
   function renderCoverage(data) {
     var container = document.getElementById('coverageSection');
@@ -491,56 +762,299 @@
     var coveredTopics = 0;
     var weakTopics = [];
 
+    var summary = document.createElement('div');
+    summary.className = 'coverage-summary';
+    var summaryText = document.createElement('div');
+    summaryText.innerHTML = '<strong>覆盖率：</strong><span id="covCount">' + coveredTopics + ' / ' + totalTopics + '</span> <span id="covPct">(' + (totalTopics ? Math.round(coveredTopics / totalTopics * 100) : 0) + '%)</span> · 薄弱点：<span id="covWeak">' + weakTopics.length + '</span> 个';
+    summary.appendChild(summaryText);
+
+    var legend = document.createElement('div');
+    legend.className = 'coverage-legend';
+    legend.innerHTML =
+      '<span class="legend-item"><span class="legend-swatch legend-green"></span>80-100% 掌握</span>' +
+      '<span class="legend-item"><span class="legend-swatch legend-yellow"></span>60-80% 学习中</span>' +
+      '<span class="legend-item"><span class="legend-swatch legend-red"></span>0-60% 薄弱</span>' +
+      '<span class="legend-item"><span class="legend-swatch legend-gray"></span>未做</span>';
+    summary.appendChild(legend);
+    container.appendChild(summary);
+
+    var perSubjTotals = [];
+
     SUBJECTS.forEach(function(s) {
       var subjData = window.SYLLABUS_DATA.getSubject(s);
       if (!subjData) return;
       var st = subjectStats(data.records || {}, s);
 
+      var subjTopics = 0;
+      var subjCovered = 0;
+
       var section = document.createElement('div');
-      section.style.cssText = 'margin-bottom:16px;';
+      section.className = 'coverage-subject';
       var h3 = document.createElement('h3');
       h3.textContent = SUBJECT_LABELS[s] + ' · ' + (subjData.papers ? subjData.papers.length : 0) + ' Papers/Units';
       section.appendChild(h3);
 
-      var table = document.createElement('table');
-      var thead = document.createElement('tr');
-      thead.innerHTML = '<th>Topic Code</th><th>Topic Name</th><th>Weight</th><th>已刷</th><th>正确率</th><th>状态</th>';
-      table.appendChild(thead);
-
       if (subjData.papers) {
-        subjData.papers.forEach(function(paper) {
-          if (paper.topics) {
-            paper.topics.forEach(function(topic) {
-              totalTopics++;
-              var rec = st.byTopic[topic.name] || { done: 0, correct: 0 };
-              var acc = rec.done ? Math.round((rec.correct / rec.done) * 100) : null;
-              var status = 'Not Started';
-              if (rec.done > 0) {
-                coveredTopics++;
-                if (acc !== null && acc < 60) {
-                  status = 'Weak';
-                  weakTopics.push({ subject: s, code: topic.code, name: topic.name, acc: acc, done: rec.done });
-                } else if (acc !== null && acc >= 80) {
-                  status = 'Mastered';
-                } else {
-                  status = 'Learning';
-                }
+        subjData.papers.forEach(function(paper, paperIdx) {
+          if (!paper.topics || !paper.topics.length) return;
+
+          var paperBlock = document.createElement('div');
+          paperBlock.className = 'paper-block';
+
+          var paperHeader = document.createElement('div');
+          paperHeader.className = 'paper-header';
+
+          var titleDiv = document.createElement('div');
+          titleDiv.className = 'paper-title';
+          var toggleSpan = document.createElement('span');
+          toggleSpan.className = 'paper-toggle';
+          toggleSpan.textContent = '▼';
+          var nameSpan = document.createElement('span');
+          nameSpan.textContent = paper.name || paper.code || ('Paper ' + (paperIdx + 1));
+          titleDiv.appendChild(toggleSpan);
+          titleDiv.appendChild(nameSpan);
+
+          var metaDiv = document.createElement('div');
+          metaDiv.className = 'paper-meta';
+          metaDiv.textContent = paper.topics.length + ' topics';
+          paperHeader.appendChild(titleDiv);
+          paperHeader.appendChild(metaDiv);
+
+          var paperContent = document.createElement('div');
+          paperContent.className = 'paper-content';
+
+          var table = document.createElement('table');
+          table.className = 'coverage-table';
+          var thead = document.createElement('tr');
+          thead.innerHTML = '<th>Topic Code</th><th>Topic Name</th><th>Weight</th><th>已刷</th><th>正确率</th><th>状态</th>';
+          table.appendChild(thead);
+
+          paper.topics.forEach(function(topic) {
+            subjTopics++;
+            totalTopics++;
+            var rec = st.byTopic[topic.name] || { done: 0, correct: 0 };
+            var acc = rec.done ? Math.round((rec.correct / rec.done) * 100) : null;
+            var status = 'Not Started';
+            if (rec.done > 0) {
+              subjCovered++;
+              coveredTopics++;
+              if (acc !== null && acc < 60) {
+                status = 'Weak';
+                weakTopics.push({ subject: s, code: topic.code, name: topic.name, acc: acc, done: rec.done });
+              } else if (acc !== null && acc >= 80) {
+                status = 'Mastered';
+              } else {
+                status = 'Learning';
               }
-              var tr = document.createElement('tr');
-              tr.innerHTML = '<td>' + topic.code + '</td><td>' + topic.name + '</td><td>' + (topic.weight || '—') + '</td><td>' + rec.done + '</td><td>' + (acc === null ? '—' : acc + '%') + '</td><td class="' + labelClass(status === 'Weak' ? 'Learning' : status) + '">' + status + '</td>';
-              table.appendChild(tr);
-            });
-          }
+            }
+
+            var tr = document.createElement('tr');
+            var hc = heatClassFor(acc, rec.done);
+            tr.innerHTML =
+              '<td class="' + hc + '">' + topic.code + '</td>' +
+              '<td class="' + hc + '">' + topic.name + '</td>' +
+              '<td class="' + hc + '">' + (topic.weight || '—') + '</td>' +
+              '<td class="' + hc + '">' + rec.done + '</td>' +
+              '<td class="' + hc + '">' + (acc === null ? '—' : acc + '%') + '</td>' +
+              '<td class="' + hc + ' ' + labelClass(status === 'Weak' ? 'Learning' : status) + '">' + status + '</td>';
+            table.appendChild(tr);
+          });
+
+          metaDiv.textContent = paper.topics.length + ' topics · 已刷 ' + subjCovered + '/' + subjTopics;
+
+          paperContent.appendChild(table);
+          paperBlock.appendChild(paperHeader);
+          paperBlock.appendChild(paperContent);
+
+          paperHeader.addEventListener('click', function() {
+            togglePaper(paperBlock);
+          });
+
+          section.appendChild(paperBlock);
         });
       }
-      section.appendChild(table);
+
+      perSubjTotals.push({ s: s, subjTopics: subjTopics, subjCovered: subjCovered });
       container.appendChild(section);
     });
 
-    var summary = document.createElement('div');
-    summary.className = 'v-info';
-    summary.innerHTML = '<strong>覆盖率：</strong>' + coveredTopics + ' / ' + totalTopics + ' topics (' + (totalTopics ? Math.round(coveredTopics / totalTopics * 100) : 0) + '%) · 薄弱点：' + weakTopics.length + ' 个';
-    container.insertBefore(summary, container.firstChild);
+    summary.querySelector('#covCount').textContent = coveredTopics + ' / ' + totalTopics;
+    summary.querySelector('#covPct').textContent = '(' + (totalTopics ? Math.round(coveredTopics / totalTopics * 100) : 0) + '%)';
+    summary.querySelector('#covWeak').textContent = weakTopics.length;
+  }
+
+  // --- v15.1: Adaptive Schedule Helpers ---
+  var SCHEDULE_STATE = {
+    tab: 'schedule',
+    dailyGoal: 20
+  };
+
+  function parseWeight(wStr) {
+    if (!wStr || wStr === '—') return 5;
+    var s = String(wStr).replace('%', '').trim();
+    var n = parseFloat(s);
+    return isNaN(n) ? 5 : Math.max(1, n);
+  }
+
+  function findTopicInSyllabus(subject, topicName) {
+    if (!window.SYLLABUS_DATA) return null;
+    var subj = window.SYLLABUS_DATA.getSubject(subject);
+    if (!subj || !subj.papers) return null;
+    for (var i = 0; i < subj.papers.length; i++) {
+      var paper = subj.papers[i];
+      if (!paper.topics) continue;
+      for (var j = 0; j < paper.topics.length; j++) {
+        var t = paper.topics[j];
+        if (t.name === topicName) return t;
+      }
+    }
+    return null;
+  }
+
+  function topicMakeKey(subject, topicName) {
+    return subject + '::' + topicName;
+  }
+
+  function buildScheduleCandidates(data) {
+    var map = {};
+    SUBJECTS.forEach(function(s) {
+      var st = subjectStats(data.records || {}, s);
+      var topicKeys = {};
+
+      Object.keys(st.byTopic).forEach(function(t) {
+        var v = st.byTopic[t];
+        var acc = v.done ? Math.round((v.correct / v.done) * 100) : null;
+        var wrong = v.done - v.correct;
+        var info = findTopicInSyllabus(s, t);
+        var code = info ? info.code : null;
+        var wPct = info ? parseWeight(info.weight) : 5;
+        var priority = (acc === null ? 100 : (100 - acc)) * wPct;
+        var key = topicMakeKey(s, t);
+        topicKeys[key] = true;
+        map[key] = {
+          subject: s,
+          topic: t,
+          code: code,
+          acc: acc,
+          done: v.done,
+          correct: v.correct,
+          wrong: wrong,
+          weightPct: wPct,
+          priority: priority
+        };
+      });
+
+      if (window.SYLLABUS_DATA) {
+        var subjData = window.SYLLABUS_DATA.getSubject(s);
+        if (subjData && subjData.papers) {
+          subjData.papers.forEach(function(paper) {
+            if (!paper.topics) return;
+            paper.topics.forEach(function(topic) {
+              var key = topicMakeKey(s, topic.name);
+              if (topicKeys[key]) return;
+              var wPct = parseWeight(topic.weight);
+              map[key] = {
+                subject: s,
+                topic: topic.name,
+                code: topic.code,
+                acc: null,
+                done: 0,
+                correct: 0,
+                wrong: 0,
+                weightPct: wPct,
+                priority: 100 * wPct
+              };
+            });
+          });
+        }
+      }
+    });
+
+    var list = Object.keys(map).map(function(k) { return map[k]; });
+    list.sort(function(a, b) { return b.priority - a.priority; });
+    return list;
+  }
+
+  function distribute7Days(candidates) {
+    var days = [[], [], [], [], [], [], []];
+    var used = {};
+    var pool = candidates.slice();
+    var dayIdx = 0;
+    var maxPerDay = 3;
+    var totalSlots = 7 * maxPerDay;
+    var filled = 0;
+
+    while (filled < totalSlots && pool.length > 0) {
+      var pick = null;
+      for (var i = 0; i < pool.length; i++) {
+        var c = pool[i];
+        var key = topicMakeKey(c.subject, c.topic);
+        if (!used[key]) {
+          pick = i;
+          break;
+        }
+      }
+      if (pick === null) break;
+      var cand = pool.splice(pick, 1)[0];
+      var k = topicMakeKey(cand.subject, cand.topic);
+      used[k] = true;
+      days[dayIdx].push(cand);
+      filled++;
+      dayIdx = (dayIdx + 1) % 7;
+      while (filled < totalSlots && days[dayIdx].length >= maxPerDay) {
+        dayIdx = (dayIdx + 1) % 7;
+      }
+    }
+    return days;
+  }
+
+  function allocateQuestionCounts(dayTopics, dailyGoal) {
+    if (!dayTopics.length) return [];
+    var total = dailyGoal;
+    var sumP = 0;
+    dayTopics.forEach(function(t) { sumP += Math.max(1, t.priority); });
+    var counts = [];
+    var allocated = 0;
+    for (var i = 0; i < dayTopics.length; i++) {
+      var t = dayTopics[i];
+      var raw = (sumP > 0 ? (t.priority / sumP) * total : total / dayTopics.length);
+      var n = Math.max(1, Math.round(raw));
+      counts.push(n);
+      allocated += n;
+    }
+    var diff = total - allocated;
+    var idx = 0;
+    while (diff !== 0 && counts.length) {
+      if (diff > 0) { counts[idx]++; diff--; }
+      else if (counts[idx] > 1) { counts[idx]--; diff++; }
+      idx = (idx + 1) % counts.length;
+    }
+    return counts;
+  }
+
+  function buildWrongTopicTopList(data, limit) {
+    var list = [];
+    SUBJECTS.forEach(function(s) {
+      var st = subjectStats(data.records || {}, s);
+      Object.keys(st.byTopic).forEach(function(t) {
+        var v = st.byTopic[t];
+        var wrong = v.done - v.correct;
+        if (wrong > 0) {
+          var info = findTopicInSyllabus(s, t);
+          var acc = v.done ? Math.round((v.correct / v.done) * 100) : null;
+          list.push({
+            subject: s,
+            topic: t,
+            code: info ? info.code : null,
+            wrong: wrong,
+            done: v.done,
+            acc: acc
+          });
+        }
+      });
+    });
+    list.sort(function(a, b) { return b.wrong - a.wrong; });
+    return list.slice(0, limit || 3);
   }
 
   // --- v15: Adaptive Study Schedule ---
@@ -549,75 +1063,173 @@
     if (!container) return;
     while (container.firstChild) container.removeChild(container.firstChild);
 
-    var candidates = [];
-    SUBJECTS.forEach(function(s) {
-      var st = subjectStats(data.records || {}, s);
-      Object.keys(st.byTopic).forEach(function(t) {
-        var v = st.byTopic[t];
-        if (v.done >= 1) {
-          var acc = v.done ? Math.round((v.correct / v.done) * 100) : null;
-          if (acc !== null && acc < 70) {
-            candidates.push({ subject: s, topic: t, acc: acc, done: v.done });
-          }
-        }
-      });
+    var state = SCHEDULE_STATE;
+
+    var toolbar = document.createElement('div');
+    toolbar.className = 'schedule-toolbar';
+
+    var lbl = document.createElement('label');
+    lbl.textContent = '每日目标题数';
+    lbl.htmlFor = 'dailyGoalInput';
+    toolbar.appendChild(lbl);
+
+    var input = document.createElement('input');
+    input.type = 'number';
+    input.id = 'dailyGoalInput';
+    input.min = '1';
+    input.max = '200';
+    input.value = String(state.dailyGoal);
+    toolbar.appendChild(input);
+
+    var tabs = document.createElement('div');
+    tabs.className = 'schedule-tabs';
+    var btnSchedule = document.createElement('button');
+    btnSchedule.textContent = '7天排期';
+    var btnWrong = document.createElement('button');
+    btnWrong.textContent = '错题专练';
+    btnSchedule.className = state.tab === 'schedule' ? 'active' : '';
+    btnWrong.className = state.tab === 'wrong' ? 'active' : '';
+    tabs.appendChild(btnSchedule);
+    tabs.appendChild(btnWrong);
+    toolbar.appendChild(tabs);
+
+    container.appendChild(toolbar);
+
+    var content = document.createElement('div');
+    container.appendChild(content);
+
+    btnSchedule.addEventListener('click', function() {
+      state.tab = 'schedule';
+      btnSchedule.className = 'active';
+      btnWrong.className = '';
+      renderScheduleContent(data, content, state.dailyGoal);
     });
 
-    if (window.SYLLABUS_DATA) {
-      SUBJECTS.forEach(function(s) {
-        var subjData = window.SYLLABUS_DATA.getSubject(s);
-        if (!subjData || !subjData.papers) return;
-        var st = subjectStats(data.records || {}, s);
-        subjData.papers.forEach(function(paper) {
-          if (!paper.topics) return;
-          paper.topics.forEach(function(topic) {
-            if (!st.byTopic[topic.name] && candidates.length < 20) {
-              candidates.push({ subject: s, topic: topic.name, acc: null, done: 0, code: topic.code });
-            }
-          });
-        });
-      });
+    btnWrong.addEventListener('click', function() {
+      state.tab = 'wrong';
+      btnWrong.className = 'active';
+      btnSchedule.className = '';
+      renderWrongContent(data, content);
+    });
+
+    input.addEventListener('change', function() {
+      var v = parseInt(input.value, 10);
+      if (isNaN(v) || v < 1) v = 20;
+      if (v > 200) v = 200;
+      state.dailyGoal = v;
+      input.value = String(v);
+      if (state.tab === 'schedule') {
+        renderScheduleContent(data, content, v);
+      }
+    });
+
+    input.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') {
+        input.blur();
+      }
+    });
+
+    if (state.tab === 'schedule') {
+      renderScheduleContent(data, content, state.dailyGoal);
+    } else {
+      renderWrongContent(data, content);
     }
 
-    candidates.sort(function(a, b) {
-      var aa = a.acc === null ? 999 : a.acc;
-      var bb = b.acc === null ? 999 : b.acc;
-      return aa - bb;
-    });
+    var note = document.createElement('div');
+    note.className = 'box-dashed';
+    note.style.marginTop = '16px';
+    note.innerHTML = 'v15.1: 优先级公式 = (100-正确率) × Topic权重% · 7天排期自动去重覆盖最多薄弱点 · 点击错题专练直接跳 practice.html?topic=xxx&filter=wrong';
+    container.appendChild(note);
+  }
 
+  function renderScheduleContent(data, content, dailyGoal) {
+    while (content.firstChild) content.removeChild(content.firstChild);
+    var candidates = buildScheduleCandidates(data);
     if (!candidates.length) {
-      container.innerHTML = '<p class="muted">暂无推荐 — 开始练习后将自动生成学习计划</p>';
+      content.innerHTML = '<p class="muted">暂无推荐 — 开始练习后将自动生成7天学习计划</p>';
       return;
     }
+    var days = distribute7Days(candidates);
+    var grid = document.createElement('div');
+    grid.className = 'schedule-grid';
 
+    for (var d = 0; d < 7; d++) {
+      var card = document.createElement('div');
+      card.className = 'day-card';
+      var label = document.createElement('div');
+      label.className = 'day-label';
+      var dayTopics = days[d];
+      var counts = allocateQuestionCounts(dayTopics, dailyGoal);
+      var dayTotal = counts.reduce(function(a, b) { return a + b; }, 0);
+      label.innerHTML = '<span>Day ' + (d + 1) + '</span><span class="day-qcount">' + dayTotal + ' 题</span>';
+      card.appendChild(label);
+
+      if (!dayTopics.length) {
+        var empty = document.createElement('div');
+        empty.className = 'empty-day';
+        empty.textContent = '暂无推荐';
+        card.appendChild(empty);
+      } else {
+        for (var i = 0; i < dayTopics.length; i++) {
+          var c = dayTopics[i];
+          var qc = counts[i] || 1;
+          var item = document.createElement('div');
+          item.className = 'topic-item';
+          var link = document.createElement('a');
+          var url = c.subject + '/practice.html' + (c.code ? '?topic=' + c.code : '');
+          link.href = url;
+          link.textContent = SUBJECT_LABELS[c.subject] + ' · ' + c.topic;
+          item.appendChild(link);
+          var meta = document.createElement('div');
+          meta.className = 'topic-meta';
+          var pri = Math.round(c.priority);
+          var statusTxt = c.acc === null ? '未练习' : '正确率 ' + c.acc + '%';
+          meta.innerHTML = '<span class="priority-pill" title="优先级 (100-正确率)×权重%">P:' + pri + '</span>' + statusTxt + ' · 分配 ' + qc + ' 题';
+          item.appendChild(meta);
+          card.appendChild(item);
+        }
+      }
+      grid.appendChild(card);
+    }
+    content.appendChild(grid);
+  }
+
+  function renderWrongContent(data, content) {
+    while (content.firstChild) content.removeChild(content.firstChild);
+    var tops = buildWrongTopicTopList(data, 3);
+    if (!tops.length) {
+      content.innerHTML = '<p class="muted">暂无错题数据 — 开始练习并答错题目后，错题最多的 Top3 Topic 将在此显示</p>';
+      return;
+    }
     var ul = document.createElement('ul');
-    ul.className = 'path-list';
-    candidates.slice(0, 5).forEach(function(c) {
+    ul.className = 'wrong-list';
+    tops.forEach(function(c) {
       var li = document.createElement('li');
       var action = document.createElement('div');
-      action.className = 'path-action';
+      action.className = 'wrong-action';
       var link = document.createElement('a');
-      link.href = c.subject + '/practice.html' + (c.code ? '?topic=' + c.code : '');
-      var statusText = c.acc === null ? '未练习' : '正确率 ' + c.acc + '%';
-      link.textContent = '刷 ' + SUBJECT_LABELS[c.subject] + ' · ' + c.topic + ' →';
+      var url = c.subject + '/practice.html' + (c.code ? '?topic=' + c.code + '&filter=wrong' : '?filter=wrong');
+      link.href = url;
+      link.textContent = '错题专练 · ' + SUBJECT_LABELS[c.subject] + ' · ' + c.topic;
+      var badge = document.createElement('span');
+      badge.className = 'wrong-count-badge';
+      badge.textContent = c.wrong + ' 错题';
+      link.appendChild(badge);
       action.appendChild(link);
       var meta = document.createElement('div');
-      meta.className = 'path-meta';
-      meta.textContent = statusText + ' · 已刷 ' + c.done + ' 题 · 点击开始局部刷题';
+      meta.className = 'wrong-meta';
+      meta.textContent = '已刷 ' + c.done + ' 题 · 正确率 ' + (c.acc === null ? '—' : c.acc + '%') + ' · 点击跳转错题筛选';
       li.appendChild(action);
       li.appendChild(meta);
       ul.appendChild(li);
     });
-    container.appendChild(ul);
-
-    var note = document.createElement('div');
-    note.className = 'box-dashed';
-    note.innerHTML = 'v15: 点击任意推荐可直接跳转到对应Topic的局部刷题页面（v14 URL参数筛选生效）';
-    container.appendChild(note);
+    content.appendChild(ul);
   }
 
   // --- Init ---
   function init() {
+    setupDataToolbar();
+    renderProfile();
     var data = loadData();
     renderOverview(data);
     renderMastery(data);
@@ -635,6 +1247,7 @@
   init();
 })();
 </script>
+<script src="../../js/app-data.js"></script>
 <script src="../../../js/syllabus-data.js"></script>
 </body>
 </html>

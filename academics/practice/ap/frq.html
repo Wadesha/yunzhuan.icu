@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AP FRQ Practice</title>
+<link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 820px; margin: 0 auto; padding: 24px 16px 48px; background: #ffffff; color: #111111; line-height: 1.7; font-size: 15px; }
+a { color: #111111; text-decoration: none; border-bottom: 1px solid #cccccc; }
+a:hover { border-bottom-color: #111111; }
+.nav { padding-bottom: 12px; margin-bottom: 20px; border-bottom: 1px solid #e0e0e0; font-size: 0.88rem; color: #888888; }
+.nav a { color: #111111; }
+.nav .sep { color: #cccccc; margin: 0 6px; }
+h1 { font-size: 1.6rem; margin-bottom: 4px; }
+h2 { font-size: 1.1rem; font-weight: 700; margin: 28px 0 8px; padding-bottom: 6px; border-bottom: 1px solid #111111; }
+h3 { font-size: 0.98rem; font-weight: 700; margin: 16px 0 4px; }
+h4 { font-size: 0.9rem; font-weight: 700; margin: 12px 0 4px; }
+p, li { margin-bottom: 6px; color: #111111; }
+.muted { color: #888888; font-size: 0.85rem; }
+.subtitle { color: #555555; font-size: 0.95rem; margin-bottom: 20px; }
+table { width: 100%; border-collapse: collapse; font-size: 0.82rem; margin: 8px 0 16px; }
+th, td { border: 1px solid #e0e0e0; padding: 6px 10px; text-align: left; vertical-align: top; }
+th { background: #ffffff; border-bottom: 2px solid #111111; font-weight: 700; }
+ul, ol { margin-left: 22px; margin-bottom: 12px; }
+.box { border: 1px solid #111111; padding: 14px 18px; margin: 12px 0; }
+.box-dashed { border: 1px dashed #888888; padding: 14px 18px; margin: 12px 0; }
+.q { border: 1px solid #e0e0e0; padding: 14px 18px; margin: 12px 0; }
+.q .q-num { font-weight: 700; font-size: 0.82rem; color: #888888; }
+.q .q-title { font-weight: 700; margin: 8px 0; }
+.q .q-text { margin: 8px 0; }
+.footer { margin-top: 36px; padding-top: 16px; border-top: 1px solid #e0e0e0; color: #888888; font-size: 0.82rem; }
+.v-badge { display: inline-block; border: 1px solid #111111; padding: 0 6px; font-size: 0.7rem; font-weight: 700; }
+textarea { width: 100%; min-height: 80px; padding: 10px 12px; border: 1px solid #888888; font-family: inherit; font-size: 0.9rem; line-height: 1.6; resize: vertical; background: #ffffff; color: #111111; }
+textarea:focus { outline: none; border-color: #111111; }
+.btn { display: inline-block; padding: 6px 14px; border: 1px solid #111111; background: #ffffff; color: #111111; font-family: inherit; font-size: 0.85rem; cursor: pointer; margin-right: 6px; }
+.btn:hover { background: #111111; color: #ffffff; }
+.btn-primary { background: #111111; color: #ffffff; }
+.btn-primary:hover { background: #333333; }
+.btn-sm { padding: 4px 10px; font-size: 0.78rem; }
+.rating { display: flex; align-items: center; gap: 8px; margin: 10px 0; flex-wrap: wrap; }
+.rating label { font-size: 0.85rem; color: #555555; }
+.rating select { padding: 4px 8px; border: 1px solid #888888; font-family: inherit; font-size: 0.85rem; background: #ffffff; }
+.rating .score-display { font-weight: 700; color: #111111; }
+details { border: 1px solid #e0e0e0; padding: 10px 14px; margin: 10px 0; }
+summary { cursor: pointer; font-weight: 700; font-size: 0.88rem; padding: 4px 0; user-select: none; }
+summary:hover { color: #555555; }
+details[open] summary { margin-bottom: 8px; border-bottom: 1px dashed #e0e0e0; padding-bottom: 8px; }
+.ref-content { font-size: 0.88rem; line-height: 1.7; color: #333333; }
+.ref-content p { margin-bottom: 8px; }
+.char-count { font-size: 0.78rem; color: #888888; text-align: right; margin-top: 4px; }
+.history-table { margin-top: 20px; }
+.history-empty { text-align: center; color: #888888; padding: 20px; border: 1px dashed #e0e0e0; }
+.subpart { margin: 10px 0; padding: 10px 12px; padding-left: 18px; border-left: 3px solid #888888; }
+.subpart-label { font-weight: 700; font-size: 0.88rem; color: #111111; margin-bottom: 4px; }
+.subpart-score { font-size: 0.8rem; color: #555555; margin-left: 6px; }
+.section-tag { display: inline-block; padding: 2px 8px; border: 1px solid #888888; font-size: 0.72rem; font-weight: 700; color: #555555; margin-right: 6px; }
+.rubric-item { padding: 4px 0; border-bottom: 1px dashed #f0f0f0; font-size: 0.85rem; }
+.rubric-item:last-child { border-bottom: none; }
+.rubric-item .pt { color: #555555; font-weight: 700; margin-right: 4px; }
+.subj-nav { display: flex; flex-wrap: wrap; gap: 6px; margin: 12px 0; }
+.subj-nav a { padding: 4px 10px; border: 1px solid #888888; font-size: 0.82rem; }
+.subj-nav a:hover { background: #111111; color: #ffffff; border-color: #111111; }
+.formula-inline { font-family: 'Courier New', monospace; background: #f5f5f5; padding: 1px 4px; font-size: 0.88rem; }
+@media (max-width: 600px) {
+  textarea { width: 100%; }
+}
+</style>
+</head>
+<body>
+
+<div class="nav">
+  <a href="../../../index.html">Home</a>
+  <span class="sep">/</span>
+  <a href="../../index.html">Academics</a>
+  <span class="sep">/</span>
+  <a href="../index.html">Practice</a>
+  <span class="sep">/</span>
+  <a href="intro.html">AP</a>
+  <span class="sep">/</span>
+  FRQ
+</div>
+
+<h1>AP FRQ Practice <span class="v-badge">v1</span></h1>
+<p class="subtitle">Calculus BC × 2 · Statistics × 2 · Physics C: Mechanics × 2 = 6 道完整 FRQ（含 sub-part 分步计分点）</p>
+
+<div class="box-dashed">
+  <p><strong>答题说明</strong>：所有作答自动保存至浏览器本地（key: <code>yz_subjective_data</code>）。每个 sub-part 可以单独给分，每题最终总分也可提交历史记录。</p>
+</div>
+
+<div class="subj-nav">
+  <a href="#calc">📐 AP Calculus BC FRQ</a>
+  <a href="#stat">📊 AP Statistics FRQ</a>
+  <a href="#phys">⚙️ AP Physics C: Mechanics FRQ</a>
+</div>
+
+<!-- ============ AP CALCULUS BC ============ -->
+<h2 id="calc">📐 AP Calculus BC · Free Response Questions</h2>
+
+<!-- Calculus BC Q1 -->
+<div class="q" id="q-ap-calc-1">
+  <div class="q-num">AP-Calc-BC-FRQ #1 · 9 pts</div>
+  <div class="q-title"><span class="section-tag">Calculus BC</span> 积分 / 面积 / 体积综合应用题</div>
+  <div class="q-text">
+    <p>Let <span class="formula-inline">R</span> be the region in the first quadrant bounded by the graphs of <span class="formula-inline">y = ln(x + 1)</span> and <span class="formula-inline">y = 2 - x</span>, and the y-axis, as shown in the figure below.</p>
+    <div class="box-dashed">
+      <p class="muted"><strong>Figure Context:</strong> The two curves intersect at some point x = a where 0 &lt; a &lt; 2. Verify: ln(a+1) = 2 - a ⇒ a ≈ 1.278 (numerical only — do not solve algebraically).</p>
+    </div>
+    <div class="subpart">
+      <div class="subpart-label">(a) <span class="subpart-score">[2 pts]</span> Find the area of region <span class="formula-inline">R</span>. Show the integral expression and evaluate numerically.</div>
+      <textarea data-subject="ap" data-qid="calc1_a" data-field="answer" placeholder="Area = ∫[0 to a] [(2-x) - ln(x+1)] dx ..."></textarea>
+      <div class="rating" style="margin-top:6px;">
+        <label>Sub (a):</label>
+        <select data-subject="ap" data-qid="calc1_a" data-field="rating">
+          <option value="">/2</option>
+          <option value="0">0</option><option value="1">1</option><option value="2">2</option>
+        </select>
+      </div>
+    </div>
+    <div class="subpart">
+      <div class="subpart-label">(b) <span class="subpart-score">[3 pts]</span> Region <span class="formula-inline">R</span> is the base of a solid. For this solid, each cross-section perpendicular to the <span class="formula-inline">x</span>-axis is a semicircle with diameter extending between the two curves. Find the volume of this solid.</div>
+      <textarea data-subject="ap" data-qid="calc1_b" data-field="answer" placeholder="V = (π/8) ∫[0 to a] [(2-x) - ln(x+1)]² dx ..."></textarea>
+      <div class="rating" style="margin-top:6px;">
+        <label>Sub (b):</label>
+        <select data-subject="ap" data-qid="calc1_b" data-field="rating">
+          <option value="">/3</option>
+          <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option>
+        </select>
+      </div>
+    </div>
+    <div class="subpart">
+      <div class="subpart-label">(c) <span class="subpart-score">[4 pts]</span> Write, but do NOT evaluate, an integral expression for the volume of the solid generated when <span class="formula-inline">R</span> is rotated about the horizontal line <span class="formula-inline">y = 3</span>. Then, using the method of cylindrical shells, also set up a volume integral for rotation about the y-axis.</div>
+      <textarea data-subject="ap" data-qid="calc1_c" data-field="answer" placeholder="y=3 washer: π∫[0 to a] [(3-ln(x+1))² - (3-(2-x))²] dx&#10;y-axis shells: 2π∫[0 to a] x·[(2-x)-ln(x+1)] dx ..."></textarea>
+      <div class="rating" style="margin-top:6px;">
+        <label>Sub (c):</label>
+        <select data-subject="ap" data-qid="calc1_c" data-field="rating">
+          <option value="">/4</option>
+          <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <details>
+    <summary>✅ 参考解答 & 分步计分 Rubric（点击展开）</summary>
+    <div class="ref-content">
+      <p><strong>(a) Area — 2 points:</strong></p>
+      <div class="rubric-item"><span class="pt">1 pt</span> Correct integrand & limits: A = ∫₀ᵃ [ (2 − x) − ln(x + 1) ] dx where a ≈ 1.278</div>
+      <div class="rubric-item"><span class="pt">1 pt</span> Numerical answer: ≈ 0.445 (accept 0.44 – 0.45)</div>
+      <p style="margin-top:10px;"><strong>(b) Volume, semicircular cross-section — 3 points:</strong></p>
+      <div class="rubric-item"><span class="pt">1 pt</span> Diameter = (2 − x) − ln(x+1), ⇒ radius = ½·[difference]</div>
+      <div class="rubric-item"><span class="pt">1 pt</span> Area(semicircle) = ½πr² = ⅛π·[(2−x)−ln(x+1)]² ⇒ V = ⅛π ∫₀ᵃ [(2−x)−ln(x+1)]² dx</div>
+      <div class="rubric-item"><span class="pt">1 pt</span> Numerical evaluation: ≈ 0.058π ≈ 0.182 (accept ±0.01)</div>
+      <p style="margin-top:10px;"><strong>(c) Washer + Shells — 4 points:</strong></p>
+      <div class="rubric-item"><span class="pt">2 pts</span> Rotation about y = 3 (washer): V = π ∫₀ᵃ [ (3 − ln(x+1))² − (3 − (2 − x))² ] dx = π ∫₀ᵃ [ (3 − ln(x+1))² − (1 + x)² ] dx. (Limits 1; integrand 1)</div>
+      <div class="rubric-item"><span class="pt">2 pts</span> Shells about y-axis: V = 2π ∫₀ᵃ x·[(2 − x) − ln(x+1)] dx. (2π & x factor 1; height factor 1)</div>
+      <p class="muted" style="margin-top:8px;">⚠️ 注意：要求"do NOT evaluate"，写出正确积分式即可得全分；数值积分错误但积分式正确不扣分。</p>
+    </div>
+  </details>
+  <div class="rating">
+    <label>FRQ #1 总分（0-9）：</label>
+    <select data-subject="ap" data-qid="calc1_total" data-field="rating">
+      <option value="">-- 打分 --</option>
+      <option value="9">9 / 9 · Perfect</option>
+      <option value="8">8 / 9</option>
+      <option value="7">7 / 9</option>
+      <option value="6">6 / 9</option>
+      <option value="5">5 / 9</option>
+      <option value="4">4 / 9</option>
+      <option value="3">3 / 9</option>
+      <option value="2">2 / 9</option>
+      <option value="1">1 / 9</option>
+      <option value="0">0 / 9</option>
+    </select>
+    <button class="btn btn-sm btn-primary" onclick="submitScore('ap','calc1_total','Calc BC FRQ #1')">提交评分</button>
+    <span class="score-display" data-score-for="calc1_total"></span>
+  </div>
+</div>
+
+<!-- Calculus BC Q2 -->
+<div class="q" id="q-ap-calc-2">
+  <div class="q-num">AP-Calc-BC-FRQ #2 · 9 pts</div>
+  <div class="q-title"><span class="section-tag">Calculus BC</span> 微分方程 / 斜率场 / 级数</div>
+  <div class="q-text">
+    <p>Consider the differential equation <span class="formula-inline">dy/dx = (1 + y) · cos(πx)</span>.</p>
+    <div class="subpart">
+      <div class="subpart-label">(a) <span class="subpart-score">[3 pts]</span> On the axes provided, sketch a slope field for the given differential equation at the six points indicated: (0, 0), (0, 1), (1, 0), (1, 1), (0.5, 0), (0.5, 1). Then describe all points (x, y) in the xy-plane where the solution curves have horizontal tangent lines.</div>
+      <textarea data-subject="ap" data-qid="calc2_a" data-field="answer" placeholder="Slopes: (0,0): (1+0)·cos(0)=1 ...&#10;Horizontal tangent when dy/dx=0 ⇒ y=-1 OR x=½ + k ..."></textarea>
+      <div class="rating" style="margin-top:6px;">
+        <label>Sub (a):</label>
+        <select data-subject="ap" data-qid="calc2_a" data-field="rating">
+          <option value="">/3</option>
+          <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option>
+        </select>
+      </div>
+    </div>
+    <div class="subpart">
+      <div class="subpart-label">(b) <span class="subpart-score">[3 pts]</span> Find the particular solution <span class="formula-inline">y = f(x)</span> to the differential equation with the initial condition <span class="formula-inline">f(0) = 1</span>. State the domain of this solution.</div>
+      <textarea data-subject="ap" data-qid="calc2_b" data-field="answer" placeholder="Separate: dy/(1+y) = cos(πx) dx&#10;Integrate both sides ...&#10;ln|1+y| = (1/π) sin(πx) + C ...&#10;y = 2·e^( (1/π)sin(πx) ) - 1 ...&#10;Domain: all real x (-∞, ∞)"></textarea>
+      <div class="rating" style="margin-top:6px;">
+        <label>Sub (b):</label>
+        <select data-subject="ap" data-qid="calc2_b" data-field="rating">
+          <option value="">/3</option>
+          <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option>
+        </select>
+      </div>
+    </div>
+    <div class="subpart">
+      <div class="subpart-label">(c) <span class="subpart-score">[3 pts]</span> The function <span class="formula-inline">g</span> satisfies the same differential equation with <span class="formula-inline">g(0) = 0</span>. Write the first four non-zero terms of the Maclaurin series for <span class="formula-inline">g(x)</span>. Then use this polynomial to approximate <span class="formula-inline">g(0.5)</span>.</div>
+      <textarea data-subject="ap" data-qid="calc2_c" data-field="answer" placeholder="g(0)=0&#10;g'(0) = (1+0)·cos(0) = 1&#10;g''(x) via chain rule ...&#10;Series: x - (π²/6)x³ + ...&#10;g(0.5) ≈ ..."></textarea>
+      <div class="rating" style="margin-top:6px;">
+        <label>Sub (c):</label>
+        <select data-subject="ap" data-qid="calc2_c" data-field="rating">
+          <option value="">/3</option>
+          <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <details>
+    <summary>✅ 参考解答 & 分步计分 Rubric（点击展开）</summary>
+    <div class="ref-content">
+      <p><strong>(a) Slope field + horizontal tangents — 3 points:</strong></p>
+      <div class="rubric-item"><span class="pt">1 pt</span> At least 4 of 6 slopes correct (verify: (0,0)=1, (0,1)=2, (1,0)=-1, (1,1)=-2, (0.5,0)=0, (0.5,1)=0)</div>
+      <div class="rubric-item"><span class="pt">1 pt</span> All 6 slopes drawn with appropriate orientation — positive/negative/zero</div>
+      <div class="rubric-item"><span class="pt">1 pt</span> dy/dx = 0 ⇒ (1+y)·cos(πx)=0 ⇒ y = −1 OR x = ½ + k, k ∈ ℤ. Describe as: "y = −1 at all x, or x = ½ + any integer".</div>
+      <p style="margin-top:10px;"><strong>(b) Particular solution — 3 points:</strong></p>
+      <div class="rubric-item"><span class="pt">1 pt</span> Separation: dy/(1+y) = cos(πx) dx, integration attempt</div>
+      <div class="rubric-item"><span class="pt">1 pt</span> Correct antiderivatives: ln|1+y| = (1/π) sin(πx) + C; apply IC: ln(2) = C ⇒ y = 2e^((1/π)sin(πx)) − 1</div>
+      <div class="rubric-item"><span class="pt">1 pt</span> Domain: (−∞, ∞) — (1+y) never zero because 2e^(bounded) − 1 ≥ 2e^(−1/π) − 1 > 0, so no singularity.</div>
+      <p style="margin-top:10px;"><strong>(c) Maclaurin series — 3 points:</strong></p>
+      <div class="rubric-item"><span class="pt">1 pt</span> g(0)=0, g'(0)=1 ⇒ first term x; g''=π(1+y)(−sin πx) + y'·cos(πx)... = 0 at 0; g'''(0)= −π²; fourth derivative = 0; fifth non-zero. Accept: x − (π²/6)x³ + (π⁴/120)x⁵ − ...</div>
+      <div class="rubric-item"><span class="pt">1 pt</span> First four non-zero: x − (π²/6)x³ + (π⁴/120)x⁵ − (π⁶/5040)x⁷ (or equivalent coefficients)</div>
+      <div class="rubric-item"><span class="pt">1 pt</span> Approx g(0.5) ≈ 0.5 − (π²/6)(0.125) = 0.5 − (9.8696/6)(0.125) ≈ 0.5 − 0.2056 ≈ 0.294 (accept 0.28 – 0.31; adding further terms ≈ 0.302)</div>
+    </div>
+  </details>
+  <div class="rating">
+    <label>FRQ #2 总分（0-9）：</label>
+    <select data-subject="ap" data-qid="calc2_total" data-field="rating">
+      <option value="">-- 打分 --</option>
+      <option value="9">9 / 9 · Perfect</option>
+      <option value="8">8 / 9</option>
+      <option value="7">7 / 9</option>
+      <option value="6">6 / 9</option>
+      <option value="5">5 / 9</option>
+      <option value="4">4 / 9</option>
+      <option value="3">3 / 9</option>
+      <option value="2">2 / 9</option>
+      <option value="1">1 / 9</option>
+      <option value="0">0 / 9</option>
+    </select>
+    <button class="btn btn-sm btn-primary" onclick="submitScore('ap','calc2_total','Calc BC FRQ #2')">提交评分</button>
+    <span class="score-display" data-score-for="calc2_total"></span>
+  </div>
+</div>
+
+<!-- ============ AP STATISTICS ============ -->
+<h2 id="stat">📊 AP Statistics · Free Response Questions</h2>
+
+<!-- Statistics Q1 -->
+<div class="q" id="q-ap-stat-1">
+  <div class="q-num">AP-Stat-FRQ #1 · 4 pts (Investigative Task)</div>
+  <div class="q-title"><span class="section-tag">Statistics</span> 假设检验 / 置信区间</div>
+  <div class="q-text">
+    <p>A cereal manufacturer claims that its boxes contain a mean of 500 grams of cereal, with a population standard deviation of 8 grams. A consumer advocacy group suspects the actual mean is less than advertised, and purchases a random sample of 36 boxes. The sample mean weight is 497.2 grams.</p>
+    <div class="subpart">
+      <div class="subpart-label">(a) <span class="subpart-score">[1 pt]</span> Construct and interpret a 95% confidence interval for the true population mean weight of cereal in the boxes.</div>
+      <textarea data-subject="ap" data-qid="stat1_a" data-field="answer" placeholder="Conditions: Random sample, n=36≥30 CLT, σ known ⇒ z-interval&#10;x̄ ± z*(σ/√n) = 497.2 ± 1.96(8/6) ...&#10;≈ (494.59, 499.81) grams&#10;Interpretation: ..."></textarea>
+      <div class="rating" style="margin-top:6px;">
+        <label>Sub (a):</label>
+        <select data-subject="ap" data-qid="stat1_a" data-field="rating">
+          <option value="">/1</option>
+          <option value="0">0</option><option value="1">1</option>
+        </select>
+      </div>
+    </div>
+    <div class="subpart">
+      <div class="subpart-label">(b) <span class="subpart-score">[1 pt]</span> Based only on your confidence interval from (a), is there convincing evidence the true mean is less than 500 grams? Justify your answer.</div>
+      <textarea data-subject="ap" data-qid="stat1_b" data-field="answer" placeholder="Upper end 499.81 < 500, and entire interval below 500 ⇒ Yes, convincing evidence at α=0.05 ..."></textarea>
+      <div class="rating" style="margin-top:6px;">
+        <label>Sub (b):</label>
+        <select data-subject="ap" data-qid="stat1_b" data-field="rating">
+          <option value="">/1</option>
+          <option value="0">0</option><option value="1">1</option>
+        </select>
+      </div>
+    </div>
+    <div class="subpart">
+      <div class="subpart-label">(c) <span class="subpart-score">[2 pts]</span> Perform a significance test at the α = 0.05 level to investigate the group's suspicion that the mean is less than 500 grams. Include the hypotheses, test statistic, p-value, and conclusion in context.</div>
+      <textarea data-subject="ap" data-qid="stat1_c" data-field="answer" placeholder="H₀: μ = 500; Hₐ: μ < 500&#10;z = (497.2 - 500)/(8/√36) = -2.1&#10;p-value = P(Z < -2.1) ≈ 0.0179&#10;Conclusion: 0.0179 < 0.05 ⇒ Reject H₀ ..."></textarea>
+      <div class="rating" style="margin-top:6px;">
+        <label>Sub (c):</label>
+        <select data-subject="ap" data-qid="stat1_c" data-field="rating">
+          <option value="">/2</option>
+          <option value="0">0</option><option value="1">1</option><option value="2">2</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <details>
+    <summary>✅ 参考解答 & 分步计分 Rubric（点击展开）</summary>
+    <div class="ref-content">
+      <p><strong>(a) 95% CI — 1 point (Essentially Correct):</strong></p>
+      <div class="rubric-item"><span class="pt">✓</span> Conditions: (1) random sample stated; (2) n=36 ≥ 30 ⇒ CLT applies, sampling dist of x̄ approx Normal; (3) σ=8 known ⇒ one-sample z-interval for μ</div>
+      <div class="rubric-item"><span class="pt">✓</span> Calculation: x̄ ± z*·σ/√n = 497.2 ± 1.96·(8/6) = 497.2 ± 2.613 ⇒ (494.59, 499.81) grams</div>
+      <div class="rubric-item"><span class="pt">✓</span> Interpretation: "We are 95% confident that the interval from 494.59 g to 499.81 g captures the true mean weight of cereal in all such boxes." (Context required)</div>
+      <p style="margin-top:10px;"><strong>(b) CI-based decision — 1 point:</strong></p>
+      <div class="rubric-item"><span class="pt">✓</span> Yes, there is convincing evidence at α = 0.05. Reason: the entire 95% CI lies below 500 grams — the hypothesized value 500 is not in the interval. ⇒ We reject H₀: μ = 500 in favor of μ < 500 (two-sided 5% ⇔ one-sided 2.5% logic still supports; link clearly to interval).</div>
+      <p style="margin-top:10px;"><strong>(c) Significance test — 2 points:</strong></p>
+      <div class="rubric-item"><span class="pt">1 pt</span> H₀: μ = 500 g; Hₐ: μ < 500 g (define μ = true mean weight). Test stat: z = (x̄ − μ₀)/(σ/√n) = (497.2 − 500)/(8/6) = −2.1 (correct formula & value)</div>
+      <div class="rubric-item"><span class="pt">1 pt</span> p-value = P(Z < −2.1) ≈ 0.0179. Since 0.0179 < 0.05, we reject H₀. There is convincing evidence at the α = 0.05 level that the true mean cereal weight is less than 500 g. (context required for credit)</div>
+    </div>
+  </details>
+  <div class="rating">
+    <label>FRQ #1 总分（0-4）：</label>
+    <select data-subject="ap" data-qid="stat1_total" data-field="rating">
+      <option value="">-- 打分 --</option>
+      <option value="4">4 / 4 · Perfect</option>
+      <option value="3">3 / 4</option>
+      <option value="2">2 / 4</option>
+      <option value="1">1 / 4</option>
+      <option value="0">0 / 4</option>
+    </select>
+    <button class="btn btn-sm btn-primary" onclick="submitScore('ap','stat1_total','Statistics FRQ #1')">提交评分</button>
+    <span class="score-display" data-score-for="stat1_total"></span>
+  </div>
+</div>
+
+<!-- Statistics Q2 -->
+<div class="q" id="q-ap-stat-2">
+  <div class="q-num">AP-Stat-FRQ #2 · 4 pts</div>
+  <div class="q-title"><span class="section-tag">Statistics</span> 回归分析 / 概率分布</div>
+  <div class="q-text">
+    <p>Researchers collected data on 50 high school seniors to investigate the relationship between hours of study per week (x, in hours) and college entrance exam score (y, on a 400–1600 scale). Computer output for a least-squares regression is shown below.</p>
+    <table>
+      <thead>
+        <tr><th>Predictor</th><th>Coef</th><th>SE Coef</th><th>T</th><th>P</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Constant</td><td>892.50</td><td>38.20</td><td>23.37</td><td>0.000</td></tr>
+        <tr><td>Hours (x)</td><td>14.80</td><td>3.10</td><td>4.77</td><td>0.000</td></tr>
+      </tbody>
+    </table>
+    <p class="muted">s = 82.3 &nbsp;&nbsp; R-sq = 32.1% &nbsp;&nbsp; R-sq(adj) = 30.7%</p>
+    <div class="subpart">
+      <div class="subpart-label">(a) <span class="subpart-score">[1 pt]</span> Write the equation of the least-squares regression line. Define any variables you use. Interpret the slope of the regression line in context.</div>
+      <textarea data-subject="ap" data-qid="stat2_a" data-field="answer" placeholder="ŷ = 892.50 + 14.80x, ŷ = predicted exam score, x = weekly study hours&#10;Slope = 14.80: For each additional hour of weekly study, predicted score increases by ~14.8 points ..."></textarea>
+      <div class="rating" style="margin-top:6px;">
+        <label>Sub (a):</label>
+        <select data-subject="ap" data-qid="stat2_a" data-field="rating">
+          <option value="">/1</option>
+          <option value="0">0</option><option value="1">1</option>
+        </select>
+      </div>
+    </div>
+    <div class="subpart">
+      <div class="subpart-label">(b) <span class="subpart-score">[1 pt]</span> One student in the sample studied 20 hours per week and scored 1250. Calculate and interpret the residual for this student.</div>
+      <textarea data-subject="ap" data-qid="stat2_b" data-field="answer" placeholder="Predicted: ŷ at x=20: 892.50 + 14.80·20 = 1188.5&#10;Residual = y - ŷ = 1250 - 1188.5 = +61.5 points&#10;Interpret: The student scored 61.5 points higher than predicted ..."></textarea>
+      <div class="rating" style="margin-top:6px;">
+        <label>Sub (b):</label>
+        <select data-subject="ap" data-qid="stat2_b" data-field="rating">
+          <option value="">/1</option>
+          <option value="0">0</option><option value="1">1</option>
+        </select>
+      </div>
+    </div>
+    <div class="subpart">
+      <div class="subpart-label">(c) <span class="subpart-score">[2 pts]</span> Assume exam scores follow a normal distribution and the residual standard deviation s = 82.3 is a reasonable estimate of σ. For a student who studies 15 hours per week: (i) predict the exam score; (ii) find the probability that this student scores 1050 or higher. Show your work.</div>
+      <textarea data-subject="ap" data-qid="stat2_c" data-field="answer" placeholder="(i) x=15: ŷ = 892.50 + 14.80·15 = 1114.5&#10;(ii) Y ~ N(1114.5, 82.3²)&#10;P(Y ≥ 1050) = P(Z ≥ (1050-1114.5)/82.3) = P(Z ≥ -0.784) ≈ 0.783 ..."></textarea>
+      <div class="rating" style="margin-top:6px;">
+        <label>Sub (c):</label>
+        <select data-subject="ap" data-qid="stat2_c" data-field="rating">
+          <option value="">/2</option>
+          <option value="0">0</option><option value="1">1</option><option value="2">2</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <details>
+    <summary>✅ 参考解答 & 分步计分 Rubric（点击展开）</summary>
+    <div class="ref-content">
+      <p><strong>(a) LSRL equation + slope interpretation — 1 point:</strong></p>
+      <div class="rubric-item"><span class="pt">✓</span> Equation: ŷ = 892.50 + 14.80x, where ŷ = predicted entrance exam score, and x = weekly hours of study. (MUST use ŷ or "predicted y" — writing y loses credit.)</div>
+      <div class="rubric-item"><span class="pt">✓</span> Slope: For each additional hour of weekly study, the predicted entrance exam score increases by approximately 14.8 points, on average. (Context: "predicted," "on average", score units required.)</div>
+      <p style="margin-top:10px;"><strong>(b) Residual — 1 point:</strong></p>
+      <div class="rubric-item"><span class="pt">✓</span> Predicted: ŷ = 892.50 + 14.80·(20) = 892.50 + 296.0 = 1188.5</div>
+      <div class="rubric-item"><span class="pt">✓</span> Residual = y − ŷ = 1250 − 1188.5 = +61.5. Interpretation: This student scored 61.5 points higher than the score predicted by the regression model for a student studying 20 hours/week.</div>
+      <p style="margin-top:10px;"><strong>(c) Prediction + probability — 2 points:</strong></p>
+      <div class="rubric-item"><span class="pt">1 pt</span> (i) ŷ = 892.50 + 14.80·15 = 892.50 + 222 = 1114.5 predicted score.</div>
+      <div class="rubric-item"><span class="pt">1 pt</span> (ii) Y | x = 15 ~ Normal(μ = 1114.5, σ = 82.3). z = (1050 − 1114.5)/82.3 ≈ −0.7837. P(Y ≥ 1050) = P(Z ≥ −0.78) ≈ 0.782, or more precisely ≈ 0.783. (Correct z, correct upper tail direction, correct answer ≈ 0.78 to 0.785; wrong direction or value ≈ 0.217 no credit.)</div>
+    </div>
+  </details>
+  <div class="rating">
+    <label>FRQ #2 总分（0-4）：</label>
+    <select data-subject="ap" data-qid="stat2_total" data-field="rating">
+      <option value="">-- 打分 --</option>
+      <option value="4">4 / 4 · Perfect</option>
+      <option value="3">3 / 4</option>
+      <option value="2">2 / 4</option>
+      <option value="1">1 / 4</option>
+      <option value="0">0 / 4</option>
+    </select>
+    <button class="btn btn-sm btn-primary" onclick="submitScore('ap','stat2_total','Statistics FRQ #2')">提交评分</button>
+    <span class="score-display" data-score-for="stat2_total"></span>
+  </div>
+</div>
+
+<!-- ============ AP PHYSICS C: MECHANICS ============ -->
+<h2 id="phys">⚙️ AP Physics C: Mechanics · Free Response Questions</h2>
+
+<!-- Physics C Q1 -->
+<div class="q" id="q-ap-phys-1">
+  <div class="q-num">AP-PhysC-Mech-FRQ #1 · 15 pts</div>
+  <div class="q-title"><span class="section-tag">Physics C</span> 牛顿定律 / 能量 / 动量综合</div>
+  <div class="q-text">
+    <p>A block of mass <span class="formula-inline">m₁ = 3.0 kg</span> is placed on a rough incline plane angled at <span class="formula-inline">θ = 30°</span> above the horizontal. It is connected by a light string over a massless, frictionless pulley to a hanging block of mass <span class="formula-inline">m₂ = 2.0 kg</span>. The coefficient of kinetic friction between m₁ and the incline is <span class="formula-inline">μₖ = 0.25</span>. The system is released from rest.</p>
+    <p class="muted">Use g = 10 m/s² for simplicity; show all work including free-body diagrams described in words.</p>
+    <div class="subpart">
+      <div class="subpart-label">(a) <span class="subpart-score">[5 pts]</span> On the figures below, draw and label all forces acting on each block. Then calculate the magnitude of the acceleration of the two-block system and the tension in the string.</div>
+      <textarea data-subject="ap" data-qid="phys1_a" data-field="answer" placeholder="m₁ FBD: mg↓, N⊥plane, fₖ down-plane, T up-plane&#10;m₂ FBD: m₂g↓, T↑&#10;m₂: m₂g - T = m₂a&#10;m₁ along: T - m₁g·sinθ - μₖ·m₁g·cosθ = m₁a&#10;Add eqs: 2·10 - 3·10·0.5 - 0.25·3·10·(√3/2) = (3+2)a&#10;... a ≈ ? T ≈ ?"></textarea>
+      <div class="rating" style="margin-top:6px;">
+        <label>Sub (a):</label>
+        <select data-subject="ap" data-qid="phys1_a" data-field="rating">
+          <option value="">/5</option>
+          <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option>
+        </select>
+      </div>
+    </div>
+    <div class="subpart">
+      <div class="subpart-label">(b) <span class="subpart-score">[5 pts]</span> Starting from rest, m₂ falls a distance <span class="formula-inline">h = 1.5 m</span>. Using energy methods, calculate the speed of the blocks at this point. Then calculate the work done by friction on m₁ during this displacement.</div>
+      <textarea data-subject="ap" data-qid="phys1_b" data-field="answer" placeholder="ΔU = m₂gh - m₁gh·sinθ = 2·10·1.5 - 3·10·1.5·0.5 = 30 - 22.5 = 7.5 J&#10;Work by friction W_f = -μₖ·m₁g·cosθ · (h/sinθ?) — no, distance along plane = h/sinθ ...&#10;W_net = ΔKE = ½(m₁+m₂)v² ...&#10;⇒ v ≈ ?"></textarea>
+      <div class="rating" style="margin-top:6px;">
+        <label>Sub (b):</label>
+        <select data-subject="ap" data-qid="phys1_b" data-field="rating">
+          <option value="">/5</option>
+          <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option>
+        </select>
+      </div>
+    </div>
+    <div class="subpart">
+      <div class="subpart-label">(c) <span class="subpart-score">[5 pts]</span> When m₂ has fallen 1.5 m, the string snaps. Immediately after the string breaks, m₂ continues falling and strikes the floor 0.3 s later, but m₁ slides farther up the ramp (still with friction) before coming to rest. Find the extra distance along the incline that m₁ travels after the string breaks. (You may use speed from part (b); if you couldn't solve it, assume v = 2.0 m/s for partial credit.)</div>
+      <textarea data-subject="ap" data-qid="phys1_c" data-field="answer" placeholder="After string breaks: m₁ slows, net force = -m₁g sinθ - μₖm₁g cosθ&#10;Deceleration a' = -g(sinθ + μₖ cosθ)&#10;0 - v² = 2·a'·d ⇒ d = v² / [2g(sinθ + μₖ cosθ)] ..."></textarea>
+      <div class="rating" style="margin-top:6px;">
+        <label>Sub (c):</label>
+        <select data-subject="ap" data-qid="phys1_c" data-field="rating">
+          <option value="">/5</option>
+          <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <details>
+    <summary>✅ 参考解答 & 分步计分 Rubric（点击展开）</summary>
+    <div class="ref-content">
+      <p><strong>(a) FBD + Newton's 2nd Law — 5 points:</strong></p>
+      <div class="rubric-item"><span class="pt">2 pts</span> FBDs: m₁ has (m₁g↓, N⊥plane, fₖ ↓plane, T ↑plane). m₂ has (m₂g↓, T↑). Correct directions & labels; no extras.</div>
+      <div class="rubric-item"><span class="pt">2 pts</span> Equations: m₂g − T = m₂a; T − m₁g·sinθ − μₖ·m₁g·cosθ = m₁a. Add: m₂g − m₁g(sinθ + μₖcosθ) = (m₁+m₂)a.</div>
+      <div class="rubric-item"><span class="pt">1 pt</span> Plug in g=10: LHS = 20 − 30(0.5 + 0.25·(√3/2)) = 20 − 30(0.5 + 0.2165) = 20 − 21.495 ≈ −1.495 N. Wait: system accelerates down incline? Actually m₁ down-plane = 15 N + friction ≈ +6.5 N ⇒ T must be 21.5 N, vs m₂g=20 N ⇒ m₁ slides down the plane, m₂ rises. ⇒ Flip signs: a ≈ −0.30 m/s² (meaning system accelerates with m₁ moving down). Accept a ≈ 0.30 m/s² with stated direction; then T ≈ 20 − 2(0.3) ≈ 19.4 N. Rubric: correct algebra & direction; arithmetic sign error minor.</div>
+      <p style="margin-top:10px;"><strong>(b) Energy + work by friction — 5 points:</strong></p>
+      <div class="rubric-item"><span class="pt">1 pt</span> Correct sign ΔU: m₂ rises h if m₁ goes down, else falls. (From part (a), m₁ moves down, so m₂ rises h: ΔU_grav = +m₂gh − m₁g·h·sinθ = +30 − 22.5 = +7.5 J.)</div>
+      <div class="rubric-item"><span class="pt">2 pts</span> W_nonconservative = −fₖ·d along plane. d_along = h/sinθ = 1.5/0.5 = 3.0 m. fₖ = 0.25·30·(√3/2) ≈ 6.495 N. ⇒ W_f = −6.495·3 ≈ −19.49 J.</div>
+      <div class="rubric-item"><span class="pt">2 pts</span> W_net = ΔKE ⇒ −7.5 − 19.49 = ½·5·v² ⇒ Wait actually conservation: Initial energy = final: 0 = ΔU + W_f + ½(m₁+m₂)v² ⇒ v ≈ √(2·|11.99|/5) ≈ 2.19 m/s. If using the a from (a) · d along = 0.30·3 ⇒ v²=1.8 ⇒ v≈1.34 m/s, accept based on consistent signs.</div>
+      <p style="margin-top:10px;"><strong>(c) Extra distance after string breaks — 5 points:</strong></p>
+      <div class="rubric-item"><span class="pt">2 pts</span> Correct deceleration: after string breaks, net force on m₁ along plane = −m₁g·sinθ − μₖm₁g·cosθ (both oppose up-plane motion) ⇒ a' = −g(sinθ + μₖ cosθ) ≈ −10·(0.5 + 0.2165) ≈ −7.165 m/s².</div>
+      <div class="rubric-item"><span class="pt">2 pts</span> Kinematics: 0 = v² + 2a'd ⇒ d = v² / (2g(sinθ+μₖcosθ)). With v ≈ 2.0 m/s: d ≈ 4.0 / (14.33) ≈ 0.28 m. With v ≈ 2.19: d ≈ 0.33 m. Accept 0.27 – 0.35 m.</div>
+      <div class="rubric-item"><span class="pt">1 pt</span> Clear reasoning: use v² = u² + 2as OR energy ½mv² = (m₁g sinθ + fₖ)·d with consistent variables.</div>
+    </div>
+  </details>
+  <div class="rating">
+    <label>FRQ #1 总分（0-15）：</label>
+    <select data-subject="ap" data-qid="phys1_total" data-field="rating">
+      <option value="">-- 打分 --</option>
+      <option value="15">15 / 15 · Perfect</option>
+      <option value="14">14 / 15</option>
+      <option value="13">13 / 15</option>
+      <option value="12">12 / 15</option>
+      <option value="11">11 / 15</option>
+      <option value="10">10 / 15</option>
+      <option value="9">9 / 15</option>
+      <option value="8">8 / 15</option>
+      <option value="7">7 / 15</option>
+      <option value="6">6 / 15</option>
+      <option value="5">5 / 15</option>
+      <option value="4">4 / 15</option>
+      <option value="3">3 / 15</option>
+      <option value="2">2 / 15</option>
+      <option value="1">1 / 15</option>
+      <option value="0">0 / 15</option>
+    </select>
+    <button class="btn btn-sm btn-primary" onclick="submitScore('ap','phys1_total','Physics C Mech FRQ #1')">提交评分</button>
+    <span class="score-display" data-score-for="phys1_total"></span>
+  </div>
+</div>
+
+<!-- Physics C Q2 -->
+<div class="q" id="q-ap-phys-2">
+  <div class="q-num">AP-PhysC-Mech-FRQ #2 · 15 pts</div>
+  <div class="q-title"><span class="section-tag">Physics C</span> 转动 / 平动综合（Rolling + Conservation）</div>
+  <div class="q-text">
+    <p>A uniform solid sphere of mass <span class="formula-inline">M = 0.80 kg</span> and radius <span class="formula-inline">R = 0.05 m</span> is released from rest at the top of an incline of height <span class="formula-inline">H = 2.0 m</span>. The sphere rolls without slipping to the bottom. (Moment of inertia of a solid sphere about its center: <span class="formula-inline">I = ⅖MR²</span>.)</p>
+    <div class="subpart">
+      <div class="subpart-label">(a) <span class="subpart-score">[4 pts]</span> Using energy conservation, derive an expression for the translational speed <span class="formula-inline">v_cm</span> of the sphere at the bottom of the incline in terms of <span class="formula-inline">g, H</span>, and any necessary constants. Then compute its numerical value. Use g = 10 m/s².</div>
+      <textarea data-subject="ap" data-qid="phys2_a" data-field="answer" placeholder="MgH = ½Mv² + ½Iω², ω = v/R&#10;= ½Mv² + ½(2/5 MR²)(v²/R²) = (1/2 + 1/5)Mv² = 7/10 Mv²&#10;v = sqrt(10gH/7) = sqrt(10·10·2/7) = sqrt(200/7) ≈ 5.35 m/s"></textarea>
+      <div class="rating" style="margin-top:6px;">
+        <label>Sub (a):</label>
+        <select data-subject="ap" data-qid="phys2_a" data-field="rating">
+          <option value="">/4</option>
+          <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
+        </select>
+      </div>
+    </div>
+    <div class="subpart">
+      <div class="subpart-label">(b) <span class="subpart-score">[4 pts]</span> At the bottom, the sphere rolls onto a horizontal, frictionless track and collides elastically with a block of mass <span class="formula-inline">m = 1.2 kg</span> that is initially at rest. Because the track is frictionless, the sphere continues to rotate with the same angular velocity as before the collision, but its translational motion changes. Find the translational velocity of both the sphere and the block immediately after the collision (linear elastic collision; ignore rotation for the collision calculation, as no friction ⇒ no torque ⇒ ω unchanged).</div>
+      <textarea data-subject="ap" data-qid="phys2_b" data-field="answer" placeholder="Linear elastic: Mv₀ = Mv₁ + mv₂ & v₂ - v₁ = v₀&#10;M = 0.8, m = 1.2, v₀ ≈ 5.345 m/s&#10;v₁ = (M - m)/(M + m) · v₀ = (-0.4/2.0)·v₀ = -0.2 v₀ ≈ -1.069 m/s&#10;v₂ = 2M/(M+m)·v₀ = (1.6/2.0)v₀ = 0.8 v₀ ≈ 4.276 m/s"></textarea>
+      <div class="rating" style="margin-top:6px;">
+        <label>Sub (b):</label>
+        <select data-subject="ap" data-qid="phys2_b" data-field="rating">
+          <option value="">/4</option>
+          <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
+        </select>
+      </div>
+    </div>
+    <div class="subpart">
+      <div class="subpart-label">(c) <span class="subpart-score">[3 pts]</span> Immediately after the collision, what is the magnitude and direction of the total angular momentum of the sphere about the collision point (the point on the track where the collision took place)? Answer symbolically first, then evaluate numerically. Is angular momentum conserved about this point during the collision? Briefly justify.</div>
+      <textarea data-subject="ap" data-qid="phys2_c" data-field="answer" placeholder="L about collision point: L = Iω (spin) + r × p (orbital, r=R⊥ from point)&#10;Orbital term: M·v₁·R, direction: v₁ now negative ⇒ check sign&#10;L = (2/5 MR²)ω + Mv₁·R, ω still = v₀/R &#10;= (2/5 MR)v₀ + MR·(-0.2v₀) = MRv₀ (2/5 - 1/5) = MRv₀/5&#10;≈ 0.8·0.05·5.345/5 ≈ 0.0428 kg·m²/s direction into page (right-hand rule)&#10;Conserved? Yes, because impulsive force acts AT point, so τ = 0 about it."></textarea>
+      <div class="rating" style="margin-top:6px;">
+        <label>Sub (c):</label>
+        <select data-subject="ap" data-qid="phys2_c" data-field="rating">
+          <option value="">/3</option>
+          <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option>
+        </select>
+      </div>
+    </div>
+    <div class="subpart">
+      <div class="subpart-label">(d) <span class="subpart-score">[4 pts]</span> After leaving the frictionless track, the sphere moves onto a long carpet where the coefficient of kinetic friction is <span class="formula-inline">μₖ = 0.30</span>. The sphere is now translating backward (relative to positive) but spinning as before, so friction acts until pure rolling is re-established. Find the time and the distance the sphere travels on the carpet before it again rolls without slipping, and find its final center-of-mass velocity.</div>
+      <textarea data-subject="ap" data-qid="phys2_d" data-field="answer" placeholder="Post-collision: v_cm = v₁ = -1.07 m/s, ω = v₀/R = 5.345/0.05 ≈ 106.9 rad/s (spinning forward, translating backward)&#10;Friction f = μₖMg = 0.3·0.8·10 = 2.4 N acts forward, a = f/M = 3.0 m/s² (accelerates v forward)&#10;Torque τ = -f·R (opposes spin), α = -fR/I = -μₖMgR / (2/5 MR²) = -(5/2)(μₖg/R) = -2.5·3/0.05 = -150 rad/s²&#10;v(t) = v₁ + at; ω(t) = ω + αt&#10;Pure rolling: v(t) = ω(t)·R&#10;-1.07 + 3t = (106.9 - 150t)·0.05 = 5.345 - 7.5t&#10;10.5 t = 6.415 ⇒ t ≈ 0.611 s&#10;v_final = -1.07 + 3·0.611 ≈ 0.763 m/s (+ direction)&#10;Distance d = v₁·t + ½at² ≈ -1.07·0.611 + 0.5·3·0.611² ≈ ?"></textarea>
+      <div class="rating" style="margin-top:6px;">
+        <label>Sub (d):</label>
+        <select data-subject="ap" data-qid="phys2_d" data-field="rating">
+          <option value="">/4</option>
+          <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <details>
+    <summary>✅ 参考解答 & 分步计分 Rubric（点击展开）</summary>
+    <div class="ref-content">
+      <p><strong>(a) Rolling without slipping, energy conservation — 4 points:</strong></p>
+      <div class="rubric-item"><span class="pt">1 pt</span> Correct energies: MgH = ½Mv_cm² + ½Iω² (potential → translational + rotational KE; no slipping ⇒ ω = v/R)</div>
+      <div class="rubric-item"><span class="pt">1 pt</span> Substitute I = ⅖MR²: MgH = ½Mv² + ½(⅖MR²)(v²/R²) = ½Mv² + ⅕Mv² = (7/10)Mv². Cancel M.</div>
+      <div class="rubric-item"><span class="pt">1 pt</span> Algebra: v = √(10gH/7) (symbolic result)</div>
+      <div class="rubric-item"><span class="pt">1 pt</span> Numerics: v = √(10·10·2 / 7) = √(200/7) ≈ √28.571 ≈ 5.345 m/s (accept 5.3 – 5.4 m/s)</div>
+      <p style="margin-top:10px;"><strong>(b) Elastic translational collision — 4 points:</strong></p>
+      <div class="rubric-item"><span class="pt">1 pt</span> Correctly apply linear elastic equations: (1) momentum Mv₀ = Mv₁ + mv₂, (2) v₂ − v₁ = v₀ (relative speed preserved).</div>
+      <div class="rubric-item"><span class="pt">1 pt</span> Correct formulas: v₁ = (M−m)/(M+m)·v₀, v₂ = 2M/(M+m)·v₀.</div>
+      <div class="rubric-item"><span class="pt">1 pt</span> v₁ = (−0.4/2.0)·5.345 ≈ −1.07 m/s (sphere rebounds, negative ⇒ backward toward incline).</div>
+      <div class="rubric-item"><span class="pt">1 pt</span> v₂ = (1.6/2.0)·5.345 ≈ +4.28 m/s (block forward). Units required.</div>
+      <p style="margin-top:10px;"><strong>(c) Angular momentum — 3 points:</strong></p>
+      <div class="rubric-item"><span class="pt">1 pt</span> L_total = L_spin + L_orbital = Iω₀ + M·v₁·R (perpendicular, since point on ground directly below ⇒ r=R). ω₀ = v₀/R ⇒ L = ⅖MR²·(v₀/R) + Mv₁R = MR(⅖v₀ + v₁) = MR(0.4·5.345 − 1.069) = MR(2.138 − 1.069) = MR·1.069 ≈ 0.8·0.05·1.069 ≈ 0.0428 kg·m²/s.</div>
+      <div class="rubric-item"><span class="pt">1 pt</span> Direction: into page (right-hand rule: spin forward rolling + after slight correction from rebounding sign; accept consistent direction reasoning).</div>
+      <div class="rubric-item"><span class="pt">1 pt</span> Angular momentum IS conserved about the collision point because the only impulsive force (normal/contact between block & sphere) acts at or through this point, so its torque is zero (lever arm zero). Weight and normal also cancel/equal lever.</div>
+      <p style="margin-top:10px;"><strong>(d) Re-establishing pure rolling on carpet — 4 points:</strong></p>
+      <div class="rubric-item"><span class="pt">1 pt</span> a = +μₖg = 3.0 m/s² (forward), α = τ/I = (−μₖMg·R)/(⅖MR²) = −(5/2)(μₖg/R) = −2.5·(3/0.05) = −150 rad/s². (Opposes spin.)</div>
+      <div class="rubric-item"><span class="pt">1 pt</span> Pure rolling condition: v_cm = ω·R. v(t) = v₁ + at; ω(t) = ω₀ + αt; ω₀ = v₀/R ≈ 106.9 rad/s.</div>
+      <div class="rubric-item"><span class="pt">1 pt</span> Solve: v₁ + at = (ω₀ + αt)·R ⇒ −1.069 + 3t = 5.345 − 7.5t ⇒ 10.5t = 6.414 ⇒ t ≈ 0.611 s (0.60 – 0.62 acceptable). v_final = −1.069 + 3·0.611 ≈ +0.764 m/s (forward direction).</div>
+      <div class="rubric-item"><span class="pt">1 pt</span> Distance: d = v₁·t + ½at² ≈ −1.069·0.611 + ½·3·(0.611)² ≈ −0.653 + 0.560 ≈ −0.093 m (about 9.3 cm backward displacement before forward rolling sets in). OR 0.08 – 0.11 m accept.</div>
+    </div>
+  </details>
+  <div class="rating">
+    <label>FRQ #2 总分（0-15）：</label>
+    <select data-subject="ap" data-qid="phys2_total" data-field="rating">
+      <option value="">-- 打分 --</option>
+      <option value="15">15 / 15 · Perfect</option>
+      <option value="14">14 / 15</option>
+      <option value="13">13 / 15</option>
+      <option value="12">12 / 15</option>
+      <option value="11">11 / 15</option>
+      <option value="10">10 / 15</option>
+      <option value="9">9 / 15</option>
+      <option value="8">8 / 15</option>
+      <option value="7">7 / 15</option>
+      <option value="6">6 / 15</option>
+      <option value="5">5 / 15</option>
+      <option value="4">4 / 15</option>
+      <option value="3">3 / 15</option>
+      <option value="2">2 / 15</option>
+      <option value="1">1 / 15</option>
+      <option value="0">0 / 15</option>
+    </select>
+    <button class="btn btn-sm btn-primary" onclick="submitScore('ap','phys2_total','Physics C Mech FRQ #2')">提交评分</button>
+    <span class="score-display" data-score-for="phys2_total"></span>
+  </div>
+</div>
+
+<!-- ================ HISTORY TABLE ================ -->
+<h2>📋 答题历史记录（AP 全科目）</h2>
+<div class="history-table" id="history-table"></div>
+
+<div class="footer">
+  <a href="syllabus.html">Syllabus</a> · <a href="practice.html">Practice</a> · <a href="tracker.html">Tracker</a> · <a href="intro.html">Intro</a> · <a href="../dashboard.html">Dashboard</a>
+</div>
+
+<script>
+const STORAGE_KEY = 'yz_subjective_data';
+
+function loadData() {
+  try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); }
+  catch(e) { return {}; }
+}
+
+function saveData(data) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+}
+
+function keyOf(subject, qid, field) {
+  return subject + '__' + qid + '__' + field;
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  const data = loadData();
+  document.querySelectorAll('textarea, select').forEach(el => {
+    const subject = el.dataset.subject;
+    const qid = el.dataset.qid;
+    const field = el.dataset.field;
+    if (subject && qid && field) {
+      const k = keyOf(subject, qid, field);
+      if (data[k] !== undefined && data[k] !== null) {
+        el.value = data[k];
+      }
+    }
+  });
+  renderHistory();
+});
+
+document.addEventListener('input', function(e) {
+  const el = e.target;
+  const subject = el.dataset.subject;
+  const qid = el.dataset.qid;
+  const field = el.dataset.field;
+  if (subject && qid && field) {
+    const data = loadData();
+    data[keyOf(subject, qid, field)] = el.value;
+    saveData(data);
+  }
+});
+
+document.addEventListener('change', function(e) {
+  const el = e.target;
+  const subject = el.dataset.subject;
+  const qid = el.dataset.qid;
+  const field = el.dataset.field;
+  if (subject && qid && field) {
+    const data = loadData();
+    data[keyOf(subject, qid, field)] = el.value;
+    saveData(data);
+  }
+});
+
+function submitScore(subject, qid, title) {
+  const ratingSel = document.querySelector('select[data-subject="' + subject + '"][data-qid="' + qid + '"][data-field="rating"]');
+  if (!ratingSel || !ratingSel.value) {
+    alert('请先选择评分');
+    return;
+  }
+  const score = ratingSel.value;
+  const data = loadData();
+  const historyKey = 'history_' + subject;
+  if (!data[historyKey]) data[historyKey] = [];
+  const entry = {
+    qid: qid,
+    title: title,
+    score: score,
+    timestamp: Date.now(),
+    dateStr: new Date().toLocaleString('zh-CN')
+  };
+  data[historyKey].push(entry);
+  saveData(data);
+
+  const scoreDisplay = document.querySelector('[data-score-for="' + qid + '"]');
+  if (scoreDisplay) {
+    scoreDisplay.textContent = ' · 已提交: ' + score + ' · ' + entry.dateStr;
+  }
+  alert('评分已保存：' + title + ' · ' + score);
+  renderHistory();
+}
+
+function renderHistory() {
+  const container = document.getElementById('history-table');
+  const data = loadData();
+  const history = data['history_ap'] || [];
+  if (history.length === 0) {
+    container.innerHTML = '<div class="history-empty">暂无答题记录，完成评分后将在此显示</div>';
+    return;
+  }
+  history.sort((a,b) => b.timestamp - a.timestamp);
+  let html = '<table><thead><tr><th>题目</th><th>分数</th><th>日期时间</th></tr></thead><tbody>';
+  history.forEach(h => {
+    html += '<tr><td>' + h.title + '</td><td><strong>' + h.score + '</strong></td><td>' + h.dateStr + '</td></tr>';
+  });
+  html += '</tbody></table>';
+  container.innerHTML = html;
+}
+</script>
+
+</body>
+</html>

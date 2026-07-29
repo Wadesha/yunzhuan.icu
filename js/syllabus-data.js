@@ -1031,6 +1031,78 @@
       });
 
       return codeMap;
+    },
+
+    /**
+     * 按 Topic 权重分配指定数量的题目
+     * 遍历 SYLLABUS_DATA.getSubject(subjectKey).papers[].topics[]
+     * 每个 topic.weight 解析成百分比，算出目标题数 = total × weightPct / 100
+     * 四舍五入后，如果总和 != total，按余数大小微调 +1/-1 让总和精确等于 total
+     *
+     * @param {string} subjectKey - 科目 key
+     * @param {number} totalQuestions - 要分配的总题数
+     * @returns {object} Map: topicCode -> questionCount
+     * 示例：SAT total=120, Linear equations weight=8.75% → 10.5 ≈ 11 题
+     */
+    allocateQuestionsByWeight: function(subjectKey, totalQuestions) {
+      var sub = subjects[subjectKey];
+      if (!sub) return {};
+
+      var allocations = {};
+      var topicList = [];
+      var totalWeight = 0;
+
+      eachTopic(subjectKey, function(topic) {
+        var weightPct = 0;
+        if (topic.weight && typeof topic.weight === 'string') {
+          var m = topic.weight.match(/([\d.]+)/);
+          if (m) weightPct = parseFloat(m[1]);
+        } else if (typeof topic.weight === 'number') {
+          weightPct = topic.weight;
+        }
+        totalWeight += weightPct;
+        topicList.push({ code: topic.code, weightPct: weightPct });
+      });
+
+      if (!topicList.length) return {};
+
+      if (totalWeight <= 0) {
+        var avgCount = Math.floor(totalQuestions / topicList.length);
+        var remainder = totalQuestions - avgCount * topicList.length;
+        topicList.forEach(function(t, i) {
+          allocations[t.code] = avgCount + (i < remainder ? 1 : 0);
+        });
+        return allocations;
+      }
+
+      var rawValues = [];
+      var roundedSum = 0;
+      topicList.forEach(function(t) {
+        var raw = (t.weightPct / totalWeight) * totalQuestions;
+        var floored = Math.floor(raw);
+        var fractional = raw - floored;
+        rawValues.push({ code: t.code, raw: raw, floored: floored, fractional: fractional });
+        allocations[t.code] = floored;
+        roundedSum += floored;
+      });
+
+      var diff = totalQuestions - roundedSum;
+
+      if (diff > 0) {
+        rawValues.sort(function(a, b) { return b.fractional - a.fractional; });
+        for (var i = 0; i < diff; i++) {
+          allocations[rawValues[i].code]++;
+        }
+      } else if (diff < 0) {
+        rawValues.sort(function(a, b) { return a.fractional - b.fractional; });
+        for (var j = 0; j < -diff; j++) {
+          if (allocations[rawValues[j].code] > 0) {
+            allocations[rawValues[j].code]--;
+          }
+        }
+      }
+
+      return allocations;
     }
   };
 

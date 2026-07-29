@@ -109,6 +109,61 @@
   </div>
 </div>
 
+<h2>出卷结构参考（按 Topic 权重分配）</h2>
+<p class="muted">每科按真实考试模块与权重比例分配 20 题。</p>
+<div id="structureReference" class="grid">
+  <div class="card">
+    <div class="card-title">SAT 真实结构</div>
+    <div class="card-meta">RW × 10 + Math × 10 = 20 题</div>
+    <ul style="font-size:0.8rem; margin:6px 0 0 18px;">
+      <li>RW-Craft (4 topic) × 10 × 28% ≈ 3 题</li>
+      <li>RW-Info (4 topic) × 10 × 26% ≈ 3 题</li>
+      <li>RW-Conv (3 topic) × 10 × 26% ≈ 2 题</li>
+      <li>RW-Expr (3 topic) × 10 × 20% ≈ 2 题</li>
+      <li>Math-Alg (4) × 10 × 35% ≈ 4 题</li>
+      <li>Math-Adv (4) × 10 × 35% ≈ 3 题</li>
+      <li>Math-PSD (3) × 10 × 15% ≈ 2 题</li>
+      <li>Math-GT (3) × 10 × 15% ≈ 1 题</li>
+    </ul>
+  </div>
+  <div class="card">
+    <div class="card-title">ACT 真实结构</div>
+    <div class="card-meta">ENG × 5 + MATH × 5 + READ × 5 + SCI × 5 = 20 题</div>
+    <ul style="font-size:0.8rem; margin:6px 0 0 18px;">
+      <li>ENG-PW/KL/CSE 按官方权重 29%/18%/53%</li>
+      <li>MATH-PA/AG/IGM/HEI/MDL 按 40%/30%/15%/10%/5%</li>
+      <li>READ-KID/CSD/IKI/SEI 按 25% 均分</li>
+      <li>SCI-IOD/SIN/EMI 按 40%/30%/30%</li>
+    </ul>
+  </div>
+  <div class="card">
+    <div class="card-title">IB / A-Level / AP / IGCSE</div>
+    <div class="card-meta">按 Paper/Unit 官方课时占比分配</div>
+    <ul style="font-size:0.8rem; margin:6px 0 0 18px;">
+      <li>IB：HL/SL Paper 1/2/3 按权重</li>
+      <li>A-Level：AS + A2 Paper 各占比例</li>
+      <li>AP：CED Unit 1–N 按课时百分比</li>
+      <li>IGCSE：Core / Extended 按 topic 均分</li>
+    </ul>
+  </div>
+  <div class="card">
+    <div class="card-title">TOEFL / IELTS</div>
+    <div class="card-meta">4 Section 各占 25%（本页仅 Reading 15 题）</div>
+    <ul style="font-size:0.8rem; margin:6px 0 0 18px;">
+      <li>TOEFL R/L/S/W：各 30 分 × 题型权重</li>
+      <li>IELTS L/R/W/S：各 9.0 分 × 题型权重</li>
+      <li>当前 Mock：仅 Reading 模拟 15 题</li>
+    </ul>
+  </div>
+</div>
+
+<div class="box-dashed" style="margin-top:12px;">
+  <strong>自适应难度（简单版）</strong>：
+  前 10 题正确率 &lt; 50% → 后 10 题<strong>降低难度（优先 Easy）</strong>；
+  前 10 题正确率 ≥ 80% → 后 10 题<strong>提升难度（优先 Medium/Hard）</strong>；
+  其他情况保持默认。结果页会显示自适应难度调整结果。
+</div>
+
 <h2>模拟测试说明</h2>
 <div class="box">
   <ul>
@@ -175,6 +230,7 @@
   <a href="javascript:window.scrollTo(0,0)">Back to top</a>
 </div>
 
+<script src="../../../js/syllabus-data.js"></script>
 <script>
 (function() {
   'use strict';
@@ -197,8 +253,208 @@
     remaining: 0,
     timerId: null,
     paused: false,
-    startedAt: 0
+    startedAt: 0,
+    adaptiveMode: '保持',
+    firstHalfCorrect: 0,
+    weightAllocations: {}
   };
+
+  // --- Adaptive: Difficulty level from question text ---
+  function extractDifficulty(qEl) {
+    var text = '';
+    var numEl = qEl.querySelector('.q-num');
+    if (numEl) text = numEl.textContent || '';
+    if (/Easy|简单|E\b/i.test(text)) return 'Easy';
+    if (/Hard|困难|H\b/i.test(text)) return 'Hard';
+    if (/Medium|中等|M\b/i.test(text)) return 'Medium';
+    return 'Medium';
+  }
+
+  // --- Extract topic-code from question element ---
+  function extractTopicCode(qEl) {
+    if (qEl.getAttribute) {
+      var code = qEl.getAttribute('data-topic-code') || qEl.getAttribute('data-topic') || '';
+      if (code) return code;
+    }
+    var qNum = qEl.querySelector('.q-num, .q-topic, .topic-code');
+    if (qNum) {
+      var txt = qNum.textContent || qNum.innerText || '';
+      var m = txt.match(/[\u3010\u3011\u3008\u3009【】]([A-Za-z0-9][A-Za-z0-9-]*)[\u3010\u3011\u3008\u3009【】]/);
+      if (m) return m[1];
+      var m2 = txt.match(/topic=([A-Za-z0-9-]+)/);
+      if (m2) return m2[1];
+    }
+    return '';
+  }
+
+  // --- Build full question pool with topic + difficulty metadata ---
+  function buildQuestionPool(subject) {
+    var all = Array.prototype.slice.call(document.querySelectorAll('.q'));
+    var pool = all.filter(function(q) {
+      var body = document.body.getAttribute('data-subject') || '';
+      return !subject || body === subject || q.getAttribute('data-subject') === subject;
+    });
+    return pool.map(function(q, i) {
+      var qNumEl = q.querySelector('.q-num');
+      var qTextEl = q.querySelector('.q-text');
+      var choicesEls = q.querySelectorAll('.q-choices li');
+      var answerEl = q.querySelector('.q-answer');
+      var correctLetter = '';
+      if (answerEl) {
+        var m = answerEl.textContent.match(/Answer:\s*([A-E])/i);
+        if (!m) m = answerEl.textContent.match(/答案[：:]\s*([A-E])/i);
+        if (m) correctLetter = m[1].toUpperCase();
+      }
+      var choices = [];
+      choicesEls.forEach(function(li) {
+        var letter = li.textContent.trim().charAt(0);
+        choices.push({ letter: letter, text: li.textContent.trim() });
+      });
+      return {
+        el: q,
+        poolIndex: i,
+        qid: q.getAttribute('data-qid') || q.id || ('q' + (i + 1)),
+        num: qNumEl ? qNumEl.textContent : ('Q' + (i + 1)),
+        text: qTextEl ? qTextEl.textContent : '',
+        choices: choices,
+        correct: correctLetter,
+        topic: extractTopicCode(q),
+        difficulty: extractDifficulty(q)
+      };
+    });
+  }
+
+  // --- Find adjacent topic codes for fallback when a topic runs out ---
+  function getAdjacentTopics(subject, targetCode) {
+    if (!window.SYLLABUS_DATA || !window.SYLLABUS_DATA.getSubject) return [];
+    var subj = window.SYLLABUS_DATA.getSubject(subject);
+    if (!subj) return [];
+    var allCodes = [];
+    var targetIdx = -1;
+    subj.papers.forEach(function(paper) {
+      paper.topics.forEach(function(t) {
+        if (t.code === targetCode) targetIdx = allCodes.length;
+        allCodes.push(t.code);
+      });
+    });
+    if (targetIdx === -1) return allCodes;
+    var adjacent = [];
+    for (var offset = 1; offset < allCodes.length; offset++) {
+      if (targetIdx + offset < allCodes.length) adjacent.push(allCodes[targetIdx + offset]);
+      if (targetIdx - offset >= 0) adjacent.push(allCodes[targetIdx - offset]);
+      if (adjacent.length >= Math.min(8, allCodes.length - 1)) break;
+    }
+    return adjacent;
+  }
+
+  // --- Collect questions by weight allocation, with topic matching + fallback + adaptive difficulty ---
+  function collectQuestionsByWeight(subject, count, difficultyPreference) {
+    var pool = buildQuestionPool(subject);
+    if (!pool.length) return [];
+
+    var allocations = {};
+    if (window.SYLLABUS_DATA && window.SYLLABUS_DATA.allocateQuestionsByWeight) {
+      allocations = window.SYLLABUS_DATA.allocateQuestionsByWeight(subject, count);
+    }
+    state.weightAllocations = allocations;
+
+    var usedIds = {};
+    var result = [];
+    var topicCodes = Object.keys(allocations);
+
+    var diffScore = function(diff) {
+      if (difficultyPreference === 'easier') {
+        return diff === 'Easy' ? 3 : (diff === 'Medium' ? 2 : 1);
+      }
+      if (difficultyPreference === 'harder') {
+        return diff === 'Hard' ? 3 : (diff === 'Medium' ? 2 : 1);
+      }
+      return 2;
+    };
+
+    if (!topicCodes.length) {
+      var shuffled = pool.slice().sort(function(a, b) {
+        return diffScore(b.difficulty) - diffScore(a.difficulty) || (Math.random() - 0.5);
+      });
+      return shuffled.slice(0, Math.min(count, shuffled.length)).map(function(q, i) {
+        return {
+          index: i + 1,
+          qid: q.qid,
+          num: q.num,
+          text: q.text,
+          choices: q.choices,
+          correct: q.correct,
+          topic: q.topic,
+          difficulty: q.difficulty
+        };
+      });
+    }
+
+    topicCodes.forEach(function(tCode) {
+      var need = allocations[tCode] || 0;
+      if (need <= 0) return;
+
+      var candidates = pool.filter(function(q) {
+        return !usedIds[q.qid] && q.topic === tCode;
+      });
+      candidates.sort(function(a, b) {
+        return diffScore(b.difficulty) - diffScore(a.difficulty) || (Math.random() - 0.5);
+      });
+
+      var picked = candidates.slice(0, need);
+      picked.forEach(function(q) { usedIds[q.qid] = true; result.push(q); });
+
+      var remaining = need - picked.length;
+      if (remaining > 0) {
+        var adjCodes = getAdjacentTopics(subject, tCode);
+        for (var ai = 0; ai < adjCodes.length && remaining > 0; ai++) {
+          var adjPool = pool.filter(function(q) {
+            return !usedIds[q.qid] && q.topic === adjCodes[ai];
+          });
+          adjPool.sort(function(a, b) {
+            return diffScore(b.difficulty) - diffScore(a.difficulty) || (Math.random() - 0.5);
+          });
+          var take = adjPool.slice(0, remaining);
+          take.forEach(function(q) { usedIds[q.qid] = true; result.push(q); });
+          remaining -= take.length;
+        }
+      }
+
+      if (remaining > 0) {
+        var anyPool = pool.filter(function(q) { return !usedIds[q.qid]; });
+        anyPool.sort(function(a, b) {
+          return diffScore(b.difficulty) - diffScore(a.difficulty) || (Math.random() - 0.5);
+        });
+        var anyTake = anyPool.slice(0, remaining);
+        anyTake.forEach(function(q) { usedIds[q.qid] = true; result.push(q); });
+      }
+    });
+
+    if (result.length < count) {
+      var fill = pool.filter(function(q) { return !usedIds[q.qid]; });
+      fill.sort(function(a, b) {
+        return diffScore(b.difficulty) - diffScore(a.difficulty) || (Math.random() - 0.5);
+      });
+      fill.slice(0, count - result.length).forEach(function(q) {
+        usedIds[q.qid] = true;
+        result.push(q);
+      });
+    }
+
+    result = result.slice(0, count);
+    return result.map(function(q, i) {
+      return {
+        index: i + 1,
+        qid: q.qid,
+        num: q.num,
+        text: q.text,
+        choices: q.choices,
+        correct: q.correct,
+        topic: q.topic,
+        difficulty: q.difficulty
+      };
+    });
+  }
 
   // --- History (localStorage) ---
   function loadHistory() {
@@ -328,7 +584,7 @@
       div.className = 'mock-q';
       var num = document.createElement('div');
       num.className = 'mq-num';
-      num.textContent = '第 ' + q.index + ' 题 · ' + q.num;
+      num.textContent = '第 ' + q.index + ' 题 · ' + q.num + (q.difficulty ? ' · [' + q.difficulty + ']' : '');
       div.appendChild(num);
       var text = document.createElement('p');
       text.className = 'mq-text';
@@ -341,10 +597,95 @@
         li.textContent = c.text;
         li.setAttribute('data-letter', c.letter);
         li.addEventListener('click', function() {
-          // Each question answered once
           if (state.answers[q.qid]) return;
           state.answers[q.qid] = c.letter;
-          // Lock all choices for this question
+          ul.querySelectorAll('li').forEach(function(x) {
+            if (x.getAttribute('data-letter') === c.letter) x.classList.add('selected');
+            x.style.cursor = 'default';
+          });
+          checkAdaptiveTrigger();
+        });
+        ul.appendChild(li);
+      });
+      div.appendChild(ul);
+      questionsEl.appendChild(div);
+    });
+  }
+
+  // --- Adaptive trigger: when first 10 questions answered, calc accuracy ---
+  function checkAdaptiveTrigger() {
+    var firstHalfCount = Math.min(10, state.questions.length);
+    var answeredCount = 0;
+    var correctCount = 0;
+    for (var i = 0; i < firstHalfCount; i++) {
+      var q = state.questions[i];
+      if (q && state.answers[q.qid]) {
+        answeredCount++;
+        if (state.answers[q.qid] === q.correct) correctCount++;
+      }
+    }
+    if (answeredCount < firstHalfCount) return;
+
+    state.firstHalfCorrect = correctCount;
+    var accuracy = correctCount / firstHalfCount;
+
+    if (accuracy < 0.5) {
+      state.adaptiveMode = '降低';
+    } else if (accuracy >= 0.8) {
+      state.adaptiveMode = '提升';
+    } else {
+      state.adaptiveMode = '保持';
+    }
+  }
+
+  // --- Append second-half questions after adaptive adjustment ---
+  function appendSecondHalfQuestions(subject, totalCount) {
+    var firstHalfCount = Math.min(10, totalCount);
+    var secondHalfCount = Math.max(0, totalCount - firstHalfCount);
+    if (secondHalfCount <= 0) return;
+
+    var diffPref = 'default';
+    if (state.adaptiveMode === '降低') diffPref = 'easier';
+    else if (state.adaptiveMode === '提升') diffPref = 'harder';
+
+    var secondHalfQs = collectQuestionsByWeight(subject, secondHalfCount, diffPref);
+    if (!secondHalfQs.length) return;
+
+    var usedQids = {};
+    state.questions.forEach(function(q) { usedQids[q.qid] = true; });
+    var filtered = secondHalfQs.filter(function(q) { return !usedQids[q.qid]; });
+    if (filtered.length < secondHalfQs.length) {
+      var startIdx = state.questions.length;
+      filtered.forEach(function(q, i) {
+        q.index = startIdx + i + 1;
+      });
+      state.questions = state.questions.concat(filtered);
+      renderQuestionsAppend(filtered);
+    }
+  }
+
+  // --- Render only additional questions, without wiping existing ones ---
+  function renderQuestionsAppend(newQs) {
+    newQs.forEach(function(q) {
+      var div = document.createElement('div');
+      div.className = 'mock-q';
+      var num = document.createElement('div');
+      num.className = 'mq-num';
+      num.textContent = '第 ' + q.index + ' 题 · ' + q.num + (q.difficulty ? ' · [' + q.difficulty + ']' : '');
+      div.appendChild(num);
+      var text = document.createElement('p');
+      text.className = 'mq-text';
+      text.textContent = q.text;
+      div.appendChild(text);
+      var ul = document.createElement('ul');
+      ul.className = 'mq-choices';
+      q.choices.forEach(function(c) {
+        var li = document.createElement('li');
+        li.textContent = c.text;
+        li.setAttribute('data-letter', c.letter);
+        li.addEventListener('click', function() {
+          if (state.answers[q.qid]) return;
+          state.answers[q.qid] = c.letter;
           ul.querySelectorAll('li').forEach(function(x) {
             if (x.getAttribute('data-letter') === c.letter) x.classList.add('selected');
             x.style.cursor = 'default';
@@ -373,9 +714,13 @@
     var usedSec = state.timeLimit * 60 - state.remaining;
     var usedMin = Math.max(1, Math.round(usedSec / 60));
 
-    // Render report
+    var adaptiveText = '自适应模块已 ' + state.adaptiveMode + ' 难度';
+    if (state.adaptiveMode === '降低') adaptiveText += '（前10题正确率 ' + Math.round((state.firstHalfCorrect / Math.min(10, total)) * 100) + '% < 50%）';
+    else if (state.adaptiveMode === '提升') adaptiveText += '（前10题正确率 ' + Math.round((state.firstHalfCorrect / Math.min(10, total)) * 100) + '% ≥ 80%）';
+    else adaptiveText += '（前10题正确率 ' + Math.round((state.firstHalfCorrect / Math.min(10, total)) * 100) + '%）';
+
     var summary = document.getElementById('reportSummary');
-    summary.textContent = '科目：' + (state.subject || '—') + ' · 题数：' + total + ' · 正确：' + correct + ' · 分数：' + score + ' · 用时：' + usedMin + ' min';
+    summary.textContent = '科目：' + (state.subject || '—') + ' · 题数：' + total + ' · 正确：' + correct + ' · 分数：' + score + ' · 用时：' + usedMin + ' min' + ' · ' + adaptiveText;
     var table = document.getElementById('reportTable');
     while (table.rows.length > 1) table.deleteRow(1);
     rows.forEach(function(r) {
@@ -426,9 +771,12 @@
 
   // --- Start a test from on-page questions (if any) ---
   function startTest(subject, count, time) {
-    var qs = collectQuestions(subject, count);
+    var firstHalfCount = Math.min(10, count);
+    var qs = collectQuestionsByWeight(subject, firstHalfCount, 'default');
     if (!qs.length) {
-      // No questions on this page — redirect to subject practice page
+      qs = collectQuestions(subject, count);
+    }
+    if (!qs.length) {
       var link = document.querySelector('a[data-subject="' + subject + '"]');
       if (link) {
         alert('该科目题目在分科目页面。即将跳转至 ' + subject + ' 练习页，进入模拟测试模式。');
@@ -443,12 +791,30 @@
     state.remaining = time * 60;
     state.paused = false;
     state.startedAt = Date.now();
+    state.adaptiveMode = '保持';
+    state.firstHalfCorrect = 0;
     renderQuestions();
     timerEl.textContent = '剩余时间：' + fmt(state.remaining);
     mockReport.classList.add('hidden');
     mockArea.classList.remove('hidden');
     startTimer();
     mockArea.scrollIntoView({ behavior: 'smooth' });
+
+    var totalNeeded = count;
+    var checkInterval = setInterval(function() {
+      var answered = 0;
+      for (var i = 0; i < firstHalfCount; i++) {
+        if (state.questions[i] && state.answers[state.questions[i].qid]) answered++;
+      }
+      if (answered >= firstHalfCount) {
+        clearInterval(checkInterval);
+        checkAdaptiveTrigger();
+        appendSecondHalfQuestions(subject, totalNeeded);
+      }
+      if (!mockArea || mockArea.classList.contains('hidden')) {
+        clearInterval(checkInterval);
+      }
+    }, 500);
   }
 
   // --- Wire up subject cards ---
