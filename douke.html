@@ -190,122 +190,63 @@ body{display:flex;flex-direction:column;position:fixed;inset:0;}
         <button class="dk-rating-btn" data-rating="bad">😞</button>
       </div>
     </div>
-    <button class="dk-session-close" id="dkSessionClose">继续学习</button>
+    <div style="display:flex;gap:10px;margin-bottom:10px;">
+      <button class="dk-session-close" id="dkSessionClose" style="flex:1;background:rgba(255,255,255,0.08);color:var(--text);border:1px solid rgba(255,255,255,0.1);">继续学习</button>
+      <button class="dk-session-close" id="dkShowDashboard" style="flex:1;background:linear-gradient(90deg,var(--blue),var(--purple));">📊 打分详情</button>
+    </div>
   </div>
 </div>
 
+<!-- === Scoring Dashboard Overlay === -->
+<div class="dk-session-overlay" id="dkDashboard">
+  <div class="dk-session-card" style="max-width:460px;">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+      <h2 style="margin:0;font-size:20px;">📊 出题效果打分</h2>
+      <button id="dkDashClose" style="background:none;border:none;color:var(--text-dim);font-size:22px;cursor:pointer;padding:0 6px;">×</button>
+    </div>
+    <div id="dkDashContent" style="max-height:65vh;overflow-y:auto;-webkit-overflow-scrolling:touch;">
+      加载中...
+    </div>
+    <div style="margin-top:14px;">
+      <button class="dk-session-close" id="dkDashClose2" style="background:rgba(255,255,255,0.08);color:var(--text);border:1px solid rgba(255,255,255,0.1);">返回</button>
+    </div>
+  </div>
+</div>
+
+<script src="js/douke-question-bank.js"></script>
+<script src="js/douke-scoring-engine.js"></script>
 <script>
 'use strict';
 
 /* ============================================================
- * 抖科 v1 — Mock Card Data
- * 所有内容来自现有 syllabus-data.js / practice.html 的真实 topic
+ * 抖科 v1.1 — 接入题库 + 打分系统
+ * 题库数据来自 DoukeQB (douke-question-bank.js)
+ * 打分数据来自 DoukeScoring (douke-scoring-engine.js)
  * ============================================================ */
-var CARDS = [
-  // --- SAT ---
-  {id:'c01',type:'question',subject:'sat',topicCode:'M-Alg-1a',topic:'Linear equations',difficulty:'easy',weight:8.75,
-   question:'If 3x + 7 = 22, what is the value of x?',
-   choices:['3','5','7','15'],answer:1,
-   explanation:'3x = 22 - 7 = 15, so x = 5.'},
-  {id:'c02',type:'knowledge',subject:'sat',topicCode:'M-Alg-1b',topic:'Linear functions',difficulty:'medium',weight:8.75,
-   content:'A linear function has the form f(x) = mx + b, where m is the slope and b is the y-intercept.\n\nKey concepts:\n• Slope = (y2-y1)/(x2-x1)\n• Parallel lines: same slope\n• Perpendicular lines: slopes multiply to -1'},
-  {id:'c03',type:'question',subject:'sat',topicCode:'RW-Craft-1a',topic:'Command of Evidence',difficulty:'medium',weight:8.75,
-   question:'A passage argues that remote work increases productivity. Which finding would most directly support this claim?',
-   choices:['A survey showing 80% of remote workers report higher focus',
-    'A study showing office workers take more breaks',
-    'Data showing remote workers earn 10% more',
-    'A poll showing 60% prefer remote work'],
-   answer:0,
-   explanation:'Direct evidence of increased productivity (higher focus) most directly supports the claim. Other options are indirect or irrelevant.'},
-  {id:'c04',type:'question',subject:'sat',topicCode:'M-Adv-2a',topic:'Nonlinear functions',difficulty:'hard',weight:8.75,
-   question:'If f(x) = 2x² - 8x + 6, at what x-value does the minimum occur?',
-   choices:['1','2','3','6'],answer:1,
-   explanation:'Vertex x = -b/(2a) = 8/(2×2) = 2. f(2) = 8-16+6 = -2 is the minimum.'},
-  // --- IB ---
-  {id:'c05',type:'question',subject:'ib',topicCode:'G4-Phy-42',topic:'Mechanics',difficulty:'medium',weight:24,
-   question:'A 2 kg object accelerates at 3 m/s². What is the net force acting on it?',
-   choices:['1.5 N','3 N','6 N','12 N'],answer:2,
-   explanation:'Newton\'s 2nd Law: F = ma = 2 kg × 3 m/s² = 6 N.'},
-  {id:'c06',type:'knowledge',subject:'ib',topicCode:'G3-Econ-31',topic:'Microeconomics',difficulty:'medium',weight:20,
-   content:'Microeconomics studies individual economic agents.\n\nKey concepts:\n• Demand curve: P↑ → Qd↓\n• Supply curve: P↑ → Qs↑\n• Equilibrium: Qd = Qs\n• Price elasticity = %ΔQ / %ΔP'},
-  {id:'c07',type:'question',subject:'ib',topicCode:'G5-Math-51',topic:'Algebra (Math AA HL)',difficulty:'hard',weight:20,
-   question:'If the roots of x² + bx + c = 0 are 3 and -2, what is b?',
-   choices:['-1','1','-5','5'],answer:1,
-   explanation:'Sum of roots = 3 + (-2) = 1 = -b, so b = -1. Wait: sum = -b/1 = -b, so -b = 1, b = -1. Product = -6 = c.'},
-  {id:'c08',type:'knowledge',subject:'ib',topicCode:'G4-Chem-411',topic:'Stoichiometry',difficulty:'medium',weight:24,
-   content:'Stoichiometry deals with quantities in chemical reactions.\n\nKey concepts:\n• Mole = 6.022 × 10²³ particles\n• Molar mass = mass / moles\n• Limiting reagent determines product\n• Balanced equation gives mole ratios'},
-  // --- A-Level ---
-  {id:'c09',type:'question',subject:'alevel',topicCode:'M-P1-11',topic:'Quadratics',difficulty:'medium',weight:15,
-   question:'Find the discriminant of 2x² - 5x + 3 = 0.',
-   choices:['-1','1','25','49'],answer:1,
-   explanation:'Δ = b² - 4ac = 25 - 4(2)(3) = 25 - 24 = 1. Since Δ > 0, two distinct real roots.'},
-  {id:'c10',type:'question',subject:'alevel',topicCode:'P-AS-12',topic:'Mechanics',difficulty:'hard',weight:15,
-   question:'A ball is thrown upward at 20 m/s. How long until it returns? (g = 10 m/s²)',
-   choices:['1s','2s','4s','20s'],answer:2,
-   explanation:'Time up = v/g = 20/10 = 2s. Total = 2 × 2 = 4s (up and back down).'},
-  {id:'c11',type:'knowledge',subject:'alevel',topicCode:'C-AS-11',topic:'Atomic Structure',difficulty:'easy',weight:15,
-   content:'Atomic structure fundamentals:\n\n• Proton: +1 charge, mass 1 amu\n• Neutron: 0 charge, mass 1 amu\n• Electron: -1 charge, mass ~0\n• Atomic number = protons\n• Mass number = protons + neutrons\n• Isotopes: same Z, different A'},
-  {id:'c12',type:'question',subject:'alevel',topicCode:'B-AS-11',topic:'Cell Structure',difficulty:'easy',weight:15,
-   question:'Which organelle is the site of aerobic respiration?',
-   choices:['Nucleus','Ribosome','Mitochondria','Golgi apparatus'],answer:2,
-   explanation:'Mitochondria are the powerhouse of the cell, where aerobic respiration (ATP production) occurs.'},
-  // --- IGCSE ---
-  {id:'c13',type:'question',subject:'igcse',topicCode:'MAT-N-1x',topic:'Number',difficulty:'easy',weight:12.5,
-   question:'What is 15% of 240?',
-   choices:['24','36','48','60'],answer:1,
-   explanation:'15% × 240 = 0.15 × 240 = 36.'},
-  {id:'c14',type:'knowledge',subject:'igcse',topicCode:'PHY-GP-1x',topic:'General Physics',difficulty:'medium',weight:12.5,
-   content:'Motion basics:\n\n• Speed = distance / time\n• Velocity = displacement / time (vector)\n• Acceleration = Δv / Δt\n• v = u + at\n• s = ut + ½at²'},
-  {id:'c15',type:'question',subject:'igcse',topicCode:'CHEM-PC-1x',topic:'Physical Chemistry',difficulty:'medium',weight:12.5,
-   question:'What happens to the rate of a reaction when temperature increases?',
-   choices:['Decreases','Increases','No change','Reverses'],answer:1,
-   explanation:'Higher temperature increases kinetic energy of particles, leading to more frequent and energetic collisions, thus faster reaction rate.'},
-  {id:'c16',type:'question',subject:'igcse',topicCode:'BIO-CELL-1x',topic:'Cells',difficulty:'easy',weight:12.5,
-   question:'Which structure controls what enters and leaves the cell?',
-   choices:['Cell wall','Nucleus','Cell membrane','Cytoplasm'],answer:2,
-   explanation:'The cell membrane is selectively permeable, controlling the movement of substances in and out of the cell.'},
-  // --- AP ---
-  {id:'c17',type:'question',subject:'ap',topicCode:'CALC-U64',topic:'Derivatives',difficulty:'hard',weight:20,
-   question:'What is the derivative of f(x) = 3x⁴ - 5x² + 7?',
-   choices:['12x³ - 10x','12x³ - 5x','3x³ - 5x','12x⁴ - 10x²'],answer:0,
-   explanation:'Power rule: d/dx(axⁿ) = anxⁿ⁻¹. So f\'(x) = 12x³ - 10x.'},
-  {id:'c18',type:'question',subject:'ap',topicCode:'STAT-U41',topic:'Descriptive Statistics',difficulty:'medium',weight:20,
-   question:'If a dataset has mean 50 and standard deviation 10, what is the z-score of 70?',
-   choices:['0.5','1','2','7'],answer:2,
-   explanation:'z = (x - μ) / σ = (70 - 50) / 10 = 2. The value is 2 standard deviations above the mean.'},
-  {id:'c19',type:'knowledge',subject:'ap',topicCode:'PHY-U101',topic:'Kinematics',difficulty:'medium',weight:20,
-   content:'AP Physics kinematics equations:\n\n• v = v₀ + at\n• Δx = v₀t + ½at²\n• v² = v₀² + 2aΔx\n• Δx = ½(v + v₀)t\n\nThese apply when acceleration is constant.'},
-  {id:'c20',type:'question',subject:'ap',topicCode:'BIO-U201',topic:'Cell Biology',difficulty:'medium',weight:20,
-   question:'During which phase of mitosis do chromosomes align at the cell equator?',
-   choices:['Prophase','Metaphase','Anaphase','Telophase'],answer:1,
-   explanation:'In metaphase, chromosomes line up at the metaphase plate (cell equator) before being separated in anaphase.'},
-  // --- TOEFL / IELTS ---
-  {id:'c21',type:'question',subject:'toefl',topicCode:'RD-1e',topic:'Reading: Inference',difficulty:'medium',weight:25,
-   question:'The passage states "The city\'s air quality improved dramatically after 2010." What can be inferred?',
-   choices:['Air quality was poor before 2010','The city has no pollution now','2010 was a bad year','The city is very large'],
-   answer:0,
-   explanation:'If quality "improved dramatically after 2010," it implies conditions were significantly worse before 2010.'},
-  {id:'c22',type:'knowledge',subject:'toefl',topicCode:'WR-3a',topic:'Writing: Integrated',difficulty:'medium',weight:25,
-   content:'TOEFL Integrated Writing structure:\n\n• Read a passage (3 min)\n• Listen to a lecture (2 min)\n• Write 150-225 words (20 min)\n\nKey: Summarize the lecture\'s points and explain how they relate to/cast doubt on the reading.'},
-  {id:'c23',type:'question',subject:'ielts',topicCode:'R-2b',topic:'Reading: True/False/Not Given',difficulty:'medium',weight:25,
-   question:'Passage: "All students must submit assignments by Friday." Statement: "Some students can submit on Saturday." Is this:',
-   choices:['True','False','Not Given'],answer:1,
-   explanation:'The passage says ALL must submit by Friday. "Some can submit Saturday" directly contradicts this, so it is False.'},
-  {id:'c24',type:'knowledge',subject:'ielts',topicCode:'W-3a',topic:'Writing: Task 2 Essay',difficulty:'hard',weight:25,
-   content:'IELTS Task 2 essay structure:\n\n• Introduction: paraphrase + thesis\n• Body 1: First argument + example\n• Body 2: Second argument + example\n• Conclusion: summarize + opinion\n\n250+ words, 40 minutes. Score on Task Response, Coherence, Lexical, Grammar.'},
-  // --- AMC ---
-  {id:'c25',type:'question',subject:'amc',topicCode:'A-NT-01',topic:'Number Theory',difficulty:'hard',weight:15,
-   question:'What is the remainder when 7¹⁰⁰ is divided by 5?',
-   choices:['0','1','2','4'],answer:1,
-   explanation:'7 ≡ 2 (mod 5). Cycle of 2^n mod 5: 2,4,3,1 (period 4). 100 mod 4 = 0, so 7¹⁰⁰ ≡ 2⁴ ≡ 1 (mod 5).'},
-  {id:'c26',type:'question',subject:'amc',topicCode:'A-CM-01',topic:'Combinatorics',difficulty:'hard',weight:20,
-   question:'How many ways can 5 people sit in a row of 5 chairs?',
-   choices:['25','60','120','720'],answer:2,
-   explanation:'5! = 5×4×3×2×1 = 120. This is a permutation of 5 distinct items.'},
-  // --- Progress Cards ---
-  {id:'c27',type:'progress',subject:'all',topicCode:'progress',topic:'Today\'s Progress',difficulty:'easy',weight:0},
-  {id:'c28',type:'progress',subject:'all',topicCode:'streak',topic:'Streak Check',difficulty:'easy',weight:0},
+
+// Knowledge supplement cards (少量保留用于多样化)
+var KNOWLEDGE_CARDS = [
+  {id:'k-sat-1',type:'knowledge',subject:'sat',topicCode:'M-Alg-K1',topic:'Linear functions',difficulty:'medium',weight:8,
+   content:'Linear function: f(x) = mx + b\n• m = slope = (y2-y1)/(x2-x1)\n• b = y-intercept\n• Parallel: same slope\n• Perpendicular: m1·m2 = -1'},
+  {id:'k-ib-1',type:'knowledge',subject:'ib',topicCode:'G3-Econ-K1',topic:'Microeconomics',difficulty:'medium',weight:15,
+   content:'Microeconomics Core:\n• Demand: P↑ → Qd↓\n• Supply: P↑ → Qs↑\n• Equilibrium: Qd = Qs\n• Elasticity = %ΔQ / %ΔP'},
+  {id:'k-ig-1',type:'knowledge',subject:'igcse',topicCode:'PHY-GP-K1',topic:'General Physics',difficulty:'easy',weight:10,
+   content:'Motion Equations:\n• Speed = d/t\n• v = u + at\n• s = ut + ½at²\n• Acceleration = Δv/Δt'},
 ];
+
+// Progress cards
+var PROGRESS_CARDS = [
+  {id:'p-progress',type:'progress',subject:'all',topicCode:'progress',topic:'今日学习进度',difficulty:'easy',weight:0},
+  {id:'p-streak',type:'progress',subject:'all',topicCode:'streak',topic:'连续打卡统计',difficulty:'easy',weight:0},
+];
+
+// 组合完整 CARDS 数组
+var CARDS = [];
+if (typeof DoukeQB !== 'undefined' && typeof DoukeQB.toCards === 'function') {
+  CARDS = CARDS.concat(DoukeQB.toCards());
+}
+CARDS = CARDS.concat(KNOWLEDGE_CARDS);
+CARDS = CARDS.concat(PROGRESS_CARDS);
 
 /* ============================================================
  * Recommender v1 — Rule-based weighted random
@@ -654,7 +595,13 @@ var Stack = {
               '正确答案：' + ['A','B','C','D','E'][card.answer] + ') ' + card.choices[card.answer] + '<br>' +
               '<span style="color:var(--text-dim);">' + card.explanation + '</span>';
           }
+          var dwell = Date.now() - self.cardVisibleTs;
           Recommender.recordAnswer(card.id, correct, card.subject, card.difficulty);
+          // 录入打分引擎
+          if (typeof DoukeScoring !== 'undefined') {
+            DoukeScoring.recordAnswer(card, correct, dwell, null);
+            DoukeScoring.saveToStorage();
+          }
           if (navigator.vibrate) navigator.vibrate(correct ? 30 : 60);
           self.updateStreak();
         });
@@ -668,6 +615,18 @@ var Stack = {
         fbBtns.forEach(function(b) { b.classList.remove('active'); });
         btn.classList.add('active');
         Recommender.recordFeedback(card.id, btn.dataset.fb);
+        // 反馈录入打分引擎（仅对题目类型）
+        if (typeof DoukeScoring !== 'undefined' && card.type === 'question') {
+          // 找到最近一条该 cardId 的 record 并回填 feedback
+          var recs = DoukeScoring.records;
+          for (var ri = recs.length - 1; ri >= 0; ri--) {
+            if (recs[ri].cardId === card.id) {
+              recs[ri].userFeedback = btn.dataset.fb;
+              DoukeScoring.saveToStorage();
+              break;
+            }
+          }
+        }
         if (btn.dataset.fb === 'bookmark' && navigator.vibrate) navigator.vibrate(15);
       });
     });
@@ -860,6 +819,23 @@ var Stack = {
     document.getElementById('dkSessionClose').addEventListener('click', function() {
       document.getElementById('dkSession').classList.remove('show');
     });
+
+    // Dashboard 按钮
+    if (document.getElementById('dkShowDashboard')) {
+      document.getElementById('dkShowDashboard').addEventListener('click', function() {
+        self.showDashboard();
+      });
+    }
+    if (document.getElementById('dkDashClose')) {
+      document.getElementById('dkDashClose').addEventListener('click', function() {
+        self.closeDashboard();
+      });
+    }
+    if (document.getElementById('dkDashClose2')) {
+      document.getElementById('dkDashClose2').addEventListener('click', function() {
+        self.closeDashboard();
+      });
+    }
   },
 
   showSession: function() {
@@ -870,6 +846,23 @@ var Stack = {
     document.getElementById('ssTime').textContent = stats.time + 'min';
     document.getElementById('ssStreak').textContent = streak.current;
     document.getElementById('dkSession').classList.add('show');
+  },
+
+  showDashboard: function() {
+    document.getElementById('dkSession').classList.remove('show');
+    var content = document.getElementById('dkDashContent');
+    if (typeof DoukeScoring !== 'undefined') {
+      // historyIds: 从推荐器 profile.seen 拿最近的答题记录
+      var histIds = (Recommender.profile.seen || []).map(function(s){return s.cardId;});
+      content.innerHTML = DoukeScoring.renderDashboard(CARDS, {historyIds: histIds});
+    } else {
+      content.innerHTML = '<div style="padding:16px;color:var(--text-dim);">打分引擎未加载</div>';
+    }
+    document.getElementById('dkDashboard').classList.add('show');
+  },
+
+  closeDashboard: function() {
+    document.getElementById('dkDashboard').classList.remove('show');
   },
 
   updateCounter: function() {
@@ -888,7 +881,22 @@ var Stack = {
  * ============================================================ */
 Recommender.init();
 StreakMock.init();
+if (typeof DoukeScoring !== 'undefined') {
+  DoukeScoring.loadFromStorage();
+}
 Stack.init();
+
+/* 调试：显示题库总量 */
+(function(){
+  try {
+    if (typeof DoukeQB !== 'undefined' && DoukeQB.countAll) {
+      console.log('[抖科] 题库加载完成：总题量 = ' + DoukeQB.countAll() + '，卡片总数 = ' + CARDS.length);
+    }
+    if (typeof DoukeScoring !== 'undefined') {
+      console.log('[抖科] 打分引擎记录数 = ' + DoukeScoring.records.length);
+    }
+  } catch(e) {}
+})();
 </script>
 </body>
 </html>
