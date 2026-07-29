@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>抖科 · Swipe to Learn</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+:root{
+  --bg:#0a0a0f;--card-bg:#1a1a2e;--card-bg2:#16213e;--accent:#0f3460;
+  --text:#e8e8e8;--text-dim:#888;--text-bright:#fff;
+  --green:#00d4aa;--red:#e94560;--yellow:#f9b115;--blue:#4e8aff;--purple:#a855f7;
+  --radius:20px;--spring:cubic-bezier(0.25,0.46,0.45,0.94);
+}
+html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  -webkit-font-smoothing:antialiased;touch-action:none;user-select:none;}
+body{display:flex;flex-direction:column;position:fixed;inset:0;}
+
+/* === Topbar === */
+.dk-topbar{flex-shrink:0;display:flex;align-items:center;gap:8px;padding:10px 16px;
+  padding-top:max(10px,env(safe-area-inset-top));background:rgba(10,10,15,0.95);
+  backdrop-filter:blur(20px);z-index:100;border-bottom:1px solid rgba(255,255,255,0.05);}
+.dk-logo{font-size:20px;font-weight:800;color:var(--text-bright);letter-spacing:-0.5px;}
+.dk-logo span{color:var(--green);}
+.dk-subject-select{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.1);
+  color:var(--text);padding:5px 10px;border-radius:8px;font-size:13px;font-family:inherit;cursor:pointer;}
+.dk-streak{margin-left:auto;display:flex;align-items:center;gap:4px;font-size:14px;font-weight:700;color:var(--yellow);}
+.dk-stats-btn{background:none;border:none;color:var(--text-dim);font-size:18px;cursor:pointer;padding:4px;}
+
+/* === Card Stack === */
+.dk-stack{flex:1;position:relative;overflow:hidden;perspective:1000px;}
+.dk-card{position:absolute;left:50%;top:50%;width:calc(100% - 32px);max-width:420px;
+  max-height:calc(100% - 20px);background:var(--card-bg);border-radius:var(--radius);
+  padding:24px 20px;overflow-y:auto;overscroll-behavior:contain;
+  transform:translate(-50%,-50%) scale(1);opacity:1;z-index:3;
+  transition:transform 0.35s var(--spring),opacity 0.35s var(--spring);
+  box-shadow:0 8px 32px rgba(0,0,0,0.5);border:1px solid rgba(255,255,255,0.06);
+  -webkit-overflow-scrolling:touch;}
+.dk-card.peek-1{transform:translate(-50%,calc(-50% + 16px)) scale(0.94);opacity:0.5;z-index:2;}
+.dk-card.peek-2{transform:translate(-50%,calc(-50% + 32px)) scale(0.88);opacity:0.2;z-index:1;}
+.dk-card.fly-out-up{transform:translate(-50%,calc(-50% - 120%)) scale(0.8) rotateZ(-3deg);opacity:0;z-index:4;}
+.dk-card.fly-out-down{transform:translate(-50%,calc(-50% + 120%)) scale(0.8) rotateZ(3deg);opacity:0;z-index:4;}
+.dk-card.fly-in-from-top{transform:translate(-50%,calc(-50% - 120%)) scale(0.8);opacity:0;z-index:4;}
+.dk-card.no-transition{transition:none!important;}
+.dk-card.swiping{transition:none!important;z-index:5;}
+
+/* Card content */
+.dk-card-header{display:flex;align-items:center;gap:8px;margin-bottom:14px;flex-wrap:wrap;}
+.dk-badge{font-size:11px;font-weight:700;padding:3px 8px;border-radius:6px;text-transform:uppercase;letter-spacing:0.5px;}
+.dk-badge.sat{background:#4e8aff;color:#fff;} .dk-badge.ib{background:#a855f7;color:#fff;}
+.dk-badge.alevel{background:#e94560;color:#fff;} .dk-badge.igcse{background:#00d4aa;color:#0a0a0f;}
+.dk-badge.ap{background:#f9b115;color:#0a0a0f;} .dk-badge.toefl{background:#4e8aff;color:#fff;}
+.dk-badge.ielts{background:#e94560;color:#fff;} .dk-badge.amc{background:#a855f7;color:#fff;}
+.dk-badge.progress{background:rgba(255,255,255,0.1);color:var(--text);}
+.dk-topic-code{font-size:11px;color:var(--text-dim);font-family:monospace;}
+.dk-difficulty{margin-left:auto;font-size:12px;font-weight:600;padding:2px 8px;border-radius:4px;}
+.dk-difficulty.easy{background:rgba(0,212,170,0.15);color:var(--green);}
+.dk-difficulty.medium{background:rgba(249,177,21,0.15);color:var(--yellow);}
+.dk-difficulty.hard{background:rgba(233,69,96,0.15);color:var(--red);}
+.dk-card-title{font-size:16px;font-weight:700;color:var(--text-bright);margin-bottom:10px;line-height:1.4;}
+.dk-card-body{font-size:15px;line-height:1.65;color:var(--text);}
+.dk-question{font-size:16px;line-height:1.5;margin-bottom:14px;color:var(--text-bright);}
+.dk-choices{list-style:none;margin-bottom:14px;}
+.dk-choice{padding:12px 14px;margin-bottom:8px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);
+  border-radius:12px;font-size:15px;cursor:pointer;transition:all 0.15s;display:flex;align-items:center;gap:10px;}
+.dk-choice:hover{background:rgba(255,255,255,0.1);}
+.dk-choice .dk-letter{font-weight:700;color:var(--text-dim);min-width:20px;}
+.dk-choice.selected{background:rgba(78,138,255,0.15);border-color:var(--blue);}
+.dk-choice.selected .dk-letter{color:var(--blue);}
+.dk-choice.correct{background:rgba(0,212,170,0.12);border-color:var(--green);}
+.dk-choice.correct .dk-letter{color:var(--green);}
+.dk-choice.wrong{background:rgba(233,69,96,0.12);border-color:var(--red);}
+.dk-choice.wrong .dk-letter{color:var(--red);}
+.dk-answer{display:none;padding:12px;border-radius:12px;margin-bottom:12px;font-size:14px;line-height:1.5;}
+.dk-answer.show{display:block;animation:dkFadeIn 0.3s ease;}
+.dk-answer.correct-answer{background:rgba(0,212,170,0.1);border-left:3px solid var(--green);}
+.dk-answer.wrong-answer{background:rgba(233,69,96,0.1);border-left:3px solid var(--red);}
+.dk-answer strong{color:var(--text-bright);}
+.dk-knowledge-content{padding:14px;background:rgba(255,255,255,0.03);border-radius:12px;margin-bottom:12px;
+  border:1px solid rgba(255,255,255,0.05);}
+.dk-knowledge-content ul{padding-left:18px;margin-top:6px;}
+.dk-knowledge-content li{margin-bottom:4px;}
+.dk-weight-bar{height:4px;background:rgba(255,255,255,0.1);border-radius:2px;margin-top:8px;overflow:hidden;}
+.dk-weight-fill{height:100%;background:linear-gradient(90deg,var(--blue),var(--purple));border-radius:2px;transition:width 0.5s;}
+.dk-progress-stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;}
+.dk-stat-box{background:rgba(255,255,255,0.05);border-radius:12px;padding:14px;text-align:center;}
+.dk-stat-num{font-size:28px;font-weight:800;color:var(--text-bright);}
+.dk-stat-label{font-size:12px;color:var(--text-dim);margin-top:2px;}
+.dk-feedback-row{display:flex;gap:6px;margin-top:14px;padding-top:14px;border-top:1px solid rgba(255,255,255,0.06);}
+.dk-fb-btn{flex:1;padding:7px 4px;border-radius:8px;font-size:12px;font-weight:600;text-align:center;
+  cursor:pointer;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.03);color:var(--text-dim);
+  transition:all 0.15s;font-family:inherit;}
+.dk-fb-btn:hover{background:rgba(255,255,255,0.08);color:var(--text);}
+.dk-fb-btn.active{background:var(--blue);color:#fff;border-color:var(--blue);}
+
+/* === Bottom Controls === */
+.dk-controls{flex-shrink:0;display:flex;align-items:center;justify-content:center;gap:20px;
+  padding:12px 16px;padding-bottom:max(12px,env(safe-area-inset-bottom));
+  background:rgba(10,10,15,0.95);backdrop-filter:blur(20px);z-index:100;
+  border-top:1px solid rgba(255,255,255,0.05);}
+.dk-nav-btn{width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,0.1);
+  background:rgba(255,255,255,0.05);color:var(--text);font-size:18px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;transition:all 0.15s;font-family:inherit;}
+.dk-nav-btn:hover{background:rgba(255,255,255,0.12);transform:scale(1.05);}
+.dk-nav-btn:active{transform:scale(0.95);}
+.dk-nav-btn:disabled{opacity:0.3;cursor:not-allowed;}
+.dk-counter{font-size:14px;font-weight:600;color:var(--text-dim);min-width:50px;text-align:center;}
+.dk-counter b{color:var(--text-bright);}
+.dk-swipe-hint{position:absolute;bottom:70px;left:50%;transform:translateX(-50%);
+  font-size:12px;color:var(--text-dim);animation:dkPulse 2s ease-in-out infinite;
+  pointer-events:none;z-index:50;transition:opacity 0.5s;}
+.dk-swipe-hint.hidden{opacity:0;}
+
+/* === Session Overlay === */
+.dk-session-overlay{position:fixed;inset:0;background:rgba(10,10,15,0.95);backdrop-filter:blur(20px);
+  z-index:200;display:none;align-items:center;justify-content:center;padding:24px;}
+.dk-session-overlay.show{display:flex;animation:dkFadeIn 0.3s ease;}
+.dk-session-card{background:var(--card-bg);border-radius:20px;padding:28px 24px;max-width:380px;width:100%;
+  border:1px solid rgba(255,255,255,0.06);}
+.dk-session-card h2{font-size:20px;margin-bottom:16px;color:var(--text-bright);}
+.dk-session-stats{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px;}
+.dk-session-stat{background:rgba(255,255,255,0.05);border-radius:12px;padding:16px;text-align:center;}
+.dk-session-stat .num{font-size:32px;font-weight:800;color:var(--text-bright);}
+.dk-session-stat .label{font-size:12px;color:var(--text-dim);margin-top:4px;}
+.dk-session-rating{margin-bottom:16px;}
+.dk-session-rating p{font-size:14px;margin-bottom:10px;color:var(--text);}
+.dk-rating-btns{display:flex;gap:10px;justify-content:center;}
+.dk-rating-btn{font-size:32px;cursor:pointer;background:none;border:none;transition:transform 0.15s;filter:grayscale(0.5);}
+.dk-rating-btn:hover{transform:scale(1.2);filter:grayscale(0);}
+.dk-rating-btn.selected{filter:grayscale(0);transform:scale(1.15);}
+.dk-session-close{width:100%;padding:12px;border-radius:12px;border:none;background:var(--green);color:#0a0a0f;
+  font-size:16px;font-weight:700;cursor:pointer;font-family:inherit;}
+
+@keyframes dkFadeIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+@keyframes dkPulse{0%,100%{opacity:0.4;}50%{opacity:0.8;}}
+
+/* Scrollbar */
+.dk-card::-webkit-scrollbar{width:4px;}
+.dk-card::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.15);border-radius:2px;}
+
+/* PC hint */
+@media(min-width:768px){.dk-swipe-hint::after{content:' · 键盘 ↑↓ 或滚轮';}}
+</style>
+</head>
+<body>
+
+<div class="dk-topbar">
+  <div class="dk-logo">抖<span>科</span></div>
+  <select class="dk-subject-select" id="dkSubject">
+    <option value="all">全部科目</option>
+    <option value="sat">SAT</option>
+    <option value="ib">IB</option>
+    <option value="alevel">A-Level</option>
+    <option value="igcse">IGCSE</option>
+    <option value="ap">AP</option>
+    <option value="toefl">TOEFL</option>
+    <option value="ielts">IELTS</option>
+    <option value="amc">AMC</option>
+  </select>
+  <div class="dk-streak" id="dkStreak"></div>
+  <button class="dk-stats-btn" id="dkStatsBtn" title="统计">📊</button>
+</div>
+
+<div class="dk-stack" id="dkStack">
+  <div class="dk-swipe-hint" id="dkHint">↑ 上滑下一张</div>
+</div>
+
+<div class="dk-controls">
+  <button class="dk-nav-btn" id="dkPrev" title="上一张">↑</button>
+  <div class="dk-counter"><b id="dkCurrent">0</b> / <span id="dkTotal">0</span></div>
+  <button class="dk-nav-btn" id="dkNext" title="下一张">↓</button>
+</div>
+
+<div class="dk-session-overlay" id="dkSession">
+  <div class="dk-session-card">
+    <h2>本次学习统计</h2>
+    <div class="dk-session-stats">
+      <div class="dk-session-stat"><div class="num" id="ssCards">0</div><div class="label">卡片</div></div>
+      <div class="dk-session-stat"><div class="num" id="ssCorrect">0%</div><div class="label">正确率</div></div>
+      <div class="dk-session-stat"><div class="num" id="ssTime">0min</div><div class="label">时长</div></div>
+      <div class="dk-session-stat"><div class="num" id="ssStreak">0</div><div class="label">连续天数</div></div>
+    </div>
+    <div class="dk-session-rating">
+      <p>这次体验如何？</p>
+      <div class="dk-rating-btns">
+        <button class="dk-rating-btn" data-rating="good">😊</button>
+        <button class="dk-rating-btn" data-rating="ok">😐</button>
+        <button class="dk-rating-btn" data-rating="bad">😞</button>
+      </div>
+    </div>
+    <button class="dk-session-close" id="dkSessionClose">继续学习</button>
+  </div>
+</div>
+
+<script>
+'use strict';
+
+/* ============================================================
+ * 抖科 v1 — Mock Card Data
+ * 所有内容来自现有 syllabus-data.js / practice.html 的真实 topic
+ * ============================================================ */
+var CARDS = [
+  // --- SAT ---
+  {id:'c01',type:'question',subject:'sat',topicCode:'M-Alg-1a',topic:'Linear equations',difficulty:'easy',weight:8.75,
+   question:'If 3x + 7 = 22, what is the value of x?',
+   choices:['3','5','7','15'],answer:1,
+   explanation:'3x = 22 - 7 = 15, so x = 5.'},
+  {id:'c02',type:'knowledge',subject:'sat',topicCode:'M-Alg-1b',topic:'Linear functions',difficulty:'medium',weight:8.75,
+   content:'A linear function has the form f(x) = mx + b, where m is the slope and b is the y-intercept.\n\nKey concepts:\n• Slope = (y2-y1)/(x2-x1)\n• Parallel lines: same slope\n• Perpendicular lines: slopes multiply to -1'},
+  {id:'c03',type:'question',subject:'sat',topicCode:'RW-Craft-1a',topic:'Command of Evidence',difficulty:'medium',weight:8.75,
+   question:'A passage argues that remote work increases productivity. Which finding would most directly support this claim?',
+   choices:['A survey showing 80% of remote workers report higher focus',
+    'A study showing office workers take more breaks',
+    'Data showing remote workers earn 10% more',
+    'A poll showing 60% prefer remote work'],
+   answer:0,
+   explanation:'Direct evidence of increased productivity (higher focus) most directly supports the claim. Other options are indirect or irrelevant.'},
+  {id:'c04',type:'question',subject:'sat',topicCode:'M-Adv-2a',topic:'Nonlinear functions',difficulty:'hard',weight:8.75,
+   question:'If f(x) = 2x² - 8x + 6, at what x-value does the minimum occur?',
+   choices:['1','2','3','6'],answer:1,
+   explanation:'Vertex x = -b/(2a) = 8/(2×2) = 2. f(2) = 8-16+6 = -2 is the minimum.'},
+  // --- IB ---
+  {id:'c05',type:'question',subject:'ib',topicCode:'G4-Phy-42',topic:'Mechanics',difficulty:'medium',weight:24,
+   question:'A 2 kg object accelerates at 3 m/s². What is the net force acting on it?',
+   choices:['1.5 N','3 N','6 N','12 N'],answer:2,
+   explanation:'Newton\'s 2nd Law: F = ma = 2 kg × 3 m/s² = 6 N.'},
+  {id:'c06',type:'knowledge',subject:'ib',topicCode:'G3-Econ-31',topic:'Microeconomics',difficulty:'medium',weight:20,
+   content:'Microeconomics studies individual economic agents.\n\nKey concepts:\n• Demand curve: P↑ → Qd↓\n• Supply curve: P↑ → Qs↑\n• Equilibrium: Qd = Qs\n• Price elasticity = %ΔQ / %ΔP'},
+  {id:'c07',type:'question',subject:'ib',topicCode:'G5-Math-51',topic:'Algebra (Math AA HL)',difficulty:'hard',weight:20,
+   question:'If the roots of x² + bx + c = 0 are 3 and -2, what is b?',
+   choices:['-1','1','-5','5'],answer:1,
+   explanation:'Sum of roots = 3 + (-2) = 1 = -b, so b = -1. Wait: sum = -b/1 = -b, so -b = 1, b = -1. Product = -6 = c.'},
+  {id:'c08',type:'knowledge',subject:'ib',topicCode:'G4-Chem-411',topic:'Stoichiometry',difficulty:'medium',weight:24,
+   content:'Stoichiometry deals with quantities in chemical reactions.\n\nKey concepts:\n• Mole = 6.022 × 10²³ particles\n• Molar mass = mass / moles\n• Limiting reagent determines product\n• Balanced equation gives mole ratios'},
+  // --- A-Level ---
+  {id:'c09',type:'question',subject:'alevel',topicCode:'M-P1-11',topic:'Quadratics',difficulty:'medium',weight:15,
+   question:'Find the discriminant of 2x² - 5x + 3 = 0.',
+   choices:['-1','1','25','49'],answer:1,
+   explanation:'Δ = b² - 4ac = 25 - 4(2)(3) = 25 - 24 = 1. Since Δ > 0, two distinct real roots.'},
+  {id:'c10',type:'question',subject:'alevel',topicCode:'P-AS-12',topic:'Mechanics',difficulty:'hard',weight:15,
+   question:'A ball is thrown upward at 20 m/s. How long until it returns? (g = 10 m/s²)',
+   choices:['1s','2s','4s','20s'],answer:2,
+   explanation:'Time up = v/g = 20/10 = 2s. Total = 2 × 2 = 4s (up and back down).'},
+  {id:'c11',type:'knowledge',subject:'alevel',topicCode:'C-AS-11',topic:'Atomic Structure',difficulty:'easy',weight:15,
+   content:'Atomic structure fundamentals:\n\n• Proton: +1 charge, mass 1 amu\n• Neutron: 0 charge, mass 1 amu\n• Electron: -1 charge, mass ~0\n• Atomic number = protons\n• Mass number = protons + neutrons\n• Isotopes: same Z, different A'},
+  {id:'c12',type:'question',subject:'alevel',topicCode:'B-AS-11',topic:'Cell Structure',difficulty:'easy',weight:15,
+   question:'Which organelle is the site of aerobic respiration?',
+   choices:['Nucleus','Ribosome','Mitochondria','Golgi apparatus'],answer:2,
+   explanation:'Mitochondria are the powerhouse of the cell, where aerobic respiration (ATP production) occurs.'},
+  // --- IGCSE ---
+  {id:'c13',type:'question',subject:'igcse',topicCode:'MAT-N-1x',topic:'Number',difficulty:'easy',weight:12.5,
+   question:'What is 15% of 240?',
+   choices:['24','36','48','60'],answer:1,
+   explanation:'15% × 240 = 0.15 × 240 = 36.'},
+  {id:'c14',type:'knowledge',subject:'igcse',topicCode:'PHY-GP-1x',topic:'General Physics',difficulty:'medium',weight:12.5,
+   content:'Motion basics:\n\n• Speed = distance / time\n• Velocity = displacement / time (vector)\n• Acceleration = Δv / Δt\n• v = u + at\n• s = ut + ½at²'},
+  {id:'c15',type:'question',subject:'igcse',topicCode:'CHEM-PC-1x',topic:'Physical Chemistry',difficulty:'medium',weight:12.5,
+   question:'What happens to the rate of a reaction when temperature increases?',
+   choices:['Decreases','Increases','No change','Reverses'],answer:1,
+   explanation:'Higher temperature increases kinetic energy of particles, leading to more frequent and energetic collisions, thus faster reaction rate.'},
+  {id:'c16',type:'question',subject:'igcse',topicCode:'BIO-CELL-1x',topic:'Cells',difficulty:'easy',weight:12.5,
+   question:'Which structure controls what enters and leaves the cell?',
+   choices:['Cell wall','Nucleus','Cell membrane','Cytoplasm'],answer:2,
+   explanation:'The cell membrane is selectively permeable, controlling the movement of substances in and out of the cell.'},
+  // --- AP ---
+  {id:'c17',type:'question',subject:'ap',topicCode:'CALC-U64',topic:'Derivatives',difficulty:'hard',weight:20,
+   question:'What is the derivative of f(x) = 3x⁴ - 5x² + 7?',
+   choices:['12x³ - 10x','12x³ - 5x','3x³ - 5x','12x⁴ - 10x²'],answer:0,
+   explanation:'Power rule: d/dx(axⁿ) = anxⁿ⁻¹. So f\'(x) = 12x³ - 10x.'},
+  {id:'c18',type:'question',subject:'ap',topicCode:'STAT-U41',topic:'Descriptive Statistics',difficulty:'medium',weight:20,
+   question:'If a dataset has mean 50 and standard deviation 10, what is the z-score of 70?',
+   choices:['0.5','1','2','7'],answer:2,
+   explanation:'z = (x - μ) / σ = (70 - 50) / 10 = 2. The value is 2 standard deviations above the mean.'},
+  {id:'c19',type:'knowledge',subject:'ap',topicCode:'PHY-U101',topic:'Kinematics',difficulty:'medium',weight:20,
+   content:'AP Physics kinematics equations:\n\n• v = v₀ + at\n• Δx = v₀t + ½at²\n• v² = v₀² + 2aΔx\n• Δx = ½(v + v₀)t\n\nThese apply when acceleration is constant.'},
+  {id:'c20',type:'question',subject:'ap',topicCode:'BIO-U201',topic:'Cell Biology',difficulty:'medium',weight:20,
+   question:'During which phase of mitosis do chromosomes align at the cell equator?',
+   choices:['Prophase','Metaphase','Anaphase','Telophase'],answer:1,
+   explanation:'In metaphase, chromosomes line up at the metaphase plate (cell equator) before being separated in anaphase.'},
+  // --- TOEFL / IELTS ---
+  {id:'c21',type:'question',subject:'toefl',topicCode:'RD-1e',topic:'Reading: Inference',difficulty:'medium',weight:25,
+   question:'The passage states "The city\'s air quality improved dramatically after 2010." What can be inferred?',
+   choices:['Air quality was poor before 2010','The city has no pollution now','2010 was a bad year','The city is very large'],
+   answer:0,
+   explanation:'If quality "improved dramatically after 2010," it implies conditions were significantly worse before 2010.'},
+  {id:'c22',type:'knowledge',subject:'toefl',topicCode:'WR-3a',topic:'Writing: Integrated',difficulty:'medium',weight:25,
+   content:'TOEFL Integrated Writing structure:\n\n• Read a passage (3 min)\n• Listen to a lecture (2 min)\n• Write 150-225 words (20 min)\n\nKey: Summarize the lecture\'s points and explain how they relate to/cast doubt on the reading.'},
+  {id:'c23',type:'question',subject:'ielts',topicCode:'R-2b',topic:'Reading: True/False/Not Given',difficulty:'medium',weight:25,
+   question:'Passage: "All students must submit assignments by Friday." Statement: "Some students can submit on Saturday." Is this:',
+   choices:['True','False','Not Given'],answer:1,
+   explanation:'The passage says ALL must submit by Friday. "Some can submit Saturday" directly contradicts this, so it is False.'},
+  {id:'c24',type:'knowledge',subject:'ielts',topicCode:'W-3a',topic:'Writing: Task 2 Essay',difficulty:'hard',weight:25,
+   content:'IELTS Task 2 essay structure:\n\n• Introduction: paraphrase + thesis\n• Body 1: First argument + example\n• Body 2: Second argument + example\n• Conclusion: summarize + opinion\n\n250+ words, 40 minutes. Score on Task Response, Coherence, Lexical, Grammar.'},
+  // --- AMC ---
+  {id:'c25',type:'question',subject:'amc',topicCode:'A-NT-01',topic:'Number Theory',difficulty:'hard',weight:15,
+   question:'What is the remainder when 7¹⁰⁰ is divided by 5?',
+   choices:['0','1','2','4'],answer:1,
+   explanation:'7 ≡ 2 (mod 5). Cycle of 2^n mod 5: 2,4,3,1 (period 4). 100 mod 4 = 0, so 7¹⁰⁰ ≡ 2⁴ ≡ 1 (mod 5).'},
+  {id:'c26',type:'question',subject:'amc',topicCode:'A-CM-01',topic:'Combinatorics',difficulty:'hard',weight:20,
+   question:'How many ways can 5 people sit in a row of 5 chairs?',
+   choices:['25','60','120','720'],answer:2,
+   explanation:'5! = 5×4×3×2×1 = 120. This is a permutation of 5 distinct items.'},
+  // --- Progress Cards ---
+  {id:'c27',type:'progress',subject:'all',topicCode:'progress',topic:'Today\'s Progress',difficulty:'easy',weight:0},
+  {id:'c28',type:'progress',subject:'all',topicCode:'streak',topic:'Streak Check',difficulty:'easy',weight:0},
+];
+
+/* ============================================================
+ * Recommender v1 — Rule-based weighted random
+ * ============================================================ */
+var Recommender = {
+  profile: null,
+  init: function() {
+    var saved = localStorage.getItem('douke_profile');
+    if (saved) {
+      this.profile = JSON.parse(saved);
+    } else {
+      this.profile = {
+        seen: [],           // [{cardId, ts, action, feedback, dwellMs, correct}]
+        accuracy: {},       // 'subject.difficulty' -> {correct, total}
+        bookmarks: [],
+        subjectLastSeen: [],// last 5 subjects
+        typeLastSeen: [],   // last 3 types
+        sessionStart: Date.now(),
+        totalCards: 0,
+        totalCorrect: 0,
+      };
+      this.save();
+    }
+  },
+  save: function() {
+    localStorage.setItem('douke_profile', JSON.stringify(this.profile));
+  },
+  recordView: function(cardId) {
+    this.profile.seen.push({cardId: cardId, ts: Date.now(), viewTs: Date.now()});
+    if (this.profile.seen.length > 500) this.profile.seen = this.profile.seen.slice(-500);
+  },
+  recordSwipe: function(cardId, action, dwellMs) {
+    var last = this.profile.seen[this.profile.seen.length - 1];
+    if (last && last.cardId === cardId) {
+      last.action = action;
+      last.dwellMs = dwellMs;
+    }
+    this.profile.totalCards++;
+    this.save();
+  },
+  recordAnswer: function(cardId, correct, subject, difficulty) {
+    var key = subject + '.' + difficulty;
+    if (!this.profile.accuracy[key]) this.profile.accuracy[key] = {correct:0, total:0};
+    this.profile.accuracy[key].total++;
+    if (correct) this.profile.accuracy[key].correct++;
+    var last = this.profile.seen[this.profile.seen.length - 1];
+    if (last && last.cardId === cardId) last.correct = correct;
+    if (correct) this.profile.totalCorrect++;
+    this.save();
+  },
+  recordFeedback: function(cardId, feedback) {
+    var last = this.profile.seen[this.profile.seen.length - 1];
+    if (last && last.cardId === cardId) last.feedback = feedback;
+    if (feedback === 'bookmark') this.profile.bookmarks.push(cardId);
+    this.save();
+  },
+  getAccuracy: function(subject, difficulty) {
+    var key = subject + '.' + difficulty;
+    var a = this.profile.accuracy[key];
+    if (!a || a.total < 2) return 0.5;
+    return a.correct / a.total;
+  },
+  recommend: function(cards, subjectFilter) {
+    var pool = cards.filter(function(c) {
+      if (subjectFilter !== 'all' && c.subject !== subjectFilter) return false;
+      return true;
+    });
+    if (pool.length === 0) pool = cards.slice();
+
+    var self = this;
+    var recentSubjects = this.profile.seen.slice(-5).map(function(s) {
+      var card = cards.find(function(c) { return c.id === s.cardId; });
+      return card ? card.subject : null;
+    });
+    var recentTypes = this.profile.seen.slice(-3).map(function(s) {
+      var card = cards.find(function(c) { return c.id === s.cardId; });
+      return card ? card.type : null;
+    });
+    var seenRecently = this.profile.seen.filter(function(s) {
+      return Date.now() - s.ts < 3600000;
+    }).map(function(s) { return s.cardId; });
+
+    var weighted = pool.map(function(card) {
+      var w = 1.0;
+      // 1. Freshness
+      if (seenRecently.indexOf(card.id) >= 0) w *= 0.05;
+      // 2. Subject rotation
+      if (recentSubjects.filter(function(s){return s===card.subject;}).length >= 2) w *= 0.3;
+      // 3. Difficulty adaptation
+      if (card.difficulty) {
+        var acc = self.getAccuracy(card.subject, card.difficulty);
+        if (card.difficulty === 'hard' && acc > 0.7) w *= 1.4;
+        if (card.difficulty === 'easy' && acc < 0.4) w *= 1.4;
+        if (card.difficulty === 'medium') w *= 1.1;
+      }
+      // 4. Type variety
+      if (recentTypes.filter(function(t){return t===card.type;}).length >= 2) w *= 0.4;
+      // 5. Bookmarked topics
+      if (self.profile.bookmarks.indexOf(card.id) >= 0) w *= 0.3; // don't repeat bookmarks
+      // 6. Weight (exam importance)
+      if (card.weight > 0) w *= (1 + card.weight / 200);
+      // 7. Progress cards occasionally
+      if (card.type === 'progress') w *= (self.profile.totalCards > 0 && self.profile.totalCards % 10 === 0) ? 2 : 0.1;
+      return {card: card, weight: Math.max(w, 0.01)};
+    });
+
+    var total = weighted.reduce(function(s, w) { return s + w.weight; }, 0);
+    var r = Math.random() * total;
+    for (var i = 0; i < weighted.length; i++) {
+      r -= weighted[i].weight;
+      if (r <= 0) return weighted[i].card;
+    }
+    return weighted[0].card;
+  },
+  getSessionStats: function() {
+    var sessionCards = this.profile.seen.filter(function(s) {
+      return s.ts >= this.profile.sessionStart;
+    }.bind(this));
+    var answered = sessionCards.filter(function(s) { return s.correct !== undefined; });
+    var correct = answered.filter(function(s) { return s.correct; }).length;
+    return {
+      cards: sessionCards.length,
+      correct: answered.length > 0 ? Math.round(correct / answered.length * 100) : 0,
+      time: Math.round((Date.now() - this.profile.sessionStart) / 60000),
+    };
+  },
+  exportData: function() {
+    return JSON.stringify(this.profile, null, 2);
+  },
+};
+
+/* ============================================================
+ * Card Renderer
+ * ============================================================ */
+var SUBJECT_LABELS = {
+  sat:'SAT', ib:'IB', alevel:'A-Level', igcse:'IGCSE', ap:'AP',
+  toefl:'TOEFL', ielts:'IELTS', amc:'AMC'
+};
+var DIFFICULTY_LABELS = {easy:'简单', medium:'中等', hard:'困难'};
+
+function renderCard(card) {
+  var label = SUBJECT_LABELS[card.subject] || card.subject;
+  var diff = card.difficulty ? '<span class="dk-difficulty ' + card.difficulty + '">' + DIFFICULTY_LABELS[card.difficulty] + '</span>' : '';
+  var weightHtml = card.weight > 0 ? '<span class="dk-topic-code">' + card.weight + '%</span>' : '';
+
+  var header = '<div class="dk-card-header">' +
+    '<span class="dk-badge ' + card.subject + '">' + label + '</span>' +
+    '<span class="dk-topic-code">' + card.topicCode + '</span>' +
+    weightHtml + diff + '</div>';
+
+  var body = '';
+  if (card.type === 'question') {
+    body = '<div class="dk-question">' + card.question + '</div>';
+    body += '<ul class="dk-choices">';
+    var letters = ['A','B','C','D','E'];
+    card.choices.forEach(function(ch, i) {
+      body += '<li class="dk-choice" data-idx="' + i + '"><span class="dk-letter">' + letters[i] + '</span><span>' + ch + '</span></li>';
+    });
+    body += '</ul>';
+    body += '<div class="dk-answer" id="dkAnswer"></div>';
+  } else if (card.type === 'knowledge') {
+    body = '<div class="dk-card-title">' + card.topic + '</div>';
+    body += '<div class="dk-knowledge-content">' + card.content.replace(/\n/g, '<br>') + '</div>';
+    if (card.weight > 0) {
+      body += '<div style="font-size:12px;color:var(--text-dim);">考试权重</div>';
+      body += '<div class="dk-weight-bar"><div class="dk-weight-fill" style="width:' + Math.min(card.weight * 3, 100) + '%"></div></div>';
+    }
+  } else if (card.type === 'progress') {
+    var stats = Recommender.getSessionStats();
+    var streak = StreakMock.getData();
+    body = '<div class="dk-card-title">' + card.topic + '</div>';
+    body += '<div class="dk-progress-stats">';
+    body += '<div class="dk-stat-box"><div class="dk-stat-num">' + stats.cards + '</div><div class="dk-stat-label">本次卡片</div></div>';
+    body += '<div class="dk-stat-box"><div class="dk-stat-num">' + stats.correct + '%</div><div class="dk-stat-label">正确率</div></div>';
+    body += '<div class="dk-stat-box"><div class="dk-stat-num">' + streak.current + '</div><div class="dk-stat-label">连续天数</div></div>';
+    body += '<div class="dk-stat-box"><div class="dk-stat-num">' + (Recommender.profile.totalCards) + '</div><div class="dk-stat-label">总计卡片</div></div>';
+    body += '</div>';
+    if (streak.current >= 3) {
+      body += '<div style="text-align:center;font-size:28px;margin:8px 0;">';
+      var badges = StreakMock.getBadges();
+      badges.forEach(function(b) { body += b.icon + ' '; });
+      body += '</div>';
+    }
+  }
+
+  var feedback = '<div class="dk-feedback-row">' +
+    '<button class="dk-fb-btn" data-fb="easy">太简单</button>' +
+    '<button class="dk-fb-btn" data-fb="ok">正好</button>' +
+    '<button class="dk-fb-btn" data-fb="hard">太难</button>' +
+    '<button class="dk-fb-btn" data-fb="bookmark">收藏</button>' +
+    '</div>';
+
+  return header + body + feedback;
+}
+
+/* ============================================================
+ * Streak Mock (will integrate real streak.js in v7)
+ * ============================================================ */
+var StreakMock = {
+  data: null,
+  init: function() {
+    var saved = localStorage.getItem('douke_streak');
+    this.data = saved ? JSON.parse(saved) : {current:1, max:1, lastDate:new Date().toISOString().slice(0,10), history:[]};
+    var today = new Date().toISOString().slice(0,10);
+    if (this.data.lastDate !== today) {
+      var yesterday = new Date(Date.now() - 86400000).toISOString().slice(0,10);
+      if (this.data.lastDate === yesterday) {
+        this.data.current++;
+      } else {
+        this.data.current = 1;
+      }
+      this.data.lastDate = today;
+      this.data.max = Math.max(this.data.max, this.data.current);
+    }
+    this.save();
+  },
+  save: function() { localStorage.setItem('douke_streak', JSON.stringify(this.data)); },
+  getData: function() { return this.data; },
+  getBadges: function() {
+    var badges = [
+      {days:3, icon:'🥉', name:'Bronze'},
+      {days:7, icon:'🥈', name:'Silver'},
+      {days:14, icon:'🥇', name:'Gold'},
+      {days:30, icon:'💎', name:'Diamond'},
+    ];
+    return badges.filter(function(b) { return StreakMock.data.max >= b.days; });
+  },
+};
+
+/* ============================================================
+ * Card Stack Controller
+ * ============================================================ */
+var Stack = {
+  el: null,
+  cards: [],
+  queue: [],      // upcoming card ids in order
+  currentIdx: 0,  // position in queue
+  history: [],    // past card ids for prev navigation
+  isAnimating: false,
+  cardVisibleTs: 0,
+  hintShown: false,
+  subjectFilter: 'all',
+
+  init: function() {
+    this.el = document.getElementById('dkStack');
+    this.buildQueue();
+    this.render();
+    this.bindEvents();
+    this.updateStreak();
+    this.updateCounter();
+  },
+
+  buildQueue: function() {
+    var self = this;
+    // Pre-generate a queue of 50 cards using recommender
+    this.queue = [];
+    var tempCards = CARDS.slice();
+    for (var i = 0; i < 50; i++) {
+      var card = Recommender.recommend(tempCards, self.subjectFilter);
+      self.queue.push(card.id);
+    }
+  },
+
+  getNextCard: function() {
+    if (this.currentIdx >= this.queue.length - 3) {
+      // Extend queue
+      var card = Recommender.recommend(CARDS, this.subjectFilter);
+      this.queue.push(card.id);
+    }
+    var cardId = this.queue[this.currentIdx];
+    return CARDS.find(function(c) { return c.id === cardId; }) || CARDS[0];
+  },
+
+  getPeekCard: function(offset) {
+    var idx = this.currentIdx + offset;
+    if (idx < 0 || idx >= this.queue.length) return null;
+    var cardId = this.queue[idx];
+    return CARDS.find(function(c) { return c.id === cardId; });
+  },
+
+  render: function() {
+    // Clear existing cards (keep hint)
+    var hints = this.el.querySelectorAll('.dk-swipe-hint');
+    this.el.querySelectorAll('.dk-card').forEach(function(e) { e.remove(); });
+
+    var current = this.getNextCard();
+    var peek1 = this.getPeekCard(1);
+    var peek2 = this.getPeekCard(2);
+
+    if (current) {
+      var el = this.createCardElement(current, '');
+      this.el.appendChild(el);
+      Recommender.recordView(current.id);
+      this.cardVisibleTs = Date.now();
+      this.bindCardEvents(el, current);
+    }
+    if (peek1) {
+      var p1 = this.createCardElement(peek1, 'peek-1');
+      this.el.appendChild(p1);
+    }
+    if (peek2) {
+      var p2 = this.createCardElement(peek2, 'peek-2');
+      this.el.appendChild(p2);
+    }
+
+    // Show hint for first few cards
+    if (!this.hintShown && Recommender.profile.totalCards < 3) {
+      var hint = this.el.querySelector('.dk-swipe-hint');
+      if (hint) hint.classList.remove('hidden');
+    } else {
+      var hint2 = this.el.querySelector('.dk-swipe-hint');
+      if (hint2) hint2.classList.add('hidden');
+    }
+  },
+
+  createCardElement: function(card, extraClass) {
+    var div = document.createElement('div');
+    div.className = 'dk-card ' + extraClass;
+    div.dataset.cardId = card.id;
+    div.innerHTML = renderCard(card);
+    return div;
+  },
+
+  bindCardEvents: function(el, card) {
+    var self = this;
+    // Choice click for question cards
+    if (card.type === 'question') {
+      var choices = el.querySelectorAll('.dk-choice');
+      var answered = false;
+      choices.forEach(function(ch) {
+        ch.addEventListener('click', function(e) {
+          e.stopPropagation();
+          if (answered) return;
+          answered = true;
+          var idx = parseInt(ch.dataset.idx);
+          var correct = idx === card.answer;
+          choices.forEach(function(c, i) {
+            if (i === card.answer) c.classList.add('correct');
+            else if (i === idx) c.classList.add('wrong');
+            c.style.pointerEvents = 'none';
+          });
+          var ansEl = el.querySelector('#dkAnswer');
+          if (ansEl) {
+            ansEl.className = 'dk-answer show ' + (correct ? 'correct-answer' : 'wrong-answer');
+            ansEl.innerHTML = '<strong>' + (correct ? '✓ 正确！' : '✗ 再想想') + '</strong><br>' +
+              '正确答案：' + ['A','B','C','D','E'][card.answer] + ') ' + card.choices[card.answer] + '<br>' +
+              '<span style="color:var(--text-dim);">' + card.explanation + '</span>';
+          }
+          Recommender.recordAnswer(card.id, correct, card.subject, card.difficulty);
+          if (navigator.vibrate) navigator.vibrate(correct ? 30 : 60);
+          self.updateStreak();
+        });
+      });
+    }
+    // Feedback buttons
+    var fbBtns = el.querySelectorAll('.dk-fb-btn');
+    fbBtns.forEach(function(btn) {
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        fbBtns.forEach(function(b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+        Recommender.recordFeedback(card.id, btn.dataset.fb);
+        if (btn.dataset.fb === 'bookmark' && navigator.vibrate) navigator.vibrate(15);
+      });
+    });
+  },
+
+  next: function() {
+    if (this.isAnimating) return;
+    this.isAnimating = true;
+    var self = this;
+
+    var currentEl = this.el.querySelector('.dk-card:not(.peek-1):not(.peek-2)');
+    var peek1El = this.el.querySelector('.dk-card.peek-1');
+    var peek2El = this.el.querySelector('.dk-card.peek-2');
+
+    // Record swipe
+    var current = this.getNextCard();
+    var dwellMs = Date.now() - this.cardVisibleTs;
+    Recommender.recordSwipe(current.id, 'next', dwellMs);
+
+    // Hide hint
+    this.hintShown = true;
+    var hint = this.el.querySelector('.dk-swipe-hint');
+    if (hint) hint.classList.add('hidden');
+
+    // Animate
+    if (currentEl) {
+      currentEl.classList.add('fly-out-up');
+    }
+    if (peek1El) {
+      peek1El.classList.remove('peek-1');
+      peek1El.style.zIndex = '3';
+    }
+    if (peek2El) {
+      peek2El.classList.remove('peek-2');
+      peek2El.classList.add('peek-1');
+    }
+
+    // Add new peek card
+    this.currentIdx++;
+    var newPeek = this.getPeekCard(2);
+    if (newPeek) {
+      var newEl = this.createCardElement(newPeek, 'peek-2');
+      newEl.style.opacity = '0';
+      this.el.appendChild(newEl);
+      setTimeout(function() {
+        newEl.style.opacity = '';
+      }, 50);
+    }
+
+    if (navigator.vibrate) navigator.vibrate(8);
+    this.updateCounter();
+
+    setTimeout(function() {
+      if (currentEl) currentEl.remove();
+      self.isAnimating = false;
+      // Re-render to ensure clean state
+      self.render();
+    }, 350);
+  },
+
+  prev: function() {
+    if (this.isAnimating || this.currentIdx === 0) return;
+    this.isAnimating = true;
+    var self = this;
+
+    this.currentIdx--;
+    var currentEl = this.el.querySelector('.dk-card:not(.peek-1):not(.peek-2)');
+    if (currentEl) currentEl.remove();
+
+    self.render();
+    self.isAnimating = false;
+    self.updateCounter();
+  },
+
+  // Touch gesture handling
+  touchStartY: 0,
+  touchStartX: 0,
+  touchStartTime: 0,
+  isSwiping: false,
+  currentCardEl: null,
+
+  bindEvents: function() {
+    var self = this;
+
+    // Touch events
+    this.el.addEventListener('touchstart', function(e) {
+      if (self.isAnimating) return;
+      var card = e.target.closest('.dk-card');
+      if (!card || card.classList.contains('peek-1') || card.classList.contains('peek-2')) return;
+      // Don't interfere with choice/button clicks
+      if (e.target.closest('.dk-choice') || e.target.closest('.dk-fb-btn')) return;
+      self.touchStartY = e.touches[0].clientY;
+      self.touchStartX = e.touches[0].clientX;
+      self.touchStartTime = Date.now();
+      self.isSwiping = true;
+      self.currentCardEl = card;
+      card.classList.add('swiping');
+    }, {passive: true});
+
+    this.el.addEventListener('touchmove', function(e) {
+      if (!self.isSwiping || !self.currentCardEl) return;
+      var deltaY = e.touches[0].clientY - self.touchStartY;
+      var deltaX = e.touches[0].clientX - self.touchStartX;
+      // Only follow vertical swipes
+      if (Math.abs(deltaY) > Math.abs(deltaX)) {
+        e.preventDefault();
+        var clampedDelta = Math.max(-400, Math.min(100, deltaY));
+        self.currentCardEl.style.transform = 'translate(-50%, calc(-50% + ' + clampedDelta + 'px)) scale(' + (1 - Math.abs(clampedDelta) / 800) + ')';
+        self.currentCardEl.style.opacity = String(1 - Math.abs(clampedDelta) / 400);
+      }
+    }, {passive: false});
+
+    this.el.addEventListener('touchend', function(e) {
+      if (!self.isSwiping || !self.currentCardEl) return;
+      self.isSwiping = false;
+      var deltaY = (e.changedTouches[0].clientY - self.touchStartY);
+      var duration = Date.now() - self.touchStartTime;
+      var card = self.currentCardEl;
+      card.classList.remove('swiping');
+
+      // Swipe up (negative deltaY) = next
+      if (deltaY < -80 || (deltaY < -40 && duration < 200)) {
+        card.style.transform = '';
+        card.style.opacity = '';
+        self.next();
+      } else if (deltaY > 80) {
+        // Swipe down = prev
+        card.style.transform = '';
+        card.style.opacity = '';
+        self.prev();
+      } else {
+        // Snap back
+        card.style.transform = '';
+        card.style.opacity = '';
+      }
+      self.currentCardEl = null;
+    }, {passive: true});
+
+    // Keyboard
+    document.addEventListener('keydown', function(e) {
+      if (self.isAnimating) return;
+      if (e.key === 'ArrowDown' || e.key === ' ' || e.key === 'ArrowRight') {
+        e.preventDefault();
+        self.next();
+      } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+        e.preventDefault();
+        self.prev();
+      }
+    });
+
+    // Wheel (PC)
+    var wheelTimeout = null;
+    this.el.addEventListener('wheel', function(e) {
+      if (self.isAnimating) return;
+      if (wheelTimeout) return;
+      if (Math.abs(e.deltaY) < 20) return;
+      wheelTimeout = setTimeout(function() { wheelTimeout = null; }, 400);
+      if (e.deltaY > 0) self.next();
+      else self.prev();
+    }, {passive: true});
+
+    // Buttons
+    document.getElementById('dkNext').addEventListener('click', function() { self.next(); });
+    document.getElementById('dkPrev').addEventListener('click', function() { self.prev(); });
+
+    // Subject filter
+    document.getElementById('dkSubject').addEventListener('change', function(e) {
+      self.subjectFilter = e.target.value;
+      self.currentIdx = 0;
+      self.buildQueue();
+      self.render();
+      self.updateCounter();
+    });
+
+    // Stats button
+    document.getElementById('dkStatsBtn').addEventListener('click', function() {
+      self.showSession();
+    });
+
+    // Session rating buttons
+    document.querySelectorAll('.dk-rating-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.dk-rating-btn').forEach(function(b) { b.classList.remove('selected'); });
+        btn.classList.add('selected');
+        var feedback = JSON.parse(localStorage.getItem('douke_session_feedback') || '[]');
+        feedback.push({rating: btn.dataset.rating, ts: Date.now(), stats: Recommender.getSessionStats()});
+        localStorage.setItem('douke_session_feedback', JSON.stringify(feedback));
+      });
+    });
+    document.getElementById('dkSessionClose').addEventListener('click', function() {
+      document.getElementById('dkSession').classList.remove('show');
+    });
+  },
+
+  showSession: function() {
+    var stats = Recommender.getSessionStats();
+    var streak = StreakMock.getData();
+    document.getElementById('ssCards').textContent = stats.cards;
+    document.getElementById('ssCorrect').textContent = stats.correct + '%';
+    document.getElementById('ssTime').textContent = stats.time + 'min';
+    document.getElementById('ssStreak').textContent = streak.current;
+    document.getElementById('dkSession').classList.add('show');
+  },
+
+  updateCounter: function() {
+    document.getElementById('dkCurrent').textContent = Recommender.profile.totalCards + 1;
+    document.getElementById('dkTotal').textContent = this.queue.length;
+  },
+
+  updateStreak: function() {
+    var s = StreakMock.getData();
+    document.getElementById('dkStreak').innerHTML = '🔥' + s.current;
+  },
+};
+
+/* ============================================================
+ * Boot
+ * ============================================================ */
+Recommender.init();
+StreakMock.init();
+Stack.init();
+</script>
+</body>
+</html>
