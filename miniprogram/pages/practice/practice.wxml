@@ -1,0 +1,80 @@
+<!--pages/practice/practice.wxml-->
+<view class="yz-container">
+
+  <view class="yz-nav">
+    <text bindtap="goHome">首页</text>
+    <text>/</text>
+    <text>{{subjectName}} 刷题</text>
+  </view>
+
+  <view class="yz-title">{{subjectName}}</view>
+  <view class="yz-subtitle">{{subjectDesc}}</view>
+
+  <view wx:if="{{stats && stats.total > 0}}" class="yz-stat">
+    <view>
+      <view class="yz-stat-num">{{stats.total}}</view>
+      <view class="yz-stat-label">已答</view>
+    </view>
+    <view>
+      <view class="yz-stat-num">{{stats.correct}}</view>
+      <view class="yz-stat-label">答对</view>
+    </view>
+    <view>
+      <view class="yz-stat-num">{{stats.accuracy}}%</view>
+      <view class="yz-stat-label">正确率</view>
+    </view>
+    <view>
+      <view class="yz-stat-num">{{stats.wrong}}</view>
+      <view class="yz-stat-label">错题</view>
+    </view>
+  </view>
+
+  <view class="yz-section-title">题目 {{questionIdx + 1}} / {{questions.length}}</view>
+
+  <view class="yz-card" wx:if="{{currentQ}}">
+    <view class="yz-muted">Topic: {{currentQ.topic}} · ID: {{currentQ.id}}</view>
+    <view style="font-size:30rpx;font-weight:600;margin:16rpx 0;">{{currentQ.stem}}</view>
+
+    <block wx:for="{{currentQ.options}}" wx:key="*this" wx:for-index="oIdx">
+      <view
+        class="yz-card"
+        style="margin:8rpx 0;padding:16rpx;"
+        bindtap="pickOption"
+        data-idx="{{oIdx}}"
+        hover-class="yz-card-hover"
+      >
+        <text style="margin-right:12rpx;">{{['A','B','C','D'][oIdx]}}.</text>
+        <text>{{item}}</text>
+        <text wx:if="{{selected === oIdx}}" class="yz-badge yz-badge-solid" style="float:right;">
+          {{oIdx === currentQ.answer ? '✓' : '✗'}}
+        </text>
+      </view>
+    </block>
+
+    <view wx:if="{{showSolution}}" class="yz-divider"></view>
+    <view wx:if="{{showSolution}}" style="background:#f5f5f5;padding:16rpx;font-size:24rpx;">
+      <view style="font-weight:700;margin-bottom:6rpx;">解析</view>
+      <view>{{currentQ.solution}}</view>
+    </view>
+  </view>
+
+  <view style="display:flex;gap:16rpx;margin-top:24rpx;">
+    <view class="yz-btn" bindtap="prevQuestion" style="flex:1;">上一题</view>
+    <view class="yz-btn yz-btn-primary" bindtap="nextQuestion" style="flex:1;">下一题</view>
+  </view>
+
+  <view class="yz-section-title">考纲 Topic</view>
+  <block wx:for="{{papers}}" wx:key="code" wx:for-item="paper">
+    <view class="yz-card">
+      <view class="yz-card-title">{{paper.name}} ({{paper.code}})</view>
+      <view wx:for="{{paper.topics}}" wx:key="code" wx:for-item="topic" style="display:inline-block;margin:6rpx;">
+        <view class="yz-badge">{{topic.code}} · {{topic.name}}</view>
+      </view>
+    </view>
+  </block>
+
+  <view class="yz-footer" bindtap="goDashboard">
+    查看仪表盘 →
+  </view>
+
+</view>

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>i18n Demo - 国际化演示 | yunzhuan.icu</title>
+<meta name="description" content="yunzhuan.icu i18n 多语言演示页：中/英/日三语切换 + 翻译覆盖率统计 + 实时 key 预览。">
+<link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+<link rel="stylesheet" href="../../js/common.css">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 960px; margin: 0 auto; padding: 24px 16px 48px; background: #ffffff; color: #111111; line-height: 1.7; font-size: 15px; }
+  a { color: #111111; text-decoration: none; border-bottom: 1px solid #cccccc; }
+  a:hover { border-bottom-color: #111111; }
+  .nav { padding-bottom: 12px; margin-bottom: 20px; border-bottom: 1px solid #e0e0e0; font-size: 0.88rem; color: #888888; }
+  .nav a { color: #111111; }
+  .nav .sep { color: #cccccc; margin: 0 6px; }
+  h1 { font-size: 1.6rem; margin-bottom: 4px; }
+  h2 { font-size: 1.1rem; font-weight: 700; margin: 28px 0 8px; padding-bottom: 6px; border-bottom: 1px solid #111111; }
+  h3 { font-size: 1rem; font-weight: 700; margin: 18px 0 6px; }
+  p { margin-bottom: 8px; }
+  .muted { color: #888888; font-size: 0.85rem; }
+  .subtitle { color: #555555; font-size: 0.95rem; margin-bottom: 20px; }
+  .footer { margin-top: 36px; padding-top: 16px; border-top: 1px solid #e0e0e0; color: #888888; font-size: 0.82rem; }
+
+  /* 语言切换器 */
+  .lang-bar {
+    position: sticky; top: 0; z-index: 50;
+    background: #ffffff; border: 1px solid #111111;
+    padding: 8px 12px; margin: 16px 0;
+    display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+  }
+  .lang-bar .label { font-size: 0.82rem; color: #888888; margin-right: 4px; }
+  .lang-btn {
+    border: 1px solid #888888; background: #ffffff; color: #111111;
+    padding: 4px 10px; font-size: 0.85rem; cursor: pointer;
+    font-family: inherit;
+  }
+  .lang-btn:hover { border-color: #111111; }
+  .lang-btn.active { background: #111111; color: #ffffff; border-color: #111111; }
+
+  /* 统计卡片 */
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 16px 0; }
+  .stat-card { border: 1px solid #e0e0e0; padding: 12px 14px; }
+  .stat-card .label { font-size: 0.75rem; color: #888888; text-transform: uppercase; }
+  .stat-card .value { font-size: 1.6rem; font-weight: 700; margin-top: 4px; }
+  .stat-card .bar { height: 4px; background: #f0f0f0; margin-top: 8px; position: relative; }
+  .stat-card .bar > span { position: absolute; left: 0; top: 0; bottom: 0; background: #111111; }
+  @media (max-width: 700px) { .stats { grid-template-columns: repeat(2, 1fr); } }
+
+  /* 表格 */
+  .tbl { width: 100%; border-collapse: collapse; font-size: 0.85rem; margin: 12px 0; }
+  .tbl th, .tbl td { border: 1px solid #e0e0e0; padding: 6px 10px; text-align: left; vertical-align: top; }
+  .tbl th { background: #f5f5f5; font-weight: 700; border-bottom: 2px solid #111111; }
+  .tbl tr.missing td { color: #cc0000; background: #fff5f5; }
+  .tbl td.code { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 0.78rem; color: #555; }
+
+  .badge { display: inline-block; border: 1px solid #111111; padding: 0 6px; font-size: 0.7rem; font-weight: 700; }
+  .badge-ok { background: #111111; color: #ffffff; }
+  .badge-warn { border-color: #cc0000; color: #cc0000; }
+
+  .search-box { width: 100%; padding: 6px 10px; border: 1px solid #888888; font-family: inherit; font-size: 0.9rem; margin: 8px 0; }
+  .preview-card { border: 1px solid #e0e0e0; padding: 14px 16px; margin: 12px 0; }
+  .preview-card .live { font-size: 1.1rem; font-weight: 700; padding: 8px 0; }
+</style>
+</head>
+<body>
+
+<div class="nav">
+  <a href="../../index.html">Home</a> <span class="sep">/</span>
+  <a href="../index.html">Academics</a> <span class="sep">/</span>
+  <a href="index.html">Practice</a> <span class="sep">/</span>
+  i18n Demo
+</div>
+
+<h1 data-i18n="practice.title">刷题中心</h1>
+<p class="subtitle" data-i18n="practice.subtitle">考纲 · 模拟考题 · 刷题追踪 — 8 科 + 3 竞赛</p>
+
+<div class="v-info" style="border:1px dashed #888;padding:8px 12px;margin:12px 0;font-size:0.82rem;color:#555;">
+  <strong>v55 国际化演示</strong> · 中 / 英 / 日 实时切换 · 翻译覆盖率统计 · 关键 label 完整预览。
+</div>
+
+<div class="lang-bar" id="langBar">
+  <span class="label" data-i18n="common.language">语言</span>
+  <button class="lang-btn" data-locale="zh-CN">简体中文</button>
+  <button class="lang-btn" data-locale="en-US">English</button>
+  <button class="lang-btn" data-locale="ja-JP">日本語</button>
+  <span class="muted" style="margin-left:auto;font-size:0.78rem;" id="currentLocale"></span>
+</div>
+
+<h2>实时切换效果</h2>
+<div class="preview-card">
+  <p class="muted">以下内容随语言切换实时变化：</p>
+  <div class="live" data-i18n="dashboard.title">学习仪表盘</div>
+  <p><span data-i18n="practice.startMock">开始模拟考</span> · <span data-i18n="practice.openDashboard">打开仪表盘</span> · <span data-i18n="practice.dailyReview">每日复习</span></p>
+  <p class="muted" data-i18n="intro.sat">SAT 是美国大学入学标准化考试。</p>
+  <p>
+    <span data-i18n="common.welcome" data-i18n-params='{"name":"Tom"}'>欢迎，Tom！</span>
+    <span class="muted"> · <span data-i18n="practice.questionCount" data-i18n-params='{"n":120}'>共 120 题</span></span>
+    <span class="muted"> · <span data-i18n="practice.accuracy" data-i18n-params='{"pct":87.5}'>正确率 87.5%</span></span>
+  </p>
+</div>
+
+<h2>翻译覆盖率</h2>
+<div class="stats" id="statsBox">
+  <div class="stat-card">
+    <div class="label">当前语言 / Locale</div>
+    <div class="value" id="statLocale">—</div>
+  </div>
+  <div class="stat-card">
+    <div class="label">总 Key / Total</div>
+    <div class="value" id="statTotal">—</div>
+  </div>
+  <div class="stat-card">
+    <div class="label">已翻译 / Translated</div>
+    <div class="value" id="statTranslated">—</div>
+  </div>
+  <div class="stat-card">
+    <div class="label">覆盖率 / Coverage</div>
+    <div class="value" id="statCoverage">—</div>
+    <div class="bar"><span id="statBar" style="width:0%"></span></div>
+  </div>
+</div>
+
+<h2>所有翻译 Key</h2>
+<input type="text" class="search-box" id="filterInput" placeholder="筛选 key / 文本 / 片段..." />
+<table class="tbl" id="dictTable">
+  <thead>
+    <tr>
+      <th style="width:30%">Key</th>
+      <th style="width:23%">zh-CN</th>
+      <th style="width:23%">en-US</th>
+      <th style="width:24%">ja-JP</th>
+    </tr>
+  </thead>
+  <tbody id="dictBody"></tbody>
+</table>
+
+<div class="footer">
+  <span data-i18n="footer.copyright">版权所有</span> · yunzhuan.icu · v55
+</div>
+
+<script src="../../js/i18n.js"></script>
+<script>
+  (function () {
+    'use strict';
+
+    var bar = document.getElementById('langBar');
+    var body = document.getElementById('dictBody');
+    var filterInput = document.getElementById('filterInput');
+
+    function highlightActiveBtn() {
+      var cur = window.I18n.getLocale();
+      var btns = bar.querySelectorAll('.lang-btn');
+      for (var i = 0; i < btns.length; i++) {
+        if (btns[i].getAttribute('data-locale') === cur) {
+          btns[i].classList.add('active');
+        } else {
+          btns[i].classList.remove('active');
+        }
+      }
+      document.getElementById('currentLocale').textContent = 'Locale: ' + cur;
+    }
+
+    function refreshStats() {
+      var c = window.I18n.coverage();
+      document.getElementById('statLocale').textContent = c.locale;
+      document.getElementById('statTotal').textContent = c.total;
+      document.getElementById('statTranslated').textContent = c.translated;
+      document.getElementById('statCoverage').textContent = c.coverage + '%';
+      document.getElementById('statBar').style.width = c.coverage + '%';
+    }
+
+    function buildTable() {
+      var keys = window.I18n.keys();
+      var filter = (filterInput.value || '').toLowerCase();
+      var html = '';
+      for (var i = 0; i < keys.length; i++) {
+        var k = keys[i];
+        var zh = window.I18n.raw(k, 'zh-CN') || '';
+        var en = window.I18n.raw(k, 'en-US') || '';
+        var ja = window.I18n.raw(k, 'ja-JP') || '';
+        if (filter) {
+          var blob = (k + ' ' + zh + ' ' + en + ' ' + ja).toLowerCase();
+          if (blob.indexOf(filter) === -1) continue;
+        }
+        var missing = !en || !ja;
+        html += '<tr' + (missing ? ' class="missing"' : '') + '>' +
+          '<td class="code">' + escapeHtml(k) + '</td>' +
+          '<td>' + escapeHtml(zh) + '</td>' +
+          '<td>' + (en ? escapeHtml(en) : '<span class="badge badge-warn">missing</span>') + '</td>' +
+          '<td>' + (ja ? escapeHtml(ja) : '<span class="badge badge-warn">missing</span>') + '</td>' +
+        '</tr>';
+      }
+      body.innerHTML = html || '<tr><td colspan="4" style="text-align:center;color:#888;">无匹配 key</td></tr>';
+    }
+
+    function escapeHtml(s) {
+      return String(s == null ? '' : s)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    function applyAll() {
+      window.I18n.apply();
+      highlightActiveBtn();
+      refreshStats();
+      buildTable();
+    }
+
+    bar.addEventListener('click', function (e) {
+      var t = e.target;
+      if (t && t.classList && t.classList.contains('lang-btn')) {
+        var code = t.getAttribute('data-locale');
+        window.I18n.setLocale(code);
+        applyAll();
+      }
+    });
+
+    filterInput.addEventListener('input', buildTable);
+
+    window.addEventListener('i18n:change', applyAll);
+
+    applyAll();
+  })();
+</script>
+
+</body>
+</html>

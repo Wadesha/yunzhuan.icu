@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>知识问答 · Q&A | Practice v48</title>
+<link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 960px; margin: 0 auto; padding: 24px 16px 48px; background: #ffffff; color: #111111; line-height: 1.7; font-size: 15px; }
+  a { color: #111111; text-decoration: none; border-bottom: 1px solid #cccccc; }
+  a:hover { border-bottom-color: #111111; }
+  .nav { padding-bottom: 12px; margin-bottom: 20px; border-bottom: 1px solid #e0e0e0; font-size: 0.88rem; color: #888888; }
+  .nav a { color: #111111; }
+  .nav .sep { color: #cccccc; margin: 0 6px; }
+  h1 { font-size: 1.6rem; margin-bottom: 4px; }
+  h2 { font-size: 1.1rem; font-weight: 700; margin: 28px 0 8px; padding-bottom: 6px; border-bottom: 1px solid #111111; }
+  h3 { font-size: 1rem; font-weight: 700; margin: 18px 0 6px; }
+  p { margin-bottom: 8px; }
+  .muted { color: #888888; font-size: 0.85rem; }
+  .subtitle { color: #555555; font-size: 0.95rem; margin-bottom: 20px; }
+  .badge { display: inline-block; border: 1px solid #111111; padding: 0 6px; font-size: 0.7rem; font-weight: 700; }
+  .v-info { border: 1px dashed #888888; padding: 8px 12px; margin: 12px 0; font-size: 0.82rem; color: #555555; }
+  input, textarea, button, select { font-family: inherit; font-size: 0.9rem; }
+  input[type=text], textarea, select { border: 1px solid #cccccc; padding: 6px 10px; width: 100%; box-sizing: border-box; font-size: 0.9rem; }
+  input:focus, textarea:focus, select:focus { outline: 2px solid #111111; outline-offset: -1px; }
+  textarea { resize: vertical; min-height: 70px; }
+  button { border: 1px solid #111111; background: #fff; color: #111111; padding: 6px 14px; cursor: pointer; font-weight: 600; }
+  button:hover { background: #111111; color: #fff; }
+  button:disabled { opacity: 0.5; cursor: not-allowed; }
+  button.primary { background: #111111; color: #fff; }
+  button.primary:hover { background: #333; }
+  button.small { padding: 3px 10px; font-size: 0.8rem; }
+  .form-row { margin-bottom: 10px; }
+  .form-row label { display: block; font-size: 0.82rem; color: #555; margin-bottom: 4px; }
+  .layout { display: grid; grid-template-columns: 1fr 280px; gap: 16px; margin-top: 16px; }
+  @media (max-width: 900px) { .layout { grid-template-columns: 1fr; } }
+  .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; margin: 12px 0; align-items: center; }
+  .filter-bar select, .filter-bar input { width: auto; min-width: 140px; }
+  .tab-bar { display: flex; border-bottom: 1px solid #e0e0e0; margin: 16px 0 12px; }
+  .tab { padding: 8px 16px; cursor: pointer; font-size: 0.88rem; border-bottom: 2px solid transparent; color: #555; }
+  .tab.active { border-bottom-color: #111; color: #111; font-weight: 700; }
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+  .q-list { list-style: none; margin: 12px 0; padding: 0; }
+  .q-item { border: 1px solid #e0e0e0; padding: 12px 14px; margin-bottom: 8px; background: #fff; cursor: pointer; }
+  .q-item:hover { border-color: #111; background: #fafafa; }
+  .q-item.accepted { border-left: 4px solid #111; }
+  .q-item.from-wrong { border-left: 4px dashed #555; }
+  .q-text { font-weight: 700; font-size: 0.95rem; margin-bottom: 4px; }
+  .q-meta { color: #888; font-size: 0.78rem; }
+  .q-meta span { margin-right: 8px; }
+  .q-tags { display: inline-block; }
+  .q-tag { display: inline-block; background: #f5f5f5; border: 1px solid #ddd; padding: 1px 6px; font-size: 0.7rem; margin-right: 4px; cursor: pointer; }
+  .q-tag:hover { background: #111; color: #fff; border-color: #111; }
+  .accepted-mark { display: inline-block; background: #111; color: #fff; padding: 0 6px; font-size: 0.7rem; font-weight: 700; margin-right: 6px; }
+  .sidebar { border: 1px solid #e0e0e0; padding: 14px 16px; background: #fafafa; }
+  .sidebar h3 { margin-top: 0; }
+  .tag-cloud { display: flex; flex-wrap: wrap; gap: 4px; }
+  .tag-cloud .q-tag { margin: 0; }
+  .empty-state { text-align: center; padding: 24px; color: #888; font-size: 0.88rem; border: 1px dashed #e0e0e0; }
+  .ask-form { border: 1px solid #e0e0e0; padding: 14px 16px; background: #fafafa; margin: 12px 0; }
+  .answer-list { list-style: none; padding: 0; margin: 12px 0; }
+  .answer-item { border: 1px solid #e0e0e0; padding: 12px 14px; margin-bottom: 8px; background: #fff; }
+  .answer-item.accepted { border: 2px solid #111; background: #fafafa; }
+  .answer-meta { font-size: 0.78rem; color: #888; margin-bottom: 4px; }
+  .answer-meta b { color: #111; }
+  .answer-content { font-size: 0.92rem; white-space: pre-wrap; }
+  .accept-btn { background: #fff; color: #111; border: 1px solid #111; padding: 3px 10px; font-size: 0.78rem; cursor: pointer; font-weight: 600; }
+  .accept-btn:hover { background: #111; color: #fff; }
+  .upvote-btn { background: #fff; color: #111; border: 1px solid #ccc; padding: 2px 8px; font-size: 0.78rem; cursor: pointer; }
+  .upvote-btn:hover { background: #f5f5f5; }
+  .footer { margin-top: 36px; padding-top: 16px; border-top: 1px solid #e0e0e0; color: #888888; font-size: 0.82rem; }
+  .q-detail { border: 1px solid #111; padding: 16px 18px; background: #fff; margin: 12px 0; }
+  .q-detail h1 { font-size: 1.3rem; margin-bottom: 8px; }
+  .stat-mini { display: inline-block; border: 1px solid #e0e0e0; padding: 4px 8px; font-size: 0.78rem; margin-right: 6px; }
+  .point-bar { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 8px; }
+  .point-bar > div { border: 1px solid #e0e0e0; padding: 6px; font-size: 0.8rem; text-align: center; }
+  .point-bar b { display: block; font-size: 1.1rem; }
+  .back-link { display: inline-block; margin-bottom: 8px; font-size: 0.82rem; }
+  .demo-wrong { border: 1px dashed #555; padding: 8px 12px; background: #fffbe6; margin: 8px 0; font-size: 0.82rem; }
+</style>
+</head>
+<body>
+
+<div class="nav">
+  <a href="../../index.html">Home</a> <span class="sep">/</span>
+  <a href="../index.html">Academics</a> <span class="sep">/</span>
+  <a href="index.html">Practice</a> <span class="sep">/</span>
+  知识问答
+</div>
+
+<h1>知识问答 <span class="badge">v48</span></h1>
+<p class="subtitle">提问 · 搜索 · 标签索引 · 按 subject 筛选 · 采纳率积分系统 · 与 v34 错题联动</p>
+
+<div class="v-info">
+  <strong>使用说明</strong> · 回答问题获得积分（+5），被提问者采纳额外获得 +20，每收到一个赞 +1。错题求助入口会从本地错题本带入内容。
+</div>
+
+<div class="layout">
+  <div>
+    <div class="tab-bar">
+      <div class="tab active" data-tab="list">问题列表</div>
+      <div class="tab" data-tab="ask">我要提问</div>
+      <div class="tab" data-tab="wrong">错题联动</div>
+    </div>
+
+    <div class="tab-content active" id="tab-list">
+      <div class="filter-bar">
+        <label>状态</label>
+        <select id="filterSolved">
+          <option value="all">全部</option>
+          <option value="unsolved">未解决</option>
+          <option value="solved">已解决</option>
+        </select>
+        <label>科目</label>
+        <select id="filterSubject">
+          <option value="">全部科目</option>
+        </select>
+        <input type="text" id="filterSearch" placeholder="搜索问题/标签..." style="flex:1; min-width:160px;">
+        <button class="small" id="clearFilterBtn">重置</button>
+      </div>
+      <ul class="q-list" id="qList"></ul>
+    </div>
+
+    <div class="tab-content" id="tab-ask">
+      <h2>发表提问</h2>
+      <div class="ask-form">
+        <div class="form-row">
+          <label>问题内容</label>
+          <textarea id="newQuestion" maxlength="1000" placeholder="尽可能描述清楚你的问题（背景、已知条件、已尝试的思路）..."></textarea>
+        </div>
+        <div class="form-row">
+          <label>标签（逗号分隔，最多 5 个）</label>
+          <input type="text" id="newTags" maxlength="100" placeholder="例如：SAT, 数学, 几何">
+        </div>
+        <div class="form-row">
+          <label>科目</label>
+          <select id="newSubject"></select>
+        </div>
+        <div class="form-row">
+          <label>昵称（可留空）</label>
+          <input type="text" id="newAuthor" maxlength="20" placeholder="匿名">
+        </div>
+        <button class="primary" id="submitQuestionBtn">发布问题</button>
+        <button class="small" id="resetQuestionBtn">清空</button>
+        <p class="muted" id="askMsg" style="margin-top:8px;"></p>
+      </div>
+    </div>
+
+    <div class="tab-content" id="tab-wrong">
+      <h2>v34 错题联动</h2>
+      <div class="demo-wrong">
+        <strong>说明</strong> · 这里展示从本地错题本（yz_practice_data）拉取的最近错题。点击"求解答"自动生成一条 [错题求助] 草稿到 QA 列表。
+      </div>
+      <div id="wrongList"></div>
+    </div>
+
+    <div class="tab-content" id="tab-detail">
+      <a href="javascript:backToList()" class="back-link">← 返回列表</a>
+      <div id="qDetail"></div>
+    </div>
+  </div>
+
+  <aside>
+    <div class="sidebar">
+      <h3>热门标签</h3>
+      <div class="tag-cloud" id="tagCloud"></div>
+
+      <h3>我的积分</h3>
+      <div class="point-bar">
+        <div><b id="myPoints">0</b><span>积分</span></div>
+        <div><b id="myRank">—</b><span>采纳率</span></div>
+      </div>
+      <div class="muted" style="margin-top:6px;">
+        回答 +5 · 被采纳 +20 · 每赞 +1
+      </div>
+    </div>
+  </aside>
+</div>
+
+<div class="footer">
+  <a href="../../index.html">Home</a> · <a href="index.html">Practice</a> · <a href="forum.html">论坛</a> · <a href="school-circle.html">学校圈</a> · <a href="buddy.html">战友</a>
+</div>
+
+<script src="../../js/qa.js"></script>
+<script>
+(function() {
+  var $ = function(id) { return document.getElementById(id); };
+  var currentTab = 'list';
+  var currentQid = null;
+
+  function showTab(name) {
+    currentTab = name;
+    document.querySelectorAll('.tab').forEach(function(t) {
+      t.classList.toggle('active', t.getAttribute('data-tab') === name);
+    });
+    document.querySelectorAll('.tab-content').forEach(function(c) {
+      c.classList.toggle('active', c.id === 'tab-' + name);
+    });
+    if (name === 'wrong') renderWrong();
+    if (name === 'list') renderList();
+    if (name === 'ask') populateSubject();
+  }
+  document.querySelectorAll('.tab').forEach(function(t) {
+    t.addEventListener('click', function() { showTab(t.getAttribute('data-tab')); });
+  });
+
+  function pad(n) { return n < 10 ? '0' + n : '' + n; }
+  function formatTime(ts) {
+    if (!ts) return '';
+    var d = new Date(ts);
+    var diff = (Date.now() - ts) / 1000;
+    if (diff < 60) return '刚刚';
+    if (diff < 3600) return Math.floor(diff / 60) + ' 分钟前';
+    if (diff < 86400) return Math.floor(diff / 3600) + ' 小时前';
+    if (diff < 86400 * 7) return Math.floor(diff / 86400) + ' 天前';
+    return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate());
+  }
+  function escapeHtml(s) {
+    if (s == null) return '';
+    return String(s).replace(/[&<>"']/g, function(c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+
+  function populateSubject() {
+    var sel = $('newSubject');
+    if (sel.options.length > 0) return;
+    sel.innerHTML = QA.SUBJECTS.map(function(s) {
+      return '<option value="' + s.key + '">' + s.name + '</option>';
+    }).join('');
+
+    var fsub = $('filterSubject');
+    if (fsub.options.length <= 1) {
+      fsub.innerHTML = '<option value="">全部科目</option>' + QA.SUBJECTS.map(function(s) {
+        return '<option value="' + s.key + '">' + s.name + '</option>';
+      }).join('');
+    }
+  }
+
+  function getMyName() {
+    return localStorage.getItem('yz_qa_myname') || '我';
+  }
+
+  function renderList() {
+    var filter = {};
+    var solved = $('filterSolved').value;
+    if (solved === 'solved') filter.solved = true;
+    if (solved === 'unsolved') filter.solved = false;
+    var sub = $('filterSubject').value;
+    if (sub) filter.subject = sub;
+    var search = $('filterSearch').value.trim();
+    if (search) filter.search = search;
+    var list = QA.getQuestions(filter);
+
+    if (list.length === 0) {
+      $('qList').innerHTML = '<div class="empty-state">没有匹配的问题 · <a href="javascript:showTab(\'ask\')">提一个问题</a></div>';
+      return;
+    }
+    var html = '';
+    list.forEach(function(q) {
+      var sub = QA.getSubject(q.subject);
+      var cls = 'q-item';
+      if (q.acceptedAnswerId) cls += ' accepted';
+      if (q.fromWrong) cls += ' from-wrong';
+      html += '<li class="' + cls + '" data-qid="' + q.id + '">';
+      html += '<div class="q-text">';
+      if (q.acceptedAnswerId) html += '<span class="accepted-mark">✓ 已采纳</span>';
+      if (q.fromWrong) html += '<span class="accepted-mark" style="background:#555;">错题</span>';
+      html += escapeHtml(q.question) + '</div>';
+      html += '<div class="q-meta">';
+      html += '<span>科目：<b>' + (sub ? sub.name : q.subject) + '</b></span>';
+      html += '<span>👤 ' + escapeHtml(q.author) + '</span>';
+      html += '<span>💬 ' + q.answerCount + ' 回答</span>';
+      html += '<span>👁 ' + q.views + ' 浏览</span>';
+      html += '<span>· ' + formatTime(q.createdAt) + '</span>';
+      if (q.tags && q.tags.length) {
+        html += '<div class="q-tags" style="margin-top:4px;">';
+        q.tags.forEach(function(t) {
+          html += '<span class="q-tag" data-tag="' + escapeHtml(t) + '">#' + escapeHtml(t) + '</span>';
+        });
+        html += '</div>';
+      }
+      html += '</div>';
+      html += '</li>';
+    });
+    $('qList').innerHTML = html;
+
+    document.querySelectorAll('.q-item').forEach(function(li) {
+      li.addEventListener('click', function(e) {
+        if (e.target.classList.contains('q-tag')) return;
+        openDetail(li.getAttribute('data-qid'));
+      });
+    });
+    document.querySelectorAll('.q-tag').forEach(function(t) {
+      t.addEventListener('click', function(e) {
+        e.stopPropagation();
+        $('filterSearch').value = t.getAttribute('data-tag');
+        renderList();
+      });
+    });
+  }
+
+  function renderTagCloud() {
+    var tags = QA.getAllTags();
+    if (tags.length === 0) {
+      $('tagCloud').innerHTML = '<p class="muted">暂无标签</p>';
+      return;
+    }
+    var html = '';
+    tags.slice(0, 30).forEach(function(t) {
+      html += '<span class="q-tag" data-tag="' + escapeHtml(t.tag) + '">#' + escapeHtml(t.tag) + ' <span class="muted">(' + t.count + ')</span></span>';
+    });
+    $('tagCloud').innerHTML = html;
+    document.querySelectorAll('#tagCloud .q-tag').forEach(function(t) {
+      t.addEventListener('click', function() {
+        $('filterSearch').value = t.getAttribute('data-tag');
+        showTab('list');
+        renderList();
+      });
+    });
+  }
+
+  function renderMyPoints() {
+    var myName = getMyName();
+    var pts = QA.getPoints(myName);
+    var rate = QA.getAcceptRate(myName);
+    $('myPoints').textContent = pts;
+    $('myRank').textContent = rate.asked + '/' + rate.accepted;
+  }
+
+  function openDetail(qid) {
+    currentQid = qid;
+    showTab('detail');
+    QA.view(qid);
+    var q = QA.getQuestion(qid);
+    if (!q) { $('qDetail').innerHTML = '<div class="empty-state">问题不存在</div>'; return; }
+    var sub = QA.getSubject(q.subject);
+    var html = '<div class="q-detail">';
+    html += '<h1>' + (q.fromWrong ? '<span class="accepted-mark" style="background:#555;">错题</span>' : '') + escapeHtml(q.question) + '</h1>';
+    html += '<div class="q-meta">';
+    html += '<span class="stat-mini">科目：' + (sub ? sub.name : q.subject) + '</span>';
+    html += '<span class="stat-mini">👤 ' + escapeHtml(q.author) + '</span>';
+    html += '<span class="stat-mini">👁 ' + q.views + '</span>';
+    html += '<span class="stat-mini">' + formatTime(q.createdAt) + '</span>';
+    html += '</div>';
+    if (q.tags && q.tags.length) {
+      html += '<div class="q-tags" style="margin-top:6px;">';
+      q.tags.forEach(function(t) { html += '<span class="q-tag">#' + escapeHtml(t) + '</span>'; });
+      html += '</div>';
+    }
+    html += '</div>';
+
+    html += '<h2>' + (q.answers.length) + ' 个回答</h2>';
+    if (q.answers.length === 0) {
+      html += '<div class="empty-state">还没有人回答 · 来当第一个吧</div>';
+    } else {
+      html += '<ul class="answer-list">';
+      q.answers.forEach(function(a) {
+        var isAccepted = q.acceptedAnswerId === a.id;
+        html += '<li class="answer-item' + (isAccepted ? ' accepted' : '') + '">';
+        if (isAccepted) html += '<div class="accepted-mark">✓ 提问者已采纳</div>';
+        html += '<div class="answer-meta"><b>' + escapeHtml(a.author) + '</b> · ' + formatTime(a.createdAt) + ' · 👍 ' + a.upvotes + '</div>';
+        html += '<div class="answer-content">' + escapeHtml(a.content) + '</div>';
+        html += '<div style="margin-top:6px;">';
+        html += '<button class="upvote-btn" data-aid="' + a.id + '">👍 有用</button> ';
+        if (q.author === getMyName() && !isAccepted) {
+          html += '<button class="accept-btn" data-aid="' + a.id + '">采纳为最佳答案</button>';
+        }
+        html += '</div>';
+        html += '</li>';
+      });
+      html += '</ul>';
+    }
+
+    html += '<h2>写下你的回答</h2>';
+    html += '<div class="ask-form">';
+    html += '<div class="form-row"><label>回答内容</label><textarea id="ansContent" maxlength="5000" placeholder="尽量详细，给出推理过程..."></textarea></div>';
+    html += '<div class="form-row"><label>昵称</label><input type="text" id="ansAuthor" maxlength="20" placeholder="匿名"></div>';
+    html += '<button class="primary" id="submitAnswerBtn">提交回答</button>';
+    html += '<p class="muted" id="ansMsg" style="margin-top:8px;"></p>';
+    html += '</div>';
+
+    $('qDetail').innerHTML = html;
+    bindDetail();
+  }
+
+  function bindDetail() {
+    $('ansAuthor').value = getMyName() === '我' ? '' : getMyName();
+    $('submitAnswerBtn').addEventListener('click', function() {
+      var content = $('ansContent').value.trim();
+      var author = $('ansAuthor').value.trim() || '匿名';
+      if (!content) { $('ansMsg').textContent = '请输入内容'; return; }
+      try {
+        QA.answer(currentQid, content, author);
+        localStorage.setItem('yz_qa_myname', author);
+        $('ansContent').value = '';
+        $('ansMsg').textContent = '已提交！';
+        renderMyPoints();
+        setTimeout(function() { openDetail(currentQid); renderMyPoints(); }, 400);
+      } catch (e) {
+        $('ansMsg').textContent = '错误：' + e.message;
+      }
+    });
+    document.querySelectorAll('.upvote-btn').forEach(function(b) {
+      b.addEventListener('click', function() {
+        QA.upvote(currentQid, b.getAttribute('data-aid'));
+        openDetail(currentQid);
+      });
+    });
+    document.querySelectorAll('.accept-btn').forEach(function(b) {
+      b.addEventListener('click', function() {
+        var aid = b.getAttribute('data-aid');
+        if (confirm('确认采纳为最佳答案？答主将获得 +20 积分')) {
+          QA.accept(currentQid, aid, getMyName());
+          renderMyPoints();
+          openDetail(currentQid);
+        }
+      });
+    });
+  }
+
+  function renderWrong() {
+    var html = '<p class="muted">从 localStorage 拉取 v34 错题本最近错题（最多 5 条）：</p>';
+    var wrong = [];
+    try {
+      var raw = localStorage.getItem('yz_practice_data');
+      if (raw) {
+        var data = JSON.parse(raw);
+        if (data.records) {
+          Object.keys(data.records).forEach(function(sub) {
+            Object.keys(data.records[sub]).forEach(function(qid) {
+              var r = data.records[sub][qid];
+              if (r && r.correct === false) {
+                wrong.push({ subject: sub, qid: qid, ts: r.ts, topic: r.topic || '' });
+              }
+            });
+          });
+          wrong.sort(function(a, b) { return (b.ts || 0) - (a.ts || 0); });
+          wrong = wrong.slice(0, 5);
+        }
+      }
+    } catch (e) {}
+
+    if (wrong.length === 0) {
+      html += '<div class="empty-state">暂无错题记录 · 在 Practice 页面做几道题试试</div>';
+    } else {
+      html += '<ul class="q-list">';
+      wrong.forEach(function(w) {
+        html += '<li class="q-item from-wrong">';
+        html += '<div class="q-text"><span class="accepted-mark" style="background:#555;">错题</span> ' + escapeHtml(w.subject) + ' · 题号 ' + escapeHtml(w.qid) + (w.topic ? ' · ' + escapeHtml(w.topic) : '') + '</div>';
+        html += '<div class="q-meta">错题时间：' + formatTime(w.ts) + '</div>';
+        html += '<button class="small" data-sub="' + escapeHtml(w.subject) + '" data-qid="' + escapeHtml(w.qid) + '" data-topic="' + escapeHtml(w.topic) + '">求解答</button>';
+        html += '</li>';
+      });
+      html += '</ul>';
+    }
+    $('wrongList').innerHTML = html;
+
+    document.querySelectorAll('#wrongList button').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var wrongData = {
+          qid: btn.getAttribute('data-qid'),
+          question: btn.getAttribute('data-sub') + ' 题号 ' + btn.getAttribute('data-qid') + (btn.getAttribute('data-topic') ? '（' + btn.getAttribute('data-topic') + '）' : '') + ' 求解答',
+          subject: mapSubject(btn.getAttribute('data-sub')),
+          tags: ['错题', btn.getAttribute('data-sub')],
+          author: getMyName()
+        };
+        var q = QA.fromWrongQuestion(wrongData);
+        alert('已生成草稿：' + q.id);
+        showTab('list');
+        renderList();
+        renderTagCloud();
+      });
+    });
+  }
+
+  function mapSubject(sub) {
+    var map = { 'sat': 'sat', 'act': 'act', 'ap': 'ap', 'ib': 'ib', 'alevel': 'alevel', 'toefl': 'toefl', 'ielts': 'ielts', 'igcse': 'igcse' };
+    return map[(sub || '').toLowerCase()] || 'other';
+  }
+
+  $('submitQuestionBtn').addEventListener('click', function() {
+    var q = $('newQuestion').value.trim();
+    var tagsRaw = $('newTags').value;
+    var tags = tagsRaw.split(/[,，;；\s]+/).filter(Boolean);
+    if (tags.length > 5) tags = tags.slice(0, 5);
+    var sub = $('newSubject').value;
+    var author = $('newAuthor').value.trim() || '匿名';
+    if (!q) { $('askMsg').textContent = '请输入问题'; return; }
+    try {
+      var newQ = QA.ask(q, tags, sub, author);
+      localStorage.setItem('yz_qa_myname', author);
+      $('newQuestion').value = '';
+      $('newTags').value = '';
+      $('askMsg').textContent = '已发布！';
+      renderTagCloud();
+      renderMyPoints();
+      setTimeout(function() { openDetail(newQ.id); }, 500);
+    } catch (e) {
+      $('askMsg').textContent = '错误：' + e.message;
+    }
+  });
+  $('resetQuestionBtn').addEventListener('click', function() {
+    $('newQuestion').value = '';
+    $('newTags').value = '';
+    $('newAuthor').value = '';
+    $('askMsg').textContent = '';
+  });
+
+  $('filterSolved').addEventListener('change', renderList);
+  $('filterSubject').addEventListener('change', renderList);
+  $('filterSearch').addEventListener('input', function() {
+    clearTimeout(window._qaSearchT);
+    window._qaSearchT = setTimeout(renderList, 200);
+  });
+  $('clearFilterBtn').addEventListener('click', function() {
+    $('filterSolved').value = 'all';
+    $('filterSubject').value = '';
+    $('filterSearch').value = '';
+    renderList();
+  });
+
+  window.backToList = function() { showTab('list'); };
+  window.openDetail = openDetail;
+  window.showTab = showTab;
+
+  populateSubject();
+  renderList();
+  renderTagCloud();
+  renderMyPoints();
+})();
+</script>
+</body>
+</html>

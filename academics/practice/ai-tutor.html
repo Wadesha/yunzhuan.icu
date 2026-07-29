@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Tutor · 智能出题与讲解 | Practice</title>
+<link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 900px; margin: 0 auto; padding: 24px 16px 48px; background: #ffffff; color: #111111; line-height: 1.7; font-size: 15px; }
+  a { color: #111111; text-decoration: none; border-bottom: 1px solid #cccccc; }
+  a:hover { border-bottom-color: #111111; }
+  .nav { padding-bottom: 12px; margin-bottom: 20px; border-bottom: 1px solid #e0e0e0; font-size: 0.88rem; color: #888888; }
+  .nav a { color: #111111; }
+  .nav .sep { color: #cccccc; margin: 0 6px; }
+  h1 { font-size: 1.6rem; margin-bottom: 4px; }
+  h2 { font-size: 1.1rem; font-weight: 700; margin: 28px 0 8px; padding-bottom: 6px; border-bottom: 1px solid #111111; }
+  h3 { font-size: 1rem; font-weight: 700; margin: 18px 0 6px; }
+  p { margin-bottom: 8px; }
+  .muted { color: #888888; font-size: 0.85rem; }
+  .subtitle { color: #555555; font-size: 0.95rem; margin-bottom: 20px; }
+  .box { border: 1px solid #111111; padding: 14px 18px; margin: 12px 0; }
+  .box-dashed { border: 1px dashed #888888; padding: 14px 18px; margin: 12px 0; }
+  .footer { margin-top: 36px; padding-top: 16px; border-top: 1px solid #e0e0e0; color: #888888; font-size: 0.82rem; }
+  .v-badge { display: inline-block; border: 1px solid #111111; padding: 0 6px; font-size: 0.7rem; font-weight: 700; }
+
+  .control-row { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; margin: 10px 0; }
+  .control-row label { font-size: 0.85rem; color: #555; font-weight: 600; margin-right: 4px; }
+  select, input[type=number] { padding: 6px 10px; border: 1px solid #888; font-family: inherit; font-size: 0.88rem; background: #fff; min-width: 80px; }
+  .btn { display: inline-block; padding: 8px 18px; border: 1px solid #111; background: #fff; color: #111; font-family: inherit; font-size: 0.88rem; cursor: pointer; margin-right: 8px; font-weight: 600; }
+  .btn:hover { background: #111; color: #fff; }
+  .btn-primary { background: #111; color: #fff; }
+  .btn-primary:hover { background: #333; }
+  .btn-secondary { background: #fff; color: #111; border: 1px solid #111; }
+  .toggle-switch { display: inline-flex; align-items: center; gap: 6px; cursor: pointer; user-select: none; }
+  .toggle-switch input { cursor: pointer; }
+
+  .question-card { border: 1px solid #e0e0e0; padding: 14px 18px; margin: 12px 0; background: #fff; }
+  .question-card.correct { border-color: #111; background: #fafafa; }
+  .question-card.wrong { border-color: #b00020; background: #fafafa; }
+  .question-card .q-meta { display: flex; justify-content: space-between; font-size: 0.78rem; color: #888; margin-bottom: 6px; }
+  .question-card .q-stem { font-weight: 600; margin-bottom: 10px; line-height: 1.6; }
+  .question-card .q-choices { list-style: none; margin: 0; padding: 0; }
+  .question-card .q-choices li { padding: 6px 10px; margin: 4px 0; border: 1px solid #e0e0e0; cursor: pointer; font-size: 0.88rem; }
+  .question-card .q-choices li:hover { border-color: #888; }
+  .question-card .q-choices li.selected { background: #111; color: #fff; border-color: #111; }
+  .question-card .q-choices li.correct-answer { background: #f0f0f0; border-color: #111; }
+  .question-card .q-explain { margin-top: 10px; padding: 10px 12px; border: 1px dashed #888; font-size: 0.82rem; line-height: 1.7; color: #333; background: #fafafa; display: none; white-space: pre-wrap; }
+  .question-card.revealed .q-explain { display: block; }
+
+  .result-summary { border: 1px solid #111; padding: 14px 18px; margin: 16px 0; }
+  .result-summary .score-big { font-size: 2rem; font-weight: 700; }
+
+  .status-bar { font-size: 0.82rem; color: #555; padding: 8px 12px; border: 1px dashed #888; background: #fafafa; margin: 10px 0; }
+  .status-bar.error { border-color: #b00020; color: #b00020; }
+
+  .topic-list { max-height: 200px; overflow-y: auto; border: 1px solid #e0e0e0; padding: 8px 10px; background: #fafafa; font-size: 0.82rem; }
+  .topic-list label { display: block; padding: 3px 0; cursor: pointer; }
+  .topic-list label:hover { background: #fff; }
+</style>
+</head>
+<body>
+
+<div class="nav">
+  <a href="../../index.html">Home</a> <span class="sep">/</span>
+  <a href="../index.html">Academics</a> <span class="sep">/</span>
+  <a href="index.html">Practice</a> <span class="sep">/</span>
+  AI Tutor
+</div>
+
+<h1>AI Tutor · 智能出题 <span class="v-badge">v40</span></h1>
+<p class="subtitle">基于 AI Provider 自动出题 · 难度自适应 · 答完自动评分并写入答题记录</p>
+
+<div class="box-dashed">
+  <strong>使用说明</strong>：选择科目与 Topic → 设置难度与题数 → 可选开启 AI 模式 → 点击"生成新题"开始练习。
+  若未在 <a href="dashboard.html">Dashboard → AI Provider Settings</a> 配置真实 API，则自动回退到本地模板。
+</div>
+
+<h2>题目配置</h2>
+<div class="box">
+  <div class="control-row">
+    <label>科目：</label>
+    <select id="cfgSubject">
+      <option value="sat">SAT</option>
+      <option value="act">ACT</option>
+      <option value="ap">AP</option>
+      <option value="ib">IB</option>
+      <option value="alevel">A-Level</option>
+      <option value="igcse">IGCSE</option>
+      <option value="toefl">TOEFL</option>
+      <option value="ielts">IELTS</option>
+    </select>
+
+    <label>Topic：</label>
+    <select id="cfgTopic">
+      <option value="">加载中...</option>
+    </select>
+  </div>
+
+  <div class="control-row">
+    <label>难度：</label>
+    <select id="cfgDifficulty">
+      <option value="easy">简单</option>
+      <option value="medium" selected>中等</option>
+      <option value="hard">困难</option>
+    </select>
+
+    <label>题数：</label>
+    <input type="number" id="cfgCount" min="1" max="20" value="5">
+
+    <label>题型：</label>
+    <select id="cfgType">
+      <option value="single" selected>单选</option>
+    </select>
+
+    <label class="toggle-switch">
+      <input type="checkbox" id="cfgUseAI" checked>
+      AI 模式
+    </label>
+
+    <button class="btn btn-primary" id="btnGenerate">生成新题</button>
+    <button class="btn" id="btnSaveBank">保存为题库</button>
+  </div>
+
+  <div class="muted" style="margin-top:6px;">
+    AI 模式优先调用真实 Provider；失败/未配置时回退到本地模板。缓存 7 天。
+  </div>
+</div>
+
+<div id="statusBar" class="status-bar" style="display:none;"></div>
+
+<h2>答题区 <span class="muted" id="quizMeta"></span></h2>
+<div id="quizArea">
+  <div class="box-dashed" style="text-align:center; color:#888;">
+    点击"生成新题"开始
+  </div>
+</div>
+
+<div id="resultArea" style="display:none;">
+  <h2>本次结果</h2>
+  <div class="result-summary" id="resultSummary"></div>
+  <div class="control-row">
+    <button class="btn" id="btnReview">查看解析</button>
+    <button class="btn" id="btnNewQuiz">再来一组</button>
+  </div>
+</div>
+
+<h2>题库（已保存）</h2>
+<div class="box">
+  <div id="bankList" class="muted">暂无</div>
+  <div class="control-row" style="margin-top:8px;">
+    <button class="btn" id="btnRefreshBank">刷新题库</button>
+    <button class="btn" id="btnClearBank">清空题库</button>
+  </div>
+</div>
+
+<div class="footer">
+  <a href="index.html">Practice Home</a> ·
+  <a href="dashboard.html">Dashboard</a> ·
+  <a href="ai-chat.html">AI Chat</a> ·
+  <a href="javascript:window.scrollTo(0,0)">Back to top</a>
+</div>
+
+<script src="../../js/syllabus-data.js"></script>
+<script src="../../js/ai-provider.js"></script>
+<script src="../../js/ai-question-gen.js"></script>
+<script>
+(function() {
+  'use strict';
+
+  var subjectSel = document.getElementById('cfgSubject');
+  var topicSel = document.getElementById('cfgTopic');
+  var diffSel = document.getElementById('cfgDifficulty');
+  var countInput = document.getElementById('cfgCount');
+  var typeSel = document.getElementById('cfgType');
+  var useAICheck = document.getElementById('cfgUseAI');
+  var btnGenerate = document.getElementById('btnGenerate');
+  var btnSaveBank = document.getElementById('btnSaveBank');
+  var btnReview = document.getElementById('btnReview');
+  var btnNewQuiz = document.getElementById('btnNewQuiz');
+  var btnRefreshBank = document.getElementById('btnRefreshBank');
+  var btnClearBank = document.getElementById('btnClearBank');
+  var statusBar = document.getElementById('statusBar');
+  var quizArea = document.getElementById('quizArea');
+  var resultArea = document.getElementById('resultArea');
+  var resultSummary = document.getElementById('resultSummary');
+  var bankList = document.getElementById('bankList');
+  var quizMeta = document.getElementById('quizMeta');
+
+  var currentQuestions = [];
+  var currentAnswers = {}; // qid -> selected letter
+  var currentResult = null;
+  var currentSubject = '';
+  var currentTopic = '';
+
+  function showStatus(text, isError) {
+    statusBar.style.display = 'block';
+    statusBar.textContent = text;
+    statusBar.className = 'status-bar' + (isError ? ' error' : '');
+    if (!isError) {
+      setTimeout(function() { statusBar.style.display = 'none'; }, 3500);
+    }
+  }
+
+  function populateTopics() {
+    var subject = subjectSel.value;
+    var codes = window.SYLLABUS_DATA.getAllTopicCodes(subject) || [];
+    topicSel.innerHTML = '';
+    if (!codes.length) {
+      var opt = document.createElement('option');
+      opt.value = ''; opt.textContent = '(暂无 Topic)';
+      topicSel.appendChild(opt);
+      return;
+    }
+    codes.forEach(function(code) {
+      var t = window.SYLLABUS_DATA.getTopic(subject, code);
+      var name = t && t.name ? t.name : code;
+      var opt = document.createElement('option');
+      opt.value = code;
+      opt.textContent = code + ' · ' + name;
+      topicSel.appendChild(opt);
+    });
+  }
+
+  function renderQuestions(questions) {
+    quizArea.innerHTML = '';
+    currentQuestions = questions || [];
+    currentAnswers = {};
+    currentResult = null;
+    resultArea.style.display = 'none';
+    if (!currentQuestions.length) {
+      quizArea.innerHTML = '<div class="box-dashed" style="text-align:center;color:#888;">未生成题目</div>';
+      return;
+    }
+    currentQuestions.forEach(function(q, idx) {
+      var card = document.createElement('div');
+      card.className = 'question-card';
+      card.setAttribute('data-qid', q.qid);
+
+      var meta = document.createElement('div');
+      meta.className = 'q-meta';
+      meta.innerHTML = '<span>#' + (idx + 1) + ' · 难度: ' + (q.difficulty || 'medium') + ' · 来源: ' + (q.source || 'local') + '</span>' +
+        '<span>topic: ' + (q.topicCode || '—') + '</span>';
+      card.appendChild(meta);
+
+      var stem = document.createElement('div');
+      stem.className = 'q-stem';
+      stem.textContent = q.stem;
+      card.appendChild(stem);
+
+      var ul = document.createElement('ul');
+      ul.className = 'q-choices';
+      Object.keys(q.choices || {}).forEach(function(letter) {
+        var li = document.createElement('li');
+        li.textContent = letter + '. ' + q.choices[letter];
+        li.setAttribute('data-letter', letter);
+        li.addEventListener('click', function() {
+          if (card.classList.contains('revealed')) return;
+          Array.prototype.forEach.call(ul.querySelectorAll('li'), function(x) { x.classList.remove('selected'); });
+          li.classList.add('selected');
+          currentAnswers[q.qid] = letter;
+        });
+        ul.appendChild(li);
+      });
+      card.appendChild(ul);
+
+      var explain = document.createElement('div');
+      explain.className = 'q-explain';
+      explain.textContent = q.explanation || '';
+      card.appendChild(explain);
+
+      quizArea.appendChild(card);
+    });
+
+    var submitBar = document.createElement('div');
+    submitBar.className = 'control-row';
+    submitBar.innerHTML = '<button class="btn btn-primary" id="btnSubmitQuiz">提交并评分</button>';
+    quizArea.appendChild(submitBar);
+    document.getElementById('btnSubmitQuiz').addEventListener('click', submitQuiz);
+  }
+
+  function submitQuiz() {
+    if (!currentQuestions.length) return;
+    var answered = Object.keys(currentAnswers).length;
+    if (answered < currentQuestions.length) {
+      if (!confirm('还有 ' + (currentQuestions.length - answered) + ' 题未作答，仍提交？')) return;
+    }
+    var correct = 0;
+    currentQuestions.forEach(function(q) {
+      var card = quizArea.querySelector('[data-qid="' + q.qid + '"]');
+      if (!card) return;
+      var selected = currentAnswers[q.qid] || '';
+      var isCorrect = selected === q.answer;
+      if (isCorrect) correct++;
+      card.classList.add('revealed');
+      if (isCorrect) card.classList.add('correct');
+      else card.classList.add('wrong');
+      // mark choices
+      var lis = card.querySelectorAll('.q-choices li');
+      Array.prototype.forEach.call(lis, function(li) {
+        var l = li.getAttribute('data-letter');
+        if (l === q.answer) li.classList.add('correct-answer');
+      });
+    });
+    currentResult = {
+      total: currentQuestions.length,
+      correct: correct,
+      accuracy: Math.round((correct / currentQuestions.length) * 100)
+    };
+    // write to yz_practice_data
+    writePracticeData(currentQuestions, currentAnswers);
+    showResultSummary();
+  }
+
+  function writePracticeData(questions, answers) {
+    try {
+      var raw = localStorage.getItem('yz_practice_data');
+      var data = raw ? JSON.parse(raw) : { records: {}, stats: {} };
+      if (!data.records) data.records = {};
+      var subj = currentSubject;
+      if (!data.records[subj]) data.records[subj] = {};
+      var ts = Date.now();
+      questions.forEach(function(q) {
+        var sel = answers[q.qid] || '';
+        data.records[subj][q.qid] = {
+          topic: q.topicCode,
+          topicCode: q.topicCode,
+          correct: sel === q.answer,
+          userAnswer: sel,
+          difficulty: q.difficulty,
+          source: q.source,
+          ts: ts,
+          subject: subj
+        };
+      });
+      localStorage.setItem('yz_practice_data', JSON.stringify(data));
+    } catch (e) {
+      console.warn('write yz_practice_data failed', e);
+    }
+  }
+
+  function showResultSummary() {
+    if (!currentResult) return;
+    resultArea.style.display = 'block';
+    resultSummary.innerHTML = '<div class="score-big">' + currentResult.correct + ' / ' + currentResult.total + '</div>' +
+      '<div>正确率：<strong>' + currentResult.accuracy + '%</strong></div>' +
+      '<div class="muted" style="margin-top:6px;">结果已写入 yz_practice_data</div>';
+    resultArea.scrollIntoView({ behavior: 'smooth' });
+  }
+
+  function refreshBankList() {
+    var list = window.QuestionGen.listBank();
+    if (!list.length) {
+      bankList.textContent = '暂无';
+      bankList.className = 'muted';
+      return;
+    }
+    bankList.className = '';
+    var rows = list.map(function(b) {
+      return '<tr><td>' + b.subject + '</td><td>' + b.topicCode + '</td><td>' + b.count + ' 题</td></tr>';
+    }).join('');
+    bankList.innerHTML = '<table><tr><th>科目</th><th>Topic</th><th>题数</th></tr>' + rows + '</table>';
+  }
+
+  subjectSel.addEventListener('change', populateTopics);
+
+  btnGenerate.addEventListener('click', function() {
+    var subject = subjectSel.value;
+    var topicCode = topicSel.value;
+    if (!topicCode) { showStatus('请选择 Topic', true); return; }
+    var count = parseInt(countInput.value, 10);
+    if (!count || count < 1) count = 5;
+    if (count > 20) count = 20;
+
+    currentSubject = subject;
+    currentTopic = topicCode;
+
+    btnGenerate.disabled = true;
+    showStatus('正在生成 ' + count + ' 道题（' + (useAICheck.checked ? 'AI 模式' : '本地模板') + '）...');
+
+    window.QuestionGen.generate({
+      subject: subject,
+      topicCode: topicCode,
+      difficulty: diffSel.value,
+      count: count,
+      type: typeSel.value,
+      useAI: useAICheck.checked
+    }).then(function(result) {
+      btnGenerate.disabled = false;
+      var tag = result.provider + (result.cached ? ' (缓存)' : '');
+      showStatus('生成成功 · provider=' + tag + (result.fallbackReason ? ' · fallback: ' + result.fallbackReason : ''));
+      renderQuestions(result.questions);
+      quizMeta.textContent = '（' + result.questions.length + ' 题 · ' + currentSubject + ' · ' + currentTopic + '）';
+    }).catch(function(err) {
+      btnGenerate.disabled = false;
+      showStatus('生成失败: ' + (err && err.message), true);
+    });
+  });
+
+  btnSaveBank.addEventListener('click', function() {
+    if (!currentQuestions.length) { showStatus('请先生成题目', true); return; }
+    var n = window.QuestionGen.saveToBank(currentQuestions, currentSubject, currentTopic);
+    showStatus('已保存 ' + n + ' 题到题库');
+    refreshBankList();
+  });
+
+  btnReview.addEventListener('click', function() {
+    Array.prototype.forEach.call(quizArea.querySelectorAll('.question-card'), function(c) {
+      c.classList.add('revealed');
+    });
+  });
+
+  btnNewQuiz.addEventListener('click', function() {
+    btnGenerate.click();
+  });
+
+  btnRefreshBank.addEventListener('click', refreshBankList);
+  btnClearBank.addEventListener('click', function() {
+    if (!confirm('清空全部 AI 题库？')) return;
+    window.QuestionGen.clearBank();
+    refreshBankList();
+    showStatus('题库已清空');
+  });
+
+  // init
+  if (window.SYLLABUS_DATA) populateTopics();
+  refreshBankList();
+})();
+</script>
+</body>
+</html>

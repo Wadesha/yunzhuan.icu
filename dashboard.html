@@ -142,6 +142,26 @@
     <h1>Application Dashboard</h1>
     <p class="subtitle">申请清单仪表盘 · v21.0 Preview</p>
 
+    <!-- v46: Care Mode Toggle + Theme Switcher -->
+    <div style="margin-bottom:14px;padding:10px 14px;background:white;border-radius:8px;border:1px solid #e0e0e0;display:flex;align-items:center;flex-wrap:wrap;gap:10px;">
+        <span style="font-size:0.85rem;color:#555;font-weight:600;">v46 体验:</span>
+        <label style="font-size:0.85rem;display:inline-flex;align-items:center;gap:6px;cursor:pointer;">
+            <input type="checkbox" id="care-toggle" style="cursor:pointer;">
+            护眼模式
+        </label>
+        <label style="font-size:0.85rem;display:inline-flex;align-items:center;gap:6px;cursor:pointer;">
+            主题:
+            <select id="theme-select" style="border:1px solid #ddd;padding:3px 6px;font-size:0.82rem;border-radius:3px;cursor:pointer;">
+                <option value="default">默认 (黑白灰)</option>
+                <option value="ocean">海洋 (蓝灰) · VIP</option>
+                <option value="forest">森林 (绿灰) · VIP</option>
+                <option value="violet">紫罗兰 (灰紫) · VIP</option>
+            </select>
+        </label>
+        <button id="vip-unlock" style="font-size:0.72rem;padding:3px 8px;border:1px dashed #888;background:#fff;color:#888;cursor:pointer;border-radius:3px;">解锁 VIP (调试)</button>
+        <a href="academics/practice/notifications.html" style="font-size:0.78rem;margin-left:auto;">通知设置 →</a>
+    </div>
+
     <!-- Role Selector -->
     <div style="margin-bottom:14px;padding:10px 14px;background:white;border-radius:8px;border:1px solid #e0e0e0;">
         <span style="font-size:0.85rem;color:#555;margin-right:10px;">Role:</span>
@@ -404,5 +424,56 @@
     loadChecklist();
     </script>
 <script src="./js/back-to-top.js"></script>
+<script src="./js/gesture.js"></script>
+<script>
+  // v46 体验开关
+  (function() {
+    var careToggle = document.getElementById('care-toggle');
+    var themeSelect = document.getElementById('theme-select');
+    var vipBtn = document.getElementById('vip-unlock');
+
+    if (careToggle && window.CareMode) {
+      careToggle.checked = window.CareMode.isEnabled();
+      careToggle.addEventListener('change', function() {
+        window.CareMode.toggle();
+        careToggle.checked = window.CareMode.isEnabled();
+      });
+    }
+
+    if (themeSelect && window.Theme) {
+      themeSelect.value = window.Theme.get();
+      themeSelect.addEventListener('change', function() {
+        var r = window.Theme.set(themeSelect.value);
+        if (!r.ok && r.reason === 'vip') {
+          alert('该主题为 VIP 专享。请先点击「解锁 VIP (调试)」按钮。');
+          themeSelect.value = window.Theme.get();
+        }
+      });
+      // 监听主题切换
+      document.addEventListener('themechange', function(e) {
+        themeSelect.value = e.detail.name;
+      });
+      // 监听 VIP 拦截事件
+      document.addEventListener('themerestricted', function() {
+        // 可对接支付页
+      });
+    }
+
+    if (vipBtn && window.Theme) {
+      vipBtn.addEventListener('click', function() {
+        if (window.Theme.isVip()) {
+          window.Theme.lockVip();
+          vipBtn.textContent = '解锁 VIP (调试)';
+          alert('已锁定 VIP 权限');
+        } else {
+          window.Theme.unlockVip();
+          vipBtn.textContent = '锁定 VIP';
+          alert('已解锁 VIP 权限（调试模式，正式环境请对接后端）');
+        }
+      });
+      if (window.Theme.isVip()) vipBtn.textContent = '锁定 VIP';
+    }
+  })();
+</script>
 </body>
 </html>

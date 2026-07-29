@@ -185,6 +185,25 @@
   .btn-primary:hover { background: #333; }
   .btn-secondary { background: #fff; color: #111; border: 1px solid #111; padding: 8px 16px; font-size: 0.85rem; cursor: pointer; font-weight: 600; margin: 6px 4px; }
   .btn-secondary:hover { background: #f0f0f0; }
+
+  /* v39 AI Provider Settings */
+  .ai-provider-box { border: 1px solid #111; padding: 14px 18px; margin: 12px 0; background: #fff; }
+  .ai-provider-box .provider-header { display: flex; align-items: center; justify-content: space-between; cursor: pointer; user-select: none; }
+  .ai-provider-box .provider-toggle { transition: transform 0.2s ease; font-size: 0.75rem; color: #888; }
+  .ai-provider-box.collapsed .provider-toggle { transform: rotate(-90deg); }
+  .ai-provider-box.collapsed .provider-body { display: none; }
+  .ai-provider-box .provider-body { margin-top: 12px; }
+  .ai-provider-tabs { display: flex; gap: 0; border: 1px solid #111; margin-bottom: 12px; flex-wrap: wrap; }
+  .ai-provider-tabs button { background: #fff; color: #111; border: none; border-right: 1px solid #111; padding: 7px 14px; font-size: 0.82rem; cursor: pointer; font-weight: 600; }
+  .ai-provider-tabs button:last-child { border-right: none; }
+  .ai-provider-tabs button.active { background: #111; color: #fff; }
+  .ai-provider-form label { display: block; font-size: 0.78rem; color: #555; margin: 8px 0 3px; font-weight: 600; }
+  .ai-provider-form input, .ai-provider-form select { width: 100%; padding: 6px 10px; border: 1px solid #ccc; font-size: 0.85rem; font-family: inherit; background: #fff; }
+  .ai-provider-form .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .ai-provider-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+  .ai-cache-stats { margin-top: 12px; padding: 10px 12px; border: 1px dashed #888; font-size: 0.78rem; color: #555; background: #fafafa; }
+  .ai-cache-stats table { margin: 6px 0; font-size: 0.78rem; }
+  .ai-cache-stats td { padding: 2px 8px; }
 </style>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
 </head>
@@ -197,8 +216,8 @@
   Dashboard
 </div>
 
-<h1>Practice Dashboard <span class="v-badge">v23</span></h1>
-<p class="subtitle">v23 · v19 Chart.js可视化 · v20 云端账号 · v21 排行榜 · v22 AI诊断 · v23 AI讲解</p>
+<h1>Practice Dashboard <span class="v-badge">v39</span></h1>
+<p class="subtitle">v39 · AI Provider 接入(OpenAI/DeepSeek/Ollama) · v22 AI诊断 · v23 AI讲解</p>
 
 <h2>总览</h2>
 <div class="data-toolbar" id="dataToolbar">
@@ -264,6 +283,89 @@
       <button class="btn-secondary" id="btnLogout">退出登录</button>
     </div>
     <p class="muted" style="margin-top:8px; font-size:0.78rem;">Sync 将本地 yz_practice_data 保存到云端；登录时自动恢复</p>
+  </div>
+</div>
+
+<!-- v39 AI Provider Settings -->
+<h2>AI Provider Settings <span class="v-badge" style="font-size:0.65rem;">v39</span></h2>
+<div class="ai-provider-box collapsed" id="aiProviderBox">
+  <div class="provider-header" id="aiProviderHeader">
+    <div>
+      <strong>配置 AI 服务商（OpenAI / DeepSeek / Ollama / Local）</strong>
+      <div class="muted" style="font-size:0.78rem; margin-top:3px;">当前激活：<span id="aiProviderActive">local</span> · 缓存：<span id="aiCacheCount">0</span> 条</div>
+    </div>
+    <span class="provider-toggle">▾</span>
+  </div>
+  <div class="provider-body">
+    <div class="ai-provider-tabs" id="aiProviderTabs">
+      <button data-tab="local" class="active">Local (默认)</button>
+      <button data-tab="openai">OpenAI</button>
+      <button data-tab="deepseek">DeepSeek</button>
+      <button data-tab="ollama">Ollama (本地)</button>
+    </div>
+
+    <div id="aiProviderPanels">
+      <div class="ai-provider-form" data-panel="local">
+        <div class="muted" style="font-size:0.82rem; line-height:1.7;">
+          Local 模式使用纯前端模板生成（沿用 AITutor 风格），无需 API Key，离线可用。<br>
+          适用于：网络受限 / 仅查看模板讲解 / 隐私优先场景。
+        </div>
+      </div>
+
+      <div class="ai-provider-form" data-panel="openai" style="display:none;">
+        <div class="form-row">
+          <div>
+            <label>API Key</label>
+            <input type="password" id="cfgOpenaiKey" placeholder="sk-...">
+          </div>
+          <div>
+            <label>Model</label>
+            <input type="text" id="cfgOpenaiModel" placeholder="gpt-4o-mini">
+          </div>
+        </div>
+        <div class="muted" style="font-size:0.78rem; margin-top:6px;">Endpoint: https://api.openai.com/v1/chat/completions</div>
+      </div>
+
+      <div class="ai-provider-form" data-panel="deepseek" style="display:none;">
+        <div class="form-row">
+          <div>
+            <label>API Key</label>
+            <input type="password" id="cfgDeepseekKey" placeholder="sk-...">
+          </div>
+          <div>
+            <label>Model</label>
+            <input type="text" id="cfgDeepseekModel" placeholder="deepseek-chat">
+          </div>
+        </div>
+        <div class="muted" style="font-size:0.78rem; margin-top:6px;">Endpoint: https://api.deepseek.com/v1/chat/completions</div>
+      </div>
+
+      <div class="ai-provider-form" data-panel="ollama" style="display:none;">
+        <div class="form-row">
+          <div>
+            <label>Endpoint</label>
+            <input type="text" id="cfgOllamaEndpoint" placeholder="http://localhost:11434">
+          </div>
+          <div>
+            <label>Model</label>
+            <input type="text" id="cfgOllamaModel" placeholder="llama3.1">
+          </div>
+        </div>
+        <div class="muted" style="font-size:0.78rem; margin-top:6px;">需本地运行 Ollama 服务（POST /v1/chat/completions）</div>
+      </div>
+    </div>
+
+    <div class="ai-provider-actions">
+      <button class="btn-primary" id="btnAiSave">保存配置</button>
+      <button class="btn-secondary" id="btnAiTest">测试连接</button>
+      <button class="btn-secondary" id="btnAiClearCache">清空缓存</button>
+      <span id="aiProviderMsg" class="muted" style="font-size:0.82rem; align-self:center;"></span>
+    </div>
+
+    <div class="ai-cache-stats" id="aiCacheStats">
+      <strong>缓存统计</strong> · TTL 7 天 · 数据存于 <code>localStorage.ai_cache</code>
+      <div id="aiCacheStatsBody">加载中...</div>
+    </div>
   </div>
 </div>
 
@@ -2134,7 +2236,152 @@
 <script src="../../js/app-data.js"></script>
 <script src="../../../js/syllabus-data.js"></script>
 <script src="../../../js/ai-tutor.js"></script>
+<script src="../../../js/ai-provider.js"></script>
 <script src="../../../js/streak.js"></script>
 <script src="../../../js/spaced-repetition.js"></script>
+<script>
+/* v39 AI Provider Settings UI */
+(function() {
+  'use strict';
+  if (!window.AIProvider) return;
+
+  var box = document.getElementById('aiProviderBox');
+  var header = document.getElementById('aiProviderHeader');
+  var tabs = document.getElementById('aiProviderTabs');
+  var panels = document.querySelectorAll('#aiProviderPanels [data-panel]');
+  var msg = document.getElementById('aiProviderMsg');
+  var activeLabel = document.getElementById('aiProviderActive');
+  var cacheCountEl = document.getElementById('aiCacheCount');
+  var cacheStatsBody = document.getElementById('aiCacheStatsBody');
+
+  function showMsg(text, isError) {
+    if (!msg) return;
+    msg.textContent = text;
+    msg.style.color = isError ? '#b00020' : '#111';
+    setTimeout(function() { msg.textContent = ''; }, 4000);
+  }
+
+  function loadIntoUI() {
+    var cfg = window.AIProvider.getConfig();
+    if (activeLabel) activeLabel.textContent = cfg.active || 'local';
+    var k = document.getElementById('cfgOpenaiKey');
+    var m = document.getElementById('cfgOpenaiModel');
+    if (k) k.value = cfg.openai.apiKey || '';
+    if (m) m.value = cfg.openai.model || '';
+    k = document.getElementById('cfgDeepseekKey');
+    m = document.getElementById('cfgDeepseekModel');
+    if (k) k.value = cfg.deepseek.apiKey || '';
+    if (m) m.value = cfg.deepseek.model || '';
+    k = document.getElementById('cfgOllamaEndpoint');
+    m = document.getElementById('cfgOllamaModel');
+    if (k) k.value = cfg.ollama.endpoint || '';
+    if (m) m.value = cfg.ollama.model || '';
+    // activate tab
+    var activeKey = cfg.active || 'local';
+    switchTab(activeKey);
+  }
+
+  function switchTab(key) {
+    if (!tabs) return;
+    Array.prototype.forEach.call(tabs.querySelectorAll('button'), function(b) {
+      if (b.getAttribute('data-tab') === key) b.classList.add('active');
+      else b.classList.remove('active');
+    });
+    Array.prototype.forEach.call(panels, function(p) {
+      p.style.display = (p.getAttribute('data-panel') === key) ? 'block' : 'none';
+    });
+  }
+
+  function refreshCacheStats() {
+    var s = window.AIProvider.stats();
+    if (cacheCountEl) cacheCountEl.textContent = s.totalEntries;
+    if (!cacheStatsBody) return;
+    var rows = Object.keys(s.byProvider).map(function(p) {
+      return '<tr><td>' + p + '</td><td>' + s.byProvider[p] + ' 条</td></tr>';
+    }).join('');
+    if (!rows) rows = '<tr><td colspan="2" class="muted">暂无缓存</td></tr>';
+    cacheStatsBody.innerHTML =
+      '<table>' +
+      '<tr><td>总条目</td><td>' + s.totalEntries + '</td><td>有效</td><td>' + s.validEntries + '</td><td>过期</td><td>' + s.expiredEntries + '</td></tr>' +
+      '</table>' +
+      '<div style="margin-top:6px;"><strong>按 Provider</strong></div>' +
+      '<table>' + rows + '</table>';
+  }
+
+  if (header) {
+    header.addEventListener('click', function() {
+      box.classList.toggle('collapsed');
+    });
+  }
+
+  if (tabs) {
+    tabs.addEventListener('click', function(e) {
+      var t = e.target;
+      if (t && t.tagName === 'BUTTON') {
+        var key = t.getAttribute('data-tab');
+        if (key) switchTab(key);
+      }
+    });
+  }
+
+  var btnSave = document.getElementById('btnAiSave');
+  if (btnSave) {
+    btnSave.addEventListener('click', function() {
+      // Determine which tab is currently active and save
+      var activeBtn = tabs.querySelector('button.active');
+      var key = activeBtn ? activeBtn.getAttribute('data-tab') : 'local';
+      if (key === 'openai') {
+        window.AIProvider.setConfig('openai', {
+          apiKey: document.getElementById('cfgOpenaiKey').value.trim(),
+          model: document.getElementById('cfgOpenaiModel').value.trim() || 'gpt-4o-mini'
+        });
+      } else if (key === 'deepseek') {
+        window.AIProvider.setConfig('deepseek', {
+          apiKey: document.getElementById('cfgDeepseekKey').value.trim(),
+          model: document.getElementById('cfgDeepseekModel').value.trim() || 'deepseek-chat'
+        });
+      } else if (key === 'ollama') {
+        window.AIProvider.setConfig('ollama', {
+          endpoint: document.getElementById('cfgOllamaEndpoint').value.trim() || 'http://localhost:11434',
+          model: document.getElementById('cfgOllamaModel').value.trim() || 'llama3.1'
+        });
+      }
+      window.AIProvider.setConfig('active', key);
+      showMsg('已保存：当前 Provider = ' + key);
+      loadIntoUI();
+      refreshCacheStats();
+    });
+  }
+
+  var btnTest = document.getElementById('btnAiTest');
+  if (btnTest) {
+    btnTest.addEventListener('click', function() {
+      showMsg('测试中...');
+      window.AIProvider.complete('ping - reply with "pong" in 1 word', { cache: false, maxTokens: 16 })
+        .then(function(r) {
+          showMsg('✓ 连接成功 · provider=' + r.provider + (r.cached ? ' (cached)' : '') + (r.fallbackReason ? ' · fallback: ' + r.fallbackReason : ''));
+        })
+        .catch(function(err) {
+          showMsg('✗ 测试失败: ' + (err && err.message), true);
+        });
+    });
+  }
+
+  var btnClear = document.getElementById('btnAiClearCache');
+  if (btnClear) {
+    btnClear.addEventListener('click', function() {
+      if (window.AIProvider.clearCache()) {
+        showMsg('缓存已清空');
+        refreshCacheStats();
+      } else {
+        showMsg('清空失败', true);
+      }
+    });
+  }
+
+  loadIntoUI();
+  refreshCacheStats();
+})();
+</script>
 </body>
 </html>

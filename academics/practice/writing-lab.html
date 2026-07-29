@@ -47,6 +47,36 @@ select { padding: 6px 10px; border: 1px solid #888; font-family: inherit; font-s
   textarea { min-height: 200px; }
   .score-display { flex-direction: column; align-items: flex-start; }
 }
+
+/* v42 additions */
+.v42-badge { display: inline-block; border: 1px solid #111; padding: 0 6px; font-size: 0.65rem; font-weight: 700; background: #111; color: #fff; }
+.mode-toggle { display: inline-flex; gap: 0; border: 1px solid #111; margin-left: 8px; }
+.mode-toggle button { background: #fff; color: #111; border: none; border-right: 1px solid #111; padding: 8px 14px; font-size: 0.85rem; cursor: pointer; font-weight: 600; font-family: inherit; }
+.mode-toggle button:last-child { border-right: none; }
+.mode-toggle button.active { background: #111; color: #fff; }
+.detail-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 14px 0; }
+@media (max-width: 600px) { .detail-grid { grid-template-columns: repeat(2, 1fr); } }
+.detail-item { border: 1px solid #e0e0e0; padding: 10px 12px; }
+.detail-item .di-label { font-size: 0.72rem; color: #888; }
+.detail-item .di-value { font-size: 1.1rem; font-weight: 700; color: #111; margin-top: 2px; }
+.band-pill { display: inline-block; padding: 1px 6px; border: 1px solid #111; font-size: 0.7rem; font-weight: 700; margin-left: 4px; }
+.band-pill.ai { border-color: #555; color: #555; }
+.highlight-card { border: 1px solid #e0e0e0; padding: 10px 12px; margin: 8px 0; background: #fafafa; font-size: 0.85rem; line-height: 1.6; }
+.highlight-card.high { border-left: 3px solid #111; }
+.highlight-card.low { border-left: 3px solid #b00020; }
+.highlight-card .h-source { font-size: 0.7rem; color: #888; margin-top: 4px; }
+.improvement-item { border: 1px dashed #888; padding: 8px 12px; margin: 6px 0; font-size: 0.85rem; }
+.improvement-item .imp-dim { font-weight: 700; margin-right: 6px; }
+.improvement-item.sev-high { border-color: #b00020; }
+.improvement-item.sev-medium { border-color: #888; }
+.improvement-item.sev-low { border-color: #ccc; }
+.export-bar { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0; }
+.history-table { width: 100%; border-collapse: collapse; font-size: 0.78rem; margin: 10px 0; }
+.history-table th, .history-table td { border: 1px solid #e0e0e0; padding: 6px 8px; text-align: left; }
+.history-table th { background: #fafafa; font-weight: 700; }
+.history-table .trend-up { color: #111; font-weight: 700; }
+.history-table .trend-down { color: #b00020; font-weight: 700; }
+.ai-info { border: 1px dashed #555; padding: 8px 12px; margin: 10px 0; font-size: 0.8rem; color: #555; background: #fafafa; }
 </style>
 </head>
 <body>
@@ -58,14 +88,14 @@ select { padding: 6px 10px; border: 1px solid #888; font-family: inherit; font-s
   Writing Lab
 </div>
 
-<h1>Writing Lab · 智能写作批改 <span class="v-badge">v30</span></h1>
-<p class="subtitle">4 维度评分 · 雷达图可视化 · 逐句反馈 · 范文对照</p>
+<h1>Writing Lab · 智能写作批改 <span class="v-badge">v30</span> <span class="v42-badge">v42 Deep</span></h1>
+<p class="subtitle">4 维 Band 评分 · 深度精评（AI + 本地） · 高分/低分句摘抄 · 历史对比</p>
 
 <div class="box-dashed">
-  <strong>使用说明</strong>：选择作文类型 → 输入或粘贴作文 → 点击"智能批改" → 查看评分、雷达图、反馈和范文。
+  <strong>使用说明</strong>：选择作文类型 → 输入或粘贴作文 → 选择"标准批改"或"Deep Grade" → 查看 4 维 Band 评分、雷达图、高分句/低分句摘抄、改进建议、历史趋势。
 </div>
 
-<h2>作文类型</h2>
+<h2>作文类型与模式</h2>
 <div style="margin: 12px 0;">
   <select id="essayType">
     <option value="TOEFL Integrated">TOEFL Integrated (综合写作)</option>
@@ -74,8 +104,13 @@ select { padding: 6px 10px; border: 1px solid #888; font-family: inherit; font-s
     <option value="IELTS Task 2">IELTS Task 2 (议论文)</option>
     <option value="AP FRQ">AP FRQ (简答题)</option>
   </select>
+  <div class="mode-toggle" id="modeToggle">
+    <button data-mode="standard" class="active">标准批改</button>
+    <button data-mode="deep">Deep Grade (AI)</button>
+  </div>
   <button class="btn btn-primary" id="gradeBtn">智能批改</button>
   <button class="btn" id="clearBtn">清空</button>
+  <span class="muted" id="modeInfo" style="font-size:0.78rem; margin-left:8px;"></span>
 </div>
 
 <h2>作文输入</h2>
@@ -87,21 +122,53 @@ select { padding: 6px 10px; border: 1px solid #888; font-family: inherit; font-s
   <div class="score-display">
     <div>
       <div class="score-big" id="totalScore">0</div>
-      <div class="score-label">总分 (满分 100)</div>
+      <div class="score-label" id="scoreLabel">总分 (满分 100)</div>
     </div>
     <div id="rubricScores" style="flex:1;min-width:300px;"></div>
   </div>
+
+  <div id="aiInfoArea" class="ai-info" style="display:none;"></div>
 
   <h3>能力雷达图</h3>
   <div id="radarContainer" style="text-align:center;margin:16px 0;">
     <svg id="radarSvg" width="420" height="380" viewBox="0 0 420 380" style="max-width:100%;height:auto;"></svg>
   </div>
 
+  <h3>文本指标</h3>
+  <div class="detail-grid" id="detailGrid"></div>
+
+  <h3>高分句摘抄</h3>
+  <div id="highlightsHigh"></div>
+
+  <h3>低分句定位</h3>
+  <div id="highlightsLow"></div>
+
+  <h3>改进建议（按 4 维拆分）</h3>
+  <div id="improvementsList"></div>
+
   <h3>逐维反馈</h3>
   <div id="feedbackContainer"></div>
 
+  <h3>导出</h3>
+  <div class="export-bar">
+    <button class="btn" id="btnExportJson">导出 JSON</button>
+    <button class="btn" id="btnExportMd">导出 Markdown</button>
+    <button class="btn" id="btnCopyRich">复制富文本</button>
+  </div>
+
   <h3>范文对照</h3>
   <div id="sampleContainer"></div>
+</div>
+
+<h2>历史批改记录 <span class="v42-badge">v42</span></h2>
+<div class="box-dashed">
+  <p class="muted" style="font-size:0.85rem; margin:0;">每次批改自动保存到 <code>localStorage.writing_grader_history</code>，最多保留 50 条。</p>
+  <div id="historyStats" class="muted" style="font-size:0.85rem; margin-top:6px;"></div>
+  <div class="export-bar" style="margin-top:8px;">
+    <button class="btn" id="btnRefreshHistory">刷新</button>
+    <button class="btn" id="btnClearHistory">清空历史</button>
+  </div>
+  <div id="historyTableContainer"></div>
 </div>
 
 <div class="footer">
@@ -111,6 +178,7 @@ select { padding: 6px 10px; border: 1px solid #888; font-family: inherit; font-s
   <a href="javascript:window.scrollTo(0,0)">Back to top</a>
 </div>
 
+<script src="../../js/ai-provider.js"></script>
 <script src="../../js/writing-grader.js"></script>
 <script>
 (function() {
@@ -129,42 +197,114 @@ select { padding: 6px 10px; border: 1px solid #888; font-family: inherit; font-s
   var gradeBtn = document.getElementById('gradeBtn');
   var clearBtn = document.getElementById('clearBtn');
   var resultArea = document.getElementById('resultArea');
+  var modeToggle = document.getElementById('modeToggle');
+  var modeInfo = document.getElementById('modeInfo');
 
-  gradeBtn.addEventListener('click', function() {
+  var currentResult = null;
+  var currentText = '';
+  var currentType = 'TOEFL Independent';
+  var currentMode = 'standard';
+
+  // Mode toggle
+  Array.prototype.forEach.call(modeToggle.querySelectorAll('button'), function(btn) {
+    btn.addEventListener('click', function() {
+      Array.prototype.forEach.call(modeToggle.querySelectorAll('button'), function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      currentMode = btn.getAttribute('data-mode');
+      if (currentMode === 'deep') {
+        var providerInfo = window.AIProvider ? ('当前 AI: ' + window.AIProvider.getConfig().active) : 'AI 未配置';
+        modeInfo.textContent = 'Deep 模式 · 60% AI + 40% 本地 · ' + providerInfo;
+      } else {
+        modeInfo.textContent = '标准模式 · 纯本地精评';
+      }
+    });
+  });
+  modeInfo.textContent = '标准模式 · 纯本地精评';
+
+  function doGrade() {
     var text = essayInput.value;
     var type = essayType.value;
     if (!text.trim()) {
       alert('请输入作文内容');
       return;
     }
-    var result = window.WritingGrader.grade(text, type);
-    renderResult(result, type);
-  });
+    currentText = text;
+    currentType = type;
+    gradeBtn.disabled = true;
+    gradeBtn.textContent = '批改中...';
+
+    var p;
+    if (currentMode === 'deep' && window.WritingGrader.gradeDeep) {
+      p = window.WritingGrader.gradeDeep(text, type);
+    } else {
+      p = Promise.resolve(window.WritingGrader.grade(text, type));
+    }
+    p.then(function(result) {
+      currentResult = result;
+      renderResult(result, type);
+      refreshHistory();
+    }).catch(function(err) {
+      alert('批改失败: ' + (err && err.message));
+    }).then(function() {
+      gradeBtn.disabled = false;
+      gradeBtn.textContent = '智能批改';
+    });
+  }
+
+  gradeBtn.addEventListener('click', doGrade);
 
   clearBtn.addEventListener('click', function() {
     essayInput.value = '';
     resultArea.style.display = 'none';
+    currentResult = null;
   });
 
   function renderResult(result, type) {
     resultArea.style.display = 'block';
     document.getElementById('totalScore').textContent = result.score;
+    var labelEl = document.getElementById('scoreLabel');
+    if (result.band != null) {
+      labelEl.innerHTML = '总分 (满分 100) · Band ' + result.band + '/36';
+    } else {
+      labelEl.textContent = '总分 (满分 100)';
+    }
+
+    // AI info
+    var aiInfo = document.getElementById('aiInfoArea');
+    if (result.aiNote) {
+      aiInfo.style.display = 'block';
+      aiInfo.innerHTML = '<strong>AI 备注</strong> · ' + result.aiNote;
+    } else {
+      aiInfo.style.display = 'none';
+    }
 
     var rubricDiv = document.getElementById('rubricScores');
     rubricDiv.innerHTML = '';
+    var bandRubric = result.bandRubric || {};
     var rubricItems = [
-      { label: 'Task Response', score: result.rubric.taskResponse, weight: '25%' },
-      { label: 'Coherence & Cohesion', score: result.rubric.coherenceCohesion, weight: '25%' },
-      { label: 'Lexical Resource', score: result.rubric.lexicalResource, weight: '25%' },
-      { label: 'Grammatical Range', score: result.rubric.grammaticalRange, weight: '25%' }
+      { label: 'Task Response', score: result.rubric.taskResponse, band: bandRubric.taskResponse, ai: result.aiBands && result.aiBands.taskResponse },
+      { label: 'Coherence & Cohesion', score: result.rubric.coherenceCohesion, band: bandRubric.coherenceCohesion, ai: result.aiBands && result.aiBands.coherenceCohesion },
+      { label: 'Lexical Resource', score: result.rubric.lexicalResource, band: bandRubric.lexicalResource, ai: result.aiBands && result.aiBands.lexicalResource },
+      { label: 'Grammatical Range', score: result.rubric.grammaticalRange, band: bandRubric.grammaticalRange, ai: result.aiBands && result.aiBands.grammaticalRange }
     ];
     rubricItems.forEach(function(item) {
       var div = document.createElement('div');
       div.style.marginBottom = '10px';
-      div.innerHTML = '<div style="font-size:0.82rem;margin-bottom:4px;"><strong>' + item.label + '</strong> (' + item.weight + '): ' + item.score + '/25</div>' +
+      var bandText = (item.band != null) ? (' <span class="band-pill">' + item.band + '/9</span>') : '';
+      var aiText = (item.ai != null && item.ai !== false) ? (' <span class="band-pill ai">AI ' + item.ai + '/9</span>') : '';
+      div.innerHTML = '<div style="font-size:0.82rem;margin-bottom:4px;"><strong>' + item.label + '</strong>: ' + item.score + '/25' + bandText + aiText + '</div>' +
         '<div class="score-bar"><div class="score-bar-fill" style="width:' + (item.score / 25 * 100) + '%;"></div></div>';
       rubricDiv.appendChild(div);
     });
+
+    // Detail grid
+    renderDetailGrid(result.detail || {});
+
+    // Highlights
+    renderHighlights(result.highlights || { high: [], low: [] });
+
+    // Improvements
+    renderImprovements(result.improvements || []);
 
     drawRadar(result.rubric);
     renderFeedback(result.feedback);
@@ -172,6 +312,156 @@ select { padding: 6px 10px; border: 1px solid #888; font-family: inherit; font-s
 
     resultArea.scrollIntoView({ behavior: 'smooth' });
   }
+
+  function renderDetailGrid(detail) {
+    var grid = document.getElementById('detailGrid');
+    grid.innerHTML = '';
+    var items = [
+      { label: '词数', value: detail.words || 0 },
+      { label: '句数', value: detail.sentences || 0 },
+      { label: '平均句长', value: detail.avgSentenceLength || 0 },
+      { label: 'TTR (词汇多样性)', value: (detail.ttr != null) ? detail.ttr.toFixed(2) : '0' },
+      { label: '连接词', value: (detail.connectives || 0) + ' 处' },
+      { label: '语法错误', value: (detail.grammarErrors || 0) + ' 处' }
+    ];
+    items.forEach(function(it) {
+      var div = document.createElement('div');
+      div.className = 'detail-item';
+      div.innerHTML = '<div class="di-label">' + it.label + '</div><div class="di-value">' + it.value + '</div>';
+      grid.appendChild(div);
+    });
+  }
+
+  function renderHighlights(hl) {
+    var high = document.getElementById('highlightsHigh');
+    var low = document.getElementById('highlightsLow');
+    high.innerHTML = '';
+    low.innerHTML = '';
+    if (!hl.high || !hl.high.length) {
+      high.innerHTML = '<div class="muted" style="font-size:0.85rem;">（未检测到高分句）</div>';
+    } else {
+      hl.high.forEach(function(s, i) {
+        var d = document.createElement('div');
+        d.className = 'highlight-card high';
+        var src = s.source ? (' · ' + s.source) : '';
+        d.innerHTML = '<strong>#' + (i + 1) + '</strong> ' + escapeHtml(s.text) + '<div class="h-source">score: ' + s.score + src + '</div>';
+        high.appendChild(d);
+      });
+    }
+    if (!hl.low || !hl.low.length) {
+      low.innerHTML = '<div class="muted" style="font-size:0.85rem;">（未检测到明显低分句）</div>';
+    } else {
+      hl.low.forEach(function(s, i) {
+        var d = document.createElement('div');
+        d.className = 'highlight-card low';
+        var src = s.source ? (' · ' + s.source) : '';
+        d.innerHTML = '<strong>#' + (i + 1) + '</strong> ' + escapeHtml(s.text) + '<div class="h-source">score: ' + s.score + src + '</div>';
+        low.appendChild(d);
+      });
+    }
+  }
+
+  function renderImprovements(items) {
+    var list = document.getElementById('improvementsList');
+    list.innerHTML = '';
+    if (!items.length) {
+      list.innerHTML = '<div class="muted" style="font-size:0.85rem;">（无）</div>';
+      return;
+    }
+    items.forEach(function(it) {
+      var div = document.createElement('div');
+      var sev = it.severity || 'medium';
+      div.className = 'improvement-item sev-' + sev;
+      var src = it.source ? (' <span class="muted" style="font-size:0.7rem;">[' + it.source + ']</span>') : '';
+      div.innerHTML = '<span class="imp-dim">[' + it.dimension + ']</span>' + escapeHtml(it.text) + src;
+      list.appendChild(div);
+    });
+  }
+
+  function escapeHtml(s) {
+    return String(s || '')
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;');
+  }
+
+  // Export buttons
+  function downloadFile(name, content, mime) {
+    var blob = new Blob([content], { type: mime || 'text/plain' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = name;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(function() { URL.revokeObjectURL(url); }, 1000);
+  }
+
+  document.getElementById('btnExportJson').addEventListener('click', function() {
+    if (!currentResult) { alert('请先批改'); return; }
+    var json = window.WritingGrader.exportGrade(currentResult, 'json');
+    var stamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
+    downloadFile('writing_grade_' + stamp + '.json', json, 'application/json');
+  });
+  document.getElementById('btnExportMd').addEventListener('click', function() {
+    if (!currentResult) { alert('请先批改'); return; }
+    var md = window.WritingGrader.exportGrade(currentResult, 'markdown');
+    var stamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
+    downloadFile('writing_grade_' + stamp + '.md', md, 'text/markdown');
+  });
+  document.getElementById('btnCopyRich').addEventListener('click', function() {
+    if (!currentResult) { alert('请先批改'); return; }
+    window.WritingGrader.copyRichText(currentResult).then(function(ok) {
+      alert(ok ? '已复制富文本到剪贴板' : '复制失败');
+    });
+  });
+
+  // History
+  function refreshHistory() {
+    var cmp = window.WritingGrader.compare();
+    var statsEl = document.getElementById('historyStats');
+    if (!cmp.count) {
+      statsEl.innerHTML = '暂无历史';
+      document.getElementById('historyTableContainer').innerHTML = '<p class="muted" style="font-size:0.85rem;">完成一次批改后自动记录</p>';
+      return;
+    }
+    statsEl.innerHTML = '共 <strong>' + cmp.count + '</strong> 次 · 平均 ' + cmp.avg + ' · 最高 ' + cmp.best + ' · 最低 ' + cmp.worst + ' · 趋势：' + cmp.trend;
+    var rows = cmp.rows.slice().reverse().map(function(r, i) {
+      var prev = cmp.rows[cmp.rows.length - 1 - i - 1];
+      var trend = '—';
+      if (prev) {
+        var d = r.score - prev.score;
+        trend = d > 0 ? '<span class="trend-up">↑+' + d + '</span>' : (d < 0 ? '<span class="trend-down">↓' + d + '</span>' : '→ 0');
+      }
+      return '<tr>' +
+        '<td>' + r.date + '</td>' +
+        '<td>' + r.type + '</td>' +
+        '<td><strong>' + r.score + '</strong> / 100</td>' +
+        '<td>' + r.band + '/36</td>' +
+        '<td>' + r.tr + '</td>' +
+        '<td>' + r.cc + '</td>' +
+        '<td>' + r.lr + '</td>' +
+        '<td>' + r.gra + '</td>' +
+        '<td>' + r.words + '</td>' +
+        '<td>' + r.ttr + '</td>' +
+        '<td>' + trend + '</td>' +
+        '</tr>';
+    }).join('');
+    document.getElementById('historyTableContainer').innerHTML =
+      '<table class="history-table">' +
+      '<tr><th>时间</th><th>类型</th><th>总分</th><th>Band</th><th>TR</th><th>CC</th><th>LR</th><th>GRA</th><th>词数</th><th>TTR</th><th>趋势</th></tr>' +
+      rows + '</table>';
+  }
+  document.getElementById('btnRefreshHistory').addEventListener('click', refreshHistory);
+  document.getElementById('btnClearHistory').addEventListener('click', function() {
+    if (!confirm('清空全部批改历史？')) return;
+    window.WritingGrader.clearHistory();
+    refreshHistory();
+  });
+
+  // init history
+  refreshHistory();
 
   function drawRadar(rubric) {
     var svg = document.getElementById('radarSvg');

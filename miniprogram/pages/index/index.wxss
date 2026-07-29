@@ -1,0 +1,4 @@
+/* pages/index/index.wxss */
+.yz-grid-3 > view {
+  width: 33.333%;
+}

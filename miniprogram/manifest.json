@@ -1,0 +1,37 @@
+{
+  "name": "yunzhuan-miniprogram",
+  "version": "v43.0.0",
+  "description": "微信小程序 + h5 双适配包 · v43",
+  "miniprogramRoot": "./",
+  "projectname": "yunzhuan-miniprogram",
+  "appid": "touristappid",
+  "setting": {
+    "urlCheck": false,
+    "es6": true,
+    "minified": true,
+    "newFeature": true,
+    "autoAudits": false
+  },
+  "compileType": "miniprogram",
+  "libVersion": "3.4.0",
+  "condition": {},
+  "h5": {
+    "router": {
+      "mode": "hash",
+      "base": "/"
+    },
+    "publicPath": "/",
+    "devServer": {
+      "port": 5173,
+      "disableHostCheck": true
+    }
+  },
+  "permissions": {
+    "scope.userLocation": {
+      "desc": "用于显示附近的学校"
+    }
+  },
+  "requiredPrivateInfos": [],
+  "usingComponents": {},
+  "plugins": {}
+}

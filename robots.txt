@@ -1,0 +1,40 @@
+# yunzhuan.icu robots.txt v58
+# https://www.robotstxt.org/robotstxt.html
+
+User-agent: *
+Allow: /
+Disallow: /snapshots/
+Disallow: /__pycache__/
+Disallow: /_prerendered/
+Disallow: /*.json$
+Disallow: /*.py$
+Disallow: /sw.js
+Disallow: /share-receiver.html
+
+# 搜索引擎
+User-agent: Googlebot
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Baiduspider-image
+Allow: /
+
+User-agent: YandexBot
+Allow: /
+
+# Sitemap
+Sitemap: https://yunzhuan.icu/sitemap.xml
+
+# Crawl-delay（建议）
+Crawl-delay: 1

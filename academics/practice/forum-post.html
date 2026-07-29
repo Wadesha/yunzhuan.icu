@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>帖子详情 · Forum Post | Practice v47</title>
+<link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 860px; margin: 0 auto; padding: 24px 16px 48px; background: #ffffff; color: #111111; line-height: 1.7; font-size: 15px; }
+  a { color: #111111; text-decoration: none; border-bottom: 1px solid #cccccc; }
+  a:hover { border-bottom-color: #111111; }
+  .nav { padding-bottom: 12px; margin-bottom: 20px; border-bottom: 1px solid #e0e0e0; font-size: 0.88rem; color: #888888; }
+  .nav a { color: #111111; }
+  .nav .sep { color: #cccccc; margin: 0 6px; }
+  h1 { font-size: 1.5rem; margin-bottom: 6px; }
+  h2 { font-size: 1.1rem; font-weight: 700; margin: 28px 0 8px; padding-bottom: 6px; border-bottom: 1px solid #111111; }
+  p { margin-bottom: 8px; }
+  .muted { color: #888888; font-size: 0.85rem; }
+  .badge { display: inline-block; border: 1px solid #111111; padding: 0 6px; font-size: 0.7rem; font-weight: 700; }
+  .badge-cat { display: inline-block; border: 1px solid #111; padding: 1px 6px; font-size: 0.72rem; font-weight: 700; margin-right: 6px; }
+  .v-info { border: 1px dashed #888888; padding: 8px 12px; margin: 12px 0; font-size: 0.82rem; color: #555555; }
+  input, textarea, button { font-family: inherit; font-size: 0.9rem; }
+  input[type=text], textarea { border: 1px solid #cccccc; padding: 6px 10px; width: 100%; box-sizing: border-box; font-size: 0.9rem; }
+  input:focus, textarea:focus { outline: 2px solid #111111; outline-offset: -1px; }
+  textarea { resize: vertical; min-height: 70px; }
+  button { border: 1px solid #111111; background: #fff; color: #111111; padding: 6px 14px; cursor: pointer; font-weight: 600; }
+  button:hover { background: #111111; color: #fff; }
+  button.primary { background: #111111; color: #fff; }
+  button.primary:hover { background: #333; }
+  button.small { padding: 3px 10px; font-size: 0.8rem; }
+  .form-row { margin-bottom: 10px; }
+  .form-row label { display: block; font-size: 0.82rem; color: #555; margin-bottom: 4px; }
+  .post-box { border: 1px solid #e0e0e0; padding: 16px 18px; background: #fafafa; margin: 12px 0; }
+  .post-title { font-size: 1.4rem; font-weight: 700; margin-bottom: 6px; }
+  .post-meta { color: #888; font-size: 0.82rem; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px dashed #e0e0e0; }
+  .post-content { font-size: 0.95rem; line-height: 1.7; white-space: pre-wrap; }
+  .post-stats-bar { display: flex; gap: 16px; padding: 10px 0; border-top: 1px dashed #e0e0e0; border-bottom: 1px dashed #e0e0e0; font-size: 0.85rem; color: #555; }
+  .post-stats-bar span b { color: #111; }
+  .action-row { margin: 12px 0; }
+  .like-btn { border: 1px solid #111; padding: 6px 14px; background: #fff; cursor: pointer; font-weight: 600; font-family: inherit; }
+  .like-btn.liked { background: #111; color: #fff; }
+  .reply-form { border: 1px solid #e0e0e0; padding: 14px 16px; background: #fff; margin: 12px 0; }
+  .reply-list { list-style: none; padding: 0; margin: 12px 0; }
+  .reply-item { border: 1px solid #e0e0e0; padding: 12px 14px; margin-bottom: 8px; background: #fff; }
+  .reply-meta { font-size: 0.78rem; color: #888; margin-bottom: 4px; }
+  .reply-meta b { color: #111; }
+  .reply-content { font-size: 0.92rem; white-space: pre-wrap; }
+  .reply-floor { display: inline-block; background: #f5f5f5; border: 1px solid #e0e0e0; padding: 0 6px; font-size: 0.7rem; margin-right: 6px; }
+  .empty-state { text-align: center; padding: 24px; color: #888; font-size: 0.88rem; border: 1px dashed #e0e0e0; }
+  .footer { margin-top: 36px; padding-top: 16px; border-top: 1px solid #e0e0e0; color: #888888; font-size: 0.82rem; }
+</style>
+</head>
+<body>
+
+<div class="nav">
+  <a href="../../index.html">Home</a> <span class="sep">/</span>
+  <a href="../index.html">Academics</a> <span class="sep">/</span>
+  <a href="index.html">Practice</a> <span class="sep">/</span>
+  <a href="forum.html">学习论坛</a> <span class="sep">/</span>
+  帖子详情
+</div>
+
+<div id="content"></div>
+
+<div class="footer">
+  <a href="forum.html">← 返回列表</a> · <a href="../../index.html">Home</a> · <a href="index.html">Practice</a>
+</div>
+
+<script src="../../js/forum.js"></script>
+<script>
+(function() {
+  function getParam(name) {
+    var s = window.location.search.substring(1).split('&');
+    for (var i = 0; i < s.length; i++) {
+      var kv = s[i].split('=');
+      if (kv[0] === name) return decodeURIComponent(kv[1] || '');
+    }
+    return '';
+  }
+  function pad(n) { return n < 10 ? '0' + n : '' + n; }
+  function formatTime(ts) {
+    if (!ts) return '';
+    var d = new Date(ts);
+    return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()) + ' ' + pad(d.getHours()) + ':' + pad(d.getMinutes());
+  }
+  function escapeHtml(s) {
+    if (s == null) return '';
+    return String(s).replace(/[&<>"']/g, function(c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+
+  var postId = getParam('id');
+  var content = document.getElementById('content');
+
+  if (!postId) {
+    content.innerHTML = '<div class="empty-state">未指定帖子 ID · <a href="forum.html">返回列表</a></div>';
+    return;
+  }
+
+  Forum.view(postId);
+  var post = Forum.getPost(postId);
+  if (!post) {
+    content.innerHTML = '<div class="empty-state">帖子不存在或已删除 · <a href="forum.html">返回列表</a></div>';
+    return;
+  }
+  var cat = Forum.getCategory(post.category);
+  var replies = Forum.getReplies(postId);
+
+  // initial like state
+  var myId = localStorage.getItem('yz_forum_guest') || (function() {
+    var g = 'g' + Math.random().toString(36).slice(2, 8);
+    localStorage.setItem('yz_forum_guest', g);
+    return g;
+  })();
+  var liked = Forum.hasLiked(postId, myId);
+
+  function render() {
+    var html = '<h1>' + escapeHtml(post.title) + '</h1>';
+    html += '<p class="muted"><span class="badge-cat">' + (cat ? cat.name : post.category) + '</span> ' + cat.desc + '</p>';
+    html += '<div class="post-box">';
+    html += '<div class="post-meta">作者：<b>' + escapeHtml(post.author) + '</b> · 发布时间：' + formatTime(post.createdAt) + '</div>';
+    html += '<div class="post-content">' + escapeHtml(post.content) + '</div>';
+    html += '<div class="post-stats-bar">';
+    html += '<span>👁 <b>' + post.views + '</b> 浏览</span>';
+    html += '<span>💬 <b>' + post.replyCount + '</b> 回复</span>';
+    html += '<span>♡ <b id="likeCount">' + post.likeCount + '</b> 赞</span>';
+    html += '</div>';
+    html += '<div class="action-row">';
+    html += '<button class="like-btn' + (liked ? ' liked' : '') + '" id="likeBtn">' + (liked ? '✓ 已点赞' : '♡ 点赞') + '</button>';
+    html += '</div>';
+    html += '</div>';
+
+    html += '<h2>回复（' + replies.length + '）</h2>';
+    if (replies.length === 0) {
+      html += '<div class="empty-state">还没有人回复 · 来抢沙发</div>';
+    } else {
+      html += '<ul class="reply-list">';
+      replies.forEach(function(r, idx) {
+        html += '<li class="reply-item">';
+        html += '<div class="reply-meta"><span class="reply-floor">#' + (idx + 1) + ' 楼</span><b>' + escapeHtml(r.author) + '</b> · ' + formatTime(r.createdAt) + '</div>';
+        html += '<div class="reply-content">' + escapeHtml(r.content) + '</div>';
+        html += '</li>';
+      });
+      html += '</ul>';
+    }
+
+    html += '<h2>发表回复</h2>';
+    html += '<div class="reply-form">';
+    html += '<div class="form-row"><label>回复内容</label><textarea id="replyContent" maxlength="3000" placeholder="输入你的回复..."></textarea></div>';
+    html += '<div class="form-row"><label>昵称（可留空）</label><input type="text" id="replyAuthor" maxlength="20" placeholder="匿名"></div>';
+    html += '<button class="primary" id="submitReplyBtn">发表回复</button>';
+    html += '<p class="muted" id="replyMsg" style="margin-top:8px;"></p>';
+    html += '</div>';
+
+    content.innerHTML = html;
+    bind();
+  }
+
+  function bind() {
+    var likeBtn = document.getElementById('likeBtn');
+    if (likeBtn) {
+      likeBtn.addEventListener('click', function() {
+        var res = Forum.like(postId, myId);
+        liked = res.liked;
+        likeBtn.textContent = liked ? '✓ 已点赞' : '♡ 点赞';
+        likeBtn.classList.toggle('liked', liked);
+        document.getElementById('likeCount').textContent = res.count;
+      });
+    }
+    var submit = document.getElementById('submitReplyBtn');
+    if (submit) {
+      submit.addEventListener('click', function() {
+        var text = document.getElementById('replyContent').value.trim();
+        var author = document.getElementById('replyAuthor').value.trim() || '匿名';
+        if (!text) { document.getElementById('replyMsg').textContent = '请输入回复内容'; return; }
+        try {
+          Forum.reply(postId, text, author);
+          document.getElementById('replyMsg').textContent = '回复成功！';
+          document.getElementById('replyContent').value = '';
+          document.getElementById('replyAuthor').value = '';
+          post = Forum.getPost(postId);
+          replies = Forum.getReplies(postId);
+          setTimeout(render, 400);
+        } catch (e) {
+          document.getElementById('replyMsg').textContent = '错误：' + e.message;
+        }
+      });
+    }
+  }
+
+  render();
+})();
+</script>
+</body>
+</html>

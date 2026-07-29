@@ -45,7 +45,17 @@
   <a href="../../index.html">Home</a> <span class="sep">/</span>
   <a href="../index.html">Academics</a> <span class="sep">/</span>
   Practice
+  <span style="float:right;">
+    <a href="i18n-demo.html" data-i18n="common.language" style="margin-right:4px;">语言</a>
+    <a href="#" id="lang-zh-CN" data-locale="zh-CN" class="lang-link">中</a>
+    <a href="#" id="lang-en-US" data-locale="en-US" class="lang-link">EN</a>
+    <a href="#" id="lang-ja-JP" data-locale="ja-JP" class="lang-link">日</a>
+  </span>
 </div>
+<style>
+  .lang-link { margin: 0 4px; color: #888; border-bottom: none; }
+  .lang-link.active { color: #111; font-weight: 700; border-bottom: 1px solid #111; }
+</style>
 
 <h1>Practice</h1>
 <p class="subtitle">考纲 · 模拟考题 · 刷题追踪 — 8 科 + 3 竞赛 · 全链路学习平台</p>
@@ -333,7 +343,27 @@
   <tr><td>v35</td><td>小组协作（简化版）</td><td>collab.html + collab.js：创建/加入房间 + 8 科共享题库选择 + 讨论区 localStorage 消息 + 房间排行榜</td><td><span class="badge badge-dashed">Done</span></td></tr>
   <tr><td>v36</td><td>家长/导师查看模式</td><td>parent.html：只读模式 + 周报生成 + 8 科成绩单 + 薄弱科目建议</td><td><span class="badge badge-dashed">Done</span></td></tr>
   <tr><td>v37</td><td>API 开放 + 第三方集成</td><td>api.html：9 组 window.* API 文档 + 调用示例 + MCP 集成说明</td><td><span class="badge badge-dashed">Done</span></td></tr>
-  <tr><td>v38</td><td>全站打包发布 + 性能优化</td><td>README.md + build.sh + common.css + 404.html + 懒加载/字体预加载</td><td><span class="badge">Done</span></td></tr></table>
+  <tr><td>v38</td><td>全站打包发布 + 性能优化</td><td>README.md + build.sh + common.css + 404.html + 懒加载/字体预加载</td><td><span class="badge badge-dashed">Done</span></td></tr>
+  <tr><td>v39</td><td>AI 多 Provider 真实接入</td><td>ai-provider.js：OpenAI/DeepSeek/Ollama/local 四 Provider + 7天缓存 + Dashboard 密钥设置</td><td><span class="badge badge-dashed">Done</span></td></tr>
+  <tr><td>v40</td><td>AI 智能出题</td><td>ai-question-gen.js + ai-tutor.html：按 Subject/Topic/难度生成新题，AI开关，自动入答题记录</td><td><span class="badge badge-dashed">Done</span></td></tr>
+  <tr><td>v41</td><td>AI 对话式助手</td><td>ai-chat.js + ai-chat.html：右下角浮窗+全屏版，内置指令/历史/快捷菜单</td><td><span class="badge badge-dashed">Done</span></td></tr>
+  <tr><td>v42</td><td>写作精评 深度版</td><td>writing-grader.js 4维Band(0-9)+gradeDeep+导出JSON/MD/HTML+历史对比</td><td><span class="badge badge-dashed">Done</span></td></tr>
+  <tr><td>v43</td><td>微信/支付宝小程序适配</td><td>miniprogram/ 目录：adapter.js(localStorage→wx.storage + fetch→wx.request)+h5入口+7步移植说明</td><td><span class="badge badge-dashed">Done</span></td></tr>
+  <tr><td>v44</td><td>移动 APP 壳(Capacitor)</td><td>capacitor.config.json + android/ios/ 占位 + docs/APP-SHELL.md 全流程指南</td><td><span class="badge badge-dashed">Done</span></td></td></tr>
+  <tr><td>v45</td><td>推送通知 + 离线消息</td><td>notifications.js：Notification API + 9:00/21:00默认规则 + SRS/考试日提醒 + notifications.html</td><td><span class="badge badge-dashed">Done</span></td></tr>
+  <tr><td>v46</td><td>手势 + 护眼 + VIP主题</td><td>gesture.js：上滑下一题/下滑上一题+care-mode暖色滤镜+4套主题(默认/海洋/森林/紫罗兰)</td><td><span class="badge badge-dashed">Done</span></td></tr>
+  <tr><td>v47</td><td>学习论坛</td><td>forum.js + forum.html/post.html：4分类(问答/错题/经验/资源)+发帖回帖点赞+13条预置</td><td><span class="badge badge-dashed">Done</span></td></tr>
+  <tr><td>v48</td><td>知识问答</td><td>qa.js + qa.html：提问/回答/采纳 + 36 tags + 错题联动(fromWrongQuestion) + 采纳率积分</td><td><span class="badge badge-dashed">Done</span></td></tr>
+  <tr><td>v49</td><td>学校圈</td><td>school-circle.js + school-circle.html：20所学校+18条动态(录取/面试/课业/活动)+同校生匹配</td><td><span class="badge badge-dashed">Done</span></td></tr>
+  <tr><td>v50</td><td>带鱼导 + 结伴备战</td><td>buddy.js + buddy.html：15位mock战友+备战室(复用collab)+契合度打分(年级30+学校15+日期25+科目5)</td><td><span class="badge badge-dashed">Done</span></td></tr>
+  <tr><td>v51</td><td>会员等级体系</td><td>membership.js + membership.html：5级Free/Bronze/Silver/Gold/Diamond+权益矩阵+邀请奖励+模拟支付</td><td><span class="badge badge-dashed">Done</span></td></tr>
+  <tr><td>v52</td><td>付费题库 Premium</td><td>premium-bank.js + premium-bank.html：8科×200题(原创+SAT/IB/AP改编)+Easy30/Medium100/Hard70+单科¥29</td><td><span class="badge badge-dashed">Done</span></td></tr>
+  <tr><td>v53</td><td>试听 + 限免权益</td><td>trial.js + trial.html：4功能试用(AI出题/写作精评/SRS深度/协作大房间)+15/30/24h档位+7天冷却</td><td><span class="badge badge-dashed">Done</span></td></tr>
+  <tr><td>v54</td><td>学习报告导出</td><td>report-export.js + report.html：JSON/Markdown/HTML三格式+错题TOP10+时间线+薄弱Topic+建议+历史</td><td><span class="badge badge-dashed">Done</span></td></tr>
+  <tr><td>v55</td><td>i18n 中/英/日</td><td>i18n.js 100+key×3语言+浏览器嗅探+localStorage+i18n-demo.html+首页切换器</td><td><span class="badge badge-dashed">Done</span></td></tr>
+  <tr><td>v56</td><td>微信小程序完整版</td><td>miniprogram/ 完整结构:app.json/js/wxss+pages(index/practice/dashboard)+真机调试指南</td><td><span class="badge badge-dashed">Done</span></td></tr>
+  <tr><td>v57</td><td>PWA 安装 + 桌面快捷</td><td>manifest.json 升级(3 shortcuts+share_target+8尺寸图标+8 API扩展字段)+pwa-install.js+install.html</td><td><span class="badge badge-dashed">Done</span></td></tr>
+  <tr><td>v58</td><td>SEO + SSR 预渲染</td><td>ssr-prerender.js(jsdom渲染+title/description/OG/Twitter Card)+sitemap.xml(864 URL)+robots.txt+analytics.html</td><td><span class="badge">Done</span></td></tr></table>
 
 <div class="box-dashed" style="margin-top:16px;">
   <strong>v11 拆分方法</strong> · IB：Group 1-6 每科展开 HL/SL + 对应 Paper 结构；A-Level：Math / Physics / Chemistry / Biology / Economics 各拆 AS + A2；SAT：R&W（Craft/Info/Conventions/Expression 4 domain）+ Math（Algebra/Advanced/PSD/Geom）各拆 3 层 skill；AP：按官方 CED 的 Unit 1–N 及 Learning Objective；TOEFL / IELTS：按 4 section × 题型/能力点；IGCSE：0580 Math / 0625 Phy / 0620 Chem / 0610 Bio / 0455 Econ 各拆 Core / Extended 对应 Topic。所有 syllabus v-badge 升级为 v2。
@@ -351,12 +381,55 @@
   <strong>v35–v38 生态扩展</strong> · <em>v35 协作</em>：collab.html+collab.js 创建/加入房间+共享题库+讨论区+房间排行榜。<em>v36 家长模式</em>：parent.html 只读查看+周报生成+8科成绩单+薄弱科目建议。<em>v37 API开放</em>：api.html 9组window.*API完整文档+代码示例+MCP集成说明。<em>v38 打包发布</em>：README.md+build.sh+common.css+404.html+懒加载+字体预加载。
 </div>
 
+<div class="box-dashed" style="margin-top:10px;">
+  <strong>v39–v42 AI 深度升级</strong> · <em>v39 多Provider接入</em>：ai-provider.js 抽象OpenAI/DeepSeek/Ollama/local四Provider+7天缓存+Dashboard密钥设置。<em>v40 智能出题</em>：ai-question-gen.js按Subject/Topic/难度生成新题+ai-tutor.html独立页+答题记录自动入栈。<em>v41 对话助手</em>：ai-chat.js右下角圆形浮窗+ai-chat.html全屏版+内置5指令+历史持久化。<em>v42 写作精评</em>：writing-grader.js 4维Band(0-9)+gradeDeep AI融合+JSON/MD/HTML导出+历史对比。
+</div>
+
+<div class="box-dashed" style="margin-top:10px;">
+  <strong>v43–v46 移动端深耕</strong> · <em>v43 小程序适配</em>：miniprogram/目录+adapter.js抽象层(localStorage→wx.storage+fetch→wx.request)+7步移植指南。<em>v44 APP壳</em>：capacitor.config.json+android/ios占位+APP-SHELL.md全流程。<em>v45 推送</em>：notifications.js浏览器Notification API+9:00/21:00默认+SRS/考试日提醒+notifications.html设置页。<em>v46 手势+护眼+VIP</em>：gesture.js上滑下一题/下滑上一题+care-mode暖色滤镜+4套主题(默认/海洋/森林/紫罗兰)。
+</div>
+
+<div class="box-dashed" style="margin-top:10px;">
+  <strong>v47–v50 社交与社区</strong> · <em>v47 论坛</em>：forum.js+forum.html/post.html 4分类(问答/错题/经验/资源)+13条预置+点赞回复。<em>v48 问答</em>：qa.js+qa.html 提问/回答/采纳+36 tags+错题联动(fromWrongQuestion)+积分。<em>v49 学校圈</em>：school-circle.js+school-circle.html 20所学校+18条动态(录取/面试/课业/活动)+同校生匹配。<em>v50 带鱼导</em>：buddy.js+buddy.html 15位mock战友+备战室(复用collab)+契合度打分。
+</div>
+
+<div class="box-dashed" style="margin-top:10px;">
+  <strong>v51–v54 商业化与付费</strong> · <em>v51 会员</em>：membership.js 5级Free/Bronze/Silver/Gold/Diamond+权益矩阵+邀请奖励+模拟支付。<em>v52 付费题库</em>：premium-bank.js 8科×200题原创+SAT/IB/AP改编+premium-bank.html+单科¥29。<em>v53 试听</em>：trial.js+trial.html 4功能(AI出题/写作/SRS/协作)15/30/24h+7天冷却。<em>v54 报告导出</em>：report-export.js JSON/Markdown/HTML三格式+错题TOP10+时间线+薄弱Topic。
+</div>
+
+<div class="box-dashed" style="margin-top:10px;">
+  <strong>v55–v58 国际化与多平台</strong> · <em>v55 i18n</em>：i18n.js 100+key×3语言(中/英/日)+浏览器嗅探+i18n-demo.html+首页切换器。<em>v56 小程序完整版</em>：miniprogram/完整app.json/js/wxss+pages(index/practice/dashboard)+真机调试指南。<em>v57 PWA安装</em>：manifest.json升级(3 shortcuts+share_target+8尺寸图标+8扩展字段)+pwa-install.js+install.html。<em>v58 SEO+SSR</em>：ssr-prerender.js(jsdom渲染+title/OG/Twitter Card)+sitemap.xml(864 URL)+robots.txt+analytics.html。
+</div>
+
 <div class="footer">
   <a href="../../index.html">Home</a> <span class="sep" style="color:#ccc;margin:0 6px;">·</span>
   <a href="../index.html">Academics</a> <span class="sep" style="color:#ccc;margin:0 6px;">·</span>
   <a href="../../simulate/index.html">Full-Simulation</a> <span class="sep" style="color:#ccc;margin:0 6px;">·</span>
   <a href="javascript:window.scrollTo(0,0)">Back to top</a>
 </div>
+
+<script src="../../js/i18n.js"></script>
+<script>
+  (function(){
+    var links = document.querySelectorAll('.lang-link');
+    function refresh() {
+      var cur = window.I18n.getLocale();
+      for (var i = 0; i < links.length; i++) {
+        if (links[i].getAttribute('data-locale') === cur) links[i].classList.add('active');
+        else links[i].classList.remove('active');
+      }
+    }
+    refresh();
+    for (var i = 0; i < links.length; i++) {
+      links[i].addEventListener('click', function(e){
+        e.preventDefault();
+        window.I18n.setLocale(this.getAttribute('data-locale'));
+        refresh();
+      });
+    }
+    if (window.I18n.apply) window.I18n.apply();
+  })();
+</script>
 
 <script src="../../js/back-to-top.js"></script>
 <script>

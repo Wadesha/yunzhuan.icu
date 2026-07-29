@@ -1,0 +1,51 @@
+<!--pages/index/index.wxml-->
+<view class="yz-container">
+
+  <view class="yz-nav">
+    <text bindtap="switchLocale">语言 / Locale: {{locale}}</text>
+  </view>
+
+  <view class="yz-title">yunzhuan.icu</view>
+  <view class="yz-subtitle">留学申请一站式平台 · v56 小程序版</view>
+
+  <view class="yz-card">
+    <view class="yz-card-title">刷题中心</view>
+    <view class="yz-card-desc">8 科 + 3 竞赛 · 共 960+ 题 · 错题本 · 仪表盘</view>
+    <view class="yz-card-link" bindtap="goDashboard">打开仪表盘</view>
+  </view>
+
+  <view class="yz-section-title">科目（v43 engine 适配）</view>
+  <view class="yz-grid yz-grid-3">
+    <block wx:for="{{subjects}}" wx:key="code">
+      <view class="yz-card" bindtap="goPractice" data-code="{{item.code}}">
+        <view class="yz-card-title">{{item.name}}</view>
+        <view class="yz-card-desc">{{item.desc}}</view>
+        <view class="yz-muted">点击进入 →</view>
+      </view>
+    </block>
+  </view>
+
+  <view class="yz-section-title">已答统计</view>
+  <view wx:if="{{stats.length === 0}}" class="yz-muted">暂无答题记录，去刷几道题吧～</view>
+  <block wx:for="{{stats}}" wx:key="subject">
+    <view class="yz-stat">
+      <view>
+        <view class="yz-stat-num">{{item.total}}</view>
+        <view class="yz-stat-label">{{item.subject}} 已答</view>
+      </view>
+      <view>
+        <view class="yz-stat-num">{{item.correct}}</view>
+        <view class="yz-stat-label">答对</view>
+      </view>
+      <view>
+        <view class="yz-stat-num">{{item.accuracy}}%</view>
+        <view class="yz-stat-label">正确率</view>
+      </view>
+    </view>
+  </block>
+
+  <view class="yz-footer">
+    yunzhuan.icu · v56 微信小程序版 · 共用 v43 engine
+  </view>
+
+</view>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+  <meta name="format-detection" content="telephone=no">
+  <title>云专 · yunzhuan.icu</title>
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    html, body { width: 100%; min-height: 100vh; background: #ffffff; color: #111111; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue", sans-serif; font-size: 15px; line-height: 1.7; }
+    .mp-shell { max-width: 860px; margin: 0 auto; padding: 24px 16px 48px; }
+    .mp-nav { padding-bottom: 12px; margin-bottom: 20px; border-bottom: 1px solid #e0e0e0; font-size: 0.88rem; color: #888; }
+    .mp-nav a { color: #111; text-decoration: none; border-bottom: 1px solid #ccc; }
+    .mp-h1 { font-size: 1.6rem; margin-bottom: 4px; }
+    .mp-sub { color: #555; font-size: 0.95rem; margin-bottom: 20px; }
+    .mp-card { border: 1px solid #e0e0e0; padding: 14px 16px; margin: 12px 0; background: #ffffff; }
+    .mp-card h3 { margin-bottom: 6px; font-size: 1rem; }
+    .mp-card p { font-size: 0.85rem; color: #555; }
+    .mp-btn { display: inline-block; border: 1px solid #111; background: #111; color: #fff; padding: 8px 16px; font-size: 0.85rem; cursor: pointer; margin: 4px 4px 4px 0; }
+    .mp-btn.outline { background: #fff; color: #111; }
+    .mp-tag { display: inline-block; border: 1px solid #111; padding: 1px 6px; font-size: 0.7rem; font-weight: 700; }
+    .mp-list { list-style: none; }
+    .mp-list li { padding: 10px 0; border-bottom: 1px solid #e0e0e0; font-size: 0.88rem; }
+    .mp-list li:last-child { border-bottom: none; }
+    .mp-footer { margin-top: 36px; padding-top: 16px; border-top: 1px solid #e0e0e0; color: #888; font-size: 0.82rem; }
+  </style>
+</head>
+<body>
+<div class="mp-shell">
+  <div class="mp-nav">
+    <a href="../index.html">Home</a> · 云专小程序 (v43)
+  </div>
+
+  <h1 class="mp-h1">云专小程序</h1>
+  <p class="mp-sub">微信小程序 + h5 双适配 · 适配 v43 起的小程序入口</p>
+
+  <div class="mp-card">
+    <h3>欢迎 <span class="mp-tag">v43</span></h3>
+    <p>本页面是 h5 模式的入口预览。编译到微信小程序时，会自动使用 wx.* API 替换 localStorage / fetch / window。</p>
+    <p style="margin-top:6px;">运行检测：<span id="mp-env">检测中…</span></p>
+  </div>
+
+  <div class="mp-card">
+    <h3>功能入口</h3>
+    <ul class="mp-list">
+      <li>刷题中心 <a href="../academics/practice/index.html" style="float:right;">进入 →</a></li>
+      <li>仪表盘 <a href="../academics/practice/dashboard.html" style="float:right;">进入 →</a></li>
+      <li>Mock Test <a href="../academics/practice/mock-test.html" style="float:right;">进入 →</a></li>
+      <li>通知设置 <a href="../academics/practice/notifications.html" style="float:right;">进入 →</a></li>
+      <li>API 文档 <a href="../academics/practice/api.html" style="float:right;">进入 →</a></li>
+    </ul>
+  </div>
+
+  <div class="mp-card">
+    <h3>适配层自检</h3>
+    <p>点击下方按钮，验证 adapter.js 是否正常工作：</p>
+    <p style="margin-top:6px;">
+      <button class="mp-btn" id="mp-test-storage">测试存储</button>
+      <button class="mp-btn outline" id="mp-test-net">测试网络</button>
+    </p>
+    <p id="mp-test-result" style="margin-top:6px;color:#555;font-size:0.82rem;"></p>
+  </div>
+
+  <div class="mp-footer">
+    yunzhuan.icu · v43 · 移动端深耕系列 · 黑白灰主色
+  </div>
+</div>
+
+<script src="./adapter.js"></script>
+<script src="./practice-engine.js"></script>
+<script>
+  (function() {
+    var envEl = document.getElementById('mp-env');
+    if (envEl) {
+      if (typeof wx !== 'undefined' && wx && wx.getSystemInfoSync) {
+        try {
+          var info = wx.getSystemInfoSync();
+          envEl.textContent = '微信小程序 · ' + (info.platform || '') + ' · ' + (info.system || '');
+        } catch (e) {
+          envEl.textContent = '微信小程序（未授权）';
+        }
+      } else {
+        envEl.textContent = 'h5 模式（浏览器 / WebView）';
+      }
+    }
+
+    var resultEl = document.getElementById('mp-test-result');
+    function showResult(msg) { if (resultEl) resultEl.textContent = msg; }
+
+    var storageBtn = document.getElementById('mp-test-storage');
+    if (storageBtn) storageBtn.addEventListener('click', function() {
+      try {
+        window.Adapter.storage.set('mp_test_key', { ts: Date.now(), from: 'mp-shell' });
+        var got = window.Adapter.storage.get('mp_test_key');
+        showResult('存储 OK · ' + JSON.stringify(got));
+      } catch (e) {
+        showResult('存储失败：' + e.message);
+      }
+    });
+
+    var netBtn = document.getElementById('mp-test-net');
+    if (netBtn) netBtn.addEventListener('click', function() {
+      showResult('网络请求已触发…');
+      window.Adapter.net.request({
+        url: '../api/stats.js',
+        method: 'GET',
+        success: function(res) { showResult('网络 OK · status=' + (res.statusCode || 'n/a')); },
+        fail: function(err) { showResult('网络失败：' + (err && err.errMsg || 'unknown')); }
+      });
+    });
+
+    if (window.PracticeEngine && typeof window.PracticeEngine.boot === 'function') {
+      window.PracticeEngine.boot({ auto: true });
+    }
+  })();
+</script>
+</body>
+</html>

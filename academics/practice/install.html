@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>安装 yunzhuan App · 详细教程 | yunzhuan.icu</title>
+<meta name="description" content="将 yunzhuan.icu 安装到桌面：Chrome / Edge / Safari / iOS / Android 全平台安装教程 + 环境检测。">
+<link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+<link rel="manifest" href="../../manifest.json">
+<link rel="stylesheet" href="../../js/common.css">
+<meta name="theme-color" content="#667eea">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 860px; margin: 0 auto; padding: 24px 16px 48px; background: #ffffff; color: #111111; line-height: 1.7; font-size: 15px; }
+  a { color: #111111; text-decoration: none; border-bottom: 1px solid #cccccc; }
+  a:hover { border-bottom-color: #111111; }
+  .nav { padding-bottom: 12px; margin-bottom: 20px; border-bottom: 1px solid #e0e0e0; font-size: 0.88rem; color: #888888; }
+  .nav a { color: #111111; }
+  .nav .sep { color: #cccccc; margin: 0 6px; }
+  h1 { font-size: 1.6rem; margin-bottom: 4px; }
+  h2 { font-size: 1.1rem; font-weight: 700; margin: 28px 0 8px; padding-bottom: 6px; border-bottom: 1px solid #111111; }
+  h3 { font-size: 1rem; font-weight: 700; margin: 18px 0 6px; }
+  p { margin-bottom: 8px; }
+  .muted { color: #888888; font-size: 0.85rem; }
+  .subtitle { color: #555555; font-size: 0.95rem; margin-bottom: 20px; }
+  .footer { margin-top: 36px; padding-top: 16px; border-top: 1px solid #e0e0e0; color: #888888; font-size: 0.82rem; }
+  .v-info { border: 1px dashed #888888; padding: 8px 12px; margin: 12px 0; font-size: 0.82rem; color: #555555; }
+
+  .detect-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 16px 0; }
+  @media (max-width: 600px) { .detect-grid { grid-template-columns: 1fr; } }
+  .detect-card { border: 1px solid #e0e0e0; padding: 12px 16px; }
+  .detect-card .label { font-size: 0.78rem; color: #888888; }
+  .detect-card .value { font-weight: 700; font-size: 1rem; }
+  .ok { color: #008800; }
+  .warn { color: #cc6600; }
+  .err { color: #cc0000; }
+
+  .install-cta {
+    display: block; width: 100%;
+    padding: 14px 16px;
+    background: #111111; color: #ffffff;
+    border: 1px solid #111111;
+    font-size: 1.05rem; font-weight: 700;
+    cursor: pointer; text-align: center;
+    font-family: inherit; margin: 20px 0;
+  }
+  .install-cta:disabled { background: #888; border-color: #888; cursor: not-allowed; }
+  .install-cta:hover:not(:disabled) { background: #000; }
+
+  .guide-block { border: 1px solid #e0e0e0; padding: 14px 18px; margin: 12px 0; }
+  .guide-block ol, .guide-block ul { padding-left: 20px; }
+  .guide-block li { margin: 6px 0; }
+
+  .shortcut-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 12px 0; }
+  @media (max-width: 600px) { .shortcut-list { grid-template-columns: 1fr; } }
+  .shortcut { border: 1px solid #e0e0e0; padding: 14px; text-align: center; }
+  .shortcut .ico { font-size: 1.8rem; font-weight: 700; margin-bottom: 6px; }
+  .shortcut .name { font-weight: 700; font-size: 0.95rem; }
+  .shortcut .desc { font-size: 0.78rem; color: #888; margin-top: 2px; }
+
+  .status-pill {
+    display: inline-block;
+    padding: 2px 10px;
+    border: 1px solid #888;
+    font-size: 0.78rem;
+    margin-left: 8px;
+  }
+  .status-ok { background: #111; color: #fff; border-color: #111; }
+</style>
+</head>
+<body>
+
+<div class="nav">
+  <a href="../../index.html">Home</a> <span class="sep">/</span>
+  <a href="../index.html">Academics</a> <span class="sep">/</span>
+  <a href="index.html">Practice</a> <span class="sep">/</span>
+  Install
+</div>
+
+<h1 data-i18n="install.title">安装 yunzhuan App</h1>
+<p class="subtitle" data-i18n="install.subtitle">添加到桌面，离线可用，秒开启动</p>
+
+<div class="v-info">
+  <strong>v57 PWA</strong> · 桌面快捷方式 (Mock / Dashboard / Daily Review) · Share Target · 8 尺寸图标 · 启动画面 + 主题色。
+</div>
+
+<h2>环境检测 <span class="status-pill status-ok" id="envStatus">检测中...</span></h2>
+<div class="detect-grid" id="detectGrid">
+  <div class="detect-card">
+    <div class="label">浏览器</div>
+    <div class="value" id="d-browser">—</div>
+  </div>
+  <div class="detect-card">
+    <div class="label">平台</div>
+    <div class="value" id="d-platform">—</div>
+  </div>
+  <div class="detect-card">
+    <div class="label">Service Worker</div>
+    <div class="value" id="d-sw">—</div>
+  </div>
+  <div class="detect-card">
+    <div class="label">Manifest</div>
+    <div class="value" id="d-manifest">—</div>
+  </div>
+  <div class="detect-card">
+    <div class="label">已安装</div>
+    <div class="value" id="d-installed">—</div>
+  </div>
+  <div class="detect-card">
+    <div class="label">可安装</div>
+    <div class="value" id="d-caninstall">—</div>
+  </div>
+</div>
+
+<button class="install-cta" id="installBtn" disabled>检测中...</button>
+
+<h2>桌面快捷方式 <span class="muted" style="font-size:0.78rem;">v57</span></h2>
+<p class="muted">安装到桌面后，长按/右键图标可看到以下入口：</p>
+<div class="shortcut-list">
+  <div class="shortcut">
+    <div class="ico" style="color:#667eea;">M</div>
+    <div class="name" data-i18n="install.shortcut.mock">模拟考</div>
+    <div class="desc">Start Mock Test</div>
+  </div>
+  <div class="shortcut">
+    <div class="ico" style="color:#111;">D</div>
+    <div class="name" data-i18n="install.shortcut.dashboard">仪表盘</div>
+    <div class="desc">Open Dashboard</div>
+  </div>
+  <div class="shortcut">
+    <div class="ico" style="color:#cc0000;">R</div>
+    <div class="name" data-i18n="install.shortcut.daily">每日复习</div>
+    <div class="desc">Spaced Repetition</div>
+  </div>
+</div>
+
+<h2>安装教程 <span class="muted" style="font-size:0.78rem;" data-i18n="install.guide">Install Guide</span></h2>
+
+<div class="guide-block">
+  <h3>Chrome / Edge（桌面 / Android）</h3>
+  <ol>
+    <li>点击上方 <strong>安装到桌面</strong> 按钮（地址栏右侧也会出现 ⊕ 图标）</li>
+    <li>在弹窗中点 <strong>安装</strong></li>
+    <li>应用图标会出现在桌面 / 应用列表</li>
+    <li>离线状态下也能继续刷题</li>
+  </ol>
+</div>
+
+<div class="guide-block">
+  <h3>Safari（iOS / iPadOS）</h3>
+  <ol>
+    <li>点击底部分享按钮 <strong>⬆</strong></li>
+    <li>选择 <strong>添加到主屏幕</strong></li>
+    <li>点 <strong>添加</strong> 完成</li>
+    <li>从主屏幕打开即为独立 App</li>
+  </ol>
+  <p class="muted">注：iOS Safari 不支持 beforeinstallprompt，需手动操作。</p>
+</div>
+
+<div class="guide-block">
+  <h3>Firefox</h3>
+  <ol>
+    <li>地址栏右侧会出现 ⊕ 主页图标</li>
+    <li>点击后选择 <strong>安装</strong></li>
+  </ol>
+  <p class="muted">注：Firefox 桌面版支持有限，建议使用 Chrome / Edge 体验完整 PWA。</p>
+</div>
+
+<div class="guide-block">
+  <h3>Share Target（被其他 App 分享题库）</h3>
+  <p>当其它 App 通过系统分享菜单选中 yunzhuan 时，文件（JSON / CSV / TXT）会被 POST 到：</p>
+  <p><code>/share-receiver.html</code></p>
+  <p class="muted">适合老师 / 学长分享整理好的题库文件。</p>
+</div>
+
+<h2>常见问题</h2>
+<dl style="margin: 12px 0;">
+  <dt style="font-weight:700;margin-top:12px;">Q: 安装按钮一直灰着？</dt>
+  <dd>需满足：HTTPS / 有 manifest.json / 已注册 Service Worker / 用户访问至少一次。</dd>
+  <dt style="font-weight:700;margin-top:12px;">Q: 离线后数据会不会丢？</dt>
+  <dd>不会。答题数据存于 localStorage，刷新或离线均可用。</dd>
+  <dt style="font-weight:700;margin-top:12px;">Q: 如何卸载？</dt>
+  <dd>桌面：右键 → 卸载；移动：长按图标 → 移除 / 删除。</dd>
+  <dt style="font-weight:700;margin-top:12px;">Q: iOS 上能完整 PWA 吗？</dt>
+  <dd>能添加到主屏幕并独立运行，但 push notification / background sync 等 API 不支持。</dd>
+</dl>
+
+<div class="footer">
+  yunzhuan.icu · v57 PWA · 由 <code>js/pwa-install.js</code> 驱动
+</div>
+
+<script src="../../js/i18n.js"></script>
+<script src="../../js/pwa-install.js"></script>
+<script>
+  (function () {
+    'use strict';
+
+    var ua = navigator.userAgent || '';
+    var isIOS = /iPhone|iPad|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+    var isAndroid = /Android/.test(ua);
+    var isChrome = /Chrome/.test(ua) && !/Edg/.test(ua);
+    var isEdge = /Edg/.test(ua);
+    var isSafari = /Safari/.test(ua) && !/Chrome/.test(ua) && !/Edg/.test(ua);
+    var isFirefox = /Firefox/.test(ua);
+
+    function browserName() {
+      if (isEdge) return 'Edge';
+      if (isChrome) return 'Chrome';
+      if (isSafari) return 'Safari';
+      if (isFirefox) return 'Firefox';
+      return 'Unknown';
+    }
+    function platformName() {
+      if (isIOS) return 'iOS';
+      if (isAndroid) return 'Android';
+      if (/Mac/.test(navigator.platform)) return 'macOS';
+      if (/Win/.test(navigator.platform)) return 'Windows';
+      if (/Linux/.test(navigator.platform)) return 'Linux';
+      return navigator.platform || 'Unknown';
+    }
+
+    function pill(text, kind) {
+      return '<span class="status-pill ' + (kind === 'ok' ? 'status-ok' : '') + '">' + text + '</span>';
+    }
+
+    function okClass(cond) { return cond ? 'ok' : 'err'; }
+    function warnClass(cond) { return cond ? 'ok' : 'warn'; }
+
+    document.getElementById('d-browser').innerHTML = browserName();
+    document.getElementById('d-platform').innerHTML = platformName();
+
+    var swOK = 'serviceWorker' in navigator;
+    var manifestOK = !!document.querySelector('link[rel="manifest"]');
+    var installed = (window.PWAInstall && window.PWAInstall.isInstalled()) || false;
+    var canInstall = false;
+
+    document.getElementById('d-sw').className = 'value ' + okClass(swOK);
+    document.getElementById('d-sw').textContent = swOK ? '✓ 支持' : '✗ 不支持';
+
+    document.getElementById('d-manifest').className = 'value ' + okClass(manifestOK);
+    document.getElementById('d-manifest').textContent = manifestOK ? '✓ 已加载' : '✗ 缺失';
+
+    document.getElementById('d-installed').className = 'value ' + (installed ? 'ok' : 'warn');
+    document.getElementById('d-installed').textContent = installed ? '✓ 已安装' : '未安装';
+
+    document.getElementById('d-caninstall').className = 'value';
+    document.getElementById('d-caninstall').textContent = '等待事件...';
+
+    var btn = document.getElementById('installBtn');
+    function enableBtn() {
+      canInstall = true;
+      btn.disabled = false;
+      btn.textContent = (window.I18n && window.I18n.t) ? window.I18n.t('install.button') : '安装到桌面';
+      document.getElementById('d-caninstall').className = 'value ok';
+      document.getElementById('d-caninstall').textContent = '✓ 可安装';
+      document.getElementById('envStatus').textContent = '就绪';
+      document.getElementById('envStatus').className = 'status-pill status-ok';
+    }
+    function disableBtn(reason) {
+      btn.disabled = true;
+      btn.textContent = reason || '当前环境不可安装';
+      if (installed) {
+        btn.textContent = '已安装';
+        document.getElementById('envStatus').textContent = '已安装';
+        document.getElementById('envStatus').className = 'status-pill status-ok';
+      } else if (isIOS) {
+        document.getElementById('envStatus').textContent = 'iOS 手动';
+        btn.textContent = 'iOS：请用 Safari 分享 → 添加到主屏幕';
+      } else {
+        document.getElementById('envStatus').textContent = '不可用';
+        document.getElementById('envStatus').className = 'status-pill';
+      }
+    }
+
+    if (installed) { disableBtn('已安装'); }
+    else if (window.PWAInstall) {
+      // 尝试立即判断
+      if (window.PWAInstall.isAvailable()) enableBtn();
+      else disableBtn(isIOS ? 'iOS：请用 Safari 分享 → 添加到主屏幕' : '请稍候，浏览器正在准备安装...');
+    } else {
+      disableBtn('加载中...');
+    }
+
+    // 监听 PWA 可用
+    window.addEventListener('pwa:available', enableBtn);
+    window.addEventListener('pwa:installed', function () {
+      installed = true;
+      disableBtn('已安装');
+    });
+
+    btn.addEventListener('click', function () {
+      if (window.PWAInstall) window.PWAInstall.prompt();
+    });
+
+    // 重新检测按钮
+    var envStatus = document.getElementById('envStatus');
+    envStatus.style.cursor = 'pointer';
+    envStatus.title = '点击重新检测';
+    envStatus.addEventListener('click', function () {
+      if (window.PWAInstall) window.PWAInstall.resetDismiss();
+      location.reload();
+    });
+
+    if (window.I18n && window.I18n.apply) window.I18n.apply();
+  })();
+</script>
+
+</body>
+</html>

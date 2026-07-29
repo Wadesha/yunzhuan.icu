@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>付费题库 · Premium Bank | Practice</title>
+<link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+<script src="../../js/membership.js"></script>
+<script src="../../js/premium-bank.js"></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 1000px; margin: 0 auto; padding: 24px 16px 48px; background: #ffffff; color: #111111; line-height: 1.7; font-size: 15px; }
+  a { color: #111111; text-decoration: none; border-bottom: 1px solid #cccccc; }
+  a:hover { border-bottom-color: #111111; }
+  .nav { padding-bottom: 12px; margin-bottom: 20px; border-bottom: 1px solid #e0e0e0; font-size: 0.88rem; color: #888888; }
+  .nav a { color: #111111; }
+  .nav .sep { color: #cccccc; margin: 0 6px; }
+  h1 { font-size: 1.6rem; margin-bottom: 4px; }
+  h2 { font-size: 1.1rem; font-weight: 700; margin: 28px 0 8px; padding-bottom: 6px; border-bottom: 1px solid #111111; }
+  h3 { font-size: 1rem; font-weight: 700; margin: 18px 0 6px; }
+  p { margin-bottom: 8px; }
+  .muted { color: #888888; font-size: 0.85rem; }
+  .subtitle { color: #555555; font-size: 0.95rem; margin-bottom: 20px; }
+  .badge { display: inline-block; border: 1px solid #111111; padding: 0 6px; font-size: 0.7rem; font-weight: 700; }
+  .badge-locked { border: 1px dashed #888; color: #888; }
+  .badge-unlocked { border: 1px solid #111; background: #111; color: #fff; }
+  .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 16px 0; }
+  @media (max-width: 1024px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 600px) { .grid { grid-template-columns: 1fr; } }
+  .subj-card { border: 1px solid #e0e0e0; padding: 14px; background: #ffffff; position: relative; }
+  .subj-card.locked { opacity: 0.85; }
+  .subj-card.unlocked { border: 2px solid #111; }
+  .subj-name { font-size: 1.1rem; font-weight: 700; }
+  .subj-source { color: #888; font-size: 0.78rem; margin: 2px 0 6px; }
+  .subj-stats { font-size: 0.82rem; color: #333; margin: 4px 0; }
+  .subj-actions { margin-top: 8px; }
+  button { border: 1px solid #111111; background: #fff; color: #111111; padding: 6px 14px; cursor: pointer; font-weight: 600; font-family: inherit; font-size: 0.88rem; }
+  button:hover { background: #111111; color: #fff; }
+  button:disabled { opacity: 0.4; cursor: not-allowed; }
+  button.primary { background: #111111; color: #fff; }
+  button.primary:hover { background: #333; }
+  button.small { padding: 3px 10px; font-size: 0.78rem; }
+  .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin: 12px 0; padding: 10px; background: #fafafa; border: 1px solid #e0e0e0; }
+  .filter-bar label { font-size: 0.82rem; color: #555; }
+  select { font-family: inherit; font-size: 0.88rem; border: 1px solid #ccc; padding: 4px 8px; background: #fff; }
+  .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.5); display: none; align-items: center; justify-content: center; z-index: 999; }
+  .modal.show { display: flex; }
+  .modal-content { background: #fff; padding: 24px; max-width: 480px; width: 90%; border: 1px solid #111; }
+  .modal-content h3 { margin-top: 0; border-bottom: 1px solid #111; padding-bottom: 8px; }
+  .modal-content .close-x { float: right; cursor: pointer; font-weight: 700; color: #888; }
+  .question-list { max-height: 60vh; overflow-y: auto; }
+  .q-item { border: 1px solid #e0e0e0; padding: 12px; margin: 8px 0; }
+  .q-meta { font-size: 0.78rem; color: #888; margin-bottom: 4px; }
+  .q-stem { font-weight: 600; margin-bottom: 6px; }
+  .q-opts { list-style: none; margin: 0; padding: 0; font-size: 0.88rem; }
+  .q-opts li { padding: 3px 0; cursor: pointer; }
+  .q-opts li.correct { background: #f0f0f0; font-weight: 700; }
+  .q-rubric { font-size: 0.82rem; color: #555; margin-top: 6px; padding: 6px; background: #fafafa; border-left: 2px solid #111; }
+  .q-video { font-size: 0.78rem; color: #888; margin-top: 4px; }
+  .footer { margin-top: 36px; padding-top: 16px; border-top: 1px solid #e0e0e0; color: #888888; font-size: 0.82rem; }
+  .v-info { border: 1px dashed #888888; padding: 8px 12px; margin: 12px 0; font-size: 0.82rem; color: #555555; }
+  .pay-info { border: 1px solid #111; padding: 14px; background: #fafafa; margin: 12px 0; }
+  .hidden { display: none !important; }
+</style>
+</head>
+<body>
+
+<div class="nav">
+  <a href="../../index.html">Home</a> <span class="sep">/</span>
+  <a href="../index.html">Academics</a> <span class="sep">/</span>
+  <a href="index.html">Practice</a> <span class="sep">/</span>
+  付费题库
+</div>
+
+<h1>付费题库 <span class="badge">v52</span></h1>
+<p class="subtitle">8 科 × 200 题 Premium 原创题库 · SAT 真题改编 / IB 真题改编 / AP FRQ 改编 · 详细 Rubric + 视频讲解占位</p>
+
+<div class="v-info">
+  <strong>说明</strong> · Free 用户可查看题目大纲,答题、解析与视频讲解仅对付费用户开放。Silver 会员默认解锁 1 科 (SAT), Gold 会员解锁 3 科, Diamond 会员解锁全部 8 科。
+</div>
+
+<h2>8 科题库入口</h2>
+<div class="grid" id="subjGrid"></div>
+
+<h2>答题模式</h2>
+<div id="quizArea" class="hidden">
+  <div class="filter-bar">
+    <label>科目: <strong id="quizSubj">—</strong></label>
+    <label>难度:
+      <select id="filterDiff">
+        <option value="">全部</option>
+        <option value="easy">Easy</option>
+        <option value="medium">Medium</option>
+        <option value="hard">Hard</option>
+      </select>
+    </label>
+    <label>Topic:
+      <select id="filterTopic"><option value="">全部</option></select>
+    </label>
+    <label>题数:
+      <select id="filterLimit">
+        <option value="10">10</option>
+        <option value="20" selected>20</option>
+        <option value="50">50</option>
+        <option value="100">100</option>
+        <option value="200">200 (全部)</option>
+      </select>
+    </label>
+    <button class="primary small" id="btnApply">应用筛选</button>
+    <button class="small" id="btnClose">关闭</button>
+  </div>
+  <div class="pay-info" id="lockedNote" style="display:none;">
+    <strong>🔒 此科目未解锁</strong> — 解锁后可查看详细解析与视频讲解。<button class="primary small" id="btnUnlockNow">立即解锁 (¥29/科)</button>
+  </div>
+  <div id="qList" class="question-list"></div>
+</div>
+
+<!-- 解锁支付弹窗 -->
+<div class="modal" id="unlockModal">
+  <div class="modal-content">
+    <span class="close-x" onclick="closeUnlockModal()">×</span>
+    <h3>解锁 Premium 科目</h3>
+    <p>科目: <strong id="unlockSubj">—</strong></p>
+    <p>价格: <strong>¥29</strong> (一次性, 永久有效)</p>
+    <p>包含: 200 道原创题 + 详细 Rubric + 视频讲解占位</p>
+    <p class="muted" style="margin-top:8px;">支付方式: 模拟支付 (无真实扣款)</p>
+    <p class="muted" id="unlockStatus">点击下方按钮完成支付</p>
+    <div style="margin-top:14px; text-align:right;">
+      <button class="small" onclick="closeUnlockModal()">取消</button>
+      <button class="primary small" id="btnConfirmUnlock">确认支付</button>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  v52 付费题库 · 8 科 × 200 题 · Easy 30 / Medium 100 / Hard 70
+</div>
+
+<script>
+  var PB = window.PremiumBank;
+  var currentSubj = null;
+  var unlockTarget = null;
+
+  function renderSubjects() {
+    var grid = document.getElementById('subjGrid');
+    grid.innerHTML = '';
+    PB.subjects().forEach(function(s) {
+      var card = document.createElement('div');
+      var cls = 'subj-card';
+      if (s.unlocked) cls += ' unlocked'; else cls += ' locked';
+      card.className = cls;
+      card.innerHTML =
+        '<div class="subj-name">' + s.name + '</div>' +
+        '<div class="subj-source">' + s.fullName + ' · 来源: ' + s.source + ' 真题改编</div>' +
+        '<div class="subj-stats">' +
+          '<div>总题数: <strong>' + s.totalQuestions + '</strong></div>' +
+          '<div>难度分布: Easy 30 / Medium 100 / Hard 70</div>' +
+        '</div>' +
+        '<div class="subj-stats">' +
+          (s.unlocked
+            ? '<span class="badge badge-unlocked">已解锁</span>'
+            : '<span class="badge badge-locked">未解锁</span>') +
+        '</div>' +
+        '<div class="subj-actions">' +
+          (s.unlocked
+            ? '<button class="primary small" data-act="enter" data-key="' + s.key + '">进入答题</button>'
+            : '<button class="small" data-act="unlock" data-key="' + s.key + '">升级解锁 (¥29)</button>') +
+          ' <button class="small" data-act="preview" data-key="' + s.key + '">查看大纲</button>' +
+        '</div>';
+      grid.appendChild(card);
+    });
+    grid.querySelectorAll('button[data-act=unlock]').forEach(function(b){
+      b.addEventListener('click', function(){ openUnlockModal(b.getAttribute('data-key')); });
+    });
+    grid.querySelectorAll('button[data-act=enter]').forEach(function(b){
+      b.addEventListener('click', function(){ enterQuiz(b.getAttribute('data-key')); });
+    });
+    grid.querySelectorAll('button[data-act=preview]').forEach(function(b){
+      b.addEventListener('click', function(){ previewSyllabus(b.getAttribute('data-key')); });
+    });
+  }
+
+  function previewSyllabus(subj) {
+    var topics = PB.TOPICS[subj] || [];
+    var stats = PB.getStats(subj);
+    var msg = subj.toUpperCase() + ' 大纲:\n\n' +
+      '来源: ' + (PB.subjects().find(function(s){return s.key===subj;}) || {}).source + ' 真题改编\n' +
+      '总题数: ' + stats.total + ' (Easy ' + stats.easy + ' / Medium ' + stats.medium + ' / Hard ' + stats.hard + ')\n\n' +
+      'Topics (' + topics.length + '):\n' +
+      topics.map(function(t, i){ return '  ' + (i+1) + '. ' + t; }).join('\n');
+    alert(msg);
+  }
+
+  function enterQuiz(subj) {
+    currentSubj = subj;
+    document.getElementById('quizSubj').textContent = subj.toUpperCase();
+    var topics = PB.TOPICS[subj] || [];
+    var sel = document.getElementById('filterTopic');
+    sel.innerHTML = '<option value="">全部</option>' +
+      topics.map(function(t){ return '<option value="' + t + '">' + t + '</option>'; }).join('');
+    document.getElementById('quizArea').classList.remove('hidden');
+    var locked = !PB.isUnlocked(subj);
+    document.getElementById('lockedNote').style.display = locked ? 'block' : 'none';
+    document.getElementById('btnUnlockNow').onclick = function(){ openUnlockModal(subj); };
+    applyFilters();
+  }
+
+  function applyFilters() {
+    if (!currentSubj) return;
+    var diff = document.getElementById('filterDiff').value;
+    var topic = document.getElementById('filterTopic').value;
+    var limit = parseInt(document.getElementById('filterLimit').value, 10) || 20;
+    var qs = PB.getQuestions(currentSubj, { difficulty: diff, topicCode: topic, limit: limit });
+    var list = document.getElementById('qList');
+    list.innerHTML = '';
+    var isLocked = !PB.isUnlocked(currentSubj);
+    qs.forEach(function(q, idx) {
+      var item = document.createElement('div');
+      item.className = 'q-item';
+      var optsHtml = q.options.map(function(o, i) {
+        var letter = String.fromCharCode(65 + i);
+        var cls = (letter === q.answer) ? 'correct' : '';
+        if (isLocked) {
+          return '<li>' + o + '</li>';
+        }
+        return '<li class="' + cls + '" data-qid="' + q.id + '" data-letter="' + letter + '">' + o + (letter === q.answer ? ' ✓' : '') + '</li>';
+      }).join('');
+      var detailHtml = '';
+      if (!isLocked) {
+        detailHtml =
+          '<div class="q-rubric"><strong>解析:</strong> ' + q.rubric + '</div>' +
+          '<div class="q-video">🎥 视频讲解占位: ' + q.videoUrl + '</div>' +
+          '<div style="margin-top:6px;"><button class="small" data-act="ans" data-qid="' + q.id + '" data-correct="' + q.answer + '">标记答对</button> <button class="small" data-act="ans" data-qid="' + q.id + '" data-correct="">标记答错</button></div>';
+      } else {
+        detailHtml = '<p class="muted" style="margin-top:6px;">🔒 解锁后可查看详细解析与视频讲解</p>';
+      }
+      item.innerHTML =
+        '<div class="q-meta">#' + (idx+1) + ' · ' + q.id + ' · ' + q.difficulty.toUpperCase() + ' · ' + q.source + ' 改编 · Topic: ' + q.topicCode + '</div>' +
+        '<div class="q-stem">' + q.stem + '</div>' +
+        '<ul class="q-opts">' + optsHtml + '</ul>' +
+        detailHtml;
+      list.appendChild(item);
+    });
+
+    if (!isLocked) {
+      list.querySelectorAll('button[data-act=ans]').forEach(function(b){
+        b.addEventListener('click', function() {
+          var qid = b.getAttribute('data-qid');
+          var correct = b.getAttribute('data-correct');
+          PB.recordAnswer(qid, !!correct, currentSubj, currentSubj);
+          alert('已记录: ' + (correct ? '答对' : '答错'));
+        });
+      });
+    }
+  }
+
+  function openUnlockModal(subj) {
+    unlockTarget = subj;
+    document.getElementById('unlockSubj').textContent = subj.toUpperCase();
+    document.getElementById('unlockStatus').textContent = '点击下方按钮完成支付';
+    document.getElementById('unlockModal').classList.add('show');
+  }
+
+  function closeUnlockModal() {
+    document.getElementById('unlockModal').classList.remove('show');
+    unlockTarget = null;
+  }
+
+  document.getElementById('btnConfirmUnlock').addEventListener('click', function() {
+    if (!unlockTarget) return;
+    document.getElementById('unlockStatus').textContent = '支付中...';
+    PB.unlock(unlockTarget, function(result) {
+      if (result.ok) {
+        document.getElementById('unlockStatus').textContent = '支付成功! 订单号: ' + result.orderId;
+        setTimeout(function() {
+          closeUnlockModal();
+          renderSubjects();
+          if (currentSubj === unlockTarget) applyFilters();
+          alert('已解锁 ' + unlockTarget.toUpperCase() + ' Premium 题库');
+        }, 500);
+      } else {
+        document.getElementById('unlockStatus').textContent = '支付失败: ' + (result.error || '未知错误');
+      }
+    });
+  });
+
+  document.getElementById('btnApply').addEventListener('click', applyFilters);
+  document.getElementById('btnClose').addEventListener('click', function() {
+    document.getElementById('quizArea').classList.add('hidden');
+    currentSubj = null;
+  });
+
+  renderSubjects();
+</script>
+
+</body>
+</html>

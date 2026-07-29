@@ -1,0 +1,58 @@
+<!--pages/dashboard/dashboard.wxml-->
+<view class="yz-container">
+
+  <view class="yz-title">学习仪表盘</view>
+  <view class="yz-subtitle">全科目数据分析 · 错题本 · 学习路径</view>
+
+  <view class="yz-stat">
+    <view>
+      <view class="yz-stat-num">{{grandTotal}}</view>
+      <view class="yz-stat-label">累计答题</view>
+    </view>
+    <view>
+      <view class="yz-stat-num">{{grandCorrect}}</view>
+      <view class="yz-stat-label">答对</view>
+    </view>
+    <view>
+      <view class="yz-stat-num">{{grandAccuracy}}%</view>
+      <view class="yz-stat-label">正确率</view>
+    </view>
+    <view>
+      <view class="yz-stat-num">{{streak}}</view>
+      <view class="yz-stat-label">连续天数</view>
+    </view>
+  </view>
+
+  <view class="yz-section-title">各科统计</view>
+  <view wx:if="{{stats.length === 0}}" class="yz-muted">还没有数据，去刷题吧～</view>
+  <block wx:for="{{stats}}" wx:key="subject">
+    <view class="yz-card">
+      <view class="yz-card-title">{{item.subject}}</view>
+      <view class="yz-muted">
+        已答 {{item.total}} · 答对 {{item.correct}} · 错 {{item.wrong}} · 正确率 {{item.accuracy}}%
+      </view>
+      <view style="height:8rpx;background:#f0f0f0;margin-top:8rpx;">
+        <view style="height:100%;background:#111;width:{{item.accuracy}}%;"></view>
+      </view>
+    </view>
+  </block>
+
+  <view class="yz-section-title">最近错题</view>
+  <view wx:if="{{recentWrong.length === 0}}" class="yz-muted">无错题记录</view>
+  <block wx:for="{{recentWrong}}" wx:key="qid">
+    <view class="yz-card">
+      <view class="yz-card-title">{{item.subject}} · {{item.qid}}</view>
+      <view class="yz-muted">Topic: {{item.topic || '—'}}</view>
+    </view>
+  </block>
+
+  <view style="display:flex;gap:16rpx;margin-top:32rpx;">
+    <view class="yz-btn yz-btn-primary" bindtap="goPractice" style="flex:1;">去刷题</view>
+    <view class="yz-btn" bindtap="clearAll" style="flex:1;">清空数据</view>
+  </view>
+
+  <view class="yz-footer">
+    数据本地存储 · v56 微信小程序版
+  </view>
+
+</view>
