@@ -55,14 +55,14 @@
   Dashboard
 </div>
 
-<h1>Practice Dashboard <span class="v-badge">v9</span></h1>
-<p class="subtitle">v9 · 全科目练习数据分析 · 知识点掌握度 · 错题趋势</p>
+<h1>Practice Dashboard <span class="v-badge">v15</span></h1>
+<p class="subtitle">v15 · 全科目数据分析 · 考纲覆盖率 · 知识点掌握度 · 自适应学习路径</p>
 
 <h2>总览</h2>
 <div class="stats">
   <div class="stat">
-    <div class="stat-value" id="statTotal">400</div>
-    <div class="stat-label">题库总数 (8 × 50)</div>
+    <div class="stat-value" id="statTotal">960</div>
+    <div class="stat-label">题库总数 (8 × 120)</div>
   </div>
   <div class="stat">
     <div class="stat-value" id="statAnswered">0</div>
@@ -173,6 +173,18 @@
     <div class="path-meta">目标：全真模拟 · 20 题 · 30 min</div>
   </li>
 </ul>
+
+<h2>考纲覆盖率 (v15 新增)</h2>
+<p class="muted">基于 v13 结构化考纲数据 (syllabus-data.js) · 按 Topic 统计已刷/未刷/错题 · 自动识别薄弱点</p>
+<div id="coverageSection">
+  <p class="muted">加载中...</p>
+</div>
+
+<h2>自适应学习计划 (v15 新增)</h2>
+<p class="muted">基于考纲覆盖率和薄弱 Topic 自动生成 · 每日 3 个优先推荐</p>
+<div id="studySchedule">
+  <p class="muted">加载中...</p>
+</div>
 
 <div class="footer">
   <a href="../index.html">Practice Home</a> <span class="sep" style="color:#ccc;margin:0 6px;">·</span>
@@ -464,6 +476,146 @@
       '目标：清理错题本 · 预计 15 min');
   }
 
+  // --- v15: Syllabus Coverage Heatmap ---
+  function renderCoverage(data) {
+    var container = document.getElementById('coverageSection');
+    if (!container) return;
+    while (container.firstChild) container.removeChild(container.firstChild);
+
+    if (!window.SYLLABUS_DATA) {
+      container.innerHTML = '<p class="muted">syllabus-data.js 未加载，无法显示覆盖率</p>';
+      return;
+    }
+
+    var totalTopics = 0;
+    var coveredTopics = 0;
+    var weakTopics = [];
+
+    SUBJECTS.forEach(function(s) {
+      var subjData = window.SYLLABUS_DATA.getSubject(s);
+      if (!subjData) return;
+      var st = subjectStats(data.records || {}, s);
+
+      var section = document.createElement('div');
+      section.style.cssText = 'margin-bottom:16px;';
+      var h3 = document.createElement('h3');
+      h3.textContent = SUBJECT_LABELS[s] + ' · ' + (subjData.papers ? subjData.papers.length : 0) + ' Papers/Units';
+      section.appendChild(h3);
+
+      var table = document.createElement('table');
+      var thead = document.createElement('tr');
+      thead.innerHTML = '<th>Topic Code</th><th>Topic Name</th><th>Weight</th><th>已刷</th><th>正确率</th><th>状态</th>';
+      table.appendChild(thead);
+
+      if (subjData.papers) {
+        subjData.papers.forEach(function(paper) {
+          if (paper.topics) {
+            paper.topics.forEach(function(topic) {
+              totalTopics++;
+              var rec = st.byTopic[topic.name] || { done: 0, correct: 0 };
+              var acc = rec.done ? Math.round((rec.correct / rec.done) * 100) : null;
+              var status = 'Not Started';
+              if (rec.done > 0) {
+                coveredTopics++;
+                if (acc !== null && acc < 60) {
+                  status = 'Weak';
+                  weakTopics.push({ subject: s, code: topic.code, name: topic.name, acc: acc, done: rec.done });
+                } else if (acc !== null && acc >= 80) {
+                  status = 'Mastered';
+                } else {
+                  status = 'Learning';
+                }
+              }
+              var tr = document.createElement('tr');
+              tr.innerHTML = '<td>' + topic.code + '</td><td>' + topic.name + '</td><td>' + (topic.weight || '—') + '</td><td>' + rec.done + '</td><td>' + (acc === null ? '—' : acc + '%') + '</td><td class="' + labelClass(status === 'Weak' ? 'Learning' : status) + '">' + status + '</td>';
+              table.appendChild(tr);
+            });
+          }
+        });
+      }
+      section.appendChild(table);
+      container.appendChild(section);
+    });
+
+    var summary = document.createElement('div');
+    summary.className = 'v-info';
+    summary.innerHTML = '<strong>覆盖率：</strong>' + coveredTopics + ' / ' + totalTopics + ' topics (' + (totalTopics ? Math.round(coveredTopics / totalTopics * 100) : 0) + '%) · 薄弱点：' + weakTopics.length + ' 个';
+    container.insertBefore(summary, container.firstChild);
+  }
+
+  // --- v15: Adaptive Study Schedule ---
+  function renderStudySchedule(data) {
+    var container = document.getElementById('studySchedule');
+    if (!container) return;
+    while (container.firstChild) container.removeChild(container.firstChild);
+
+    var candidates = [];
+    SUBJECTS.forEach(function(s) {
+      var st = subjectStats(data.records || {}, s);
+      Object.keys(st.byTopic).forEach(function(t) {
+        var v = st.byTopic[t];
+        if (v.done >= 1) {
+          var acc = v.done ? Math.round((v.correct / v.done) * 100) : null;
+          if (acc !== null && acc < 70) {
+            candidates.push({ subject: s, topic: t, acc: acc, done: v.done });
+          }
+        }
+      });
+    });
+
+    if (window.SYLLABUS_DATA) {
+      SUBJECTS.forEach(function(s) {
+        var subjData = window.SYLLABUS_DATA.getSubject(s);
+        if (!subjData || !subjData.papers) return;
+        var st = subjectStats(data.records || {}, s);
+        subjData.papers.forEach(function(paper) {
+          if (!paper.topics) return;
+          paper.topics.forEach(function(topic) {
+            if (!st.byTopic[topic.name] && candidates.length < 20) {
+              candidates.push({ subject: s, topic: topic.name, acc: null, done: 0, code: topic.code });
+            }
+          });
+        });
+      });
+    }
+
+    candidates.sort(function(a, b) {
+      var aa = a.acc === null ? 999 : a.acc;
+      var bb = b.acc === null ? 999 : b.acc;
+      return aa - bb;
+    });
+
+    if (!candidates.length) {
+      container.innerHTML = '<p class="muted">暂无推荐 — 开始练习后将自动生成学习计划</p>';
+      return;
+    }
+
+    var ul = document.createElement('ul');
+    ul.className = 'path-list';
+    candidates.slice(0, 5).forEach(function(c) {
+      var li = document.createElement('li');
+      var action = document.createElement('div');
+      action.className = 'path-action';
+      var link = document.createElement('a');
+      link.href = c.subject + '/practice.html' + (c.code ? '?topic=' + c.code : '');
+      var statusText = c.acc === null ? '未练习' : '正确率 ' + c.acc + '%';
+      link.textContent = '刷 ' + SUBJECT_LABELS[c.subject] + ' · ' + c.topic + ' →';
+      action.appendChild(link);
+      var meta = document.createElement('div');
+      meta.className = 'path-meta';
+      meta.textContent = statusText + ' · 已刷 ' + c.done + ' 题 · 点击开始局部刷题';
+      li.appendChild(action);
+      li.appendChild(meta);
+      ul.appendChild(li);
+    });
+    container.appendChild(ul);
+
+    var note = document.createElement('div');
+    note.className = 'box-dashed';
+    note.innerHTML = 'v15: 点击任意推荐可直接跳转到对应Topic的局部刷题页面（v14 URL参数筛选生效）';
+    container.appendChild(note);
+  }
+
   // --- Init ---
   function init() {
     var data = loadData();
@@ -473,6 +625,8 @@
     renderWeakTopics(data);
     renderErrorTrend(data);
     renderPath(data);
+    renderCoverage(data);
+    renderStudySchedule(data);
   }
 
   // Expose for re-render after answering elsewhere
@@ -481,6 +635,6 @@
   init();
 })();
 </script>
-
+<script src="../../../js/syllabus-data.js"></script>
 </body>
 </html>

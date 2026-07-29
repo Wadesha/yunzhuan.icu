@@ -1,6 +1,6 @@
 /**
- * Practice Engine v4
- * 答题 + 错题本 + localStorage 持久化
+ * Practice Engine v5 (v14)
+ * 答题 + 错题本 + localStorage 持久化 + Topic筛选(?topic=xxx)
  */
 (function() {
   'use strict';
@@ -48,10 +48,52 @@
     saveData(data);
   }
 
+  // --- v14: Topic Filter from URL ?topic=xxx ---
+  function getTopicFromUrl() {
+    var params = new URLSearchParams(window.location.search);
+    return params.get('topic') || '';
+  }
+
+  function extractTopicCode(qNumEl) {
+    if (!qNumEl) return '';
+    var text = qNumEl.textContent;
+    var m = text.match(/【([A-Za-z0-9_-]+)】/);
+    return m ? m[1] : '';
+  }
+
+  function initTopicFilter(questions) {
+    var topicParam = getTopicFromUrl();
+    if (!topicParam) return null;
+
+    var matched = 0;
+    questions.forEach(function(q) {
+      var qNum = q.querySelector('.q-num');
+      var code = extractTopicCode(qNum);
+      if (code && code === topicParam) {
+        q.style.display = '';
+        matched++;
+      } else {
+        q.style.display = 'none';
+      }
+    });
+
+    // Insert filter banner
+    var banner = document.createElement('div');
+    banner.style.cssText = 'border:1px solid #111;padding:10px 14px;margin:12px 0;font-size:0.85rem;';
+    banner.innerHTML = '<strong>Topic Filter:</strong> ' + topicParam + ' · 显示 ' + matched + ' 题 · <a href="practice.html" style="border-bottom:1px solid #ccc;">清除筛选</a>';
+    var h2 = document.querySelector('h2');
+    if (h2) h2.parentNode.insertBefore(banner, h2.nextSibling);
+
+    return { topic: topicParam, matched: matched };
+  }
+
   // --- Practice Page Logic ---
   function initPracticePage() {
     var questions = document.querySelectorAll('.q');
     var recs = getRecords();
+
+    // v14: Apply topic filter first
+    var filterResult = initTopicFilter(questions);
 
     questions.forEach(function(q, idx) {
       var qid = q.getAttribute('data-qid') || ('q' + (idx + 1));
@@ -120,7 +162,8 @@
     // Stats bar + controls
     var stats = document.createElement('div');
     stats.style.cssText = 'border:1px solid #111;padding:10px 14px;margin:16px 0;font-size:0.85rem;';
-    updateStats(stats);
+    var visibleCount = filterResult ? filterResult.matched : questions.length;
+    updateStats(stats, visibleCount);
     var h2 = document.querySelector('h2');
     if (h2) h2.parentNode.insertBefore(stats, h2.nextSibling);
 
@@ -212,7 +255,7 @@
     }
   }
 
-  function updateStats(statsDiv) {
+  function updateStats(statsDiv, totalCount) {
     var recs = getRecords();
     var total = Object.keys(recs).length;
     var correct = 0;
@@ -220,7 +263,8 @@
       if (recs[k].correct) correct++;
     });
     var rate = total > 0 ? Math.round(correct / total * 100) : 0;
-    statsDiv.innerHTML = '<strong>Progress:</strong> ' + total + ' answered · ' + correct + ' correct · ' + rate + '% accuracy';
+    var displayTotal = totalCount || total;
+    statsDiv.innerHTML = '<strong>Progress:</strong> ' + total + ' answered · ' + correct + ' correct · ' + rate + '% accuracy' + (totalCount ? ' · Showing ' + totalCount + ' questions' : '');
   }
 
   // --- Tracker Page Logic ---

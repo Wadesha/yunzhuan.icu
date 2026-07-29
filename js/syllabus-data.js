@@ -1,465 +1,1039 @@
 /* ================================================================
  * syllabus-data.js v13
- * 8科结构化考纲数据层：
- *   - subject -> paper/unit -> topic: {code, name, weight, questionIds[], prereq[]}
- *   - 供 syllabus.html, practice.html, tracker.html,
- *         mock-test.html, dashboard.html 全局调用
+ * 8科结构化考纲数据层 (Structured Syllabus Data Layer)
  *
- * 使用方法：
- *   var satUnit1 = window.SYLLABUS_DATA.sat.topics['M-Alg-1a'];
- *   var allTopics = SYLLABUS_DATA.listTopics('ib');
- *   var topicByCode = SYLLABUS_DATA.findTopic('alevel', 'M-P1-12');
+ * Schema:
+ *   subject -> papers[] -> topics[] -> { code, name, weight, questionIds[], prereq[] }
+ *
+ * 8 科: sat / act / ap / ib / alevel / toefl / ielts / igcse
+ *
+ * 说明:
+ *   - questionIds[] 初始为空 []，由 buildQuestionMap(subjectKey, domNodes)
+ *     在页面加载时从 practice.html 的 topic-code 标签反向映射动态填充。
+ *   - weight: 有明确权重的科目(SAT/ACT/IB HL/AL CIE)填百分比字符串；
+ *     无明确权重(AP/TOEFL/IELTS/IGCSE)填 '—'。
+ *   - prereq[]: 标注前置依赖 topic-code，无依赖填 []。
+ *
+ * 使用方法:
+ *   var sub  = SYLLABUS_DATA.getSubject('sat');
+ *   var top  = SYLLABUS_DATA.getTopic('sat', 'M-Alg-1a');
+ *   var cov  = SYLLABUS_DATA.getCoverage('ib');
+ *   SYLLABUS_DATA.buildQuestionMap('sat', document.querySelectorAll('.q'));
  * ================================================================ */
 (function() {
-  var DATA = {};
+  'use strict';
 
-  // ---------- SAT (Digital 2025) ----------
-  DATA.sat = {
-    meta: {
-      name: 'Digital SAT',
-      version: 'v3',
-      questionCount: 120,
-      groups: [
-        { code: 'RW',  name: 'Reading & Writing', weight: 50 },
-        { code: 'M',   name: 'Math',              weight: 50 }
+  var subjects = {
+
+    // ================================================================
+    // SAT (Digital SAT 2025)
+    // ================================================================
+    sat: {
+      name: 'SAT',
+      fullName: 'Digital SAT 2025',
+      totalQuestions: 120,
+      papers: [
+        {
+          name: 'Reading & Writing',
+          code: 'RW',
+          weight: '50%',
+          topics: [
+            { code: 'RW-Craft-1a', name: 'Words in Context', weight: '7%', questionIds: [], prereq: [] },
+            { code: 'RW-Craft-1b', name: 'Text Structure & Purpose', weight: '7%', questionIds: [], prereq: [] },
+            { code: 'RW-Craft-1c', name: 'Cross-Text Connections', weight: '7%', questionIds: [], prereq: [] },
+            { code: 'RW-Craft-1d', name: 'Central Ideas & Details', weight: '7%', questionIds: [], prereq: [] },
+            { code: 'RW-Info-2a', name: 'Explicit & Implicit Meaning', weight: '6.5%', questionIds: [], prereq: [] },
+            { code: 'RW-Info-2b', name: 'Follow a Logical Sequence', weight: '6.5%', questionIds: [], prereq: [] },
+            { code: 'RW-Info-2c', name: 'Cite Textual Evidence', weight: '6.5%', questionIds: [], prereq: [] },
+            { code: 'RW-Info-2d', name: 'Dual-Part Graph + Text', weight: '6.5%', questionIds: [], prereq: [] },
+            { code: 'RW-Conv-3a', name: 'Boundaries', weight: '8.7%', questionIds: [], prereq: [] },
+            { code: 'RW-Conv-3b', name: 'Subordination & Coordination', weight: '8.7%', questionIds: [], prereq: [] },
+            { code: 'RW-Conv-3c', name: 'Subject-Verb / Pronoun / Parallelism', weight: '8.6%', questionIds: [], prereq: [] },
+            { code: 'RW-Expr-4a', name: 'Transition Words & Phrases', weight: '6.7%', questionIds: [], prereq: [] },
+            { code: 'RW-Expr-4b', name: 'Rhetorical Synthesis', weight: '6.7%', questionIds: [], prereq: [] },
+            { code: 'RW-Expr-4c', name: 'Adding / Deleting / Revising', weight: '6.6%', questionIds: [], prereq: [] }
+          ]
+        },
+        {
+          name: 'Math',
+          code: 'M',
+          weight: '50%',
+          topics: [
+            { code: 'M-Alg-1a', name: 'Linear equations, inequalities & systems', weight: '8.75%', questionIds: [], prereq: [] },
+            { code: 'M-Alg-1b', name: 'Linear functions', weight: '8.75%', questionIds: [], prereq: ['M-Alg-1a'] },
+            { code: 'M-Alg-1c', name: 'Absolute value inequalities', weight: '8.75%', questionIds: [], prereq: ['M-Alg-1a'] },
+            { code: 'M-Alg-1d', name: 'Graphing linear relationships', weight: '8.75%', questionIds: [], prereq: ['M-Alg-1b'] },
+            { code: 'M-Adv-2a', name: 'Nonlinear functions', weight: '8.75%', questionIds: [], prereq: [] },
+            { code: 'M-Adv-2b', name: 'Polynomial operations & factoring', weight: '8.75%', questionIds: [], prereq: ['M-Adv-2a'] },
+            { code: 'M-Adv-2c', name: 'Radical & Rational exponents', weight: '8.75%', questionIds: [], prereq: ['M-Adv-2a'] },
+            { code: 'M-Adv-2d', name: 'Equivalent expressions / Isolating quantities', weight: '8.75%', questionIds: [], prereq: ['M-Adv-2b'] },
+            { code: 'M-PSD-3a', name: 'Ratios, rates, proportions, percentages', weight: '5%', questionIds: [], prereq: [] },
+            { code: 'M-PSD-3b', name: '1-variable & 2-variable data', weight: '5%', questionIds: [], prereq: [] },
+            { code: 'M-PSD-3c', name: 'Probability & Inference from samples', weight: '5%', questionIds: [], prereq: ['M-PSD-3b'] },
+            { code: 'M-GT-4a', name: 'Area, Volume & 2D-3D', weight: '5%', questionIds: [], prereq: [] },
+            { code: 'M-GT-4b', name: 'Lines, angles, triangles, circles', weight: '5%', questionIds: [], prereq: [] },
+            { code: 'M-GT-4c', name: 'Right triangle trig + Circle trig', weight: '5%', questionIds: [], prereq: ['M-GT-4b'] }
+          ]
+        }
       ]
     },
-    topics: {}
-  };
-  // SAT: Math 4 Domain 12 Skills
-  var SAT_M = [
-    ['M-Alg-1a', 'Linear equations, inequalities, systems', 35, [1,11,12,15,21,22,23,25,26,28,29]],
-    ['M-Alg-1b', 'Linear functions (slope/intercept)',      35, [3,13,18,31,32,33]],
-    ['M-Alg-1c', 'Absolute value inequalities',             35, [4,35]],
-    ['M-Alg-1d', 'Graphing linear relationships',           35, [17,34,37,39]],
-    ['M-Adv-2a', 'Nonlinear functions (quadratic, exp)',    35, [2,6,7,41,42,43,45]],
-    ['M-Adv-2b', 'Polynomial operations & factoring',       35, [8,14,44,46,48]],
-    ['M-Adv-2c', 'Radical, rational, exponent equations',   35, [9,51,52,54,55]],
-    ['M-Adv-2d', 'Equivalent expressions / isolation',      35, [10,19,56,58,59]],
-    ['M-PSD-3a', 'Ratios, rates, proportions, percents',    15, [4,16,61,62,64,65,66,67]],
-    ['M-PSD-3b', '1-var & 2-var data + regression',         15, [36,68,69,71,72]],
-    ['M-PSD-3c', 'Probability & sampling inference',        15, [37,73,74,75,76,77]],
-    ['M-GT-4a',  'Area, Volume, 2D-3D similar solids',      15, [5,38,81,82,83]],
-    ['M-GT-4b',  'Lines, angles, triangles, congruence',    15, [20,24,84,85,86,87,88]],
-    ['M-GT-4c',  'Circles, Right triangle trig + Unit circle', 15, [30,39,91,92,93,94,95,96]]
-  ];
-  // SAT: R&W 4 Domain 14 Skills
-  var SAT_RW = [
-    ['RW-Craft-1a', 'Words in Context (vocab choice)', 28, [15,47,50,101,102]],
-    ['RW-Craft-1b', 'Text Structure & Purpose',         28, [18,53,57,103,104]],
-    ['RW-Craft-1c', 'Cross-text Connections',            28, [27,60,105]],
-    ['RW-Craft-1d', 'Central Ideas & Details',           28, [19,30,106,107,108]],
-    ['RW-Info-2a',  'Explicit & Implicit Meaning',       26, [22,35,109,110,111]],
-    ['RW-Info-2b',  'Follow a Logical Sequence',         26, [32,112,113]],
-    ['RW-Info-2c',  'Cite Textual Evidence (support)',   26, [34,114,115,116]],
-    ['RW-Info-2d',  'Dual-part Graph + Text Synthesis',  26, [36,117,118]],
-    ['RW-Conv-3a',  'Boundaries: comma, semicolon, dash, colon', 26, [1,6,10,40,63,80,120]],
-    ['RW-Conv-3b',  'Subordination / Coordination',      26, [2,5,9,41,42,81]],
-    ['RW-Conv-3c',  'SVA / Pronoun / Parallelism / Modifiers', 26, [3,7,8,11,43,44,78]],
-    ['RW-Expr-4a',  'Transition words & phrases',        20, [12,13,14,45,46,79,88]],
-    ['RW-Expr-4b',  'Rhetorical synthesis (goal match)', 20, [17,47,48,49,89,90]],
-    ['RW-Expr-4c',  'Add/Delete/Revise sentences',       20, [20,21,23,24,25,91,92]]
-  ];
-  SAT_M.concat(SAT_RW).forEach(function(row) {
-    DATA.sat.topics[row[0]] = {
-      code: row[0], name: row[1], weight: row[2], questionIds: row[3], prereq: []
-    };
-  });
 
-  // ---------- ACT ----------
-  DATA.act = {
-    meta: { name: 'ACT', version: 'v3', questionCount: 120,
-      groups: [
-        { code: 'ENG', name: 'English (75q/45min)',   weight: 25 },
-        { code: 'M',   name: 'Math (60q/60min)',      weight: 25 },
-        { code: 'R',   name: 'Reading (40q/35min)',   weight: 25 },
-        { code: 'SCI', name: 'Science (40q/35min)',   weight: 25 }
+    // ================================================================
+    // ACT
+    // ================================================================
+    act: {
+      name: 'ACT',
+      fullName: 'ACT 2025',
+      totalQuestions: 120,
+      papers: [
+        {
+          name: 'English (75q / 45min)',
+          code: 'ENG',
+          weight: '25%',
+          topics: [
+            { code: 'E-PW-11', name: 'Production of Writing: Topic dev, organization, unity, cohesion', weight: '29%', questionIds: [], prereq: [] },
+            { code: 'E-KL-21', name: 'Knowledge of Language: Word choice, style, tone, concision', weight: '18%', questionIds: [], prereq: [] },
+            { code: 'E-CSE-31', name: 'Conventions: Punctuation (comma, apostrophe, dash, colon)', weight: '25%', questionIds: [], prereq: [] },
+            { code: 'E-CSE-32', name: 'Conventions: Grammar usage (SVA, pronoun, tense)', weight: '14%', questionIds: [], prereq: [] },
+            { code: 'E-CSE-33', name: 'Conventions: Sentence structure (frag, run-on, modifier, parallelism)', weight: '14%', questionIds: [], prereq: [] }
+          ]
+        },
+        {
+          name: 'Math (60q / 60min)',
+          code: 'M',
+          weight: '25%',
+          topics: [
+            { code: 'M-PAEA-41', name: 'Pre-Algebra (number, fraction, ratio, percent)', weight: '23%', questionIds: [], prereq: [] },
+            { code: 'M-PAEA-42', name: 'Elementary Algebra (polynomial, exponent, factoring)', weight: '17%', questionIds: [], prereq: ['M-PAEA-41'] },
+            { code: 'M-IACG-51', name: 'Intermediate Algebra (quadratic, log, systems, functions)', weight: '15%', questionIds: [], prereq: ['M-PAEA-42'] },
+            { code: 'M-IACG-52', name: 'Coordinate Geometry (slope, line, circle)', weight: '15%', questionIds: [], prereq: ['M-PAEA-42'] },
+            { code: 'M-PGT-61', name: 'Plane Geometry (triangle, polygon, circle, area/volume)', weight: '23%', questionIds: [], prereq: [] },
+            { code: 'M-PGT-62', name: 'Trigonometry (SOHCAHTOA, identities, special angles)', weight: '7%', questionIds: [], prereq: ['M-PGT-61'] }
+          ]
+        },
+        {
+          name: 'Reading (40q / 35min)',
+          code: 'R',
+          weight: '25%',
+          topics: [
+            { code: 'R-KID-71', name: 'Key Ideas & Details: Main idea & detail', weight: '35%', questionIds: [], prereq: [] },
+            { code: 'R-KID-72', name: 'Key Ideas & Details: Cause-effect, compare, sequence', weight: '20%', questionIds: [], prereq: [] },
+            { code: 'R-CS-81', name: 'Craft & Structure: Word meaning, tone, rhetoric', weight: '25%', questionIds: [], prereq: [] },
+            { code: 'R-IKI-91', name: 'Integration of Knowledge & Ideas (paired-passage, evidence)', weight: '20%', questionIds: [], prereq: [] }
+          ]
+        },
+        {
+          name: 'Science (40q / 35min)',
+          code: 'SCI',
+          weight: '25%',
+          topics: [
+            { code: 'S-DR-101', name: 'Data Representation (graph, table, diagram, trend)', weight: '25%', questionIds: [], prereq: [] },
+            { code: 'S-DR-102', name: 'Math-in-science (rate, proportion, unit conversion)', weight: '10%', questionIds: [], prereq: ['S-DR-101'] },
+            { code: 'S-RS-111', name: 'Research Summary (hypothesis, variable, control, experiment design)', weight: '48%', questionIds: [], prereq: [] },
+            { code: 'S-CV-121', name: 'Conflicting Viewpoints (compare models / scientists)', weight: '17%', questionIds: [], prereq: [] }
+          ]
+        }
       ]
     },
-    topics: {}
-  };
-  var ACT_TOPICS = [
-    ['E-PW-11',  'Topic dev, organization, cohesion', 29, [1,6,11,16,21,22,26]],
-    ['E-KL-21',  'Word choice, style, tone, concision', 18, [2,7,12,17,23,27]],
-    ['E-CSE-31', 'Punctuation (comma, apostrophe, dash)', 25, [3,8,13,18,24,28,31]],
-    ['E-CSE-32', 'Grammar usage (SVA, pron, tense)',    14, [4,9,14,19,25,29,32]],
-    ['E-CSE-33', 'Sentence structure (frag, run-on, mod, parallel)', 14, [5,10,15,20,30,33]],
-    ['M-PAEA-41','Pre-Algebra (number, fraction, ratio, percent)', 23, [34,39,44,51,56,61]],
-    ['M-PAEA-42','Elementary Algebra (poly, exp, factoring)', 17, [35,40,45,52,57,62]],
-    ['M-IACG-51','Intermediate Algebra (quad, log, sys, func)', 15, [36,41,46,53,58,63]],
-    ['M-IACG-52','Coordinate Geometry (slope, line, circle)', 15, [37,42,47,54,59,64]],
-    ['M-PGT-61', 'Plane Geometry (tri, polygon, circle, area/vol)', 23, [38,43,48,55,60,65]],
-    ['M-PGT-62', 'Trigonometry (SOHCAHTOA, ident, special angle)', 7, [49,50,66,67]],
-    ['R-KID-71', 'Main Idea & Detail', 35, [68,71,72,75,76,79,80]],
-    ['R-KID-72', 'Cause-effect, Compare, Sequence', 20, [69,73,74,77,78,81]],
-    ['R-CS-81',  'Meaning-of-word, Author tone/voice, rhetoric', 25, [82,85,86,87,88]],
-    ['R-IKI-91', 'Integration (paired-passage, evidence)', 20, [83,84,89,90,91,92]],
-    ['S-DR-101', 'Data Rep (graph, table, diagram, trend, extrapolation)', 38, [93,94,95,96,97,98,101]],
-    ['S-DR-102', 'Math-in-science (rate, proportion, unit conversion)', 15, [99,100,102,103]],
-    ['S-RS-111', 'Research Summary: hypothesis, variable, control, experiment design', 45, [104,105,106,107,108,109]],
-    ['S-CV-121', 'Conflicting Viewpoints: compare models/scientists', 17, [110,111,112,113,114,115,116]]
-  ];
-  ACT_TOPICS.forEach(function(row) {
-    DATA.act.topics[row[0]] = { code:row[0], name:row[1], weight:row[2], questionIds:row[3], prereq:[] };
-  });
 
-  // ---------- AP ----------
-  DATA.ap = {
-    meta: { name: 'AP (10热门科CED)', version: 'v3', questionCount: 120,
-      groups: [
-        { code: 'MATH',  name: 'Calculus AB/BC + Statistics', weight: 30 },
-        { code: 'SCI',   name: 'PhyC + Chem + Bio',          weight: 30 },
-        { code: 'SOC',   name: 'Micro + Macro Econ',         weight: 15 },
-        { code: 'CS',    name: 'Comp Sci A (Java/OOP)',       weight: 10 },
-        { code: 'HUM',   name: 'Psych / Hist / EngLang',     weight: 15 }
+    // ================================================================
+    // AP (10 热门科 CED Unit)
+    // ================================================================
+    ap: {
+      name: 'AP',
+      fullName: 'Advanced Placement (10 热门科 CED)',
+      totalQuestions: 120,
+      papers: [
+        {
+          name: 'Calculus AB/BC',
+          code: 'CALC',
+          weight: '—',
+          topics: [
+            { code: 'CALC-U11', name: 'Limits & Continuity', weight: '—', questionIds: [], prereq: [] },
+            { code: 'CALC-U21', name: 'Differentiation: Definition & Fundamental Rules', weight: '—', questionIds: [], prereq: ['CALC-U11'] },
+            { code: 'CALC-U31', name: 'Composite, Implicit & Inverse Differentiation', weight: '—', questionIds: [], prereq: ['CALC-U21'] },
+            { code: 'CALC-U41', name: 'Contextual Applications of Differentiation', weight: '—', questionIds: [], prereq: ['CALC-U31'] },
+            { code: 'CALC-U51', name: 'Analytical Applications of Differentiation', weight: '—', questionIds: [], prereq: ['CALC-U31'] },
+            { code: 'CALC-U61', name: 'Integration & Accumulation of Change', weight: '—', questionIds: [], prereq: ['CALC-U21'] },
+            { code: 'CALC-U71', name: 'Differential Equations', weight: '—', questionIds: [], prereq: ['CALC-U61'] },
+            { code: 'CALC-U81', name: 'Applications of Integration', weight: '—', questionIds: [], prereq: ['CALC-U61'] },
+            { code: 'CALC-U91', name: 'Parametric / Polar / Vector Functions (BC)', weight: '—', questionIds: [], prereq: ['CALC-U81'] },
+            { code: 'CALC-U101', name: 'Infinite Sequences & Series (BC)', weight: '—', questionIds: [], prereq: ['CALC-U91'] }
+          ]
+        },
+        {
+          name: 'Statistics',
+          code: 'STAT',
+          weight: '—',
+          topics: [
+            { code: 'STAT-U11', name: 'Exploring One-Variable Data', weight: '—', questionIds: [], prereq: [] },
+            { code: 'STAT-U21', name: 'Exploring Two-Variable Data', weight: '—', questionIds: [], prereq: ['STAT-U11'] },
+            { code: 'STAT-U31', name: 'Collecting Data (sample / experiment)', weight: '—', questionIds: [], prereq: ['STAT-U21'] },
+            { code: 'STAT-U41', name: 'Probability, Random Variables & Probability Distributions', weight: '—', questionIds: [], prereq: ['STAT-U31'] },
+            { code: 'STAT-U51', name: 'Sampling Distributions', weight: '—', questionIds: [], prereq: ['STAT-U41'] },
+            { code: 'STAT-U61', name: 'Inference for Categorical Data: Proportions', weight: '—', questionIds: [], prereq: ['STAT-U51'] },
+            { code: 'STAT-U71', name: 'Inference for Quantitative Data: Means', weight: '—', questionIds: [], prereq: ['STAT-U61'] },
+            { code: 'STAT-U81', name: 'Chi-Square Inference', weight: '—', questionIds: [], prereq: ['STAT-U71'] },
+            { code: 'STAT-U91', name: 'Inference for Slopes (LSRL)', weight: '—', questionIds: [], prereq: ['STAT-U71'] }
+          ]
+        },
+        {
+          name: 'Physics C: Mechanics',
+          code: 'PHYCM',
+          weight: '—',
+          topics: [
+            { code: 'PHYCM-U11', name: 'Kinematics (1D / 2D)', weight: '—', questionIds: [], prereq: [] },
+            { code: 'PHYCM-U21', name: "Newton's Laws of Motion", weight: '—', questionIds: [], prereq: ['PHYCM-U11'] },
+            { code: 'PHYCM-U31', name: 'Work, Energy & Power', weight: '—', questionIds: [], prereq: ['PHYCM-U21'] },
+            { code: 'PHYCM-U41', name: 'Systems of Particles & Linear Momentum', weight: '—', questionIds: [], prereq: ['PHYCM-U21'] },
+            { code: 'PHYCM-U51', name: 'Rotation + Oscillation + Gravitation', weight: '—', questionIds: [], prereq: ['PHYCM-U31', 'PHYCM-U41'] }
+          ]
+        },
+        {
+          name: 'Physics C: Electricity & Magnetism',
+          code: 'PHYCE',
+          weight: '—',
+          topics: [
+            { code: 'PHYCE-U11', name: 'Electrostatics: Charge, Field, Potential', weight: '—', questionIds: [], prereq: [] },
+            { code: 'PHYCE-U21', name: 'Conductors, Capacitors & Dielectrics', weight: '—', questionIds: [], prereq: ['PHYCE-U11'] },
+            { code: 'PHYCE-U31', name: 'Electric Circuits (R, C, RC)', weight: '—', questionIds: [], prereq: ['PHYCE-U21'] },
+            { code: 'PHYCE-U41', name: 'Magnetic Fields (force on moving charge)', weight: '—', questionIds: [], prereq: ['PHYCE-U11'] },
+            { code: 'PHYCE-U51', name: 'Electromagnetism (Faraday, Inductance)', weight: '—', questionIds: [], prereq: ['PHYCE-U41'] }
+          ]
+        },
+        {
+          name: 'Chemistry',
+          code: 'CHEM',
+          weight: '—',
+          topics: [
+            { code: 'CHEM-U11', name: 'Atomic Structure & Properties', weight: '—', questionIds: [], prereq: [] },
+            { code: 'CHEM-U21', name: 'Molecular & Ionic Compound Structure', weight: '—', questionIds: [], prereq: ['CHEM-U11'] },
+            { code: 'CHEM-U31', name: 'Intermolecular Forces & Properties', weight: '—', questionIds: [], prereq: ['CHEM-U21'] },
+            { code: 'CHEM-U41', name: 'Chemical Reactions (stoichiometry / net ionic)', weight: '—', questionIds: [], prereq: ['CHEM-U31'] },
+            { code: 'CHEM-U51', name: 'Kinetics (rate law, mechanism)', weight: '—', questionIds: [], prereq: ['CHEM-U41'] },
+            { code: 'CHEM-U61', name: 'Thermodynamics (ΔH, ΔS, ΔG)', weight: '—', questionIds: [], prereq: ['CHEM-U41'] },
+            { code: 'CHEM-U71', name: 'Equilibrium (Kc, Kp, Le Chatelier)', weight: '—', questionIds: [], prereq: ['CHEM-U41'] },
+            { code: 'CHEM-U81', name: 'Acids & Bases (pH, Ka, buffers, titration)', weight: '—', questionIds: [], prereq: ['CHEM-U71'] },
+            { code: 'CHEM-U91', name: 'Applications of Thermodynamics: Electrochemistry', weight: '—', questionIds: [], prereq: ['CHEM-U81'] }
+          ]
+        },
+        {
+          name: 'Biology',
+          code: 'BIO',
+          weight: '—',
+          topics: [
+            { code: 'BIO-U11', name: 'Chemistry of Life (water, organics, enzymes)', weight: '—', questionIds: [], prereq: [] },
+            { code: 'BIO-U21', name: 'Cell Structure & Function (organelles, membrane)', weight: '—', questionIds: [], prereq: ['BIO-U11'] },
+            { code: 'BIO-U31', name: 'Cellular Energetics (photosynthesis, respiration)', weight: '—', questionIds: [], prereq: ['BIO-U21'] },
+            { code: 'BIO-U41', name: 'Cell Communication & Cell Cycle', weight: '—', questionIds: [], prereq: ['BIO-U21'] },
+            { code: 'BIO-U51', name: 'Heredity (meiosis, Mendelian & non-Mendelian)', weight: '—', questionIds: [], prereq: ['BIO-U31'] },
+            { code: 'BIO-U61', name: 'Gene Expression & Regulation (central dogma)', weight: '—', questionIds: [], prereq: ['BIO-U41'] },
+            { code: 'BIO-U71', name: 'Natural Selection (Hardy-Weinberg, speciation)', weight: '—', questionIds: [], prereq: ['BIO-U51'] },
+            { code: 'BIO-U81', name: 'Ecology (population, community, ecosystem)', weight: '—', questionIds: [], prereq: ['BIO-U71'] }
+          ]
+        },
+        {
+          name: 'Microeconomics',
+          code: 'MICRO',
+          weight: '—',
+          topics: [
+            { code: 'MICRO-U11', name: 'Basic Economic Concepts (scarcity, PPC, trade)', weight: '—', questionIds: [], prereq: [] },
+            { code: 'MICRO-U21', name: 'Supply & Demand, Elasticity, Gov Intervention', weight: '—', questionIds: [], prereq: ['MICRO-U11'] },
+            { code: 'MICRO-U31', name: 'Production, Cost & Perfect Competition', weight: '—', questionIds: [], prereq: ['MICRO-U21'] },
+            { code: 'MICRO-U41', name: 'Imperfect Competition (monopoly, oligopoly, game)', weight: '—', questionIds: [], prereq: ['MICRO-U31'] },
+            { code: 'MICRO-U51', name: 'Factor Markets (labor MRP, monopsony)', weight: '—', questionIds: [], prereq: ['MICRO-U31'] },
+            { code: 'MICRO-U61', name: 'Market Failure & Gov Role (externality, public good)', weight: '—', questionIds: [], prereq: ['MICRO-U41'] }
+          ]
+        },
+        {
+          name: 'Macroeconomics',
+          code: 'MACRO',
+          weight: '—',
+          topics: [
+            { code: 'MACRO-U11', name: 'Basic Economic Concepts', weight: '—', questionIds: [], prereq: [] },
+            { code: 'MACRO-U21', name: 'Economic Indicators (GDP, CPI, unemployment)', weight: '—', questionIds: [], prereq: ['MACRO-U11'] },
+            { code: 'MACRO-U31', name: 'National Income & Price Determination (AD/AS)', weight: '—', questionIds: [], prereq: ['MACRO-U21'] },
+            { code: 'MACRO-U41', name: 'Financial Sector (money, banking, policy)', weight: '—', questionIds: [], prereq: ['MACRO-U31'] },
+            { code: 'MACRO-U51', name: 'Long-Run Consequences of Stabilization Policies', weight: '—', questionIds: [], prereq: ['MACRO-U41'] },
+            { code: 'MACRO-U61', name: 'Open Economy (BOP, exchange rate, capital flows)', weight: '—', questionIds: [], prereq: ['MACRO-U51'] }
+          ]
+        },
+        {
+          name: 'Computer Science A (Java)',
+          code: 'CSA',
+          weight: '—',
+          topics: [
+            { code: 'CSA-U11', name: 'Primitive Types (int, double, boolean, casting)', weight: '—', questionIds: [], prereq: [] },
+            { code: 'CSA-U21', name: 'Using Objects (classes, methods, constructors)', weight: '—', questionIds: [], prereq: ['CSA-U11'] },
+            { code: 'CSA-U31', name: 'Boolean Expressions & if/else', weight: '—', questionIds: [], prereq: ['CSA-U21'] },
+            { code: 'CSA-U41', name: 'Iteration (for, while, enhanced-for, nested)', weight: '—', questionIds: [], prereq: ['CSA-U31'] },
+            { code: 'CSA-U51', name: 'Writing Classes (static, this, toString)', weight: '—', questionIds: [], prereq: ['CSA-U21'] },
+            { code: 'CSA-U61', name: 'Array (declare, traverse, search)', weight: '—', questionIds: [], prereq: ['CSA-U41', 'CSA-U51'] },
+            { code: 'CSA-U71', name: 'ArrayList<> (add/remove/set, size)', weight: '—', questionIds: [], prereq: ['CSA-U61'] },
+            { code: 'CSA-U81', name: '2D Array (nested loops, row-major)', weight: '—', questionIds: [], prereq: ['CSA-U61'] },
+            { code: 'CSA-U91', name: 'Inheritance & Polymorphism (extends, super)', weight: '—', questionIds: [], prereq: ['CSA-U51'] },
+            { code: 'CSA-U101', name: 'Recursion (base case, binary search, merge sort)', weight: '—', questionIds: [], prereq: ['CSA-U41'] }
+          ]
+        },
+        {
+          name: 'Psychology',
+          code: 'PSY',
+          weight: '—',
+          topics: [
+            { code: 'PSY-U11', name: 'Biological Bases (neurons, brain, consciousness)', weight: '—', questionIds: [], prereq: [] },
+            { code: 'PSY-U21', name: 'Sensation & Perception', weight: '—', questionIds: [], prereq: ['PSY-U11'] },
+            { code: 'PSY-U31', name: 'Learning (classical, operant, social, cognitive)', weight: '—', questionIds: [], prereq: [] },
+            { code: 'PSY-U41', name: 'Cognitive (memory, thinking, language, intelligence)', weight: '—', questionIds: [], prereq: ['PSY-U21'] },
+            { code: 'PSY-U51', name: 'Developmental (life span, Piaget, attachment)', weight: '—', questionIds: [], prereq: [] },
+            { code: 'PSY-U61', name: 'Motivation, Emotion & Personality', weight: '—', questionIds: [], prereq: ['PSY-U41'] },
+            { code: 'PSY-U71', name: 'Clinical (disorders & therapy)', weight: '—', questionIds: [], prereq: ['PSY-U51'] },
+            { code: 'PSY-U81', name: 'Social Psychology (conformity, attitudes, group)', weight: '—', questionIds: [], prereq: [] }
+          ]
+        },
+        {
+          name: 'English Language & Composition',
+          code: 'ENGLANG',
+          weight: '—',
+          topics: [
+            { code: 'ENGLANG-U1', name: 'Rhetorical Analysis (ethos, pathos, logos, SOAPSTone)', weight: '—', questionIds: [], prereq: [] },
+            { code: 'ENGLANG-U2', name: 'Argumentative Writing (claim, evidence, counter)', weight: '—', questionIds: [], prereq: ['ENGLANG-U1'] },
+            { code: 'ENGLANG-U3', name: 'Synthesis Writing (integrate sources)', weight: '—', questionIds: [], prereq: ['ENGLANG-U2'] },
+            { code: 'ENGLANG-U4', name: 'MCQ Reading: Rhetorical situation & reasoning', weight: '—', questionIds: [], prereq: ['ENGLANG-U1'] },
+            { code: 'ENGLANG-U5', name: 'MCQ Writing: Word choice & sentence structure', weight: '—', questionIds: [], prereq: ['ENGLANG-U2'] }
+          ]
+        },
+        {
+          name: 'History (APUSH + World History)',
+          code: 'HIST',
+          weight: '—',
+          topics: [
+            { code: 'HIST-U1', name: 'APUSH Period 1-3: Foundations & Colonization & Revolution', weight: '—', questionIds: [], prereq: [] },
+            { code: 'HIST-U2', name: 'APUSH Period 4-5: Early Republic / Expansion / Civil War', weight: '—', questionIds: [], prereq: ['HIST-U1'] },
+            { code: 'HIST-U3', name: 'APUSH Period 6-7: Industrialization / Gilded Age / WW', weight: '—', questionIds: [], prereq: ['HIST-U2'] },
+            { code: 'HIST-U4', name: 'APUSH Period 8: Post-WWII Cold War, Civil Rights', weight: '—', questionIds: [], prereq: ['HIST-U3'] },
+            { code: 'HIST-U5', name: 'APUSH Period 9: 1980-present Globalization', weight: '—', questionIds: [], prereq: ['HIST-U4'] },
+            { code: 'HIST-U6', name: 'WH Period 1-2: c.1200-1450 & 1450-1750 Global', weight: '—', questionIds: [], prereq: [] },
+            { code: 'HIST-U7', name: 'WH Period 3-5: Enlightenment / Industrial / Imperial', weight: '—', questionIds: [], prereq: ['HIST-U6'] },
+            { code: 'HIST-U8', name: 'WH Period 6: World Wars & Cold War', weight: '—', questionIds: [], prereq: ['HIST-U7'] },
+            { code: 'HIST-U9', name: 'WH Period 7-9: Decolonization & Globalization', weight: '—', questionIds: [], prereq: ['HIST-U8'] }
+          ]
+        }
       ]
     },
-    topics: {}
-  };
-  var AP_TOPICS = [
-    // Calculus AB/BC
-    ['CALC-U11','Limits & Continuity',                       12,[1,11,21,31]],
-    ['CALC-U21','Differentiation: Definition + Rules',      12,[2,12,22,32]],
-    ['CALC-U31','Composite, Implicit, Inverse diff',        10,[3,13,23,33]],
-    ['CALC-U41','Contextual Applications of Differentiation',8,[4,14,24]],
-    ['CALC-U51','Analytical Applications of Differentiation',10,[5,15,25,34]],
-    ['CALC-U61','Integration & Accumulation of Change',     18,[6,16,26,35,36]],
-    ['CALC-U71','Differential Equations',                    8,[7,17,27]],
-    ['CALC-U81','Applications of Integration',               8,[8,18,28]],
-    ['CALC-U91','Parametric / Polar / Vector Functions',    12,[9,19,29,37]],
-    ['CALC-U101','Infinite Sequences & Series',              18,[10,20,30,38,39]],
-    // Statistics
-    ['STAT-U11','Exploring One-Variable Data',              19,[41,51,61]],
-    ['STAT-U21','Exploring Two-Variable Data',               6,[42,52]],
-    ['STAT-U31','Collecting Data (sample/experiment)',      13,[43,53,62]],
-    ['STAT-U41','Probability, Random Variables, Prob Dist', 15,[44,54,63,64]],
-    ['STAT-U51','Sampling Distributions',                    9,[45,55,65]],
-    ['STAT-U61','Inference for Categorical Data: Proportions',14,[46,56,66,67]],
-    ['STAT-U71','Inference for Quantitative Data: Means',   15,[47,57,68,69]],
-    ['STAT-U81','Chi-Square Inference',                      3,[48,58]],
-    ['STAT-U91','Inference for Slopes (LSRL)',               6,[49,59]],
-    // Physics C
-    ['PHYCM-U11','Kinematics (1D/2D)',                       15,[71,81]],
-    ['PHYCM-U21','Newton\'s Laws of Motion',                 18,[72,82]],
-    ['PHYCM-U31','Work, Energy, Power',                      15,[73,83]],
-    ['PHYCM-U41','Systems of Particles & Linear Momentum',   12,[74,84]],
-    ['PHYCM-U51','Rotation + Oscillation + Gravitation',    20,[75,85,86]],
-    ['PHYCE-U11','Electrostatics: Charge, Field, Potential', 15,[76,87]],
-    ['PHYCE-U21','Conductors, Capacitors, Dielectrics',     15,[77,88]],
-    ['PHYCE-U31','Electric Circuits (R, C, RC)',            18,[78,89,90]],
-    ['PHYCE-U41','Magnetic Fields (force on moving charge)', 15,[79,91]],
-    ['PHYCE-U51','Electromagnetism (Faraday, Inductance)',   12,[80,92]],
-    // Chemistry
-    ['CHEM-U11','Atomic Structure & Properties',             10,[93,101]],
-    ['CHEM-U21','Molecular & Ionic Compound Structure',     10,[94,102]],
-    ['CHEM-U31','Intermolecular Forces & Properties',       15,[95,103,104]],
-    ['CHEM-U41','Chemical Reactions (stoich/net ionic)',    8,[96,105]],
-    ['CHEM-U51','Kinetics (rate law, mechanism)',           10,[97,106]],
-    ['CHEM-U61','Thermodynamics (ΔH, ΔS, ΔG)',              12,[98,107,108]],
-    ['CHEM-U71','Equilibrium (Kc, Kp, Le Chatelier)',       12,[99,109,110]],
-    ['CHEM-U81','Acids & Bases (pH, Ka, buffers, titration)',14,[100,111,112]],
-    ['CHEM-U91','Applications of Thermo: Electrochem (E°cell, ΔG=-nFE)',10,[113,114]],
-    // Biology
-    ['BIO-U11','Chemistry of Life (water, organic, enzyme)', 12,[1,11,21]],
-    ['BIO-U21','Cell Structure & Function (organelles, membrane)',15,[2,12,22,23]],
-    ['BIO-U31','Cellular Energetics (photosynthesis, respiration/fermentation)',18,[3,13,24,25,26]],
-    ['BIO-U41','Cell Communication & Cell Cycle (mitosis, signal, feedback)',15,[4,14,27,28]],
-    ['BIO-U51','Heredity (meiosis, Mendelian, non-Mendelian, linkage)',18,[5,15,29,30,31]],
-    ['BIO-U61','Gene Expression & Regulation (central dogma, operon, epigenetics)',18,[6,16,32,33]],
-    ['BIO-U71','Natural Selection (micro/macro, Hardy-Weinberg, speciation)',18,[7,17,34,35,36]],
-    ['BIO-U81','Ecology (population, community, ecosystem, biogeochemical cycles, conservation)',16,[8,18,37,38]],
-    // Micro + Macro Econ
-    ['MICRO-U11','Basic Econ Concepts (scarcity, PPC, gains from trade)',8,[41,51]],
-    ['MICRO-U21','Supply & Demand, Elasticity, Gov Intervention',22,[42,52,61,62]],
-    ['MICRO-U31','Production, Cost, Perfect Competition',    18,[43,53,63]],
-    ['MICRO-U41','Imperfect Competition (monopoly, monopolistic, oligopoly game)',22,[44,54,64]],
-    ['MICRO-U51','Factor Markets (labor MRP, monopsony)',     8,[45,55]],
-    ['MICRO-U61','Market Failure & Gov Role (externality, pub good, inequality)',15,[46,56,65]],
-    ['MACRO-U11','Basic Econ Concepts',                      5,[47,57]],
-    ['MACRO-U21','Economic Indicators (GDP, CPI, unemp)',    18,[48,58,66]],
-    ['MACRO-U31','National Income & Price Determination (AD/AS, multiplier, gap)',22,[49,59,67,68]],
-    ['MACRO-U41','Financial Sector (money, bank, loanable funds, policy)',22,[50,60,69,70]],
-    ['MACRO-U51','Long-Run Consequences of Stabilization (Philips, growth)',18,[71,72,73]],
-    ['MACRO-U61','Open Economy (BOP, exchange rate, capital flows)',15,[74,75,76]],
-    // CSA Java OOP
-    ['CSA-U11','Primitive Types (int, double, boolean, casting)',10,[77,87]],
-    ['CSA-U21','Using Objects (classes, methods, constructors, null)',15,[78,88,89]],
-    ['CSA-U31','Boolean Expressions & if/else/switch',         10,[79,90]],
-    ['CSA-U41','Iteration (for, while, enhanced-for, nested)', 20,[80,91,92]],
-    ['CSA-U51','Writing Classes (instance/static, this, toString, access)',15,[81,93,94]],
-    ['CSA-U61','Array (decl, init, traverse, max/sum/search)', 15,[82,95,96]],
-    ['CSA-U71','ArrayList<>, add/remove/set, size vs length',   15,[83,97,98]],
-    ['CSA-U81','2D Array (nested loops, row-major order)',     10,[84,99]],
-    ['CSA-U91','Inheritance & Polymorphism (extends, override, super)',10,[85,100]],
-    ['CSA-U101','Recursion (base case, binary search, merge sort)',10,[86,101]],
-    // Psychology
-    ['PSY-U11','Biological Bases (neuro, brain, genetics, consciousness, drugs)',15,[102,111,112]],
-    ['PSY-U21','Sensation & Perception',                        10,[103,113]],
-    ['PSY-U31','Learning (classical, operant, social, cognitive)',15,[104,114,115]],
-    ['PSY-U41','Cognitive (memory, thinking, language, intel)',15,[105,116,117]],
-    ['PSY-U51','Developmental (life span, Piaget, Kohlberg, attachment)',15,[106,118,119]],
-    ['PSY-U61','Motivation, Emotion, Personality',             15,[107,120]],
-    ['PSY-U71','Clinical (disorders, therapy)',                10,[108]],
-    ['PSY-U81','Social Psychology (attributions, conformity, group, attitudes)',10,[109,110]],
-    // English Lang
-    ['ENGLANG-U11','Rhetorical Analysis (ethos, pathos, logos, SOAPSTone)',25,[1,11,21]],
-    ['ENGLANG-U21','Argumentative Writing (claim, evidence, warrant, counter)',25,[2,12,22,23]],
-    ['ENGLANG-U31','Synthesis Writing (integrate 6 sources)',20,[3,13,24]],
-    ['ENGLANG-U41','MCQ Reading: Rhetorical situation/claims/reasoning/organization',15,[4,14,25,26]],
-    ['ENGLANG-U51','MCQ Writing: Word choice/sentence structure/development',15,[5,15,27]],
-    // History (APUSH + WH Mixed Periods)
-    ['HIST-U11','Period 1-3: Foundations & Colonization & Revol',10,[31,41]],
-    ['HIST-U21','Period 4-5: Early Republic / Expansn / Civil War',15,[32,42,43]],
-    ['HIST-U31','Period 6-7: Industrialization / Gilded Age / Progressivism / WW',15,[33,44,45]],
-    ['HIST-U41','Period 8: Post-WWII Cold War, Civil Rights',   15,[34,46,47]],
-    ['HIST-U51','Period 9: 1980-present Globalization',         10,[35,48]],
-    ['HIST-U61','WH Period 1-2: c.1200-1450, 1450-1750 Global',15,[36,49,50]],
-    ['HIST-U71','WH Period 3-5: Enlightenment/Industrial/Imperial/World Wars/Cold War/decolonization/Globalization',20,[37,38,39,40]]
-  ];
-  AP_TOPICS.forEach(function(row) {
-    DATA.ap.topics[row[0]] = { code:row[0], name:row[1], weight:row[2], questionIds:row[3], prereq:[] };
-  });
 
-  // ---------- IB Diploma ----------
-  DATA.ib = {
-    meta: { name: 'IB Diploma Programme', version: 'v3', questionCount: 120,
-      groups: [
-        { code: 'G1', name: 'Group 1: Language & Literature', weight: 16 },
-        { code: 'G2', name: 'Group 2: Language Acquisition', weight: 14 },
-        { code: 'G3', name: 'Group 3: Individuals & Societies', weight: 20 },
-        { code: 'G4', name: 'Group 4: Sciences (Phy/Chem/Bio/CS)', weight: 25 },
-        { code: 'G5', name: 'Group 5: Mathematics (AA/AI)',   weight: 20 },
-        { code: 'G6', name: 'Group 6: Arts',                   weight: 5 },
-        { code: 'COR', name: 'Core: TOK + EE + CAS',           weight: 2 }
+    // ================================================================
+    // IB Diploma
+    // ================================================================
+    ib: {
+      name: 'IB',
+      fullName: 'IB Diploma Programme',
+      totalQuestions: 120,
+      papers: [
+        {
+          name: 'Group 1: Language & Literature',
+          code: 'G1',
+          weight: '16%',
+          topics: [
+            { code: 'G1-Lit-11', name: 'Chinese A Lit HL: Poetry Analysis (close reading, imagery)', weight: '20%', questionIds: [], prereq: [] },
+            { code: 'G1-Lit-12', name: 'Chinese A Lit: Prose / Novel Analysis (narrative, character, theme)', weight: '20%', questionIds: [], prereq: ['G1-Lit-11'] },
+            { code: 'G1-Lit-13', name: 'Chinese A Lit: Drama Analysis (staging, dialogue, tragedy/comedy)', weight: '20%', questionIds: [], prereq: ['G1-Lit-11'] },
+            { code: 'G1-Lit-14', name: 'Chinese A HL: Comparative Literature (2 works across contexts)', weight: '15%', questionIds: [], prereq: ['G1-Lit-12', 'G1-Lit-13'] },
+            { code: 'G1-Lit-15', name: 'Chinese A: Critical Perspectives (feminist, Marxist, post-colonial)', weight: '15%', questionIds: [], prereq: ['G1-Lit-14'] },
+            { code: 'G1-LL-16', name: 'Eng A Lang&Lit SL: Text type analysis (article, speech, ad, blog)', weight: '20%', questionIds: [], prereq: [] },
+            { code: 'G1-LL-17', name: 'Eng A: Mass media texts (news, editorial, social media)', weight: '20%', questionIds: [], prereq: ['G1-LL-16'] },
+            { code: 'G1-LL-18', name: 'Eng A: Language & Power / Identity / Gender', weight: '20%', questionIds: [], prereq: ['G1-LL-16'] },
+            { code: 'G1-LL-19', name: 'Eng A: Literary text close reading (fiction / poetry)', weight: '20%', questionIds: [], prereq: ['G1-LL-16'] },
+            { code: 'G1-LL-110', name: 'Eng A: Paper 2 comparative essay across 2 texts', weight: '15%', questionIds: [], prereq: ['G1-LL-19'] }
+          ]
+        },
+        {
+          name: 'Group 2: Language Acquisition',
+          code: 'G2',
+          weight: '14%',
+          topics: [
+            { code: 'G2-EB-21', name: 'English B HL: Listening comprehension (dialogue + lecture)', weight: '20%', questionIds: [], prereq: [] },
+            { code: 'G2-EB-22', name: 'English B: Reading (exposition, argument, story, literary)', weight: '20%', questionIds: [], prereq: ['G2-EB-21'] },
+            { code: 'G2-EB-23', name: 'English B: Writing (email, opinion article, report, essay)', weight: '25%', questionIds: [], prereq: ['G2-EB-22'] },
+            { code: 'G2-EB-24', name: 'English B: Individual Oral (based on 2 texts + stimulus)', weight: '20%', questionIds: [], prereq: ['G2-EB-22'] },
+            { code: 'G2-EB-25', name: 'English B HL: Vocabulary + Grammar extensions (subjunctive, inversion)', weight: '20%', questionIds: [], prereq: ['G2-EB-23'] },
+            { code: 'G2-CB-26', name: 'Chinese B SL: Listening comprehension', weight: '15%', questionIds: [], prereq: [] },
+            { code: 'G2-CB-27', name: 'Chinese B SL: Reading comprehension', weight: '15%', questionIds: [], prereq: ['G2-CB-26'] },
+            { code: 'G2-CB-28', name: 'Chinese B SL: Writing (email, diary, essay)', weight: '15%', questionIds: [], prereq: ['G2-CB-27'] }
+          ]
+        },
+        {
+          name: 'Group 3: Individuals & Societies',
+          code: 'G3',
+          weight: '20%',
+          topics: [
+            { code: 'G3-Econ-31', name: 'Econ Micro 1: Basic problem, PPC, Supply & Demand', weight: '25%', questionIds: [], prereq: [] },
+            { code: 'G3-Econ-32', name: 'Econ Micro 2: Elasticities + Gov intervention (tax/subsidy)', weight: '25%', questionIds: [], prereq: ['G3-Econ-31'] },
+            { code: 'G3-Econ-33', name: 'Econ Micro 3: Market failure (public good, externality)', weight: '20%', questionIds: [], prereq: ['G3-Econ-32'] },
+            { code: 'G3-Econ-34', name: 'Econ Macro 1: GDP, AD-AS, inflation/unemployment', weight: '25%', questionIds: [], prereq: ['G3-Econ-31'] },
+            { code: 'G3-Econ-35', name: 'Econ Macro 2: Fiscal & Monetary policy, multiplier', weight: '25%', questionIds: [], prereq: ['G3-Econ-34'] },
+            { code: 'G3-Econ-36', name: 'Econ International: Exchange rate, BOP, trade, protectionism', weight: '20%', questionIds: [], prereq: ['G3-Econ-34'] },
+            { code: 'G3-Econ-37', name: 'Econ Development (LDC, poverty, inequality, sustainability)', weight: '20%', questionIds: [], prereq: ['G3-Econ-36'] },
+            { code: 'G3-BM-36', name: 'BM: Business organization & environment (sole/part/PLC, PEST)', weight: '15%', questionIds: [], prereq: [] },
+            { code: 'G3-BM-37', name: 'BM: HRM (recruitment, motivation theories, org culture)', weight: '20%', questionIds: [], prereq: ['G3-BM-36'] },
+            { code: 'G3-BM-38', name: 'BM: Marketing (STP, 4Ps, market research, product life cycle)', weight: '20%', questionIds: [], prereq: ['G3-BM-36'] },
+            { code: 'G3-BM-39', name: 'BM: Finance & Accounts (3 statements, ratio: ROCE, gearing)', weight: '20%', questionIds: [], prereq: ['G3-BM-36'] },
+            { code: 'G3-BM-310', name: 'BM: Operations management (production, quality, supply chain)', weight: '15%', questionIds: [], prereq: ['G3-BM-36'] },
+            { code: 'G3-Hist-311', name: 'History HL: Prescribed Subject (1 doc, 10 MCQ + SAQ)', weight: '10%', questionIds: [], prereq: [] },
+            { code: 'G3-Hist-312', name: 'History HL: World History Topics (Paper 2 essays)', weight: '20%', questionIds: [], prereq: ['G3-Hist-311'] },
+            { code: 'G3-Hist-313', name: 'History HL: HL Option (Paper 3, 3 essays)', weight: '15%', questionIds: [], prereq: ['G3-Hist-312'] }
+          ]
+        },
+        {
+          name: 'Group 4: Sciences (Phy / Chem / Bio / CS)',
+          code: 'G4',
+          weight: '25%',
+          topics: [
+            { code: 'G4-Phy-41', name: 'Phy HL T1: Measurement + uncertainty + significant figures', weight: '10%', questionIds: [], prereq: [] },
+            { code: 'G4-Phy-42', name: 'Phy HL T2: Mechanics (kinematics, forces, energy, momentum)', weight: '25%', questionIds: [], prereq: ['G4-Phy-41'] },
+            { code: 'G4-Phy-43', name: 'Phy HL T3: Thermal physics (ideal gas, internal energy)', weight: '10%', questionIds: [], prereq: ['G4-Phy-42'] },
+            { code: 'G4-Phy-44', name: 'Phy HL T4: Waves (SHM, interference, diffraction, Doppler)', weight: '20%', questionIds: [], prereq: ['G4-Phy-42'] },
+            { code: 'G4-Phy-45', name: 'Phy HL T5: Electricity & Magnetism (Kirchhoff, Faraday, Lenz)', weight: '20%', questionIds: [], prereq: ['G4-Phy-42'] },
+            { code: 'G4-Phy-46', name: 'Phy HL T6: Circular motion & Gravitation (Kepler, satellite)', weight: '10%', questionIds: [], prereq: ['G4-Phy-42'] },
+            { code: 'G4-Phy-47', name: 'Phy HL T7: Atomic/Nuclear/Particle (half-life, standard model)', weight: '10%', questionIds: [], prereq: ['G4-Phy-41'] },
+            { code: 'G4-Phy-48', name: 'Phy HL T8: Energy production (solar, wind, nuclear, Sankey)', weight: '10%', questionIds: [], prereq: ['G4-Phy-43'] },
+            { code: 'G4-Phy-49', name: 'Phy HL Option A: Further Mechanics (torque, angular momentum)', weight: '10%', questionIds: [], prereq: ['G4-Phy-42'] },
+            { code: 'G4-Phy-410', name: 'Phy HL Option B: Engineering Physics / EM Waves', weight: '10%', questionIds: [], prereq: ['G4-Phy-45'] },
+            { code: 'G4-Chem-411', name: 'Chem HL T1: Stoichiometric relationships (mole, %yield, gas laws)', weight: '10%', questionIds: [], prereq: [] },
+            { code: 'G4-Chem-412', name: 'Chem HL T2: Atomic structure + electron config + periodic trend', weight: '15%', questionIds: [], prereq: ['G4-Chem-411'] },
+            { code: 'G4-Chem-413', name: 'Chem HL T3: Bonding & structure (ionic, covalent, VSEPR, IMF)', weight: '20%', questionIds: [], prereq: ['G4-Chem-412'] },
+            { code: 'G4-Chem-414', name: 'Chem HL T4: Energetics/thermochemistry (ΔH, Hess, bond enthalpy)', weight: '18%', questionIds: [], prereq: ['G4-Chem-411'] },
+            { code: 'G4-Chem-415', name: 'Chem HL T5: Chemical kinetics (collision, rate, Arrhenius)', weight: '15%', questionIds: [], prereq: ['G4-Chem-414'] },
+            { code: 'G4-Chem-416', name: 'Chem HL T6: Equilibrium (Kc, Kp, Le Chatelier, ΔG°=-RTlnK)', weight: '18%', questionIds: [], prereq: ['G4-Chem-414'] },
+            { code: 'G4-Chem-417', name: 'Chem HL T8: Acids & Bases (pH, Ka, buffer, titration)', weight: '20%', questionIds: [], prereq: ['G4-Chem-416'] },
+            { code: 'G4-Chem-418', name: 'Chem HL T10: Organic (IUPAC, functional groups, synthesis routes)', weight: '25%', questionIds: [], prereq: ['G4-Chem-413'] },
+            { code: 'G4-Chem-419', name: 'Chem HL T9: Redox (oxidation number, voltaic cell E°, electrolysis)', weight: '15%', questionIds: [], prereq: ['G4-Chem-411'] },
+            { code: 'G4-Chem-420', name: 'Chem HL Option: Materials / Medicinal / Analytical (NMR/IR/MS)', weight: '10%', questionIds: [], prereq: ['G4-Chem-418'] },
+            { code: 'G4-Bio-421', name: 'Bio HL T1: Cell biology (prokary/eukary, organelle, mitosis)', weight: '20%', questionIds: [], prereq: [] },
+            { code: 'G4-Bio-422', name: 'Bio HL T2: Molecular biology (water, carbs, protein, DNA, enzymes)', weight: '20%', questionIds: [], prereq: ['G4-Bio-421'] },
+            { code: 'G4-Bio-423', name: 'Bio HL T3: Genetics (meiosis, Mendelian, linkage, chi-square)', weight: '22%', questionIds: [], prereq: ['G4-Bio-422'] },
+            { code: 'G4-Bio-424', name: 'Bio HL T4: Ecology (species, energy pyramids, C/N cycles)', weight: '18%', questionIds: [], prereq: ['G4-Bio-421'] },
+            { code: 'G4-Bio-425', name: 'Bio HL T5: Evolution & biodiversity (selection, Hardy-Weinberg)', weight: '18%', questionIds: [], prereq: ['G4-Bio-423'] },
+            { code: 'G4-Bio-426', name: 'Bio HL T6: Human physiology (digest, circulatory, immune, neuro)', weight: '22%', questionIds: [], prereq: ['G4-Bio-422'] },
+            { code: 'G4-Bio-427', name: 'Bio HL T7: Nucleic acids (DNA replication, epigenetics, CRISPR)', weight: '15%', questionIds: [], prereq: ['G4-Bio-422'] },
+            { code: 'G4-Bio-428', name: 'Bio HL T8: Metabolism, respiration & photosynthesis (HL detail)', weight: '15%', questionIds: [], prereq: ['G4-Bio-426'] },
+            { code: 'G4-Bio-429', name: 'Bio HL T9: Plant biology (xylem/phloem, transpiration, hormones)', weight: '15%', questionIds: [], prereq: ['G4-Bio-421'] },
+            { code: 'G4-Bio-430', name: 'Bio HL T10: Genetics continuation + Animal physiology (HL)', weight: '10%', questionIds: [], prereq: ['G4-Bio-423'] },
+            { code: 'G4-CS-431', name: 'CS SL T1: System fundamentals (lifecycle, analysis, design)', weight: '10%', questionIds: [], prereq: [] },
+            { code: 'G4-CS-432', name: 'CS SL T2: Computer organization (von Neumann, logic gates, CPU)', weight: '12%', questionIds: [], prereq: ['G4-CS-431'] },
+            { code: 'G4-CS-433', name: 'CS SL T3: Networks (LAN/WAN, TCP/IP, security, encryption)', weight: '10%', questionIds: [], prereq: ['G4-CS-432'] },
+            { code: 'G4-CS-434', name: 'CS SL T4: Computational thinking & programming (algorithm, OOP)', weight: '15%', questionIds: [], prereq: ['G4-CS-431'] }
+          ]
+        },
+        {
+          name: 'Group 5: Mathematics (AA / AI)',
+          code: 'G5',
+          weight: '20%',
+          topics: [
+            { code: 'G5-MAA-51', name: 'Math AA HL T1: Algebra & Number (series, complex, matrices, proof)', weight: '20%', questionIds: [], prereq: [] },
+            { code: 'G5-MAA-52', name: 'Math AA HL T2: Functions (rational, exp/log, transformations)', weight: '18%', questionIds: [], prereq: ['G5-MAA-51'] },
+            { code: 'G5-MAA-53', name: 'Math AA HL T3: Geometry & Trigonometry (vectors, 3D lines/planes)', weight: '22%', questionIds: [], prereq: ['G5-MAA-51'] },
+            { code: 'G5-MAA-54', name: 'Math AA HL T4: Calculus (diff, int, Maclaurin/Taylor, DEq)', weight: '22%', questionIds: [], prereq: ['G5-MAA-52'] },
+            { code: 'G5-MAA-55', name: 'Math AA HL T5: Statistics & Probability (Normal, hypothesis, χ²)', weight: '18%', questionIds: [], prereq: ['G5-MAA-51'] },
+            { code: 'G5-MAA-56', name: 'Math AA HL Calculus Option: Series & Differential Equations', weight: '10%', questionIds: [], prereq: ['G5-MAA-54'] },
+            { code: 'G5-MAI-57', name: 'Math AI SL T1: Number & Algebra (finance, sequences, loans)', weight: '15%', questionIds: [], prereq: [] },
+            { code: 'G5-MAI-58', name: 'Math AI SL T2: Functions (modelling linear/quadratic/exp/log)', weight: '15%', questionIds: [], prereq: ['G5-MAI-57'] },
+            { code: 'G5-MAI-59', name: 'Math AI SL T3: Geometry & Trig (3D volumes, bearings, Voronoi)', weight: '15%', questionIds: [], prereq: ['G5-MAI-57'] },
+            { code: 'G5-MAI-510', name: 'Math AI SL T5: Stats/Prob (regression, Markov, χ² test)', weight: '20%', questionIds: [], prereq: ['G5-MAI-57'] }
+          ]
+        },
+        {
+          name: 'Group 6: Arts',
+          code: 'G6',
+          weight: '5%',
+          topics: [
+            { code: 'G6-VA-61', name: 'VA HL: Process Portfolio (art making, techniques, journal)', weight: '10%', questionIds: [], prereq: [] },
+            { code: 'G6-VA-62', name: 'VA HL: Comparative Study (3 artists, cultural context)', weight: '10%', questionIds: [], prereq: ['G6-VA-61'] },
+            { code: 'G6-VA-63', name: 'VA HL: Exhibition (curatorial statement + 8-11 works)', weight: '10%', questionIds: [], prereq: ['G6-VA-61'] },
+            { code: 'G6-Mu-64', name: 'Music SL: Performance (solo/ensemble) + Creating', weight: '10%', questionIds: [], prereq: [] },
+            { code: 'G6-Mu-65', name: 'Music: Listening & Theory (musical elements, score analysis)', weight: '10%', questionIds: [], prereq: ['G6-Mu-64'] },
+            { code: 'G6-Mu-66', name: 'Music: Contemporary & World music context', weight: '8%', questionIds: [], prereq: ['G6-Mu-65'] }
+          ]
+        },
+        {
+          name: 'Core: TOK + EE + CAS',
+          code: 'COR',
+          weight: '2%',
+          topics: [
+            { code: 'COR-TOK-01', name: 'TOK: Knowledge Framework (8 AOKs + 5 WOKs)', weight: '10%', questionIds: [], prereq: [] },
+            { code: 'COR-TOK-02', name: 'TOK Essay (PT→KQ→RLE/Counter, 1600 words)', weight: '10%', questionIds: [], prereq: ['COR-TOK-01'] },
+            { code: 'COR-TOK-03', name: 'TOK Exhibition (3 objects + IA prompt commentary)', weight: '10%', questionIds: [], prereq: ['COR-TOK-01'] },
+            { code: 'COR-EE-02', name: 'EE: 5-step research flow + criteria A-F (4000 words)', weight: '10%', questionIds: [], prereq: [] },
+            { code: 'COR-CAS-03', name: 'CAS: 5 Learning Outcomes + 18 months 3 phases', weight: '10%', questionIds: [], prereq: [] }
+          ]
+        }
       ]
     },
-    topics: {}
-  };
-  var IB_TOPICS = [
-    // Group 1
-    ['G1-Lit-11','Chinese A Literature HL: Poetry Analysis (close reading, imagery)',20,[11,21,31]],
-    ['G1-Lit-12','Chinese A: Prose/Novel Analysis (narrative, character, theme)',20,[12,22,32]],
-    ['G1-Lit-13','Chinese A: Drama Analysis (staging, dialogue, tragedy/comedy)',20,[13,23,33]],
-    ['G1-Lit-14','Chinese A HL: Comparative Literature (2 works across contexts)',15,[14,24]],
-    ['G1-Lit-15','Chinese A: Critical Perspectives (feminist, Marxist, post-colonial)',15,[15,25]],
-    ['G1-LL-16','Eng A Lang&Lit SL: Text type analysis (article, speech, ad, blog)',20,[16,26,34]],
-    ['G1-LL-17','Eng A: Mass media texts (news, editorial, social media, propaganda)',20,[17,27,35]],
-    ['G1-LL-18','Eng A: Language & Power / Identity / Gender',   20,[18,28,36]],
-    ['G1-LL-19','Eng A: Literary text close reading (fiction/poetry)',20,[19,29,37]],
-    ['G1-LL-110','Eng A: Paper 2 comparative essay across 2 texts',15,[20,30,38]],
-    // Group 2
-    ['G2-EB-21','English B HL: Listening comprehension (dialogue + lecture)',20,[39,49]],
-    ['G2-EB-22','English B: Reading (exposition, argument, story, literary)',20,[40,50,60]],
-    ['G2-EB-23','English B: Writing (email, opinion article, report, essay)',25,[41,51,61,71]],
-    ['G2-EB-24','English B: Individual Oral (based on 2 texts + stimulus)',20,[42,52]],
-    ['G2-EB-25','English B HL: Vocabulary + Grammar extensions (subjunctive, inversion, collocations)',20,[43,53]],
-    ['G2-CB-26','Chinese B SL: Listening comprehension',         15,[44,54]],
-    ['G2-CB-27','Chinese B SL: Reading comprehension',         15,[45,55]],
-    ['G2-CB-28','Chinese B SL: Writing (email, diary, essay)', 15,[46,56]],
-    // Group 3
-    ['G3-Econ-31','Micro 1: Basic problem, PPC, Supply & Demand (curve shift, equilibrium)',25,[1,10,20,47,57,62]],
-    ['G3-Econ-32','Micro 2: Elasticities (PED/XED/YED/PES) + Gov intervention (tax/subsidy, price floor/ceiling)',25,[2,14,26,48,58,63]],
-    ['G3-Econ-33','Micro 3: Market failure (public good, externality, info asymmetry, merit/demerit)',20,[5,15,27,49,59]],
-    ['G3-Econ-34','Macro 1: GDP, AD-AS model, inflation/unemployment, business cycle',25,[6,16,28,50,60,64]],
-    ['G3-Econ-35','Macro 2: Fiscal & Monetary policy, Keynesian vs Monetarist, multiplier',25,[7,17,29,65,75]],
-    ['G3-Econ-36','International: Exchange rate, Balance of Payments, trade (absolute/CA, protectionism)',20,[8,18,30,66,76]],
-    ['G3-Econ-37','Economic Development (LDC, poverty, inequality, ODA/FDI/MNC, sustainability)',20,[9,19,67,77]],
-    ['G3-BM-36','BM SL: Business organization & environment (sole/part/PLC, PEST)',15,[3,70,80]],
-    ['G3-BM-37','BM: HRM (recruitment, selection, motivation theories, org culture)',20,[4,68,78]],
-    ['G3-BM-38','BM: Marketing (STP, 4Ps, market research, product life cycle)',20,[11,69,79]],
-    ['G3-BM-39','BM: Finance & Accounts (3 statements, ratio analysis: ROCE, current, gearing)',20,[12,71,81,91]],
-    ['G3-BM-310','BM: Operations management (production, quality, supply chain, crisis)',15,[13,72,82]],
-    ['G3-Hist-311','History HL Prescribed Subject (1 doc, 10 MCQ + SAQ)',10,[21,83]],
-    ['G3-Hist-312','History HL: World History Topics (2 topics, Paper 2 essays)',20,[22,84,85]],
-    ['G3-Hist-313','History HL: HL Option (Paper 3, 3 essays)',  15,[23,86]],
-    // Group 4 Sciences
-    ['G4-Phy-41','Phy HL T1: Measurement + uncertainty + significant figures',10,[51,93]],
-    ['G4-Phy-42','Phy HL T2: Mechanics (kinematics, forces/Newton, work/energy/power, momentum, impulse)',25,[31,32,33,52,53,68,87,88,94,95,105]],
-    ['G4-Phy-43','Phy HL T3: Thermal physics (ideal gas, 3 laws, internal energy, heat transfer)',10,[34,54,89]],
-    ['G4-Phy-44','Phy HL T4: Waves (SHM, superposition, interference, diffraction, standing, Doppler)',20,[35,55,90,96,97,101]],
-    ['G4-Phy-45','Phy HL T5: Electricity & Magnetism (Kirchhoff, Ohm, emf, B-field, EM induction, Faraday, Lenz)',20,[36,56,91,92,98,99,102]],
-    ['G4-Phy-46','Phy HL T6: Circular motion & Gravitation (centripetal, Kepler, satellite)',10,[37,57,100]],
-    ['G4-Phy-47','Phy HL T7: Atomic/Nuclear/Particle (Rutherford, αβγ, half-life, quarks/leptons, standard model)',10,[38,58,103]],
-    ['G4-Phy-48','Phy HL T8: Energy production (solar, wind, hydro, fossil, nuclear, Sankey diagram)',10,[39,59,104]],
-    ['G4-Phy-49','Phy HL Option A: Further Mechanics (rigid bodies, torque, angular momentum, rotational SHM)',10,[40,60,105]],
-    ['G4-Phy-410','Phy HL Option B: Engineering Physics / EM Waves (optional)',10,[106,107]],
-    ['G4-Chem-411','Chem HL T1: Stoichiometric relationships (mole, %yield, gas laws)',10,[1,11,61,108]],
-    ['G4-Chem-412','Chem HL T2: Atomic structure + electron config (s-p-d, ionisation energy, periodic trend)',15,[2,12,62,109]],
-    ['G4-Chem-413','Chem HL T3: Chemical bonding & structure (ionic, covalent, metallic, VSEPR, intermolecular forces)',20,[3,13,24,63,110,111]],
-    ['G4-Chem-414','Chem HL T4: Energetics/thermochemistry (ΔH, Hess, bond enthalpy, Born-Haber, entropy/ΔG)',18,[4,14,25,64,82,112]],
-    ['G4-Chem-415','Chem HL T5: Chemical kinetics (collision, rate expression, order, Arrhenius, mechanism)',15,[5,15,26,65,83,113]],
-    ['G4-Chem-416','Chem HL T6: Equilibrium (Kc, Kp, Le Chatelier, Gibbs free energy ΔG°=-RTlnK)',18,[6,16,27,66,84,114]],
-    ['G4-Chem-417','Chem HL T8: Acids & Bases (pH, Ka, Kw, buffer, acid-base titration, Lewis acid/base)',20,[7,17,28,67,75,85,115]],
-    ['G4-Chem-418','Chem HL T10: Organic Chemistry (IUPAC, functional groups, reaction types (add/sub/elim/oxid/reduc/esterif), synthesis routes)',25,[8,18,29,69,76,86,88,89,90,116,117,118,119,120]],
-    ['G4-Chem-419','Chem HL T9: Redox processes (oxidation number, voltaic cell E°, Nernst, electrolysis products)',15,[9,19,30,70,77,87]],
-    ['G4-Chem-420','Chem HL Option Materials / Medicinal / Analytical (NMR/IR/MS spectra, titration)',10,[78,79]],
-    ['G4-Bio-421','Bio HL T1: Cell biology (prokary/eukary, organelle, membrane, mitosis, cell cycle)',20,[41,52,61,71,81]],
-    ['G4-Bio-422','Bio HL T2: Molecular biology (water, carb/lipid/protein structure, DNA replication, transcription, translation, gene expression, enzymes)',20,[42,53,62,72,82]],
-    ['G4-Bio-423','Bio HL T3: Genetics (meiosis, Mendelian, linkage/dihybrid, chi-square, gene mutation/chromosomal, non-Mendelian, genetic screening, HL: meiosis, polygenic inheritance)',22,[43,54,63,73,83]],
-    ['G4-Bio-424','Bio HL T4: Ecology (species, communities, energy pyramids, C/N cycles, succession, human impact on climate/sustainability)',18,[44,55,64,74,84]],
-    ['G4-Bio-425','Bio HL T5: Evolution & biodiversity (natural selection, evidence, Hardy-Weinberg, cladistics, speciation, extinction)',18,[45,56,65,75,85]],
-    ['G4-Bio-426','Bio HL T6: Human physiology (digest, circulatory, respiratory, immune, excretion/nephron, neuro/hormonal, reproduction, HL: heart/liver/gas/osmo/neurol)',22,[46,57,66,76,86]],
-    ['G4-Bio-427','Bio HL T7: Nucleic acids (HL: DNA replication details, telomeres, non-coding DNA, epigenetics, biotechnology, CRISPR basics)',15,[47,58,67,77,87]],
-    ['G4-Bio-428','Bio HL T8: Metabolism, cell respiration & photosynthesis (HL details: glycolysis/Krebs/oxid phosphorylation/LDR/LIR)',15,[48,59,68,78,88]],
-    ['G4-Bio-429','Bio HL T9: Plant biology (HL: transport in xylem/phloem, transpiration, stomatal regulation, reproduction in angiosperms, meristems, hormones)',15,[49,60,69,79,89]],
-    ['G4-Bio-430','Bio HL T10: Genetics & evolution continuation + Animal physiology (HL: muscles/antibiotics/immune more)',10,[90,91,92]],
-    ['G4-CS-431','CS SL T1: System fundamentals (system lifecycle, analysis, design, stakeholders, feasibility)',10,[93,94,95]],
-    ['G4-CS-432','CS SL T2: Computer organization (von Neumann, logic gates, CPU, cache, machine code)',12,[96,97]],
-    ['G4-CS-433','CS SL T3: Networks (LAN/WAN, protocol TCP/IP, security, encryption, cloud)',10,[98,99]],
-    ['G4-CS-434','CS SL T4: Computational thinking, problem-solving & programming (algorithm, pseudocode, array, search/sort, OOP basics)',15,[100,101,102]],
-    // Group 5 Mathematics
-    ['G5-MAA-51','Math AA HL T1: Algebra & Number (sequence/series, exponents/log, binomial, complex numbers, Argand/polar/De Moivre, matrices, proofs by induction/contradiction)',20,[1,2,11,12,21,22,31,32,41,42]],
-    ['G5-MAA-52','Math AA HL T2: Functions (linear, quadratic, rational, exp/log, transformations, composite/inverse, modulus, graph sketching with GDC)',18,[3,13,23,33,43,51]],
-    ['G5-MAA-53','Math AA HL T3: Geometry & Trigonometry (trig identities/equations, sine/cosine rule, circle theorems, vectors (dot/cross product), 3D vector lines/planes, intersection, angles, area/volume)',22,[4,14,24,34,44,52]],
-    ['G5-MAA-54','Math AA HL T4: Calculus (limit/cont, diff chain/product/quotient, implicit/param, related rates, optimization, kinematics; integration u-sub/by parts, definite integrals, area/volume of revolution, Maclaurin series, Taylor HL, DEq separable)',22,[5,6,15,16,25,26,35,36,45,46,53,54]],
-    ['G5-MAA-55','Math AA HL T5: Statistics & Probability (descriptive stats, prob rules, discrete distributions (Binomial/Poisson), continuous Normal, confidence intervals, hypothesis testing t/z, chi-squared, PMCC/Spearman, regression)',18,[7,8,9,10,17,18,19,20,27,28,29,30,37,38,39,40,47,48,49,50]],
-    ['G5-MAA-56','Math AA HL Calculus Option: Series and Differential Equations (more DE methods: integrating factor, homogeneous, Euler, coupled, power series)',10,[55,56,57]],
-    ['G5-MAI-57','Math AI SL T1: Number & Algebra (finance, sequences, loans, annuities, GDC amortization)',15,[58,59,60]],
-    ['G5-MAI-58','Math AI SL T2: Functions (modelling with linear/quadratic/exp/log, sinusoidal/polynomial models)',15,[61,62]],
-    ['G5-MAI-59','Math AI SL T3: Geometry & Trigonometry (right triangle, 3D volumes/surface areas, bearings, Voronoi diagram)',15,[63,64]],
-    ['G5-MAI-510','Math AI SL T5: Stats/Prob (bivariate data, regression, Spearman, transition matrices, Markov, hypothesis testing for means/proportions, χ² test)',20,[65,66,67,68,69,70]],
-    // Group 6 Arts
-    ['G6-VA-61','VA HL: Process Portfolio (art making, techniques, journal)', 10,[71,72]],
-    ['G6-VA-62','VA HL: Comparative Study (3 artists, cultural context, critical analysis)', 10,[73,74]],
-    ['G6-VA-63','VA HL: Exhibition (curatorial statement + 8-11 works, rationale)',10,[75,76]],
-    ['G6-Mu-64','Music SL: Performance (solo/ensemble) + Creating (composition exercises)',10,[77,78]],
-    ['G6-Mu-65','Music: Listening & Theory (musical elements, score analysis, style recognition)',10,[79,80]],
-    ['G6-Mu-66','Music: Contemporary & World music context',         8,[81]],
-    // Core
-    ['COR-TOK-01','TOK: Knowledge Framework (8 AOKs: Math/Natural/Human/History/Arts/Ethics/Religion/Indigenous + 5 WOKs: reason/sense/emotion/language/intuition)', 10,[1,11,21]],
-    ['COR-TOK-02','TOK Essay (PT→KQ→RLE/Counter/Implications, 1600 words)', 10,[2,12,22]],
-    ['COR-TOK-03','TOK Exhibition (3 objects + one IA prompt, written commentary on each object\'s link to prompt/KQ)',10,[3,13,23]],
-    ['COR-EE-02','EE: 5-step research flow (topic selection → supervisor → RPPF proposal → 4000-word draft → final) + criteria A-F: Focus/Method/Critical/Cog/Engag/Presentation',10,[4,14,24]],
-    ['COR-CAS-03','CAS: 5 Learning Outcomes (Identify own strengths, show challenge & skills, initiate activities, show perseverance & commitment, demonstrate global issues engagement) + 18 months 3 phases: Investigation → Preparation → Action → Demonstration → Reflection',10,[5,15,25]]
-  ];
-  IB_TOPICS.forEach(function(row){
-    DATA.ib.topics[row[0]] = { code:row[0], name:row[1], weight:row[2], questionIds:row[3], prereq:[] };
-  });
 
-  // ---------- A-Level ----------
-  DATA.alevel = {
-    meta: { name: 'A-Level (5科AS+A2 CIE/Edexcel通用)', version: 'v3', questionCount: 120,
-      groups: [
-        { code: 'MATH', name: 'Mathematics (Pure/Mechanics/Statistics)', weight: 30 },
-        { code: 'PHY',  name: 'Physics (9702)',                    weight: 18 },
-        { code: 'CHEM', name: 'Chemistry (9701)',                  weight: 18 },
-        { code: 'BIO',  name: 'Biology (9700)',                    weight: 18 },
-        { code: 'ECON', name: 'Economics (9708)',                  weight: 16 }
+    // ================================================================
+    // A-Level (CIE 9708 / 9702 / 9701 / 9700 / 9709 通用)
+    // ================================================================
+    alevel: {
+      name: 'A-Level',
+      fullName: 'A-Level (5科 AS + A2, CIE/Edexcel 通用)',
+      totalQuestions: 120,
+      papers: [
+        {
+          name: 'Mathematics (Pure / Mechanics / Statistics)',
+          code: 'M',
+          weight: '30%',
+          topics: [
+            { code: 'M-P1-11', name: 'P1: Algebra (indices/surds/Remainder-Factor theorem)', weight: '20%', questionIds: [], prereq: [] },
+            { code: 'M-P1-12', name: 'P1: Quadratics (completing square/discriminant/inequalities)', weight: '20%', questionIds: [], prereq: ['M-P1-11'] },
+            { code: 'M-P1-13', name: 'P1: Inequalities (linear, quadratic, |ax+b|<k)', weight: '10%', questionIds: [], prereq: ['M-P1-12'] },
+            { code: 'M-P1-14', name: 'P1: Coordinate geometry (line, circle, tangent)', weight: '18%', questionIds: [], prereq: [] },
+            { code: 'M-P1-15', name: 'P1: Trigonometry basic (sin/cos/tan, exact values)', weight: '12%', questionIds: [], prereq: [] },
+            { code: 'M-P1-16', name: 'P1: Differentiation (power rule, tangent/normal, max/min)', weight: '18%', questionIds: [], prereq: ['M-P1-12'] },
+            { code: 'M-P1-17', name: 'P1: Integration (reverse power, area under curve)', weight: '15%', questionIds: [], prereq: ['M-P1-16'] },
+            { code: 'M-P2-21', name: 'P2: Exponentials & logarithms (e^x, ln x, modelling)', weight: '18%', questionIds: [], prereq: ['M-P1-11'] },
+            { code: 'M-P2-22', name: 'P2: Binomial expansion (1+x)^n for any rational n', weight: '12%', questionIds: [], prereq: ['M-P1-11'] },
+            { code: 'M-P2-23', name: 'P2: Trigonometry (double/half angle, Rsin(x+α), identities)', weight: '18%', questionIds: [], prereq: ['M-P1-15'] },
+            { code: 'M-P2-24', name: 'P2: Differentiation 2 (chain/product/quotient, e^x/ln/trig)', weight: '15%', questionIds: [], prereq: ['M-P1-16', 'M-P2-21'] },
+            { code: 'M-P2-25', name: 'P2: Integration 2 (1/x, e^x, u-substitution, trapezium)', weight: '15%', questionIds: [], prereq: ['M-P1-17', 'M-P2-24'] },
+            { code: 'M-P2-26', name: 'P2: Numerical methods (iteration x_{n+1}=g(x_n))', weight: '10%', questionIds: [], prereq: ['M-P1-12'] },
+            { code: 'M-P3-31', name: 'P3: Algebraic fractions + partial fractions', weight: '15%', questionIds: [], prereq: ['M-P2-21'] },
+            { code: 'M-P3-32', name: 'P3: Functions (domain/range, composite, inverse, modulus)', weight: '18%', questionIds: [], prereq: ['M-P2-21'] },
+            { code: 'M-P3-33', name: 'P3: Series (arith/geom sum + binomial general)', weight: '10%', questionIds: [], prereq: ['M-P2-22'] },
+            { code: 'M-P3-34', name: 'P3: Parametric / Polar basics (circles/ellipses, dy/dx)', weight: '10%', questionIds: [], prereq: ['M-P2-24'] },
+            { code: 'M-P3-35', name: 'P3: Further calculus (implicit, by parts, partial fractions, volumes)', weight: '20%', questionIds: [], prereq: ['M-P2-25'] },
+            { code: 'M-P3-36', name: 'P3: 3D Vectors (dot/cross, line/plane equation, angle)', weight: '20%', questionIds: [], prereq: ['M-P1-14'] },
+            { code: 'M-P4-41', name: 'P4: Matrices (determinant, inverse, linear transformations)', weight: '18%', questionIds: [], prereq: ['M-P3-36'] },
+            { code: 'M-P4-42', name: 'P4: Complex numbers (Argand, polar, De Moivre, nth roots)', weight: '18%', questionIds: [], prereq: ['M-P3-32'] },
+            { code: 'M-P4-43', name: 'P4: Polar coordinates (sketch, area enclosed, symmetry)', weight: '10%', questionIds: [], prereq: ['M-P3-34'] },
+            { code: 'M-P4-44', name: 'P4: Differential Equations (separable, integrating factor, 2nd order)', weight: '18%', questionIds: [], prereq: ['M-P3-35'] },
+            { code: 'M-P4-45', name: 'P4: Numerical Methods (Newton-Raphson, Simpson, Euler)', weight: '10%', questionIds: [], prereq: ['M-P2-26'] },
+            { code: 'M-Mech-51', name: 'M1: Kinematics (SUVAT, v-t/s-t graphs, projectile)', weight: '20%', questionIds: [], prereq: [] },
+            { code: 'M-Mech-52', name: "M1: Forces & Newton's laws (F=ma, inclined plane, pulley)", weight: '20%', questionIds: [], prereq: ['M-Mech-51'] },
+            { code: 'M-Mech-53', name: 'M1: Equilibrium + friction (μ, limiting) + moments', weight: '18%', questionIds: [], prereq: ['M-Mech-52'] },
+            { code: 'M-Mech-54', name: 'M1: Momentum & Impulse (I=Δp, conservation)', weight: '12%', questionIds: [], prereq: ['M-Mech-52'] },
+            { code: 'M-Mech-55', name: 'M1: Work, Energy & Power (GPE, KE, P=Fv)', weight: '18%', questionIds: [], prereq: ['M-Mech-52'] },
+            { code: 'M-Mech-56', name: 'M2: Projectiles (range, greatest height, trajectory)', weight: '12%', questionIds: [], prereq: ['M-Mech-51'] },
+            { code: 'M-Mech-57', name: 'M2: Centre of Mass (lamina, composite, toppling)', weight: '12%', questionIds: [], prereq: ['M-Mech-53'] },
+            { code: 'M-Stat-61', name: 'S1: Representing data (mean/median/SD, PMCC, coding)', weight: '18%', questionIds: [], prereq: [] },
+            { code: 'M-Stat-62', name: 'S1: Probability (Venn, conditional P(A|B), tree)', weight: '20%', questionIds: [], prereq: [] },
+            { code: 'M-Stat-63', name: 'S1: Discrete random variables (Binomial, E(X), Var(X))', weight: '18%', questionIds: [], prereq: ['M-Stat-62'] },
+            { code: 'M-Stat-64', name: 'S1: Normal distribution (Z~N(0,1), inverse normal)', weight: '18%', questionIds: [], prereq: ['M-Stat-63'] },
+            { code: 'M-Stat-65', name: 'S2: Poisson distribution P(λ), approximation', weight: '12%', questionIds: [], prereq: ['M-Stat-63'] },
+            { code: 'M-Stat-66', name: 'S2: Continuous distributions (Uniform, Normal approx)', weight: '12%', questionIds: [], prereq: ['M-Stat-64'] },
+            { code: 'M-Stat-67', name: 'S2: Sampling, Estimation, Confidence intervals', weight: '12%', questionIds: [], prereq: ['M-Stat-64'] }
+          ]
+        },
+        {
+          name: 'Physics (9702)',
+          code: 'P',
+          weight: '18%',
+          topics: [
+            { code: 'P-AS-11', name: 'AS P1: Physical quantities, units, uncertainty, homogeneity', weight: '10%', questionIds: [], prereq: [] },
+            { code: 'P-AS-12', name: 'AS P1/2: Kinematics (suvat, graphs, free fall)', weight: '18%', questionIds: [], prereq: ['P-AS-11'] },
+            { code: 'P-AS-13', name: 'AS: Dynamics (Newton 1-3, momentum, impulse, equilibrium)', weight: '20%', questionIds: [], prereq: ['P-AS-12'] },
+            { code: 'P-AS-14', name: 'AS: Forces, Density, Pressure, Hooke, Young modulus, energy', weight: '22%', questionIds: [], prereq: ['P-AS-13'] },
+            { code: 'P-AS-15', name: 'AS: Materials - bulk properties, phase change, stress-strain', weight: '10%', questionIds: [], prereq: ['P-AS-14'] },
+            { code: 'P-AS-16', name: 'AS: Waves (superposition, stationary, interference, diffraction, TIR)', weight: '18%', questionIds: [], prereq: [] },
+            { code: 'P-AS-17', name: 'AS: Electricity (Ohm, Kirchhoff, resistivity, potential divider)', weight: '22%', questionIds: [], prereq: [] },
+            { code: 'P-A2-21', name: 'A2: Motion in a circle (ω, centripetal force, banked)', weight: '12%', questionIds: [], prereq: ['P-AS-12'] },
+            { code: 'P-A2-22', name: 'A2: Gravitational field (F=GMm/r², potential, Kepler, satellite)', weight: '15%', questionIds: [], prereq: ['P-A2-21'] },
+            { code: 'P-A2-23', name: 'A2: Oscillations (SHM a=-ω²x, energy, resonance, damping)', weight: '18%', questionIds: [], prereq: ['P-AS-16'] },
+            { code: 'P-A2-24', name: 'A2: Ideal gases (pV=nRT, kinetic theory, <KE>∝T)', weight: '15%', questionIds: [], prereq: ['P-AS-15'] },
+            { code: 'P-A2-25', name: 'A2: Capacitors (C=Q/V, RC, τ=RC, energy ½QV)', weight: '18%', questionIds: [], prereq: ['P-AS-17'] },
+            { code: 'P-A2-26', name: 'A2: Magnetic fields & EM induction (F=BIL, Faraday, Lenz)', weight: '22%', questionIds: [], prereq: ['P-AS-17'] },
+            { code: 'P-A2-27', name: 'A2: Modern/Quantum (photoelectric, de Broglie, nuclear, fission/fusion)', weight: '18%', questionIds: [], prereq: [] },
+            { code: 'P-A2-28', name: 'A2 P5: Planning, Analysis & Evaluation (practical)', weight: '10%', questionIds: [], prereq: ['P-AS-11'] }
+          ]
+        },
+        {
+          name: 'Chemistry (9701)',
+          code: 'C',
+          weight: '18%',
+          topics: [
+            { code: 'C-AS-11', name: 'AS T1: Atomic structure + electron config + ionisation energy', weight: '12%', questionIds: [], prereq: [] },
+            { code: 'C-AS-12', name: 'AS T2: Bonding & structure (ionic/covalent/metallic, VSEPR, IMF)', weight: '22%', questionIds: [], prereq: ['C-AS-11'] },
+            { code: 'C-AS-13', name: 'AS T3: Stoichiometry (mole, empirical formula, titration, gas)', weight: '18%', questionIds: [], prereq: [] },
+            { code: 'C-AS-14', name: 'AS T4: Periodic Table periodicity (G1/G17/Period 3)', weight: '20%', questionIds: [], prereq: ['C-AS-11'] },
+            { code: 'C-AS-15', name: 'AS T5: Chemical energetics (ΔH, Hess, bond enthalpy, calorimetry)', weight: '16%', questionIds: [], prereq: ['C-AS-13'] },
+            { code: 'C-AS-16', name: 'AS T6: Electrochemistry/Redox (oxidation number, voltaic, electrolysis)', weight: '18%', questionIds: [], prereq: ['C-AS-13'] },
+            { code: 'C-AS-17', name: 'AS T7: Equilibria (Le Chatelier, Kc, Haber/Contact process)', weight: '14%', questionIds: [], prereq: ['C-AS-15'] },
+            { code: 'C-AS-18', name: 'AS T8: Reaction Kinetics (collision, Maxwell-Boltzmann, catalyst)', weight: '16%', questionIds: [], prereq: ['C-AS-15'] },
+            { code: 'C-AS-19', name: 'AS T9: Organic basics (IUPAC, isomers, SN1/SN2, addition, polymers)', weight: '24%', questionIds: [], prereq: ['C-AS-12'] },
+            { code: 'C-A2-21', name: 'A2: Electrochemistry advanced (E°, Nernst, Faraday, electrolysis)', weight: '18%', questionIds: [], prereq: ['C-AS-16'] },
+            { code: 'C-A2-22', name: 'A2: Acids & Bases (Ka, pKa, buffer, Henderson, titration curves, Ksp)', weight: '25%', questionIds: [], prereq: ['C-AS-17'] },
+            { code: 'C-A2-23', name: 'A2: Lattice energy & Thermodynamics (Born-Haber, ΔS, ΔG=ΔH-TΔS)', weight: '20%', questionIds: [], prereq: ['C-AS-15'] },
+            { code: 'C-A2-24', name: 'A2: Kinetics advanced (rate equation, order, Arrhenius, mechanism)', weight: '18%', questionIds: [], prereq: ['C-AS-18'] },
+            { code: 'C-A2-25', name: 'A2: Transition Metals (d-block, complex, crystal field, Kstab, catalysis)', weight: '20%', questionIds: [], prereq: ['C-AS-11'] },
+            { code: 'C-A2-26', name: 'A2: Organic advanced (aromatic, carbonyl, acyl chlorides, amines, IR/NMR/MS)', weight: '28%', questionIds: [], prereq: ['C-AS-19'] }
+          ]
+        },
+        {
+          name: 'Biology (9700)',
+          code: 'B',
+          weight: '18%',
+          topics: [
+            { code: 'B-AS-11', name: 'AS T1: Cell structure (microscopy, organelles, prokaryote vs eukaryote)', weight: '18%', questionIds: [], prereq: [] },
+            { code: 'B-AS-12', name: 'AS T2: Biological molecules (water, carbs, lipids, proteins, food tests)', weight: '25%', questionIds: [], prereq: ['B-AS-11'] },
+            { code: 'B-AS-13', name: 'AS T3: Enzymes (active site, factors, competitive/non-competitive)', weight: '20%', questionIds: [], prereq: ['B-AS-12'] },
+            { code: 'B-AS-14', name: 'AS T4: Cell membranes & transport (fluid mosaic, osmosis, active)', weight: '20%', questionIds: [], prereq: ['B-AS-11'] },
+            { code: 'B-AS-15', name: 'AS T5: Mitotic cell cycle (PMAT, cytokinesis, stem cells)', weight: '16%', questionIds: [], prereq: ['B-AS-11'] },
+            { code: 'B-AS-16', name: 'AS T6: Nucleic acids & protein synthesis (DNA, transcription, translation)', weight: '20%', questionIds: [], prereq: ['B-AS-12'] },
+            { code: 'B-AS-17', name: 'AS T7: Transport in plants & animals (heart, vessels, xylem, phloem)', weight: '22%', questionIds: [], prereq: ['B-AS-14'] },
+            { code: 'B-AS-18', name: 'AS T8: Gas exchange, infectious disease & immunity (vaccination, HIV)', weight: '25%', questionIds: [], prereq: ['B-AS-13'] },
+            { code: 'B-A2-21', name: 'A2 T9: Photosynthesis & Respiration (LDR/Calvin, glycolysis/Krebs/ETC)', weight: '25%', questionIds: [], prereq: ['B-AS-12'] },
+            { code: 'B-A2-22', name: 'A2 T10: Homeostasis, nervous & endocrine, excretion (nephron, ADH)', weight: '30%', questionIds: [], prereq: ['B-AS-17'] },
+            { code: 'B-A2-23', name: 'A2 T11: Coordination & response, sensory receptors, muscle, plant', weight: '25%', questionIds: [], prereq: ['B-A2-22'] },
+            { code: 'B-A2-24', name: 'A2 T12: Inheritance, classification & evolution (meiosis, Hardy-Weinberg)', weight: '28%', questionIds: [], prereq: ['B-AS-16'] },
+            { code: 'B-A2-25', name: 'A2 T13: Genetic engineering (PCR, restriction, CRISPR, vectors, GMO)', weight: '25%', questionIds: [], prereq: ['B-A2-24'] },
+            { code: 'B-A2-26', name: 'A2 T14: Biotechnology (mAbs, ELISA, qPCR, fermentation, ethics)', weight: '20%', questionIds: [], prereq: ['B-A2-25'] }
+          ]
+        },
+        {
+          name: 'Economics (9708)',
+          code: 'E',
+          weight: '16%',
+          topics: [
+            { code: 'E-AS-11', name: 'AS: Basic economic problem & resource allocation (scarcity, PPC, trade)', weight: '18%', questionIds: [], prereq: [] },
+            { code: 'E-AS-12', name: 'AS: Price system - Demand, Supply, Elasticities, Gov intervention', weight: '25%', questionIds: [], prereq: ['E-AS-11'] },
+            { code: 'E-AS-13', name: 'AS: Market failure & externalities (public good, Pigouvian tax)', weight: '20%', questionIds: [], prereq: ['E-AS-12'] },
+            { code: 'E-AS-14', name: 'AS: Macro indicators - GDP, inflation, unemployment, BOP', weight: '22%', questionIds: [], prereq: ['E-AS-11'] },
+            { code: 'E-AS-15', name: 'AS: Macro policy objectives & instruments (fiscal/monetary)', weight: '20%', questionIds: [], prereq: ['E-AS-14'] },
+            { code: 'E-AS-16', name: 'AS: Economic growth, productivity & sustainable development', weight: '15%', questionIds: [], prereq: ['E-AS-14'] },
+            { code: 'E-A2-21', name: 'A2: Theory of the Firm (cost curves, market structures, pricing)', weight: '20%', questionIds: [], prereq: ['E-AS-12'] },
+            { code: 'E-A2-22', name: 'A2: Labour market (demand/supply of labour, wage, monopsony, unions)', weight: '15%', questionIds: [], prereq: ['E-A2-21'] },
+            { code: 'E-A2-23', name: 'A2: International trade (comparative advantage, WTO, protectionism)', weight: '15%', questionIds: [], prereq: ['E-AS-14'] },
+            { code: 'E-A2-24', name: 'A2: Exchange rates & Balance of Payments (floating/fixed, correction)', weight: '15%', questionIds: [], prereq: ['E-A2-23'] },
+            { code: 'E-A2-25', name: 'A2: Macroeconomic policy (Phillips curve, inflation targeting, conflicts)', weight: '15%', questionIds: [], prereq: ['E-AS-15'] },
+            { code: 'E-A2-26', name: 'A2: Economic growth & development (HDI, MDG/SDG, poverty, inequality)', weight: '12%', questionIds: [], prereq: ['E-AS-16'] },
+            { code: 'E-A2-27', name: 'A2: Financial sector (money supply, interest rate, credit, central bank)', weight: '12%', questionIds: [], prereq: ['E-AS-15'] },
+            { code: 'E-A2-28', name: 'A2: Globalisation & trade liberalisation (MNC/FDI, trade blocs, GVC)', weight: '12%', questionIds: [], prereq: ['E-A2-23'] }
+          ]
+        }
       ]
     },
-    topics: {}
+
+    // ================================================================
+    // TOEFL iBT
+    // ================================================================
+    toefl: {
+      name: 'TOEFL',
+      fullName: 'TOEFL iBT',
+      totalQuestions: 120,
+      papers: [
+        {
+          name: 'Reading (35min · 2 passages × 10q)',
+          code: 'RD',
+          weight: '—',
+          topics: [
+            { code: 'RD-1a', name: 'Factual Information', weight: '—', questionIds: [], prereq: [] },
+            { code: 'RD-1b', name: 'Negative Factual Information', weight: '—', questionIds: [], prereq: ['RD-1a'] },
+            { code: 'RD-1c', name: 'Inference', weight: '—', questionIds: [], prereq: ['RD-1a'] },
+            { code: 'RD-1d', name: 'Rhetorical Purpose', weight: '—', questionIds: [], prereq: ['RD-1c'] },
+            { code: 'RD-1e', name: 'Vocabulary', weight: '—', questionIds: [], prereq: [] },
+            { code: 'RD-1f', name: 'Reference', weight: '—', questionIds: [], prereq: [] },
+            { code: 'RD-1g', name: 'Sentence Simplification', weight: '—', questionIds: [], prereq: [] },
+            { code: 'RD-1h', name: 'Insert Text', weight: '—', questionIds: [], prereq: ['RD-1g'] },
+            { code: 'RD-1i', name: 'Prose Summary', weight: '—', questionIds: [], prereq: ['RD-1a', 'RD-1d'] },
+            { code: 'RD-1j', name: 'Fill in a Table', weight: '—', questionIds: [], prereq: ['RD-1i'] },
+            { code: 'RD-TOP-1k', name: 'Art (passage topic)', weight: '—', questionIds: [], prereq: [] },
+            { code: 'RD-TOP-1l', name: 'History (passage topic)', weight: '—', questionIds: [], prereq: [] },
+            { code: 'RD-TOP-1m', name: 'Social Science (passage topic)', weight: '—', questionIds: [], prereq: [] },
+            { code: 'RD-TOP-1n', name: 'Life Science (passage topic)', weight: '—', questionIds: [], prereq: [] },
+            { code: 'RD-TOP-1o', name: 'Physical Science (passage topic)', weight: '—', questionIds: [], prereq: [] }
+          ]
+        },
+        {
+          name: 'Listening (36min · 3 lectures × 6q + 2 conv × 5q)',
+          code: 'L',
+          weight: '—',
+          topics: [
+            { code: 'L-2a', name: 'Gist-Content / Gist-Purpose', weight: '—', questionIds: [], prereq: [] },
+            { code: 'L-2b', name: 'Detail', weight: '—', questionIds: [], prereq: ['L-2a'] },
+            { code: 'L-2c', name: 'Function of What Is Said', weight: '—', questionIds: [], prereq: ['L-2b'] },
+            { code: 'L-2d', name: "Speaker's Attitude", weight: '—', questionIds: [], prereq: ['L-2c'] },
+            { code: 'L-2e', name: 'Organization', weight: '—', questionIds: [], prereq: ['L-2b'] },
+            { code: 'L-2f', name: 'Connecting Content', weight: '—', questionIds: [], prereq: ['L-2b'] },
+            { code: 'L-2g', name: 'Making Inferences', weight: '—', questionIds: [], prereq: ['L-2c'] },
+            { code: 'L-TOP-2h', name: 'Arts (lecture topic)', weight: '—', questionIds: [], prereq: [] },
+            { code: 'L-TOP-2i', name: 'Life Science (lecture topic)', weight: '—', questionIds: [], prereq: [] },
+            { code: 'L-TOP-2j', name: 'Physical Science (lecture topic)', weight: '—', questionIds: [], prereq: [] },
+            { code: 'L-TOP-2k', name: 'Social Science (lecture topic)', weight: '—', questionIds: [], prereq: [] },
+            { code: 'L-TOP-2l', name: 'History (lecture topic)', weight: '—', questionIds: [], prereq: [] },
+            { code: 'L-TOP-2m', name: 'Environmental (lecture topic)', weight: '—', questionIds: [], prereq: [] },
+            { code: 'L-TOP-2n', name: 'Office Hours (conversation scenario)', weight: '—', questionIds: [], prereq: [] },
+            { code: 'L-TOP-2o', name: 'Service Encounters (conversation scenario)', weight: '—', questionIds: [], prereq: [] }
+          ]
+        },
+        {
+          name: 'Speaking (16min · 4 Tasks)',
+          code: 'SPK',
+          weight: '—',
+          topics: [
+            { code: 'SPK-3a', name: 'Task 1: Independent Speaking (prep 15s · speak 45s)', weight: '—', questionIds: [], prereq: [] },
+            { code: 'SPK-3b', name: 'Task 2: Integrated - Campus Announcement', weight: '—', questionIds: [], prereq: ['SPK-3a'] },
+            { code: 'SPK-3c', name: 'Task 3: Integrated - Academic Concept', weight: '—', questionIds: [], prereq: ['SPK-3b'] },
+            { code: 'SPK-3d', name: 'Task 4: Integrated - Academic Lecture', weight: '—', questionIds: [], prereq: ['SPK-3c'] }
+          ]
+        },
+        {
+          name: 'Writing',
+          code: 'WR',
+          weight: '—',
+          topics: [
+            { code: 'WR-4a', name: 'Integrated Writing (read + listen → write 20min)', weight: '—', questionIds: [], prereq: [] },
+            { code: 'WR-4b', name: 'Academic Discussion Writing (10min)', weight: '—', questionIds: [], prereq: ['WR-4a'] }
+          ]
+        }
+      ]
+    },
+
+    // ================================================================
+    // IELTS Academic
+    // ================================================================
+    ielts: {
+      name: 'IELTS',
+      fullName: 'IELTS Academic',
+      totalQuestions: 120,
+      papers: [
+        {
+          name: 'Listening (30min + 10min · 4 Sections × 40q)',
+          code: 'L',
+          weight: '—',
+          topics: [
+            { code: 'L-1a', name: 'Form / Note / Table / Flow-chart / Summary Completion', weight: '—', questionIds: [], prereq: [] },
+            { code: 'L-1b', name: 'Multiple Choice (single / multiple)', weight: '—', questionIds: [], prereq: [] },
+            { code: 'L-1c', name: 'Matching', weight: '—', questionIds: [], prereq: [] },
+            { code: 'L-1d', name: 'Plan / Map / Diagram Labelling', weight: '—', questionIds: [], prereq: [] },
+            { code: 'L-1e', name: 'Sentence Completion', weight: '—', questionIds: [], prereq: ['L-1a'] },
+            { code: 'L-1f', name: 'Short-answer Questions', weight: '—', questionIds: [], prereq: [] },
+            { code: 'L-SC-1x', name: 'Section 1 & 2: Social / Everyday Contexts', weight: '—', questionIds: [], prereq: [] },
+            { code: 'L-AC-1y', name: 'Section 3 & 4: Academic / Training Contexts', weight: '—', questionIds: [], prereq: ['L-SC-1x'] }
+          ]
+        },
+        {
+          name: 'Reading Academic (60min · 3 passages × 40q)',
+          code: 'R',
+          weight: '—',
+          topics: [
+            { code: 'R-2a', name: 'Multiple Choice', weight: '—', questionIds: [], prereq: [] },
+            { code: 'R-2b', name: 'True / False / Not Given (事实判断)', weight: '—', questionIds: [], prereq: [] },
+            { code: 'R-2c', name: 'Yes / No / Not Given (作者观点)', weight: '—', questionIds: [], prereq: ['R-2b'] },
+            { code: 'R-2d', name: 'Matching Headings (段落主旨匹配)', weight: '—', questionIds: [], prereq: [] },
+            { code: 'R-2e', name: 'Matching Information (细节定位·乱序)', weight: '—', questionIds: [], prereq: ['R-2d'] },
+            { code: 'R-2f', name: 'Matching Features (人物观点匹配)', weight: '—', questionIds: [], prereq: [] },
+            { code: 'R-2g', name: 'Matching Sentence Endings', weight: '—', questionIds: [], prereq: [] },
+            { code: 'R-2h', name: 'Sentence / Summary / Note / Table / Flow-chart Completion', weight: '—', questionIds: [], prereq: [] },
+            { code: 'R-2i', name: 'Diagram Label Completion', weight: '—', questionIds: [], prereq: [] },
+            { code: 'R-2j', name: 'Short-answer Questions', weight: '—', questionIds: [], prereq: [] },
+            { code: 'R-2k', name: 'Multiple Choice (multi-select)', weight: '—', questionIds: [], prereq: ['R-2a'] }
+          ]
+        },
+        {
+          name: 'Writing Academic (60min · Task 1 + Task 2)',
+          code: 'W',
+          weight: '—',
+          topics: [
+            { code: 'W-3a', name: 'Task 1: Line Graph (曲线图)', weight: '—', questionIds: [], prereq: [] },
+            { code: 'W-3b', name: 'Task 1: Bar Chart (柱状图)', weight: '—', questionIds: [], prereq: ['W-3a'] },
+            { code: 'W-3c', name: 'Task 1: Pie Chart (饼图)', weight: '—', questionIds: [], prereq: ['W-3a'] },
+            { code: 'W-3d', name: 'Task 1: Table (表格)', weight: '—', questionIds: [], prereq: ['W-3a'] },
+            { code: 'W-3e', name: 'Task 1: Process Diagram (流程图)', weight: '—', questionIds: [], prereq: [] },
+            { code: 'W-3f', name: 'Task 1: Map (地理变迁图)', weight: '—', questionIds: [], prereq: [] },
+            { code: 'W-4a', name: 'Task 2: Opinion 题型', weight: '—', questionIds: [], prereq: [] },
+            { code: 'W-4b', name: 'Task 2: Discussion 题型', weight: '—', questionIds: [], prereq: ['W-4a'] },
+            { code: 'W-4c', name: 'Task 2: Problem-Solution 题型', weight: '—', questionIds: [], prereq: ['W-4a'] },
+            { code: 'W-4d', name: 'Task 2: Two-part / Direct Questions 题型', weight: '—', questionIds: [], prereq: ['W-4a'] }
+          ]
+        },
+        {
+          name: 'Speaking (11-14min · 3 Parts · 面对面)',
+          code: 'S',
+          weight: '—',
+          topics: [
+            { code: 'S-5a', name: 'Part 1: Intro & Interview (日常话题)', weight: '—', questionIds: [], prereq: [] },
+            { code: 'S-5b', name: 'Part 2: Long Turn / Cue Card (1-2 min talk)', weight: '—', questionIds: [], prereq: ['S-5a'] },
+            { code: 'S-5c', name: 'Part 3: Two-way Discussion (抽象延伸)', weight: '—', questionIds: [], prereq: ['S-5b'] },
+            { code: 'S-6a', name: '评分: Fluency & Coherence (F)', weight: '—', questionIds: [], prereq: [] },
+            { code: 'S-6b', name: '评分: Lexical Resource (LR)', weight: '—', questionIds: [], prereq: [] },
+            { code: 'S-6c', name: '评分: Grammar Range & Accuracy (GRA)', weight: '—', questionIds: [], prereq: [] },
+            { code: 'S-6d', name: '评分: Pronunciation (Pron)', weight: '—', questionIds: [], prereq: [] }
+          ]
+        }
+      ]
+    },
+
+    // ================================================================
+    // IGCSE (CAIE 0580 / 0625 / 0620 / 0610 / 0455)
+    // ================================================================
+    igcse: {
+      name: 'IGCSE',
+      fullName: 'IGCSE (CAIE 0580/0625/0620/0610/0455)',
+      totalQuestions: 120,
+      papers: [
+        {
+          name: 'Mathematics (0580 · Core / Extended)',
+          code: 'MAT',
+          weight: '—',
+          topics: [
+            { code: 'MAT-N-1x', name: 'Number', weight: '—', questionIds: [], prereq: [] },
+            { code: 'MAT-AG-2x', name: 'Algebra & Graphs', weight: '—', questionIds: [], prereq: ['MAT-N-1x'] },
+            { code: 'MAT-CG-3x', name: 'Coordinate Geometry', weight: '—', questionIds: [], prereq: ['MAT-AG-2x'] },
+            { code: 'MAT-Geo-4x', name: 'Geometry', weight: '—', questionIds: [], prereq: [] },
+            { code: 'MAT-Mens-5x', name: 'Mensuration', weight: '—', questionIds: [], prereq: ['MAT-Geo-4x'] },
+            { code: 'MAT-Trig-6x', name: 'Trigonometry', weight: '—', questionIds: [], prereq: ['MAT-Geo-4x'] },
+            { code: 'MAT-Prob-7x', name: 'Probability', weight: '—', questionIds: [], prereq: ['MAT-N-1x'] },
+            { code: 'MAT-Stat-8x', name: 'Statistics', weight: '—', questionIds: [], prereq: ['MAT-Prob-7x'] },
+            { code: 'MAT-Ext-9x', name: 'Extended-only (vectors, transformation matrices, calculus basics)', weight: '—', questionIds: [], prereq: ['MAT-AG-2x', 'MAT-Geo-4x'] }
+          ]
+        },
+        {
+          name: 'Physics (0625 · Core / Extended)',
+          code: 'PHY',
+          weight: '—',
+          topics: [
+            { code: 'PHY-GP-1x', name: 'General Physics (Measurement, Kinematics, Forces, Energy, Matter)', weight: '—', questionIds: [], prereq: [] },
+            { code: 'PHY-Wv-2x', name: 'Waves, Light, EM Spectrum & Sound', weight: '—', questionIds: [], prereq: ['PHY-GP-1x'] },
+            { code: 'PHY-EM-3x', name: 'Electricity & Magnetism', weight: '—', questionIds: [], prereq: ['PHY-GP-1x'] },
+            { code: 'PHY-TNS-4x', name: 'Thermal Physics, Nuclear Physics & Space', weight: '—', questionIds: [], prereq: ['PHY-GP-1x'] }
+          ]
+        },
+        {
+          name: 'Chemistry (0620 · Core / Extended)',
+          code: 'CHEM',
+          weight: '—',
+          topics: [
+            { code: 'CHEM-PC-1x', name: 'Physical Chemistry (states, bonding, stoichiometry, energy, rates, equilibria, redox, acids)', weight: '—', questionIds: [], prereq: [] },
+            { code: 'CHEM-INorg-2x', name: 'Inorganic Chemistry (Periodic Table, G1/G2/G7, transition metals, N, S, metallurgy)', weight: '—', questionIds: [], prereq: ['CHEM-PC-1x'] },
+            { code: 'CHEM-Org-3x', name: 'Organic Chemistry (alkane/alkene/alcohol/acid/ester/halogenoalkane, polymers, fuels)', weight: '—', questionIds: [], prereq: ['CHEM-PC-1x'] },
+            { code: 'CHEM-An-4x', name: 'Analytical Chemistry (qualitative & quantitative analysis)', weight: '—', questionIds: [], prereq: ['CHEM-PC-1x'] }
+          ]
+        },
+        {
+          name: 'Biology (0610 · Core / Extended)',
+          code: 'BIO',
+          weight: '—',
+          topics: [
+            { code: 'BIO-CBM-1x', name: 'Cells & Biological Molecules (cell structure, transport, enzymes)', weight: '—', questionIds: [], prereq: [] },
+            { code: 'BIO-Plnt-2x', name: 'Plant Physiology (photosynthesis, transport, coordination)', weight: '—', questionIds: [], prereq: ['BIO-CBM-1x'] },
+            { code: 'BIO-Hum-3x', name: 'Animal / Human Physiology (nutrition, gas exchange, circulation, immunity)', weight: '—', questionIds: [], prereq: ['BIO-CBM-1x'] },
+            { code: 'BIO-RIE-4x', name: 'Reroduction, Inheritance & Ecology (selection, evolution, environment)', weight: '—', questionIds: [], prereq: ['BIO-CBM-1x'] }
+          ]
+        },
+        {
+          name: 'Economics (0455)',
+          code: 'ECON',
+          weight: '—',
+          topics: [
+            { code: 'ECON-Mic-1x', name: 'Microeconomics: The Price System (demand, supply, market failure)', weight: '—', questionIds: [], prereq: [] },
+            { code: 'ECON-Mac-2x', name: 'Macroeconomics (GDP, inflation, unemployment, BOP, policies)', weight: '—', questionIds: [], prereq: ['ECON-Mic-1x'] },
+            { code: 'ECON-Intl-3x', name: 'International Trade & Globalisation (comparative advantage, tariff, WTO)', weight: '—', questionIds: [], prereq: ['ECON-Mac-2x'] },
+            { code: 'ECON-Dev-4x', name: 'Economic Development vs Growth (LDC, poverty, inequality, sustainability)', weight: '—', questionIds: [], prereq: ['ECON-Mac-2x'] }
+          ]
+        }
+      ]
+    }
   };
-  var AL_TOPICS = [
-    // Math P1-P4 / M1-M2 / S1-S2
-    ['M-P1-11','P1: Algebra (indices/surds/expanding/polynomial division/Remainder Factor theorem)',20,[1,11,21,31,41]],
-    ['M-P1-12','P1: Quadratics (completing square/discriminant/roots/graph/inequalities)',20,[2,12,22,32,42]],
-    ['M-P1-13','P1: Inequalities (linear, quadratic, |ax+b|<k)',10,[3,13,23,33]],
-    ['M-P1-14','P1: Coordinate geometry (straight line, parallel/perp, distance/midpoint, circle equation, tangent)',18,[4,14,24,34,43]],
-    ['M-P1-15','P1: Trigonometry basic (sin/cos/tan, exact values, graphs of sin/cos/tan, cast, 360±/180±)',12,[5,15,25,35]],
-    ['M-P1-16','P1: Differentiation (power rule, tangent & normal, increasing/decreasing, stationary point max/min)',18,[6,16,26,36,44]],
-    ['M-P1-17','P1: Integration (reverse power, area under curve, x-axis, definite integral, simple volume with y-axis basic)',15,[7,17,27,37,45]],
 
-    ['M-P2-21','P2: Exponentials & logarithms (laws of log, change of base, e^x and ln x, solve equations: a^x = b, exponential modelling)',18,[8,18,28,38,46]],
-    ['M-P2-22','P2: Binomial expansion (1+x)^n and (a+b)^n for any rational n, approximation',12,[9,19,29,39,47]],
-    ['M-P2-23','P2: Trigonometry (double/half angle formulae, Rsin(x+α), prove identities, solving equations with identities, 0<=θ<360)',18,[10,20,30,40,48]],
-    ['M-P2-24','P2: Differentiation 2 (chain/product/quotient rules, derivatives e^x/ln/x^n/trig)',15,[49,59,69]],
-    ['M-P2-25','P2: Integration 2 (∫1/x dx, ∫e^x dx, ∫sin/cos dx, simple u-substitution, trapezium rule)',15,[50,60,70]],
-    ['M-P2-26','P2: Numerical methods (solving f(x)=0: linear interpolation, iteration x_{n+1}=g(x_n))',10,[51,61]],
+  // ================================================================
+  // API
+  // ================================================================
 
-    ['M-P3-31','P3: Algebraic fractions + simplification + partial fractions (3 cases)',15,[52,62,71]],
-    ['M-P3-32','P3: Functions (domain/range, composite, inverse, modulus, transformations of graphs f(ax+b)+k)',18,[53,63,72]],
-    ['M-P3-33','P3: Series (arith/geom sum + binomial general)',10,[54,64]],
-    ['M-P3-34','P3: Parametric / Polar basics (parametric equation for circles/ellipses, finding dy/dx)',10,[55,65,73]],
-    ['M-P3-35','P3: Further calculus (implicit differentiation, integration by parts, integration using partial fractions, ∫f\'(x)/f(x), Volumes of revolution y-axis, ∫sec², ∫csc², ∫tan/sec)',20,[56,66,74,75,85]],
-    ['M-P3-36','P3: 3D Vectors (position vector, dot/cross product, equation of straight line, skew, distance, plane equation, angle)',20,[57,67,76,86]],
+  // 内部辅助：遍历某科目所有 topics，回调 (topic, paper)
+  function eachTopic(subjectKey, fn) {
+    var sub = subjects[subjectKey];
+    if (!sub) return;
+    sub.papers.forEach(function(paper) {
+      paper.topics.forEach(function(topic) {
+        fn(topic, paper);
+      });
+    });
+  }
 
-    ['M-P4-41','P4 Further: Matrices (operations, determinant, inverse of 2x2/3x3, solving linear system AX=B, linear transformations: rotations, reflections, scaling, shear, eigenvalues + eigenvectors basic)',18,[58,68,77,87]],
-    ['M-P4-42','P4 Further: Complex numbers (algebra, Argand diagram, modulus, argument, polar, De Moivre, roots (nth roots))',18,[78,88,98]],
-    ['M-P4-43','P4 Further: Polar coordinates (sketch curves, area enclosed by curve, symmetry, r=a(1+cosθ))',10,[79,89]],
-    ['M-P4-44','P4 Further: Differential Equations (separable + integrating factor method, solving 1st order, second order homogeneous y'' + ay\' + by = 0, complementary functions)',18,[80,90,99,100]],
-    ['M-P4-45','P4 Further: Numerical Methods advanced (Newton-Raphson for roots, Simpson\'s rule, Euler for DEq)',10,[81,91]],
+  // 内部辅助：按 topicCode 建立 { code -> topic } 映射
+  function buildCodeMap(subjectKey) {
+    var map = {};
+    eachTopic(subjectKey, function(topic) {
+      map[topic.code] = topic;
+    });
+    return map;
+  }
 
-    ['M-Mech-51','M1: Kinematics (1D constant acceleration: SUVAT, v-t and s-t graphs, 2D projectile, motion under gravity)',20,[82,92,101,102]],
-    ['M-Mech-52','M1: Forces & Newton\'s laws of motion + F = ma (inclined plane, tension/compression, connected particles: 2 masses over pulley)',20,[83,93,103]],
-    ['M-Mech-53','M1: Equilibrium + static, friction (μ, limiting friction), moments about a point',18,[84,94,104]],
-    ['M-Mech-54','M1: Momentum & Impulse (I = Δp, conservation of momentum in collisions)',12,[95,105]],
-    ['M-Mech-55','M1: Work, Energy & Power (work-force, GPE, KE, work-energy principle, conservation of mechanical energy, power = Fv)',18,[96,106]],
-    ['M-Mech-56','M2: Projectiles (launch angle, range, greatest height, trajectory equation)',12,[97,107]],
-    ['M-Mech-57','M2: Centre of Mass (for uniform lamina, composite bodies, frame, suspensions/toppling)',12,[98,108]],
-    ['M-Mech-58','M2: Collisions (Newton\'s law of restitution e, direct impacts + oblique collisions with wall or sphere)',12,[99,109]],
-    ['M-Mech-59','M2: Rigid body rotation basics (moment of inertia basic, energy in rotation)',8,[100,110]],
+  var api = {
+    version: 'v13',
+    lastUpdated: '2026-07-29',
+    subjects: subjects,
 
-    ['M-Stat-61','S1: Representing data (location: mean/median/mode; dispersion: range, IQR, variance/SD, PMCC, coding)',18,[11,21,51,61,91,111]],
-    ['M-Stat-62','S1: Probability (sample space, Venn diagram, conditional P(A|B), independence, tree diagrams)',20,[12,22,52,62,92,112]],
-    ['M-Stat-63','S1: Discrete random variables + Probability distributions (Binomial B(n,p), E(X), Var(X))',18,[13,23,53,63,93,113]],
-    ['M-Stat-64','S1: Normal distribution N(μ,σ²), standardising Z~N(0,1), inverse normal, finding μ or σ from given percentiles',18,[14,24,54,64,94,114]],
-    ['M-Stat-65','S2: Poisson distribution P(λ), approximation Binomial(n,p) to Poisson when n large p small; additivity',12,[15,25,55,65,115]],
-    ['M-Stat-66','S2: Continuous distributions: Uniform Rectangular + Normal approx to Binomial (continuity correction)',12,[16,26,56,66,116]],
-    ['M-Stat-67','S2: Sampling, Estimation, Unbiased estimator of mean/variance, Confidence intervals for μ (Normal + σ known, t-distribution for small n unknown σ)',12,[17,27,57,67,117]],
-    ['M-Stat-68','S2: Hypothesis testing (one/two tail for proportion + mean, type I/II errors concepts)',12,[18,28,58,68,118]],
-    ['M-Stat-69','S2: Goodness of fit / Contingency tables χ² test',8,[19,29,59,69,119]],
+    /**
+     * 获取整科数据
+     * @param {string} subjectKey - sat/act/ap/ib/alevel/toefl/ielts/igcse
+     * @returns {object|null}
+     */
+    getSubject: function(subjectKey) {
+      return subjects[subjectKey] || null;
+    },
 
-    // Physics AS / A2
-    ['P-AS-11','AS P1: Physical quantities, units, SI prefixes, homogeneity of equations, systematic vs random errors, uncertainty propagation',10,[31,41,71]],
-    ['P-AS-12','AS P1/2: Kinematics (suvat equations, displacement/velocity/acceleration graphs, free fall)',18,[32,42,72,81,91]],
-    ['P-AS-13','AS: Dynamics (Newton 1-3 laws, mass vs weight, linear momentum conservation, F = Δp/Δt, impulse, equilibrium of forces & coplanar, triangle/parallelogram of forces, resolving)',20,[33,43,73,82,92,101]],
-    ['P-AS-14','AS: Forces, Density, Pressure (liquid P=ρgh, Archimedes upthrust), Hooke\'s law (F=kx), Young modulus E = stress/strain, elastic/plastic behaviour, work done by force=Fx, power P=Fv, energy conservation (KE + GPE + elastic PE)',22,[34,44,74,83,93,102]],
-    ['P-AS-15','AS: Materials - bulk properties of matter: (solid/liquid/gas kinetic model) phase change latent heat basics, brittle/ductile/polymer stress-strain curve features',10,[35,45,75]],
-    ['P-AS-16','AS: Waves (transverse/longitudinal, progressive wave equation v=fλ, phase difference, superposition, stationary wave on string/open closed pipe, interference Young double slit, diffraction grating equation dsinθ=nλ, reflection/refraction Snell, total internal reflection critical angle, Doppler effect (basics for sound)',18,[36,46,76,84,94,103]],
-    ['P-AS-17','AS: Electricity (current I=Q/t, V=W/Q, Ohm\'s law V=IR, resistivity R=ρL/A, Power P=IV=V²/R=I²R, series/parallel resistors rules, internal resistance of source (terminal pd, emf, lost volts), Kirchhoff\'s 2 laws for complex network, potential divider, sensor circuits: LDR + thermistor + diode IV curve',22,[37,47,77,85,95,104,110]],
-    ['P-AS-1x','AS P3: Practical skills (readings/table/ graph/error bars/line of best fit/ gradients & intercepts/ uncertainties)', 8,[38,48]],
+    /**
+     * 按 topic-code 获取单个 topic
+     * @param {string} subjectKey
+     * @param {string} topicCode
+     * @returns {object|null} topic 对象
+     */
+    getTopic: function(subjectKey, topicCode) {
+      var found = null;
+      eachTopic(subjectKey, function(topic) {
+        if (topic.code === topicCode) found = topic;
+      });
+      return found;
+    },
 
-    ['P-A2-21','A2: Motion in a circle (angular velocity ω, tangential v=rω, centripetal acceleration & force F=mv²/r, car on banked, conical pendulum basics)',12,[51,61,96]],
-    ['P-A2-22','A2: Gravitational field (Newton law F=GMm/r², field strength g, gravitational potential, Kepler\'s laws, geostationary satellite, escape velocity)',15,[52,62,97,105]],
-    ['P-A2-23','A2: Oscillations (SHM: a = -ω²x, solutions x=x₀sin(ωt+ε), v, a graphs, energy (KE/PE/total), free vs forced, resonance & damping (light/heavy/critical)',18,[53,63,86,98,106]],
-    ['P-A2-24','A2: Ideal gases (pV=nRT, kinetic theory, assumptions, pressure derivation, <KE> ∝ T, rms speed, internal energy for ideal gas, First law thermo ΔU=Q+W basics)',15,[54,64,87,99,107]],
-    ['P-A2-25','A2: Capacitors (C=Q/V, parallel plate, series/parallel combos, charging/discharging RC circuits, I=I₀e^(-t/RC), time constant τ=RC, energy stored E=½QV, capacitor discharge graphs, uses in timing circuits)',18,[55,65,88,100,108]],
-    ['P-A2-26','A2: Magnetic fields & Electromagnetism (force on current F=BIL sinθ, force on moving charge F=Bqv sinθ, circular path of charged particle, mass spectrometer basics, Faraday\'s laws of electromagnetic induction, Lenz\'s law, emf = -N dΦ/dt, flux linkage Φ=BA, simple a.c. generator, transformer equation Vp/Vs=Np/Ns, eddy currents, mutual induction basics)',22,[56,66,89,109,111,112,115]],
-    ['P-A2-27','A2: Modern / Quantum physics (Photoelectric effect hf = Φ + KE_max, work function, threshold frequency, wave-particle duality de Broglie λ=h/p, energy levels in atom, line emission/absorption spectra, nuclear structure: proton/neutron count, α/β⁻/β⁺/γ decay equations, isotope, half-life t₁/₂, decay constant λ, N=N₀e^(-λt), A=λN, nuclear mass defect & binding energy, E=mc², fission/fusion basics, semiconductors/band gap theory/LED/solar cell (diode forward/reverse)',18,[57,67,90,103,113,116]],
-    ['P-A2-28','A2 P5: Planning, Analysis & Evaluation (Practical paper: identify variables, plan a method, discuss reliability/validity/safety, sources of error, improvements, uncertainty analysis + graph plotting with errors)',10,[58,68,114]],
-    ['P-A2-29','A2: Medical / Astrophysics options (X-ray basics, ultrasound A/B scan; stellar parallax, luminosity, Hertzsprung-Russell diagram, Big Bang & redshift)',8,[59,69,117]],
+    /**
+     * 获取某 paper 下所有 topics
+     * @param {string} subjectKey
+     * @param {string} paperCode
+     * @returns {Array} topics 数组（空则返回 []）
+     */
+    getTopicsByPaper: function(subjectKey, paperCode) {
+      var sub = subjects[subjectKey];
+      if (!sub) return [];
+      for (var i = 0; i < sub.papers.length; i++) {
+        if (sub.papers[i].code === paperCode) return sub.papers[i].topics;
+      }
+      return [];
+    },
 
-    // Chemistry AS / A2
-    ['C-AS-11','AS T1 Atomic structure (subatomic particle; proton/neutron/electron; atomic number vs mass number, isotopes, electronic configuration 1s 2s 2p ... 3d, first ionisation energy trends (across period, down group, explain with shielding/nuclear charge/ distance)',12,[1,11,31,41]],
-    ['C-AS-12','AS T2 Atomic/Molecular structure & bonding (ionic lattice, covalent: dot&cross single/double/triple, dative, bond order/ bond length/ bond energy; VSEPR: 2,3,4,5,6 pairs shapes (linear, trigonal planar, tetrahedral, trigonal bipyramidal, octahedral, bond angle; bond polarity/ electronegativity difference, molecular polarity vs symmetric cancel; intermolecular forces (London/dispersion, permanent dipole-dipole, hydrogen bonding with N/O/F: anomalous properties of water; melting/boiling point trend explanation, metallic bonding: electron sea model, alloys, giant covalent structures diamond/graphite/silicon/SiO₂ properties)',22,[2,12,21,22,32,42,51,61]],
-    ['C-AS-13','AS T3 Stoichiometry (Ar/Mr definition, mole concept, Avogadro constant, % composition by mass, empirical vs molecular formula, writing & balancing equations, ionic half-equations & full ionic equation, limiting reagent, %yield, gas volumes (ideal gas pV=nRT, molar volume at rtp: 24 dm³), solution molarity (mol/dm³), titration calculations (acid-base: unknown conc, back titration concept)',18,[3,13,23,33,43,52,62]],
-    ['C-AS-14','AS T4 The Periodic Table: chemical periodicity (Group 2: physical trend Be→Ba (atomic radii, IE, MP/BP, reactivity with oxygen/water/dilute acid; Group 17: halogens physical state/colour, trend boiling point, reactivity/displacement reactions, oxidising power F₂>Cl₂>Br₂>I₂, tests for halide ion with AgNO₃ then NH₃, Period 3 (Na→Ar): trends in atomic radii, electronegativity, IE, structure of chlorides/oxides (acid/base/amphoteric nature, hydrolysis of chlorides)',20,[4,14,24,34,44,53,63]],
-    ['C-AS-15','AS T5 Chemical energetics (Enthalpy change ΔH: exothermic vs endothermic profile; standard enthalpy of formation/combustion/reaction/neutralisation/atomization/ionization/hydration, lattice energy basic, Hess\'s Law cycles: algebraic summation or energy level diagram, bond enthalpy: ΔH = Σ(BE reactants) - Σ(BE products), Calorimetry: q = mcΔT; sources of error)',16,[5,15,25,35,45,54,64]],
-    ['C-AS-16','AS T6 Electrochemistry / Redox basics (Oxidation numbers (oxidation states rules), oxidation vs reduction (gain/lose O/H/e⁻), half-equations balancing in acidic/basic, identify reducing/oxidizing agent; Electrochemical series; simple voltaic cell (Daniell: Zn/Cu), direction e⁻ flow, salt bridge; Electrolysis of molten compounds vs aqueous (factors: position in electrochemical series, concentration, nature of electrode: carbon vs active copper in CuSO₄ electrolysis; products at anode/cathode, half equations; Faraday laws basics: Q=It, moles e⁻=Q/F, F≈96500C/mol e⁻)',18,[6,16,26,36,46,55,65]],
-    ['C-AS-17','AS T7 Equilibria (Dynamic equilibrium concept, factors effect on position (Le Chatelier: conc/temp/pressure/catalyst); Kc expression for homogeneous and heterogeneous (solids/liquids excluded), Kc calculations given equilibrium concentrations or ICE table; Effect of T on Kc for endo/exothermic; Industrial relevance: Haber process (N₂+3H₂⇌2NH₃) & Contact process (SO₂→SO₃) conditions choices',14,[7,17,27,37,47,56,66]],
-    ['C-AS-18','AS T8 Reaction Kinetics (Collision theory: 2 conditions for reaction: collisions + E ≥ Ea, orientation; Maxwell-Boltzmann distribution curve: Ea shaded area; effect of (1) concentration/pressure (collision freq), (2) temp (area>Ea + collisions freq), (3) catalyst (alternative route/lower Ea, more particles>Ea), (4) surface area (heterogeneous: powder vs lump). Rate measurement methods: gas collection, colorimetry, titration sampling, conductivity; initial rate, continuous rate method)',16,[8,18,28,38,48,57,67]],
-    ['C-AS-19','AS T9 Organic basics + intro functional groups (Classification/ homologous series/ general formula/ functional group; Nomenclature IUPAC: alkanes/alkenes/alcohols/halogenoalkanes/aldehydes/ketones/carboxylic acids/esters/amines/amides; Structural isomers: chain/positional/functional group; Stereoisomers E/Z (cis-trans) restricted rotation + optical isomerism (chiral centre) basic; Reaction types classification: free radical substitution (alkane UV with Cl₂: initiation/propagation/termination); electrophilic addition (alkene + HBr/Br₂ in water, Markownikoff rule, carbocation stability explanation; nucleophilic substitution (SN1 vs SN2 mechanisms: halogenoalkane + OH⁻(aq)/water/CN⁻/NH₃: conditions, products, curly arrows; oxidation alcohols (1°→aldehyde→COOH, 2°→ketone, 3° no, acidified K₂Cr₂O₇+H⁺ heat/distil vs reflux; elimination (dehydration alcohol→alkene, H₂SO₄/Al₂O₃ heat; Reduction carbonyls→alcohols: NaBH₄; esterification: alcohol + carboxylic acid (H⁺ cat, reflux, name ester), condensation & hydrolysis of ester; polymer: addition (alkene) vs condensation (polyester/polyamide, peptide bond in proteins, nylon, terylene, biodegradable polymers; Environmental: polymer disposal, isomerism of benzene; combustion/ozone depletion by CFCs)',24,[9,19,20,29,30,39,40,49,50,58,59,60,68,69,70,80,82,83,84,85,86,87,88,89,90,118,119,120]],
+    /**
+     * 反查 questionId 所属 topic
+     * @param {string} subjectKey
+     * @param {string} questionId - 如 'q-1'
+     * @returns {object|null} topic 对象（含 questionId）
+     */
+    getQuestionTopic: function(subjectKey, questionId) {
+      var found = null;
+      eachTopic(subjectKey, function(topic) {
+        if (topic.questionIds && topic.questionIds.indexOf(questionId) !== -1) found = topic;
+      });
+      return found;
+    },
 
-    ['C-A2-21','A2 Electrochemistry advanced (Standard electrode potential (E°) of half cells; setup (reference: SHE 0V), measuring E° cell; overall E° = E_right - E_left; predict feasibility/spontaneity (E°cell>0); non-standard conditions using Le Chatelier; Concentration cells; Nernst equation (qualitative effect of conc on E); Electrolysis quantitative: Faraday 1st&2nd, mass of product, volume gas, determining charge/n factor; Applications: Na extraction from molten NaCl, Al electrolysis cryolite; Brine (concentrated NaCl): diaphragm cell: products Cl₂/H₂/NaOH; purification of Cu (impure anode pure cathode acidified CuSO₄)',18,[71,72,81,91,92,101]],
-    ['C-A2-22','A2 Acids & Bases (Bronsted-Lowry conjugate pairs; pH = -log[H⁺]; strong acid/base pH from conc; Kw = [H⁺][OH⁻] = 1e-14 at 298K → pOH, pH strong base; Weak acid: Ka (expression, units, pKa = -log Ka, larger Ka=stronger acid; Approximation [H⁺]=√(Ka·c); Weak base Kb; Buffer solutions (acidic: weak acid + salt, e.g. ethanoic + sodium ethanoate; basic: weak base + salt); buffer action equations, calculate pH of buffer using Henderson-Hasselbalch pH=pKa+log(salt/acid); Acid-base titration curves: 4 shapes (SA-SB, WA-SB, SA-WB, WA-WB + choice indicator equivalence point pH range: methyl orange 3.1-4.4 / phenolphthalein 8.3-10); half-equivalence point = pKa; solubility product Ksp for sparingly soluble salts (AB, AB₂ etc), common ion effect; Partition coefficient Kp for solvent extraction)',25,[73,74,75,82,83,93,94,102,103,104,105]],
-    ['C-A2-23','A2 Lattice energy & Thermodynamics advanced (Born-Haber cycle for ionic solid: steps (atomization/ionization energies/electron affinities/lattice formation enthalpy); explanation magnitude of lattice energy (charge product, ionic radii); Deviation from theoretical lattice (degree of covalent character - Fajans\' rules: polarizing power cation, polarisability anion); Entropy (ΔS) of system/surroundings/total; Standard molar entropy values; Gibbs free energy ΔG = ΔH - TΔS; ΔG prediction feasibility at low/high temp (4 combinations of signs); Temperature of feasibility T=ΔH/ΔS; ΔG and K equilibrium relationship: ΔG° = -RT ln K)',20,[76,77,84,85,95,96,106,107,108]],
-    ['C-A2-24','A2 Kinetics advanced (Rate equation: rate = k[A]^m [B]^n, orders m/n 0/1/2; units of k; determining order from: (a) initial rates method (concentration halved/doubled experiment table); (b) rate-conc graphs (zero/order 1 straight line origin; order 2 parabola); (c) conc-time graphs (zero straight linear; first order half-life constant = ln2/k; second order curve steeper); Mechanism: slow RDS matches rate equation stoichiometry + intermediates; Activation energy from Arrhenius equation: k = A e^(-Ea/RT) → plot ln k vs 1/T gives slope = -Ea/R; Catalysis homogeneous vs heterogeneous; autocatalysis; Maxwell-Boltzmann & catalyst explanation',18,[78,79,86,87,97,98,109,110,111]],
-    ['C-A2-25','A2 Transition Metals (d-block: Sc→Zn, general properties: variable oxidation states, coloured ion, complex formation, catalyst (homogeneous/heterogeneous); ligand (monodentate H2O/NH3/Cl⁻/CN⁻, bidentate en, multidentate EDTA⁴⁻, coordination number 4 (tetrahedral vs square planar) & 6 (octahedral); Crystal field splitting: octahedral d-orbital splitting, spectrochemical series, Δo effect on colour absorbed vs complementary colour transmitted; stability constant Kstab expression, chelate effect entropy-driven; Reactions: acid-base, ligand substitution, precipitation, redox (MnO4⁻/Fe²⁺/C2O4²⁻ titration; I2/S2O3²⁻ thiosulfate); Uses: cisplatin anti-cancer, hemoglobin, heterogeneous catalyst in Haber/Contact/ hydrogenation of alkenes Ni, homogeneous catalyst in S+B by NO2 acid rain, catalytic converter CO/NOx)',20,[99,100,112,113,114,115,116,117]],
-    ['C-A2-26','A2 Organic advanced: Aromatic / Carbonyls / Carboxylic acid derivatives / Nitrogen compounds / Polymer / Analytical Spectra (Benzene structure (delocalisation, stability hydrogenation less); Aromatic reactions: electrophilic substitution: Nitration conc HNO3+conc H2SO4 50C, Friedel-Crafts alkylation/acylation (AlCl3 catalyst), Halogenation (halogen carrier FeBr3/AlBr3), Sulfonation; side chain oxidation alkyl benzene with hot KMnO4; Directive effects (-OH/-NH2 2,4 activating 2-4 dir; -NO2 deactivating 3-dir; -CH3 2-4 activating weak). Carbonyls: Aldehyde/Ketone preparation (1°/2° alcohol oxidation); Reactions: nucleophilic addition with NaBH4 (reduction to alcohol), HCN with base cat (hydroxynitrile, optical isomerism produced, mechanism curly arrows); Oxidation: aldehyde→acid (Tollens\' silver mirror, Fehling\'s red ppt Cu2O; ketones none); Iodoform test CH3CO- / CH3CH(OH)-. Carboxylic acid derivatives (acyl chlorides, acid anhydrides, esters, amides: order of reactivity towards nucleophiles acyl chloride > anhydride > ester > amide; reactions of RCOCl with water (hydrolysis violent) / alcohol (ester) / ammonia (1°amide) / 1° amine (N-substituted amide) / phenol (ester aspirin); ester hydrolysis acidic/reversible vs alkaline (saponification irreversible salt). Amines: 1°/2°/3° aliphatic & aromatic; basicity aliphatic > ammonia > aromatic (lone pair delocalised into benzene); prep: halogenoalkane + NH3 excess or reduction nitrile LiAlH4 or nitrobenzene Sn/conc HCl; diazonium salt formation 0-5°C NaNO2/HCl; coupling with phenol/Naphth-2-ol → azo dyes. Amino acids & proteins (2-amino acids, zwitterion, isoelectric point pI, peptide link condensation/hydrolysis); polymers: addition vs condensation (polyester, polyamide Kevlar/Nylon6,6; structure & repeat unit, biodegradable). Analytical: IR spectroscopy (identify peaks O-H broad acid vs alcohol, C=O, C=C, C-O, fingerprint); Mass spectrometry (M+ peak molecular mass, fragment pattern & molecular formula; degree of unsaturation); ¹H NMR (TMS reference δ scale, number of H set, chemical shift, integration ratio, splitting n+1 rule, coupling constants; deuterium exchange with D2O labile H -OH/-NH2; carbon-13 NMR number of unique environments, DEPT; TLC/column chromatography separation basics; melting point for purity)',28,[10,15,25,40,45,50,60,65,70,75,80,85,90,95,100,105,110,115,118,119,120]],
-    ['C-A2-27','A2 Analytical Chemistry techniques + practical planning (KAA, evaluation & conclusion: planning a synthesis, percentage yield, purification recrystallization, testing purity mp mixed, solvent extraction, distillation simple/steam/fractional/vacuum; Error sources, improvements, safety assessments & risk hazards)',10,[117,118,119,120]],
+    /**
+     * 获取某 topic 的全部 questionIds
+     * @param {string} subjectKey
+     * @param {string} topicCode
+     * @returns {Array}
+     */
+    getTopicQuestions: function(subjectKey, topicCode) {
+      var t = this.getTopic(subjectKey, topicCode);
+      return t ? (t.questionIds || []) : [];
+    },
 
-    // Biology AS / A2
-    ['B-AS-11','AS T1 Cell structure (Magnification = image size / actual; resolution difference LM vs EM; eukaryotic animal & plant cell organelles: nucleus (nuclear envelope, nucleolus, chromatin), rER / sER, 80S ribosomes, Golgi apparatus (vesicles, lysosomes/suicide sacs, endocytosis/exocytosis), mitochondria (cristae, matrix, function), chloroplast (thylakoid/grana/stroma), cell wall, plasmodesmata, vacuole, tonoplast, centrioles (animal only, role in spindle cell division); Prokaryotic vs eukaryotic comparison (70S ribosomes, no nucleus/nuclear envelope, circular DNA/nucleoid, plasmids, pili, flagella, peptidoglycan wall); Virus basics (protein coat capsid + nucleic acid RNA/DNA, no metabolism, not alive, intracellular parasite: bacteriophage lytic cycle)',18,[1,11,21,31,41,51,61]],
-    ['B-AS-12','AS T2 Biological molecules (Water properties (H-bonding, solvent, transport, high specific/ latent heat capacity, cohesive/ adhesive/ capillary, density anomaly ice floats; Carbohydrates: monosaccharides (triose/pentose ribose deoxyribose/ hexose glucose α vs β, fructose, galactose; disaccharides (condensation reaction → glycosidic bond 1-4 / 1-6: maltose 2αglc 1-4, sucrose αglc-βfruct 1-2, lactose βgalc+αglc 1-4); Polysaccharides: starch (amylose α1-4 unbranched coiled helix iodine test blue-black + amylopectin α1-4 & α1-6 branched storage plant; glycogen α1-4/1-6 more branched, animal liver/muscle storage; cellulose β-glucose 1-4 alternate orientation, straight chain, H-bond cross → microfibril → fibril → cell wall structural; Lipids: triglycerides (condensation glycerol + 3 fatty acids ester bonds; saturated vs unsaturated (mono/poly) cis vs trans; phospholipids (1 PO4 + 2 fatty acid tails, amphipathic, forms bilayer membranes; Cholesterol steroid, function membrane fluidity stability; Proteins: amino acid general structure NH2-CαH(R)-COOH 20 R-groups; zwitterion at pI; dipeptide/ polypeptide condensation peptide bond; 4 structures: Primary (sequence peptide), Secondary (α-helix / β-pleated sheet, H-bonds between C=O & N-H), Tertiary (3D shape: interactions R-groups: ionic, H-bonds, disulfide bridges cysteine, hydrophobic interactions; Globular (3D compact soluble enzymes antibodies hemoglobin) vs Fibrous (long insoluble: collagen triple helix/cross-links, keratin hair/nails, actin/myosin muscle); Quaternary (multiple polypeptides subunits: hemoglobin 2α2β + 4 heme prosthetic Fe² groups oxygen transport, cooperative binding; Conjugated vs non-conjugated protein. Food tests: Reducing sugars (Benedict heat brick-red precipitate; non-reducing sucrose hydrolyse HCl neutralise then Benedict; Starch iodine KI blue black; Protein Biuret (CuSO4 + NaOH) violet; Emulsion (ethanol + water, white emulsion)',25,[2,12,22,32,42,52,62,71,81,91]],
-    ['B-AS-13','AS T3 Enzymes (3D Globular biological catalysts; active site complementary shape to substrate; Lock & Key vs Induced Fit model hypothesis; Factors affecting enzyme activity: Temperature (optimum, Q10 ≈ 2 between 0-40°C, denaturation high temp: H/ionic bonds break, shape active site lost irreversibly); pH (optimum H+ ions affect R group charges, denaturation extreme pH); Substrate concentration (saturation Vmax plateau → Michaelis-Menten curve, Km affinity inverse); Enzyme concentration (linear Vmax proportional if substrate excess); Inhibitors: Competitive (similar shape substrate, binds active site blocks; reversible overcome by ↑ substrate → Km↑ Vmax same); Non-competitive (binds allosteric site not active, changes shape active site permanently or not: Km same Vmax↓, not reversed by ↑S); End-product inhibition (metabolic pathway negative feedback); Immobilized enzymes (alginate beads/ calcium chloride: advantages reusable, product pure no contamination enzyme, stable wider pH/T tolerance, continuous processes e.g. lactase reducing lactose free milk)',20,[3,13,23,33,43,53,63,72,82,92]],
-    ['B-AS-14','AS T4 Cell membranes and transport (Fluid Mosaic Model Singer-Nicolson: phospholipid bilayer (amphipathic); proteins (integral/transmembrane channel/carrier, peripheral, glycoproteins + glycolipids: cell signalling/recognition/antigens); cholesterol reduces fluidity at body temp; Factors affecting membrane permeability: temperature ↑ phospholipids move leaky, solvents like ethanol dissolve lipids, damage; Transport mechanisms: 1 Passive: Simple diffusion (small nonpolar O2/CO2/steroid down conc gradient, no ATP); Facilitated diffusion (channel/carrier large polar ions/glucose/amino/charged down gradient, no ATP); 2 Osmosis (net movement water down water potential Ψ via partially permeable, water potential Ψ= Ψs + Ψp; pure water Ψ=0, solutes make it negative (-kPa); animal cells in hypotonic burst/hypertonic crenated; plant cells: turgid (hypo), incipient plasmolysis (Ψcell=-Ψs), plasmolysed (hyper, cell membrane pulls from wall). 3 Active transport (carrier pump + ATP hydrolysis, against gradient: e.g. Na+/K+ pump, 3Na+ out/2K+ in across axolemma, creates resting potential). 4 Bulk: Endocytosis (phagocytosis solid / pinocytosis liquid / receptor mediated) and Exocytosis (vesicle fuse membrane + release contents e.g. hormones/neurotransmitters)',20,[4,14,24,34,44,54,64,73,83,93]],
-    ['B-AS-15','AS T5 The mitotic cell cycle (Why divide? Growth, repair, asexual reproduction/clones; Cell cycle: Interphase (~90%): G1 (growth, protein synth, normal metabolism, checkpoint restriction), S phase DNA replication semi-conservative → chromatids attached centromere, G2 (growth prep division, centrosomes duplicate, energy stores ATP, check for DNA damage); M phase: Mitosis + cytokinesis; Chromatin → chromosome (supercoiling condense + histones packaging); Mitosis 4 stages PMAT in detail + diagrams: Prophase (chromosomes condense, nuclear envelope/nucleolus break, centrioles opposite poles spindle microtubules form); Metaphase (chromosomes line up equator single file, spindle attach centromere kinetochores, each chromatid own microtubule opposite pole); Anaphase (centromere splits, sister chromatids pulled apart by shortening spindle to opposite poles, now each chromatid = chromosome); Telophase (chromosomes decondense back chromatin at poles, nuclear envelopes reform, nucleolus reappears, spindle breaks); Cytokinesis (animal cleavage furrow contractile ring actin/myosin pinch cytoplasm two separate cells; plants: cell plate forms Golgi vesicles fuse → new cell wall membrane two cells, no furrow; Binary fission in prokaryotes (circular DNA replicates + plasmids replicate, cell elongates, septum forms divides 2 identical cells); Importance of genetically identical daughter cells stability; Stem cells (totipotent/pluripotent zygote embryo vs multipotent adult stem cells bone marrow hematopoietic → RBC/WBC; meristems plants root/shoot apical cambium; ethics therapeutic cloning IPS induced pluripotent vs embryonic)',16,[5,15,25,35,45,55,65,74,84,94]],
-    ['B-AS-16','AS T6 Nucleic acids and protein synthesis (DNA & RNA structure: Nucleotide = pentose sugar + phosphate group + nitrogenous base (A/T/C/G/U); DNA: double helix anti-parallel strands, deoxyribose, bases A-T 2 H-bonds / G-C 3 H-bonds, complementary base pairing rules, Purine (A,G double ring) vs Pyrimidine (T,C,U single ring); RNA: ribose, U replaces T, single strand, mRNA (messenger linear copy gene), tRNA (transfer cloverleaf 3 loops anticodon + amino acid attachment site), rRNA ribosomal + protein = ribosome; Semi-conservative DNA replication (Meselson Stahl ¹⁵N heavy / ¹⁴N light CsCl gradient bands evidence; enzymes: Helicase unwinds + breaks H-bonds, DNA polymerase III adds dNTPs 5\'→3\' direction complementary; Okazaki fragments lagging strand joined ligase; RNA primer + primase; topoisomerase uncoils supercoils). Transcription (nucleus: gene, RNA polymerase binds TATA box promoter region, breaks H-bonds, template strand antisense used, build mRNA 5\'→3\' U replaces T; stop terminator sequence; pre-mRNA splicing eukaryotes introns removed exons joined spliceosome; 5\' cap methylguanosine + 3\' polyA tail mature mRNA export nucleus). Translation (cytoplasm ribosomes small + large subunits: mRNA binds small; initiation tRNA-methionine AUG start codon 5\' cap; large subunit joins A/P/E sites; Elongation: codon recognition A site tRNA anticodon H-bond mRNA codon; peptide bond by peptidyl transferase between amino acids P→A; translocation tRNA A→P, P→E exit; ribosome moves 1 codon 5\'→3\'; Termination: stop codon UAA/UAG/UGA no tRNA → release factor polypeptide released; ribosome dissociates; Post-translational modification (Golgi: add carbs = glycoproteins, signal sequences, activation by cleavage e.g. pepsinogen→pepsin); Codon table: 64 codons, 3 stop, 61 amino acids (20), start AUG methionine; degenerate/redundant multiple codons same amino acid; Universal across organisms → genetic engineering transgenic genes express protein correctly)',20,[6,16,26,36,46,56,66,75,85,95]],
-    ['B-AS-17','AS T7 Transport in plants & animals (Circulatory system mammalian double closed (systemic + pulmonary); Heart structure external/internal: 4 chambers (R atrium vena cava deoxy → tricuspid R → R ventricle → pulmonary semilunar → pulmonary artery lungs; lungs → pulmonary veins oxy → L atrium mitral/bicuspid → L ventricle (thickest wall high pressure systemic) → aortic semilunar → aorta body; Coronary arteries heart muscle own supply block = myocardial infarction; Cardiac cycle 1 heartbeat diastole (relaxed, atria fill, AV valves open, ventricles passively fill ~70%) → Atrial systole (contract push remaining 30% blood ventricles) → Ventricular systole (contract ventricles pressure rises, AV valves shut "lub", semilunar valves open, blood ejected aorta/pulmonary artery; ventricular diastole → semilunar shut "dub" → start cycle; Pressure volume graphs explain valves timing; Heart rate control myogenic (SAN Sino Atrial Node pacemaker in R atrium wall generates impulse → Internodal pathways → AV node (delay 0.1s so atria empty before ventricles contract → Bundle of His → Purkyne tissue in septum up ventricular walls apex → ventricles contract base up squeeze out blood); Autonomic nervous control: Medulla oblongata cardio accelerator (sympathetic noradrenaline ↑HR stroke volume) vs cardioinhibitory (parasympathetic vagus nerve acetylcholine ↓HR); Chemoreceptors carotid/aortic bodies CO2↑pH↓→↑HR; baroreceptors pressure stretch; Cardiac output = stroke volume × HR; Blood vessels (Artery thick muscle/elastic narrow lumen high pressure → Arterioles smooth muscle control distribution to tissues → Capillaries 1 cell thick, leaky, vast cross-section slow exchange; Venules → Veins thin muscle, semilunar valves, wide lumen low pressure, skeletal muscle pump + breathing return blood). Tissue fluid and lymph (Hydrostatic pressure arterial end forces water/solutes out plasma → form tissue fluid bathes cells; Venous end oncotic pressure plasma proteins pulls water back 90%; remaining 10% → lymph vessels (valves, smooth muscle, no pump) → lymph nodes filter lymphocytes immunity → thoracic duct drain back into subclavian vein; blockage = edema). Plant transport: Xylem dead lignified hollow tracheids + vessels elements water/minerals roots→leaves transpiration pull cohesion tension (water potential gradient soil ←root hair ←cortex ←endodermis Casparian strip forces symplastic pathway stele → xylem root pressure capillary minor; transpiration = water evaporation spongy mesophyll air spaces → out stomata; Factors humidity/temp/light intensity/ wind speed affect transpiration rate; Potometer bubble method; Stomatal opening guard cell turgid K+ in → water potential ↓, water in, curve banana shape pore open; abscisic acid ABA stress closes stomata drought; Phloem living sieve tube elements (perforated sieve plates end walls, lose nucleus, few organelles, companion cells adjacent full organelles provide ATP loading); Translocation mass flow hypothesis: source (photosynthesising leaves load sucrose active H+ co-transport companion → sieve tube → Ψ ↓ water enter xylem → hydrostatic pressure ↑ pushes solution down sink (root storage growing fruits/unload sucrose→Ψ↑water leaves xylem→ low pressure; pressure flow drives bulk; Evidence ringing experiments remove bark phloem = sugars accumulate above ring; aphid stylets collect sap; tracers ¹⁴C radioactive CO2 autoradiography; sink-source can change season)',22,[7,17,27,37,47,57,67,76,86,96,101,106,111]],
-    ['B-AS-18','AS T8 Gas exchange / Infectious disease & Immunity (Respiratory system mammalian: Nasal cavity warm/moist/filter hairs/mucus cilia; trachea C-shape cartilage rings incomplete, bronchi → bronchioles → alveoli (grapelike clusters ~300-500 million; Features for gas exchange: huge S.A, 1 cell thick alveoli + capillary walls short diffusion distance 0.5μm, steep conc gradient maintained ventilation + blood flow deoxygenated vs oxygenated; Ventilation mechanism: Inhalation inspiratory external intercostal muscles contract + diaphragm contract flattens → volume thorax ↑ → pressure ↓ below atm → air flows in; Exhalation passive internal intercostals + diaphragm relax → elastic recoil lung tissue + ribs → volume ↓ pressure ↑ air out; Spirometer measures tidal volume / vital capacity / breathing rate; Asthma/COPD/Emphysema basics; Disease transmission: Cholera (Vibrio cholerae water/food faecal-oral enterotoxin diarrhea dehydration); TB Mycobacterium tuberculosis aerosol droplets lungs; HIV Human Immunodeficiency Virus → AIDS Acquired Immunodeficiency Syndrome: sexual/blood/birth/sharing needles, infects CD4 helper T cells viral RNA → reverse transcriptase → DNA integrates host lysogenic then lytic destroys T-helper <200 cells/μl opportunistic infections Kaposi sarcoma pneumonia death; Influenza virus droplets/contact; Malaria Plasmodium protozoan female Anopheles mosquito vector liver → RBC merozoites cycle fever chills; Control methods: hygiene sanitation clean water WHO, vaccination, vector control mosquito bednets insecticides ART anti-retroviral HAART; Immune system: Non-specific innate (1st: skin, mucus, cilia, HCl stomach, tears/sweat lysozyme, sebum; 2nd: Phagocytes (neutrophils/macrophages) chemotaxis, endocytosis/phagosome-lysosome = phagolysosome lysozyme digestion; inflammation mast cells histamine dilation permeability red/warm/swelling/pain/fever pyrogens hypothalamus ↑ temp denature pathogens speed metabolism lymphocytes/ interferons virus-infected warn neighbors; Specific adaptive acquired: Lymphocytes (B + T cells bone marrow stem; B mature bone marrow → plasma memory; T mature thymus). Humoral B-cells: antigen binds surface antibody receptor → T helper activates clonal selection expansion: plasma cells mass produce Y-shaped antibodies (immunoglobulin 4 polypeptide chains 2 heavy +2 light, variable Fab regions bind specific antigen shape; constant Fc region macrophage identify; Types IgG cross placenta; IgA mucosa/saliva/breast milk; IgM primary response pentamer; 5 functions: neutralize/agglutinate/opsonize/ activate complement cascade/ antibody-dependent cell cytotoxicity; Primary response 7-10 days latent lag peak IgM short; Secondary response (memory cells B/T clonal expansion): 2-4 days faster stronger higher IgG longer duration = immunity immunological memory no symptoms; Cell-mediated T-cells: T-helper CD4 binds MHC II exogenous antigens macrophages dendritic → activates cytokine interleukin help both B cells + cytotoxic T killer cells CD8 binds MHC I endogenous infected body cells/virus/ cancer → perforin pores + granzyme apoptosis kill self before virus replicates, memory T cells long lived rest lymph node; Types of immunity: Natural active (get sick) vs artificial active (vaccination: inactivated/attenuated/subunit/recombinant mRNA J&J Pfizer Moderna mechanism; herd immunity threshold); Natural passive (maternal placenta IgG + breast milk colostrum IgA temporary months); Artificial passive (injection antibodies e.g. tetanus antitoxin/rabies/ snake antivenom immediate but short no memory); Vaccines vs antibiotics (bacteria kill ribosome/cell wall/DNA gyrase: penicillin beta-lactam peptidoglycan; overuse antibiotic resistance MRSA, TB MDR/XDR; antibiotic stewardship complete course no overprescribe no agriculture use)',25,[8,18,28,38,48,58,68,77,87,97,102,107,112,116,117,118,119,120]],
+    /**
+     * 获取某科目每个 topic 的题数覆盖情况
+     * @param {string} subjectKey
+     * @returns {object} { topicCode: questionCount, ... }
+     */
+    getCoverage: function(subjectKey) {
+      var cov = {};
+      eachTopic(subjectKey, function(topic) {
+        cov[topic.code] = (topic.questionIds && topic.questionIds.length) || 0;
+      });
+      return cov;
+    },
 
-    // Biology A2
-    ['B-A2-21','A2 T9 Photosynthesis / Respiration (Photosynthesis chloroplast: Light dependent grana thylakoid LDR: Photoexcitation chlorophyll a PSII (P680) → 2 e⁻ → ETC (electron carriers cytochrome bf proton pump stroma → thylakoid space) creates proton gradient → ATP synthase stalked particles chemiosmosis → ADP + Pi → ATP (photophosphorylation non-cyclic Z scheme PSII→PSI; cyclic only PSI → extra ATP); Photolysis water 2H2O → 4H+ + 4e⁻ + O2 (replace e⁻ PSII, waste diffuse out stomata) + NADP reduced → NADPH (reducing power PSI P700 electron). Light independent stroma Calvin cycle / C3 photosynthesis: 1. Carbon fixation: Ribulose bisphosphate RuBP 5C + CO2 (1C) enzyme Rubisco RuBisCO (Ribulose bisphosphate carboxylase-oxygenase rate limiting, most abundant protein earth; photorespiration waste bind O2) → 2 molecules GP glycerate 3-phosphate (3C); 2. Reduction: GP → TP (GALP triose phosphate 3C) using energy ATP hydrolysis → ADP + Pi and reducing power NADPH → NADP; 3. Regeneration: Most TP (5 out 6) → RuBP using ATP reset cycle; 1 out 6 TP (2x3C=6C) → glucose phosphate → starch (chloroplast stroma grains storage; sucrose transport phloem; cellulose cell wall; amino acids/ lipids). Factors limiting photosynthesis: Law of Limiting Factors Blackman; (1) light intensity light comp point vs saturation; (2) CO2 conc (0.04%→0.1% greenhouse enrichment yield ↑); (3) temperature (optimum 25°C enzymes Rubisco; >45 denature, stomatal close less CO2 photorespiration C4 plants Kranz anatomy maize/sugarcane avoid photorespiration). Measuring photosynthesis rate: weighing/ counting O2 bubbles pondweed / CO2 uptake / DCPIP colorimetry Hill reaction isolated chloroplasts red/ox dye; Respiration: aerobic 4 stages eukaryotes: 1 Glycolysis cytoplasm matrix: glucose 6C → 2 TP (G3P) → 2 pyruvate 3C + Net 2 ATP (substrate level phosphorylation) + 2 reduced NAD NADH; 2 Link reaction mitochondrial matrix: pyruvate + CoA → Acetyl CoA 2C + 1 CO2 + 1 NADH per pyruvate → ×2; 3 Krebs / Citric acid cycle matrix: acetyl CoA + oxaloacetate 4C → citrate 6C → series decarboxylations 2 CO2; dehydrogenations 3 NADH + 1 FADH; 1 ATP substrate-level → regenerate oxaloacetate ×2 = 2 ATP/6 NADH/2 FADH/4 CO2; 4 Oxidative Phosphorylation inner mitochondrial membrane cristae ETC: NADH/FADH give 2e⁻ carriers (Complex I/II/III/IV ubiquinone cytochrome c proton pump matrix→intermembrane space); Final electron acceptor O2 → 2H+ + O2 + 4e⁻ → 2H2O metabolic water; Chemiosmosis proton motive force → ATP synthase 3 H+ per ATP; Oxidative yield ~ 2.5 per NADH ~ 1.5 per FADH → total ~ 30-32 ATP per glucose net eukaryotes shuttle cost; Anaerobic respiration: lactate fermentation mammals muscle O2 debt NADH→NAD+ pyruvate→lactate lactate dehydrogenase Cori cycle liver gluconeogenesis back glucose; alcoholic fermentation yeast (pyruvate → ethanal decarboxylase thiamine → ethanol alcohol dehydrogenase + CO2 regenerate NAD both have net 2 ATP glycolysis only; Respiratory quotient RQ = CO2 produced / O2 consumed (carbs=1, lipids ~0.7, proteins ~0.8-0.9; anaerobic RQ infinite no O2 used) respirometer manometer soda lime absorb CO2 measure O2 volume consumed; metabolic rate basal BMR per kg body mass vs body size SA:Vol)',25,[1,11,21,31,41,51,61,71,81,91,101,103,105,111,113,114]],
-    ['B-A2-22','A2 T10 Homeostasis & Nervous & Endocrine / Excretion (NEGATIVE FEEDBACK STIMULUS → RECEPTOR → COORDINATOR (brain/spinal/endocrine glands) → EFFECTOR (muscle/gland) → RESPONSE RETURN SET POINT; Thermoregulation core 37°C hypothalamus set point: Peripheral thermoreceptors skin + central hypothalamus blood temp; Too HOT: Vasodilation arterioles skin surface SNS off (more blood warm skin lose heat radiation/convection); Sweating glands SNS acetylcholine → evaporative cooling latent heat; erector pili relax hair flat no insulation; Too COLD: Vasoconstriction shunt blood deeper less radiation; Shivering rapid involuntary muscle contraction aerobic respiration generate heat; Erector pili contract hair trap air insulation goosebumps; Behavioral (clothes, shelter, migrate, hibernation); Brown fat infants/hibernators UCP proton leak uncoupling ETC → heat not ATP non-shivering thermogenesis. Osmoregulation nephron kidney ultrafiltration Bowman\'s capsule glomerulus 3 barriers: fenestrations endothelium, basement membrane glycoprotein filter: <10kDa proteins/cells stay blood; filtrate glucose/amino acids/urea/salts/water; Selective reabsorption PCT proximal convoluted tubule cuboidal microvilli brush border; 100% glucose/amino acids Na+ glucose symporter; 65% water/Na osmosis/bulk; Loop of Henle counter current multiplier hairpin: Descending permeable water impermeable NaCl; Ascending impermeable water actively pump NaCl out → medulla tissue fluid hypertonic gradient; Collecting duct ADH vasopressin hypothalamic neurons posterior pituitary hormone → inserts aquaporin-2 channels CD → water reabsorbed concentrated urine (negative feedback osmoreceptors hypothalamus; ADH low → dilute urine diabetes insipidus); Diabetes mellitus Type 1 autoimmune beta islets insulin no production insulin injection; Type 2 insulin resistance target cells obese diet/exercise metformin → high blood glucose glycosuria glucose in urine water follows osmotic diuresis frequent urination thirst → HbA1c test long term glucose control. Nervous system: CNS (brain/spinal cord) + PNS (sensory/afferent → interneurons → motor/efferent Somatic (voluntary skeletal muscle) & Autonomic: Sympathetic fight-flight thoracolumbar ganglia close spine noradrenaline; parasympathetic rest-digest craniosacral ganglia target acetylcholine). Neurone structure: dendrites/soma/axon/myelin sheath Schwann cells PNS / oligodendrocytes CNS nodes Ranvier saltatory conduction; Resting potential -70mV 3Na+ out 2K+ in pump leak K+ channels open membrane more permeable K+ → inside negative outside positive; Action potential all-or-nothing threshold -55mV → voltage gated Na+ channels open depolarization upswing +40mV; close; repolarization K+ voltage open outflow; refractory period hyperpolarization overshoot → K+ close pump restore; Propagation local current next patch threshold; saltatory faster 120m/s myelinated vs 1ms unmyelinated; Synapse: presynaptic action potential → Ca²+ voltage open → vesicles neurotransmitter (acetylcholine, glutamate, GABA, dopamine, serotonin) exocytosis cleft → bind receptors ligand gated ion channels post synaptic (EPSP excitatory Na+ depolarisation / IPSP Cl- hyperpolarisation K+ out); Summation spatial (many terminals) temporal (rapid same); Acetylcholinesterase enzyme in cleft break ACh → choline + acetate reuptake recycle; Neurotoxins curare block nicotinic receptors paralysis; organophosphate inhibit AchE → tetanus spasms; Botox inhibit ACh release muscle relax wrinkles; Drugs SSRIs block serotonin uptake → treat depression mood; Endocrine system: Hormones (protein insulin/glucagon/ADH/ peptide receptors cell membrane second messenger cAMP; Steroid lipid soluble testosterone/oestrogen/cortisol cross membrane intracellular receptor hormone response element HRE DNA direct gene transcription). Pancreas Islets of Langerhans: β-cells secrete insulin (high glucose → GLUT4 translocate to membrane → glucose uptake muscle/adipose → glycogenesis glycogen liver ↓ blood glucose; inhibit gluconeogenesis; promote lipogenesis protein synthesis. α-cells glucagon low glucose → liver glycogenolysis → glucose release; gluconeogenesis lactic amino → glucose; lipolysis fatty acids; Insulin/glucagon antagonistic pair; Adrenal medulla adrenaline/fight flight (glycogenolysis, pupil dilate, bronchodilation HR BP up); Adrenal cortex aldosterone (Na/K balance kidney renin-angiotensin-aldosterone RAAS system HTN drugs ACE inhibitors) / cortisol long term stress immunosuppression anti-inflammatory metabolism; Thyroid T3/T4 iodine BMR ↑ growth/mental development; TRH hypothalamus pituitary TSH negative feedback; Parathyroid PTH calcium bone osteoclasts release blood ↑; Control of heart SAN autonomic; Mammalian reproduction menstrual ovarian uterine cycles Hypothalamus GnRH → Anterior pituitary FSH + LH; FSH follicles grow secrete estradiol oestrogen → proliferative endometrium thick; Oestrogen + LH surge → ovulation day 14 release secondary oocyte → corpus luteum secretes progesterone + oestrogen secretory phase endometrium glands spiral arteries prepare implantation; No fertilisation → CL degenerate corpus albicans progesterone ↓ → uterine lining shed menstruation → cycle repeat; Pregnancy hCG placenta maintains CL first 12 weeks progesterone → placenta takes over progesterone + oestrogen; Prostaglandin oxytocin positive feedback contractions parturition childbirth; Mammary glands prolactin milk production; oxytocin milk ejection let down reflex suckling; Excretion liver + kidney; Liver functions: bile salts emulsify fat, deamination amino acids NH3 → ornithine urea cycle UREA CO2 + 2NH3 less toxic blood kidney excrete; detox alcohol ADH → ALDH acetaldehyde; Ornithine transcarbamylase deficiency OTC hyperammonemia brain toxicity death; Kidney failure hemodialysis peritoneal CAPD / kidney transplant HLA matching immunosuppressants)',30,[2,12,22,32,42,52,62,72,82,92,102,104,106,107,108,109,110,112,115,116,117,118,119,120]],
-    ['B-A2-23','A2 T11 Coordination & Response / Sensory receptors & Muscle / Plant responses (Nervous coordination vs chemical speed/duration/specificity; Reflex arc fastest unconscious protect (withdrawal hot pin: receptor pain → sensory neurone → inter relay spinal → motor neurone → effector muscle contract; Pacinian corpuscle (mechanoreceptor deep skin layers lamellae layers connective tissue pressure deforms stretch-mediated Na+ channels open generator potential → threshold → AP all or nothing; frequency encoding stimulus intensity greater → more APs second; Sensory adaptation prolonged stimulus ↓ APs ignore; Rods vs Cones retina: HIGH sensitivity low light (rods rhodopsin pigment bleached, convergence multiple rods → 1 bipolar spatial summation), LOW acuity; Cones iodopsin trichromatic 3 types (R/G/B) fovea high acuity 1:1:1 ganglion, high light only; Visual cortex brain columns simple complex cells hypercolumns). Skeletal muscle structure: Muscle belly → fascicles → muscle fibre long multinucleated cell → myofibrils (sarcomere units: thin Actin filaments tropomyosin + troponin regulatory; thick Myosin II heads ATPase hinge). Sliding Filament Theory: 1. AP neuromuscular junction ACh → sarcolemma depolarisation → transverse (T) tubules deep → sarcoplasmic reticulum SR release Ca²+ into sarcoplasm; 2. Ca²+ binds troponin-C complex → conformation change tropomyosin moves uncover myosin binding sites actin; 3. Myosin head ADP + Pi cocked bind actin cross-bridge formed; 4. Power stroke Pi release → myosin head rotate 45° pull actin thin M-line sarcomere shorten (H-zone/I-band shorter A-band same length evidence EM); 5. ATP binds myosin → head detach actin; 6. Myosin ATPase ATP → ADP + Pi reset myosin high energy cocked repeat cycle (5-10x per contraction); 7. Relaxation: SR Ca²+-ATPase pumps Ca² back SR → troponin Ca fall tropomyosin rebind block sites → muscle relax; Types of muscle fibres: Slow-twitch Type I oxidative dark red myoglobin many mitochondria aerobic marathon; Fast-twitch Type IIb glycolytic white few mitochondria powerful short burst 100m weightlifting; ATP sources: 1. Creatine phosphate immediate 3s 1 ATP 2 Anaerobic glycolysis lactic 30-40s net 2 ATP; 3 Oxidative phosphorylation aerobic long minutes hours 30-36 ATP glucose. Plant growth & responses: Tropisms (Phototropism shoot + auxin IAA indole 3-acetic acid apical meristem shoot tip, diffuses down cells elongate, shoot bends towards light unilateral → auxin moves shaded side (PIN proteins efflux carriers) shaded elongate more; roots + gravitropism positive downwards auxin high concentrations INHIBIT growth root cells opposite; statoliths amyloplasts gravity settle; Cytokinins (promote cell division delay senescence aging leaves); Gibberellins stem internode elongation, seed germination α-amylase barley (aleurone layer → amylase starch → malt sugar embryo food); dwarf plants gibberellin insensitive mutation; Abscisic acid ABA stomatal closure stress drought seed dormancy winter; Ethene gas fruit ripening climacteric fruits banana/Apple; apical dominance terminal bud auxin suppress lateral buds growth; decapitate apical → buds bushier horticulture pruning; Synthetic auxin 2,4-D herbicide dicots defoliant Agent Orange Vietnam; Tissue culture micropropagation callus totipotency auxin/cytokinin ratio morphogenesis shoot vs root genetic engineering Agrobacterium Ti plasmid T-DNA insert plant genome transgenic Bt cotton bacillus thuringiensis insect cry toxin; golden rice beta-carotene provitamin A reduce blindness deficiency; RNA interference / gene editing CRISPR crop improvements drought salinity yield disease resistance blight potato late blight Phytophthora infestans Irish famine)',25,[3,13,23,33,43,53,63,73,83,93,103,105,111,113,114,118,119,120]],
-    ['B-A2-24','A2 T12 Inheritance/Classification/Classification/Evolution (Meiosis reduction division diploid 2n → haploid n 4 unique gametes; Meiosis I PMAT I: Prophase I homologous chromosomes synapsis bivalent crossing over chiasmata genetic recombination between non-sister chromatids new allele combinations; Metaphase I bivalents line up equator random orientation independent assortment = 2^n possibilities 2^23 ≈ 8 million human; Anaphase I whole homologues separate sister chromatids still attached centromere; Telophase I/ cytokinesis → 2 cells haploid but duplicated chromosomes; Meiosis II similar mitosis equatorial division → Anaphase II splits centromeres → 4 haploid genetically different cells. Sources variation sexual reproduction: (1) crossing over Prophase I; (2) independent assortment Metaphase I; (3) random fertilisation any sperm fuses any ovum. Genetics crosses: Monohybrid (1 gene 3:1 F2 complete dominance); Dihybrid 2 genes unlinked independent assortment 9:3:3:1 F2; Test cross unknown genotype recessive homozygote 1:1; Incomplete dominance snapdragon pink intermediate 1:2:1; Codominance blood groups IA IB co-dominant both A/B antigens cell surface; Multiple alleles ABO IA IA or IA i = A; IB IB or IB i = B; IA IB = AB universal recipient; ii = O universal donor; Sex-linkage X chromosome males XY hemizygous only 1 copy → males show recessive X-linked disorders higher frequency: Red-green colour blindness; Haemophilia A factor VIII deficiency bleed spontaneously pedigree analysis Xa recessive carrier females XAXa; Autosomal vs X-linked dominant vs recessive pedigree rules; Gene linkage 2 genes same chromosome close loci not assort independently parental phenotypes more recombinants less crossing over; Recombination frequency RF = recombinants total × 100% <50% linked; 1% RF = 1 centimorgan cM map distance chromosome; Chi squared χ² test goodness of fit observed vs expected null hypothesis no difference (5% significance p<0.05 df = n-1 categories reject null if χ² > critical value = not due chance probably link; Polygenic quantitative multifactorial continuous variation normal distribution bell shaped skin colour/height 3+ genes additive + environment interaction; Hardy-Weinberg equilibrium allele frequencies constant p² + 2pq + q² = 1, p + q = 1 conditions large population no mutation no migration random mating no natural selection; Causes change: mutations (raw material new alleles; point substitution missense/nonsense/silent; indels frameshift chromosomal duplication/translocation/inversion/deletion/aneuploidy non-disjunction meiosis Down syndrome trisomy 21 47 XXY Klinefelter); genetic drift founder effect small population bottleneck cheetahs/evolution forces: Stabilising selection (intermediate optimum human birth weight extremes eliminated ↓variation); Directional selection (antibiotic resistant bacteria MRSA environment changes one extreme favoured shift mean); Disruptive selection (both extremes favoured medium selected against polymorphism sickle cell heterozygote HbS malaria advantage heterozygote protection Africa; Species biological concept fertile offspring; Reproductive isolation: Prezygotic temporal/mechanical/behavioral/gamete/habitat isolation; Postzygotic hybrid inviability/sterility mule horse+donkey 63 chromosomes infertile; Allopatric speciation geographical barrier mountain river split gene pool adaptive radiation Darwin finches Galápagos islands 13 species different beaks seed sizes/insects/nectar; Sympatric speciation same habitat polyploidy autopolyploid 4n tetraploid plants meiosis error instant species; Evidence evolution: fossil record strata transition species Archaeopteryx dinosaurs→birds; comparative anatomy homologous same basic structure different functions pentadactyl limb vertebrates common ancestor divergent evolution; analogous wings birds/insects similar environments convergent; molecular homology DNA cytochrome c amino acid differences less = closer relative; comparative embryology gill slits post anal tail vertebrates embryos; Artificial selection humans selective breeding crops dogs Brassica oleracea kale/broccoli/cauliflower/cabbage/Brussels all one wild mustard; Evolution antibiotic resistance over prescription; pesticide resistance DDT; Evidences antibiotic resistant Nosocomial infections hospital; Taxonomy classification 8 ranks: Domain→Kingdom→Phylum→Class→Order→Family→Genus→Species (Dear King Philip Came Over For Good Soup). Three domains (Bacteria / Archaea / Eukarya); Original 5 kingdoms vs 3 domain Woese rRNA sequencing; Binomial nomenclature Linnaeus genus species italicised Homo sapiens sapiens; Phylogeny cladistics monophyletic clade common ancestor + all descendants shared derived characters synapomorphies molecular data DNA barcoding COI gene animals; Maximum parsimony fewest evolutionary changes; Endangered species conservation IUCN categories CR EN VU NT LC; CITES convention endangered species illegal trade ban; Seed banks Svalbard global seed vault; In-situ reserves national parks wildlife corridors maintain gene flow; Ex situ zoos captive breeding programs reintroduction Arabian oryx; IVF artificial insemination; frozen zoos gametes; Problems genetic drift small captive populations inbreeding depression cheetahs severe bottleneck low genetic diversity viral epidemics dangerous)',28,[4,14,24,34,44,54,64,74,84,94,101,102,104,105,106,107,108,109,110,111,112,115,116,117,118,119,120]],
-    ['B-A2-25','A2 T13 Genetic engineering (Recombinant DNA technology tools: Restriction endonucleases (Type II palindromic recognition sequence 4-8bp sticky ends blunt EcoRI GAATTC GGATCC BamHI HindIII; same enzyme cut plasmid + foreign DNA complementary sticky ends anneal H-bonds) + DNA Ligase phosphodiester bonds seal backbones covalently (T4 ligase); Reverse transcriptase retroviruses mRNA → copy DNA complementary cDNA no introns prokaryotes expression; PCR thermocycler amplify DNA billionfold in vitro 2^n exponential: (Denaturation 95°C H-bonds template → Annealing 50-65°C primers forward/reverse oligonucleotides bind complementary sequences flanking target → Extension 72°C Thermus aquaticus Taq polymerase heat stable 5\'→3\' dNTPs added); Applications: PCR HIV viral load detect; forensic STR short tandem repeats CODIS DNA fingerprinting crime scene paternity VNTR gel electrophoresis (agarose gel DNA negative phosphate → anode positive; smaller fragments migrate faster bands visible stain ethidium bromide UV transilluminator; Southern blot DNA / Northern blot RNA / Western blot protein antibodies); DNA sequencing Sanger chain terminator dideoxynucleotide ddNTP fluorescent capillary electrophoresis → Human Genome Project 3 billion bp 2003 1% protein coding ~20 000 genes ENCODE 80% function non coding regulatory; Next generation sequencing Illumina whole genome cheap fast $1000 genome now personalised medicine sequence cancer patient tumour mutations treatment target specific EGFR Cetuximab breast BRCA1/2 PARP inhibitors prophylactic mastectomy Angelina Jolie; Vectors: Plasmids (pBR322 / pUC ori + antibiotic resistance gene ampR tetR selectable marker; multiple cloning site MCS); Expression vector extra features promoter (T7 lac operator IPTG induction) ribosome binding site His-tag purification; Viral vectors retrovirus/lentivirus integrate random genome gene therapy ex vivo SCID X-linked ADA deficiency first gene therapy 1990 Ashanti DeSilva; Adeno-associated virus AAV non-integrating episomal stable non-dividing cells retinal blindness Luxturna first FDA gene therapy 2017 850k $; Cas9 CRISPR Clustered regularly interspaced palindromic repeats prokaryote immune spacer sequences homologous invaders phage plasmid; Guide RNA gRNA complementary target NGG PAM adjacent → SpCas9 double stranded break cut precise location → repair NHEJ error prone indels frameshift gene knockout disable; HDR Homology Directed Repair donor template precise knockin edit single base pair sickle cell β-globin gene edit ex vivo → reinfuse patients CTX001 Vertex/CRISPR Therapeutics FDA approved 2023 transfusion independent β-Thal major sickle cell disease; ethical issues germline edits heritable embryo Lulu Nana 2018 He Jiankui CCR5 HIV resistance condemned international community; germline ban somatic allowed/ GMO foods Flavr Savr tomato delayed ripening antisense polygalacturonase soften; Golden Rice 2 Syngenta engineered psy+ crtI genes maize daffodil pathway endosperm β-carotene provitamin A malnutrition blindness; Herbicide tolerant Roundup Ready soybeans glyphosate target EPSPS CP4 Agrobacterium; Bt cotton insecticidal cry toxin bacillus thuringiensis no need pesticide; Concerns: environmental escape outcross wild relatives superweeds; GM labelling EU mandatory; biodiversity pollinator bee decline neonicotinoids pesticides. Bioinformatics databases NCBI GenBank DNA/EMBL/DDBJ; BLAST alignment identify gene functions; Proteomics mass spectrometry 2D electrophoresis identify thousands proteins cell at once; Personal genomics 23andMe ancestry BRCA risks; pharmacogenomics warfarin dose genetic CYP2C9/VKORC1 test avoid bleeding/thrombosis; Gene therapy cures vs enhancement designer babies slippery slope GATTACA somatic vs germline distinction; Synthetic biology minimal cell JCVI-syn3.0 473 genes Craig Venter; mRNA vaccine Pfizer/BioNTech Moderna COVID-19 spike protein LNP lipid nanoparticle deliver mRNA host cells produce antigen MHC I cellular + antibody response 95% efficacy mRNA technology revolution future cancer personalized neoantigen therapies, HIV, influenza universal flu)',25,[5,15,25,35,45,55,65,75,85,95,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120]],
-    ['B-A2-26','A2 T14 Biotechnology / Gene tech continuation extra (DNA probes microarrays single nucleotide polymorphisms SNPs GWAS genome wide association studies identify risk alleles common diseases diabetes HTN Alzheimer ApoE ε4; RNAi interference siRNA miRNA gene silencing post-transcription knockdown specific genes therapeutic Huntington\'s disease HTT allele; Antibody monoclonal antibody mAb hybridoma: mouse B cell (specific antibody) fused myeloma cancer cell immortal HGPRT HAT medium selection → hybrid clones → screen ELISA supernatant mAbs pure therapeutic: Herceptin Trastuzumab HER2+ breast cancer blocks tyrosine kinase receptor; Pembrolizumab anti-PD-1 checkpoint inhibitor immune oncology release T cells brake attack cancer; Adalimumab Humira anti-TNFα rheumatoid arthritis autoimmune monoclonal market top selling; diagnostic pregnancy test hCG monoclonal sandwich lateral flow immunoassay: mobile Ab gold conjugated + test line immobilized hCG capture antibody 2 sites same hCG molecule sandwich double antibody positive line; control line captures excess mobile gold; Enzyme Linked Immunosorbent Assay ELISA quantitate antigens/antibodies colorimetric plate reader 96 well format; ELISA sandwich antibody-antigen-antibody-enzyme conjugate substrate TMB blue = amount proportional absorbance 450nm applications diagnostics HIV p24 antigen; COVID lateral flow test antigen 15min; PCR quantitative real time qPCR SYBR green fluorescent dye binds double stranded DNA Ct threshold cycle quantitative number copies viral RNA RT-PCR reverse transcriptase RNA → cDNA then amplify Covid test swab diagnosis; Nanopore Oxford MinION portable sequencing long reads real time field outbreaks ebola zika metagenomics; Soil microbiome 16S rRNA amplicon sequencing bacteria diversity; Fungal ITS; Microbiome gut bacteria faecal transplant C. difficile infections cure 90%+ Clostridium difficile recurrent antibiotics disrupt microbiome; Fermentation industrial biotechnology: Batch vs continuous fermenter sterile feedstock inoculum optimum T/pH/aeration dissolved oxygen probe downstream processing centrifugation filtration chromatography purification lyophilisation aseptic prevent contamination; Penicillin Fleming Florey Chain WWII mass produced Penicillium chrysogenum fed batch; Mycoprotein Quorn Fusarium venenatum fungus high protein low fat meat substitute vegetarians continuous aerobic fermentation filter harvesting glucose ammonia nitrogen source Bioreactor design; Genetically engineered microbes produce insulin Humulin recombinant E. coli 1978 Genentech Eli Lilly replaced animal insulin pig beef side effects allergy religious vegetarian; Factor IX haemophilia B transgenic goats milk milk secretion; Human albumin rice endosperm oral tolerance; Spider silk transgenic goats milk biosteel military bulletproof body armour lightweight; Xenotransplantation genetic engineering pig knock out alpha gal sugar retrovirus PERV safe human transplant organ shortage wait list 100k US; Organs on chips microfluidic mimic organ physiology (lung-on-a-chip heart-on-a-chip) reduce animal testing 3Rs Replacement Reduction Refinement; Ethics embryo experimentation 14 day rule UK; mitochondrial replacement therapy three person baby maternal spindle transfer avoid Leigh syndrome defective mitochondria mother healthy donor mitochondria UK legal 2016 Newcastle; Ectogenesis artificial womb placenta like device premature lamb 28 weeks 4 weeks grow future; De-extinction woolly mammoth CRISPR edit Asian elephant genome mammoth genes cold tolerance tundra restore permafrost Colossal Biosciences; Passenger pigeon Revive & Restore; Jurassic park amber DNA unlikely half life 521 years; plus synthetic biology BioBricks standardised parts iGEM competition students Do-it-yourself biohacker garage biosafety risk classification BSL-1-4 pathogens smallpox destruction variola debates; Gain-of-Function research viruses COVID lab leak controversy biosecurity; Dual Use Research Concern DURC gain function avian influenza H5N1 transmissible ferrets airborne pandemic preparedness benefit risks oversight WHO governance)',20,[6,16,26,36,46,56,66,76,86,96,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120]],
-    ['B-A2-27','A2 T15 Classification & Continuation of Selection + practical exams skill (Investigate factors: T on enzyme activity / pH / substrate; Variables, identify limitations, improvements, safety hazards, references, statistical analysis p value 0.05 significance conclusions; mean/sd error bars ±2 SEM 95% CI overlap or not; practical skills endorsed CPAC 1-5 competencies; Evaluative/Quantitative/Qualitative/Prep tasks; paper 5 planning analysis evaluation draw graph correctly axes title units labelled plot line best fit smooth curve error bars calculate gradient method units extrapolation interpolation read values)', 10,[7,17,27,37,47,57,67,77,87,97]],
+    /**
+     * 获取某科目所有 topic-code 列表
+     * @param {string} subjectKey
+     * @returns {Array<string>}
+     */
+    getAllTopicCodes: function(subjectKey) {
+      var codes = [];
+      eachTopic(subjectKey, function(topic) {
+        codes.push(topic.code);
+      });
+      return codes;
+    },
 
-    // Economics 9708 AS / A2
-    ['E-AS-11','AS Basic economic problem & resource allocation (Scarcity: unlimited wants vs finite resources land/labour/capital/enterprise; Opportunity cost = value next best alternative sacrificed examples; Free market vs command/planned vs mixed economy strengths weaknesses; Production Possibilities Curve frontier concave outward increasing opportunity cost: points on curve efficient maximum output combinations; inside unemployed waste inefficient shift out = economic growth technology labour productivity; Long run vs short run; Ceteris paribus assumption. Specialization + division of labour Adam Smith pin factory 1776 productivity ↑: advantages skill acquisition practice save time switch tasks capital equipment consistent quality → international trade absolute advantage David Ricardo comparative opportunity cost lower produce good gains trade consumption outside PPC; Disadvantages worker dehumanisation monotony alienation repetitive repetitive strain unemployable narrow skill; Money functions medium of exchange unit of account store of value standard deferred payment; barter problem double coincidence wants fiat vs commodity money bitcoin debate crypto store of value volatility)',18,[1,11,21,31,41,51,61,81]],
-    ['E-AS-12','AS The price system & the micro economy: Demand & Supply & Elasticities + Government intervention (Individual demand schedule → curve price relationship ceteris paribus; Law of demand inverse price ↑ Qd ↓ income/substitution effect normal/inferior goods; Shifts demand curve factors (changes real income/ tastes/ advertising/ price substitutes/ complements (joint derived demand composite) / expectations future price rise → panic hoard; Population size structure demographics; Interest rates big ticket durables credit mortgages; Supply curve Law of supply price ↑ profit ↑ Qs ↑ direct positive; Shifts supply: costs raw materials energy wages COP, technology TFP productivity, number suppliers industry, government subsidies indirect taxes (VAT ad valorem specific), expectations, weather climate agriculture, time frame short run vs long run inelastic PES fixed capacity planting season crops. Equilibrium price quantity market clearing shortage disequilibrium surplus mechanism rationing invisible hand Adam Smith. Elasticities: PED Price elasticity demand = %ΔQd / %ΔP elastic >1 flatter perfectly horizontal perfectly vertical inelastic = 0 perfectly inelastic diabetic insulin factors: substitutes availability (% budget income? 1% salt vs 20% car elastic; time horizon longer more elastic durable vs non durables bread less elastic week month PED varies along straight-line demand midpoint = 1 upper >1 lower <1; Revenue TR = P × Q: maximum PED unit elastic = 1 elastic price ↓ revenue ↑ inelastic price ↑ TR ↑; primary commodities PED inelastic less substitutes manufactured PED elastic → fluctuations farmers income government intervene buffer stock minimum guaranteed price floor EU CAP Common Agricultural Policy overproduction wine lake butter mountains reform reduce subsidies decoupled production single payment scheme environmental cross-compliance. XED Cross elasticity: Substitutes positive e.g. Coke/Pepsi XED>0; Complements negative printer/ink -ve large magnitude strong complements; unrelated zero; YED Income elasticity normal goods positive YED>0 (necessities 0<YED<1 income inelastic Engel\'s law share food ↓income ↑; luxuries YED>1 income elastic inferior goods negative YED<0 generic value store brands recession sales rise. PES Price Elasticity of Supply %ΔQs/%ΔP determinants spare capacity unemployed; stocks inventory storage perishable agriculture low PES; time period very short momentary perfectly inelastic vertical; long run supply more elastic firms enter invest new capacity. Government Intervention: Indirect tax = cost supply left shift higher price less quantity; Tax incidence burden: Ped < Pes consumers bear most tax cigarette alcohol demand inelastic producers can pass; Ped> Pes producers absorb most. Specific unit £x per pack vs ad valorem % of price VAT 20%; Subsidies payment government reduce COP supply right shift lower price more quantity farmers renewable energy green solar panels; Deadweight welfare loss triangles taxation subsidy distortion allocative inefficiency community surplus less; Price ceilings maximum rent control affordable housing shortage excess demand = waiting lists queues black market informal subletting discrimination landlords low maintenance quality deteriorate; Price floors minimum living wage NLW national living age >23 £11.58 2025 UK excess supply unemployment low skilled teenage surplus monopsony employers trade unions bargaining countervailing power minimum wage above equilibrium little unemployment effect monopsony diagram labour economics; Transfer payments welfare universal credit state pension not included GDP because nothing produced in exchange; Direct progressive income tax 20/40/45 brackets; Indirect regressive VAT poor spend higher % income; Equity vs efficiency trade off high disincentive Laffer curve optimal max tax revenue 70% top IMF economists evidence trickle-down economics debate Thomas Piketty Capital r>g inequality inequality ↑ since 1980s wealth inequality higher Gini coefficient UK 0.35 disposable Gini US 0.39 Nordic 0.25-0.28; Equality of opportunity vs outcome Rawls difference principle veil of ignorance maximin least well off; Nozick libertarian night watchman state taxation slavery only minimal night watchman; Absolute poverty <$2.15/day World Bank updated 2022 from $1.90 PPP; relative poverty household <60% median income UK after housing costs AHC poverty rate ~22% children pensioners fuel poverty fuel poor 10%+ income heating cold homes Wales Scotland; Multiple deprivation index IMD health education crime barriers housing environment geographic north south divide UK deindustrialisation structural unemployment; Millennium Development Goals MDG 2000→2015 half extreme poverty success global China poverty reduction 800m lifted out; Sustainable Development Goals SDGs 17 goals 2030 No Poverty Zero hunger good health wellbeing education gender equality clean water affordable clean energy decent work economic growth industry innovation reduced inequalities sustainable cities responsible consumption climate action life below water on land peace justice strong institutions partnerships)',25,[2,12,22,32,42,52,62,82,91,92,101,102,106,110,112,115,116,118,119,120]],
-    ['E-AS-13','AS Government microeconomic intervention & market failure / Externalities (Market failure free market fails allocate resources efficiently Pareto optimum impossible reallocate make someone better without making worse; Allocative efficiency P=MC; Productive efficiency AC minimum; X-inefficiency monopoly lazy not min costs; Dynamic efficiency innovation long run LRAC↓ technology. Sources failure: 1 Externalities positive/negative production consumption spillover third party not price mechanism; Marginal private cost/benefit MPC MPB vs social MSC MSB; welfare loss triangles deadweight welfare loss underprovided positive/ overprovided negative examples: Smoking negative consumption external MSC>MPC overconsumed; Vaccination positive consumption MSB>MPB under consumed herd immunity; Congestion road pricing negative production London ULEZ Ultra Low Emission Zone; Cambridge congestion charge debate UK. Solutions: Pigouvian tax size equal marginal external cost MEC internalise externality = social cost price signals; Tradable pollution permits cap and trade EU ETS Emissions Trading System carbon price ceiling floor CO2 companies exceed buy permits undersell incentive green tech cost effective cheapest reduce first; Property rights Coase Theorem low transaction costs assign clear ownership private bargaining efficient regardless initial allocation problem large numbers public free rider; State provision public goods non-rival non-excludable street lighting national defence free rider problem market missing → Gov must provide compulsory taxation finance. Quasi-public goods roads motorways toll exclusion possible TV exclusion paywall satellite; Merit goods under-consumed education healthcare government information failure people underestimate long-term benefits myopia poor paternalism state intervene provide free at point use NHS UK funded general taxation outcomes life expectancy 81 vs US 77 spends per capita double; Demerit goods over-consumed drugs alcohol tobacco information failure long run harm private costs underestimated; government tax/ban/age limits/advertising ban tobacco plain packaging Australia 2012 precedent; Regulation: maximum pollution limit laws ban CFC Montreal Protocol 1987 ozone layer recovery by 2060s success story global cooperation environmental protocol success! Information failure asymmetric adverse selection (lemons problem Akerlof 1970 used cars good cars withdraw market only lemons; Health insurance sick people buy more adverse selection death spiral uninsurable without mandate ACA Obama care individual mandate penalty. Moral hazard insured behave reckless care less after buy insurance overuse healthcare moral hazard copays deductibles coinsurance share costs reduce; Principal agent problem shareholders vs directors CEO pay empire building perquisites asymmetric information corporate governance monitoring; regulation remuneration committees say on pay shareholders binding votes UK; Mergers monopoly monopoly CMA Competition Markets Authority UK investigate mergers >25% market share SLC substantial lessening of competition remedies behavioural price caps structural divestiture break up; Natural monopoly utilities water network rail high fixed costs economies of scale duplicating networks waste RPI-X price cap regulation Ofwat Ofgem Ofcom sector regulators; Government failure also occurs: information poor knowledge unintended consequences law unexpected effects mini-budget September 2022 Truss Kwarteng unfunded tax cuts £45bn pound crashed gilt yields spike pension funds LDI crisis Bank England emergency intervention stability; Regulatory capture regulator friend industry protect not public interest revolving door between regulator regulated lobbying political donations; Public choice theory bureaucrats Niskanen max budget empire waste vote seeking politicians populist short run election cycle before election spend boom austerity after; Public sector inefficiency lack profit motive waste state owned privatised Margaret Thatcher 1980s privatisation British Telecom BP British Airways Rolls Royce water electricity gas British Rail 1994 John Major; PFI Private Finance Initiative public private partnerships hospital schools private company design build maintain 30 years government pay rent annual fee risk transfer but criticism expensive total repayments 5x cost debt kept off balance sheet Enron style accounting; Shadow economy informal tax evasion black market cash undeclared work drug human trafficking illegal measured electricity consumption demand monetary method M0/GDP ratio; Size UK shadow economy ~10% GDP; Mediterranean countries Greece Italy 25%; Developing nations >40% causes high taxes overregulation corruption bureaucracy ease doing business World Bank index Singapore New Zealand Denmark top; Venezuela hyperinflation Zimbabwae 100 trillion dollar demonetisation India 2016 500/1000 rupee notes replace digital payments UPI India success fast digital public infrastructure DPIs identity Aadhaar 1.4 billion + UPI + CoWIN vaccination certificates platform model G20 Global Stack; Pros Cons)',20,[3,13,23,33,43,53,63,71,83,93,103,105,107,111,113,114,117,120]],
-    ['E-AS-14','AS Macroeconomic basic indicators: National Income statistics + Inflation + Unemployment (GDP vs GNI Gross National Income includes remittances migrants; Nominal vs Real GDP chain volume measure deflator inflation adjust base year 2019=100 ONS; Per capita GDP/population compare countries living standards not equal distribution; Purchasing Power Parity PPP compare exchange rates adjusted Big Mac Index The Economist under/overvalued currencies; HDI Human Development Index UNDP 0-1 three dimensions income GNI per capita PPP, life expectancy birth, education mean expected years schooling top Norway Australia Switzerland; limitations HDI ignores inequality political freedoms gender GDI Gender Development Index; Green GDP account environmental costs carbon; Genuine progress indicator GPI volunteer housework subtract crime/pollution/commuting hours better measure than GDP Easterlin paradox income above threshold ~$15k 2010 PPP happiness not increases much further set point adaption hedonic treadmill; Problems measurement GDP: home production childcare cooking volunteer work underreported; shadow economy illegal drugs smuggling prostitution; externalities pollution China 7% GDP environmental costs; quality improvements new products smartphones computers hedonic pricing adjust quality BLS; Inflation measurement CPI Consumer Price Index ONS 700 items basket of goods representative weights updated each year Living Costs Food Survey. RPI Retail Prices Index mortgage interest included housing costs different CPIH preferred UK CPI+owner occupied housing. Calculation weights price index weighted average expenditure shares Laspeyres base year Paasche current Fisher ideal geometric mean. Limitations: substitution bias new goods quality outlet substitution Big tech digital; CPI does not include housing costs debate; Headline vs Core inflation excludes volatile food energy trend better signal; Causes inflation Demand-pull too much money chasing too few goods Monetarism MV=PY Fisher equation of exchange MV money supply × velocity = P price level × Y real output; assumption V constant Y full employment long run; Milton Friedman Chicago school "inflation always everywhere monetary phenomenon" → Central bank independence control M3 Thatcher 1980s medium term financial strategy targets; Cost-push supply side shock oil 1973 Yom Kippur War Arab OPEC oil embargo 4x price stagflation stagnation growth + inflation 1970s UK 25% inflation 1975 winter discontent 1979 strikes "Crisis? What crisis?" Callaghan; Wage push spiral cost of living COL pay claims 10%+; Imported inflation currency depreciation import costs energy food; Excess growth broad money QE quantitative easing BOE 2009-2022 £895 billion government bonds corporate inflated asset prices house prices stock market bubbles wealth inequality. Consequences inflation: shoe leather costs more trips bank less cash; menu costs reprint price lists restaurants; income redistribution borrowers gain lenders lose real value debt eroded; government gain seigniorage profit printing money inflation tax; fiscal drag nominal wages rise drag people higher tax brackets stealth tax by 2028 HMRC freezing thresholds £50bn extra revenue OBR; Uncertainty discourages investment planning; International competitiveness loss exports more expensive imports cheaper current account deficit currency depreciate further depreciation spiral. Deflation bad debt deflation Japan lost 2 decades 1991-2011 balance sheet recession asset bubble burst private sector aggressively deleveraging repay debt no spending liquidity trap zero lower bound rates ZLB can not cut more deflation increases real debt burden harder repay; Helicopter money direct transfers people Milton Friedman parable; Unemployment: Claimant Count JSA Universal Credit measure vs LFS Labour Force Survey ILO definition 4 weeks looking available start. Types: 1 Frictional search transitional between jobs info imperfect 2 Structural occupational/geographical immobility deindustrialisation coal mining areas Wales Scotland north skills mismatch retraining 3 Cyclical demand deficient Keynesian recession falls AD real GDP negative growth 2 quarters; 4 Seasonal tourism farming Santa Christmas; 5 Classical/Real Wage classical real wage above equilibrium minimum wage trade unions; 6 Voluntary choose not work benefit replacement ratio 90% replacement too generous incentive poverty trap marginal deduction rates >80% UC withdrawal + tax; 7 Underemployment zero hour contracts gig economy Deliveroo/Uber part-time want full-time. NAIRU non accelerating inflation rate unemployment equilibrium natural rate long run Phillips curve vertical. Short run Phillips curve trade-off inflation unemployment A W Phillips 1958 UK 1861-1957 data; Phelps/Friedman 1968 vertical LRPC expectations augmented; Adaptive expectations backward looking stagflation 1970s occurred simultaneously both high invalidate simple trade. Rational expectations forward looking Lucas critique policy anticipated no output effect only prices new classical macroeconomics Ricardian Equivalence forward consumers save tax cuts future tax rises no effect fiscal multiplier; Hysteresis unemployment becomes structural long-term unemployed skills atrophy deskilled duration dependence scarring youth unemployment NEET not education employment training lifetime scars lower wages future mental health drug deaths of despair despair white working class America Case Deaton Princeton economists; Okun\'s law 1% cyclical unemployment above natural = gap potential GDP -2% output lost; Beveridge curve vacancies unemployment inverse relationship frictions mismatch; Active labour market policies ALMPs: apprenticeships training subsidies Kickstart scheme 2020 youth; JSA conditionality sanctions; job centres plus Work Programme EU youth guarantee)',22,[4,14,24,34,44,54,64,72,84,94,102,104,106,108,109,112,115,116,118,119,120]],
-    ['E-AS-15','AS Macroeconomic policy objectives & institutions / International trade preliminary balance payments (Macro objectives: (1) Strong sustainable growth trend non inflationary; (2) Low stable price inflation CPI 2% ±1% UK target symmetrical MPC remit; (3) Low unemployment full employment NAIRU; (4) Balance of payments equilibrium sustainable current account deficit financed capital financial inflows not persistent; (5) Reduced inequalities Gini coefficient progressive tax transfers; (6) Balanced budget medium term fiscal sustainability debt/GDP; (7) Environmental sustainability net zero carbon 2050 UK legal obligation Climate Change Act 2008 80%↓ 1990 levels updated net zero; trade-offs Phillips curve conflicts short run inflation growth unemployment inequality equity efficiency environment jobs green new deal no conflicts long run. Macroeconomic policy instruments: Fiscal policy
+    /**
+     * 从 DOM 元素数组反向映射 questionIds（解析每题的 topic-code 标签）。
+     *
+     * 解析优先级：
+     *   1. 元素 data-topic-code / data-topic 属性
+     *   2. 子元素 .q-num / .q-topic 文本中 【code】 括号内容
+     *   3. 子元素 [data-topic-code] 属性
+     *
+     * qid 优先级：元素 id > data-qid > 'q-' + (index+1)
+     *
+     * @param {string} subjectKey
+     * @param {NodeList|Array} questions - .q DOM 元素集合
+     * @returns {object} { topicCode: topic } 已填充 questionIds 的 topic 映射
+     */
+    buildQuestionMap: function(subjectKey, questions) {
+      var sub = subjects[subjectKey];
+      if (!sub) return {};
+
+      // 重置所有 questionIds
+      sub.papers.forEach(function(paper) {
+        paper.topics.forEach(function(t) {
+          t.questionIds = [];
+        });
+      });
+
+      var codeMap = buildCodeMap(subjectKey);
+
+      // 兼容 NodeList 与 Array
+      var nodes = questions;
+      if (nodes && typeof nodes.length === 'number' && !Array.isArray(nodes)) {
+        nodes = Array.prototype.slice.call(nodes);
+      }
+      if (!Array.isArray(nodes)) nodes = [];
+
+      nodes.forEach(function(el, i) {
+        if (!el) return;
+
+        // 解析 qid
+        var qid = '';
+        if (el.id) {
+          qid = el.id;
+        } else if (el.getAttribute && el.getAttribute('data-qid')) {
+          qid = el.getAttribute('data-qid');
+        } else {
+          qid = 'q-' + (i + 1);
+        }
+
+        // 解析 topic-code
+        var code = '';
+        if (el.getAttribute) {
+          code = el.getAttribute('data-topic-code') || el.getAttribute('data-topic') || '';
+        }
+
+        if (!code && el.querySelector) {
+          // 方式2：.q-num / .q-topic 文本中的 【...】
+          var qNum = el.querySelector('.q-num, .q-topic, .topic-code');
+          if (qNum) {
+            var txt = qNum.textContent || qNum.innerText || '';
+            var m = txt.match(/[\u3010\u3011\u3008\u3009【】]([A-Za-z0-9][A-Za-z0-9-]*)[\u3010\u3011\u3008\u3009【】]/);
+            if (m) {
+              code = m[1];
+            } else {
+              // 兜底：尝试匹配形如 "topic=XXX" 或裸 code（含连字符且全大写字母开头）
+              var m2 = txt.match(/topic=([A-Za-z0-9-]+)/);
+              if (m2) code = m2[1];
+            }
+          }
+          // 方式3：子元素 data-topic-code 属性
+          if (!code) {
+            var holder = el.querySelector('[data-topic-code]');
+            if (holder) code = holder.getAttribute('data-topic-code');
+          }
+        }
+
+        if (code && codeMap[code]) {
+          codeMap[code].questionIds.push(qid);
+        }
+      });
+
+      return codeMap;
+    }
+  };
+
+  // 挂载到全局
+  window.SYLLABUS_DATA = api;
+})();

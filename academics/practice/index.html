@@ -152,11 +152,11 @@
 <table>
   <tr><th>版本</th><th>目标</th><th>核心输出</th><th>状态</th></tr>
   <tr><td>v10</td><td>题库定稿（8 科 × 120 题 = 960 题）</td><td>Practice 题目覆盖 + 解析 + 计时 + 难度 + 模拟卷</td><td><span class="badge badge-dashed">Done</span></td></tr>
-  <tr><td>v11</td><td>考纲按官方结构细分到 Topic 级（IB 6 科组 / AL 5 科 / SAT R&W+Math Domain / AP CED Unit 等）</td><td>8 科 Syllabus 均不再是示例，完整拆 Paper/Unit/Topic 三级</td><td><span class="badge">Current</span></td></tr>
-  <tr><td>v12</td><td>考纲 Topic ↔ Practice 题目双向对齐</td><td>每题标注 topic code；Syllabus 每个 topic 列出对应 Q 编号 + 锚点跳转</td><td><span class="badge badge-dashed">Next</span></td></tr>
-  <tr><td>v13</td><td>结构化考纲 JSON 数据层</td><td>js/syllabus-data.js：subject → unit → topic → sub-topic，含权重/对应题 ID 映射</td><td><span class="badge badge-dashed">Planned</span></td></tr>
-  <tr><td>v14</td><td>按 Topic 分块局部刷题入口</td><td>Syllabus 每个 topic 加"刷本题(X 题)"按钮，URL 参数筛选跳 practice 局部练习</td><td><span class="badge badge-dashed">Planned</span></td></tr>
-  <tr><td>v15</td><td>考纲覆盖率仪表盘 + 自适应路径</td><td>Dashboard 新增 Coverage 热力图 + 薄弱 topic 排序 + 个性化 Study Schedule</td><td><span class="badge badge-dashed">Planned</span></td></tr>
+  <tr><td>v11</td><td>考纲按官方结构细分到 Topic 级</td><td>8 科 Syllabus 完整拆 Paper/Unit/Topic 三级</td><td><span class="badge badge-dashed">Done</span></td></tr>
+  <tr><td>v12</td><td>考纲 Topic ↔ Practice 题目双向对齐</td><td>每题标注 topic-code；Syllabus 每个 topic 列出对应 Q 锚点跳转</td><td><span class="badge badge-dashed">Done</span></td></tr>
+  <tr><td>v13</td><td>结构化考纲 JSON 数据层</td><td>js/syllabus-data.js：8科418个topic含权重/前置依赖/题映射API</td><td><span class="badge badge-dashed">Done</span></td></tr>
+  <tr><td>v14</td><td>按 Topic 分块局部刷题入口</td><td>practice-engine.js v5：?topic=xxx URL参数筛选 + 筛选banner</td><td><span class="badge badge-dashed">Done</span></td></tr>
+  <tr><td>v15</td><td>考纲覆盖率仪表盘 + 自适应路径</td><td>Dashboard v15：Coverage热力图 + 薄弱topic排序 + Study Schedule</td><td><span class="badge">Current</span></td></tr>
 </table>
 
 <div class="box-dashed" style="margin-top:16px;">
