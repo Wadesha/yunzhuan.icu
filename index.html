@@ -209,24 +209,13 @@
             min-width: 60px;
         }
         .version-list .status {
-            font-size: 0.72rem;
-            min-width: 60px;
-            padding: 2px 8px;
-            border: 1px solid #111111;
-            border-radius: 2px;
-            text-align: center;
-            color: #111111;
-            background: #ffffff;
-            font-weight: 600;
-            height: fit-content;
-            align-self: center;
+            font-size: 0.82rem;
+            min-width: 48px;
+            color: #888888;
+            font-weight: 400;
+            align-self: baseline;
         }
-        /* 通过边框粗细区分版本状态，避免彩色文字 */
-        .version-list li .status { border-width: 1px; font-weight: 500; }
-        .version-list li .status.done { border-width: 3px; font-weight: 700; }
-        .version-list li .status.active { border-width: 2px dashed #111111; font-weight: 700; }
-        .version-list li .status.planned { border-width: 1px dashed #888888; color: #555555; }
-        .version-list li .status.idea { border-width: 1px dotted #888888; color: #888888; }
+        .version-list li .status.done { color: #111111; font-weight: 700; }
         .version-list .desc {
             color: #555555;
         }
