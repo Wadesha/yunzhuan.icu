@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>推进原理 - Propulsion - yunzhuan.icu</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 900px; margin: 0 auto; padding: 20px 16px; background: #f5f5f5; color: #333; }
+        .back-link { color: #667eea; text-decoration: none; font-size: 0.85rem; margin-bottom: 12px; display: inline-block; }
+        .back-link:hover { text-decoration: underline; }
+        h1 { color: #333; margin-bottom: 4px; font-size: 1.4rem; }
+        .en-name { color: #888; font-size: 0.95rem; margin-bottom: 14px; font-weight: normal; }
+        .section { background: white; border-radius: 8px; padding: 14px 18px; margin-bottom: 10px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+        .section h2 { color: #667eea; margin-bottom: 8px; font-size: 1rem; font-weight: 600; }
+        .section h2 .en { color: #999; font-size: 0.8rem; font-weight: normal; }
+        .section p { color: #333; line-height: 1.7; font-size: 0.92rem; }
+        .meta { font-size: 0.82rem; color: #888; margin-bottom: 8px; }
+        .footer { text-align: center; margin-top: 20px; color: #999; font-size: 0.8rem; }
+    </style>
+<link rel="stylesheet" href="/css/collapse.css">
+</head>
+<body>
+    <a href="../../index.html" class="back-link">← 返回首页</a>
+    <h1>推进原理</h1>
+    <p class="en-name">Propulsion</p>
+    <div class="section">
+        <h2>课程介绍 <span class="en">Course Introduction</span></h2>
+        <p class="meta">学分：3 | 先修课：流体力学、工程热力学 | 学期：大三下</p>
+        <p>本课程系统讲授航空航天推进系统的基本原理与工作特性。内容包括推进系统分类与性能参数，活塞式航空发动机原理，喷气发动机基本理论与热力循环，涡轮喷气发动机、涡轮风扇发动机、涡轮螺旋桨发动机的结构与工作原理，冲压发动机与火箭发动机基础。课程强调推进系统的性能分析与参数匹配，使学生掌握航空发动机的基本设计思想与性能评估方法。</p>
+        <p style="margin-top:8px;">This course systematically teaches fundamental principles and operating characteristics of aerospace propulsion systems. Topics include propulsion system classification and performance parameters, piston aircraft engines, jet engine theory and thermodynamic cycles, turbojet, turbofan, and turboprop engine structures and principles, ramjet and rocket engine fundamentals. The course emphasizes performance analysis and parameter matching, equipping students with basic design concepts and performance evaluation methods for aero engines.</p>
+    </div>
+    <div class="section">
+        <h2>大作业 <span class="en">Final Project</span></h2>
+        <div>
+<p class="meta">作业标题：涡轮风扇发动机总体性能分析与循环设计 / Turbofan Engine Performance Analysis and Cycle Design</p>
+        <p>针对给定飞行任务进行涡轮风扇发动机循环参数设计与性能评估。计算推力、耗油率并分析涵道比与压比对性能的影响。</p>
+        <p style="margin-top:8px;">Design cycle parameters and evaluate performance of a turbofan engine for a given flight mission. Compute thrust, specific fuel consumption, and analyze the effects of bypass ratio and pressure ratio on performance.</p>
+        </div>
+    </div>
+    <div class="section">
+        <h2>实施步骤 <span class="en">Implementation Steps</span></h2>
+<div>
+<div style="background:#f0f4ff;padding:10px 14px;border-radius:6px;margin-bottom:12px;border-left:3px solid #667eea;font-size:0.88rem;">
+<b>📋 示例</b>：设计一个涡轮风扇发动机的循环参数，比如推力150kN的民用涡扇发动机。你需要用Brayton循环模型计算总压比、涵道比和涡轮前温度，然后分析这些参数对推力和耗油率的影响，找到最佳设计点让耗油率降到最低。
+</div>
+
+
+
+<div class="step-item">
+    <div class="step-number">步骤 1</div>
+    <div class="step-title">任务需求分析</div>
+    <div class="step-desc">
+        本步骤对飞行器飞行品质进行深入分析，评估系统的稳定性、阻尼特性和操纵响应。飞行品质分析是飞行器设计的关键环节，依据MIL-STD-1797或GJB标准评价等级，为控制律设计提供指标要求。通过特征值分析、频域响应和时域仿真多维度评估。
+        <br><br>
+        • 运用MATLAB/Simulink进行特征值分析，计算短周期、长周期、滚转、偏航等模态的阻尼比和自然频率<br>• 绘制Bode图和根轨迹，分析系统稳定性裕度，确定相位裕度和增益裕度<br>• 按照MIL-STD-1797B标准评定飞行品质等级，区分Level 1/2/3飞行品质
+    </div>
+    <div class="step-output">产出：飞行品质分析报告（含特征值表、模态参数、Bode图、根轨迹、品质等级评定） ｜ 质量标准：分析方法符合规范、模态参数准确、品质等级评定正确</div>
+</div>
+<div class="step-item">
+    <div class="step-number">步骤 2</div>
+    <div class="step-title">循环参数选择</div>
+    <div class="step-desc">
+        本步骤是航空航天工程项目的关键环节，通过专业方法和工具完成特定任务目标。航空航天工程强调安全性、可靠性和精确性，每一步都需要严谨的理论推导和充分的验证。采用行业标准方法和专业软件工具确保结果的准确性和工程实用性。
+        <br><br>
+        • 明确任务目标和技术指标，依据航空航天相关标准制定详细的实施方案和技术路线<br>• 使用专业软件工具（MATLAB/ANSYS/Fluent/CATIA等）进行建模、计算或仿真分析<br>• 通过试验数据或文献结果进行对比验证，确保结果可靠并满足工程要求
+    </div>
+    <div class="step-output">产出：专业技术报告（含方法说明、计算过程、结果数据、验证对比、结论建议） ｜ 质量标准：方法科学规范、数据准确可靠、结论有据可依、满足工程标准</div>
+</div>
+<div class="step-item">
+    <div class="step-number">步骤 3</div>
+    <div class="step-title">部件性能计算</div>
+    <div class="step-desc">
+        本步骤是航空航天工程项目的关键环节，通过专业方法和工具完成特定任务目标。航空航天工程强调安全性、可靠性和精确性，每一步都需要严谨的理论推导和充分的验证。采用行业标准方法和专业软件工具确保结果的准确性和工程实用性。
+        <br><br>
+        • 明确任务目标和技术指标，依据航空航天相关标准制定详细的实施方案和技术路线<br>• 使用专业软件工具（MATLAB/ANSYS/Fluent/CATIA等）进行建模、计算或仿真分析<br>• 通过试验数据或文献结果进行对比验证，确保结果可靠并满足工程要求
+    </div>
+    <div class="step-output">产出：专业技术报告（含方法说明、计算过程、结果数据、验证对比、结论建议） ｜ 质量标准：方法科学规范、数据准确可靠、结论有据可依、满足工程标准</div>
+</div>
+<div class="step-item">
+    <div class="step-number">步骤 4</div>
+    <div class="step-title">整机性能评估</div>
+    <div class="step-desc">
+        本步骤是航空航天工程项目的关键环节，通过专业方法和工具完成特定任务目标。航空航天工程强调安全性、可靠性和精确性，每一步都需要严谨的理论推导和充分的验证。采用行业标准方法和专业软件工具确保结果的准确性和工程实用性。
+        <br><br>
+        • 明确任务目标和技术指标，依据航空航天相关标准制定详细的实施方案和技术路线<br>• 使用专业软件工具（MATLAB/ANSYS/Fluent/CATIA等）进行建模、计算或仿真分析<br>• 通过试验数据或文献结果进行对比验证，确保结果可靠并满足工程要求
+    </div>
+    <div class="step-output">产出：专业技术报告（含方法说明、计算过程、结果数据、验证对比、结论建议） ｜ 质量标准：方法科学规范、数据准确可靠、结论有据可依、满足工程标准</div>
+</div>
+<div class="step-item">
+    <div class="step-number">步骤 5</div>
+    <div class="step-title">参数敏感性分析与报告</div>
+    <div class="step-desc">
+        本步骤对飞行器飞行品质进行深入分析，评估系统的稳定性、阻尼特性和操纵响应。飞行品质分析是飞行器设计的关键环节，依据MIL-STD-1797或GJB标准评价等级，为控制律设计提供指标要求。通过特征值分析、频域响应和时域仿真多维度评估。
+        <br><br>
+        • 运用MATLAB/Simulink进行特征值分析，计算短周期、长周期、滚转、偏航等模态的阻尼比和自然频率<br>• 绘制Bode图和根轨迹，分析系统稳定性裕度，确定相位裕度和增益裕度<br>• 按照MIL-STD-1797B标准评定飞行品质等级，区分Level 1/2/3飞行品质
+    </div>
+    <div class="step-output">产出：飞行品质分析报告（含特征值表、模态参数、Bode图、根轨迹、品质等级评定） ｜ 质量标准：分析方法符合规范、模态参数准确、品质等级评定正确</div>
+</div>
+            
+
+<div style="margin-top:14px;padding-top:10px;border-top:1px solid #eee;">
+    <h3 style="font-size:0.9rem;color:#667eea;margin-bottom:8px;">Steps</h3>
+<div class="step-item">
+    <div class="step-number">Step 1</div>
+    <div class="step-title">Mission Requirements Analysis</div>
+    <div class="step-desc">
+        This step conducts in-depth analysis of aircraft flying qualities, evaluating system stability, damping characteristics and control response. Flying qualities analysis is a critical element in aircraft design, evaluating levels based on MIL-STD-1797 or GJB standards, providing performance requirements for control law design. Multi-dimensional evaluation through eigenvalue analysis, frequency domain response and time domain simulation.
+        <br><br>
+        • Perform eigenvalue analysis using MATLAB/Simulink, calculate damping ratios and natural frequencies of short-period, phugoid, roll, yaw modes<br>• Plot Bode diagrams and root locus, analyze stability margins, determine phase margin and gain margin<br>• Rate flying qualities levels according to MIL-STD-1797B standard, distinguish Level 1/2/3 flying qualities
+    </div>
+    <div class="step-output">Deliverable: Flying qualities analysis report (including eigenvalue table, modal parameters, Bode plots, root locus, quality level assessment) | Quality standard: Analysis method compliant with standards, accurate modal parameters, correct quality rating</div>
+</div>
+<div class="step-item">
+    <div class="step-number">Step 2</div>
+    <div class="step-title">Cycle Parameter Selection</div>
+    <div class="step-desc">
+        This step is a critical element in aerospace engineering projects, accomplishing specific task objectives through professional methods and tools. Aerospace engineering emphasizes safety, reliability and precision, requiring rigorous theoretical derivation and sufficient verification at every step. Industry standard methods and professional software tools are used to ensure result accuracy and engineering practicality.
+        <br><br>
+        • Clarify task objectives and technical specifications, develop detailed implementation plan and technical route based on aerospace related standards<br>• Use professional software tools (MATLAB/ANSYS/Fluent/CATIA, etc.) for modeling, calculation or simulation analysis<br>• Compare and validate with test data or literature results, ensuring results are reliable and meet engineering requirements
+    </div>
+    <div class="step-output">Deliverable: Professional technical report (including method description, calculation process, result data, validation comparison, conclusions and suggestions) | Quality standard: Scientific and standard method, accurate and reliable data, evidence-based conclusions, meeting engineering standards</div>
+</div>
+<div class="step-item">
+    <div class="step-number">Step 3</div>
+    <div class="step-title">Component Performance Calculation</div>
+    <div class="step-desc">
+        This step is a critical element in aerospace engineering projects, accomplishing specific task objectives through professional methods and tools. Aerospace engineering emphasizes safety, reliability and precision, requiring rigorous theoretical derivation and sufficient verification at every step. Industry standard methods and professional software tools are used to ensure result accuracy and engineering practicality.
+        <br><br>
+        • Clarify task objectives and technical specifications, develop detailed implementation plan and technical route based on aerospace related standards<br>• Use professional software tools (MATLAB/ANSYS/Fluent/CATIA, etc.) for modeling, calculation or simulation analysis<br>• Compare and validate with test data or literature results, ensuring results are reliable and meet engineering requirements
+    </div>
+    <div class="step-output">Deliverable: Professional technical report (including method description, calculation process, result data, validation comparison, conclusions and suggestions) | Quality standard: Scientific and standard method, accurate and reliable data, evidence-based conclusions, meeting engineering standards</div>
+</div>
+<div class="step-item">
+    <div class="step-number">Step 4</div>
+    <div class="step-title">Engine Performance Evaluation</div>
+    <div class="step-desc">
+        This step is a critical element in aerospace engineering projects, accomplishing specific task objectives through professional methods and tools. Aerospace engineering emphasizes safety, reliability and precision, requiring rigorous theoretical derivation and sufficient verification at every step. Industry standard methods and professional software tools are used to ensure result accuracy and engineering practicality.
+        <br><br>
+        • Clarify task objectives and technical specifications, develop detailed implementation plan and technical route based on aerospace related standards<br>• Use professional software tools (MATLAB/ANSYS/Fluent/CATIA, etc.) for modeling, calculation or simulation analysis<br>• Compare and validate with test data or literature results, ensuring results are reliable and meet engineering requirements
+    </div>
+    <div class="step-output">Deliverable: Professional technical report (including method description, calculation process, result data, validation comparison, conclusions and suggestions) | Quality standard: Scientific and standard method, accurate and reliable data, evidence-based conclusions, meeting engineering standards</div>
+</div>
+<div class="step-item">
+    <div class="step-number">Step 5</div>
+    <div class="step-title">Sensitivity Analysis and Report</div>
+    <div class="step-desc">
+        This step conducts in-depth analysis of aircraft flying qualities, evaluating system stability, damping characteristics and control response. Flying qualities analysis is a critical element in aircraft design, evaluating levels based on MIL-STD-1797 or GJB standards, providing performance requirements for control law design. Multi-dimensional evaluation through eigenvalue analysis, frequency domain response and time domain simulation.
+        <br><br>
+        • Perform eigenvalue analysis using MATLAB/Simulink, calculate damping ratios and natural frequencies of short-period, phugoid, roll, yaw modes<br>• Plot Bode diagrams and root locus, analyze stability margins, determine phase margin and gain margin<br>• Rate flying qualities levels according to MIL-STD-1797B standard, distinguish Level 1/2/3 flying qualities
+    </div>
+    <div class="step-output">Deliverable: Flying qualities analysis report (including eigenvalue table, modal parameters, Bode plots, root locus, quality level assessment) | Quality standard: Analysis method compliant with standards, accurate modal parameters, correct quality rating</div>
+</div>
+            </div>
+        </div>
+    <div class="course-nav" style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:16px;padding:12px 16px;background:white;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,0.05);flex-wrap:wrap;">
+    <a href="../aerospace.html" style="color:#667eea;text-decoration:none;font-size:0.88rem;">← 返回航空航天工程</a>
+    <a href="aero-dynamics.html" style="color:#667eea;text-decoration:none;font-size:0.88rem;">下一门：空气动力学 →</a>
+    <a href="#" onclick="goRandomCourse();return false;" style="color:#667eea;text-decoration:none;font-size:0.88rem;">🎲 Random Course</a>
+</div>
+
+    <p class="footer">© 2026 yunzhuan.icu</p>
+<!-- Vercel Analytics -->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script defer src="/js/random-course.js"></script>
+<div style="text-align:center;padding:8px 0;font-size:0.75rem;color:#aaa;">
+    <a href="../../prerequisite/" style="color:#aaa;text-decoration:none;">Prerequisites</a>
+    <span style="margin:0 6px;">·</span>
+    <a href="../../intl-exams/index.html" style="color:#aaa;text-decoration:none;">International Exams</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="../../contact.html" style="color:#aaa;text-decoration:none;">Contact</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="javascript:window.scrollTo(0,0)" style="color:#aaa;text-decoration:none;">Back to top</a>
+    <span style="margin:0 6px;">·</span>
+    <a href="../../index.html" style="color:#aaa;text-decoration:none;">Home</a>
+</div>
+<!-- footer-links -->
+</body>
+</html>

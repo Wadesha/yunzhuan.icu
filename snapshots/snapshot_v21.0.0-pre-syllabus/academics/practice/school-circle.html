@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>学校圈 · School Circle | Practice v49</title>
+<link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 1000px; margin: 0 auto; padding: 24px 16px 48px; background: #ffffff; color: #111111; line-height: 1.7; font-size: 15px; }
+  a { color: #111111; text-decoration: none; border-bottom: 1px solid #cccccc; }
+  a:hover { border-bottom-color: #111111; }
+  .nav { padding-bottom: 12px; margin-bottom: 20px; border-bottom: 1px solid #e0e0e0; font-size: 0.88rem; color: #888888; }
+  .nav a { color: #111111; }
+  .nav .sep { color: #cccccc; margin: 0 6px; }
+  h1 { font-size: 1.6rem; margin-bottom: 4px; }
+  h2 { font-size: 1.1rem; font-weight: 700; margin: 28px 0 8px; padding-bottom: 6px; border-bottom: 1px solid #111111; }
+  h3 { font-size: 1rem; font-weight: 700; margin: 18px 0 6px; }
+  p { margin-bottom: 8px; }
+  .muted { color: #888888; font-size: 0.85rem; }
+  .subtitle { color: #555555; font-size: 0.95rem; margin-bottom: 20px; }
+  .badge { display: inline-block; border: 1px solid #111111; padding: 0 6px; font-size: 0.7rem; font-weight: 700; }
+  .v-info { border: 1px dashed #888888; padding: 8px 12px; margin: 12px 0; font-size: 0.82rem; color: #555555; }
+  input, textarea, button, select { font-family: inherit; font-size: 0.9rem; }
+  input[type=text], textarea, select { border: 1px solid #cccccc; padding: 6px 10px; width: 100%; box-sizing: border-box; font-size: 0.9rem; }
+  input:focus, textarea:focus, select:focus { outline: 2px solid #111111; outline-offset: -1px; }
+  textarea { resize: vertical; min-height: 70px; }
+  button { border: 1px solid #111111; background: #fff; color: #111111; padding: 6px 14px; cursor: pointer; font-weight: 600; }
+  button:hover { background: #111111; color: #fff; }
+  button:disabled { opacity: 0.5; cursor: not-allowed; }
+  button.primary { background: #111111; color: #fff; }
+  button.primary:hover { background: #333; }
+  button.small { padding: 3px 10px; font-size: 0.8rem; }
+  .form-row { margin-bottom: 10px; }
+  .form-row label { display: block; font-size: 0.82rem; color: #555; margin-bottom: 4px; }
+  .layout { display: grid; grid-template-columns: 220px 1fr 240px; gap: 16px; }
+  @media (max-width: 900px) { .layout { grid-template-columns: 1fr; } }
+  .school-list { list-style: none; padding: 0; margin: 0; max-height: 600px; overflow-y: auto; }
+  .school-item { border: 1px solid #e0e0e0; padding: 8px 10px; margin-bottom: 4px; cursor: pointer; background: #fff; font-size: 0.88rem; }
+  .school-item:hover { background: #f5f5f5; }
+  .school-item.active { background: #111; color: #fff; border-color: #111; }
+  .school-item .count { color: #888; font-size: 0.72rem; }
+  .school-item.active .count { color: #ccc; }
+  .feed { list-style: none; padding: 0; margin: 0; }
+  .feed-item { border: 1px solid #e0e0e0; padding: 14px 16px; margin-bottom: 10px; background: #fff; }
+  .feed-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+  .feed-author { font-weight: 700; font-size: 0.9rem; }
+  .feed-type { display: inline-block; border: 1px solid #111; padding: 0 6px; font-size: 0.7rem; font-weight: 700; }
+  .feed-content { font-size: 0.92rem; white-space: pre-wrap; margin: 6px 0; }
+  .feed-meta { font-size: 0.78rem; color: #888; }
+  .feed-meta button { border: 1px solid #ccc; background: #fff; padding: 2px 8px; font-size: 0.78rem; font-weight: 600; cursor: pointer; }
+  .feed-meta button:hover { background: #f5f5f5; border-color: #111; }
+  .feed-meta span { margin-right: 8px; }
+  .post-form { border: 1px solid #e0e0e0; padding: 14px 16px; background: #fafafa; margin: 12px 0; }
+  .members-panel { border: 1px solid #e0e0e0; padding: 12px; background: #fafafa; }
+  .member-row { display: flex; align-items: center; padding: 4px 0; border-bottom: 1px dashed #e0e0e0; font-size: 0.85rem; }
+  .member-row:last-child { border-bottom: none; }
+  .avatar { width: 28px; height: 28px; border-radius: 50%; background: #111; color: #fff; display: inline-flex; align-items: center; justify-content: center; font-size: 0.78rem; font-weight: 700; margin-right: 8px; flex-shrink: 0; }
+  .member-info { flex: 1; }
+  .member-name { font-weight: 700; }
+  .member-meta { font-size: 0.72rem; color: #888; }
+  .empty-state { text-align: center; padding: 24px; color: #888; font-size: 0.88rem; border: 1px dashed #e0e0e0; }
+  .filter-pills { display: flex; gap: 4px; margin: 8px 0; flex-wrap: wrap; }
+  .filter-pill { border: 1px solid #ccc; padding: 2px 8px; font-size: 0.78rem; cursor: pointer; background: #fff; }
+  .filter-pill.active { background: #111; color: #fff; border-color: #111; }
+  .footer { margin-top: 36px; padding-top: 16px; border-top: 1px solid #e0e0e0; color: #888888; font-size: 0.82rem; }
+  .my-schools-bar { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; margin-bottom: 8px; font-size: 0.82rem; }
+  .my-school { background: #111; color: #fff; padding: 2px 8px; font-size: 0.78rem; }
+  .score-bar { display: inline-block; width: 60px; height: 6px; background: #e0e0e0; margin-left: 4px; vertical-align: middle; }
+  .score-bar-fill { height: 100%; background: #111; }
+  .matched { font-size: 0.72rem; color: #111; font-weight: 700; }
+</style>
+</head>
+<body>
+
+<div class="nav">
+  <a href="../../index.html">Home</a> <span class="sep">/</span>
+  <a href="../index.html">Academics</a> <span class="sep">/</span>
+  <a href="index.html">Practice</a> <span class="sep">/</span>
+  学校圈
+</div>
+
+<h1>学校圈 <span class="badge">v49</span></h1>
+<p class="subtitle">按目标学校聚合动态 · 录取分享 / 面试经验 / 课业体验 / 活动推荐 · 同校生匹配</p>
+
+<div class="v-info">
+  <strong>使用说明</strong> · 自动从 AppData 读取 profile.targetSchools 加入这些学校；选择学校查看动态、发布内容、匹配同校生。Top 20 学校已预置。
+</div>
+
+<div id="mySchoolsBar" class="my-schools-bar"></div>
+
+<div class="layout">
+  <aside>
+    <h2>选择学校</h2>
+    <ul class="school-list" id="schoolList"></ul>
+  </aside>
+
+  <main>
+    <h2 id="feedTitle">动态流</h2>
+    <div class="filter-pills" id="typeFilter"></div>
+    <div class="post-form">
+      <h3>发布动态</h3>
+      <div class="form-row">
+        <label>动态类型</label>
+        <select id="postType"></select>
+      </div>
+      <div class="form-row">
+        <label>内容</label>
+        <textarea id="postContent" maxlength="2000" placeholder="分享你的经历、心得、面试题..."></textarea>
+      </div>
+      <div class="form-row">
+        <label>昵称（可留空）</label>
+        <input type="text" id="postAuthor" maxlength="20" placeholder="匿名">
+      </div>
+      <button class="primary" id="submitPostBtn">发布</button>
+      <p class="muted" id="postMsg" style="margin-top:6px;"></p>
+    </div>
+    <ul class="feed" id="feed"></ul>
+  </main>
+
+  <aside>
+    <div class="members-panel">
+      <h3 id="matchTitle">同校生</h3>
+      <p class="muted" id="matchSub">选择学校查看</p>
+      <div id="matchList"></div>
+    </div>
+  </aside>
+</div>
+
+<div class="footer">
+  <a href="../../index.html">Home</a> · <a href="index.html">Practice</a> · <a href="forum.html">论坛</a> · <a href="qa.html">问答</a> · <a href="buddy.html">战友</a>
+</div>
+
+<script src="../../js/app-data.js"></script>
+<script src="../../js/school-circle.js"></script>
+<script>
+(function() {
+  var $ = function(id) { return document.getElementById(id); };
+  var currentSchool = 'Harvard';
+  var currentType = '';
+
+  function pad(n) { return n < 10 ? '0' + n : '' + n; }
+  function formatTime(ts) {
+    if (!ts) return '';
+    var d = new Date(ts);
+    var diff = (Date.now() - ts) / 1000;
+    if (diff < 60) return '刚刚';
+    if (diff < 3600) return Math.floor(diff / 60) + ' 分钟前';
+    if (diff < 86400) return Math.floor(diff / 3600) + ' 小时前';
+    if (diff < 86400 * 7) return Math.floor(diff / 86400) + ' 天前';
+    return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate());
+  }
+  function escapeHtml(s) {
+    if (s == null) return '';
+    return String(s).replace(/[&<>"']/g, function(c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+
+  function getMyName() {
+    var n = (window.AppData && window.AppData.getProfile) ? (window.AppData.getProfile().name || '') : '';
+    return n || localStorage.getItem('yz_circle_myname') || '我';
+  }
+  function setMyName(n) { localStorage.setItem('yz_circle_myname', n); }
+
+  function getProfile() {
+    if (window.AppData && window.AppData.getProfile) {
+      try { return window.AppData.getProfile(); } catch (e) {}
+    }
+    return { name: getMyName(), grade: 11, targetSchools: ['Harvard', 'MIT', 'Stanford'] };
+  }
+
+  function renderMySchools() {
+    var p = getProfile();
+    var html = '<b>我的学校：</b>';
+    if (!p.targetSchools || p.targetSchools.length === 0) {
+      html += '<span class="muted">未设置（请到 <a href="../../profile.html">profile</a> 设置）</span>';
+    } else {
+      p.targetSchools.forEach(function(s) {
+        html += '<span class="my-school">' + escapeHtml(s) + '</span>';
+      });
+      SchoolCircle.joinMySchools(getMyName());
+    }
+    $('mySchoolsBar').innerHTML = html;
+  }
+
+  function renderSchoolList() {
+    var html = '';
+    var p = getProfile();
+    var my = p.targetSchools || [];
+    SchoolCircle.SCHOOLS.forEach(function(s) {
+      var isMine = my.indexOf(s.name) >= 0;
+      var count = SchoolCircle.getMembers(s.name).length;
+      html += '<li class="school-item' + (s.name === currentSchool ? ' active' : '') + '" data-name="' + escapeHtml(s.name) + '">';
+      html += '<div><b>' + escapeHtml(s.name) + '</b>' + (isMine ? ' ★' : '') + '</div>';
+      html += '<div class="count">' + s.country + ' · ' + count + ' 成员</div>';
+      html += '</li>';
+    });
+    $('schoolList').innerHTML = html;
+    document.querySelectorAll('.school-item').forEach(function(li) {
+      li.addEventListener('click', function() {
+        currentSchool = li.getAttribute('data-name');
+        currentType = '';
+        renderSchoolList();
+        renderFeed();
+        renderMatch();
+      });
+    });
+  }
+
+  function renderTypeFilter() {
+    var html = '<span class="filter-pill' + (currentType === '' ? ' active' : '') + '" data-type="">全部</span>';
+    SchoolCircle.POST_TYPES.forEach(function(t) {
+      html += '<span class="filter-pill' + (currentType === t.key ? ' active' : '') + '" data-type="' + t.key + '">' + t.icon + ' ' + t.name + '</span>';
+    });
+    $('typeFilter').innerHTML = html;
+    document.querySelectorAll('#typeFilter .filter-pill').forEach(function(p) {
+      p.addEventListener('click', function() {
+        currentType = p.getAttribute('data-type');
+        renderTypeFilter();
+        renderFeed();
+      });
+    });
+  }
+
+  function renderFeed() {
+    var data = SchoolCircle.getFeed(currentSchool, { type: currentType || undefined });
+    $('feedTitle').textContent = currentSchool + ' · 动态流 (' + data.posts.length + ')';
+    $('postType').innerHTML = SchoolCircle.POST_TYPES.map(function(t) {
+      return '<option value="' + t.key + '">' + t.icon + ' ' + t.name + '</option>';
+    }).join('');
+
+    if (data.posts.length === 0) {
+      $('feed').innerHTML = '<div class="empty-state">暂无动态 · 来发第一条</div>';
+      return;
+    }
+    var html = '';
+    data.posts.forEach(function(p) {
+      var t = SchoolCircle.getPostType(p.type);
+      html += '<li class="feed-item">';
+      html += '<div class="feed-header">';
+      html += '<span class="feed-author">👤 ' + escapeHtml(p.author) + '</span>';
+      html += '<span class="feed-type">' + (t ? t.icon + ' ' + t.name : p.type) + '</span>';
+      html += '</div>';
+      html += '<div class="feed-content">' + escapeHtml(p.content) + '</div>';
+      html += '<div class="feed-meta">';
+      html += '<span>🕐 ' + formatTime(p.createdAt) + '</span>';
+      html += '<span>💬 ' + (p.comments || 0) + '</span>';
+      html += '<button data-id="' + p.id + '">♡ 赞 (' + (p.likes || 0) + ')</button>';
+      html += '</div>';
+      html += '</li>';
+    });
+    $('feed').innerHTML = html;
+    document.querySelectorAll('.feed-meta button').forEach(function(b) {
+      b.addEventListener('click', function() {
+        SchoolCircle.like(b.getAttribute('data-id'));
+        renderFeed();
+      });
+    });
+  }
+
+  function renderMatch() {
+    var p = getProfile();
+    var matches = SchoolCircle.matchSameSchool(currentSchool, p);
+    $('matchTitle').textContent = currentSchool + ' 同校生';
+    $('matchSub').textContent = matches.length + ' 位同学 · 按契合度排序';
+    if (matches.length === 0) {
+      $('matchList').innerHTML = '<p class="muted">暂无匹配</p>';
+      return;
+    }
+    matches.sort(function(a, b) { return b.score - a.score; });
+    var html = '';
+    matches.slice(0, 12).forEach(function(m) {
+      html += '<div class="member-row">';
+      html += '<span class="avatar">' + escapeHtml(m.name.charAt(0).toUpperCase()) + '</span>';
+      html += '<div class="member-info">';
+      html += '<div class="member-name">' + escapeHtml(m.name) + (m.isMutual ? ' <span class="matched">匹配</span>' : '') + '</div>';
+      html += '<div class="member-meta">契合度 ' + m.score + '%<span class="score-bar"><span class="score-bar-fill" style="width:' + m.score + '%;"></span></span></div>';
+      html += '</div>';
+      html += '</div>';
+    });
+    $('matchList').innerHTML = html;
+  }
+
+  $('submitPostBtn').addEventListener('click', function() {
+    var type = $('postType').value;
+    var content = $('postContent').value.trim();
+    var author = $('postAuthor').value.trim() || getMyName();
+    if (!content) { $('postMsg').textContent = '请输入内容'; return; }
+    try {
+      SchoolCircle.post(currentSchool, type, content, author);
+      setMyName(author);
+      $('postContent').value = '';
+      $('postMsg').textContent = '已发布！';
+      renderFeed();
+      renderSchoolList();
+    } catch (e) {
+      $('postMsg').textContent = '错误：' + e.message;
+    }
+  });
+
+  renderMySchools();
+  renderSchoolList();
+  renderTypeFilter();
+  renderFeed();
+  renderMatch();
+})();
+</script>
+</body>
+</html>

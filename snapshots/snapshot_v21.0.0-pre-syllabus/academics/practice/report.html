@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>学习报告 · Report | Practice</title>
+<link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+<script src="../../js/membership.js"></script>
+<script src="../../js/report-export.js"></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 1000px; margin: 0 auto; padding: 24px 16px 48px; background: #ffffff; color: #111111; line-height: 1.7; font-size: 15px; }
+  a { color: #111111; text-decoration: none; border-bottom: 1px solid #cccccc; }
+  a:hover { border-bottom-color: #111111; }
+  .nav { padding-bottom: 12px; margin-bottom: 20px; border-bottom: 1px solid #e0e0e0; font-size: 0.88rem; color: #888888; }
+  .nav a { color: #111111; }
+  .nav .sep { color: #cccccc; margin: 0 6px; }
+  h1 { font-size: 1.6rem; margin-bottom: 4px; }
+  h2 { font-size: 1.1rem; font-weight: 700; margin: 28px 0 8px; padding-bottom: 6px; border-bottom: 1px solid #111111; }
+  h3 { font-size: 1rem; font-weight: 700; margin: 18px 0 6px; }
+  p { margin-bottom: 8px; }
+  .muted { color: #888888; font-size: 0.85rem; }
+  .subtitle { color: #555555; font-size: 0.95rem; margin-bottom: 20px; }
+  .badge { display: inline-block; border: 1px solid #111111; padding: 0 6px; font-size: 0.7rem; font-weight: 700; }
+  .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin: 16px 0; }
+  @media (max-width: 768px) { .grid { grid-template-columns: 1fr; } }
+  .card { border: 1px solid #e0e0e0; padding: 14px 16px; background: #ffffff; margin: 12px 0; }
+  button { border: 1px solid #111111; background: #fff; color: #111111; padding: 6px 14px; cursor: pointer; font-weight: 600; font-family: inherit; font-size: 0.88rem; }
+  button:hover { background: #111111; color: #fff; }
+  button:disabled { opacity: 0.4; cursor: not-allowed; }
+  button.primary { background: #111111; color: #fff; }
+  button.primary:hover { background: #333; }
+  button.small { padding: 3px 10px; font-size: 0.78rem; }
+  .form-row { margin-bottom: 10px; }
+  .form-row label { display: block; font-size: 0.82rem; color: #555; margin-bottom: 4px; }
+  input[type=text], input[type=date], select { border: 1px solid #ccc; padding: 6px 10px; font-size: 0.88rem; font-family: inherit; }
+  .subj-chip { display: inline-block; border: 1px solid #ccc; padding: 4px 10px; margin: 2px; font-size: 0.82rem; cursor: pointer; background: #fff; }
+  .subj-chip.active { background: #111; color: #fff; border-color: #111; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.82rem; margin: 8px 0; }
+  th, td { border: 1px solid #e0e0e0; padding: 6px 10px; text-align: left; }
+  th { background: #f5f5f5; font-weight: 700; }
+  .summary-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 10px 0; }
+  @media (max-width: 768px) { .summary-grid { grid-template-columns: repeat(2, 1fr); } }
+  .summary-card { border: 1px solid #e0e0e0; padding: 12px; text-align: center; background: #fafafa; }
+  .summary-num { font-size: 1.6rem; font-weight: 700; }
+  .summary-label { font-size: 0.78rem; color: #666; }
+  .preview-area { border: 1px solid #111; padding: 16px; margin: 12px 0; background: #fafafa; max-height: 600px; overflow-y: auto; }
+  .preview-area pre { white-space: pre-wrap; word-break: break-word; font-family: 'Courier New', monospace; font-size: 0.82rem; }
+  .preview-area iframe { width: 100%; min-height: 500px; border: 1px solid #ccc; background: #fff; }
+  .weak { color: #a00; }
+  .strong { color: #060; }
+  .suggestion { border-left: 3px solid #111; padding: 6px 12px; background: #fafafa; margin: 6px 0; font-size: 0.88rem; }
+  .footer { margin-top: 36px; padding-top: 16px; border-top: 1px solid #e0e0e0; color: #888888; font-size: 0.82rem; }
+  .v-info { border: 1px dashed #888888; padding: 8px 12px; margin: 12px 0; font-size: 0.82rem; color: #555555; }
+  .tab-bar { display: flex; border-bottom: 1px solid #e0e0e0; margin: 16px 0 12px; }
+  .tab { padding: 8px 16px; cursor: pointer; font-size: 0.88rem; border-bottom: 2px solid transparent; color: #555; }
+  .tab.active { border-bottom-color: #111; color: #111; font-weight: 700; }
+  .hidden { display: none !important; }
+  .quota-info { font-size: 0.78rem; color: #888; }
+</style>
+</head>
+<body>
+
+<div class="nav">
+  <a href="../../index.html">Home</a> <span class="sep">/</span>
+  <a href="../index.html">Academics</a> <span class="sep">/</span>
+  <a href="index.html">Practice</a> <span class="sep">/</span>
+  学习报告
+</div>
+
+<h1>学习报告导出 <span class="badge">v54</span></h1>
+<p class="subtitle">总做题数 / 正确率 / 各科对比 / 错题 TOP10 / 学习时间线 / 薄弱 Topic / 学习建议</p>
+
+<div class="v-info">
+  <strong>说明</strong> · 支持 JSON / Markdown / HTML 三种格式,HTML 自包含样式,可在浏览器中"打印 → 另存为 PDF"。<span id="quotaInfo" class="quota-info"></span>
+</div>
+
+<div class="grid">
+  <div class="card">
+    <h3>报告生成器</h3>
+    <div class="form-row">
+      <label>选择科目 (留空 = 全部):</label>
+      <div id="subjPicker"></div>
+    </div>
+    <div class="form-row">
+      <label>时间范围:</label>
+      <div style="display:flex; gap:8px; flex-wrap:wrap; align-items:center;">
+        <input type="date" id="dateFrom" placeholder="开始日期">
+        <span>~</span>
+        <input type="date" id="dateTo" placeholder="结束日期">
+        <button class="small" id="btnClearDate">清空</button>
+      </div>
+    </div>
+    <div class="form-row">
+      <label>格式:</label>
+      <select id="fmtSel">
+        <option value="json">JSON</option>
+        <option value="markdown" selected>Markdown</option>
+        <option value="html">HTML (可打印 PDF)</option>
+      </select>
+    </div>
+    <div>
+      <button class="primary" id="btnPreview">预览</button>
+      <button class="primary" id="btnDownload">下载</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>当前统计快照</h3>
+    <div id="snapshot">点击"预览"生成</div>
+  </div>
+</div>
+
+<h2>报告预览</h2>
+<div class="tab-bar">
+  <div class="tab active" data-tab="render">渲染视图</div>
+  <div class="tab" data-tab="raw">原始内容</div>
+</div>
+<div class="preview-area" id="previewArea">
+  <p class="muted">点击"预览"按钮生成报告</p>
+</div>
+
+<h2>历史报告 <span class="muted" style="font-weight:400;">(最多保留 30 份)</span></h2>
+<table>
+  <thead>
+    <tr><th>生成时间</th><th>报告 ID</th><th>格式</th><th>题数</th><th>正确率</th><th>大小</th><th>操作</th></tr>
+  </thead>
+  <tbody id="histTable">
+    <tr><td colspan="7" class="muted" style="text-align:center;">暂无历史报告</td></tr>
+  </tbody>
+</table>
+
+<div class="footer">
+  v54 学习报告 · 8 科数据聚合 · JSON / Markdown / HTML
+</div>
+
+<script>
+  var R = window.Report;
+  var M = window.Membership;
+  var currentReport = null;
+  var selectedSubjects = [];
+
+  function renderQuota() {
+    var lv = M.getLevel();
+    var ent = M.entitlements();
+    var quota = ent.exportsPerMonth;
+    var el = document.getElementById('quotaInfo');
+    if (quota === -1) {
+      el.textContent = '当前会员: ' + lv.nameZh + ' · 报告导出次数: 无限';
+    } else if (quota === 0) {
+      el.textContent = '当前会员: ' + lv.nameZh + ' · 报告导出次数: 0 · 升级后可导出';
+    } else {
+      el.textContent = '当前会员: ' + lv.nameZh + ' · 报告导出: ' + quota + ' 次/月';
+    }
+  }
+
+  function renderSubjPicker() {
+    var picker = document.getElementById('subjPicker');
+    picker.innerHTML = '';
+    R.getCurrentSubjects().forEach(function(s) {
+      var chip = document.createElement('span');
+      chip.className = 'subj-chip active';
+      chip.setAttribute('data-key', s.key);
+      chip.textContent = s.name;
+      chip.addEventListener('click', function() {
+        chip.classList.toggle('active');
+      });
+      picker.appendChild(chip);
+    });
+  }
+
+  function getSelected() {
+    var arr = [];
+    document.querySelectorAll('.subj-chip.active').forEach(function(c) {
+      arr.push(c.getAttribute('data-key'));
+    });
+    return arr;
+  }
+
+  function getDateRange() {
+    var from = document.getElementById('dateFrom').value;
+    var to = document.getElementById('dateTo').value;
+    if (!from && !to) return null;
+    return { from: from, to: to };
+  }
+
+  function renderSnapshot(data) {
+    var el = document.getElementById('snapshot');
+    var html = '<div class="summary-grid">' +
+      '<div class="summary-card"><div class="summary-num">' + data.overall.totalQuestions + '</div><div class="summary-label">总做题数</div></div>' +
+      '<div class="summary-card"><div class="summary-num">' + data.overall.totalCorrect + '</div><div class="summary-label">答对数</div></div>' +
+      '<div class="summary-card"><div class="summary-num">' + data.overall.accuracy + '%</div><div class="summary-label">正确率</div></div>' +
+      '<div class="summary-card"><div class="summary-num">' + data.overall.activeSubjects + '</div><div class="summary-label">活跃科目</div></div>' +
+      '</div>';
+    if (data.topWrong.length > 0) {
+      html += '<p style="margin-top:10px;"><strong>错题 TOP 3:</strong></p><ol style="padding-left:20px;">';
+      data.topWrong.slice(0, 3).forEach(function(w) {
+        html += '<li>' + (R.SUBJECT_NAMES[w.subject] || w.subject) + ' · ' + w.qid + ' · ' + (w.topic || '—') + ' (错 ' + w.count + ' 次)</li>';
+      });
+      html += '</ol>';
+    }
+    if (data.suggestions.length > 0) {
+      html += '<p style="margin-top:10px;"><strong>建议:</strong></p>';
+      data.suggestions.forEach(function(s) {
+        html += '<div class="suggestion">' + s + '</div>';
+      });
+    }
+    el.innerHTML = html;
+  }
+
+  function renderPreview(report) {
+    var area = document.getElementById('previewArea');
+    area.innerHTML = '';
+    if (!report) {
+      area.innerHTML = '<p class="muted">点击"预览"按钮生成报告</p>';
+      return;
+    }
+    var activeTab = document.querySelector('.tab.active').getAttribute('data-tab');
+    if (activeTab === 'render') {
+      if (report.format === 'html') {
+        var iframe = document.createElement('iframe');
+        iframe.srcdoc = report.content;
+        area.appendChild(iframe);
+      } else if (report.format === 'markdown') {
+        // 简单 markdown 渲染为 pre
+        var pre = document.createElement('pre');
+        pre.textContent = report.content;
+        area.appendChild(pre);
+      } else {
+        var pre2 = document.createElement('pre');
+        pre2.textContent = report.content;
+        area.appendChild(pre2);
+      }
+    } else {
+      var pre3 = document.createElement('pre');
+      pre3.textContent = report.content;
+      area.appendChild(pre3);
+    }
+  }
+
+  function generateReport(doDownload) {
+    var subjects = getSelected();
+    var range = getDateRange();
+    var fmt = document.getElementById('fmtSel').value;
+    var report = R.generate({ subjects: subjects, dateRange: range, format: fmt });
+    currentReport = report;
+    renderSnapshot(report.data);
+    renderPreview(report);
+    if (doDownload) {
+      R.download(report);
+      alert('已下载: ' + report.filename);
+    }
+    renderHistory();
+  }
+
+  function renderHistory() {
+    var hist = R.history();
+    var tbody = document.getElementById('histTable');
+    if (hist.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="7" class="muted" style="text-align:center;">暂无历史报告</td></tr>';
+      return;
+    }
+    tbody.innerHTML = '';
+    hist.forEach(function(h) {
+      var tr = document.createElement('tr');
+      tr.innerHTML =
+        '<td class="muted">' + new Date(h.generatedAt).toLocaleString('zh-CN') + '</td>' +
+        '<td><code>' + h.reportId + '</code></td>' +
+        '<td>' + h.format + '</td>' +
+        '<td>' + (h.overall ? h.overall.totalQuestions : 0) + '</td>' +
+        '<td>' + (h.overall ? h.overall.accuracy : 0) + '%</td>' +
+        '<td class="muted">' + (h.size / 1024).toFixed(1) + ' KB</td>' +
+        '<td>' +
+          '<button class="small" data-act="regen" data-id="' + h.reportId + '">重生成</button> ' +
+          '<button class="small" data-act="del" data-id="' + h.reportId + '">删除</button>' +
+        '</td>';
+      tbody.appendChild(tr);
+    });
+    tbody.querySelectorAll('button[data-act=del]').forEach(function(b) {
+      b.addEventListener('click', function() {
+        if (confirm('确定删除该历史报告?')) {
+          R.deleteReport(b.getAttribute('data-id'));
+          renderHistory();
+        }
+      });
+    });
+    tbody.querySelectorAll('button[data-act=regen]').forEach(function(b) {
+      b.addEventListener('click', function() {
+        var h = R.getReport(b.getAttribute('data-id'));
+        if (h && h.subjects) {
+          // 重置选择
+          document.querySelectorAll('.subj-chip').forEach(function(c) {
+            if (h.subjects.indexOf(c.getAttribute('data-key')) >= 0) c.classList.add('active');
+            else c.classList.remove('active');
+          });
+          document.getElementById('fmtSel').value = h.format;
+          generateReport(false);
+        }
+      });
+    });
+  }
+
+  // 事件绑定
+  document.getElementById('btnPreview').addEventListener('click', function() { generateReport(false); });
+  document.getElementById('btnDownload').addEventListener('click', function() { generateReport(true); });
+  document.getElementById('btnClearDate').addEventListener('click', function() {
+    document.getElementById('dateFrom').value = '';
+    document.getElementById('dateTo').value = '';
+  });
+  document.querySelectorAll('.tab').forEach(function(t) {
+    t.addEventListener('click', function() {
+      document.querySelectorAll('.tab').forEach(function(x){ x.classList.remove('active'); });
+      t.classList.add('active');
+      renderPreview(currentReport);
+    });
+  });
+
+  // 初始化
+  renderQuota();
+  renderSubjPicker();
+  renderHistory();
+</script>
+
+</body>
+</html>

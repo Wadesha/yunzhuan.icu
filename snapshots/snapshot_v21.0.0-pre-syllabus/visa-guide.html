@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Visa Guide - F-1 Visa Application Tips - yunzhuan.icu</title>
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 16px 20px;
+            background: #f5f5f5;
+            color: #333;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            margin-bottom: 16px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .logo {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #667eea;
+            text-decoration: none;
+        }
+        .logo span { color: #764ba2; }
+        .nav-links {
+            display: flex;
+            gap: 18px;
+            align-items: center;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: #555;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: color 0.15s;
+        }
+        .nav-links a:hover { color: #667eea; }
+        .nav-links .cn {
+            font-size: 0.7rem;
+            color: #aaa;
+            margin-left: 2px;
+        }
+        @media (max-width: 768px) {
+            .navbar { flex-wrap: wrap; gap: 8px; }
+            .nav-links { gap: 12px; }
+            .nav-links a { font-size: 0.78rem; }
+            .nav-links .cn { display: none; }
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 4px;
+            font-size: 1.5rem;
+        }
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 16px;
+            font-size: 0.9rem;
+        }
+        .section {
+            background: white;
+            border-radius: 8px;
+            padding: 14px 18px;
+            margin-bottom: 10px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .section h2 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        .section h2 .cn { color: #999; font-size: 0.8rem; font-weight: normal; margin-left: 6px; }
+        .section p { color: #333; line-height: 1.7; font-size: 0.92rem; margin-bottom: 8px; }
+        .step-list { list-style: none; counter-reset: step; }
+        .step-list li {
+            counter-increment: step;
+            padding: 10px 0 10px 40px;
+            position: relative;
+            font-size: 0.9rem;
+            color: #444;
+            line-height: 1.6;
+            border-bottom: 1px solid #f5f5f5;
+        }
+        .step-list li:last-child { border-bottom: none; }
+        .step-list li::before {
+            content: counter(step);
+            position: absolute;
+            left: 0;
+            top: 10px;
+            width: 26px;
+            height: 26px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.78rem;
+            font-weight: 700;
+        }
+        .step-list h4 {
+            font-size: 0.9rem;
+            color: #333;
+            margin-bottom: 2px;
+        }
+        .tip-box {
+            background: #fff8e1;
+            border-left: 3px solid #ff8f00;
+            padding: 10px 14px;
+            border-radius: 0 6px 6px 0;
+            margin-top: 10px;
+            font-size: 0.82rem;
+            color: #5d4037;
+            line-height: 1.6;
+        }
+        .tip-box strong { color: #e65100; }
+        .success-box {
+            background: #e8f5e9;
+            border-left: 3px solid #2e7d32;
+            padding: 10px 14px;
+            border-radius: 0 6px 6px 0;
+            margin-top: 10px;
+            font-size: 0.82rem;
+            color: #1b5e20;
+            line-height: 1.6;
+        }
+        .success-box strong { color: #2e7d32; }
+        .warning-box {
+            background: #ffebee;
+            border-left: 3px solid #c62828;
+            padding: 10px 14px;
+            border-radius: 0 6px 6px 0;
+            margin-top: 10px;
+            font-size: 0.82rem;
+            color: #b71c1c;
+            line-height: 1.6;
+        }
+        .warning-box strong { color: #c62828; }
+        .qa-item {
+            padding: 10px 0;
+            border-bottom: 1px solid #f5f5f5;
+        }
+        .qa-item:last-child { border-bottom: none; }
+        .qa-q {
+            font-weight: 600;
+            color: #333;
+            font-size: 0.9rem;
+            margin-bottom: 4px;
+        }
+        .qa-a {
+            font-size: 0.85rem;
+            color: #555;
+            line-height: 1.6;
+        }
+        .footer { text-align: center; margin-top: 20px; color: #999; font-size: 0.8rem; }
+        .checklist { list-style: none; }
+        .checklist li {
+            padding: 6px 0 6px 24px;
+            position: relative;
+            font-size: 0.88rem;
+            color: #444;
+        }
+        .checklist li::before {
+            content: '☑';
+            position: absolute;
+            left: 0;
+            color: #22c55e;
+            font-size: 0.85rem;
+        }
+    </style>
+    <link rel="stylesheet" href="./css/theme.css">
+    <link rel="manifest" href="./manifest.json">
+    <meta name="theme-color" content="#667eea">
+    <script src="./js/theme.js"></script>
+    <script>
+    window.SUPABASE_CONFIG = {{
+        url: 'https://otfjbzjvkoectpejhxar.supabase.co',
+        anonKey: 'sb_publishable_SBRF6ewKH-se3dNlqFwsXQ_lObhamTr'
+    }};
+    </script>
+    <script src="./js/auth.js"></script>
+    <script src="./js/favorites.js"></script>
+    <script src="./js/pwa.js"></script>
+    <script src="./js/mobile-nav.js"></script>
+    <script src="./js/breadcrumbs.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="../index.html" class="logo"><span class="logo-icon">🎓</span><span class="logo-text">yunzhuan<span>.icu</span></span></a>
+        <div class="nav-links">
+            <a href="../index.html">Majors<span class="cn">专业</span></a>
+            <a href="../schools/index.html">Schools<span class="cn">学校</span></a>
+            <a href="../tests/index.html">Tests<span class="cn">考试</span></a>
+            <a href="../essays/index.html">Essays<span class="cn">文书</span></a>
+            <a href="../resources.html">Resources<span class="cn">资源</span></a>
+            <a href="search.html">Search<span class="cn">搜索</span></a>
+            <a href="../contact.html">Contact<span class="cn">联系</span></a>
+        </div>
+    </nav>
+
+    <h1>Student Visa Guide</h1>
+    <p class="subtitle">美国 F-1 学生签证申请指南</p>
+
+    <div class="section">
+        <h2>Visa Types <span class="cn">签证类型</span></h2>
+        <p style="font-size:0.9rem;color:#555;">
+            去美国读大学本科，通常需要申请 <strong>F-1 学生签证</strong>。
+        </p>
+        <ul class="checklist" style="margin-top:8px;">
+            <li><strong>F-1 Visa：</strong>学术学生签证，最常见，用于全日制学位课程</li>
+            <li><strong>M-1 Visa：</strong>职业学生签证，用于非学术职业课程</li>
+            <li><strong>J-1 Visa：</strong>交流访问学者签证，部分交换项目用</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Application Steps <span class="cn">申请步骤</span></h2>
+        <ol class="step-list">
+            <li>
+                <h4>收到 I-20</h4>
+                确认入读学校后，学校会发给你 I-20 表格（学生身份资格证明）。收到后仔细核对个人信息和学校信息是否正确。
+            </li>
+            <li>
+                <h4>缴纳 SEVIS 费</h4>
+                在线缴纳 SEVIS I-901 费用（目前 $350）。保存好缴费收据，面签时需要带上。缴费网站：fmjfee.com
+            </li>
+            <li>
+                <h4>填写 DS-160 表格</h4>
+                在线填写非移民签证申请表 DS-160。需要上传符合要求的照片。填完后打印确认页，面签时必须带。
+                <div class="tip-box" style="margin-top:6px;">
+                    <strong>💡 提示：</strong>DS-160 一旦提交就不能修改了，填之前准备好所有信息，检查无误再提交。
+                </div>
+            </li>
+            <li>
+                <h4>缴纳签证费</h4>
+                缴纳 MRV 签证申请费（目前 $185），保存好收据。
+            </li>
+            <li>
+                <h4>预约面签</h4>
+                在 ustraveldocs.com 上注册账号，预约签证面谈时间。建议提前预约，旺季（5-8 月）可能要等很久。
+            </li>
+            <li>
+                <h4>准备材料</h4>
+                详见下方"材料清单"。材料准备充分很重要！
+            </li>
+            <li>
+                <h4>参加面签</h4>
+                按预约时间去美国大使馆/领事馆参加面谈。通常几分钟就结束，当场知道结果。
+            </li>
+            <li>
+                <h4>领取护照</h4>
+                如果通过，签证会贴在护照上，通过中信银行返还给你。一般 3-5 个工作日。
+            </li>
+        </ol>
+    </div>
+
+    <div class="section">
+        <h2>Required Documents <span class="cn">必备材料清单</span></h2>
+        <h3 style="font-size:0.9rem;color:#333;margin-bottom:6px;">📋 必须带的材料</h3>
+        <ul class="checklist">
+            <li>有效护照（有效期至少 6 个月以上）</li>
+            <li>DS-160 确认页</li>
+            <li>签证费缴费收据</li>
+            <li>SEVIS 费缴费收据</li>
+            <li>I-20 表格原件（需要签字）</li>
+            <li>面签预约确认页</li>
+            <li>符合要求的签证照片（51x51mm，白底，6 个月内）</li>
+        </ul>
+
+        <h3 style="font-size:0.9rem;color:#333;margin-bottom:6px;margin-top:12px;">📚 学习相关材料</h3>
+        <ul class="checklist">
+            <li>录取通知书（offer letter）</li>
+            <li>高中成绩单 + 毕业证（中英文）</li>
+            <li>标化成绩单（SAT/ACT/TOEFL/IELTS 官方成绩单）</li>
+            <li>个人简历 / CV</li>
+            <li>学习计划（为什么去美国、为什么选这个学校这个专业）</li>
+        </ul>
+
+        <h3 style="font-size:0.9rem;color:#333;margin-bottom:6px;margin-top:12px;">💰 资金证明材料</h3>
+        <ul class="checklist">
+            <li>存款证明（覆盖第一年全部费用，建议覆盖 2 年更稳妥）</li>
+            <li>银行流水（近 6 个月）</li>
+            <li>父母收入证明 / 工作证明</li>
+            <li>房产证、车辆登记证等补充资产证明（可选）</li>
+            <li>奖学金证明（如果有）</li>
+        </ul>
+
+        <h3 style="font-size:0.9rem;color:#333;margin-bottom:6px;margin-top:12px;">👨‍👩‍👧 家庭/身份相关</h3>
+        <ul class="checklist">
+            <li>户口本</li>
+            <li>出生证明（或亲属关系证明）</li>
+            <li>父母结婚证（可选）</li>
+            <li>身份证</li>
+        </ul>
+
+        <div class="tip-box">
+            <strong>💡 建议：</strong><br>
+            · 所有材料都带原件，同时准备一份复印件<br>
+            · 材料按类别整理好，用文件夹分装，面签时方便取用<br>
+            · 虽然很多材料可能用不上，但准备充分心里有底
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Common Interview Questions <span class="cn">常见面签问题</span></h2>
+        <div class="qa-item">
+            <div class="qa-q">1. 为什么去美国读书？/ Why do you want to study in the US?</div>
+            <div class="qa-a">
+                说清楚为什么选择美国的教育体系，而不是英国、加拿大、中国等。可以结合学术资源、专业优势、教育理念等来说。
+            </div>
+        </div>
+        <div class="qa-item">
+            <div class="qa-q">2. 为什么选这所学校？/ Why did you choose this university?</div>
+            <div class="qa-a">
+                提前做好功课，说出学校的具体特点：某个专业很强、某个教授的研究方向、独特的课程设置、校园文化等。
+                不要说"排名高""环境好"这种泛泛的理由，要具体。
+            </div>
+        </div>
+        <div class="qa-item">
+            <div class="qa-q">3. 你的专业是什么？为什么选这个专业？</div>
+            <div class="qa-a">
+                解释你的专业兴趣来源：从小就喜欢？某段经历？未来职业规划？逻辑清晰、真实可信就好。
+            </div>
+        </div>
+        <div class="qa-item">
+            <div class="qa-q">4. 毕业后打算做什么？/ What's your plan after graduation?</div>
+            <div class="qa-a">
+                <strong>非常重要的问题！</strong>签证官要确认你没有移民倾向。
+                一定要说"毕业后回国发展"，可以说说回国的职业规划、为什么想回国（家庭、国内机会多等）。
+            </div>
+        </div>
+        <div class="qa-item">
+            <div class="qa-q">5. 谁支付你的学费？/ Who will pay for your education?</div>
+            <div class="qa-a">
+                如实回答。父母支付就说父母，拿出资金证明。有奖学金就说有多少奖学金，剩下的谁承担。
+            </div>
+        </div>
+        <div class="qa-item">
+            <div class="qa-q">6. 你父母做什么工作？/ What do your parents do?</div>
+            <div class="qa-a">
+                如实回答。签证官想确认你的家庭有稳定的经济来源，能够支付留学费用。
+            </div>
+        </div>
+        <div class="qa-item">
+            <div class="qa-q">7. 你现在在哪上学？/ Where do you study now?</div>
+            <div class="qa-a">
+                如实回答现在的学校、年级、专业。可以带在读证明。
+            </div>
+        </div>
+        <div class="qa-item">
+            <div class="qa-q">8. 你有亲戚在美国吗？/ Do you have any relatives in the US?</div>
+            <div class="qa-a">
+                <strong>必须如实回答！</strong>有就说有，没有就说没有。签证官系统里能查到，撒谎直接拒签。
+            </div>
+        </div>
+        <div class="qa-item">
+            <div class="qa-q">9. 你之前去过美国吗？/ Have you been to the US before?</div>
+            <div class="qa-a">
+                如实回答。去过的话说说去做什么（旅游、夏校、比赛等）。
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Tips for Success <span class="cn">面签通过技巧</span></h2>
+        <div class="success-box">
+            <strong>✅ 要做的事：</strong><br>
+            · 提前 30 分钟到使馆（不要太早也不要太晚）<br>
+            · 穿着得体，整洁大方（不需要穿西装，正常学生样就好）<br>
+            · 回答问题简洁直接，不要啰嗦<br>
+            · 听清楚问题再回答，没听清可以问 "Pardon?"<br>
+            · 自信、大方、真诚，眼神交流<br>
+            · 主动出示相关材料（签证官问什么就递什么）<br>
+            · 英文不好也不用紧张，可以说需要翻译（但建议还是练一下基本英文）
+        </div>
+        <div class="warning-box" style="margin-top:8px;">
+            <strong>❌ 不要做的事：</strong><br>
+            · <strong>绝对不要撒谎！</strong>诚实是第一位的<br>
+            · 不要提到移民、打工、留在美国工作的想法<br>
+            · 不要背诵稿子，一听就假<br>
+            · 不要太紧张，正常交流就好<br>
+            · 不要带违禁品进使馆（手机、背包等要存）<br>
+            · 不要和签证官争论
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>FAQ <span class="cn">常见问题</span></h2>
+        <div class="qa-item">
+            <div class="qa-q">Q: 签证难不难？通过率高吗？</div>
+            <div class="qa-a">
+                A: 只要你材料真实、有足够的资金、能说清楚去美国的目的、证明没有移民倾向，通过率还是很高的。
+                本科生的签证通过率一般挺高的，不用太担心。
+            </div>
+        </div>
+        <div class="qa-item">
+            <div class="qa-q">Q: 被拒签了怎么办？</div>
+            <div class="qa-a">
+                A: 首先弄清楚拒签原因（214(b) 移民倾向最常见），然后针对性地准备补充材料，过段时间可以再签。
+                二签通过率不低，不要灰心。
+            </div>
+        </div>
+        <div class="qa-item">
+            <div class="qa-q">Q: 可以用中文面签吗？</div>
+            <div class="qa-a">
+                A: 可以，但最好用英文，因为你是去美国读书的。实在不行可以要求中文翻译。
+                但 F-1 签证如果英文太差，签证官可能会质疑你去美国怎么读书。
+            </div>
+        </div>
+        <div class="qa-item">
+            <div class="qa-q">Q: 最早可以什么时候签证？</div>
+            <div class="qa-a">
+                A: 课程开始前 120 天以内可以申请签证。拿到 I-20 就可以预约了，越早越好。
+            </div>
+        </div>
+        <div class="qa-item">
+            <div class="qa-q">Q: 签证有效期是多久？</div>
+            <div class="qa-a">
+                A: 中国学生的 F-1 签证一般是 5 年有效期。但这不意味着你可以在美国待 5 年，
+                只要你保持全日制学生身份，签证过期了也可以合法待在美国，只是不能出境再入境（需要续签）。
+            </div>
+        </div>
+        <div class="qa-item">
+            <div class="qa-q">Q: 存款证明要多少钱？要存多久？</div>
+            <div class="qa-a">
+                A: 至少覆盖第一年的全部费用（学费+生活费），建议存一年以上的更稳妥。
+                存款历史最好有 3-6 个月，不要临时大笔存入（容易被怀疑）。
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>After Visa <span class="cn">拿到签证后</span></h2>
+        <ul class="checklist">
+            <li>核对签证上的信息（姓名、护照号、学校、签证类型等）是否正确</li>
+            <li>提前了解学校的 orientation 和选课信息</li>
+            <li>订机票（最早可以在课程开始前 30 天入境）</li>
+            <li>找住宿（宿舍 / 校外租房）</li>
+            <li>体检、打疫苗（学校会有要求）</li>
+            <li>办手机卡、银行卡（到了之后）</li>
+            <li>准备行李，出发！</li>
+        </ul>
+        <div class="tip-box" style="margin-top:10px;">
+            <strong>💡 入境注意事项：</strong><br>
+            · 带好 I-20 和录取通知书（随身带，不要托运）<br>
+            · 准备好回答海关的问题（来做什么、哪个学校、待多久等）<br>
+            · 不要带违禁品（新鲜水果、肉类、大量现金等）<br>
+            · 第一次入境可能会被问得多一些，如实回答就好
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Official Resources <span class="cn">官方资源</span></h2>
+        <ul class="checklist">
+            <li><strong>SEVIS 费缴费：</strong>fmjfee.com</li>
+            <li><strong>DS-160 表格：</strong>ceac.state.gov/GenNIV/</li>
+            <li><strong>签证预约：</strong>ustraveldocs.com</li>
+            <li><strong>美国驻华大使馆：</strong>china.usembassy-china.org.cn</li>
+            <li><strong>Study in the States（官方学生信息）：</strong>studyinthestates.dhs.gov</li>
+        </ul>
+    </div>
+
+    <p class="footer">&copy; 2026 yunzhuan.icu | Visa Guide</p>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <div style="text-align:center;padding:8px 0;font-size:0.75rem;color:#aaa;">
+        <a href="../index.html" style="color:#aaa;text-decoration:none;">Home</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="../resources.html" style="color:#aaa;text-decoration:none;">Resources</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="../contact.html" style="color:#aaa;text-decoration:none;">Contact</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="javascript:window.scrollTo(0,0)" style="color:#aaa;text-decoration:none;">Back to top</a>
+    </div>
+<script src="./js/back-to-top.js"></script>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>密码学 - Cryptography - yunzhuan.icu</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 900px; margin: 0 auto; padding: 20px 16px; background: #f5f5f5; color: #333; }
+        .back-link { color: #667eea; text-decoration: none; font-size: 0.85rem; margin-bottom: 12px; display: inline-block; }
+        .back-link:hover { text-decoration: underline; }
+        h1 { color: #333; margin-bottom: 4px; font-size: 1.4rem; }
+        .en-name { color: #888; font-size: 0.95rem; margin-bottom: 14px; font-weight: normal; }
+        .section { background: white; border-radius: 8px; padding: 14px 18px; margin-bottom: 10px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+        .section h2 { color: #667eea; margin-bottom: 8px; font-size: 1rem; font-weight: 600; }
+        .section h2 .en { color: #999; font-size: 0.8rem; font-weight: normal; }
+        .section p { color: #333; line-height: 1.7; font-size: 0.92rem; }
+        .meta { font-size: 0.82rem; color: #888; margin-bottom: 8px; }
+        .footer { text-align: center; margin-top: 20px; color: #999; font-size: 0.8rem; }
+    </style>
+<link rel="stylesheet" href="/css/collapse.css">
+</head>
+<body>
+    <a href="../../index.html" class="back-link">← 返回首页</a>
+    <h1>密码学</h1>
+    <p class="en-name">Cryptography</p>
+    <div class="section">
+        <h2>课程介绍 <span class="en">Course Introduction</span></h2>
+        <p class="meta">学分：3 | 先修课：离散数学、概率论 | 学期：第5学期</p>
+        <p>密码学是网络安全的核心基础课程，研究信息加密与解密的原理与方法。课程涵盖对称加密（如AES、DES）、非对称加密（如RSA、ECC）、哈希函数、数字签名、密钥管理与分配协议、公钥基础设施（PKI）等内容。学生将学习古典密码、现代分组密码与流密码的设计分析，以及密码协议的安全性证明方法，为后续安全课程打下理论基础。</p>
+        <p style="margin-top:8px;">Cryptography is a core foundational course in cybersecurity, studying principles and methods of information encryption and decryption. The course covers symmetric encryption (AES, DES), asymmetric encryption (RSA, ECC), hash functions, digital signatures, key management and distribution protocols, and public key infrastructure (PKI). Students learn classical ciphers, modern block ciphers and stream cipher design and analysis, and security proof methods for cryptographic protocols.</p>
+    </div>
+        <div class="section">
+        <h2>大作业 <span class="en">Final Project</span></h2>
+        <div>
+<p class="meta">作业标题：加密算法实现与分析</p>
+        <p>实现经典加密算法如AES、RSA，分析其安全性，并完成密码学实验报告。</p>
+        <p style="margin-top:8px;">Implement classic encryption algorithms such as AES and RSA, analyze their security, and complete cryptography experiment reports.</p>
+        </div>
+    </div>
+    <div class="section">
+        <h2>实施步骤 <span class="en">Implementation Steps</span></h2>
+        <div><div style="background:#f0f4ff;padding:10px 14px;border-radius:6px;margin-bottom:12px;border-left:3px solid #667eea;font-size:0.88rem;">
+<b>📋 示例</b>：实现一个安全通信工具，比如基于RSA和AES的加密聊天程序。你需要用Python实现密钥生成、非对称加密传输会话密钥、对称加密传输消息，并验证加密后的数据无法被中间人窃取。
+</div>
+
+<div class="step-item">
+    <div class="step-number">步骤 1</div>
+    <div class="step-title">加密算法研究</div>
+    <div class="step-desc">研究AES、RSA等加密算法原理，分析优缺点</div>
+    <div class="step-output">产出：算法研究报告</div>
+</div><div class="step-item">
+    <div class="step-number">步骤 2</div>
+    <div class="step-title">加密工具设计</div>
+    <div class="step-desc">设计文件加密工具架构，支持对称和非对称加密</div>
+    <div class="step-output">产出：工具设计文档</div>
+</div><div class="step-item">
+    <div class="step-number">步骤 3</div>
+    <div class="step-title">加密工具实现</div>
+    <div class="step-desc">实现文件加密和解密功能，处理密钥管理</div>
+    <div class="step-output">产出：加密工具源代码</div>
+</div><div class="step-item">
+    <div class="step-number">步骤 4</div>
+    <div class="step-title">安全性测试</div>
+    <div class="step-desc">测试加密强度，验证密钥管理安全性</div>
+    <div class="step-output">产出：安全测试报告</div>
+</div><div class="step-item">
+    <div class="step-number">步骤 5</div>
+    <div class="step-title">文档提交</div>
+    <div class="step-desc">整理代码注释和使用说明</div>
+    <div class="step-output">产出：最终提交材料</div>
+</div><div style="margin-top:14px;padding-top:10px;border-top:1px solid #eee;">
+    <h3 style="font-size:0.9rem;color:#667eea;margin-bottom:8px;">Steps</h3><div class="step-item">
+    <div class="step-number">Step 1</div>
+    <div class="step-title">Algorithm Research</div>
+    <div class="step-desc">Study AES, RSA encryption principles</div>
+    <div class="step-output">Deliverable: Algorithm Research Report</div>
+</div><div class="step-item">
+    <div class="step-number">Step 2</div>
+    <div class="step-title">Tool Design</div>
+    <div class="step-desc">Design file encryption tool with symmetric/asymmetric support</div>
+    <div class="step-output">Deliverable: Tool Design Doc</div>
+</div><div class="step-item">
+    <div class="step-number">Step 3</div>
+    <div class="step-title">Tool Implementation</div>
+    <div class="step-desc">Implement encryption/decryption, handle key management</div>
+    <div class="step-output">Deliverable: Encryption Tool Source Code</div>
+</div><div class="step-item">
+    <div class="step-number">Step 4</div>
+    <div class="step-title">Security Testing</div>
+    <div class="step-desc">Test encryption strength, verify key management</div>
+    <div class="step-output">Deliverable: Security Test Report</div>
+</div><div class="step-item">
+    <div class="step-number">Step 5</div>
+    <div class="step-title">Documentation</div>
+    <div class="step-desc">Prepare code comments and user manual</div>
+    <div class="step-output">Deliverable: Final Submission</div>
+</div></div>
+        
+    <div class="course-nav" style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:16px;padding:12px 16px;background:white;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,0.05);flex-wrap:wrap;">
+    <a href="../cyber.html" style="color:#667eea;text-decoration:none;font-size:0.88rem;">← 返回网络安全</a>
+    <a href="network-security.html" style="color:#667eea;text-decoration:none;font-size:0.88rem;">下一门：网络安全 →</a>
+    <a href="#" onclick="goRandomCourse();return false;" style="color:#667eea;text-decoration:none;font-size:0.88rem;">🎲 Random Course</a>
+</div>
+
+    <p class="footer">© 2026 yunzhuan.icu</p>
+<!-- Vercel Analytics -->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script defer src="/js/random-course.js"></script>
+<div style="text-align:center;padding:8px 0;font-size:0.75rem;color:#aaa;">
+    <a href="../../prerequisite/" style="color:#aaa;text-decoration:none;">Prerequisites</a>
+    <span style="margin:0 6px;">·</span>
+    <a href="../../intl-exams/index.html" style="color:#aaa;text-decoration:none;">International Exams</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="../../contact.html" style="color:#aaa;text-decoration:none;">Contact</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="javascript:window.scrollTo(0,0)" style="color:#aaa;text-decoration:none;">Back to top</a>
+    <span style="margin:0 6px;">·</span>
+    <a href="../../index.html" style="color:#aaa;text-decoration:none;">Home</a>
+</div>
+<!-- footer-links -->
+</body>
+</html>

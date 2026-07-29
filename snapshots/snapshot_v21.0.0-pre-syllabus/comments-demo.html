@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Comments Demo 评论系统演示</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      line-height: 1.6;
+      color: #000;
+      background: #fff;
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    a {
+      color: #0066cc;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* Navigation */
+    nav {
+      border-bottom: 1px solid #ccc;
+      padding: 10px 0;
+      margin-bottom: 30px;
+    }
+
+    nav a {
+      margin-right: 20px;
+      font-weight: 500;
+    }
+
+    /* Title */
+    h1 {
+      font-size: 28px;
+      margin-bottom: 30px;
+      border-bottom: 2px solid #000;
+      padding-bottom: 10px;
+    }
+
+    /* Comment Input */
+    .comment-input {
+      background: #f9f9f9;
+      border: 1px solid #ddd;
+      padding: 20px;
+      margin-bottom: 30px;
+    }
+
+    .comment-input textarea {
+      width: 100%;
+      min-height: 80px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      resize: vertical;
+    }
+
+    .comment-input button {
+      margin-top: 10px;
+      padding: 8px 20px;
+      background: #0066cc;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .comment-input button:hover {
+      background: #0052a3;
+    }
+
+    /* Sort Controls */
+    .sort-controls {
+      margin-bottom: 20px;
+      display: flex;
+      gap: 15px;
+      align-items: center;
+    }
+
+    .sort-controls span {
+      font-weight: 500;
+    }
+
+    .sort-controls button {
+      background: none;
+      border: 1px solid #ccc;
+      padding: 5px 12px;
+      cursor: pointer;
+      font-size: 13px;
+    }
+
+    .sort-controls button.active {
+      background: #000;
+      color: #fff;
+      border-color: #000;
+    }
+
+    /* Comments List */
+    .comments-list {
+      list-style: none;
+    }
+
+    .comment-item {
+      border: 1px solid #ddd;
+      margin-bottom: 15px;
+      padding: 15px;
+      background: #fff;
+    }
+
+    .comment-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .user-avatar {
+      width: 40px;
+      height: 40px;
+      background: #e0e0e0;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      color: #666;
+      flex-shrink: 0;
+    }
+
+    .comment-meta {
+      flex-grow: 1;
+    }
+
+    .comment-username {
+      font-weight: 600;
+      font-size: 15px;
+    }
+
+    .comment-time {
+      font-size: 12px;
+      color: #666;
+    }
+
+    .comment-content {
+      margin-left: 50px;
+      margin-bottom: 10px;
+    }
+
+    .comment-actions {
+      display: flex;
+      gap: 15px;
+      margin-left: 50px;
+    }
+
+    .like-button {
+      background: none;
+      border: 1px solid #ccc;
+      padding: 4px 10px;
+      cursor: pointer;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .like-button.liked {
+      background: #ffe6e6;
+      border-color: #cc0000;
+    }
+
+    .like-button:hover {
+      background: #f0f0f0;
+    }
+
+    .reply-toggle {
+      background: none;
+      border: none;
+      color: #0066cc;
+      cursor: pointer;
+      font-size: 13px;
+      padding: 4px 0;
+    }
+
+    .reply-toggle:hover {
+      text-decoration: underline;
+    }
+
+    /* Nested Replies */
+    .replies {
+      list-style: none;
+      margin-left: 50px;
+      margin-top: 15px;
+      border-left: 2px solid #e0e0e0;
+      padding-left: 15px;
+      display: none;
+    }
+
+    .replies.show {
+      display: block;
+    }
+
+    .replies .comment-item {
+      border: none;
+      border-bottom: 1px solid #eee;
+      padding: 10px 0;
+      margin-bottom: 0;
+      background: none;
+    }
+
+    .replies .comment-item:last-child {
+      border-bottom: none;
+    }
+
+    .replies .comment-content,
+    .replies .comment-actions,
+    .replies .comment-header {
+      margin-left: 0;
+    }
+
+    .replies .user-avatar {
+      width: 32px;
+      height: 32px;
+      font-size: 12px;
+    }
+
+    .no-comments {
+      text-align: center;
+      color: #666;
+      padding: 40px;
+      border: 1px dashed #ccc;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="#home">首页</a>
+    <a href="#articles">文章</a>
+    <a href="#about">关于</a>
+    <a href="#contact">联系</a>
+  </nav>
+
+  <h1>Comments Demo 评论系统演示</h1>
+
+  <div class="comment-input">
+    <textarea placeholder="写下你的评论..." id="newComment"></textarea>
+    <button onclick="submitComment()">发表评论</button>
+  </div>
+
+  <div class="sort-controls">
+    <span>排序：</span>
+    <button class="active" onclick="sortComments('newest')" id="sort-newest">Newest</button>
+    <button onclick="sortComments('oldest')" id="sort-oldest">Oldest</button>
+    <button onclick="sortComments('mostLiked')" id="sort-mostLiked">Most Liked</button>
+  </div>
+
+  <ul class="comments-list" id="commentsList"></ul>
+
+  <script>
+    const COMMENTS = [
+      { id: 1, user: 'Alice', content: '这个专业分析很详细！', time: '2025-01-15', likes: 12, replies: [
+        { id: 2, user: 'Bob', content: '同意，帮到我了', time: '2025-01-15', likes: 5 }
+      ]},
+      { id: 3, user: 'Carol', content: '请问就业前景如何？', time: '2025-01-16', likes: 3, replies: [] },
+      { id: 4, user: 'David', content: '建议加上薪资数据', time: '2025-01-16', likes: 8, replies: [
+        { id: 5, user: 'Admin', content: '收到，后续版本会加', time: '2025-01-17', likes: 15 }
+      ]}
+    ];
+
+    let currentSort = 'newest';
+
+    function getLikedComments() {
+      const stored = localStorage.getItem('likedComments');
+      return stored ? JSON.parse(stored) : [];
+    }
+
+    function setLikedComments(liked) {
+      localStorage.setItem('likedComments', JSON.stringify(liked));
+    }
+
+    function isCommentLiked(commentId) {
+      return getLikedComments().includes(commentId);
+    }
+
+    function toggleLike(commentId, isReply) {
+      const liked = getLikedComments();
+      const index = liked.indexOf(commentId);
+
+      if (index > -1) {
+        liked.splice(index, 1);
+        updateLikeCount(commentId, -1, isReply);
+      } else {
+        liked.push(commentId);
+        updateLikeCount(commentId, 1, isReply);
+      }
+
+      setLikedComments(liked);
+      renderComments();
+    }
+
+    function updateLikeCount(commentId, delta, isReply) {
+      if (isReply) {
+        COMMENTS.forEach(comment => {
+          const reply = comment.replies.find(r => r.id === commentId);
+          if (reply) {
+            reply.likes += delta;
+          }
+        });
+      } else {
+        const comment = COMMENTS.find(c => c.id === commentId);
+        if (comment) {
+          comment.likes += delta;
+        }
+      }
+    }
+
+    function sortComments(type) {
+      currentSort = type;
+
+      document.querySelectorAll('.sort-controls button').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      document.getElementById('sort-' + type).classList.add('active');
+
+      renderComments();
+    }
+
+    function getSortedComments() {
+      const sorted = [...COMMENTS];
+
+      switch (currentSort) {
+        case 'newest':
+          sorted.sort((a, b) => new Date(b.time) - new Date(a.time));
+          break;
+        case 'oldest':
+          sorted.sort((a, b) => new Date(a.time) - new Date(b.time));
+          break;
+        case 'mostLiked':
+          sorted.sort((a, b) => b.likes - a.likes);
+          break;
+      }
+
+      return sorted;
+    }
+
+    function toggleReplies(commentId) {
+      const replies = document.querySelector(`#comment-${commentId} .replies`);
+      if (replies) {
+        replies.classList.toggle('show');
+      }
+    }
+
+    function getInitials(name) {
+      return name.charAt(0).toUpperCase();
+    }
+
+    function renderComments() {
+      const container = document.getElementById('commentsList');
+      const sortedComments = getSortedComments();
+
+      if (sortedComments.length === 0) {
+        container.innerHTML = '<div class="no-comments">暂无评论</div>';
+        return;
+      }
+
+      container.innerHTML = sortedComments.map(comment => {
+        const isLiked = isCommentLiked(comment.id);
+        const replyCount = comment.replies.length;
+
+        return `
+          <li id="comment-${comment.id}" class="comment-item">
+            <div class="comment-header">
+              <div class="user-avatar">${getInitials(comment.user)}</div>
+              <div class="comment-meta">
+                <div class="comment-username">${comment.user}</div>
+                <div class="comment-time">${comment.time}</div>
+              </div>
+            </div>
+            <div class="comment-content">${comment.content}</div>
+            <div class="comment-actions">
+              <button class="like-button ${isLiked ? 'liked' : ''}" onclick="toggleLike(${comment.id}, false)">
+                ❤ <span class="like-count">${comment.likes}</span>
+              </button>
+              ${replyCount > 0 ? `
+                <button class="reply-toggle" onclick="toggleReplies(${comment.id})">
+                  ${replyCount} 条回复
+                </button>
+              ` : ''}
+            </div>
+            ${replyCount > 0 ? `
+              <ul class="replies">
+                ${comment.replies.map(reply => {
+                  const replyLiked = isCommentLiked(reply.id);
+                  return `
+                    <li class="comment-item">
+                      <div class="comment-header">
+                        <div class="user-avatar">${getInitials(reply.user)}</div>
+                        <div class="comment-meta">
+                          <div class="comment-username">${reply.user}</div>
+                          <div class="comment-time">${reply.time}</div>
+                        </div>
+                      </div>
+                      <div class="comment-content">${reply.content}</div>
+                      <div class="comment-actions">
+                        <button class="like-button ${replyLiked ? 'liked' : ''}" onclick="toggleLike(${reply.id}, true)">
+                          ❤ <span class="like-count">${reply.likes}</span>
+                        </button>
+                      </div>
+                    </li>
+                  `;
+                }).join('')}
+              </ul>
+            ` : ''}
+          </li>
+        `;
+      }).join('');
+    }
+
+    function submitComment() {
+      const textarea = document.getElementById('newComment');
+      const content = textarea.value.trim();
+
+      if (!content) {
+        alert('请输入评论内容');
+        return;
+      }
+
+      const newId = Math.max(...COMMENTS.map(c => c.id), 0) + 1;
+      const today = new Date().toISOString().split('T')[0];
+
+      COMMENTS.unshift({
+        id: newId,
+        user: 'You',
+        content: content,
+        time: today,
+        likes: 0,
+        replies: []
+      });
+
+      textarea.value = '';
+      renderComments();
+    }
+
+    // Initialize
+    renderComments();
+  </script>
+  <script src="js/back-to-top.js"></script>
+</body>
+</html>

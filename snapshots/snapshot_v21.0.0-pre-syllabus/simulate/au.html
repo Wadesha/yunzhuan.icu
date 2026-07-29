@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Australia Application Full Simulation | yunzhuan.icu</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; max-width: 820px; margin: 0 auto; padding: 24px 16px 48px; background: #ffffff; color: #111111; line-height: 1.8; font-size: 15px; }
+  a { color: #111111; text-decoration: none; border-bottom: 1px solid #cccccc; }
+  a:hover { border-bottom-color: #111111; }
+  .nav { padding-bottom: 12px; margin-bottom: 20px; border-bottom: 1px solid #e0e0e0; font-size: 0.88rem; }
+  .nav a { color: #111111; }
+  .nav .sep { color: #cccccc; margin: 0 6px; }
+  .mock { border: 1px dashed #888888; color: #555555; padding: 8px 12px; font-size: 0.78rem; margin-bottom: 24px; }
+  h1 { font-size: 1.6rem; margin-bottom: 4px; }
+  h2 { font-size: 1.1rem; font-weight: 700; margin: 28px 0 8px; padding-bottom: 6px; border-bottom: 1px solid #111111; }
+  h3 { font-size: 0.98rem; font-weight: 700; margin: 16px 0 4px; }
+  p, li { margin-bottom: 8px; color: #111111; }
+  .muted { color: #888888; font-size: 0.85rem; }
+  .box { border: 1px solid #111111; padding: 14px 18px; margin: 12px 0; background: #ffffff; }
+  .box .title { font-weight: 700; margin-bottom: 6px; }
+  .letterhead { text-align: center; border-bottom: 3px double #111111; padding-bottom: 12px; margin-bottom: 14px; }
+  .letterhead .crest { font-weight: 700; font-size: 1.05rem; letter-spacing: 0.08em; }
+  .salutation { font-weight: 700; margin: 14px 0 10px; }
+  .signature { margin-top: 28px; }
+  .signature .line { border-top: 1px solid #111111; width: 180px; margin-bottom: 4px; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.85rem; margin: 8px 0; }
+  th, td { border: 1px solid #e0e0e0; padding: 6px 10px; text-align: left; }
+  th { background: #ffffff; border-bottom: 2px solid #111111; font-weight: 700; }
+  .status { display: inline-block; border: 1px solid #111111; padding: 1px 6px; font-size: 0.68rem; font-weight: 700; }
+  .status.done { border-width: 2px; }
+  .status.pending { border-color: #888888; color: #888888; }
+  .status.missing { border-style: dashed; }
+  ul, ol { margin-left: 22px; margin-bottom: 12px; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 640px) { .grid { grid-template-columns: 1fr; } }
+  .tag { display: inline-block; border: 1px solid #111111; padding: 1px 6px; font-size: 0.7rem; margin-right: 4px; font-weight: 700; }
+</style>
+</head>
+<body>
+
+<div class="nav">
+  <a href="../index.html">Home</a> <span class="sep">/</span>
+  <a href="index.html">Full Simulation</a> <span class="sep">/</span>
+  Australia
+</div>
+
+<div class="mock">模拟数据 · 澳洲本科申请全流程 · 画像：11年级 / CS</div>
+
+<h1>Australia — Application Full Simulation</h1>
+<p class="muted">基于"Li Ming"画像的澳洲 Group of Eight（墨大/悉大/新南威尔士/莫纳什等）申请全流程仿真</p>
+
+<h2>你的画像</h2>
+<div class="box">
+  <div class="title">基础信息</div>
+  <ul>
+    <li>年级：11 年级（2026 Semester 1 申请季）</li>
+    <li>目标专业：Bachelor of Computer Science</li>
+    <li>ATAR 等效：预估 98+（中国高考分数换算）</li>
+    <li>语言：IELTS 7.5 / 9.0</li>
+    <li>GPA：3.95 / 4.0</li>
+    <li>竞赛：IMO 金牌</li>
+  </ul>
+</div>
+
+<h2>澳洲申请体系概述</h2>
+<ul>
+  <li>澳洲大学主要看 <strong>ATAR（Australian Tertiary Admission Rank）</strong>或等效成绩</li>
+  <li>中国学生需提供：高中毕业证 + 成绩单（GPA）+ 语言成绩 + 高考/AL/IB 等效</li>
+  <li>大部分专业<strong>不需要文书和面试</strong>，录取基于成绩</li>
+  <li>部分专业（医学、法学、精算等）需 PS + 面试</li>
+  <li>八大（Group of Eight）CS 要求：ATAR 90+（墨大）/ 85+（悉大/新南威尔士）</li>
+  <li>申请通过 <strong>UAC / QTAC / 直接申请</strong> 系统</li>
+</ul>
+
+<!-- TIMELINE -->
+<h2>① 申请时间线（2025 - 2026）</h2>
+<table>
+  <tr><th>时间</th><th>事项</th></tr>
+  <tr><td>2025.03 - 06</td><td>选择目标大学 + 专业方向</td></tr>
+  <tr><td>2025.07 - 09</td><td>准备申请材料（成绩单 + 毕业证 + 语言成绩）</td></tr>
+  <tr><td>2025.10</td><td>部分大学 Semester 2 截止（11 月开学）</td></tr>
+  <tr><td>2025.11 - 2026.01</td><td>Semester 1 2026 申请开放</td></tr>
+  <tr><td>2026.01 - 03</td><td>递交申请 + 缴纳押金（$100-150）</td></tr>
+  <tr><td>2026.04 - 05</td><td>收到 Conditional Offer → 确认</td></tr>
+  <tr><td>2026.06 - 07</td><td>Final Transcript + 签证材料（COE）</td></tr>
+  <tr><td>2026.07 - 08</td><td>签证申请（Subclass 500）</td></tr>
+  <tr><td>2026.08 - 09</td><td>行前准备 + 机票 + 抵达澳洲</td></tr>
+  <tr><td>2026.09 - 10</td><td>Orientation Week + 正式开学</td></tr>
+</table>
+
+<!-- MATERIALS -->
+<h2>② 申请材料清单</h2>
+
+<h3>核心材料（CS 方向 / 八大）</h3>
+<div class="box">
+  <div class="title">Academic Documents</div>
+  <ul>
+    <li>高中毕业证（中英文公证）</li>
+    <li>9-12 年级完整成绩单（中英文 + 学校盖章）</li>
+    <li>GPA 换算说明（如果学校使用 4.0 体系，附说明信）</li>
+    <li>课程大纲（部分大学要求）</li>
+  </ul>
+</div>
+
+<div class="box">
+  <div class="title">Language &amp; Test Scores</div>
+  <ul>
+    <li>IELTS：7.5 overall（no band below 7.0）</li>
+    <li>TOEFL iBT：100+（如果用 TOEFL）</li>
+    <li>高考成绩（如果用高考分数申请）</li>
+    <li>AL/IB/AP 成绩（如果用国际课程）</li>
+  </ul>
+</div>
+
+<div class="box">
+  <div class="title">Additional Materials（部分专业要求）</div>
+  <ul>
+    <li>Personal Statement（部分大学/专业要求）</li>
+    <li>1-2 封推荐信（部分专业要求）</li>
+    <li>简历（CV）</li>
+    <li>作品集（如设计/媒体/艺术方向）</li>
+  </ul>
+</div>
+
+<!-- PS -->
+<h2>③ Personal Statement（模拟，如学校要求）</h2>
+
+<div class="box">
+  <div class="title">你的 PS 初稿（558 字）</div>
+  <pre style="white-space:pre-wrap; font-family: inherit; font-size: 0.88rem; line-height: 1.85;">
+I have always been fascinated by the power of computers to transform information. My passion for computer science began when I taught myself to code at age 12, and since then I have pursued this interest through both academic study and extracurricular engagement.
+
+Academically, I have maintained a 3.95 / 4.0 GPA throughout high school, with particular strength in mathematics and computer science. I have completed AP Computer Science A (score 5) and AP Calculus BC (score 5), and I will sit A-Level Computer Science in 2026. My mathematical abilities were recognized when I won a gold medal at the 2025 International Mathematical Olympiad (IMO), where I competed against 600+ students from over 100 countries.
+
+In terms of practical experience, I founded my school's AI club, which now has 30 active members. I designed a curriculum teaching machine learning fundamentals, and organized our first hackathon, which attracted 60+ participants. I have also volunteered for two summers teaching Python to students in rural China, where I developed a passion for making technology accessible to underserved communities.
+
+I am applying to study Computer Science in Australia because of the country's strong reputation for CS research, particularly in areas such as machine learning, data science, and software engineering. Australian universities have produced world-leading research in AI, and I am excited by the prospect of contributing to this tradition. I am particularly interested in the intersection of AI and social good, and I believe Australian universities' focus on interdisciplinary research will provide an excellent foundation for this work.
+
+I would welcome the opportunity to study at an Australian university, where I can pursue my passion for computer science while also engaging with Australia's diverse and vibrant academic community.
+  </pre>
+  <p class="muted">字数：558 / 1000（建议 500-600 字）</p>
+</div>
+
+<!-- INTERVIEW (if required) -->
+<h2>④ 模拟面试（部分专业如医学/CS 荣誉学位要求）</h2>
+
+<div class="box">
+  <div class="title">典型面试问题（CS 荣誉学位）</div>
+</div>
+
+<div class="box">
+  <p><strong>Q1.</strong> "Why did you choose to study Computer Science in Australia?"</p>
+  <p><strong>你的回答：</strong>澳洲在 ML 和 AI 领域的研究实力很强（如 ANU 的 ML 实验室、U Melbourne 的 AI 中心）。我对 AI for Social Good 很感兴趣，澳洲大学在这方面的跨学科合作（CS + 社会政策）很吸引我。此外，澳洲的文化和生活方式也很适合国际学生。</p>
+  <div class="tag">评分：Strong</div>
+</div>
+
+<div class="box">
+  <p><strong>Q2.</strong> "Tell me about a project you've worked on."</p>
+  <p><strong>你的回答：</strong>在 CMU 夏校期间，我参与了一个 AI for Education 项目。我们开发了一个轻量级 LLM，专门为低带宽地区的学生提供教育问答。我负责用户访谈和模型评估，在云南山区实测 200+ 学生。我们的模型在问答准确率上比现有方案提升 12%。</p>
+  <div class="tag">评分：Excellent</div>
+</div>
+
+<div class="box">
+  <p><strong>Q3.</strong> "How do you handle failure?"</p>
+  <p><strong>你的回答：</strong>高一 USACO 比赛，我因为用错输入格式三道题零分。那次以后我养成了"先写测试再写代码"的习惯。我认为失败暴露的是"假设"，而不是"能力"——每次失败都让我的假设系统更完善。</p>
+  <div class="tag">评分：Strong</div>
+</div>
+
+<p class="muted">面试综合：<strong>8.8/10</strong></p>
+
+<!-- CHECKLIST -->
+<h2>⑤ 申请 Checklist</h2>
+<table>
+  <tr><th>#</th><th>材料</th><th>状态</th></tr>
+  <tr><td>1</td><td>高中毕业证（中英公证）</td><td><span class="status done">Done</span></td></tr>
+  <tr><td>2</td><td>9-12 年级成绩单</td><td><span class="status done">Done</span></td></tr>
+  <tr><td>3</td><td>GPA 换算说明</td><td><span class="status done">Done</span></td></tr>
+  <tr><td>4</td><td>IELTS 7.5</td><td><span class="status done">Done</span></td></tr>
+  <tr><td>5</td><td>高考 / A-Level / IB 等效成绩</td><td><span class="status done">Done</span></td></tr>
+  <tr><td>6</td><td>PS + 推荐信（如要求）</td><td><span class="status pending">Pending</span></td></tr>
+  <tr><td>7</td><td>简历 CV</td><td><span class="status done">Done</span></td></tr>
+  <tr><td>8</td><td>申请费缴纳 + 押金</td><td><span class="status pending">Pending</span></td></tr>
+  <tr><td>9</td><td>OSHC 健康保险</td><td><span class="status missing">Not Yet</span></td></tr>
+  <tr><td>10</td><td>CoE + 签证申请</td><td><span class="status missing">Not Yet</span></td></tr>
+</table>
+
+<!-- RESULT -->
+<h2>⑥ 模拟 Offer</h2>
+
+<div class="letterhead">
+  <div class="crest">SAMPLE GROUP OF EIGHT UNIVERSITY</div>
+  <div class="sub" style="font-size:0.72rem; color:#888;">International Admissions Office · Melbourne, Australia</div>
+</div>
+
+<p>5 May 2026</p>
+<p style="font-weight:700;">Dear Li Ming,</p>
+
+<p>We are delighted to offer you a <strong>Conditional Offer of Admission</strong> to the Bachelor of Computer Science (Honours) programme, commencing in Semester 1, 2027 (February 2027 intake).</p>
+
+<p>This offer is based on your outstanding academic record, including your GPA of 3.95/4.0, your International Mathematical Olympiad gold medal, and your demonstrated commitment to computer science through your AI club leadership and community outreach work.</p>
+
+<p>This offer is conditional upon you meeting the following requirements by <strong>31 January 2027</strong>:</p>
+<ul>
+  <li>Completion of high school with results equivalent to an ATAR of 98 or above</li>
+  <li>IELTS score of 7.5 overall (no band below 7.0) — if not already held</li>
+  <li>Successful completion of all prerequisite mathematics and computer science subjects</li>
+</ul>
+
+<p>Please note that this is a <strong>Round 2 offer</strong>. You will need to confirm your acceptance by paying the AUD $5,000 deposit within 4 weeks of receiving this offer. The deposit will be credited towards your tuition fees upon enrolment.</p>
+
+<p>Australia offers a world-class education, a welcoming multicultural environment, and exciting opportunities in the growing tech sector. We look forward to the possibility of welcoming you to our community.</p>
+
+<div class="signature">
+  <div class="line"></div>
+  <p><strong>Director of International Admissions</strong><br>Sample Group of Eight University</p>
+</div>
+
+<div class="grid">
+  <div class="box">
+    <div class="title">你的优势</div>
+    <ul>
+      <li>IMO 金牌（澳洲 CS 看重数学基础）</li>
+      <li>GPA 3.95 远超 G8 CS 门槛</li>
+      <li>AI 社团 + 公益经历增加差异化</li>
+    </ul>
+  </div>
+  <div class="box">
+    <div class="title">你的风险</div>
+    <ul>
+      <li>需确保最终成绩达标 ATAR 98 等效</li>
+      <li>需关注 IELTS 是否需要再次考试</li>
+      <li>CoE 签发和签证申请需预留充足时间</li>
+    </ul>
+  </div>
+</div>
+
+<p class="muted">→ 返回国家选择：<a href="index.html">其他国家模拟</a> · <a href="../index.html">首页</a></p>
+
+</body>
+</html>

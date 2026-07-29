@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Analytics Dashboard · yunzhuan.icu</title>
+<meta name="description" content="yunzhuan.icu 数据统计与事件追踪仪表盘 - Google Analytics / 百度统计 / 自定义事件。">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'PingFang SC', sans-serif; max-width: 960px; margin: 0 auto; padding: 24px 16px 48px; background: #ffffff; color: #111111; line-height: 1.7; font-size: 15px; }
+  a { color: #111; text-decoration: none; border-bottom: 1px solid #ccc; }
+  a:hover { border-bottom-color: #111; }
+  .nav { padding-bottom: 12px; margin-bottom: 20px; border-bottom: 1px solid #e0e0e0; font-size: 0.88rem; color: #888; }
+  .nav a { color: #111; }
+  .nav .sep { color: #ccc; margin: 0 6px; }
+  h1 { font-size: 1.6rem; margin-bottom: 4px; }
+  h2 { font-size: 1.1rem; font-weight: 700; margin: 28px 0 8px; padding-bottom: 6px; border-bottom: 1px solid #111; }
+  h3 { font-size: 1rem; font-weight: 700; margin: 18px 0 6px; }
+  p, pre, code { margin-bottom: 12px; }
+  pre { background: #f5f5f5; border: 1px solid #e0e0e0; padding: 12px 16px; font-size: 0.85rem; overflow-x: auto; line-height: 1.5; }
+  code { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 0.85em; background: #f5f5f5; padding: 1px 6px; }
+  .muted { color: #888; font-size: 0.85rem; }
+  .badge { display: inline-block; border: 1px solid #111; padding: 0 6px; font-size: 0.7rem; font-weight: 700; }
+  .footer { margin-top: 36px; padding-top: 16px; border-top: 1px solid #e0e0e0; color: #888; font-size: 0.82rem; }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 16px 0; }
+  @media (max-width: 700px) { .grid-2 { grid-template-columns: 1fr; } }
+  .card { border: 1px solid #e0e0e0; padding: 16px; }
+  .card h3 { margin-top: 0; }
+  .card p { font-size: 0.88rem; }
+
+  .event-log { border: 1px solid #e0e0e0; padding: 12px; max-height: 320px; overflow-y: auto; background: #fafafa; font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 0.78rem; }
+  .event-log .ev { border-bottom: 1px dashed #ddd; padding: 4px 0; }
+  .event-log .ev:last-child { border-bottom: 0; }
+  .event-log .ev .ts { color: #888; }
+  .event-log .ev .name { font-weight: 700; color: #111; }
+
+  button { padding: 8px 16px; border: 1px solid #111; background: #fff; color: #111; cursor: pointer; font-family: inherit; font-size: 0.9rem; }
+  button:hover { background: #f5f5f5; }
+  button.primary { background: #111; color: #fff; }
+  button.primary:hover { background: #000; }
+  .btn-row { display: flex; gap: 8px; flex-wrap: wrap; margin: 12px 0; }
+
+  .placeholder {
+    background: repeating-linear-gradient(45deg, #f5f5f5 0 10px, #fafafa 10px 20px);
+    border: 1px dashed #888;
+    padding: 24px;
+    text-align: center;
+    color: #888;
+    font-size: 0.88rem;
+  }
+</style>
+</head>
+<body>
+
+<div class="nav">
+  <a href="index.html">Home</a> <span class="sep">/</span>
+  Analytics
+</div>
+
+<h1>Analytics · 数据统计 <span class="badge">v58</span></h1>
+<p class="muted">Google Analytics · 百度统计 · 自定义事件追踪 API</p>
+
+<div class="v-info" style="border:1px dashed #888;padding:8px 12px;margin:12px 0;font-size:0.82rem;color:#555;">
+  此页面用于演示与验证统计集成。所有 SDK 加载为占位（&lt;!-- TODO --&gt;），生产环境请替换为真实 ID。
+</div>
+
+<h2>第三方统计 SDK <span class="muted" style="font-size:0.78rem;">Third-party</span></h2>
+
+<div class="grid-2">
+  <div class="card">
+    <h3>Google Analytics 4 (gtag.js)</h3>
+    <p>在 <code>&lt;head&gt;</code> 顶部插入：</p>
+<pre>&lt;!-- Google tag (gtag.js) --&gt;
+&lt;script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"&gt;&lt;/script&gt;
+&lt;script&gt;
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXXXXX');
+&lt;/script&gt;</pre>
+    <p class="muted">获取 Measurement ID：<a href="https://analytics.google.com/" target="_blank" rel="noopener">analytics.google.com</a></p>
+  </div>
+
+  <div class="card">
+    <h3>百度统计 (Baidu Tongji)</h3>
+    <p>在 <code>&lt;body&gt;</code> 顶部插入：</p>
+<pre>&lt;script&gt;
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?xxxxxxxxxxxxxxxxxxxxxxxxxx";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+&lt;/script&gt;</pre>
+    <p class="muted">获取站点 ID：<a href="https://tongji.baidu.com/" target="_blank" rel="noopener">tongji.baidu.com</a></p>
+  </div>
+</div>
+
+<h2>自定义事件追踪 <span class="muted" style="font-size:0.78rem;">Custom API</span></h2>
+
+<p>暴露 <code>window.Analytics.track(event, props)</code>，自动转发到 GA4 / 百度 / 控制台。</p>
+
+<pre>// 引入 js/analytics.js（v58 新增）后
+window.Analytics.track('practice_start', { subject: 'sat', source: 'homepage' });
+window.Analytics.track('mock_test_complete', { subject: 'act', score: 32, accuracy: 88.5 });
+window.Analytics.track('pwa_installed', { source: 'shortcut_mock' });</pre>
+
+<h3>事件类型约定</h3>
+<table style="width:100%;border-collapse:collapse;font-size:0.85rem;">
+  <tr><th style="text-align:left;padding:6px 10px;border-bottom:2px solid #111;border-top:1px solid #e0e0e0;">事件名</th><th style="text-align:left;padding:6px 10px;border-bottom:2px solid #111;border-top:1px solid #e0e0e0;">触发时机</th></tr>
+  <tr><td style="padding:6px 10px;border-bottom:1px solid #e0e0e0;"><code>page_view</code></td><td style="padding:6px 10px;border-bottom:1px solid #e0e0e0;">自动</td></tr>
+  <tr><td style="padding:6px 10px;border-bottom:1px solid #e0e0e0;"><code>practice_start</code></td><td style="padding:6px 10px;border-bottom:1px solid #e0e0e0;">用户进入刷题页</td></tr>
+  <tr><td style="padding:6px 10px;border-bottom:1px solid #e0e0e0;"><code>answer_submit</code></td><td style="padding:6px 10px;border-bottom:1px solid #e0e0e0;">提交答案</td></tr>
+  <tr><td style="padding:6px 10px;border-bottom:1px solid #e0e0e0;"><code>mock_test_complete</code></td><td style="padding:6px 10px;border-bottom:1px solid #e0e0e0;">模拟考完成</td></tr>
+  <tr><td style="padding:6px 10px;border-bottom:1px solid #e0e0e0;"><code>dashboard_open</code></td><td style="padding:6px 10px;border-bottom:1px solid #e0e0e0;">打开仪表盘</td></tr>
+  <tr><td style="padding:6px 10px;border-bottom:1px solid #e0e0e0;"><code>pwa_install_prompt</code></td><td style="padding:6px 10px;border-bottom:1px solid #e0e0e0;">触发 PWA 安装</td></tr>
+  <tr><td style="padding:6px 10px;border-bottom:1px solid #e0e0e0;"><code>pwa_installed</code></td><td style="padding:6px 10px;border-bottom:1px solid #e0e0e0;">PWA 安装完成</td></tr>
+  <tr><td style="padding:6px 10px;border-bottom:1px solid #e0e0e0;"><code>locale_change</code></td><td style="padding:6px 10px;border-bottom:1px solid #e0e0e0;">切换语言</td></tr>
+  <tr><td style="padding:6px 10px;"><code>share_target_received</code></td><td style="padding:6px 10px;">PWA 接收分享题库</td></tr>
+</table>
+
+<h2>事件追踪演示</h2>
+<p class="muted">点击下方按钮，事件会输出到下方 log + 转发到 GA / 百度（如已加载）。</p>
+
+<div class="btn-row">
+  <button class="primary" data-ev="practice_start" data-props='{"subject":"sat","source":"demo"}'>practice_start</button>
+  <button data-ev="answer_submit" data-props='{"qid":"sat-Q3","correct":true,"topic":"ALG"}'>answer_submit</button>
+  <button data-ev="mock_test_complete" data-props='{"subject":"act","score":32,"accuracy":88.5}'>mock_test_complete</button>
+  <button data-ev="dashboard_open">dashboard_open</button>
+  <button data-ev="pwa_installed" data-props='{"source":"shortcut_mock"}'>pwa_installed</button>
+  <button data-ev="locale_change" data-props='{"from":"zh-CN","to":"en-US"}'>locale_change</button>
+</div>
+
+<h3>实时事件 log</h3>
+<div class="event-log" id="eventLog">
+  <div class="muted">（暂无事件）</div>
+</div>
+
+<div class="footer">
+  yunzhuan.icu · v58 · <a href="docs/SEO.html">SEO 文档</a> · <a href="sitemap.xml">sitemap.xml</a> · <a href="robots.txt">robots.txt</a>
+</div>
+
+<!-- TODO: 替换为真实 GA Measurement ID -->
+<!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script> -->
+
+<!-- TODO: 替换为真实百度站点 ID -->
+<!-- <script>var _hmt=_hmt||[];(function(){var hm=document.createElement("script");hm.src="https://hm.baidu.com/hm.js?xxxxxxxx";var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(hm,s);})();</script> -->
+
+<script src="js/analytics.js"></script>
+<script>
+  (function () {
+    'use strict';
+
+    var log = document.getElementById('eventLog');
+
+    function appendLog(name, props) {
+      if (log.querySelector('.muted')) log.innerHTML = '';
+      var div = document.createElement('div');
+      div.className = 'ev';
+      var ts = new Date().toISOString().slice(11, 19);
+      var propsStr = props ? ' ' + JSON.stringify(props) : '';
+      div.innerHTML = '<span class="ts">[' + ts + ']</span> <span class="name">' + escapeHtml(name) + '</span>' + escapeHtml(propsStr);
+      log.appendChild(div);
+      log.scrollTop = log.scrollHeight;
+    }
+
+    function escapeHtml(s) {
+      return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
+
+    // hook into Analytics
+    if (window.Analytics && window.Analytics.track) {
+      var orig = window.Analytics.track;
+      window.Analytics.track = function (name, props) {
+        appendLog(name, props);
+        return orig.call(this, name, props);
+      };
+    }
+
+    // hook buttons
+    var btns = document.querySelectorAll('button[data-ev]');
+    for (var i = 0; i < btns.length; i++) {
+      btns[i].addEventListener('click', function () {
+        var name = this.getAttribute('data-ev');
+        var props = null;
+        try { props = JSON.parse(this.getAttribute('data-props') || 'null'); } catch (e) {}
+        if (window.Analytics) window.Analytics.track(name, props);
+      });
+    }
+
+    // 触发 page_view
+    if (window.Analytics) window.Analytics.track('page_view', { path: location.pathname });
+  })();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Favorites 收藏夹</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #000;
+            background: #fff;
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* 导航栏 */
+        nav {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+        }
+
+        nav a {
+            color: #0066cc;
+            text-decoration: none;
+            margin-right: 20px;
+            font-size: 14px;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        /* 标题 */
+        h1 {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 25px;
+            color: #000;
+        }
+
+        /* 分类标签 */
+        .category-tabs {
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 30px;
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
+        }
+
+        .category-tab {
+            padding: 10px 20px;
+            background: transparent;
+            border: none;
+            color: #0066cc;
+            cursor: pointer;
+            font-size: 15px;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s;
+        }
+
+        .category-tab:hover {
+            background: #f5f5f5;
+        }
+
+        .category-tab.active {
+            border-bottom-color: #0066cc;
+            color: #000;
+            font-weight: 500;
+        }
+
+        /* 自定义分组区域 */
+        .groups-section {
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        .groups-section h2 {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: #000;
+        }
+
+        .group-card {
+            background: #fff;
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+
+        .group-card h3 {
+            font-size: 16px;
+            color: #000;
+            margin-bottom: 10px;
+        }
+
+        .group-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+
+        .group-item {
+            background: #fff;
+            border: 1px solid #ccc;
+            padding: 5px 12px;
+            font-size: 13px;
+            color: #0066cc;
+        }
+
+        .group-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .group-actions button {
+            background: transparent;
+            border: 1px solid #ccc;
+            padding: 5px 15px;
+            font-size: 13px;
+            cursor: pointer;
+            color: #000;
+        }
+
+        .group-actions button:hover {
+            background: #f5f5f5;
+        }
+
+        .create-group-btn {
+            background: #fff;
+            border: 1px dashed #999;
+            padding: 10px 20px;
+            cursor: pointer;
+            color: #0066cc;
+            font-size: 14px;
+            width: 100%;
+        }
+
+        .create-group-btn:hover {
+            background: #f5f5f5;
+        }
+
+        /* 收藏列表 */
+        .favorites-section h2 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: #000;
+        }
+
+        .favorites-list {
+            display: grid;
+            gap: 15px;
+        }
+
+        .favorite-item {
+            border: 1px solid #ddd;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .favorite-item-content {
+            flex: 1;
+        }
+
+        .favorite-type {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+
+        .favorite-title {
+            font-size: 16px;
+            color: #0066cc;
+            font-weight: 500;
+        }
+
+        .favorite-meta {
+            font-size: 13px;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .favorite-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .favorite-actions button {
+            background: transparent;
+            border: 1px solid #ccc;
+            padding: 5px 15px;
+            font-size: 13px;
+            cursor: pointer;
+            color: #000;
+        }
+
+        .favorite-actions button:hover {
+            background: #f5f5f5;
+        }
+
+        .remove-btn {
+            color: #cc0000 !important;
+        }
+
+        /* 导出按钮 */
+        .export-section {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+        }
+
+        .export-btn {
+            background: #0066cc;
+            color: #fff;
+            border: none;
+            padding: 12px 30px;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+        .export-btn:hover {
+            background: #0055aa;
+        }
+
+        /* 空状态 */
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+
+        /* 模态框 */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+        }
+
+        .modal.active {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: #fff;
+            padding: 30px;
+            width: 90%;
+            max-width: 500px;
+            border: 1px solid #ddd;
+        }
+
+        .modal-content h3 {
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+
+        .modal-content input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+        }
+
+        .modal-buttons button {
+            padding: 10px 20px;
+            font-size: 14px;
+            cursor: pointer;
+            border: 1px solid #ccc;
+            background: #fff;
+        }
+
+        .modal-buttons button:first-child {
+            background: #0066cc;
+            color: #fff;
+            border-color: #0066cc;
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav>
+        <a href="#">&#8592; 返回首页</a>
+        <a href="#">搜索</a>
+        <a href="#">帮助</a>
+    </nav>
+
+    <!-- 标题 -->
+    <h1>My Favorites 收藏夹</h1>
+
+    <!-- 分类标签 -->
+    <div class="category-tabs">
+        <button class="category-tab active" data-category="all">All</button>
+        <button class="category-tab" data-category="majors">Majors</button>
+        <button class="category-tab" data-category="schools">Schools</button>
+        <button class="category-tab" data-category="competitions">Competitions</button>
+        <button class="category-tab" data-category="essays">Essays</button>
+        <button class="category-tab" data-category="guides">Guides</button>
+    </div>
+
+    <!-- 自定义分组区域 -->
+    <div class="groups-section">
+        <h2>自定义分组</h2>
+        <div id="groups-container">
+            <!-- 分组卡片将通过JS动态生成 -->
+        </div>
+        <button class="create-group-btn" onclick="createGroup()">+ 创建新分组</button>
+    </div>
+
+    <!-- 收藏列表 -->
+    <div class="favorites-section">
+        <h2>收藏列表</h2>
+        <div class="favorites-list" id="favorites-list">
+            <!-- 收藏项将通过JS动态生成 -->
+        </div>
+    </div>
+
+    <!-- 导出PDF按钮 -->
+    <div class="export-section">
+        <button class="export-btn" onclick="exportPDF()">导出为 PDF</button>
+    </div>
+
+    <!-- 创建分组模态框 -->
+    <div class="modal" id="group-modal">
+        <div class="modal-content">
+            <h3>创建新分组</h3>
+            <input type="text" id="group-name-input" placeholder="输入分组名称">
+            <div class="modal-buttons">
+                <button onclick="saveGroup()">创建</button>
+                <button onclick="closeModal()">取消</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 模拟数据
+        const FAVORITES_DATA = {
+            majors: [
+                { id: 'cs', name: 'Computer Science', meta: 'STEM · 高需求' },
+                { id: 'finance', name: 'Finance', meta: '商科 · 华尔街方向' },
+                { id: 'mechanical-engineering', name: 'Mechanical Engineering', meta: '工程 · 设计与创新' }
+            ],
+            schools: [
+                { id: 'harvard', name: 'Harvard University', meta: '马萨诸塞州 · #2 US News' },
+                { id: 'mit', name: 'MIT', meta: '马萨诸塞州 · #2 US News' },
+                { id: 'stanford', name: 'Stanford University', meta: '加州 · #3 US News' },
+                { id: 'columbia', name: 'Columbia University', meta: '纽约州 · #18 US News' }
+            ],
+            competitions: [
+                { id: 'usaco', name: 'USACO', meta: '计算机科学 · 金级认证' },
+                { id: 'amc', name: 'AMC 12', meta: '数学竞赛 · AIME晋级' },
+                { id: 'himcm', name: 'HiMCM', meta: '数学建模 · 团队竞赛' }
+            ],
+            essays: [
+                { id: 'common-app-1', name: 'Common App 文书范例 #1', meta: '个人成长 · 已录取哈佛' },
+                { id: 'why-harvard', name: 'Why Harvard 补充文书', meta: '目标院校 · 录取样本' }
+            ],
+            guides: [
+                { id: 'application-timeline', name: '申请时间线指南', meta: '规划 · 11年级开始' },
+                { id: 'interview-tips', name: '面试技巧大全', meta: '准备 · 校友面试' }
+            ]
+        };
+
+        // 从localStorage加载或使用默认数据
+        let favorites = JSON.parse(localStorage.getItem('favorites')) || {
+            majors: ['cs', 'finance', 'mechanical-engineering'],
+            schools: ['harvard', 'mit', 'stanford', 'columbia'],
+            competitions: ['usaco', 'amc', 'himcm'],
+            essays: ['common-app-1', 'why-harvard'],
+            guides: ['application-timeline', 'interview-tips']
+        };
+
+        let groups = JSON.parse(localStorage.getItem('groups')) || [
+            { name: 'My Top Schools', items: ['harvard', 'mit', 'stanford'] },
+            { name: 'STEM Competitions', items: ['usaco', 'amc', 'himcm'] }
+        ];
+
+        let currentCategory = 'all';
+
+        // 保存到localStorage
+        function saveToStorage() {
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            localStorage.setItem('groups', JSON.stringify(groups));
+        }
+
+        // 渲染分组
+        function renderGroups() {
+            const container = document.getElementById('groups-container');
+            container.innerHTML = groups.map((group, index) => `
+                <div class="group-card">
+                    <h3>${group.name}</h3>
+                    <div class="group-items">
+                        ${group.items.map(itemId => {
+                            const item = findItemById(itemId);
+                            return item ? `<span class="group-item">${item.name}</span>` : '';
+                        }).join('')}
+                    </div>
+                    <div class="group-actions">
+                        <button onclick="editGroup(${index})">编辑</button>
+                        <button onclick="deleteGroup(${index})">删除</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // 根据ID查找项目
+        function findItemById(id) {
+            for (const category of Object.keys(FAVORITES_DATA)) {
+                const item = FAVORITES_DATA[category].find(item => item.id === id);
+                if (item) return item;
+            }
+            return null;
+        }
+
+        // 渲染收藏列表
+        function renderFavorites() {
+            const list = document.getElementById('favorites-list');
+            let html = '';
+
+            const categories = currentCategory === 'all' 
+                ? Object.keys(favorites) 
+                : [currentCategory];
+
+            categories.forEach(category => {
+                if (!favorites[category]) return;
+                
+                favorites[category].forEach(itemId => {
+                    const item = FAVORITES_DATA[category]?.find(i => i.id === itemId);
+                    if (item) {
+                        html += `
+                            <div class="favorite-item" data-category="${category}">
+                                <div class="favorite-item-content">
+                                    <div class="favorite-type">${getCategoryLabel(category)}</div>
+                                    <div class="favorite-title">${item.name}</div>
+                                    <div class="favorite-meta">${item.meta}</div>
+                                </div>
+                                <div class="favorite-actions">
+                                    <button onclick="viewItem('${itemId}', '${category}')">查看</button>
+                                    <button class="remove-btn" onclick="removeFavorite('${category}', '${itemId}')">移除</button>
+                                </div>
+                            </div>
+                        `;
+                    }
+                });
+            });
+
+            if (html === '') {
+                html = '<div class="empty-state">暂无收藏</div>';
+            }
+
+            list.innerHTML = html;
+        }
+
+        // 获取分类标签
+        function getCategoryLabel(category) {
+            const labels = {
+                majors: '专业',
+                schools: '学校',
+                competitions: '竞赛',
+                essays: '文章',
+                guides: '指南'
+            };
+            return labels[category] || category;
+        }
+
+        // 分类筛选
+        document.querySelectorAll('.category-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.category-tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                currentCategory = this.dataset.category;
+                renderFavorites();
+            });
+        });
+
+        // 创建分组
+        function createGroup() {
+            document.getElementById('group-modal').classList.add('active');
+            document.getElementById('group-name-input').value = '';
+            document.getElementById('group-name-input').focus();
+        }
+
+        // 保存分组
+        function saveGroup() {
+            const name = document.getElementById('group-name-input').value.trim();
+            if (name) {
+                groups.push({ name: name, items: [] });
+                saveToStorage();
+                renderGroups();
+                closeModal();
+            }
+        }
+
+        // 编辑分组（简化版：直接删除重新创建）
+        function editGroup(index) {
+            alert('编辑功能：可从收藏列表中添加项目到分组');
+        }
+
+        // 删除分组
+        function deleteGroup(index) {
+            if (confirm('确定删除该分组吗？')) {
+                groups.splice(index, 1);
+                saveToStorage();
+                renderGroups();
+            }
+        }
+
+        // 关闭模态框
+        function closeModal() {
+            document.getElementById('group-modal').classList.remove('active');
+        }
+
+        // 查看项目
+        function viewItem(itemId, category) {
+            alert(`查看详情：${itemId} (${getCategoryLabel(category)})`);
+        }
+
+        // 移除收藏
+        function removeFavorite(category, itemId) {
+            if (confirm('确定从收藏夹中移除吗？')) {
+                const index = favorites[category].indexOf(itemId);
+                if (index > -1) {
+                    favorites[category].splice(index, 1);
+                    saveToStorage();
+                    renderFavorites();
+                }
+            }
+        }
+
+        // 导出PDF（模拟）
+        function exportPDF() {
+            alert('PDF导出功能：将生成包含所有收藏项的PDF文件');
+        }
+
+        // 初始化页面
+        renderGroups();
+        renderFavorites();
+    </script>
+
+    <script src="js/back-to-top.js"></script>
+</body>
+</html>

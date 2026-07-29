@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>带鱼导 · 结伴备战 | Practice v50</title>
+<link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 1000px; margin: 0 auto; padding: 24px 16px 48px; background: #ffffff; color: #111111; line-height: 1.7; font-size: 15px; }
+  a { color: #111111; text-decoration: none; border-bottom: 1px solid #cccccc; }
+  a:hover { border-bottom-color: #111111; }
+  .nav { padding-bottom: 12px; margin-bottom: 20px; border-bottom: 1px solid #e0e0e0; font-size: 0.88rem; color: #888888; }
+  .nav a { color: #111111; }
+  .nav .sep { color: #cccccc; margin: 0 6px; }
+  h1 { font-size: 1.6rem; margin-bottom: 4px; }
+  h2 { font-size: 1.1rem; font-weight: 700; margin: 28px 0 8px; padding-bottom: 6px; border-bottom: 1px solid #111111; }
+  h3 { font-size: 1rem; font-weight: 700; margin: 18px 0 6px; }
+  p { margin-bottom: 8px; }
+  .muted { color: #888888; font-size: 0.85rem; }
+  .subtitle { color: #555555; font-size: 0.95rem; margin-bottom: 20px; }
+  .badge { display: inline-block; border: 1px solid #111111; padding: 0 6px; font-size: 0.7rem; font-weight: 700; }
+  .v-info { border: 1px dashed #888888; padding: 8px 12px; margin: 12px 0; font-size: 0.82rem; color: #555555; }
+  input, textarea, button, select { font-family: inherit; font-size: 0.9rem; }
+  input[type=text], textarea, select { border: 1px solid #cccccc; padding: 6px 10px; width: 100%; box-sizing: border-box; font-size: 0.9rem; }
+  input:focus, textarea:focus, select:focus { outline: 2px solid #111111; outline-offset: -1px; }
+  textarea { resize: vertical; min-height: 60px; }
+  button { border: 1px solid #111111; background: #fff; color: #111111; padding: 6px 14px; cursor: pointer; font-weight: 600; }
+  button:hover { background: #111111; color: #fff; }
+  button:disabled { opacity: 0.5; cursor: not-allowed; }
+  button.primary { background: #111111; color: #fff; }
+  button.primary:hover { background: #333; }
+  button.small { padding: 3px 10px; font-size: 0.8rem; }
+  .form-row { margin-bottom: 10px; }
+  .form-row label { display: block; font-size: 0.82rem; color: #555; margin-bottom: 4px; }
+  .layout { display: grid; grid-template-columns: 1fr 320px; gap: 16px; }
+  @media (max-width: 900px) { .layout { grid-template-columns: 1fr; } }
+  .tab-bar { display: flex; border-bottom: 1px solid #e0e0e0; margin: 16px 0 12px; flex-wrap: wrap; }
+  .tab { padding: 8px 16px; cursor: pointer; font-size: 0.88rem; border-bottom: 2px solid transparent; color: #555; }
+  .tab.active { border-bottom-color: #111; color: #111; font-weight: 700; }
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+  .buddy-card { border: 1px solid #e0e0e0; padding: 12px 14px; margin-bottom: 8px; background: #fff; display: grid; grid-template-columns: 50px 1fr auto; gap: 10px; align-items: center; }
+  .buddy-card:hover { background: #fafafa; }
+  .buddy-avatar { width: 44px; height: 44px; border-radius: 50%; background: #111; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; font-weight: 700; }
+  .buddy-info b { font-size: 0.95rem; }
+  .buddy-info .meta { color: #888; font-size: 0.78rem; margin-top: 2px; }
+  .buddy-info .bio { font-size: 0.82rem; color: #555; margin-top: 4px; }
+  .buddy-score { text-align: center; min-width: 60px; }
+  .buddy-score b { font-size: 1.4rem; display: block; }
+  .buddy-score span { font-size: 0.7rem; color: #888; }
+  .score-bar { width: 50px; height: 6px; background: #e0e0e0; margin: 4px auto; }
+  .score-bar-fill { height: 100%; background: #111; }
+  .school-chip { display: inline-block; border: 1px solid #ccc; padding: 0 5px; font-size: 0.7rem; margin: 0 2px; }
+  .school-chip.match { background: #111; color: #fff; border-color: #111; }
+  .prep-room { border: 1px solid #e0e0e0; padding: 12px 14px; margin-bottom: 8px; background: #fff; }
+  .prep-room h3 { margin-top: 0; margin-bottom: 4px; }
+  .prep-room .code { font-family: 'Courier New', monospace; font-weight: 700; background: #f5f5f5; padding: 2px 6px; border: 1px solid #ccc; }
+  .prep-room .meta { font-size: 0.78rem; color: #888; margin-top: 4px; }
+  .prep-room .members { margin-top: 6px; }
+  .member-chip { display: inline-block; border: 1px solid #ccc; padding: 1px 6px; font-size: 0.7rem; margin: 2px; }
+  .prep-form { border: 1px solid #e0e0e0; padding: 14px 16px; background: #fafafa; margin: 12px 0; }
+  .empty-state { text-align: center; padding: 24px; color: #888; font-size: 0.88rem; border: 1px dashed #e0e0e0; }
+  .feed-item { border: 1px solid #e0e0e0; padding: 10px 12px; margin-bottom: 6px; background: #fff; font-size: 0.88rem; }
+  .feed-item .meta { color: #888; font-size: 0.72rem; }
+  .footer { margin-top: 36px; padding-top: 16px; border-top: 1px solid #e0e0e0; color: #888888; font-size: 0.82rem; }
+  .my-summary { border: 1px solid #111; padding: 14px 16px; background: #fafafa; margin-bottom: 12px; }
+  .my-summary h3 { margin-top: 0; }
+  .my-summary .info { font-size: 0.85rem; color: #555; }
+  .my-summary .info b { color: #111; }
+</style>
+</head>
+<body>
+
+<div class="nav">
+  <a href="../../index.html">Home</a> <span class="sep">/</span>
+  <a href="../index.html">Academics</a> <span class="sep">/</span>
+  <a href="index.html">Practice</a> <span class="sep">/</span>
+  带鱼导 · 结伴备战
+</div>
+
+<h1>带鱼导 · 结伴备战 <span class="badge">v50</span></h1>
+<p class="subtitle">找志同道合 · 备战室 · 战友动态 — 匹配规则：年级相同 + 共同目标学校 + 考试日期相近</p>
+
+<div class="v-info">
+  <strong>使用说明</strong> · 匹配基于你的 profile（grade / targetSchools）和常用考试日期。备战室复用 collab.js 房间系统，可直接进入讨论和答题。
+</div>
+
+<div class="my-summary">
+  <h3>我的画像 <a href="../../profile.html" class="small">(设置)</a></h3>
+  <div class="info" id="mySummary">加载中...</div>
+</div>
+
+<div class="tab-bar">
+  <div class="tab active" data-tab="match">推荐匹配</div>
+  <div class="tab" data-tab="friends">我的战友</div>
+  <div class="tab" data-tab="prep">备战室</div>
+  <div class="tab" data-tab="feed">战友动态</div>
+</div>
+
+<div class="layout">
+  <div>
+    <div class="tab-content active" id="tab-match">
+      <h2>推荐匹配（按契合度排序）</h2>
+      <p class="muted">匹配分数 = 年级相同 (30) + 每共同学校 (15) + 考试日期相近 (≤25) + 共同科目 (5/个)</p>
+      <div id="matchList"></div>
+    </div>
+
+    <div class="tab-content" id="tab-friends">
+      <h2>我的战友</h2>
+      <div id="friendsList"></div>
+    </div>
+
+    <div class="tab-content" id="tab-prep">
+      <h2>我的备战室</h2>
+      <div id="myPrepList"></div>
+
+      <h2>创建备战室</h2>
+      <div class="prep-form">
+        <div class="form-row">
+          <label>房间名</label>
+          <input type="text" id="prepName" maxlength="30" placeholder="例如：SAT 12 月冲刺小队">
+        </div>
+        <div class="form-row">
+          <label>目标学校（逗号分隔）</label>
+          <input type="text" id="prepSchools" placeholder="例如：MIT, Stanford">
+        </div>
+        <div class="form-row">
+          <label>考试日期</label>
+          <select id="prepExam"></select>
+        </div>
+        <button class="primary" id="createPrepBtn">创建备战室</button>
+        <p class="muted" id="prepMsg" style="margin-top:6px;"></p>
+      </div>
+
+      <h2>加入已有备战室</h2>
+      <div class="prep-form">
+        <div class="form-row">
+          <label>房间码（6 位）</label>
+          <input type="text" id="joinCode" maxlength="6" placeholder="例如：PR3K9X" style="font-family:monospace;letter-spacing:4px;">
+        </div>
+        <button class="primary" id="joinPrepBtn">加入</button>
+        <p class="muted" id="joinMsg" style="margin-top:6px;"></p>
+      </div>
+
+      <h2>公开备战室</h2>
+      <div id="publicPrepList"></div>
+    </div>
+
+    <div class="tab-content" id="tab-feed">
+      <h2>战友动态</h2>
+      <p class="muted">来自你目标学校的最新动态 + 战友发布的内容</p>
+      <div id="buddyFeed"></div>
+    </div>
+  </div>
+
+  <aside>
+    <div class="my-summary">
+      <h3>统计</h3>
+      <div class="info" id="statsSummary"></div>
+    </div>
+  </aside>
+</div>
+
+<div class="footer">
+  <a href="../../index.html">Home</a> · <a href="index.html">Practice</a> · <a href="forum.html">论坛</a> · <a href="qa.html">问答</a> · <a href="school-circle.html">学校圈</a> · <a href="collab.html">协作</a>
+</div>
+
+<script src="../../js/app-data.js"></script>
+<script src="../../js/school-circle.js"></script>
+<script src="../../js/collab.js"></script>
+<script src="../../js/buddy.js"></script>
+<script>
+(function() {
+  var $ = function(id) { return document.getElementById(id); };
+
+  function pad(n) { return n < 10 ? '0' + n : '' + n; }
+  function formatTime(ts) {
+    if (!ts) return '';
+    var d = new Date(ts);
+    var diff = (Date.now() - ts) / 1000;
+    if (diff < 60) return '刚刚';
+    if (diff < 3600) return Math.floor(diff / 60) + ' 分钟前';
+    if (diff < 86400) return Math.floor(diff / 3600) + ' 小时前';
+    if (diff < 86400 * 7) return Math.floor(diff / 86400) + ' 天前';
+    return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate());
+  }
+  function escapeHtml(s) {
+    if (s == null) return '';
+    return String(s).replace(/[&<>"']/g, function(c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+
+  function showTab(name) {
+    document.querySelectorAll('.tab').forEach(function(t) {
+      t.classList.toggle('active', t.getAttribute('data-tab') === name);
+    });
+    document.querySelectorAll('.tab-content').forEach(function(c) {
+      c.classList.toggle('active', c.id === 'tab-' + name);
+    });
+    if (name === 'match') renderMatch();
+    if (name === 'friends') renderFriends();
+    if (name === 'prep') renderPrep();
+    if (name === 'feed') renderFeed();
+  }
+  document.querySelectorAll('.tab').forEach(function(t) {
+    t.addEventListener('click', function() { showTab(t.getAttribute('data-tab')); });
+  });
+
+  function getMyProfile() {
+    return Buddy.getMyProfile();
+  }
+
+  function renderMySummary() {
+    var me = getMyProfile();
+    var html = '昵称：<b>' + escapeHtml(me.name) + '</b> · 年级：<b>' + me.grade + '</b> · 考试：<b>' + (Buddy.EXAM_DATES[me.examDate] || me.examDate) + '</b>';
+    html += '<br>目标学校：';
+    (me.targetSchools || []).forEach(function(s) { html += '<span class="school-chip match">' + escapeHtml(s) + '</span>'; });
+    $('mySummary').innerHTML = html;
+  }
+
+  function renderMatch() {
+    var data = Buddy.find();
+    if (!data.matches || data.matches.length === 0) {
+      $('matchList').innerHTML = '<div class="empty-state">暂无推荐 · 加几个目标学校试试</div>';
+      return;
+    }
+    var meSchools = data.me.targetSchools || [];
+    var html = '';
+    data.matches.forEach(function(u, i) {
+      var common = (u.targetSchools || []).filter(function(s) { return meSchools.indexOf(s) >= 0; });
+      var isFriend = Buddy.isFriend(data.me.name, u.name);
+      html += '<div class="buddy-card">';
+      html += '<div class="buddy-avatar">' + escapeHtml(u.name.charAt(0).toUpperCase()) + '</div>';
+      html += '<div class="buddy-info">';
+      html += '<b>' + escapeHtml(u.name) + '</b> · 年级 ' + u.grade + ' · 考试 ' + (Buddy.EXAM_DATES[u.examDate] || u.examDate || '—');
+      html += '<div>';
+      (u.targetSchools || []).forEach(function(s) {
+        html += '<span class="school-chip' + (common.indexOf(s) >= 0 ? ' match' : '') + '">' + escapeHtml(s) + '</span>';
+      });
+      html += '</div>';
+      if (u.bio) html += '<div class="bio">' + escapeHtml(u.bio) + '</div>';
+      html += '</div>';
+      html += '<div class="buddy-score">';
+      html += '<b>' + u.score + '</b><span>契合度</span>';
+      html += '<div class="score-bar"><div class="score-bar-fill" style="width:' + u.score + '%;"></div></div>';
+      html += '<button class="small ' + (isFriend ? 'primary' : '') + '" data-name="' + escapeHtml(u.name) + '">';
+      html += isFriend ? '✓ 已是战友' : '+ 加为战友';
+      html += '</button>';
+      html += '</div>';
+      html += '</div>';
+    });
+    $('matchList').innerHTML = html;
+    document.querySelectorAll('#matchList .buddy-score button').forEach(function(b) {
+      b.addEventListener('click', function() {
+        var n = b.getAttribute('data-name');
+        if (Buddy.isFriend(Buddy.getMyProfile().name, n)) {
+          Buddy.removeFriend(Buddy.getMyProfile().name, n);
+        } else {
+          Buddy.addFriend(Buddy.getMyProfile().name, n);
+        }
+        renderMatch();
+        renderStats();
+      });
+    });
+  }
+
+  function renderFriends() {
+    var friends = Buddy.getFriends();
+    if (friends.length === 0) {
+      $('friendsList').innerHTML = '<div class="empty-state">还没有战友 · 去"推荐匹配"加几个</div>';
+      return;
+    }
+    var html = '';
+    friends.forEach(function(f) {
+      var u = Buddy.getUser(f.name) || f;
+      html += '<div class="buddy-card">';
+      html += '<div class="buddy-avatar">' + escapeHtml((u.name || '?').charAt(0).toUpperCase()) + '</div>';
+      html += '<div class="buddy-info">';
+      html += '<b>' + escapeHtml(u.name) + '</b> · 年级 ' + (u.grade || '?') + ' · 考试 ' + (Buddy.EXAM_DATES[u.examDate] || u.examDate || '—');
+      html += '<div>';
+      (u.targetSchools || []).forEach(function(s) {
+        html += '<span class="school-chip match">' + escapeHtml(s) + '</span>';
+      });
+      html += '</div>';
+      if (u.bio) html += '<div class="bio">' + escapeHtml(u.bio) + '</div>';
+      html += '</div>';
+      html += '<div class="buddy-score">';
+      html += '<button class="small primary" data-name="' + escapeHtml(u.name) + '">移除</button>';
+      html += '</div>';
+      html += '</div>';
+    });
+    $('friendsList').innerHTML = html;
+    document.querySelectorAll('#friendsList button').forEach(function(b) {
+      b.addEventListener('click', function() {
+        if (confirm('确认移除 ' + b.getAttribute('data-name') + '？')) {
+          Buddy.removeFriend(Buddy.getMyProfile().name, b.getAttribute('data-name'));
+          renderFriends();
+          renderStats();
+        }
+      });
+    });
+  }
+
+  function renderPrep() {
+    // populate exam select
+    var sel = $('prepExam');
+    sel.innerHTML = '';
+    Object.keys(Buddy.EXAM_DATES).forEach(function(k) {
+      sel.innerHTML += '<option value="' + k + '">' + k.replace(/_/g, ' ') + ' · ' + Buddy.EXAM_DATES[k] + '</option>';
+    });
+
+    var mine = Buddy.getPrepRooms();
+    if (mine.length === 0) {
+      $('myPrepList').innerHTML = '<div class="empty-state">还没加入任何备战室</div>';
+    } else {
+      var html = '';
+      mine.forEach(function(r) {
+        html += renderPrepRoom(r, true);
+      });
+      $('myPrepList').innerHTML = html;
+    }
+
+    var all = Buddy.getAllPrepRooms();
+    var notMine = all.filter(function(r) { return (r.members || []).indexOf(Buddy.getMyProfile().name) === -1; });
+    if (notMine.length === 0) {
+      $('publicPrepList').innerHTML = '<div class="empty-state">暂无公开备战室</div>';
+    } else {
+      var h = '';
+      notMine.forEach(function(r) { h += renderPrepRoom(r, false); });
+      $('publicPrepList').innerHTML = h;
+    }
+
+    bindPrepButtons();
+  }
+
+  function renderPrepRoom(r, isMine) {
+    var html = '<div class="prep-room">';
+    html += '<h3>' + escapeHtml(r.name) + ' <span class="code">' + r.code + '</span></h3>';
+    html += '<div class="meta">创建者：' + escapeHtml(r.createdBy) + ' · 创建于 ' + formatTime(r.createdAt);
+    if (r.examDate) html += ' · 考试 ' + (Buddy.EXAM_DATES[r.examDate] || r.examDate);
+    html += '</div>';
+    if (r.schools && r.schools.length) {
+      html += '<div style="margin-top:4px;">';
+      r.schools.forEach(function(s) { html += '<span class="school-chip match">' + escapeHtml(s) + '</span>'; });
+      html += '</div>';
+    }
+    html += '<div class="members">成员：';
+    (r.members || []).forEach(function(m) { html += '<span class="member-chip">' + escapeHtml(m) + '</span>'; });
+    html += '</div>';
+    html += '<div style="margin-top:8px;">';
+    if (isMine) {
+      html += '<a class="small" href="collab.html" onclick="sessionStorage.setItem(\'yz_room_code\', \'' + r.code + '\');">进入讨论</a> ';
+      html += '<button class="small" data-action="leave" data-code="' + r.code + '">离开</button>';
+    } else {
+      html += '<button class="small primary" data-action="join" data-code="' + r.code + '">加入</button>';
+    }
+    html += '</div>';
+    html += '</div>';
+    return html;
+  }
+
+  function bindPrepButtons() {
+    document.querySelectorAll('[data-action="join"]').forEach(function(b) {
+      b.addEventListener('click', function() {
+        try {
+          Buddy.joinPrepRoom(b.getAttribute('data-code'));
+          alert('已加入！');
+          renderPrep();
+        } catch (e) {
+          alert('加入失败：' + e.message);
+        }
+      });
+    });
+    document.querySelectorAll('[data-action="leave"]').forEach(function(b) {
+      b.addEventListener('click', function() {
+        if (confirm('确认离开备战室 ' + b.getAttribute('data-code') + '？')) {
+          Buddy.leavePrepRoom(b.getAttribute('data-code'));
+          renderPrep();
+        }
+      });
+    });
+  }
+
+  function renderFeed() {
+    var data = Buddy.getBuddyFeed();
+    var html = '';
+    if (data.friends && data.friends.length) {
+      html += '<h3>我的战友 (' + data.friends.length + ')</h3>';
+      data.friends.forEach(function(f) {
+        html += '<div class="feed-item"><b>' + escapeHtml(f.name) + '</b> · 年级 ' + (f.grade || '?') + ' · ';
+        (f.targetSchools || []).forEach(function(s) { html += '<span class="school-chip">' + escapeHtml(s) + '</span>'; });
+        html += '</div>';
+      });
+    }
+    html += '<h3>战友动态 + 同校动态</h3>';
+    if (!data.feed || data.feed.length === 0) {
+      html += '<div class="empty-state">暂无动态 · 去学校圈看看</div>';
+    } else {
+      data.feed.forEach(function(f) {
+        html += '<div class="feed-item">';
+        html += '<b>' + escapeHtml(f.author) + '</b> 在 <span class="school-chip match">' + escapeHtml(f.school) + '</span>';
+        html += ' <span class="meta">' + formatTime(f.createdAt) + '</span>';
+        html += '<div>' + escapeHtml(f.content) + '</div>';
+        html += '</div>';
+      });
+    }
+    $('buddyFeed').innerHTML = html;
+  }
+
+  function renderStats() {
+    var me = Buddy.getMyProfile();
+    var friends = Buddy.getFriends();
+    var prep = Buddy.getPrepRooms();
+    var all = Buddy.find();
+    var html = '匹配池：<b>' + all.matches.length + '</b> 人<br>';
+    html += '我的战友：<b>' + friends.length + '</b><br>';
+    html += '备战室：<b>' + prep.length + '</b>';
+    $('statsSummary').innerHTML = html;
+  }
+
+  $('createPrepBtn').addEventListener('click', function() {
+    var name = $('prepName').value.trim();
+    var schoolsRaw = $('prepSchools').value.trim();
+    var schools = schoolsRaw ? schoolsRaw.split(/[,，;；\s]+/).filter(Boolean) : [];
+    var exam = $('prepExam').value;
+    if (!name) { $('prepMsg').textContent = '请输入房间名'; return; }
+    try {
+      var r = Buddy.createPrepRoom(name, schools, exam, Buddy.getMyProfile().name);
+      $('prepName').value = '';
+      $('prepSchools').value = '';
+      $('prepMsg').textContent = '已创建！房间码 ' + r.code;
+      renderPrep();
+      renderStats();
+    } catch (e) {
+      $('prepMsg').textContent = '错误：' + e.message;
+    }
+  });
+  $('joinPrepBtn').addEventListener('click', function() {
+    var code = $('joinCode').value.trim().toUpperCase();
+    if (!code) { $('joinMsg').textContent = '请输入房间码'; return; }
+    try {
+      Buddy.joinPrepRoom(code);
+      $('joinCode').value = '';
+      $('joinMsg').textContent = '加入成功！';
+      renderPrep();
+      renderStats();
+    } catch (e) {
+      $('joinMsg').textContent = '错误：' + e.message;
+    }
+  });
+
+  renderMySummary();
+  renderMatch();
+  renderStats();
+})();
+</script>
+</body>
+</html>

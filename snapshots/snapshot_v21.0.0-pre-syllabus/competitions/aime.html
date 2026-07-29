@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Competition Detail - yunzhuan.icu</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 900px; margin: 0 auto; padding: 0 16px 20px; background: #f5f5f5; color: #333; }
+        .navbar { display: flex; justify-content: flex-start; align-items: center; padding: 12px 0; margin-bottom: 16px; flex-wrap: wrap; gap: 6px; }
+        .logo { font-weight: 700; font-size: 1.1rem; color: #667eea; text-decoration: none; }
+        .logo span { color: #764ba2; }
+        .nav-links { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+        .nav-links a { text-decoration: none; color: #555; font-size: 0.82rem; font-weight: 500; white-space: nowrap; }
+        .nav-links a:hover { color: #667eea; }
+        .nav-links .cn { font-size: 0.65rem; color: #bbb; margin-left: 2px; }
+        .breadcrumb { font-size: 0.8rem; color: #888; margin-bottom: 12px; }
+        .breadcrumb a { color: #667eea; text-decoration: none; }
+        .demo-banner { background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border: 1px solid #fcd34d; color: #92400e; padding: 8px 14px; border-radius: 8px; font-size: 0.8rem; margin-bottom: 14px; }
+        .demo-banner strong { color: #78350f; }
+        .comp-header { background: white; border-radius: 8px; padding: 20px; margin-bottom: 14px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+        .comp-header h1 { font-size: 1.6rem; margin-bottom: 4px; }
+        .comp-header .fullname { color: #888; font-size: 0.9rem; margin-bottom: 8px; }
+        .comp-header .cn-name { color: #555; font-size: 1rem; margin-bottom: 12px; }
+        .comp-header .badges { display: flex; gap: 8px; flex-wrap: wrap; }
+        .badge { font-size: 0.75rem; padding: 3px 10px; border-radius: 12px; }
+        .badge.prestige { background: #fef3c7; color: #92400e; }
+        .badge.difficulty { background: #fee2e2; color: #dc2626; }
+        .badge.type { background: #dbeafe; color: #2563eb; }
+        .badge.region { background: #f0f4ff; color: #667eea; }
+        .badge.free { background: #dcfce7; color: #16a34a; }
+        .info-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 14px; }
+        .info-card { background: white; border-radius: 8px; padding: 14px 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+        .info-card h2 { font-size: 0.85rem; color: #667eea; margin-bottom: 8px; font-weight: 600; }
+        .info-card h2 .cn { color: #999; font-weight: normal; font-size: 0.78rem; margin-left: 4px; }
+        .info-card p { font-size: 0.85rem; color: #555; line-height: 1.6; }
+        .info-card .info-row { display: flex; margin-bottom: 4px; font-size: 0.82rem; }
+        .info-card .info-row .label { color: #888; min-width: 80px; }
+        .info-card .info-row .value { color: #333; flex: 1; }
+        .info-card a { color: #667eea; text-decoration: none; }
+        .info-full { grid-column: 1 / -1; }
+        .related { background: white; border-radius: 8px; padding: 14px 16px; margin-bottom: 14px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+        .related h2 { font-size: 0.85rem; color: #667eea; margin-bottom: 8px; font-weight: 600; }
+        .related-list { display: flex; gap: 8px; flex-wrap: wrap; }
+        .related-list a { padding: 4px 12px; background: #f8f9fa; border-radius: 4px; text-decoration: none; color: #555; font-size: 0.8rem; }
+        .related-list a:hover { background: #e8eaf6; color: #667eea; }
+        .footer { text-align: center; margin-top: 20px; color: #999; font-size: 0.8rem; }
+        @media (max-width: 768px) { .info-grid { grid-template-columns: 1fr; } .comp-header h1 { font-size: 1.2rem; } body { padding: 0 10px 16px; } }
+    </style>
+    <link rel="stylesheet" href="../css/theme.css">
+    <script src="../js/theme.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="../index.html" class="logo"><span class="logo-icon">🎓</span><span class="logo-text">yunzhuan<span>.icu</span></span></a>
+        <div class="nav-links">
+            <a href="../index.html">Majors<span class="cn">专业</span></a>
+            <a href="../schools/index.html">Schools<span class="cn">学校</span></a>
+            <a href="../tests/index.html">Tests<span class="cn">考试</span></a>
+            <a href="../essays/index.html">Essays<span class="cn">文书</span></a>
+            <a href="../guides/index.html">Guides<span class="cn">指南</span></a>
+            <a href="../search.html">Search<span class="cn">搜索</span></a>
+            <a href="index.html" style="color:#667eea;font-weight:600;">Competitions<span class="cn">竞赛</span></a>
+        </div>
+    </nav>
+    <div class="breadcrumb"><a href="index.html">Competitions</a> / <span id="bcCat">Category</span> / <span id="bcComp">Competition</span></div>
+    <div class="demo-banner"><strong>📋 Demo Mode</strong> — 数据为模拟示例，报名时间和赛程请以官网为准。</div>
+    <div id="compContent"></div>
+    <p class="footer">© 2026 yunzhuan.icu &nbsp;|&nbsp; v20.4.0</p>
+    <script src="../js/competitions.js"></script>
+    <script>
+    (function() {
+        const compId = 'aime';
+        const comp = COMPETITIONS.find(c => c.id === compId);
+        if (!comp) { document.getElementById('compContent').innerHTML = '<p>Competition not found.</p>'; return; }
+        const cat = CATEGORIES.find(c => c.id === comp.category);
+        const stars = '★'.repeat(comp.prestige) + '☆'.repeat(5 - comp.prestige);
+        const isFree = comp.fee.includes('免费') || comp.fee.includes('Free');
+        document.title = comp.name + ' - yunzhuan.icu';
+        document.getElementById('bcCat').textContent = cat.name;
+        document.getElementById('bcComp').textContent = comp.name;
+        const related = comp.relatedComps.map(id => COMPETITIONS.find(c => c.id === id)).filter(Boolean);
+        document.getElementById('compContent').innerHTML = `
+            <div class="comp-header">
+                <h1>${comp.name}</h1>
+                <div class="fullname">${comp.fullName}</div>
+                <div class="cn-name">${comp.cnName}</div>
+                <div class="badges">
+                    <span class="badge prestige">${stars} 含金量</span>
+                    <span class="badge difficulty">难度 ${comp.difficulty}/5</span>
+                    <span class="badge type">${comp.type === 'team' ? '团队赛' : '个人赛'}</span>
+                    <span class="badge region">${comp.region === 'global' ? '全球' : comp.region === 'us' ? '美国' : comp.region === 'china' ? '中国' : comp.region}</span>
+                    ${isFree ? '<span class="badge free">免费</span>' : ''}
+                </div>
+            </div>
+            <div class="info-grid">
+                <div class="info-card info-full">
+                    <h2>竞赛简介 <span class="cn">Overview</span></h2>
+                    <p>${comp.intro}</p>
+                </div>
+                <div class="info-card">
+                    <h2>基本信息 <span class="cn">Basic Info</span></h2>
+                    <div class="info-row"><span class="label">主办方</span><span class="value">${comp.organizer}</span></div>
+                    <div class="info-row"><span class="label">官网</span><span class="value"><a href="${comp.website}" target="_blank">${comp.website}</a></span></div>
+                    <div class="info-row"><span class="label">比赛时间</span><span class="value">${comp.date}</span></div>
+                    <div class="info-row"><span class="label">参赛费用</span><span class="value">${comp.fee}</span></div>
+                </div>
+                <div class="info-card">
+                    <h2>参赛形式 <span class="cn">Format</span></h2>
+                    <div class="info-row"><span class="label">形式</span><span class="value">${comp.format}</span></div>
+                    <div class="info-row"><span class="label">参赛资格</span><span class="value">${comp.eligibility}</span></div>
+                    <div class="info-row"><span class="label">适合年级</span><span class="value">${comp.grades.join(', ')}</span></div>
+                </div>
+                <div class="info-card">
+                    <h2>奖项与含金量 <span class="cn">Awards</span></h2>
+                    <p><strong>奖项设置：</strong>${comp.awards}</p>
+                    <p style="margin-top:4px;"><strong>获奖率：</strong>${comp.acceptanceRate}</p>
+                </div>
+                <div class="info-card">
+                    <h2>备考建议 <span class="cn">Preparation</span></h2>
+                    <p>${comp.prepTime}</p>
+                </div>
+                <div class="info-card info-full">
+                    <h2>适合专业 <span class="cn">Related Majors</span></h2>
+                    <p>${comp.relatedMajors.map(m => '<span class="badge" style="margin-right:4px;">' + m + '</span>').join('')}</p>
+                </div>
+            </div>
+            ${related.length > 0 ? `
+            <div class="related">
+                <h2>相关竞赛 <span class="cn">Related</span></h2>
+                <div class="related-list">
+                    ${related.map(r => '<a href="' + r.id + '.html">' + r.name + ' — ' + r.cnName + '</a>').join('')}
+                </div>
+            </div>` : ''}
+        `;
+    })();
+    </script>
+</body>
+</html>

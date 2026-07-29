@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>会员等级 · Membership | Practice</title>
+<link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+<script src="../../js/membership.js"></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 960px; margin: 0 auto; padding: 24px 16px 48px; background: #ffffff; color: #111111; line-height: 1.7; font-size: 15px; }
+  a { color: #111111; text-decoration: none; border-bottom: 1px solid #cccccc; }
+  a:hover { border-bottom-color: #111111; }
+  .nav { padding-bottom: 12px; margin-bottom: 20px; border-bottom: 1px solid #e0e0e0; font-size: 0.88rem; color: #888888; }
+  .nav a { color: #111111; }
+  .nav .sep { color: #cccccc; margin: 0 6px; }
+  h1 { font-size: 1.6rem; margin-bottom: 4px; }
+  h2 { font-size: 1.1rem; font-weight: 700; margin: 28px 0 8px; padding-bottom: 6px; border-bottom: 1px solid #111111; }
+  h3 { font-size: 1rem; font-weight: 700; margin: 18px 0 6px; }
+  p { margin-bottom: 8px; }
+  .muted { color: #888888; font-size: 0.85rem; }
+  .subtitle { color: #555555; font-size: 0.95rem; margin-bottom: 20px; }
+  .badge { display: inline-block; border: 1px solid #111111; padding: 0 6px; font-size: 0.7rem; font-weight: 700; }
+  .card { border: 1px solid #e0e0e0; padding: 16px; background: #ffffff; margin: 12px 0; }
+  .grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin: 16px 0; }
+  @media (max-width: 1024px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 600px) { .grid { grid-template-columns: 1fr; } }
+  .tier-card { border: 1px solid #e0e0e0; padding: 14px; background: #ffffff; position: relative; }
+  .tier-card.current { border: 2px solid #111111; }
+  .tier-card.recommended { border: 1px dashed #111; }
+  .tier-name { font-size: 1.05rem; font-weight: 700; }
+  .tier-price { font-size: 1.4rem; font-weight: 700; margin: 4px 0 8px; }
+  .tier-price small { font-size: 0.7rem; color: #888; font-weight: 400; }
+  .tier-list { list-style: none; margin: 0; padding: 0; font-size: 0.82rem; }
+  .tier-list li { padding: 3px 0; border-bottom: 1px dashed #eee; }
+  .tier-list li.unavailable { color: #aaa; text-decoration: line-through; }
+  .tier-actions { margin-top: 10px; }
+  button { border: 1px solid #111111; background: #fff; color: #111111; padding: 6px 14px; cursor: pointer; font-weight: 600; font-family: inherit; font-size: 0.88rem; }
+  button:hover { background: #111111; color: #fff; }
+  button:disabled { opacity: 0.4; cursor: not-allowed; }
+  button.primary { background: #111111; color: #fff; }
+  button.primary:hover { background: #333; }
+  button.small { padding: 3px 10px; font-size: 0.78rem; }
+  .status-card { border: 1px solid #111111; padding: 18px; background: #fafafa; margin: 12px 0; }
+  .status-row { display: flex; justify-content: space-between; align-items: center; padding: 4px 0; font-size: 0.92rem; }
+  .status-row .label { color: #555; }
+  .status-row .value { font-weight: 700; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.82rem; margin: 8px 0 16px; }
+  th, td { border: 1px solid #e0e0e0; padding: 6px 10px; text-align: left; vertical-align: top; }
+  th { background: #f5f5f5; font-weight: 700; }
+  td.check { text-align: center; }
+  td.check.yes { background: #f0f0f0; font-weight: 700; }
+  .invite-box { border: 1px dashed #111; padding: 14px; margin: 12px 0; background: #fafafa; }
+  .invite-code { font-family: 'Courier New', monospace; font-size: 1.3rem; letter-spacing: 4px; font-weight: 700; background: #fff; padding: 8px 14px; border: 1px solid #111; display: inline-block; }
+  .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.5); display: none; align-items: center; justify-content: center; z-index: 999; }
+  .modal.show { display: flex; }
+  .modal-content { background: #fff; padding: 24px; max-width: 420px; width: 90%; border: 1px solid #111; }
+  .modal-content h3 { margin-top: 0; border-bottom: 1px solid #111; padding-bottom: 8px; }
+  .footer { margin-top: 36px; padding-top: 16px; border-top: 1px solid #e0e0e0; color: #888888; font-size: 0.82rem; }
+  .v-info { border: 1px dashed #888888; padding: 8px 12px; margin: 12px 0; font-size: 0.82rem; color: #555555; }
+  .reminder { border: 1px solid #111; padding: 10px 14px; background: #fafafa; margin: 8px 0; font-size: 0.88rem; }
+  input[type=text] { border: 1px solid #ccc; padding: 6px 10px; font-size: 0.9rem; font-family: inherit; }
+  .form-row { margin-bottom: 10px; }
+  .form-row label { display: block; font-size: 0.82rem; color: #555; margin-bottom: 4px; }
+</style>
+</head>
+<body>
+
+<div class="nav">
+  <a href="../../index.html">Home</a> <span class="sep">/</span>
+  <a href="../index.html">Academics</a> <span class="sep">/</span>
+  <a href="index.html">Practice</a> <span class="sep">/</span>
+  会员等级
+</div>
+
+<h1>会员等级体系 <span class="badge">v51</span></h1>
+<p class="subtitle">5 级会员体系 · 纯前端模拟 · localStorage 存储 · 预置 30 天 Silver 试用</p>
+
+<div class="v-info">
+  <strong>说明</strong> · 本页所有支付均为前端模拟,不产生真实费用。系统已自动预置 30 天 Silver 会员试用,可在「我的会员」区域查看到期时间。
+</div>
+
+<h2>我的会员</h2>
+<div class="status-card" id="statusCard">
+  <div class="status-row"><span class="label">当前等级</span><span class="value" id="curLevel">—</span></div>
+  <div class="status-row"><span class="label">月费</span><span class="value" id="curPrice">—</span></div>
+  <div class="status-row"><span class="label">到期时间</span><span class="value" id="curExpire">—</span></div>
+  <div class="status-row"><span class="label">剩余天数</span><span class="value" id="curDays">—</span></div>
+  <div class="status-row"><span class="label">到期倒计时</span><span class="value" id="curCountdown">—</span></div>
+  <div class="reminder" id="reminder" style="display:none;"></div>
+  <div style="margin-top:12px;">
+    <button class="small" id="btnDowngrade">取消会员</button>
+    <button class="small" id="btnRefresh">刷新状态</button>
+  </div>
+</div>
+
+<h2>5 等级对比</h2>
+<div class="grid" id="tierGrid"></div>
+
+<h2>权益对比表</h2>
+<table>
+  <thead>
+    <tr>
+      <th>权益项</th>
+      <th>Free</th>
+      <th>Bronze</th>
+      <th>Silver</th>
+      <th>Gold</th>
+      <th>Diamond</th>
+    </tr>
+  </thead>
+  <tbody id="entTable"></tbody>
+</table>
+
+<h2>邀请奖励</h2>
+<div class="invite-box">
+  <p>分享你的邀请码,每邀请 1 位同学,你将获得 <strong>7 天 Silver</strong> 奖励。</p>
+  <p>我的邀请码: <span class="invite-code" id="inviteCode">—</span> <button class="small" id="btnCopyCode">复制</button></p>
+  <p class="muted">已成功邀请 <strong id="inviteCount">0</strong> 位同学</p>
+  <div class="form-row" style="margin-top:10px;">
+    <label>输入朋友邀请码 (模拟):</label>
+    <input type="text" id="friendCode" placeholder="如: ABCD1234" style="width:200px;">
+    <button class="small" id="btnUseCode">使用并领取奖励</button>
+  </div>
+</div>
+
+<h2>邀请排行榜</h2>
+<table>
+  <thead><tr><th>#</th><th>邀请码</th><th>邀请数</th><th>最近时间</th></tr></thead>
+  <tbody id="leaderTable">
+    <tr><td colspan="4" class="muted" style="text-align:center;">暂无邀请记录</td></tr>
+  </tbody>
+</table>
+
+<h2>升级 / 续费历史</h2>
+<table>
+  <thead><tr><th>时间</th><th>动作</th><th>等级</th><th>天数</th><th>说明</th></tr></thead>
+  <tbody id="historyTable">
+    <tr><td colspan="5" class="muted" style="text-align:center;">暂无记录</td></tr>
+  </tbody>
+</table>
+
+<!-- 模拟支付弹窗 -->
+<div class="modal" id="payModal">
+  <div class="modal-content">
+    <h3>模拟支付</h3>
+    <p>等级: <strong id="payLevel">—</strong></p>
+    <p>时长: <strong id="payDays">—</strong> 天</p>
+    <p>金额: <strong id="payAmount">—</strong></p>
+    <p class="muted" style="margin-top:8px;">支付方式: 模拟支付宝 (无真实扣款)</p>
+    <p class="muted" id="payStatus" style="margin-top:8px;">点击下方按钮完成支付</p>
+    <div style="margin-top:14px; text-align:right;">
+      <button class="small" onclick="closePayModal()">取消</button>
+      <button class="primary small" id="btnConfirmPay">确认支付</button>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  v51 会员体系 · 5 等级 × 完整权益矩阵 · 模拟支付 · 邀请奖励 · 续费提醒
+</div>
+
+<script>
+  var M = window.Membership;
+  var payTarget = null;
+
+  function renderStatus() {
+    var lv = M.getLevel();
+    document.getElementById('curLevel').textContent = lv.nameZh + ' (' + lv.name + ')';
+    document.getElementById('curPrice').textContent = lv.priceLabel;
+    document.getElementById('curExpire').textContent = lv.active ? new Date(lv.expireAt).toLocaleString('zh-CN') : '— (无有效会员)';
+    document.getElementById('curDays').textContent = lv.active ? (lv.daysLeft + ' 天') : '—';
+    document.getElementById('curCountdown').textContent = lv.active ? M.formatCountdown(lv.expireAt) : '—';
+
+    var rem = M.renewalReminder();
+    var remEl = document.getElementById('reminder');
+    if (rem.needed) {
+      remEl.style.display = 'block';
+      remEl.textContent = '⚠ ' + rem.message;
+    } else {
+      remEl.style.display = 'none';
+    }
+  }
+
+  function renderTiers() {
+    var grid = document.getElementById('tierGrid');
+    grid.innerHTML = '';
+    var currentKey = M.getLevel().key;
+    M.LEVELS.forEach(function(key) {
+      var tier = M.TIERS[key];
+      var ent = M.allEntitlements()[key];
+      var isCur = (key === currentKey);
+      var card = document.createElement('div');
+      card.className = 'tier-card' + (isCur ? ' current' : '');
+      if (key === 'silver') card.className += ' recommended';
+      card.innerHTML =
+        '<div class="tier-name">' + tier.nameZh + ' (' + tier.name + ')</div>' +
+        '<div class="tier-price">' + tier.priceLabel + '</div>' +
+        '<ul class="tier-list">' +
+          '<li>每日题量: ' + (ent.questionsPerDay === -1 ? '无限' : ent.questionsPerDay) + '</li>' +
+          '<li>AI 对话: ' + (ent.aiChatsPerDay === -1 ? '无限' : ent.aiChatsPerDay + ' 次/天') + '</li>' +
+          '<li>报告导出: ' + (ent.exportsPerMonth === -1 ? '无限' : ent.exportsPerMonth + ' 次/月') + '</li>' +
+          '<li>协作房间: ' + (ent.collabRooms === -1 ? '无限' : ent.collabRooms) + '</li>' +
+          '<li>解析深度: ' + ent.solutionDepth + '</li>' +
+          '<li>Premium 题库: ' + (ent.premiumBank ? '✓' : '✗') + '</li>' +
+          '<li>间隔复习 Pro: ' + (ent.srsAdvanced ? '✓' : '✗') + '</li>' +
+          '<li>去广告: ' + (ent.adFree ? '✓' : '✗') + '</li>' +
+        '</ul>' +
+        '<div class="tier-actions">' +
+          (isCur
+            ? '<button disabled class="small">当前等级</button>'
+            : (tier.price === 0
+                ? '<button class="small" data-act="downgrade">切换到此</button>'
+                : '<button class="primary small" data-act="upgrade" data-key="' + key + '">升级</button>'
+              )
+          ) +
+        '</div>';
+      grid.appendChild(card);
+    });
+
+    // 绑定按钮
+    grid.querySelectorAll('button[data-act=upgrade]').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        openPayModal(btn.getAttribute('data-key'));
+      });
+    });
+    var downBtn = grid.querySelector('button[data-act=downgrade]');
+    if (downBtn) {
+      downBtn.addEventListener('click', function() {
+        if (confirm('确定要取消会员并降级为 Free 吗?')) {
+          M.downgrade();
+          renderAll();
+        }
+      });
+    }
+  }
+
+  function renderEntTable() {
+    var tbody = document.getElementById('entTable');
+    tbody.innerHTML = '';
+    var rows = [
+      { k: 'questionsPerDay', label: '每日题目数', fmt: function(v){ return v === -1 ? '无限' : v; } },
+      { k: 'aiChatsPerDay', label: 'AI 对话/天', fmt: function(v){ return v === -1 ? '无限' : v; } },
+      { k: 'exportsPerMonth', label: '报告导出/月', fmt: function(v){ return v === -1 ? '无限' : v; } },
+      { k: 'collabRooms', label: '协作房间数', fmt: function(v){ return v === -1 ? '无限' : v; } },
+      { k: 'solutionDepth', label: '题目解析深度', fmt: function(v){ return v; } },
+      { k: 'premiumBank', label: 'Premium 题库', fmt: function(v){ return v ? '✓' : '✗'; } },
+      { k: 'srsAdvanced', label: 'SRS 间隔复习 Pro', fmt: function(v){ return v ? '✓' : '✗'; } },
+      { k: 'adFree', label: '去广告', fmt: function(v){ return v ? '✓' : '✗'; } },
+      { k: 'trialUnlock', label: '试用功能解锁', fmt: function(v){ return v ? '✓' : '✗'; } },
+      { k: 'prioritySupport', label: '优先客服', fmt: function(v){ return v ? '✓' : '✗'; } }
+    ];
+    rows.forEach(function(r) {
+      var tr = document.createElement('tr');
+      tr.innerHTML = '<td><strong>' + r.label + '</strong></td>' +
+        M.LEVELS.map(function(lv) {
+          var ent = M.allEntitlements()[lv];
+          var v = ent[r.k];
+          var isYes = (typeof v === 'boolean' && v) || (typeof v === 'number' && v > 0) || (typeof v === 'string' && v !== 'brief');
+          return '<td class="check ' + (isYes ? 'yes' : '') + '">' + r.fmt(v) + '</td>';
+        }).join('');
+      tbody.appendChild(tr);
+    });
+  }
+
+  function renderInvite() {
+    var code = M.getInviteCode();
+    document.getElementById('inviteCode').textContent = code;
+    document.getElementById('inviteCount').textContent = M.inviteCount();
+    var lb = M.leaderboard();
+    var tbody = document.getElementById('leaderTable');
+    if (lb.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="4" class="muted" style="text-align:center;">暂无邀请记录</td></tr>';
+      return;
+    }
+    tbody.innerHTML = '';
+    lb.forEach(function(r, i) {
+      var tr = document.createElement('tr');
+      tr.innerHTML = '<td>' + (i + 1) + '</td>' +
+        '<td><code>' + r.code + '</code></td>' +
+        '<td>' + r.count + '</td>' +
+        '<td class="muted">' + new Date(r.lastTs).toLocaleString('zh-CN') + '</td>';
+      tbody.appendChild(tr);
+    });
+  }
+
+  function renderHistory() {
+    var hist = M.history();
+    var tbody = document.getElementById('historyTable');
+    if (hist.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="5" class="muted" style="text-align:center;">暂无记录</td></tr>';
+      return;
+    }
+    tbody.innerHTML = '';
+    hist.forEach(function(h) {
+      var tr = document.createElement('tr');
+      tr.innerHTML = '<td class="muted">' + new Date(h.ts).toLocaleString('zh-CN') + '</td>' +
+        '<td>' + h.action + '</td>' +
+        '<td>' + (h.level || '—') + '</td>' +
+        '<td>' + (h.days || '—') + '</td>' +
+        '<td class="muted">' + (h.note || '') + '</td>';
+      tbody.appendChild(tr);
+    });
+  }
+
+  function renderAll() {
+    renderStatus();
+    renderTiers();
+    renderEntTable();
+    renderInvite();
+    renderHistory();
+  }
+
+  function openPayModal(levelKey) {
+    payTarget = levelKey;
+    var tier = M.TIERS[levelKey];
+    var days = 30;
+    var amount = tier.price;
+    document.getElementById('payLevel').textContent = tier.nameZh + ' (' + tier.name + ')';
+    document.getElementById('payDays').textContent = days;
+    document.getElementById('payAmount').textContent = '¥' + amount;
+    document.getElementById('payStatus').textContent = '点击下方按钮完成支付';
+    document.getElementById('payModal').classList.add('show');
+  }
+
+  function closePayModal() {
+    document.getElementById('payModal').classList.remove('show');
+    payTarget = null;
+  }
+
+  document.getElementById('btnConfirmPay').addEventListener('click', function() {
+    if (!payTarget) return;
+    document.getElementById('payStatus').textContent = '支付中...';
+    M.pay(payTarget, 30, function(result) {
+      if (result.ok) {
+        document.getElementById('payStatus').textContent = '支付成功! 订单号: ' + result.orderId;
+        setTimeout(function() {
+          closePayModal();
+          renderAll();
+          alert('已成功升级到 ' + M.TIERS[result.level].nameZh);
+        }, 500);
+      } else {
+        document.getElementById('payStatus').textContent = '支付失败: ' + (result.error || '未知错误');
+      }
+    });
+  });
+
+  document.getElementById('btnDowngrade').addEventListener('click', function() {
+    if (confirm('确定要取消会员吗?')) {
+      M.downgrade();
+      renderAll();
+    }
+  });
+
+  document.getElementById('btnRefresh').addEventListener('click', function() {
+    renderAll();
+  });
+
+  document.getElementById('btnCopyCode').addEventListener('click', function() {
+    var code = document.getElementById('inviteCode').textContent;
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(code).then(function() {
+        alert('已复制: ' + code);
+      });
+    } else {
+      prompt('复制邀请码:', code);
+    }
+  });
+
+  document.getElementById('btnUseCode').addEventListener('click', function() {
+    var code = document.getElementById('friendCode').value.trim();
+    if (!code) { alert('请输入邀请码'); return; }
+    var r = M.invite(code);
+    if (r.ok) {
+      alert('已使用邀请码,获得 ' + r.reward + ' 奖励!');
+      document.getElementById('friendCode').value = '';
+      renderAll();
+    }
+  });
+
+  // 倒计时刷新
+  setInterval(function() {
+    var lv = M.getLevel();
+    if (lv.active) {
+      document.getElementById('curCountdown').textContent = M.formatCountdown(lv.expireAt);
+    }
+  }, 1000);
+
+  // 初始渲染
+  renderAll();
+</script>
+
+</body>
+</html>

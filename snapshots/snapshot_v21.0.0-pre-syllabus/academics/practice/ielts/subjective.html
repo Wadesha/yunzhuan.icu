@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IELTS Subjective Practice</title>
+<link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 820px; margin: 0 auto; padding: 24px 16px 48px; background: #ffffff; color: #111111; line-height: 1.7; font-size: 15px; }
+a { color: #111111; text-decoration: none; border-bottom: 1px solid #cccccc; }
+a:hover { border-bottom-color: #111111; }
+.nav { padding-bottom: 12px; margin-bottom: 20px; border-bottom: 1px solid #e0e0e0; font-size: 0.88rem; color: #888888; }
+.nav a { color: #111111; }
+.nav .sep { color: #cccccc; margin: 0 6px; }
+h1 { font-size: 1.6rem; margin-bottom: 4px; }
+h2 { font-size: 1.1rem; font-weight: 700; margin: 28px 0 8px; padding-bottom: 6px; border-bottom: 1px solid #111111; }
+h3 { font-size: 0.98rem; font-weight: 700; margin: 16px 0 4px; }
+h4 { font-size: 0.9rem; font-weight: 700; margin: 12px 0 4px; }
+p, li { margin-bottom: 6px; color: #111111; }
+.muted { color: #888888; font-size: 0.85rem; }
+.subtitle { color: #555555; font-size: 0.95rem; margin-bottom: 20px; }
+table { width: 100%; border-collapse: collapse; font-size: 0.82rem; margin: 8px 0 16px; }
+th, td { border: 1px solid #e0e0e0; padding: 6px 10px; text-align: left; vertical-align: top; }
+th { background: #ffffff; border-bottom: 2px solid #111111; font-weight: 700; }
+ul, ol { margin-left: 22px; margin-bottom: 12px; }
+.box { border: 1px solid #111111; padding: 14px 18px; margin: 12px 0; }
+.box-dashed { border: 1px dashed #888888; padding: 14px 18px; margin: 12px 0; }
+.q { border: 1px solid #e0e0e0; padding: 14px 18px; margin: 12px 0; }
+.q .q-num { font-weight: 700; font-size: 0.82rem; color: #888888; }
+.q .q-title { font-weight: 700; margin: 8px 0; }
+.q .q-text { margin: 8px 0; }
+.footer { margin-top: 36px; padding-top: 16px; border-top: 1px solid #e0e0e0; color: #888888; font-size: 0.82rem; }
+.v-badge { display: inline-block; border: 1px solid #111111; padding: 0 6px; font-size: 0.7rem; font-weight: 700; }
+textarea { width: 100%; min-height: 120px; padding: 10px 12px; border: 1px solid #888888; font-family: inherit; font-size: 0.9rem; line-height: 1.6; resize: vertical; background: #ffffff; color: #111111; }
+textarea:focus { outline: none; border-color: #111111; }
+.btn { display: inline-block; padding: 6px 14px; border: 1px solid #111111; background: #ffffff; color: #111111; font-family: inherit; font-size: 0.85rem; cursor: pointer; margin-right: 6px; }
+.btn:hover { background: #111111; color: #ffffff; }
+.btn-primary { background: #111111; color: #ffffff; }
+.btn-primary:hover { background: #333333; }
+.btn-sm { padding: 4px 10px; font-size: 0.78rem; }
+.timer { display: inline-flex; align-items: center; gap: 10px; padding: 8px 14px; border: 1px solid #111111; font-family: 'Courier New', monospace; font-size: 1.2rem; font-weight: 700; margin: 8px 0; }
+.timer-section { margin: 10px 0; text-align: center; }
+.timer-label { font-size: 0.8rem; color: #555555; margin-right: 6px; }
+.rating { display: flex; align-items: center; gap: 8px; margin: 10px 0; flex-wrap: wrap; }
+.rating label { font-size: 0.85rem; color: #555555; }
+.rating select { padding: 4px 8px; border: 1px solid #888888; font-family: inherit; font-size: 0.85rem; background: #ffffff; }
+.rating .score-display { font-weight: 700; color: #111111; }
+details { border: 1px solid #e0e0e0; padding: 10px 14px; margin: 10px 0; }
+summary { cursor: pointer; font-weight: 700; font-size: 0.88rem; padding: 4px 0; user-select: none; }
+summary:hover { color: #555555; }
+details[open] summary { margin-bottom: 8px; border-bottom: 1px dashed #e0e0e0; padding-bottom: 8px; }
+.ref-content { font-size: 0.88rem; line-height: 1.7; color: #333333; }
+.ref-content p { margin-bottom: 8px; }
+.char-count { font-size: 0.78rem; color: #888888; text-align: right; margin-top: 4px; }
+.notes-area { border: 1px dashed #888888; padding: 10px 12px; margin: 8px 0; }
+.notes-area textarea { border: none; min-height: 80px; padding: 0; }
+.history-table { margin-top: 20px; }
+.history-empty { text-align: center; color: #888888; padding: 20px; border: 1px dashed #e0e0e0; }
+.subq { margin: 10px 0; padding: 10px 12px; border: 1px solid #f0f0f0; background: #fafafa; }
+.subq-label { font-weight: 700; font-size: 0.88rem; color: #333333; margin-bottom: 6px; }
+.section-tag { display: inline-block; padding: 2px 8px; border: 1px solid #888888; font-size: 0.72rem; font-weight: 700; color: #555555; margin-right: 6px; }
+.chart-box { border: 1px solid #e0e0e0; padding: 14px; margin: 10px 0; text-align: center; background: #fafafa; }
+.chart-box canvas { max-width: 100%; }
+@media (max-width: 600px) {
+  textarea { width: 100%; }
+  .timer-section { text-align: center; }
+  .timer { justify-content: center; display: flex; }
+}
+</style>
+</head>
+<body>
+
+<div class="nav">
+  <a href="../../../index.html">Home</a>
+  <span class="sep">/</span>
+  <a href="../../index.html">Academics</a>
+  <span class="sep">/</span>
+  <a href="../index.html">Practice</a>
+  <span class="sep">/</span>
+  <a href="intro.html">IELTS</a>
+  <span class="sep">/</span>
+  Subjective
+</div>
+
+<h1>IELTS Subjective Practice <span class="v-badge">v1</span></h1>
+<p class="subtitle">Writing 2 大题 + Speaking 3 Part（约 14 小问）· 计时器 + 笔记区 + Band 9 范文/参考要点</p>
+
+<div class="box-dashed">
+  <p><strong>答题说明</strong>：所有作答自动保存至浏览器本地（key: <code>yz_subjective_data</code>）。评分后会在页面底部生成答题历史记录。</p>
+</div>
+
+<!-- ================ WRITING TASK 1 ================ -->
+<h2>Writing · Task 1 (Academic)</h2>
+
+<div class="q" id="q-ielts-w1">
+  <div class="q-num">W-Task1 · 图表描述 · 20 min</div>
+  <div class="q-title"><span class="section-tag">Writing</span> Task 1 Academic：柱状图 + 折线图综合</div>
+  <div class="q-text">
+    <p><strong>The chart below shows the number of international students enrolled in four different subjects at a UK university between 2010 and 2020. The line graph indicates the corresponding tuition fees (in £ thousands) over the same period.</strong></p>
+    <div class="chart-box">
+      <svg viewBox="0 0 500 260" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;">
+        <rect x="0" y="0" width="500" height="260" fill="#fff"/>
+        <line x1="40" y1="200" x2="490" y2="200" stroke="#333" stroke-width="1"/>
+        <line x1="40" y1="20" x2="40" y2="200" stroke="#333" stroke-width="1"/>
+        <text x="100" y="215" font-size="10" text-anchor="middle" fill="#555">2010</text>
+        <text x="220" y="215" font-size="10" text-anchor="middle" fill="#555">2015</text>
+        <text x="340" y="215" font-size="10" text-anchor="middle" fill="#555">2020</text>
+        <text x="450" y="215" font-size="10" text-anchor="middle" fill="#555">Year</text>
+        <text x="30" y="15" font-size="10" fill="#555">Students</text>
+        <g font-size="9" fill="#555">
+          <text x="35" y="200" text-anchor="end">0</text>
+          <text x="35" y="155" text-anchor="end">500</text>
+          <text x="35" y="110" text-anchor="end">1000</text>
+          <text x="35" y="65" text-anchor="end">1500</text>
+          <text x="35" y="25" text-anchor="end">2000</text>
+        </g>
+        <g fill="#333" fill-opacity="0.85">
+          <rect x="60"  y="140" width="18" height="60"/>
+          <rect x="82"  y="120" width="18" height="80"/>
+          <rect x="104" y="150" width="18" height="50"/>
+          <rect x="126" y="165" width="18" height="35"/>
+          <rect x="180" y="100" width="18" height="100"/>
+          <rect x="202" y="80"  width="18" height="120"/>
+          <rect x="224" y="110" width="18" height="90"/>
+          <rect x="246" y="130" width="18" height="70"/>
+          <rect x="300" y="55"  width="18" height="145"/>
+          <rect x="322" y="35"  width="18" height="165"/>
+          <rect x="344" y="90"  width="18" height="110"/>
+          <rect x="366" y="105" width="18" height="95"/>
+        </g>
+        <g font-size="8" fill="#111">
+          <text x="230" y="240" text-anchor="middle" font-weight="700">■ Eng  ■ CompSci  ■ Business  ■ Physics</text>
+        </g>
+      </svg>
+    </div>
+    <div class="box-dashed">
+      <p><strong>Data Summary:</strong></p>
+      <ul>
+        <li>Computer Science enrollment grew fastest: 300 (2010) → 700 (2015) → 1500 (2020)</li>
+        <li>Engineering rose steadily: 400 → 650 → 1100</li>
+        <li>Business peaked 2015 at ~600, then dropped to ~800 range; Physics grew slowly from ~250 to ~650</li>
+        <li>Tuition fees (line): £12k (2010) → £18k (2015) → £24k (2020), doubling over decade.</li>
+      </ul>
+    </div>
+    <p style="margin-top:8px;">Summarise the information by selecting and reporting the main features, and make comparisons where relevant.</p>
+  </div>
+  <p class="muted">建议字数：150+ 词</p>
+  <textarea data-subject="ielts" data-qid="w1" data-field="answer" placeholder="The bar chart illustrates... while the line graph depicts..."></textarea>
+  <div class="char-count" data-count-for="w1">0 / 180 字</div>
+  <details>
+    <summary>📄 Band 9 范文（点击展开）</summary>
+    <div class="ref-content">
+      <p><strong>Sample Response — Band 9:</strong></p>
+      <p>The bar chart illustrates the number of overseas students enrolled in four subject areas at a UK university over the decade 2010–2020, and the line graph shows how average tuition fees changed over the same period.</p>
+      <p>Overall, international enrolments rose in all four disciplines, with Computer Science experiencing the most dramatic growth. Tuition fees more than doubled across the decade, indicating that rising cost did not deter demand.</p>
+      <p>In 2010, Engineering was the most popular subject with approximately 400 international students, followed by Computer Science (300), Business (roughly 280) and Physics (around 250). By 2015, Computer Science had more than doubled to 700 and by 2020 it had surged to 1,500 — a fivefold increase over ten years, making it easily the largest subject. Engineering also grew strongly but more steadily, reaching about 1,100 students by 2020.</p>
+      <p>Business enrolments climbed to a peak of around 600 in 2015 before settling to roughly 800 by the end of the period, while Physics numbers increased gradually to nearly 650. In parallel with these trends, annual tuition fees climbed from £12,000 in 2010 to £18,000 in 2015 and £24,000 by 2020 — exactly doubling over the decade.</p>
+      <p class="muted"><em>字数约 185，涵盖 overview + 对比 + 数据支持，符合 Band 9 要求（TA 完整、CC 连贯、LR 多样、GRA 准确多变）。</em></p>
+    </div>
+  </details>
+  <div class="rating">
+    <label>自评 Band（1-9）：</label>
+    <select data-subject="ielts" data-qid="w1" data-field="rating">
+      <option value="">-- 选择 --</option>
+      <option value="9">9 · Expert</option>
+      <option value="8">8 · Very Good</option>
+      <option value="7">7 · Good</option>
+      <option value="6">6 · Competent</option>
+      <option value="5">5 · Modest</option>
+      <option value="4">4 · Limited</option>
+      <option value="3">3 · Extremely Limited</option>
+      <option value="2">2 · Intermittent</option>
+      <option value="1">1 · Non User</option>
+    </select>
+    <button class="btn btn-sm btn-primary" onclick="submitScore('ielts','w1','Writing Task 1 Academic')">提交评分</button>
+    <button class="btn btn-sm" onclick="gradeWriting('ielts','w1','IELTS Task 1')">智能批改</button>
+    <span class="score-display" data-score-for="w1"></span>
+  </div>
+</div>
+
+<!-- ================ WRITING TASK 2 ================ -->
+<h2>Writing · Task 2</h2>
+
+<div class="q" id="q-ielts-w2">
+  <div class="q-num">W-Task2 · 议论文 · 40 min</div>
+  <div class="q-title"><span class="section-tag">Writing</span> Task 2：Agree / Disagree 型</div>
+  <div class="q-text">
+    <div class="box" style="margin:10px 0;">
+      <p><em>Some people believe that governments should fund scientific research even when there is no practical application in the short term. Others, however, argue that public money should be spent only on research with immediate commercial or social benefits.</em></p>
+      <p><em>Discuss both these views and give your own opinion.</em></p>
+    </div>
+    <p>Give reasons for your answer and include any relevant examples from your own knowledge or experience.</p>
+  </div>
+  <p class="muted">建议字数：250+ 词</p>
+  <textarea data-subject="ielts" data-qid="w2" data-field="answer" placeholder="Introduction (paraphrase + thesis) · Body 1 (one view) · Body 2 (other view) · Conclusion..."></textarea>
+  <div class="char-count" data-count-for="w2">0 / 300+ 字</div>
+  <details>
+    <summary>📄 Band 9 范文（点击展开）</summary>
+    <div class="ref-content">
+      <p><strong>Sample Response — Band 9:</strong></p>
+      <p>There is an ongoing debate about whether governments should finance scientific research that lacks near-term applications or whether public funding should be restricted to work offering immediate commercial or social returns. Although short-term returns are politically attractive, I believe sustained support for "blue-sky" research is essential because transformative discoveries rarely arrive on a predictable schedule.</p>
+      <p>Those who favour only applied research argue that taxpayers deserve tangible benefits from their contributions. In an era of strained public budgets, funding a physics experiment that may produce nothing practical for decades can seem irresponsible compared with, for example, a clinical trial that directly improves cancer treatment within five years. Governments facing elections naturally prefer spending that voters can see and evaluate. Proponents also point out that applied research often spurs further innovation indirectly, so prioritising it does not stop knowledge from advancing.</p>
+      <p>Nevertheless, restricting funding to demonstrably useful projects would ultimately stifle the breakthroughs on which modern civilisation depends. Many of the technologies people take for granted today — the internet, GPS, semiconductors, mRNA vaccines — grew out of curiosity-driven research that had no obvious use at the time. The World Wide Web, for instance, emerged from a particle physicist's need to share data among colleagues at CERN; nobody foresaw it would reshape global commerce and culture. Without public support for speculative work, many of these paradigm-shifting discoveries would never occur because private firms have little incentive to invest in highly uncertain, long-horizon projects.</p>
+      <p>In my view, therefore, the sensible approach is to fund both applied and basic research in a balanced way, with roughly a quarter to a third of public science budgets reserved for open-ended, curiosity-driven inquiry. Short-term utility should guide the majority of spending, but a dedicated fraction must be protected against political pressure so that serendipitous, world-changing breakthroughs remain possible.</p>
+      <p>In conclusion, while applied spending delivers quick wins and accountability to the public, governments cannot afford to neglect curiosity-driven research. A portfolio that deliberately includes seemingly impractical projects is precisely what produces the long-run benefits that make societies healthier, wealthier and more resilient.</p>
+      <p class="muted"><em>字数约 365，结构：Introduction · Discussion 1 · Discussion 2 · Own opinion · Conclusion；Task Response 覆盖两个观点并给出清晰立场；CC 逻辑连接词丰富；LR & GRA 达到学术写作要求。</em></p>
+    </div>
+  </details>
+  <div class="rating">
+    <label>自评 Band（1-9）：</label>
+    <select data-subject="ielts" data-qid="w2" data-field="rating">
+      <option value="">-- 选择 --</option>
+      <option value="9">9 · Expert</option>
+      <option value="8">8 · Very Good</option>
+      <option value="7">7 · Good</option>
+      <option value="6">6 · Competent</option>
+      <option value="5">5 · Modest</option>
+      <option value="4">4 · Limited</option>
+      <option value="3">3 · Extremely Limited</option>
+      <option value="2">2 · Intermittent</option>
+      <option value="1">1 · Non User</option>
+    </select>
+    <button class="btn btn-sm btn-primary" onclick="submitScore('ielts','w2','Writing Task 2')">提交评分</button>
+    <button class="btn btn-sm" onclick="gradeWriting('ielts','w2','IELTS Task 2')">智能批改</button>
+    <span class="score-display" data-score-for="w2"></span>
+  </div>
+</div>
+
+<!-- ================ SPEAKING SECTION ================ -->
+<h2>Speaking · 口语（3 Parts）</h2>
+
+<!-- Part 1 -->
+<h3>Part 1 · Introduction & Interview（4-5 问，日常话题）</h3>
+<div class="box-dashed" style="margin:10px 0;">
+  <p class="muted"><strong>说明</strong>：Part 1 约 4-5 分钟。每个问题回答 2-4 句话（扩展 + 例子/细节）。下面给出 5 个常见问题，每题有笔记区与参考回答要点。</p>
+</div>
+
+<div class="q" id="q-ielts-s1-1">
+  <div class="q-num">S-P1-Q1</div>
+  <div class="q-title">Let's talk about your hometown. Where do you come from?</div>
+  <div class="notes-area">
+    <div class="subq-label">📝 作答笔记</div>
+    <textarea data-subject="ielts" data-qid="s1_1" data-field="notes" placeholder="City / town · Location · One feature you like..."></textarea>
+  </div>
+  <details>
+    <summary>💡 参考回答要点（点击展开）</summary>
+    <div class="ref-content">
+      <p><strong>Sample (Band 7-8):</strong> "I'm from Chengdu, which is the capital of Sichuan Province in southwestern China. It's a really lively city famous for hotpot and pandas, but actually I love it most for the pace of life — it's busy yet relaxed at the same time. People there take their time over meals and tea, which I think is quite rare for a big Chinese city."</p>
+      <p><strong>扩展技巧</strong>：直接回答 + 位置 + 一个特点 + 个人感受。给出 1-2 个具体细节（hotpot, pandas, tea culture）避免回答过短。</p>
+    </div>
+  </details>
+</div>
+
+<div class="q" id="q-ielts-s1-2">
+  <div class="q-num">S-P1-Q2</div>
+  <div class="q-title">What do you usually do on weekends?</div>
+  <div class="notes-area">
+    <div class="subq-label">📝 作答笔记</div>
+    <textarea data-subject="ielts" data-qid="s1_2" data-field="notes" placeholder="Activity 1: when/what · Activity 2: who with..."></textarea>
+  </div>
+  <details>
+    <summary>💡 参考回答要点（点击展开）</summary>
+    <div class="ref-content">
+      <p><strong>Sample:</strong> "It depends on how tired I am from the week. On Saturday I usually try to go outside — maybe hike a nearby trail with my friends, or try a new café with my sister. Sunday is more lazy; I'll read a novel, go grocery shopping, and spend the evening meal-prepping for the week ahead. Oh, and I try to call my grandparents every Sunday without fail."</p>
+      <p><strong>扩展技巧</strong>：分情况（It depends...）· 分周六周日两点 · 最后加一个小习惯（grandparents 例）让回答更具体、自然。</p>
+    </div>
+  </details>
+</div>
+
+<div class="q" id="q-ielts-s1-3">
+  <div class="q-num">S-P1-Q3</div>
+  <div class="q-title">Do you enjoy reading? What kinds of books do you like?</div>
+  <div class="notes-area">
+    <div class="subq-label">📝 作答笔记</div>
+    <textarea data-subject="ielts" data-qid="s1_3" data-field="notes" placeholder="Yes/No · Genre · One example..."></textarea>
+  </div>
+  <details>
+    <summary>💡 参考回答要点（点击展开）</summary>
+    <div class="ref-content">
+      <p><strong>Sample:</strong> "I absolutely love reading — I try to finish one or two books a month. I'm mostly into literary fiction, especially contemporary authors from East Asia; recently I finished <em>Love in the New Millennium</em> and it completely blew me away. I also read a fair bit of popular science on the side, especially about behavioural economics and psychology. I find they help me understand real-life decisions better."</p>
+      <p><strong>扩展技巧</strong>：表态 + 阅读频率 + 喜爱类型 + 最近一本例子书名 + 附带第二类型 + 原因。</p>
+    </div>
+  </details>
+</div>
+
+<div class="q" id="q-ielts-s1-4">
+  <div class="q-num">S-P1-Q4</div>
+  <div class="q-title">How do you usually travel to work or school?</div>
+  <div class="notes-area">
+    <div class="subq-label">📝 作答笔记</div>
+    <textarea data-subject="ielts" data-qid="s1_4" data-field="notes" placeholder="Transport · Duration · Pros/Cons..."></textarea>
+  </div>
+  <details>
+    <summary>💡 参考回答要点（点击展开）</summary>
+    <div class="ref-content">
+      <p><strong>Sample:</strong> "Most days I take the underground, which is the fastest option in my city. It takes roughly 35 minutes door to door, and honestly it's my favourite part of the day because I can just sit and read or listen to podcasts without any pressure. The only downside is rush hour, when it gets so crowded you can barely move. If it's pouring rain I'll take a Didi instead, even though it's more expensive."</p>
+      <p><strong>扩展技巧</strong>：主要交通方式 + 时长 + 优点 + 缺点 + 替代方式（条件）。</p>
+    </div>
+  </details>
+</div>
+
+<div class="q" id="q-ielts-s1-5">
+  <div class="q-num">S-P1-Q5</div>
+  <div class="q-title">Is there a festival that is especially important in your culture?</div>
+  <div class="notes-area">
+    <div class="subq-label">📝 作答笔记</div>
+    <textarea data-subject="ielts" data-qid="s1_5" data-field="notes" placeholder="Festival name · When · Customs..."></textarea>
+  </div>
+  <details>
+    <summary>💡 参考回答要点（点击展开）</summary>
+    <div class="ref-content">
+      <p><strong>Sample:</strong> "By far the most important one is Spring Festival, which is the Chinese New Year — it falls in late January or early February depending on the lunar calendar. Families travel from across the country to be together; we have a reunion dinner on New Year's Eve, set off fireworks or watch the CCTV gala, and kids receive red envelopes with lucky money. For me what matters most is just having several slow days where no one is working and everyone is at home."</p>
+      <p><strong>扩展技巧</strong>：最具代表性节日 + 时间 + 2-3 个习俗 + 个人感受（what matters most）。</p>
+    </div>
+  </details>
+</div>
+
+<!-- Part 2 Cue Card -->
+<h3>Part 2 · Individual Long Turn（Cue Card，1-2 分钟独白）</h3>
+<div class="q" id="q-ielts-s2">
+  <div class="q-num">S-P2 · Cue Card</div>
+  <div class="q-title"><span class="section-tag">Speaking</span> Part 2 Cue Card（话题卡）</div>
+  <div class="box" style="margin:10px 0;">
+    <p><strong>Describe a place you visited that you found particularly memorable.</strong></p>
+    <p class="muted" style="margin-top:10px;">You should say:</p>
+    <ul>
+      <li>where it was</li>
+      <li>when and why you went there</li>
+      <li>what you did there</li>
+      <li>and explain why you found it so memorable.</p>
+    </ul>
+  </div>
+  <div class="timer-section">
+    <div class="timer-label">准备时间 Preparation: 1 min</div>
+    <div class="timer" id="timer-ielts-s2-prep">
+      <span id="time-ielts-s2-prep">01:00</span>
+      <button class="btn btn-sm" onclick="toggleTimer('ielts-s2-prep', 60)">Start/Pause</button>
+      <button class="btn btn-sm" onclick="resetTimer('ielts-s2-prep', 60)">Reset</button>
+    </div>
+  </div>
+  <div class="timer-section">
+    <div class="timer-label">作答时间 Response: 2 min</div>
+    <div class="timer" id="timer-ielts-s2-resp">
+      <span id="time-ielts-s2-resp">02:00</span>
+      <button class="btn btn-sm" onclick="toggleTimer('ielts-s2-resp', 120)">Start/Pause</button>
+      <button class="btn btn-sm" onclick="resetTimer('ielts-s2-resp', 120)">Reset</button>
+    </div>
+  </div>
+  <h4>📝 要点笔记区（Part 2 可写 1 分钟提纲）</h4>
+  <div class="notes-area">
+    <textarea data-subject="ielts" data-qid="s2" data-field="notes" placeholder="Where:&#10;When/Why:&#10;What I did:&#10;Why memorable:"></textarea>
+  </div>
+  <details>
+    <summary>💡 参考结构 & 要点（点击展开）</summary>
+    <div class="ref-content">
+      <p><strong>答题结构（约 1 分 45 秒，填满 2 分钟）：</strong></p>
+      <p><strong>1. 开篇定位（15s）</strong><br>
+      "One place that genuinely stuck with me is a small village called Wuzhen, an hour outside Hangzhou in Zhejiang Province. I went there about three years ago, in late autumn, with my two best friends from high school. We'd just finished midterm exams and wanted to get completely away from our dorms and computers."</p>
+      <p><strong>2. Where + When/Why（扩展环境：15-20s）</strong><br>
+      "Wuzhen is one of those water towns — traditional houses built right on canals, stone bridges, narrow stone streets. It's touristy, but we stayed in the old part on a weekday, so most of the day it was just us and local elderly residents. We booked a tiny guesthouse with wooden floors and a balcony overlooking the water."</p>
+      <p><strong>3. What you did（具体细节 + 2-3 个动作：50-60s）</strong><br>
+      "On the first day we basically just wandered. We took a wooden boat through the canals at dusk, watched local women wash vegetables in the water, and ate these incredible braised pork rice bowls from a stall we found down an alley. On the second day we visited a small textile museum showing the local silk-weaving tradition, and we even tried a little weaving ourselves — it was way harder than it looked. That evening we sat on the balcony with tea and watched the lanterns come on over the water."</p>
+      <p><strong>4. Why memorable + 感受升华（20-25s）</strong><br>
+      "What really made it unforgettable, though, was the contrast with our normal lives. In university every day is packed with deadlines, notifications, rushing. For two whole days we had nothing scheduled and nowhere we needed to be. We laughed so much that weekend, and since then, whenever we're stressed, we text each other Wuzhen photos and say 'we need to go back.' It became a little marker of friendship."</p>
+      <p><strong>注意</strong>：每段给具体名字（Wuzhen, Hangzhou, braised pork, silk museum）让回答真实。避免背诵腔。</p>
+    </div>
+  </details>
+  <div class="rating">
+    <label>自评 Band（1-9）：</label>
+    <select data-subject="ielts" data-qid="s2" data-field="rating">
+      <option value="">-- 选择 --</option>
+      <option value="9">9 · Expert</option>
+      <option value="8">8 · Very Good</option>
+      <option value="7">7 · Good</option>
+      <option value="6">6 · Competent</option>
+      <option value="5">5 · Modest</option>
+      <option value="4">4 · Limited</option>
+      <option value="3">3 · Extremely Limited</option>
+      <option value="2">2 · Intermittent</option>
+      <option value="1">1 · Non User</option>
+    </select>
+    <button class="btn btn-sm btn-primary" onclick="submitScore('ielts','s2','Speaking Part 2 Cue Card')">提交评分</button>
+    <span class="score-display" data-score-for="s2"></span>
+  </div>
+</div>
+
+<!-- Part 3 Discussion -->
+<h3>Part 3 · Two-way Discussion（深入探讨 4-5 题）</h3>
+<div class="box-dashed" style="margin:10px 0;">
+  <p class="muted"><strong>说明</strong>：Part 3 约 4-5 分钟。根据 Part 2 话题扩展，回答需要更加抽象、概括、给出原因和对比。每题 4-6 句，可用举例+解释结构。</p>
+</div>
+
+<div class="q" id="q-ielts-s3-1">
+  <div class="q-num">S-P3-Q1</div>
+  <div class="q-title">Why do you think some people prefer to travel to natural places rather than cities?</div>
+  <div class="notes-area">
+    <div class="subq-label">📝 作答笔记</div>
+    <textarea data-subject="ielts" data-qid="s3_1" data-field="notes" placeholder="Reason 1: escape + recharge&#10;Reason 2: contrast to urban lives&#10;Example:"></textarea>
+  </div>
+  <details>
+    <summary>💡 参考回答要点（点击展开）</summary>
+    <div class="ref-content">
+      <p><strong>Sample (Band 7-8):</strong> "I suppose the biggest reason is the desire to escape — natural landscapes offer a total break from the screens, noise, and deadlines of city life. People who live in dense urban areas feel mentally drained by constant stimulation, so a hike, a quiet lake or a mountain cabin provides psychological reset. Beyond that, nature also feels more 'real' to many of us; in cities so much is man-made and commercialised, whereas standing by a vast mountain or a wild ocean reminds you of something bigger than daily routines. I think that sense of perspective is what draws people back again and again."</p>
+    </div>
+  </details>
+</div>
+
+<div class="q" id="q-ielts-s3-2">
+  <div class="q-num">S-P3-Q2</div>
+  <div class="q-title">Do you think tourism has a mainly positive or negative effect on local communities?</div>
+  <div class="notes-area">
+    <div class="subq-label">📝 作答笔记</div>
+    <textarea data-subject="ielts" data-qid="s3_2" data-field="notes" placeholder="Positive side: jobs / economy&#10;Negative side: gentrification / culture loss&#10;Balanced view:"></textarea>
+  </div>
+  <details>
+    <summary>💡 参考回答要点（点击展开）</summary>
+    <div class="ref-content">
+      <p><strong>Sample:</strong> "Tourism is double-edged, so it's hard to say 'mainly' one way or the other. On the plus side, it creates enormous numbers of jobs in restaurants, hotels and transport, and can be the lifeline of a region that has no other major industry — like small coastal towns or remote villages. But the downsides are real too: when mass tourism takes over, rents rise and local people get pushed out, while traditional culture can turn into a cheap performance for visitors. To me, the key question is scale and management. Low-volume, carefully regulated tourism tends to be positive; uncontrolled mass tourism does more harm than good."</p>
+    </div>
+  </details>
+</div>
+
+<div class="q" id="q-ielts-s3-3">
+  <div class="q-num">S-P3-Q3</div>
+  <div class="q-title">In what ways has travel changed in the last 20 years compared to your parents' generation?</div>
+  <div class="notes-area">
+    <div class="subq-label">📝 作答笔记</div>
+    <textarea data-subject="ielts" data-qid="s3_3" data-field="notes" placeholder="1. Budget airlines&#10;2. Apps / social media&#10;3. Purpose of travel (cultural vs checking in)"></textarea>
+  </div>
+  <details>
+    <summary>💡 参考回答要点（点击展开）</summary>
+    <div class="ref-content">
+      <p><strong>Sample:</strong> "Three differences stand out to me. First, cost: budget airlines and high-speed rail have made travel dramatically cheaper, so a young person today can take weekend trips abroad or across the country for roughly what my parents would have spent on bus fare. Second, planning and navigation — my parents relied on guidebooks, maps and asking strangers; we use Google Maps, booking apps and user reviews to handle everything. Third, the purpose has shifted somewhat. For my parents' generation, a big trip was a major once-in-a-lifetime cultural event. Now it's often shorter and more frequent, and people also travel partly for social-media content, which changes the whole experience. Whether that's for the better is debatable."</p>
+    </div>
+  </details>
+</div>
+
+<div class="q" id="q-ielts-s3-4">
+  <div class="q-num">S-P3-Q4</div>
+  <div class="q-title">Should governments preserve old historical buildings, even if it is very expensive?</div>
+  <div class="notes-area">
+    <div class="subq-label">📝 作答笔记</div>
+    <textarea data-subject="ielts" data-qid="s3_4" data-field="notes" placeholder="Yes / No&#10;Why: identity, tourism, education&#10;Limits: safety + practicality"></textarea>
+  </div>
+  <details>
+    <summary>💡 参考回答要点（点击展开）</summary>
+    <div class="ref-content">
+      <p><strong>Sample:</strong> "I think they absolutely should, but within reason. Historical buildings are part of a place's collective memory — if you tear them all down for glass towers, a city loses its identity and becomes indistinguishable from anywhere else. There's also a pragmatic case: well-preserved heritage sites attract tourists and create economic value that often exceeds the cost of maintenance. That said, I don't think every old building must be saved at any cost. If a structure is structurally unsafe and restoration prices are wildly out of proportion to its significance, then a careful demolition with a proper public record might be acceptable. The default, though, should be preservation rather than replacement."</p>
+    </div>
+  </details>
+</div>
+
+<div class="q" id="q-ielts-s3-5">
+  <div class="q-num">S-P3-Q5</div>
+  <div class="q-title">Some people argue that international travel makes people more open-minded. To what extent do you agree?</div>
+  <div class="notes-area">
+    <div class="subq-label">📝 作答笔记</div>
+    <textarea data-subject="ielts" data-qid="s3_5" data-field="notes" placeholder="Agree to a large extent&#10;Why: encounters with others challenge stereotypes&#10;But: quality of engagement matters (resort vs local)"></textarea>
+  </div>
+  <details>
+    <summary>💡 参考回答要点（点击展开）</summary>
+    <div class="ref-content">
+      <p><strong>Sample:</strong> "I agree up to a point, but it depends on the kind of travel. If you actually interact with locals, eat their food and try to understand daily life outside the tourist bubble, travel absolutely dismantles stereotypes. You realise that people elsewhere share the same basic concerns — family, health, work — even if their customs look different. However, I'm less sure about the effect of package tourism where people stay inside a resort and barely speak to anyone outside the staff. That form of travel can actually reinforce prejudices rather than reduce them. So the potential is there, but it doesn't happen automatically: you have to be willing to engage."</p>
+    </div>
+  </details>
+</div>
+
+<!-- ================ HISTORY TABLE ================ -->
+<h2>📋 答题历史记录</h2>
+<div class="history-table" id="history-table"></div>
+
+<div class="footer">
+  <a href="syllabus.html">Syllabus</a> · <a href="practice.html">Practice</a> · <a href="tracker.html">Tracker</a> · <a href="intro.html">Intro</a> · <a href="../dashboard.html">Dashboard</a>
+</div>
+
+<script>
+const STORAGE_KEY = 'yz_subjective_data';
+
+function loadData() {
+  try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); }
+  catch(e) { return {}; }
+}
+
+function saveData(data) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+}
+
+function keyOf(subject, qid, field) {
+  return subject + '__' + qid + '__' + field;
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  const data = loadData();
+  document.querySelectorAll('textarea, select').forEach(el => {
+    const subject = el.dataset.subject;
+    const qid = el.dataset.qid;
+    const field = el.dataset.field;
+    if (subject && qid && field) {
+      const k = keyOf(subject, qid, field);
+      if (data[k] !== undefined && data[k] !== null) {
+        el.value = data[k];
+      }
+    }
+  });
+
+  document.querySelectorAll('textarea[data-field="answer"]').forEach(ta => {
+    const qid = ta.dataset.qid;
+    updateCharCount(qid, ta.value);
+  });
+
+  renderHistory();
+});
+
+document.addEventListener('input', function(e) {
+  const el = e.target;
+  const subject = el.dataset.subject;
+  const qid = el.dataset.qid;
+  const field = el.dataset.field;
+  if (subject && qid && field) {
+    const data = loadData();
+    data[keyOf(subject, qid, field)] = el.value;
+    saveData(data);
+    if (field === 'answer') {
+      updateCharCount(qid, el.value);
+    }
+  }
+});
+
+document.addEventListener('change', function(e) {
+  const el = e.target;
+  const subject = el.dataset.subject;
+  const qid = el.dataset.qid;
+  const field = el.dataset.field;
+  if (subject && qid && field) {
+    const data = loadData();
+    data[keyOf(subject, qid, field)] = el.value;
+    saveData(data);
+  }
+});
+
+function updateCharCount(qid, text) {
+  const counter = document.querySelector('[data-count-for="' + qid + '"]');
+  if (counter) {
+    const len = (text || '').length;
+    counter.textContent = len + ' 字';
+  }
+}
+
+function submitScore(subject, qid, title) {
+  const ratingSel = document.querySelector('select[data-subject="' + subject + '"][data-qid="' + qid + '"][data-field="rating"]');
+  if (!ratingSel || !ratingSel.value) {
+    alert('请先选择评分');
+    return;
+  }
+  const score = ratingSel.value;
+  const data = loadData();
+  const historyKey = 'history_' + subject;
+  if (!data[historyKey]) data[historyKey] = [];
+  const entry = {
+    qid: qid,
+    title: title,
+    score: score,
+    timestamp: Date.now(),
+    dateStr: new Date().toLocaleString('zh-CN')
+  };
+  data[historyKey].push(entry);
+  saveData(data);
+
+  const scoreDisplay = document.querySelector('[data-score-for="' + qid + '"]');
+  if (scoreDisplay) {
+    scoreDisplay.textContent = ' · 已提交: Band ' + score + ' · ' + entry.dateStr;
+  }
+  alert('评分已保存：' + title + ' · Band ' + score);
+  renderHistory();
+}
+
+function renderHistory() {
+  const container = document.getElementById('history-table');
+  const data = loadData();
+  const history = data['history_ielts'] || [];
+  if (history.length === 0) {
+    container.innerHTML = '<div class="history-empty">暂无答题记录，完成评分后将在此显示</div>';
+    return;
+  }
+  history.sort((a,b) => b.timestamp - a.timestamp);
+  let html = '<table><thead><tr><th>题目</th><th>Band</th><th>日期时间</th></tr></thead><tbody>';
+  history.forEach(h => {
+    html += '<tr><td>' + h.title + '</td><td><strong>' + h.score + '</strong></td><td>' + h.dateStr + '</td></tr>';
+  });
+  html += '</tbody></table>';
+  container.innerHTML = html;
+}
+
+const timerIntervals = {};
+
+function toggleTimer(id, totalSeconds) {
+  const el = document.getElementById('time-' + id);
+  if (!el) return;
+  if (timerIntervals[id]) {
+    clearInterval(timerIntervals[id]);
+    delete timerIntervals[id];
+    return;
+  }
+  let current = parseTime(el.textContent);
+  if (current <= 0) current = totalSeconds;
+  timerIntervals[id] = setInterval(function() {
+    current--;
+    if (current <= 0) {
+      current = 0;
+      el.textContent = formatTime(current);
+      clearInterval(timerIntervals[id]);
+      delete timerIntervals[id];
+      return;
+    }
+    el.textContent = formatTime(current);
+  }, 1000);
+}
+
+function resetTimer(id, totalSeconds) {
+  if (timerIntervals[id]) {
+    clearInterval(timerIntervals[id]);
+    delete timerIntervals[id];
+  }
+  const el = document.getElementById('time-' + id);
+  if (el) el.textContent = formatTime(totalSeconds);
+}
+
+function formatTime(sec) {
+  const m = Math.floor(sec / 60);
+  const s = sec % 60;
+  return (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s;
+}
+
+function parseTime(str) {
+  const parts = str.split(':');
+  return parseInt(parts[0]) * 60 + parseInt(parts[1]);
+}
+</script>
+
+<script src="../../js/writing-grader.js"></script>
+<script>
+(function() {
+  'use strict';
+
+  window.gradeWriting = function(subject, qid, type) {
+    var textarea = document.querySelector('textarea[data-subject="' + subject + '"][data-qid="' + qid + '"][data-field="answer"]');
+    if (!textarea || !textarea.value.trim()) {
+      alert('请先写作文再批改');
+      return;
+    }
+    var result = window.WritingGrader.grade(textarea.value, type);
+    var summary = '总分: ' + result.score + '/100\n\n';
+    summary += 'Task Response: ' + result.rubric.taskResponse + '/25\n';
+    summary += 'Coherence & Cohesion: ' + result.rubric.coherenceCohesion + '/25\n';
+    summary += 'Lexical Resource: ' + result.rubric.lexicalResource + '/25\n';
+    summary += 'Grammatical Range: ' + result.rubric.grammaticalRange + '/25\n\n';
+    summary += '--- 详细反馈 ---\n';
+    result.feedback.forEach(function(fb) {
+      summary += '[' + fb.type + '] ' + fb.text + '\n';
+    });
+    alert(summary);
+  };
+
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search - yunzhuan.icu</title>
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px 16px 40px;
+            background: #f5f5f5;
+            color: #333;
+        }
+        .navbar {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            padding: 14px 0;
+            margin-bottom: 24px;
+        }
+        .logo {
+            display: none;
+        }
+        .logo span { color: #764ba2; }
+        .nav-links { display: flex; gap: 16px; align-items: center; }
+        .nav-links a {
+            color: #555;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        .nav-links a:hover { color: #667eea; }
+        .nav-links .cn {
+            color: #999;
+            font-size: 0.8rem;
+            margin-left: 2px;
+        }
+        h1 {
+            font-size: 1.5rem;
+            margin-bottom: 16px;
+            color: #333;
+        }
+        h1 .cn {
+            color: #888;
+            font-size: 0.9rem;
+            font-weight: normal;
+            margin-left: 8px;
+        }
+        .search-box {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        .search-box input {
+            width: 100%;
+            padding: 12px 100px 12px 16px;
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.2s;
+            background: white;
+        }
+        .search-box input:focus {
+            border-color: #667eea;
+        }
+        .search-kbd {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 0.75rem;
+            color: #aaa;
+            background: #f0f0f0;
+            padding: 3px 8px;
+            border-radius: 4px;
+            border: 1px solid #e0e0e0;
+            font-family: monospace;
+            pointer-events: none;
+        }
+        .suggestions {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            margin-top: 4px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            z-index: 100;
+            display: none;
+            max-height: 320px;
+            overflow-y: auto;
+        }
+        .suggestions.show { display: block; }
+        .suggestion-item {
+            padding: 10px 16px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.15s;
+            border-bottom: 1px solid #f5f5f5;
+        }
+        .suggestion-item:last-child { border-bottom: none; }
+        .suggestion-item:hover,
+        .suggestion-item.active {
+            background: #f8f9ff;
+        }
+        .suggestion-title {
+            font-size: 0.9rem;
+            color: #333;
+        }
+        .suggestion-cat {
+            font-size: 0.72rem;
+            color: #999;
+            flex-shrink: 0;
+            margin-left: 12px;
+        }
+        .suggestion-item mark {
+            background: #fef08a;
+            color: inherit;
+            padding: 0 1px;
+            border-radius: 2px;
+        }
+        .filters {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+        .filter-btn {
+            padding: 5px 12px;
+            border: 1px solid #e5e7eb;
+            background: white;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            color: #666;
+            transition: all 0.2s;
+        }
+        .filter-btn:hover {
+            border-color: #667eea;
+            color: #667eea;
+        }
+        .filter-btn.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+        .results-stats {
+            font-size: 0.85rem;
+            color: #888;
+            margin-bottom: 12px;
+        }
+        .results {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .result-item {
+            background: white;
+            padding: 14px 16px;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            text-decoration: none;
+            transition: box-shadow 0.2s, transform 0.2s;
+            display: block;
+        }
+        .result-item:hover {
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transform: translateY(-1px);
+        }
+        .result-title {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 4px;
+            font-size: 0.95rem;
+        }
+        .result-item:hover .result-title {
+            color: #667eea;
+        }
+        .result-category {
+            display: inline-block;
+            background: #ede9fe;
+            color: #5b21b6;
+            font-size: 0.7rem;
+            padding: 2px 8px;
+            border-radius: 10px;
+            margin-right: 8px;
+            margin-bottom: 6px;
+        }
+        .result-snippet {
+            font-size: 0.8rem;
+            color: #666;
+            line-height: 1.5;
+        }
+        .result-snippet mark {
+            background: #fef08a;
+            color: inherit;
+            padding: 0 2px;
+            border-radius: 2px;
+        }
+        .no-results {
+            text-align: center;
+            padding: 40px 20px;
+            color: #999;
+        }
+        .no-results .icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #999;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #e5e7eb;
+            font-size: 0.8rem;
+            color: #999;
+        }
+        @media (max-width: 768px) {
+            body { padding: 12px 10px; }
+            h1 { font-size: 1.2rem; }
+            .nav-links a .cn { display: none; }
+        }
+    </style>
+    <link rel="stylesheet" href="css/theme.css">
+    <script src="js/theme.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="index.html" class="logo"><span class="logo-icon">🎓</span><span class="logo-text">yunzhuan<span>.icu</span></span></a>
+        <div class="nav-links">
+            <a href="index.html">Home<span class="cn">首页</span></a>
+            <a href="guides/index.html">Guides<span class="cn">指南</span></a>
+            <a href="schools/compare.html">Compare<span class="cn">对比</span></a>
+        </div>
+    </nav>
+
+    <h1>Search <span class="cn">全站搜索</span></h1>
+
+    <div class="search-box">
+        <input type="text" id="searchInput" placeholder="Search majors, schools, guides, tools... 搜索专业、学校、指南、工具..." autocomplete="off">
+        <span class="search-kbd">/</span>
+        <div class="suggestions" id="suggestions"></div>
+    </div>
+
+    <div class="filters" id="filters"></div>
+
+    <div class="results-stats" id="stats"></div>
+    <div class="results" id="results">
+        <div class="loading">Loading index... 正在加载搜索索引...</div>
+    </div>
+
+    <p class="footer">© 2026 yunzhuan.icu &nbsp;|&nbsp; Version v18.9.0</p>
+
+<script>
+(function() {
+    let allPages = [];
+    let currentCategory = 'all';
+
+    const input = document.getElementById('searchInput');
+    const resultsEl = document.getElementById('results');
+    const statsEl = document.getElementById('stats');
+    const filtersEl = document.getElementById('filters');
+    const suggestionsEl = document.getElementById('suggestions');
+    let activeSuggestion = -1;
+
+    async function loadIndex() {
+        try {
+            const res = await fetch('search-index.json');
+            allPages = await res.json();
+            buildFilters();
+            const params = new URLSearchParams(window.location.search);
+            const q = params.get('q');
+            if (q) {
+                input.value = q;
+                doSearch();
+            } else {
+                resultsEl.innerHTML = '<div class="no-results"><div class="icon">🔍</div><p>Start typing to search 开始输入搜索</p></div>';
+            }
+        } catch (e) {
+            resultsEl.innerHTML = '<div class="no-results"><div class="icon">⚠️</div><p>Failed to load search index 加载搜索索引失败</p></div>';
+        }
+    }
+
+    function buildFilters() {
+        const cats = {};
+        allPages.forEach(p => { cats[p.category] = (cats[p.category] || 0) + 1; });
+        const sorted = Object.entries(cats).sort((a, b) => b[1] - a[1]);
+        let html = `<button class="filter-btn active" data-cat="all">All <span>(${allPages.length})</span></button>`;
+        sorted.forEach(([cat, count]) => {
+            html += `<button class="filter-btn" data-cat="${cat}">${cat} <span>(${count})</span></button>`;
+        });
+        filtersEl.innerHTML = html;
+        filtersEl.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                filtersEl.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentCategory = btn.dataset.cat;
+                doSearch();
+            });
+        });
+    }
+
+    function search(query) {
+        if (!query.trim()) return [];
+        const q = query.toLowerCase().trim();
+        const terms = q.split(/\s+/).filter(Boolean);
+
+        return allPages
+            .filter(p => currentCategory === 'all' || p.category === currentCategory)
+            .map(p => {
+                let score = 0;
+                const title = p.title.toLowerCase();
+                const text = p.text.toLowerCase();
+                const url = p.url.toLowerCase();
+
+                terms.forEach(term => {
+                    if (title.includes(term)) score += 10;
+                    if (url.includes(term)) score += 5;
+                    const textMatches = (text.match(new RegExp(term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g')) || []).length;
+                    score += textMatches * 0.5;
+                });
+
+                return { page: p, score };
+            })
+            .filter(r => r.score > 0)
+            .sort((a, b) => b.score - a.score)
+            .slice(0, 50);
+    }
+
+    function highlight(text, query) {
+        if (!query.trim()) return text;
+        const terms = query.toLowerCase().split(/\s+/).filter(Boolean);
+        let result = text;
+        terms.forEach(term => {
+            const re = new RegExp('(' + term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'ig');
+            result = result.replace(re, '<mark>$1</mark>');
+        });
+        return result;
+    }
+
+    function getSnippet(text, query) {
+        const q = query.toLowerCase().trim();
+        const idx = text.toLowerCase().indexOf(q);
+        if (idx === -1) return text.substring(0, 150) + '...';
+        const start = Math.max(0, idx - 50);
+        const end = Math.min(text.length, idx + 100);
+        return (start > 0 ? '...' : '') + text.substring(start, end) + (end < text.length ? '...' : '');
+    }
+
+    function doSearch() {
+        const query = input.value;
+        const results = search(query);
+
+        statsEl.textContent = query.trim() ? `${results.length} result${results.length !== 1 ? 's' : ''} found 找到 ${results.length} 个结果` : '';
+
+        if (!query.trim()) {
+            resultsEl.innerHTML = '<div class="no-results"><div class="icon">🔍</div><p>Start typing to search 开始输入搜索</p></div>';
+            return;
+        }
+
+        if (results.length === 0) {
+            resultsEl.innerHTML = '<div class="no-results"><div class="icon">😕</div><p>No results found 没有找到结果</p><p style="font-size:0.8rem;margin-top:8px;">Try different keywords 试试其他关键词</p></div>';
+            return;
+        }
+
+        resultsEl.innerHTML = results.map(r => {
+            const snippet = getSnippet(r.page.text, query);
+            return `<a href="${r.page.url}" class="result-item">
+                <span class="result-category">${r.page.category}</span>
+                <div class="result-title">${highlight(r.page.title, query)}</div>
+                <div class="result-snippet">${highlight(snippet, query)}</div>
+            </a>`;
+        }).join('');
+    }
+
+    function showSuggestions(query) {
+        if (!query.trim() || allPages.length === 0) {
+            suggestionsEl.classList.remove('show');
+            suggestionsEl.innerHTML = '';
+            activeSuggestion = -1;
+            return;
+        }
+        const q = query.toLowerCase().trim();
+        const matches = allPages
+            .filter(p => currentCategory === 'all' || p.category === currentCategory)
+            .filter(p => p.title.toLowerCase().includes(q))
+            .slice(0, 8);
+
+        if (matches.length === 0) {
+            suggestionsEl.classList.remove('show');
+            suggestionsEl.innerHTML = '';
+            activeSuggestion = -1;
+            return;
+        }
+
+        suggestionsEl.innerHTML = matches.map((p, i) => `
+            <div class="suggestion-item" data-index="${i}" data-url="${p.url}">
+                <span class="suggestion-title">${highlight(p.title, query)}</span>
+                <span class="suggestion-cat">${p.category}</span>
+            </div>
+        `).join('');
+        suggestionsEl.classList.add('show');
+        activeSuggestion = -1;
+
+        suggestionsEl.querySelectorAll('.suggestion-item').forEach(item => {
+            item.addEventListener('click', () => {
+                window.location.href = item.dataset.url;
+            });
+        });
+    }
+
+    function setActiveSuggestion(idx) {
+        const items = suggestionsEl.querySelectorAll('.suggestion-item');
+        if (items.length === 0) return;
+        items.forEach(i => i.classList.remove('active'));
+        if (idx < 0) idx = items.length - 1;
+        if (idx >= items.length) idx = 0;
+        activeSuggestion = idx;
+        items[idx].classList.add('active');
+        items[idx].scrollIntoView({ block: 'nearest' });
+    }
+
+    let searchTimeout;
+    input.addEventListener('input', () => {
+        clearTimeout(searchTimeout);
+        searchTimeout = setTimeout(() => {
+            doSearch();
+            showSuggestions(input.value);
+            const url = new URL(window.location);
+            if (input.value.trim()) {
+                url.searchParams.set('q', input.value);
+            } else {
+                url.searchParams.delete('q');
+            }
+            history.replaceState(null, '', url);
+        }, 150);
+    });
+
+    input.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            if (activeSuggestion >= 0 && suggestionsEl.classList.contains('show')) {
+                const items = suggestionsEl.querySelectorAll('.suggestion-item');
+                if (items[activeSuggestion]) {
+                    window.location.href = items[activeSuggestion].dataset.url;
+                    return;
+                }
+            }
+            doSearch();
+            suggestionsEl.classList.remove('show');
+        } else if (e.key === 'ArrowDown') {
+            e.preventDefault();
+            if (suggestionsEl.classList.contains('show')) {
+                setActiveSuggestion(activeSuggestion + 1);
+            }
+        } else if (e.key === 'ArrowUp') {
+            e.preventDefault();
+            if (suggestionsEl.classList.contains('show')) {
+                setActiveSuggestion(activeSuggestion - 1);
+            }
+        } else if (e.key === 'Escape') {
+            suggestionsEl.classList.remove('show');
+            activeSuggestion = -1;
+        }
+    });
+
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.search-box')) {
+            suggestionsEl.classList.remove('show');
+            activeSuggestion = -1;
+        }
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === '/' && document.activeElement !== input && !e.ctrlKey && !e.metaKey) {
+            const tag = (e.target.tagName || '').toLowerCase();
+            if (tag === 'input' || tag === 'textarea' || e.target.isContentEditable) return;
+            e.preventDefault();
+            input.focus();
+            input.select();
+        }
+        if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+            e.preventDefault();
+            input.focus();
+            input.select();
+        }
+    });
+
+    loadIndex();
+    setTimeout(() => input.focus(), 100);
+})();
+</script>
+<script src="./js/back-to-top.js"></script>
+</body>
+</html>

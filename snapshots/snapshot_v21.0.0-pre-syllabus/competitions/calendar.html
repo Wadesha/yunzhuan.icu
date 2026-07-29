@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Competition Calendar - yunzhuan.icu</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 16px 20px;
+            background: #f5f5f5;
+            color: #333;
+        }
+        .navbar {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            padding: 12px 0;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+        .logo { font-weight: 700; font-size: 1.1rem; color: #667eea; text-decoration: none; }
+        .logo span { color: #764ba2; }
+        .nav-links { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+        .nav-links a { text-decoration: none; color: #555; font-size: 0.82rem; font-weight: 500; white-space: nowrap; }
+        .nav-links a:hover { color: #667eea; }
+        .nav-links .cn { font-size: 0.65rem; color: #bbb; margin-left: 2px; }
+
+        .breadcrumb { font-size: 0.8rem; color: #888; margin-bottom: 12px; }
+        .breadcrumb a { color: #667eea; text-decoration: none; }
+
+        h1 { font-size: 1.4rem; margin-bottom: 4px; }
+        .subtitle { color: #666; font-size: 0.9rem; margin-bottom: 16px; }
+
+        .view-toggle {
+            display: flex;
+            gap: 0;
+            margin-bottom: 14px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            width: fit-content;
+        }
+        .view-toggle button {
+            padding: 6px 16px;
+            border: none;
+            background: white;
+            font-size: 0.8rem;
+            cursor: pointer;
+            color: #666;
+        }
+        .view-toggle button.active {
+            background: #667eea;
+            color: white;
+        }
+
+        .filters {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 14px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .filter-btn {
+            padding: 3px 10px;
+            border: 1px solid #ddd;
+            background: white;
+            border-radius: 14px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            color: #555;
+        }
+        .filter-btn:hover { border-color: #667eea; color: #667eea; }
+        .filter-btn.active { background: #667eea; color: white; border-color: #667eea; }
+        .filter-label { font-size: 0.78rem; color: #888; margin-right: 4px; }
+
+        /* 月视图 */
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+        .month-card {
+            background: white;
+            border-radius: 8px;
+            padding: 10px 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            min-height: 120px;
+        }
+        .month-card h3 {
+            font-size: 0.9rem;
+            color: #667eea;
+            margin-bottom: 6px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .month-card h3 .count {
+            font-size: 0.7rem;
+            color: #999;
+            font-weight: normal;
+        }
+        .month-comp {
+            display: block;
+            padding: 3px 6px;
+            margin-bottom: 3px;
+            border-radius: 4px;
+            text-decoration: none;
+            color: #333;
+            font-size: 0.78rem;
+            border-left: 2px solid #667eea;
+            background: #f8f9ff;
+        }
+        .month-comp:hover { background: #e8eaf6; }
+        .month-comp .comp-name { font-weight: 500; }
+        .month-comp .comp-cn { font-size: 0.7rem; color: #888; margin-left: 4px; }
+
+        /* 时间线视图 */
+        .timeline {
+            display: none;
+            background: white;
+            border-radius: 8px;
+            padding: 16px 20px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .timeline.active { display: block; }
+        .timeline-month {
+            margin-bottom: 16px;
+            padding-left: 16px;
+            border-left: 3px solid #667eea;
+        }
+        .timeline-month h3 {
+            font-size: 0.95rem;
+            color: #667eea;
+            margin-bottom: 8px;
+        }
+        .timeline-item {
+            padding: 6px 10px;
+            margin-bottom: 4px;
+            background: #f8f9ff;
+            border-radius: 6px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-decoration: none;
+            color: #333;
+        }
+        .timeline-item:hover { background: #e8eaf6; }
+        .timeline-item .info { flex: 1; }
+        .timeline-item .name { font-weight: 500; font-size: 0.88rem; }
+        .timeline-item .cn { font-size: 0.75rem; color: #888; margin-left: 6px; }
+        .timeline-item .tags { display: flex; gap: 4px; }
+        .timeline-item .tag {
+            font-size: 0.68rem;
+            padding: 1px 6px;
+            border-radius: 3px;
+            background: #e0e7ff;
+            color: #4338ca;
+        }
+        .timeline-item .tag.difficulty { background: #fef3c7; color: #92400e; }
+        .timeline-item .tag.team { background: #dbeafe; color: #2563eb; }
+
+        .demo-banner {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border: 1px solid #fcd34d;
+            color: #92400e;
+            padding: 8px 14px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            margin-bottom: 14px;
+        }
+        .demo-banner strong { color: #78350f; }
+
+        .footer { text-align: center; margin-top: 20px; color: #999; font-size: 0.8rem; }
+
+        @media (max-width: 768px) {
+            .calendar-grid { grid-template-columns: repeat(2, 1fr); }
+            h1 { font-size: 1.1rem; }
+            body { padding: 0 10px 16px; }
+        }
+        @media (max-width: 480px) {
+            .calendar-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+    <link rel="stylesheet" href="../css/theme.css">
+    <link rel="manifest" href="../manifest.json">
+    <meta name="theme-color" content="#667eea">
+    <script src="../js/theme.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="../index.html" class="logo"><span class="logo-icon">🎓</span><span class="logo-text">yunzhuan<span>.icu</span></span></a>
+        <div class="nav-links">
+            <a href="../index.html">Majors<span class="cn">专业</span></a>
+            <a href="../schools/index.html">Schools<span class="cn">学校</span></a>
+            <a href="../tests/index.html">Tests<span class="cn">考试</span></a>
+            <a href="../essays/index.html">Essays<span class="cn">文书</span></a>
+            <a href="index.html" style="color:#667eea;font-weight:600;">Competitions<span class="cn">竞赛</span></a>
+            <a href="calendar.html">Calendar<span class="cn">日历</span></a>
+        </div>
+    </nav>
+
+    <div class="breadcrumb"><a href="index.html">Competitions</a> / Calendar</div>
+
+    <h1>📅 Competition Calendar</h1>
+    <p class="subtitle">竞赛日历 · 全年赛事时间轴</p>
+
+    <div class="demo-banner">
+        <strong>📋 Demo Mode</strong> — 时间为模拟数据（基于各竞赛常规时间整理），具体报名时间请以官网为准。后续将联网获取最新赛程。
+    </div>
+
+    <div class="view-toggle">
+        <button class="active" data-view="grid">月历视图</button>
+        <button data-view="timeline">时间线视图</button>
+    </div>
+
+    <div class="filters">
+        <span class="filter-label">分类:</span>
+        <button class="filter-btn active" data-cat="all">全部</button>
+    </div>
+
+    <div class="calendar-grid" id="calendarGrid"></div>
+
+    <div class="timeline" id="timeline"></div>
+
+    <p class="footer">© 2026 yunzhuan.icu &nbsp;|&nbsp; v20.5.0</p>
+
+    <script src="../js/competitions.js"></script>
+    <script>
+    (function() {
+        const calendarGrid = document.getElementById('calendarGrid');
+        const timeline = document.getElementById('timeline');
+        const viewButtons = document.querySelectorAll('.view-toggle button');
+        const filtersContainer = document.querySelector('.filters');
+        const MONTH_NAMES = ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'];
+
+        let currentView = 'grid';
+        let currentCategory = 'all';
+
+        // 生成分类筛选按钮
+        CATEGORIES.forEach(cat => {
+            const btn = document.createElement('button');
+            btn.className = 'filter-btn';
+            btn.dataset.cat = cat.id;
+            btn.textContent = cat.name.split(' & ')[0];
+            filtersContainer.appendChild(btn);
+        });
+
+        // 按月份分组
+        function getCompetitionsByMonth() {
+            const byMonth = {};
+            for (let m = 1; m <= 12; m++) byMonth[m] = [];
+            COMPETITIONS.forEach(comp => {
+                if (currentCategory !== 'all' && comp.category !== currentCategory) return;
+                comp.months.forEach(m => {
+                    byMonth[m].push(comp);
+                });
+            });
+            return byMonth;
+        }
+
+        // 渲染月历视图
+        function renderGrid() {
+            calendarGrid.innerHTML = '';
+            const byMonth = getCompetitionsByMonth();
+            for (let m = 1; m <= 12; m++) {
+                const comps = byMonth[m];
+                const card = document.createElement('div');
+                card.className = 'month-card';
+                card.innerHTML = `
+                    <h3>${MONTH_NAMES[m - 1]} <span class="count">${comps.length} 项</span></h3>
+                    <div class="month-list"></div>
+                `;
+                const list = card.querySelector('.month-list');
+                comps.forEach(comp => {
+                    const link = document.createElement('a');
+                    link.className = 'month-comp';
+                    link.href = comp.id + '.html';
+                    link.innerHTML = `<span class="comp-name">${comp.name}</span><span class="comp-cn">${comp.cnName}</span>`;
+                    list.appendChild(link);
+                });
+                if (comps.length === 0) {
+                    list.innerHTML = '<div style="font-size:0.75rem;color:#bbb;">暂无</div>';
+                }
+                calendarGrid.appendChild(card);
+            }
+        }
+
+        // 渲染时间线视图
+        function renderTimeline() {
+            timeline.innerHTML = '';
+            const byMonth = getCompetitionsByMonth();
+            for (let m = 1; m <= 12; m++) {
+                const comps = byMonth[m];
+                if (comps.length === 0) continue;
+                const section = document.createElement('div');
+                section.className = 'timeline-month';
+                section.innerHTML = `<h3>${MONTH_NAMES[m - 1]} · ${comps.length} 项赛事</h3>`;
+                comps.forEach(comp => {
+                    const item = document.createElement('a');
+                    item.className = 'timeline-item';
+                    item.href = comp.id + '.html';
+                    const stars = '★'.repeat(comp.prestige);
+                    item.innerHTML = `
+                        <div class="info">
+                            <span class="name">${comp.name}</span>
+                            <span class="cn">${comp.cnName}</span>
+                        </div>
+                        <div class="tags">
+                            <span class="tag difficulty">难度 ${comp.difficulty}/5</span>
+                            <span class="tag">${stars}</span>
+                        </div>
+                    `;
+                    section.appendChild(item);
+                });
+                timeline.appendChild(section);
+            }
+        }
+
+        function render() {
+            renderGrid();
+            renderTimeline();
+        }
+
+        render();
+
+        // 视图切换
+        viewButtons.forEach(btn => {
+            btn.addEventListener('click', function() {
+                viewButtons.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                currentView = this.dataset.view;
+                if (currentView === 'grid') {
+                    calendarGrid.style.display = 'grid';
+                    timeline.classList.remove('active');
+                } else {
+                    calendarGrid.style.display = 'none';
+                    timeline.classList.add('active');
+                }
+            });
+        });
+
+        // 分类筛选
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                currentCategory = this.dataset.cat;
+                render();
+            });
+        });
+    })();
+    </script>
+<script src="../js/back-to-top.js"></script>
+</body>
+</html>

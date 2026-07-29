@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TOEFL Subjective Practice</title>
+<link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 820px; margin: 0 auto; padding: 24px 16px 48px; background: #ffffff; color: #111111; line-height: 1.7; font-size: 15px; }
+a { color: #111111; text-decoration: none; border-bottom: 1px solid #cccccc; }
+a:hover { border-bottom-color: #111111; }
+.nav { padding-bottom: 12px; margin-bottom: 20px; border-bottom: 1px solid #e0e0e0; font-size: 0.88rem; color: #888888; }
+.nav a { color: #111111; }
+.nav .sep { color: #cccccc; margin: 0 6px; }
+h1 { font-size: 1.6rem; margin-bottom: 4px; }
+h2 { font-size: 1.1rem; font-weight: 700; margin: 28px 0 8px; padding-bottom: 6px; border-bottom: 1px solid #111111; }
+h3 { font-size: 0.98rem; font-weight: 700; margin: 16px 0 4px; }
+h4 { font-size: 0.9rem; font-weight: 700; margin: 12px 0 4px; }
+p, li { margin-bottom: 6px; color: #111111; }
+.muted { color: #888888; font-size: 0.85rem; }
+.subtitle { color: #555555; font-size: 0.95rem; margin-bottom: 20px; }
+table { width: 100%; border-collapse: collapse; font-size: 0.82rem; margin: 8px 0 16px; }
+th, td { border: 1px solid #e0e0e0; padding: 6px 10px; text-align: left; vertical-align: top; }
+th { background: #ffffff; border-bottom: 2px solid #111111; font-weight: 700; }
+ul, ol { margin-left: 22px; margin-bottom: 12px; }
+.box { border: 1px solid #111111; padding: 14px 18px; margin: 12px 0; }
+.box-dashed { border: 1px dashed #888888; padding: 14px 18px; margin: 12px 0; }
+.q { border: 1px solid #e0e0e0; padding: 14px 18px; margin: 12px 0; }
+.q .q-num { font-weight: 700; font-size: 0.82rem; color: #888888; }
+.q .q-title { font-weight: 700; margin: 8px 0; }
+.q .q-text { margin: 8px 0; }
+.footer { margin-top: 36px; padding-top: 16px; border-top: 1px solid #e0e0e0; color: #888888; font-size: 0.82rem; }
+.v-badge { display: inline-block; border: 1px solid #111111; padding: 0 6px; font-size: 0.7rem; font-weight: 700; }
+textarea { width: 100%; min-height: 120px; padding: 10px 12px; border: 1px solid #888888; font-family: inherit; font-size: 0.9rem; line-height: 1.6; resize: vertical; background: #ffffff; color: #111111; }
+textarea:focus { outline: none; border-color: #111111; }
+.btn { display: inline-block; padding: 6px 14px; border: 1px solid #111111; background: #ffffff; color: #111111; font-family: inherit; font-size: 0.85rem; cursor: pointer; margin-right: 6px; }
+.btn:hover { background: #111111; color: #ffffff; }
+.btn-primary { background: #111111; color: #ffffff; }
+.btn-primary:hover { background: #333333; }
+.btn-sm { padding: 4px 10px; font-size: 0.78rem; }
+.timer { display: inline-flex; align-items: center; gap: 10px; padding: 8px 14px; border: 1px solid #111111; font-family: 'Courier New', monospace; font-size: 1.2rem; font-weight: 700; margin: 8px 0; }
+.timer-section { margin: 10px 0; text-align: center; }
+.timer-label { font-size: 0.8rem; color: #555555; margin-right: 6px; }
+.rating { display: flex; align-items: center; gap: 8px; margin: 10px 0; flex-wrap: wrap; }
+.rating label { font-size: 0.85rem; color: #555555; }
+.rating select { padding: 4px 8px; border: 1px solid #888888; font-family: inherit; font-size: 0.85rem; background: #ffffff; }
+.rating .score-display { font-weight: 700; color: #111111; }
+details { border: 1px solid #e0e0e0; padding: 10px 14px; margin: 10px 0; }
+summary { cursor: pointer; font-weight: 700; font-size: 0.88rem; padding: 4px 0; user-select: none; }
+summary:hover { color: #555555; }
+details[open] summary { margin-bottom: 8px; border-bottom: 1px dashed #e0e0e0; padding-bottom: 8px; }
+.ref-content { font-size: 0.88rem; line-height: 1.7; color: #333333; }
+.ref-content p { margin-bottom: 8px; }
+.char-count { font-size: 0.78rem; color: #888888; text-align: right; margin-top: 4px; }
+.notes-area { border: 1px dashed #888888; padding: 10px 12px; margin: 8px 0; }
+.notes-area textarea { border: none; min-height: 80px; padding: 0; }
+.history-table { margin-top: 20px; }
+.history-empty { text-align: center; color: #888888; padding: 20px; border: 1px dashed #e0e0e0; }
+.subpart { margin: 8px 0; padding-left: 12px; border-left: 2px solid #e0e0e0; }
+.subpart-label { font-weight: 700; font-size: 0.85rem; color: #555555; }
+.section-tag { display: inline-block; padding: 2px 8px; border: 1px solid #888888; font-size: 0.72rem; font-weight: 700; color: #555555; margin-right: 6px; }
+@media (max-width: 600px) {
+  textarea { width: 100%; }
+  .timer-section { text-align: center; }
+  .timer { justify-content: center; display: flex; }
+}
+</style>
+</head>
+<body>
+
+<div class="nav">
+  <a href="../../../index.html">Home</a>
+  <span class="sep">/</span>
+  <a href="../../index.html">Academics</a>
+  <span class="sep">/</span>
+  <a href="../index.html">Practice</a>
+  <span class="sep">/</span>
+  <a href="intro.html">TOEFL</a>
+  <span class="sep">/</span>
+  Subjective
+</div>
+
+<h1>TOEFL Subjective Practice <span class="v-badge">v1</span></h1>
+<p class="subtitle">Writing 2 题 + Speaking 4 题 · 计时器 + 笔记区 + 参考答案要点 + localStorage 持久化</p>
+
+<div class="box-dashed">
+  <p><strong>答题说明</strong>：所有作答自动保存至浏览器本地（key: <code>yz_subjective_data</code>）。评分后会在页面底部生成答题历史记录。</p>
+</div>
+
+<!-- ================ WRITING SECTION ================ -->
+<h2>Writing · 写作</h2>
+
+<!-- Integrated Writing -->
+<div class="q" id="q-toefl-w1">
+  <div class="q-num">W-1 · Integrated Writing · 20 min</div>
+  <div class="q-title"><span class="section-tag">Writing</span> Integrated Writing（综合写作）</div>
+  <div class="q-text">
+    <p><strong>Reading Passage（3 min）:</strong></p>
+    <div class="box-dashed">
+      <p>The article discusses the benefits of implementing a four-day workweek. The author presents three main arguments supporting this change. First, a four-day week would reduce employee burnout and increase overall productivity, as workers would be more rested and motivated. Second, it would lower operational costs for companies by reducing utility expenses and office overhead by 20 percent. Third, it would benefit the environment by reducing commuting frequency, thus cutting carbon emissions significantly.</p>
+    </div>
+    <p style="margin-top:12px;"><strong>Listening Section（2 min lecture）:</strong></p>
+    <div class="box-dashed">
+      <p style="color:#888;font-size:0.85rem;"><strong>🎧 音频播放区：</strong></p>
+      <audio controls style="width:100%;margin:8px 0;">
+        <source src="#" type="audio/mpeg">
+        <em style="color:#888;font-size:0.82rem;">[音频文件待接入] - Audio placeholder for integrated writing lecture</em>
+      </audio>
+      <p style="color:#888;font-size:0.8rem;">实际考试中，此音频为教授讲座。请根据讲座内容总结要点并说明如何反驳阅读文章。</p>
+    </div>
+    <p style="margin-top:12px;"><strong>Listening Notes:</strong></p>
+    <div class="box-dashed">
+      <p>The professor challenges each point from the reading. Regarding productivity, she argues that employees would simply cram five days of work into four, leading to increased stress and rushed work rather than better output. On costs, she points out that companies would need to hire and train additional workers to maintain coverage, which is far more expensive than any savings on utilities. Finally, she notes that most employees would use their extra day for shopping and other car trips, so overall carbon reductions would be minimal.</p>
+    </div>
+  </div>
+  <p class="muted">建议字数：150-225 词（官方新格式）/ 传统 300-325 词均可</p>
+  <textarea data-subject="toefl" data-qid="w1" data-field="answer" placeholder="Summarize the points made in the lecture and explain how they cast doubt on points made in the reading..."></textarea>
+  <div class="char-count" data-count-for="w1">0 / 325 字</div>
+  <details>
+    <summary>📄 参考范文（点击展开）</summary>
+    <div class="ref-content">
+      <p><strong>Sample Response (Score 5):</strong></p>
+      <p>The reading and the lecture discuss the feasibility of a four-day workweek. The author of the reading presents three benefits of this policy, but the lecturer casts doubt on each argument, claiming they are not convincingly supported.</p>
+      <p>First, the author claims that a four-day week would reduce burnout and increase productivity. The lecturer refutes this by arguing that employees would be forced to compress the same amount of work into fewer days. This would create more pressure, not less, leading to rushed work and potentially more mistakes rather than higher quality output.</p>
+      <p>Second, the reading suggests companies would save on operational costs like utilities. However, the professor points out that businesses would need to hire and train additional staff to cover the lost day. Hiring and training costs are substantial and would far outweigh any savings from reduced electricity or office overhead. Employees would still need workspace and equipment when present.</p>
+      <p>Third, the article claims environmental benefits from reduced commuting. The lecturer counters that most people would use their extra day for errands, shopping, and leisure activities requiring driving. Therefore, the net reduction in carbon emissions would be negligible, not significant as the reading predicts.</p>
+    </div>
+  </details>
+  <div class="rating">
+    <label>评分（0-5）：</label>
+    <select data-subject="toefl" data-qid="w1" data-field="rating">
+      <option value="">-- 选择 --</option>
+      <option value="5">5 · 优秀</option>
+      <option value="4">4 · 良好</option>
+      <option value="3">3 · 中等</option>
+      <option value="2">2 · 较弱</option>
+      <option value="1">1 · 差</option>
+      <option value="0">0 · 未作答</option>
+    </select>
+    <button class="btn btn-sm btn-primary" onclick="submitScore('toefl','w1','Integrated Writing')">提交评分</button>
+    <button class="btn btn-sm" onclick="gradeWriting('toefl','w1','TOEFL Integrated')">智能批改</button>
+    <span class="score-display" data-score-for="w1"></span>
+  </div>
+</div>
+
+<!-- Independent Writing -->
+<div class="q" id="q-toefl-w2">
+  <div class="q-num">W-2 · Independent Writing · 30 min</div>
+  <div class="q-title"><span class="section-tag">Writing</span> Independent Writing（独立写作）</div>
+  <div class="q-text">
+    <p><strong>Do you agree or disagree with the following statement?</strong></p>
+    <div class="box" style="margin:10px 0;">
+      <p><em>"Universities should require students to take courses in many different subjects, even if those courses are not part of their major field of study."</em></p>
+    </div>
+    <p>Use specific reasons and examples to support your answer.</p>
+  </div>
+  <p class="muted">建议字数：300+ 词</p>
+  <textarea data-subject="toefl" data-qid="w2" data-field="answer" placeholder="State your position and support with reasons and examples..."></textarea>
+  <div class="char-count" data-count-for="w2">0 / 400+ 字</div>
+  <details>
+    <summary>📄 参考范文（点击展开）</summary>
+    <div class="ref-content">
+      <p><strong>Sample Response (Score 5):</strong></p>
+      <p>I strongly agree that universities should require students to take courses outside their major. While specialization is valuable, a truly well-rounded education produces graduates who are more adaptable, more creative, and better prepared for the complexity of modern careers.</p>
+      <p>First and foremost, interdisciplinary knowledge fosters innovation. The most groundbreaking discoveries today happen at the intersection of fields. A computer scientist who understands psychology can design more intuitive user interfaces. A biologist who has studied statistics can design more rigorous experiments. Steve Jobs famously credited a calligraphy course he dropped in on as inspiration for the Mac's beautiful typography. Without exposure beyond engineering, that design sensibility might never have emerged. When students are forced to sample diverse disciplines, they build mental connections that spark creative problem-solving.</p>
+      <p>Secondly, most graduates will change careers multiple times, and broad coursework provides resilience. The average professional today switches jobs every few years and may entirely change fields mid-career. A history major might end up in data analysis; a biology major might go into medical sales. Required survey courses give students foundational literacy that prevents them from being locked into a single narrow path. Even within a specialty, employers increasingly value "T-shaped" professionals — those with depth in one area and breadth across many. Breadth requirements directly cultivate that versatility.</p>
+      <p>Critics may argue that required electives waste students' time and tuition on material they will forget. This objection misses the point: the goal is not memorization, but training in different modes of thinking. A physics course teaches logical deduction; a literature seminar hones interpretation and argumentation; an art history class builds visual analysis. These cognitive skills transfer across domains, even when specific facts fade. Moreover, being an educated citizen requires basic familiarity with science, history, culture, and logic — one cannot meaningfully participate in democracy or public debate without that foundation.</p>
+      <p>In conclusion, requiring coursework across disciplines is not a distraction from specialization but its necessary complement. Universities exist not merely to train technicians, but to cultivate adaptable, thoughtful, and creative human beings. Breadth requirements are an indispensable mechanism for achieving that higher purpose.</p>
+    </div>
+  </details>
+  <div class="rating">
+    <label>评分（0-5）：</label>
+    <select data-subject="toefl" data-qid="w2" data-field="rating">
+      <option value="">-- 选择 --</option>
+      <option value="5">5 · 优秀</option>
+      <option value="4">4 · 良好</option>
+      <option value="3">3 · 中等</option>
+      <option value="2">2 · 较弱</option>
+      <option value="1">1 · 差</option>
+      <option value="0">0 · 未作答</option>
+    </select>
+    <button class="btn btn-sm btn-primary" onclick="submitScore('toefl','w2','Independent Writing')">提交评分</button>
+    <button class="btn btn-sm" onclick="gradeWriting('toefl','w2','TOEFL Independent')">智能批改</button>
+    <span class="score-display" data-score-for="w2"></span>
+  </div>
+</div>
+
+<!-- ================ SPEAKING SECTION ================ -->
+<h2>Speaking · 口语</h2>
+
+<!-- Task 1 Independent -->
+<div class="q" id="q-toefl-s1">
+  <div class="q-num">S-1 · Task 1 · Independent Speaking</div>
+  <div class="q-title"><span class="section-tag">Speaking</span> Task 1 Independent（个人经历/偏好）</div>
+  <div class="q-text">
+    <p><strong>Question:</strong> Some people prefer to take classes in the morning, while others prefer to take classes in the afternoon or evening. Which do you prefer and why? Use specific reasons and examples to support your answer.</p>
+  </div>
+  <div class="timer-section">
+    <div class="timer-label">准备时间 Preparation: 15s</div>
+    <div class="timer" id="timer-toefl-s1-prep">
+      <span id="time-toefl-s1-prep">00:15</span>
+      <button class="btn btn-sm" onclick="toggleTimer('toefl-s1-prep', 15)">Start/Pause</button>
+      <button class="btn btn-sm" onclick="resetTimer('toefl-s1-prep', 15)">Reset</button>
+    </div>
+  </div>
+  <div class="timer-section">
+    <div class="timer-label">作答时间 Response: 45s</div>
+    <div class="timer" id="timer-toefl-s1-resp">
+      <span id="time-toefl-s1-resp">00:45</span>
+      <button class="btn btn-sm" onclick="toggleTimer('toefl-s1-resp', 45)">Start/Pause</button>
+      <button class="btn btn-sm" onclick="resetTimer('toefl-s1-resp', 45)">Reset</button>
+    </div>
+  </div>
+  <div class="timer-section">
+    <div class="timer-label">🎙 录音占位区 (MediaRecorder)</div>
+    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+      <button class="btn btn-sm" id="recStart-s1" onclick="startRecording('s1')">● 开始录音</button>
+      <button class="btn btn-sm" id="recStop-s1" onclick="stopRecording('s1')">■ 停止录音</button>
+      <span id="recStatus-s1" style="font-size:0.82rem;color:#888;">[录音功能待接入 - 使用 MediaRecorder API]</span>
+    </div>
+  </div>
+  <h4>📝 作答要点笔记区</h4>
+  <div class="notes-area">
+    <textarea data-subject="toefl" data-qid="s1" data-field="notes" placeholder="Position: Morning / Afternoon...&#10;Reason 1:&#10;Example:&#10;Reason 2:&#10;Example:"></textarea>
+  </div>
+  <details>
+    <summary>💡 参考答案要点（点击展开）</summary>
+    <div class="ref-content">
+      <p><strong>答题结构（推荐模板）：</strong></p>
+      <p><strong>1. 明确表态 + 两个理由（10s）</strong><br>
+      "I definitely prefer morning classes for two main reasons: higher energy levels and better free time in the evenings."</p>
+      <p><strong>2. 理由 1 + 具体例子（15-20s）</strong><br>
+      "First, my brain works best in the morning. After eight hours of sleep, I'm fresh and focused. For instance, when I took my calculus course at 8 a.m. last semester, I absorbed theorems immediately and scored well on quizzes without extra cramming. By contrast, evening classes leave me tired from the day, and I zone out."</p>
+      <p><strong>3. 理由 2 + 具体例子（15-20s）</strong><br>
+      "Second, finishing classes by early afternoon opens up the rest of the day. I can work at my part-time campus job, study at the library when it's quiet, or hit the gym. If I had afternoon or evening classes, my schedule would be fragmented, and I'd struggle to find large blocks of uninterrupted time for projects or exercise."</p>
+      <p><strong>4. 总结句（可选，5s）</strong><br>
+      "That's why I'm firmly team morning classes."</p>
+      <p><strong>注意</strong>：语速自然，连接词 first / second / for instance 清晰，例子要具体（课程名、学期、结果）。</p>
+    </div>
+  </details>
+  <div class="rating">
+    <label>评分（0-5）：</label>
+    <select data-subject="toefl" data-qid="s1" data-field="rating">
+      <option value="">-- 选择 --</option>
+      <option value="5">5 · 优秀</option>
+      <option value="4">4 · 良好</option>
+      <option value="3">3 · 中等</option>
+      <option value="2">2 · 较弱</option>
+      <option value="1">1 · 差</option>
+      <option value="0">0 · 未作答</option>
+    </select>
+    <button class="btn btn-sm btn-primary" onclick="submitScore('toefl','s1','Speaking Task 1 Independent')">提交评分</button>
+    <span class="score-display" data-score-for="s1"></span>
+  </div>
+</div>
+
+<!-- Task 2 Integrated Campus -->
+<div class="q" id="q-toefl-s2">
+  <div class="q-num">S-2 · Task 2 · Integrated Campus</div>
+  <div class="q-title"><span class="section-tag">Speaking</span> Task 2 Integrated: Campus Announcement</div>
+  <div class="q-text">
+    <p><strong>Reading（45s）:</strong></p>
+    <div class="box-dashed">
+      <p><strong>University Announces New Meal Plan Requirement</strong><br>
+      Beginning next semester, all first-year and second-year students will be required to purchase a 7-day unlimited campus meal plan. Currently, underclassmen can choose a 5-day plan or opt out entirely. The administration argues that the new policy will ensure students eat nutritious meals regularly and will increase social interaction in dining halls. The mandatory plan will cost approximately $500 more per semester than the 5-day option.</p>
+    </div>
+    <p style="margin-top:12px;"><strong>Listening（60-80s，对话要点）:</strong></p>
+    <div class="box-dashed">
+      <p><strong>Student Opinion:</strong> 强烈反对<br>
+      Reason 1: 很多学生周末回家，7 天计划对他们来说浪费钱。她朋友每周五晚上都回家，周日才回来，根本不会用周末的餐次。500 美元的额外成本对中低收入家庭是负担。<br>
+      Reason 2: 社交互动的理由不成立。学生们吃饭时间不一样，不一定能遇到朋友。而且学生可以在图书馆、学生活动中心聚会，不是只有食堂才能社交。</p>
+    </div>
+  </div>
+  <div class="timer-section">
+    <div class="timer-label">作答时间 Response: 60s</div>
+    <div class="timer" id="timer-toefl-s2-resp">
+      <span id="time-toefl-s2-resp">01:00</span>
+      <button class="btn btn-sm" onclick="toggleTimer('toefl-s2-resp', 60)">Start/Pause</button>
+      <button class="btn btn-sm" onclick="resetTimer('toefl-s2-resp', 60)">Reset</button>
+    </div>
+  </div>
+  <h4>📝 笔记区（阅读要点 + 听力反驳）</h4>
+  <div class="notes-area">
+    <textarea data-subject="toefl" data-qid="s2" data-field="notes" placeholder="Reading: Plan change, reasons...&#10;Student: Agree/Disagree&#10;Reason 1:&#10;Reason 2:"></textarea>
+  </div>
+  <details>
+    <summary>💡 参考回答结构（点击展开）</summary>
+    <div class="ref-content">
+      <p><strong>答题模板（60s 节奏）：</strong></p>
+      <p><strong>1. 概括阅读 + 听力态度（10s）</strong><br>
+      "The university plans to require first and second-year students to buy a 7-day unlimited meal plan next semester, saying it will improve nutrition and socialization. But the woman in the conversation strongly opposes this policy."</p>
+      <p><strong>2. 第一个反驳点 + 听力细节（20-25s）</strong><br>
+      "First, she points out the plan wastes money. Many students go home every weekend — her friend, for example, leaves Friday evening and only returns Sunday. That's two full days of meals completely unused. Five hundred extra dollars per semester is a real burden, especially for low-income families who can't afford to pay for services they don't receive."</p>
+      <p><strong>3. 第二个反驳点 + 听力细节（20-25s）</strong><br>
+      "Second, she challenges the socialization argument. Students have different schedules — some eat early, some late — so dining halls don't guarantee you'll run into friends. There are plenty of other places to socialize: the library study rooms, campus clubs, the student center. Requiring a meal plan is an expensive, ineffective way to engineer friendships."</p>
+      <p><strong>连接词</strong>：The university announces... / But the woman opposes... / First, she points out... / Second, she challenges...</p>
+    </div>
+  </details>
+  <div class="rating">
+    <label>评分（0-5）：</label>
+    <select data-subject="toefl" data-qid="s2" data-field="rating">
+      <option value="">-- 选择 --</option>
+      <option value="5">5 · 优秀</option>
+      <option value="4">4 · 良好</option>
+      <option value="3">3 · 中等</option>
+      <option value="2">2 · 较弱</option>
+      <option value="1">1 · 差</option>
+      <option value="0">0 · 未作答</option>
+    </select>
+    <button class="btn btn-sm btn-primary" onclick="submitScore('toefl','s2','Speaking Task 2 Campus')">提交评分</button>
+    <span class="score-display" data-score-for="s2"></span>
+  </div>
+</div>
+
+<!-- Task 3 Integrated Academic -->
+<div class="q" id="q-toefl-s3">
+  <div class="q-num">S-3 · Task 3 · Integrated Academic</div>
+  <div class="q-title"><span class="section-tag">Speaking</span> Task 3 Integrated: Academic Concept</div>
+  <div class="q-text">
+    <p><strong>Reading Term Definition（75-120w）:</strong></p>
+    <div class="box-dashed">
+      <p><strong>Cognitive Dissonance Theory</strong><br>
+      Cognitive dissonance is a psychological term describing the mental discomfort experienced by a person who simultaneously holds two or more contradictory beliefs, ideas, or values, or whose actions contradict their beliefs. When this tension arises, people are motivated to reduce it in one of two ways: either by changing their beliefs or attitudes, or by justifying or rationalizing their behavior. The theory was first proposed by social psychologist Leon Festinger in 1957.</p>
+    </div>
+    <p style="margin-top:12px;"><strong>Listening Lecture Example（60-90s）:</strong></p>
+    <div class="box-dashed">
+      <p>教授用朋友 Mike 的例子来说明认知失调。<br>
+      Mike 是一个坚信吸烟有害健康的人，他反复告诉朋友们应该戒烟。但是 Mike 自己也吸烟，这就造成了认知失调。<br>
+      Mike 没有选择改变自己的行为（戒烟），而是选择了合理化。他辩解说："我爷爷抽了 50 年烟还活到了 90 岁，所以基因更重要，抽烟的危害被夸大了。"<br>
+      通过这种方式，Mike 把自己的行为合理化，消除了信念和行为之间的矛盾带来的不舒服感。</p>
+    </div>
+  </div>
+  <div class="timer-section">
+    <div class="timer-label">作答时间 Response: 60s</div>
+    <div class="timer" id="timer-toefl-s3-resp">
+      <span id="time-toefl-s3-resp">01:00</span>
+      <button class="btn btn-sm" onclick="toggleTimer('toefl-s3-resp', 60)">Start/Pause</button>
+      <button class="btn btn-sm" onclick="resetTimer('toefl-s3-resp', 60)">Reset</button>
+    </div>
+  </div>
+  <h4>📝 笔记区（术语定义 + 讲座例子）</h4>
+  <div class="notes-area">
+    <textarea data-subject="toefl" data-qid="s3" data-field="notes" placeholder="Term: Cognitive Dissonance&#10;Definition:&#10;Example from lecture:&#10;How example illustrates:"></textarea>
+  </div>
+  <details>
+    <summary>💡 参考要点（点击展开）</summary>
+    <div class="ref-content">
+      <p><strong>答题要点（60s 结构）：</strong></p>
+      <p><strong>1. 术语定义（15s）</strong><br>
+      "The reading discusses cognitive dissonance theory, introduced by Leon Festinger in 1957. It refers to the mental stress we feel when our actions contradict our beliefs, or when we hold conflicting ideas. To resolve this discomfort, people either change their beliefs or justify their behavior."</p>
+      <p><strong>2. 教授例子的具体情节（35-40s）</strong><br>
+      "The professor illustrates this with his friend Mike. Mike genuinely believes smoking is terrible for health and lectures his friends to quit — yet he smokes himself. This gap between his values and his actions creates dissonance. Instead of quitting, Mike chooses rationalization: he argues his grandfather smoked for 50 years and lived to 90, so genetics matter more than tobacco and the risks are overstated. This reasoning lets him dismiss the contradiction without changing."</p>
+      <p><strong>3. 结论句（5-10s）</strong><br>
+      "So Mike perfectly demonstrates the 'justification' pathway for reducing cognitive dissonance."</p>
+      <p><strong>关键连接词</strong>：The reading defines... / The professor illustrates this with... / Instead of... / So this example clearly demonstrates...</p>
+    </div>
+  </details>
+  <div class="rating">
+    <label>评分（0-5）：</label>
+    <select data-subject="toefl" data-qid="s3" data-field="rating">
+      <option value="">-- 选择 --</option>
+      <option value="5">5 · 优秀</option>
+      <option value="4">4 · 良好</option>
+      <option value="3">3 · 中等</option>
+      <option value="2">2 · 较弱</option>
+      <option value="1">1 · 差</option>
+      <option value="0">0 · 未作答</option>
+    </select>
+    <button class="btn btn-sm btn-primary" onclick="submitScore('toefl','s3','Speaking Task 3 Academic')">提交评分</button>
+    <span class="score-display" data-score-for="s3"></span>
+  </div>
+</div>
+
+<!-- Task 4 Integrated Academic Lecture -->
+<div class="q" id="q-toefl-s4">
+  <div class="q-num">S-4 · Task 4 · Integrated Academic Lecture</div>
+  <div class="q-title"><span class="section-tag">Speaking</span> Task 4 Integrated: Academic Lecture</div>
+  <div class="q-text">
+    <p><strong>Lecture Summary（90-120s，教授讲 2 种动物觅食策略）:</strong></p>
+    <div class="box-dashed">
+      <p>教授介绍了动物在自然界中使用的两种食物获取策略：<br><br>
+      <strong>策略 1：Generalist（泛食者）</strong>——吃广泛的食物来源。以浣熊为例，它们的菜单极其多样：水果、坚果、昆虫、鱼、蛙类、甚至人类的垃圾。虽然任何单一食物的营养质量可能不高，但灵活性高，在环境变化时总能找到吃的。浣熊因为这种适应力，在城市和郊区都能繁衍。<br><br>
+      <strong>策略 2：Specialist（专食者）</strong>——只吃 1-2 种特定食物。以考拉为例，几乎完全依赖桉树叶。桉树叶对大多数动物有毒，但考拉演化出了特殊的消化系统和肝脏酶来分解毒素。优点是竞争少（别人不吃这个），缺点是如果桉树消失，考拉就会挨饿甚至灭绝，无法快速切换食物。</p>
+    </div>
+  </div>
+  <div class="timer-section">
+    <div class="timer-label">作答时间 Response: 60s</div>
+    <div class="timer" id="timer-toefl-s4-resp">
+      <span id="time-toefl-s4-resp">01:00</span>
+      <button class="btn btn-sm" onclick="toggleTimer('toefl-s4-resp', 60)">Start/Pause</button>
+      <button class="btn btn-sm" onclick="resetTimer('toefl-s4-resp', 60)">Reset</button>
+    </div>
+  </div>
+  <h4>📝 笔记区（两个要点 + 各自例子）</h4>
+  <div class="notes-area">
+    <textarea data-subject="toefl" data-qid="s4" data-field="notes" placeholder="Strategy 1: Generalist&#10;Animal: Raccoon&#10;Details + advantage:&#10;&#10;Strategy 2: Specialist&#10;Animal: Koala&#10;Details + advantage/disadvantage:"></textarea>
+  </div>
+  <details>
+    <summary>💡 参考要点（点击展开）</summary>
+    <div class="ref-content">
+      <p><strong>答题要点（60s，两个要点对称展开）：</strong></p>
+      <p><strong>1. 主题引入（5s）</strong><br>
+      "The professor explains two contrasting strategies animals use to find food."</p>
+      <p><strong>2. 策略一 + 浣熊例子（25-28s）</strong><br>
+      "First, generalists eat many different foods. Raccoons, for example, consume everything from fruit and insects to fish and even human garbage. No single item may be perfectly nutritious, but this flexibility is a huge advantage — raccoons thrive in forests, suburbs, and cities because they can always find something edible when conditions change."</p>
+      <p><strong>3. 策略二 + 考拉例子（25-28s）</strong><br>
+      "Second, specialists target just one or two foods. Koalas feed almost exclusively on eucalyptus leaves, which are toxic to most animals. Koalas evolved special liver enzymes and a digestive system to handle the poison. The upside is little competition for food. The downside is vulnerability: if eucalyptus trees were wiped out, koalas could not switch to anything else and would likely starve."</p>
+      <p><strong>核心结构</strong>：The professor explains two... / First... / For example... / Second... / The upside... / The downside...</p>
+    </div>
+  </details>
+  <div class="rating">
+    <label>评分（0-5）：</label>
+    <select data-subject="toefl" data-qid="s4" data-field="rating">
+      <option value="">-- 选择 --</option>
+      <option value="5">5 · 优秀</option>
+      <option value="4">4 · 良好</option>
+      <option value="3">3 · 中等</option>
+      <option value="2">2 · 较弱</option>
+      <option value="1">1 · 差</option>
+      <option value="0">0 · 未作答</option>
+    </select>
+    <button class="btn btn-sm btn-primary" onclick="submitScore('toefl','s4','Speaking Task 4 Lecture')">提交评分</button>
+    <span class="score-display" data-score-for="s4"></span>
+  </div>
+</div>
+
+<!-- ================ HISTORY TABLE ================ -->
+<h2>📋 答题历史记录</h2>
+<div class="history-table" id="history-table"></div>
+
+<div class="footer">
+  <a href="syllabus.html">Syllabus</a> · <a href="practice.html">Practice</a> · <a href="tracker.html">Tracker</a> · <a href="intro.html">Intro</a> · <a href="../dashboard.html">Dashboard</a>
+</div>
+
+<script>
+const STORAGE_KEY = 'yz_subjective_data';
+
+function loadData() {
+  try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); }
+  catch(e) { return {}; }
+}
+
+function saveData(data) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+}
+
+function keyOf(subject, qid, field) {
+  return subject + '__' + qid + '__' + field;
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  const data = loadData();
+  document.querySelectorAll('textarea, select').forEach(el => {
+    const subject = el.dataset.subject;
+    const qid = el.dataset.qid;
+    const field = el.dataset.field;
+    if (subject && qid && field) {
+      const k = keyOf(subject, qid, field);
+      if (data[k] !== undefined && data[k] !== null) {
+        el.value = data[k];
+      }
+    }
+  });
+
+  document.querySelectorAll('textarea[data-field="answer"]').forEach(ta => {
+    const qid = ta.dataset.qid;
+    updateCharCount(qid, ta.value);
+  });
+
+  renderHistory();
+});
+
+document.addEventListener('input', function(e) {
+  const el = e.target;
+  const subject = el.dataset.subject;
+  const qid = el.dataset.qid;
+  const field = el.dataset.field;
+  if (subject && qid && field) {
+    const data = loadData();
+    data[keyOf(subject, qid, field)] = el.value;
+    saveData(data);
+    if (field === 'answer') {
+      updateCharCount(qid, el.value);
+    }
+  }
+});
+
+document.addEventListener('change', function(e) {
+  const el = e.target;
+  const subject = el.dataset.subject;
+  const qid = el.dataset.qid;
+  const field = el.dataset.field;
+  if (subject && qid && field) {
+    const data = loadData();
+    data[keyOf(subject, qid, field)] = el.value;
+    saveData(data);
+  }
+});
+
+function updateCharCount(qid, text) {
+  const counter = document.querySelector('[data-count-for="' + qid + '"]');
+  if (counter) {
+    const len = (text || '').length;
+    counter.textContent = len + ' 字';
+  }
+}
+
+function submitScore(subject, qid, title) {
+  const ratingSel = document.querySelector('select[data-subject="' + subject + '"][data-qid="' + qid + '"][data-field="rating"]');
+  if (!ratingSel || !ratingSel.value) {
+    alert('请先选择评分');
+    return;
+  }
+  const score = ratingSel.value;
+  const data = loadData();
+  const historyKey = 'history_' + subject;
+  if (!data[historyKey]) data[historyKey] = [];
+  const entry = {
+    qid: qid,
+    title: title,
+    score: score,
+    timestamp: Date.now(),
+    dateStr: new Date().toLocaleString('zh-CN')
+  };
+  data[historyKey].push(entry);
+  saveData(data);
+
+  const scoreDisplay = document.querySelector('[data-score-for="' + qid + '"]');
+  if (scoreDisplay) {
+    scoreDisplay.textContent = ' · 已提交: ' + score + ' 分 · ' + entry.dateStr;
+  }
+  alert('评分已保存：' + title + ' · ' + score + ' 分');
+  renderHistory();
+}
+
+function renderHistory() {
+  const container = document.getElementById('history-table');
+  const data = loadData();
+  const history = data['history_toefl'] || [];
+  if (history.length === 0) {
+    container.innerHTML = '<div class="history-empty">暂无答题记录，完成评分后将在此显示</div>';
+    return;
+  }
+  history.sort((a,b) => b.timestamp - a.timestamp);
+  let html = '<table><thead><tr><th>题目</th><th>分数</th><th>日期时间</th></tr></thead><tbody>';
+  history.forEach(h => {
+    html += '<tr><td>' + h.title + '</td><td><strong>' + h.score + '</strong></td><td>' + h.dateStr + '</td></tr>';
+  });
+  html += '</tbody></table>';
+  container.innerHTML = html;
+}
+
+const timerIntervals = {};
+
+function toggleTimer(id, totalSeconds) {
+  const el = document.getElementById('time-' + id);
+  if (!el) return;
+  if (timerIntervals[id]) {
+    clearInterval(timerIntervals[id]);
+    delete timerIntervals[id];
+    return;
+  }
+  let current = parseTime(el.textContent);
+  if (current <= 0) current = totalSeconds;
+  timerIntervals[id] = setInterval(function() {
+    current--;
+    if (current <= 0) {
+      current = 0;
+      el.textContent = formatTime(current);
+      clearInterval(timerIntervals[id]);
+      delete timerIntervals[id];
+      return;
+    }
+    el.textContent = formatTime(current);
+  }, 1000);
+}
+
+function resetTimer(id, totalSeconds) {
+  if (timerIntervals[id]) {
+    clearInterval(timerIntervals[id]);
+    delete timerIntervals[id];
+  }
+  const el = document.getElementById('time-' + id);
+  if (el) el.textContent = formatTime(totalSeconds);
+}
+
+function formatTime(sec) {
+  const m = Math.floor(sec / 60);
+  const s = sec % 60;
+  return (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s;
+}
+
+function parseTime(str) {
+  const parts = str.split(':');
+  return parseInt(parts[0]) * 60 + parseInt(parts[1]);
+}
+</script>
+
+<script src="../../js/writing-grader.js"></script>
+<script>
+(function() {
+  'use strict';
+
+  var recorder = null;
+  var chunks = [];
+
+  window.gradeWriting = function(subject, qid, type) {
+    var textarea = document.querySelector('textarea[data-subject="' + subject + '"][data-qid="' + qid + '"][data-field="answer"]');
+    if (!textarea || !textarea.value.trim()) {
+      alert('请先写作文再批改');
+      return;
+    }
+    var result = window.WritingGrader.grade(textarea.value, type);
+    var summary = '总分: ' + result.score + '/100\n\n';
+    summary += 'Task Response: ' + result.rubric.taskResponse + '/25\n';
+    summary += 'Coherence & Cohesion: ' + result.rubric.coherenceCohesion + '/25\n';
+    summary += 'Lexical Resource: ' + result.rubric.lexicalResource + '/25\n';
+    summary += 'Grammatical Range: ' + result.rubric.grammaticalRange + '/25\n\n';
+    summary += '--- 详细反馈 ---\n';
+    result.feedback.forEach(function(fb) {
+      summary += '[' + fb.type + '] ' + fb.text + '\n';
+    });
+    alert(summary);
+  };
+
+  window.startRecording = function(id) {
+    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+      alert('当前浏览器不支持录音功能，请使用 Chrome/Edge 等现代浏览器');
+      return;
+    }
+    navigator.mediaDevices.getUserMedia({ audio: true }).then(function(stream) {
+      recorder = new MediaRecorder(stream);
+      chunks = [];
+      recorder.ondataavailable = function(e) {
+        if (e.data.size > 0) chunks.push(e.data);
+      };
+      recorder.onstop = function() {
+        var blob = new Blob(chunks, { type: 'audio/webm' });
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement('audio');
+        a.controls = true;
+        a.src = url;
+        var statusEl = document.getElementById('recStatus-' + id);
+        if (statusEl) {
+          statusEl.innerHTML = '<a href="' + url + '" download="recording.webm">下载录音</a>';
+        }
+        stream.getTracks().forEach(function(t) { t.stop(); });
+      };
+      recorder.start();
+      var statusEl = document.getElementById('recStatus-' + id);
+      if (statusEl) statusEl.textContent = '● 正在录音...';
+    }).catch(function(err) {
+      alert('无法访问麦克风: ' + err.message);
+    });
+  };
+
+  window.stopRecording = function(id) {
+    if (recorder && recorder.state !== 'inactive') {
+      recorder.stop();
+      var statusEl = document.getElementById('recStatus-' + id);
+      if (statusEl) statusEl.textContent = '■ 录音已停止';
+    }
+  };
+
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vocabulary Test - Estimate Your Word Level - yunzhuan.icu</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px 16px;
+            background: #f5f5f5;
+            color: #333;
+        }
+        .back-link { color: #667eea; text-decoration: none; font-size: 0.85rem; margin-bottom: 12px; display: inline-block; }
+        .back-link:hover { text-decoration: underline; }
+        h1 { color: #333; margin-bottom: 4px; font-size: 1.4rem; }
+        .en-name { color: #888; font-size: 0.95rem; margin-bottom: 4px; font-weight: normal; }
+        .code-line { color: #888; font-size: 0.82rem; margin-bottom: 14px; }
+        .section {
+            background: white;
+            border-radius: 8px;
+            padding: 16px 20px;
+            margin-bottom: 10px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .section h2 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        .section h2 .en { color: #999; font-size: 0.8rem; font-weight: normal; }
+        .section p { color: #333; line-height: 1.7; font-size: 0.92rem; }
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e9ecef;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+            width: 0%;
+        }
+        .progress-text {
+            text-align: right;
+            font-size: 0.8rem;
+            color: #666;
+            margin-bottom: 12px;
+        }
+        .word-card {
+            text-align: center;
+            padding: 10px 0;
+            margin-bottom: 14px;
+        }
+        .word-card .word {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 6px;
+        }
+        .word-card .level-tag {
+            display: inline-block;
+            padding: 2px 10px;
+            background: #e0e7ff;
+            color: #4338ca;
+            border-radius: 4px;
+            font-size: 0.78rem;
+            font-weight: 500;
+        }
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .option-btn {
+            text-align: left;
+            padding: 12px 16px;
+            border: 2px solid #e9ecef;
+            background: white;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            color: #333;
+            transition: all 0.15s;
+            line-height: 1.4;
+        }
+        .option-btn:hover {
+            border-color: #667eea;
+            background: #f8f9ff;
+        }
+        .option-btn.correct {
+            border-color: #22c55e;
+            background: #f0fdf4;
+            color: #16a34a;
+        }
+        .option-btn.wrong {
+            border-color: #ef4444;
+            background: #fef2f2;
+            color: #dc2626;
+        }
+        .nav-buttons {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 16px;
+        }
+        .next-btn {
+            padding: 10px 24px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            background: #667eea;
+            color: white;
+            transition: all 0.15s;
+        }
+        .next-btn:hover { background: #5a67d8; }
+        .next-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .result-card {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 24px;
+            border-radius: 10px;
+            margin-bottom: 14px;
+            text-align: center;
+        }
+        .result-card .label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-bottom: 6px;
+        }
+        .result-card .score {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+        .result-card .sub {
+            font-size: 0.85rem;
+            opacity: 0.9;
+        }
+        .result-detail {
+            margin-top: 12px;
+        }
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 0.88rem;
+        }
+        .detail-row:last-child { border-bottom: none; }
+        .detail-row .name { color: #555; }
+        .detail-row .val { font-weight: 600; color: #333; }
+        .level-section {
+            margin-top: 14px;
+            padding: 12px;
+            background: #f8f9ff;
+            border-radius: 8px;
+        }
+        .level-section h3 {
+            color: #4338ca;
+            font-size: 0.92rem;
+            margin-bottom: 6px;
+        }
+        .level-section p {
+            font-size: 0.85rem;
+            color: #555;
+            line-height: 1.6;
+        }
+        .retake-btn {
+            width: 100%;
+            padding: 12px;
+            background: #f0f4ff;
+            color: #667eea;
+            border: 1px solid #c7d2fe;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            margin-top: 14px;
+            transition: all 0.15s;
+        }
+        .retake-btn:hover { background: #e0e7ff; }
+        .tip-box {
+            background: #fff8e1;
+            border-left: 3px solid #ff8f00;
+            padding: 10px 14px;
+            border-radius: 0 6px 6px 0;
+            margin-top: 10px;
+            font-size: 0.82rem;
+            color: #5d4037;
+            line-height: 1.6;
+        }
+        .footer { text-align: center; margin-top: 20px; color: #999; font-size: 0.8rem; }
+        .start-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-top: 14px;
+            transition: all 0.2s;
+        }
+        .start-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4); }
+    </style>
+    <link rel="stylesheet" href="../css/theme.css">
+    <link rel="manifest" href="../manifest.json">
+    <meta name="theme-color" content="#667eea">
+    <script src="../js/theme.js"></script>
+    <script src="../js/pwa.js"></script>
+    <script src="../js/mobile-nav.js"></script>
+    <script src="../js/breadcrumbs.js"></script>
+</head>
+<body>
+    <a href="../index.html" class="back-link">&larr; Back to Home</a>
+
+    <h1>Vocabulary Test</h1>
+    <p class="en-name">英语词汇量测试</p>
+    <p class="code-line">30 questions · ~3 minutes · CEFR level estimate</p>
+
+    <div class="section" id="start-section">
+        <h2>About This Test <span class="en">测试说明</span></h2>
+        <p style="font-size:0.9rem;color:#555;line-height:1.7;">
+            本测试包含 30 道选择题，从简单到困难，覆盖 A1 到 C2 六个难度级别。
+            测试结束后会估算你的词汇量范围和对应的 CEFR 等级。<br><br>
+            <strong>测试方式：</strong>选择单词对应的中文释义，不确定可以猜，但不要瞎蒙（会影响准确度）。
+        </p>
+        <button class="start-btn" onclick="startTest()">Start Test / 开始测试</button>
+    </div>
+
+    <div class="section" id="quiz-section" style="display:none;">
+        <h2>Question <span class="en">答题中</span></h2>
+        <div class="progress-bar"><div class="progress-fill" id="quiz-progress"></div></div>
+        <div class="progress-text" id="quiz-progress-text">0 / 30</div>
+        
+        <div class="word-card">
+            <div class="word" id="current-word">—</div>
+            <div class="level-tag" id="current-level">—</div>
+        </div>
+        
+        <div class="options" id="options"></div>
+        
+        <div class="nav-buttons">
+            <button class="next-btn" id="next-btn" onclick="nextQuestion()" disabled>Next →</button>
+        </div>
+    </div>
+
+    <div class="section" id="result-section" style="display:none;">
+        <h2>Your Results <span class="en">测试结果</span></h2>
+        <div class="result-card">
+            <div class="label">Estimated Vocabulary</div>
+            <div class="score" id="result-vocab">—</div>
+            <div class="sub" id="result-level">—</div>
+        </div>
+        
+        <div class="result-detail">
+            <div class="detail-row">
+                <span class="name">Correct / 答对</span>
+                <span class="val" id="result-correct">0 / 30</span>
+            </div>
+            <div class="detail-row">
+                <span class="name">Highest Level / 最高级别</span>
+                <span class="val" id="result-highest">—</span>
+            </div>
+            <div class="detail-row">
+                <span class="name">Approx. TOEFL / 托福估算</span>
+                <span class="val" id="result-toefl">—</span>
+            </div>
+            <div class="detail-row">
+                <span class="name">Approx. IELTS / 雅思估算</span>
+                <span class="val" id="result-ielts">—</span>
+            </div>
+        </div>
+        
+        <div class="level-section">
+            <h3 id="level-title">—</h3>
+            <p id="level-desc">—</p>
+        </div>
+        
+        <button class="retake-btn" onclick="retakeQuiz()">🔄 Retake / 重新测试</button>
+        
+        <div class="tip-box" style="margin-top:14px;">
+            <strong>💡 说明：</strong><br>
+            · 这只是一个大致估算，实际词汇量会因测试方法不同而有差异<br>
+            · 想要更准确的结果，可以做更长的专业测试<br>
+            · 词汇量不等于语言能力，听说读写都很重要！
+        </div>
+    </div>
+
+    <p class="footer">&copy; 2026 yunzhuan.icu | Vocabulary Test</p>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <div style="text-align:center;padding:8px 0;font-size:0.75rem;color:#aaa;">
+        <a href="../index.html" style="color:#aaa;text-decoration:none;">Home</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="../tests/index.html" style="color:#aaa;text-decoration:none;">Tests</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="../contact.html" style="color:#aaa;text-decoration:none;">Contact</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="javascript:window.scrollTo(0,0)" style="color:#aaa;text-decoration:none;">Back to top</a>
+    </div>
+
+    <script>
+    const vocabData = [
+        { word: "apple", options: ["苹果", "香蕉", "橙子", "葡萄"], answer: 0, level: "A1", vocab: 500 },
+        { word: "book", options: ["书", "笔", "桌子", "椅子"], answer: 0, level: "A1", vocab: 500 },
+        { word: "water", options: ["火", "水", "土", "风"], answer: 1, level: "A1", vocab: 500 },
+        { word: "happy", options: ["悲伤的", "生气的", "开心的", "疲惫的"], answer: 2, level: "A1", vocab: 500 },
+        { word: "family", options: ["朋友", "家庭", "学校", "工作"], answer: 1, level: "A1", vocab: 500 },
+        
+        { word: "beautiful", options: ["丑陋的", "美丽的", "高的", "矮的"], answer: 1, level: "A2", vocab: 1500 },
+        { word: "important", options: ["重要的", "简单的", "困难的", "有趣的"], answer: 0, level: "A2", vocab: 1500 },
+        { word: "remember", options: ["忘记", "记住", "想象", "理解"], answer: 1, level: "A2", vocab: 1500 },
+        { word: "decide", options: ["拒绝", "接受", "决定", "邀请"], answer: 2, level: "A2", vocab: 1500 },
+        { word: "experience", options: ["实验", "经验", "表达", "期待"], answer: 1, level: "A2", vocab: 1500 },
+        
+        { word: "achieve", options: ["失败", "实现", "接受", "放弃"], answer: 1, level: "B1", vocab: 3000 },
+        { word: "opportunity", options: ["危险", "挑战", "机会", "困难"], answer: 2, level: "B1", vocab: 3000 },
+        { word: "responsible", options: ["负责的", "自由的", "可能的", "可见的"], answer: 0, level: "B1", vocab: 3000 },
+        { word: "consider", options: ["控制", "考虑", "比较", "竞争"], answer: 1, level: "B1", vocab: 3000 },
+        { word: "influence", options: ["流感", "影响", "信息", "推断"], answer: 1, level: "B1", vocab: 3000 },
+        
+        { word: "ambitious", options: ["模糊的", "有野心的", "谨慎的", "明显的"], answer: 1, level: "B2", vocab: 5000 },
+        { word: "consequence", options: ["结果", "会议", "自信", "良心"], answer: 0, level: "B2", vocab: 5000 },
+        { word: "phenomenon", options: ["现象", "电话", "摄影", "哲学"], answer: 0, level: "B2", vocab: 5000 },
+        { word: "perspective", options: ["坚持", "视角", "说服", "完美"], answer: 1, level: "B2", vocab: 5000 },
+        { word: "sophisticated", options: ["苏菲的", "复杂精密的", "柔软的", "南方的"], answer: 1, level: "B2", vocab: 5000 },
+        
+        { word: "ubiquitous", options: ["独特的", "无处不在的", "模糊的", "紧急的"], answer: 1, level: "C1", vocab: 8000 },
+        { word: "ephemeral", options: ["永恒的", "短暂的", "巨大的", "神秘的"], answer: 1, level: "C1", vocab: 8000 },
+        { word: "pragmatic", options: ["戏剧的", "务实的", "诗意的", "恐慌的"], answer: 1, level: "C1", vocab: 8000 },
+        { word: "meticulous", options: ["大胆的", "一丝不苟的", "神秘的", "多样的"], answer: 1, level: "C1", vocab: 8000 },
+        { word: "resilient", options: ["抵抗的", "有弹性的/坚韧的", "辞职的", "响应的"], answer: 1, level: "C1", vocab: 8000 },
+        
+        { word: "quintessential", options: [" Quint 五", "典型的/精髓的", "质疑的", "安静的"], answer: 1, level: "C2", vocab: 12000 },
+        { word: "obfuscate", options: ["观察", "使模糊/混淆", "服从", "反对"], answer: 1, level: "C2", vocab: 12000 },
+        { word: "sycophant", options: ["交响乐", "谄媚者/马屁精", "症状", "综合征"], answer: 1, level: "C2", vocab: 12000 },
+        { word: "perfunctory", options: ["完美的", "敷衍的/走过场的", "永久的", "困惑的"], answer: 1, level: "C2", vocab: 12000 },
+        { word: "ineffable", options: ["无能的", "难以言表的", "低效的", "不可避免的"], answer: 1, level: "C2", vocab: 12000 },
+    ];
+
+    const levelDescs = {
+        "A1": {
+            title: "A1 Beginner / 入门级",
+            desc: "你掌握了最基础的英语词汇，能进行最简单的日常交流。建议从基础词汇开始系统学习，每天背 20-30 个单词，配合简单的阅读材料。",
+            toefl: "~30",
+            ielts: "~3.0"
+        },
+        "A2": {
+            title: "A2 Elementary / 初级",
+            desc: "你有基本的词汇量，能应付简单的日常对话。建议扩充常用词汇，开始接触简单的英文文章和视频，培养语感。",
+            toefl: "30-50",
+            ielts: "3.5-4.5"
+        },
+        "B1": {
+            title: "B1 Intermediate / 中级",
+            desc: "你的词汇量已经不错了，能应对大部分日常交流和学习场景。建议开始接触更专业的词汇，多阅读英文原著和新闻，提升词汇深度。",
+            toefl: "55-75",
+            ielts: "5.0-6.0"
+        },
+        "B2": {
+            title: "B2 Upper-Intermediate / 中高级",
+            desc: "你的词汇量相当不错！能应付大学水平的学术阅读和写作。建议继续扩充学术词汇和低频词汇，注意词汇的精确用法和搭配。",
+            toefl: "80-100",
+            ielts: "6.5-7.5"
+        },
+        "C1": {
+            title: "C1 Advanced / 高级",
+            desc: "你的词汇量很优秀！接近母语者的日常水平。建议多接触不同领域的专业词汇，学习更地道的表达和成语，追求用词的精准和优雅。",
+            toefl: "105-115",
+            ielts: "7.5-8.5"
+        },
+        "C2": {
+            title: "C2 Proficiency / 精通级",
+            desc: "你的词汇量非常出色！达到了接近受过良好教育的母语者的水平。可以挑战 GRE/GMAT 级别的词汇，或者深入研究某一专业领域的术语。",
+            toefl: "115+",
+            ielts: "8.5-9.0"
+        }
+    };
+
+    let currentQuestion = 0;
+    let correctCount = 0;
+    let highestCorrectLevel = "A1";
+    let answered = false;
+
+    function startTest() {
+        document.getElementById('start-section').style.display = 'none';
+        document.getElementById('quiz-section').style.display = 'block';
+        currentQuestion = 0;
+        correctCount = 0;
+        highestCorrectLevel = "A1";
+        renderQuestion();
+    }
+
+    function renderQuestion() {
+        answered = false;
+        const q = vocabData[currentQuestion];
+        document.getElementById('current-word').textContent = q.word;
+        document.getElementById('current-level').textContent = 'Level ' + q.level;
+        
+        const optionsHtml = q.options.map((opt, i) => 
+            '<button class="option-btn" onclick="selectOption(' + i + ')">' + 
+            String.fromCharCode(65 + i) + '. ' + opt + '</button>'
+        ).join('');
+        document.getElementById('options').innerHTML = optionsHtml;
+        
+        document.getElementById('quiz-progress').style.width = ((currentQuestion + 1) / vocabData.length * 100) + '%';
+        document.getElementById('quiz-progress-text').textContent = (currentQuestion + 1) + ' / ' + vocabData.length;
+        document.getElementById('next-btn').disabled = true;
+        document.getElementById('next-btn').textContent = currentQuestion === vocabData.length - 1 ? 'See Results →' : 'Next →';
+    }
+
+    function selectOption(i) {
+        if (answered) return;
+        answered = true;
+        
+        const q = vocabData[currentQuestion];
+        const buttons = document.querySelectorAll('.option-btn');
+        
+        if (i === q.answer) {
+            buttons[i].classList.add('correct');
+            correctCount++;
+            highestCorrectLevel = q.level;
+        } else {
+            buttons[i].classList.add('wrong');
+            buttons[q.answer].classList.add('correct');
+        }
+        
+        document.getElementById('next-btn').disabled = false;
+    }
+
+    function nextQuestion() {
+        if (currentQuestion < vocabData.length - 1) {
+            currentQuestion++;
+            renderQuestion();
+        } else {
+            showResults();
+        }
+    }
+
+    function showResults() {
+        document.getElementById('quiz-section').style.display = 'none';
+        document.getElementById('result-section').style.display = 'block';
+        
+        const levelOrder = ["A1", "A2", "B1", "B2", "C1", "C2"];
+        const highestIdx = levelOrder.indexOf(highestCorrectLevel);
+        
+        const vocabEstimate = highestCorrectLevel === "C2" 
+            ? "12,000+" 
+            : (vocabData[correctCount - 1]?.vocab || 500) + " - " + (vocabData[Math.min(correctCount + 5, vocabData.length - 1)]?.vocab || 12000);
+        
+        document.getElementById('result-vocab').textContent = vocabEstimate;
+        document.getElementById('result-level').textContent = 'CEFR Level ' + highestCorrectLevel;
+        document.getElementById('result-correct').textContent = correctCount + ' / ' + vocabData.length;
+        document.getElementById('result-highest').textContent = highestCorrectLevel;
+        
+        const info = levelDescs[highestCorrectLevel];
+        document.getElementById('level-title').textContent = info.title;
+        document.getElementById('level-desc').textContent = info.desc;
+        document.getElementById('result-toefl').textContent = info.toefl;
+        document.getElementById('result-ielts').textContent = info.ielts;
+        
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function retakeQuiz() {
+        document.getElementById('result-section').style.display = 'none';
+        document.getElementById('start-section').style.display = 'block';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    </script>
+</body>
+</html>

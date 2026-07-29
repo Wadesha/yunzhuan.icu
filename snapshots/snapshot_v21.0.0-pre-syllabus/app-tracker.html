@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application Tracker - yunzhuan.icu</title>
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 0 20px 40px;
+            background: #ffffff;
+            color: #1a1a1a;
+            line-height: 1.7;
+            font-size: 16px;
+        }
+
+        /* Navbar */
+        .navbar {
+            border-bottom: 1px solid #e0e0e0;
+            padding: 16px 0;
+            margin-bottom: 32px;
+        }
+        .nav-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .logo {
+            font-weight: 600;
+            font-size: 1rem;
+            color: #1a1a1a;
+            text-decoration: none;
+        }
+        .logo-icon {
+            background: #1a1a1a;
+            color: white;
+            width: 22px;
+            height: 22px;
+            border-radius: 4px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            margin-right: 6px;
+            vertical-align: middle;
+        }
+        .nav-links {
+            display: flex;
+            gap: 18px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .nav-links a {
+            color: #333;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        .nav-links a:hover {
+            color: #0066cc;
+            text-decoration: underline;
+        }
+        .nav-links .back-home { color: #0066cc; }
+
+        /* Page header */
+        .page-header { margin-bottom: 28px; }
+        .page-header h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #111;
+            margin-bottom: 6px;
+            line-height: 1.2;
+        }
+        .page-header .subtitle {
+            font-size: 0.95rem;
+            color: #555;
+        }
+
+        /* Role selector */
+        .role-section {
+            margin-bottom: 32px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #eee;
+        }
+        .role-section .label {
+            font-size: 0.85rem;
+            color: #888;
+            margin-right: 12px;
+        }
+        .role-tabs {
+            display: inline-flex;
+            gap: 20px;
+        }
+        .role-tab {
+            color: #0066cc;
+            text-decoration: none;
+            cursor: pointer;
+            font-size: 0.92rem;
+            background: none;
+            border: none;
+            padding: 0;
+            font-family: inherit;
+        }
+        .role-tab:hover { text-decoration: underline; }
+        .role-tab.active {
+            color: #1a1a1a;
+            font-weight: 600;
+            cursor: default;
+        }
+        .role-tab.active:hover { text-decoration: none; }
+        .role-hint {
+            font-size: 0.82rem;
+            color: #999;
+            margin-top: 8px;
+        }
+
+        /* Section headings */
+        section.main-section { margin-bottom: 40px; }
+        section.main-section > h2 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #111;
+            margin-bottom: 20px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #111;
+        }
+        .section-sub {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 16px;
+            margin-top: -12px;
+        }
+
+        /* Stats - pure text row */
+        .stats-row {
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+            padding: 8px 0 4px;
+        }
+        .stats-row .stat {
+            font-size: 0.92rem;
+            color: #666;
+        }
+        .stats-row .stat .num {
+            font-weight: 600;
+            color: #111;
+        }
+
+        /* Profile bar */
+        .profile-section { margin-bottom: 20px; }
+        .profile-bar {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            font-size: 0.9rem;
+            color: #555;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .profile-bar strong { color: #111; font-weight: 600; }
+
+        /* Kanban stages */
+        .stage-group { margin-bottom: 28px; }
+        .stage-header {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: #111;
+            margin-bottom: 4px;
+        }
+        .stage-header .cn {
+            font-weight: 400;
+            color: #888;
+            font-size: 0.85rem;
+            margin-left: 6px;
+        }
+        .stage-header .count {
+            color: #999;
+            font-weight: 400;
+            font-size: 0.85rem;
+            margin-left: 4px;
+        }
+        .stage-empty {
+            font-size: 0.85rem;
+            color: #aaa;
+            padding: 8px 0;
+            font-style: italic;
+        }
+
+        /* School card - pure text, no card background */
+        .school-card {
+            padding: 14px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .school-card:last-child { border-bottom: none; }
+        .school-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 4px;
+        }
+        .school-name {
+            font-size: 1.02rem;
+            font-weight: 600;
+            color: #111;
+        }
+        .school-meta {
+            font-size: 0.85rem;
+            color: #666;
+        }
+        .school-meta .type {
+            color: #333;
+            font-weight: 500;
+        }
+        .result-tag {
+            font-size: 0.78rem;
+            font-weight: 600;
+            margin-left: 8px;
+            text-transform: capitalize;
+        }
+        .result-tag.admitted { color: #2e7d32; }
+        .result-tag.rejected { color: #c62828; }
+        .result-tag.waitlisted { color: #cc7a00; }
+
+        .school-deadline {
+            font-size: 0.85rem;
+            color: #666;
+            margin-bottom: 6px;
+        }
+        .school-deadline .countdown { margin-left: 8px; }
+        .school-deadline .countdown.urgent { color: #c62828; font-weight: 600; }
+        .school-deadline .countdown.past { color: #c62828; }
+
+        /* Progress bar - gray bg + black fill */
+        .progress-bar {
+            background: #e0e0e0;
+            height: 6px;
+            border-radius: 3px;
+            overflow: hidden;
+            margin: 8px 0 6px;
+        }
+        .progress-fill {
+            background: #1a1a1a;
+            height: 100%;
+            transition: width 0.3s;
+        }
+        .progress-meta {
+            font-size: 0.82rem;
+            color: #888;
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        /* Stage switcher - text links */
+        .stage-switcher {
+            margin-top: 10px;
+            font-size: 0.82rem;
+            color: #888;
+        }
+        .stage-switcher .switch-label { margin-right: 6px; }
+        .stage-switcher a {
+            color: #0066cc;
+            text-decoration: none;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+        .stage-switcher a:hover { text-decoration: underline; }
+        .stage-switcher a.current {
+            color: #1a1a1a;
+            font-weight: 600;
+            cursor: default;
+            text-decoration: none;
+        }
+
+        /* Deadlines list */
+        .deadline-list { list-style: none; padding: 0; }
+        .deadline-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            font-size: 0.92rem;
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .deadline-list li:last-child { border-bottom: none; }
+        .deadline-list .dl-school { font-weight: 600; color: #111; }
+        .deadline-list .dl-date { color: #666; font-size: 0.85rem; }
+        .deadline-list .dl-days { font-size: 0.85rem; color: #666; }
+        .deadline-list .dl-days.urgent { color: #c62828; font-weight: 600; }
+
+        /* Results stats */
+        .results-row {
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+            padding: 8px 0;
+        }
+        .results-row .stat { font-size: 0.92rem; color: #666; }
+        .results-row .stat .num { font-weight: 600; color: #111; }
+        .results-row .stat .num.admitted { color: #2e7d32; }
+        .results-row .stat .num.rejected { color: #c62828; }
+        .results-row .stat .num.waitlisted { color: #cc7a00; }
+        .rate-note { font-size: 0.85rem; color: #666; margin-top: 12px; }
+
+        /* Parent view */
+        .parent-overview {
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 8px;
+        }
+        .parent-overview .child {
+            font-size: 0.95rem;
+            color: #333;
+            margin-bottom: 4px;
+        }
+        .parent-overview .child .name { font-weight: 600; color: #111; }
+        .readonly-note {
+            font-size: 0.82rem;
+            color: #999;
+            font-style: italic;
+            margin-top: 4px;
+        }
+
+        /* Counselor view - student list */
+        .student-list { list-style: none; padding: 0; }
+        .student-item {
+            padding: 16px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .student-item:last-child { border-bottom: none; }
+        .student-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 6px;
+        }
+        .student-name {
+            font-size: 1.02rem;
+            font-weight: 600;
+            color: #111;
+        }
+        .student-name .grade {
+            font-weight: 400;
+            color: #888;
+            font-size: 0.82rem;
+            margin-left: 6px;
+        }
+        .student-stats {
+            font-size: 0.85rem;
+            color: #666;
+            display: flex;
+            gap: 18px;
+            flex-wrap: wrap;
+            margin-bottom: 4px;
+        }
+        .student-stats .num { font-weight: 600; color: #111; }
+        .student-todo { font-size: 0.85rem; color: #555; }
+        .student-todo .label { color: #888; }
+
+        /* Hide editing controls when readonly */
+        body.readonly .stage-switcher { display: none; }
+        body.readonly .reset-link { display: none; }
+
+        /* Reset link */
+        .reset-link {
+            font-size: 0.78rem;
+            color: #999;
+            margin-left: 12px;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: 400;
+        }
+        .reset-link:hover { color: #c62828; text-decoration: underline; }
+
+        /* Footer */
+        .footer {
+            font-size: 0.85rem;
+            color: #888;
+            padding-top: 24px;
+            border-top: 1px solid #eee;
+            margin-top: 32px;
+        }
+        .footer a {
+            color: #666;
+            text-decoration: none;
+            margin-right: 10px;
+        }
+        .footer a:hover { color: #0066cc; }
+
+        @media (max-width: 768px) {
+            body { padding: 0 16px 24px; }
+            .page-header h1 { font-size: 1.4rem; }
+            .stats-row, .results-row { gap: 14px; }
+            .nav-links { gap: 12px; }
+            .nav-links a { font-size: 0.8rem; }
+        }
+    </style>
+    <script src="js/app-data.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-inner">
+            <a href="index.html" class="logo"><span class="logo-icon">🎓</span>yunzhuan.icu</a>
+            <div class="nav-links">
+                <a href="schools/index.html">Schools</a>
+                <a href="tests/index.html">Tests</a>
+                <a href="essays/index.html">Essays</a>
+                <a href="application-timeline.html">Timeline</a>
+                <a href="index.html" class="back-home">← Back to Home</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="page-header">
+        <h1>Application Tracker</h1>
+        <p class="subtitle">申请进度跟踪 · Track your college applications end-to-end</p>
+    </header>
+
+    <section class="profile-section" id="profileSection" style="display:none;">
+        <div class="profile-bar">
+            <span class="profile-item">GPA: <strong id="profileGpa">--</strong></span>
+            <span class="profile-item">SAT: <strong id="profileSat">--</strong></span>
+            <span class="profile-item">Target Major: <strong id="profileMajor">--</strong></span>
+        </div>
+    </section>
+
+    <section class="role-section">
+        <span class="label">View as:</span>
+        <div class="role-tabs">
+            <button class="role-tab active" data-role="student">Student</button>
+            <button class="role-tab" data-role="parent">Parent</button>
+            <button class="role-tab" data-role="counselor">Counselor</button>
+        </div>
+        <p class="role-hint" id="roleHint">Full edit access — move schools between stages, track essays and deadlines.</p>
+    </section>
+
+    <div id="studentParentView">
+        <section class="main-section">
+            <h2>Overview<a class="reset-link" id="resetBtn">(reset data)</a></h2>
+            <div class="stats-row" id="statsRow"></div>
+        </section>
+
+        <section class="main-section" id="parentOverview" style="display:none;">
+            <h2>Child Progress</h2>
+            <div class="parent-overview">
+                <p class="child">Student: <span class="name">Alex Johnson</span> · Grade 12</p>
+                <p class="readonly-note">Read-only view — switch to Student role to edit.</p>
+            </div>
+        </section>
+
+        <section class="main-section">
+            <h2>Application Stages</h2>
+            <div id="kanban"></div>
+        </section>
+
+        <section class="main-section">
+            <h2>Upcoming Deadlines</h2>
+            <p class="section-sub">Unsubmitted schools, sorted by deadline. Nearest shown in red.</p>
+            <ul class="deadline-list" id="deadlineList"></ul>
+        </section>
+
+        <section class="main-section">
+            <h2>Admission Results</h2>
+            <div class="results-row" id="resultsRow"></div>
+            <p class="rate-note" id="rateNote"></p>
+        </section>
+    </div>
+
+    <section class="main-section" id="counselorView" style="display:none;">
+        <h2>Student Overview</h2>
+        <p class="section-sub">Aggregated view across all assigned students.</p>
+        <ul class="student-list" id="studentList"></ul>
+    </section>
+
+    <div class="footer">
+        <a href="index.html">Home</a>
+        <a href="roadmap.html">Roadmap</a>
+        <a href="contact.html">Contact</a>
+        <p>© 2026 yunzhuan.icu · Application Tracker</p>
+        <p style="font-size:0.75rem;color:#aaa;margin-top:6px;">Data Source: Shared</p>
+    </div>
+
+    <script src="js/back-to-top.js"></script>
+    <script>
+        // ===== Mock data =====
+        const DEFAULT_SCHOOLS = [
+            { name: 'Harvard', type: 'RE', deadline: '2026-01-01', stage: 'preparing', essays: { total: 3, done: 1 }, progress: 60 },
+            { name: 'MIT', type: 'EA', deadline: '2025-11-01', stage: 'submitted', essays: { total: 5, done: 5 }, progress: 100 },
+            { name: 'Stanford', type: 'RD', deadline: '2026-01-05', stage: 'preparing', essays: { total: 3, done: 0 }, progress: 20 },
+            { name: 'UPenn', type: 'ED', deadline: '2025-11-01', stage: 'interview', essays: { total: 2, done: 2 }, progress: 85 },
+            { name: 'Columbia', type: 'RD', deadline: '2026-01-01', stage: 'researching', essays: { total: 4, done: 0 }, progress: 5 },
+            { name: 'UChicago', type: 'EA', deadline: '2025-11-01', stage: 'decision', essays: { total: 3, done: 3 }, progress: 100, result: 'admitted' },
+            { name: 'Duke', type: 'RD', deadline: '2026-01-03', stage: 'preparing', essays: { total: 2, done: 1 }, progress: 50 },
+            { name: 'Northwestern', type: 'RD', deadline: '2026-01-02', stage: 'researching', essays: { total: 2, done: 0 }, progress: 10 },
+            { name: 'Johns Hopkins', type: 'RD', deadline: '2026-01-01', stage: 'submitted', essays: { total: 3, done: 3 }, progress: 100 },
+            { name: 'Cornell', type: 'RD', deadline: '2026-01-02', stage: 'preparing', essays: { total: 2, done: 0 }, progress: 30 }
+        ];
+
+        const STAGES = [
+            { key: 'researching', en: 'Researching', cn: '选校研究中' },
+            { key: 'preparing',   en: 'Preparing',   cn: '材料准备中' },
+            { key: 'submitted',   en: 'Submitted',   cn: '已提交' },
+            { key: 'interview',   en: 'Interview',   cn: '面试中' },
+            { key: 'decision',    en: 'Decision',    cn: '已出结果' }
+        ];
+
+        const STUDENTS = [
+            { name: 'Alice Chen', grade: 'Grade 12', schools: 10, submitted: 3, admitted: 1, todo: 'Submit Harvard supplemental essays (Dec 28)' },
+            { name: 'Bob Wang',   grade: 'Grade 12', schools: 8,  submitted: 5, admitted: 2, todo: 'Schedule UPenn alumni interview' },
+            { name: 'Cathy Liu',  grade: 'Grade 12', schools: 12, submitted: 4, admitted: 0, todo: 'Finish Stanford short answers' }
+        ];
+
+        let currentRole = 'student';
+        let schools = AppData.getSchools();
+        if (!Array.isArray(schools) || schools.length === 0) {
+            schools = JSON.parse(JSON.stringify(DEFAULT_SCHOOLS));
+        }
+
+        // ===== Data persistence =====
+        function saveSchools() {
+            AppData.setSchools(schools);
+        }
+        function resetSchools() {
+            schools = JSON.parse(JSON.stringify(DEFAULT_SCHOOLS));
+            saveSchools();
+        }
+
+        // ===== Countdown =====
+        function daysUntil(deadline) {
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            const due = new Date(deadline);
+            due.setHours(0, 0, 0, 0);
+            return Math.round((due - today) / 86400000);
+        }
+        function formatCountdown(days) {
+            if (days < 0) return days === -1 ? '1 day overdue' : (-days) + ' days overdue';
+            if (days === 0) return 'due today';
+            if (days === 1) return '1 day left';
+            return days + ' days left';
+        }
+
+        // ===== Stats =====
+        function computeStats() {
+            return {
+                total: schools.length,
+                submitted: schools.filter(s => ['submitted', 'decision'].includes(s.stage)).length,
+                inProgress: schools.filter(s => ['preparing', 'interview'].includes(s.stage)).length,
+                notStarted: schools.filter(s => s.stage === 'researching').length,
+                admitted: schools.filter(s => s.result === 'admitted').length
+            };
+        }
+
+        function renderStats() {
+            const s = computeStats();
+            document.getElementById('statsRow').innerHTML =
+                '<span class="stat">Total Schools: <span class="num">' + s.total + '</span></span>' +
+                '<span class="stat">Submitted: <span class="num">' + s.submitted + '</span></span>' +
+                '<span class="stat">In Progress: <span class="num">' + s.inProgress + '</span></span>' +
+                '<span class="stat">Not Started: <span class="num">' + s.notStarted + '</span></span>' +
+                '<span class="stat">Admitted: <span class="num">' + s.admitted + '</span></span>';
+        }
+
+        // ===== Kanban =====
+        function renderKanban() {
+            const container = document.getElementById('kanban');
+            let html = '';
+            STAGES.forEach(stage => {
+                const items = [];
+                schools.forEach((s, idx) => { if (s.stage === stage.key) items.push({ s: s, idx: idx }); });
+                html += '<div class="stage-group">';
+                html += '<div class="stage-header">' + stage.en + ' <span class="cn">' + stage.cn + '</span><span class="count">(' + items.length + ')</span></div>';
+                if (items.length === 0) {
+                    html += '<div class="stage-empty">No schools in this stage.</div>';
+                } else {
+                    items.forEach(it => { html += renderSchoolCard(it.s, it.idx); });
+                }
+                html += '</div>';
+            });
+            container.innerHTML = html;
+        }
+
+        function renderSchoolCard(s, idx) {
+            const days = daysUntil(s.deadline);
+            const countdownText = formatCountdown(days);
+            const isPast = days < 0;
+            const isUrgent = !isPast && days <= 7;
+            const countdownClass = isPast ? 'past' : (isUrgent ? 'urgent' : '');
+
+            let resultTag = '';
+            if (s.result && s.result !== 'pending') {
+                const label = s.result.charAt(0).toUpperCase() + s.result.slice(1);
+                resultTag = ' <span class="result-tag ' + s.result + '">[' + label + ']</span>';
+            }
+
+            let switcher = '<div class="stage-switcher"><span class="switch-label">Move to:</span>';
+            STAGES.forEach(st => {
+                const isCurrent = st.key === s.stage;
+                switcher += '<a class="' + (isCurrent ? 'current' : '') + '" data-school="' + idx + '" data-stage="' + st.key + '">' + st.en + '</a>';
+            });
+            switcher += '</div>';
+
+            return '' +
+                '<div class="school-card">' +
+                  '<div class="school-head">' +
+                    '<span class="school-name">' + s.name + resultTag + '</span>' +
+                    '<span class="school-meta"><span class="type">' + s.type + '</span> · Due ' + s.deadline + '</span>' +
+                  '</div>' +
+                  '<div class="school-deadline">Deadline: <span class="countdown ' + countdownClass + '">' + countdownText + '</span></div>' +
+                  '<div class="progress-bar"><div class="progress-fill" style="width:' + s.progress + '%"></div></div>' +
+                  '<div class="progress-meta">' +
+                    '<span>Progress: ' + s.progress + '%</span>' +
+                    '<span>Essays: ' + s.essays.done + '/' + s.essays.total + ' done</span>' +
+                  '</div>' +
+                  switcher +
+                '</div>';
+        }
+
+        // ===== Deadlines =====
+        function renderDeadlines() {
+            const list = document.getElementById('deadlineList');
+
+            // School deadlines from tracker
+            const schoolItems = schools
+                .filter(s => !['submitted', 'interview', 'decision'].includes(s.stage))
+                .map(s => ({ name: s.name, type: s.type, deadline: s.deadline, days: daysUntil(s.deadline) }));
+
+            // Dashboard deadlines from shared data
+            const dashboardItems = AppData.getDeadlines()
+                .map(d => ({ name: d.name, type: d.type, deadline: d.date, days: daysUntil(d.date) }))
+                .filter(d => d.days <= 60);
+
+            // Merge and deduplicate
+            const seen = new Set();
+            const upcoming = [];
+            [...schoolItems, ...dashboardItems].forEach(item => {
+                const key = item.name + '|' + item.deadline;
+                if (!seen.has(key)) {
+                    seen.add(key);
+                    upcoming.push(item);
+                }
+            });
+            upcoming.sort((a, b) => a.days - b.days);
+
+            if (upcoming.length === 0) {
+                list.innerHTML = '<li style="color:#aaa;font-style:italic;">No upcoming deadlines.</li>';
+                return;
+            }
+            list.innerHTML = upcoming.map(s => {
+                const isPast = s.days < 0;
+                const isUrgent = !isPast && s.days <= 7;
+                const cls = (isPast || isUrgent) ? 'urgent' : '';
+                return '<li>' +
+                    '<span><span class="dl-school">' + s.name + '</span> <span class="dl-date">· ' + s.type + ' · ' + s.deadline + '</span></span>' +
+                    '<span class="dl-days ' + cls + '">' + formatCountdown(s.days) + '</span>' +
+                '</li>';
+            }).join('');
+        }
+
+        // ===== Results =====
+        function renderResults() {
+            const admitted = schools.filter(s => s.result === 'admitted').length;
+            const rejected = schools.filter(s => s.result === 'rejected').length;
+            const waitlisted = schools.filter(s => s.result === 'waitlisted').length;
+            const pending = schools.length - admitted - rejected - waitlisted;
+            const decided = admitted + rejected + waitlisted;
+            const rate = decided > 0 ? Math.round((admitted / decided) * 100) : 0;
+            document.getElementById('resultsRow').innerHTML =
+                '<span class="stat">Admitted: <span class="num admitted">' + admitted + '</span></span>' +
+                '<span class="stat">Rejected: <span class="num rejected">' + rejected + '</span></span>' +
+                '<span class="stat">Waitlisted: <span class="num waitlisted">' + waitlisted + '</span></span>' +
+                '<span class="stat">Pending: <span class="num">' + pending + '</span></span>';
+            document.getElementById('rateNote').textContent = decided > 0
+                ? 'Admission rate: ' + rate + '% (' + admitted + ' admitted of ' + decided + ' decided)'
+                : 'No decisions received yet.';
+        }
+
+        // ===== Profile =====
+        function renderProfile() {
+            const profile = AppData.getProfile();
+            const section = document.getElementById('profileSection');
+            if (profile && (profile.gpa || profile.sat || profile.targetMajor)) {
+                section.style.display = '';
+                document.getElementById('profileGpa').textContent = profile.gpa != null ? profile.gpa : '--';
+                document.getElementById('profileSat').textContent = profile.sat != null ? profile.sat : '--';
+                const majorMap = { cs: 'Computer Science', finance: 'Finance', 'mechanical-engineering': 'Mechanical Engineering' };
+                document.getElementById('profileMajor').textContent = majorMap[profile.targetMajor] || profile.targetMajor || '--';
+            } else {
+                section.style.display = 'none';
+            }
+        }
+
+        // ===== Counselor view =====
+        function renderCounselor() {
+            const list = document.getElementById('studentList');
+            list.innerHTML = STUDENTS.map(st => '' +
+                '<li class="student-item">' +
+                  '<div class="student-head">' +
+                    '<span class="student-name">' + st.name + '<span class="grade">' + st.grade + '</span></span>' +
+                  '</div>' +
+                  '<div class="student-stats">' +
+                    '<span>Schools: <span class="num">' + st.schools + '</span></span>' +
+                    '<span>Submitted: <span class="num">' + st.submitted + '</span></span>' +
+                    '<span>Admitted: <span class="num">' + st.admitted + '</span></span>' +
+                  '</div>' +
+                  '<div class="student-todo"><span class="label">Next:</span> ' + st.todo + '</div>' +
+                '</li>'
+            ).join('');
+        }
+
+        // ===== Role switching =====
+        const ROLE_HINTS = {
+            student: 'Full edit access — move schools between stages, track essays and deadlines.',
+            parent: 'Read-only view — monitor your child\'s application progress and deadlines.',
+            counselor: 'Multi-student overview — track progress across all assigned students.'
+        };
+
+        function setRole(role) {
+            currentRole = role;
+            document.querySelectorAll('.role-tab').forEach(t => {
+                t.classList.toggle('active', t.dataset.role === role);
+            });
+            document.getElementById('roleHint').textContent = ROLE_HINTS[role];
+            const studentParent = document.getElementById('studentParentView');
+            const counselor = document.getElementById('counselorView');
+            const parentOverview = document.getElementById('parentOverview');
+            if (role === 'counselor') {
+                studentParent.style.display = 'none';
+                counselor.style.display = '';
+                renderCounselor();
+            } else {
+                studentParent.style.display = '';
+                counselor.style.display = 'none';
+                parentOverview.style.display = role === 'parent' ? '' : 'none';
+                document.body.classList.toggle('readonly', role === 'parent');
+                renderAll();
+            }
+        }
+
+        function renderAll() {
+            renderProfile();
+            renderStats();
+            renderKanban();
+            renderDeadlines();
+            renderResults();
+        }
+
+        // ===== Init =====
+        function init() {
+            document.querySelectorAll('.role-tab').forEach(t => {
+                t.addEventListener('click', () => setRole(t.dataset.role));
+            });
+            document.getElementById('resetBtn').addEventListener('click', () => {
+                if (confirm('Reset all tracker data to defaults?')) {
+                    resetSchools();
+                    renderAll();
+                }
+            });
+            // Event delegation for stage switcher links
+            document.getElementById('kanban').addEventListener('click', function(e) {
+                const a = e.target.closest('.stage-switcher a:not(.current)');
+                if (!a) return;
+                const idx = parseInt(a.dataset.school, 10);
+                const stage = a.dataset.stage;
+                if (schools[idx] && stage) {
+                    schools[idx].stage = stage;
+                    saveSchools();
+                    renderAll();
+                }
+            });
+            setRole('student');
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init);
+        } else {
+            init();
+        }
+    </script>
+</body>
+</html>

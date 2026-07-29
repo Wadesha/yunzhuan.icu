@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Chat · 全屏对话学习助手 | Practice</title>
+<link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 960px; margin: 0 auto; padding: 24px 16px 48px; background: #ffffff; color: #111111; line-height: 1.7; font-size: 15px; }
+  a { color: #111111; text-decoration: none; border-bottom: 1px solid #cccccc; }
+  a:hover { border-bottom-color: #111111; }
+  .nav { padding-bottom: 12px; margin-bottom: 20px; border-bottom: 1px solid #e0e0e0; font-size: 0.88rem; color: #888888; }
+  .nav a { color: #111111; }
+  .nav .sep { color: #cccccc; margin: 6px; }
+  h1 { font-size: 1.6rem; margin-bottom: 4px; }
+  h2 { font-size: 1.1rem; font-weight: 700; margin: 28px 0 8px; padding-bottom: 6px; border-bottom: 1px solid #111111; }
+  .muted { color: #888888; font-size: 0.85rem; }
+  .subtitle { color: #555555; font-size: 0.95rem; margin-bottom: 20px; }
+  .v-badge { display: inline-block; border: 1px solid #111111; padding: 0 6px; font-size: 0.7rem; font-weight: 700; }
+  .footer { margin-top: 36px; padding-top: 16px; border-top: 1px solid #e0e0e0; color: #888888; font-size: 0.82rem; }
+
+  .chat-container { border: 1px solid #111; display: flex; flex-direction: column; height: 70vh; min-height: 500px; background: #fff; }
+  .chat-header { padding: 12px 16px; border-bottom: 1px solid #111; background: #111; color: #fff; display: flex; justify-content: space-between; align-items: center; }
+  .chat-header .title { font-weight: 700; }
+  .chat-header .sub { font-size: 0.75rem; opacity: 0.85; }
+  .chat-header .actions button { background: transparent; color: #fff; border: 1px solid #fff; padding: 4px 10px; font-size: 0.78rem; cursor: pointer; margin-left: 4px; font-family: inherit; }
+  .chat-header .actions button:hover { background: #fff; color: #111; }
+
+  .chat-messages { flex: 1; overflow-y: auto; padding: 16px; background: #fafafa; }
+  .chat-msg { margin: 10px 0; padding: 12px 16px; max-width: 80%; line-height: 1.65; font-size: 0.92rem; white-space: pre-wrap; word-break: break-word; border: 1px solid #e0e0e0; }
+  .chat-msg.user { background: #111; color: #fff; border-color: #111; margin-left: auto; }
+  .chat-msg.assistant { background: #fff; }
+  .chat-msg.system { background: #fafafa; border: 1px dashed #888; color: #555; font-size: 0.82rem; max-width: 100%; }
+  .chat-msg.error { background: #fafafa; border-color: #b00020; color: #b00020; font-size: 0.85rem; }
+  .chat-msg .msg-meta { display: block; font-size: 0.7rem; color: #888; margin-top: 6px; }
+  .chat-msg.user .msg-meta { color: rgba(255,255,255,0.7); }
+
+  .chat-quick { padding: 8px 12px; border-top: 1px solid #e0e0e0; background: #fff; display: flex; gap: 6px; flex-wrap: wrap; }
+  .chat-quick button { background: #fff; border: 1px solid #888; padding: 5px 10px; font-size: 0.78rem; cursor: pointer; font-family: inherit; }
+  .chat-quick button:hover { background: #111; color: #fff; border-color: #111; }
+
+  .chat-input { display: flex; border-top: 1px solid #111; }
+  .chat-input input { flex: 1; border: none; padding: 14px 16px; font-size: 0.95rem; outline: none; font-family: inherit; }
+  .chat-input button { background: #111; color: #fff; border: none; padding: 0 24px; cursor: pointer; font-family: inherit; font-size: 0.9rem; font-weight: 600; }
+  .chat-input button:disabled { background: #888; cursor: not-allowed; }
+
+  .config-row { display: flex; flex-wrap: wrap; gap: 10px; margin: 12px 0; align-items: center; }
+  .config-row label { font-size: 0.85rem; color: #555; font-weight: 600; }
+  .config-row select, .config-row input { padding: 6px 10px; border: 1px solid #888; font-size: 0.88rem; font-family: inherit; background: #fff; }
+  .info-box { border: 1px dashed #888; padding: 10px 14px; margin: 12px 0; font-size: 0.85rem; color: #555; background: #fafafa; }
+  .info-box code { background: #fff; border: 1px solid #ccc; padding: 1px 5px; font-family: 'Courier New', monospace; }
+</style>
+</head>
+<body data-subject="sat">
+
+<div class="nav">
+  <a href="../../index.html">Home</a> <span class="sep">/</span>
+  <a href="../index.html">Academics</a> <span class="sep">/</span>
+  <a href="index.html">Practice</a> <span class="sep">/</span>
+  AI Chat
+</div>
+
+<h1>AI Chat · 全屏对话学习助手 <span class="v-badge">v41</span></h1>
+<p class="subtitle">支持内置指令、推荐练习、AI 出题、题目讲解；历史自动保存到 localStorage</p>
+
+<div class="info-box">
+  <strong>内置指令</strong>（直接发送即可）：
+  <ul style="margin:6px 0 0 18px;">
+    <li><code>解释这道题</code> — 基于当前页面 qid 给出讲解</li>
+    <li><code>推荐练习</code> — 根据 yz_practice_data 推荐 TOP 5 薄弱 Topic</li>
+    <li><code>讲解 [topic-code]</code> — 讲解指定 Topic，如 <code>讲解 M-Alg-1a</code></li>
+    <li><code>出 5 道 [topic] 题</code> — 调用 QuestionGen 生成练习题</li>
+    <li>其他自由提问将直接转发给 AIProvider</li>
+  </ul>
+</div>
+
+<div class="config-row">
+  <label>当前科目：</label>
+  <select id="cfgSubject">
+    <option value="sat">SAT</option>
+    <option value="act">ACT</option>
+    <option value="ap">AP</option>
+    <option value="ib">IB</option>
+    <option value="alevel">A-Level</option>
+    <option value="igcse">IGCSE</option>
+    <option value="toefl">TOEFL</option>
+    <option value="ielts">IELTS</option>
+  </select>
+  <label>当前 qid：</label>
+  <input type="text" id="cfgQid" placeholder="(可选) q-xxx" style="width:160px;">
+  <button id="btnApplyCfg" style="padding:6px 14px;border:1px solid #111;background:#fff;cursor:pointer;font-family:inherit;font-size:0.85rem;">应用</button>
+  <span class="muted" id="cfgStatus"></span>
+</div>
+
+<div class="chat-container">
+  <div class="chat-header">
+    <div>
+      <div class="title">yunzhuan AI 学习助手</div>
+      <div class="sub">v41 · 内置指令 + AI Provider</div>
+    </div>
+    <div class="actions">
+      <button id="btnClearChat" type="button">清空</button>
+    </div>
+  </div>
+  <div class="chat-messages" id="chatMessages"></div>
+  <div class="chat-quick">
+    <button data-q="推荐练习" type="button">推荐练习</button>
+    <button data-q="解释这道题" type="button">解释这道题</button>
+    <button data-q="讲解 M-Alg-1a" type="button">讲解 M-Alg-1a</button>
+    <button data-q="讲解 RW-Craft-1a" type="button">讲解 RW-Craft-1a</button>
+    <button data-q="出 5 道 Linear equations 题" type="button">出 5 道题</button>
+    <button data-q="自由提问：你如何高效备考 SAT？" type="button">自由提问示例</button>
+  </div>
+  <div class="chat-input">
+    <input type="text" id="chatInput" placeholder="输入消息，回车发送…" maxlength="500">
+    <button id="chatSend" type="button">发送</button>
+  </div>
+</div>
+
+<div class="footer">
+  <a href="index.html">Practice Home</a> ·
+  <a href="dashboard.html">Dashboard</a> ·
+  <a href="ai-tutor.html">AI Tutor</a> ·
+  <a href="javascript:window.scrollTo(0,0)">Back to top</a>
+</div>
+
+<script src="../../js/syllabus-data.js"></script>
+<script src="../../js/ai-tutor.js"></script>
+<script src="../../js/ai-provider.js"></script>
+<script src="../../js/ai-question-gen.js"></script>
+<script src="../../js/ai-chat.js"></script>
+<script>
+(function() {
+  'use strict';
+  // Prevent the floating bubble from being added to this page
+  // by stubbing AIChat's auto-mount via a flag.
+  // Simpler: hide bubble after load (this page has its own fullscreen UI).
+  var messagesEl = document.getElementById('chatMessages');
+  var inputEl = document.getElementById('chatInput');
+  var sendBtn = document.getElementById('chatSend');
+  var subjectSel = document.getElementById('cfgSubject');
+  var qidInput = document.getElementById('cfgQid');
+  var btnApply = document.getElementById('btnApplyCfg');
+  var btnClear = document.getElementById('btnClearChat');
+  var cfgStatus = document.getElementById('cfgStatus');
+
+  var busy = false;
+
+  function escapeHtml(s) {
+    return String(s || '')
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;');
+  }
+
+  function renderMessage(role, text, provider) {
+    var div = document.createElement('div');
+    div.className = 'chat-msg ' + role;
+    div.textContent = text;
+    var meta = document.createElement('span');
+    meta.className = 'msg-meta';
+    var ts = new Date();
+    meta.textContent = ts.toLocaleTimeString() + (provider ? ' · ' + provider : '');
+    div.appendChild(meta);
+    messagesEl.appendChild(div);
+    messagesEl.scrollTop = messagesEl.scrollHeight;
+  }
+
+  function refreshFromStorage() {
+    messagesEl.innerHTML = '';
+    var hist = window.AIChat.history();
+    if (!hist.length) {
+      renderMessage('system', '你好！我是 yunzhuan AI 学习助手。\n' +
+        '可直接提问，或使用下方快捷指令。\n' +
+        '当前 Provider：' + (window.AIProvider ? window.AIProvider.getConfig().active : 'n/a'));
+      return;
+    }
+    hist.forEach(function(m) {
+      renderMessage(m.role, m.text, m.provider);
+    });
+  }
+
+  function doSend() {
+    if (busy) return;
+    var text = inputEl.value.trim();
+    if (!text) return;
+    inputEl.value = '';
+    renderMessage('user', text);
+    busy = true;
+    sendBtn.disabled = true;
+    window.AIChat.send(text).then(function(result) {
+      busy = false;
+      sendBtn.disabled = false;
+      if (result && result.reply) {
+        renderMessage('assistant', result.reply, result.provider);
+      }
+    }).catch(function(err) {
+      busy = false;
+      sendBtn.disabled = false;
+      renderMessage('error', '[错误] ' + (err && err.message));
+    });
+  }
+
+  function setConfig() {
+    var s = subjectSel.value;
+    var q = qidInput.value.trim();
+    if (window.AIChat && window.AIChat.setSubject) window.AIChat.setSubject(s);
+    if (q && window.AIChat && window.AIChat.setCurrentQid) window.AIChat.setCurrentQid(q);
+    cfgStatus.textContent = '已应用：subject=' + s + (q ? ', qid=' + q : '');
+    setTimeout(function() { cfgStatus.textContent = ''; }, 2500);
+  }
+
+  sendBtn.addEventListener('click', doSend);
+  inputEl.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      doSend();
+    }
+  });
+  btnApply.addEventListener('click', setConfig);
+  btnClear.addEventListener('click', function() {
+    if (!confirm('清空当前对话历史？')) return;
+    window.AIChat.clear();
+    refreshFromStorage();
+  });
+  messagesEl.addEventListener('click', function(e) {
+    var t = e.target;
+    if (t && t.tagName === 'BUTTON' && t.getAttribute('data-q')) {
+      inputEl.value = t.getAttribute('data-q');
+      doSend();
+    }
+  });
+
+  // init subject from body
+  var s0 = document.body.getAttribute('data-subject');
+  if (s0) subjectSel.value = s0;
+
+  // Hide floating bubble on this page
+  setTimeout(function() {
+    var b = document.getElementById('aiChatBubble');
+    if (b) b.style.display = 'none';
+  }, 100);
+
+  refreshFromStorage();
+})();
+</script>
+</body>
+</html>

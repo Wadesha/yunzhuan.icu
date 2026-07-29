@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Major Rankings - Top US Universities by Field - yunzhuan.icu</title>
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 16px 20px;
+            background: #f5f5f5;
+            color: #333;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            margin-bottom: 16px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .logo {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #667eea;
+            text-decoration: none;
+        }
+        .logo span { color: #764ba2; }
+        .nav-links {
+            display: flex;
+            gap: 18px;
+            align-items: center;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: #555;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: color 0.15s;
+        }
+        .nav-links a:hover { color: #667eea; }
+        .nav-links .cn {
+            font-size: 0.7rem;
+            color: #aaa;
+            margin-left: 2px;
+        }
+        @media (max-width: 768px) {
+            .navbar { flex-wrap: wrap; gap: 8px; }
+            .nav-links { gap: 12px; }
+            .nav-links a { font-size: 0.78rem; }
+            .nav-links .cn { display: none; }
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 4px;
+            font-size: 1.5rem;
+        }
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 16px;
+            font-size: 0.9rem;
+        }
+        .tabs {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 14px;
+            overflow-x: auto;
+            padding-bottom: 4px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .tab-btn {
+            padding: 6px 14px;
+            border: 2px solid #e9ecef;
+            background: white;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.82rem;
+            color: #555;
+            transition: all 0.15s;
+            white-space: nowrap;
+            font-weight: 500;
+        }
+        .tab-btn:hover { border-color: #c7d2fe; }
+        .tab-btn.active {
+            border-color: #667eea;
+            background: #f0f4ff;
+            color: #667eea;
+        }
+        .section {
+            background: white;
+            border-radius: 8px;
+            padding: 14px 18px;
+            margin-bottom: 10px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .section h2 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        .section h2 .cn { color: #999; font-size: 0.8rem; font-weight: normal; margin-left: 6px; }
+        .ranking-table { width: 100%; border-collapse: collapse; }
+        .ranking-table th {
+            text-align: left;
+            padding: 8px 10px;
+            font-size: 0.78rem;
+            color: #888;
+            font-weight: 500;
+            border-bottom: 2px solid #e5e7eb;
+        }
+        .ranking-table td {
+            padding: 9px 10px;
+            font-size: 0.88rem;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .ranking-table tr:last-child td { border-bottom: none; }
+        .rank {
+            font-weight: 700;
+            color: #667eea;
+            font-size: 0.9rem;
+            width: 40px;
+        }
+        .rank.top3 { color: #f59e0b; }
+        .school-name { font-weight: 600; color: #333; }
+        .school-location { font-size: 0.78rem; color: #999; }
+        .note { font-size: 0.78rem; color: #888; }
+        .tip-box {
+            background: #fff8e1;
+            border-left: 3px solid #ff8f00;
+            padding: 10px 14px;
+            border-radius: 0 6px 6px 0;
+            margin-top: 10px;
+            font-size: 0.82rem;
+            color: #5d4037;
+            line-height: 1.6;
+        }
+        .tip-box strong { color: #e65100; }
+        .footer { text-align: center; margin-top: 20px; color: #999; font-size: 0.8rem; }
+        .ranking-section { display: none; }
+        .ranking-section.active { display: block; }
+    </style>
+    <link rel="stylesheet" href="./css/theme.css">
+    <link rel="manifest" href="./manifest.json">
+    <meta name="theme-color" content="#667eea">
+    <script src="./js/theme.js"></script>
+    <script>
+    window.SUPABASE_CONFIG = {{
+        url: 'https://otfjbzjvkoectpejhxar.supabase.co',
+        anonKey: 'sb_publishable_SBRF6ewKH-se3dNlqFwsXQ_lObhamTr'
+    }};
+    </script>
+    <script src="./js/auth.js"></script>
+    <script src="./js/favorites.js"></script>
+    <script src="./js/pwa.js"></script>
+    <script src="./js/mobile-nav.js"></script>
+    <script src="./js/breadcrumbs.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="../index.html" class="logo"><span class="logo-icon">🎓</span><span class="logo-text">yunzhuan<span>.icu</span></span></a>
+        <div class="nav-links">
+            <a href="../index.html">Majors<span class="cn">专业</span></a>
+            <a href="../schools/index.html">Schools<span class="cn">学校</span></a>
+            <a href="../tests/index.html">Tests<span class="cn">考试</span></a>
+            <a href="../essays/index.html">Essays<span class="cn">文书</span></a>
+            <a href="../scholarships/index.html">Scholarships<span class="cn">奖学金</span></a>
+            <a href="../interviews/index.html">Interviews<span class="cn">面试</span></a>
+            <a href="search.html">Search<span class="cn">搜索</span></a>
+            <a href="../contact.html">Contact<span class="cn">联系</span></a>
+        </div>
+    </nav>
+
+    <h1>Major Rankings</h1>
+    <p class="subtitle">各专业全球大学排名</p>
+
+    <div class="tabs">
+        <button class="tab-btn active" onclick="showTab('cs')">Computer Science</button>
+        <button class="tab-btn" onclick="showTab('engineering')">Engineering</button>
+        <button class="tab-btn" onclick="showTab('business')">Business</button>
+        <button class="tab-btn" onclick="showTab('biology')">Biology / Medical</button>
+        <button class="tab-btn" onclick="showTab('economics')">Economics</button>
+        <button class="tab-btn" onclick="showTab('psychology')">Psychology</button>
+        <button class="tab-btn" onclick="showTab('overall')">Overall / 综合</button>
+    </div>
+
+    <div id="cs" class="ranking-section active">
+        <div class="section">
+            <h2>Top CS Programs <span class="cn">计算机科学排名</span></h2>
+            <table class="ranking-table">
+                <thead>
+                    <tr><th>#</th><th>University</th><th>Location</th><th>Note</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td class="rank top3">1</td><td><span class="school-name">MIT</span></td><td class="school-location">Cambridge, MA</td><td class="note">AI / Theory / Systems 全强</td></tr>
+                    <tr><td class="rank top3">2</td><td><span class="school-name">Stanford University</span></td><td class="school-location">Stanford, CA</td><td class="note">AI / HCI / 创业氛围</td></tr>
+                    <tr><td class="rank top3">3</td><td><span class="school-name">Carnegie Mellon University</span></td><td class="school-location">Pittsburgh, PA</td><td class="note">AI / Robotics / HCI 顶尖</td></tr>
+                    <tr><td class="rank">4</td><td><span class="school-name">UC Berkeley</span></td><td class="school-location">Berkeley, CA</td><td class="note">公立第一，AI / Systems 强</td></tr>
+                    <tr><td class="rank">5</td><td><span class="school-name">Cornell University</span></td><td class="school-location">Ithaca, NY</td><td class="note">Theoretical CS 强</td></tr>
+                    <tr><td class="rank">6</td><td><span class="school-name">University of Washington</span></td><td class="school-location">Seattle, WA</td><td class="note">Systems / HCI，靠近 Amazon/微软</td></tr>
+                    <tr><td class="rank">7</td><td><span class="school-name">Princeton University</span></td><td class="school-location">Princeton, NJ</td><td class="note">Theoretical CS 顶尖</td></tr>
+                    <tr><td class="rank">8</td><td><span class="school-name">University of Texas (Austin)</span></td><td class="school-location">Austin, TX</td><td class="note">公立强校，性价比高</td></tr>
+                    <tr><td class="rank">9</td><td><span class="school-name">Georgia Tech</span></td><td class="school-location">Atlanta, GA</td><td class="note">公立性价比高，工程强</td></tr>
+                    <tr><td class="rank">10</td><td><span class="school-name">UCLA</span></td><td class="school-location">Los Angeles, CA</td><td class="note">综合强，位置好</td></tr>
+                    <tr><td class="rank">11</td><td><span class="school-name">University of Illinois (Urbana-Champaign)</span></td><td class="school-location">Urbana, IL</td><td class="note">公立牛校，Systems 强</td></tr>
+                    <tr><td class="rank">12</td><td><span class="school-name">Columbia University</span></td><td class="school-location">New York, NY</td><td class="note">ML / Theory 不错</td></tr>
+                    <tr><td class="rank">13</td><td><span class="school-name">Harvard University</span></td><td class="school-location">Cambridge, MA</td><td class="note">综合名气大</td></tr>
+                    <tr><td class="rank">14</td><td><span class="school-name">University of Michigan</span></td><td class="school-location">Ann Arbor, MI</td><td class="note">全面发展的公立大校</td></tr>
+                    <tr><td class="rank">15</td><td><span class="school-name">University of Pennsylvania</span></td><td class="school-location">Philadelphia, PA</td><td class="note">CIS + Wharton 结合</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="engineering" class="ranking-section">
+        <div class="section">
+            <h2>Top Engineering Programs <span class="cn">工程学排名</span></h2>
+            <table class="ranking-table">
+                <thead>
+                    <tr><th>#</th><th>University</th><th>Location</th><th>Note</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td class="rank top3">1</td><td><span class="school-name">MIT</span></td><td class="school-location">Cambridge, MA</td><td class="note">工程界绝对王者</td></tr>
+                    <tr><td class="rank top3">2</td><td><span class="school-name">Stanford University</span></td><td class="school-location">Stanford, CA</td><td class="note">硅谷加持，创业氛围</td></tr>
+                    <tr><td class="rank top3">3</td><td><span class="school-name">UC Berkeley</span></td><td class="school-location">Berkeley, CA</td><td class="note">公立工程第一</td></tr>
+                    <tr><td class="rank">4</td><td><span class="school-name">California Institute of Technology</span></td><td class="school-location">Pasadena, CA</td><td class="note">小而精，科研强</td></tr>
+                    <tr><td class="rank">5</td><td><span class="school-name">Carnegie Mellon University</span></td><td class="school-location">Pittsburgh, PA</td><td class="note">CS / Robotics 顶尖</td></tr>
+                    <tr><td class="rank">6</td><td><span class="school-name">Georgia Tech</span></td><td class="school-location">Atlanta, GA</td><td class="note">公立性价比之王</td></tr>
+                    <tr><td class="rank">7</td><td><span class="school-name">University of Michigan</span></td><td class="school-location">Ann Arbor, MI</td><td class="note">全面发展</td></tr>
+                    <tr><td class="rank">8</td><td><span class="school-name">Cornell University</span></td><td class="school-location">Ithaca, NY</td><td class="note">常春藤工程代表</td></tr>
+                    <tr><td class="rank">9</td><td><span class="school-name">University of Texas (Austin)</span></td><td class="school-location">Austin, TX</td><td class="note">石油/化工/EE 强</td></tr>
+                    <tr><td class="rank">10</td><td><span class="school-name">Princeton University</span></td><td class="school-location">Princeton, NJ</td><td class="note">本科教育优秀</td></tr>
+                    <tr><td class="rank">11</td><td><span class="school-name">Purdue University</span></td><td class="school-location">West Lafayette, IN</td><td class="note">工程强校，性价比高</td></tr>
+                    <tr><td class="rank">12</td><td><span class="school-name">University of Illinois (Urbana-Champaign)</span></td><td class="school-location">Urbana, IL</td><td class="note">公立工程大牛</td></tr>
+                    <tr><td class="rank">13</td><td><span class="school-name">Columbia University</span></td><td class="school-location">New York, NY</td><td class="note">常春藤，纽约位置</td></tr>
+                    <tr><td class="rank">14</td><td><span class="school-name">Johns Hopkins University</span></td><td class="school-location">Baltimore, MD</td><td class="note">生物医学工程顶尖</td></tr>
+                    <tr><td class="rank">15</td><td><span class="school-name">University of Washington</span></td><td class="school-location">Seattle, WA</td><td class="note">西雅图，工科强</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="business" class="ranking-section">
+        <div class="section">
+            <h2>Top Undergraduate Business Programs <span class="cn">本科商科排名</span></h2>
+            <table class="ranking-table">
+                <thead>
+                    <tr><th>#</th><th>University</th><th>Location</th><th>Note</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td class="rank top3">1</td><td><span class="school-name">UPenn (Wharton)</span></td><td class="school-location">Philadelphia, PA</td><td class="note">本科商科第一，金融/管理强</td></tr>
+                    <tr><td class="rank top3">2</td><td><span class="school-name">MIT (Sloan)</span></td><td class="school-location">Cambridge, MA</td><td class="note">量化金融/创业强</td></tr>
+                    <tr><td class="rank top3">3</td><td><span class="school-name">UC Berkeley (Haas)</span></td><td class="school-location">Berkeley, CA</td><td class="note">公立第一，创业/营销强</td></tr>
+                    <tr><td class="rank">4</td><td><span class="school-name">University of Michigan (Ross)</span></td><td class="school-location">Ann Arbor, MI</td><td class="note">公立顶尖，全面发展</td></tr>
+                    <tr><td class="rank">5</td><td><span class="school-name">New York University (Stern)</span></td><td class="school-location">New York, NY</td><td class="note">金融/营销，华尔街位置</td></tr>
+                    <tr><td class="rank">6</td><td><span class="school-name">University of Texas (McCombs)</span></td><td class="school-location">Austin, TX</td><td class="note">公立性价比高，会计强</td></tr>
+                    <tr><td class="rank">7</td><td><span class="school-name">Carnegie Mellon (Tepper)</span></td><td class="school-location">Pittsburgh, PA</td><td class="note">量化/运营管理强</td></tr>
+                    <tr><td class="rank">8</td><td><span class="school-name">Cornell University (Dyson)</span></td><td class="school-location">Ithaca, NY</td><td class="note">常春藤，应用经济管理</td></tr>
+                    <tr><td class="rank">9</td><td><span class="school-name">University of North Carolina (Kenan-Flagler)</span></td><td class="school-location">Chapel Hill, NC</td><td class="note">公立强校，性价比高</td></tr>
+                    <tr><td class="rank">10</td><td><span class="school-name">Indiana University (Kelley)</span></td><td class="school-location">Bloomington, IN</td><td class="note">会计/金融强</td></tr>
+                    <tr><td class="rank">11</td><td><span class="school-name">University of Notre Dame (Mendoza)</span></td><td class="school-location">Notre Dame, IN</td><td class="note">校友网络强</td></tr>
+                    <tr><td class="rank">12</td><td><span class="school-name">USC (Marshall)</span></td><td class="school-location">Los Angeles, CA</td><td class="note">创业/营销，洛杉矶位置</td></tr>
+                    <tr><td class="rank">13</td><td><span class="school-name">University of Virginia (McIntire)</span></td><td class="school-location">Charlottesville, VA</td><td class="note">两年制项目，教学优秀</td></tr>
+                    <tr><td class="rank">14</td><td><span class="school-name">Georgetown University (McDonough)</span></td><td class="school-location">Washington, DC</td><td class="note">国际商务/金融强</td></tr>
+                    <tr><td class="rank">15</td><td><span class="school-name">Ohio State University (Fisher)</span></td><td class="school-location">Columbus, OH</td><td class="note">公立性价比高</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="biology" class="ranking-section">
+        <div class="section">
+            <h2>Top Biology & Medical Programs <span class="cn">生物医学排名</span></h2>
+            <table class="ranking-table">
+                <thead>
+                    <tr><th>#</th><th>University</th><th>Location</th><th>Note</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td class="rank top3">1</td><td><span class="school-name">Harvard University</span></td><td class="school-location">Cambridge, MA</td><td class="note">医学院 + 公卫都是顶级</td></tr>
+                    <tr><td class="rank top3">2</td><td><span class="school-name">MIT</span></td><td class="school-location">Cambridge, MA</td><td class="note">生物工程/计算生物学强</td></tr>
+                    <tr><td class="rank top3">3</td><td><span class="school-name">Stanford University</span></td><td class="school-location">Stanford, CA</td><td class="note">生物/医学 + 硅谷结合</td></tr>
+                    <tr><td class="rank">4</td><td><span class="school-name">Johns Hopkins University</span></td><td class="school-location">Baltimore, MD</td><td class="note">生物医学/公卫顶尖</td></tr>
+                    <tr><td class="rank">5</td><td><span class="school-name">UC Berkeley</span></td><td class="school-location">Berkeley, CA</td><td class="note">分子生物/神经科学强</td></tr>
+                    <tr><td class="rank">6</td><td><span class="school-name">University of Washington</span></td><td class="school-location">Seattle, WA</td><td class="note">医学研究强，靠近 FHCRC</td></tr>
+                    <tr><td class="rank">7</td><td><span class="school-name">Yale University</span></td><td class="school-location">New Haven, CT</td><td class="note">医学院强，综合研究</td></tr>
+                    <tr><td class="rank">8</td><td><span class="school-name">Princeton University</span></td><td class="school-location">Princeton, NJ</td><td class="note">分子生物/计算生物</td></tr>
+                    <tr><td class="rank">9</td><td><span class="school-name">UCLA</span></td><td class="school-location">Los Angeles, CA</td><td class="note">医学院 + 生命科学强</td></tr>
+                    <tr><td class="rank">10</td><td><span class="school-name">UCSF</span></td><td class="school-location">San Francisco, CA</td><td class="note">仅研究生，但生科声誉极高</td></tr>
+                    <tr><td class="rank">11</td><td><span class="school-name">University of Michigan</span></td><td class="school-location">Ann Arbor, MI</td><td class="note">公立强校，全面</td></tr>
+                    <tr><td class="rank">12</td><td><span class="school-name">Columbia University</span></td><td class="school-location">New York, NY</td><td class="note">医学院强，纽约位置</td></tr>
+                    <tr><td class="rank">13</td><td><span class="school-name">Cornell University (Weill)</span></td><td class="school-location">Ithaca, NY</td><td class="note">常春藤，医学院在 NYC</td></tr>
+                    <tr><td class="rank">14</td><td><span class="school-name">Duke University</span></td><td class="school-location">Durham, NC</td><td class="note">医学院 + 公共政策</td></tr>
+                    <tr><td class="rank">15</td><td><span class="school-name">UC San Diego</span></td><td class="school-location">La Jolla, CA</td><td class="note">生物医学强，科研环境好</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="economics" class="ranking-section">
+        <div class="section">
+            <h2>Top Economics Programs <span class="cn">经济学排名</span></h2>
+            <table class="ranking-table">
+                <thead>
+                    <tr><th>#</th><th>University</th><th>Location</th><th>Note</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td class="rank top3">1</td><td><span class="school-name">MIT</span></td><td class="school-location">Cambridge, MA</td><td class="note">理论/计量经济学顶尖</td></tr>
+                    <tr><td class="rank top3">2</td><td><span class="school-name">Harvard University</span></td><td class="school-location">Cambridge, MA</td><td class="note">政治经济/宏观经济强</td></tr>
+                    <tr><td class="rank top3">3</td><td><span class="school-name">Princeton University</span></td><td class="school-location">Princeton, NJ</td><td class="note">理论经济学王者</td></tr>
+                    <tr><td class="rank">4</td><td><span class="school-name">University of Chicago</span></td><td class="school-location">Chicago, IL</td><td class="note">芝加哥经济学派</td></tr>
+                    <tr><td class="rank">5</td><td><span class="school-name">Stanford University</span></td><td class="school-location">Stanford, CA</td><td class="note">应用经济学/发展经济</td></tr>
+                    <tr><td class="rank">6</td><td><span class="school-name">UC Berkeley</span></td><td class="school-location">Berkeley, CA</td><td class="note">公立第一，全面</td></tr>
+                    <tr><td class="rank">7</td><td><span class="school-name">Yale University</span></td><td class="school-location">New Haven, CT</td><td class="note">理论/计量强</td></tr>
+                    <tr><td class="rank">8</td><td><span class="school-name">Northwestern University</span></td><td class="school-location">Evanston, IL</td><td class="note">微观经济/博弈论强</td></tr>
+                    <tr><td class="rank">9</td><td><span class="school-name">Columbia University</span></td><td class="school-location">New York, NY</td><td class="note">宏观/金融经济强</td></tr>
+                    <tr><td class="rank">10</td><td><span class="school-name">University of Pennsylvania</span></td><td class="school-location">Philadelphia, PA</td><td class="note">经济 + 沃顿</td></tr>
+                    <tr><td class="rank">11</td><td><span class="school-name">New York University</span></td><td class="school-location">New York, NY</td><td class="note">宏观/计量强</td></tr>
+                    <tr><td class="rank">12</td><td><span class="school-name">University of Michigan</span></td><td class="school-location">Ann Arbor, MI</td><td class="note">公立强校</td></tr>
+                    <tr><td class="rank">13</td><td><span class="school-name">Cornell University</span></td><td class="school-location">Ithaca, NY</td><td class="note">应用经济/农业经济</td></tr>
+                    <tr><td class="rank">14</td><td><span class="school-name">University of Wisconsin</span></td><td class="school-location">Madison, WI</td><td class="note">公立性价比高</td></tr>
+                    <tr><td class="rank">15</td><td><span class="school-name">Brown University</span></td><td class="school-location">Providence, RI</td><td class="note">常春藤，小而精</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="psychology" class="ranking-section">
+        <div class="section">
+            <h2>Top Psychology Programs <span class="cn">心理学排名</span></h2>
+            <table class="ranking-table">
+                <thead>
+                    <tr><th>#</th><th>University</th><th>Location</th><th>Note</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td class="rank top3">1</td><td><span class="school-name">Stanford University</span></td><td class="school-location">Stanford, CA</td><td class="note">认知/发展/社会心理全强</td></tr>
+                    <tr><td class="rank top3">2</td><td><span class="school-name">UC Berkeley</span></td><td class="school-location">Berkeley, CA</td><td class="note">公立第一，全面发展</td></tr>
+                    <tr><td class="rank top3">3</td><td><span class="school-name">Harvard University</span></td><td class="school-location">Cambridge, MA</td><td class="note">认知/发展心理强</td></tr>
+                    <tr><td class="rank">4</td><td><span class="school-name">University of Michigan</span></td><td class="school-location">Ann Arbor, MI</td><td class="note">社会心理学顶尖</td></tr>
+                    <tr><td class="rank">5</td><td><span class="school-name">Yale University</span></td><td class="school-location">New Haven, CT</td><td class="note">认知/临床心理强</td></tr>
+                    <tr><td class="rank">6</td><td><span class="school-name">Princeton University</span></td><td class="school-location">Princeton, NJ</td><td class="note">认知/社会心理</td></tr>
+                    <tr><td class="rank">7</td><td><span class="school-name">University of Illinois (Urbana-Champaign)</span></td><td class="school-location">Urbana, IL</td><td class="note">定量心理学强</td></tr>
+                    <tr><td class="rank">8</td><td><span class="school-name">MIT</span></td><td class="school-location">Cambridge, MA</td><td class="note">认知神经科学顶尖</td></tr>
+                    <tr><td class="rank">9</td><td><span class="school-name">New York University</span></td><td class="school-location">New York, NY</td><td class="note">社会/认知/临床</td></tr>
+                    <tr><td class="rank">10</td><td><span class="school-name">University of Washington</span></td><td class="school-location">Seattle, WA</td><td class="note">临床心理学强</td></tr>
+                    <tr><td class="rank">11</td><td><span class="school-name">Johns Hopkins University</span></td><td class="school-location">Baltimore, MD</td><td class="note">神经科学/生物心理</td></tr>
+                    <tr><td class="rank">12</td><td><span class="school-name">Columbia University</span></td><td class="school-location">New York, NY</td><td class="note">临床/组织心理</td></tr>
+                    <tr><td class="rank">13</td><td><span class="school-name">UCLA</span></td><td class="school-location">Los Angeles, CA</td><td class="note">全面发展，加州系统</td></tr>
+                    <tr><td class="rank">14</td><td><span class="school-name">Cornell University</span></td><td class="school-location">Ithaca, NY</td><td class="note">发展心理学强</td></tr>
+                    <tr><td class="rank">15</td><td><span class="school-name">University of Texas (Austin)</span></td><td class="school-location">Austin, TX</td><td class="note">公立强校，性价比高</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="overall" class="ranking-section">
+        <div class="section">
+            <h2>Top National Universities (Overall) <span class="cn">综合大学排名</span></h2>
+            <table class="ranking-table">
+                <thead>
+                    <tr><th>#</th><th>University</th><th>Location</th><th>Type</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td class="rank top3">1</td><td><span class="school-name">Princeton University</span></td><td class="school-location">Princeton, NJ</td><td class="note">Private / 私立</td></tr>
+                    <tr><td class="rank top3">2</td><td><span class="school-name">MIT</span></td><td class="school-location">Cambridge, MA</td><td class="note">Private / 私立</td></tr>
+                    <tr><td class="rank top3">3</td><td><span class="school-name">Harvard University</span></td><td class="school-location">Cambridge, MA</td><td class="note">Private / 私立</td></tr>
+                    <tr><td class="rank">4</td><td><span class="school-name">Stanford University</span></td><td class="school-location">Stanford, CA</td><td class="note">Private / 私立</td></tr>
+                    <tr><td class="rank">5</td><td><span class="school-name">Yale University</span></td><td class="school-location">New Haven, CT</td><td class="note">Private / 私立</td></tr>
+                    <tr><td class="rank">6</td><td><span class="school-name">University of Pennsylvania</span></td><td class="school-location">Philadelphia, PA</td><td class="note">Private / 私立</td></tr>
+                    <tr><td class="rank">7</td><td><span class="school-name">Brown University</span></td><td class="school-location">Providence, RI</td><td class="note">Private / 私立</td></tr>
+                    <tr><td class="rank">8</td><td><span class="school-name">Duke University</span></td><td class="school-location">Durham, NC</td><td class="note">Private / 私立</td></tr>
+                    <tr><td class="rank">9</td><td><span class="school-name">Johns Hopkins University</span></td><td class="school-location">Baltimore, MD</td><td class="note">Private / 私立</td></tr>
+                    <tr><td class="rank">10</td><td><span class="school-name">Dartmouth College</span></td><td class="school-location">Hanover, NH</td><td class="note">Private / 私立</td></tr>
+                    <tr><td class="rank">11</td><td><span class="school-name">Columbia University</span></td><td class="school-location">New York, NY</td><td class="note">Private / 私立</td></tr>
+                    <tr><td class="rank">12</td><td><span class="school-name">Cornell University</span></td><td class="school-location">Ithaca, NY</td><td class="note">Private / 私立</td></tr>
+                    <tr><td class="rank">13</td><td><span class="school-name">Vanderbilt University</span></td><td class="school-location">Nashville, TN</td><td class="note">Private / 私立</td></tr>
+                    <tr><td class="rank">14</td><td><span class="school-name">Carnegie Mellon University</span></td><td class="school-location">Pittsburgh, PA</td><td class="note">Private / 私立</td></tr>
+                    <tr><td class="rank">15</td><td><span class="school-name">University of Michigan</span></td><td class="school-location">Ann Arbor, MI</td><td class="note">Public / 公立</td></tr>
+                    <tr><td class="rank">16</td><td><span class="school-name">UC Berkeley</span></td><td class="school-location">Berkeley, CA</td><td class="note">Public / 公立</td></tr>
+                    <tr><td class="rank">17</td><td><span class="school-name">UCLA</span></td><td class="school-location">Los Angeles, CA</td><td class="note">Public / 公立</td></tr>
+                    <tr><td class="rank">18</td><td><span class="school-name">Northwestern University</span></td><td class="school-location">Evanston, IL</td><td class="note">Private / 私立</td></tr>
+                    <tr><td class="rank">19</td><td><span class="school-name">University of Chicago</span></td><td class="school-location">Chicago, IL</td><td class="note">Private / 私立</td></tr>
+                    <tr><td class="rank">20</td><td><span class="school-name">Georgetown University</span></td><td class="school-location">Washington, DC</td><td class="note">Private / 私立</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Notes <span class="cn">说明</span></h2>
+        <div class="tip-box">
+            <strong>💡 关于排名：</strong><br>
+            · 以上排名综合参考 US News、QS、以及业内声誉，仅供参考<br>
+            · 排名每年会有变动，具体请以各机构最新发布为准<br>
+            · 选校不应该只看排名，还要考虑：专业方向、地理位置、学校氛围、费用、奖学金等<br>
+            · 适合自己的才是最好的！
+        </div>
+    </div>
+
+    <p class="footer">&copy; 2026 yunzhuan.icu | Major Rankings</p>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <div style="text-align:center;padding:8px 0;font-size:0.75rem;color:#aaa;">
+        <a href="../index.html" style="color:#aaa;text-decoration:none;">Home</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="../schools/index.html" style="color:#aaa;text-decoration:none;">Schools</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="../contact.html" style="color:#aaa;text-decoration:none;">Contact</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="javascript:window.scrollTo(0,0)" style="color:#aaa;text-decoration:none;">Back to top</a>
+    </div>
+
+    <script>
+    function showTab(id) {
+        document.querySelectorAll('.ranking-section').forEach(s => s.classList.remove('active'));
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.getElementById(id).classList.add('active');
+        event.target.classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    </script>
+<script src="./js/back-to-top.js"></script>
+</body>
+</html>

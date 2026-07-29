@@ -1,0 +1,2329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IB Practice</title>
+<link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 820px; margin: 0 auto; padding: 24px 16px 48px; background: #ffffff; color: #111111; line-height: 1.7; font-size: 15px; }
+a { color: #111111; text-decoration: none; border-bottom: 1px solid #cccccc; }
+a:hover { border-bottom-color: #111111; }
+.nav { padding-bottom: 12px; margin-bottom: 20px; border-bottom: 1px solid #e0e0e0; font-size: 0.88rem; color: #888888; }
+.nav a { color: #111111; }
+.nav .sep { color: #cccccc; margin: 0 6px; }
+h1 { font-size: 1.6rem; margin-bottom: 4px; }
+h2 { font-size: 1.1rem; font-weight: 700; margin: 28px 0 8px; padding-bottom: 6px; border-bottom: 1px solid #111111; }
+h3 { font-size: 0.98rem; font-weight: 700; margin: 16px 0 4px; }
+p, li { margin-bottom: 6px; color: #111111; }
+.muted { color: #888888; font-size: 0.85rem; }
+.subtitle { color: #555555; font-size: 0.95rem; margin-bottom: 20px; }
+table { width: 100%; border-collapse: collapse; font-size: 0.82rem; margin: 8px 0 16px; }
+th, td { border: 1px solid #e0e0e0; padding: 6px 10px; text-align: left; vertical-align: top; }
+th { background: #ffffff; border-bottom: 2px solid #111111; font-weight: 700; }
+ul, ol { margin-left: 22px; margin-bottom: 12px; }
+.box { border: 1px solid #111111; padding: 14px 18px; margin: 12px 0; }
+.box-dashed { border: 1px dashed #888888; padding: 14px 18px; margin: 12px 0; }
+.q { border: 1px solid #e0e0e0; padding: 14px 18px; margin: 12px 0; }
+.q .q-num { font-weight: 700; font-size: 0.82rem; color: #888888; }
+.q .q-text { margin: 8px 0; }
+.q .q-choices { list-style: none; margin-left: 0; }
+.q .q-choices li { margin-bottom: 4px; padding-left: 24px; text-indent: -24px; }
+.q .q-answer { margin-top: 8px; padding-top: 8px; border-top: 1px dashed #e0e0e0; font-size: 0.85rem; }
+.q .q-answer strong { color: #111111; }
+.footer { margin-top: 36px; padding-top: 16px; border-top: 1px solid #e0e0e0; color: #888888; font-size: 0.82rem; }
+.v-badge { display: inline-block; border: 1px solid #111111; padding: 0 6px; font-size: 0.7rem; font-weight: 700; }
+@media (max-width:768px){body{font-size:14px;padding:16px 10px 32px;}h1{font-size:1.3rem;}h2{font-size:1rem;}.q{padding:8px 10px;margin:8px 0;}table{font-size:0.75rem;overflow-x:auto;display:block;}.box,.box-dashed{padding:8px 10px;}}
+</style>
+</head>
+<body data-subject="ib">
+
+<div class="nav">
+  <a href="../../../index.html">Home</a> <span class="sep">/</span>
+  <a href="../../index.html">Academics</a> <span class="sep">/</span>
+  <a href="../index.html">Practice</a> <span class="sep">/</span>
+  <a href="practice.html">IB</a> <span class="sep">/</span>
+  Practice
+</div>
+
+<h1>IB Practice Questions <span class="v-badge">v12-beta</span></h1>
+<p class="subtitle">v12-beta · 120 道题·每Q加topic-code与锚点 · 与Syllabus v3双向对齐</p>
+
+<div class="box-dashed">
+  <strong>v10: 点击选项答题，自动记录到错题本（localStorage）。</strong>
+  <p style="margin-top:8px;">v12新增：考纲Topic ↔ Q编号双向锚点直达（锚点#q-N跳题；topic-code反向查考纲）</p>
+</div>
+
+<div id="topicNotes"></div>
+
+<h2>Sample Questions</h2>
+
+<h3>Mathematics (19 questions)</h3>
+
+<div class="q" id="q-1">
+  <div class="q-num">【G5-MAA-54】 Q1 · IB Math AA HL · Calculus · Medium</div>
+  <p class="q-text">Find the maximum value of f(x) = x³ - 6x² + 9x + 2 on the interval [0, 4].</p>
+  <ul class="q-choices">
+    <li>A) 6</li>
+    <li>B) 2</li>
+    <li>C) 4</li>
+    <li>D) 9</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> A) 6. f'(x) = 3x² - 12x + 9 = 0 → x=1 or x=3. f(1)=6, f(3)=2, f(0)=2, f(4)=6. Maximum is 6 at x=1.
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G5-MAA-54】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-2">
+  <div class="q-num">【G5-MAA-51】 Q4 · IB Math AA HL · Algebra · Medium</div>
+  <p class="q-text">Given log₂(x) + log₂(x-2) = 3, find x.</p>
+  <ul class="q-choices">
+    <li>A) 4</li>
+    <li>B) -2</li>
+    <li>C) 4 or -2</li>
+    <li>D) 8</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> A) 4. log₂(x(x-2))=3, x(x-2)=8, x²-2x-8=0, (x-4)(x+2)=0, x=4 (x=-2 rejected since log of negative is undefined).
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G5-MAA-51】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-3">
+  <div class="q-num">【G5-MAA-52】 Q5 · IB Math AA HL · Functions · Hard</div>
+  <p class="q-text">If f(x) = 2x + 1 and g(x) = x² - 3, find g(f(2)).</p>
+  <ul class="q-choices">
+    <li>A) 22</li>
+    <li>B) 12</li>
+    <li>C) 6</li>
+    <li>D) 9</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> A) 22. f(2)=2(2)+1=5, g(5)=5²-3=22.
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G5-MAA-52】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-4">
+  <div class="q-num">【G5-MAA-51】 Q11 · IB Math AA HL · Algebra · Easy</div>
+  <p class="q-text">Solve: 2^x = 32.</p>
+  <ul class="q-choices">
+    <li>A) 3</li>
+    <li>B) 4</li>
+    <li>C) 5</li>
+    <li>D) 6</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> C) 5. 2^5 = 32.
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G5-MAA-51】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-5">
+  <div class="q-num">【G5-MAA-54】 Q12 · IB Math AA HL · Calculus · Medium</div>
+  <p class="q-text">Find dy/dx if y = 3x⁴ - 2x² + 5.</p>
+  <ul class="q-choices">
+    <li>A) 12x³ - 4x</li>
+    <li>B) 12x³ - 2</li>
+    <li>C) 3x³ - 2x</li>
+    <li>D) 12x⁴ - 4x²</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> A) 12x³ - 4x. Power rule: 4·3x³ - 2·2x = 12x³ - 4x.
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G5-MAA-54】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-6">
+  <div class="q-num">【G5-MAA-55】 Q13 · IB Math AA HL · Statistics · Medium</div>
+  <p class="q-text">In a normal distribution with mean 50 and SD 10, what percentage of data lies between 40 and 60?</p>
+  <ul class="q-choices">
+    <li>A) 68%</li>
+    <li>B) 95%</li>
+    <li>C) 34%</li>
+    <li>D) 99.7%</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> A) 68%. 40 and 60 are ±1 SD from mean, covering ~68% of data.
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G5-MAA-55】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-7">
+  <div class="q-num">【G5-MAA-53】 Q14 · IB Math AA HL · Vectors · Hard</div>
+  <p class="q-text">Given u = (3, 4), find |u|.</p>
+  <ul class="q-choices">
+    <li>A) 7</li>
+    <li>B) 12</li>
+    <li>C) 5</li>
+    <li>D) 25</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> C) 5. |u| = √(9+16) = √25 = 5.
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G5-MAA-53】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-8">
+  <div class="q-num">【G5-MAA-51】 Q21 · IB Math AA HL · Sequences · Easy</div>
+  <p class="q-text">Find the 10th term of the arithmetic sequence 3, 7, 11, 15, ...</p>
+  <ul class="q-choices">
+    <li>A) 39</li>
+    <li>B) 43</li>
+    <li>C) 41</li>
+    <li>D) 47</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> A) 39. a_n = a_1 + (n-1)d = 3 + 9×4 = 39.
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G5-MAA-51】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-9">
+  <div class="q-num">【G5-MAA-51】 Q22 · IB Math AA HL · Binomial Theorem · Medium</div>
+  <p class="q-text">Find the coefficient of x³ in the expansion of (1 + 2x)⁵.</p>
+  <ul class="q-choices">
+    <li>A) 10</li>
+    <li>B) 40</li>
+    <li>C) 80</li>
+    <li>D) 32</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> C) 80. C(5,3)·(2x)³ = 10·8x³ = 80x³, so the coefficient is 80.
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G5-MAA-51】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-10">
+  <div class="q-num">【G5-MAA-51】 Q23 · IB Math AA HL · Complex Numbers · Medium</div>
+  <p class="q-text">Find the modulus of the complex number z = 3 + 4i.</p>
+  <ul class="q-choices">
+    <li>A) 7</li>
+    <li>B) 5</li>
+    <li>C) 25</li>
+    <li>D) 1</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) 5. |z| = √(3² + 4²) = √25 = 5.
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G5-MAA-51】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-11">
+  <div class="q-num">【G5-MAA-54】 Q24 · IB Math AA HL · Integration · Hard</div>
+  <p class="q-text">Evaluate ∫ x·e^x dx.</p>
+  <ul class="q-choices">
+    <li>A) x·e^x + C</li>
+    <li>B) e^x(x - 1) + C</li>
+    <li>C) e^x(x + 1) + C</li>
+    <li>D) (1/2)x²·e^x + C</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) e^x(x - 1) + C. Using parts with u=x, dv=e^x dx: ∫x·e^x dx = x·e^x - ∫e^x dx = x·e^x - e^x = e^x(x-1) + C.
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G5-MAA-54】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-12">
+  <div class="q-num">【G5-MAI-510】 Q25 · IB Math AI HL · Probability Distributions · Medium</div>
+  <p class="q-text">A fair coin is tossed 5 times. What is the probability of getting exactly 3 heads?</p>
+  <ul class="q-choices">
+    <li>A) 5/32</li>
+    <li>B) 10/32</li>
+    <li>C) 1/8</li>
+    <li>D) 3/16</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) 10/32. P(X=3) = C(5,3)·(1/2)⁵ = 10/32 = 5/16.
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G5-MAI-510】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-13">
+  <div class="q-num">【G5-MAA-51】 Q26 · IB Math AA HL · Matrices · Hard</div>
+  <p class="q-text">Given matrix A = [[2, 1], [1, 3]], find A² (the matrix product A·A).</p>
+  <ul class="q-choices">
+    <li>A) [[5, 5], [5, 10]]</li>
+    <li>B) [[4, 3], [3, 10]]</li>
+    <li>C) [[5, 4], [4, 10]]</li>
+    <li>D) [[4, 1], [1, 9]]</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> A) [[5, 5], [5, 10]]. Row-by-column: row 1 = [2·2+1·1, 2·1+1·3] = [5, 5]; row 2 = [1·2+3·1, 1·1+3·3] = [5, 10].
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G5-MAA-51】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-14">
+  <div class="q-num">【G5-MAA-54】 Q27 · IB Math AA HL · Limits · Medium</div>
+  <p class="q-text">Evaluate lim(x→2) (x² - 4)/(x - 2).</p>
+  <ul class="q-choices">
+    <li>A) 0</li>
+    <li>B) 4</li>
+    <li>C) undefined</li>
+    <li>D) 2</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) 4. Factor: (x-2)(x+2)/(x-2) = x+2 → 4 as x→2.
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G5-MAA-54】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-15">
+  <div class="q-num">【G5-MAA-53】 Q28 · IB Math AA HL · Trigonometric Identities · Hard</div>
+  <p class="q-text">Simplify: sin²θ + cos²θ + tan²θ.</p>
+  <ul class="q-choices">
+    <li>A) 1</li>
+    <li>B) sec²θ</li>
+    <li>C) 2</li>
+    <li>D) tan²θ</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) sec²θ. Using sin²θ + cos²θ = 1, the expression becomes 1 + tan²θ = sec²θ.
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G5-MAA-53】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-16">
+  <div class="q-num">【G5-MAA-51】 Q29 · IB Math AA HL · Logarithms · Medium</div>
+  <p class="q-text">Solve: log(x) + log(x+3) = 1 (base 10).</p>
+  <ul class="q-choices">
+    <li>A) 2</li>
+    <li>B) -5</li>
+    <li>C) 2 or -5</li>
+    <li>D) 5</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> A) 2. log(x(x+3))=1, x(x+3)=10, x²+3x-10=0, (x-2)(x+5)=0, x=2 (x=-5 rejected since log of negative is undefined).
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G5-MAA-51】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-17">
+  <div class="q-num">【G5-MAA-54】 Q30 · IB Math AA HL · Optimization · Hard</div>
+  <p class="q-text">A rectangle has perimeter 20 m. What is the maximum possible area?</p>
+  <ul class="q-choices">
+    <li>A) 25 m²</li>
+    <li>B) 20 m²</li>
+    <li>C) 16 m²</li>
+    <li>D) 100 m²</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> A) 25 m². If length = x, width = 10-x, area = x(10-x) = 10x - x². Maximum at x = 5: area = 25 m² (square is optimal).
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G5-MAA-54】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-18">
+  <div class="q-num">【G5-MAA-54】 Q31 · IB Math AA HL · Differential Equations · Hard</div>
+  <p class="q-text">Solve dy/dx = 2x, given y(0) = 3.</p>
+  <ul class="q-choices">
+    <li>A) y = x² + 3</li>
+    <li>B) y = 2x² + 3</li>
+    <li>C) y = x² + C</li>
+    <li>D) y = 2x + 3</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> A) y = x² + 3. Integrate: y = x² + C. Use y(0)=3: C = 3. So y = x² + 3.
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G5-MAA-54】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-19">
+  <div class="q-num">【G5-MAA-53】 Q32 · IB Math AA HL · Vector Geometry · Medium</div>
+  <p class="q-text">Find the dot product of vectors a = (2, -1, 3) and b = (4, 2, -1).</p>
+  <ul class="q-choices">
+    <li>A) 3</li>
+    <li>B) 8</li>
+    <li>C) 5</li>
+    <li>D) -3</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> A) 3. a·b = (2)(4) + (-1)(2) + (3)(-1) = 8 - 2 - 3 = 3.
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G5-MAA-53】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<h3>Physics (16 questions)</h3>
+
+<div class="q" id="q-20">
+  <div class="q-num">【G4-Phy-42】 Q2 · IB Physics HL · Mechanics · Easy</div>
+  <p class="q-text">A ball is thrown vertically upward at 20 m/s. What is the maximum height reached? (g = 10 m/s²)</p>
+  <ul class="q-choices">
+    <li>A) 10 m</li>
+    <li>B) 20 m</li>
+    <li>C) 40 m</li>
+    <li>D) 5 m</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) 20 m. v² = u² - 2gh, 0 = 400 - 20h, h = 20 m.
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G4-Phy-42】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-21">
+  <div class="q-num">【G4-Phy-44】 Q6 · IB Physics HL · Waves · Medium</div>
+  <p class="q-text">A wave has frequency 500 Hz and speed 340 m/s. What is its wavelength?</p>
+  <ul class="q-choices">
+    <li>A) 0.34 m</li>
+    <li>B) 0.68 m</li>
+    <li>C) 1.47 m</li>
+    <li>D) 170000 m</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) 0.68 m. λ = v/f = 340/500 = 0.68 m.
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G4-Phy-44】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-22">
+  <div class="q-num">【G4-Phy-43】 Q7 · IB Physics HL · Thermodynamics · Hard</div>
+  <p class="q-text">An ideal gas at 300 K has its temperature doubled to 600 K at constant volume. If the initial pressure was 100 kPa, what is the new pressure?</p>
+  <ul class="q-choices">
+    <li>A) 50 kPa</li>
+    <li>B) 100 kPa</li>
+    <li>C) 200 kPa</li>
+    <li>D) 400 kPa</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> C) 200 kPa. At constant volume, P/T = constant. P₂ = P₁ × T₂/T₁ = 100 × 600/300 = 200 kPa.
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G4-Phy-43】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-23">
+  <div class="q-num">【G4-Phy-42】 Q15 · IB Physics HL · Mechanics · Easy</div>
+  <p class="q-text">A car decelerates from 30 m/s to 0 in 6 seconds. What is the deceleration?</p>
+  <ul class="q-choices">
+    <li>A) 5 m/s²</li>
+    <li>B) -5 m/s²</li>
+    <li>C) 30 m/s²</li>
+    <li>D) 180 m/s²</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) -5 m/s². a = Δv/Δt = (0-30)/6 = -5 m/s².
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G4-Phy-42】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-24">
+  <div class="q-num">【G4-Phy-45】 Q16 · IB Physics HL · Electricity · Medium</div>
+  <p class="q-text">A 12V battery drives 3A through a circuit. What is the resistance?</p>
+  <ul class="q-choices">
+    <li>A) 36Ω</li>
+    <li>B) 4Ω</li>
+    <li>C) 9Ω</li>
+    <li>D) 0.25Ω</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) 4Ω. R = V/I = 12/3 = 4Ω.
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G4-Phy-45】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-25">
+  <div class="q-num">【G4-Phy-47】 Q17 · IB Physics HL · Modern Physics · Hard</div>
+  <p class="q-text">What is the energy of a photon with frequency 5×10¹⁴ Hz? (h = 6.6×10⁻³⁴ J·s)</p>
+  <ul class="q-choices">
+    <li>A) 3.3×10⁻¹⁹ J</li>
+    <li>B) 7.6×10⁻²⁰ J</li>
+    <li>C) 1.3×10⁻⁴⁸ J</li>
+    <li>D) 5×10¹⁴ J</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> A) 3.3×10⁻¹⁹ J. E = hf = 6.6×10⁻³⁴ × 5×10¹⁴ = 3.3×10⁻¹⁹ J.
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G4-Phy-47】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-26">
+  <div class="q-num">【G4-Phy-46】 Q33 · IB Physics HL · Circular Motion · Easy</div>
+  <p class="q-text">A car goes around a circular track of radius 50 m at constant speed 10 m/s. What is its centripetal acceleration?</p>
+  <ul class="q-choices">
+    <li>A) 1 m/s²</li>
+    <li>B) 2 m/s²</li>
+    <li>C) 5 m/s²</li>
+    <li>D) 0 m/s²</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) 2 m/s². a_c = v²/r = 100/50 = 2 m/s².
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G4-Phy-46】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-27">
+  <div class="q-num">【G4-Phy-44】 Q34 · IB Physics HL · SHM · Medium</div>
+  <p class="q-text">A mass on a spring has period 2π s. If the spring constant k = 10 N/m, what is the mass? (Take π² ≈ 10)</p>
+  <ul class="q-choices">
+    <li>A) 0.1 kg</li>
+    <li>B) 1 kg</li>
+    <li>C) 10 kg</li>
+    <li>D) 100 kg</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> C) 10 kg. T = 2π√(m/k). With T = 2π: √(m/k) = 1, so m = k = 10 kg.
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G4-Phy-44】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-28">
+  <div class="q-num">【G4-Phy-45】 Q35 · IB Physics HL · Electromagnetic Induction · Medium</div>
+  <p class="q-text">A magnetic flux through a coil changes from 0.05 Wb to 0.15 Wb in 0.2 s. The coil has 50 turns. What is the magnitude of the induced EMF?</p>
+  <ul class="q-choices">
+    <li>A) 5 V</li>
+    <li>B) 25 V</li>
+    <li>C) 2.5 V</li>
+    <li>D) 50 V</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) 25 V. EMF = N·|ΔΦ|/Δt = 50 × (0.10)/0.2 = 25 V.
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G4-Phy-45】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-29">
+  <div class="q-num">【G4-Phy-47】 Q36 · IB Physics HL · Nuclear Physics · Hard</div>
+  <p class="q-text">A radioactive isotope has a half-life of 6 hours. If you start with 80 g, how much remains after 18 hours?</p>
+  <ul class="q-choices">
+    <li>A) 10 g</li>
+    <li>B) 20 g</li>
+    <li>C) 40 g</li>
+    <li>D) 5 g</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> A) 10 g. 18 hours = 3 half-lives. 80 → 40 → 20 → 10 g.
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G4-Phy-47】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-30">
+  <div class="q-num">【G4-Phy-44】 Q37 · IB Physics HL · Optics · Medium</div>
+  <p class="q-text">A converging lens has focal length 20 cm. An object is placed 60 cm from the lens. At what distance from the lens is the image formed?</p>
+  <ul class="q-choices">
+    <li>A) 15 cm</li>
+    <li>B) 30 cm</li>
+    <li>C) 20 cm</li>
+    <li>D) 12 cm</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) 30 cm. 1/v = 1/f - 1/u = 1/20 - 1/60 = 2/60 = 1/30, so v = 30 cm.
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G4-Phy-44】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-31">
+  <div class="q-num">【G4-Phy-45】 Q38 · IB Physics HL · Capacitors · Medium</div>
+  <p class="q-text">A 10 μF capacitor is charged by a 12 V battery. What charge is stored?</p>
+  <ul class="q-choices">
+    <li>A) 120 μC</li>
+    <li>B) 1.2 μC</li>
+    <li>C) 12 μC</li>
+    <li>D) 1200 μC</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> A) 120 μC. Q = CV = 10 × 12 = 120 μC.
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G4-Phy-45】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-32">
+  <div class="q-num">【G4-Phy-45】 Q39 · IB Physics HL · Magnetism · Hard</div>
+  <p class="q-text">A wire of length 0.5 m carries current 4 A perpendicular to a magnetic field of 0.2 T. What is the force on the wire?</p>
+  <ul class="q-choices">
+    <li>A) 0.4 N</li>
+    <li>B) 0.04 N</li>
+    <li>C) 4 N</li>
+    <li>D) 2 N</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> A) 0.4 N. F = BIL = 0.2 × 4 × 0.5 = 0.4 N.
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G4-Phy-45】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-33">
+  <div class="q-num">【G4-Phy-47】 Q40 · IB Physics HL · Quantum · Medium</div>
+  <p class="q-text">In the photoelectric effect, if light of frequency below the threshold frequency is shone on a metal, what happens?</p>
+  <ul class="q-choices">
+    <li>A) Electrons are emitted with low KE</li>
+    <li>B) No electrons are emitted</li>
+    <li>C) Electrons are emitted with high KE</li>
+    <li>D) The metal becomes positively charged</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) No electrons are emitted. Below the threshold frequency, no electrons are emitted regardless of intensity.
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G4-Phy-47】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-34">
+  <div class="q-num">【G4-Phy-43】 Q41 · IB Physics HL · Thermodynamics · Easy</div>
+  <p class="q-text">How much heat is needed to raise the temperature of 2 kg of water by 5°C? (Specific heat capacity of water = 4200 J/kg·°C)</p>
+  <ul class="q-choices">
+    <li>A) 42000 J</li>
+    <li>B) 4200 J</li>
+    <li>C) 8400 J</li>
+    <li>D) 21000 J</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> A) 42000 J. Q = mcΔT = 2 × 4200 × 5 = 42000 J.
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G4-Phy-43】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-35">
+  <div class="q-num">【G4-Phy-49】 Q42 · IB Physics HL · Fluids · Medium</div>
+  <p class="q-text">What is the pressure at a depth of 10 m in water? (Density of water = 1000 kg/m³, g = 10 m/s²)</p>
+  <ul class="q-choices">
+    <li>A) 10000 Pa</li>
+    <li>B) 100000 Pa</li>
+    <li>C) 1000 Pa</li>
+    <li>D) 100 Pa</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) 100000 Pa. P = ρgh = 1000 × 10 × 10 = 100000 Pa = 100 kPa.
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G4-Phy-49】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<h3>Economics, Business & Chemistry (15 questions)</h3>
+
+<div class="q" id="q-36">
+  <div class="q-num">【G3-Econ-31】 Q3 · IB Economics HL · Microeconomics · Easy</div>
+  <p class="q-text">Which of the following will cause a shift of the demand curve to the right?</p>
+  <ul class="q-choices">
+    <li>A) A decrease in the price of the good</li>
+    <li>B) An increase in consumer income (normal good)</li>
+    <li>C) A decrease in the price of a substitute good</li>
+    <li>D) An improvement in production technology</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B). Income increase shifts demand right for normal goods. A is movement along curve, C shifts left, D shifts supply.
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G3-Econ-31】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-37">
+  <div class="q-num">【G3-Econ-32】 Q8 · IB Economics HL · Macroeconomics · Medium</div>
+  <p class="q-text">Which of the following is an example of expansionary fiscal policy?</p>
+  <ul class="q-choices">
+    <li>A) Increasing interest rates</li>
+    <li>B) Increasing government spending</li>
+    <li>C) Selling government bonds</li>
+    <li>D) Increasing reserve requirements</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B). Expansionary fiscal policy involves increasing government spending or decreasing taxes to stimulate aggregate demand.
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>G3-Econ-32</p><p><strong>解析：</strong>本题考查【G3-Econ-32】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-38">
+  <div class="q-num">【G4-Chem-415】 Q9 · IB Chemistry HL · Equilibrium · Hard</div>
+  <p class="q-text">For the reaction N₂ + 3H₂ ⇌ 2NH₃, what happens to the equilibrium when pressure is increased?</p>
+  <ul class="q-choices">
+    <li>A) Shifts left</li>
+    <li>B) Shifts right</li>
+    <li>C) No change</li>
+    <li>D) Reaction stops</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) Shifts right. Increasing pressure shifts equilibrium toward the side with fewer moles of gas. Products have 2 moles vs 4 moles of reactants.
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G4-Chem-415】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-39">
+  <div class="q-num">【G3-BM-38】 Q10 · IB Business Management HL · Marketing · Easy</div>
+  <p class="q-text">Which of the following is NOT one of the 4 Ps of the marketing mix?</p>
+  <ul class="q-choices">
+    <li>A) Price</li>
+    <li>B) Promotion</li>
+    <li>C) Position</li>
+    <li>D) Product</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> C) Position. The 4 Ps are Product, Price, Place, Promotion.
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G3-BM-38】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-40">
+  <div class="q-num">【G3-Econ-31】 Q18 · IB Economics HL · Microeconomics · Easy</div>
+  <p class="q-text">If the price of coffee rises, what happens to demand for tea (a substitute)?</p>
+  <ul class="q-choices">
+    <li>A) Decreases</li>
+    <li>B) Increases</li>
+    <li>C) No change</li>
+    <li>D) Becomes zero</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) Increases. Substitutes: when coffee price rises, consumers switch to tea.
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G3-Econ-31】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-41">
+  <div class="q-num">【G3-Econ-32】 Q19 · IB Economics HL · Macroeconomics · Medium</div>
+  <p class="q-text">What is the primary tool used by central banks to control inflation?</p>
+  <ul class="q-choices">
+    <li>A) Tax rates</li>
+    <li>B) Government spending</li>
+    <li>C) Interest rates</li>
+    <li>D) Exchange rates</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> C) Interest rates. Central banks adjust interest rates to control money supply and inflation.
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>G3-Econ-32</p><p><strong>解析：</strong>本题考查【G3-Econ-32】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-42">
+  <div class="q-num">【G3-BM-39】 Q20 · IB Business Management HL · Finance · Medium</div>
+  <p class="q-text">A company's revenue is $500,000 and costs are $350,000. What is the profit margin?</p>
+  <ul class="q-choices">
+    <li>A) 25%</li>
+    <li>B) 30%</li>
+    <li>C) 70%</li>
+    <li>D) 42.9%</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) 30%. Profit = $150,000. Margin = 150,000/500,000 = 30%.
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G3-BM-39】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-43">
+  <div class="q-num">【G3-Econ-31】 Q43 · IB Economics HL · Market Failure · Medium</div>
+  <p class="q-text">Which of the following is an example of a negative externality?</p>
+  <ul class="q-choices">
+    <li>A) Vaccination programs</li>
+    <li>B) Pollution from a factory</li>
+    <li>C) Public parks</li>
+    <li>D) Education subsidies</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B). Negative externalities impose costs on third parties. Pollution is a classic example. The other options are positive externalities or public goods.
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G3-Econ-31】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-44">
+  <div class="q-num">【G3-Econ-32】 Q44 · IB Economics HL · Monetary Policy · Easy</div>
+  <p class="q-text">To combat inflation, a central bank should:</p>
+  <ul class="q-choices">
+    <li>A) Lower interest rates</li>
+    <li>B) Increase interest rates</li>
+    <li>C) Buy government bonds</li>
+    <li>D) Decrease reserve requirements</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) Increase interest rates. Contractionary monetary policy raises rates to reduce money supply and aggregate demand.
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>G3-Econ-32</p><p><strong>解析：</strong>本题考查【G3-Econ-32】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-45">
+  <div class="q-num">【G3-Econ-33】 Q45 · IB Economics HL · Exchange Rates · Medium</div>
+  <p class="q-text">If the US dollar appreciates against the Japanese yen, what happens to US exports to Japan?</p>
+  <ul class="q-choices">
+    <li>A) They become cheaper for Japanese buyers</li>
+    <li>B) They become more expensive for Japanese buyers</li>
+    <li>C) They remain the same price</li>
+    <li>D) They become zero</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) They become more expensive for Japanese buyers. A stronger USD means Japanese buyers need more yen to purchase the same US goods.
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>G3-Econ-33</p><p><strong>解析：</strong>本题考查【G3-Econ-33】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-46">
+  <div class="q-num">【G3-BM-39】 Q46 · IB Business Management HL · Accounting · Medium</div>
+  <p class="q-text">A company has current assets of $200,000 and current liabilities of $100,000. What is the current ratio?</p>
+  <ul class="q-choices">
+    <li>A) 0.5</li>
+    <li>B) 2</li>
+    <li>C) 1.5</li>
+    <li>D) 3</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) 2. Current ratio = Current assets / Current liabilities = 200,000 / 100,000 = 2.
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G3-BM-39】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-47">
+  <div class="q-num">【G3-BM-37】 Q47 · IB Business Management HL · HRM · Easy</div>
+  <p class="q-text">According to Maslow's hierarchy of needs, which need is at the highest level?</p>
+  <ul class="q-choices">
+    <li>A) Safety</li>
+    <li>B) Physiological</li>
+    <li>C) Self-actualization</li>
+    <li>D) Esteem</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> C) Self-actualization. Maslow's hierarchy from lowest to highest: physiological, safety, love/belonging, esteem, self-actualization.
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G3-BM-37】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-48">
+  <div class="q-num">【G4-Chem-414】 Q48 · IB Chemistry HL · Kinetics · Medium</div>
+  <p class="q-text">Which factor does NOT increase the rate of a chemical reaction?</p>
+  <ul class="q-choices">
+    <li>A) Increasing temperature</li>
+    <li>B) Increasing concentration</li>
+    <li>C) Adding a catalyst</li>
+    <li>D) Decreasing surface area</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> D) Decreasing surface area. Decreasing surface area reduces the rate of reaction by lowering collision frequency.
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G4-Chem-414】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-49">
+  <div class="q-num">【G4-Chem-415】 Q49 · IB Chemistry HL · Equilibrium · Hard</div>
+  <p class="q-text">For the exothermic reaction N₂ + 3H₂ ⇌ 2NH₃, what happens to the equilibrium when temperature is increased?</p>
+  <ul class="q-choices">
+    <li>A) Equilibrium shifts right</li>
+    <li>B) Equilibrium shifts left</li>
+    <li>C) No change</li>
+    <li>D) Reaction stops</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) Equilibrium shifts left. For an exothermic reaction, increasing temperature shifts equilibrium toward the reactants (the endothermic direction).
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G4-Chem-415】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-50">
+  <div class="q-num">【G4-Chem-416】 Q50 · IB Chemistry HL · Acids & Bases · Medium</div>
+  <p class="q-text">What is the pH of a solution with [H⁺] = 1×10⁻⁴ M?</p>
+  <ul class="q-choices">
+    <li>A) 4</li>
+    <li>B) 10</li>
+    <li>C) 0.0001</li>
+    <li>D) 14</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> A) 4. pH = -log[H⁺] = -log(10⁻⁴) = 4.
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>G4-Chem-416</p><p><strong>解析：</strong>本题考查【G4-Chem-416】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<h3>Biology (10 questions)</h3>
+
+<div class="q" id="q-51">
+<div class="q-num">【G4-Bio-421】 Q51 · IB Biology HL · Cell Biology · Easy</div>
+  <p class="q-text">Which organelle is primarily responsible for ATP production in eukaryotic cells?</p>
+  <ul class="q-choices">
+    <li>A) Nucleus</li>
+    <li>B) Ribosome</li>
+    <li>C) Mitochondrion</li>
+    <li>D) Golgi apparatus</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> C) Mitochondrion. Mitochondria carry out aerobic cellular respiration, producing ATP via oxidative phosphorylation.
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G4-Bio-421】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-52">
+<div class="q-num">【G4-Bio-421】 Q52 · IB Biology HL · Molecular Biology · Easy</div>
+  <p class="q-text">In DNA replication, which enzyme synthesizes the new complementary DNA strand?</p>
+  <ul class="q-choices">
+    <li>A) Helicase</li>
+    <li>B) DNA polymerase</li>
+    <li>C) Ligase</li>
+    <li>D) RNA primase</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) DNA polymerase. DNA polymerase adds nucleotides in the 5'→3' direction using the template strand. Helicase unwinds; ligase joins Okazaki fragments.
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G4-Bio-421】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-53">
+<div class="q-num">【G4-Bio-423】 Q53 · IB Biology HL · Genetics · Medium</div>
+  <p class="q-text">A heterozygous tall plant (Tt) is crossed with a homozygous short plant (tt). What is the expected ratio of tall to short offspring?</p>
+  <ul class="q-choices">
+    <li>A) 3 : 1</li>
+    <li>B) 1 : 1</li>
+    <li>C) 1 : 0</li>
+    <li>D) 1 : 2 : 1</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) 1 : 1. Punnett square: Tt × tt yields 50% Tt (tall) and 50% tt (short).
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G4-Bio-423】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-54">
+<div class="q-num">【G4-Bio-424】 Q54 · IB Biology HL · Human Physiology · Medium</div>
+  <p class="q-text">Which hormone is secreted by the pancreas in response to high blood glucose levels?</p>
+  <ul class="q-choices">
+    <li>A) Glucagon</li>
+    <li>B) Insulin</li>
+    <li>C) Thyroxine</li>
+    <li>D) ADH</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) Insulin. Insulin lowers blood glucose by promoting uptake into cells and storage as glycogen. Glucagon raises blood glucose.
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>G4-Bio-424</p><p><strong>解析：</strong>本题考查【G4-Bio-424】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-55">
+<div class="q-num">【G4-Bio-423】 Q55 · IB Biology HL · Ecology · Easy</div>
+  <p class="q-text">Which of the following best describes a group of individuals of the same species living in the same area?</p>
+  <ul class="q-choices">
+    <li>A) Community</li>
+    <li>B) Ecosystem</li>
+    <li>C) Population</li>
+    <li>D) Biome</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> C) Population. A population is a group of conspecific individuals; a community includes multiple species; an ecosystem includes biotic + abiotic.
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G4-Bio-423】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-56">
+<div class="q-num">【G4-Bio-425】 Q56 · IB Biology HL · Evolution · Medium</div>
+  <p class="q-text">The forelimbs of humans, bats, and whales have similar bone structures despite different functions. This is an example of:</p>
+  <ul class="q-choices">
+    <li>A) Analogous structures</li>
+    <li>B) Homologous structures</li>
+    <li>C) Vestigial structures</li>
+    <li>D) Convergent evolution</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) Homologous structures. Homology indicates shared ancestry. Analogous structures result from convergent evolution (similar function, different origin).
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G4-Bio-425】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-57">
+<div class="q-num">【G4-Bio-422】 Q57 · IB Biology HL · Cell Biology · Hard</div>
+  <p class="q-text">During which stage of meiosis does crossing over (recombination) between homologous chromosomes occur?</p>
+  <ul class="q-choices">
+    <li>A) Prophase I</li>
+    <li>B) Metaphase I</li>
+    <li>C) Prophase II</li>
+    <li>D) Anaphase I</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> A) Prophase I. Synapsis and crossing over occur in prophase I of meiosis, producing recombinant chromatids and increasing genetic variation.
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G4-Bio-422】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-58">
+<div class="q-num">【G4-Bio-422】 Q58 · IB Biology HL · Molecular Biology · Hard</div>
+  <p class="q-text">Which process converts the genetic information in mRNA into a sequence of amino acids?</p>
+  <ul class="q-choices">
+    <li>A) Replication</li>
+    <li>B) Transcription</li>
+    <li>C) Translation</li>
+    <li>D) Reverse transcription</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> C) Translation. Translation at the ribosome uses tRNA and codon-anticodon pairing to synthesize the polypeptide. Transcription makes mRNA from DNA.
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G4-Bio-422】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-59">
+<div class="q-num">【G4-Bio-423】 Q59 · IB Biology HL · Genetics · Medium</div>
+  <p class="q-text">In humans, color blindness is an X-linked recessive trait. A carrier mother and unaffected father have a son. What is the probability he is colorblind?</p>
+  <ul class="q-choices">
+    <li>A) 0%</li>
+    <li>B) 25%</li>
+    <li>C) 50%</li>
+    <li>D) 100%</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> C) 50%. Mother (XᴮXᵇ) × Father (XᴮY): sons inherit Y from father and either Xᴮ or Xᵇ from mother → 50% chance of XᵇY (colorblind).
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G4-Bio-423】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-60">
+<div class="q-num">【G4-Bio-425】 Q60 · IB Biology HL · Human Physiology · Hard</div>
+  <p class="q-text">In the nephron, most reabsorption of glucose, amino acids, and water occurs in which structure?</p>
+  <ul class="q-choices">
+    <li>A) Bowman's capsule</li>
+    <li>B) Proximal convoluted tubule</li>
+    <li>C) Loop of Henle</li>
+    <li>D) Distal convoluted tubule</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) Proximal convoluted tubule. The PCT reabsorbs ~70–80% of filtrate including all glucose (via cotransport), amino acids, salts, and water.
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G4-Bio-425】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<h3>Mathematics Additional (14 questions)</h3>
+
+<div class="q" id="q-61">
+  <div class="q-num">【G5-MAA-54】 Q61 · IB Math AA HL · Calculus · Easy</div>
+  <p class="q-text">Find the derivative of f(x) = sin(x) + cos(x).</p>
+  <ul class="q-choices">
+    <li>A) cos(x) − sin(x)</li>
+    <li>B) −cos(x) + sin(x)</li>
+    <li>C) sin(x) + cos(x)</li>
+    <li>D) tan(x)</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> A) cos(x) − sin(x). d/dx sin(x) = cos(x); d/dx cos(x) = −sin(x); sum gives cos(x) − sin(x).
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G5-MAA-54】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-62">
+  <div class="q-num">【G5-MAA-54】 Q62 · IB Math AA HL · Calculus · Hard</div>
+  <p class="q-text">Evaluate ∫₀¹ (2x + 3) dx.</p>
+  <ul class="q-choices">
+    <li>A) 3</li>
+    <li>B) 4</li>
+    <li>C) 5</li>
+    <li>D) 2</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) 4. Antiderivative: x² + 3x. At x=1: 1 + 3 = 4; at x=0: 0. Definite integral = 4 − 0 = 4.
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G5-MAA-54】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-63">
+  <div class="q-num">【G5-MAA-53】 Q63 · IB Math AA HL · Vectors · Medium</div>
+  <p class="q-text">Vectors a = (1, 2) and b = (3, k) are perpendicular. Find k.</p>
+  <ul class="q-choices">
+    <li>A) −3/2</li>
+    <li>B) 3/2</li>
+    <li>C) −6</li>
+    <li>D) 0</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> A) −3/2. Perpendicular ⇒ dot product = 0: 1·3 + 2·k = 0 → 3 + 2k = 0 → k = −3/2.
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G5-MAA-53】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-64">
+  <div class="q-num">【G5-MAI-510】 Q64 · IB Math AI HL · Probability · Easy</div>
+  <p class="q-text">A fair six-sided die is rolled once. What is the probability of rolling a number greater than 4?</p>
+  <ul class="q-choices">
+    <li>A) 1/3</li>
+    <li>B) 1/2</li>
+    <li>C) 2/3</li>
+    <li>D) 1/6</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> A) 1/3. Numbers > 4 on a die are {5, 6}: 2 favorable outcomes out of 6, so P = 2/6 = 1/3.
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G5-MAI-510】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-65">
+  <div class="q-num">【G5-MAI-510】 Q65 · IB Math AI HL · Probability · Hard</div>
+  <p class="q-text">Events A and B are independent. P(A) = 0.4, P(B) = 0.5. What is P(A ∪ B)?</p>
+  <ul class="q-choices">
+    <li>A) 0.9</li>
+    <li>B) 0.7</li>
+    <li>C) 0.2</li>
+    <li>D) 0.1</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) 0.7. Independent ⇒ P(A∩B) = 0.4×0.5 = 0.2. P(A∪B) = P(A)+P(B)−P(A∩B) = 0.4+0.5−0.2 = 0.7.
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G5-MAI-510】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-66">
+  <div class="q-num">【G5-MAI-510】 Q66 · IB Math AI HL · Statistics · Medium</div>
+  <p class="q-text">The data set {2, 4, 6, 8, 10} has mean 6. What is the standard deviation (population, ungrouped)?</p>
+  <ul class="q-choices">
+    <li>A) 2</li>
+    <li>B) √8</li>
+    <li>C) 4</li>
+    <li>D) √10</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) √8. Squared deviations: (−4)², (−2)², 0², 2², 4² = 16, 4, 0, 4, 16. Variance = (40)/5 = 8. σ = √8.
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G5-MAI-510】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-67">
+  <div class="q-num">【G5-MAA-51】 Q67 · IB Math AA HL · Complex Numbers · Easy</div>
+  <p class="q-text">Simplify: i² + i⁴, where i = √−1.</p>
+  <ul class="q-choices">
+    <li>A) 0</li>
+    <li>B) 2</li>
+    <li>C) −2</li>
+    <li>D) 2i</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> A) 0. i² = −1, i⁴ = (i²)² = (−1)² = 1. Sum: −1 + 1 = 0.
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G5-MAA-51】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-68">
+  <div class="q-num">【G5-MAA-51】 Q68 · IB Math AA HL · Complex Numbers · Medium</div>
+  <p class="q-text">Write z = 1 + i in polar form (modulus–argument form).</p>
+  <ul class="q-choices">
+    <li>A) √2 (cos π/4 + i sin π/4)</li>
+    <li>B) 2 (cos π/4 + i sin π/4)</li>
+    <li>C) √2 (cos π/2 + i sin π/2)</li>
+    <li>D) 1 (cos π/4 + i sin π/4)</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> A) √2 (cos π/4 + i sin π/4). |z| = √(1+1) = √2; arg(z) = arctan(1/1) = π/4.
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G5-MAA-51】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-69">
+  <div class="q-num">【G5-MAA-51】 Q69 · IB Math AA HL · Matrices · Easy</div>
+  <p class="q-text">Given A = [[1, 2], [3, 4]], find the determinant det(A).</p>
+  <ul class="q-choices">
+    <li>A) −2</li>
+    <li>B) 10</li>
+    <li>C) 2</li>
+    <li>D) −10</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> A) −2. For 2×2 [[a,b],[c,d]], det = ad − bc = (1)(4) − (2)(3) = 4 − 6 = −2.
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G5-MAA-51】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-70">
+  <div class="q-num">【G5-MAA-51】 Q70 · IB Math AA HL · Matrices · Hard</div>
+  <p class="q-text">Which condition must hold for a square matrix A to have an inverse A⁻¹?</p>
+  <ul class="q-choices">
+    <li>A) det(A) = 0</li>
+    <li>B) det(A) ≠ 0</li>
+    <li>C) A is symmetric</li>
+    <li>D) All entries are positive</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) det(A) ≠ 0. A square matrix is invertible (non-singular) iff its determinant is nonzero. Singular matrices have det = 0.
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G5-MAA-51】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-71">
+  <div class="q-num">【G5-MAA-54】 Q71 · IB Math AA HL · Calculus · Medium</div>
+  <p class="q-text">Find the slope of the tangent to y = x³ at x = 2.</p>
+  <ul class="q-choices">
+    <li>A) 6</li>
+    <li>B) 8</li>
+    <li>C) 12</li>
+    <li>D) 3</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> C) 12. dy/dx = 3x². At x = 2: 3(4) = 12. So the tangent slope is 12.
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G5-MAA-54】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-72">
+  <div class="q-num">【G5-MAI-510】 Q72 · IB Math AI HL · Probability · Medium</div>
+  <p class="q-text">In a normal distribution with μ = 100 and σ = 15, what z-score corresponds to x = 115?</p>
+  <ul class="q-choices">
+    <li>A) 0</li>
+    <li>B) 1</li>
+    <li>C) −1</li>
+    <li>D) 2</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) 1. z = (x − μ)/σ = (115 − 100)/15 = 15/15 = 1.
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G5-MAI-510】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-73">
+  <div class="q-num">【G5-MAA-53】 Q73 · IB Math AA HL · Vectors · Hard</div>
+  <p class="q-text">Find the cross product a × b where a = (1, 0, 0) and b = (0, 1, 0).</p>
+  <ul class="q-choices">
+    <li>A) (0, 0, 1)</li>
+    <li>B) (0, 0, −1)</li>
+    <li>C) (1, 1, 0)</li>
+    <li>D) (0, 0, 0)</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> A) (0, 0, 1). Standard basis cross product: î × ĵ = k̂ = (0, 0, 1), perpendicular to both with |a||b| sin 90° = 1.
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G5-MAA-53】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-74">
+  <div class="q-num">【G5-MAI-510】 Q74 · IB Math AI HL · Statistics · Easy</div>
+  <p class="q-text">Find the median of: 3, 7, 2, 9, 5.</p>
+  <ul class="q-choices">
+    <li>A) 5</li>
+    <li>B) 5.2</li>
+    <li>C) 7</li>
+    <li>D) 2</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> A) 5. Ordered: 2, 3, 5, 7, 9. With n = 5 (odd), median is the (n+1)/2 = 3rd value = 5.
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G5-MAI-510】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<h3>Physics Additional (12 questions)</h3>
+
+<div class="q" id="q-75">
+  <div class="q-num">【G4-Phy-42】 Q75 · IB Physics HL · Mechanics · Medium</div>
+  <p class="q-text">A 2 kg object experiences a net force of 10 N. What is its acceleration?</p>
+  <ul class="q-choices">
+    <li>A) 0.2 m/s²</li>
+    <li>B) 5 m/s²</li>
+    <li>C) 20 m/s²</li>
+    <li>D) 12 m/s²</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) 5 m/s². Newton's second law: F = ma ⇒ a = F/m = 10 / 2 = 5 m/s².
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G4-Phy-42】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-76">
+  <div class="q-num">【G4-Phy-42】 Q76 · IB Physics HL · Mechanics · Hard</div>
+  <p class="q-text">A block of mass 5 kg slides down a frictionless incline of angle 30°. What is its acceleration down the slope? (g = 10 m/s²)</p>
+  <ul class="q-choices">
+    <li>A) 10 m/s²</li>
+    <li>B) 5 m/s²</li>
+    <li>C) 8.66 m/s²</li>
+    <li>D) 0 m/s²</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) 5 m/s². Parallel component: a = g sin θ = 10 · sin 30° = 10 × 0.5 = 5 m/s² (mass cancels on frictionless incline).
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G4-Phy-42】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-77">
+  <div class="q-num">【G4-Phy-45】 Q77 · IB Physics HL · Electricity · Easy</div>
+  <p class="q-text">Two resistors, 3 Ω and 6 Ω, are in parallel. What is the equivalent resistance?</p>
+  <ul class="q-choices">
+    <li>A) 9 Ω</li>
+    <li>B) 2 Ω</li>
+    <li>C) 4.5 Ω</li>
+    <li>D) 18 Ω</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) 2 Ω. 1/Rₚ = 1/3 + 1/6 = 1/2 ⇒ Rₚ = 2 Ω (parallel: equivalent resistance is less than the smallest resistor).
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G4-Phy-45】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-78">
+  <div class="q-num">【G4-Phy-45】 Q78 · IB Physics HL · Electricity · Hard</div>
+  <p class="q-text">A 12 V battery with internal resistance 1 Ω is connected to a 3 Ω load. What is the terminal voltage across the load?</p>
+  <ul class="q-choices">
+    <li>A) 9 V</li>
+    <li>B) 12 V</li>
+    <li>C) 3 V</li>
+    <li>D) 4 V</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> A) 9 V. Total R = 1 + 3 = 4 Ω ⇒ I = 12/4 = 3 A. Terminal V = I × R_load = 3 × 3 = 9 V (or 12 − I×1 = 9 V).
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G4-Phy-45】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-79">
+  <div class="q-num">【G4-Phy-45】 Q79 · IB Physics HL · Magnetism · Easy</div>
+  <p class="q-text">Which of the following materials is NOT ferromagnetic?</p>
+  <ul class="q-choices">
+    <li>A) Iron</li>
+    <li>B) Nickel</li>
+    <li>C) Copper</li>
+    <li>D) Cobalt</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> C) Copper. Fe, Ni, Co are classic ferromagnetic materials. Cu is weakly diamagnetic and not strongly attracted to magnets.
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G4-Phy-45】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-80">
+  <div class="q-num">【G4-Phy-45】 Q80 · IB Physics HL · Magnetism · Medium</div>
+  <p class="q-text">A charged particle moves parallel to a uniform magnetic field B. The magnetic force on the particle is:</p>
+  <ul class="q-choices">
+    <li>A) Maximum</li>
+    <li>B) Zero</li>
+    <li>C) Depends on charge sign only</li>
+    <li>D) Equal to qB</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) Zero. Lorentz force F = qv × B, magnitude qvB sin θ. When v ∥ B, θ = 0° and sin 0° = 0 ⇒ F = 0.
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G4-Phy-45】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-81">
+  <div class="q-num">【G4-Phy-44】 Q81 · IB Physics HL · Waves · Easy</div>
+  <p class="q-text">Two waves of equal amplitude and frequency arrive perfectly out of phase at a point. What occurs?</p>
+  <ul class="q-choices">
+    <li>A) Constructive interference</li>
+    <li>B) Destructive interference</li>
+    <li>C) Standing wave only</li>
+    <li>D) Resonance</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) Destructive interference. Out of phase by 180° gives A + (−A) = 0 total amplitude → destructive (node).
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G4-Phy-44】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-82">
+  <div class="q-num">【G4-Phy-44】 Q82 · IB Physics HL · Waves · Hard</div>
+  <p class="q-text">A string of length L fixed at both ends vibrates in its first harmonic (fundamental mode). What is the wavelength?</p>
+  <ul class="q-choices">
+    <li>A) L/2</li>
+    <li>B) L</li>
+    <li>C) 2L</li>
+    <li>D) 4L</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> C) 2L. Fixed at both ends ⇒ nodes at each end. Fundamental = one loop: half a wavelength fits, so λ/2 = L ⇒ λ = 2L.
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G4-Phy-44】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-83">
+  <div class="q-num">【G4-Phy-43】 Q83 · IB Physics HL · Thermodynamics · Medium</div>
+  <p class="q-text">The first law of thermodynamics is a restatement of which principle?</p>
+  <ul class="q-choices">
+    <li>A) Conservation of momentum</li>
+    <li>B) Conservation of energy</li>
+    <li>C) Conservation of mass</li>
+    <li>D) Entropy increase</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) Conservation of energy. ΔU = Q − W (or Q = ΔU + W) formalizes energy conservation for thermal systems.
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G4-Phy-43】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-84">
+  <div class="q-num">【G4-Phy-43】 Q84 · IB Physics HL · Thermodynamics · Easy</div>
+  <p class="q-text">What is absolute zero on the Celsius scale?</p>
+  <ul class="q-choices">
+    <li>A) 0°C</li>
+    <li>B) −100°C</li>
+    <li>C) −273°C</li>
+    <li>D) 273°C</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> C) −273°C. Absolute zero = 0 K = −273.15°C, the theoretical minimum temperature where molecular motion is at minimum.
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G4-Phy-43】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-85">
+  <div class="q-num">【G4-Phy-47】 Q85 · IB Physics HL · Quantum · Medium</div>
+  <p class="q-text">Which phenomenon demonstrates the particle nature of light?</p>
+  <ul class="q-choices">
+    <li>A) Young's double-slit interference</li>
+    <li>B) Photoelectric effect</li>
+    <li>C) Diffraction through a slit</li>
+    <li>D) Refraction by a prism</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) Photoelectric effect. Einstein explained the PE effect by quantized light (photons) delivering energy E = hf to eject electrons, showing particle behavior.
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G4-Phy-47】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-86">
+  <div class="q-num">【G4-Phy-47】 Q86 · IB Physics HL · Quantum · Hard</div>
+  <p class="q-text">Which principle states that the position and momentum of a particle cannot both be known precisely at the same time?</p>
+  <ul class="q-choices">
+    <li>A) Pauli exclusion principle</li>
+    <li>B) Heisenberg uncertainty principle</li>
+    <li>C) Aufbau principle</li>
+    <li>D) Hund's rule</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) Heisenberg uncertainty principle. Δx · Δp ≥ ℏ/2, a fundamental limit of quantum mechanics. Pauli: no two fermions share identical quantum numbers.
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G4-Phy-47】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<h3>Chemistry Additional (12 questions)</h3>
+
+<div class="q" id="q-87">
+  <div class="q-num">【G4-Chem-412】 Q87 · IB Chemistry HL · Bonding · Easy</div>
+  <p class="q-text">Which type of bond is formed between two atoms with a large difference in electronegativity?</p>
+  <ul class="q-choices">
+    <li>A) Nonpolar covalent</li>
+    <li>B) Polar covalent</li>
+    <li>C) Ionic</li>
+    <li>D) Metallic</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> C) Ionic. Large ΔEN (typically > 1.7) leads to electron transfer and formation of ions (e.g., Na⁺Cl⁻).
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G4-Chem-412】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-88">
+  <div class="q-num">【G4-Chem-412】 Q88 · IB Chemistry HL · Bonding · Medium</div>
+  <p class="q-text">Using VSEPR theory, what is the electron domain geometry and molecular shape of NH₃?</p>
+  <ul class="q-choices">
+    <li>A) Tetrahedral; trigonal pyramidal</li>
+    <li>B) Trigonal planar; trigonal pyramidal</li>
+    <li>C) Tetrahedral; tetrahedral</li>
+    <li>D) Linear; bent</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> A) Tetrahedral; trigonal pyramidal. 4 electron domains (3 bonds + 1 lone pair) ⇒ electron geometry tetrahedral; lone pair repels more ⇒ molecular shape trigonal pyramidal.
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G4-Chem-412】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-89">
+  <div class="q-num">【G4-Chem-413】 Q89 · IB Chemistry HL · Energetics · Medium</div>
+  <p class="q-text">A reaction has ΔH = −85 kJ mol⁻¹. This reaction is:</p>
+  <ul class="q-choices">
+    <li>A) Endothermic, absorbing heat</li>
+    <li>B) Exothermic, releasing heat</li>
+    <li>C) At equilibrium</li>
+    <li>D) Non-spontaneous at any T</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) Exothermic, releasing heat. Negative ΔH means enthalpy of products < reactants; heat is released to the surroundings.
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G4-Chem-413】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-90">
+  <div class="q-num">【G4-Chem-413】 Q90 · IB Chemistry HL · Energetics · Hard</div>
+  <p class="q-text">Which combination of ΔH and ΔS guarantees a reaction is spontaneous at all temperatures?</p>
+  <ul class="q-choices">
+    <li>A) ΔH > 0, ΔS > 0</li>
+    <li>B) ΔH < 0, ΔS < 0</li>
+    <li>C) ΔH < 0, ΔS > 0</li>
+    <li>D) ΔH > 0, ΔS < 0</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> C) ΔH < 0, ΔS > 0. Gibbs: ΔG = ΔH − TΔS. For ΔH negative and ΔS positive, ΔG is always negative at any T → always spontaneous.
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G4-Chem-413】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-91">
+  <div class="q-num">【G4-Chem-415】 Q91 · IB Chemistry HL · Redox · Easy</div>
+  <p class="q-text">In the reaction Zn + Cu²⁺ → Zn²⁺ + Cu, which species is reduced?</p>
+  <ul class="q-choices">
+    <li>A) Zn</li>
+    <li>B) Cu²⁺</li>
+    <li>C) Zn²⁺</li>
+    <li>D) Cu</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) Cu²⁺. Reduction = gain of electrons (oxidation state decreases): Cu²⁺ + 2e⁻ → Cu. Zn is oxidized (loses electrons).
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G4-Chem-415】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-92">
+  <div class="q-num">【G4-Chem-415】 Q92 · IB Chemistry HL · Redox · Hard</div>
+  <p class="q-text">What is the oxidation number of Cl in KClO₃?</p>
+  <ul class="q-choices">
+    <li>A) −1</li>
+    <li>B) +1</li>
+    <li>C) +5</li>
+    <li>D) +7</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> C) +5. K = +1, each O = −2. Let Cl = x: +1 + x + 3(−2) = 0 ⇒ x = +5.
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G4-Chem-415】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-93">
+  <div class="q-num">【G4-Chem-416】 Q93 · IB Chemistry HL · Acids & Bases · Easy</div>
+  <p class="q-text">According to the Brønsted–Lowry definition, a base is:</p>
+  <ul class="q-choices">
+    <li>A) A proton donor</li>
+    <li>B) A proton acceptor</li>
+    <li>C) An electron-pair donor</li>
+    <li>D) A hydroxide producer only</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) A proton acceptor. Brønsted–Lowry: acid = H⁺ donor, base = H⁺ acceptor. (Lewis: acid = e⁻ pair acceptor; base = e⁻ pair donor.)
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>G4-Chem-416</p><p><strong>解析：</strong>本题考查【G4-Chem-416】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-94">
+  <div class="q-num">【G4-Chem-416】 Q94 · IB Chemistry HL · Acids & Bases · Hard</div>
+  <p class="q-text">What is the pH of a 0.001 M NaOH solution (assume full dissociation)?</p>
+  <ul class="q-choices">
+    <li>A) 3</li>
+    <li>B) 11</li>
+    <li>C) 13</li>
+    <li>D) 1</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) 11. [OH⁻] = 0.001 M ⇒ pOH = 3. At 25°C: pH + pOH = 14 ⇒ pH = 11.
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>G4-Chem-416</p><p><strong>解析：</strong>本题考查【G4-Chem-416】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-95">
+  <div class="q-num">【G4-Chem-418】 Q95 · IB Chemistry HL · Organic Chemistry · Easy</div>
+  <p class="q-text">Which of the following is an alkane?</p>
+  <ul class="q-choices">
+    <li>A) C₂H₄</li>
+    <li>B) C₂H₆</li>
+    <li>C) C₂H₂</li>
+    <li>D) C₆H₆</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) C₂H₆. Alkanes have general formula CₙH₂ₙ₊₂ (single bonds only). C₂H₄ = alkene; C₂H₂ = alkyne; C₆H₆ = benzene (aromatic).
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G4-Chem-418】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-96">
+  <div class="q-num">【G4-Chem-418】 Q96 · IB Chemistry HL · Organic Chemistry · Medium</div>
+  <p class="q-text">What type of isomerism is shown by CH₃CH₂OH (ethanol) and CH₃OCH₃ (methoxymethane)?</p>
+  <ul class="q-choices">
+    <li>A) Geometric (cis–trans)</li>
+    <li>B) Optical</li>
+    <li>C) Functional group</li>
+    <li>D) Chain (structural)</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> C) Functional group. Both have molecular formula C₂H₆O but different functional groups (alcohol vs ether) → functional group isomerism (class of structural isomerism).
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G4-Chem-418】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-97">
+  <div class="q-num">【G4-Chem-418】 Q97 · IB Chemistry HL · Organic Chemistry · Hard</div>
+  <p class="q-text">Which reaction type converts ethene (C₂H₄) into ethanol (C₂H₅OH) by adding water across the double bond?</p>
+  <ul class="q-choices">
+    <li>A) Substitution</li>
+    <li>B) Elimination</li>
+    <li>C) Hydration (addition)</li>
+    <li>D) Esterification</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> C) Hydration (addition). Addition of H₂O across C=C (acid-catalyzed hydration): the double bond breaks; −H and −OH add to each carbon → ethanol.
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G4-Chem-418】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-98">
+  <div class="q-num">【G4-Chem-414】 Q98 · IB Chemistry HL · Kinetics · Hard</div>
+  <p class="q-text">A catalyst increases the rate of a chemical reaction primarily by:</p>
+  <ul class="q-choices">
+    <li>A) Increasing the temperature</li>
+    <li>B) Increasing the concentration of reactants</li>
+    <li>C) Providing an alternative reaction pathway with lower activation energy</li>
+    <li>D) Shifting the equilibrium position toward products</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> C) Providing an alternative reaction pathway with lower Eₐ. Lower Eₐ means more particles have sufficient energy to react; catalysts do not affect ΔH or equilibrium position.
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G4-Chem-414】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<h3>Economics Additional (8 questions)</h3>
+
+<div class="q" id="q-99">
+  <div class="q-num">【G3-Econ-31】 Q99 · IB Economics HL · Microeconomics · Medium</div>
+  <p class="q-text">If a 10% increase in price causes a 5% decrease in quantity demanded, the price elasticity of demand (PED) is:</p>
+  <ul class="q-choices">
+    <li>A) −0.5 (demand is inelastic)</li>
+    <li>B) −2 (demand is elastic)</li>
+    <li>C) −0.5 (demand is elastic)</li>
+    <li>D) −2 (demand is inelastic)</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> A) −0.5 (demand is inelastic). PED = %ΔQd / %ΔP = −5%/10% = −0.5. Since |PED| < 1, demand is inelastic.
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G3-Econ-31】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-100">
+  <div class="q-num">【G3-Econ-31】 Q100 · IB Economics HL · Microeconomics · Hard</div>
+  <p class="q-text">Which market structure is characterized by many firms, differentiated products, and relatively easy entry/exit?</p>
+  <ul class="q-choices">
+    <li>A) Perfect competition</li>
+    <li>B) Monopoly</li>
+    <li>C) Monopolistic competition</li>
+    <li>D) Oligopoly</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> C) Monopolistic competition. Key: many firms + product differentiation (unlike perfect competition's homogeneous goods) and free entry/exit (unlike oligopoly/monopoly).
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G3-Econ-31】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-101">
+  <div class="q-num">【G3-Econ-31】 Q101 · IB Economics HL · Externalities · Medium</div>
+  <p class="q-text">A government imposes a per-unit Pigouvian tax on a good with negative production externalities. The intended outcome is:</p>
+  <ul class="q-choices">
+    <li>A) Shift the supply curve right and raise output</li>
+    <li>B) Shift the supply curve left and lower output toward the social optimum</li>
+    <li>C) Shift demand right to internalize the externality</li>
+    <li>D) Eliminate the good entirely from the market</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) Shift supply left, lower output toward social optimum. The tax raises producers' MPC closer to MSC, reducing overproduction and moving equilibrium closer to the socially efficient quantity.
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G3-Econ-31】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-102">
+  <div class="q-num">【G3-Econ-32】 Q102 · IB Economics HL · Macroeconomics · Easy</div>
+  <p class="q-text">Which of the following is included in the expenditure approach to calculating GDP?</p>
+  <ul class="q-choices">
+    <li>A) Intermediate goods purchases</li>
+    <li>B) Government transfer payments</li>
+    <li>C) Investment spending (I)</li>
+    <li>D) Used car resale</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> C) Investment spending (I). Expenditure GDP = C + I + G + (X − M). Intermediate goods, transfers, and used-goods sales are excluded.
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>G3-Econ-32</p><p><strong>解析：</strong>本题考查【G3-Econ-32】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-103">
+  <div class="q-num">【G3-Econ-32】 Q103 · IB Economics HL · Macroeconomics · Medium</div>
+  <p class="q-text">Which type of unemployment arises from a mismatch between workers' skills and available jobs?</p>
+  <ul class="q-choices">
+    <li>A) Frictional unemployment</li>
+    <li>B) Structural unemployment</li>
+    <li>C) Cyclical (demand-deficient) unemployment</li>
+    <li>D) Seasonal unemployment</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) Structural unemployment. Structural = skills/location mismatch (e.g., declining industry). Frictional = between jobs; cyclical = recession-related.
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>G3-Econ-32</p><p><strong>解析：</strong>本题考查【G3-Econ-32】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-104">
+  <div class="q-num">【G3-Econ-32】 Q104 · IB Economics HL · Fiscal Policy · Medium</div>
+  <p class="q-text">In a recession, an appropriate discretionary fiscal policy response would be to:</p>
+  <ul class="q-choices">
+    <li>A) Raise taxes and cut government spending</li>
+    <li>B) Lower interest rates</li>
+    <li>C) Increase government spending and/or cut taxes</li>
+    <li>D) Sell government bonds on the open market</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> C) Expansionary fiscal policy: higher G and/or lower T increases AD to close a recessionary gap. B and D are monetary policy tools (central bank), not fiscal.
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>G3-Econ-32</p><p><strong>解析：</strong>本题考查【G3-Econ-32】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-105">
+  <div class="q-num">【G3-Econ-33】 Q105 · IB Economics HL · International Trade · Easy</div>
+  <p class="q-text">A country has a comparative advantage in producing a good when it can do so:</p>
+  <ul class="q-choices">
+    <li>A) With the absolute lowest labor cost</li>
+    <li>B) At a lower opportunity cost than its trading partner</li>
+    <li>C) Using fewer raw materials</li>
+    <li>D) With a higher price than other countries</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) At a lower opportunity cost. Comparative advantage is based on opportunity cost, not absolute productivity. Gains from trade arise from specializing per CA.
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>G3-Econ-33</p><p><strong>解析：</strong>本题考查【G3-Econ-33】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-106">
+  <div class="q-num">【G3-Econ-33】 Q106 · IB Economics HL · Exchange Rates · Hard</div>
+  <p class="q-text">In a floating exchange-rate system, an increase in demand by foreigners for a country's exports will tend to cause the country's currency to:</p>
+  <ul class="q-choices">
+    <li>A) Appreciate</li>
+    <li>B) Depreciate</li>
+    <li>C) Remain unchanged</li>
+    <li>D) Experience hyperinflation</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> A) Appreciate. Foreign buyers need the domestic currency to pay for exports ⇒ demand for domestic currency rises ⇒ the currency appreciates (higher exchange value).
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>G3-Econ-33</p><p><strong>解析：</strong>本题考查【G3-Econ-33】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<h3>Business Management Additional (8 questions)</h3>
+
+<div class="q" id="q-107">
+  <div class="q-num">【G3-BM-38】 Q107 · IB Business Management HL · Marketing · Medium</div>
+  <p class="q-text">Which pricing strategy involves setting a very low initial price to quickly gain market share?</p>
+  <ul class="q-choices">
+    <li>A) Price skimming</li>
+    <li>B) Penetration pricing</li>
+    <li>C) Cost-plus pricing</li>
+    <li>D) Loss leader</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) Penetration pricing. Skimming = high initial price; penetration = low initial price to penetrate the market rapidly and build volume.
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G3-BM-38】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-108">
+  <div class="q-num">【G3-BM-310】 Q108 · IB Business Management HL · Operations Management · Easy</div>
+  <p class="q-text">Which production method produces a single, unique product to customer specifications (e.g., custom furniture)?</p>
+  <ul class="q-choices">
+    <li>A) Job production</li>
+    <li>B) Batch production</li>
+    <li>C) Flow (mass) production</li>
+    <li>D) Mass customization</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> A) Job production. Job = one-off custom unit; batch = groups of identical units; flow = continuous standardized units on a line.
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G3-BM-310】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-109">
+  <div class="q-num">【G3-BM-310】 Q109 · IB Business Management HL · Operations · Medium</div>
+  <p class="q-text">Which operations management tool identifies the bottleneck activities and critical path of a project?</p>
+  <ul class="q-choices">
+    <li>A) SWOT analysis</li>
+    <li>B) Ansoff matrix</li>
+    <li>C) Critical path analysis (CPA)</li>
+    <li>D) Boston Consulting Group (BCG) matrix</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> C) Critical path analysis. CPA (with network diagrams) calculates EST, LFT, float, and the critical path of tasks determining minimum project duration.
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G3-BM-310】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-110">
+  <div class="q-num">【G3-BM-39】 Q110 · IB Business Management HL · Finance · Easy</div>
+  <p class="q-text">Which financial statement shows a firm's assets, liabilities, and equity at a point in time?</p>
+  <ul class="q-choices">
+    <li>A) Income statement (P&L)</li>
+    <li>B) Balance sheet (statement of financial position)</li>
+    <li>C) Cash flow statement</li>
+    <li>D) Funds flow statement</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) Balance sheet. Balance sheet = snapshot of financial position (A = L + E) at a date. Income statement covers a period's revenues and expenses.
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G3-BM-39】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-111">
+  <div class="q-num">【G3-BM-39】 Q111 · IB Business Management HL · Finance · Hard</div>
+  <p class="q-text">A company's net profit after tax is $50,000, total equity is $250,000, and it pays $10,000 in dividends. Calculate return on equity (ROE).</p>
+  <ul class="q-choices">
+    <li>A) 4%</li>
+    <li>B) 20%</li>
+    <li>C) 25%</li>
+    <li>D) 16%</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) 20%. ROE = (Net profit after tax / Equity) × 100% = (50,000 / 250,000) × 100% = 20%. Dividends do not reduce net profit used for ROE.
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G3-BM-39】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-112">
+  <div class="q-num">【G3-BM-37】 Q112 · IB Business Management HL · Human Resource Management · Medium</div>
+  <p class="q-text">In Herzberg's two-factor theory, which is a motivating factor (satisfier) rather than a hygiene factor?</p>
+  <ul class="q-choices">
+    <li>A) Salary</li>
+    <li>B) Working conditions</li>
+    <li>C) Achievement / recognition</li>
+    <li>D) Company policy</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> C) Achievement / recognition. Herzberg motivators (intrinsic): achievement, recognition, responsibility, advancement. Hygiene (extrinsic context): pay, conditions, policies—prevent dissatisfaction but do not strongly motivate.
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G3-BM-37】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-113">
+  <div class="q-num">【G3-BM-36】 Q113 · IB Business Management HL · Strategy · Hard</div>
+  <p class="q-text">In the BCG matrix, a product with high market share in a low-growth market is classified as a:</p>
+  <ul class="q-choices">
+    <li>A) Star</li>
+    <li>B) Cash cow</li>
+    <li>C) Question mark (problem child)</li>
+    <li>D) Dog</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) Cash cow. BCG: Star = high share, high growth; Cash Cow = high share, low growth (cash-generating mature products); Question mark = low share, high growth; Dog = low share, low growth.
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G3-BM-36】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-114">
+  <div class="q-num">【G3-BM-36】 Q114 · IB Business Management HL · Strategy · Easy</div>
+  <p class="q-text">Which Ansoff matrix strategy involves existing products in existing markets?</p>
+  <ul class="q-choices">
+    <li>A) Market development</li>
+    <li>B) Product development</li>
+    <li>C) Market penetration</li>
+    <li>D) Diversification</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> C) Market penetration. Ansoff: Penetration = existing product/existing market (lowest risk); Diversification = new product/new market (highest risk).
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G3-BM-36】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<h3>Computer Science, Psychology, History (6 questions)</h3>
+
+<div class="q" id="q-115">
+<div class="q-num">【G4-CS-431】 Q115 · IB Computer Science SL · System Fundamentals · Easy</div>
+  <p class="q-text">Which of the following best describes an algorithm?</p>
+  <ul class="q-choices">
+    <li>A) A programming language</li>
+    <li>B) A finite sequence of well-defined steps to solve a problem</li>
+    <li>C) A hardware component</li>
+    <li>D) A type of data structure</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) A finite sequence of well-defined steps to solve a problem. Algorithms are unambiguous, have clear inputs/outputs, and terminate (typically).
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G4-CS-431】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-116">
+<div class="q-num">【G4-CS-434】 Q116 · IB Computer Science HL · Data Structures · Medium</div>
+  <p class="q-text">Which data structure uses LIFO (Last-In, First-Out) ordering?</p>
+  <ul class="q-choices">
+    <li>A) Queue</li>
+    <li>B) Stack</li>
+    <li>C) Linked list</li>
+    <li>D) Binary search tree</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) Stack. Push/pop at the top ⇒ LIFO. Queue uses FIFO (First-In, First-Out).
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G4-CS-434】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-117">
+<div class="q-num">【G4-CS-434】 Q117 · IB Computer Science HL · Algorithms · Hard</div>
+  <p class="q-text">Using Big-O notation, what is the average-case time complexity of binary search on a sorted array of size n?</p>
+  <ul class="q-choices">
+    <li>A) O(1)</li>
+    <li>B) O(log n)</li>
+    <li>C) O(n)</li>
+    <li>D) O(n log n)</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) O(log n). Binary search halves the search space each step; number of comparisons is proportional to log₂n ⇒ logarithmic time. Linear search is O(n).
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G4-CS-434】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-118">
+  <div class="q-num">【G3-Hist-313】 Q118 · IB Psychology HL · Criminological / Abnormal · Medium</div>
+  <p class="q-text">According to the biological approach to behavior, which brain structure is most associated with the "fight or flight" fear response and emotional memory?</p>
+  <ul class="q-choices">
+    <li>A) Cerebellum</li>
+    <li>B) Amygdala</li>
+    <li>C) Broca's area</li>
+    <li>D) Medulla oblongata</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) Amygdala. The amygdala (part of the limbic system) is central to fear conditioning, threat appraisal, and forming emotional (fearful) memories.
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G3-Hist-313】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-119">
+  <div class="q-num">【G3-Hist-313】 Q119 · IB Psychology HL · Developmental · Medium</div>
+  <p class="q-text">Piaget proposed that in the sensorimotor stage, infants develop an understanding that objects continue to exist when out of sight. This concept is called:</p>
+  <ul class="q-choices">
+    <li>A) Conservation</li>
+    <li>B) Object permanence</li>
+    <li>C) Egocentrism</li>
+    <li>D) Assimilation</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> B) Object permanence. A key milestone of the sensorimotor stage (0–2 years), demonstrated typically by 8 months. Conservation appears in the concrete operational stage.
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G3-Hist-313】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="q" id="q-120">
+  <div class="q-num">【G3-Hist-312】 Q120 · IB History HL · 20th-Century World History · Easy</div>
+  <p class="q-text">Which treaty officially ended World War I and imposed heavy reparations on Germany?</p>
+  <ul class="q-choices">
+    <li>A) Treaty of Versailles (1919)</li>
+    <li>B) Treaty of Brest-Litovsk</li>
+    <li>C) Treaty of Tordesillas</li>
+    <li>D) Treaty of Westphalia</li>
+  </ul>
+  <div class="q-answer">
+    <strong>Answer:</strong> A) Treaty of Versailles (1919). The Treaty of Versailles (June 1919) redrew Europe, created the League of Nations, and assigned "war guilt" + reparations to Germany, with long-term consequences.
+  </div>
+  <div class="q-explanation" style="display:none;border:1px dashed #ccc;padding:8px 12px;margin-top:8px;font-size:0.82rem;"><p><strong>考点：</strong>刷全本Topic</p><p><strong>解析：</strong>本题考查【G3-Hist-312】对应知识点的理解与应用。先读题明确题干要求，识别考点对应的核心概念与公式法则，再按标准步骤逐步推导；对于文字应用题先转化为数学模型或逻辑框架，再代入条件验证，最后回代结果检查合理性。</p><p><strong>干扰项：</strong>A 概念混淆，把相似知识点的定义或公式张冠李戴导致选错；B 计算疏漏，关键步骤算术错误或符号处理不当产生错误结果；D 审题失误，忽略题干限定条件（如单位、范围、NOT/EXCEPT 等否定词）而误选。</p></div>
+
+</div>
+
+<div class="footer">
+  <a href="syllabus.html">Syllabus</a> <span class="sep">·</span>
+  <a href="tracker.html">Tracker</a> <span class="sep">·</span>
+  <a href="javascript:window.scrollTo(0,0)">Back to top</a>
+</div>
+
+<script src="../../../js/streak.js"></script>
+<script src="../../../js/spaced-repetition.js"></script>
+<script src="../../../js/practice-engine.js"></script>
+<script>
+(function() {
+  'use strict';
+  function patchShowAnswerButtons() {
+    var questions = document.querySelectorAll('.q');
+    questions.forEach(function(q) {
+      var explDiv = q.querySelector('.q-explanation');
+      var btns = q.querySelectorAll('button');
+      btns.forEach(function(btn) {
+        if (btn.textContent.indexOf('Show Answer') >= 0) {
+          btn.textContent = 'Show Answer + Explanation';
+          btn.addEventListener('click', function() {
+            if (explDiv) explDiv.style.display = 'block';
+          });
+        }
+      });
+    });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() {
+      setTimeout(patchShowAnswerButtons, 50);
+    });
+  } else {
+    setTimeout(patchShowAnswerButtons, 50);
+  }
+})();
+</script>
+<script>
+(function() {
+  'use strict';
+
+  var TOPICS = [
+    {code:'G5-MAA-54', name:'刷全本Topic', section:'Topic 5.4 Calculus（Math AA HL）',
+     def:'本题考查【G5-MAA-54】刷全本Topic相关知识点，是IB考试的核心/常考内容，需掌握定义内涵、典型应用场景及常见变体考法。',
+     tips:['① 先读题干标记关键词，确定考点为【G5-MAA-54】，回忆该知识点的核心定义与标准步骤','② 按规范步骤推演：数学类先列公式再代入、英语类先分析句子结构再匹配语法规则、阅读类先定位原文再做同义改写','③ 得出答案后代入原条件验证，或用排除法反证其余选项为何错误，确保结果可靠'],
+     traps:['概念混淆：把相近知识点的公式/规则搞混，张冠李戴得到错误结果','审题失误：忽略题干中的限定词（NOT/EXCEPT/单位/范围等），或把问题问的内容看反','计算疏漏：算术运算跳步、符号处理错误、小数分数换算不当，属于低级但高频错误']},
+    {code:'G5-MAA-51', name:'刷全本Topic', section:'Topic 5.1 Algebra（Math AA HL）',
+     def:'本题考查【G5-MAA-51】刷全本Topic相关知识点，是IB考试的核心/常考内容，需掌握定义内涵、典型应用场景及常见变体考法。',
+     tips:['① 先读题干标记关键词，确定考点为【G5-MAA-51】，回忆该知识点的核心定义与标准步骤','② 按规范步骤推演：数学类先列公式再代入、英语类先分析句子结构再匹配语法规则、阅读类先定位原文再做同义改写','③ 得出答案后代入原条件验证，或用排除法反证其余选项为何错误，确保结果可靠'],
+     traps:['概念混淆：把相近知识点的公式/规则搞混，张冠李戴得到错误结果','审题失误：忽略题干中的限定词（NOT/EXCEPT/单位/范围等），或把问题问的内容看反','计算疏漏：算术运算跳步、符号处理错误、小数分数换算不当，属于低级但高频错误']},
+    {code:'G5-MAA-52', name:'刷全本Topic', section:'Topic 5.2 Functions（Math AA HL）',
+     def:'本题考查【G5-MAA-52】刷全本Topic相关知识点，是IB考试的核心/常考内容，需掌握定义内涵、典型应用场景及常见变体考法。',
+     tips:['① 先读题干标记关键词，确定考点为【G5-MAA-52】，回忆该知识点的核心定义与标准步骤','② 按规范步骤推演：数学类先列公式再代入、英语类先分析句子结构再匹配语法规则、阅读类先定位原文再做同义改写','③ 得出答案后代入原条件验证，或用排除法反证其余选项为何错误，确保结果可靠'],
+     traps:['概念混淆：把相近知识点的公式/规则搞混，张冠李戴得到错误结果','审题失误：忽略题干中的限定词（NOT/EXCEPT/单位/范围等），或把问题问的内容看反','计算疏漏：算术运算跳步、符号处理错误、小数分数换算不当，属于低级但高频错误']},
+    {code:'G5-MAA-55', name:'刷全本Topic', section:'Topic 5.5 Statistics & Probability（Math AA HL）',
+     def:'本题考查【G5-MAA-55】刷全本Topic相关知识点，是IB考试的核心/常考内容，需掌握定义内涵、典型应用场景及常见变体考法。',
+     tips:['① 先读题干标记关键词，确定考点为【G5-MAA-55】，回忆该知识点的核心定义与标准步骤','② 按规范步骤推演：数学类先列公式再代入、英语类先分析句子结构再匹配语法规则、阅读类先定位原文再做同义改写','③ 得出答案后代入原条件验证，或用排除法反证其余选项为何错误，确保结果可靠'],
+     traps:['概念混淆：把相近知识点的公式/规则搞混，张冠李戴得到错误结果','审题失误：忽略题干中的限定词（NOT/EXCEPT/单位/范围等），或把问题问的内容看反','计算疏漏：算术运算跳步、符号处理错误、小数分数换算不当，属于低级但高频错误']},
+    {code:'G5-MAA-53', name:'刷全本Topic', section:'Topic 5.3 Geometry & Trigonometry（Math AA HL）',
+     def:'本题考查【G5-MAA-53】刷全本Topic相关知识点，是IB考试的核心/常考内容，需掌握定义内涵、典型应用场景及常见变体考法。',
+     tips:['① 先读题干标记关键词，确定考点为【G5-MAA-53】，回忆该知识点的核心定义与标准步骤','② 按规范步骤推演：数学类先列公式再代入、英语类先分析句子结构再匹配语法规则、阅读类先定位原文再做同义改写','③ 得出答案后代入原条件验证，或用排除法反证其余选项为何错误，确保结果可靠'],
+     traps:['概念混淆：把相近知识点的公式/规则搞混，张冠李戴得到错误结果','审题失误：忽略题干中的限定词（NOT/EXCEPT/单位/范围等），或把问题问的内容看反','计算疏漏：算术运算跳步、符号处理错误、小数分数换算不当，属于低级但高频错误']},
+    {code:'G5-MAI-510', name:'刷全本Topic', section:'Topic 5.10 Statistics + Probability（Math AI SL）',
+     def:'本题考查【G5-MAI-510】刷全本Topic相关知识点，是IB考试的核心/常考内容，需掌握定义内涵、典型应用场景及常见变体考法。',
+     tips:['① 先读题干标记关键词，确定考点为【G5-MAI-510】，回忆该知识点的核心定义与标准步骤','② 按规范步骤推演：数学类先列公式再代入、英语类先分析句子结构再匹配语法规则、阅读类先定位原文再做同义改写','③ 得出答案后代入原条件验证，或用排除法反证其余选项为何错误，确保结果可靠'],
+     traps:['概念混淆：把相近知识点的公式/规则搞混，张冠李戴得到错误结果','审题失误：忽略题干中的限定词（NOT/EXCEPT/单位/范围等），或把问题问的内容看反','计算疏漏：算术运算跳步、符号处理错误、小数分数换算不当，属于低级但高频错误']},
+    {code:'G4-Phy-42', name:'刷全本Topic', section:'Topic 4.2 力学（Physics HL）',
+     def:'本题考查【G4-Phy-42】刷全本Topic相关知识点，是IB考试的核心/常考内容，需掌握定义内涵、典型应用场景及常见变体考法。',
+     tips:['① 先读题干标记关键词，确定考点为【G4-Phy-42】，回忆该知识点的核心定义与标准步骤','② 按规范步骤推演：数学类先列公式再代入、英语类先分析句子结构再匹配语法规则、阅读类先定位原文再做同义改写','③ 得出答案后代入原条件验证，或用排除法反证其余选项为何错误，确保结果可靠'],
+     traps:['概念混淆：把相近知识点的公式/规则搞混，张冠李戴得到错误结果','审题失误：忽略题干中的限定词（NOT/EXCEPT/单位/范围等），或把问题问的内容看反','计算疏漏：算术运算跳步、符号处理错误、小数分数换算不当，属于低级但高频错误']},
+    {code:'G4-Phy-44', name:'刷全本Topic', section:'Topic 4.4 波（Physics HL）',
+     def:'本题考查【G4-Phy-44】刷全本Topic相关知识点，是IB考试的核心/常考内容，需掌握定义内涵、典型应用场景及常见变体考法。',
+     tips:['① 先读题干标记关键词，确定考点为【G4-Phy-44】，回忆该知识点的核心定义与标准步骤','② 按规范步骤推演：数学类先列公式再代入、英语类先分析句子结构再匹配语法规则、阅读类先定位原文再做同义改写','③ 得出答案后代入原条件验证，或用排除法反证其余选项为何错误，确保结果可靠'],
+     traps:['概念混淆：把相近知识点的公式/规则搞混，张冠李戴得到错误结果','审题失误：忽略题干中的限定词（NOT/EXCEPT/单位/范围等），或把问题问的内容看反','计算疏漏：算术运算跳步、符号处理错误、小数分数换算不当，属于低级但高频错误']},
+    {code:'G4-Phy-43', name:'刷全本Topic', section:'Topic 4.3 热物理（Physics HL）',
+     def:'本题考查【G4-Phy-43】刷全本Topic相关知识点，是IB考试的核心/常考内容，需掌握定义内涵、典型应用场景及常见变体考法。',
+     tips:['① 先读题干标记关键词，确定考点为【G4-Phy-43】，回忆该知识点的核心定义与标准步骤','② 按规范步骤推演：数学类先列公式再代入、英语类先分析句子结构再匹配语法规则、阅读类先定位原文再做同义改写','③ 得出答案后代入原条件验证，或用排除法反证其余选项为何错误，确保结果可靠'],
+     traps:['概念混淆：把相近知识点的公式/规则搞混，张冠李戴得到错误结果','审题失误：忽略题干中的限定词（NOT/EXCEPT/单位/范围等），或把问题问的内容看反','计算疏漏：算术运算跳步、符号处理错误、小数分数换算不当，属于低级但高频错误']},
+    {code:'G4-Phy-45', name:'刷全本Topic', section:'Topic 4.5 电与磁（Physics HL）',
+     def:'本题考查【G4-Phy-45】刷全本Topic相关知识点，是IB考试的核心/常考内容，需掌握定义内涵、典型应用场景及常见变体考法。',
+     tips:['① 先读题干标记关键词，确定考点为【G4-Phy-45】，回忆该知识点的核心定义与标准步骤','② 按规范步骤推演：数学类先列公式再代入、英语类先分析句子结构再匹配语法规则、阅读类先定位原文再做同义改写','③ 得出答案后代入原条件验证，或用排除法反证其余选项为何错误，确保结果可靠'],
+     traps:['概念混淆：把相近知识点的公式/规则搞混，张冠李戴得到错误结果','审题失误：忽略题干中的限定词（NOT/EXCEPT/单位/范围等），或把问题问的内容看反','计算疏漏：算术运算跳步、符号处理错误、小数分数换算不当，属于低级但高频错误']},
+    {code:'G4-Phy-47', name:'刷全本Topic', section:'Topic 4.7 原子 / 核 / 粒子物理（Physics HL）',
+     def:'本题考查【G4-Phy-47】刷全本Topic相关知识点，是IB考试的核心/常考内容，需掌握定义内涵、典型应用场景及常见变体考法。',
+     tips:['① 先读题干标记关键词，确定考点为【G4-Phy-47】，回忆该知识点的核心定义与标准步骤','② 按规范步骤推演：数学类先列公式再代入、英语类先分析句子结构再匹配语法规则、阅读类先定位原文再做同义改写','③ 得出答案后代入原条件验证，或用排除法反证其余选项为何错误，确保结果可靠'],
+     traps:['概念混淆：把相近知识点的公式/规则搞混，张冠李戴得到错误结果','审题失误：忽略题干中的限定词（NOT/EXCEPT/单位/范围等），或把问题问的内容看反','计算疏漏：算术运算跳步、符号处理错误、小数分数换算不当，属于低级但高频错误']},
+    {code:'G4-Phy-46', name:'刷全本Topic', section:'Topic 4.6 圆周与引力（Physics HL）',
+     def:'本题考查【G4-Phy-46】刷全本Topic相关知识点，是IB考试的核心/常考内容，需掌握定义内涵、典型应用场景及常见变体考法。',
+     tips:['① 先读题干标记关键词，确定考点为【G4-Phy-46】，回忆该知识点的核心定义与标准步骤','② 按规范步骤推演：数学类先列公式再代入、英语类先分析句子结构再匹配语法规则、阅读类先定位原文再做同义改写','③ 得出答案后代入原条件验证，或用排除法反证其余选项为何错误，确保结果可靠'],
+     traps:['概念混淆：把相近知识点的公式/规则搞混，张冠李戴得到错误结果','审题失误：忽略题干中的限定词（NOT/EXCEPT/单位/范围等），或把问题问的内容看反','计算疏漏：算术运算跳步、符号处理错误、小数分数换算不当，属于低级但高频错误']},
+    {code:'G4-Phy-49', name:'刷全本Topic', section:'Topic 4.9 HL Option A: Further Mechanics（Physics HL）',
+     def:'本题考查【G4-Phy-49】刷全本Topic相关知识点，是IB考试的核心/常考内容，需掌握定义内涵、典型应用场景及常见变体考法。',
+     tips:['① 先读题干标记关键词，确定考点为【G4-Phy-49】，回忆该知识点的核心定义与标准步骤','② 按规范步骤推演：数学类先列公式再代入、英语类先分析句子结构再匹配语法规则、阅读类先定位原文再做同义改写','③ 得出答案后代入原条件验证，或用排除法反证其余选项为何错误，确保结果可靠'],
+     traps:['概念混淆：把相近知识点的公式/规则搞混，张冠李戴得到错误结果','审题失误：忽略题干中的限定词（NOT/EXCEPT/单位/范围等），或把问题问的内容看反','计算疏漏：算术运算跳步、符号处理错误、小数分数换算不当，属于低级但高频错误']},
+    {code:'G3-Econ-31', name:'刷全本Topic', section:'Topic 3.1 Microeconomics（Economics HL）',
+     def:'本题考查【G3-Econ-31】刷全本Topic相关知识点，是IB考试的核心/常考内容，需掌握定义内涵、典型应用场景及常见变体考法。',
+     tips:['① 先读题干标记关键词，确定考点为【G3-Econ-31】，回忆该知识点的核心定义与标准步骤','② 按规范步骤推演：数学类先列公式再代入、英语类先分析句子结构再匹配语法规则、阅读类先定位原文再做同义改写','③ 得出答案后代入原条件验证，或用排除法反证其余选项为何错误，确保结果可靠'],
+     traps:['概念混淆：把相近知识点的公式/规则搞混，张冠李戴得到错误结果','审题失误：忽略题干中的限定词（NOT/EXCEPT/单位/范围等），或把问题问的内容看反','计算疏漏：算术运算跳步、符号处理错误、小数分数换算不当，属于低级但高频错误']},
+    {code:'G3-Econ-32', name:'G3-Econ-32', section:'General',
+     def:'本题考查【G3-Econ-32】G3-Econ-32相关知识点，是IB考试的核心/常考内容，需掌握定义内涵、典型应用场景及常见变体考法。',
+     tips:['① 先读题干标记关键词，确定考点为【G3-Econ-32】，回忆该知识点的核心定义与标准步骤','② 按规范步骤推演：数学类先列公式再代入、英语类先分析句子结构再匹配语法规则、阅读类先定位原文再做同义改写','③ 得出答案后代入原条件验证，或用排除法反证其余选项为何错误，确保结果可靠'],
+     traps:['概念混淆：把相近知识点的公式/规则搞混，张冠李戴得到错误结果','审题失误：忽略题干中的限定词（NOT/EXCEPT/单位/范围等），或把问题问的内容看反','计算疏漏：算术运算跳步、符号处理错误、小数分数换算不当，属于低级但高频错误']},
+    {code:'G4-Chem-415', name:'刷全本Topic', section:'Topic 4.15 Topic 9 氧化还原 / 10 有机 / 11 测量（Chemistry HL）',
+     def:'本题考查【G4-Chem-415】刷全本Topic相关知识点，是IB考试的核心/常考内容，需掌握定义内涵、典型应用场景及常见变体考法。',
+     tips:['① 先读题干标记关键词，确定考点为【G4-Chem-415】，回忆该知识点的核心定义与标准步骤','② 按规范步骤推演：数学类先列公式再代入、英语类先分析句子结构再匹配语法规则、阅读类先定位原文再做同义改写','③ 得出答案后代入原条件验证，或用排除法反证其余选项为何错误，确保结果可靠'],
+     traps:['概念混淆：把相近知识点的公式/规则搞混，张冠李戴得到错误结果','审题失误：忽略题干中的限定词（NOT/EXCEPT/单位/范围等），或把问题问的内容看反','计算疏漏：算术运算跳步、符号处理错误、小数分数换算不当，属于低级但高频错误']},
+    {code:'G3-BM-38', name:'刷全本Topic', section:'Topic 3.8 Marketing（STP + 4P）（Business Management SL）',
+     def:'本题考查【G3-BM-38】刷全本Topic相关知识点，是IB考试的核心/常考内容，需掌握定义内涵、典型应用场景及常见变体考法。',
+     tips:['① 先读题干标记关键词，确定考点为【G3-BM-38】，回忆该知识点的核心定义与标准步骤','② 按规范步骤推演：数学类先列公式再代入、英语类先分析句子结构再匹配语法规则、阅读类先定位原文再做同义改写','③ 得出答案后代入原条件验证，或用排除法反证其余选项为何错误，确保结果可靠'],
+     traps:['概念混淆：把相近知识点的公式/规则搞混，张冠李戴得到错误结果','审题失误：忽略题干中的限定词（NOT/EXCEPT/单位/范围等），或把问题问的内容看反','计算疏漏：算术运算跳步、符号处理错误、小数分数换算不当，属于低级但高频错误']},
+    {code:'G3-BM-39', name:'刷全本Topic', section:'Topic 3.9 Finance / 会计（三张表 + 比率）（Business Management SL）',
+     def:'本题考查【G3-BM-39】刷全本Topic相关知识点，是IB考试的核心/常考内容，需掌握定义内涵、典型应用场景及常见变体考法。',
+     tips:['① 先读题干标记关键词，确定考点为【G3-BM-39】，回忆该知识点的核心定义与标准步骤','② 按规范步骤推演：数学类先列公式再代入、英语类先分析句子结构再匹配语法规则、阅读类先定位原文再做同义改写','③ 得出答案后代入原条件验证，或用排除法反证其余选项为何错误，确保结果可靠'],
+     traps:['概念混淆：把相近知识点的公式/规则搞混，张冠李戴得到错误结果','审题失误：忽略题干中的限定词（NOT/EXCEPT/单位/范围等），或把问题问的内容看反','计算疏漏：算术运算跳步、符号处理错误、小数分数换算不当，属于低级但高频错误']},
+    {code:'G3-Econ-33', name:'G3-Econ-33', section:'General',
+     def:'本题考查【G3-Econ-33】G3-Econ-33相关知识点，是IB考试的核心/常考内容，需掌握定义内涵、典型应用场景及常见变体考法。',
+     tips:['① 先读题干标记关键词，确定考点为【G3-Econ-33】，回忆该知识点的核心定义与标准步骤','② 按规范步骤推演：数学类先列公式再代入、英语类先分析句子结构再匹配语法规则、阅读类先定位原文再做同义改写','③ 得出答案后代入原条件验证，或用排除法反证其余选项为何错误，确保结果可靠'],
+     traps:['概念混淆：把相近知识点的公式/规则搞混，张冠李戴得到错误结果','审题失误：忽略题干中的限定词（NOT/EXCEPT/单位/范围等），或把问题问的内容看反','计算疏漏：算术运算跳步、符号处理错误、小数分数换算不当，属于低级但高频错误']},
+    {code:'G3-BM-37', name:'刷全本Topic', section:'Topic 3.7 HRM（招聘 / 激励 / 组织文化）（Business Management SL）',
+     def:'本题考查【G3-BM-37】刷全本Topic相关知识点，是IB考试的核心/常考内容，需掌握定义内涵、典型应用场景及常见变体考法。',
+     tips:['① 先读题干标记关键词，确定考点为【G3-BM-37】，回忆该知识点的核心定义与标准步骤','② 按规范步骤推演：数学类先列公式再代入、英语类先分析句子结构再匹配语法规则、阅读类先定位原文再做同义改写','③ 得出答案后代入原条件验证，或用排除法反证其余选项为何错误，确保结果可靠'],
+     traps:['概念混淆：把相近知识点的公式/规则搞混，张冠李戴得到错误结果','审题失误：忽略题干中的限定词（NOT/EXCEPT/单位/范围等），或把问题问的内容看反','计算疏漏：算术运算跳步、符号处理错误、小数分数换算不当，属于低级但高频错误']},
+    {code:'G4-Chem-414', name:'刷全本Topic', section:'Topic 4.14 Topic 7 平衡 / 8 酸碱（Chemistry HL）',
+     def:'本题考查【G4-Chem-414】刷全本Topic相关知识点，是IB考试的核心/常考内容，需掌握定义内涵、典型应用场景及常见变体考法。',
+     tips:['① 先读题干标记关键词，确定考点为【G4-Chem-414】，回忆该知识点的核心定义与标准步骤','② 按规范步骤推演：数学类先列公式再代入、英语类先分析句子结构再匹配语法规则、阅读类先定位原文再做同义改写','③ 得出答案后代入原条件验证，或用排除法反证其余选项为何错误，确保结果可靠'],
+     traps:['概念混淆：把相近知识点的公式/规则搞混，张冠李戴得到错误结果','审题失误：忽略题干中的限定词（NOT/EXCEPT/单位/范围等），或把问题问的内容看反','计算疏漏：算术运算跳步、符号处理错误、小数分数换算不当，属于低级但高频错误']},
+    {code:'G4-Chem-416', name:'G4-Chem-416', section:'General',
+     def:'本题考查【G4-Chem-416】G4-Chem-416相关知识点，是IB考试的核心/常考内容，需掌握定义内涵、典型应用场景及常见变体考法。',
+     tips:['① 先读题干标记关键词，确定考点为【G4-Chem-416】，回忆该知识点的核心定义与标准步骤','② 按规范步骤推演：数学类先列公式再代入、英语类先分析句子结构再匹配语法规则、阅读类先定位原文再做同义改写','③ 得出答案后代入原条件验证，或用排除法反证其余选项为何错误，确保结果可靠'],
+     traps:['概念混淆：把相近知识点的公式/规则搞混，张冠李戴得到错误结果','审题失误：忽略题干中的限定词（NOT/EXCEPT/单位/范围等），或把问题问的内容看反','计算疏漏：算术运算跳步、符号处理错误、小数分数换算不当，属于低级但高频错误']},
+    {code:'G4-Bio-421', name:'刷全本Topic', section:'Topic 4.17 Topic 1-2 Cell + Molecular（Biology HL）',
+     def:'本题考查【G4-Bio-421】刷全本Topic相关知识点，是IB考试的核心/常考内容，需掌握定义内涵、典型应用场景及常见变体考法。',
+     tips:['① 先读题干标记关键词，确定考点为【G4-Bio-421】，回忆该知识点的核心定义与标准步骤','② 按规范步骤推演：数学类先列公式再代入、英语类先分析句子结构再匹配语法规则、阅读类先定位原文再做同义改写','③ 得出答案后代入原条件验证，或用排除法反证其余选项为何错误，确保结果可靠'],
+     traps:['概念混淆：把相近知识点的公式/规则搞混，张冠李戴得到错误结果','审题失误：忽略题干中的限定词（NOT/EXCEPT/单位/范围等），或把问题问的内容看反','计算疏漏：算术运算跳步、符号处理错误、小数分数换算不当，属于低级但高频错误']},
+    {code:'G4-Bio-423', name:'刷全本Topic', section:'Topic 4.18 Topic 3-4 Genetics + Ecology（Biology HL）',
+     def:'本题考查【G4-Bio-423】刷全本Topic相关知识点，是IB考试的核心/常考内容，需掌握定义内涵、典型应用场景及常见变体考法。',
+     tips:['① 先读题干标记关键词，确定考点为【G4-Bio-423】，回忆该知识点的核心定义与标准步骤','② 按规范步骤推演：数学类先列公式再代入、英语类先分析句子结构再匹配语法规则、阅读类先定位原文再做同义改写','③ 得出答案后代入原条件验证，或用排除法反证其余选项为何错误，确保结果可靠'],
+     traps:['概念混淆：把相近知识点的公式/规则搞混，张冠李戴得到错误结果','审题失误：忽略题干中的限定词（NOT/EXCEPT/单位/范围等），或把问题问的内容看反','计算疏漏：算术运算跳步、符号处理错误、小数分数换算不当，属于低级但高频错误']},
+    {code:'G4-Bio-424', name:'G4-Bio-424', section:'General',
+     def:'本题考查【G4-Bio-424】G4-Bio-424相关知识点，是IB考试的核心/常考内容，需掌握定义内涵、典型应用场景及常见变体考法。',
+     tips:['① 先读题干标记关键词，确定考点为【G4-Bio-424】，回忆该知识点的核心定义与标准步骤','② 按规范步骤推演：数学类先列公式再代入、英语类先分析句子结构再匹配语法规则、阅读类先定位原文再做同义改写','③ 得出答案后代入原条件验证，或用排除法反证其余选项为何错误，确保结果可靠'],
+     traps:['概念混淆：把相近知识点的公式/规则搞混，张冠李戴得到错误结果','审题失误：忽略题干中的限定词（NOT/EXCEPT/单位/范围等），或把问题问的内容看反','计算疏漏：算术运算跳步、符号处理错误、小数分数换算不当，属于低级但高频错误']},
+    {code:'G4-Bio-425', name:'刷全本Topic', section:'Topic 4.19 Topic 5-6 Evolution + Human Physiology（Biology HL）',
+     def:'本题考查【G4-Bio-425】刷全本Topic相关知识点，是IB考试的核心/常考内容，需掌握定义内涵、典型应用场景及常见变体考法。',
+     tips:['① 先读题干标记关键词，确定考点为【G4-Bio-425】，回忆该知识点的核心定义与标准步骤','② 按规范步骤推演：数学类先列公式再代入、英语类先分析句子结构再匹配语法规则、阅读类先定位原文再做同义改写','③ 得出答案后代入原条件验证，或用排除法反证其余选项为何错误，确保结果可靠'],
+     traps:['概念混淆：把相近知识点的公式/规则搞混，张冠李戴得到错误结果','审题失误：忽略题干中的限定词（NOT/EXCEPT/单位/范围等），或把问题问的内容看反','计算疏漏：算术运算跳步、符号处理错误、小数分数换算不当，属于低级但高频错误']},
+    {code:'G4-Bio-422', name:'刷全本Topic', section:'Topic 4.20 HL Extension 7-11（Biology HL）',
+     def:'本题考查【G4-Bio-422】刷全本Topic相关知识点，是IB考试的核心/常考内容，需掌握定义内涵、典型应用场景及常见变体考法。',
+     tips:['① 先读题干标记关键词，确定考点为【G4-Bio-422】，回忆该知识点的核心定义与标准步骤','② 按规范步骤推演：数学类先列公式再代入、英语类先分析句子结构再匹配语法规则、阅读类先定位原文再做同义改写','③ 得出答案后代入原条件验证，或用排除法反证其余选项为何错误，确保结果可靠'],
+     traps:['概念混淆：把相近知识点的公式/规则搞混，张冠李戴得到错误结果','审题失误：忽略题干中的限定词（NOT/EXCEPT/单位/范围等），或把问题问的内容看反','计算疏漏：算术运算跳步、符号处理错误、小数分数换算不当，属于低级但高频错误']},
+    {code:'G4-Chem-412', name:'刷全本Topic', section:'Topic 4.12 Topic 3 周期 / 4 键合（Chemistry HL）',
+     def:'本题考查【G4-Chem-412】刷全本Topic相关知识点，是IB考试的核心/常考内容，需掌握定义内涵、典型应用场景及常见变体考法。',
+     tips:['① 先读题干标记关键词，确定考点为【G4-Chem-412】，回忆该知识点的核心定义与标准步骤','② 按规范步骤推演：数学类先列公式再代入、英语类先分析句子结构再匹配语法规则、阅读类先定位原文再做同义改写','③ 得出答案后代入原条件验证，或用排除法反证其余选项为何错误，确保结果可靠'],
+     traps:['概念混淆：把相近知识点的公式/规则搞混，张冠李戴得到错误结果','审题失误：忽略题干中的限定词（NOT/EXCEPT/单位/范围等），或把问题问的内容看反','计算疏漏：算术运算跳步、符号处理错误、小数分数换算不当，属于低级但高频错误']},
+    {code:'G4-Chem-413', name:'刷全本Topic', section:'Topic 4.13 Topic 5 热力学 / 6 动力学（Chemistry HL）',
+     def:'本题考查【G4-Chem-413】刷全本Topic相关知识点，是IB考试的核心/常考内容，需掌握定义内涵、典型应用场景及常见变体考法。',
+     tips:['① 先读题干标记关键词，确定考点为【G4-Chem-413】，回忆该知识点的核心定义与标准步骤','② 按规范步骤推演：数学类先列公式再代入、英语类先分析句子结构再匹配语法规则、阅读类先定位原文再做同义改写','③ 得出答案后代入原条件验证，或用排除法反证其余选项为何错误，确保结果可靠'],
+     traps:['概念混淆：把相近知识点的公式/规则搞混，张冠李戴得到错误结果','审题失误：忽略题干中的限定词（NOT/EXCEPT/单位/范围等），或把问题问的内容看反','计算疏漏：算术运算跳步、符号处理错误、小数分数换算不当，属于低级但高频错误']},
+    {code:'G4-Chem-418', name:'刷全本Topic', section:'Topic 4.16 Option 至少 3 个（Chemistry HL）',
+     def:'本题考查【G4-Chem-418】刷全本Topic相关知识点，是IB考试的核心/常考内容，需掌握定义内涵、典型应用场景及常见变体考法。',
+     tips:['① 先读题干标记关键词，确定考点为【G4-Chem-418】，回忆该知识点的核心定义与标准步骤','② 按规范步骤推演：数学类先列公式再代入、英语类先分析句子结构再匹配语法规则、阅读类先定位原文再做同义改写','③ 得出答案后代入原条件验证，或用排除法反证其余选项为何错误，确保结果可靠'],
+     traps:['概念混淆：把相近知识点的公式/规则搞混，张冠李戴得到错误结果','审题失误：忽略题干中的限定词（NOT/EXCEPT/单位/范围等），或把问题问的内容看反','计算疏漏：算术运算跳步、符号处理错误、小数分数换算不当，属于低级但高频错误']},
+    {code:'G3-BM-310', name:'刷全本Topic', section:'Topic 3.10 Operations（生产 + 质量 + 供应链）（Business Management SL）',
+     def:'本题考查【G3-BM-310】刷全本Topic相关知识点，是IB考试的核心/常考内容，需掌握定义内涵、典型应用场景及常见变体考法。',
+     tips:['① 先读题干标记关键词，确定考点为【G3-BM-310】，回忆该知识点的核心定义与标准步骤','② 按规范步骤推演：数学类先列公式再代入、英语类先分析句子结构再匹配语法规则、阅读类先定位原文再做同义改写','③ 得出答案后代入原条件验证，或用排除法反证其余选项为何错误，确保结果可靠'],
+     traps:['概念混淆：把相近知识点的公式/规则搞混，张冠李戴得到错误结果','审题失误：忽略题干中的限定词（NOT/EXCEPT/单位/范围等），或把问题问的内容看反','计算疏漏：算术运算跳步、符号处理错误、小数分数换算不当，属于低级但高频错误']},
+    {code:'G3-BM-36', name:'刷全本Topic', section:'Topic 3.6 组织类型 + 结构（Business Management SL）',
+     def:'本题考查【G3-BM-36】刷全本Topic相关知识点，是IB考试的核心/常考内容，需掌握定义内涵、典型应用场景及常见变体考法。',
+     tips:['① 先读题干标记关键词，确定考点为【G3-BM-36】，回忆该知识点的核心定义与标准步骤','② 按规范步骤推演：数学类先列公式再代入、英语类先分析句子结构再匹配语法规则、阅读类先定位原文再做同义改写','③ 得出答案后代入原条件验证，或用排除法反证其余选项为何错误，确保结果可靠'],
+     traps:['概念混淆：把相近知识点的公式/规则搞混，张冠李戴得到错误结果','审题失误：忽略题干中的限定词（NOT/EXCEPT/单位/范围等），或把问题问的内容看反','计算疏漏：算术运算跳步、符号处理错误、小数分数换算不当，属于低级但高频错误']},
+    {code:'G4-CS-431', name:'刷全本Topic', section:'Topic 4.21 Topic 1 System Fundamentals（Computer Science SL）',
+     def:'本题考查【G4-CS-431】刷全本Topic相关知识点，是IB考试的核心/常考内容，需掌握定义内涵、典型应用场景及常见变体考法。',
+     tips:['① 先读题干标记关键词，确定考点为【G4-CS-431】，回忆该知识点的核心定义与标准步骤','② 按规范步骤推演：数学类先列公式再代入、英语类先分析句子结构再匹配语法规则、阅读类先定位原文再做同义改写','③ 得出答案后代入原条件验证，或用排除法反证其余选项为何错误，确保结果可靠'],
+     traps:['概念混淆：把相近知识点的公式/规则搞混，张冠李戴得到错误结果','审题失误：忽略题干中的限定词（NOT/EXCEPT/单位/范围等），或把问题问的内容看反','计算疏漏：算术运算跳步、符号处理错误、小数分数换算不当，属于低级但高频错误']},
+    {code:'G4-CS-434', name:'刷全本Topic', section:'Topic 4.24 Topic 4 Computational Thinking（Computer Science SL）',
+     def:'本题考查【G4-CS-434】刷全本Topic相关知识点，是IB考试的核心/常考内容，需掌握定义内涵、典型应用场景及常见变体考法。',
+     tips:['① 先读题干标记关键词，确定考点为【G4-CS-434】，回忆该知识点的核心定义与标准步骤','② 按规范步骤推演：数学类先列公式再代入、英语类先分析句子结构再匹配语法规则、阅读类先定位原文再做同义改写','③ 得出答案后代入原条件验证，或用排除法反证其余选项为何错误，确保结果可靠'],
+     traps:['概念混淆：把相近知识点的公式/规则搞混，张冠李戴得到错误结果','审题失误：忽略题干中的限定词（NOT/EXCEPT/单位/范围等），或把问题问的内容看反','计算疏漏：算术运算跳步、符号处理错误、小数分数换算不当，属于低级但高频错误']},
+    {code:'G3-Hist-313', name:'刷全本Topic', section:'Topic 3.13 World History Topic 2（History HL）',
+     def:'本题考查【G3-Hist-313】刷全本Topic相关知识点，是IB考试的核心/常考内容，需掌握定义内涵、典型应用场景及常见变体考法。',
+     tips:['① 先读题干标记关键词，确定考点为【G3-Hist-313】，回忆该知识点的核心定义与标准步骤','② 按规范步骤推演：数学类先列公式再代入、英语类先分析句子结构再匹配语法规则、阅读类先定位原文再做同义改写','③ 得出答案后代入原条件验证，或用排除法反证其余选项为何错误，确保结果可靠'],
+     traps:['概念混淆：把相近知识点的公式/规则搞混，张冠李戴得到错误结果','审题失误：忽略题干中的限定词（NOT/EXCEPT/单位/范围等），或把问题问的内容看反','计算疏漏：算术运算跳步、符号处理错误、小数分数换算不当，属于低级但高频错误']},
+    {code:'G3-Hist-312', name:'刷全本Topic', section:'Topic 3.12 World History Topic 1（History HL）',
+     def:'本题考查【G3-Hist-312】刷全本Topic相关知识点，是IB考试的核心/常考内容，需掌握定义内涵、典型应用场景及常见变体考法。',
+     tips:['① 先读题干标记关键词，确定考点为【G3-Hist-312】，回忆该知识点的核心定义与标准步骤','② 按规范步骤推演：数学类先列公式再代入、英语类先分析句子结构再匹配语法规则、阅读类先定位原文再做同义改写','③ 得出答案后代入原条件验证，或用排除法反证其余选项为何错误，确保结果可靠'],
+     traps:['概念混淆：把相近知识点的公式/规则搞混，张冠李戴得到错误结果','审题失误：忽略题干中的限定词（NOT/EXCEPT/单位/范围等），或把问题问的内容看反','计算疏漏：算术运算跳步、符号处理错误、小数分数换算不当，属于低级但高频错误']}
+  ];
+
+  var TOTAL_TOPICS = TOPICS.length;
+
+  var sectionGroups = {
+    'Topic 5.4 Calculus（Math AA HL）': [],
+    'Topic 5.1 Algebra（Math AA HL）': [],
+    'Topic 5.2 Functions（Math AA HL）': [],
+    'Topic 5.5 Statistics & Probability（Math AA HL）': [],
+    'Topic 5.3 Geometry & Trigonometry（Math AA HL）': [],
+    'Topic 5.10 Statistics + Probability（Math AI SL）': [],
+    'Topic 4.2 力学（Physics HL）': [],
+    'Topic 4.4 波（Physics HL）': [],
+    'Topic 4.3 热物理（Physics HL）': [],
+    'Topic 4.5 电与磁（Physics HL）': [],
+    'Topic 4.7 原子 / 核 / 粒子物理（Physics HL）': [],
+    'Topic 4.6 圆周与引力（Physics HL）': [],
+    'Topic 4.9 HL Option A: Further Mechanics（Physics HL）': [],
+    'Topic 3.1 Microeconomics（Economics HL）': [],
+    'General': [],
+    'Topic 4.15 Topic 9 氧化还原 / 10 有机 / 11 测量（Chemistry HL）': [],
+    'Topic 3.8 Marketing（STP + 4P）（Business Management SL）': [],
+    'Topic 3.9 Finance / 会计（三张表 + 比率）（Business Management SL）': [],
+    'Topic 3.7 HRM（招聘 / 激励 / 组织文化）（Business Management SL）': [],
+    'Topic 4.14 Topic 7 平衡 / 8 酸碱（Chemistry HL）': [],
+    'Topic 4.17 Topic 1-2 Cell + Molecular（Biology HL）': [],
+    'Topic 4.18 Topic 3-4 Genetics + Ecology（Biology HL）': [],
+    'Topic 4.19 Topic 5-6 Evolution + Human Physiology（Biology HL）': [],
+    'Topic 4.20 HL Extension 7-11（Biology HL）': [],
+    'Topic 4.12 Topic 3 周期 / 4 键合（Chemistry HL）': [],
+    'Topic 4.13 Topic 5 热力学 / 6 动力学（Chemistry HL）': [],
+    'Topic 4.16 Option 至少 3 个（Chemistry HL）': [],
+    'Topic 3.10 Operations（生产 + 质量 + 供应链）（Business Management SL）': [],
+    'Topic 3.6 组织类型 + 结构（Business Management SL）': [],
+    'Topic 4.21 Topic 1 System Fundamentals（Computer Science SL）': [],
+    'Topic 4.24 Topic 4 Computational Thinking（Computer Science SL）': [],
+    'Topic 3.13 World History Topic 2（History HL）': [],
+    'Topic 3.12 World History Topic 1（History HL）': []
+  };
+  TOPICS.forEach(function(t) { if (sectionGroups[t.section]) sectionGroups[t.section].push(t); });
+
+  function buildTopicCard(t, index, singleMode) {
+    var style = singleMode
+      ? 'border:1px solid #111;padding:14px 18px;margin:12px 0;'
+      : 'border:1px solid #e0e0e0;margin:8px 0;';
+    var title = (singleMode ? '<h3 style="margin:0 0 8px;">' : '<div style="cursor:pointer;padding:10px 14px;font-weight:700;font-size:0.95rem;user-select:none;" data-toggle="' + t.code + '">')
+      + '【' + t.code + '】 ' + t.name
+      + '<span style="float:right;font-weight:400;font-size:0.78rem;color:#888;">' + t.section + '</span>'
+      + (singleMode ? '</h3>' : '</div>');
+    var bodyStyle = singleMode ? '' : 'padding:0 14px 12px;display:none;';
+    var body =
+      '<div class="topic-body" data-body="' + t.code + '" style="' + bodyStyle + '">' +
+        '<div style="margin:10px 0 8px;"><strong style="color:#555;font-size:0.85rem;">📘 概念定义</strong></div>' +
+        '<p style="margin:0 0 10px;padding-left:8px;border-left:3px solid #111;font-size:0.88rem;line-height:1.65;">' + t.def + '</p>' +
+        '<div style="margin:12px 0 8px;"><strong style="color:#555;font-size:0.85rem;">💡 解题技巧要点</strong></div>' +
+        '<ol style="margin:0 0 10px 22px;font-size:0.85rem;line-height:1.7;">' +
+          t.tips.map(function(x){return '<li>'+x+'</li>';}).join('') +
+        '</ol>' +
+        '<div style="margin:12px 0 8px;"><strong style="color:#555;font-size:0.85rem;">⚠️ 易错点</strong></div>' +
+        '<ul style="margin:0 0 14px 22px;font-size:0.82rem;line-height:1.7;color:#444;">' +
+          t.traps.map(function(x){return '<li>'+x+'</li>';}).join('') +
+        '</ul>' +
+        '<div style="text-align:right;padding-top:6px;border-top:1px dashed #e0e0e0;">' +
+          '<a href="practice.html?topic=' + t.code + '#top" style="display:inline-block;border:1px solid #111;padding:4px 12px;font-size:0.82rem;font-weight:700;">去刷题 →</a>' +
+        '</div>' +
+      '</div>';
+    return '<div class="topic-card" style="' + style + '">' + title + body + '</div>';
+  }
+
+  function renderAllTopics() {
+    var html = '';
+    html += '<div style="margin:4px 0 12px;font-size:0.88rem;color:#555;">共 <strong>' + TOTAL_TOPICS + '</strong> 个 IB 官方 Topic 讲义。点击标题展开详情，学完跳对应 Topic 刷题。</div>';
+    Object.keys(sectionGroups).forEach(function(sec) {
+      var arr = sectionGroups[sec];
+      if (!arr.length) return;
+      html += '<h3 style="margin:18px 0 6px;font-size:0.92rem;">📂 ' + sec + '（' + arr.length + ' 个）</h3>';
+      arr.forEach(function(t) {
+        html += buildTopicCard(t, null, false);
+      });
+    });
+    return html;
+  }
+
+  function renderSingleTopic(code) {
+    var t = null;
+    for (var i = 0; i < TOPICS.length; i++) {
+      if (TOPICS[i].code === code) { t = TOPICS[i]; break; }
+    }
+    if (!t) {
+      return '<div class="box-dashed"><strong>未找到 Topic：</strong>' + code + ' · <a href="practice.html">← 返回全部 Topic 列表</a></div>';
+    }
+    var html = '';
+    html += '<div style="margin:4px 0 12px;font-size:0.85rem;color:#888;"><a href="practice.html">← 返回全部 ' + TOTAL_TOPICS + ' 个 Topic 讲义</a></div>';
+    html += buildTopicCard(t, null, true);
+    return html;
+  }
+
+  function getParam(name) {
+    var s = window.location.search.substring(1);
+    var parts = s.split('&');
+    for (var i = 0; i < parts.length; i++) {
+      var kv = parts[i].split('=');
+      if (decodeURIComponent(kv[0]) === name) return decodeURIComponent(kv.slice(1).join('='));
+    }
+    return '';
+  }
+
+  function mount() {
+    var host = document.getElementById('topicNotes');
+    if (!host) return;
+    var code = getParam('topic');
+    host.innerHTML = code ? renderSingleTopic(code) : renderAllTopics();
+
+    if (!code) {
+      var headers = host.querySelectorAll('[data-toggle]');
+      headers.forEach(function(h) {
+        h.addEventListener('click', function() {
+          var c = h.getAttribute('data-toggle');
+          var body = host.querySelector('[data-body="' + c + '"]');
+          if (!body) return;
+          if (body.style.display === 'none' || !body.style.display) {
+            body.style.display = 'block';
+          } else {
+            body.style.display = 'none';
+          }
+        });
+      });
+    } else {
+      var body = host.querySelector('.topic-body');
+      if (body) body.style.display = 'block';
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', mount);
+  } else {
+    mount();
+  }
+})();
+</script>
+<script src="../../../js/ai-tutor.js"></script>
+</body>
+</html>

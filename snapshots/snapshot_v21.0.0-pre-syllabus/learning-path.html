@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning Path Planner - 学习路径规划 - yunzhuan.icu</title>
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 0 20px 40px;
+            background: #ffffff;
+            color: #1a1a1a;
+            line-height: 1.7;
+            font-size: 16px;
+        }
+
+        /* Navigation */
+        .navbar {
+            border-bottom: 1px solid #e0e0e0;
+            padding: 16px 0;
+            margin-bottom: 32px;
+        }
+        .nav-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .logo {
+            font-weight: 600;
+            font-size: 1rem;
+            color: #1a1a1a;
+            text-decoration: none;
+        }
+        .logo-icon {
+            background: #1a1a1a;
+            color: white;
+            width: 22px;
+            height: 22px;
+            border-radius: 4px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            margin-right: 6px;
+            vertical-align: middle;
+        }
+        .nav-links {
+            display: flex;
+            gap: 18px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .nav-links a {
+            color: #333;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        .nav-links a:hover {
+            color: #0066cc;
+            text-decoration: underline;
+        }
+        .nav-links .back-home {
+            color: #0066cc;
+        }
+
+        /* Hero */
+        .hero {
+            margin-bottom: 32px;
+        }
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #111;
+            margin-bottom: 8px;
+            line-height: 1.2;
+        }
+        .hero .subtitle {
+            font-size: 1.05rem;
+            color: #555;
+            margin-bottom: 4px;
+        }
+        .hero .subtitle-cn {
+            font-size: 0.9rem;
+            color: #888;
+        }
+
+        /* Section heading (matches homepage h2) */
+        h2.section-head {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #111;
+        }
+
+        /* Role tabs */
+        .role-tabs {
+            display: flex;
+            gap: 24px;
+            border-bottom: 1px solid #e0e0e0;
+            margin-bottom: 24px;
+        }
+        .role-tab {
+            background: none;
+            border: none;
+            border-bottom: 2px solid transparent;
+            padding: 8px 0;
+            margin-bottom: -1px;
+            font-size: 0.95rem;
+            font-family: inherit;
+            color: #777;
+            cursor: pointer;
+        }
+        .role-tab:hover { color: #0066cc; }
+        .role-tab.active {
+            color: #111;
+            border-bottom-color: #111;
+            font-weight: 600;
+        }
+        .role-tab .cn {
+            color: #999;
+            font-size: 0.75rem;
+            margin-left: 3px;
+            font-weight: normal;
+        }
+
+        /* Major selector */
+        .major-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 28px;
+            font-size: 0.92rem;
+            flex-wrap: wrap;
+        }
+        .major-row label { color: #555; font-weight: 500; }
+        .major-row select {
+            padding: 6px 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 0.92rem;
+            font-family: inherit;
+            color: #1a1a1a;
+            background: #fff;
+            cursor: pointer;
+        }
+        .major-row select:focus { border-color: #1a1a1a; outline: none; }
+        .major-row .major-cn { color: #999; font-size: 0.85rem; }
+
+        /* Role panels */
+        .role-panel { display: none; }
+        .role-panel.active { display: block; }
+
+        /* Grade block (collapsible) */
+        .grade-block {
+            border-bottom: 1px solid #eee;
+        }
+        .grade-block:last-child { border-bottom: none; }
+        .grade-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 0;
+            cursor: pointer;
+            user-select: none;
+        }
+        .grade-head .grade-title {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: #111;
+        }
+        .grade-head .grade-title .cn {
+            color: #999;
+            font-size: 0.82rem;
+            font-weight: normal;
+            margin-left: 6px;
+        }
+        .grade-head .grade-meta {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.82rem;
+            color: #888;
+        }
+        .grade-head .toggle {
+            color: #999;
+            font-size: 0.8rem;
+            min-width: 14px;
+            text-align: center;
+        }
+        .grade-body {
+            display: none;
+            padding: 0 0 18px;
+        }
+        .grade-body.open { display: block; }
+
+        /* Category within a grade */
+        .cat {
+            margin-bottom: 16px;
+        }
+        .cat:last-child { margin-bottom: 0; }
+        .cat-name {
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: #0066cc;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            margin-bottom: 6px;
+        }
+        .cat ul {
+            list-style: none;
+            padding: 0;
+        }
+        .cat ul li {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            font-size: 0.9rem;
+            color: #333;
+            padding: 3px 0;
+            line-height: 1.6;
+        }
+        .cat ul li input[type="checkbox"] {
+            margin-top: 5px;
+            flex-shrink: 0;
+            cursor: pointer;
+        }
+        .cat ul li.done {
+            color: #aaa;
+            text-decoration: line-through;
+        }
+
+        /* Progress bar */
+        .progress-section {
+            margin-top: 32px;
+            padding: 20px 0;
+            border-top: 2px solid #111;
+        }
+        .progress-section .progress-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            color: #555;
+            margin-bottom: 8px;
+        }
+        .progress-section .progress-label .pct {
+            font-weight: 600;
+            color: #111;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background: #e0e0e0;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: #1a1a1a;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        .progress-note {
+            font-size: 0.8rem;
+            color: #999;
+            margin-top: 8px;
+        }
+
+        /* Parent view */
+        .parent-overview {
+            padding: 20px 0;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 24px;
+        }
+        .parent-overview .big-pct {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #111;
+            line-height: 1.2;
+        }
+        .parent-overview .big-pct-label {
+            font-size: 0.9rem;
+            color: #555;
+            margin-bottom: 16px;
+        }
+        .parent-overview .mini-bar {
+            width: 100%;
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .parent-overview .mini-bar .fill {
+            height: 100%;
+            background: #1a1a1a;
+        }
+        .grade-progress-list { list-style: none; padding: 0; }
+        .grade-progress-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            font-size: 0.9rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+        }
+        .grade-progress-list li:last-child { border-bottom: none; }
+        .grade-progress-list .gp-name { color: #333; }
+        .grade-progress-list .gp-name .cn { color: #999; font-size: 0.8rem; margin-left: 4px; }
+        .grade-progress-list .gp-bar {
+            flex: 1;
+            max-width: 160px;
+            height: 6px;
+            background: #e0e0e0;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        .grade-progress-list .gp-bar .fill { height: 100%; background: #1a1a1a; }
+        .grade-progress-list .gp-pct { color: #555; font-weight: 600; min-width: 40px; text-align: right; }
+
+        .todo-list { list-style: none; padding: 0; }
+        .todo-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+            font-size: 0.9rem;
+            color: #333;
+        }
+        .todo-list li:last-child { border-bottom: none; }
+        .todo-list .when { color: #0066cc; font-size: 0.8rem; margin-right: 8px; }
+
+        .read-only-note {
+            font-size: 0.82rem;
+            color: #999;
+            margin-bottom: 20px;
+            padding: 8px 12px;
+            background: #fafafa;
+            border-left: 3px solid #ccc;
+        }
+
+        /* Counselor view */
+        .student-card {
+            border-bottom: 1px solid #eee;
+            padding: 16px 0;
+        }
+        .student-card:last-child { border-bottom: none; }
+        .student-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .student-head .s-name {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #111;
+        }
+        .student-head .s-meta {
+            font-size: 0.82rem;
+            color: #888;
+        }
+        .student-head .s-meta .sep { color: #ddd; margin: 0 6px; }
+        .student-head .s-prog {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.85rem;
+            color: #555;
+        }
+        .student-head .s-prog .bar {
+            width: 80px;
+            height: 6px;
+            background: #e0e0e0;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        .student-head .s-prog .bar .fill { height: 100%; background: #1a1a1a; }
+        .student-head .s-prog .pct { font-weight: 600; color: #111; min-width: 34px; }
+        .student-head .toggle { color: #999; font-size: 0.8rem; }
+        .student-detail {
+            display: none;
+            padding: 14px 0 4px;
+        }
+        .student-detail.open { display: block; }
+        .student-detail h4 {
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: #0066cc;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            margin-bottom: 6px;
+        }
+        .student-detail .s-tasks {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 12px;
+        }
+        .student-detail .s-tasks li {
+            font-size: 0.88rem;
+            color: #333;
+            padding: 3px 0;
+            padding-left: 14px;
+            position: relative;
+        }
+        .student-detail .s-tasks li::before {
+            content: '·';
+            position: absolute;
+            left: 2px;
+            color: #999;
+        }
+
+        /* Footer */
+        .footer {
+            font-size: 0.85rem;
+            color: #888;
+            padding-top: 24px;
+            margin-top: 32px;
+            border-top: 1px solid #eee;
+        }
+        .footer a { color: #0066cc; text-decoration: none; }
+        .footer a:hover { text-decoration: underline; }
+
+        @media (max-width: 768px) {
+            body { padding: 0 16px 24px; }
+            .hero h1 { font-size: 1.6rem; }
+            .role-tabs { gap: 16px; }
+            .grade-progress-list .gp-bar { max-width: 90px; }
+        }
+    </style>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#1a1a1a">
+    <script src="js/app-data.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-inner">
+            <a href="index.html" class="logo"><span class="logo-icon">🎓</span>yunzhuan.icu</a>
+            <div class="nav-links">
+                <a href="timeline/index.html">Timeline<span style="color:#999;font-size:0.75rem;margin-left:2px;">时间线</span></a>
+                <a href="dashboard.html">Dashboard<span style="color:#999;font-size:0.75rem;margin-left:2px;">仪表盘</span></a>
+                <a href="major-quiz.html">Major Quiz<span style="color:#999;font-size:0.75rem;margin-left:2px;">专业测试</span></a>
+                <a href="index.html" class="back-home">Back Home<span style="color:#999;font-size:0.75rem;margin-left:2px;">返回首页</span></a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <h1>Learning Path Planner</h1>
+        <p class="subtitle">Plan your 4-year high school journey toward your target major</p>
+        <p class="subtitle-cn">学习路径规划 · 按年级分阶段 · 标化 · 活动 · 竞赛 · 申请</p>
+    </section>
+
+    <div id="profileBar" style="margin-bottom: 24px; padding: 12px 16px; background: #f8f8f8; border-radius: 6px; font-size: 0.9rem; color: #555; display: flex; gap: 16px; flex-wrap: wrap; align-items: center;">
+        <span><strong>Target Major:</strong> <span id="profileMajor">--</span></span>
+        <span style="color:#ddd;">|</span>
+        <span><strong>GPA:</strong> <span id="profileGpa">--</span></span>
+        <span style="color:#ddd;">|</span>
+        <span><strong>SAT:</strong> <span id="profileSat">--</span></span>
+    </div>
+
+    <div class="role-tabs">
+        <button class="role-tab active" data-role="student" onclick="switchRole('student')">Student<span class="cn">学生</span></button>
+        <button class="role-tab" data-role="parent" onclick="switchRole('parent')">Parent<span class="cn">家长</span></button>
+        <button class="role-tab" data-role="counselor" onclick="switchRole('counselor')">Counselor<span class="cn">顾问</span></button>
+    </div>
+
+    <!-- ============ STUDENT VIEW ============ -->
+    <div class="role-panel active" id="role-student">
+        <div class="major-row">
+            <label for="majorSelect">Target Major:</label>
+            <select id="majorSelect" onchange="switchMajor(this.value)">
+                <option value="cs">Computer Science</option>
+                <option value="finance">Finance</option>
+                <option value="engineering">Engineering</option>
+                <option value="premed">Pre-Med</option>
+                <option value="undecided">Undecided</option>
+            </select>
+            <span class="major-cn" id="majorCn">计算机科学</span>
+        </div>
+
+        <h2 class="section-head">Your 4-Year Path</h2>
+        <div id="pathContainer"></div>
+
+        <div class="progress-section">
+            <div class="progress-label">
+                <span>Overall Completion <span style="color:#999;font-size:0.8rem;">总体完成度</span></span>
+                <span><span class="pct" id="progressPct">0%</span> <span id="progressCount" style="color:#999;font-weight:normal;">(0 / 0)</span></span>
+            </div>
+            <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+            <p class="progress-note">Progress is saved automatically in your browser. 进度自动保存到本地浏览器。</p>
+        </div>
+    </div>
+
+    <!-- ============ PARENT VIEW ============ -->
+    <div class="role-panel" id="role-parent">
+        <div class="read-only-note">Read-only view · 只读概览 — switch to Student role to check off items.</div>
+
+        <div class="parent-overview">
+            <div class="big-pct">68%</div>
+            <div class="big-pct-label">Overall progress · 孩子总体进度（目标专业：Computer Science · 11年级）</div>
+            <div class="mini-bar"><div class="fill" style="width:68%"></div></div>
+        </div>
+
+        <h2 class="section-head">Progress by Grade</h2>
+        <ul class="grade-progress-list">
+            <li>
+                <span class="gp-name">9th Grade <span class="cn">九年级</span></span>
+                <span class="gp-bar"><span class="fill" style="width:100%"></span></span>
+                <span class="gp-pct">100%</span>
+            </li>
+            <li>
+                <span class="gp-name">10th Grade <span class="cn">十年级</span></span>
+                <span class="gp-bar"><span class="fill" style="width:92%"></span></span>
+                <span class="gp-pct">92%</span>
+            </li>
+            <li>
+                <span class="gp-name">11th Grade <span class="cn">十一年级</span></span>
+                <span class="gp-bar"><span class="fill" style="width:48%"></span></span>
+                <span class="gp-pct">48%</span>
+            </li>
+            <li>
+                <span class="gp-name">12th Grade <span class="cn">十二年级</span></span>
+                <span class="gp-bar"><span class="fill" style="width:0%"></span></span>
+                <span class="gp-pct">0%</span>
+            </li>
+        </ul>
+
+        <h2 class="section-head" style="margin-top:32px;">Upcoming Tasks</h2>
+        <ul class="todo-list">
+            <li><span class="when">Aug</span> SAT 最终考试（8 月场）</li>
+            <li><span class="when">Sep</span> 确定选校名单（Reach / Match / Safety）</li>
+            <li><span class="when">Oct</span> 推荐信沟通 · Common App 填写</li>
+            <li><span class="when">Nov 1</span> ED/EA 申请提交截止</li>
+            <li><span class="when">Dec</span> USACO 12 月月赛 · 文书定稿</li>
+        </ul>
+    </div>
+
+    <!-- ============ COUNSELOR VIEW ============ -->
+    <div class="role-panel" id="role-counselor">
+        <div class="read-only-note">Counselor overview · 顾问概览 — 3 students tracked. Click a student to expand details.</div>
+
+        <h2 class="section-head">Student Overview</h2>
+        <div id="counselorList"></div>
+    </div>
+
+    <div class="footer">
+        <p><a href="index.html">Back to Home</a> · <a href="timeline/index.html">Application Timeline</a> · <a href="dashboard.html">Dashboard</a></p>
+        <p style="margin-top:8px;">© 2026 yunzhuan.icu · Learning Path Planner (demo data)</p>
+    </div>
+
+<script>
+/* =================== MOCK DATA =================== */
+const PATHS = {
+    cs: {
+        label: 'Computer Science',
+        labelCn: '计算机科学',
+        grades: [
+            {
+                title: '9th Grade (Freshman)', titleCn: '九年级',
+                sections: [
+                    { name: 'Academics', items: ['代数2/几何', '生物', '英语9', '世界历史'] },
+                    { name: 'Standardized', items: ['PSAT 8/9 (10月)'] },
+                    { name: 'Activities', items: ['加入2-3个社团', '尝试不同领域', '加入编程社团 / CS Club'] },
+                    { name: 'Competitions', items: ['AMC 10 (如有能力)', '本地科学展', 'USACO Bronze 入门练习'] },
+                    { name: 'Goals', items: ['探索兴趣', '建立学习习惯', 'GPA > 3.8', '入门一门编程语言'] }
+                ]
+            },
+            {
+                title: '10th Grade (Sophomore)', titleCn: '十年级',
+                sections: [
+                    { name: 'Academics', items: ['Pre-AP/AP课程', '化学', '英语10', 'AP Computer Science Principles'] },
+                    { name: 'Standardized', items: ['PSAT/NMSQT (10月)', 'AP考试 (5月)'] },
+                    { name: 'Activities', items: ['深化2个核心活动', '领导力角色', '独立编程项目'] },
+                    { name: 'Competitions', items: ['AMC 10/12', 'USACO Bronze', 'Science Olympiad', 'HiMCM'] },
+                    { name: 'Goals', items: ['确定大致方向', 'AP 4分+', 'USACO Bronze → Silver'] }
+                ]
+            },
+            {
+                title: '11th Grade (Junior)', titleCn: '十一年级',
+                sections: [
+                    { name: 'Academics', items: ['AP核心课程', 'AP CS A', 'AP Calculus BC', 'SAT/ACT备考'] },
+                    { name: 'Standardized', items: ['SAT/ACT (3-6月)', 'AP考试 (5月)', 'TOEFL (国际生)'] },
+                    { name: 'Activities', items: ['核心领导职位', '独立项目/科研', '开源贡献 / GitHub 作品'] },
+                    { name: 'Competitions', items: ['USACO Silver+', 'AMC 12', 'AIME', 'HiMCM', 'Google Code Jam'] },
+                    { name: 'Goals', items: ['SAT 1500+/ACT 34+', '确定选校名单', '文书素材积累', 'USACO Gold 冲刺'] }
+                ]
+            },
+            {
+                title: '12th Grade (Senior)', titleCn: '十二年级',
+                sections: [
+                    { name: 'Academics', items: ['保持GPA', 'AP课程', 'AP CS A (如未完成)'] },
+                    { name: 'Standardized', items: ['SAT/ACT最终 (8-10月)', 'AP考试 (5月)'] },
+                    { name: 'Application', items: ['ED/EA (11月1日)', 'RD (1月1日)', '文书', '推荐信', '作品集 / GitHub 链接'] },
+                    { name: 'Competitions', items: ['最终冲刺', 'USACO Platinum', '发表论文'] },
+                    { name: 'Goals', items: ['提交申请', '面试准备', '录取选择'] }
+                ]
+            }
+        ]
+    },
+    finance: {
+        label: 'Finance',
+        labelCn: '金融',
+        grades: [
+            {
+                title: '9th Grade (Freshman)', titleCn: '九年级',
+                sections: [
+                    { name: 'Academics', items: ['代数2/几何', '生物', '英语9', '世界历史'] },
+                    { name: 'Standardized', items: ['PSAT 8/9 (10月)'] },
+                    { name: 'Activities', items: ['加入2-3个社团', '尝试不同领域', '加入商科/投资社团'] },
+                    { name: 'Competitions', items: ['AMC 10 (如有能力)', '本地科学展', 'NEC 入门了解'] },
+                    { name: 'Goals', items: ['探索兴趣', '建立学习习惯', 'GPA > 3.8', '阅读财经新闻'] }
+                ]
+            },
+            {
+                title: '10th Grade (Sophomore)', titleCn: '十年级',
+                sections: [
+                    { name: 'Academics', items: ['Pre-AP/AP课程', '化学', '英语10', 'AP Macroeconomics'] },
+                    { name: 'Standardized', items: ['PSAT/NMSQT (10月)', 'AP考试 (5月)'] },
+                    { name: 'Activities', items: ['深化2个核心活动', '领导力角色', '商赛社团核心成员'] },
+                    { name: 'Competitions', items: ['NEC (National Economics Challenge)', 'FBLA', 'DECA', 'KWHS Investment Competition'] },
+                    { name: 'Goals', items: ['确定大致方向', 'AP 4分+', '完成第一场商赛'] }
+                ]
+            },
+            {
+                title: '11th Grade (Junior)', titleCn: '十一年级',
+                sections: [
+                    { name: 'Academics', items: ['AP核心课程', 'AP Microeconomics', 'AP Statistics', 'AP Calculus', 'SAT/ACT备考'] },
+                    { name: 'Standardized', items: ['SAT/ACT (3-6月)', 'AP考试 (5月)', 'TOEFL (国际生)'] },
+                    { name: 'Activities', items: ['核心领导职位', '独立项目/科研', '投资组合模拟 / 实习'] },
+                    { name: 'Competitions', items: ['NEC 全国赛', 'FBLA National', 'IEO (International Economics Olympiad)', 'John Locke Essay (Economics)'] },
+                    { name: 'Goals', items: ['SAT 1500+/ACT 34+', '确定选校名单', '文书素材积累', '商赛全国级奖项'] }
+                ]
+            },
+            {
+                title: '12th Grade (Senior)', titleCn: '十二年级',
+                sections: [
+                    { name: 'Academics', items: ['保持GPA', 'AP课程', 'AP Micro/Macro (如未完成)'] },
+                    { name: 'Standardized', items: ['SAT/ACT最终 (8-10月)', 'AP考试 (5月)'] },
+                    { name: 'Application', items: ['ED/EA (11月1日)', 'RD (1月1日)', '文书', '推荐信', '商科相关活动简历'] },
+                    { name: 'Competitions', items: ['最终冲刺', 'IEO 国际赛', '发表论文'] },
+                    { name: 'Goals', items: ['提交申请', '面试准备', '录取选择'] }
+                ]
+            }
+        ]
+    },
+    engineering: {
+        label: 'Engineering',
+        labelCn: '工程',
+        grades: [
+            {
+                title: '9th Grade (Freshman)', titleCn: '九年级',
+                sections: [
+                    { name: 'Academics', items: ['代数2/几何', '生物', '英语9', '世界历史'] },
+                    { name: 'Standardized', items: ['PSAT 8/9 (10月)'] },
+                    { name: 'Activities', items: ['加入2-3个社团', '尝试不同领域', '加入机器人/STEM社团'] },
+                    { name: 'Competitions', items: ['AMC 10 (如有能力)', '本地科学展', 'VEX Robotics 入门'] },
+                    { name: 'Goals', items: ['探索兴趣', '建立学习习惯', 'GPA > 3.8', '动手做一个小工程项目'] }
+                ]
+            },
+            {
+                title: '10th Grade (Sophomore)', titleCn: '十年级',
+                sections: [
+                    { name: 'Academics', items: ['Pre-AP/AP课程', '化学', '英语10', 'AP Physics 1'] },
+                    { name: 'Standardized', items: ['PSAT/NMSQT (10月)', 'AP考试 (5月)'] },
+                    { name: 'Activities', items: ['深化2个核心活动', '领导力角色', '机器人/工程团队核心'] },
+                    { name: 'Competitions', items: ['Science Olympiad', 'FRC (First Robotics)', 'AMC 10/12', 'Physics Bowl'] },
+                    { name: 'Goals', items: ['确定大致方向', 'AP 4分+', '确定工程细分方向'] }
+                ]
+            },
+            {
+                title: '11th Grade (Junior)', titleCn: '十一年级',
+                sections: [
+                    { name: 'Academics', items: ['AP核心课程', 'AP Physics C', 'AP Calculus BC', 'SAT/ACT备考'] },
+                    { name: 'Standardized', items: ['SAT/ACT (3-6月)', 'AP考试 (5月)', 'TOEFL (国际生)'] },
+                    { name: 'Activities', items: ['核心领导职位', '独立项目/科研', '工程设计作品集'] },
+                    { name: 'Competitions', items: ['USACO Silver+', 'AMC 12', 'AIME', 'FRC 区域赛', 'ISEF (科研展)'] },
+                    { name: 'Goals', items: ['SAT 1500+/ACT 34+', '确定选校名单', '文书素材积累', '完成一个可展示工程项目'] }
+                ]
+            },
+            {
+                title: '12th Grade (Senior)', titleCn: '十二年级',
+                sections: [
+                    { name: 'Academics', items: ['保持GPA', 'AP课程', 'AP Physics C (如未完成)'] },
+                    { name: 'Standardized', items: ['SAT/ACT最终 (8-10月)', 'AP考试 (5月)'] },
+                    { name: 'Application', items: ['ED/EA (11月1日)', 'RD (1月1日)', '文书', '推荐信', '工程作品集'] },
+                    { name: 'Competitions', items: ['最终冲刺', 'ISEF 国际赛', '发表论文'] },
+                    { name: 'Goals', items: ['提交申请', '面试准备', '录取选择'] }
+                ]
+            }
+        ]
+    },
+    premed: {
+        label: 'Pre-Med',
+        labelCn: '医学预科',
+        grades: [
+            {
+                title: '9th Grade (Freshman)', titleCn: '九年级',
+                sections: [
+                    { name: 'Academics', items: ['代数2/几何', '生物', '英语9', '世界历史'] },
+                    { name: 'Standardized', items: ['PSAT 8/9 (10月)'] },
+                    { name: 'Activities', items: ['加入2-3个社团', '尝试不同领域', '医院/诊所志愿服务入门'] },
+                    { name: 'Competitions', items: ['AMC 10 (如有能力)', '本地科学展', 'USABO 入门了解'] },
+                    { name: 'Goals', items: ['探索兴趣', '建立学习习惯', 'GPA > 3.8', '积累志愿者时长'] }
+                ]
+            },
+            {
+                title: '10th Grade (Sophomore)', titleCn: '十年级',
+                sections: [
+                    { name: 'Academics', items: ['Pre-AP/AP课程', '化学', '英语10', 'AP Biology'] },
+                    { name: 'Standardized', items: ['PSAT/NMSQT (10月)', 'AP考试 (5月)'] },
+                    { name: 'Activities', items: ['深化2个核心活动', '领导力角色', '医院志愿服务持续'] },
+                    { name: 'Competitions', items: ['USABO (USA Biology Olympiad)', 'BBO (British Biology Olympiad)', 'HOSA', 'Science Olympiad'] },
+                    { name: 'Goals', items: ['确定大致方向', 'AP 4分+', 'USABO 进入半决赛'] }
+                ]
+            },
+            {
+                title: '11th Grade (Junior)', titleCn: '十一年级',
+                sections: [
+                    { name: 'Academics', items: ['AP核心课程', 'AP Chemistry', 'AP Biology (如未完成)', 'SAT/ACT备考'] },
+                    { name: 'Standardized', items: ['SAT/ACT (3-6月)', 'AP考试 (5月)', 'TOEFL (国际生)'] },
+                    { name: 'Activities', items: ['核心领导职位', '独立项目/科研', '医学相关实习/影子医生'] },
+                    { name: 'Competitions', items: ['USABO 决赛', 'USNCO (Chemistry Olympiad)', 'HOSA National', 'ISEF (生物/医学方向)'] },
+                    { name: 'Goals', items: ['SAT 1500+/ACT 34+', '确定选校名单', '文书素材积累', '科研/实习经历'] }
+                ]
+            },
+            {
+                title: '12th Grade (Senior)', titleCn: '十二年级',
+                sections: [
+                    { name: 'Academics', items: ['保持GPA', 'AP课程', 'AP Chemistry (如未完成)'] },
+                    { name: 'Standardized', items: ['SAT/ACT最终 (8-10月)', 'AP考试 (5月)'] },
+                    { name: 'Application', items: ['ED/EA (11月1日)', 'RD (1月1日)', '文书', '推荐信', '医学相关活动简历'] },
+                    { name: 'Competitions', items: ['最终冲刺', 'ISEF 国际赛', '发表论文'] },
+                    { name: 'Goals', items: ['提交申请', '面试准备 (MMI)', '录取选择'] }
+                ]
+            }
+        ]
+    },
+    undecided: {
+        label: 'Undecided',
+        labelCn: '未定方向',
+        grades: [
+            {
+                title: '9th Grade (Freshman)', titleCn: '九年级',
+                sections: [
+                    { name: 'Academics', items: ['代数2/几何', '生物', '英语9', '世界历史'] },
+                    { name: 'Standardized', items: ['PSAT 8/9 (10月)'] },
+                    { name: 'Activities', items: ['加入2-3个社团', '尝试不同领域 (STEM + 人文 + 艺术)'] },
+                    { name: 'Competitions', items: ['AMC 10 (如有能力)', '本地科学展', '尝试1-2个不同领域竞赛'] },
+                    { name: 'Goals', items: ['探索兴趣', '建立学习习惯', 'GPA > 3.8', '广泛探索不急于定型'] }
+                ]
+            },
+            {
+                title: '10th Grade (Sophomore)', titleCn: '十年级',
+                sections: [
+                    { name: 'Academics', items: ['Pre-AP/AP课程', '化学', '英语10', '跨学科AP (CS / Econ / History)'] },
+                    { name: 'Standardized', items: ['PSAT/NMSQT (10月)', 'AP考试 (5月)'] },
+                    { name: 'Activities', items: ['深化2个核心活动', '领导力角色', '聚焦2-3个最有热情的活动'] },
+                    { name: 'Competitions', items: ['AMC 10/12', 'Science Olympiad', '尝试 DECA / NEC / USACO 不同方向'] },
+                    { name: 'Goals', items: ['逐步确定方向', 'AP 4分+', '缩小兴趣到2-3个领域'] }
+                ]
+            },
+            {
+                title: '11th Grade (Junior)', titleCn: '十一年级',
+                sections: [
+                    { name: 'Academics', items: ['AP核心课程', '跨学科AP (文理搭配)', 'SAT/ACT备考'] },
+                    { name: 'Standardized', items: ['SAT/ACT (3-6月)', 'AP考试 (5月)', 'TOEFL (国际生)'] },
+                    { name: 'Activities', items: ['核心领导职位', '独立项目/科研', '在选定方向深化'] },
+                    { name: 'Competitions', items: ['AMC 12', 'AIME', '根据方向选择 USACO / NEC / USABO / ISEF'] },
+                    { name: 'Goals', items: ['SAT 1500+/ACT 34+', '确定选校名单', '文书素材积累', '11年级末定下专业方向'] }
+                ]
+            },
+            {
+                title: '12th Grade (Senior)', titleCn: '十二年级',
+                sections: [
+                    { name: 'Academics', items: ['保持GPA', 'AP课程', '与目标专业对齐'] },
+                    { name: 'Standardized', items: ['SAT/ACT最终 (8-10月)', 'AP考试 (5月)'] },
+                    { name: 'Application', items: ['ED/EA (11月1日)', 'RD (1月1日)', '文书', '推荐信', '活动简历'] },
+                    { name: 'Competitions', items: ['最终冲刺', '发表论文/作品'] },
+                    { name: 'Goals', items: ['提交申请', '面试准备', '录取选择'] }
+                ]
+            }
+        ]
+    }
+};
+
+const COUNSELOR_STUDENTS = [
+    { name: 'Alice Wang', grade: 11, major: 'CS', progress: 65, tasks: ['SAT备考', 'USACO Silver', '文书素材积累'] },
+    { name: 'Bob Li', grade: 10, major: 'Finance', progress: 40, tasks: ['AP Macro 备考', 'NEC 竞赛', '社团活动'] },
+    { name: 'Carol Zhang', grade: 12, major: 'Engineering', progress: 85, tasks: ['ED 提交', '面试准备', '推荐信跟进'] }
+];
+
+/* =================== STATE =================== */
+let currentMajor = 'cs';
+const GRADE_KEYS = ['grade9', 'grade10', 'grade11', 'grade12'];
+
+function isChecked(major, grade, index) {
+    const progress = AppData.getPathProgress(major);
+    return (progress[grade] || []).includes(index);
+}
+
+function updateProfileBar() {
+    const profile = AppData.getProfile();
+    const majorLabel = PATHS[currentMajor] ? PATHS[currentMajor].label : currentMajor;
+    document.getElementById('profileMajor').textContent = majorLabel;
+    document.getElementById('profileGpa').textContent = profile.gpa != null ? profile.gpa : '--';
+    document.getElementById('profileSat').textContent = profile.sat != null ? profile.sat : '--';
+}
+
+/* =================== ROLE SWITCH =================== */
+function switchRole(role) {
+    document.querySelectorAll('.role-tab').forEach(t => {
+        t.classList.toggle('active', t.dataset.role === role);
+    });
+    document.querySelectorAll('.role-panel').forEach(p => {
+        p.classList.toggle('active', p.id === 'role-' + role);
+    });
+}
+
+/* =================== MAJOR SWITCH =================== */
+function switchMajor(major) {
+    currentMajor = major;
+    document.getElementById('majorCn').textContent = PATHS[major].labelCn;
+    updateProfileBar();
+    renderPath();
+}
+
+/* =================== RENDER PATH =================== */
+function renderPath() {
+    const path = PATHS[currentMajor];
+    const container = document.getElementById('pathContainer');
+    let html = '';
+
+    path.grades.forEach((grade, gi) => {
+        const gradeKey = GRADE_KEYS[gi];
+        const gradeId = currentMajor + '_g' + gi;
+        // count completion for this grade header
+        let total = 0, done = 0;
+        let flatIndex = 0;
+        grade.sections.forEach((sec, si) => {
+            sec.items.forEach((item, ii) => {
+                total++;
+                if (isChecked(currentMajor, gradeKey, flatIndex + ii)) done++;
+            });
+            flatIndex += sec.items.length;
+        });
+        const gradePct = total ? Math.round(done / total * 100) : 0;
+        const isOpen = gi <= 1; // first two grades open by default
+
+        html += '<div class="grade-block">';
+        html += '<div class="grade-head" onclick="toggleGrade(this)">';
+        html += '<span class="grade-title">' + grade.title + '<span class="cn">' + grade.titleCn + '</span></span>';
+        html += '<span class="grade-meta"><span class="gpct" data-gid="' + gradeId + '">' + gradePct + '%</span><span class="toggle">' + (isOpen ? '▾' : '▸') + '</span></span>';
+        html += '</div>';
+        html += '<div class="grade-body' + (isOpen ? ' open' : '') + '">';
+
+        flatIndex = 0;
+        grade.sections.forEach((sec, si) => {
+            html += '<div class="cat">';
+            html += '<div class="cat-name">' + sec.name + '</div>';
+            html += '<ul>';
+            sec.items.forEach((item, ii) => {
+                const idx = flatIndex + ii;
+                const itemId = gradeId + '_s' + si + '_i' + ii;
+                const checked = isChecked(currentMajor, gradeKey, idx);
+                html += '<li' + (checked ? ' class="done"' : '') + '>';
+                html += '<input type="checkbox" id="' + itemId + '"' + (checked ? ' checked' : '') + ' onchange="toggleCheck(\'' + currentMajor + '\', \'' + gradeKey + '\', ' + idx + ', this)">';
+                html += '<label for="' + itemId + '">' + item + '</label>';
+                html += '</li>';
+            });
+            flatIndex += sec.items.length;
+            html += '</ul>';
+            html += '</div>';
+        });
+
+        html += '</div></div>';
+    });
+
+    container.innerHTML = html;
+    updateProgress();
+}
+
+/* =================== COLLAPSE =================== */
+function toggleGrade(headEl) {
+    const body = headEl.nextElementSibling;
+    const toggle = headEl.querySelector('.toggle');
+    const open = body.classList.toggle('open');
+    toggle.textContent = open ? '▾' : '▸';
+}
+
+/* =================== CHECKBOX =================== */
+function toggleCheck(major, grade, index, cb) {
+    AppData.togglePathCheck(major, grade, index);
+    const li = cb.closest('li');
+    if (cb.checked) li.classList.add('done');
+    else li.classList.remove('done');
+    updateProgress();
+    // update the per-grade percentage label
+    const gi = GRADE_KEYS.indexOf(grade);
+    const gradeId = major + '_g' + gi;
+    updateGradePct(gradeId);
+}
+
+function updateGradePct(gradeId) {
+    const gradeBlock = document.getElementById(gradeId + '_s0_i0')?.closest('.grade-block');
+    if (!gradeBlock) return;
+    let total = 0, done = 0;
+    gradeBlock.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+        total++;
+        if (cb.checked) done++;
+    });
+    const pct = total ? Math.round(done / total * 100) : 0;
+    const label = gradeBlock.querySelector('.gpct');
+    if (label) label.textContent = pct + '%';
+}
+
+/* =================== PROGRESS BAR =================== */
+function updateProgress() {
+    const path = PATHS[currentMajor];
+    const progress = AppData.getPathProgress(currentMajor);
+    let total = 0, done = 0;
+    path.grades.forEach((grade, gi) => {
+        const gradeKey = GRADE_KEYS[gi];
+        const checkedSet = new Set(progress[gradeKey] || []);
+        let flatIndex = 0;
+        grade.sections.forEach((sec) => {
+            sec.items.forEach((item, ii) => {
+                total++;
+                if (checkedSet.has(flatIndex + ii)) done++;
+            });
+            flatIndex += sec.items.length;
+        });
+    });
+    const pct = total ? Math.round(done / total * 100) : 0;
+    document.getElementById('progressFill').style.width = pct + '%';
+    document.getElementById('progressPct').textContent = pct + '%';
+    document.getElementById('progressCount').textContent = '(' + done + ' / ' + total + ')';
+    // refresh all per-grade labels too
+    path.grades.forEach((_, gi) => {
+        updateGradePct(currentMajor + '_g' + gi);
+    });
+}
+
+/* =================== COUNSELOR VIEW =================== */
+function renderCounselor() {
+    const list = document.getElementById('counselorList');
+    let html = '';
+    COUNSELOR_STUDENTS.forEach((s, idx) => {
+        html += '<div class="student-card">';
+        html += '<div class="student-head" onclick="toggleStudent(this)">';
+        html += '<span class="s-name">' + s.name + '</span>';
+        html += '<span class="s-meta">Grade ' + s.grade + '<span class="sep">|</span>' + s.major + '</span>';
+        html += '<span class="s-prog">';
+        html += '<span class="bar"><span class="fill" style="width:' + s.progress + '%"></span></span>';
+        html += '<span class="pct">' + s.progress + '%</span>';
+        html += '<span class="toggle">▸</span>';
+        html += '</span>';
+        html += '</div>';
+        html += '<div class="student-detail">';
+        html += '<h4>Upcoming Tasks · 近期待办</h4>';
+        html += '<ul class="s-tasks">';
+        s.tasks.forEach(t => { html += '<li>' + t + '</li>'; });
+        html += '</ul>';
+        html += '<h4>Path Snapshot · 路径快照</h4>';
+        html += '<ul class="s-tasks">';
+        html += '<li>目标专业：' + s.major + '</li>';
+        html += '<li>当前年级：Grade ' + s.grade + '</li>';
+        html += '<li>总体进度：' + s.progress + '%</li>';
+        html += '<li><a href="#" onclick="switchRole(\'student\');return false;" style="color:#0066cc;">查看完整路径 →</a></li>';
+        html += '</ul>';
+        html += '</div>';
+        html += '</div>';
+    });
+    list.innerHTML = html;
+}
+
+function toggleStudent(headEl) {
+    const detail = headEl.nextElementSibling;
+    const toggle = headEl.querySelector('.toggle');
+    const open = detail.classList.toggle('open');
+    toggle.textContent = open ? '▾' : '▸';
+}
+
+/* =================== INIT =================== */
+const profile = AppData.getProfile();
+const savedMajor = profile.targetMajor || 'cs';
+currentMajor = savedMajor;
+document.getElementById('majorSelect').value = savedMajor;
+document.getElementById('majorCn').textContent = PATHS[savedMajor].labelCn;
+updateProfileBar();
+renderPath();
+renderCounselor();
+</script>
+<script src="js/back-to-top.js"></script>
+</body>
+</html>

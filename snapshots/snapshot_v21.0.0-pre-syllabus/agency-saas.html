@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agency SaaS 中介管理平台</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            color: #000;
+            background-color: #fff;
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* 导航栏 */
+        nav {
+            border-bottom: 1px solid #ddd;
+            padding: 15px 0;
+            margin-bottom: 30px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        nav li a {
+            font-weight: 500;
+        }
+
+        /* 标题 */
+        h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            font-size: 24px;
+            margin: 25px 0 15px 0;
+            border-bottom: 2px solid #000;
+            padding-bottom: 5px;
+        }
+
+        h3 {
+            font-size: 18px;
+            margin: 20px 0 10px 0;
+        }
+
+        /* 角色选择 */
+        .role-selector {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            background-color: #f9f9f9;
+        }
+
+        .role-btn {
+            padding: 8px 16px;
+            margin-right: 10px;
+            cursor: pointer;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            font-size: 14px;
+        }
+
+        .role-btn.active {
+            background-color: #000;
+            color: #fff;
+            border-color: #000;
+        }
+
+        /* 搜索和筛选 */
+        .controls {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            background-color: #f9f9f9;
+        }
+
+        .search-input {
+            padding: 8px 12px;
+            width: 200px;
+            border: 1px solid #ccc;
+            margin-right: 10px;
+        }
+
+        .filter-select {
+            padding: 8px;
+            border: 1px solid #ccc;
+            margin-right: 10px;
+        }
+
+        .action-btn {
+            padding: 8px 16px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            cursor: pointer;
+            margin-right: 5px;
+        }
+
+        .action-btn:hover {
+            background-color: #f0f0f0;
+        }
+
+        /* 学生列表 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f0f0f0;
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .checkbox-col {
+            width: 30px;
+        }
+
+        .progress-bar {
+            width: 100px;
+            height: 20px;
+            background-color: #e0e0e0;
+            display: inline-block;
+            border: 1px solid #ccc;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background-color: #000;
+        }
+
+        /* 统计卡片 */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin: 15px 0;
+        }
+
+        .stat-card {
+            border: 1px solid #ddd;
+            padding: 15px;
+            background-color: #f9f9f9;
+        }
+
+        .stat-value {
+            font-size: 28px;
+            font-weight: 700;
+            margin: 5px 0;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 14px;
+        }
+
+        /* 定价方案 */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            margin: 15px 0;
+        }
+
+        .pricing-card {
+            border: 1px solid #ddd;
+            padding: 20px;
+        }
+
+        .pricing-card.featured {
+            border: 2px solid #000;
+        }
+
+        .price {
+            font-size: 24px;
+            font-weight: 700;
+            margin: 10px 0;
+        }
+
+        .price-period {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .feature-list {
+            list-style: none;
+            margin: 15px 0;
+        }
+
+        .feature-list li {
+            padding: 5px 0;
+        }
+
+        .feature-list li:before {
+            content: "✓ ";
+            color: #0066cc;
+        }
+
+        /* 隐藏类 */
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav>
+        <ul>
+            <li><a href="#overview">概览</a></li>
+            <li><a href="#students">学生管理</a></li>
+            <li><a href="#pricing">定价方案</a></li>
+            <li><a href="#contact">联系我们</a></li>
+        </ul>
+    </nav>
+
+    <!-- 标题 -->
+    <h1>Agency SaaS 中介管理平台</h1>
+    <p>专业、高效的教育中介管理解决方案</p>
+
+    <!-- 角色选择 -->
+    <div class="role-selector">
+        <strong>选择角色：</strong>
+        <button class="role-btn active" onclick="switchRole('counselor')">Counselor（顾问）</button>
+        <button class="role-btn" onclick="switchRole('admin')">Admin（管理员）</button>
+    </div>
+
+    <!-- 顾问视图 -->
+    <div id="counselor-view">
+        <h2 id="students">学生列表</h2>
+        
+        <!-- 搜索和筛选 -->
+        <div class="controls">
+            <input type="text" class="search-input" id="searchInput" placeholder="搜索学生姓名..." onkeyup="filterStudents()">
+            <select class="filter-select" id="gradeFilter" onchange="filterStudents()">
+                <option value="">全部年级</option>
+                <option value="10">10年级</option>
+                <option value="11">11年级</option>
+                <option value="12">12年级</option>
+            </select>
+            <select class="filter-select" id="counselorFilter" onchange="filterStudents()">
+                <option value="">全部顾问</option>
+                <option value="张老师">张老师</option>
+                <option value="李老师">李老师</option>
+                <option value="王老师">王老师</option>
+            </select>
+        </div>
+
+        <!-- 批量操作 -->
+        <div class="controls">
+            <strong>批量操作：</strong>
+            <button class="action-btn" onclick="selectAll()">全选</button>
+            <button class="action-btn" onclick="deselectAll()">取消全选</button>
+            <button class="action-btn" onclick="batchExport()">批量导出</button>
+            <button class="action-btn" onclick="exportAllData()">导出全部数据</button>
+        </div>
+
+        <!-- 学生表格 -->
+        <table id="studentsTable">
+            <thead>
+                <tr>
+                    <th class="checkbox-col"><input type="checkbox" id="selectAllCheckbox" onchange="toggleAllCheckboxes()"></th>
+                    <th>姓名</th>
+                    <th>年级</th>
+                    <th>专业</th>
+                    <th>进度</th>
+                    <th>下一步</th>
+                    <th>顾问</th>
+                </tr>
+            </thead>
+            <tbody id="studentsTableBody">
+                <!-- 动态生成 -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 管理员视图 -->
+    <div id="admin-view" class="hidden">
+        <h2 id="overview">机构概览</h2>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-label">学生总数</div>
+                <div class="stat-value" id="statStudents">127</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">顾问数量</div>
+                <div class="stat-value" id="statCounselors">8</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">今日活跃</div>
+                <div class="stat-value" id="statActive">45</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">总收入（元）</div>
+                <div class="stat-value" id="statRevenue">380,000</div>
+            </div>
+        </div>
+
+        <h3>收入统计</h3>
+        <p>本月收入：¥<strong>380,000</strong></p>
+        <p>环比增长：<strong>+15.2%</strong></p>
+        
+        <h3>系统设置</h3>
+        <div class="controls">
+            <p><strong>通用设置</strong></p>
+            <p>• 机构名称：示例教育机构</p>
+            <p>• 默认时区：Asia/Shanghai</p>
+            <p>• 语言：简体中文</p>
+            <br>
+            <p><strong>权限管理</strong></p>
+            <p>• 顾问可查看：全部学生</p>
+            <p>• 导出权限：管理员审批</p>
+        </div>
+    </div>
+
+    <!-- 定价方案 -->
+    <h2 id="pricing">定价方案</h2>
+    <div class="pricing-grid">
+        <div class="pricing-card">
+            <h3>基础版</h3>
+            <div class="price">¥999<span class="price-period">/月</span></div>
+            <ul class="feature-list">
+                <li>最多50名学生</li>
+                <li>基础数据导出</li>
+                <li>邮件支持</li>
+            </ul>
+        </div>
+        
+        <div class="pricing-card featured">
+            <h3>专业版 <span style="color: #0066cc;">★ 推荐</span></h3>
+            <div class="price">¥2,999<span class="price-period">/月</span></div>
+            <ul class="feature-list">
+                <li>最多200名学生</li>
+                <li>高级数据分析</li>
+                <li>优先技术支持</li>
+                <li>自定义报表</li>
+            </ul>
+        </div>
+        
+        <div class="pricing-card">
+            <h3>企业版</h3>
+            <div class="price">¥9,999<span class="price-period">/月</span></div>
+            <ul class="feature-list">
+                <li>不限学生数量</li>
+                <li>专属客户经理</li>
+                <li>API接口访问</li>
+                <li>私有化部署选项</li>
+                <li>培训与实施支持</li>
+            </ul>
+        </div>
+    </div>
+
+    <h2 id="contact">联系我们</h2>
+    <p>如有任何问题，请发送邮件至：<a href="mailto:support@example.com">support@example.com</a></p>
+
+    <script>
+        // 模拟数据
+        const STUDENTS = [
+            { name: 'Alice Wang', grade: 11, major: 'CS', progress: 65, nextStep: 'SAT备考', counselor: '张老师' },
+            { name: 'Bob Li', grade: 10, major: 'Finance', progress: 40, nextStep: 'AP Macro', counselor: '李老师' },
+            { name: 'Carol Zhang', grade: 12, major: 'Engineering', progress: 85, nextStep: 'ED提交', counselor: '张老师' },
+            { name: 'David Chen', grade: 11, major: 'Pre-Med', progress: 55, nextStep: 'USABO', counselor: '王老师' }
+        ];
+        
+        const STATS = { students: 127, counselors: 8, activeToday: 45, revenue: 380000 };
+
+        // 渲染学生列表
+        function renderStudents(students) {
+            const tbody = document.getElementById('studentsTableBody');
+            tbody.innerHTML = '';
+            
+            students.forEach(student => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td class="checkbox-col"><input type="checkbox" class="student-checkbox"></td>
+                    <td>${student.name}</td>
+                    <td>${student.grade}</td>
+                    <td>${student.major}</td>
+                    <td>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: ${student.progress}%"></div>
+                        </div>
+                        ${student.progress}%
+                    </td>
+                    <td>${student.nextStep}</td>
+                    <td>${student.counselor}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        // 角色切换
+        function switchRole(role) {
+            const counselorView = document.getElementById('counselor-view');
+            const adminView = document.getElementById('admin-view');
+            const buttons = document.querySelectorAll('.role-btn');
+            
+            buttons.forEach(btn => btn.classList.remove('active'));
+            
+            if (role === 'counselor') {
+                counselorView.classList.remove('hidden');
+                adminView.classList.add('hidden');
+                buttons[0].classList.add('active');
+            } else {
+                counselorView.classList.add('hidden');
+                adminView.classList.remove('hidden');
+                buttons[1].classList.add('active');
+            }
+        }
+
+        // 搜索筛选
+        function filterStudents() {
+            const searchText = document.getElementById('searchInput').value.toLowerCase();
+            const gradeFilter = document.getElementById('gradeFilter').value;
+            const counselorFilter = document.getElementById('counselorFilter').value;
+            
+            const filtered = STUDENTS.filter(student => {
+                const matchSearch = student.name.toLowerCase().includes(searchText);
+                const matchGrade = !gradeFilter || student.grade.toString() === gradeFilter;
+                const matchCounselor = !counselorFilter || student.counselor === counselorFilter;
+                
+                return matchSearch && matchGrade && matchCounselor;
+            });
+            
+            renderStudents(filtered);
+        }
+
+        // 全选
+        function selectAll() {
+            const checkboxes = document.querySelectorAll('.student-checkbox');
+            checkboxes.forEach(cb => cb.checked = true);
+        }
+
+        // 取消全选
+        function deselectAll() {
+            const checkboxes = document.querySelectorAll('.student-checkbox');
+            checkboxes.forEach(cb => cb.checked = false);
+        }
+
+        // 批量导出
+        function batchExport() {
+            const checked = document.querySelectorAll('.student-checkbox:checked');
+            if (checked.length === 0) {
+                alert('请先选择要导出的学生');
+                return;
+            }
+            alert(`已选择 ${checked.length} 名学生，数据已准备导出`);
+        }
+
+        // 导出全部数据
+        function exportAllData() {
+            alert(`导出全部 ${STUDENTS.length} 名学生数据`);
+        }
+
+        // 切换全选复选框
+        function toggleAllCheckboxes() {
+            const selectAllCheckbox = document.getElementById('selectAllCheckbox');
+            const checkboxes = document.querySelectorAll('.student-checkbox');
+            checkboxes.forEach(cb => cb.checked = selectAllCheckbox.checked);
+        }
+
+        // 初始化
+        renderStudents(STUDENTS);
+    </script>
+    <script src="js/back-to-top.js"></script>
+</body>
+</html>

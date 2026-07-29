@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 12 Monthly Tasks - Application Timeline - yunzhuan.icu</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px 16px;
+            background: #f5f5f5;
+            color: #333;
+        }
+        .back-link {
+            color: #667eea;
+            text-decoration: none;
+            font-size: 0.85rem;
+            margin-bottom: 12px;
+            display: inline-block;
+        }
+        .back-link:hover { text-decoration: underline; }
+        h1 {
+            color: #333;
+            margin-bottom: 4px;
+            font-size: 1.5rem;
+        }
+        .subtitle {
+            color: #888;
+            font-size: 0.95rem;
+            margin-bottom: 18px;
+        }
+        .intro {
+            background: white;
+            border-radius: 8px;
+            padding: 14px 18px;
+            margin-bottom: 14px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            font-size: 0.92rem;
+            line-height: 1.7;
+            color: #444;
+        }
+        .month-card {
+            background: white;
+            border-radius: 8px;
+            padding: 14px 18px;
+            margin-bottom: 10px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            border-left: 4px solid #667eea;
+        }
+        .month-header {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+        .month-name {
+            color: #667eea;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        .month-name .en {
+            color: #999;
+            font-size: 0.8rem;
+            font-weight: normal;
+            margin-left: 6px;
+        }
+        .month-focus {
+            color: #888;
+            font-size: 0.82rem;
+            font-style: italic;
+        }
+        .task-list { list-style: none; }
+        .task-list li {
+            padding: 6px 10px;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 0.88rem;
+            line-height: 1.6;
+            color: #444;
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+        }
+        .task-list li:last-child { border-bottom: none; }
+        .task-list li:before {
+            content: "[ ]";
+            color: #aaa;
+            font-family: monospace;
+            flex-shrink: 0;
+        }
+        .task-tag {
+            display: inline-block;
+            padding: 1px 6px;
+            border-radius: 3px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin-right: 6px;
+            flex-shrink: 0;
+        }
+        .tag-academic { background: #e8f4fd; color: #1976d2; }
+        .tag-test { background: #fce4ec; color: #c2185b; }
+        .tag-essay { background: #f3e5f5; color: #7b1fa2; }
+        .tag-school { background: #e8f5e9; color: #2e7d32; }
+        .tag-activity { background: #fff3e0; color: #ef6c00; }
+        .tag-rec { background: #fce4ec; color: #c2185b; }
+        .tag-financial { background: #fff8e1; color: #f57c00; }
+        .task-link {
+            color: #667eea;
+            text-decoration: none;
+            border-bottom: 1px dotted #667eea;
+        }
+        .task-link:hover { text-decoration: underline; }
+        .footer { text-align: center; margin-top: 20px; color: #999; font-size: 0.8rem; }
+        .legend {
+            background: white;
+            border-radius: 8px;
+            padding: 10px 18px;
+            margin-bottom: 14px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            font-size: 0.82rem;
+            color: #555;
+        }
+        .legend b { color: #333; }
+    </style>
+    <link rel="stylesheet" href="/css/collapse.css">
+</head>
+<body>
+    <a href="index.html" class="back-link">&larr; Back to Application Timeline</a>
+    <a href="grade-12.html" class="back-link" style="margin-left:10px;">Overview &rarr;</a>
+
+    <h1>Grade 12 Monthly Tasks</h1>
+    <p class="subtitle">12 年级月度任务清单 · Application phase</p>
+
+    <div class="intro">
+        This page breaks Grade 12 (the application phase) into month-by-month tasks. Each month lists 3-6 concrete actions tagged by category (academics, standardized tests, essays, school list, activities, recommendations). Tasks focus on submission, decisions and enrollment.
+        <br><span style="color:#888;">把 12 年级拆成 12 个月的清单，每月 3-6 条具体任务，重点是递交申请、面试、录取与就读决策。</span>
+    </div>
+
+    <div class="legend">
+        <b>Tags:</b>
+        <span class="task-tag tag-academic">Academic</span>
+        <span class="task-tag tag-test">Test</span>
+        <span class="task-tag tag-essay">Essay</span>
+        <span class="task-tag tag-school">School</span>
+        <span class="task-tag tag-activity">Activity</span>
+        <span class="task-tag tag-rec">Rec Letter</span>
+        <span class="task-tag tag-financial">Financial</span>
+    </div>
+
+        <div class="month-card">
+        <div class="month-header">
+            <div class="month-name">September <span class="en">9 月 · 申请启动</span></div>
+            <div class="month-focus">Focus: Application launch</div>
+        </div>
+        <ul class="task-list">
+            <li><span class="task-tag tag-school">School</span>Common App opens; fill out biographical info, activity list, and add schools to your list.</li>
+            <li><span class="task-tag tag-rec">Rec Letter</span>Confirm recommenders have submitted or are on track; send gentle reminders 2 weeks before ED/EA deadline.</li>
+            <li><span class="task-tag tag-test">Test</span>Take September ACT or October SAT if retaking; this is the last sitting for ED/EA timelines.</li>
+            <li><span class="task-tag tag-essay">Essay</span>Finalize Common App main essay; complete supplemental essays for top 3-5 ED/EA schools.</li>
+            <li><span class="task-tag tag-academic">Academic</span>Senior year grades matter — do not slack. Mid-year reports go to colleges in January.</li>
+        </ul>
+    </div>
+
+    <div class="month-card">
+        <div class="month-header">
+            <div class="month-name">October <span class="en">10 月 · ED/EA 提交</span></div>
+            <div class="month-focus">Focus: ED/EA submission</div>
+        </div>
+        <ul class="task-list">
+            <li><span class="task-tag tag-school">School</span>Submit ED/EA applications by November 1; verify all materials arrived (transcripts, recs, scores).</li>
+            <li><span class="task-tag tag-test">Test</span>Take October SAT if needed; send official scores to ED/EA schools (allow 2-3 weeks for delivery).</li>
+            <li><span class="task-tag tag-essay">Essay</span>Begin drafting RD supplemental essays; aim for 1-2 schools per week through December.</li>
+            <li><span class="task-tag tag-school">School</span>Finalize RD school list to 8-12 across reach/match/safety; verify each school's deadline and requirements.</li>
+            <li><span class="task-tag tag-activity">Activity</span>Update activity list with senior year roles; document any new leadership or projects.</li>
+        </ul>
+    </div>
+
+    <div class="month-card">
+        <div class="month-header">
+            <div class="month-name">November <span class="en">11 月 · ED/EA 截止与 RD 推进</span></div>
+            <div class="month-focus">Focus: ED/EA deadline & RD progress</div>
+        </div>
+        <ul class="task-list">
+            <li><span class="task-tag tag-school">School</span>ED/EA applications due November 1 (some schools November 15). Submit at least 2 days early to avoid crashes.</li>
+            <li><span class="task-tag tag-test">Test</span>Take November SAT or ACT if still retaking; this is the last comfortable sitting for RD timelines.</li>
+            <li><span class="task-tag tag-essay">Essay</span>Complete RD supplemental essays for top 5 schools; aim for 1-2 per week.</li>
+            <li><span class="task-tag tag-rec">Rec Letter</span>Send thank-you notes to recommenders; confirm counselor submitted school report.</li>
+            <li><span class="task-tag tag-financial">Financial</span>Begin CSS Profile draft for early-deadline schools (some ED/EA schools need it by November 15).</li>
+        </ul>
+    </div>
+
+    <div class="month-card">
+        <div class="month-header">
+            <div class="month-name">December <span class="en">12 月 · ED/EA 出结果与 RD 收尾</span></div>
+            <div class="month-focus">Focus: ED/EA decisions & RD finalization</div>
+        </div>
+        <ul class="task-list">
+            <li><span class="task-tag tag-school">School</span>Receive ED/EA decisions mid-December; if admitted ED, withdraw other applications immediately.</li>
+            <li><span class="task-tag tag-test">Test</span>Take December SAT or ACT if still retaking; this is typically the last sitting for RD timelines.</li>
+            <li><span class="task-tag tag-essay">Essay</span>Complete all RD supplemental essays; aim for "final draft pending review" by end of December.</li>
+            <li><span class="task-tag tag-financial">Financial</span>Submit CSS Profile for early-deadline schools; FAFSA opens December 1 (US citizens/permanent residents).</li>
+            <li><span class="task-tag tag-activity">Activity</span>Wrap up fall leadership deliverables; document outcomes for mid-year report updates.</li>
+        </ul>
+    </div>
+
+    <div class="month-card">
+        <div class="month-header">
+            <div class="month-name">January <span class="en">1 月 · RD 截止</span></div>
+            <div class="month-focus">Focus: RD submission</div>
+        </div>
+        <ul class="task-list">
+            <li><span class="task-tag tag-school">School</span>Submit RD applications by January 1-15 (varies by school); verify all materials arrived.</li>
+            <li><span class="task-tag tag-academic">Academic</span>Mid-year reports go to colleges in January; maintain grades and submit updated transcripts.</li>
+            <li><span class="task-tag tag-test">Test</span>Send final official SAT/ACT/TOEFL scores to all RD schools if not already sent.</li>
+            <li><span class="task-tag tag-financial">Financial</span>Submit FAFSA for federal aid (US citizens); complete CSS Profile for RD schools requiring it.</li>
+            <li><span class="task-tag tag-essay">Essay</span>Update essays if your profile changed significantly since submission (rare; only if asked).</li>
+        </ul>
+    </div>
+
+    <div class="month-card">
+        <div class="month-header">
+            <div class="month-name">February <span class="en">2 月 · 等待与面试</span></div>
+            <div class="month-focus">Focus: Interviews & mid-year updates</div>
+        </div>
+        <ul class="task-list">
+            <li><span class="task-tag tag-school">School</span>Attend alumni interviews if invited; prepare thoughtful questions about the school.</li>
+            <li><span class="task-tag tag-school">School</span>Send "letter of continued interest" to waitlist/deferred schools; include any new achievements.</li>
+            <li><span class="task-tag tag-academic">Academic</span>Maintain grades; some schools request third-quarter reports before deciding.</li>
+            <li><span class="task-tag tag-activity">Activity</span>Continue activities at full intensity; do not check out before decisions arrive.</li>
+            <li><span class="task-tag tag-financial">Financial</span>Complete any remaining financial aid forms; respond to verification requests promptly.</li>
+        </ul>
+    </div>
+
+    <div class="month-card">
+        <div class="month-header">
+            <div class="month-name">March <span class="en">3 月 · RD 出结果</span></div>
+            <div class="month-focus">Focus: RD decisions</div>
+        </div>
+        <ul class="task-list">
+            <li><span class="task-tag tag-school">School</span>RD decisions released late March to early April; track all decisions in a spreadsheet.</li>
+            <li><span class="task-tag tag-school">School</span>Compare admitted schools: financial aid packages, academic fit, campus culture, location.</li>
+            <li><span class="task-tag tag-school">School</span>Attend admitted student events (Admitted Students Day, virtual sessions); ask current students tough questions.</li>
+            <li><span class="task-tag tag-financial">Financial</span>Compare financial aid packages; appeal if packages are significantly different across peer schools.</li>
+            <li><span class="task-tag tag-test">Test</span>Take AP exams registration if applicable; AP scores can earn college credit at admitted schools.</li>
+        </ul>
+    </div>
+
+    <div class="month-card">
+        <div class="month-header">
+            <div class="month-name">April <span class="en">4 月 · 录取决策与就读确认</span></div>
+            <div class="month-focus">Focus: Final choice & enrollment</div>
+        </div>
+        <ul class="task-list">
+            <li><span class="task-tag tag-school">School</span>Visit 2-3 top admitted schools if possible; informal visits help with final decision.</li>
+            <li><span class="task-tag tag-school">School</span>Submit enrollment deposit by May 1 (National Decision Day); notify other schools of your decision.</li>
+            <li><span class="task-tag tag-school">School</span>If waitlisted at top-choice school, send updated letter of continued interest with new achievements.</li>
+            <li><span class="task-tag tag-financial">Financial</span>Accept financial aid package at enrolled school; complete any remaining paperwork.</li>
+            <li><span class="task-tag tag-test">Test</span>Take AP/IB exams in May; scores will be sent to enrolled school for credit consideration.</li>
+        </ul>
+    </div>
+
+    <div class="month-card">
+        <div class="month-header">
+            <div class="month-name">May <span class="en">5 月 · AP/IB 考试与过渡</span></div>
+            <div class="month-focus">Focus: Subject exams & transition</div>
+        </div>
+        <ul class="task-list">
+            <li><span class="task-tag tag-academic">Academic</span>Take AP / IB / A-Level exams in May; scores are reported to enrolled school for credit.</li>
+            <li><span class="task-tag tag-school">School</span>Submit final transcript request to counselor; ensure grades do not drop significantly (offers can be rescinded).</li>
+            <li><span class="task-tag tag-school">School</span>Complete enrollment paperwork: housing, meal plan, course registration, orientation signup.</li>
+            <li><span class="task-tag tag-activity">Activity</span>Wind down high school activities gracefully; train successors if in leadership roles.</li>
+            <li><span class="task-tag tag-test">Test</span>Take May SAT or ACT only if enrolled school requires it for placement (rare).</li>
+        </ul>
+    </div>
+
+    <div class="month-card">
+        <div class="month-header">
+            <div class="month-name">June <span class="en">6 月 · 高中毕业</span></div>
+            <div class="month-focus">Focus: Graduation & handover</div>
+        </div>
+        <ul class="task-list">
+            <li><span class="task-tag tag-academic">Academic</span>Final transcripts sent to enrolled college; verify receipt and resolve any discrepancies.</li>
+            <li><span class="task-tag tag-school">School</span>Attend graduation; thank teachers and counselors who supported your application.</li>
+            <li><span class="task-tag tag-activity">Activity</span>Close out high school activities; document final outcomes for personal records.</li>
+            <li><span class="task-tag tag-school">School</span>Begin college transition: review summer reading lists, math placement exams, language placement tests.</li>
+            <li><span class="task-tag tag-financial">Financial</span>Set up college billing account; understand payment deadlines and refund policies.</li>
+        </ul>
+    </div>
+
+    <div class="month-card">
+        <div class="month-header">
+            <div class="month-name">July <span class="en">7 月 · 大学准备</span></div>
+            <div class="month-focus">Focus: College preparation</div>
+        </div>
+        <ul class="task-list">
+            <li><span class="task-tag tag-school">School</span>Complete summer assignments: reading lists, math packets, language placement prep.</li>
+            <li><span class="task-tag tag-school">School</span>Register for orientation; sign up for first-semester courses with advisor input.</li>
+            <li><span class="task-tag tag-school">School</span>Set up college email and student portal; monitor for housing and registration deadlines.</li>
+            <li><span class="task-tag tag-financial">Financial</span>Finalize financial aid disbursement; confirm payment plan or loan arrangements.</li>
+            <li><span class="task-tag tag-activity">Activity</span>Begin packing and logistics for move-in day; coordinate with roommate if assigned.</li>
+        </ul>
+    </div>
+
+    <div class="month-card">
+        <div class="month-header">
+            <div class="month-name">August <span class="en">8 月 · 入学过渡</span></div>
+            <div class="month-focus">Focus: Move-in & first semester</div>
+        </div>
+        <ul class="task-list">
+            <li><span class="task-tag tag-school">School</span>Move into dorm; attend orientation week activities; meet roommate and floor mates.</li>
+            <li><span class="task-tag tag-school">School</span>Finalize course registration with academic advisor; understand add/drop deadlines.</li>
+            <li><span class="task-tag tag-academic">Academic</span>Attend first week of classes; assess workload and adjust schedule if needed within add/drop period.</li>
+            <li><span class="task-tag tag-financial">Financial</span>Verify tuition payment is complete; understand work-study assignments if applicable.</li>
+            <li><span class="task-tag tag-activity">Activity</span>Explore student clubs and organizations; sign up for 2-3 to try in first month.</li>
+        </ul>
+    </div>
+
+    <p class="footer">&copy; 2026 yunzhuan.icu | Grade 12 Monthly Tasks</p>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <div style="text-align:center;padding:8px 0;font-size:0.75rem;color:#aaa;">
+        <a href="../index.html" style="color:#aaa;text-decoration:none;">Home</a>
+        <span style="margin:0 6px;">&middot;</span>
+        <a href="../intl-exams/index.html" style="color:#aaa;text-decoration:none;">International Exams</a>
+        <span style="margin:0 6px;">&middot;</span>
+        <a href="../contact.html" style="color:#aaa;text-decoration:none;">Contact</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="javascript:window.scrollTo(0,0)" style="color:#aaa;text-decoration:none;">Back to top</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,1190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roadmap - 产品路线图 & 技术规划 - yunzhuan.icu</title>
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 16px 40px;
+            background: #f5f5f5;
+            color: #333;
+            line-height: 1.7;
+        }
+        .navbar {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            padding: 12px 0;
+            margin-bottom: 20px;
+        }
+        .logo { display: none; }
+        .nav-links {
+            display: flex;
+            gap: 14px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: #555;
+            font-size: 0.82rem;
+            font-weight: 500;
+            transition: color 0.15s;
+            white-space: nowrap;
+        }
+        .nav-links a:hover { color: #667eea; }
+        .nav-links .cn {
+            font-size: 0.65rem;
+            color: #bbb;
+            margin-left: 2px;
+        }
+        h1 {
+            font-size: 1.6rem;
+            color: #333;
+            margin-bottom: 6px;
+        }
+        .subtitle {
+            color: #888;
+            font-size: 0.9rem;
+            margin-bottom: 28px;
+        }
+        .version-block {
+            background: white;
+            border-radius: 10px;
+            padding: 24px 28px;
+            margin-bottom: 18px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .version-header {
+            display: flex;
+            align-items: baseline;
+            gap: 12px;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+        }
+        .version-tag {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #333;
+        }
+        .version-status {
+            font-size: 0.72rem;
+            padding: 3px 10px;
+            border-radius: 10px;
+            font-weight: 500;
+        }
+        .status-planned { background: #fef3c7; color: #92400e; }
+        .status-exploring { background: #dbeafe; color: #1e40af; }
+        .status-idea { background: #f3e8ff; color: #6b21a8; }
+        .status-done { background: #d1fae5; color: #065f46; }
+        .version-desc {
+            color: #555;
+            margin-bottom: 16px;
+            font-size: 0.92rem;
+        }
+        .section-title {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #667eea;
+            margin: 18px 0 8px;
+            padding-bottom: 4px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .section-title:first-child { margin-top: 0; }
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 10px;
+        }
+        .feature-list li {
+            padding: 6px 0 6px 18px;
+            position: relative;
+            color: #444;
+            font-size: 0.88rem;
+        }
+        .feature-list li::before {
+            content: "○";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-size: 0.7rem;
+            top: 8px;
+        }
+        .tech-box {
+            background: #f8f9ff;
+            border: 1px solid #e0e7ff;
+            border-radius: 8px;
+            padding: 14px 18px;
+            margin: 10px 0;
+        }
+        .tech-box h4 {
+            font-size: 0.85rem;
+            color: #4338ca;
+            margin-bottom: 6px;
+        }
+        .tech-box p, .tech-box li {
+            font-size: 0.82rem;
+            color: #555;
+        }
+        .tech-box ul { margin-left: 18px; }
+        .tech-box ol { margin-left: 18px; }
+        .tech-box code {
+            background: #e0e7ff;
+            color: #4338ca;
+            padding: 1px 5px;
+            border-radius: 3px;
+            font-size: 0.78em;
+            font-family: monospace;
+        }
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.8rem;
+            margin: 8px 0;
+        }
+        .data-table th, .data-table td {
+            padding: 6px 10px;
+            text-align: left;
+            border-bottom: 1px solid #e0e7ff;
+        }
+        .data-table th {
+            background: #eef2ff;
+            color: #4338ca;
+            font-weight: 600;
+            font-size: 0.78rem;
+        }
+        .data-table tr:hover { background: #f5f7ff; }
+        .tech-box pre {
+            background: #1e1b4b;
+            color: #c7d2fe;
+            padding: 12px;
+            border-radius: 6px;
+            overflow-x: auto;
+            font-size: 0.78rem;
+            line-height: 1.5;
+            margin: 8px 0;
+        }
+        .pros-cons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin: 10px 0;
+        }
+        .pros, .cons {
+            padding: 10px 14px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+        }
+        .pros { background: #f0fdf4; border: 1px solid #bbf7d0; }
+        .cons { background: #fef2f2; border: 1px solid #fecaca; }
+        .pros h5, .cons h5 {
+            font-size: 0.78rem;
+            margin-bottom: 4px;
+        }
+        .pros h5 { color: #166534; }
+        .cons h5 { color: #991b1b; }
+        .pros ul, .cons ul { margin-left: 16px; }
+        .pros li { color: #166534; }
+        .cons li { color: #991b1b; }
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 18px;
+            border-top: 1px solid #e5e7eb;
+            font-size: 0.8rem;
+            color: #999;
+        }
+        @media (max-width: 600px) {
+            .version-block { padding: 18px 16px; }
+            .pros-cons { grid-template-columns: 1fr; }
+            .nav-links .cn { display: none; }
+        }
+    </style>
+    <link rel="stylesheet" href="css/theme.css">
+    <script src="js/theme.js"></script>
+    <script src="js/search-shortcut.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="index.html" class="logo"><span class="logo-icon">🎓</span><span class="logo-text">yunzhuan<span>.icu</span></span></a>
+        <div class="nav-links">
+            <a href="index.html">Majors<span class="cn">专业</span></a>
+            <a href="schools/index.html">Schools<span class="cn">学校</span></a>
+            <a href="essays/index.html">Essays<span class="cn">文书</span></a>
+            <a href="guides/index.html">Guides<span class="cn">指南</span></a>
+            <a href="search.html">Search<span class="cn">搜索</span></a>
+        </div>
+    </nav>
+
+    <h1>Product Roadmap</h1>
+    <p class="subtitle">产品路线图 &middot; 技术规划与讨论 &middot; 逐步实施中</p>
+
+    <!-- v20.6.0 - 首页产品化 -->
+    <div class="version-block">
+        <div class="version-header">
+            <span class="version-tag">v20.6.0</span>
+            <span class="version-status status-done">Done</span>
+        </div>
+        <p class="version-desc"><strong>首页产品化改造</strong> — 从专业导航列表改为产品展示首页，面向感兴趣的用户展示基础功能和亮点。</p>
+
+        <div class="section-title">已实施内容</div>
+        <ul class="feature-list">
+            <li>Hero 区：品牌定位 + 一句话描述 + 搜索框</li>
+            <li>数据条：56专业 / 40+学校 / 15+工具 / 36竞赛 / 700+页面，纯彩色文字区分</li>
+            <li>6 大功能亮点卡片：Majors/Schools/Tests/Competitions/Application/Resources，每个用独立主题色（蓝/绿/橙/红/紫/青）</li>
+            <li>版本进度条：可视化展示 v20.0~v24.0 各版本完成度，带状态标签（Done/Active/Planned/Idea）</li>
+            <li>CTA 行动号召区：引导用户开始搜索/测评/浏览竞赛</li>
+            <li>无渐变、无 icon 设计，纯彩色文字 + 左边框卡片</li>
+        </ul>
+    </div>
+
+    <!-- v20.5.0 -->
+    <div class="version-block">
+        <div class="version-header">
+            <span class="version-tag">v20.5.0</span>
+            <span class="version-status status-done">Done</span>
+        </div>
+        <p class="version-desc"><strong>竞赛体系 Phase 2 + Bug修复 + 体验优化</strong></p>
+
+        <div class="section-title">已实施内容</div>
+        <ul class="feature-list">
+            <li>36 个竞赛详情页补齐（8大分类全覆盖）</li>
+            <li>总览页多维筛选器（类型/难度/年级/地区 + 搜索）</li>
+            <li>竞赛日历页（月历视图 + 时间线视图 + 分类筛选）</li>
+            <li>6 个 Bug 修复（contact模板语法/导航404/favorites路径/breadcrumbs路径/邮箱占位符/学校CSS）</li>
+            <li>回到顶部浮动按钮（全站36+页面）</li>
+            <li>打印样式 @media print</li>
+            <li>4 个页面多维筛选推广（学校/考试/文书/奖学金）</li>
+            <li>8 个专业详情页加推荐竞赛区块</li>
+            <li>统一全站 max-width（642个文件）</li>
+        </ul>
+    </div>
+
+    <!-- v21.0.0 -->
+    <div class="version-block">
+        <div class="version-header">
+            <span class="version-tag">v21.0.0</span>
+            <span class="version-status status-exploring">Active</span>
+        </div>
+        <p class="version-desc"><strong>个人中心 &amp; 学习路径系统</strong> — 基于 Supabase 的完整用户数据体系，包含收藏夹、学习路径、申请进度 Tracker、截止日期提醒。</p>
+
+        <div class="section-title">已完成基础</div>
+        <ul class="feature-list">
+            <li>Supabase Auth 已集成（auth.js），支持注册/登录/登出</li>
+            <li>收藏功能已实现（favorites.js），专业/学校页可收藏</li>
+            <li>Dashboard / Profile / Login 页面已存在（模拟展示模式）</li>
+        </ul>
+
+        <div class="section-title">用户角色体系</div>
+        <p style="font-size:0.88rem;color:#555;margin-bottom:10px;">不同角色看到不同的界面和功能，模拟数据先行，后续接入真实权限系统。</p>
+
+        <div class="tech-box">
+            <h4>角色定义与权限矩阵</h4>
+            <table class="data-table">
+                <thead>
+                    <tr><th>角色</th><th>英文</th><th>核心权限</th><th>数据范围</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>学生</td><td>Student</td><td>个人Dashboard / 学习路径 / 申请Tracker / 收藏 / 测评</td><td>仅自己的数据</td></tr>
+                    <tr><td>家长</td><td>Parent</td><td>查看孩子进度 / 费用计算 / 时间线概览 / 消息通知</td><td>关联孩子的数据（只读）</td></tr>
+                    <tr><td>顾问</td><td>Counselor</td><td>多学生管理 / 批量跟踪 / 备注 / 资源共享 / 数据导出</td><td>所有关联学生</td></tr>
+                    <tr><td>管理员</td><td>Admin</td><td>内容管理 / 用户管理 / 数据统计 / 系统配置</td><td>全站数据</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="tech-box">
+            <h4>技术实现方案</h4>
+            <ul>
+                <li><strong>当前阶段（模拟）：</strong>用 localStorage 存储 role 字段，页面根据 role 显示/隐藏区块，数据为预设模拟值</li>
+                <li><strong>中期（Supabase RLS）：</strong>Supabase Row Level Security 按角色过滤数据，<code>auth.uid() = user_id</code> 或 <code>parent_id = auth.uid()</code></li>
+                <li><strong>长期（RBAC）：</strong>引入 <code>user_roles</code> 表 + Supabase Auth Hook，支持细粒度权限控制</li>
+            </ul>
+            <p style="margin-top:6px;"><strong>数据结构设计：</strong></p>
+            <pre>-- profiles 表
+profiles (
+  id UUID REFERENCES auth.users,
+  role TEXT DEFAULT 'student', -- student | parent | counselor | admin
+  display_name TEXT,
+  avatar_url TEXT,
+  grade INT,               -- 学生年级
+  target_major TEXT,       -- 目标专业
+  target_schools TEXT[],   -- 目标学校
+  parent_of UUID[],        -- 家长关联的学生ID
+  counselor_students UUID[] -- 顾问关联的学生列表
+)</pre>
+        </div>
+
+        <div class="section-title">v21.0 实施计划（模拟数据先行）</div>
+        <ul class="feature-list">
+            <li><strong>个人中心 Dashboard</strong> — 角色切换 / 总览卡片 / 进度环形图 / 最近活动 / 快捷入口</li>
+            <li><strong>学习路径系统</strong> — 按年级(9-12)分阶段 / 课程规划 / 标化时间线 / 活动建议 / 竞赛推荐 / 勾选完成度</li>
+            <li><strong>申请 Tracker</strong> — 每所学校独立跟踪 / 申请阶段(选校→文书→提交→面试→录取) / 截止日期倒计时 / 录取结果统计</li>
+            <li><strong>收藏夹增强</strong> — 分类收藏(专业/学校/竞赛/文章) / 自定义分组 / 导出 PDF</li>
+            <li><strong>截止日期提醒</strong> — 浏览器通知 / 倒计时组件 / 月历视图</li>
+            <li><strong>家长视图</strong> — 只读模式查看孩子进度 / 费用汇总 / 消息通知</li>
+            <li><strong>顾问工作台</strong> — 多学生列表 / 批量操作 / 备注 / 数据导出</li>
+        </ul>
+
+        <div class="section-title">技术方案讨论</div>
+
+        <div class="tech-box">
+            <h4>🔌 数据层：Supabase Database vs Vercel KV</h4>
+            <p><strong>现状：</strong>已有 Supabase Auth 和 Vercel KV（统计用）</p>
+            <div class="pros-cons">
+                <div class="pros">
+                    <h5>Supabase Database 方案</h5>
+                    <ul>
+                        <li>关系型数据，适合复杂查询</li>
+                        <li>RLS 行级安全，数据隔离</li>
+                        <li>与已有 Auth 无缝集成</li>
+                        <li>支持实时订阅</li>
+                    </ul>
+                </div>
+                <div class="cons">
+                    <h5>Vercel KV 方案</h5>
+                    <ul>
+                        <li>Redis 速度快</li>
+                        <li>与现有统计代码复用</li>
+                        <li>但不适合复杂关系数据</li>
+                        <li>查询能力有限</li>
+                    </ul>
+                </div>
+            </div>
+            <p style="margin-top:8px;"><strong>推荐：</strong>用户数据用 Supabase Database，KV 继续存访问统计。两套各尽其职。</p>
+        </div>
+
+        <div class="tech-box">
+            <h4>📅 截止日期提醒实现方案</h4>
+            <ul>
+                <li><strong>方案 A：</strong>浏览器 Notification API + Service Worker 定时检查（纯前端，无需后端）</li>
+                <li><strong>方案 B：</strong>Vercel Cron Job + 邮件推送（需要用户邮箱，用 Resend / SendGrid）</li>
+                <li><strong>方案 C：</strong>Web Push Notification（VAPID 协议，可离线推送）</li>
+            </ul>
+            <p style="margin-top:6px;"><strong>推荐：</strong>先做方案 A（零成本），后续迭代加方案 C。邮件提醒作为高优先级功能单独评估。</p>
+        </div>
+
+        <div class="tech-box">
+            <h4>🧭 学习路径数据结构</h4>
+            <p>用 JSON 配置化驱动，每个专业对应一条学习路径：</p>
+            <ul style="margin-top:4px;">
+                <li><code>freshman</code> / <code>sophomore</code> / <code>junior</code> / <code>senior</code> 四个阶段</li>
+                <li>每阶段包含：课程、标化、活动、科研、竞赛建议</li>
+                <li>用户可勾选完成，自动计算完成度百分比</li>
+                <li>数据存在 Supabase <code>user_progress</code> 表</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- v22.0.0 -->
+    <div class="version-block">
+        <div class="version-header">
+            <span class="version-tag">v22.0.0</span>
+            <span class="version-status status-exploring">Exploring</span>
+        </div>
+        <p class="version-desc"><strong>社区系统 &amp; UGC 内容</strong> — 用户生成内容平台，包括问答、经验分享、评论互动。</p>
+
+        <div class="section-title">核心功能</div>
+        <ul class="feature-list">
+            <li>问答社区 — 提问、回答、点赞、收藏</li>
+            <li>经验分享投稿 — 用户可发布自己的申请故事</li>
+            <li>评论系统 — 所有文章/专业/学校页支持评论</li>
+            <li>用户等级体系 — 贡献值、徽章、等级</li>
+            <li>关注系统 — 关注学长学姐，动态推送</li>
+        </ul>
+
+        <div class="section-title">技术方案讨论</div>
+
+        <div class="tech-box">
+            <h4>💬 评论系统选型</h4>
+            <div class="pros-cons">
+                <div class="pros">
+                    <h5>Giscus (GitHub Discussions)</h5>
+                    <ul>
+                        <li>零后端，开箱即用</li>
+                        <li>GitHub 账号体系</li>
+                        <li>支持深色模式</li>
+                        <li>无广告，开源</li>
+                    </ul>
+                </div>
+                <div class="cons">
+                    <h5>自建评论系统</h5>
+                    <ul>
+                        <li>完全可控，可定制</li>
+                        <li>与站内账号体系打通</li>
+                        <li>开发成本高</li>
+                        <li>需要反垃圾机制</li>
+                    </ul>
+                </div>
+            </div>
+            <p style="margin-top:8px;"><strong>推荐：</strong>第一阶段用 Giscus 快速上线，验证需求。用户量起来后再考虑自建。</p>
+        </div>
+
+        <div class="tech-box">
+            <h4>🛡️ 内容审核方案</h4>
+            <ul>
+                <li><strong>前置审核：</strong>新用户首帖需审核（人工 + 关键词过滤）</li>
+                <li><strong>自动审核：</strong>接入第三方内容审核 API（如阿里云内容安全、腾讯云内容安全）</li>
+                <li><strong>用户举报：</strong>每帖带举报按钮，社区共治</li>
+                <li><strong>成本预估：</strong>第三方 API 约 ¥0.002/次，1 万条内容 ¥20，早期可接受</li>
+            </ul>
+        </div>
+
+        <div class="tech-box">
+            <h4>⚡ 富文本编辑器选择</h4>
+            <ul>
+                <li><strong>TipTap：</strong>基于 ProseMirror，现代、轻量、可扩展（推荐）</li>
+                <li><strong>Quill：</strong>成熟稳定，生态好，但包体较大</li>
+                <li><strong>Markdown 编辑器：</strong>如 EasyMDE，技术向用户友好，但普通用户有门槛</li>
+            </ul>
+            <p style="margin-top:6px;"><strong>推荐：</strong>Markdown 先行（开发成本最低），后续再上 TipTap 富文本。</p>
+        </div>
+
+        <div class="section-title">技术实现方案</div>
+        <div class="tech-box">
+            <h4>用户角色扩展</h4>
+            <ul>
+                <li>社区角色继承 v21 的 RBAC 体系</li>
+                <li>新增内容创作者角色（Contributor）：可投稿经验分享</li>
+                <li>新增版主角色（Moderator）：可审核/删除/置顶帖子</li>
+                <li>用户等级基于贡献值自动升级</li>
+            </ul>
+        </div>
+        <div class="tech-box">
+            <h4>数据架构</h4>
+            <pre>-- UGC 内容表
+posts (id, author_id, title, content, category, status, created_at)
+comments (id, post_id, author_id, content, parent_id, created_at)
+reactions (id, user_id, target_type, target_id, type)
+follows (follower_id, followee_id, created_at)
+user_badges (user_id, badge_id, awarded_at)</pre>
+        </div>
+    </div>
+
+    <!-- v22.5.0 - 国际竞赛体系 -->
+    <div class="version-block">
+        <div class="version-header">
+            <span class="version-tag">v22.5.0</span>
+            <span class="version-status status-idea">Idea</span>
+        </div>
+        <p class="version-desc"><strong>国际竞赛体系</strong> — 常见国际竞赛全收录，按学科分类、难度分级、适合专业推荐，帮助学生找到适合自己的背景提升竞赛。</p>
+
+        <div class="section-title">为什么单独做竞赛板块</div>
+        <ul class="feature-list">
+            <li>背景提升是美本申请的核心环节，竞赛是最主流的背景提升方式之一</li>
+            <li>竞赛信息分散，学生和家长不知道有哪些、怎么选、什么时候参加</li>
+            <li>与专业页、学校页可形成强关联（"CS 专业推荐参加哪些竞赛"）</li>
+            <li>SEO 流量入口："xx 竞赛含金量"、"xx 竞赛报名时间" 等长尾词</li>
+        </ul>
+
+        <div class="section-title">竞赛分类架构（8 大类 + 40+ 核心竞赛）</div>
+
+        <div class="tech-box">
+            <h4>🔬 1. 数理科学类（Mathematics & Sciences）</h4>
+            <table class="data-table">
+                <thead>
+                    <tr><th>竞赛名称</th><th>缩写</th><th>难度</th><th>适合年级</th><th>含金量</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>AMC 8 / 10 / 12</td><td>AMC</td><td>⭐⭐⭐⭐</td><td>8-12 年级</td><td>极高</td></tr>
+                    <tr><td>AIME 美国数学邀请赛</td><td>AIME</td><td>⭐⭐⭐⭐⭐</td><td>10-12 年级</td><td>极高</td></tr>
+                    <tr><td>USA(J)MO 数学奥赛</td><td>USAMO</td><td>⭐⭐⭐⭐⭐</td><td>10-12 年级</td><td>顶级</td></tr>
+                    <tr><td>Physics Bowl 物理碗</td><td>—</td><td>⭐⭐⭐</td><td>9-12 年级</td><td>高</td></tr>
+                    <tr><td>UKChO 英国化学奥赛</td><td>UKChO</td><td>⭐⭐⭐⭐</td><td>11-12 年级</td><td>高</td></tr>
+                    <tr><td>USNCO 美国化学奥赛</td><td>USNCO</td><td>⭐⭐⭐⭐</td><td>10-12 年级</td><td>高</td></tr>
+                    <tr><td>BBO 英国生物奥赛</td><td>BBO</td><td>⭐⭐⭐</td><td>9-12 年级</td><td>中高</td></tr>
+                    <tr><td>USABO 美国生物奥赛</td><td>USABO</td><td>⭐⭐⭐⭐</td><td>10-12 年级</td><td>高</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="tech-box">
+            <h4>💻 2. 计算机与工程类（Computer Science & Engineering）</h4>
+            <table class="data-table">
+                <thead>
+                    <tr><th>竞赛名称</th><th>缩写</th><th>难度</th><th>适合年级</th><th>含金量</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>USACO 信息学奥赛</td><td>USACO</td><td>⭐⭐⭐⭐⭐</td><td>9-12 年级</td><td>极高</td></tr>
+                    <tr><td>CCC 加拿大计算机竞赛</td><td>CCC</td><td>⭐⭐⭐</td><td>9-12 年级</td><td>中高</td></tr>
+                    <tr><td>VEX 机器人竞赛</td><td>VEX</td><td>⭐⭐⭐⭐</td><td>6-12 年级</td><td>高</td></tr>
+                    <tr><td>FRC 机器人竞赛</td><td>FRC</td><td>⭐⭐⭐⭐</td><td>9-12 年级</td><td>高</td></tr>
+                    <tr><td>Google Science Fair</td><td>GSF</td><td>⭐⭐⭐⭐⭐</td><td>13-18 岁</td><td>顶级</td></tr>
+                    <tr><td>ISEF 国际科学与工程大奖赛</td><td>ISEF</td><td>⭐⭐⭐⭐⭐</td><td>9-12 年级</td><td>顶级</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="tech-box">
+            <h4>📊 3. 商科与经济类（Business & Economics）</h4>
+            <table class="data-table">
+                <thead>
+                    <tr><th>竞赛名称</th><th>缩写</th><th>难度</th><th>适合年级</th><th>含金量</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>NEC 全美经济学挑战赛</td><td>NEC</td><td>⭐⭐⭐</td><td>9-12 年级</td><td>高</td></tr>
+                    <tr><td>IEO 国际经济学奥赛</td><td>IEO</td><td>⭐⭐⭐⭐</td><td>9-12 年级</td><td>高</td></tr>
+                    <tr><td>FBLA 未来商业领袖</td><td>FBLA</td><td>⭐⭐⭐</td><td>9-12 年级</td><td>中高</td></tr>
+                    <tr><td>DECA 商业挑战赛</td><td>DECA</td><td>⭐⭐⭐</td><td>9-12 年级</td><td>中高</td></tr>
+                    <tr><td>KWHS 沃顿商赛</td><td>KWHS</td><td>⭐⭐⭐⭐</td><td>9-12 年级</td><td>极高</td></tr>
+                    <tr><td>Marshall 社创挑战赛</td><td>—</td><td>⭐⭐⭐⭐</td><td>9-12 年级</td><td>高</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="tech-box">
+            <h4>🌍 4. 人文社科类（Humanities & Social Sciences）</h4>
+            <table class="data-table">
+                <thead>
+                    <tr><th>竞赛名称</th><th>缩写</th><th>难度</th><th>适合年级</th><th>含金量</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>NHSDLC 美式辩论联赛</td><td>NHSDLC</td><td>⭐⭐⭐</td><td>7-12 年级</td><td>中高</td></tr>
+                    <tr><td>NSDA 演讲与辩论</td><td>NSDA</td><td>⭐⭐⭐⭐</td><td>6-12 年级</td><td>高</td></tr>
+                    <tr><td>John Locke 论文竞赛</td><td>—</td><td>⭐⭐⭐⭐⭐</td><td>10-12 年级</td><td>极高</td></tr>
+                    <tr><td>Marshall 论文竞赛</td><td>—</td><td>⭐⭐⭐⭐⭐</td><td>11-12 年级</td><td>极高</td></tr>
+                    <tr><td>HiMCM 数学建模竞赛</td><td>HiMCM</td><td>⭐⭐⭐⭐</td><td>9-12 年级</td><td>高</td></tr>
+                    <tr><td>CTB 全球创新研究大挑战</td><td>CTB</td><td>⭐⭐⭐</td><td>9-12 年级</td><td>中高</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="tech-box">
+            <h4>🎨 5. 艺术与设计类（Arts & Design）</h4>
+            <ul class="feature-list">
+                <li>Scholastic Art & Writing Awards — 美国中学生艺术写作大赛</li>
+                <li>YoungArts — 国家青年艺术基金会</li>
+                <li>Rhode Island Design Competition — 罗德岛设计竞赛</li>
+                <li>NYU Tisch 艺术竞赛</li>
+                <li>国际青少年绘画大赛（多种）</li>
+            </ul>
+        </div>
+
+        <div class="tech-box">
+            <h4>🗣️ 6. 语言与写作类（Language & Writing）</h4>
+            <ul class="feature-list">
+                <li>NSDA / NHSDLC 辩论（已列在人文类，交叉）</li>
+                <li>John Locke Institute 论文竞赛</li>
+                <li>New York Times 写作竞赛系列</li>
+                <li>The Concord Review — 历史论文发表</li>
+                <li>Polymath 多学科论文竞赛</li>
+            </ul>
+        </div>
+
+        <div class="tech-box">
+            <h4>🔬 7. 科研类（Research & Innovation）</h4>
+            <ul class="feature-list">
+                <li>ISEF / Regeneron STS — 顶级科学竞赛</li>
+                <li>Google Science Fair</li>
+                <li>丘成桐中学科学奖（Yau Award）</li>
+                <li>CTB 全球创新研究大挑战</li>
+                <li>China Thinks Big 中国大智汇</li>
+            </ul>
+        </div>
+
+        <div class="tech-box">
+            <h4>🌏 8. 综合类 & 夏校竞赛（Summer Programs）</h4>
+            <ul class="feature-list">
+                <li>RSI 科学暑期研究院（MIT）</li>
+                <li>MITES / E2@MIT</li>
+                <li>Telluride Association Summer Program (TASP)</li>
+                <li>HSMC 斯坦福数学营</li>
+                <li>SUMaC / PROMYS / Ross Program — 数学营</li>
+                <li>YYGS 耶鲁全球青年学者</li>
+            </ul>
+        </div>
+
+        <div class="section-title">页面结构设计</div>
+        <ul class="feature-list">
+            <li><code>/competitions/index.html</code> — 竞赛总览页（8 大分类 + 搜索 + 筛选器）</li>
+            <li><code>/competitions/math.html</code> — 数学竞赛分类页</li>
+            <li><code>/competitions/cs.html</code> — 计算机竞赛分类页</li>
+            <li><code>/competitions/amc.html</code> — 单个竞赛详情页（模板化）</li>
+            <li><code>/competitions/major-cs.html</code> — 按专业推荐竞赛（CS 专业推荐竞赛 Top 10）</li>
+        </ul>
+
+        <div class="section-title">单个竞赛详情页内容模板</div>
+        <div class="tech-box">
+            <h4>📄 标准竞赛详情页结构</h4>
+            <ol>
+                <li><strong>基本信息卡片</strong>：全称、缩写、主办方、官网、报名时间、比赛时间、参赛费用</li>
+                <li><strong>竞赛简介</strong>：历史、规模、影响力</li>
+                <li><strong>参赛资格</strong>：年级、地域、前置要求</li>
+                <li><strong>比赛形式</strong>：个人/团队、线上/线下、题型、时长、轮次</li>
+                <li><strong>难度分级</strong>：入门 / 进阶 / 顶级（5 星制）</li>
+                <li><strong>含金量评估</strong>：藤校认可度、对申请帮助程度</li>
+                <li><strong>适合专业</strong>：关联专业列表（可跳转专业页）</li>
+                <li><strong>获奖率 / 分数线</strong>：近年数据（如有）</li>
+                <li><strong>备考建议</strong>：推荐书籍、网站、备考周期</li>
+                <li><strong>相关竞赛</strong>：同类型/同难度推荐</li>
+                <li><strong>常见问题 FAQ</strong></li>
+            </ol>
+        </div>
+
+        <div class="section-title">逐步实现步骤（分 3 期）</div>
+
+        <div class="tech-box">
+            <h4>Phase 1：信息架构搭建（MVP，约 10 个核心竞赛）</h4>
+            <ul class="feature-list">
+                <li>✅ 创建 <code>/competitions/</code> 目录和总览页</li>
+                <li>✅ 8 大分类导航 + 分类页（静态列表）</li>
+                <li>✅ 先做 10 个最高频竞赛的详情页（AMC / USACO / NEC / John Locke / VEX / Physics Bowl / BBO / UKChO / HiMCM / KWHS）</li>
+                <li>✅ 统一详情页模板，可复用</li>
+                <li>✅ 每个竞赛页加"适合专业"关联链接，导流到专业页</li>
+            </ul>
+            <p style="margin-top:6px;"><strong>目标：</strong>验证内容需求，SEO 长尾词起量</p>
+        </div>
+
+        <div class="tech-box">
+            <h4>Phase 2：扩量 + 工具化（40+ 竞赛，工具辅助）</h4>
+            <ul class="feature-list">
+                <li>🔄 补齐 8 大类所有核心竞赛详情页（约 40 个）</li>
+                <li>🔄 竞赛筛选器：按学科 / 难度 / 年级 / 含金量 / 时间筛选</li>
+                <li>🔄 竞赛日历：按时间轴展示全年竞赛报名/比赛时间</li>
+                <li>🔄 按专业推荐竞赛功能（"CS 专业必参加的 5 个竞赛"）</li>
+                <li>🔄 竞赛对比工具（类似学校对比，选 2-3 个竞赛对比）</li>
+            </ul>
+            <p style="margin-top:6px;"><strong>目标：</strong>成为国内最全的国际竞赛中文信息库</p>
+        </div>
+
+        <div class="tech-box">
+            <h4>Phase 3：社区 + 个性化（用户系统打通）</h4>
+            <ul class="feature-list">
+                <li>💡 我的竞赛规划（用户可添加到个人计划，关联 Dashboard）</li>
+                <li>💡 竞赛组队功能（找队友，尤其是团队赛）</li>
+                <li>💡 用户经验分享（过来人竞赛备考经验）</li>
+                <li>💡 个性化推荐（根据目标专业 + 当前年级推荐竞赛路径）</li>
+                <li>💡 竞赛进度追踪（报名/备考/比赛/获奖状态）</li>
+            </ul>
+            <p style="margin-top:6px;"><strong>目标：</strong>从信息库升级为竞赛规划平台，依赖 v21 用户系统</p>
+        </div>
+
+        <div class="section-title">技术方案讨论</div>
+
+        <div class="tech-box">
+            <h4>🗂️ 数据结构设计</h4>
+            <p style="margin-bottom:8px;">纯静态方案（推荐初期）：</p>
+            <pre><code>
+// competitions.js — 竞赛数据（静态 JSON）
+const competitions = [
+  {
+    id: 'amc12',
+    name: 'AMC 12',
+    fullName: 'American Mathematics Competition 12',
+    category: 'math',
+    difficulty: 4,        // 1-5
+    prestige: 5,          // 含金量 1-5
+    grades: ['10', '11', '12'],
+    organizer: 'MAA',
+    website: 'https://www.maa.org/math-competitions',
+    region: 'global',
+    type: 'individual',
+    format: '笔试 · 25 题 · 75 分钟',
+    date: '每年 2 月',
+    fee: '约 ¥80-150',
+    relatedMajors: ['cs', 'math', 'physics', 'engineering'],
+    relatedComps: ['aime', 'usamo'],
+    tags: ['数学', '顶级', '理工科必选']
+  },
+  // ...
+]
+            </code></pre>
+            <p style="margin-top:8px;"><strong>选型：</strong>初期纯静态 JSON + 静态页面生成，SEO 友好、开发成本最低；后期数据量大了再考虑数据库。</p>
+        </div>
+
+        <div class="tech-box">
+            <h4>🔍 筛选器实现方案</h4>
+            <div class="pros-cons">
+                <div class="pros">
+                    <h5>纯前端筛选（推荐）</h5>
+                    <ul>
+                        <li>开发快，无需后端</li>
+                        <li>响应快，无网络延迟</li>
+                        <li>适合 40-100 条数据规模</li>
+                        <li>可静态托管</li>
+                    </ul>
+                </div>
+                <div class="cons">
+                    <h5>后端筛选</h5>
+                    <ul>
+                        <li>支持复杂查询</li>
+                        <li>数据量大时性能好</li>
+                        <li>开发成本高</li>
+                        <li>需要运维</li>
+                    </ul>
+                </div>
+            </div>
+            <p style="margin-top:8px;"><strong>推荐：</strong>Phase 1/2 纯前端筛选（数据量 < 200 条完全没问题），到 Phase 3 再考虑后端。</p>
+        </div>
+
+        <div class="tech-box">
+            <h4>📅 竞赛日历组件</h4>
+            <ul class="feature-list">
+                <li>月视图 / 列表视图切换</li>
+                <li>按月份展示：报名开始、报名截止、比赛日期</li>
+                <li>点击跳转到对应竞赛详情页</li>
+                <li>可按分类筛选只看某类竞赛</li>
+                <li>技术选型：FullCalendar（功能全但重）vs 手写简易版（轻量）</li>
+            </ul>
+            <p style="margin-top:6px;"><strong>推荐：</strong>手写简易月历 + 时间线列表，满足 80% 需求，包体小体验好。</p>
+        </div>
+
+        <div class="tech-box">
+            <h4>🔗 与现有模块的联动</h4>
+            <ul class="feature-list">
+                <li><strong>专业页</strong>：每个专业页底部加"推荐参加的竞赛"区块（Top 5）</li>
+                <li><strong>学校页</strong>：部分学校页可关联"该校学生常参加的竞赛"</li>
+                <li><strong>Roadmap / Timeline</strong>：按年级推荐竞赛路径（9 年级入门 → 10 年级进阶 → 11 年级冲顶）</li>
+                <li><strong>Dashboard</strong>（v21 后）：用户可添加竞赛到自己的规划，追踪进度</li>
+                <li><strong>AI Assistant</strong>（v23 后）：AI 推荐个性化竞赛方案</li>
+            </ul>
+        </div>
+
+        <div class="tech-box">
+            <h4>📈 SEO 策略</h4>
+            <ul class="feature-list">
+                <li>长尾关键词："xx 竞赛含金量"、"xx 竞赛报名时间"、"xx 竞赛难不难"</li>
+                <li>对比类："AMC 和 AIME 区别"、"NEC 和 FBLA 哪个好"</li>
+                <li>推荐类："CS 专业推荐什么竞赛"、"申请藤校需要什么竞赛"</li>
+                <li>时间类："2026 年 AMC 报名时间"、"上半年有什么竞赛"</li>
+                <li>结构化数据：每个竞赛页加 <code>Event</code> / <code>Course</code> schema 标记</li>
+            </ul>
+        </div>
+
+        <div class="section-title">开发预估</div>
+        <ul class="feature-list">
+            <li><strong>Phase 1（MVP）</strong>：总览页 + 8 分类 + 10 个详情页 — ✅ 已完成（v20.4.0）</li>
+            <li><strong>Phase 2（扩量）</strong>：补齐 36 个详情页 + 多维筛选器 + 竞赛日历 + 搜索 — ✅ 已完成（v20.5.0）</li>
+            <li><strong>Phase 3（社区）</strong>：用户系统打通 + 组队 + 个性化 — 依赖 v21/v22</li>
+        </ul>
+
+        <div class="section-title">技术实现方案</div>
+        <div class="tech-box">
+            <h4>竞赛组队系统</h4>
+            <ul>
+                <li>队伍管理：创建/加入/退出队伍，队长权限</li>
+                <li>匹配算法：按专业、年级、技能标签匹配队友</li>
+                <li>队内协作：共享备赛资料、讨论区、进度同步</li>
+                <li>数据结构：<code>teams</code> 表 + <code>team_members</code> 关联表</li>
+            </ul>
+        </div>
+        <div class="tech-box">
+            <h4>个性化推荐引擎</h4>
+            <ul>
+                <li>基于用户 profile（年级/专业/兴趣/已有竞赛）计算推荐</li>
+                <li>规则引擎 v1：if grade=10 && major=cs then recommend USACO+AMC</li>
+                <li>协同过滤 v2：相似用户参加了什么竞赛</li>
+                <li>LLM 推荐 v3：GPT 分析用户背景生成个性化竞赛路径</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- v23.0.0 -->
+    <div class="version-block">
+        <div class="version-header">
+            <span class="version-tag">v23.0.0</span>
+            <span class="version-status status-idea">Idea</span>
+        </div>
+        <p class="version-desc"><strong>AI 深度集成 &amp; 个性化推荐</strong> — 全场景 AI 赋能，从选校到文书一站式智能辅助。</p>
+
+        <div class="section-title">核心功能</div>
+        <ul class="feature-list">
+            <li>AI 选校匹配 — 输入背景自动生成选校名单，带录取概率评估</li>
+            <li>AI 文书润色 — 多维度评分（语言/逻辑/个性展现/匹配度）</li>
+            <li>AI 面试模拟 — 语音对话模拟校友面试，实时反馈</li>
+            <li>个性化推荐 — 基于浏览历史推荐相关专业/学校/文章</li>
+            <li>ChatGPT 插件 — 网站内容接入 GPTs，对话式获取信息</li>
+        </ul>
+
+        <div class="section-title">技术方案讨论</div>
+
+        <div class="tech-box">
+            <h4>🤖 AI 选校匹配算法</h4>
+            <p><strong>核心思路：</strong>基于历史录取数据 + 用户背景特征，计算匹配度。</p>
+            <ul style="margin-top:6px;">
+                <li><strong>输入特征：</strong>GPA、标化、学校背景、专业方向、科研/实习/竞赛、意向国家/排名</li>
+                <li><strong>算法选型：</strong>
+                    <ul style="margin-top:4px;">
+                        <li>方案 A：规则引擎（权重打分）— 可解释性强，易调优，冷启动友好</li>
+                        <li>方案 B：协同过滤 / 向量检索 — 需要大量用户数据，越用越准</li>
+                        <li>方案 C：LLM 直接生成 — 简单粗暴，但不稳定，成本高</li>
+                    </ul>
+                </li>
+            </ul>
+            <p style="margin-top:8px;"><strong>推荐：</strong>先方案 A（规则引擎）上线，积累数据后迭代到方案 B。LLM 作为补充，生成自然语言解释。</p>
+        </div>
+
+        <div class="tech-box">
+            <h4>💰 AI 成本估算</h4>
+            <ul>
+                <li><strong>gpt-4o-mini：</strong>输入 $0.15 / 1M tokens，输出 $0.60 / 1M tokens</li>
+                <li><strong>Claude 3.5 Sonnet：</strong>输入 $3 / 1M tokens，输出 $15 / 1M tokens</li>
+                <li><strong>单次文书润色：</strong>约 5k 输入 + 2k 输出 = $0.00195（GPT-4o mini）</li>
+                <li><strong>1000 次/天：</strong>约 $2/天，$60/月，可接受</li>
+                <li><strong>注意：</strong>需要做 rate limit 和用户配额，防止滥用</li>
+            </ul>
+        </div>
+
+        <div class="tech-box">
+            <h4>🔍 推荐系统技术栈</h4>
+            <ul>
+                <li><strong>冷启动阶段：</strong>基于标签的推荐（专业/学校/文章打 tag，按 tag 关联推荐）</li>
+                <li><strong>有数据后：</strong>
+                    <ul style="margin-top:4px;">
+                        <li>向量相似度：用 embeddings 计算内容相似度（OpenAI text-embedding-3-small）</li>
+                        <li>协同过滤：基于用户行为矩阵分解</li>
+                    </ul>
+                </li>
+                <li><strong>存储：</strong>pgvector（Postgres 扩展，Supabase 支持）+ 缓存层（KV）</li>
+            </ul>
+        </div>
+
+        <div class="section-title">技术实现方案</div>
+        <div class="tech-box">
+            <h4>AI 选校匹配</h4>
+            <ul>
+                <li>输入：GPA + 标化 + 专业 + 预算 + 地理位置偏好</li>
+                <li>匹配：历史录取数据 + 用户画像 → 推荐Reach/Match/Safety</li>
+                <li>模型：初期规则引擎 → 中期协同过滤 → 后期LLM推理</li>
+                <li>数据源：CDS (Common Data Set) + IPEDS + 自有录取数据</li>
+            </ul>
+        </div>
+        <div class="tech-box">
+            <h4>AI 文书润色</h4>
+            <ul>
+                <li>功能：语法检查 / 用词优化 / 结构建议 / 主题契合度评分</li>
+                <li>模型：GPT-4 / Claude，prompt engineering + few-shot learning</li>
+                <li>隐私：用户可选"不存储原文"模式</li>
+                <li>限制：每用户每日免费 3 次，超出需订阅</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- v24.0.0+ 远期构想 -->
+    <div class="version-block">
+        <div class="version-header">
+            <span class="version-tag">v24.0+</span>
+            <span class="version-status status-idea">Dreaming</span>
+        </div>
+        <p class="version-desc"><strong>远期构想</strong> — 更远期的产品方向，待市场验证。</p>
+
+        <div class="section-title">可能的方向</div>
+        <ul class="feature-list">
+            <li><strong>移动端 App：</strong>React Native / Flutter 跨平台，推送提醒更及时</li>
+            <li><strong>留学中介 SaaS：</strong>给顾问用的后台管理系统（客户管理、进度跟踪、文书协作）</li>
+            <li><strong>海外租房/机票/保险：</strong>行后服务对接，佣金模式</li>
+            <li><strong>AI Video 模拟面试：</strong>摄像头 + 语音，实时表情和表达分析</li>
+            <li><strong>社区 Marketplace：</strong>学长学姐 1v1 咨询撮合平台（抽佣模式）</li>
+        </ul>
+
+        <div class="tech-box">
+            <h4>💡 技术选型思考原则</h4>
+            <ul>
+                <li><strong>渐进式增强：</strong>先做最简单的版本验证需求，再逐步加复杂度</li>
+                <li><strong>能用 SaaS 绝不自建：</strong>评论用 Giscus，邮件用 Resend，搜索用 Algolia，省下来的时间做核心功能</li>
+                <li><strong>保持静态优先：</strong>核心内容页保持纯静态，动态功能通过 JS + API 增强，不影响 SEO 和性能</li>
+                <li><strong>数据可迁移：</strong>尽量用标准协议和格式，避免厂商锁定</li>
+                <li><strong>成本敏感：</strong>免费额度优先，按量付费可控，初期避免大额固定成本</li>
+            </ul>
+        </div>
+
+        <div class="section-title">技术实现方案</div>
+        <div class="tech-box">
+            <h4>移动端策略</h4>
+            <ul>
+                <li>方案A：PWA 增强（离线缓存 + 推送通知 + 安装到桌面）</li>
+                <li>方案B：React Native 跨平台App（iOS + Android）</li>
+                <li>方案C：Flutter 跨平台App</li>
+                <li>推荐：先 PWA 验证需求，再上 React Native</li>
+            </ul>
+        </div>
+        <div class="tech-box">
+            <h4>中介 SaaS 平台</h4>
+            <ul>
+                <li>多租户架构：每个中介机构独立空间</li>
+                <li>顾问工作台增强：CRM + 学生管理 + 合同 + 业绩</li>
+                <li>家长端：实时查看申请进度 + 费用明细</li>
+                <li>定价：按学生数 / 按功能模块 / 按使用量</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- v25.0.0 - 协作架构：核心成员小范围测试 -->
+    <div class="version-block">
+        <div class="version-header">
+            <span class="version-tag">v25.0.0</span>
+            <span class="version-status status-idea">Idea</span>
+        </div>
+        <p class="version-desc"><strong>协作架构 &amp; 核心成员小范围测试平台</strong> — 平台已邀请多位有影响力的准备阶段核心成员参与产品共建，本版本构建支撑多角色协作、多端访问、版本快照对比、可控邀请机制的整套基础架构，让外部专家可以在受控环境下完整体验产品并提供反馈。</p>
+
+        <div class="section-title">为什么需要这个版本</div>
+        <ul class="feature-list">
+            <li><strong>前期投入大需要验证：</strong>平台已投入大量资源邀请核心成员，需要为他们提供顺畅、专属、可持续的体验通道</li>
+            <li><strong>反馈质量决定后续方向：</strong>核心成员具有行业经验和影响力，他们对产品结构、内容深度、交互细节的反馈会显著影响后续版本规划</li>
+            <li><strong>持续参与需要仪式感：</strong>让成员感到被重视（有专属空间、能看到自己的反馈被采纳），是建立长期合作的关键</li>
+            <li><strong>风险控制：</strong>在产品还未对公众开放前，所有外部访问必须可追溯、可撤销、可限定功能范围</li>
+            <li><strong>沉淀共创资产：</strong>成员提供的选校建议、文书范例、行业洞察可以沉淀为产品的差异化壁垒</li>
+        </ul>
+
+        <div class="section-title">整体架构思路</div>
+        <ul class="feature-list">
+            <li>采用"主站 + 协作后台"双空间模式：主站保持静态公开访问，协作后台是受限私有空间</li>
+            <li>基于"邀请码 + 角色 + 过期时间"的三段式准入机制，确保每位成员访问范围清晰可控</li>
+            <li>所有协作内容（建议、评论、共创文档）都进入独立存储，与公开内容物理隔离</li>
+            <li>每次重大改版自动生成版本快照，成员可并排对比新旧版本，给出针对性反馈</li>
+            <li>提供"成员专属仪表盘"：看到自己关注的功能点、待办反馈、被采纳建议的统计</li>
+        </ul>
+
+        <div class="section-title">核心模块清单</div>
+        <ul class="feature-list">
+            <li><strong>角色体系：</strong>Admin（产品负责人）、Curator（内容共建者）、Mentor（行业顾问）、Observer（观察员）四类角色，权限逐级递减</li>
+            <li><strong>邀请码系统：</strong>每位核心成员生成专属邀请码，可设置有效期、可用次数、绑定邮箱/IP 范围</li>
+            <li><strong>协作后台入口：</strong><code>/collab</code> 私有路径，公开搜索引擎不收录，需登录访问</li>
+            <li><strong>功能点反馈面板：</strong>任何页面右上角固定"反馈"按钮，点击可针对当前页面提交结构化反馈</li>
+            <li><strong>版本快照对比：</strong>支持任意两个版本间的页面 diff 视图，并排显示改动区域</li>
+            <li><strong>成员贡献榜：</strong>统计每位成员的反馈数、被采纳数、参与讨论数，形成正反馈循环</li>
+            <li><strong>私信/讨论：</strong>核心成员之间、成员与产品负责人之间可发起异步讨论（基于评论嵌套结构）</li>
+            <li><strong>导出权限：</strong>Admin 可一键导出所有反馈为 CSV/Markdown，用于复盘和归档</li>
+        </ul>
+
+        <div class="section-title">技术实现方案</div>
+        <div class="tech-box">
+            <h4>准入控制</h4>
+            <ul>
+                <li>邀请码 = HMAC 签名 + 过期时间 + 角色标识 + 一次性随机串，前端校验 + 后端二次校验</li>
+                <li>登录态使用 HttpOnly Cookie + SameSite=Lax，JWT 短期（2小时）+ Refresh Token 长期（30天）</li>
+                <li>IP 绑定可选开启，开启后异地登录需重新验证邀请码</li>
+                <li>敏感操作（导出数据、修改成员角色）需二次确认 + 操作日志</li>
+            </ul>
+        </div>
+        <div class="tech-box">
+            <h4>数据存储与隔离</h4>
+            <ul>
+                <li>公开内容：继续使用纯静态文件 + JSON 数据，部署在 CDN</li>
+                <li>协作内容：使用 Supabase（Postgres + Row Level Security），按 member_id 强制隔离</li>
+                <li>RLS 策略示例：<code>feedback.member_id = auth.uid() OR auth.role() = 'admin'</code></li>
+                <li>公开页面与协作数据通过前端 JS 异步拉取，不影响主站 SEO</li>
+            </ul>
+        </div>
+        <div class="tech-box">
+            <h4>反馈面板前端实现</h4>
+            <pre>
+// 注入到所有公开页面的浮动反馈按钮
+(function() {
+  if (!window.CollabUser) return;
+  const btn = document.createElement('div');
+  btn.className = 'collab-feedback-btn';
+  btn.innerHTML = '反馈';
+  btn.onclick = () => openFeedbackPanel(location.pathname);
+  document.body.appendChild(btn);
+})();</pre>
+        </div>
+        <div class="tech-box">
+            <h4>版本快照对比</h4>
+            <ul>
+                <li>每次部署触发 <code>scripts/snapshot.sh</code>，对全站 HTML 生成 SHA + 行级 diff 索引</li>
+                <li>快照存储在 <code>/snapshots/vXX/</code>，保留最近 10 个版本</li>
+                <li>对比页用 <code>jsdiff</code> 库做文本 diff，可视化用 <code>diff2html</code></li>
+                <li>成员可对任一 diff 区域直接添加评论，形成"看改动 + 提建议"闭环</li>
+            </ul>
+        </div>
+        <div class="tech-box">
+            <h4>成员体验流程</h4>
+            <ol>
+                <li>产品负责人通过 Admin 后台创建成员账号 + 角色 + 邀请码</li>
+                <li>邀请码通过加密邮件/私信发送，附简短说明（功能 + 体验重点 + 反馈方式）</li>
+                <li>成员访问 <code>/collab/join?code=xxx</code> 完成首次登录，绑定邮箱</li>
+                <li>登录后看到"今日体验重点"列表（产品负责人每天更新 1-3 个体验任务）</li>
+                <li>成员按任务体验，反馈自动关联到当前路径</li>
+                <li>每周生成成员个人简报：本周访问了哪些功能、提交了多少反馈、哪些被采纳</li>
+            </ol>
+        </div>
+
+        <div class="section-title">推广节奏与成功标准</div>
+        <div class="pros-cons">
+            <div class="pros">
+                <h5>短期收益（2-4 周）</h5>
+                <ul>
+                    <li>获得 10-20 位核心成员的系统性反馈</li>
+                    <li>在正式公开发布前发现关键可用性问题</li>
+                    <li>沉淀 50+ 条高质量建议进入产品 backlog</li>
+                </ul>
+            </div>
+            <div class="cons">
+                <h5>风险与控制</h5>
+                <ul>
+                    <li>成员流失：定期一对一沟通，了解诉求变化</li>
+                    <li>数据泄露：邀请码 + RLS 双重防护，敏感操作日志全留痕</li>
+                    <li>反馈过载：Admin 端每日整理，按优先级回复</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- v26.0.0 - 全流程模拟体验 -->
+    <div class="version-block">
+        <div class="version-header">
+            <span class="version-tag">v26.0.0</span>
+            <span class="version-status status-idea">Idea</span>
+        </div>
+        <p class="version-desc"><strong>全流程模拟体验 &amp; 个性化模拟结果</strong> — 用户填写或自动生成个性化档案后，系统为该用户模拟出从选校、前期材料准备、中期申请提交、后期录取结果的全套场景化内容；点击任意大学卡片即可看到"如果我申请这所学校，我在该校的完整画像、模拟材料、模拟面试、模拟 Offer/拒信"。所有内容先使用模拟数据占位，未来 v27 接入真实数据源。</p>
+
+        <div class="section-title">为什么需要这个版本</div>
+        <ul class="feature-list">
+            <li><strong>大幅提升体验感：</strong>从"看百科"升级为"看到自己"，让用户在使用产品过程中产生情感连接</li>
+            <li><strong>解决决策焦虑：</strong>学生家长最大的痛点是"不知道最终结果"，模拟结果可帮助用户提前建立合理预期</li>
+            <li><strong>建立数据资产：</strong>用户填写的档案本身就是高质量数据，反哺个性化推荐引擎</li>
+            <li><strong>差异化竞争力：</strong>市面上还没有产品能为单个用户生成"全流程、个性化、可点击"的模拟体验</li>
+            <li><strong>占位先行：</strong>先做模拟数据 → 验证用户付费意愿 → 再投入资源接入真实数据</li>
+        </ul>
+
+        <div class="section-title">核心模块清单</div>
+        <ul class="feature-list">
+            <li><strong>个性化档案：</strong>姓名/年级/目标国家/意向专业/当前 GPA/活动/奖项/竞赛/语言成绩/标化预估分 10+ 维度</li>
+            <li><strong>档案自动生成：</strong>用户未填写时，按年级 + 目标国家自动生成"典型学生"画像作为占位</li>
+            <li><strong>选校清单：</strong>基于档案 + 历届录取数据，为用户生成 Reach/Match/Safety 三档共 15-20 所推荐学校</li>
+            <li><strong>学校专属模拟页：</strong>点击任意学校卡片，弹出"我在该校的完整档案"全屏视图</li>
+            <li><strong>三阶段模拟：</strong>前期（活动清单 + 文书素材）、中期（申请材料包 + 模拟面试）、后期（模拟 Offer/拒信 + 理由分析）</li>
+            <li><strong>材料评分：</strong>对用户的模拟材料从招生官视角打分（学术 / 活动 / 文书 / 面试四维度）</li>
+            <li><strong>录取概率：</strong>基于历史数据 + 相似画像，给出 0-100% 录取概率和置信区间</li>
+            <li><strong>时间线占位：</strong>根据目标国家，自动生成该年度 9 月-次年 8 月每月应该做什么的任务清单</li>
+            <li><strong>导出与分享：</strong>用户可导出整份模拟报告为 PDF，或生成可分享的匿名链接</li>
+        </ul>
+
+        <div class="section-title">学校专属模拟页内容结构（每一个都是可点击超链接）</div>
+        <p class="version-desc">点击任意段落都会跳到一份独立页面，提供与真实场景几乎一模一样的细节（文书题目原文、面试真题、模拟 Offer PDF、模拟成绩单、模拟活动描述等）。所有页面顶部都有"← 返回学校页"链接，不打断浏览节奏。</p>
+        <ul class="feature-list">
+            <li><strong>顶部摘要：</strong>学校 Logo + 校训 + 录取率 + 你的录取概率（环形图）→ 跳 <code>simulate/{school}/summary.html</code></li>
+            <li><strong>录取分布：</strong>历年录取者 GPA / SAT / 活动 分布图，你在分布中的位置高亮 → <code>simulate/{school}/distribution.html</code></li>
+            <li><strong>前期-活动清单：</strong>该校在意的活动类型（科研/竞赛/公益/领导力），每条活动有标题、描述、耗时、奖项 → <code>simulate/{school}/activities.html</code></li>
+            <li><strong>前期-推荐阅读：</strong>10-20 本该校相关/专业相关书单，含 ISBN、简介、阅读时长 → <code>simulate/{school}/reading.html</code></li>
+            <li><strong>前期-推荐竞赛：</strong>与该校/专业强相关的 5-10 个竞赛，含奖项等级、含金量评估 → <code>simulate/{school}/competitions.html</code></li>
+            <li><strong>中期-文书题目原文：</strong>该校 Common App + 补充文书题目中英文对照（带年份标注） → <code>simulate/{school}/essays.html</code></li>
+            <li><strong>中期-文书初稿：</strong>AI 根据用户画像生成的"模拟初稿"，含导师批注（高亮 + 文字批注） → <code>simulate/{school}/essay-draft.html</code></li>
+            <li><strong>中期-补充材料：</strong>模拟的科研报告摘要、艺术作品集、附加视频脚本 → <code>simulate/{school}/supplements.html</code></li>
+            <li><strong>中期-推荐信：</strong>模拟的 2-3 封推荐信全文（中文 + 英文 + 老师身份） → <code>simulate/{school}/recommendations.html</code></li>
+            <li><strong>中期-模拟面试：</strong>该校的 10-15 个常见面试题（中英双语） + AI 模拟答案 + 评估 → <code>simulate/{school}/interview.html</code></li>
+            <li><strong>中期-成绩单：</strong>模拟的 9-12 年级成绩单（含 GPA 走势、班级排名、AP 分数） → <code>simulate/{school}/transcript.html</code></li>
+            <li><strong>中期-申请 Checklist：</strong>该校申请所需的全部材料清单 + 提交状态（已提交/待提交/缺失） → <code>simulate/{school}/checklist.html</code></li>
+            <li><strong>后期-模拟 Offer：</strong>该校的录取信 / Waitlist / 拒信 三种结果之一的完整模拟文档（带校徽、信头、签名） → <code>simulate/{school}/result.html</code></li>
+            <li><strong>后期-财务通知：</strong>模拟的 Financial Aid / Scholarship 通知（奖学金金额、覆盖比例） → <code>simulate/{school}/financial.html</code></li>
+            <li><strong>后期-入学前：</strong>模拟的 I-20 / Visa / 选课 / 宿舍 / Orientation 流程 → <code>simulate/{school}/pre-arrival.html</code></li>
+            <li><strong>侧边栏：</strong>同档次 3 所学校录取概率柱状图 + 跳转链接</li>
+        </ul>
+
+        <div class="section-title">细节页面设计原则（让"假"看起来像"真"）</div>
+        <ul class="feature-list">
+            <li><strong>真实格式：</strong>Offer 模拟信采用学校真实校徽、信头、签名风格；成绩单使用学校真实 GPA 换算规则</li>
+            <li><strong>动态细节：</strong>用户档案中的姓名、年级、专业、奖项自动填充到所有模拟页（占位符替换）</li>
+            <li><strong>上下文一致：</strong>同一用户在同一学校的"模拟初稿"与"模拟面试回答"互相呼应（提到同一项目、同一人名）</li>
+            <li><strong>专业区分度：</strong>不同专业的面试题、文书题、推荐书单显著不同（CS vs 历史 vs 商科）</li>
+            <li><strong>时间标记：</strong>所有日期基于目标申请季（如 2026 Fall），不出现不合理时间</li>
+            <li><strong>多语言支持：</strong>所有页面同时提供中英双语版本，按用户偏好切换</li>
+            <li><strong>水印标识：</strong>页面顶部显著标识"模拟数据" + 免责声明，避免误读</li>
+            <li><strong>返回路径：</strong>每个细节页顶部固定"← 返回 {学校名} 模拟页"，保证可逆浏览</li>
+        </ul>
+
+        <div class="section-title">数据组织结构（v26.1 已更新：按国家而非学校）</div>
+        <pre>
+/simulate/
+  index.html                    # 模拟入口（选择国家）
+  us.html                       # 美国全流程模拟（通用 Ivy/Top 30 模板）
+  uk.html                       # 英国全流程模拟（通用 G5/Russell Group 模板）
+  au.html                       # 澳洲全流程模拟（通用 Group of Eight 模板）</pre>
+        <p class="muted">v26 核心决策：按"国家"而非"学校"组织模拟内容。原因：(1) 维护成本低（3-6 个国家 vs. 50+ 学校）；(2) 更符合"全球留学"定位；(3) 通用模板可覆盖同一国家 90% 的申请场景；(4) 用户在实际申请时可以再细化到具体学校。后续可扩展：ca.html 加拿大 / hk.html 香港 / sg.html 新加坡 / de.html 德国。</p>
+        <div class="tech-box">
+            <h4>细节数据生成策略</h4>
+            <ul>
+                <li><strong>Phase 1（v26 启动）：</strong>手动编写 3 所旗舰学校（Harvard/MIT/Oxford）的 14 个细节页，作为样板</li>
+                <li><strong>Phase 2（v26.1）：</strong>用 AI 批量生成其余 20 所学校的细节内容，人工 review</li>
+                <li><strong>Phase 3（v26.2）：</strong>建立细节生成模板（如"Offer 模板"含 5 个变量），AI 根据画像填充</li>
+                <li><strong>Phase 4（v27）：</strong>用真实数据替换模拟数据时，仅替换内容源，模板与结构保留</li>
+            </ul>
+        </div>
+
+        <div class="section-title">技术实现方案</div>
+        <div class="tech-box">
+            <h4>档案与画像引擎</h4>
+            <ul>
+                <li>用户档案：localStorage 存本地 + 可选登录后云端同步（Supabase）</li>
+                <li>画像模板：<code>data/personas/*.json</code> 按年级 + 目标国家预置 8 套典型画像</li>
+                <li>画像合并：用户填写的字段覆盖模板对应字段，未填写字段保留模板值</li>
+                <li>画像导出：<code>profile.toJSON()</code> 提供统一序列化</li>
+            </ul>
+        </div>
+        <div class="tech-box">
+            <h4>录取概率算法（模拟版）</h4>
+            <pre>
+function calcChance(user, school) {
+  // 简化版 - 仅用于模拟演示
+  const userScore = (
+    user.gpa * 0.4 +
+    user.testScore / 1600 * 0.3 +
+    user.activities.length * 2 +
+    user.awards.length * 5
+  );
+  const schoolAvg = school.avgAdmitScore;
+  const stddev = school.stddev || 10;
+  const z = (userScore - schoolAvg) / stddev;
+  const prob = 1 / (1 + Math.exp(-z)); // sigmoid
+  return Math.round(prob * 100);
+}</pre>
+        </div>
+        <div class="tech-box">
+            <h4>学校专属模拟页</h4>
+            <ul>
+                <li>URL 结构：<code>/simulate/school.html?school=harvard&profile=xxx</code></li>
+                <li>所有学校共享同一份 <code>simulate-school.html</code> 模板，通过 URL 参数渲染</li>
+                <li>每个学校预置 <code>data/simulate/harvard.json</code>，包含该校专属文案、面试题、文书题、Offer 模板</li>
+                <li>模拟结果采用加权随机 + 画像匹配，确保同一用户每次刷新结果稳定（同 profile 同 school 同结果）</li>
+            </ul>
+        </div>
+        <div class="tech-box">
+            <h4>数据来源策略</h4>
+            <ol>
+                <li><strong>Phase 1（v26 默认）：</strong>纯模拟数据，存储在 <code>data/simulate/*.json</code>，约 200 KB 静态文件</li>
+                <li><strong>Phase 2（v27 规划）：</strong>接入 Common Data Set、IPEDS、各校官网公布的录取统计</li>
+                <li><strong>Phase 3（v28 远期）：</strong>接入第三方数据服务（如 CollegeVine、Cappex）增强录取概率算法</li>
+                <li>所有真实数据接入前必须经过人工校验 + 样本测试，确保不出现荒谬预测</li>
+            </ol>
+        </div>
+        <div class="tech-box">
+            <h4>PDF 导出</h4>
+            <ul>
+                <li>客户端使用 <code>html2canvas</code> + <code>jspdf</code> 生成 PDF</li>
+                <li>PDF 模板：封面（学校 Logo + 用户名 + 模拟日期）+ 4-5 页内容（每屏一页）</li>
+                <li>文件名：<code>simulate_{school}_{date}.pdf</code></li>
+            </ul>
+        </div>
+
+        <div class="section-title">推广节奏与成功标准</div>
+        <div class="pros-cons">
+            <div class="pros">
+                <h5>短期收益（4-6 周）</h5>
+                <ul>
+                    <li>用户平均停留时长预计提升 3-5 倍</li>
+                    <li>档案填写率作为关键北极星指标，目标 30%+</li>
+                    <li>建立"全流程模拟"差异化标签，支撑后续商业化</li>
+                </ul>
+            </div>
+            <div class="cons">
+                <h5>风险与控制</h5>
+                <ul>
+                    <li>模拟结果被用户误读为真实预测：所有页面加"模拟数据"显著标识 + 免责声明</li>
+                    <li>数据生成质量不达标：建立内部 review 流程，每所学校 3 人抽查</li>
+                    <li>开发成本高：分 3 个子版本 v26.1（档案）/ v26.2（学校页）/ v26.3（导出）逐步发布</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <p class="footer">© 2026 yunzhuan.icu &nbsp;|&nbsp; Product Roadmap v26.0.0</p>
+<script src="./js/back-to-top.js"></script>
+</body>
+</html>

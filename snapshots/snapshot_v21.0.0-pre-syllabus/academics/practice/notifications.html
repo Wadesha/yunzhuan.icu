@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>通知设置 · Notifications | yunzhuan.icu</title>
+<link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue", sans-serif; max-width: 820px; margin: 0 auto; padding: 24px 16px 48px; background: #ffffff; color: #111111; line-height: 1.7; font-size: 15px; }
+  a { color: #111111; text-decoration: none; border-bottom: 1px solid #cccccc; }
+  a:hover { border-bottom-color: #111111; }
+  .nav { padding-bottom: 12px; margin-bottom: 20px; border-bottom: 1px solid #e0e0e0; font-size: 0.88rem; color: #888888; }
+  .nav a { color: #111111; }
+  .nav .sep { color: #cccccc; margin: 0 6px; }
+  h1 { font-size: 1.6rem; margin-bottom: 4px; }
+  h2 { font-size: 1.1rem; font-weight: 700; margin: 28px 0 8px; padding-bottom: 6px; border-bottom: 1px solid #111111; }
+  h3 { font-size: 0.98rem; font-weight: 700; margin: 16px 0 4px; }
+  p, li { margin-bottom: 6px; color: #111111; }
+  .muted { color: #888888; font-size: 0.85rem; }
+  .subtitle { color: #555555; font-size: 0.95rem; margin-bottom: 20px; }
+  .v-info { border: 1px dashed #888888; padding: 8px 12px; margin: 12px 0; font-size: 0.82rem; color: #555555; }
+  .box { border: 1px solid #111111; padding: 14px 18px; margin: 12px 0; }
+  .box-dashed { border: 1px dashed #888888; padding: 14px 18px; margin: 12px 0; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.85rem; margin: 8px 0 16px; }
+  th, td { border: 1px solid #e0e0e0; padding: 6px 10px; text-align: left; vertical-align: top; }
+  th { background: #ffffff; border-bottom: 2px solid #111111; font-weight: 700; }
+  .form-row { display: grid; grid-template-columns: 130px 1fr; gap: 8px; margin-bottom: 8px; align-items: center; font-size: 0.88rem; }
+  .form-row label { color: #555; }
+  .form-row input, .form-row select { padding: 6px 8px; border: 1px solid #ddd; border-radius: 4px; font-size: 0.88rem; width: 100%; font-family: inherit; }
+  .btn { display: inline-block; border: 1px solid #111; background: #111; color: #fff; padding: 8px 16px; font-size: 0.85rem; cursor: pointer; font-family: inherit; margin: 4px 4px 4px 0; }
+  .btn.outline { background: #fff; color: #111; }
+  .btn.danger { background: #fff; color: #c00; border-color: #c00; }
+  .perm-status { font-weight: 700; }
+  .perm-granted { color: #111; }
+  .perm-denied { color: #c00; }
+  .perm-default { color: #888; }
+  .log-list { list-style: none; }
+  .log-list li { padding: 10px 12px; border: 1px solid #e0e0e0; margin-bottom: 6px; font-size: 0.85rem; }
+  .log-list li.read { background: #fafafa; }
+  .log-list .log-title { font-weight: 700; }
+  .log-list .log-meta { color: #888; font-size: 0.78rem; }
+  .footer { margin-top: 36px; padding-top: 16px; border-top: 1px solid #e0e0e0; color: #888888; font-size: 0.82rem; }
+  .rule-row { display: flex; align-items: center; justify-content: space-between; padding: 10px 0; border-bottom: 1px dashed #e0e0e0; }
+  .rule-row:last-child { border-bottom: none; }
+  .rule-row .rule-name { font-size: 0.92rem; }
+  .rule-row .rule-desc { color: #888; font-size: 0.8rem; margin-top: 2px; }
+  .switch { position: relative; display: inline-block; width: 44px; height: 22px; }
+  .switch input { opacity: 0; width: 0; height: 0; }
+  .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; transition: 0.2s; border-radius: 22px; }
+  .slider:before { position: absolute; content: ""; height: 18px; width: 18px; left: 2px; bottom: 2px; background-color: white; transition: 0.2s; border-radius: 50%; }
+  input:checked + .slider { background-color: #111; }
+  input:checked + .slider:before { transform: translateX(22px); }
+  @media (max-width: 600px) { .form-row { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<div class="nav">
+  <a href="../../index.html">Home</a> <span class="sep">/</span>
+  <a href="index.html">Practice</a> <span class="sep">/</span>
+  通知设置
+</div>
+
+<h1>通知设置</h1>
+<p class="subtitle">浏览器原生 Notification API · 默认规则：每日 9:00 / 21:00 + SRS 到期 + 考试倒计时</p>
+
+<div class="v-info">
+  <strong>v45 新增</strong> · 推送通知 + 离线消息 · 支持 PWA / Capacitor 容器（v44）。
+</div>
+
+<h2>1. 权限申请</h2>
+<div class="box">
+  <p>当前权限状态：<span id="perm-status" class="perm-status perm-default">检测中…</span></p>
+  <p class="muted" style="margin-top:6px;">
+    浏览器会在你点击「申请权限」时弹出系统授权窗口。请选择「允许」以接收推送。
+  </p>
+  <p style="margin-top:8px;">
+    <button class="btn" id="btn-request">申请权限</button>
+    <button class="btn outline" id="btn-test">一键测试推送</button>
+    <button class="btn outline" id="btn-test-srs">测试 SRS 提醒</button>
+    <button class="btn outline" id="btn-test-exam">测试考试倒计时</button>
+  </p>
+</div>
+
+<h2>2. 推送规则</h2>
+<div class="box">
+  <div class="rule-row">
+    <div>
+      <div class="rule-name">每日 09:00 · 今日计划</div>
+      <div class="rule-desc">每天上午 9 点提醒查看 Dashboard 任务清单</div>
+    </div>
+    <label class="switch">
+      <input type="checkbox" id="rule-daily9" checked>
+      <span class="slider"></span>
+    </label>
+  </div>
+  <div class="rule-row">
+    <div>
+      <div class="rule-name">每日 21:00 · 今日打卡</div>
+      <div class="rule-desc">每天晚上 9 点提醒完成刷题和复习打卡</div>
+    </div>
+    <label class="switch">
+      <input type="checkbox" id="rule-daily21" checked>
+      <span class="slider"></span>
+    </label>
+  </div>
+  <div class="rule-row">
+    <div>
+      <div class="rule-name">SRS 复习到期</div>
+      <div class="rule-desc">当 spaced-repetition.js 检测到到期题目时推送</div>
+    </div>
+    <label class="switch">
+      <input type="checkbox" id="rule-srs" checked>
+      <span class="slider"></span>
+    </label>
+  </div>
+  <div class="rule-row">
+    <div>
+      <div class="rule-name">考试倒计时 (7/3/1 天)</div>
+      <div class="rule-desc">距离 v28 考试日 7/3/1 天时推送提醒</div>
+    </div>
+    <label class="switch">
+      <input type="checkbox" id="rule-exam" checked>
+      <span class="slider"></span>
+    </label>
+  </div>
+  <p style="margin-top:12px;">
+    <button class="btn" id="btn-save-rules">保存规则</button>
+  </p>
+</div>
+
+<h2>3. 考试日期设置 (v28)</h2>
+<div class="box">
+  <div class="form-row">
+    <label for="exam-date">考试日期：</label>
+    <input type="date" id="exam-date">
+  </div>
+  <p class="muted">设置后，距考试 7 / 3 / 1 天时自动推送</p>
+  <p style="margin-top:8px;">
+    <button class="btn" id="btn-save-exam">保存考试日期</button>
+    <button class="btn outline" id="btn-clear-exam">清除</button>
+  </p>
+  <p id="exam-info" class="muted" style="margin-top:6px;"></p>
+</div>
+
+<h2>4. 立即调度（自定义）</h2>
+<div class="box">
+  <div class="form-row">
+    <label for="custom-title">标题：</label>
+    <input type="text" id="custom-title" placeholder="例如：背单词 30min">
+  </div>
+  <div class="form-row">
+    <label for="custom-body">内容：</label>
+    <input type="text" id="custom-body" placeholder="例如：今天还差 50 个">
+  </div>
+  <div class="form-row">
+    <label for="custom-delay">延迟（分钟）：</label>
+    <input type="number" id="custom-delay" value="1" min="0" max="1440">
+  </div>
+  <p style="margin-top:8px;">
+    <button class="btn" id="btn-schedule">排程推送</button>
+  </p>
+  <p id="schedule-info" class="muted" style="margin-top:6px;"></p>
+</div>
+
+<h2>5. 历史通知 (localStorage.notifications_log)</h2>
+<div class="box">
+  <p style="margin-bottom:8px;">
+    <button class="btn outline" id="btn-mark-read">全部标为已读</button>
+    <button class="btn danger" id="btn-clear-log">清空历史</button>
+  </p>
+  <ul class="log-list" id="log-list">
+    <li class="muted">暂无通知</li>
+  </ul>
+</div>
+
+<div class="footer">
+  yunzhuan.icu · v45 · notifications.js · 黑白灰主色
+</div>
+
+<script src="../../js/notifications.js"></script>
+<script>
+  (function() {
+    var permEl = document.getElementById('perm-status');
+    function refreshPerm() {
+      var p = window.Notifications.getPermission();
+      permEl.textContent = p;
+      permEl.className = 'perm-status ' + (
+        p === 'granted' ? 'perm-granted' :
+        p === 'denied' ? 'perm-denied' : 'perm-default'
+      );
+    }
+    refreshPerm();
+
+    document.getElementById('btn-request').addEventListener('click', function() {
+      window.Notifications.requestPermission().then(function(p) {
+        refreshPerm();
+        if (p === 'granted') {
+          window.Notifications.show('权限已开启', '现在可以接收推送了', 'permission');
+        } else if (p === 'denied') {
+          alert('权限被拒绝。请在浏览器设置中手动开启通知。');
+        }
+      });
+    });
+
+    document.getElementById('btn-test').addEventListener('click', function() {
+      window.Notifications.show('测试推送', '这是一条来自 yunzhuan.icu 的测试通知', 'test');
+    });
+    document.getElementById('btn-test-srs').addEventListener('click', function() {
+      window.Notifications.checkSrsDue();
+      window.Notifications.show('SRS 检查', '已触发 SRS 到期检查', 'srs');
+    });
+    document.getElementById('btn-test-exam').addEventListener('click', function() {
+      var d = window.Notifications.checkExamCountdown();
+      if (d == null) {
+        window.Notifications.show('考试倒计时', '未命中 7/3/1 天节点', 'exam');
+      }
+    });
+
+    // 规则开关
+    function loadRulesToUI() {
+      var r = window.Notifications.getRules();
+      document.getElementById('rule-daily9').checked = !!r.daily9;
+      document.getElementById('rule-daily21').checked = !!r.daily21;
+      document.getElementById('rule-srs').checked = !!r.srs;
+      document.getElementById('rule-exam').checked = !!r.examCountdown;
+    }
+    loadRulesToUI();
+    document.getElementById('btn-save-rules').addEventListener('click', function() {
+      var r = {
+        daily9: document.getElementById('rule-daily9').checked,
+        daily21: document.getElementById('rule-daily21').checked,
+        srs: document.getElementById('rule-srs').checked,
+        examCountdown: document.getElementById('rule-exam').checked
+      };
+      window.Notifications.setRules(r);
+      alert('规则已保存。下次启动时生效。');
+    });
+
+    // 考试日期
+    var examInfoEl = document.getElementById('exam-info');
+    function loadExamToUI() {
+      try {
+        var s = localStorage.getItem('v28_exam_date');
+        if (s) {
+          document.getElementById('exam-date').value = s;
+          var days = Math.ceil((new Date(s).getTime() - Date.now()) / 86400000);
+          examInfoEl.textContent = '已设置：' + s + ' · 距今 ' + days + ' 天';
+        } else {
+          examInfoEl.textContent = '未设置';
+        }
+      } catch (e) {}
+    }
+    loadExamToUI();
+    document.getElementById('btn-save-exam').addEventListener('click', function() {
+      var v = document.getElementById('exam-date').value;
+      if (!v) { alert('请选择日期'); return; }
+      try { localStorage.setItem('v28_exam_date', v); } catch (e) {}
+      loadExamToUI();
+    });
+    document.getElementById('btn-clear-exam').addEventListener('click', function() {
+      try { localStorage.removeItem('v28_exam_date'); } catch (e) {}
+      document.getElementById('exam-date').value = '';
+      examInfoEl.textContent = '已清除';
+    });
+
+    // 立即排程
+    document.getElementById('btn-schedule').addEventListener('click', function() {
+      var title = document.getElementById('custom-title').value || '提醒';
+      var body = document.getElementById('custom-body').value;
+      var min = parseInt(document.getElementById('custom-delay').value, 10) || 0;
+      var fireAt = Date.now() + min * 60 * 1000;
+      var r = window.Notifications.schedule(title, body, fireAt, 'custom');
+      document.getElementById('schedule-info').textContent =
+        '已排程：' + new Date(r.fireAt).toLocaleString();
+    });
+
+    // 历史
+    var logList = document.getElementById('log-list');
+    function renderLog() {
+      var log = window.Notifications.getLog();
+      if (!log || log.length === 0) {
+        logList.innerHTML = '<li class="muted">暂无通知</li>';
+        return;
+      }
+      logList.innerHTML = log.map(function(e) {
+        var cls = e.read ? 'read' : '';
+        var time = new Date(e.ts).toLocaleString();
+        return '<li class="' + cls + '">' +
+          '<div class="log-title">' + (e.title || '(无标题)') + '</div>' +
+          '<div>' + (e.body || '') + '</div>' +
+          '<div class="log-meta">' + (e.type || 'custom') + ' · ' + time + '</div>' +
+        '</li>';
+      }).join('');
+    }
+    renderLog();
+    document.getElementById('btn-mark-read').addEventListener('click', function() {
+      window.Notifications.markAllRead();
+      renderLog();
+    });
+    document.getElementById('btn-clear-log').addEventListener('click', function() {
+      if (confirm('确定清空所有历史通知？')) {
+        window.Notifications.clearLog();
+        renderLog();
+      }
+    });
+  })();
+</script>
+</body>
+</html>

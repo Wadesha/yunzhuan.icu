@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>机器学习导论 - Introduction to Machine Learning - yunzhuan.icu</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 900px; margin: 0 auto; padding: 20px 16px; background: #f5f5f5; color: #333; }
+        .back-link { color: #667eea; text-decoration: none; font-size: 0.85rem; margin-bottom: 12px; display: inline-block; }
+        .back-link:hover { text-decoration: underline; }
+        h1 { color: #333; margin-bottom: 4px; font-size: 1.4rem; }
+        .en-name { color: #888; font-size: 0.95rem; margin-bottom: 14px; font-weight: normal; }
+        .section { background: white; border-radius: 8px; padding: 14px 18px; margin-bottom: 10px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+        .section h2 { color: #667eea; margin-bottom: 8px; font-size: 1rem; font-weight: 600; }
+        .section h2 .en { color: #999; font-size: 0.8rem; font-weight: normal; }
+        .section p { color: #333; line-height: 1.7; font-size: 0.92rem; }
+        .meta { font-size: 0.82rem; color: #888; margin-bottom: 8px; }
+        .footer { text-align: center; margin-top: 20px; color: #999; font-size: 0.8rem; }
+    </style>
+<link rel="stylesheet" href="/css/collapse.css">
+</head>
+<body>
+    <a href="../../index.html" class="back-link">← 返回首页</a>
+    <h1>机器学习导论</h1>
+    <p class="en-name">Introduction to Machine Learning</p>
+    <div class="section">
+        <h2>课程介绍 <span class="en">Course Introduction</span></h2>
+        <p class="meta">学分：4 | 先修课：线性代数、概率论与数理统计、程序设计基础 | 学期：第4学期</p>
+        <p>机器学习导论系统介绍机器学习的基本概念、经典算法与理论基础。课程涵盖监督学习（线性回归、逻辑回归、决策树、支持向量机、集成学习）、无监督学习（聚类、降维、密度估计）以及模型评估、正则化、偏差-方差权衡等内容。学生将通过编程作业掌握算法实现，理解过拟合与泛化，为深入研究深度学习与统计学习打下基础。</p>
+        <p style="margin-top:8px;">Introduction to Machine Learning systematically covers fundamental concepts, classic algorithms, and theoretical foundations. Topics include supervised learning (linear and logistic regression, decision trees, support vector machines, ensemble methods), unsupervised learning (clustering, dimensionality reduction, density estimation), model evaluation, regularization, and the bias-variance trade-off. Programming assignments build implementation skills and intuition for generalization, preparing students for deep learning and statistical learning.</p>
+    </div>
+        <div class="section">
+        <h2>大作业 <span class="en">Final Project</span></h2>
+        <div>
+<p class="meta">作业标题：房价预测模型构建</p>
+        <p>基于真实房屋交易数据集，完成特征工程、模型选择、调参与评估，对比多种算法表现，最终部署预测模型并撰写技术报告，分析模型可解释性。</p>
+        <p style="margin-top:8px;">Based on a real housing transaction dataset, complete feature engineering, model selection, tuning, and evaluation, compare multiple algorithms, deploy the prediction model, and write a technical report analyzing model interpretability.</p>
+        </div>
+    </div>
+    <div class="section">
+        <h2>实施步骤 <span class="en">Implementation Steps</span></h2>
+        <div><div style="background:#f0f4ff;padding:10px 14px;border-radius:6px;margin-bottom:12px;border-left:3px solid #667eea;font-size:0.88rem;">
+<b>📋 示例</b>：用线性回归预测一个生活问题，比如根据房屋面积和位置预测租金。你需要收集几十条真实数据，用Python的Scikit-learn训练模型，画出拟合直线，计算R2分数，理解机器学习的基本流程。
+</div>
+
+<div class="step-item">
+    <div class="step-number">步骤 1</div>
+    <div class="step-title">数据准备</div>
+    <div class="step-desc">收集和预处理数据，进行数据清洗和划分</div>
+    <div class="step-output">产出：预处理后数据</div>
+</div><div class="step-item">
+    <div class="step-number">步骤 2</div>
+    <div class="step-title">模型选择</div>
+    <div class="step-desc">选择合适的机器学习模型</div>
+    <div class="step-output">产出：模型选择报告</div>
+</div><div class="step-item">
+    <div class="step-number">步骤 3</div>
+    <div class="step-title">模型训练</div>
+    <div class="step-desc">训练模型，调整超参数</div>
+    <div class="step-output">产出：训练好的模型</div>
+</div><div class="step-item">
+    <div class="step-number">步骤 4</div>
+    <div class="step-title">模型评估</div>
+    <div class="step-desc">评估模型性能，分析结果</div>
+    <div class="step-output">产出：评估报告</div>
+</div><div class="step-item">
+    <div class="step-number">步骤 5</div>
+    <div class="step-title">报告提交</div>
+    <div class="step-desc">整理实验报告和代码</div>
+    <div class="step-output">产出：最终提交材料</div>
+</div><div style="margin-top:14px;padding-top:10px;border-top:1px solid #eee;">
+    <h3 style="font-size:0.9rem;color:#667eea;margin-bottom:8px;">Steps</h3><div class="step-item">
+    <div class="step-number">Step 1</div>
+    <div class="step-title">Data Preparation</div>
+    <div class="step-desc">Collect and preprocess data, split into train/test</div>
+    <div class="step-output">Deliverable: Preprocessed Data</div>
+</div><div class="step-item">
+    <div class="step-number">Step 2</div>
+    <div class="step-title">Model Selection</div>
+    <div class="step-desc">Select appropriate machine learning model</div>
+    <div class="step-output">Deliverable: Model Selection Report</div>
+</div><div class="step-item">
+    <div class="step-number">Step 3</div>
+    <div class="step-title">Model Training</div>
+    <div class="step-desc">Train model, tune hyperparameters</div>
+    <div class="step-output">Deliverable: Trained Model</div>
+</div><div class="step-item">
+    <div class="step-number">Step 4</div>
+    <div class="step-title">Model Evaluation</div>
+    <div class="step-desc">Evaluate performance, analyze results</div>
+    <div class="step-output">Deliverable: Evaluation Report</div>
+</div><div class="step-item">
+    <div class="step-number">Step 5</div>
+    <div class="step-title">Report Submission</div>
+    <div class="step-desc">Prepare experimental report and code</div>
+    <div class="step-output">Deliverable: Final Submission</div>
+</div></div>
+        
+    <div class="course-nav" style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:16px;padding:12px 16px;background:white;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,0.05);flex-wrap:wrap;">
+    <a href="../ai.html" style="color:#667eea;text-decoration:none;font-size:0.88rem;">← 返回人工智能</a>
+    <a href="deep-learning.html" style="color:#667eea;text-decoration:none;font-size:0.88rem;">下一门：深度学习 →</a>
+    <a href="#" onclick="goRandomCourse();return false;" style="color:#667eea;text-decoration:none;font-size:0.88rem;">🎲 Random Course</a>
+</div>
+
+    <p class="footer">© 2026 yunzhuan.icu</p>
+<!-- Vercel Analytics -->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script defer src="/js/random-course.js"></script>
+<div style="text-align:center;padding:8px 0;font-size:0.75rem;color:#aaa;">
+    <a href="../../prerequisite/" style="color:#aaa;text-decoration:none;">Prerequisites</a>
+    <span style="margin:0 6px;">·</span>
+    <a href="../../intl-exams/index.html" style="color:#aaa;text-decoration:none;">International Exams</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="../../contact.html" style="color:#aaa;text-decoration:none;">Contact</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="javascript:window.scrollTo(0,0)" style="color:#aaa;text-decoration:none;">Back to top</a>
+    <span style="margin:0 6px;">·</span>
+    <a href="../../index.html" style="color:#aaa;text-decoration:none;">Home</a>
+</div>
+<!-- footer-links -->
+</body>
+</html>

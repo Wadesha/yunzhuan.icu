@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transfer Guide - 本科转学指南 - yunzhuan.icu</title>
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 16px 20px;
+            background: #f5f5f5;
+            color: #333;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            margin-bottom: 16px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .logo {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #667eea;
+            text-decoration: none;
+        }
+        .logo span { color: #764ba2; }
+        .nav-links {
+            display: flex;
+            gap: 18px;
+            align-items: center;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: #555;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: color 0.15s;
+        }
+        .nav-links a:hover { color: #667eea; }
+        .nav-links .cn {
+            font-size: 0.7rem;
+            color: #aaa;
+            margin-left: 2px;
+        }
+        @media (max-width: 768px) {
+            .navbar { flex-wrap: wrap; gap: 8px; }
+            .nav-links { gap: 12px; }
+            .nav-links a { font-size: 0.78rem; }
+            .nav-links .cn { display: none; }
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 4px;
+            font-size: 1.5rem;
+        }
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 16px;
+            font-size: 0.9rem;
+        }
+        .section {
+            background: white;
+            border-radius: 8px;
+            padding: 14px 18px;
+            margin-bottom: 10px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .section h2 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        .section h2 .cn { color: #999; font-size: 0.8rem; font-weight: normal; margin-left: 6px; }
+        .section p { color: #333; line-height: 1.7; font-size: 0.92rem; margin-bottom: 8px; }
+        .tip-box {
+            background: #fff8e1;
+            border-left: 3px solid #ff8f00;
+            padding: 10px 14px;
+            border-radius: 0 6px 6px 0;
+            margin-top: 10px;
+            font-size: 0.82rem;
+            color: #5d4037;
+            line-height: 1.6;
+        }
+        .tip-box strong { color: #e65100; }
+        .success-box {
+            background: #e8f5e9;
+            border-left: 3px solid #2e7d32;
+            padding: 10px 14px;
+            border-radius: 0 6px 6px 0;
+            margin-top: 10px;
+            font-size: 0.82rem;
+            color: #1b5e20;
+            line-height: 1.6;
+        }
+        .success-box strong { color: #2e7d32; }
+        .warning-box {
+            background: #ffebee;
+            border-left: 3px solid #c62828;
+            padding: 10px 14px;
+            border-radius: 0 6px 6px 0;
+            margin-top: 10px;
+            font-size: 0.82rem;
+            color: #b71c1c;
+            line-height: 1.6;
+        }
+        .warning-box strong { color: #c62828; }
+        .info-list { list-style: none; }
+        .info-list li {
+            padding: 8px 0 8px 20px;
+            position: relative;
+            font-size: 0.88rem;
+            color: #444;
+            line-height: 1.5;
+            border-bottom: 1px solid #f5f5f5;
+        }
+        .info-list li:last-child { border-bottom: none; }
+        .info-list li::before {
+            content: '✦';
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-size: 0.7rem;
+            top: 11px;
+        }
+        .info-list li strong { color: #333; }
+        .timeline-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .timeline-card {
+            background: #f8f9ff;
+            padding: 12px;
+            border-radius: 8px;
+            border-left: 3px solid #667eea;
+        }
+        .timeline-card h3 {
+            font-size: 0.88rem;
+            color: #4338ca;
+            margin-bottom: 4px;
+        }
+        .timeline-card p {
+            font-size: 0.8rem;
+            color: #666;
+            line-height: 1.5;
+        }
+        .footer { text-align: center; margin-top: 20px; color: #999; font-size: 0.8rem; }
+    </style>
+    <link rel="stylesheet" href="./css/theme.css">
+    <link rel="manifest" href="./manifest.json">
+    <meta name="theme-color" content="#667eea">
+    <script src="./js/theme.js"></script>
+    <script>
+    window.SUPABASE_CONFIG = {{
+        url: 'https://otfjbzjvkoectpejhxar.supabase.co',
+        anonKey: 'sb_publishable_SBRF6ewKH-se3dNlqFwsXQ_lObhamTr'
+    }};
+    </script>
+    <script src="./js/auth.js"></script>
+    <script src="./js/favorites.js"></script>
+    <script src="./js/pwa.js"></script>
+    <script src="./js/mobile-nav.js"></script>
+    <script src="./js/breadcrumbs.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="../index.html" class="logo"><span class="logo-icon">🎓</span><span class="logo-text">yunzhuan<span>.icu</span></span></a>
+        <div class="nav-links">
+            <a href="../index.html">Majors<span class="cn">专业</span></a>
+            <a href="../schools/index.html">Schools<span class="cn">学校</span></a>
+            <a href="../tests/index.html">Tests<span class="cn">考试</span></a>
+            <a href="../guides/index.html">Guides<span class="cn">指南</span></a>
+            <a href="../resources.html">Resources<span class="cn">资源</span></a>
+            <a href="search.html">Search<span class="cn">搜索</span></a>
+            <a href="../contact.html">Contact<span class="cn">联系</span></a>
+        </div>
+    </nav>
+
+    <h1>Undergraduate Transfer Guide</h1>
+    <p class="subtitle">海外大学本科转学指南</p>
+
+    <div class="section">
+        <h2>Why Transfer? <span class="cn">为什么转学</span></h2>
+        <ul class="info-list">
+            <li><strong>学校不适合：</strong>发现学校的氛围/规模/地理位置不喜欢</li>
+            <li><strong>专业原因：</strong>现在的学校没有你想学的专业，或者专业不够好</li>
+            <li><strong>学术追求：</strong>想去更好的学校，接受更高质量的教育</li>
+            <li><strong>费用原因：</strong>社区大学（CC）转四年制，省钱</li>
+            <li><strong>个人原因：</strong>想换个城市、离家近一点、或者和朋友在一起</li>
+            <li><strong>就业资源：</strong>目标学校有更好的 career service 和校友网络</li>
+        </ul>
+        <div class="warning-box">
+            <strong>⚠️ 转学之前：</strong><br>
+            先确定你真的想转，而不是因为一时不适应。大一新生刚到美国，
+            前几个月不适应很正常，给自己一个学期到一年的时间，
+            也许你会慢慢喜欢上现在的学校。转学有成本，也有风险。
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Transfer Timeline <span class="cn">转学时间线</span></h2>
+        <p style="font-size:0.88rem;color:#666;">
+            大部分学校接受大二结束转过去读大三，也可以大一结束转。
+            以下是秋季入学的时间线（春季入学时间相应提前半年）：
+        </p>
+        <div class="timeline-grid">
+            <div class="timeline-card">
+                <h3>大一上 / Fall</h3>
+                <p>
+                    · 适应新环境<br>
+                    · 保持高 GPA<br>
+                    · 探索兴趣，选好课<br>
+                    · 了解转学要求
+                </p>
+            </div>
+            <div class="timeline-card">
+                <h3>大一下 / Spring</h3>
+                <p>
+                    · 确定目标学校<br>
+                    · 保持高 GPA<br>
+                    · 找教授套磁，准备推荐信<br>
+                    · 写转学文书<br>
+                    · 参加活动/科研
+                </p>
+            </div>
+            <div class="timeline-card">
+                <h3>大一暑假 / Summer</h3>
+                <p>
+                    · 写文书<br>
+                    · 准备申请材料<br>
+                    · 做实习/科研/暑校<br>
+                    · 找推荐人
+                </p>
+            </div>
+            <div class="timeline-card">
+                <h3>大二上 / Fall</h3>
+                <p>
+                    · 提交申请<br>
+                    · 保持 GPA<br>
+                    · 更新材料<br>
+                    · 等结果
+                </p>
+            </div>
+            <div class="timeline-card">
+                <h3>大二下 / Spring</h3>
+                <p>
+                    · 收到录取结果<br>
+                    · 做决定<br>
+                    · 办转学手续<br>
+                    · 转学分
+                </p>
+            </div>
+            <div class="timeline-card">
+                <h3>大三 / Fall</h3>
+                <p>
+                    · 新学校报到！<br>
+                    · 适应新环境<br>
+                    · 认识新朋友<br>
+                    · 规划剩下两年
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>What Do Colleges Look For? <span class="cn">转学看什么</span></h2>
+        <p style="font-size:0.88rem;color:#555;">
+            转学申请和新生申请侧重点不一样：
+        </p>
+        <ul class="info-list">
+            <li><strong>大学 GPA（最重要！）：</strong>转学最看重你大学的表现，GPA 越高越好。3.8+ 比较有竞争力。</li>
+            <li><strong>课程匹配：</strong>你有没有修目标学校要求的先修课，学分能不能转过去</li>
+            <li><strong>转学文书：</strong>为什么想转？为什么选我们学校？这篇文书很重要</li>
+            <li><strong>推荐信：</strong>大学教授的推荐信（1-2封），最好是教过你、了解你的教授</li>
+            <li><strong>课外活动：</strong>大学期间的活动、科研、实习等</li>
+            <li><strong>高中成绩 + 标化：</strong>也会看，但权重比新生低很多</li>
+        </ul>
+        <div class="tip-box">
+            <strong>💡 重点：</strong><br>
+            转学申请中，大学 GPA 和课程匹配是最重要的，远胜过高中学历和标化。
+            所以想转学的话，首先要保证现在学校的成绩！
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Transfer Essay <span class="cn">转学文书</span></h2>
+        <p style="font-size:0.88rem;color:#555;">
+            Common App 转学文书题目一般是 "Please provide a statement that addresses your reasons for transferring
+            and the objectives you hope to achieve." （你为什么转学？想达到什么目标？）
+        </p>
+        <div class="success-box">
+            <strong>✅ 好的文书应该：</strong><br>
+            · 正面、积极，不要抱怨现在的学校<br>
+            · 说清楚你为什么想转（学术原因最有说服力）<br>
+            · 说明为什么选目标学校（具体的课程、教授、项目）<br>
+            · 展示你在现在学校的成就和成长<br>
+            · 有明确的目标和规划<br>
+            · 真实、真诚
+        </div>
+        <div class="warning-box" style="margin-top:8px;">
+            <strong>❌ 不要：</strong><br>
+            · 抱怨现在的学校/教授/同学<br>
+            · 说"我就是想去更好的学校"（太空了）<br>
+            · 泛泛而谈，没有具体的例子<br>
+            · 只说学校排名高、名气大<br>
+            · 编造理由
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Credit Transfer <span class="cn">学分转换</span></h2>
+        <ul class="info-list">
+            <li><strong>能转多少？</strong>一般最多能转 60-90 学分（两年左右的课）</li>
+            <li><strong>怎么评估？</strong>录取后学校会评估你已修的课程，决定哪些能转</li>
+            <li><strong>什么课容易转？</strong>基础课、通识课、和目标学校课程描述相似的课</li>
+            <li><strong>什么课难转？</strong>太专业的课、学校特色课、成绩太低的课（一般 C 以下不转）</li>
+            <li><strong>注意：</strong>转过去的学分算毕业要求，但一般不算 GPA</li>
+            <li><strong>最低毕业学分要求：</strong>很多学校要求至少在本校读满两年/60学分才能毕业</li>
+        </ul>
+        <div class="tip-box">
+            <strong>💡 选课技巧：</strong><br>
+            · 提前查目标学校的通识要求和专业先修课<br>
+            · 选那些大概率能转的课<br>
+            · 保留好 syllabus（课程大纲），转学分的时候可能有用<br>
+            · 可以提前联系目标学校的 advisor 咨询
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Community College Transfer <span class="cn">社区大学转学</span></h2>
+        <p style="font-size:0.88rem;color:#555;">
+            社区大学（CC）转四年制大学是很常见的路径，尤其是加州的 TAG（Transfer Admission Guarantee）项目。
+        </p>
+        <ul class="info-list">
+            <li><strong>优势：</strong>便宜很多！社区大学学费只是四年制的几分之一</li>
+            <li><strong>TAG 项目：</strong>加州很多 UC 学校有 TAG，满足要求保证录取</li>
+            <li><strong>适合人群：</strong>高中成绩不够好但想上好大学的、想省钱的</li>
+            <li><strong>关键点：</strong>保持高 GPA（3.5+ 比较稳），完成 required courses</li>
+            <li><strong>ASSIST：</strong>加州的 www.assist.org 可以查课程对应关系</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Top Transfer-Friendly Schools <span class="cn">转学友好的学校</span></h2>
+        <p style="font-size:0.88rem;color:#666;">
+            有些学校转学生录取率相对高一些，尤其是公立大学（因为有州内转学压力）：
+        </p>
+        <ul class="info-list">
+            <li><strong>UC 系列：</strong>UC Berkeley、UCLA、UCSD 等每年收很多转学生（主要来自加州社区大学）</li>
+            <li><strong>USC：</strong>私立里转学录取率相对高的</li>
+            <li><strong>UMich：</strong>公立名校，转学名额不少</li>
+            <li><strong>NYU：</strong>每年收不少转学生</li>
+            <li><strong>Cornell：</strong>藤校里转学录取率相对高的（尤其是农业和生命科学学院等）</li>
+            <li><strong>Emory、WUSTL、Vanderbilt：</strong>私立名校，转学录取率比新生高一些</li>
+        </ul>
+        <div class="tip-box">
+            <strong>💡 注意：</strong><br>
+            · 顶尖学校转学竞争依然很激烈，不要低估难度<br>
+            · 每年转学名额不一定，要看当年有多少人走<br>
+            · 具体录取率去学校官网查 Common Data Set
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Application Materials <span class="cn">申请材料</span></h2>
+        <ul class="info-list">
+            <li><strong>Common App / Coalition App：</strong>大部分学校用 Common App 转学系统</li>
+            <li><strong>大学成绩单：</strong>所有上过的大学的官方成绩单</li>
+            <li><strong>高中成绩单：</strong>还是需要的，但权重不高</li>
+            <li><strong>标化成绩（可选）：</strong>很多学校转学也是 test-optional</li>
+            <li><strong>转学文书：</strong>为什么转学 + why school</li>
+            <li><strong>推荐信：</strong>1-2 封大学教授的推荐信</li>
+            <li><strong>活动列表：</strong>大学期间的活动</li>
+            <li><strong>课程描述（部分学校）：</strong>有的学校要你提供课程描述来评估转学分</li>
+            <li><strong>申请费：</strong>和新生差不多，可以申请费减免</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Deadlines <span class="cn">截止日期</span></h2>
+        <ul class="info-list">
+            <li><strong>秋季入学（Fall）：</strong>一般 2 月-4 月截止，3 月中旬最多</li>
+            <li><strong>春季入学（Spring）：</strong>一般 10 月-11 月截止</li>
+            <li><strong>Rolling：</strong>滚动录取，先到先得</li>
+            <li><strong>注意：</strong>转学截止日期一般比新生晚，而且每个学校不一样，一定要查清楚</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Pros & Cons <span class="cn">转学的利弊</span></h2>
+        <div class="timeline-grid">
+            <div class="timeline-card" style="border-left-color:#22c55e;background:#f0fdf4;">
+                <h3 style="color:#15803d;">Pros / 好处</h3>
+                <p style="color:#333;">
+                    · 去更好的学校<br>
+                    · 换个喜欢的环境<br>
+                    · 更好的学术资源<br>
+                    · 更好的就业前景<br>
+                    · 认识新朋友<br>
+                    · 体验不同的校园文化
+                </p>
+            </div>
+            <div class="timeline-card" style="border-left-color:#ef4444;background:#fef2f2;">
+                <h3 style="color:#dc2626;">Cons / 坏处</h3>
+                <p style="color:#333;">
+                    · 可能丢学分<br>
+                    · 重新适应环境<br>
+                    · 朋友关系可能淡了<br>
+                    · 申请要花时间精力<br>
+                    · 可能有经济成本<br>
+                    · 不确定因素多
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Tips for Success <span class="cn">转学成功建议</span></h2>
+        <div class="success-box">
+            <strong>✅ 一定要做：</strong><br>
+            · 保持高 GPA（3.8+ 最好）<br>
+            · 提前研究目标学校的课程要求<br>
+            · 和教授搞好关系，拿强推<br>
+            · 文书提前写，多改几稿<br>
+            · 多申请几所学校（8-12所比较合适）<br>
+            · 分冲刺、匹配、保底<br>
+            · 有问题直接联系目标学校的 transfer advisor
+        </div>
+        <div class="warning-box" style="margin-top:8px;">
+            <strong>❌ 不要做：</strong><br>
+            · 别翘课/GPA 崩了<br>
+            · 别在文书里抱怨现在的学校<br>
+            · 别拖到最后一刻才开始准备<br>
+            · 别只申一所学校<br>
+            · 别放弃现在学校的社交和活动<br>
+            · 转学不是万能的，别期望太高
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>After You Transfer <span class="cn">转学之后</span></h2>
+        <p style="font-size:0.88rem;color:#555;">
+            转学后前几个月可能会不适应，这很正常：
+        </p>
+        <ul class="info-list">
+            <li><strong>学业：</strong>新学校的节奏和难度可能不一样，给点时间适应</li>
+            <li><strong>社交：</strong>大家已经有朋友了，融入需要时间，主动一点</li>
+            <li><strong>选课：</strong>搞清楚哪些学分转了、还需要上什么课，别耽误毕业</li>
+            <li><strong>找 advisor：</strong>尽快认识你的新 academic advisor</li>
+            <li><strong>加入社团：</strong>社团是认识新朋友的好地方</li>
+            <li><strong>耐心：</strong>给自己一个学期的时间，慢慢会好的</li>
+        </ul>
+    </div>
+
+    <p class="footer">&copy; 2026 yunzhuan.icu | Transfer Guide</p>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <div style="text-align:center;padding:8px 0;font-size:0.75rem;color:#aaa;">
+        <a href="../index.html" style="color:#aaa;text-decoration:none;">Home</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="../guides/index.html" style="color:#aaa;text-decoration:none;">Guides</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="../faq.html" style="color:#aaa;text-decoration:none;">FAQ</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="../contact.html" style="color:#aaa;text-decoration:none;">Contact</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="javascript:window.scrollTo(0,0)" style="color:#aaa;text-decoration:none;">Back to top</a>
+    </div>
+<script src="./js/back-to-top.js"></script>
+</body>
+</html>

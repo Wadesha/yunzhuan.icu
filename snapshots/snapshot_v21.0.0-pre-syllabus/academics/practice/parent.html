@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>家长/导师查看模式 | Practice</title>
+<link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 860px; margin: 0 auto; padding: 24px 16px 48px; background: #ffffff; color: #111111; line-height: 1.7; font-size: 15px; }
+  a { color: #111111; text-decoration: none; border-bottom: 1px solid #cccccc; }
+  a:hover { border-bottom-color: #111111; }
+  .nav { padding-bottom: 12px; margin-bottom: 20px; border-bottom: 1px solid #e0e0e0; font-size: 0.88rem; color: #888888; }
+  .nav a { color: #111111; }
+  .nav .sep { color: #cccccc; margin: 0 6px; }
+  h1 { font-size: 1.6rem; margin-bottom: 4px; }
+  h2 { font-size: 1.1rem; font-weight: 700; margin: 28px 0 8px; padding-bottom: 6px; border-bottom: 1px solid #111111; }
+  h3 { font-size: 1rem; font-weight: 700; margin: 18px 0 6px; }
+  p { margin-bottom: 8px; }
+  .muted { color: #888888; font-size: 0.85rem; }
+  .subtitle { color: #555555; font-size: 0.95rem; margin-bottom: 20px; }
+  .card { border: 1px solid #e0e0e0; padding: 14px 16px; background: #ffffff; margin: 12px 0; }
+  .card h3 { margin-top: 0; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 16px 0; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 16px 0; }
+  @media (max-width: 768px) { .grid, .grid-3 { grid-template-columns: 1fr; } }
+  table { width: 100%; border-collapse: collapse; font-size: 0.82rem; margin: 8px 0 16px; }
+  th, td { border: 1px solid #e0e0e0; padding: 6px 10px; text-align: left; vertical-align: top; }
+  th { background: #f5f5f5; font-weight: 700; }
+  input, button { font-family: inherit; font-size: 0.9rem; }
+  input[type=text] { border: 1px solid #cccccc; padding: 6px 10px; width: 100%; box-sizing: border-box; }
+  button { border: 1px solid #111; background: #fff; color: #111; padding: 6px 14px; cursor: pointer; font-weight: 600; }
+  button:hover { background: #111; color: #fff; }
+  .stat-card { border: 1px solid #e0e0e0; padding: 12px; text-align: center; background: #fafafa; }
+  .stat-card .stat-value { font-size: 1.4rem; font-weight: 700; }
+  .stat-card .stat-label { font-size: 0.75rem; color: #666; margin-top: 4px; }
+  .badge { display: inline-block; border: 1px solid #111; padding: 0 6px; font-size: 0.7rem; font-weight: 700; }
+  .badge-warn { border-color: #b00020; color: #b00020; }
+  .badge-ok { border-color: #2e7d32; color: #2e7d32; }
+  .badge-info { border-color: #1565c0; color: #1565c0; }
+  .progress-bar { height: 8px; background: #eee; border-radius: 4px; overflow: hidden; margin-top: 4px; }
+  .progress-fill { height: 100%; transition: width 0.3s; }
+  .progress-high { background: #2e7d32; }
+  .progress-mid { background: #f57c00; }
+  .progress-low { background: #b00020; }
+  .subject-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #eee; }
+  .subject-row:last-child { border-bottom: none; }
+  .subject-name { font-weight: 600; }
+  .subject-mastery { font-size: 0.8rem; color: #555; }
+  .report-section { margin-top: 20px; }
+  .advice-list { list-style: none; margin: 0; padding: 0; }
+  .advice-list li { padding: 10px 12px; border-left: 3px solid #111; background: #fafafa; margin-bottom: 8px; font-size: 0.88rem; }
+  .advice-list li strong { display: block; margin-bottom: 4px; }
+  .empty-state { text-align: center; padding: 40px 20px; color: #888; }
+  .footer { margin-top: 36px; padding-top: 16px; border-top: 1px solid #e0e0e0; color: #888888; font-size: 0.82rem; }
+  .v-info { border: 1px dashed #888; padding: 8px 12px; margin: 12px 0; font-size: 0.82rem; color: #555; }
+  .readonly-banner { background: #111; color: #fff; padding: 8px 14px; text-align: center; font-size: 0.82rem; font-weight: 600; margin-bottom: 16px; }
+</style>
+</head>
+<body>
+
+<div class="readonly-banner">
+  只读模式 · 本页面仅供家长/导师查看学生学习数据，所有操作均为只读。
+</div>
+
+<div class="nav">
+  <a href="../../index.html">Home</a> <span class="sep">/</span>
+  <a href="../index.html">Academics</a> <span class="sep">/</span>
+  <a href="index.html">Practice</a> <span class="sep">/</span>
+  家长/导师查看模式
+</div>
+
+<h1>家长/导师查看 <span class="badge">v36</span></h1>
+<p class="subtitle">只读模式查看学生学习数据，生成周报、成绩单和学习建议。</p>
+
+<div class="v-info">
+  <strong>使用说明</strong> · 输入学生在 Practice 系统中使用的用户名，即可查看该学生的学习数据。数据存储在浏览器 localStorage 中（key: <code>yz_practice_data</code>）。
+</div>
+
+<div class="card">
+  <h3>查找学生</h3>
+  <div style="display:flex;gap:8px;align-items:flex-end;">
+    <div style="flex:1;">
+      <div style="font-size:0.82rem;color:#555;margin-bottom:4px;">学生用户名</div>
+      <input type="text" id="studentName" placeholder="输入学生用户名（如：student001）">
+    </div>
+    <button id="lookupBtn">查看数据</button>
+  </div>
+  <p class="muted" style="margin-top:8px;">留空则查看当前浏览器的全部学习数据汇总。</p>
+</div>
+
+<div id="studentData" class="hidden">
+  <h2>学生周报</h2>
+  <div id="weekReport" class="grid-3"></div>
+
+  <h2>成绩单 · 8 科掌握度汇总</h2>
+  <div class="card">
+    <div id="subjectReport"></div>
+  </div>
+
+  <h2>薄弱科目分析</h2>
+  <div id="weakAnalysis" class="card"></div>
+
+  <h2>学习建议</h2>
+  <div id="adviceSection"></div>
+</div>
+
+<div id="noData" class="empty-state hidden">
+  <p>未找到该学生的学习数据。</p>
+  <p class="muted">请确认学生已在本设备上完成至少一次练习。</p>
+</div>
+
+<div class="footer">
+  <a href="../../index.html">Home</a> <span class="sep" style="color:#ccc;margin:0 6px;">·</span>
+  <a href="index.html">Practice</a> <span class="sep" style="color:#ccc;margin:0 6px;">·</span>
+  <a href="collab.html">小组协作</a> <span class="sep" style="color:#ccc;margin:0 6px;">·</span>
+  <a href="api.html">API 文档</a> <span class="sep" style="color:#ccc;margin:0 6px;">·</span>
+  <a href="javascript:window.scrollTo(0,0)">Back to top</a>
+</div>
+
+<script>
+(function() {
+  var $ = function(id) { return document.getElementById(id); };
+
+  function loadPracticeData() {
+    try {
+      var raw = localStorage.getItem('yz_practice_data');
+      if (raw) return JSON.parse(raw);
+    } catch(e) {}
+    return null;
+  }
+
+  function getSubjectInfo(key) {
+    var names = {
+      sat: 'SAT', act: 'ACT', ap: 'AP', ib: 'IB',
+      alevel: 'A-Level', toefl: 'TOEFL', ielts: 'IELTS', igcse: 'IGCSE'
+    };
+    return { key: key, name: names[key] || key };
+  }
+
+  function showElement(id) { $(id).classList.remove('hidden'); }
+  function hideElement(id) { $(id).classList.add('hidden'); }
+
+  $('lookupBtn').addEventListener('click', function() {
+    var name = $('studentName').value.trim();
+    analyzeData(name);
+  });
+
+  function analyzeData(studentName) {
+    var data = loadPracticeData();
+    var hasData = data && data.records && Object.keys(data.records).length > 0;
+
+    if (!hasData) {
+      hideElement('studentData');
+      showElement('noData');
+      return;
+    }
+
+    hideElement('noData');
+    showElement('studentData');
+
+    var records = data.records;
+    var subjects = Object.keys(records);
+    var totalAnswered = 0;
+    var totalCorrect = 0;
+    var subjectStats = {};
+    var weekStart = getWeekStart();
+    var weekAnswered = 0;
+    var weekCorrect = 0;
+    var weakSubjects = [];
+    var strongSubjects = [];
+
+    subjects.forEach(function(subKey) {
+      var subRecs = records[subKey] || {};
+      var subTotal = Object.keys(subRecs).length;
+      var subCorrect = 0;
+      var weekSubAnswered = 0;
+      var weekSubCorrect = 0;
+
+      Object.keys(subRecs).forEach(function(qid) {
+        var r = subRecs[qid];
+        if (r.correct) subCorrect++;
+        totalAnswered++;
+        if (r.correct) totalCorrect++;
+
+        if (r.ts && r.ts >= weekStart) {
+          weekAnswered++;
+          if (r.correct) weekCorrect++;
+          weekSubAnswered++;
+          if (r.correct) weekSubCorrect++;
+        }
+      });
+
+      var rate = subTotal > 0 ? Math.round(subCorrect / subTotal * 100) : 0;
+      subjectStats[subKey] = {
+        name: getSubjectInfo(subKey).name,
+        total: subTotal,
+        correct: subCorrect,
+        rate: rate,
+        weekAnswered: weekSubAnswered,
+        weekCorrect: weekSubCorrect,
+        weekRate: weekSubAnswered > 0 ? Math.round(weekSubCorrect / weekSubAnswered * 100) : 0
+      };
+
+      if (subTotal > 0) {
+        if (rate < 60) weakSubjects.push({ key: subKey, rate: rate, name: getSubjectInfo(subKey).name });
+        else if (rate >= 80) strongSubjects.push({ key: subKey, rate: rate, name: getSubjectInfo(subKey).name });
+      }
+    });
+
+    weakSubjects.sort(function(a, b) { return a.rate - b.rate; });
+    strongSubjects.sort(function(a, b) { return b.rate - a.rate; });
+
+    renderWeekReport(studentName, totalAnswered, totalCorrect, weekAnswered, weekCorrect, subjectStats);
+    renderSubjectReport(subjectStats);
+    renderWeakAnalysis(weakSubjects, subjectStats);
+    renderAdvice(weakSubjects, strongSubjects, subjectStats, studentName);
+  }
+
+  function getWeekStart() {
+    var now = new Date();
+    var day = now.getDay() || 7;
+    var monday = new Date(now);
+    monday.setDate(now.getDate() - (day - 1));
+    monday.setHours(0, 0, 0, 0);
+    return monday.getTime();
+  }
+
+  function renderWeekReport(name, totalAnswered, totalCorrect, weekAnswered, weekCorrect, stats) {
+    var rate = totalAnswered > 0 ? Math.round(totalCorrect / totalAnswered * 100) : 0;
+    var weekRate = weekAnswered > 0 ? Math.round(weekCorrect / weekAnswered * 100) : 0;
+    var dateStr = new Date().toLocaleDateString('zh-CN', { year: 'numeric', month: 'long', day: 'numeric' });
+
+    var html = '';
+    html += statCard('总答题数', totalAnswered + ' 题', '累计完成');
+    html += statCard('总正确率', rate + '%', '所有科目');
+    html += statCard('本周答题', weekAnswered + ' 题', '本周完成');
+    html += statCard('本周正确率', weekRate + '%', '本周表现');
+    html += statCard('学习科目', Object.keys(stats).length + ' 科', '有答题记录');
+    html += statCard('报告日期', dateStr, '数据截止');
+
+    $('weekReport').innerHTML = html;
+  }
+
+  function statCard(value, label, sub) {
+    return '<div class="stat-card"><div class="stat-value">' + value + '</div><div class="stat-label">' + label + '</div>' + (sub ? '<div style="font-size:0.7rem;color:#999;margin-top:4px;">' + sub + '</div>' : '') + '</div>';
+  }
+
+  function renderSubjectReport(stats) {
+    var html = '<table><thead><tr><th>科目</th><th>答题数</th><th>正确</th><th>正确率</th><th>掌握度</th><th>本周进度</th></tr></thead><tbody>';
+
+    var allKeys = ['sat', 'act', 'ap', 'ib', 'alevel', 'toefl', 'ielts', 'igcse'];
+    allKeys.forEach(function(key) {
+      var info = getSubjectInfo(key);
+      var s = stats[key];
+      if (s) {
+        var masteryLabel = s.rate >= 80 ? '熟练' : (s.rate >= 60 ? '学习中' : '薄弱');
+        var masteryClass = s.rate >= 80 ? 'badge-ok' : (s.rate >= 60 ? 'badge-info' : 'badge-warn');
+        var progressClass = s.rate >= 80 ? 'progress-high' : (s.rate >= 60 ? 'progress-mid' : 'progress-low');
+        html += '<tr>';
+        html += '<td><strong>' + info.name + '</strong></td>';
+        html += '<td>' + s.total + '</td>';
+        html += '<td>' + s.correct + '</td>';
+        html += '<td>' + s.rate + '%</td>';
+        html += '<td><span class="badge ' + masteryClass + '">' + masteryLabel + '</span></td>';
+        html += '<td>' + s.weekAnswered + ' 题 · ' + s.weekRate + '%<div class="progress-bar"><div class="progress-fill ' + progressClass + '" style="width:' + s.rate + '%;"></div></div></td>';
+        html += '</tr>';
+      } else {
+        html += '<tr>';
+        html += '<td><strong>' + info.name + '</strong></td>';
+        html += '<td>—</td><td>—</td><td>—</td>';
+        html += '<td><span class="badge">未开始</span></td>';
+        html += '<td>—</td>';
+        html += '</tr>';
+      }
+    });
+
+    html += '</tbody></table>';
+    $('subjectReport').innerHTML = html;
+  }
+
+  function renderWeakAnalysis(weakList, stats) {
+    if (weakList.length === 0) {
+      $('weakAnalysis').innerHTML = '<p class="muted">暂无明显薄弱科目。继续保持！</p>';
+      return;
+    }
+    var html = '<p>以下是正确率低于 60% 的科目，为学生当前的薄弱环节：</p>';
+    weakList.forEach(function(w) {
+      var s = stats[w.key];
+      html += '<div class="subject-row"><div><div class="subject-name">' + w.name + '</div><div class="subject-mastery">答题 ' + s.total + ' 题 · 正确率 ' + w.rate + '%</div></div><span class="badge badge-warn">薄弱</span></div>';
+      html += '<div class="progress-bar" style="margin-bottom:8px;"><div class="progress-fill progress-low" style="width:' + w.rate + '%;"></div></div>';
+    });
+    $('weakAnalysis').innerHTML = html;
+  }
+
+  function renderAdvice(weakList, strongList, stats, name) {
+    var html = '';
+
+    if (name) {
+      html += '<p class="muted">以下建议基于学生 <strong>' + name + '</strong> 的数据生成：</p>';
+    } else {
+      html += '<p class="muted">以下建议基于当前浏览器内所有学生数据汇总生成：</p>';
+    }
+
+    html += '<h3>优先行动项</h3>';
+    html += '<ul class="advice-list">';
+
+    if (weakList.length > 0) {
+      html += '<li><strong>集中攻克薄弱科目</strong>重点复习 <em>' + weakList.map(function(w) { return w.name; }).join('、') + '</em>。建议每天分配 30-45 分钟专项练习，使用错题本功能反复训练。</li>';
+
+      weakList.slice(0, 2).forEach(function(w) {
+        html += '<li><strong>' + w.name + ' 专项突破</strong>当前正确率仅 ' + w.rate + '%。建议：1) 回顾该科目 Syllabus 考纲，明确 Topic 结构；2) 按 Topic 筛选练习（practice.html?topic=xxx）；3) 完成 20 题专项训练后复查正确率是否提升。</li>';
+      });
+    } else {
+      html += '<li><strong>保持良好势头</strong>所有科目正确率均在 60% 以上，暂无明显薄弱环节。建议开始挑战更高难度的题目或尝试 Mock Test 全真模考。</li>';
+    }
+
+    if (strongList.length > 0) {
+      html += '<li><strong>巩固优势科目</strong><em>' + strongList.map(function(s) { return s.name; }).join('、') + '</em> 表现优秀（正确率 ' + strongList[0].rate + '%+）。建议：1) 提高题目难度等级；2) 尝试 FRQ/主观题专项；3) 帮助同学讲解相关概念，加深理解。</li>';
+    }
+
+    html += '<li><strong>建立学习节奏</strong>建议每周完成至少 50 题跨科目练习，使用 Dashboard 的 7 天自适应排期功能安排学习计划。</li>';
+    html += '<li><strong>参加小组协作</strong>使用 Collab 小组功能，与同学组队共同刷题、讨论解题思路，排行榜机制可增加学习动力。</li>';
+    html += '</ul>';
+
+    $('adviceSection').innerHTML = html;
+  }
+
+})();
+</script>
+
+</body>
+</html>

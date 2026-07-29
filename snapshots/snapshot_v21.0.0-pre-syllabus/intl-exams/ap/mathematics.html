@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AP Mathematics (Calculus & Statistics) - yunzhuan.icu</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px 16px;
+            background: #f5f5f5;
+            color: #333;
+        }
+        .back-link { color: #667eea; text-decoration: none; font-size: 0.85rem; margin-bottom: 12px; display: inline-block; }
+        .back-link:hover { text-decoration: underline; }
+        h1 { color: #333; margin-bottom: 4px; font-size: 1.4rem; }
+        .en-name { color: #888; font-size: 0.95rem; margin-bottom: 4px; font-weight: normal; }
+        .code-line { color: #888; font-size: 0.82rem; margin-bottom: 14px; }
+        .section {
+            background: white;
+            border-radius: 8px;
+            padding: 14px 18px;
+            margin-bottom: 10px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .section h2 {
+            color: #667eea;
+            margin-bottom: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        .section h2 .en { color: #999; font-size: 0.8rem; font-weight: normal; }
+        .section p { color: #333; line-height: 1.7; font-size: 0.92rem; }
+        .section p.en { color: #888; font-size: 0.85rem; margin-top: 6px; }
+        .meta-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+            margin-top: 6px;
+        }
+        .meta-table td {
+            padding: 4px 8px;
+            border-bottom: 1px solid #f0f0f0;
+            vertical-align: top;
+        }
+        .meta-table td.label { color: #888; width: 28%; }
+        .meta-table td.value { color: #333; }
+        .level-tag {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-right: 6px;
+        }
+        .level-ab { background: #e8f4fd; color: #1976d2; }
+        .level-bc { background: #e8f5e9; color: #2e7d32; }
+        .level-stat { background: #fce4ec; color: #c2185b; }
+        .topic-list { list-style: none; }
+        .topic-list li {
+            padding: 8px 10px;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        .topic-list li:last-child { border-bottom: none; }
+        .topic-list .topic-title { font-weight: 600; color: #333; }
+        .topic-list .topic-desc { color: #777; font-size: 0.82rem; margin-top: 2px; }
+        .footer { text-align: center; margin-top: 20px; color: #999; font-size: 0.8rem; }
+        .nav-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 8px;
+            margin-top: 16px;
+            padding: 12px 16px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            flex-wrap: wrap;
+        }
+        .nav-row a { color: #667eea; text-decoration: none; font-size: 0.88rem; }
+    </style>
+    <link rel="stylesheet" href="/css/collapse.css">
+</head>
+<body>
+    <a href="../index.html" class="back-link">← Back to International Exams Index</a>
+
+    <h1>AP Mathematics (Calculus & Statistics)</h1>
+    <p class="en-name">AP 数学（微积分与统计）</p>
+    <p class="code-line">College Board · Advanced Placement</p>
+
+    <div class="section">
+        <h2>Course Overview <span class="en">课程介绍</span></h2>
+        <p style="color:#666;font-size:0.85rem;margin-bottom:6px;">AP 数学实为 Calculus AB/BC 与 Statistics 三门独立考试，本页整合对照。</p>
+        <p>The AP system has no single "Mathematics" exam; the corresponding courses are AP Calculus AB, AP Calculus BC, and AP Statistics. Calculus AB/BC cover calculus (BC includes all of AB plus parametric/polar/vector functions and series), while Statistics is a dedicated statistics course. All three are core subjects for STEM, economics and data science applicants.</p>
+    </div>
+
+    <div class="section">
+        <h2>Key Facts <span class="en">基本信息</span></h2>
+        <table class="meta-table">
+            <tr><td class="label">Administrator (主办方)</td><td class="value">College Board</td></tr>
+            <tr><td class="label">Duration (学制)</td><td class="value">1 year per exam (three independent exams)</td></tr>
+            <tr><td class="label">Scoring (评分)</td><td class="value">1 – 5 (5 is the highest)</td></tr>
+            <tr><td class="label">Prerequisites (先修建议)</td><td class="value">Calculus: Pre-calculus; Statistics: Algebra II</td></tr>
+            <tr><td class="label">Exam structure (考试结构)</td><td class="value">Section I MCQ + Section II FRQ, 50% each</td></tr>
+            <tr><td class="label">Tools (允许工具)</td><td class="value">Graphing calculator (required for some FRQs)</td></tr>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>Sub-Exam: Calculus AB <span class="en">AP Calculus AB 章节</span></h2>
+        <p style="color:#666;font-size:0.85rem;margin-bottom:6px;">微积分 AB 含极限、求导、积分、微分方程与积分应用共 8 个单元。</p>
+        <ul class="topic-list">
+            <li>
+                <div class="topic-title"><span class="level-tag level-ab">AB</span>Unit 1. Limits and Continuity</div>
+                <div class="topic-desc">One-sided limits; asymptotes; squeeze theorem; Intermediate Value Theorem</div>
+            </li>
+            <li>
+                <div class="topic-title"><span class="level-tag level-ab">AB</span>Unit 2. Differentiation: Definition and Fundamental Properties</div>
+                <div class="topic-desc">Derivative definition; tangent lines and instantaneous rate of change; basic differentiation rules</div>
+            </li>
+            <li>
+                <div class="topic-title"><span class="level-tag level-ab">AB</span>Unit 3. Differentiation: Composite, Implicit, and Inverse Functions</div>
+                <div class="topic-desc">Chain rule for composite functions; implicit and inverse differentiation</div>
+            </li>
+            <li>
+                <div class="topic-title"><span class="level-tag level-ab">AB</span>Unit 4. Contextual Applications of Differentiation</div>
+                <div class="topic-desc">Related rates; linear approximation; L'Hôpital's rule</div>
+            </li>
+            <li>
+                <div class="topic-title"><span class="level-tag level-ab">AB</span>Unit 5. Applying Derivatives to Analyze Functions</div>
+                <div class="topic-desc">Extrema and monotonicity; concavity and inflection; optimization</div>
+            </li>
+            <li>
+                <div class="topic-title"><span class="level-tag level-ab">AB</span>Unit 6. Integration and Accumulation of Change</div>
+                <div class="topic-desc">Riemann sums; Fundamental Theorem of Calculus; integration techniques</div>
+            </li>
+            <li>
+                <div class="topic-title"><span class="level-tag level-ab">AB</span>Unit 7. Differential Equations</div>
+                <div class="topic-desc">Slope fields; separable equations; exponential growth and decay models</div>
+            </li>
+            <li>
+                <div class="topic-title"><span class="level-tag level-ab">AB</span>Unit 8. Applications of Integration</div>
+                <div class="topic-desc">Area; volumes of revolution; volumes from known cross-sections</div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Sub-Exam: Calculus BC (all of AB plus the following) <span class="en">AP Calculus BC 章节</span></h2>
+        <p style="color:#666;font-size:0.85rem;margin-bottom:6px;">BC 在 AB 基础上新增参数/极坐标/向量函数与无穷级数共 2 个单元。</p>
+        <ul class="topic-list">
+            <li>
+                <div class="topic-title"><span class="level-tag level-bc">BC</span>Unit 9. Parametric Equations, Polar Coordinates, and Vector-Valued Functions</div>
+                <div class="topic-desc">Parametric, polar and vector-valued functions; arc length and parametric area</div>
+            </li>
+            <li>
+                <div class="topic-title"><span class="level-tag level-bc">BC</span>Unit 10. Infinite Sequences and Series</div>
+                <div class="topic-desc">Convergence tests; Taylor and Maclaurin series; power series; error bounds</div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Sub-Exam: Statistics <span class="en">AP Statistics 章节</span></h2>
+        <p style="color:#666;font-size:0.85rem;margin-bottom:6px;">统计学含数据探索、抽样、概率、抽样分布与推断共 9 个单元。</p>
+        <ul class="topic-list">
+            <li>
+                <div class="topic-title"><span class="level-tag level-stat">Stat</span>Unit 1. Exploring One-Variable Data</div>
+                <div class="topic-desc">Distributions and displays; center and spread; normal distribution</div>
+            </li>
+            <li>
+                <div class="topic-title"><span class="level-tag level-stat">Stat</span>Unit 2. Exploring Two-Variable Data</div>
+                <div class="topic-desc">Scatterplots and correlation; least-squares regression; residual analysis</div>
+            </li>
+            <li>
+                <div class="topic-title"><span class="level-tag level-stat">Stat</span>Unit 3. Collecting Data</div>
+                <div class="topic-desc">Sampling methods; experimental design; bias and control</div>
+            </li>
+            <li>
+                <div class="topic-title"><span class="level-tag level-stat">Stat</span>Unit 4. Probability, Random Variables, and Probability Distributions</div>
+                <div class="topic-desc">Discrete and continuous distributions; binomial and geometric distributions</div>
+            </li>
+            <li>
+                <div class="topic-title"><span class="level-tag level-stat">Stat</span>Unit 5. Sampling Distributions</div>
+                <div class="topic-desc">Central Limit Theorem; sampling distributions for proportions and means</div>
+            </li>
+            <li>
+                <div class="topic-title"><span class="level-tag level-stat">Stat</span>Unit 6. Inference for Categorical Data: Proportions</div>
+                <div class="topic-desc">Confidence intervals and hypothesis tests for proportions</div>
+            </li>
+            <li>
+                <div class="topic-title"><span class="level-tag level-stat">Stat</span>Unit 7. Inference for Quantitative Data: Means</div>
+                <div class="topic-desc">Confidence intervals and t-tests for means; paired and two-sample</div>
+            </li>
+            <li>
+                <div class="topic-title"><span class="level-tag level-stat">Stat</span>Unit 8. Inference for Categorical Data: Chi-Square</div>
+                <div class="topic-desc">Chi-square goodness-of-fit; chi-square tests of independence</div>
+            </li>
+            <li>
+                <div class="topic-title"><span class="level-tag level-stat">Stat</span>Unit 9. Inference for Quantitative Data: Slopes</div>
+                <div class="topic-desc">Confidence intervals and hypothesis tests for regression slopes</div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Exam Structure <span class="en">考试结构</span></h2>
+        <table class="meta-table">
+            <tr><td class="label">Calculus AB · Section I</td><td class="value">MCQ · 45 questions · 105 min · 50%</td></tr>
+            <tr><td class="label">Calculus AB · Section II</td><td class="value">FRQ · 6 questions · 90 min · 50%</td></tr>
+            <tr><td class="label">Calculus BC · Section I</td><td class="value">MCQ · 45 questions · 105 min · 50%</td></tr>
+            <tr><td class="label">Calculus BC · Section II</td><td class="value">FRQ · 6 questions · 90 min · 50%</td></tr>
+            <tr><td class="label">Statistics · Section I</td><td class="value">MCQ · 40 questions · 90 min · 50%</td></tr>
+            <tr><td class="label">Statistics · Section II</td><td class="value">FRQ · 6 questions · 90 min · 50% (investigative task, experiment, statistical inference)</td></tr>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>Credit Transfer <span class="en">学分转换与衔接</span></h2>
+        <p style="color:#666;font-size:0.85rem;margin-bottom:6px;">4/5 分换算大学学分，BC 5 分常换算微积分 I 与 II。</p>
+        <p>All three AP math exams use a 1–5 scale; most US colleges grant credit for 4 or 5. Calculus AB typically maps to Calculus I, while a BC score of 4 often earns Calculus I credit and a 5 earns Calculus I + II. Statistics maps to an introductory statistics course. Policies vary by institution.</p>
+    </div>
+
+    <div class="nav-row">
+        <a href="../index.html">← International Exams Index</a>
+        <a href="further-mathematics.html">Next: Further Mathematics →</a>
+    </div>
+
+    <p class="footer">© 2026 yunzhuan.icu | AP Mathematics</p>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <div style="text-align:center;padding:8px 0;font-size:0.75rem;color:#aaa;">
+        <a href="../../index.html" style="color:#aaa;text-decoration:none;">Home</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="../index.html" style="color:#aaa;text-decoration:none;">International Exams</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="../../contact.html" style="color:#aaa;text-decoration:none;">Contact</a>
+        <span style="margin:0 6px;">·</span>
+        <a href="javascript:window.scrollTo(0,0)" style="color:#aaa;text-decoration:none;">Back to top</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>yunzhuan.icu - 全球留学导航平台</title>
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 0 20px 40px;
+            background: #ffffff;
+            color: #111111;
+            line-height: 1.7;
+            font-size: 16px;
+        }
+
+        /* Navigation */
+        .navbar {
+            border-bottom: 1px solid #e0e0e0;
+            padding: 16px 0;
+            margin-bottom: 32px;
+        }
+        .nav-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .logo {
+            font-weight: 600;
+            font-size: 1rem;
+            color: #111111;
+            text-decoration: none;
+        }
+        .logo-icon {
+            background: #111111;
+            color: #ffffff;
+            width: 22px;
+            height: 22px;
+            border-radius: 4px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            margin-right: 6px;
+            vertical-align: middle;
+        }
+        .nav-links {
+            display: flex;
+            gap: 18px;
+            flex-wrap: wrap;
+        }
+        .nav-links a {
+            color: #111111;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        .nav-links a:hover {
+            text-decoration: underline;
+        }
+        .nav-links .cn {
+            color: #888888;
+            font-size: 0.75rem;
+            margin-left: 2px;
+        }
+
+        /* Hero */
+        .hero {
+            margin-bottom: 40px;
+        }
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #111111;
+            margin-bottom: 8px;
+            line-height: 1.2;
+        }
+        .hero .subtitle {
+            font-size: 1.05rem;
+            color: #555555;
+            margin-bottom: 20px;
+        }
+        .hero .subtitle-cn {
+            font-size: 0.9rem;
+            color: #888888;
+            margin-bottom: 24px;
+        }
+        .search-box {
+            width: 100%;
+            max-width: 500px;
+        }
+        .search-box input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #e0e0e0;
+            background: #ffffff;
+            color: #111111;
+            border-radius: 6px;
+            font-size: 1rem;
+            outline: none;
+        }
+        .search-box input:focus {
+            border-color: #111111;
+        }
+
+        /* Data */
+        .data-row {
+            display: flex;
+            gap: 24px;
+            padding: 16px 0;
+            border-bottom: 1px solid #eeeeee;
+            margin-bottom: 32px;
+            flex-wrap: wrap;
+        }
+        .data-row span {
+            font-size: 0.9rem;
+            color: #555555;
+        }
+        .data-row .num {
+            font-weight: 700;
+            color: #111111;
+        }
+
+        /* Features - pure text columns */
+        .features {
+            margin-bottom: 48px;
+        }
+        .features h2 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 24px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #111111;
+            color: #111111;
+        }
+        .feature-cols {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 28px;
+        }
+        @media (max-width: 768px) {
+            .feature-cols { grid-template-columns: 1fr; gap: 24px; }
+        }
+        .feature-block h3 {
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #111111;
+        }
+        .feature-block p {
+            font-size: 0.88rem;
+            color: #888888;
+            margin-bottom: 12px;
+        }
+        .feature-block ul {
+            list-style: none;
+            padding: 0;
+        }
+        .feature-block ul li {
+            font-size: 0.88rem;
+            margin-bottom: 4px;
+            color: #555555;
+        }
+        .feature-block ul li a {
+            color: #111111;
+            text-decoration: none;
+            border-bottom: 1px solid #cccccc;
+        }
+        .feature-block ul li a:hover {
+            border-bottom-color: #111111;
+        }
+        .feature-block ul li .pipe {
+            color: #cccccc;
+            margin: 0 6px;
+        }
+
+        /* Version Progress - simple list */
+        .version-section {
+            margin-bottom: 48px;
+        }
+        .version-section h2 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 24px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #111111;
+            color: #111111;
+        }
+        .version-list {
+            list-style: none;
+            padding: 0;
+        }
+        .version-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #eeeeee;
+            font-size: 0.92rem;
+            display: flex;
+            gap: 12px;
+            color: #555555;
+        }
+        .version-list .ver {
+            font-weight: 700;
+            color: #111111;
+            min-width: 60px;
+        }
+        .version-list .status {
+            font-size: 0.82rem;
+            min-width: 48px;
+            color: #888888;
+            font-weight: 400;
+            align-self: baseline;
+        }
+        .version-list li .status.done { color: #111111; font-weight: 700; }
+        .version-list .desc {
+            color: #555555;
+        }
+        .version-list .desc a {
+            color: #111111;
+            text-decoration: none;
+            border-bottom: 1px solid #cccccc;
+        }
+        .version-list .desc a:hover {
+            border-bottom-color: #111111;
+        }
+
+        /* CTA */
+        .cta {
+            padding: 32px 0;
+            text-align: center;
+            border-top: 1px solid #eeeeee;
+            border-bottom: 1px solid #eeeeee;
+            margin-bottom: 32px;
+        }
+        .cta p {
+            font-size: 1rem;
+            color: #555555;
+            margin-bottom: 16px;
+        }
+        .cta a {
+            display: inline-block;
+            padding: 10px 24px;
+            background: #111111;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            margin: 0 4px;
+        }
+        .cta a.secondary {
+            background: #ffffff;
+            color: #111111;
+            border: 1px solid #111111;
+        }
+
+        /* Footer */
+        .footer {
+            font-size: 0.85rem;
+            color: #888888;
+            padding-top: 24px;
+            border-top: 1px solid #eeeeee;
+        }
+        .footer-links {
+            margin-bottom: 12px;
+        }
+        .footer-links a {
+            color: #555555;
+            text-decoration: none;
+            margin-right: 10px;
+        }
+        .footer-links a:hover {
+            color: #111111;
+        }
+
+        @media (max-width: 768px) {
+            body { padding: 0 16px 24px; }
+            .hero h1 { font-size: 1.6rem; }
+            .nav-links { gap: 12px; }
+            .nav-links a { font-size: 0.8rem; }
+            .nav-links .cn { display: none; }
+            .data-row { gap: 16px; }
+        }
+    </style>
+    <link rel="stylesheet" href="css/theme.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#1a1a1a">
+    <script src="js/theme.js"></script>
+    <script src="js/mobile-nav.js"></script>
+    <script src="js/breadcrumbs.js"></script>
+    <script src="js/back-to-top.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-inner">
+            <a href="index.html" class="logo"><span class="logo-icon">🎓</span>yunzhuan.icu</a>
+            <div class="nav-links">
+                <a href="schools/index.html">Schools<span class="cn">学校</span></a>
+                <a href="academics/index.html">Academics<span class="cn">学术</span></a>
+                <a href="essays/index.html">Essays<span class="cn">文书</span></a>
+                <a href="competitions/index.html">Competitions<span class="cn">竞赛</span></a>
+                <a href="dashboard.html">Dashboard<span class="cn">仪表盘</span></a>
+                <a href="learning-path.html">Path<span class="cn">路径</span></a>
+                <a href="app-tracker.html">Tracker<span class="cn">跟踪</span></a>
+                <a href="search.html">Search<span class="cn">搜索</span></a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <h1>全球留学一站式导航</h1>
+        <p class="subtitle">From choosing your major to submitting your application, worldwide</p>
+        <p class="subtitle-cn">专业 · 学校 · 标化 · 文书 · 竞赛 · 工具 · 覆盖美/英/加/澳/港/新</p>
+        <div class="search-box">
+            <input type="text" id="homeSearch" placeholder="Search majors, schools, tools..." autocomplete="off">
+        </div>
+    </section>
+
+    <div class="data-row">
+        <span><span class="num">56</span> Majors</span>
+        <span><span class="num">40+</span> Schools</span>
+        <span><span class="num">15+</span> Tools</span>
+        <span><span class="num">36</span> Competitions</span>
+        <span><span class="num">700+</span> Pages</span>
+    </div>
+
+    <div class="features">
+        <h2>Features</h2>
+        <div class="feature-cols">
+            <div class="feature-block">
+                <h3>Majors</h3>
+                <p>56 majors across 8 categories, with curriculum, career outlook, and salary data.</p>
+                <ul>
+                    <li><a href="computer/cs.html">Computer Science</a> <span class="pipe">|</span> <a href="business/finance.html">Finance</a></li>
+                    <li><a href="engineering/mechanical.html">Mechanical Engineering</a> <span class="pipe">|</span> <a href="social/economics.html">Economics</a></li>
+                    <li><a href="major-quiz.html">Major Quiz</a> <span class="pipe">|</span> <a href="salary.html">Salary Outlook</a></li>
+                </ul>
+            </div>
+            <div class="feature-block">
+                <h3>Schools</h3>
+                <p>40+ universities in 6 countries with filtering, comparison, and recommendation.</p>
+                <ul>
+                    <li><a href="schools/index.html">All Schools</a> <span class="pipe">|</span> <a href="schools/compare.html">Compare</a></li>
+                    <li><a href="schools/matcher.html">School Matcher</a></li>
+                    <li><a href="schools/us/harvard.html">Harvard</a> <span class="pipe">|</span> <a href="schools/us/mit.html">MIT</a> <span class="pipe">|</span> <a href="schools/uk/oxford.html">Oxford</a></li>
+                </ul>
+            </div>
+            <div class="feature-block">
+                <h3>Academics</h3>
+                <p>IB, A-Level, IGCSE, AP, SAT, ACT, TOEFL, IELTS — by student path, not by category.</p>
+                <ul>
+                    <li><a href="academics/igcse.html">IGCSE</a> <span class="pipe">|</span> <a href="academics/ib.html">IB</a> <span class="pipe">|</span> <a href="academics/alevel.html">A-Level</a></li>
+                    <li><a href="academics/sat.html">SAT</a> <span class="pipe">|</span> <a href="academics/act.html">ACT</a> <span class="pipe">|</span> <a href="academics/ap.html">AP</a></li>
+                    <li><a href="academics/toefl.html">TOEFL</a> <span class="pipe">|</span> <a href="academics/ielts.html">IELTS</a></li>
+                </ul>
+            </div>
+            <div class="feature-block">
+                <h3>Competitions</h3>
+                <p>36 competitions across 8 categories with difficulty and prestige ratings.</p>
+                <ul>
+                    <li><a href="competitions/index.html">All Competitions</a></li>
+                    <li><a href="competitions/math.html">Math</a> <span class="pipe">|</span> <a href="competitions/cs.html">CS</a> <span class="pipe">|</span> <a href="competitions/business.html">Business</a></li>
+                    <li><a href="competitions/calendar.html">Competition Calendar</a></li>
+                </ul>
+            </div>
+            <div class="feature-block">
+                <h3>Global Study</h3>
+                <p>Guides, timelines, costs, and scholarships for 6 countries.</p>
+                <ul>
+                    <li><a href="uk-ucas-guide.html">UK</a> <span class="pipe">|</span> <a href="canada-guide.html">Canada</a> <span class="pipe">|</span> <a href="australia-guide.html">Australia</a></li>
+                    <li><a href="hongkong-guide.html">Hong Kong</a> <span class="pipe">|</span> <a href="singapore-guide.html">Singapore</a></li>
+                    <li><a href="intl-timeline.html">Timeline</a> <span class="pipe">|</span> <a href="language-tests.html">Languages</a></li>
+                    <li><a href="cost-comparison.html">Cost Compare</a> <span class="pipe">|</span> <a href="intl-scholarships.html">Scholarships</a></li>
+                    <li><a href="simulate-school.html">全流程模拟 →</a></li>
+                </ul>
+            </div>
+            <div class="feature-block">
+                <h3>Application Tools</h3>
+                <p>End-to-end toolchain from school selection to submission.</p>
+                <ul>
+                    <li><a href="dashboard.html">Dashboard</a> <span class="pipe">|</span> <a href="learning-path.html">Learning Path</a></li>
+                    <li><a href="app-tracker.html">App Tracker</a> <span class="pipe">|</span> <a href="tests/application-checklist.html">Checklist</a></li>
+                    <li><a href="tests/score-converter.html">Score Converter</a> <span class="pipe">|</span> <a href="tests/gpa-calculator.html">GPA Calculator</a></li>
+                    <li><a href="application-timeline.html">Timeline</a> <span class="pipe">|</span> <a href="cost-calculator.html">Cost Calculator</a></li>
+                    <li><a href="ai-assistant.html">AI Assistant</a></li>
+                </ul>
+            </div>
+            <div class="feature-block">
+                <h3>Resources</h3>
+                <p>Essay examples, interview questions, scholarships, and guides.</p>
+                <ul>
+                    <li><a href="essays/index.html">Essays</a> <span class="pipe">|</span> <a href="interviews/index.html">Interviews</a></li>
+                    <li><a href="scholarships/index.html">Scholarships</a> <span class="pipe">|</span> <a href="guides/index.html">Guides</a></li>
+                    <li><a href="glossary.html">Glossary</a> <span class="pipe">|</span> <a href="faq.html">FAQ</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="version-section">
+        <h2>Version Progress</h2>
+        <ul class="version-list">
+            <li><span class="ver">v20.6</span><span class="status done">Done</span><span class="desc">首页产品化改造 — <a href="roadmap.html">Roadmap</a></span></li>
+            <li><span class="ver">v21.0</span><span class="status active">Demo</span><span class="desc">个人中心 + <a href="learning-path.html">学习路径</a> + <a href="app-tracker.html">申请Tracker</a> + <a href="deadline-reminder.html">提醒</a> + <a href="favorites-enhanced.html">收藏</a></span></li>
+            <li><span class="ver">v22.0</span><span class="status planned">Demo</span><span class="desc"><a href="community.html">社区问答</a> + UGC + <a href="comments-demo.html">评论系统</a></span></li>
+            <li><span class="ver">v22.5</span><span class="status planned">Demo</span><span class="desc"><a href="competition-teams.html">竞赛组队</a> + <a href="recommendations.html">个性化推荐</a></span></li>
+            <li><span class="ver">v23.0</span><span class="status idea">Demo</span><span class="desc"><a href="ai-school-match.html">AI选校</a> + <a href="ai-essay-polish.html">AI文书润色</a></span></li>
+            <li><span class="ver">v24.0</span><span class="status idea">Demo</span><span class="desc"><a href="mobile-app.html">移动端</a> + <a href="agency-saas.html">中介SaaS</a></span></li>
+            <li><span class="ver">v25.0</span><span class="status idea">Demo</span><span class="desc"><a href="collab.html">协作架构</a> + 核心成员小范围测试平台</span></li>
+            <li><span class="ver">v26.0</span><span class="status idea">Demo</span><span class="desc"><a href="simulate-school.html">全流程模拟</a> + 个性化档案 + 学校专属模拟页</span></li>
+        </ul>
+        <p style="font-size:0.85rem;color:#888888;margin-top:16px;">
+            All versions use mock data — 技术细节见 <a href="roadmap.html">Product Roadmap</a>
+        </p>
+    </div>
+
+    <div class="cta">
+        <p>Ready to explore your application journey?</p>
+        <a href="simulate/index.html">Start Full-Simulation</a>
+        <a href="search.html" class="secondary">Search Schools</a>
+    </div>
+
+    <div class="footer">
+        <div class="footer-links">
+            <a href="rankings.html">Rankings</a>
+            <a href="prerequisite/">Prerequisites</a>
+            <a href="scholarships/index.html">Scholarships</a>
+            <a href="contact.html">Contact</a>
+            <a href="snapshots/index.html">Snapshots</a>
+            <a href="roadmap.html">Roadmap</a>
+        </div>
+        <p>© 2026 yunzhuan.icu · v21.0 Demo</p>
+    </div>
+<script>
+document.getElementById('homeSearch').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' && this.value.trim()) {
+        window.location.href = 'search.html?q=' + encodeURIComponent(this.value.trim());
+    }
+});
+</script>
+</body>
+</html>
