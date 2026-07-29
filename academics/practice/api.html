@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>API 文档 · 开放接口 | Practice</title>
+<link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 860px; margin: 0 auto; padding: 24px 16px 48px; background: #ffffff; color: #111111; line-height: 1.7; font-size: 15px; }
+  a { color: #111111; text-decoration: none; border-bottom: 1px solid #cccccc; }
+  a:hover { border-bottom-color: #111111; }
+  .nav { padding-bottom: 12px; margin-bottom: 20px; border-bottom: 1px solid #e0e0e0; font-size: 0.88rem; color: #888888; }
+  .nav a { color: #111111; }
+  .nav .sep { color: #cccccc; margin: 0 6px; }
+  h1 { font-size: 1.6rem; margin-bottom: 4px; }
+  h2 { font-size: 1.1rem; font-weight: 700; margin: 28px 0 8px; padding-bottom: 6px; border-bottom: 1px solid #111111; }
+  h3 { font-size: 1rem; font-weight: 700; margin: 18px 0 6px; }
+  p { margin-bottom: 8px; }
+  .muted { color: #888888; font-size: 0.85rem; }
+  .subtitle { color: #555555; font-size: 0.95rem; margin-bottom: 20px; }
+  .card { border: 1px solid #e0e0e0; padding: 14px 16px; background: #ffffff; margin: 12px 0; }
+  .card h3 { margin-top: 0; }
+  pre { background: #f5f5f5; border: 1px solid #e0e0e0; padding: 12px 14px; overflow-x: auto; font-family: 'Courier New', Consolas, monospace; font-size: 0.82rem; line-height: 1.6; white-space: pre; }
+  code { background: #f5f5f5; padding: 1px 5px; font-family: 'Courier New', Consolas, monospace; font-size: 0.85rem; }
+  pre code { background: none; padding: 0; }
+  .badge { display: inline-block; border: 1px solid #111; padding: 0 6px; font-size: 0.7rem; font-weight: 700; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.82rem; margin: 8px 0 16px; }
+  th, td { border: 1px solid #e0e0e0; padding: 6px 10px; text-align: left; vertical-align: top; }
+  th { background: #f5f5f5; font-weight: 700; }
+  .api-group { margin: 20px 0; }
+  .api-item { border: 1px solid #e0e0e0; padding: 12px 16px; margin: 10px 0; }
+  .api-signature { font-family: 'Courier New', Consolas, monospace; font-weight: 700; color: #111; font-size: 0.88rem; }
+  .api-desc { color: #555; font-size: 0.85rem; margin: 4px 0 8px; }
+  .api-example { margin-top: 8px; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 16px 0; }
+  @media (max-width: 768px) { .grid { grid-template-columns: 1fr; } }
+  .toc { border: 1px solid #e0e0e0; padding: 14px 18px; background: #fafafa; margin: 16px 0; }
+  .toc h3 { margin-top: 0; }
+  .toc ol { margin-left: 20px; }
+  .toc li { padding: 2px 0; }
+  .toc a { font-size: 0.88rem; }
+  .v-info { border: 1px dashed #888; padding: 8px 12px; margin: 12px 0; font-size: 0.82rem; color: #555; }
+  .mcp-box { border: 2px solid #111; padding: 16px; margin: 16px 0; background: #fafafa; }
+  .mcp-box h3 { margin-top: 0; }
+  .footer { margin-top: 36px; padding-top: 16px; border-top: 1px solid #e0e0e0; color: #888888; font-size: 0.82rem; }
+  .anchor { scroll-margin-top: 20px; }
+</style>
+</head>
+<body>
+
+<div class="nav">
+  <a href="../../index.html">Home</a> <span class="sep">/</span>
+  <a href="../index.html">Academics</a> <span class="sep">/</span>
+  <a href="index.html">Practice</a> <span class="sep">/</span>
+  API 文档
+</div>
+
+<h1>API 开放文档 <span class="badge">v37</span></h1>
+<p class="subtitle">所有 Practice 模块对外暴露的 <code>window.*</code> API 接口，可直接在浏览器控制台或第三方应用中调用。</p>
+
+<div class="toc">
+  <h3>目录</h3>
+  <ol>
+    <li><a href="#api-syllabus">SYLLABUS_DATA · 考纲数据层</a></li>
+    <li><a href="#api-practice">YZPractice · 练习引擎</a></li>
+    <li><a href="#api-ai">AITutor · AI 辅导</a></li>
+    <li><a href="#api-streak">Streak · 学习连续打卡</a></li>
+    <li><a href="#api-srs">SRS · 间隔重复记忆</a></li>
+    <li><a href="#api-writing">WritingGrader · 写作评分</a></li>
+    <li><a href="#api-vocab">Vocab · 词汇学习</a></li>
+    <li><a href="#api-notes">Notes · 学习笔记</a></li>
+    <li><a href="#api-collab">Collab · 小组协作</a></li>
+    <li><a href="#api-mcp">MCP 集成说明</a></li>
+  </ol>
+</div>
+
+<div class="v-info">
+  <strong>加载方式</strong> · 在 Practice 相关页面底部均已加载对应 JS 文件。也可在任意页面手动引入：
+  <pre><code>&lt;script src="/js/syllabus-data.js"&gt;&lt;/script&gt;
+&lt;script src="/js/practice-engine.js"&gt;&lt;/script&gt;
+&lt;script src="/js/collab.js"&gt;&lt;/script&gt;</code></pre>
+</div>
+
+<!-- SYLLABUS_DATA -->
+<div class="api-group anchor" id="api-syllabus">
+  <h2>1. SYLLABUS_DATA · 考纲数据层</h2>
+  <p class="muted">来源：<code>js/syllabus-data.js</code> · 版本 v13 · 8 科结构化考纲数据</p>
+
+  <div class="api-item">
+    <div class="api-signature">SYLLABUS_DATA.getSubject(subjectKey)</div>
+    <div class="api-desc">获取整科考纲数据。subjectKey: sat / act / ap / ib / alevel / toefl / ielts / igcse</div>
+    <div class="api-example">
+      <pre><code>// 获取 SAT 考纲
+var sat = SYLLABUS_DATA.getSubject('sat');
+console.log(sat.name, sat.papers.length);
+// => "SAT 2"</code></pre>
+    </div>
+  </div>
+
+  <div class="api-item">
+    <div class="api-signature">SYLLABUS_DATA.getTopic(subjectKey, topicCode)</div>
+    <div class="api-desc">按 topic-code 获取单个 topic 详情，含 name / weight / prereq / questionIds</div>
+    <div class="api-example">
+      <pre><code>var topic = SYLLABUS_DATA.getTopic('sat', 'M-Alg-1a');
+console.log(topic.name); // => "Linear equations, inequalities & systems"
+console.log(topic.weight); // => "8.75%"</code></pre>
+    </div>
+  </div>
+
+  <div class="api-item">
+    <div class="api-signature">SYLLABUS_DATA.getAllTopicCodes(subjectKey)</div>
+    <div class="api-desc">获取某科目所有 topic-code 列表</div>
+    <div class="api-example">
+      <pre><code>var codes = SYLLABUS_DATA.getAllTopicCodes('ap');
+console.log(codes.length); // => AP 全部 topic 数量</code></pre>
+    </div>
+  </div>
+
+  <div class="api-item">
+    <div class="api-signature">SYLLABUS_DATA.allocateQuestionsByWeight(subjectKey, totalQuestions)</div>
+    <div class="api-desc">按 Topic 权重分配指定数量的题目，返回 topicCode → questionCount 映射。用于 Mock Test 组卷。</div>
+    <div class="api-example">
+      <pre><code>// SAT 120 题按权重分配
+var alloc = SYLLABUS_DATA.allocateQuestionsByWeight('sat', 120);
+console.log(alloc['M-Alg-1a']); // => 约 11 题 (8.75% × 120)</code></pre>
+    </div>
+  </div>
+</div>
+
+<!-- YZPractice -->
+<div class="api-group anchor" id="api-practice">
+  <h2>2. YZPractice · 练习引擎</h2>
+  <p class="muted">来源：<code>js/practice-engine.js</code> · 版本 v6 · 答题 + 错题本 + localStorage 持久化</p>
+
+  <div class="api-item">
+    <div class="api-signature">YZPractice.loadData()</div>
+    <div class="api-desc">加载全部练习数据（含所有科目的答题记录）</div>
+    <div class="api-example">
+      <pre><code>var data = YZPractice.loadData();
+console.log(Object.keys(data.records)); // => ["sat", "act", "ap", ...]</code></pre>
+    </div>
+  </div>
+
+  <div class="api-item">
+    <div class="api-signature">YZPractice.saveData(data)</div>
+    <div class="api-desc">保存练习数据到 localStorage</div>
+    <div class="api-example">
+      <pre><code>var data = YZPractice.loadData();
+data.records.sat['q-1'].correct = true;
+YZPractice.saveData(data);</code></pre>
+    </div>
+  </div>
+
+  <div class="api-item">
+    <div class="api-signature">YZPractice.getRecords()</div>
+    <div class="api-desc">获取当前科目（data-subject 属性）的答题记录</div>
+    <div class="api-example">
+      <pre><code>var satRecs = YZPractice.getRecords();
+var total = Object.keys(satRecs).length;
+var correct = Object.values(satRecs).filter(function(r){ return r.correct; }).length;
+console.log('SAT:', correct + '/' + total);</code></pre>
+    </div>
+  </div>
+
+  <div class="api-item">
+    <div class="api-signature">YZPractice.clearSubject()</div>
+    <div class="api-desc">清空当前科目全部答题记录（慎用）</div>
+    <div class="api-example">
+      <pre><code>YZPractice.clearSubject(); // 清空当前科目记录</code></pre>
+    </div>
+  </div>
+</div>
+
+<!-- AITutor -->
+<div class="api-group anchor" id="api-ai">
+  <h2>3. AITutor · AI 辅导</h2>
+  <p class="muted">来源：<code>api/ai-chat.js</code> · 诊断 + 解析 + 自适应建议</p>
+
+  <div class="api-item">
+    <div class="api-signature">AITutor.diagnose(subjectKey, records)</div>
+    <div class="api-desc">诊断学生薄弱环节，返回需要重点复习的 topic 列表</div>
+    <div class="api-example">
+      <pre><code>var recs = YZPractice.getRecords();
+var diag = AITutor.diagnose('sat', recs);
+console.log(diag.weakTopics); // => [{code:'M-Alg-1a', rate: 0.4}, ...]
+console.log(diag.suggestions); // => ["建议复习线性方程组..."]</code></pre>
+    </div>
+  </div>
+
+  <div class="api-item">
+    <div class="api-signature">AITutor.explain(questionId, subjectKey)</div>
+    <div class="api-desc">获取指定题目的 AI 解析</div>
+    <div class="api-example">
+      <pre><code>var explanation = AITutor.explain('q-5', 'sat');
+console.log(explanation.answer);  // => 正确答案
+console.log(explanation.solution); // => 解题步骤</code></pre>
+    </div>
+  </div>
+</div>
+
+<!-- Streak -->
+<div class="api-group anchor" id="api-streak">
+  <h2>4. Streak · 学习连续打卡</h2>
+  <p class="muted">学习连续天数 + 徽章系统</p>
+
+  <div class="api-item">
+    <div class="api-signature">Streak.init(userId)</div>
+    <div class="api-desc">初始化/恢复用户的打卡记录</div>
+    <div class="api-example">
+      <pre><code>Streak.init('student001');</code></pre>
+    </div>
+  </div>
+
+  <div class="api-item">
+    <div class="api-signature">Streak.todayCount()</div>
+    <div class="api-desc">获取今日已答题数</div>
+    <div class="api-example">
+      <pre><code>var done = Streak.todayCount();
+if (done < 20) console.log('还差', 20 - done, '题达成今日目标');</code></pre>
+    </div>
+  </div>
+
+  <div class="api-item">
+    <div class="api-signature">Streak.getBadges()</div>
+    <div class="api-desc">获取已获得的徽章列表</div>
+    <div class="api-example">
+      <pre><code>var badges = Streak.getBadges();
+badges.forEach(function(b) {
+  console.log(b.name, '·', b.description);
+});</code></pre>
+    </div>
+  </div>
+</div>
+
+<!-- SRS -->
+<div class="api-group anchor" id="api-srs">
+  <h2>5. SRS · 间隔重复记忆</h2>
+  <p class="muted">基于 SM-2 算法的错题间隔重复调度</p>
+
+  <div class="api-item">
+    <div class="api-signature">SRS.init()</div>
+    <div class="api-desc">初始化 SRS 系统</div>
+    <div class="api-example">
+      <pre><code>SRS.init();</code></pre>
+    </div>
+  </div>
+
+  <div class="api-item">
+    <div class="api-signature">SRS.getDueQuestions(subjectKey)</div>
+    <div class="api-desc">获取当前到期需要复习的题目列表</div>
+    <div class="api-example">
+      <pre><code>var due = SRS.getDueQuestions('sat');
+console.log('需要复习:', due.length, '题');
+due.forEach(function(q) {
+  console.log(q.id, q.topic);
+});</code></pre>
+    </div>
+  </div>
+</div>
+
+<!-- WritingGrader -->
+<div class="api-group anchor" id="api-writing">
+  <h2>6. WritingGrader · 写作评分</h2>
+  <p class="muted">TOEFL/IELTS/AP 主观题自动评分</p>
+
+  <div class="api-item">
+    <div class="api-signature">WritingGrader.grade(text, type)</div>
+    <div class="api-desc">评分学生写作。type: 'toefl_integrated' / 'ielts_task2' / 'ap_frq' 等</div>
+    <div class="api-example">
+      <pre><code>var result = WritingGrader.grade(
+  'In today's society, education is important because...',
+  'toefl_integrated'
+);
+console.log('得分:', result.score);
+console.log('反馈:', result.feedback);
+console.log('改进建议:', result.suggestions);</code></pre>
+    </div>
+  </div>
+</div>
+
+<!-- Vocab -->
+<div class="api-group anchor" id="api-vocab">
+  <h2>7. Vocab · 词汇学习</h2>
+  <p class="muted">SAT/TOEFL/IELTS 核心词汇</p>
+
+  <div class="api-item">
+    <div class="api-signature">Vocab.loadList(level)</div>
+    <div class="api-desc">加载指定级别词汇表。level: 'sat' / 'toefl' / 'ielts'</div>
+    <div class="api-example">
+      <pre><code>var words = Vocab.loadList('sat');
+console.log('SAT 核心词汇:', words.length, '个');
+console.log(words[0]); // => {word:'abandon', pos:'v.', meaning:'放弃'}</code></pre>
+    </div>
+  </div>
+
+  <div class="api-item">
+    <div class="api-signature">Vocab.startStudy(level, count)</div>
+    <div class="api-desc">开始词汇学习会话，返回指定数量的单词卡片</div>
+    <div class="api-example">
+      <pre><code>var cards = Vocab.startStudy('toefl', 20);
+cards.forEach(function(c) {
+  console.log(c.word, c.meaning);
+});</code></pre>
+    </div>
+  </div>
+</div>
+
+<!-- Notes -->
+<div class="api-group anchor" id="api-notes">
+  <h2>8. Notes · 学习笔记</h2>
+  <p class="muted">针对题目/Topic的笔记系统</p>
+
+  <div class="api-item">
+    <div class="api-signature">Notes.addNote(target, content)</div>
+    <div class="api-desc">添加笔记。target 可以是题目 ID 或 topic-code</div>
+    <div class="api-example">
+      <pre><code>Notes.addNote('q-5', '这道题考的是线性方程组，注意消元法的步骤。');
+Notes.addNote('M-Alg-1a', '核心公式：y = kx + b');</code></pre>
+    </div>
+  </div>
+
+  <div class="api-item">
+    <div class="api-signature">Notes.getNotes(target)</div>
+    <div class="api-desc">获取指定目标的所有笔记</div>
+    <div class="api-example">
+      <pre><code>var notes = Notes.getNotes('M-Alg-1a');
+notes.forEach(function(n) {
+  console.log(n.content, '·', new Date(n.ts).toLocaleDateString());
+});</code></pre>
+    </div>
+  </div>
+
+  <div class="api-item">
+    <div class="api-signature">Notes.export(format)</div>
+    <div class="api-desc">导出全部笔记。format: 'json' / 'markdown' / 'txt'</div>
+    <div class="api-example">
+      <pre><code>var md = Notes.export('markdown');
+// 下载为 .md 文件
+var blob = new Blob([md], {type:'text/markdown'});
+var url = URL.createObjectURL(blob);
+window.open(url);</code></pre>
+    </div>
+  </div>
+</div>
+
+<!-- Collab -->
+<div class="api-group anchor" id="api-collab">
+  <h2>9. Collab · 小组协作</h2>
+  <p class="muted">来源：<code>js/collab.js</code> · localStorage 模拟多人协作</p>
+
+  <div class="api-item">
+    <div class="api-signature">Collab.createRoom(roomName, nickname)</div>
+    <div class="api-desc">创建房间，返回房间码</div>
+    <div class="api-example">
+      <pre><code>var result = Collab.createRoom('SAT 冲刺小队', '小明');
+console.log('房间码:', result.code); // => "AB3X9K"</code></pre>
+    </div>
+  </div>
+
+  <div class="api-item">
+    <div class="api-signature">Collab.joinRoom(code, nickname)</div>
+    <div class="api-desc">加入已有房间</div>
+    <div class="api-example">
+      <pre><code>var room = Collab.joinRoom('AB3X9K', '小红');
+if (room) console.log('已加入:', room.name);
+else console.log('房间码无效');</code></pre>
+    </div>
+  </div>
+
+  <div class="api-item">
+    <div class="api-signature">Collab.sendMsg(code, nickname, text)</div>
+    <div class="api-desc">发送聊天消息</div>
+    <div class="api-example">
+      <pre><code>Collab.sendMsg('AB3X9K', '小明', '大家今天刷了多少题？');</code></pre>
+    </div>
+  </div>
+
+  <div class="api-item">
+    <div class="api-signature">Collab.getLeaderboard(code)</div>
+    <div class="api-desc">获取房间内排行榜</div>
+    <div class="api-example">
+      <pre><code>var lb = Collab.getLeaderboard('AB3X9K');
+lb.forEach(function(u, i) {
+  console.log(i+1, u.name, u.correct+'/'+u.total, u.rate+'%');
+});</code></pre>
+    </div>
+  </div>
+</div>
+
+<!-- MCP Integration -->
+<div class="api-group anchor" id="api-mcp">
+  <h2>10. MCP 集成说明</h2>
+  <div class="mcp-box">
+    <h3>什么是 MCP</h3>
+    <p><strong>MCP（Model Context Protocol）</strong>是一种让 AI 助手能够调用外部工具/API 的协议。通过 MCP，你可以将 Practice 的所有 API 暴露给 AI 助手（如 TRAE、Claude Desktop 等），让 AI 能够直接操作学习系统。</p>
+
+    <h3>集成步骤</h3>
+    <ol>
+      <li><strong>注册 API 端点</strong>：将 <code>window.SYLLABUS_DATA</code>、<code>window.YZPractice</code> 等对象的方法映射为 MCP 工具。</li>
+      <li><strong>配置权限</strong>：决定哪些 API 允许 AI 调用（只读 vs 读写）。建议默认只读。</li>
+      <li><strong>设置触发规则</strong>：例如当 AI 被问到"学生 SAT 正确率"时，自动调用 <code>YZPractice.getRecords()</code>。</li>
+      <li><strong>添加自然语言描述</strong>：为每个工具添加清晰的描述，让 AI 理解何时该使用。</li>
+    </ol>
+
+    <h3>MCP 工具配置示例</h3>
+    <pre><code>{
+  "mcpServers": {
+    "practice": {
+      "command": "node",
+      "args": ["mcp-practice-server.js"],
+      "env": {
+        "PRACTICE_DATA_KEY": "yz_practice_data"
+      }
+    }
+  }
+}
+
+// AI 调用示例（自然语言 → API）：
+// 用户："帮我看看学生 sat_001 的 SAT 表现如何？"
+// AI 自动调用：
+//   1. YZPractice.loadData() → 获取全部数据
+//   2. SYLLABUS_DATA.getSubject('sat') → 获取 SAT 考纲结构
+//   3. 计算正确率并生成报告</code></pre>
+
+    <h3>安全建议</h3>
+    <ul>
+      <li>默认使用只读模式（readOnly: true），防止 AI 误修改数据</li>
+      <li>限制 AI 可访问的 API 子集，仅暴露必要接口</li>
+      <li>添加操作日志审计，记录每次 AI 调用</li>
+      <li>生产环境建议通过后端代理转发 API 调用</li>
+    </ul>
+  </div>
+</div>
+
+<div class="footer">
+  <a href="../../index.html">Home</a> <span class="sep" style="color:#ccc;margin:0 6px;">·</span>
+  <a href="index.html">Practice</a> <span class="sep" style="color:#ccc;margin:0 6px;">·</span>
+  <a href="collab.html">小组协作</a> <span class="sep" style="color:#ccc;margin:0 6px;">·</span>
+  <a href="parent.html">家长模式</a> <span class="sep" style="color:#ccc;margin:0 6px;">·</span>
+  <a href="javascript:window.scrollTo(0,0)">Back to top</a>
+</div>
+
+</body>
+</html>

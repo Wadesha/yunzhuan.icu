@@ -5,6 +5,11 @@
 (function() {
   'use strict';
 
+  // v34: Dynamically load notes.js if not already loaded
+  if (!window.Notes) {
+    document.write('<script src="../../js/notes.js"><\/script>');
+  }
+
   var STORAGE_KEY = 'yz_practice_data';
   var SUBJECT = document.body.getAttribute('data-subject') || 'unknown';
 
@@ -54,6 +59,41 @@
     return params.get('topic') || '';
   }
 
+  // --- v26: SRS Due Filter from URL ?srs=due ---
+  function getSrsFromUrl() {
+    var params = new URLSearchParams(window.location.search);
+    return params.get('srs') || '';
+  }
+
+  function initSrsFilter(questions) {
+    var srsParam = getSrsFromUrl();
+    if (srsParam !== 'due') return null;
+    if (!window.SRS || typeof window.SRS.getDueQuestions !== 'function') return null;
+
+    var dueList = window.SRS.getDueQuestions(SUBJECT);
+    var qidSet = {};
+    dueList.forEach(function(d) { qidSet[d.qid] = true; });
+
+    var matched = 0;
+    questions.forEach(function(q) {
+      var qid = q.getAttribute('data-qid');
+      if (qid && qidSet[qid]) {
+        q.style.display = '';
+        matched++;
+      } else {
+        q.style.display = 'none';
+      }
+    });
+
+    var banner = document.createElement('div');
+    banner.style.cssText = 'border:1px solid #111;padding:10px 14px;margin:12px 0;font-size:0.85rem;background:#fffbe6;';
+    banner.innerHTML = '<strong>SRS 复习模式:</strong> 仅显示 ' + matched + ' 道到期复习题 · <a href="practice.html" style="border-bottom:1px solid #ccc;">退出复习模式</a>';
+    var h2 = document.querySelector('h2');
+    if (h2) h2.parentNode.insertBefore(banner, h2.nextSibling);
+
+    return { srs: 'due', matched: matched };
+  }
+
   function extractTopicCode(qNumEl) {
     if (!qNumEl) return '';
     var text = qNumEl.textContent;
@@ -99,7 +139,17 @@
   // --- v6 B2: Floating Navigation Bar ---
   function initFloatingNav(questions, updateAllStats) {
     var navDiv = document.createElement('div');
+    navDiv.className = 'yz-floating-nav';
     navDiv.style.cssText = 'position:fixed;right:16px;bottom:16px;z-index:9999;background:#fff;border:1px solid #111;padding:8px 10px;font-size:0.8rem;display:flex;align-items:center;gap:6px;flex-wrap:wrap;max-width:340px;box-shadow:0 2px 8px rgba(0,0,0,0.1);';
+
+    // Inject responsive CSS for floating nav
+    var respStyle = document.createElement('style');
+    respStyle.textContent = '@media (max-width:768px){' +
+      '.yz-floating-nav{left:8px;right:8px;bottom:auto;top:8px;max-width:none;width:auto;}' +
+      '.yz-floating-nav button{font-size:0.72rem;padding:2px 6px;}' +
+      '.yz-floating-nav input[type=text]{width:30px;}' +
+      '}';
+    document.head.appendChild(respStyle);
 
     // Prev button
     var prevBtn = document.createElement('button');
@@ -263,6 +313,9 @@
     // v14: Apply topic filter first
     var filterResult = initTopicFilter(questions);
 
+    // v26: Apply SRS due filter (after topic filter, may override)
+    var srsResult = initSrsFilter(questions);
+
     questions.forEach(function(q, idx) {
       var qid = q.getAttribute('data-qid') || ('q' + (idx + 1));
       q.setAttribute('data-qid', qid); // ensure qid is set for later lookups
@@ -312,6 +365,20 @@
           markAnswer(li, isCorrect);
           recordAnswer(qid, letter, isCorrect, topic);
 
+          // v25: Streak - trigger daily check-in on every answer
+          if (window.Streak && typeof window.Streak.todayCount === 'function') {
+            window.Streak.todayCount(1);
+          }
+
+          // v26: SRS - record correct/wrong for spaced repetition
+          if (window.SRS && typeof window.SRS.recordCorrect === 'function') {
+            if (isCorrect) {
+              window.SRS.recordCorrect(qid);
+            } else {
+              window.SRS.recordWrong(qid);
+            }
+          }
+
           // v6: update all stats counters after answer
           if (window._yzNavUpdater) window._yzNavUpdater();
           if (window._yzStatsUpdater) window._yzStatsUpdater();
@@ -330,12 +397,74 @@
         });
         q.appendChild(btn);
       }
+
+      // v34: Notes button
+      var notesBtn = document.createElement('button');
+      notesBtn.textContent = '📝 笔记';
+      notesBtn.style.cssText = 'display:inline-block;margin-top:8px;margin-right:6px;border:1px solid #555;background:#fff;color:#555;padding:3px 10px;font-size:0.78rem;cursor:pointer;font-family:inherit;';
+      notesBtn.addEventListener('click', function() {
+        if (!window.Notes) {
+          alert('笔记系统未加载');
+          return;
+        }
+        var existing = window.Notes.getNote(qid, SUBJECT);
+        var existingText = existing ? existing.text : '';
+        var text = prompt('添加/编辑笔记 (题目 ' + qid + '):', existingText);
+        if (text !== null && text.trim()) {
+          window.Notes.addNote(qid, text.trim(), SUBJECT);
+          notesBtn.textContent = '📝 已记录';
+          notesBtn.style.color = '#111';
+          notesBtn.style.borderColor = '#111';
+        }
+      });
+      q.appendChild(notesBtn);
+
+      // v34: Highlight button
+      var highlightBtn = document.createElement('button');
+      highlightBtn.textContent = '🖍 高亮';
+      highlightBtn.style.cssText = 'display:inline-block;margin-top:8px;border:1px solid #555;background:#fff;color:#555;padding:3px 10px;font-size:0.78rem;cursor:pointer;font-family:inherit;';
+      highlightBtn.addEventListener('click', function() {
+        if (!window.Notes) {
+          alert('笔记系统未加载');
+          return;
+        }
+        var qText = q.querySelector('.q-text');
+        var text = qText ? qText.textContent.trim() : '';
+        if (text) {
+          window.Notes.highlight(qid, text);
+          highlightBtn.textContent = '🖍 已高亮';
+          highlightBtn.style.color = '#111';
+          highlightBtn.style.borderColor = '#111';
+          if (qText) {
+            qText.style.backgroundColor = '#fffbe6';
+          }
+        }
+      });
+      q.appendChild(highlightBtn);
+
+      // Restore notes/highlights state
+      if (window.Notes) {
+        var existingNote = window.Notes.getNote(qid, SUBJECT);
+        if (existingNote) {
+          notesBtn.textContent = '📝 已记录';
+          notesBtn.style.color = '#111';
+          notesBtn.style.borderColor = '#111';
+        }
+        var existingHL = window.Notes.getHighlight(qid);
+        if (existingHL) {
+          highlightBtn.textContent = '🖍 已高亮';
+          highlightBtn.style.color = '#111';
+          highlightBtn.style.borderColor = '#111';
+          var qText = q.querySelector('.q-text');
+          if (qText) qText.style.backgroundColor = '#fffbe6';
+        }
+      }
     });
 
     // Stats bar + controls
     var stats = document.createElement('div');
     stats.style.cssText = 'border:1px solid #111;padding:10px 14px;margin:16px 0;font-size:0.85rem;';
-    var visibleCount = filterResult ? filterResult.matched : questions.length;
+    var visibleCount = filterResult ? filterResult.matched : (srsResult ? srsResult.matched : questions.length);
 
     function doUpdateStats() {
       updateStats(stats, visibleCount);

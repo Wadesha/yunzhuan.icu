@@ -106,7 +106,87 @@
   .profile-footer { border-top: 1px dashed #ccc; padding-top: 10px; font-size: 0.78rem; color: #888; }
   .mastery-hint { display: inline-block; margin-left: 6px; font-size: 0.68rem; padding: 1px 5px; border: 1px solid #888; color: #555; font-weight: 600; }
   .mastery-hint.target { border-color: #111; color: #111; }
+
+  /* v25 Streak */
+  .streak-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 12px 0; }
+  .streak-big { font-size: 2rem; font-weight: 700; text-align: center; }
+  .streak-big .unit { font-size: 0.85rem; color: #888; font-weight: 400; }
+  .badge-wall { display: flex; gap: 8px; flex-wrap: wrap; margin: 10px 0; }
+  .badge-item { border: 1px solid #111; padding: 6px 10px; font-size: 0.78rem; text-align: center; min-width: 80px; }
+  .badge-item .b-icon { font-size: 1.2rem; display: block; }
+  .badge-item.locked { opacity: 0.35; border-style: dashed; }
+
+  /* v26 SRS */
+  .srs-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 12px 0; }
+  .srs-action { display: inline-block; border: 1px solid #111; padding: 6px 14px; font-size: 0.85rem; font-weight: 700; cursor: pointer; text-decoration: none; color: #111; background: #fff; }
+  .srs-action:hover { background: #111; color: #fff; }
+
+  /* v27 Comparison */
+  .radar-wrap { display: flex; gap: 16px; align-items: flex-start; flex-wrap: wrap; }
+  .radar-svg { flex: 0 0 auto; }
+  .radar-legend { flex: 1; min-width: 200px; }
+  .radar-legend .dim { display: flex; justify-content: space-between; padding: 4px 0; font-size: 0.82rem; border-bottom: 1px dashed #e0e0e0; }
+  .compare-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; margin: 10px 0; }
+  .compare-table th, .compare-table td { border: 1px solid #e0e0e0; padding: 6px 10px; text-align: left; }
+  .compare-table th { background: #fafafa; }
+  .gap-pos { color: #1a7f37; font-weight: 700; }
+  .gap-neg { color: #b00020; font-weight: 700; }
+
+  /* v28 Sprint */
+  .sprint-controls { display: flex; gap: 16px; flex-wrap: wrap; margin: 12px 0; padding: 12px 14px; border: 1px solid #e0e0e0; background: #fafafa; }
+  .sprint-controls label { font-size: 0.85rem; color: #555; font-weight: 600; }
+  .sprint-controls input[type=text], .sprint-controls input[type=date] { padding: 6px 10px; border: 1px solid #ccc; font-size: 0.9rem; font-family: inherit; }
+  .countdown { display: flex; gap: 16px; justify-content: center; margin: 16px 0; flex-wrap: wrap; }
+  .countdown .cd-unit { text-align: center; border: 1px solid #111; padding: 12px 16px; min-width: 80px; }
+  .countdown .cd-num { font-size: 2rem; font-weight: 700; line-height: 1; }
+  .countdown .cd-label { font-size: 0.72rem; color: #888; margin-top: 4px; }
+  .sprint-breakdown { font-size: 0.85rem; line-height: 1.8; }
+  .sprint-breakdown table { margin: 8px 0; }
+  @media (max-width:768px) {
+    .streak-grid, .srs-stats { grid-template-columns: repeat(2, 1fr); }
+    .countdown .cd-unit { min-width: 64px; padding: 8px 10px; }
+    .countdown .cd-num { font-size: 1.4rem; }
+    .radar-wrap { flex-direction: column; }
+  }
+  .chart-container { border: 1px solid #e0e0e0; padding: 14px; margin: 12px 0; background: #fff; }
+  .chart-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 12px 0; }
+  @media (max-width: 768px) { .chart-row { grid-template-columns: 1fr; } }
+  @media (max-width: 768px) {
+    body { font-size: 14px; padding: 16px 10px 32px; }
+    table { font-size: 0.75rem; overflow-x: auto; display: block; }
+    .box, .box-dashed { padding: 8px 10px; }
+  }
+  .chart-box { border: 1px solid #e0e0e0; padding: 12px; background: #fff; }
+  .chart-box h3 { margin: 0 0 8px; font-size: 0.9rem; }
+  .chart-box canvas { max-height: 260px; }
+  .auth-box { border: 1px solid #111; padding: 14px 18px; margin: 12px 0; background: #fff; }
+  .auth-box h3 { margin-top: 0; }
+  .auth-form { display: grid; grid-template-columns: 1fr; gap: 8px; margin: 10px 0; }
+  .auth-form input { padding: 6px 10px; border: 1px solid #ccc; font-size: 0.88rem; }
+  .auth-form button { background: #111; color: #fff; border: none; padding: 7px 14px; font-size: 0.85rem; cursor: pointer; font-weight: 600; }
+  .auth-form button.secondary { background: #fff; color: #111; border: 1px solid #111; }
+  .auth-status { font-size: 0.85rem; color: #555; margin: 6px 0; }
+  .auth-status strong { color: #111; }
+  .leaderboard-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; margin: 10px 0; }
+  .leaderboard-table th, .leaderboard-table td { border: 1px solid #e0e0e0; padding: 8px 10px; text-align: left; }
+  .leaderboard-table th { background: #111; color: #fff; font-weight: 700; }
+  .leaderboard-table tr.you { background: #fafafa; font-weight: 700; }
+  .ai-report { border: 1px solid #111; padding: 14px 18px; margin: 12px 0; background: #fff; }
+  .ai-report h3 { margin-top: 0; }
+  .ai-report ul { margin: 8px 0; padding-left: 20px; }
+  .ai-report .ai-item { padding: 10px 0; border-bottom: 1px dashed #ccc; }
+  .ai-report .ai-item:last-child { border-bottom: none; }
+  .ai-report .ai-meta { color: #888; font-size: 0.8rem; margin-top: 4px; }
+  .ai-report .ai-explain-btn { background: #fff; border: 1px solid #111; padding: 3px 10px; font-size: 0.75rem; cursor: pointer; font-weight: 600; margin-top: 6px; }
+  .ai-report .ai-explain-btn:hover { background: #111; color: #fff; }
+  .ai-report .ai-explain-text { display: none; margin-top: 8px; padding: 10px; border: 1px dashed #888; font-size: 0.82rem; line-height: 1.6; color: #333; }
+  .ai-report .ai-explain-text.show { display: block; }
+  .btn-primary { background: #111; color: #fff; border: none; padding: 8px 16px; font-size: 0.85rem; cursor: pointer; font-weight: 700; margin: 6px 4px; }
+  .btn-primary:hover { background: #333; }
+  .btn-secondary { background: #fff; color: #111; border: 1px solid #111; padding: 8px 16px; font-size: 0.85rem; cursor: pointer; font-weight: 600; margin: 6px 4px; }
+  .btn-secondary:hover { background: #f0f0f0; }
 </style>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
 </head>
 <body data-subject="dashboard">
 
@@ -117,8 +197,8 @@
   Dashboard
 </div>
 
-<h1>Practice Dashboard <span class="v-badge">v15</span></h1>
-<p class="subtitle">v15 · 全科目数据分析 · 考纲覆盖率 · 知识点掌握度 · 自适应学习路径</p>
+<h1>Practice Dashboard <span class="v-badge">v23</span></h1>
+<p class="subtitle">v23 · v19 Chart.js可视化 · v20 云端账号 · v21 排行榜 · v22 AI诊断 · v23 AI讲解</p>
 
 <h2>总览</h2>
 <div class="data-toolbar" id="dataToolbar">
@@ -152,6 +232,39 @@
 <h2>Profile 联动（C3 新增）</h2>
 <div id="profileCard" class="profile-card">
   <p class="muted">AppData 未加载</p>
+</div>
+
+<h2>云端账号系统（v20）</h2>
+<div id="accountSection" class="auth-box">
+  <div id="accountLoggedOut">
+    <p class="auth-status">未登录 · 数据仅存储在本设备</p>
+    <div style="display:flex; gap:12px; flex-wrap:wrap;">
+      <div style="flex:1; min-width:200px;">
+        <strong>注册新账号</strong>
+        <div class="auth-form">
+          <input type="text" id="regUsername" placeholder="用户名" autocomplete="username">
+          <input type="password" id="regPassword" placeholder="密码（至少3位）" autocomplete="new-password">
+          <button id="btnRegister">注册</button>
+        </div>
+      </div>
+      <div style="flex:1; min-width:200px;">
+        <strong>登录已有账号</strong>
+        <div class="auth-form">
+          <input type="text" id="loginUsername" placeholder="用户名" autocomplete="username">
+          <input type="password" id="loginPassword" placeholder="密码" autocomplete="current-password">
+          <button id="btnLogin">登录</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="accountLoggedIn" style="display:none;">
+    <p class="auth-status">已登录：<strong id="currentUsername">—</strong></p>
+    <div style="display:flex; gap:10px; flex-wrap:wrap;">
+      <button class="btn-secondary" id="btnSync">☁ Sync 数据到云端</button>
+      <button class="btn-secondary" id="btnLogout">退出登录</button>
+    </div>
+    <p class="muted" style="margin-top:8px; font-size:0.78rem;">Sync 将本地 yz_practice_data 保存到云端；登录时自动恢复</p>
+  </div>
 </div>
 
 <h2>各科掌握度</h2>
@@ -206,19 +319,23 @@
 </table>
 
 <h2>错题趋势</h2>
-<div class="chart-desc">
-  折线图（文本模拟）· 横轴：日期 · 纵轴：题目数<br>
-  新错题：0 ── 0 ── 0<br>
-  已复习：0 ── 0 ── 0<br>
-  待复习：0 ── 0 ── 0
+<div class="chart-container">
+  <div class="chart-box">
+    <h3>错题趋势折线图（近7天）</h3>
+    <canvas id="trendChart"></canvas>
+  </div>
+  <div class="chart-row">
+    <div class="chart-box">
+      <h3>各科正确率柱状图</h3>
+      <canvas id="accBarChart"></canvas>
+    </div>
+    <div class="chart-box">
+      <h3>Topic 掌握度饼图</h3>
+      <canvas id="topicPieChart"></canvas>
+    </div>
+  </div>
 </div>
-<table id="errorTrendTable">
-  <tr><th>日期</th><th>新错题</th><th>已复习</th><th>待复习</th></tr>
-  <tr><td>2026-07-22</td><td>0</td><td>0</td><td>0</td></tr>
-  <tr><td>2026-07-25</td><td>0</td><td>0</td><td>0</td></tr>
-  <tr><td>2026-07-28</td><td>0</td><td>0</td><td>0</td></tr>
-</table>
-<div class="v-info">v9: 错题趋势将随答题数据自动更新</div>
+<div class="v-info">v19: Chart.js 实时可视化 · 错题趋势/正确率/掌握度自动渲染</div>
 
 <h2>薄弱知识点</h2>
 <p class="muted">尚未开始练习</p>
@@ -228,6 +345,10 @@
 <div class="box-dashed">
   v9: 答题 10+ 题后，系统将自动识别薄弱知识点并推荐复习
 </div>
+<div style="margin: 10px 0;">
+  <button class="btn-primary" id="btnAIReport">🤖 AI 诊断报告（v22）</button>
+</div>
+<div id="aiReportSection" class="ai-report" style="display:none;"></div>
 
 <h2>建议学习路径</h2>
 <p class="muted">基于掌握度生成的复习建议</p>
@@ -255,6 +376,35 @@
 <h2>自适应学习计划 (v15 新增)</h2>
 <p class="muted">基于考纲覆盖率和薄弱 Topic 自动生成 · 每日 3 个优先推荐</p>
 <div id="studySchedule">
+  <p class="muted">加载中...</p>
+</div>
+
+<h2>全局排行榜（v21）</h2>
+<div id="leaderboardSection">
+  <p class="muted">加载中...</p>
+</div>
+
+<h2>连续打卡 (v25 新增)</h2>
+<p class="muted">每日答题自动触发打卡 · 连续天数奖励徽章</p>
+<div id="streakSection">
+  <p class="muted">加载中...</p>
+</div>
+
+<h2>复习调度 (v26 新增)</h2>
+<p class="muted">基于 SM-2 简化算法的错题间隔重复调度 · 到期自动提醒</p>
+<div id="srsSection">
+  <p class="muted">加载中...</p>
+</div>
+
+<h2>对比分析 (v27 新增)</h2>
+<p class="muted">雷达图 5 维评估 · 各科与目标分差距分析</p>
+<div id="comparisonSection">
+  <p class="muted">加载中...</p>
+</div>
+
+<h2>冲刺看板 (v28 新增)</h2>
+<p class="muted">目标分拆解 · 倒计时 · 每日刷题量规划</p>
+<div id="sprintSection">
   <p class="muted">加载中...</p>
 </div>
 
@@ -1226,28 +1376,765 @@
     content.appendChild(ul);
   }
 
+  // --- v19: Chart.js Data Visualization ---
+  var CHART_INSTANCES = {};
+
+  function initCharts() {
+    if (typeof Chart === 'undefined') return;
+    Chart.defaults.color = '#555555';
+    Chart.defaults.borderColor = '#e0e0e0';
+    Chart.defaults.font.family = '-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif';
+  }
+
+  function renderCharts(data) {
+    if (typeof Chart === 'undefined') return;
+    initCharts();
+
+    Object.keys(CHART_INSTANCES).forEach(function(k) {
+      if (CHART_INSTANCES[k]) { CHART_INSTANCES[k].destroy(); }
+    });
+
+    renderTrendChart(data);
+    renderAccBarChart(data);
+    renderTopicPieChart(data);
+  }
+
+  function renderTrendChart(data) {
+    var ctx = document.getElementById('trendChart');
+    if (!ctx) return;
+    var hist = readMockHistory();
+    var labels = [];
+    var newWrong = [];
+    var reviewed = [];
+    var pending = [];
+
+    var today = new Date();
+    for (var i = 6; i >= 0; i--) {
+      var d = new Date(today.getTime() - i * 86400000);
+      var dateStr = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+      labels.push(dateStr.slice(5));
+      var found = null;
+      for (var j = 0; j < hist.length; j++) {
+        if (hist[j].date === dateStr) { found = hist[j]; break; }
+      }
+      var wrong = found ? (found.total || 0) - (found.correct || 0) : 0;
+      newWrong.push(wrong);
+      reviewed.push(0);
+      pending.push(wrong);
+    }
+
+    Object.keys(data.records || {}).forEach(function(s) {
+      var recs = data.records[s] || {};
+      Object.keys(recs).forEach(function(k) {
+        var r = recs[k];
+        if (!r || !r.ts || r.correct) return;
+        var rd = new Date(r.ts);
+        var rStr = rd.getFullYear() + '-' + String(rd.getMonth() + 1).padStart(2, '0') + '-' + String(rd.getDate()).padStart(2, '0');
+        var idx = labels.indexOf(rStr.slice(5));
+        if (idx !== -1) { newWrong[idx]++; pending[idx]++; }
+      });
+    });
+
+    CHART_INSTANCES.trend = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: labels,
+        datasets: [
+          { label: '新错题', data: newWrong, borderColor: '#111111', backgroundColor: 'rgba(17,17,17,0.1)', tension: 0.3, pointRadius: 3 },
+          { label: '已复习', data: reviewed, borderColor: '#555555', backgroundColor: 'rgba(85,85,85,0.1)', tension: 0.3, pointRadius: 3 },
+          { label: '待复习', data: pending, borderColor: '#888888', backgroundColor: 'rgba(136,136,136,0.1)', tension: 0.3, pointRadius: 3 }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: true,
+        plugins: { legend: { position: 'bottom', labels: { font: { size: 11 } } } },
+        scales: { y: { beginAtZero: true, ticks: { stepSize: 1 } } }
+      }
+    });
+  }
+
+  function renderAccBarChart(data) {
+    var ctx = document.getElementById('accBarChart');
+    if (!ctx) return;
+    var labels = [];
+    var values = [];
+    SUBJECTS.forEach(function(s) {
+      var st = subjectStats(data.records || {}, s);
+      labels.push(SUBJECT_LABELS[s]);
+      values.push(st.acc === null ? 0 : st.acc);
+    });
+
+    CHART_INSTANCES.accBar = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: '正确率 (%)',
+          data: values,
+          backgroundColor: values.map(function(v) {
+            if (v >= 80) return '#111111';
+            if (v >= 60) return '#555555';
+            return '#888888';
+          }),
+          borderColor: '#111111',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: true,
+        plugins: { legend: { display: false } },
+        scales: {
+          y: { beginAtZero: true, max: 100, ticks: { callback: function(v) { return v + '%'; } } }
+        }
+      }
+    });
+  }
+
+  function renderTopicPieChart(data) {
+    var ctx = document.getElementById('topicPieChart');
+    if (!ctx) return;
+    var mastered = 0;
+    var learning = 0;
+    var notStarted = 0;
+
+    if (window.SYLLABUS_DATA) {
+      SUBJECTS.forEach(function(s) {
+        var subjData = window.SYLLABUS_DATA.getSubject(s);
+        if (!subjData || !subjData.papers) return;
+        var st = subjectStats(data.records || {}, s);
+        subjData.papers.forEach(function(paper) {
+          if (!paper.topics) return;
+          paper.topics.forEach(function(topic) {
+            var rec = st.byTopic[topic.name] || { done: 0, correct: 0 };
+            var acc = rec.done > 0 ? rec.correct / rec.done : null;
+            if (acc === null) notStarted++;
+            else if (acc >= 0.8) mastered++;
+            else learning++;
+          });
+        });
+      });
+    }
+
+    CHART_INSTANCES.topicPie = new Chart(ctx, {
+      type: 'doughnut',
+      data: {
+        labels: ['Mastered', 'Learning', 'Not Started'],
+        datasets: [{
+          data: [mastered, learning, notStarted],
+          backgroundColor: ['#111111', '#555555', '#cccccc'],
+          borderColor: '#ffffff',
+          borderWidth: 2
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: true,
+        plugins: { legend: { position: 'bottom', labels: { font: { size: 11 } } } }
+      }
+    });
+  }
+
+  // --- v20: Cloud Account System ---
+  function setupAccount() {
+    initUsersDB();
+    var btnReg = document.getElementById('btnRegister');
+    var btnLogin = document.getElementById('btnLogin');
+    var btnLogout = document.getElementById('btnLogout');
+    var btnSync = document.getElementById('btnSync');
+
+    if (btnReg) btnReg.addEventListener('click', handleRegister);
+    if (btnLogin) btnLogin.addEventListener('click', handleLogin);
+    if (btnLogout) btnLogout.addEventListener('click', handleLogout);
+    if (btnSync) btnSync.addEventListener('click', handleSync);
+
+    var inputs = ['regUsername', 'regPassword', 'loginUsername', 'loginPassword'];
+    inputs.forEach(function(id) {
+      var el = document.getElementById(id);
+      if (el) el.addEventListener('keydown', function(e) { if (e.key === 'Enter') e.preventDefault(); });
+    });
+
+    renderAccount();
+  }
+
+  function initUsersDB() {
+    try {
+      var raw = localStorage.getItem('users');
+      if (!raw) {
+        localStorage.setItem('users', JSON.stringify({}));
+      } else {
+        var users = JSON.parse(raw);
+        if (typeof users !== 'object' || users === null) {
+          localStorage.setItem('users', JSON.stringify({}));
+        }
+      }
+    } catch(e) {
+      localStorage.setItem('users', JSON.stringify({}));
+    }
+  }
+
+  function getUsers() {
+    try { return JSON.parse(localStorage.getItem('users') || '{}'); } catch(e) { return {}; }
+  }
+
+  function saveUsers(users) {
+    localStorage.setItem('users', JSON.stringify(users));
+  }
+
+  function renderAccount() {
+    var current = null;
+    try {
+      current = localStorage.getItem('current_user');
+    } catch(e) {}
+    var loggedOut = document.getElementById('accountLoggedOut');
+    var loggedIn = document.getElementById('accountLoggedIn');
+    var nameEl = document.getElementById('currentUsername');
+    if (current) {
+      if (loggedOut) loggedOut.style.display = 'none';
+      if (loggedIn) loggedIn.style.display = 'block';
+      if (nameEl) nameEl.textContent = current;
+    } else {
+      if (loggedOut) loggedOut.style.display = 'block';
+      if (loggedIn) loggedIn.style.display = 'none';
+    }
+  }
+
+  function handleRegister() {
+    var u = (document.getElementById('regUsername') || {}).value || '';
+    var p = (document.getElementById('regPassword') || {}).value || '';
+    u = u.trim();
+    if (!u || !p) { alert('请填写用户名和密码'); return; }
+    if (p.length < 3) { alert('密码至少3位'); return; }
+    var users = getUsers();
+    if (users[u]) { alert('用户名已存在'); return; }
+    users[u] = { password: p, createdAt: Date.now() };
+    saveUsers(users);
+    alert('注册成功！请登录');
+    var regU = document.getElementById('regUsername');
+    var regP = document.getElementById('regPassword');
+    if (regU) regU.value = '';
+    if (regP) regP.value = '';
+  }
+
+  function handleLogin() {
+    var u = (document.getElementById('loginUsername') || {}).value || '';
+    var p = (document.getElementById('loginPassword') || {}).value || '';
+    u = u.trim();
+    var users = getUsers();
+    if (!users[u]) { alert('用户不存在，请先注册'); return; }
+    if (users[u].password !== p) { alert('密码错误'); return; }
+    localStorage.setItem('current_user', u);
+    var cloudKey = 'cloud_' + u;
+    try {
+      var cloudData = localStorage.getItem(cloudKey);
+      if (cloudData) {
+        localStorage.setItem('yz_practice_data', cloudData);
+        alert('登录成功，数据已从云端恢复');
+      } else {
+        alert('登录成功，暂无云端数据');
+      }
+    } catch(e) { alert('登录成功'); }
+    var loginU = document.getElementById('loginUsername');
+    var loginP = document.getElementById('loginPassword');
+    if (loginU) loginU.value = '';
+    if (loginP) loginP.value = '';
+    renderAccount();
+    var data = loadData();
+    renderOverview(data);
+    renderMastery(data);
+    renderHeatmap(data);
+    renderWeakTopics(data);
+    renderPath(data);
+    renderCoverage(data);
+    renderStudySchedule(data);
+    renderCharts(data);
+    renderLeaderboard();
+  }
+
+  function handleLogout() {
+    localStorage.removeItem('current_user');
+    renderAccount();
+    alert('已退出登录');
+  }
+
+  function handleSync() {
+    var current = null;
+    try { current = localStorage.getItem('current_user'); } catch(e) {}
+    if (!current) { alert('请先登录'); return; }
+    try {
+      var data = localStorage.getItem('yz_practice_data') || '{}';
+      localStorage.setItem('cloud_' + current, data);
+      var histRaw = localStorage.getItem('yz_mock_history');
+      if (histRaw) {
+        localStorage.setItem('cloud_' + current + '_mock', histRaw);
+      }
+      alert('Sync 成功！数据已保存到云端');
+    } catch(e) {
+      alert('Sync 失败: ' + e.message);
+    }
+  }
+
+  // --- v21: Leaderboard ---
+  function ensureLeaderboard() {
+    try {
+      var raw = localStorage.getItem('leaderboard');
+      if (raw) {
+        var arr = JSON.parse(raw);
+        if (Array.isArray(arr) && arr.length) return arr;
+      }
+    } catch(e) {}
+    var mock = [
+      { name: 'Alex', total: 847, acc: 92, lastDay: '2026-07-29' },
+      { name: 'Bella', total: 720, acc: 88, lastDay: '2026-07-28' },
+      { name: 'Chris', total: 650, acc: 85, lastDay: '2026-07-27' },
+      { name: 'Diana', total: 530, acc: 80, lastDay: '2026-07-26' },
+      { name: 'Evan', total: 410, acc: 76, lastDay: '2026-07-25' }
+    ];
+    localStorage.setItem('leaderboard', JSON.stringify(mock));
+    return mock;
+  }
+
+  function getLeaderboard() {
+    return ensureLeaderboard();
+  }
+
+  function updateUserRank() {
+    var current = null;
+    try { current = localStorage.getItem('current_user'); } catch(e) {}
+    if (!current) return null;
+    var data = loadData();
+    var totalDone = 0;
+    var totalCorrect = 0;
+    Object.keys(data.records || {}).forEach(function(s) {
+      var recs = data.records[s] || {};
+      Object.keys(recs).forEach(function(k) {
+        totalDone++;
+        if (recs[k] && recs[k].correct) totalCorrect++;
+      });
+    });
+    var today = new Date();
+    var dateStr = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0') + '-' + String(today.getDate()).padStart(2, '0');
+    var entry = {
+      name: current,
+      total: totalDone,
+      acc: totalDone ? Math.round((totalCorrect / totalDone) * 100) : 0,
+      lastDay: dateStr
+    };
+    var board = getLeaderboard();
+    var found = false;
+    for (var i = 0; i < board.length; i++) {
+      if (board[i].name === current) { board[i] = entry; found = true; break; }
+    }
+    if (!found) board.push(entry);
+    board.sort(function(a, b) { return b.total - a.total; });
+    localStorage.setItem('leaderboard', JSON.stringify(board));
+    return entry;
+  }
+
+  function renderLeaderboard() {
+    var container = document.getElementById('leaderboardSection');
+    if (!container) return;
+    while (container.firstChild) container.removeChild(container.firstChild);
+
+    var userEntry = updateUserRank();
+    var board = getLeaderboard();
+
+    var h3 = document.createElement('h3');
+    h3.textContent = 'Top 10 排名';
+    container.appendChild(h3);
+
+    var table = document.createElement('table');
+    table.className = 'leaderboard-table';
+    var thead = document.createElement('tr');
+    thead.innerHTML = '<th>排名</th><th>用户名</th><th>总题数</th><th>正确率</th><th>最近练习</th>';
+    table.appendChild(thead);
+
+    var top10 = board.slice(0, 10);
+    top10.forEach(function(entry, idx) {
+      var tr = document.createElement('tr');
+      if (userEntry && entry.name === userEntry.name) tr.className = 'you';
+      tr.innerHTML =
+        '<td>' + (idx + 1) + '</td>' +
+        '<td>' + entry.name + '</td>' +
+        '<td>' + entry.total + '</td>' +
+        '<td>' + (entry.acc || 0) + '%</td>' +
+        '<td>' + (entry.lastDay || '—') + '</td>';
+      table.appendChild(tr);
+    });
+    container.appendChild(table);
+
+    if (userEntry) {
+      var rankNote = document.createElement('p');
+      rankNote.className = 'muted';
+      var myRank = board.findIndex(function(e) { return e.name === userEntry.name; });
+      rankNote.textContent = '我的排名：第 ' + (myRank >= 0 ? myRank + 1 : '—') + ' 名 · 总题数 ' + userEntry.total + ' · 正确率 ' + userEntry.acc + '%';
+      container.appendChild(rankNote);
+    }
+  }
+
+  // --- v22+v23: AI Diagnosis ---
+  function setupAIRport() {
+    var btn = document.getElementById('btnAIReport');
+    if (btn) btn.addEventListener('click', function() {
+      var data = loadData();
+      renderAIRport(data);
+    });
+  }
+
+  function renderAIRport(data) {
+    var section = document.getElementById('aiReportSection');
+    if (!section) return;
+    section.style.display = 'block';
+    while (section.firstChild) section.removeChild(section.firstChild);
+
+    if (!window.AITutor || typeof window.AITutor.diagnose !== 'function') {
+      section.innerHTML = '<p class="muted">AI Tutor 未加载</p>';
+      return;
+    }
+
+    var result = window.AITutor.diagnose(data);
+
+    var h3 = document.createElement('h3');
+    h3.textContent = '🤖 AI 薄弱点诊断报告';
+    section.appendChild(h3);
+
+    if (!result.topWeakTopics || result.topWeakTopics.length === 0) {
+      var empty = document.createElement('p');
+      empty.className = 'muted';
+      empty.textContent = '暂无练习数据 · 完成至少 5 道题后系统将生成诊断报告';
+      section.appendChild(empty);
+      return;
+    }
+
+    var ul = document.createElement('ul');
+    result.topWeakTopics.forEach(function(topic, idx) {
+      var li = document.createElement('li');
+      li.className = 'ai-item';
+      var main = document.createElement('div');
+      main.innerHTML = '<strong>#' + (idx + 1) + ' ' + topic.subjectName + ' · ' + topic.topicName + '</strong>' +
+        ' <span class="priority-pill">权重 ' + topic.weight + '%</span>';
+      li.appendChild(main);
+
+      var meta = document.createElement('div');
+      meta.className = 'ai-meta';
+      meta.textContent = '正确率：' + (topic.acc === null ? '未练习' : topic.acc + '%') +
+        ' · 已做 ' + topic.done + ' 题' +
+        ' · 推荐练习 ' + topic.recommendPrac + ' 题' +
+        ' · 预计提升 ' + topic.estImprove + ' 分';
+      li.appendChild(meta);
+
+      var btnExplain = document.createElement('button');
+      btnExplain.className = 'ai-explain-btn';
+      btnExplain.textContent = '📖 AI 讲解';
+      li.appendChild(btnExplain);
+
+      var explainDiv = document.createElement('div');
+      explainDiv.className = 'ai-explain-text';
+      explainDiv.id = 'ai-explain-' + topic.topicCode;
+      li.appendChild(explainDiv);
+
+      btnExplain.addEventListener('click', (function(topicCode, subj) {
+        return function() {
+          var el = document.getElementById('ai-explain-' + topicCode);
+          if (!el) return;
+          if (el.classList.contains('show')) {
+            el.classList.remove('show');
+            return;
+          }
+          if (!el.dataset.generated) {
+            var text = window.AITutor.explain(topicCode, subj);
+            el.textContent = text;
+            el.dataset.generated = '1';
+          }
+          el.classList.add('show');
+        };
+      })(topic.topicCode, topic.subject));
+
+      ul.appendChild(li);
+    });
+    section.appendChild(ul);
+
+    var note = document.createElement('div');
+    note.className = 'box-dashed';
+    note.style.marginTop = '10px';
+    note.innerHTML = 'v22+v23: 薄弱 TOP5 按 (100-正确率)×权重% 排序 · 点击"AI 讲解"查看三段式讲解（考点回顾/解题策略/常见陷阱）';
+    section.appendChild(note);
+  }
+
+  // --- v25 Streak ---
+  function renderStreak() {
+    var el = document.getElementById('streakSection');
+    if (!window.Streak) { el.innerHTML = '<p class="muted">streak.js 未加载</p>'; return; }
+    Streak.init();
+    var d = Streak.getData();
+    var badges = Streak.getBadges();
+    var today = new Date().toISOString().slice(0, 10);
+    var todayDone = 0;
+    if (d.history) {
+      for (var i = 0; i < d.history.length; i++) {
+        if (d.history[i].date === today) { todayDone = d.history[i].count || 0; break; }
+      }
+    }
+    var goal = d.goal || 5;
+    var totalDays = d.history ? d.history.length : 0;
+
+    var html = '<div class="streak-grid">';
+    html += '<div><div class="streak-big">' + (d.current || 0) + '<span class="unit"> 天</span></div><div style="text-align:center;font-size:0.78rem;color:#888;">当前连续</div></div>';
+    html += '<div><div class="streak-big">' + (d.max || 0) + '<span class="unit"> 天</span></div><div style="text-align:center;font-size:0.78rem;color:#888;">历史最长</div></div>';
+    html += '<div><div class="streak-big">' + todayDone + '<span class="unit"> / ' + goal + '</span></div><div style="text-align:center;font-size:0.78rem;color:#888;">今日目标</div></div>';
+    html += '<div><div class="streak-big">' + totalDays + '<span class="unit"> 天</span></div><div style="text-align:center;font-size:0.78rem;color:#888;">累计天数</div></div>';
+    html += '</div>';
+
+    html += '<div style="margin-top:8px;"><strong>徽章墙：</strong></div>';
+    html += '<div class="badge-wall">';
+    var allBadges = [
+      {name:'Bronze',icon:'🥉',desc:'3天连续'},
+      {name:'Silver',icon:'🥈',desc:'7天连续'},
+      {name:'Gold',icon:'🥇',desc:'14天连续'},
+      {name:'Diamond',icon:'💎',desc:'30天连续'},
+      {name:'Legend',icon:'👑',desc:'100天连续'}
+    ];
+    var earnedNames = {};
+    badges.forEach(function(b){ earnedNames[b.name] = true; });
+    allBadges.forEach(function(b){
+      var locked = earnedNames[b.name] ? '' : ' locked';
+      html += '<div class="badge-item' + locked + '"><span class="b-icon">' + b.icon + '</span><strong>' + b.name + '</strong><div style="font-size:0.68rem;color:#888;">' + b.desc + '</div></div>';
+    });
+    html += '</div>';
+    html += '<p class="muted" style="font-size:0.78rem;margin-top:8px;">每日首次答题自动打卡 · 中断会重置连续天数</p>';
+    el.innerHTML = html;
+  }
+
+  // --- v26 SRS ---
+  function renderSRS() {
+    var el = document.getElementById('srsSection');
+    if (!window.SRS) { el.innerHTML = '<p class="muted">spaced-repetition.js 未加载</p>'; return; }
+    SRS.init();
+    var stats = SRS.getStats();
+    var dueBySubject = {};
+    var subjects = ['ib','alevel','igcse','ap','sat','act','toefl','ielts','ukmt'];
+    var totalDue = 0;
+    subjects.forEach(function(sub){
+      var due = SRS.getDueQuestions(sub);
+      dueBySubject[sub] = due.length;
+      totalDue += due.length;
+    });
+
+    var html = '<div class="srs-stats">';
+    html += '<div><div class="streak-big">' + totalDue + '</div><div style="text-align:center;font-size:0.78rem;color:#888;">今日到期复习</div></div>';
+    html += '<div><div class="streak-big">' + (stats.total || 0) + '</div><div style="text-align:center;font-size:0.78rem;color:#888;">总错题数</div></div>';
+    html += '<div><div class="streak-big">' + (stats.mastered || 0) + '</div><div style="text-align:center;font-size:0.78rem;color:#888;">已掌握</div></div>';
+    html += '<div><div class="streak-big">' + (stats.learning || 0) + '</div><div style="text-align:center;font-size:0.78rem;color:#888;">学习中</div></div>';
+    html += '</div>';
+
+    if (totalDue > 0) {
+      html += '<div style="margin:10px 0;">';
+      subjects.forEach(function(sub){
+        if (dueBySubject[sub] > 0) {
+          html += '<a class="srs-action" href="' + sub + '/practice.html?srs=due">' + sub.toUpperCase() + ' (' + dueBySubject[sub] + ')</a> ';
+        }
+      });
+      html += '</div>';
+      html += '<p class="muted" style="font-size:0.78rem;">点击科目跳转将只显示到期复习题</p>';
+    } else {
+      html += '<p class="muted" style="font-size:0.78rem;">暂无到期复习题 · 继续保持！</p>';
+    }
+    el.innerHTML = html;
+  }
+
+  // --- v27 Comparison ---
+  function renderComparison() {
+    var el = document.getElementById('comparisonSection');
+    var data = loadData();
+    var records = data.records || {};
+    var subjects = ['ib','alevel','igcse','ap','sat','act','toefl','ielts'];
+    var subjNames = {ib:'IB',alevel:'A-Level',igcse:'IGCSE',ap:'AP',sat:'SAT',act:'ACT',toefl:'TOEFL',ielts:'IELTS'};
+
+    function computeScores(sub) {
+      var recs = records[sub] || {};
+      var qs = Object.values(recs);
+      if (qs.length === 0) return null;
+      var done = qs.length;
+      var correct = qs.filter(function(q){return q.correct;}).length;
+      var acc = correct / done;
+      var totalTime = qs.reduce(function(s,q){return s + (q.timeSpent||0);}, 0);
+      var avgTime = done > 0 ? totalTime / done : 0;
+      var speed = Math.max(0, Math.min(1, 1 - avgTime / 120));
+      return {acc: acc, speed: speed, done: done};
+    }
+
+    var selfBest = JSON.parse(localStorage.getItem('yz_self_best') || '{}');
+    var targetOut = {sat:1500, act:34, toefl:110, ielts:7.5, ib:45, alevel:90, igcse:90, ap:5};
+
+    var html = '<div class="radar-wrap">';
+    html += '<div class="radar-svg"><svg width="280" height="280" viewBox="0 0 280 280">';
+    var cx = 140, cy = 140, R = 100;
+    var dims = ['正确率','速度','打卡','覆盖','薄弱改善'];
+    var numAxes = 5;
+    for (var ring = 1; ring <= 4; ring++) {
+      var r = R * ring / 4;
+      var points = [];
+      for (var a = 0; a < numAxes; a++) {
+        var angle = -Math.PI/2 + a * 2 * Math.PI / numAxes;
+        points.push((cx + r * Math.cos(angle)) + ',' + (cy + r * Math.sin(angle)));
+      }
+      html += '<polygon points="' + points.join(' ') + '" fill="none" stroke="#ddd" stroke-width="1"/>';
+    }
+    for (var a2 = 0; a2 < numAxes; a2++) {
+      var angle2 = -Math.PI/2 + a2 * 2 * Math.PI / numAxes;
+      html += '<line x1="' + cx + '" y1="' + cy + '" x2="' + (cx + R * Math.cos(angle2)) + '" y2="' + (cy + R * Math.sin(angle2)) + '" stroke="#ddd" stroke-width="1"/>';
+    }
+    var totalDone = 0;
+    subjects.forEach(function(s){ totalDone += (records[s]) ? Object.keys(records[s]).length : 0; });
+    var subjectCount = 0;
+    var accSum = 0, speedSum = 0;
+    subjects.forEach(function(s){
+      var sc = computeScores(s);
+      if (sc) { subjectCount++; accSum += sc.acc; speedSum += sc.speed; }
+    });
+    var avgAcc = subjectCount > 0 ? accSum / subjectCount : 0;
+    var avgSpeed = subjectCount > 0 ? speedSum / subjectCount : 0;
+    var streakData = JSON.parse(localStorage.getItem('yz_streak_data') || '{"current":0,"max":0}');
+    var streakScore = Math.min(1, (streakData.current || 0) / 30);
+    var coverageScore = Math.min(1, totalDone / 200);
+    var weakScore = subjectCount > 0 ? 1 - (1 - avgAcc) * 0.7 : 0;
+    var vals = [avgAcc, avgSpeed, streakScore, coverageScore, weakScore];
+    var dataPoints = [];
+    for (var a3 = 0; a3 < numAxes; a3++) {
+      var angle3 = -Math.PI/2 + a3 * 2 * Math.PI / numAxes;
+      var r3 = R * vals[a3];
+      dataPoints.push((cx + r3 * Math.cos(angle3)) + ',' + (cy + r3 * Math.sin(angle3)));
+    }
+    html += '<polygon points="' + dataPoints.join(' ') + '" fill="rgba(17,17,17,0.2)" stroke="#111" stroke-width="2"/>';
+    for (var a4 = 0; a4 < numAxes; a4++) {
+      var angle4 = -Math.PI/2 + a4 * 2 * Math.PI / numAxes;
+      html += '<circle cx="' + (cx + R * Math.cos(angle4)) + '" cy="' + (cy + R * Math.sin(angle4)) + '" r="3" fill="#111"/>';
+      html += '<text x="' + (cx + (R+14) * Math.cos(angle4)) + '" y="' + (cy + (R+14) * Math.sin(angle4)) + '" font-size="11" text-anchor="middle" dominant-baseline="middle">' + dims[a4] + '</text>';
+    }
+    html += '</svg></div>';
+
+    html += '<div class="radar-legend">';
+    html += '<div class="dim"><span>正确率</span><span>' + Math.round(avgAcc*100) + '%</span></div>';
+    html += '<div class="dim"><span>速度</span><span>' + Math.round(avgSpeed*100) + '%</span></div>';
+    html += '<div class="dim"><span>打卡</span><span>' + Math.round(streakScore*100) + '%</span></div>';
+    html += '<div class="dim"><span>覆盖</span><span>' + Math.round(coverageScore*100) + '%</span></div>';
+    html += '<div class="dim"><span>薄弱改善</span><span>' + Math.round(weakScore*100) + '%</span></div>';
+    html += '</div>';
+    html += '</div>';
+
+    html += '<h3 style="margin-top:14px;">各科与目标分对比</h3>';
+    html += '<table class="compare-table"><tr><th>科目</th><th>已做题</th><th>正确率</th><th>目标分</th><th>当前进度</th><th>差距</th></tr>';
+    subjects.forEach(function(s){
+      var sc = computeScores(s);
+      var tgt = targetOut[s] || '-';
+      var cur = selfBest[s] ? selfBest[s].score : (sc ? Math.round(sc.acc * (s==='sat'?1600:s==='act'?36:s==='toefl'?120:s==='ielts'?9:100)) : 0);
+      var gap = '-' ;
+      if (tgt && cur) {
+        var g = cur - tgt;
+        gap = '<span class="' + (g >= 0 ? 'gap-pos' : 'gap-neg') + '">' + (g >= 0 ? '+' : '') + g + '</span>';
+      }
+      html += '<tr><td>' + subjNames[s] + '</td><td>' + (sc ? sc.done : 0) + '</td><td>' + (sc ? Math.round(sc.acc*100)+'%' : '-') + '</td><td>' + tgt + '</td><td>' + cur + '</td><td>' + gap + '</td></tr>';
+    });
+    html += '</table>';
+    el.innerHTML = html;
+  }
+
+  // --- v28 Sprint ---
+  function renderSprint() {
+    var el = document.getElementById('sprintSection');
+    var saved = JSON.parse(localStorage.getItem('yz_sprint_config') || '{}');
+    var targetScore = saved.targetScore || '1500';
+    var examDate = saved.examDate || '2026-12-01';
+    var targetType = saved.targetType || 'SAT';
+
+    var html = '<div class="sprint-controls">';
+    html += '<label>目标类型 <select id="sprintType"><option>SAT</option><option>ACT</option><option>TOEFL</option><option>IELTS</option></select></label>';
+    html += '<label>目标分 <input type="text" id="sprintScore" value="' + targetScore + '" style="width:80px;"></label>';
+    html += '<label>考试日期 <input type="date" id="sprintDate" value="' + examDate + '"></label>';
+    html += '<button class="btn-secondary" onclick="window.YZDashboard.applySprintConfig()">应用</button>';
+    html += '</div>';
+
+    var now = new Date();
+    var exam = new Date(examDate + 'T23:59:59');
+    var diffMs = exam - now;
+    var days = Math.max(0, Math.floor(diffMs / 86400000));
+    var hours = Math.max(0, Math.floor((diffMs % 86400000) / 3600000));
+    var mins = Math.max(0, Math.floor((diffMs % 3600000) / 60000));
+
+    html += '<div class="countdown">';
+    html += '<div class="cd-unit"><div class="cd-num">' + days + '</div><div class="cd-label">天</div></div>';
+    html += '<div class="cd-unit"><div class="cd-num">' + hours + '</div><div class="cd-label">小时</div></div>';
+    html += '<div class="cd-unit"><div class="cd-num">' + mins + '</div><div class="cd-label">分钟</div></div>';
+    html += '</div>';
+
+    var data = loadData();
+    var records = data.records || {};
+    var subjects = ['ib','alevel','igcse','ap','sat','act','toefl','ielts'];
+    var subjNames = {ib:'IB',alevel:'A-Level',igcse:'IGCSE',ap:'AP',sat:'SAT',act:'ACT',toefl:'TOEFL',ielts:'IELTS'};
+    var totalDone = 0;
+    subjects.forEach(function(s){ totalDone += (records[s]) ? Object.keys(records[s]).length : 0; });
+    var dailyGoal = Math.ceil(Math.max(5, totalDone > 0 ? (totalDone / Math.max(1, days)) : 10));
+
+    html += '<div class="sprint-breakdown">';
+    html += '<p><strong>每日需刷 Topic 数：</strong>' + dailyGoal + ' 题</p>';
+    html += '<p><strong>按科目权重拆解：</strong></p>';
+    html += '<table class="compare-table"><tr><th>科目</th><th>权重</th><th>每日题数</th><th>剩余天数</th></tr>';
+    var weights = {sat:0.25,act:0.15,toefl:0.15,ielts:0.10,ib:0.10,alevel:0.10,igcse:0.08,ap:0.07};
+    subjects.forEach(function(s){
+      var w = weights[s] || 0.05;
+      var dailyN = Math.max(1, Math.round(dailyGoal * w));
+      html += '<tr><td>' + subjNames[s] + '</td><td>' + Math.round(w*100) + '%</td><td>' + dailyN + '</td><td>' + days + '</td></tr>';
+    });
+    html += '</table>';
+    html += '</div>';
+    el.innerHTML = html;
+
+    setTimeout(function(){
+      var typeSel = document.getElementById('sprintType');
+      if (typeSel) typeSel.value = targetType;
+    }, 0);
+  }
+
   // --- Init ---
   function init() {
     setupDataToolbar();
+    setupAccount();
+    setupAIRport();
     renderProfile();
     var data = loadData();
     renderOverview(data);
     renderMastery(data);
     renderHeatmap(data);
     renderWeakTopics(data);
-    renderErrorTrend(data);
     renderPath(data);
     renderCoverage(data);
     renderStudySchedule(data);
+    renderCharts(data);
+    renderLeaderboard();
+    renderStreak();
+    renderSRS();
+    renderComparison();
+    renderSprint();
   }
 
   // Expose for re-render after answering elsewhere
   window.YZDashboard = { refresh: init };
+  window.YZDashboard.applySprintConfig = function() {
+    var type = document.getElementById('sprintType').value;
+    var score = document.getElementById('sprintScore').value;
+    var date = document.getElementById('sprintDate').value;
+    localStorage.setItem('yz_sprint_config', JSON.stringify({targetType: type, targetScore: score, examDate: date}));
+    renderSprint();
+  };
 
   init();
 })();
 </script>
 <script src="../../js/app-data.js"></script>
 <script src="../../../js/syllabus-data.js"></script>
+<script src="../../../js/ai-tutor.js"></script>
+<script src="../../../js/streak.js"></script>
+<script src="../../../js/spaced-repetition.js"></script>
 </body>
 </html>

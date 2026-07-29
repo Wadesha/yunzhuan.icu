@@ -100,7 +100,16 @@ details[open] summary { margin-bottom: 8px; border-bottom: 1px dashed #e0e0e0; p
     <div class="box-dashed">
       <p>The article discusses the benefits of implementing a four-day workweek. The author presents three main arguments supporting this change. First, a four-day week would reduce employee burnout and increase overall productivity, as workers would be more rested and motivated. Second, it would lower operational costs for companies by reducing utility expenses and office overhead by 20 percent. Third, it would benefit the environment by reducing commuting frequency, thus cutting carbon emissions significantly.</p>
     </div>
-    <p style="margin-top:12px;"><strong>Listening Summary（2 min lecture）:</strong></p>
+    <p style="margin-top:12px;"><strong>Listening Section（2 min lecture）:</strong></p>
+    <div class="box-dashed">
+      <p style="color:#888;font-size:0.85rem;"><strong>🎧 音频播放区：</strong></p>
+      <audio controls style="width:100%;margin:8px 0;">
+        <source src="#" type="audio/mpeg">
+        <em style="color:#888;font-size:0.82rem;">[音频文件待接入] - Audio placeholder for integrated writing lecture</em>
+      </audio>
+      <p style="color:#888;font-size:0.8rem;">实际考试中，此音频为教授讲座。请根据讲座内容总结要点并说明如何反驳阅读文章。</p>
+    </div>
+    <p style="margin-top:12px;"><strong>Listening Notes:</strong></p>
     <div class="box-dashed">
       <p>The professor challenges each point from the reading. Regarding productivity, she argues that employees would simply cram five days of work into four, leading to increased stress and rushed work rather than better output. On costs, she points out that companies would need to hire and train additional workers to maintain coverage, which is far more expensive than any savings on utilities. Finally, she notes that most employees would use their extra day for shopping and other car trips, so overall carbon reductions would be minimal.</p>
     </div>
@@ -130,6 +139,7 @@ details[open] summary { margin-bottom: 8px; border-bottom: 1px dashed #e0e0e0; p
       <option value="0">0 · 未作答</option>
     </select>
     <button class="btn btn-sm btn-primary" onclick="submitScore('toefl','w1','Integrated Writing')">提交评分</button>
+    <button class="btn btn-sm" onclick="gradeWriting('toefl','w1','TOEFL Integrated')">智能批改</button>
     <span class="score-display" data-score-for="w1"></span>
   </div>
 </div>
@@ -171,6 +181,7 @@ details[open] summary { margin-bottom: 8px; border-bottom: 1px dashed #e0e0e0; p
       <option value="0">0 · 未作答</option>
     </select>
     <button class="btn btn-sm btn-primary" onclick="submitScore('toefl','w2','Independent Writing')">提交评分</button>
+    <button class="btn btn-sm" onclick="gradeWriting('toefl','w2','TOEFL Independent')">智能批改</button>
     <span class="score-display" data-score-for="w2"></span>
   </div>
 </div>
@@ -199,6 +210,14 @@ details[open] summary { margin-bottom: 8px; border-bottom: 1px dashed #e0e0e0; p
       <span id="time-toefl-s1-resp">00:45</span>
       <button class="btn btn-sm" onclick="toggleTimer('toefl-s1-resp', 45)">Start/Pause</button>
       <button class="btn btn-sm" onclick="resetTimer('toefl-s1-resp', 45)">Reset</button>
+    </div>
+  </div>
+  <div class="timer-section">
+    <div class="timer-label">🎙 录音占位区 (MediaRecorder)</div>
+    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+      <button class="btn btn-sm" id="recStart-s1" onclick="startRecording('s1')">● 开始录音</button>
+      <button class="btn btn-sm" id="recStop-s1" onclick="stopRecording('s1')">■ 停止录音</button>
+      <span id="recStatus-s1" style="font-size:0.82rem;color:#888;">[录音功能待接入 - 使用 MediaRecorder API]</span>
     </div>
   </div>
   <h4>📝 作答要点笔记区</h4>
@@ -576,6 +595,75 @@ function parseTime(str) {
   const parts = str.split(':');
   return parseInt(parts[0]) * 60 + parseInt(parts[1]);
 }
+</script>
+
+<script src="../../js/writing-grader.js"></script>
+<script>
+(function() {
+  'use strict';
+
+  var recorder = null;
+  var chunks = [];
+
+  window.gradeWriting = function(subject, qid, type) {
+    var textarea = document.querySelector('textarea[data-subject="' + subject + '"][data-qid="' + qid + '"][data-field="answer"]');
+    if (!textarea || !textarea.value.trim()) {
+      alert('请先写作文再批改');
+      return;
+    }
+    var result = window.WritingGrader.grade(textarea.value, type);
+    var summary = '总分: ' + result.score + '/100\n\n';
+    summary += 'Task Response: ' + result.rubric.taskResponse + '/25\n';
+    summary += 'Coherence & Cohesion: ' + result.rubric.coherenceCohesion + '/25\n';
+    summary += 'Lexical Resource: ' + result.rubric.lexicalResource + '/25\n';
+    summary += 'Grammatical Range: ' + result.rubric.grammaticalRange + '/25\n\n';
+    summary += '--- 详细反馈 ---\n';
+    result.feedback.forEach(function(fb) {
+      summary += '[' + fb.type + '] ' + fb.text + '\n';
+    });
+    alert(summary);
+  };
+
+  window.startRecording = function(id) {
+    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+      alert('当前浏览器不支持录音功能，请使用 Chrome/Edge 等现代浏览器');
+      return;
+    }
+    navigator.mediaDevices.getUserMedia({ audio: true }).then(function(stream) {
+      recorder = new MediaRecorder(stream);
+      chunks = [];
+      recorder.ondataavailable = function(e) {
+        if (e.data.size > 0) chunks.push(e.data);
+      };
+      recorder.onstop = function() {
+        var blob = new Blob(chunks, { type: 'audio/webm' });
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement('audio');
+        a.controls = true;
+        a.src = url;
+        var statusEl = document.getElementById('recStatus-' + id);
+        if (statusEl) {
+          statusEl.innerHTML = '<a href="' + url + '" download="recording.webm">下载录音</a>';
+        }
+        stream.getTracks().forEach(function(t) { t.stop(); });
+      };
+      recorder.start();
+      var statusEl = document.getElementById('recStatus-' + id);
+      if (statusEl) statusEl.textContent = '● 正在录音...';
+    }).catch(function(err) {
+      alert('无法访问麦克风: ' + err.message);
+    });
+  };
+
+  window.stopRecording = function(id) {
+    if (recorder && recorder.state !== 'inactive') {
+      recorder.stop();
+      var statusEl = document.getElementById('recStatus-' + id);
+      if (statusEl) statusEl.textContent = '■ 录音已停止';
+    }
+  };
+
+})();
 </script>
 
 </body>

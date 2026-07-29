@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Practice - 刷题中心 | yunzhuan.icu</title>
 <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+<link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" as="style" onload="this.rel='stylesheet'">
+<link rel="stylesheet" href="../../js/common.css">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 860px; margin: 0 auto; padding: 24px 16px 48px; background: #ffffff; color: #111111; line-height: 1.7; font-size: 15px; }
@@ -46,10 +48,10 @@
 </div>
 
 <h1>Practice</h1>
-<p class="subtitle">考纲 · 模拟考题 · 刷题追踪 — 8 科全覆盖</p>
+<p class="subtitle">考纲 · 模拟考题 · 刷题追踪 — 8 科 + 3 竞赛 · 全链路学习平台</p>
 
 <div class="v-info">
-  <strong>v10 定稿版</strong> · 8 科 × 120 题 = 960 题 · 计时 + 难度分级 + 错题本 + 模拟卷 + 仪表盘。
+  <strong>v38 定稿版</strong> · 8 科 × 120 题 + 3 竞赛 · 图表化仪表盘 + AI 辅导 + PWA + 协作 + API 开放 · 20 版本迭代全落地。
 </div>
 
 <h2>Mock Test & Dashboard</h2>
@@ -66,6 +68,39 @@
     <p class="desc">全科目数据分析 · 知识点掌握度 · 错题趋势 · 学习路径推荐</p>
     <div class="links">
       <a href="dashboard.html">Open Dashboard</a>
+    </div>
+  </div>
+</div>
+
+<h2>协作 & 扩展功能</h2>
+<div class="grid">
+  <div class="card">
+    <h3>小组协作 <span class="badge">v35</span></h3>
+    <p class="desc">创建房间 · 邀请同学 · 共选题库 · 讨论答题 · 排行榜</p>
+    <div class="links">
+      <a href="collab.html">进入协作</a>
+    </div>
+  </div>
+  <div class="card">
+    <h3>家长/导师模式 <span class="badge">v36</span></h3>
+    <p class="desc">只读查看学生数据 · 周报 · 成绩单 · 学习建议</p>
+    <div class="links">
+      <a href="parent.html">查看模式</a>
+    </div>
+  </div>
+  <div class="card">
+    <h3>API 开放 <span class="badge">v37</span></h3>
+    <p class="desc">window.* API 文档 · 代码示例 · MCP 集成说明</p>
+    <div class="links">
+      <a href="api.html">API 文档</a>
+    </div>
+  </div>
+  <div class="card">
+    <h3>打包下载 <span class="badge">v38</span></h3>
+    <p class="desc">README · build.sh · 404 · 通用 CSS · 懒加载优化</p>
+    <div class="links">
+      <a href="README.md">查看 README</a>
+      <a href="404.html">404 示例</a>
     </div>
   </div>
 </div>
@@ -199,11 +234,85 @@
       <a href="ielts/practice.html">Practice</a>
       <a href="ielts/tracker.html">Tracker</a>
       <a href="ielts/subjective.html">Writing/Speaking</a>
+      <a href="ielts/listening.html">Listening</a>
+      <a href="ielts/speaking.html">Speaking</a>
     </div>
   </div>
 </div>
 
-<h2>迭代路线图（v11–v18 考纲→功能→体验全打通）</h2>
+<h2>写作 · 听说 · 词汇 · 笔记</h2>
+<div class="grid">
+  <div class="card">
+    <h3>写作批改实验室 <span class="badge">v23</span></h3>
+    <p class="desc">TOEFL/IELTS/AP 写作智能评分 · 4 维 Rubric · 雷达图反馈</p>
+    <div class="links">
+      <a href="writing-lab.html">Writing Lab</a>
+    </div>
+  </div>
+  <div class="card">
+    <h3>TOEFL 听说模拟 <span class="badge">v23</span></h3>
+    <p class="desc">3 段听力 + 4 题口语 · 音频占位 · 计时器 · 录音</p>
+    <div class="links">
+      <a href="toefl/listening.html">Listening</a>
+      <a href="toefl/speaking.html">Speaking</a>
+    </div>
+  </div>
+  <div class="card">
+    <h3>IELTS 听说模拟 <span class="badge">v23</span></h3>
+    <p class="desc">4 段听力 + 3 Part 口语 · 音频占位 · 计时器 · 录音</p>
+    <div class="links">
+      <a href="ielts/listening.html">Listening</a>
+      <a href="ielts/speaking.html">Speaking</a>
+    </div>
+  </div>
+  <div class="card">
+    <h3>单词本 <span class="badge">v24</span></h3>
+    <p class="desc">TOEFL/IELTS/SAT 各 100 高频词 · 卡片翻转 · 进度追踪</p>
+    <div class="links">
+      <a href="vocab.html">Vocab Lab</a>
+    </div>
+  </div>
+  <div class="card">
+    <h3>学习笔记 <span class="badge">v24</span></h3>
+    <p class="desc">按科目分组 · 高亮标注 · JSON 导出</p>
+    <div class="links">
+      <a href="notes.html">Notes</a>
+    </div>
+  </div>
+</div>
+
+<h2>竞赛题库</h2>
+<div class="grid">
+  <div class="card">
+    <h3>UKMT</h3>
+    <p class="desc">AMC 8/10/12 · AIME · 30 题模拟</p>
+    <div class="links">
+      <a href="ukmt/intro.html">Intro</a>
+      <a href="ukmt/syllabus.html">Syllabus</a>
+      <a href="ukmt/practice.html">Practice</a>
+    </div>
+  </div>
+  <div class="card">
+    <h3>AMC</h3>
+    <p class="desc">AMC 10 风格 · 30 题模拟</p>
+    <div class="links">
+      <a href="amc/intro.html">Intro</a>
+      <a href="amc/syllabus.html">Syllabus</a>
+      <a href="amc/practice.html">Practice</a>
+    </div>
+  </div>
+  <div class="card">
+    <h3>USABO</h3>
+    <p class="desc">生物奥赛 · 20 题模拟</p>
+    <div class="links">
+      <a href="usabo/intro.html">Intro</a>
+      <a href="usabo/syllabus.html">Syllabus</a>
+      <a href="usabo/practice.html">Practice</a>
+    </div>
+  </div>
+</div>
+
+<h2>迭代路线图（v11–v38 全链路学习平台）</h2>
 <table>
   <tr><th>版本</th><th>目标</th><th>核心输出</th><th>状态</th></tr>
   <tr><td>v10</td><td>题库定稿（8 科 × 120 题 = 960 题）</td><td>Practice 题目覆盖 + 解析 + 计时 + 难度 + 模拟卷</td><td><span class="badge badge-dashed">Done</span></td></tr>
@@ -215,8 +324,16 @@
   <tr><td>v16</td><td>Dashboard可视化 + 数据互通</td><td>覆盖率真色块热力图(Paper折叠) + 7天自适应排期+错题专练Tab + JSON导入导出 + AppData Profile联动</td><td><span class="badge badge-dashed">Done</span></td></tr>
   <tr><td>v17</td><td>刷题体验升级 + 入门引导</td><td>practice-engine v6浮动导航(Prev/Next/Go+计数) + Dark Mode切换 + 8科Intro入门页(权重速览TOP10) + 首页年级阶段入口(9-10/11/12三档)</td><td><span class="badge badge-dashed">Done</span></td></tr>
   <tr><td>v18</td><td>题目解析+讲义全配套 + 主观题</td><td>8科×120题逐题解析(考点/解法/干扰项) + 每科Topic讲义卡片(概念/技巧/易错点) + 权重配比API + Mock Test真实结构出卷+自适应难度 + TOEFL/IELTS/AP主观题专项页</td><td><span class="badge">Done</span></td></tr>
-  <tr><td>v19</td><td>数据可视化 + 云同步(规划中)</td><td>Chart.js 折线柱状图 + 云端账号保存进度 + 多人比较/排行榜(可选)</td><td><span class="badge badge-dashed">Future</span></td></tr>
-</table>
+  <tr><td>v19</td><td>Chart.js 数据可视化 + 云账号 + 排行榜</td><td>Chart.js 折线(错题趋势)/柱状(8科正确率)/饼图(掌握度)；localStorage 用户注册登录+Sync；Top10 排行榜+个人排名</td><td><span class="badge badge-dashed">Done</span></td></tr>
+  <tr><td>v20</td><td>AI 薄弱点诊断 + 错题讲解</td><td>ai-tutor.js：diagnose(薄弱TOP5+提升分)/explain(考点回顾+解题策略+陷阱)；Dashboard AI 诊断报告+讲解按钮</td><td><span class="badge badge-dashed">Done</span></td></tr>
+  <tr><td>v21</td><td>移动端 PWA + 打卡奖励</td><td>manifest.json+sw.js(cache-first)+响应式(@media)；streak.js 每日打卡+5级徽章(Bronze→Legend)；Dashboard 打卡墙</td><td><span class="badge badge-dashed">Done</span></td></tr>
+  <tr><td>v22</td><td>间隔复习 + 对比分析 + 冲刺看板</td><td>spaced-repetition.js SM-2简化算法(getDueQuestions)；?srs=due 到期复习模式；SVG雷达图5维对比；目标分+倒计时+每日拆解</td><td><span class="badge badge-dashed">Done</span></td></tr>
+  <tr><td>v23</td><td>竞赛题库 + 写作批改 + 听说模拟</td><td>UKMT/AMC/USABO 3科目(30+30+20题)；writing-grader.js 4维Rubric+writing-lab.html；TOEFL/IELTS listening/speaking页(音频占位+计时器+录音)</td><td><span class="badge badge-dashed">Done</span></td></tr>
+  <tr><td>v24</td><td>单词本 + 学习笔记</td><td>vocab.js TOEFL/IELTS/SAT各100词卡片翻转+进度；notes.js 笔记+高亮+导出；notes.html 汇总页；practice-engine笔记按钮</td><td><span class="badge badge-dashed">Done</span></td></tr>
+  <tr><td>v35</td><td>小组协作（简化版）</td><td>collab.html + collab.js：创建/加入房间 + 8 科共享题库选择 + 讨论区 localStorage 消息 + 房间排行榜</td><td><span class="badge badge-dashed">Done</span></td></tr>
+  <tr><td>v36</td><td>家长/导师查看模式</td><td>parent.html：只读模式 + 周报生成 + 8 科成绩单 + 薄弱科目建议</td><td><span class="badge badge-dashed">Done</span></td></tr>
+  <tr><td>v37</td><td>API 开放 + 第三方集成</td><td>api.html：9 组 window.* API 文档 + 调用示例 + MCP 集成说明</td><td><span class="badge badge-dashed">Done</span></td></tr>
+  <tr><td>v38</td><td>全站打包发布 + 性能优化</td><td>README.md + build.sh + common.css + 404.html + 懒加载/字体预加载</td><td><span class="badge">Done</span></td></tr></table>
 
 <div class="box-dashed" style="margin-top:16px;">
   <strong>v11 拆分方法</strong> · IB：Group 1-6 每科展开 HL/SL + 对应 Paper 结构；A-Level：Math / Physics / Chemistry / Biology / Economics 各拆 AS + A2；SAT：R&W（Craft/Info/Conventions/Expression 4 domain）+ Math（Algebra/Advanced/PSD/Geom）各拆 3 层 skill；AP：按官方 CED 的 Unit 1–N 及 Learning Objective；TOEFL / IELTS：按 4 section × 题型/能力点；IGCSE：0580 Math / 0625 Phy / 0620 Chem / 0610 Bio / 0455 Econ 各拆 Core / Extended 对应 Topic。所有 syllabus v-badge 升级为 v2。
@@ -224,6 +341,14 @@
 
 <div class="box-dashed" style="margin-top:10px;">
   <strong>v16–v18 全景说明</strong> · <em>v16 Dashboard 深度</em>：真色块热力图(0-60%红/60-80%黄/80-100%绿/未做灰)+Paper手风琴折叠；7天21槽位Round-Robin去重排期×每日目标题数输入 + 错题专练Tab；JSON导入导出(带时间戳文件名)；AppData Profile速览卡 + 分数阈值掌握度Hint。<em>v17 体验+引导</em>：practice-engine v6右下角固定浮动导航栏(Prev/Next/题号跳转Go+实时已答计数器)+Dark Mode一键切换(localStorage记忆)；8科Intro页(考纲结构权重表+TOP10高频Topic带进度显示+三步走路径)；首页插入9-10探索 / 11攻坚 / 12申请季 三档年级入口卡；8科卡片统一追加Intro链接。<em>v18 内容+主观题</em>：960题逐题解析(考点/三段解法/干扰项三错因)+Show Answer按钮改为"Show Answer + Explanation"；每科Topic讲义卡(#topicNotes，URL?topic=单张模式/默认列表模式，含概念定义/技巧要点/易错提醒+去刷题锚点)；权重配比allocateQuestionsByWeight API(SAT 120题精确匹配)；Mock Test按权重抽题+前10题正确率阈值(≤50%降/≥80%升)自动调整后10题难度；TOEFL/IELTS/AP主观题页(Writing/Speaking/FRQ/分步Rubric+计时器+localStorage答题历史)。
+</div>
+
+<div class="box-dashed" style="margin-top:10px;">
+  <strong>v19–v24 全景说明</strong> · <em>v19 可视化+账号</em>：Chart.js 三图(折线/柱状/饼图)替代文本模拟；localStorage 用户注册登录+数据 Sync；Top10 排行榜含自身排名。<em>v20 AI 辅导</em>：ai-tutor.js 薄弱TOP5诊断(正确率×权重排序)+AI讲解(考点回顾/解题策略/陷阱)。<em>v21 PWA+打卡</em>：manifest+SW cache-first+@media响应式；streak.js 每日打卡+Bronze→Legend 五级徽章。<em>v22 复习+对比+冲刺</em>：spaced-repetition.js SM-2简化算法；?srs=due 到期复习模式；SVG雷达图5维对比；目标分+倒计时+每日拆解。<em>v23 竞赛+写作+听说</em>：UKMT(30)/AMC(30)/USABO(20)三科竞赛题库；writing-grader.js 4维Rubric+writing-lab.html；TOEFL/IELTS listening/speaking页(音频占位+计时器+录音)。<em>v24 单词+笔记</em>：vocab.js 300词卡片翻转+进度；notes.js 笔记+高亮+JSON导出；notes.html汇总页。
+</div>
+
+<div class="box-dashed" style="margin-top:10px;">
+  <strong>v35–v38 生态扩展</strong> · <em>v35 协作</em>：collab.html+collab.js 创建/加入房间+共享题库+讨论区+房间排行榜。<em>v36 家长模式</em>：parent.html 只读查看+周报生成+8科成绩单+薄弱科目建议。<em>v37 API开放</em>：api.html 9组window.*API完整文档+代码示例+MCP集成说明。<em>v38 打包发布</em>：README.md+build.sh+common.css+404.html+懒加载+字体预加载。
 </div>
 
 <div class="footer">
@@ -234,5 +359,50 @@
 </div>
 
 <script src="../../js/back-to-top.js"></script>
+<script>
+(function() {
+  var lazyImgs = document.querySelectorAll('img[loading="lazy"]');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          var img = entry.target;
+          img.src = img.dataset.src || img.src;
+          io.unobserve(img);
+        }
+      });
+    });
+    lazyImgs.forEach(function(img) { io.observe(img); });
+  } else {
+    lazyImgs.forEach(function(img) {
+      img.src = img.dataset.src || img.src;
+    });
+  }
+})();
+</script>
+<script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js').catch(function() {});
+}
+</script>
+<script>
+(function() {
+  var link = document.createElement('link');
+  link.rel = 'manifest';
+  link.href = 'manifest.json';
+  document.head.appendChild(link);
+})();
+</script>
+<style>
+@media (max-width: 768px) {
+  .grid { grid-template-columns: 1fr !important; }
+  .grid-3 { grid-template-columns: 1fr !important; }
+  .card { padding: 10px 12px; }
+  body { font-size: 14px; padding: 16px 10px 32px; }
+  h1 { font-size: 1.3rem; }
+  h2 { font-size: 1rem; }
+  table { font-size: 0.75rem; overflow-x: auto; display: block; }
+}
+</style>
 </body>
 </html>

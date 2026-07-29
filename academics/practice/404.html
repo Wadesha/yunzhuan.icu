@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>404 - 页面未找到 | Practice</title>
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #ffffff;
+    color: #111111;
+    text-align: center;
+    padding: 20px;
+  }
+  .container {
+    max-width: 500px;
+  }
+  h1 {
+    font-size: 6rem;
+    font-weight: 900;
+    margin-bottom: 0;
+    letter-spacing: -4px;
+    line-height: 1;
+  }
+  h2 {
+    font-size: 1.2rem;
+    margin: 12px 0 20px;
+    color: #555;
+    font-weight: 500;
+  }
+  p {
+    color: #666;
+    margin-bottom: 24px;
+    font-size: 0.95rem;
+  }
+  .home-link {
+    display: inline-block;
+    border: 1px solid #111;
+    padding: 10px 24px;
+    color: #111;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.2s;
+  }
+  .home-link:hover {
+    background: #111;
+    color: #fff;
+  }
+  .practice-link {
+    display: inline-block;
+    margin-left: 12px;
+    border: none;
+    padding: 10px 24px;
+    color: #555;
+    text-decoration: none;
+    font-size: 0.9rem;
+  }
+  .practice-link:hover {
+    color: #111;
+    text-decoration: underline;
+  }
+  .error-code {
+    font-family: 'Courier New', monospace;
+    color: #ccc;
+    font-size: 0.82rem;
+    margin-top: 30px;
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    <h1>404</h1>
+    <h2>页面未找到</h2>
+    <p>抱歉，您访问的页面不存在或已被移除。<br>请检查链接是否正确，或返回首页继续浏览。</p>
+    <div>
+      <a href="../index.html" class="home-link">返回首页</a>
+      <a href="../academics/practice/index.html" class="practice-link">Practice 中心</a>
+    </div>
+    <div class="error-code">Error 404 · Page Not Found</div>
+  </div>
+</body>
+</html>

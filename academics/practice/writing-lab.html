@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Writing Lab · 写作批改</title>
+<link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 860px; margin: 0 auto; padding: 24px 16px 48px; background: #ffffff; color: #111111; line-height: 1.7; font-size: 15px; }
+a { color: #111111; text-decoration: none; border-bottom: 1px solid #cccccc; }
+a:hover { border-bottom-color: #111111; }
+.nav { padding-bottom: 12px; margin-bottom: 20px; border-bottom: 1px solid #e0e0e0; font-size: 0.88rem; color: #888888; }
+.nav a { color: #111111; }
+.nav .sep { color: #cccccc; margin: 0 6px; }
+h1 { font-size: 1.6rem; margin-bottom: 4px; }
+h2 { font-size: 1.1rem; font-weight: 700; margin: 28px 0 8px; padding-bottom: 6px; border-bottom: 1px solid #111111; }
+h3 { font-size: 0.98rem; font-weight: 700; margin: 16px 0 4px; }
+p, li { margin-bottom: 6px; color: #111111; }
+.muted { color: #888888; font-size: 0.85rem; }
+.subtitle { color: #555555; font-size: 0.95rem; margin-bottom: 20px; }
+.box { border: 1px solid #111111; padding: 14px 18px; margin: 12px 0; }
+.box-dashed { border: 1px dashed #888888; padding: 14px 18px; margin: 12px 0; }
+.footer { margin-top: 36px; padding-top: 16px; border-top: 1px solid #e0e0e0; color: #888888; font-size: 0.82rem; }
+.v-badge { display: inline-block; border: 1px solid #111111; padding: 0 6px; font-size: 0.7rem; font-weight: 700; }
+textarea { width: 100%; min-height: 280px; padding: 12px; border: 1px solid #888; font-family: inherit; font-size: 0.9rem; line-height: 1.7; resize: vertical; background: #fff; color: #111; }
+textarea:focus { outline: none; border-color: #111; }
+.btn { display: inline-block; padding: 8px 18px; border: 1px solid #111; background: #fff; color: #111; font-family: inherit; font-size: 0.88rem; cursor: pointer; margin-right: 8px; font-weight: 600; }
+.btn:hover { background: #111; color: #fff; }
+.btn-primary { background: #111; color: #fff; }
+.btn-primary:hover { background: #333; }
+select { padding: 6px 10px; border: 1px solid #888; font-family: inherit; font-size: 0.88rem; background: #fff; margin-right: 10px; }
+.score-display { border: 1px solid #111; padding: 16px; margin: 16px 0; display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
+.score-big { font-size: 2.5rem; font-weight: 700; }
+.score-label { font-size: 0.85rem; color: #555; }
+.score-bar { height: 8px; background: #eee; border: 1px solid #ccc; width: 120px; position: relative; }
+.score-bar-fill { height: 100%; background: #111; }
+.feedback-list { list-style: none; margin-left: 0; }
+.feedback-list li { padding: 8px 12px; margin-bottom: 6px; border-left: 3px solid #ccc; font-size: 0.88rem; }
+.feedback-list .fb-success { border-left-color: #111; background: #f9f9f9; }
+.feedback-list .fb-warning { border-left-color: #888; background: #fafafa; }
+.feedback-list .fb-error { border-left-color: #555; background: #fafafa; }
+.feedback-list .fb-info { border-left-color: #bbb; color: #555; }
+.example-box { border: 1px dashed #888; padding: 12px 16px; margin: 10px 0; font-size: 0.85rem; line-height: 1.7; color: #333; }
+.example-box strong { color: #111; }
+@media (max-width: 600px) {
+  textarea { min-height: 200px; }
+  .score-display { flex-direction: column; align-items: flex-start; }
+}
+</style>
+</head>
+<body>
+
+<div class="nav">
+  <a href="../../index.html">Home</a> <span class="sep">/</span>
+  <a href="../index.html">Academics</a> <span class="sep">/</span>
+  <a href="index.html">Practice</a> <span class="sep">/</span>
+  Writing Lab
+</div>
+
+<h1>Writing Lab · 智能写作批改 <span class="v-badge">v30</span></h1>
+<p class="subtitle">4 维度评分 · 雷达图可视化 · 逐句反馈 · 范文对照</p>
+
+<div class="box-dashed">
+  <strong>使用说明</strong>：选择作文类型 → 输入或粘贴作文 → 点击"智能批改" → 查看评分、雷达图、反馈和范文。
+</div>
+
+<h2>作文类型</h2>
+<div style="margin: 12px 0;">
+  <select id="essayType">
+    <option value="TOEFL Integrated">TOEFL Integrated (综合写作)</option>
+    <option value="TOEFL Independent">TOEFL Independent (独立写作)</option>
+    <option value="IELTS Task 1">IELTS Task 1 (书信/图表)</option>
+    <option value="IELTS Task 2">IELTS Task 2 (议论文)</option>
+    <option value="AP FRQ">AP FRQ (简答题)</option>
+  </select>
+  <button class="btn btn-primary" id="gradeBtn">智能批改</button>
+  <button class="btn" id="clearBtn">清空</button>
+</div>
+
+<h2>作文输入</h2>
+<textarea id="essayInput" placeholder="在此输入或粘贴你的作文..."></textarea>
+
+<div id="resultArea" style="display:none;margin-top:24px;">
+  <h2>批改结果</h2>
+
+  <div class="score-display">
+    <div>
+      <div class="score-big" id="totalScore">0</div>
+      <div class="score-label">总分 (满分 100)</div>
+    </div>
+    <div id="rubricScores" style="flex:1;min-width:300px;"></div>
+  </div>
+
+  <h3>能力雷达图</h3>
+  <div id="radarContainer" style="text-align:center;margin:16px 0;">
+    <svg id="radarSvg" width="420" height="380" viewBox="0 0 420 380" style="max-width:100%;height:auto;"></svg>
+  </div>
+
+  <h3>逐维反馈</h3>
+  <div id="feedbackContainer"></div>
+
+  <h3>范文对照</h3>
+  <div id="sampleContainer"></div>
+</div>
+
+<div class="footer">
+  <a href="index.html">Practice Home</a> ·
+  <a href="toefl/subjective.html">TOEFL Writing</a> ·
+  <a href="ielts/subjective.html">IELTS Writing</a> ·
+  <a href="javascript:window.scrollTo(0,0)">Back to top</a>
+</div>
+
+<script src="../../js/writing-grader.js"></script>
+<script>
+(function() {
+  'use strict';
+
+  var SAMPLES = {
+    'TOEFL Integrated': '<strong>Sample Response (Score 90+):</strong><br>The reading discusses the benefits of a four-day workweek, while the lecturer challenges each point. First, the reading claims increased productivity, but the professor argues employees would compress five days of work into four, causing more stress. Second, the reading suggests cost savings, yet the professor notes hiring additional staff would be more expensive. Third, the environmental benefits are minimal since employees would still drive for errands on their day off.',
+    'TOEFL Independent': '<strong>Sample Response (Score 90+):</strong><br>I strongly agree that universities should require students to take interdisciplinary courses. While specialization is valuable, a well-rounded education fosters adaptability and creativity. First, interdisciplinary knowledge drives innovation — the most groundbreaking discoveries happen at field intersections. Second, most professionals change careers multiple times, and broad coursework provides resilience. Finally, courses outside one\'s major cultivate different thinking modes that transfer across domains.',
+    'IELTS Task 1': '<strong>Sample Response (Score 90+):</strong><br>The chart illustrates the distribution of energy sources in four countries. Country A relies most heavily on coal at 65%, while Country B has the highest proportion of renewable energy at 40%. Natural gas is the dominant source in Country C, accounting for 55%. In contrast, Country D uses a balanced mix of all sources. Overall, the data reveals significant differences in energy policies across these nations.',
+    'IELTS Task 2': '<strong>Sample Response (Score 90+):</strong><br>In recent years, the debate over whether governments should regulate social media has intensified. While social media offers unprecedented connectivity, I believe some regulation is necessary to protect public interest. On the one hand, social platforms enable free speech and information sharing. On the other hand, unregulated use has contributed to misinformation, mental health issues, and echo chambers. Governments should strike a balance between protecting individual freedoms and ensuring platform accountability.',
+    'AP FRQ': '<strong>Sample Response (Score 90+):</strong><br>The Hardy-Weinberg principle states that allele frequencies in a population remain constant in the absence of evolutionary forces. For a population in equilibrium, p² + 2pq + q² = 1, where p and q represent allele frequencies. If 36% of individuals show the recessive phenotype (q² = 0.36), then q = 0.6 and p = 0.4. The heterozygous frequency is 2pq = 2(0.4)(0.6) = 0.48. Deviations from equilibrium may indicate selection, genetic drift, or non-random mating.'
+  };
+
+  var essayInput = document.getElementById('essayInput');
+  var essayType = document.getElementById('essayType');
+  var gradeBtn = document.getElementById('gradeBtn');
+  var clearBtn = document.getElementById('clearBtn');
+  var resultArea = document.getElementById('resultArea');
+
+  gradeBtn.addEventListener('click', function() {
+    var text = essayInput.value;
+    var type = essayType.value;
+    if (!text.trim()) {
+      alert('请输入作文内容');
+      return;
+    }
+    var result = window.WritingGrader.grade(text, type);
+    renderResult(result, type);
+  });
+
+  clearBtn.addEventListener('click', function() {
+    essayInput.value = '';
+    resultArea.style.display = 'none';
+  });
+
+  function renderResult(result, type) {
+    resultArea.style.display = 'block';
+    document.getElementById('totalScore').textContent = result.score;
+
+    var rubricDiv = document.getElementById('rubricScores');
+    rubricDiv.innerHTML = '';
+    var rubricItems = [
+      { label: 'Task Response', score: result.rubric.taskResponse, weight: '25%' },
+      { label: 'Coherence & Cohesion', score: result.rubric.coherenceCohesion, weight: '25%' },
+      { label: 'Lexical Resource', score: result.rubric.lexicalResource, weight: '25%' },
+      { label: 'Grammatical Range', score: result.rubric.grammaticalRange, weight: '25%' }
+    ];
+    rubricItems.forEach(function(item) {
+      var div = document.createElement('div');
+      div.style.marginBottom = '10px';
+      div.innerHTML = '<div style="font-size:0.82rem;margin-bottom:4px;"><strong>' + item.label + '</strong> (' + item.weight + '): ' + item.score + '/25</div>' +
+        '<div class="score-bar"><div class="score-bar-fill" style="width:' + (item.score / 25 * 100) + '%;"></div></div>';
+      rubricDiv.appendChild(div);
+    });
+
+    drawRadar(result.rubric);
+    renderFeedback(result.feedback);
+    renderSample(type);
+
+    resultArea.scrollIntoView({ behavior: 'smooth' });
+  }
+
+  function drawRadar(rubric) {
+    var svg = document.getElementById('radarSvg');
+    var w = 420, h = 380;
+    var cx = w / 2, cy = h / 2;
+    var radius = 130;
+    var labels = ['Task Response', 'Coherence', 'Lexical', 'Grammar'];
+    var scores = [rubric.taskResponse / 25, rubric.coherenceCohesion / 25, rubric.lexicalResource / 25, rubric.grammaticalRange / 25];
+    var n = 4;
+
+    var html = '';
+
+    for (var level = 1; level <= 5; level++) {
+      var r = radius * level / 5;
+      var points = [];
+      for (var i = 0; i < n; i++) {
+        var angle = -Math.PI / 2 + (2 * Math.PI * i / n);
+        points.push((cx + r * Math.cos(angle)) + ',' + (cy + r * Math.sin(angle)));
+      }
+      html += '<polygon points="' + points.join(' ') + '" fill="none" stroke="#ddd" stroke-width="1"/>';
+    }
+
+    for (var i = 0; i < n; i++) {
+      var angle = -Math.PI / 2 + (2 * Math.PI * i / n);
+      html += '<line x1="' + cx + '" y1="' + cy + '" x2="' + (cx + radius * Math.cos(angle)) + '" y2="' + (cy + radius * Math.sin(angle)) + '" stroke="#ddd" stroke-width="1"/>';
+    }
+
+    var dataPoints = [];
+    for (var i = 0; i < n; i++) {
+      var angle = -Math.PI / 2 + (2 * Math.PI * i / n);
+      var r = radius * scores[i];
+      dataPoints.push((cx + r * Math.cos(angle)) + ',' + (cy + r * Math.sin(angle)));
+    }
+    html += '<polygon points="' + dataPoints.join(' ') + '" fill="rgba(0,0,0,0.15)" stroke="#111" stroke-width="2"/>';
+
+    for (var i = 0; i < n; i++) {
+      var angle = -Math.PI / 2 + (2 * Math.PI * i / n);
+      var r = radius * scores[i];
+      var px = cx + r * Math.cos(angle);
+      var py = cy + r * Math.sin(angle);
+      html += '<circle cx="' + px + '" cy="' + py + '" r="4" fill="#111"/>';
+    }
+
+    for (var i = 0; i < n; i++) {
+      var angle = -Math.PI / 2 + (2 * Math.PI * i / n);
+      var lx = cx + (radius + 30) * Math.cos(angle);
+      var ly = cy + (radius + 30) * Math.sin(angle);
+      html += '<text x="' + lx + '" y="' + ly + '" text-anchor="middle" dominant-baseline="middle" font-size="12" fill="#333" font-weight="600">' + labels[i] + '</text>';
+    }
+
+    svg.innerHTML = html;
+  }
+
+  function renderFeedback(feedback) {
+    var container = document.getElementById('feedbackContainer');
+    container.innerHTML = '';
+    var ul = document.createElement('ul');
+    ul.className = 'feedback-list';
+    feedback.forEach(function(fb) {
+      var li = document.createElement('li');
+      li.className = 'fb-' + fb.type;
+      li.textContent = fb.text;
+      ul.appendChild(li);
+    });
+    container.appendChild(ul);
+  }
+
+  function renderSample(type) {
+    var container = document.getElementById('sampleContainer');
+    container.innerHTML = '';
+    var box = document.createElement('div');
+    box.className = 'example-box';
+    box.innerHTML = SAMPLES[type] || '<p>暂无此类型范文</p>';
+    container.appendChild(box);
+  }
+
+})();
+</script>
+
+</body>
+</html>

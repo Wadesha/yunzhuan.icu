@@ -1,0 +1,329 @@
+/**
+ * common.css - Practice 模块通用样式
+ * 可被各学科 practice.html 覆盖
+ */
+
+/* ===== 通用容器 ===== */
+.practice-container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 24px 16px 48px;
+  background: #ffffff;
+  color: #111111;
+  line-height: 1.7;
+  font-size: 15px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* ===== 导航 ===== */
+.practice-nav {
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #e0e0e0;
+  font-size: 0.88rem;
+  color: #888888;
+}
+
+.practice-nav a {
+  color: #111111;
+  text-decoration: none;
+  border-bottom: 1px solid #cccccc;
+}
+
+.practice-nav a:hover {
+  border-bottom-color: #111111;
+}
+
+.practice-nav .sep {
+  color: #cccccc;
+  margin: 0 6px;
+}
+
+/* ===== 标题 ===== */
+.practice-container h1 {
+  font-size: 1.6rem;
+  margin-bottom: 4px;
+}
+
+.practice-container h2 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 28px 0 8px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid #111111;
+}
+
+.practice-container h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 18px 0 6px;
+}
+
+/* ===== 卡片 ===== */
+.practice-card {
+  border: 1px solid #e0e0e0;
+  padding: 14px 16px;
+  background: #ffffff;
+  margin: 12px 0;
+}
+
+.practice-card h3 {
+  margin-top: 0;
+}
+
+/* ===== 网格 ===== */
+.practice-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 16px 0;
+}
+
+.practice-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin: 16px 0;
+}
+
+@media (max-width: 768px) {
+  .practice-grid,
+  .practice-grid-3 {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .practice-grid-3 {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* ===== 表格 ===== */
+.practice-container table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+  margin: 8px 0 16px;
+}
+
+.practice-container th,
+.practice-container td {
+  border: 1px solid #e0e0e0;
+  padding: 6px 10px;
+  text-align: left;
+  vertical-align: top;
+}
+
+.practice-container th {
+  background: #ffffff;
+  border-bottom: 2px solid #111111;
+  font-weight: 700;
+}
+
+/* ===== 徽章 ===== */
+.practice-badge {
+  display: inline-block;
+  border: 1px solid #111111;
+  padding: 0 6px;
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+.practice-badge-dashed {
+  border-style: dashed;
+  color: #888888;
+}
+
+/* ===== 统计数字 ===== */
+.practice-stats {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  margin: 14px 0;
+}
+
+@media (max-width: 768px) {
+  .practice-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.practice-stat {
+  border: 1px solid #e0e0e0;
+  padding: 12px 10px;
+  text-align: center;
+  background: #ffffff;
+}
+
+.practice-stat .stat-value {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #111111;
+}
+
+.practice-stat .stat-label {
+  font-size: 0.72rem;
+  color: #888888;
+  margin-top: 4px;
+}
+
+/* ===== 信息框 ===== */
+.practice-v-info {
+  border: 1px dashed #888888;
+  padding: 8px 12px;
+  margin: 12px 0;
+  font-size: 0.82rem;
+  color: #555555;
+}
+
+/* ===== 底部 ===== */
+.practice-footer {
+  margin-top: 36px;
+  padding-top: 16px;
+  border-top: 1px solid #e0e0e0;
+  color: #888888;
+  font-size: 0.82rem;
+}
+
+/* ===== 链接 ===== */
+.practice-container a {
+  color: #111111;
+  text-decoration: none;
+  border-bottom: 1px solid #cccccc;
+}
+
+.practice-container a:hover {
+  border-bottom-color: #111111;
+}
+
+/* ===== 做题样式 ===== */
+.practice-q {
+  border: 1px solid #e0e0e0;
+  padding: 14px 16px;
+  margin: 14px 0;
+  background: #fafafa;
+}
+
+.practice-q-num {
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: #555555;
+  margin-bottom: 6px;
+}
+
+.practice-q-stem {
+  margin-bottom: 10px;
+}
+
+.practice-q-choices {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.practice-q-choices li {
+  padding: 6px 12px;
+  cursor: pointer;
+  border: 1px solid #e0e0e0;
+  margin-bottom: 4px;
+  background: #fff;
+  font-size: 0.88rem;
+}
+
+.practice-q-choices li:hover {
+  background: #f5f5f5;
+}
+
+.practice-q-choices li.correct {
+  border-left: 3px solid #111;
+  font-weight: 700;
+  padding-left: 9px;
+}
+
+.practice-q-choices li.wrong {
+  border-left: 3px dashed #888;
+  padding-left: 9px;
+}
+
+.practice-q-answer {
+  margin-top: 10px;
+  padding: 10px;
+  background: #f5f5f5;
+  border: 1px solid #e0e0e0;
+  font-size: 0.85rem;
+}
+
+/* ===== 按钮 ===== */
+.practice-btn {
+  border: 1px solid #111111;
+  background: #fff;
+  color: #111111;
+  padding: 6px 14px;
+  cursor: pointer;
+  font-weight: 600;
+  font-family: inherit;
+  font-size: 0.9rem;
+}
+
+.practice-btn:hover {
+  background: #111111;
+  color: #fff;
+}
+
+/* ===== 懒加载图片 ===== */
+img[loading="lazy"] {
+  background: #f0f0f0;
+  min-height: 100px;
+}
+
+/* ===== 字体预加载备用 ===== */
+@font-face {
+  font-family: 'system-fallback';
+  src: local(-apple-system), local(BlinkMacSystemFont), local('Segoe UI'), local(Roboto), local(sans-serif);
+}
+
+/* ===== 暗色模式 ===== */
+@media (prefers-color-scheme: dark) {
+  .practice-container {
+    background: #111;
+    color: #e5e5e5;
+  }
+  .practice-container a {
+    color: #e5e5e5;
+    border-color: #555;
+  }
+  .practice-card,
+  .practice-stat,
+  .practice-q {
+    background: #1a1a1a;
+    border-color: #444;
+  }
+  .practice-container th {
+    background: #1a1a1a;
+  }
+  .practice-container th,
+  .practice-container td {
+    border-color: #444;
+  }
+  .practice-q-choices li {
+    background: #222;
+    border-color: #444;
+    color: #e5e5e5;
+  }
+  .practice-q-choices li:hover {
+    background: #2a2a2a;
+  }
+  .practice-q-answer {
+    background: #1a1a1a;
+    border-color: #444;
+  }
+  .practice-btn {
+    background: #1a1a1a;
+    color: #e5e5e5;
+    border-color: #555;
+  }
+  .practice-btn:hover {
+    background: #333;
+  }
+}

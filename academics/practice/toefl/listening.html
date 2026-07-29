@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TOEFL Listening Mock</title>
+<link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 820px; margin: 0 auto; padding: 24px 16px 48px; background: #ffffff; color: #111111; line-height: 1.7; font-size: 15px; }
+a { color: #111111; text-decoration: none; border-bottom: 1px solid #cccccc; }
+a:hover { border-bottom-color: #111111; }
+.nav { padding-bottom: 12px; margin-bottom: 20px; border-bottom: 1px solid #e0e0e0; font-size: 0.88rem; color: #888888; }
+.nav a { color: #111111; }
+.nav .sep { color: #cccccc; margin: 0 6px; }
+h1 { font-size: 1.6rem; margin-bottom: 4px; }
+h2 { font-size: 1.1rem; font-weight: 700; margin: 28px 0 8px; padding-bottom: 6px; border-bottom: 1px solid #111111; }
+h3 { font-size: 0.98rem; font-weight: 700; margin: 16px 0 4px; }
+p, li { margin-bottom: 6px; color: #111111; }
+.muted { color: #888888; font-size: 0.85rem; }
+.subtitle { color: #555555; font-size: 0.95rem; margin-bottom: 20px; }
+.box { border: 1px solid #111111; padding: 14px 18px; margin: 12px 0; }
+.box-dashed { border: 1px dashed #888888; padding: 14px 18px; margin: 12px 0; }
+.q { border: 1px solid #e0e0e0; padding: 14px 18px; margin: 12px 0; }
+.q .q-num { font-weight: 700; font-size: 0.82rem; color: #888888; }
+.q .q-text { margin: 8px 0; }
+.q .q-choices { list-style: none; margin-left: 0; }
+.q .q-choices li { margin-bottom: 4px; padding-left: 24px; text-indent: -24px; cursor: pointer; }
+.q .q-answer { margin-top: 8px; padding-top: 8px; border-top: 1px dashed #e0e0e0; font-size: 0.85rem; }
+.q .q-answer strong { color: #111111; }
+.footer { margin-top: 36px; padding-top: 16px; border-top: 1px solid #e0e0e0; color: #888888; font-size: 0.82rem; }
+.v-badge { display: inline-block; border: 1px solid #111111; padding: 0 6px; font-size: 0.7rem; font-weight: 700; }
+.audio-box { border: 1px dashed #888; padding: 12px; margin: 10px 0; background: #fafafa; }
+.audio-box audio { width: 100%; }
+.section-tag { display: inline-block; padding: 2px 8px; border: 1px solid #888; font-size: 0.72rem; font-weight: 700; color: #555; margin-right: 6px; }
+.timer { display: inline-flex; align-items: center; gap: 10px; padding: 8px 14px; border: 1px solid #111; font-family: 'Courier New', monospace; font-size: 1.1rem; font-weight: 700; margin: 8px 0; }
+.btn { display: inline-block; padding: 6px 14px; border: 1px solid #111; background: #fff; color: #111; font-family: inherit; font-size: 0.85rem; cursor: pointer; margin-right: 6px; }
+.btn:hover { background: #111; color: #fff; }
+.btn-sm { padding: 4px 10px; font-size: 0.78rem; }
+</style>
+</head>
+<body data-subject="toefl">
+
+<div class="nav">
+  <a href="../../../index.html">Home</a> <span class="sep">/</span>
+  <a href="../../index.html">Academics</a> <span class="sep">/</span>
+  <a href="../index.html">Practice</a> <span class="sep">/</span>
+  <a href="intro.html">TOEFL</a> <span class="sep">/</span>
+  Listening
+</div>
+
+<h1>TOEFL Listening Mock <span class="v-badge">v31</span></h1>
+<p class="subtitle">3 段听力模拟 · 每段含音频占位 + 题目 + 答题区</p>
+
+<div class="box-dashed">
+  <strong>使用说明</strong>：每段听力先播放音频（占位），然后回答相关问题。实际考试中音频不可回放，请认真听记。
+</div>
+
+<!-- ================ SECTION 1 ================ -->
+<h2>Section 1 · Conversation</h2>
+
+<div class="audio-box">
+  <p><strong>🎧 Listening Audio 1:</strong></p>
+  <audio controls>
+    <source src="#" type="audio/mpeg">
+    <em style="color:#888;font-size:0.82rem;">[音频文件待接入] - Student talking to advisor about course selection</em>
+  </audio>
+  <p class="muted" style="font-size:0.8rem;">对话场景：学生与学术顾问讨论选课问题 · 约 3 分钟</p>
+</div>
+
+<div class="q" id="q-l1-1">
+  <div class="q-num">【L1-01】 Q1 · Section 1</div>
+  <div class="q-text"><span class="section-tag">Listening</span> What is the student's main concern?</div>
+  <ul class="q-choices">
+    <li>A) She cannot access the online course registration system.</li>
+    <li>B) She is unsure which elective courses to take.</li>
+    <li>C) She failed a prerequisite course last semester.</li>
+    <li>D) She needs to change her major.</li>
+  </ul>
+  <div class="q-answer"><strong>Answer:</strong> B. The student is seeking advice about elective course selection for next semester.</div>
+</div>
+
+<div class="q" id="q-l1-2">
+  <div class="q-num">【L1-02】 Q2 · Section 1</div>
+  <div class="q-text"><span class="section-tag">Listening</span> Why does the advisor recommend the environmental science course?</div>
+  <ul class="q-choices">
+    <li>A) It is offered online.</li>
+    <li>B) It counts toward her major requirements.</li>
+    <li>C) It has a reputation for being interesting.</li>
+    <li>D) It is only offered in the spring semester.</li>
+  </ul>
+  <div class="q-answer"><strong>Answer:</strong> C. The advisor mentions it is interesting and has good reviews from students.</div>
+</div>
+
+<div class="q" id="q-l1-3">
+  <div class="q-num">【L1-03】 Q3 · Section 1</div>
+  <div class="q-text"><span class="section-tag">Listening</span> What does the student decide to do by the end of the conversation?</div>
+  <ul class="q-choices">
+    <li>A) Register for the environmental science course immediately.</li>
+    <li>B) Look at the course catalog and return to discuss options.</li>
+    <li>C) Change her major to environmental science.</li>
+    <li>D) Skip electives and focus on required courses.</li>
+  </ul>
+  <div class="q-answer"><strong>Answer:</strong> B. She will review the catalog and come back for further discussion.</div>
+</div>
+
+<!-- ================ SECTION 2 ================ -->
+<h2>Section 2 · Academic Lecture</h2>
+
+<div class="audio-box">
+  <p><strong>🎧 Listening Audio 2:</strong></p>
+  <audio controls>
+    <source src="#" type="audio/mpeg">
+    <em style="color:#888;font-size:0.82rem;">[音频文件待接入] - Professor lecturing on sustainable energy</em>
+  </audio>
+  <p class="muted" style="font-size:0.8rem;">学术讲座：可持续能源与传统能源对比 · 约 5 分钟</p>
+</div>
+
+<div class="q" id="q-l2-1">
+  <div class="q-num">【L2-01】 Q1 · Section 2</div>
+  <div class="q-text"><span class="section-tag">Listening</span> What is the professor's main point about renewable energy?</div>
+  <ul class="q-choices">
+    <li>A) It is cheaper than fossil fuels in all cases.</li>
+    <li>B) It has both advantages and significant challenges.</li>
+    <li>C) It will completely replace fossil fuels by 2030.</li>
+    <li>D) It is only viable in sunny climates.</li>
+  </ul>
+  <div class="q-answer"><strong>Answer:</strong> B. The professor presents a balanced view of benefits and challenges.</div>
+</div>
+
+<div class="q" id="q-l2-2">
+  <div class="q-num">【L2-02】 Q2 · Section 2</div>
+  <div class="q-text"><span class="section-tag">Listening</span> According to the lecture, what is one major challenge facing solar energy?</div>
+  <ul class="q-choices">
+    <li>A) Solar panels are too expensive to manufacture.</li>
+    <li>B) It cannot generate electricity during cloudy days or at night.</li>
+    <li>C) It requires too much water to operate.</li>
+    <li>D) It produces harmful emissions.</li>
+  </ul>
+  <div class="q-answer"><strong>Answer:</strong> B. The intermittent nature of sunlight is a key challenge mentioned.</div>
+</div>
+
+<div class="q" id="q-l2-3">
+  <div class="q-num">【L2-03】 Q3 · Section 2</div>
+  <div class="q-text"><span class="section-tag">Listening</span> What does the professor mention as a potential solution to the storage problem?</div>
+  <ul class="q-choices">
+    <li>A) Building larger solar farms in desert areas.</li>
+    <li>B) Using battery technology to store excess energy.</li>
+    <li>C) Converting solar energy directly to hydrogen fuel.</li>
+    <li>D) Reducing overall energy consumption.</li>
+  </ul>
+  <div class="q-answer"><strong>Answer:</strong> B. The professor mentions battery storage as a promising solution.</div>
+</div>
+
+<!-- ================ SECTION 3 ================ -->
+<h2>Section 3 · Academic Discussion</h2>
+
+<div class="audio-box">
+  <p><strong>🎧 Listening Audio 3:</strong></p>
+  <audio controls>
+    <source src="#" type="audio/mpeg">
+    <em style="color:#888;font-size:0.82rem;">[音频文件待接入] - Classroom discussion on urban ecology</em>
+  </audio>
+  <p class="muted" style="font-size:0.8rem;">课堂讨论：城市生态学与绿色基础设施 · 约 4 分钟</p>
+</div>
+
+<div class="q" id="q-l3-1">
+  <div class="q-num">【L3-01】 Q1 · Section 3</div>
+  <div class="q-text"><span class="section-tag">Listening</span> What is the main topic of the class discussion?</div>
+  <ul class="q-choices">
+    <li>A) The history of urban planning.</li>
+    <li>B) How green roofs benefit urban environments.</li>
+    <li>C) The economic impact of skyscrapers.</li>
+    <li>D) Water pollution in urban rivers.</li>
+  </ul>
+  <div class="q-answer"><strong>Answer:</strong> B. The discussion focuses on benefits of green roofs in cities.</div>
+</div>
+
+<div class="q" id="q-l3-2">
+  <div class="q-num">【L3-02】 Q2 · Section 3</div>
+  <div class="q-text"><span class="section-tag">Listening</span> Which of the following is mentioned as a benefit of green roofs?</div>
+  <ul class="q-choices">
+    <li>A) They reduce building construction costs.</li>
+    <li>B) They decrease energy consumption for cooling.</li>
+    <li>C) They eliminate the need for parks.</li>
+    <li>D) They attract endangered species.</li>
+  </ul>
+  <div class="q-answer"><strong>Answer:</strong> B. Green roofs help insulate buildings, reducing cooling costs.</div>
+</div>
+
+<div class="q" id="q-l3-3">
+  <div class="q-num">【L3-03】 Q3 · Section 3</div>
+  <div class="q-text"><span class="section-tag">Listening</span> What concern does the student raise about green roof implementation?</div>
+  <ul class="q-choices">
+    <li>A) They are too heavy for most buildings.</li>
+    <li>B) They require too much maintenance.</li>
+    <li>C) The initial installation cost is prohibitive.</li>
+    <li>D) They may attract unwanted insects.</li>
+  </ul>
+  <div class="q-answer"><strong>Answer:</strong> C. The student mentions high upfront costs as a barrier.</div>
+</div>
+
+<script src="../../js/practice-engine.js"></script>
+
+<div class="footer">
+  <a href="intro.html">Intro</a> · <a href="practice.html">Practice</a> · <a href="subjective.html">Subjective</a> · <a href="speaking.html">Speaking</a> · <a href="../index.html">Practice Home</a>
+</div>
+
+</body>
+</html>

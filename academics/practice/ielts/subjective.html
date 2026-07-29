@@ -174,6 +174,7 @@ details[open] summary { margin-bottom: 8px; border-bottom: 1px dashed #e0e0e0; p
       <option value="1">1 · Non User</option>
     </select>
     <button class="btn btn-sm btn-primary" onclick="submitScore('ielts','w1','Writing Task 1 Academic')">提交评分</button>
+    <button class="btn btn-sm" onclick="gradeWriting('ielts','w1','IELTS Task 1')">智能批改</button>
     <span class="score-display" data-score-for="w1"></span>
   </div>
 </div>
@@ -221,6 +222,7 @@ details[open] summary { margin-bottom: 8px; border-bottom: 1px dashed #e0e0e0; p
       <option value="1">1 · Non User</option>
     </select>
     <button class="btn btn-sm btn-primary" onclick="submitScore('ielts','w2','Writing Task 2')">提交评分</button>
+    <button class="btn btn-sm" onclick="gradeWriting('ielts','w2','IELTS Task 2')">智能批改</button>
     <span class="score-display" data-score-for="w2"></span>
   </div>
 </div>
@@ -634,6 +636,33 @@ function parseTime(str) {
   const parts = str.split(':');
   return parseInt(parts[0]) * 60 + parseInt(parts[1]);
 }
+</script>
+
+<script src="../../js/writing-grader.js"></script>
+<script>
+(function() {
+  'use strict';
+
+  window.gradeWriting = function(subject, qid, type) {
+    var textarea = document.querySelector('textarea[data-subject="' + subject + '"][data-qid="' + qid + '"][data-field="answer"]');
+    if (!textarea || !textarea.value.trim()) {
+      alert('请先写作文再批改');
+      return;
+    }
+    var result = window.WritingGrader.grade(textarea.value, type);
+    var summary = '总分: ' + result.score + '/100\n\n';
+    summary += 'Task Response: ' + result.rubric.taskResponse + '/25\n';
+    summary += 'Coherence & Cohesion: ' + result.rubric.coherenceCohesion + '/25\n';
+    summary += 'Lexical Resource: ' + result.rubric.lexicalResource + '/25\n';
+    summary += 'Grammatical Range: ' + result.rubric.grammaticalRange + '/25\n\n';
+    summary += '--- 详细反馈 ---\n';
+    result.feedback.forEach(function(fb) {
+      summary += '[' + fb.type + '] ' + fb.text + '\n';
+    });
+    alert(summary);
+  };
+
+})();
 </script>
 
 </body>
