@@ -537,8 +537,15 @@ var Recommender = {
       var w = 1.0;
       // 1. Freshness
       if (seenRecently.indexOf(card.id) >= 0) w *= 0.05;
-      // 2. Subject rotation
-      if (recentSubjects.filter(function(s){return s===card.subject;}).length >= 2) w *= 0.3;
+      // 2. Subject rotation（前20题强惩罚，后续正常）
+      var recentSubjectCount = recentSubjects.filter(function(s){return s===card.subject;}).length;
+      if (self.profile.totalCards < 20) {
+        // 新用户前20题：强惩罚（权重×0.1），避免连续同科目
+        if (recentSubjects[recentSubjects.length - 1] === card.subject) w *= 0.1;
+      } else {
+        // 稳定用户：正常轮换（权重×0.3）
+        if (recentSubjectCount >= 2) w *= 0.3;
+      }
       // 3. Difficulty adaptation
       if (card.difficulty) {
         var acc = self.getAccuracy(card.subject, card.difficulty);
