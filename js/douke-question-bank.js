@@ -987,6 +987,93 @@
     return total;
   };
 
+  /**
+   * 选出新手池（100题）
+   * 标准：覆盖多科目、多难度、题干清晰、代表性强
+   * @param {number} count - 池子大小，默认100
+   * @returns {Object[]} 新手池题目数组（带metadata）
+   */
+  Q.selectOnboardingPool = function(count) {
+    count = count || 100;
+    var pool = [];
+    var subjects = ['sat','igcse','ib','ap','toefl','ielts','alevel','amc'];
+
+    // 每科目目标数量（按题库大小比例分配）
+    var subjectCounts = {
+      sat: Math.min(25, Math.floor(count * 0.25)),    // SAT 占25%
+      igcse: Math.min(18, Math.floor(count * 0.18)),  // IGCSE 18%
+      ib: Math.min(15, Math.floor(count * 0.15)),     // IB 15%
+      ap: Math.min(12, Math.floor(count * 0.12)),     // AP 12%
+      toefl: Math.min(10, Math.floor(count * 0.10)),  // TOEFL 10%
+      ielts: Math.min(8, Math.floor(count * 0.08)),   // IELTS 8%
+      alevel: Math.min(7, Math.floor(count * 0.07)),  // A-Level 7%
+      amc: Math.min(5, Math.floor(count * 0.05))      // AMC 5%
+    };
+
+    subjects.forEach(function(sub) {
+      var list = Q[sub] || [];
+      if (list.length === 0) return;
+
+      var targetCount = subjectCounts[sub] || 10;
+      var easy = list.filter(function(q) { return q.difficulty === 'easy'; });
+      var medium = list.filter(function(q) { return q.difficulty === 'medium'; });
+      var hard = list.filter(function(q) { return q.difficulty === 'hard'; });
+
+      // 优先选easy（70%），medium（25%），hard（5%）
+      var easyCount = Math.min(Math.ceil(targetCount * 0.7), easy.length);
+      var medCount = Math.min(Math.ceil(targetCount * 0.25), medium.length);
+      var hardCount = Math.min(Math.floor(targetCount * 0.05), hard.length);
+
+      // 随机打乱后取前N个
+      var shuffle = function(arr) { return arr.slice().sort(function() { return Math.random() - 0.5; }); };
+
+      var selected = shuffle(easy).slice(0, easyCount)
+        .concat(shuffle(medium).slice(0, medCount))
+        .concat(shuffle(hard).slice(0, hardCount));
+
+      // 按quality筛选（题干清晰度≥4）
+      selected = selected.filter(function(q) {
+        return q.score && q.score.clarity >= 4;
+      });
+
+      selected.forEach(function(q) {
+        pool.push({
+          id: q.id,
+          subject: sub,
+          topicCode: q.topicCode,
+          topic: q.topic,
+          difficulty: q.difficulty,
+          weight: q.weight || 10,
+          question: q.question,
+          choices: q.choices,
+          answer: q.answer,
+          explanation: q.explanation,
+          score: q.score,
+          expectedTime: Q.estimateExpectedTime(q),
+          isOnboarding: true // 标记为新手池题目
+        });
+      });
+    });
+
+    // 打乱顺序
+    pool = pool.sort(function() { return Math.random() - 0.5; });
+
+    return pool.slice(0, count);
+  };
+
+  /**
+   * 从池中随机抽取n题
+   * @param {Object[]} pool - 题池
+   * @param {number} n - 抽取数量
+   * @returns {Object[]} 抽取的题目
+   */
+  Q.sampleFromPool = function(pool, n) {
+    n = n || 10;
+    if (!pool || pool.length === 0) return [];
+    var shuffled = pool.slice().sort(function() { return Math.random() - 0.5; });
+    return shuffled.slice(0, Math.min(n, shuffled.length));
+  };
+
   // Attach to window
   window.DoukeQB = Q;
 })();

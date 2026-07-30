@@ -245,6 +245,7 @@ if (typeof DoukeVariantEngine !== 'undefined' && TEMPLATE_CARDS.length > 0) {
 var Recommender = {
   profile: null,
   variantPool: [], // 本次会话生成的变体题（不持久化，每次会话重新生成）
+  onboardingPool: [], // 新手池（100题，从题库选出，会话级别缓存）
   init: function() {
     var saved = localStorage.getItem('douke_profile');
     if (saved) {
@@ -270,6 +271,10 @@ var Recommender = {
         preferredTopics: [],// 高愉悦度 topicCode 列表
       };
       this.save();
+    }
+    // 初始化新手池（新用户第一次进入时生成）
+    if (typeof DoukeQB !== 'undefined' && this.profile.totalCards < 20) {
+      this.onboardingPool = DoukeQB.selectOnboardingPool(100);
     }
     // 初始化时生成变体池（为偏好 topic 扩充题目）
     this.refreshVariantPool();
@@ -490,6 +495,21 @@ var Recommender = {
     return a.correct / a.total;
   },
   recommend: function(cards, subjectFilter) {
+    var self = this;
+
+    // 新用户前10题：从新手池随机抽取
+    if (self.profile.totalCards < 10 && self.onboardingPool.length > 0) {
+      var sampled = DoukeQB.sampleFromPool(self.onboardingPool, 10);
+      if (subjectFilter !== 'all') {
+        sampled = sampled.filter(function(c) { return c.subject === subjectFilter; });
+      }
+      if (sampled.length > 0) {
+        // 随机返回一题
+        var idx = Math.floor(Math.random() * sampled.length);
+        return sampled[idx];
+      }
+    }
+
     // 合并原始题库 + 本次会话变体池
     var allCards = cards.concat(this.variantPool);
 
@@ -498,8 +518,6 @@ var Recommender = {
       return true;
     });
     if (pool.length === 0) pool = allCards.slice();
-
-    var self = this;
     var recentSubjects = this.profile.seen.slice(-5).map(function(s) {
       var card = cards.find(function(c) { return c.id === s.cardId; });
       return card ? card.subject : null;
