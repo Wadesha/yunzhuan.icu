@@ -86,6 +86,7 @@
     this.records.push({
       cardId: card.id, subject: card.subject, difficulty: card.difficulty,
       correct: correct, dwellMs: dwellMs || 0, userFeedback: userFeedback || null,
+      expectedTime: card.expectedTime || null, // 题目预期用时（秒），用于后台分析实际/预期比值
       ts: Date.now()
     });
     if (this.records.length > 5000) this.records = this.records.slice(-5000);

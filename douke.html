@@ -320,6 +320,27 @@ var Recommender = {
       return Date.now() - s.ts < 3600000;
     }).map(function(s) { return s.cardId; });
 
+    // 10. 用时比值：用户实际用时 / 预期用时（衡量用户做题速度，不是聪明与否）
+    // 比值<0.5 = 秒选型（题太简单或用户心不在焉）→ 倾向推难题
+    // 比值>2.0 = 苦战型（题太难或需要深度思考）→ 倾向推简单题
+    var cardMap = {};
+    cards.forEach(function(c) { cardMap[c.id] = c; });
+    var recentAnswered = this.profile.seen.slice(-8).filter(function(s) {
+      return s.dwellMs && s.action && s.action !== 'skip';
+    }).slice(-3);
+    var speedRatio = 1.0; // 默认正常
+    if (recentAnswered.length >= 2) {
+      var totalRatio = 0, cnt = 0;
+      recentAnswered.forEach(function(s) {
+        var c = cardMap[s.cardId];
+        if (c && c.expectedTime) {
+          totalRatio += (s.dwellMs / 1000) / c.expectedTime;
+          cnt++;
+        }
+      });
+      if (cnt > 0) speedRatio = totalRatio / cnt;
+    }
+
     var weighted = pool.map(function(card) {
       var w = 1.0;
       // 1. Freshness
@@ -359,6 +380,9 @@ var Recommender = {
         var sc = self.profile.skipCount[card.id];
         w *= Math.max(0.2, 1 - sc * 0.25); // skip 1次×0.75, 2次×0.5, 3次×0.25, 4+次×0.2
       }
+      // 10b. 用时比值调整：秒选→推难，苦战→推简单（题目本身预期用时 vs 用户实际用时）
+      if (speedRatio < 0.5 && card.difficulty === 'hard') w *= 1.3;
+      if (speedRatio > 2.0 && card.difficulty === 'easy') w *= 1.3;
       return {card: card, weight: Math.max(w, 0.01)};
     });
 

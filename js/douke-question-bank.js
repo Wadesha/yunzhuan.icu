@@ -925,6 +925,30 @@
    * Convert raw questions → douke cards format
    * type: 'question' always for bank items, score metadata attached
    */
+  /**
+   * 预估单题预期用时（秒）
+   * 维度：题干阅读时间 + 难度思考时间 + 选项判断时间
+   * 前期用模拟公式，后期用真实数据校准
+   */
+  Q.estimateExpectedTime = function(q) {
+    // 1. 阅读时间：英文约5字符/秒，长题干额外加时
+    var readTime = q.question.length / 5;
+    if (q.question.length > 80) readTime *= 1.2; // 长文本阅读理解
+
+    // 2. 思考/计算时间：按难度分级
+    var thinkTime = { easy: 5, medium: 20, hard: 45 }[q.difficulty] || 15;
+
+    // 3. 含计算符号的题额外加时
+    if (/[×÷²√∑∫π^]/.test(q.question)) thinkTime *= 1.3;
+    // 含方程/不等式的题加时
+    if (/[≤≥≠]/.test(q.question)) thinkTime *= 1.2;
+
+    // 4. 选项判断时间：每个选项约2秒
+    var optionTime = (q.choices || []).length * 2;
+
+    return Math.round(readTime + thinkTime + optionTime);
+  };
+
   Q.toCards = function() {
     var cards = [];
     var subjects = ['sat','igcse','ib','ap','toefl','ielts','alevel','amc'];
@@ -943,7 +967,8 @@
           choices: q.choices,
           answer: q.answer,
           explanation: q.explanation,
-          score: q.score || null
+          score: q.score || null,
+          expectedTime: Q.estimateExpectedTime(q) // 预期用时（秒），题目本身属性
         });
       });
     });
