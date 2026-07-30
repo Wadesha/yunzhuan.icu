@@ -255,6 +255,7 @@ var Recommender = {
       if (!this.profile.enjoyment) this.profile.enjoyment = {};
       if (!this.profile.preferredTopics) this.profile.preferredTopics = [];
       if (!this.profile.skipCount) this.profile.skipCount = {};
+      if (!this.profile.wrongCards) this.profile.wrongCards = {};
     } else {
       this.profile = {
         seen: [],           // [{cardId, ts, action, feedback, dwellMs, correct}]
@@ -269,6 +270,7 @@ var Recommender = {
         topicStats: {},     // topicCode -> {correct, total, skipTotal, shownTotal, dwellSum, expectedSum, streak, bookmarked}
         enjoyment: {},      // topicCode -> {score, sampleSize, mock}
         preferredTopics: [],// 高愉悦度 topicCode 列表
+        wrongCards: {},     // 错题库：cardId -> {ts, subject, difficulty, reason: 'wrong'|'show-answer', count}
       };
       this.save();
     }
@@ -323,6 +325,14 @@ var Recommender = {
     if (correct) this.profile.totalCorrect++;
     // 更新 topicStats 的 correct/streak
     this._updateTopicCorrect(cardId, correct);
+    // 答错 → 加入错题库
+    if (correct === false) {
+      this._addToWrongCards(cardId, subject, difficulty, 'wrong');
+    }
+    // 答对 → 从错题库移除（如果之前错过）
+    if (correct === true) {
+      this._removeFromWrongCards(cardId);
+    }
     this.save();
   },
   recordFeedback: function(cardId, feedback) {
@@ -341,6 +351,37 @@ var Recommender = {
   },
 
   // === 愉悦度引擎内部方法 ===
+
+  _addToWrongCards: function(cardId, subject, difficulty, reason) {
+    if (!this.profile.wrongCards) this.profile.wrongCards = {};
+    if (this.profile.wrongCards[cardId]) {
+      this.profile.wrongCards[cardId].count++;
+      this.profile.wrongCards[cardId].ts = Date.now();
+      this.profile.wrongCards[cardId].reason = reason;
+    } else {
+      this.profile.wrongCards[cardId] = {
+        ts: Date.now(),
+        subject: subject,
+        difficulty: difficulty,
+        reason: reason, // 'wrong' = 答错, 'show-answer' = 看答案（不会做）
+        count: 1
+      };
+    }
+  },
+
+  _removeFromWrongCards: function(cardId) {
+    if (this.profile.wrongCards && this.profile.wrongCards[cardId]) {
+      delete this.profile.wrongCards[cardId];
+    }
+  },
+
+  getWrongCards: function() {
+    return this.profile.wrongCards || {};
+  },
+
+  getWrongCardCount: function() {
+    return Object.keys(this.profile.wrongCards || {}).length;
+  },
 
   _emptyTopicStats: function() {
     return {correct:0, total:0, skipTotal:0, shownTotal:0, dwellSum:0, expectedSum:0, streak:0, bookmarked:false};
@@ -920,7 +961,7 @@ var Stack = {
           return;
         }
 
-        // "看答案"：直接显示答案（不标记对错，不记录答题）
+        // "看答案"：直接显示答案（不标记对错，但记录为"不会做"到错题库）
         if (fb === 'show-answer') {
           if (card.type === 'question') {
             var ansEl = el.querySelector('#dkAnswer');
@@ -938,6 +979,15 @@ var Stack = {
             });
             // 标记已看答案
             el.dataset.answered = 'show-answer';
+            // 记录到错题库（reason: 'show-answer'，表示不会做）
+            Recommender._addToWrongCards(card.id, card.subject, card.difficulty, 'show-answer');
+            Recommender.save();
+            // 录入打分引擎（记为 null correct = 未作答）
+            var dwellShow = Date.now() - self.cardVisibleTs;
+            if (typeof DoukeScoring !== 'undefined') {
+              DoukeScoring.recordAnswer(card, null, dwellShow, 'show-answer');
+              DoukeScoring.saveToStorage();
+            }
           }
           fbBtns.forEach(function(b) { b.classList.remove('active'); });
           btn.classList.add('active');
