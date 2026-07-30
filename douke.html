@@ -196,6 +196,7 @@ body{display:flex;flex-direction:column;position:fixed;inset:0;}
 
 <script src="js/douke-question-bank.js"></script>
 <script src="js/douke-scoring-engine.js"></script>
+<script src="js/douke-variant-engine.js"></script>
 <script>
 'use strict';
 
@@ -223,21 +224,36 @@ var PROGRESS_CARDS = [
 
 // 组合完整 CARDS 数组
 var CARDS = [];
+var TEMPLATE_CARDS = []; // 原始模板题（用于变体生成）
 if (typeof DoukeQB !== 'undefined' && typeof DoukeQB.toCards === 'function') {
-  CARDS = CARDS.concat(DoukeQB.toCards());
+  var qbCards = DoukeQB.toCards();
+  CARDS = CARDS.concat(qbCards);
+  TEMPLATE_CARDS = qbCards.filter(function(c) { return c.type === 'question'; });
 }
 CARDS = CARDS.concat(KNOWLEDGE_CARDS);
 CARDS = CARDS.concat(PROGRESS_CARDS);
+
+// 题库变体分析（后台日志，不展示给用户）
+if (typeof DoukeVariantEngine !== 'undefined' && TEMPLATE_CARDS.length > 0) {
+  var _analysis = DoukeVariantEngine.analyzePool(TEMPLATE_CARDS);
+  console.log('[Douke] 变体引擎覆盖：' + _analysis.matchable + '/' + _analysis.total + ' 题（' + _analysis.coverage + '）', _analysis.byPattern);
+}
 
 /* ============================================================
  * Recommender v1 — Rule-based weighted random
  * ============================================================ */
 var Recommender = {
   profile: null,
+  variantPool: [], // 本次会话生成的变体题（不持久化，每次会话重新生成）
   init: function() {
     var saved = localStorage.getItem('douke_profile');
     if (saved) {
       this.profile = JSON.parse(saved);
+      // 向后兼容：补充新字段
+      if (!this.profile.topicStats) this.profile.topicStats = {};
+      if (!this.profile.enjoyment) this.profile.enjoyment = {};
+      if (!this.profile.preferredTopics) this.profile.preferredTopics = [];
+      if (!this.profile.skipCount) this.profile.skipCount = {};
     } else {
       this.profile = {
         seen: [],           // [{cardId, ts, action, feedback, dwellMs, correct}]
@@ -248,9 +264,15 @@ var Recommender = {
         sessionStart: Date.now(),
         totalCards: 0,
         totalCorrect: 0,
+        skipCount: {},      // cardId -> skip 次数
+        topicStats: {},     // topicCode -> {correct, total, skipTotal, shownTotal, dwellSum, expectedSum, streak, bookmarked}
+        enjoyment: {},      // topicCode -> {score, sampleSize, mock}
+        preferredTopics: [],// 高愉悦度 topicCode 列表
       };
       this.save();
     }
+    // 初始化时生成变体池（为偏好 topic 扩充题目）
+    this.refreshVariantPool();
   },
   save: function() {
     localStorage.setItem('douke_profile', JSON.stringify(this.profile));
@@ -275,7 +297,14 @@ var Recommender = {
       if (!this.profile.skipCount) this.profile.skipCount = {};
       this.profile.skipCount[cardId] = (this.profile.skipCount[cardId] || 0) + 1;
     }
+    // 更新 topicStats（愉悦度数据源）
+    this._updateTopicStats(cardId, action, dwellMs);
     this.profile.totalCards++;
+    // 每 10 题刷新一次偏好和变体池
+    if (this.profile.totalCards % 10 === 0) {
+      this.refreshEnjoyment();
+      this.refreshVariantPool();
+    }
     this.save();
   },
   recordAnswer: function(cardId, correct, subject, difficulty) {
@@ -286,13 +315,156 @@ var Recommender = {
     var last = this.profile.seen[this.profile.seen.length - 1];
     if (last && last.cardId === cardId) last.correct = correct;
     if (correct) this.profile.totalCorrect++;
+    // 更新 topicStats 的 correct/streak
+    this._updateTopicCorrect(cardId, correct);
     this.save();
   },
   recordFeedback: function(cardId, feedback) {
     var last = this.profile.seen[this.profile.seen.length - 1];
     if (last && last.cardId === cardId) last.feedback = feedback;
-    if (feedback === 'bookmark') this.profile.bookmarks.push(cardId);
+    if (feedback === 'bookmark') {
+      this.profile.bookmarks.push(cardId);
+      // 标记 topic 的 bookmarked
+      var card = this._findCard(cardId);
+      if (card && card.topicCode) {
+        if (!this.profile.topicStats[card.topicCode]) this.profile.topicStats[card.topicCode] = this._emptyTopicStats();
+        this.profile.topicStats[card.topicCode].bookmarked = true;
+      }
+    }
     this.save();
+  },
+
+  // === 愉悦度引擎内部方法 ===
+
+  _emptyTopicStats: function() {
+    return {correct:0, total:0, skipTotal:0, shownTotal:0, dwellSum:0, expectedSum:0, streak:0, bookmarked:false};
+  },
+
+  _findCard: function(cardId) {
+    // 从 CARDS 或 variantPool 中找卡片
+    for (var i = 0; i < CARDS.length; i++) {
+      if (CARDS[i].id === cardId) return CARDS[i];
+    }
+    for (var i = 0; i < this.variantPool.length; i++) {
+      if (this.variantPool[i].id === cardId) return this.variantPool[i];
+    }
+    return null;
+  },
+
+  _updateTopicStats: function(cardId, action, dwellMs) {
+    var card = this._findCard(cardId);
+    if (!card || !card.topicCode) return;
+    var tc = card.topicCode;
+    if (!this.profile.topicStats[tc]) this.profile.topicStats[tc] = this._emptyTopicStats();
+    var s = this.profile.topicStats[tc];
+    s.shownTotal++;
+    if (action === 'skip') s.skipTotal++;
+    if (dwellMs) s.dwellSum += dwellMs;
+    if (card.expectedTime) s.expectedSum += card.expectedTime;
+  },
+
+  _updateTopicCorrect: function(cardId, correct) {
+    var card = this._findCard(cardId);
+    if (!card || !card.topicCode) return;
+    var tc = card.topicCode;
+    if (!this.profile.topicStats[tc]) this.profile.topicStats[tc] = this._emptyTopicStats();
+    var s = this.profile.topicStats[tc];
+    if (correct === true) {
+      s.correct++;
+      s.total++;
+      s.streak++;
+    } else if (correct === false) {
+      s.total++;
+      s.streak = 0;
+    }
+    // correct === null (skip) 不计入 total，只计入 shownTotal
+  },
+
+  /**
+   * 刷新所有 topic 的愉悦度分数
+   * 真实数据 >= 3 条时用真实分，否则用 mock 预设
+   */
+  refreshEnjoyment: function() {
+    var self = this;
+    // 收集所有 topicCode
+    var allTopics = {};
+    TEMPLATE_CARDS.forEach(function(c) {
+      if (c.topicCode) allTopics[c.topicCode] = c.difficulty || 'medium';
+    });
+
+    Object.keys(allTopics).forEach(function(tc) {
+      var diff = allTopics[tc];
+      var s = self.profile.topicStats[tc];
+      var realSampleSize = s ? s.total : 0;
+
+      if (realSampleSize >= 3) {
+        // 真实数据足够，用真实愉悦度
+        var score = DoukeVariantEngine.enjoymentScore(s);
+        self.profile.enjoyment[tc] = { score: score, sampleSize: realSampleSize, mock: false };
+      } else if (realSampleSize > 0) {
+        // 混合：50% mock + 50% 真实
+        var mockScore = DoukeVariantEngine.mockEnjoyment(diff);
+        var realScore = DoukeVariantEngine.enjoymentScore(s) || mockScore;
+        var blended = mockScore * 0.5 + realScore * 0.5;
+        self.profile.enjoyment[tc] = { score: Math.round(blended*100)/100, sampleSize: realSampleSize, mock: true };
+      } else {
+        // 纯 mock
+        self.profile.enjoyment[tc] = { score: DoukeVariantEngine.mockEnjoyment(diff), sampleSize: 0, mock: true };
+      }
+    });
+
+    // 更新 preferredTopics（愉悦度 > 0.5 的 topic）
+    self.profile.preferredTopics = Object.keys(self.profile.enjoyment)
+      .filter(function(tc) { return self.profile.enjoyment[tc].score > 0.5; })
+      .sort(function(a, b) { return self.profile.enjoyment[b].score - self.profile.enjoyment[a].score; });
+    self.save();
+  },
+
+  /**
+   * 获取某 topic 的愉悦度（0-1），未计算过则返回 mock
+   */
+  getEnjoyment: function(topicCode) {
+    var e = this.profile.enjoyment[topicCode];
+    if (e) return e.score;
+    // 未初始化，找 difficulty 返回 mock
+    var card = TEMPLATE_CARDS.find(function(c) { return c.topicCode === topicCode; });
+    return DoukeVariantEngine.mockEnjoyment(card ? card.difficulty : 'medium');
+  },
+
+  /**
+   * 刷新变体池：为偏好 topic 生成额外变体题
+   * 每次 refreshEnjoyment 后调用
+   */
+  refreshVariantPool: function() {
+    if (typeof DoukeVariantEngine === 'undefined') return;
+    // 确保愉悦度已计算
+    if (Object.keys(this.profile.enjoyment).length === 0) {
+      this.refreshEnjoyment();
+    }
+    var self = this;
+    self.variantPool = [];
+    // 为 top 5 偏好 topic 各生成 5 个变体
+    var topTopics = self.profile.preferredTopics.slice(0, 5);
+    topTopics.forEach(function(tc) {
+      // 找该 topic 的模板题
+      var templates = TEMPLATE_CARDS.filter(function(c) { return c.topicCode === tc; });
+      templates.slice(0, 3).forEach(function(t) {
+        if (DoukeVariantEngine.canGenerate(t)) {
+          var vs = DoukeVariantEngine.generateVariants(t, 2);
+          self.variantPool = self.variantPool.concat(vs);
+        }
+      });
+    });
+    // 如果偏好 topic 不足 5 个（新用户），为所有可生成变体的题各生成 1 个
+    if (self.variantPool.length < 10) {
+      TEMPLATE_CARDS.forEach(function(t) {
+        if (self.variantPool.length >= 15) return;
+        if (DoukeVariantEngine.canGenerate(t)) {
+          var v = DoukeVariantEngine.generateVariant(t);
+          if (v) self.variantPool.push(v);
+        }
+      });
+    }
   },
   getAccuracy: function(subject, difficulty) {
     var key = subject + '.' + difficulty;
@@ -301,11 +473,14 @@ var Recommender = {
     return a.correct / a.total;
   },
   recommend: function(cards, subjectFilter) {
-    var pool = cards.filter(function(c) {
+    // 合并原始题库 + 本次会话变体池
+    var allCards = cards.concat(this.variantPool);
+
+    var pool = allCards.filter(function(c) {
       if (subjectFilter !== 'all' && c.subject !== subjectFilter) return false;
       return true;
     });
-    if (pool.length === 0) pool = cards.slice();
+    if (pool.length === 0) pool = allCards.slice();
 
     var self = this;
     var recentSubjects = this.profile.seen.slice(-5).map(function(s) {
@@ -324,7 +499,7 @@ var Recommender = {
     // 比值<0.5 = 秒选型（题太简单或用户心不在焉）→ 倾向推难题
     // 比值>2.0 = 苦战型（题太难或需要深度思考）→ 倾向推简单题
     var cardMap = {};
-    cards.forEach(function(c) { cardMap[c.id] = c; });
+    allCards.forEach(function(c) { cardMap[c.id] = c; });
     var recentAnswered = this.profile.seen.slice(-8).filter(function(s) {
       return s.dwellMs && s.action && s.action !== 'skip';
     }).slice(-3);
@@ -383,16 +558,52 @@ var Recommender = {
       // 10b. 用时比值调整：秒选→推难，苦战→推简单（题目本身预期用时 vs 用户实际用时）
       if (speedRatio < 0.5 && card.difficulty === 'hard') w *= 1.3;
       if (speedRatio > 2.0 && card.difficulty === 'easy') w *= 1.3;
-      return {card: card, weight: Math.max(w, 0.01)};
+      // 11. 愉悦度加权：偏好 topic（enjoyment > 0.5）加权，非偏好降权
+      if (card.topicCode) {
+        var ej = self.getEnjoyment(card.topicCode);
+        w *= (0.5 + ej * 1.0); // enjoyment 0→×0.5, 0.5→×1.0, 1.0→×1.5
+      }
+      return {card: card, weight: Math.max(w, 0.01), topicCode: card.topicCode};
     });
 
-    var total = weighted.reduce(function(s, w) { return s + w.weight; }, 0);
-    var r = Math.random() * total;
-    for (var i = 0; i < weighted.length; i++) {
-      r -= weighted[i].weight;
-      if (r <= 0) return weighted[i].card;
+    // === ε-greedy 7:3 混合推荐 ===
+    // 理论：Epsilon-Greedy (Sutton & Barto, RL)
+    //   70% 利用（exploit）：从偏好题库（愉悦度 > 0.5 的 topic）中选
+    //   30% 探索（explore）：从非偏好 topic 中选，发现新的可能喜欢的题
+    //   ε 随答题数衰减：0.30 → 0.15（长期保持 15% 探索，避免信息茧房）
+    var epsilon = DoukeVariantEngine.computeEpsilon(self.profile.totalCards);
+    var preferredSet = {};
+    self.profile.preferredTopics.forEach(function(tc) { preferredSet[tc] = true; });
+
+    var preferredPool = weighted.filter(function(w) { return w.topicCode && preferredSet[w.topicCode]; });
+    var exploratoryPool = weighted.filter(function(w) { return !w.topicCode || !preferredSet[w.topicCode]; });
+
+    // 兜底：如果某一边为空，用全部
+    if (preferredPool.length === 0) preferredPool = weighted;
+    if (exploratoryPool.length === 0) exploratoryPool = weighted;
+
+    var chosenPool;
+    if (Math.random() < epsilon) {
+      // 探索（~30%）：从非偏好题中选，带 UCB 探索加分
+      // 给样本少的 topic 额外加分（鼓励探索未知）
+      exploratoryPool.forEach(function(w) {
+        var s = self.profile.topicStats[w.topicCode];
+        var shown = s ? s.shownTotal : 0;
+        w.weight *= (1 + Math.max(0, (3 - shown) * 0.15)); // 前3次曝光加权
+      });
+      chosenPool = exploratoryPool;
+    } else {
+      // 利用（~70%）：从偏好题中选
+      chosenPool = preferredPool;
     }
-    return weighted[0].card;
+
+    var total = chosenPool.reduce(function(s, w) { return s + w.weight; }, 0);
+    var r = Math.random() * total;
+    for (var i = 0; i < chosenPool.length; i++) {
+      r -= chosenPool[i].weight;
+      if (r <= 0) return chosenPool[i].card;
+    }
+    return chosenPool[0].card;
   },
   getSessionStats: function() {
     var sessionCards = this.profile.seen.filter(function(s) {
