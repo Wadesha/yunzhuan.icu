@@ -91,12 +91,42 @@ yunzhuan.icu 是一个美国大学本科专业导航网站，涵盖 8 大类 44 
 | 板块 | 路径 | 用途 |
 |------|------|------|
 | 专业导航 | `/` | 8 大类 44 个美国本科专业及核心课程 |
+| **Academics · 学术体系** | `/academics/` | IB / A-Level / AP / IGCSE / SAT / TOEFL / IELTS 七大学术体系总览 |
+| **Practice · 练习中心** | `/academics/practice/` | 国际课程真题练习 + 题目导航 |
+| **Simulate · 模拟考试** | `/simulate/` | 标化/国际课程模拟考试、试卷发布、限时答题 |
+| **Competitions · 竞赛中心** | `/competitions/` | AMC / UKMT / Physics Bowl / NEC / FBLA 等竞赛导航 |
+| **抖科 Douke** | `/douke.html` | ⚡ 卡片式滑动刷题（Apple Wallet 风格），算法个性化推荐 |
 | 先修课程导航 | `/prerequisite/` | 各专业先修课程与题库 |
 | International Exams | `/intl-exams/` | AL / IG / IB / AP 国际学科考试 |
-| Standardized Tests | `/tests/` | SAT / ACT / TOEFL / IELTS / DET 标化考试 |
+| Standardized Tests | `/tests/` | SAT / ACT / TOEFL / IELTS / DET / PTE 标化考试 |
 | Universities | `/schools/` | 美 / 英 / 加 / 澳 / 港 / 新 选校数据库 |
 | Timeline | `/timeline/` | 9-10 / 11 / 12 年级申请时间线 |
 | Essays | `/essays/` | 个人陈述 / Common App / 补充文书 / UCAS |
+
+### 4.0.1 抖科 Douke · 卡片式滑动刷题
+
+**访问地址**：https://yunzhuan.icu/douke.html （首页最底部版权栏不起眼入口）
+
+> **抖科 = 抖（swipe 刷）+ 科（知识/科目）**
+> Apple Wallet 风格卡片堆叠，手势滑动，算法个性化推荐，后台打分引擎闭环。
+
+| 特性 | 说明 |
+|---|---|
+| **交互** | 手机端手势上下滑切卡；PC 端 ↑↓ 键 / 鼠标滚轮 / 屏幕按钮 |
+| **当前题库** | 275 道广泛简单题干，覆盖 8 科目（SAT/IB/A-Level/IGCSE/AP/TOEFL/IELTS/AMC），共 280 张卡片 |
+| **推荐算法** | v1：规则引擎 8 条权重（新鲜度/科目轮换/难度自适应/类型多样/考试权重…）+ DoukeScoring 质量/行为双闭环 |
+| **打分引擎** | 后台静默运行 5 维评分：① 题目静态质量 ② 答题行为动态 ③ 推荐引擎效果 ④ 题库健康度 ⑤ A/B 多方案模拟对比 |
+| **用户数据** | localStorage 本地持久化 + 打分引擎记录自动归档 |
+| **文档** | [产品规划与 50 版本路线图](docs/DOUKE-ROADMAP.md) · [引擎 20 版本迭代规划](docs/DOUKE-ENGINE-v1-to-v20.md) · [推荐算法方案选型](docs/DOUKE-RECO-ALGO-SELECTION.md) · [承载力与 Token 需求](docs/INFRA-CAPACITY-AND-TOKENS.md) |
+
+### 4.0.2 Academics · 学术体系 & Practice · 练习 & Simulate · 模考 & Competitions · 竞赛
+
+| 板块 | 路径 | 核心内容 |
+|---|---|---|
+| Academics 总览 | `/academics/` | IB Diploma Programme / A-Level / AP / IGCSE / SAT / TOEFL / IELTS 七大学术体系框架 |
+| Practice 练习中心 | `/academics/practice/` | 国际课程题目导航、章节练习、真实题库接入点 |
+| Simulate 模考中心 | `/simulate/` | 试卷发布、限时答题、自动批改、分数诊断 |
+| Competitions 竞赛中心 | `/competitions/` | AMC（美国数学竞赛）、UKMT、Physics Bowl、NEC（经济竞赛）、FBLA（商赛）等导航 |
 
 ### 4.1 专业导航
 
@@ -374,6 +404,37 @@ yunzhuan.icu 是一个美国大学本科专业导航网站，涵盖 8 大类 44 
 ├── gen_supplemental.py           # 批量生成补充文书页脚本
 ├── gen_monthly.py                # 批量生成月度清单脚本
 ├── gen_q.py                      # 批量生成题目脚本
+├── douke.html                    # 抖科 · 卡片式滑动刷题主页面
+├── academics/                    # Academics 学术体系总览
+│   ├── index.html                # 7大学术体系（IB/AL/AP/IG/SAT/TOEFL/IELTS）
+│   └── practice/                 # Practice 练习中心
+│       └── index.html            # 国际课程题目导航 + 真实题库
+├── simulate/                     # Simulate 模考中心
+│   └── index.html                # 试卷发布 / 限时答题 / 自动批改
+├── competitions/                 # Competitions 竞赛中心
+│   └── index.html                # AMC / UKMT / Physics Bowl / NEC / FBLA 等导航
+├── interviews/                   # 面试与校友资源
+│   └── index.html                # 面试指南 + 模拟面试
+├── guides/                       # 申请指南
+│   └── index.html                # 本科申请全流程指南
+├── scholarships/                 # 奖学金中心
+│   └── index.html                # 奖学金导航
+├── contact.html                  # 联系与反馈
+├── roadmap.html                  # 产品路线图
+├── search.html                   # 学校搜索
+├── rankings.html                 # 学校排名
+├── js/
+│   ├── track.js                  # 访问跟踪脚本
+│   ├── wechat-redirect.js        # 微信浏览器检测跳转
+│   ├── douke-question-bank.js    # 抖科题库（275题 8科目，每题5维元数据）
+│   └── douke-scoring-engine.js   # 抖科出题效果打分引擎（5维度 + A/B模拟）
+├── docs/                         # 产品文档
+│   ├── DOUKE-ROADMAP.md              # 抖科产品 50 版本路线图
+│   ├── DOUKE-ENGINE-v1-to-v20.md     # 抖科引擎 20 版本迭代规划
+│   ├── DOUKE-RECO-ALGO-SELECTION.md  # ✅ 推荐算法方案选型（6大流派对比，待确认）
+│   ├── INFRA-CAPACITY-AND-TOKENS.md  # ✅ 承载力与 Token 需求清单（待确认）
+│   ├── APP-SHELL.md                  # 前端架构说明
+│   └── SEO.md                        # SEO 规范
 ├── DEV_GUIDE.md                  # 开发规范文档
 └── README.md                     # 本文档
 ```
@@ -395,11 +456,77 @@ git config user.email "wadesha@users.noreply.github.com"
 
 ### 6.3 认证方式
 
-GitHub Personal Access Token（PAT），有效期 90 天。
+GitHub Personal Access Token（PAT），有效期 **90 天**。当前 Token 仅绑定 Wadesha 账户。
+
+### 6.4 Token 安全规范（硬性要求）
+
+> **禁止在任何代码/文档/Markdown 中硬编码 Token**，历史事件：之前的推送曾把 Token 直接写入仓库导致暴露。
+
+| 原则 | 具体做法 |
+|---|---|
+| ① 代码零硬编码 | 所有 `ghp_`、`sk-`、`apiKey` 绝不写入 `*.js/*.html/*.md/*.json`。每次提交前必须执行：<br>`grep -r "ghp_\|sk-\|API_KEY" --include="*.js" --include="*.html" --include="*.md" .` |
+| ② 本地凭证存储 | 仅存于 `~/.git-credentials`（chmod 600）+ `git config credential.helper store` |
+| ③ 环境变量隔离 | 生产 Token 走 Vercel Project Environment Variables，开发环境 `.env.local` 且加入 `.gitignore` |
+| ④ 定期轮换 | GitHub PAT 每 90 天强制换；AI Key 每月轮换；可疑泄露立即 revoke |
+
+### 6.5 Token 与密钥清单（完整）
+
+详见 [docs/INFRA-CAPACITY-AND-TOKENS.md](docs/INFRA-CAPACITY-AND-TOKENS.md)，包括：
+- 开发托管类：GitHub PAT / SSH Key / Vercel Token
+- 数据存储类：Vercel KV / Supabase / CloudSlot
+- AI 推荐类：OpenAI / Anthropic / DeepSeek / Cohere / HuggingFace / Lambda Labs
+- 分析增长类：GrowthBook / Giscus / Formspree / PostHog / Sentry
+- 安全监控类：Turnstile / Cloudflare
 
 ---
 
-## 7. Vercel 部署
+## 7. 承载力规划（分三阶段）
+
+### 7.1 阶段与成本预估
+
+| 阶段 | 时间窗口 | 日活 | 月活 | 月成本 | 基础设施 |
+|---|---|---|---|---|---|
+| **A · 内测期（当前）** | v1 ~ v10（2个月内）| 1-50 | 200 | ¥0 | Vercel Hobby + KV 免费 + localStorage |
+| **B · 种子期** | v11 ~ v30（2-8个月）| 50-5k | 200-50k | ¥350-500 | Vercel Pro + Supabase Pro + Vercel KV Pro + 低额度 LLM |
+| **C · 增长期** | v31+（8个月+）| 5k+ | 50万+ | ¥4k-12k | Vercel Enterprise + AWS RDS + 多家 LLM + GPU 训练 |
+
+详细承载力与 Token 需求见 [docs/INFRA-CAPACITY-AND-TOKENS.md](docs/INFRA-CAPACITY-AND-TOKENS.md)。
+
+---
+
+## 8. 推荐算法体系 · 方案选型
+
+抖科推荐算法分 **5 阶段 · 6 大流派**演进，当前处于 v1.1「规则引擎 v1（加权随机）」。
+
+### 8.1 推荐算法总览（方案选型对比）
+
+| 流派 | 方案 | 适用阶段 | 推荐度 |
+|---|---|---|---|
+| **A 规则引擎系列** | A1手工规则 → A2自动调优 → A3ELO画像 → A4多臂老虎机MAB | v1.0 ~ v5.0 | ⭐⭐⭐⭐⭐ 现阶段最优 |
+| **B 统计学习模型** | B1逻辑回归LR → B2因子分解机FM → B3Item-CF → B4User-CF | v6.0 ~ v10.0 | ⭐⭐⭐⭐ v6必做，性价比最高 |
+| **C 知识图谱+路径** | C1前置DAG → C2BFS/DFS路径 → C3SRS间隔重复 → C4Dijkstra最短路径 | v11.0 ~ v15.0 | ⭐⭐⭐⭐ v11必做，打通prereq |
+| **D 深度学习** | D1Transformer序列 → D2双塔 → D3LLM多模态 | v21.0 ~ v30.0 | ⭐⭐ 过早，ABC先跑通 |
+| **E 因果+学习科学** | E1Uplift → E2BKT贝叶斯知识追踪 → E3IRT项目反应理论 | v31.0+ | ⭐⭐⭐ v10已部分包含 |
+| **F 第三方集成** | Algolia / Amazon Personalize / Cohere Rerank | 视情况 | ⭐ 现阶段自研足够 |
+
+### 8.2 立刻可做的 5 项提升（v1.1 → v3.0 短期）
+
+| 编号 | 提升项 | 预期收益 | 工作量 |
+|---|---|---|---|
+| ① | 参数 Θ 自动寻优（爬山法+模拟退火，200 会话仿真）| 推荐效果分 +8~12 | 0.5 天 |
+| ② | 新题冷启动 MAB（Thompson Sampling 前 3 次曝光公平分配）| 新题曝光公平度 +30% | 0.3 天 |
+| ③ | Item-CF 雏形（400×400 共现矩阵，Top-K 预存）| 连续同主题命中率 +15% | 0.5 天 |
+| ④ | accuracy 从 subject.difficulty 升级到 topicCode 粒度 | 难度自适应精度 ↑ | 0.2 天 |
+| ⑤ | DoukeScoring.records 云同步（Vercel KV）| 换机不丢数据，仿真有真实样本 | 0.3 天 |
+
+完整方案选型、承载力、Token 需求与待确认决策见：
+- [docs/DOUKE-RECO-ALGO-SELECTION.md](docs/DOUKE-RECO-ALGO-SELECTION.md)
+- [docs/DOUKE-ENGINE-v1-to-v20.md](docs/DOUKE-ENGINE-v1-to-v20.md)
+- [docs/INFRA-CAPACITY-AND-TOKENS.md](docs/INFRA-CAPACITY-AND-TOKENS.md)
+
+---
+
+## 9. Vercel 部署
 
 ### 7.1 部署方式
 
@@ -607,6 +734,12 @@ git push origin vX.Y.Z
 | v13.6.0 | 2026-07-27 | 文书资源扩充：新增 PS 写作指南（万能结构公式、Show Don't Tell、6 步修改流程）、文书范例库（10+ 篇按主题分类的优秀文书节选+分析框架） |
 | v13.7.0 | 2026-07-27 | 国际学科扩充：新增 IGCSE 备考指南（三大考试局、70+科目、2年备考规划）、IB 文凭备考指南（六大学科组+TOK/EE/CAS核心、IA考试比例、生存指南） |
 | v13.8.0 | 2026-07-27 | 加澳港新大学板块扩充：11 所大学详情页（加拿大4所：Toronto/UBC/McGill/Waterloo；澳洲3所：Melbourne/Sydney/UNSW；香港2所：HKU/CUHK；新加坡2所：NUS/NTU） |
+| v20.5.0 | 2026-07-28 | 考纲→样题深度关联：120/科联网获取课程子分类+细分；考纲结构化+双向锚点+局部刷题+覆盖率分析；5小版本规划落地；syllabus结构化（顶部目录+上一节/下一节导航+中间分节展示）+ 总览页 |
+| v20.6.0 | 2026-07-28 | 首页产品化改造；Demo：个人中心+学习路径+申请Tracker+提醒+收藏；Community问答+UGC+评论；竞赛组队+个性化推荐；AI选校+AI文书润色；移动端+中介SaaS；协作架构+核心成员小范围测试平台；全流程模拟+个性化档案+学校专属模拟页 |
+| v20.6.1 | 2026-07-29 | Simulate 模拟考试发布修复：试卷 startTime/endTime 默认值，解决 UTC 偏移校验失败（参考经验 407468）；localStorage 双写+校验+备份回填（参考经验 548283，解决 iOS 抖音平台数据丢失风险）；PTE 上线 |
+| v21.0 Demo | 2026-07-29 | Academics & Practice & Simulate & Competitions 四板块上线；考纲结构化导航（顶部目录+分节展示+上一节/下一节），syllabus 结构化替代全文展开 |
+| v21.1 Douke MVP | 2026-07-29 | **抖科 Douke v1.0 上线**：Apple Wallet 卡片堆叠，手机手势/PC键盘；DoukeQB 275 题 8 科目题库；DoukeScoring 5 维打分引擎后台闭环；规则引擎 v1（8 权重+质量/行为双闭环）；20 版本引擎迭代文档落地 |
+| v21.2 Douke v1.1 | 2026-07-30 | 打分系统改为后台引擎闭环（移除前端Dashboard，算法权重直接接入 recommend）；首页底部版权栏添加抖科不起眼入口；推荐算法方案选型文档 & 承载力 Token 需求文档 & README 补齐 |
 
 ---
 
@@ -650,7 +783,7 @@ git push origin vX.Y.Z
 
 ---
 
-*文档更新时间：2026-07-27*
+*文档更新时间：2026-07-30*
 
 ---
 
@@ -665,3 +798,31 @@ git push origin vX.Y.Z
 - 样式一致性（配色、组件风格、无emoji）
 - 数据存储规范（localStorage、Supabase占坑模式）
 - 云同步架构设计（实时同步、安全设计、分阶段实施计划）
+
+---
+
+## 17. 待确认决策项（请回复方案编号）
+
+详见 [DOUKE-RECO-ALGO-SELECTION.md](docs/DOUKE-RECO-ALGO-SELECTION.md) + [INFRA-CAPACITY-AND-TOKENS.md](docs/INFRA-CAPACITY-AND-TOKENS.md)
+
+### 决策 1：推荐算法立刻执行项
+- **A**：5 项提升全做（①-⑤，合计 ~2 天）
+- **B**：先做 ① 参数自动寻优 + ④ 精度升级（高性价比，~0.7 天）✅ 推荐
+- **C**：现阶段不做，等更多用户数据
+
+### 决策 2：承载力升级触发点
+- **A**：KPI 触发（KV 免费额度 80% 用完升级）✅ 推荐
+- **B**：3 个月后统一升级
+- **C**：MAU 破 1 万再升级
+
+### 决策 3：AI LLM 接入时间点
+- **A**：v21 D 阶段再接入（ABC 先跑通）✅ 推荐
+- **B**：v11 阶段先低额度 DeepSeek 润色解析
+- **C**：现在就拿 DeepSeek 免费额度跑题库自动化扩充
+
+### 决策 4：Token 管理方式
+- **A**：现状（本地文件 + 手动轮换，Wadesha 一人持有）✅ 推荐
+- **B**：1Password/Bitwarden 团队密码库 + 共享
+- **C**：Doppler/Infisical 环境变量平台（免费版）
+
+*文档更新时间：2026-07-30*
