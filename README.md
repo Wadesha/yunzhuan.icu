@@ -114,10 +114,69 @@ yunzhuan.icu 是一个美国大学本科专业导航网站，涵盖 8 大类 44 
 |---|---|
 | **交互** | 手机端手势上下滑切卡；PC 端 ↑↓ 键 / 鼠标滚轮 / 屏幕按钮 |
 | **当前题库** | 275 道广泛简单题干，覆盖 8 科目（SAT/IB/A-Level/IGCSE/AP/TOEFL/IELTS/AMC），共 280 张卡片 |
-| **推荐算法** | v1：规则引擎 8 条权重（新鲜度/科目轮换/难度自适应/类型多样/考试权重…）+ DoukeScoring 质量/行为双闭环 |
+| **变体引擎** | 15 种题型模式匹配器，自动替换数值+重算答案+生成干扰项，为偏好 topic 动态生成无限变体题 |
+| **推荐算法** | ε-greedy 7:3 混合推荐 + 11 条权重规则（详见下方 §8.2） |
+| **愉悦度引擎** | 5 维评分（正确率30%+速度25%+不跳过20%+连续对15%+收藏10%），冷启动 mock 预设 |
 | **打分引擎** | 后台静默运行 5 维评分：① 题目静态质量 ② 答题行为动态 ③ 推荐引擎效果 ④ 题库健康度 ⑤ A/B 多方案模拟对比 |
+| **行为记录** | 三态闭环：correct / wrong / skip + 停留时长（dwellMs）全量录入，用户无感知 |
 | **用户数据** | localStorage 本地持久化 + 打分引擎记录自动归档 |
 | **文档** | [产品规划与 50 版本路线图](docs/DOUKE-ROADMAP.md) · [引擎 20 版本迭代规划](docs/DOUKE-ENGINE-v1-to-v20.md) · [推荐算法方案选型](docs/DOUKE-RECO-ALGO-SELECTION.md) · [承载力与 Token 需求](docs/INFRA-CAPACITY-AND-TOKENS.md) |
+
+#### 4.0.1.1 推荐引擎设计思想与实现思路
+
+> 核心理念：**"做得又快又对 = 愉悦"** → 推他愉悦的题（70%），同时留探索空间发现新偏好（30%）。
+
+**问题出发**：
+1. 题库有限（275题），用户刷完就重复 → 需要**变体生成**扩充
+2. 新用户无数据，推荐无从下手 → 需要**冷启动 mock 预设**
+3. 全推熟悉的题 = 信息茧房 → 需要**探索机制**（不是全推喜欢的）
+4. 题目本身有"阅读时间"和"思考时间"差异 → 需要**预期用时**维度
+5. 用户不做直接划走 ≠ 答错 → 需要**skip 三态记录**
+6. 每个用户有擅长的题库 → 需要**偏好题库管理**
+
+**解决方案（5 个模块联动）**：
+
+```
+用户刷题（对/错/skip + 停留时长）
+         ↓
+  ① 行为记录三态闭环（correct/wrong/skip + dwellMs）
+         ↓
+  ② topicStats 自动更新（正确率/速度/skip率/连续对/收藏）
+         ↓
+  ③ 愉悦度引擎 refreshEnjoyment()
+     · 真实数据 ≥3 条 → 用真实分
+     · 真实数据 1-2 条 → 50% mock + 50% 真实
+     · 无数据 → mock 预设（easy 0.65 / medium 0.45 / hard 0.25）
+         ↓
+  ④ preferredTopics 自动调整（愉悦度 > 0.5 的 topic）
+         ↓
+  ⑤ 变体引擎 refreshVariantPool()
+     · 为 top 5 偏好 topic 各生成变体题
+     · 新用户偏好不足时，为所有可生成变体的题各生成 1 个
+         ↓
+  ⑥ ε-greedy 7:3 混合推荐 recommend()
+     · 70% exploit：从偏好题库选（愉悦度加权 ×0.5~1.5）
+     · 30% explore：从非偏好题库选（UCB 探索加分，前3次曝光加权）
+     · ε 随答题数衰减：0.30 → 0.15（长期保持15%探索，避免茧房）
+         ↓
+    用户看到下一张卡片（用户无感知，纯前端零后端）
+```
+
+**关键设计决策**：
+
+| 决策 | 选择 | 为什么 | 理论依据 |
+|---|---|---|---|
+| 探索策略 | ε-greedy（非纯随机/非UCB/非Thompson） | 实现最简单，效果经MovieLens验证够用，纯前端可跑 | Sutton & Barto, RL; arXiv:2506.03324 |
+| ε 衰减 | 0.30→0.15，每题-0.005 | 初始多探索快速发现偏好，后期多利用但保留15%探索防茧房 | Explore-then-commit + epsilon-greedy |
+| 愉悦度公式 | 5维加权（非单一正确率） | "做得快"和"做得对"都是愉悦信号，但权重不同；skip是负信号 | 心流理论(Csikszentmihalyi)：能力与挑战匹配时最愉悦 |
+| 冷启动 | mock预设（非空/非随机） | easy题大多数人初始喜欢，hard题大多数人初始不喜欢 | Content-based recommendation (Lops et al., 2019) |
+| 变体生成 | 模式匹配+数值替换（非LLM生成） | 零成本、零延迟、答案100%可验证、纯前端 | 题目结构固定，数值替换即可 |
+| 偏好粒度 | topicCode（非subject/difficulty） | "SAT数学-算术"比"SAT.easy"更精准 | 细粒度画像 → 更精准推荐 |
+| 预期用时 | 公式估算（非真实数据） | 题目本身属性，跟用户无关；阅读时间+思考时间+选项判断 | 区分"题目需要长时间" vs "用户个人慢" |
+
+**为什么不过早做深度学习**：当前 <100 用户，数据不足以训练模型；规则引擎+统计模型（v1-v10）已能覆盖80%场景；DL（v21+）等数据量够了再上，避免过早优化。详见 [DOUKE-RECO-ALGO-SELECTION.md](docs/DOUKE-RECO-ALGO-SELECTION.md)。
+
+**性能策略**：纯前端 JS，零后端调用，零额外网络请求。如果发现某规则费性能，直接砍掉。localStorage 存几百字节 profile 数据。变体池每次会话重新生成（不持久化）。
 
 ### 4.0.2 Academics · 学术体系 & Practice · 练习 & Simulate · 模考 & Competitions · 竞赛
 
@@ -426,8 +485,9 @@ yunzhuan.icu 是一个美国大学本科专业导航网站，涵盖 8 大类 44 
 ├── js/
 │   ├── track.js                  # 访问跟踪脚本
 │   ├── wechat-redirect.js        # 微信浏览器检测跳转
-│   ├── douke-question-bank.js    # 抖科题库（275题 8科目，每题5维元数据）
-│   └── douke-scoring-engine.js   # 抖科出题效果打分引擎（5维度 + A/B模拟）
+│   ├── douke-question-bank.js    # 抖科题库（275题 8科目，每题5维元数据+expectedTime预期用时）
+│   ├── douke-scoring-engine.js   # 抖科出题效果打分引擎（5维度 + A/B模拟 + skip行为支持）
+│   └── douke-variant-engine.js   # 抖科变体生成引擎（15种题型模式+愉悦度评分+ε-greedy）
 ├── docs/                         # 产品文档
 │   ├── DOUKE-ROADMAP.md              # 抖科产品 50 版本路线图
 │   ├── DOUKE-ENGINE-v1-to-v20.md     # 抖科引擎 20 版本迭代规划
@@ -496,7 +556,7 @@ GitHub Personal Access Token（PAT），有效期 **90 天**。当前 Token 仅�
 
 ## 8. 推荐算法体系 · 方案选型
 
-抖科推荐算法分 **5 阶段 · 6 大流派**演进，当前处于 v1.1「规则引擎 v1（加权随机）」。
+抖科推荐算法分 **5 阶段 · 6 大流派**演进，当前处于 v1.2「ε-greedy 7:3 混合推荐 + 愉悦度引擎 + 变体生成」。
 
 ### 8.1 推荐算法总览（方案选型对比）
 
@@ -509,15 +569,25 @@ GitHub Personal Access Token（PAT），有效期 **90 天**。当前 Token 仅�
 | **E 因果+学习科学** | E1Uplift → E2BKT贝叶斯知识追踪 → E3IRT项目反应理论 | v31.0+ | ⭐⭐⭐ v10已部分包含 |
 | **F 第三方集成** | Algolia / Amazon Personalize / Cohere Rerank | 视情况 | ⭐ 现阶段自研足够 |
 
-### 8.2 立刻可做的 5 项提升（v1.1 → v3.0 短期）
+### 8.2 已实现功能（v1.2 当前状态）
+
+| 模块 | 实现内容 | 文件 |
+|---|---|---|
+| **变体生成引擎** | 15 种题型模式匹配器，自动替换数值+重算答案+生成干扰项 | [js/douke-variant-engine.js](js/douke-variant-engine.js) |
+| **愉悦度引擎** | 5 维评分（正确率30%+速度25%+不跳过20%+连续对15%+收藏10%）+ 冷启动 mock 预设 | [js/douke-variant-engine.js](js/douke-variant-engine.js#L260-L300) |
+| **ε-greedy 7:3 混合推荐** | 70% exploit（偏好题库+愉悦度加权）+ 30% explore（非偏好+UCB探索加分），ε 衰减 0.30→0.15 | [douke.html](douke.html#L569-L606) |
+| **行为记录三态闭环** | correct / wrong / skip + dwellMs 全量录入 Recommender + DoukeScoring | [douke.html](douke.html#L284-L320) |
+| **预期用时维度** | 题目本身属性：阅读时间+思考时间+选项判断，区分"题目需长时间" vs "用户个人慢" | [js/douke-question-bank.js](js/douke-question-bank.js#L933-L950) |
+| **偏好题库管理** | preferredTopics 自动调整（愉悦度>0.5），为偏好 topic 动态生成变体题 | [douke.html](douke.html#L387-L468) |
+| **题目质量/行为打分** | 5 维后台静默评分（题目质量+行为动态+推荐效果+健康度+A/B模拟） | [js/douke-scoring-engine.js](js/douke-scoring-engine.js) |
+
+### 8.3 待实现提升（v3.0 → v5.0）
 
 | 编号 | 提升项 | 预期收益 | 工作量 |
 |---|---|---|---|
 | ① | 参数 Θ 自动寻优（爬山法+模拟退火，200 会话仿真）| 推荐效果分 +8~12 | 0.5 天 |
-| ② | 新题冷启动 MAB（Thompson Sampling 前 3 次曝光公平分配）| 新题曝光公平度 +30% | 0.3 天 |
-| ③ | Item-CF 雏形（400×400 共现矩阵，Top-K 预存）| 连续同主题命中率 +15% | 0.5 天 |
-| ④ | accuracy 从 subject.difficulty 升级到 topicCode 粒度 | 难度自适应精度 ↑ | 0.2 天 |
-| ⑤ | DoukeScoring.records 云同步（Vercel KV）| 换机不丢数据，仿真有真实样本 | 0.3 天 |
+| ② | Item-CF 雏形（400×400 共现矩阵，Top-K 预存）| 连续同主题命中率 +15% | 0.5 天 |
+| ③ | DoukeScoring.records 云同步（Vercel KV）| 换机不丢数据，仿真有真实样本 | 0.3 天 |
 
 完整方案选型、承载力、Token 需求与待确认决策见：
 - [docs/DOUKE-RECO-ALGO-SELECTION.md](docs/DOUKE-RECO-ALGO-SELECTION.md)
@@ -740,6 +810,8 @@ git push origin vX.Y.Z
 | v21.0 Demo | 2026-07-29 | Academics & Practice & Simulate & Competitions 四板块上线；考纲结构化导航（顶部目录+分节展示+上一节/下一节），syllabus 结构化替代全文展开 |
 | v21.1 Douke MVP | 2026-07-29 | **抖科 Douke v1.0 上线**：Apple Wallet 卡片堆叠，手机手势/PC键盘；DoukeQB 275 题 8 科目题库；DoukeScoring 5 维打分引擎后台闭环；规则引擎 v1（8 权重+质量/行为双闭环）；20 版本引擎迭代文档落地 |
 | v21.2 Douke v1.1 | 2026-07-30 | 打分系统改为后台引擎闭环（移除前端Dashboard，算法权重直接接入 recommend）；首页底部版权栏添加抖科不起眼入口；推荐算法方案选型文档 & 承载力 Token 需求文档 & README 补齐 |
+| v21.3 Douke v1.2 | 2026-07-30 | 答对1.5秒自动切下一张；skip三态行为记录（correct/wrong/skip+dwellMs）；题目预期用时维度（expectedTime，阅读+思考+选项判断）；用时比值双向算法调整（秒选→推难，苦战→推简单） |
+| v21.4 Douke v1.3 | 2026-07-30 | **变体生成引擎**（15种题型模式匹配+数值替换+答案重算）；**愉悦度引擎**（5维评分+冷启动mock预设）；**ε-greedy 7:3混合推荐**（70%偏好exploit+30%探索explore+UCB探索加分+ε衰减0.30→0.15）；偏好题库管理（preferredTopics+变体池动态生成） |
 
 ---
 
