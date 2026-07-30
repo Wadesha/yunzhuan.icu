@@ -719,9 +719,10 @@ function renderCard(card) {
   }
 
   var feedback = '<div class="dk-feedback-row">' +
-    '<button class="dk-fb-btn" data-fb="easy">太简单</button>' +
+    '<button class="dk-fb-btn" data-fb="skip">跳过</button>' +
     '<button class="dk-fb-btn" data-fb="ok">正好</button>' +
     '<button class="dk-fb-btn" data-fb="hard">太难</button>' +
+    '<button class="dk-fb-btn" data-fb="show-answer">看答案</button>' +
     '<button class="dk-fb-btn" data-fb="bookmark">收藏</button>' +
     '</div>';
 
@@ -910,22 +911,58 @@ var Stack = {
     fbBtns.forEach(function(btn) {
       btn.addEventListener('click', function(e) {
         e.stopPropagation();
+        var fb = btn.dataset.fb;
+
+        // "跳过"：记录skip并切下一张
+        if (fb === 'skip') {
+          var dwellSkip = Date.now() - self.cardVisibleTs;
+          Recommender.recordSwipe(card.id, 'skip', dwellSkip);
+          fbBtns.forEach(function(b) { b.classList.remove('active'); });
+          btn.classList.add('active');
+          self.next();
+          return;
+        }
+
+        // "看答案"：直接显示答案（不标记对错，不记录答题）
+        if (fb === 'show-answer') {
+          if (card.type === 'question') {
+            var ansEl = el.querySelector('#dkAnswer');
+            if (ansEl) {
+              ansEl.className = 'dk-answer show correct-answer';
+              ansEl.innerHTML = '<strong>答案</strong><br>' +
+                '正确答案：' + ['A','B','C','D','E'][card.answer] + ') ' + card.choices[card.answer] + '<br>' +
+                '<span style="color:var(--text-dim);">' + card.explanation + '</span>';
+            }
+            // 禁用选项点击
+            var choices = el.querySelectorAll('.dk-choice');
+            choices.forEach(function(c) {
+              c.style.pointerEvents = 'none';
+              if (parseInt(c.dataset.idx) === card.answer) c.classList.add('correct');
+            });
+            // 标记已看答案
+            el.dataset.answered = 'show-answer';
+          }
+          fbBtns.forEach(function(b) { b.classList.remove('active'); });
+          btn.classList.add('active');
+          return;
+        }
+
+        // 正常反馈：正好 / 太难 / 收藏
         fbBtns.forEach(function(b) { b.classList.remove('active'); });
         btn.classList.add('active');
-        Recommender.recordFeedback(card.id, btn.dataset.fb);
+        Recommender.recordFeedback(card.id, fb);
         // 反馈录入打分引擎（仅对题目类型）
         if (typeof DoukeScoring !== 'undefined' && card.type === 'question') {
-          // 找到最近一条该 cardId 的 record 并回填 feedback
           var recs = DoukeScoring.records;
           for (var ri = recs.length - 1; ri >= 0; ri--) {
             if (recs[ri].cardId === card.id) {
-              recs[ri].userFeedback = btn.dataset.fb;
+              recs[ri].userFeedback = fb;
               DoukeScoring.saveToStorage();
               break;
             }
           }
         }
-        if (btn.dataset.fb === 'bookmark' && navigator.vibrate) navigator.vibrate(15);
+        if (fb === 'bookmark' && navigator.vibrate) navigator.vibrate(15);
       });
     });
   },
