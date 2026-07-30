@@ -300,10 +300,11 @@ var Recommender = {
     // 更新 topicStats（愉悦度数据源）
     this._updateTopicStats(cardId, action, dwellMs);
     this.profile.totalCards++;
-    // 每 10 题刷新一次偏好和变体池
-    if (this.profile.totalCards % 10 === 0) {
+    // 动态刷新间隔：新用户前30题每3题刷新，稳定后每10题刷新
+    var refreshInterval = this.profile.totalCards <= 30 ? 3 : 10;
+    if (this.profile.totalCards % refreshInterval === 0) {
       this.refreshEnjoyment();
-      this.refreshVariantPool();
+      this.refreshVariantPool(true); // true = 增量更新
     }
     this.save();
   },
@@ -433,28 +434,44 @@ var Recommender = {
 
   /**
    * 刷新变体池：为偏好 topic 生成额外变体题
-   * 每次 refreshEnjoyment 后调用
+   * @param {boolean} incremental - 是否增量更新（不清空已有变体）
    */
-  refreshVariantPool: function() {
+  refreshVariantPool: function(incremental) {
     if (typeof DoukeVariantEngine === 'undefined') return;
     // 确保愉悦度已计算
     if (Object.keys(this.profile.enjoyment).length === 0) {
       this.refreshEnjoyment();
     }
     var self = this;
-    self.variantPool = [];
-    // 为 top 5 偏好 topic 各生成 5 个变体
+
+    // 增量更新：保留已有变体，不清空
+    if (!incremental) {
+      self.variantPool = [];
+    }
+
+    // 淘汰机制：超过 50 个变体时，淘汰最久未用的
+    if (self.variantPool.length > 50) {
+      self.variantPool = self.variantPool.slice(-30);
+    }
+
+    // 为 top 5 偏好 topic 各生成 2 个新变体（增量追加）
     var topTopics = self.profile.preferredTopics.slice(0, 5);
+    var added = 0;
     topTopics.forEach(function(tc) {
+      if (added >= 10) return; // 单次最多追加 10 个
       // 找该 topic 的模板题
       var templates = TEMPLATE_CARDS.filter(function(c) { return c.topicCode === tc; });
-      templates.slice(0, 3).forEach(function(t) {
+      templates.slice(0, 2).forEach(function(t) {
         if (DoukeVariantEngine.canGenerate(t)) {
-          var vs = DoukeVariantEngine.generateVariants(t, 2);
-          self.variantPool = self.variantPool.concat(vs);
+          var v = DoukeVariantEngine.generateVariant(t);
+          if (v) {
+            self.variantPool.push(v);
+            added++;
+          }
         }
       });
     });
+
     // 如果偏好 topic 不足 5 个（新用户），为所有可生成变体的题各生成 1 个
     if (self.variantPool.length < 10) {
       TEMPLATE_CARDS.forEach(function(t) {
