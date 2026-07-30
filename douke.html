@@ -260,10 +260,20 @@ var Recommender = {
     if (this.profile.seen.length > 500) this.profile.seen = this.profile.seen.slice(-500);
   },
   recordSwipe: function(cardId, action, dwellMs) {
+    // action: 'correct' | 'wrong' | 'skip' | 'next'
     var last = this.profile.seen[this.profile.seen.length - 1];
     if (last && last.cardId === cardId) {
       last.action = action;
       last.dwellMs = dwellMs;
+    } else {
+      // 防御：recordView 没调用过时补一条
+      this.profile.seen.push({cardId: cardId, ts: Date.now(), action: action, dwellMs: dwellMs});
+      if (this.profile.seen.length > 500) this.profile.seen = this.profile.seen.slice(-500);
+    }
+    // skip 计数（按 cardId 维度，后续 recommend 可降权）
+    if (action === 'skip') {
+      if (!this.profile.skipCount) this.profile.skipCount = {};
+      this.profile.skipCount[cardId] = (this.profile.skipCount[cardId] || 0) + 1;
     }
     this.profile.totalCards++;
     this.save();
@@ -343,6 +353,11 @@ var Recommender = {
           var bMult = 0.5 + (bs.overall / 100) * 0.7;
           w *= bMult;
         }
+      }
+      // 9. skip 信号：用户反复划走的题目降权（说明不感兴趣/太难/不相关）
+      if (self.profile.skipCount && self.profile.skipCount[card.id]) {
+        var sc = self.profile.skipCount[card.id];
+        w *= Math.max(0.2, 1 - sc * 0.25); // skip 1次×0.75, 2次×0.5, 3次×0.25, 4+次×0.2
       }
       return {card: card, weight: Math.max(w, 0.01)};
     });
@@ -590,6 +605,8 @@ var Stack = {
               '<span style="color:var(--text-dim);">' + card.explanation + '</span>';
           }
           var dwell = Date.now() - self.cardVisibleTs;
+          // 标记本卡已答（供 next() 区分 skip vs answered）
+          el.dataset.answered = correct ? 'correct' : 'wrong';
           Recommender.recordAnswer(card.id, correct, card.subject, card.difficulty);
           // 录入打分引擎
           if (typeof DoukeScoring !== 'undefined') {
@@ -598,8 +615,18 @@ var Stack = {
           }
           if (navigator.vibrate) navigator.vibrate(correct ? 30 : 60);
           self.updateStreak();
+          // 答对1.5秒后自动切下一张；答错不自动切（让用户看解析）
+          if (correct) {
+            setTimeout(function() {
+              // 确保这张卡还在屏幕上（用户没手动滑走）
+              if (el.parentNode && el.dataset.answered === 'correct') {
+                self.next();
+              }
+            }, 1500);
+          }
         });
       });
+      // 记录"未答划走"标记：cardVisibleTs 已在 render() 设置
     }
     // Feedback buttons
     var fbBtns = el.querySelectorAll('.dk-fb-btn');
@@ -635,10 +662,26 @@ var Stack = {
     var peek1El = this.el.querySelector('.dk-card.peek-1');
     var peek2El = this.el.querySelector('.dk-card.peek-2');
 
-    // Record swipe
+    // === 行为记录：区分 answered(correct/wrong) vs skip ===
     var current = this.getNextCard();
     var dwellMs = Date.now() - this.cardVisibleTs;
-    Recommender.recordSwipe(current.id, 'next', dwellMs);
+    var answerState = 'skip'; // 默认 skip
+    if (currentEl && currentEl.dataset.answered) {
+      answerState = currentEl.dataset.answered; // 'correct' or 'wrong'
+    }
+    // Recommender: 统一记录 action + dwellMs + answerState
+    Recommender.recordSwipe(current.id, answerState, dwellMs);
+    // 打分引擎：skip 也要记录（作为"回避"信号，不同于答对/答错）
+    if (typeof DoukeScoring !== 'undefined' && current.type === 'question' && answerState === 'skip') {
+      // skip 记为 null correct + dwellMs，feedback=null
+      // 用 recordAnswer(card, null, dwell, null) 表示未作答
+      try {
+        DoukeScoring.recordAnswer(current, null, dwellMs, null);
+        DoukeScoring.saveToStorage();
+      } catch(e) {}
+    }
+    // 清除 dataset.answered，避免下一张误读
+    if (currentEl) delete currentEl.dataset.answered;
 
     // Hide hint
     this.hintShown = true;

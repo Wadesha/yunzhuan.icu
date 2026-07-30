@@ -93,12 +93,18 @@
 
   Engine.clearRecords = function() { this.records = []; };
 
-  // 单题行为分（结合正确率和用时）
+  // 单题行为分（结合正确率和用时，skip 记为 null correct）
   Engine.behaviorScoreForCard = function(cardId) {
     var samples = this.records.filter(function(r) { return r.cardId === cardId; });
     if (samples.length === 0) return null;
-    var acc = samples.filter(function(r){return r.correct;}).length / samples.length;
-    var avgDwell = samples.reduce(function(s,r){return s+r.dwellMs;},0) / samples.length;
+    // 区分：answered 样本 vs skip 样本
+    var answered = samples.filter(function(r){return r.correct === true || r.correct === false;});
+    var skipped = samples.filter(function(r){return r.correct === null || r.correct === undefined;});
+    var skipRate = skipped.length / samples.length;
+    var acc = answered.length > 0
+      ? answered.filter(function(r){return r.correct;}).length / answered.length
+      : 0.5; // 全是 skip 的题目，按 0.5 中性处理
+    var avgDwell = samples.reduce(function(s,r){return s+(r.dwellMs||0);},0) / samples.length;
     var sampleFirst = samples[0];
     var diff = sampleFirst ? sampleFirst.difficulty : 'medium';
     var target = { easy: this.config.targetAccEasy, medium: this.config.targetAccMedium, hard: this.config.targetAccHard }[diff] || 0.6;
@@ -116,8 +122,13 @@
     else if (dwellRatio < 2) dwellScore = 100 - (dwellRatio - 1) * 60; // 略慢减分
     else dwellScore = Math.max(10, 40 - (dwellRatio - 2) * 30); // 太慢 = 题目不清晰/太难
 
-    // 综合：行为健康度 = 60% 合适的正确率 + 40% 用时合理性
+    // 综合：行为健康度 = 55% 合适的正确率 + 45% 用时合理性
     var overall = accScore * 0.55 + dwellScore * 0.45;
+
+    // skip 率惩罚：高 skip 率说明题目不受欢迎（太难/不相关/无聊）→ 降分
+    if (skipRate > 0) {
+      overall = overall * (1 - skipRate * 0.4); // skip 率 100% → 行为分打 6 折
+    }
 
     // 用户反馈加权（太简单/太难扣分，正好加分）
     var fbHits = samples.filter(function(r){return r.userFeedback;});
@@ -131,6 +142,9 @@
 
     return {
       sampleSize: samples.length,
+      answeredCount: answered.length,
+      skipCount: skipped.length,
+      skipRate: Math.round(skipRate*100),
       accuracy: Math.round(acc*100),
       targetAccuracy: Math.round(target*100),
       avgDwellMs: Math.round(avgDwell),
