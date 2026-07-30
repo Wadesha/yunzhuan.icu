@@ -273,7 +273,7 @@ var Recommender = {
       this.save();
     }
     // 初始化新手池（新用户第一次进入时生成）
-    if (typeof DoukeQB !== 'undefined' && this.profile.totalCards < 20) {
+    if (typeof DoukeQB !== 'undefined' && this.profile.totalCards < 10) {
       this.onboardingPool = DoukeQB.selectOnboardingPool(100);
     }
     // 初始化时生成变体池（为偏好 topic 扩充题目）
@@ -305,8 +305,8 @@ var Recommender = {
     // 更新 topicStats（愉悦度数据源）
     this._updateTopicStats(cardId, action, dwellMs);
     this.profile.totalCards++;
-    // 动态刷新间隔：新用户前30题每3题刷新，稳定后每10题刷新
-    var refreshInterval = this.profile.totalCards <= 30 ? 3 : 10;
+    // 动态刷新间隔：新用户前15题每2题刷新，稳定后每10题刷新
+    var refreshInterval = this.profile.totalCards <= 15 ? 2 : 10;
     if (this.profile.totalCards % refreshInterval === 0) {
       this.refreshEnjoyment();
       this.refreshVariantPool(true); // true = 增量更新
@@ -497,8 +497,8 @@ var Recommender = {
   recommend: function(cards, subjectFilter) {
     var self = this;
 
-    // 新用户前10题：从新手池随机抽取
-    if (self.profile.totalCards < 10 && self.onboardingPool.length > 0) {
+    // 新用户前5题：从新手池随机抽取（快速探索）
+    if (self.profile.totalCards < 5 && self.onboardingPool.length > 0) {
       var sampled = DoukeQB.sampleFromPool(self.onboardingPool, 10);
       if (subjectFilter !== 'all') {
         sampled = sampled.filter(function(c) { return c.subject === subjectFilter; });
@@ -555,10 +555,10 @@ var Recommender = {
       var w = 1.0;
       // 1. Freshness
       if (seenRecently.indexOf(card.id) >= 0) w *= 0.05;
-      // 2. Subject rotation（前20题强惩罚，后续正常）
+      // 2. Subject rotation（前15题强惩罚，后续正常）
       var recentSubjectCount = recentSubjects.filter(function(s){return s===card.subject;}).length;
-      if (self.profile.totalCards < 20) {
-        // 新用户前20题：强惩罚（权重×0.1），避免连续同科目
+      if (self.profile.totalCards < 15) {
+        // 新用户前15题：强惩罚（权重×0.1），避免连续同科目
         if (recentSubjects[recentSubjects.length - 1] === card.subject) w *= 0.1;
       } else {
         // 稳定用户：正常轮换（权重×0.3）
