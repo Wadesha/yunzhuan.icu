@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pre-interview Reading Simulator · Oxbridge</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f5f5; color: #333;
+            min-height: 100vh;
+        }
+        .back-link {
+            display: inline-block; color: #667eea; text-decoration: none;
+            font-size: 0.85rem; padding: 12px 16px 0; max-width: 1000px; margin: 0 auto;
+        }
+        .back-link:hover { text-decoration: underline; }
+
+        /* 顶部栏 */
+        .topbar {
+            background: white; border-bottom: 1px solid #e8ecff;
+            padding: 10px 16px; position: sticky; top: 0; z-index: 100;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+        }
+        .topbar-inner {
+            max-width: 1000px; margin: 0 auto;
+            display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+        }
+        .topbar .meta {
+            font-size: 0.78rem; color: #666; flex: 1; min-width: 180px;
+        }
+        .topbar .meta .tag {
+            display: inline-block; padding: 2px 7px; border-radius: 3px;
+            font-size: 0.68rem; font-weight: 600; margin-right: 5px;
+            background: #e3f2fd; color: #1565c0;
+        }
+        .timer {
+            font-family: 'SF Mono', 'Menlo', monospace;
+            font-size: 1.3rem; font-weight: 700;
+            padding: 4px 12px; border-radius: 6px;
+            background: #e8f5e9; color: #2e7d32;
+            min-width: 92px; text-align: center;
+            transition: background 0.3s, color 0.3s;
+        }
+        .timer.warn { background: #fff8e1; color: #ff8f00; }
+        .timer.danger { background: #ffebee; color: #c62828; animation: pulse 1s infinite; }
+        @keyframes pulse { 50% { opacity: 0.6; } }
+        .timer.done { background: #f0f0f5; color: #999; animation: none; }
+        .timer-controls { display: flex; gap: 6px; }
+        .btn {
+            border: 1px solid #ddd; background: white; color: #555;
+            padding: 5px 12px; border-radius: 5px; font-size: 0.8rem;
+            cursor: pointer; transition: all 0.15s;
+        }
+        .btn:hover { border-color: #667eea; color: #667eea; }
+        .btn-primary { background: #667eea; color: white; border-color: #667eea; }
+        .btn-primary:hover { background: #5568d3; color: white; }
+        .btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+        /* 主区 */
+        .workspace {
+            max-width: 1000px; margin: 12px auto; padding: 0 16px 40px;
+            display: grid; grid-template-columns: 1fr 280px; gap: 12px;
+        }
+        .main-col { min-width: 0; }
+        .side-col { min-width: 0; }
+
+        /* 材料卡片 */
+        .material-card {
+            background: white; border-radius: 8px; padding: 18px 22px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05); margin-bottom: 12px;
+        }
+        .material-card h2 {
+            color: #333; font-size: 1.05rem; margin-bottom: 4px;
+        }
+        .material-card .mat-sub {
+            color: #888; font-size: 0.8rem; margin-bottom: 14px;
+            padding-bottom: 10px; border-bottom: 1px solid #f0f0f0;
+        }
+        /* 可标注文本 */
+        .reading-text {
+            font-size: 0.95rem; line-height: 1.85; color: #333;
+            user-select: text; -webkit-user-select: text;
+        }
+        .reading-text p { margin-bottom: 12px; }
+        .reading-text .law {
+            background: #f8f9ff; padding: 10px 14px; border-left: 3px solid #667eea;
+            border-radius: 0 6px 6px 0; font-style: italic; margin: 10px 0;
+        }
+        .reading-text .fact {
+            background: #fff8e1; padding: 10px 14px; border-left: 3px solid #ff8f00;
+            border-radius: 0 6px 6px 0; margin: 10px 0;
+        }
+        /* 标注高亮 */
+        .anno { border-radius: 2px; padding: 0 2px; cursor: pointer; }
+        .anno-blue { background: #bbdefb; border-bottom: 2px solid #1565c0; }
+        .anno-green { background: #c8e6c9; border-bottom: 2px solid #2e7d32; }
+        .anno-red { background: #ffcdd2; border-bottom: 2px solid #c62828; }
+        .anno-yellow { background: #fff9c4; border-bottom: 2px solid #f9a825; }
+        .anno:hover { filter: brightness(0.95); }
+
+        /* 标注工具栏 */
+        .anno-toolbar {
+            background: white; border-radius: 8px; padding: 10px 14px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05); margin-bottom: 12px;
+            display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+            position: sticky; top: 56px; z-index: 50;
+        }
+        .anno-toolbar .tb-label {
+            font-size: 0.78rem; color: #888; margin-right: 4px;
+        }
+        .color-btn {
+            display: inline-flex; align-items: center; gap: 6px;
+            padding: 5px 11px; border-radius: 5px; border: 1px solid #ddd;
+            background: white; cursor: pointer; font-size: 0.8rem;
+            transition: all 0.15s;
+        }
+        .color-btn:hover { border-color: #999; }
+        .color-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+        .color-dot {
+            width: 12px; height: 12px; border-radius: 50%;
+        }
+        .dot-blue { background: #1565c0; }
+        .dot-green { background: #2e7d32; }
+        .dot-red { background: #c62828; }
+        .dot-yellow { background: #f9a825; }
+        .anno-toolbar .hint-text {
+            font-size: 0.74rem; color: #999; margin-left: auto;
+        }
+
+        /* 侧边栏 */
+        .side-card {
+            background: white; border-radius: 8px; padding: 14px 16px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05); margin-bottom: 12px;
+        }
+        .side-card h3 {
+            color: #667eea; font-size: 0.88rem; margin-bottom: 10px;
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        .side-card h3 .count {
+            background: #eef1ff; color: #667eea; font-size: 0.7rem;
+            padding: 1px 7px; border-radius: 10px;
+        }
+        .anno-list { list-style: none; max-height: 320px; overflow-y: auto; }
+        .anno-list li {
+            padding: 7px 9px; margin-bottom: 5px; border-radius: 5px;
+            font-size: 0.78rem; line-height: 1.5; cursor: pointer;
+            border-left: 3px solid #ddd; background: #fafaff;
+            transition: background 0.15s;
+        }
+        .anno-list li:hover { background: #f0f0f5; }
+        .anno-list li.c-blue { border-left-color: #1565c0; }
+        .anno-list li.c-green { border-left-color: #2e7d32; }
+        .anno-list li.c-red { border-left-color: #c62828; }
+        .anno-list li.c-yellow { border-left-color: #f9a825; }
+        .anno-list .li-text {
+            color: #333; display: block; margin-bottom: 2px;
+            overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+        }
+        .anno-list .li-dim {
+            font-size: 0.66rem; font-weight: 600; text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+        .anno-list .empty {
+            color: #aaa; text-align: center; padding: 16px 0; font-size: 0.78rem;
+            cursor: default; border: none; background: transparent;
+        }
+        /* 维度覆盖率 */
+        .dim-coverage { font-size: 0.76rem; }
+        .dim-coverage .dim-row {
+            display: flex; align-items: center; gap: 8px;
+            padding: 4px 0; border-bottom: 1px solid #f5f5f5;
+        }
+        .dim-coverage .dim-row:last-child { border: none; }
+        .dim-coverage .dim-name { flex: 1; color: #555; }
+        .dim-coverage .dim-stat {
+            font-size: 0.7rem; padding: 1px 6px; border-radius: 3px;
+        }
+        .dim-coverage .dim-stat.ok { background: #e8f5e9; color: #2e7d32; }
+        .dim-coverage .dim-stat.miss { background: #ffebee; color: #c62828; }
+
+        /* 问题区（OX-5 预留，OX-4 隐藏） */
+        .questions-card { display: none; }
+        .questions-card.show { display: block; }
+        .question-item {
+            background: #f8f9ff; border-left: 3px solid #667eea;
+            padding: 12px 16px; border-radius: 0 6px 6px 0;
+            margin-bottom: 10px;
+        }
+        .question-item .q-dim {
+            font-size: 0.68rem; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 0.04em; padding: 1px 6px; border-radius: 3px;
+            margin-right: 6px;
+        }
+        .q-dim.d-textual { background: #e3f2fd; color: #1565c0; }
+        .q-dim.d-structural { background: #e8f5e9; color: #2e7d32; }
+        .q-dim.d-conflict { background: #ffebee; color: #c62828; }
+        .q-dim.d-boundary { background: #fff9c4; color: #f9a825; }
+        .question-item .q-text {
+            color: #333; font-size: 0.9rem; line-height: 1.6; margin-top: 5px;
+        }
+
+        /* 文本收缩（OX-5 状态） */
+        .material-card.collapsed {
+            position: fixed; right: 16px; bottom: 16px;
+            width: 320px; max-height: 50vh; overflow-y: auto;
+            z-index: 200; box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            padding: 12px 16px;
+        }
+        .material-card.collapsed h2 { font-size: 0.88rem; }
+        .material-card.collapsed .reading-text { font-size: 0.78rem; line-height: 1.6; }
+        .material-card.collapsed .mat-sub { display: none; }
+
+        .footer {
+            text-align: center; color: #aaa; font-size: 0.75rem; padding: 16px;
+        }
+        .footer a { color: #aaa; text-decoration: none; }
+
+        @media (max-width: 700px) {
+            .workspace { grid-template-columns: 1fr; }
+            .anno-toolbar { position: static; }
+            .material-card.collapsed { width: calc(100% - 32px); }
+        }
+    </style>
+    <link rel="stylesheet" href="../../css/theme.css">
+    <meta name="theme-color" content="#667eea">
+    <script src="../../js/theme.js"></script>
+</head>
+<body>
+    <a href="../oxbridge-interview.html" class="back-link">&larr; 返回牛剑面试</a>
+
+    <!-- 顶部栏：元信息 + 倒计时 -->
+    <div class="topbar">
+        <div class="topbar-inner">
+            <div class="meta">
+                <span class="tag" id="metaTag">LAW</span>
+                <span id="metaText">Oxford · Balliol College · 2025 Winter</span>
+            </div>
+            <select id="materialSelect" class="btn" style="min-width:150px;">
+                <option value="law-firefighter">法学 · 消防员两难</option>
+                <option value="history-silences">历史 · 档案的沉默</option>
+                <option value="ppe-bus-fare">PPE · 0.5 英镑公交票</option>
+            </select>
+            <div class="timer" id="timer">15:00</div>
+            <div class="timer-controls">
+                <button class="btn btn-primary" id="startBtn">开始倒计时</button>
+                <button class="btn" id="resetBtn" disabled>重置</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="workspace">
+        <div class="main-col">
+            <!-- 标注工具栏 -->
+            <div class="anno-toolbar">
+                <span class="tb-label">选中文本后点击维度：</span>
+                <button class="color-btn" data-color="blue" disabled>
+                    <span class="color-dot dot-blue"></span>文本层
+                </button>
+                <button class="color-btn" data-color="green" disabled>
+                    <span class="color-dot dot-green"></span>结构层
+                </button>
+                <button class="color-btn" data-color="red" disabled>
+                    <span class="color-dot dot-red"></span>冲突层
+                </button>
+                <button class="color-btn" data-color="yellow" disabled>
+                    <span class="color-dot dot-yellow"></span>边界层
+                </button>
+                <span class="hint-text" id="selHint">先选中材料中的一段文字</span>
+            </div>
+
+            <!-- 预读材料 -->
+            <div class="material-card" id="materialCard">
+                <h2 id="materialTitle">预读材料 · 消防员两难</h2>
+                <div class="mat-sub">Pre-interview Reading · 请在 15 分钟内阅读并标注关键点</div>
+                <div class="reading-text" id="readingText"></div>
+            </div>
+
+            <!-- 问题区（OX-5 启用） -->
+            <div class="material-card questions-card" id="questionsCard">
+                <h2>递进问题</h2>
+                <div class="mat-sub">倒计时结束 · 文本已收缩至右下角 · 请回答以下问题</div>
+                <div id="questionsList"></div>
+            </div>
+        </div>
+
+        <!-- 侧边栏 -->
+        <div class="side-col">
+            <div class="side-card">
+                <h3>维度覆盖率 <span class="count" id="totalCount">0</span></h3>
+                <div class="dim-coverage" id="dimCoverage">
+                    <div class="dim-row">
+                        <span class="color-dot dot-blue"></span>
+                        <span class="dim-name">文本层 Textual</span>
+                        <span class="dim-stat miss" id="stat-blue">未标</span>
+                    </div>
+                    <div class="dim-row">
+                        <span class="color-dot dot-green"></span>
+                        <span class="dim-name">结构层 Structural</span>
+                        <span class="dim-stat miss" id="stat-green">未标</span>
+                    </div>
+                    <div class="dim-row">
+                        <span class="color-dot dot-red"></span>
+                        <span class="dim-name">冲突层 Conflict</span>
+                        <span class="dim-stat miss" id="stat-red">未标</span>
+                    </div>
+                    <div class="dim-row">
+                        <span class="color-dot dot-yellow"></span>
+                        <span class="dim-name">边界层 Boundary</span>
+                        <span class="dim-stat miss" id="stat-yellow">未标</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="side-card">
+                <h3>我的标注 <span class="count" id="listCount">0</span></h3>
+                <ul class="anno-list" id="annoList">
+                    <li class="empty">尚无标注<br><span style="font-size:0.7rem;">选中材料文字 → 点击维度颜色</span></li>
+                </ul>
+                <button class="btn" id="exportBtn" style="width:100%;margin-top:8px;font-size:0.76rem;" disabled>导出标注报告 (JSON)</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <a href="../../index.html">Home</a> ·
+        <a href="../oxbridge-interview.html">Oxbridge Interviews</a> ·
+        Pre-interview Reading Simulator
+    </div>
+
+    <script>
+    (function() {
+        'use strict';
+
+        // ============ 维度配置 ============
+        const DIMENSIONS = {
+            blue:   { name: '文本层',   en: 'Textual',   statEl: 'stat-blue' },
+            green:  { name: '结构层',   en: 'Structural', statEl: 'stat-green' },
+            red:    { name: '冲突层',   en: 'Conflict',   statEl: 'stat-red' },
+            yellow: { name: '边界层',   en: 'Boundary',   statEl: 'stat-yellow' }
+        };
+
+        // ============ OX-7: 预读材料数据 ============
+        const MATERIALS = {
+            'law-firefighter': {
+                tag: 'LAW', meta: 'Oxford · Balliol College · 2025 Winter',
+                title: '预读材料 · 消防员两难',
+                framework: '四维度',
+                html: '<p>以下材料将在倒计时结束后进入提问环节。请在 15 分钟内用四色标注工具，抓取材料的"核心假设 / 逻辑漏洞 / 潜在争议点"。</p>' +
+                    '<div class="law">法条："任何人故意剥夺他人生命者，处谋杀罪。"</div>' +
+                    '<div class="fact">事实：消防员 A 在火场中只能救一人——救 B 则 C 死，救 C 则 B 死。A 选择救 B。C 的家属控告 A 谋杀。</div>' +
+                    '<p>本案的核心争议在于：A 的"选择"是否构成法条所称的"故意剥夺他人生命"。一种观点认为，A 的行为本质上是"救援"，C 的死亡是火场本身造成的，A 只是未能阻止而非主动造成。另一种观点则强调，A 在两个必然死亡的人之间做出了选择，这一选择直接决定了谁能存活——若 A 选择救 C，则 B 死亡。因此 A 的"选择"与 C 的死亡之间存在因果联系。</p>' +
+                    '<p>进一步的问题是：消防员作为负有职务义务的救援人员，其"不作为"是否等同于"作为"？如果普通路人在同样情境下选择不救人，我们通常不会追究其谋杀责任；但消防员的职务义务是否改变了这一判断？这涉及行为责任与结果责任的区分，以及立法目的究竟是为了惩罚"造成死亡的行为"，还是为了惩罚"主动杀害的行为"。</p>' +
+                    '<p>此外，若改变某些事实条件，结论是否会发生反转？例如：若 A 是普通路人（无救援义务），结论是否不同？若 B 是 A 的孩子，A 的选择是否会被视为正当的偏袒而非谋杀故意？这些边界情形将检验我们对"故意"与"剥夺生命"定义的稳定性。</p>',
+                questions: [
+                    { dim: 'blue',   dimName: '文本层',   text: '"故意"在该场景中应如何界定？A 的心理状态是什么？' },
+                    { dim: 'green',  dimName: '结构层',   text: '不作为能否构成"剥夺生命"？区分标准是什么？' },
+                    { dim: 'red',    dimName: '冲突层',   text: '本案中"行为责任"与"结果责任"的冲突如何化解？立法目的应优先哪一方？' },
+                    { dim: 'yellow', dimName: '边界层',   text: '给出一个让结论反转的事实变体（如改变 A 的身份或与 B/C 的关系）。' }
+                ]
+            },
+            'history-silences': {
+                tag: 'HISTORY', meta: 'Cambridge · Trinity College · 2025 Winter',
+                title: '预读材料 · 档案的沉默',
+                framework: '四维度',
+                html: '<p>以下是一段关于"被征服文明史料"的节选。请在 15 分钟内标注其论证结构与潜在盲点。</p>' +
+                    '<div class="law">俗语："历史是由胜利者书写的。"</div>' +
+                    '<div class="fact">情境：罗马在第三次布匿战争后彻底摧毁迦太基，城池被夷平，文献大多散佚。后世对迦太基的了解，几乎全部依赖罗马作家（如波利比乌斯、李维）的记述。</div>' +
+                    '<p>一种常见的观点认为：既然文字记录被胜利者控制，我们就无法真正了解迦太基这样的"被毁灭文明"——罗马作家会按照自己的立场塑造叙事，将被征服者描绘为野蛮、衰败或罪有应得。</p>' +
+                    '<p>然而，这种"全然不可知"的结论可能过于草率。首先，史料来源并非只有文字：考古遗迹、物质文化（陶器形制、神庙布局）、环境数据（花粉分析、土壤样本）难以被单方面伪造，它们能提供与文字记录相互印证或相互矛盾的证据。其次，即便只有胜利者写的记录，这些记录为了夸大自己的胜利，也会无意间留存关于对方社会组织、战术、人口规模的细节——这被称为"反向解读"（reading against the grain）。</p>' +
+                    '<p>更深层的问题是：胜利者不仅书写，还选择性销毁。档案的"沉默"本身并非偶然的空白，而是权力关系的证据。当我们追问"为什么这些记录消失了"，追问本身就已经在揭示一段被压制的权力史。那么，历史学的任务究竟是"还原真相"，还是"持续追问记录如何被生产、被抹除"？</p>',
+                questions: [
+                    { dim: 'blue',   dimName: '文本层',   text: '"胜利者书写历史"这句话的措辞如何界定？"书写"是单纯记录，还是包含塑造与删改？' },
+                    { dim: 'green',  dimName: '结构层',   text: '"全然不可知"结论的论证链条是什么？哪个环节最薄弱？' },
+                    { dim: 'red',    dimName: '冲突层',   text: '"还原真相"与"追问记录如何被生产"两种史学目标存在什么张力？' },
+                    { dim: 'yellow', dimName: '边界层',   text: '给出一个反例：在什么情境下，被征服文明的史料反而比征服者的更完整？' }
+                ]
+            },
+            'ppe-bus-fare': {
+                tag: 'PPE', meta: 'Oxford · Balliol College · 2025 Winter',
+                title: '预读材料 · 0.5 英镑公交票',
+                framework: '四维度',
+                html: '<p>以下是一段政策困境材料。请在 15 分钟内标注其中的价值冲突与潜在权衡。</p>' +
+                    '<div class="law">政策：某市政府为减少碳排放，将所有公共汽车改为免费乘坐。</div>' +
+                    '<div class="fact">结果：公车极度拥挤、体验恶劣，通勤效率下降。政府考虑恢复收取极低票价（0.5 英镑）以过滤无目的乘车。</div>' +
+                    '<p>支持恢复票价的观点认为：收取微量票价可以过滤掉无目的乘车的流动人群，缓解拥挤，同时为公交系统提供运营维护资金。从效率角度看，0.5 英镑的边际成本足以筛除大量非必要出行，而真正有通勤需求的人几乎不会因此放弃乘车。</p>' +
+                    '<p>然而，反对者指出一个关键数据：这 0.5 英镑的票价让低收入群体的搭乘率下降了 30%，而对中产阶级完全没有影响。结果是低收入者不得不花更多时间步行，而碳排放并没有明显降低——因为被挤出公交的人并未转向私家车（他们本就没有车），只是减少了出行。这意味着政策在"公平"维度上失败了，却并未在"效率"或"环保"维度上获益。</p>' +
+                    '<p>进一步的问题是：如果政府的真实目标是减排而非创收，是否存在比"一刀切票价"更好的工具？例如针对低收入者的凭证补贴、高峰期阶梯定价、或对短途与长途差异化收费。这些替代方案各自引入了什么新的权衡？当我们说一个政策"有效"时，我们究竟在衡量哪个维度的有效性？</p>',
+                questions: [
+                    { dim: 'blue',   dimName: '文本层',   text: '"有效"一词在该政策语境中应如何界定？效率、公平、环保哪个优先？' },
+                    { dim: 'green',  dimName: '结构层',   text: '支持票价恢复的论证链条是什么？低收入数据如何动摇它？' },
+                    { dim: 'red',    dimName: '冲突层',   text: '本案中"效率"与"公平"的冲突如何化解？是否存在帕累托改进？' },
+                    { dim: 'yellow', dimName: '边界层',   text: '给出一个让"恢复票价"结论反转的条件变体（如改变低收入者出行替代方案）。' }
+                ]
+            }
+        };
+
+        let currentMaterialId = 'law-firefighter';
+
+        // ============ 状态 ============
+        const state = {
+            totalSeconds: 15 * 60,  // 15 分钟（测试时可改小）
+            remaining: 15 * 60,
+            running: false,
+            timerId: null,
+            finished: false,
+            annotations: []  // { id, color, text, note }
+        };
+
+        // ============ DOM ============
+        const timerEl = document.getElementById('timer');
+        const startBtn = document.getElementById('startBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const readingText = document.getElementById('readingText');
+        const materialCard = document.getElementById('materialCard');
+        const materialTitle = document.getElementById('materialTitle');
+        const materialSelect = document.getElementById('materialSelect');
+        const metaTag = document.getElementById('metaTag');
+        const metaText = document.getElementById('metaText');
+        const questionsCard = document.getElementById('questionsCard');
+        const questionsList = document.getElementById('questionsList');
+        const annoList = document.getElementById('annoList');
+        const totalCount = document.getElementById('totalCount');
+        const listCount = document.getElementById('listCount');
+        const selHint = document.getElementById('selHint');
+        const colorBtns = document.querySelectorAll('.color-btn');
+
+        // ============ OX-7: 材料切换 ============
+        function loadMaterial(id) {
+            currentMaterialId = id;
+            const m = MATERIALS[id];
+            readingText.innerHTML = m.html;
+            materialTitle.textContent = m.title;
+            metaTag.textContent = m.tag;
+            metaText.textContent = m.meta;
+            // 切换材料时重置标注与状态
+            state.annotations = [];
+            state.remaining = state.totalSeconds;
+            state.finished = false;
+            state.running = false;
+            clearInterval(state.timerId);
+            startBtn.textContent = '开始倒计时';
+            startBtn.disabled = false;
+            resetBtn.disabled = true;
+            colorBtns.forEach(b => b.disabled = true);
+            materialCard.classList.remove('collapsed');
+            questionsCard.classList.remove('show');
+            renderAnnotationList();
+            renderDimCoverage();
+            updateTimerDisplay();
+            saveAnnotations();
+        }
+
+        materialSelect.addEventListener('change', (e) => {
+            loadMaterial(e.target.value);
+        });
+
+        // ============ 倒计时 ============
+        function formatTime(sec) {
+            const m = Math.floor(sec / 60);
+            const s = sec % 60;
+            return String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
+        }
+
+        function updateTimerDisplay() {
+            timerEl.textContent = formatTime(state.remaining);
+            timerEl.classList.remove('warn', 'danger', 'done');
+            if (state.finished) {
+                timerEl.classList.add('done');
+            } else if (state.remaining <= 60) {
+                timerEl.classList.add('danger');
+            } else if (state.remaining <= 180) {
+                timerEl.classList.add('warn');
+            }
+        }
+
+        function tick() {
+            state.remaining--;
+            updateTimerDisplay();
+            if (state.remaining <= 0) {
+                finishCountdown();
+            }
+        }
+
+        function startCountdown() {
+            if (state.running || state.finished) return;
+            state.running = true;
+            startBtn.textContent = '暂停';
+            resetBtn.disabled = false;
+            // 启用标注工具
+            colorBtns.forEach(b => b.disabled = false);
+            state.timerId = setInterval(tick, 1000);
+            updateTimerDisplay();
+        }
+
+        function pauseCountdown() {
+            state.running = false;
+            clearInterval(state.timerId);
+            startBtn.textContent = '继续';
+        }
+
+        function finishCountdown() {
+            clearInterval(state.timerId);
+            state.running = false;
+            state.finished = true;
+            startBtn.textContent = '已结束';
+            startBtn.disabled = true;
+            updateTimerDisplay();
+            triggerQuestions();
+        }
+
+        function resetCountdown() {
+            clearInterval(state.timerId);
+            state.running = false;
+            state.finished = false;
+            state.remaining = state.totalSeconds;
+            startBtn.textContent = '开始倒计时';
+            startBtn.disabled = false;
+            resetBtn.disabled = true;
+            colorBtns.forEach(b => b.disabled = true);
+            // 清除所有标注
+            clearAllAnnotations();
+            // 恢复材料卡片
+            materialCard.classList.remove('collapsed');
+            questionsCard.classList.remove('show');
+            updateTimerDisplay();
+        }
+
+        startBtn.addEventListener('click', () => {
+            if (state.finished) return;
+            if (state.running) pauseCountdown();
+            else startCountdown();
+        });
+        resetBtn.addEventListener('click', resetCountdown);
+
+        // ============ 四色标注 ============
+        let pendingSelection = null;
+
+        function getSelectionText() {
+            const sel = window.getSelection();
+            if (!sel || sel.rangeCount === 0 || sel.isCollapsed) return null;
+            const range = sel.getRangeAt(0);
+            // 确保选区在阅读文本内
+            if (!readingText.contains(range.commonAncestorContainer)) return null;
+            const text = sel.toString().trim();
+            if (!text) return null;
+            return { range, text };
+        }
+
+        // 监听选区变化
+        document.addEventListener('selectionchange', () => {
+            const sel = window.getSelection();
+            const result = getSelectionText();
+            if (result) {
+                pendingSelection = result;
+                colorBtns.forEach(b => {
+                    b.disabled = state.finished || !state.running;
+                });
+                selHint.textContent = '已选中，点击维度标注 →';
+                selHint.style.color = '#667eea';
+            } else {
+                pendingSelection = null;
+                if (!state.finished && state.running) {
+                    selHint.textContent = '选中材料中的一段文字';
+                    selHint.style.color = '#999';
+                }
+            }
+        });
+
+        colorBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                if (!pendingSelection) return;
+                const color = btn.dataset.color;
+                applyAnnotation(pendingSelection, color);
+                window.getSelection().removeAllRanges();
+                pendingSelection = null;
+                selHint.textContent = '已标注 ✓';
+                selHint.style.color = '#2e7d32';
+            });
+        });
+
+        function applyAnnotation(selection, color) {
+            const { range, text } = selection;
+            try {
+                const span = document.createElement('span');
+                span.className = 'anno anno-' + color;
+                span.dataset.annoId = 'a' + Date.now() + Math.random().toString(36).slice(2, 6);
+                range.surroundContents(span);
+                const anno = {
+                    id: span.dataset.annoId,
+                    color,
+                    text,
+                    note: ''
+                };
+                state.annotations.push(anno);
+                span.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    highlightInList(anno.id);
+                });
+                renderAnnotationList();
+                renderDimCoverage();
+                saveAnnotations();  // OX-6: 持久化
+            } catch (err) {
+                // surroundContents 在跨节点选区时会失败，提示用户
+                selHint.textContent = '该选区跨节点，请选连续文字';
+                selHint.style.color = '#c62828';
+            }
+        }
+
+        function clearAllAnnotations() {
+            state.annotations = [];
+            // 移除所有 anno span
+            readingText.querySelectorAll('.anno').forEach(span => {
+                const parent = span.parentNode;
+                while (span.firstChild) parent.insertBefore(span.firstChild, span);
+                parent.removeChild(span);
+                parent.normalize();
+            });
+            renderAnnotationList();
+            renderDimCoverage();
+            saveAnnotations();  // OX-6: 清空存储
+        }
+
+        // ============ 标注列表 ============
+        const exportBtn = document.getElementById('exportBtn');
+
+        function renderAnnotationList() {
+            listCount.textContent = state.annotations.length;
+            totalCount.textContent = state.annotations.length;
+            exportBtn.disabled = state.annotations.length === 0;
+            if (state.annotations.length === 0) {
+                annoList.innerHTML = '<li class="empty">尚无标注<br><span style="font-size:0.7rem;">选中材料文字 → 点击维度颜色</span></li>';
+                return;
+            }
+            annoList.innerHTML = state.annotations.map(a => {
+                const dim = DIMENSIONS[a.color];
+                return '<li class="c-' + a.color + '" data-id="' + a.id + '">' +
+                    '<span class="li-text">' + escapeHtml(a.text) + '</span>' +
+                    '<span class="li-dim" style="color:' + colorHex(a.color) + '">' + dim.name + ' · ' + dim.en + '</span>' +
+                '</li>';
+            }).join('');
+        }
+
+        function highlightInList(id) {
+            const item = annoList.querySelector('[data-id="' + id + '"]');
+            if (item) {
+                item.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+                item.style.background = '#eef1ff';
+                setTimeout(() => { item.style.background = ''; }, 800);
+            }
+        }
+
+        // ============ 维度覆盖率 ============
+        function renderDimCoverage() {
+            Object.keys(DIMENSIONS).forEach(color => {
+                const dim = DIMENSIONS[color];
+                const has = state.annotations.some(a => a.color === color);
+                const el = document.getElementById(dim.statEl);
+                if (has) {
+                    el.textContent = '已覆盖';
+                    el.classList.remove('miss');
+                    el.classList.add('ok');
+                } else {
+                    el.textContent = '未标';
+                    el.classList.remove('ok');
+                    el.classList.add('miss');
+                }
+            });
+        }
+
+        // ============ OX-5: 倒计时结束触发问题 ============
+        // 问题从"该有但学生可能漏标"的维度触发，从当前材料读取
+        function triggerQuestions() {
+            // 文本收缩至右下角
+            materialCard.classList.add('collapsed');
+            // 显示问题区
+            questionsCard.classList.add('show');
+
+            const QUESTIONS = MATERIALS[currentMaterialId].questions;
+            // 按维度排序：漏标的维度对应的问题排在前面
+            const marked = new Set(state.annotations.map(a => a.color));
+            const sorted = [...QUESTIONS].sort((a, b) => {
+                const aMiss = marked.has(a.dim) ? 1 : 0;
+                const bMiss = marked.has(b.dim) ? 1 : 0;
+                return aMiss - bMiss;  // 漏标(0)在前
+            });
+
+            questionsList.innerHTML = sorted.map(q => {
+                const cls = 'd-' + ({blue:'textual',green:'structural',red:'conflict',yellow:'boundary'}[q.dim]);
+                const missTag = marked.has(q.dim) ? '' : ' <span style="color:#c62828;font-size:0.7rem;">（你未标注此维度）</span>';
+                return '<div class="question-item">' +
+                    '<span class="q-dim ' + cls + '">' + q.dimName + '</span>' +
+                    missTag +
+                    '<div class="q-text">' + q.text + '</div>' +
+                '</div>';
+            }).join('');
+
+            // 滚动到问题区
+            setTimeout(() => {
+                questionsCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 300);
+
+            // OX-6: 输出 Hint 引擎数据接口（供 Phase 3 Think Aloud + Hints 消费）
+            const hintData = getMissingDimensions();
+            console.log('[Hint Engine] 漏标维度检测：', hintData);
+            window.__oxbridgeHintData = hintData;  // 全局暴露，供后续模块读取
+        }
+
+        // 导出按钮
+        exportBtn.addEventListener('click', exportReport);
+
+        // ============ 工具函数 ============
+        function escapeHtml(str) {
+            const div = document.createElement('div');
+            div.textContent = str;
+            return div.innerHTML;
+        }
+        function colorHex(color) {
+            return { blue:'#1565c0', green:'#2e7d32', red:'#c62828', yellow:'#f9a825' }[color];
+        }
+
+        // ============ OX-6: 数据持久化 + Hint 引擎数据接口 ============
+        const STORAGE_KEY = 'oxbridge_sim_annotations';
+
+        // 标注数据结构化存储
+        function saveAnnotations() {
+            const payload = {
+                materialId: 'law-firefighter',
+                annotations: state.annotations,
+                remaining: state.remaining,
+                finished: state.finished,
+                ts: Date.now()
+            };
+            try {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
+            } catch (e) {
+                console.warn('存储失败', e);
+            }
+        }
+
+        function loadAnnotations() {
+            try {
+                const raw = localStorage.getItem(STORAGE_KEY);
+                if (!raw) return null;
+                return JSON.parse(raw);
+            } catch (e) {
+                return null;
+            }
+        }
+
+        // 在 applyAnnotation 末尾会调用 saveAnnotations（见下方覆盖）
+        // 在 clearAllAnnotations / resetCountdown 中也会调用
+
+        // 漏标维度检测 —— 喂给 Hint 引擎的数据接口
+        function getMissingDimensions() {
+            const marked = new Set(state.annotations.map(a => a.color));
+            const missing = Object.keys(DIMENSIONS).filter(c => !marked.has(c));
+            return {
+                materialId: 'law-firefighter',
+                markedDimensions: Array.from(marked),
+                missingDimensions: missing,
+                annotationCount: state.annotations.length,
+                // Hint 引擎消费规则：漏标→指向该维度；标了但少→可后续扩展"标注深度"判断
+                hintTargets: missing.map(c => ({
+                    dimension: c,
+                    name: DIMENSIONS[c].name,
+                    en: DIMENSIONS[c].en,
+                    action: 'point_to'  // 指向该维度
+                }))
+            };
+        }
+
+        // 导出标注报告（可下载，为后续 Think Aloud + Hints 阶段准备）
+        function exportReport() {
+            const report = {
+                meta: {
+                    materialId: 'law-firefighter',
+                    subject: 'Law',
+                    college: 'Balliol',
+                    exportedAt: new Date().toISOString()
+                },
+                annotations: state.annotations,
+                dimensionCoverage: getMissingDimensions(),
+                remainingTime: state.remaining,
+                finished: state.finished
+            };
+            const blob = new Blob([JSON.stringify(report, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'oxbridge-annotations-' + Date.now() + '.json';
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        // ============ 初始化 ============
+        loadMaterial('law-firefighter');
+    })();
+    </script>
+</body>
+</html>
