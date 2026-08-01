@@ -204,6 +204,65 @@
             padding: 1px 5px; border-radius: 3px; font-size: 0.76rem;
         }
         .footer { text-align: center; margin-top: 20px; color: #999; font-size: 0.8rem; }
+        /* 全学科样板库（折叠卡片） */
+        .bank-filter {
+            display: flex; flex-wrap: wrap; gap: 6px;
+            margin-bottom: 10px; font-size: 0.78rem;
+        }
+        .bank-filter .f-tag {
+            padding: 3px 9px; border-radius: 12px;
+            background: #f0f0f5; color: #666; cursor: default;
+        }
+        .bank-filter .f-tag.stem { background: #e3f2fd; color: #1565c0; }
+        .bank-filter .f-tag.hss { background: #f3e5f5; color: #7b1fa2; }
+        .bank-item {
+            background: #f8f9ff; border: 1px solid #e8ecff;
+            border-radius: 8px; margin-bottom: 8px; overflow: hidden;
+        }
+        .bank-item > summary {
+            list-style: none; cursor: pointer; padding: 10px 14px;
+            display: flex; align-items: center; gap: 8px;
+            font-size: 0.88rem; font-weight: 600; color: #333;
+        }
+        .bank-item > summary::-webkit-details-marker { display: none; }
+        .bank-item > summary::before {
+            content: '▸'; color: #667eea; font-size: 0.72rem;
+            transition: transform 0.15s ease;
+        }
+        .bank-item[open] > summary::before { transform: rotate(90deg); }
+        .bank-item > summary .b-meta {
+            font-weight: 400; font-size: 0.74rem; color: #888;
+            margin-left: auto;
+        }
+        .bank-item .b-body {
+            padding: 0 14px 12px; font-size: 0.84rem; line-height: 1.65;
+        }
+        .bank-item .b-block {
+            padding: 7px 10px; margin: 6px 0; border-radius: 5px;
+            border-left: 3px solid #ddd;
+        }
+        .bank-item .b-block .b-label {
+            font-size: 0.7rem; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 0.04em; margin-right: 5px;
+        }
+        .b-prompt { background: #f8f9ff; border-left-color: #667eea; }
+        .b-prompt .b-label { color: #667eea; }
+        .b-pitfall { background: #fff8e1; border-left-color: #ff8f00; }
+        .b-pitfall .b-label { color: #ff8f00; }
+        .b-followup { background: #ffebee; border-left-color: #c62828; }
+        .b-followup .b-label { color: #c62828; }
+        .b-resolution { background: #e8f5e9; border-left-color: #2e7d32; }
+        .b-resolution .b-label { color: #2e7d32; }
+        .b-framework {
+            font-size: 0.74rem; color: #555; margin-top: 8px;
+            padding: 5px 9px; background: #f0f0f5; border-radius: 4px;
+        }
+        .b-framework .fw-label {
+            font-weight: 700; font-size: 0.68rem;
+            text-transform: uppercase; letter-spacing: 0.04em;
+        }
+        .b-framework.fw-stem .fw-label { color: #1565c0; }
+        .b-framework.fw-hss .fw-label { color: #7b1fa2; }
         @media (max-width: 600px) {
             .subject-grid, .module-grid { grid-template-columns: 1fr; }
             .dim-table { font-size: 0.78rem; }
@@ -363,6 +422,176 @@
             1. "故意"在该场景中应如何界定？A 的心理状态是什么？<br>
             2. 不作为能否构成"剥夺生命"？区分标准是什么？<br>
             3. 给出一个让结论反转的事实变体。
+        </div>
+    </div>
+
+    <!-- ============ 全学科样板库 ============ -->
+    <div class="section">
+        <h2>Full-Subject Question Bank <span class="en">全学科样板库</span></h2>
+        <p class="cn-hint">初始数据库必须同时覆盖 STEM 与人文社科——两类学科考查的思维能力不同，样板须分别呈现其框架。点击下方各卡片展开完整追问链。</p>
+        <div class="bank-filter">
+            <span class="f-tag stem">STEM · 约束-反例框架</span>
+            <span class="f-tag hss">HSS · 四维度框架</span>
+            <span style="color:#999;align-self:center;">框架按思维方式选择，而非学科标签</span>
+        </div>
+
+        <!-- 样板二：CS / 数学 -->
+        <details class="bank-item" open>
+            <summary>
+                <span class="tag tag-subject">CS / Maths</span>
+                bit 翻转下找最大值
+                <span class="b-meta">Oxford · STEM</span>
+            </summary>
+            <div class="b-body">
+                <div class="b-block b-prompt">
+                    <span class="b-label">📌 原始发问</span><br>
+                    假设你有一个包含 n 个数字的数组，但运行这段代码的内存硬件有故障，会有 10% 的概率随机把某一位比特（bit）翻转。你如何在这个数组里找到最大值？
+                </div>
+                <div class="b-block b-pitfall">
+                    <span class="b-label">⚠️ 常见陷阱</span><br>
+                    试图寻找"绝对完美"的算法，或盲目说"把数据复制 3 份做投票"，忽略了时间和空间开销。
+                </div>
+                <div class="b-block b-followup">
+                    <span class="b-label">🔄 导师追问</span><br>
+                    如果"重复读取同一个内存地址"的开销（时间/能耗）是"常规读取"的 10 倍，你还会选择复制投票吗？在保证 99% 准确率的前提下，你会怎么设计检查策略？
+                </div>
+                <div class="b-block b-resolution">
+                    <span class="b-label">💡 破局推演</span><br>
+                    不需要给确定性算法，转向<b>概率算法</b>：① 识别"准确率 vs 计算成本"的 Trade-off；② 只对"候选最大值"做二次或三次校验，而非对整个数组全量重复读取，将开销从 O(n) 降下来。
+                </div>
+                <div class="b-framework fw-stem">
+                    <span class="fw-label">约束-反例框架：</span>
+                    约束识别（10% bit 翻转）→ 推导路径（遍历找最大值）→ 反例收紧（重复读取成本 10 倍）→ 降级重构（仅校验候选最大值，O(n)→O(k)）
+                </div>
+            </div>
+        </details>
+
+        <!-- 样板三：工程 / 物理 -->
+        <details class="bank-item">
+            <summary>
+                <span class="tag tag-subject">Engineering</span>
+                1000 米超级风机
+                <span class="b-meta">Cambridge · STEM</span>
+            </summary>
+            <div class="b-body">
+                <div class="b-block b-prompt">
+                    <span class="b-label">📌 原始发问</span><br>
+                    为了获取更高空更稳定的风能，我们为什么不建一座 1000 米高的超级风力发电机？
+                </div>
+                <div class="b-block b-pitfall">
+                    <span class="b-label">⚠️ 常见陷阱</span><br>
+                    单方面回答"太贵了"或"技术达不到"，缺乏具体的物理推导。
+                </div>
+                <div class="b-block b-followup">
+                    <span class="b-label">🔄 导师追问</span><br>
+                    如果材料的抗拉/抗压强度随截面积放大（A ∝ r²），而结构自重随体积放大（V ∝ r³），你能推导出风机叶片和塔架的"几何尺寸上限"受什么控制吗？
+                </div>
+                <div class="b-block b-resolution">
+                    <span class="b-label">💡 破局推演</span><br>
+                    ① <b>立方-平方定律（Square-cube law）</b>：结构等比例放大时，自重增长远快于材料支撑力，导致因自重塌陷；② <b>跨学科联想</b>：若不改变材料，就必须改变结构（拉线悬挂 / 轻量化复合材料），展现工程思维。
+                </div>
+                <div class="b-framework fw-stem">
+                    <span class="fw-label">约束-反例框架：</span>
+                    约束识别（1000m 高度需求）→ 推导路径（材料强度 vs 自重）→ 反例收紧（几何缩放 A∝r² / V∝r³）→ 降级重构（改变结构形式而非堆材料）
+                </div>
+            </div>
+        </details>
+
+        <!-- 样板四：医学 / 生化 -->
+        <details class="bank-item">
+            <summary>
+                <span class="tag tag-subject">Medicine</span>
+                脂质包膜病毒药物设计
+                <span class="b-meta">Oxford · STEM</span>
+            </summary>
+            <div class="b-body">
+                <div class="b-block b-prompt">
+                    <span class="b-label">📌 原始发问</span><br>
+                    某种新型病毒通过将自身包裹在宿主细胞膜的脂质双分子层中来逃避免疫系统。我们应该如何设计药物来杀灭这种病毒，同时不破坏人体正常的细胞？
+                </div>
+                <div class="b-block b-pitfall">
+                    <span class="b-label">⚠️ 常见陷阱</span><br>
+                    只盯"药物分子设计"单点，忽略递送机制与脱靶风险。
+                </div>
+                <div class="b-block b-followup">
+                    <span class="b-label">🔄 导师追问</span><br>
+                    如果你选择靶向病毒内部的核酸结构，但这种核酸序列有 30% 与人体神经细胞中的某种表达 RNA 重合，这会导致什么临床后果？你会如何调整药物递送系统？
+                </div>
+                <div class="b-block b-resolution">
+                    <span class="b-label">💡 破局推演</span><br>
+                    ① 从"分子设计"转向<b>定向递送机制</b>（如脂质纳米颗粒 LNP 的组织特异性）；② 坦诚承认副作用风险，从生化机制给出现实应对（如利用感染区域特有的微酸性环境触发药物释放）。
+                </div>
+                <div class="b-framework fw-stem">
+                    <span class="fw-label">约束-反例框架：</span>
+                    约束识别（避免免疫 + 不伤正常细胞）→ 推导路径（靶向核酸）→ 反例收紧（30% 序列与神经 RNA 重合）→ 降级重构（组织特异性递送 + 微环境触发释放）
+                </div>
+            </div>
+        </details>
+
+        <!-- 样板五：PBS / 心理学 -->
+        <details class="bank-item">
+            <summary>
+                <span class="tag tag-subject">PBS / Psychology</span>
+                邮件比手写信更易撒谎
+                <span class="b-meta">Cambridge · HSS（跨界）</span>
+            </summary>
+            <div class="b-body">
+                <div class="b-block b-prompt">
+                    <span class="b-label">📌 原始发问</span><br>
+                    研究表明，人们在发送电子邮件时比写纸质手写信更容易撒谎。你认为这是什么原因？请设计一个实验来验证你的假设。
+                </div>
+                <div class="b-block b-pitfall">
+                    <span class="b-label">⚠️ 常见陷阱</span><br>
+                    设计了复杂问卷，但问卷只能测出"自我报告（Self-report）的偏好"，测不出真实行为。
+                </div>
+                <div class="b-block b-followup">
+                    <span class="b-label">🔄 导师追问</span><br>
+                    如果在实验室里被试知道自己被观察，会刻意表现得更诚实（霍桑效应）。在不违背伦理（不能过度欺骗被试）的前提下，你如何消除这种观察者效应？
+                </div>
+                <div class="b-block b-resolution">
+                    <span class="b-label">💡 破局推演</span><br>
+                    ① 区分"知情同意"与"告知具体实验目的"；② 引入<b>任务掩护（Cover Story）</b>——让被试以为在参加"办公软件流畅度测试"，过程中自然嵌入决策环境。
+                </div>
+                <div class="b-framework fw-stem">
+                    <span class="fw-label">约束-反例框架（实验设计变体）：</span>
+                    假设（邮件媒介降低撒谎成本）→ 操作化（测真实行为而非自报）→ 反例控制（霍桑效应）→ 任务掩护（Cover Story 嵌入自然决策）
+                </div>
+            </div>
+        </details>
+
+        <!-- 样板六：现代语言 / 文学 -->
+        <details class="bank-item">
+            <summary>
+                <span class="tag tag-subject">English / Modern Lang</span>
+                AI 文本 vs 17 世纪诗
+                <span class="b-meta">Oxford · HSS</span>
+            </summary>
+            <div class="b-body">
+                <div class="b-block b-prompt">
+                    <span class="b-label">📌 原始发问</span><br>
+                    （提供一段 17 世纪匿名诗歌与一段现代 AI 生成的对话）这两段文本在"情感的真实性（Emotional Authenticity）"表达上有什么本质区别？
+                </div>
+                <div class="b-block b-pitfall">
+                    <span class="b-label">⚠️ 常见陷阱</span><br>
+                    感情用事地坚持"人比 AI 高尚"，缺乏文学理论支撑；或只做修辞表层比较，不进入概念辨析。
+                </div>
+                <div class="b-block b-followup">
+                    <span class="b-label">🔄 导师追问</span><br>
+                    如果一个读者在不知道作者身份的情况下，读 AI 文本的心理共鸣程度甚至超越了读这首 17 世纪的诗，我们还能说 AI 的表达缺乏"真实性"吗？究竟是文本本身具有真实性，还是真实性完全由读者的解读赋予？
+                </div>
+                <div class="b-block b-resolution">
+                    <span class="b-label">💡 破局推演</span><br>
+                    ① 跳出"人比 AI 高尚"的感情用事，从<b>意图（Authorial Intent）与接收（Reception Aesthetics）</b>两个维度拆解；② 区分"修辞模仿"与"经验提炼"，展示对文学理论基本概念的理解。
+                </div>
+                <div class="b-framework fw-hss">
+                    <span class="fw-label">四维度框架适用：</span>
+                    文本层（修辞细读）· 结构层（意图 vs 接收美学）· 冲突层（人 vs AI 的真实性归属）· 边界层（文本固有真实 vs 读者赋予真实）
+                </div>
+            </div>
+        </details>
+
+        <div class="info-box">
+            <strong>📌 框架选择规则：</strong>样板按<b>思维方式</b>而非学科标签选择框架——人文社科（法学/历史/PPE/文学）用四维度，STEM（CS/工程/医学）用约束-反例。PBS 心理学虽属社科，但其"假设→操作化→反例控制"逻辑属约束-反例型。详见 <code>docs/OXBRIDGE-INTERVIEW-ROADMAP.md</code> §3.6。
         </div>
     </div>
 
@@ -537,7 +766,7 @@
         <h2>Roadmap <span class="en">迭代路线</span></h2>
         <p class="cn-hint">本模块分 5 个 Phase 逐步实施。完整规划见 <code>docs/OXBRIDGE-INTERVIEW-ROADMAP.md</code>。</p>
         <div class="roadmap-mini">
-            <p><span class="tag tag-phase">Phase 1</span> 入口重构 + 内容样板（法学/PPE/历史静态样板） — <code>OX-1 ~ OX-3</code> <b style="color:#2e7d32;">进行中</b></p>
+            <p><span class="tag tag-phase">Phase 1</span> 入口重构 + 全学科样板库（法学 + CS/工程/医学 + PBS/文学，双框架） — <code>OX-1 ~ OX-3</code> <b style="color:#2e7d32;">已完成</b></p>
             <p><span class="tag tag-phase">Phase 2</span> 预读材料限时解题器（15min 倒计时 + 四色标注） — <code>OX-4 ~ OX-7</code></p>
             <p><span class="tag tag-phase">Phase 3</span> Think Aloud + 阶梯 Hints（动态提示 + 脚手架撤除） — <code>OX-8 ~ OX-11</code></p>
             <p><span class="tag tag-phase">Phase 4</span> Devil's Advocate（LLM 语境感知实时反驳） — <code>OX-12 ~ OX-15</code></p>
