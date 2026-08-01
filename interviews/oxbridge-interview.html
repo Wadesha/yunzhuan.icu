@@ -313,27 +313,27 @@
                 <div class="m-desc">15 分钟倒计时 + 四色标注（文本/结构/冲突/边界），倒计时结束弹出递进问题。标注数据喂给 Hint 引擎。法学/历史/PPE 三份材料可切换。</div>
                 <span class="m-status">已上线 OX-4~7 →</span>
             </a>
-            <div class="module-card disabled">
+            <a class="module-card" href="oxbridge/hints.html">
                 <div class="m-num">PHASE 2</div>
                 <div class="m-title">出声思考 + 阶梯 Hints</div>
                 <div class="m-en">Think Aloud + Scaffolded Hints</div>
-                <div class="m-desc">录音转写 + 阶梯式提示（切入角/限定变量）+ 句式救场卡片。脚手架会随熟练度主动撤除，避免新模板化。</div>
-                <span class="m-status">规划中 OX-8</span>
-            </div>
-            <div class="module-card disabled">
+                <div class="m-desc">录音转写（Web Speech API）+ 阶梯式提示（切入角/限定变量，按维度生成）+ 句式救场卡片。Hint 从模拟器标注数据动态触发，脚手架使用 3 次后主动撤除。</div>
+                <span class="m-status">已上线 OX-8~11 →</span>
+            </a>
+            <a class="module-card" href="oxbridge/devils-advocate.html">
                 <div class="m-num">PHASE 3</div>
                 <div class="m-title">导师追问反驳模拟</div>
                 <div class="m-en">Devil's Advocate Challenge</div>
-                <div class="m-desc">提交回答后，LLM 读取转写、定位论证薄弱点，生成针对性反驳（非预设题库）。逼你练习"承认局限 + 顺新条件二次推理"。</div>
-                <span class="m-status">规划中 OX-12</span>
-            </div>
-            <div class="module-card disabled">
+                <div class="m-desc">读取转写 → 论证链条解析（前提/推理/结论/薄弱点）→ 基于关键词规则引擎生成针对性反驳（非预设题库，留 LLM 接口）→ 二次推演引导。支持 Balliol/Trinity 学院风格切换。</div>
+                <span class="m-status">已上线 OX-12~15 →</span>
+            </a>
+            <a class="module-card" href="oxbridge/bank.html">
                 <div class="m-num">PHASE 4</div>
                 <div class="m-title">学科 + 学院面经库</div>
                 <div class="m-en">Subject × College Question Bank</div>
-                <div class="m-desc">按 Course（PPE/Law/History…）× College（Balliol/Trinity…）× 题型三维筛选。Offer Holder 还原完整追问链。</div>
-                <span class="m-status">规划中 OX-16</span>
-            </div>
+                <div class="m-desc">按 Course × College × 题型三维筛选。UGC 上传表单（追问链构建器 + 四维度审核标尺）。Offer Holder 还原计划入口 + P2P 互面匹配设计。含 6 条种子面经。</div>
+                <span class="m-status">已上线 OX-16~20 →</span>
+            </a>
         </div>
         <div class="info-box">
             <strong>📌 为什么是这四步？</strong><br>
@@ -768,9 +768,9 @@
         <div class="roadmap-mini">
             <p><span class="tag tag-phase">Phase 1</span> 入口重构 + 全学科样板库（法学 + CS/工程/医学 + PBS/文学，双框架） — <code>OX-1 ~ OX-3</code> <b style="color:#2e7d32;">已完成</b></p>
             <p><span class="tag tag-phase">Phase 2</span> 预读材料限时解题器（15min 倒计时 + 四色标注 + 法学/历史/PPE 三材料） — <code>OX-4 ~ OX-7</code> <b style="color:#2e7d32;">已完成</b></p>
-            <p><span class="tag tag-phase">Phase 3</span> Think Aloud + 阶梯 Hints（动态提示 + 脚手架撤除） — <code>OX-8 ~ OX-11</code></p>
-            <p><span class="tag tag-phase">Phase 4</span> Devil's Advocate（LLM 语境感知实时反驳） — <code>OX-12 ~ OX-15</code></p>
-            <p><span class="tag tag-phase">Phase 5</span> 学科+学院面经库 + UGC（Offer Holder 还原计划） — <code>OX-16 ~ OX-20</code></p>
+            <p><span class="tag tag-phase">Phase 3</span> Think Aloud + 阶梯 Hints（录音转写 + 动态提示 + 脚手架撤除） — <code>OX-8 ~ OX-11</code> <b style="color:#2e7d32;">已完成</b></p>
+            <p><span class="tag tag-phase">Phase 4</span> Devil's Advocate（论证解析 + 规则引擎反驳 + 二次推演 + 学院风格切换） — <code>OX-12 ~ OX-15</code> <b style="color:#2e7d32;">已完成</b></p>
+            <p><span class="tag tag-phase">Phase 5</span> 学科+学院面经库 + UGC（三维筛选 + 追问链上传 + 四维度审核 + Offer Holder 还原 + P2P 互面设计） — <code>OX-16 ~ OX-20</code> <b style="color:#2e7d32;">已完成</b></p>
         </div>
         <div class="info-box">
             <strong>📌 学科优先级说明：</strong>人文社科（法学/PPE/历史）先行，<b>不是因为更重要</b>，而是因为它们与四维度框架耦合最深、验证成本最低。理工科留作第二轮压力测试——若"冲突层"对生物题无意义，则证明框架需分层（人文社科一套，理工科用"约束-反例型"另一套）。

@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Devil's Advocate · Oxbridge</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f5f5; color: #333; min-height: 100vh;
+        }
+        .back-link {
+            display: inline-block; color: #667eea; text-decoration: none;
+            font-size: 0.85rem; padding: 12px 16px 0; max-width: 1000px; margin: 0 auto;
+        }
+        .back-link:hover { text-decoration: underline; }
+
+        .topbar {
+            background: white; border-bottom: 1px solid #e8ecff;
+            padding: 10px 16px; position: sticky; top: 0; z-index: 100;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+        }
+        .topbar-inner {
+            max-width: 1000px; margin: 0 auto;
+            display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+        }
+        .topbar .meta { font-size: 0.78rem; color: #666; flex: 1; min-width: 160px; }
+        .topbar .meta .tag {
+            display: inline-block; padding: 2px 7px; border-radius: 3px;
+            font-size: 0.68rem; font-weight: 600; margin-right: 5px;
+            background: #e3f2fd; color: #1565c0;
+        }
+        /* 学院风格切换 */
+        .style-toggle {
+            display: flex; gap: 0; border: 1px solid #ddd; border-radius: 5px; overflow: hidden;
+        }
+        .style-toggle button {
+            border: none; background: white; color: #555;
+            padding: 5px 11px; font-size: 0.76rem; cursor: pointer;
+            transition: all 0.15s;
+        }
+        .style-toggle button.active { background: #667eea; color: white; }
+        .style-toggle button:hover:not(.active) { background: #f0f0f5; }
+
+        .workspace {
+            max-width: 1000px; margin: 12px auto; padding: 0 16px 40px;
+            display: grid; grid-template-columns: 1fr 280px; gap: 12px;
+        }
+        .main-col, .side-col { min-width: 0; }
+
+        .card {
+            background: white; border-radius: 8px; padding: 16px 20px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05); margin-bottom: 12px;
+        }
+        .card h2 {
+            color: #333; font-size: 1rem; margin-bottom: 4px;
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        .card .sub {
+            color: #888; font-size: 0.8rem; margin-bottom: 12px;
+            padding-bottom: 10px; border-bottom: 1px solid #f0f0f0;
+        }
+
+        .btn {
+            border: 1px solid #ddd; background: white; color: #555;
+            padding: 6px 14px; border-radius: 5px; font-size: 0.82rem;
+            cursor: pointer; transition: all 0.15s;
+        }
+        .btn:hover { border-color: #667eea; color: #667eea; }
+        .btn-primary { background: #667eea; color: white; border-color: #667eea; }
+        .btn-primary:hover { background: #5568d3; color: white; }
+        .btn-danger { background: #c62828; color: white; border-color: #c62828; }
+        .btn-danger:hover { background: #b71c1c; color: white; }
+        .btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+        /* 学生回答展示 */
+        .student-answer {
+            background: #f8f9ff; border-left: 3px solid #667eea;
+            padding: 12px 16px; border-radius: 0 6px 6px 0;
+            font-size: 0.88rem; line-height: 1.75; color: #333;
+            max-height: 200px; overflow-y: auto;
+        }
+        .student-answer .empty {
+            color: #aaa; text-align: center; padding: 16px 0; font-size: 0.82rem;
+        }
+
+        /* 论证链条解析 */
+        .chain-parse {
+            background: #fafaff; border: 1px solid #eee; border-radius: 6px;
+            padding: 12px 16px; margin-top: 10px;
+        }
+        .chain-parse .chain-title {
+            font-size: 0.74rem; color: #888; margin-bottom: 8px;
+            text-transform: uppercase; letter-spacing: 0.04em;
+        }
+        .chain-step {
+            display: flex; gap: 8px; padding: 4px 0;
+            font-size: 0.82rem; line-height: 1.5;
+        }
+        .chain-step .chain-label {
+            font-weight: 700; font-size: 0.7rem; color: #667eea;
+            min-width: 50px; padding-top: 2px;
+        }
+        .chain-step .chain-content { color: #555; flex: 1; }
+        .chain-step.weak .chain-label { color: #c62828; }
+        .chain-step.weak .chain-content { color: #c62828; }
+
+        /* Devil's Advocate 反驳 */
+        .challenge-card {
+            background: #ffebee; border-left: 3px solid #c62828;
+            padding: 14px 18px; border-radius: 0 6px 6px 0;
+            margin-top: 12px;
+        }
+        .challenge-card .ch-label {
+            font-size: 0.68rem; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 0.04em; color: #c62828; margin-bottom: 6px;
+            display: flex; align-items: center; gap: 6px;
+        }
+        .challenge-card .ch-style {
+            font-size: 0.66rem; background: #c62828; color: white;
+            padding: 1px 6px; border-radius: 3px;
+        }
+        .challenge-card .ch-text {
+            font-size: 0.92rem; line-height: 1.75; color: #333;
+            font-style: italic;
+        }
+        .challenge-card .ch-target {
+            font-size: 0.72rem; color: #888; margin-top: 8px;
+            padding-top: 8px; border-top: 1px dashed #ffcdd2;
+        }
+        .challenge-card .ch-target b { color: #c62828; }
+
+        /* 二次推演引导 */
+        .revision-box {
+            background: #e8f5e9; border-left: 3px solid #2e7d32;
+            padding: 14px 18px; border-radius: 0 6px 6px 0;
+            margin-top: 12px;
+        }
+        .revision-box .rev-label {
+            font-size: 0.68rem; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 0.04em; color: #2e7d32; margin-bottom: 8px;
+        }
+        .revision-box .rev-framework {
+            font-size: 0.8rem; color: #1b5e20; line-height: 1.6;
+            margin-bottom: 10px;
+        }
+        .revision-box textarea {
+            width: 100%; min-height: 80px; padding: 10px 12px;
+            border: 1px solid #c8e6c9; border-radius: 5px;
+            font-size: 0.86rem; line-height: 1.6; font-family: inherit;
+            resize: vertical; background: white;
+        }
+        .revision-box textarea:focus {
+            outline: none; border-color: #2e7d32;
+        }
+        .revision-actions {
+            display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap;
+        }
+
+        /* 反驳轮次历史 */
+        .round-history {
+            margin-top: 12px; font-size: 0.8rem;
+        }
+        .round-item {
+            padding: 8px 12px; margin-bottom: 6px; border-radius: 5px;
+            border-left: 3px solid #ddd; background: #fafaff;
+            font-size: 0.8rem; line-height: 1.6;
+        }
+        .round-item.round-challenge { border-left-color: #c62828; }
+        .round-item.round-revision { border-left-color: #2e7d32; }
+        .round-item .r-label {
+            font-size: 0.66rem; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 0.04em; margin-right: 6px;
+        }
+        .round-item.round-challenge .r-label { color: #c62828; }
+        .round-item.round-revision .r-label { color: #2e7d32; }
+
+        /* 侧边栏 */
+        .side-card {
+            background: white; border-radius: 8px; padding: 14px 16px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05); margin-bottom: 12px;
+        }
+        .side-card h3 {
+            color: #667eea; font-size: 0.88rem; margin-bottom: 10px;
+        }
+        .side-card .sc-body { font-size: 0.8rem; color: #555; line-height: 1.7; }
+        .side-card .sc-body b { color: #333; }
+
+        .info-box {
+            background: #e3f2fd; border-left: 3px solid #1565c0;
+            padding: 10px 14px; border-radius: 0 6px 6px 0;
+            font-size: 0.8rem; color: #0d47a1; line-height: 1.6;
+        }
+        .warning-box {
+            background: #fff8e1; border-left: 3px solid #ff8f00;
+            padding: 10px 14px; border-radius: 0 6px 6px 0;
+            font-size: 0.8rem; color: #5d4037; line-height: 1.6;
+        }
+
+        .footer {
+            text-align: center; color: #aaa; font-size: 0.75rem; padding: 16px;
+        }
+        .footer a { color: #aaa; text-decoration: none; }
+
+        @media (max-width: 700px) {
+            .workspace { grid-template-columns: 1fr; }
+        }
+    </style>
+    <link rel="stylesheet" href="../../css/theme.css">
+    <meta name="theme-color" content="#667eea">
+    <script src="../../js/theme.js"></script>
+</head>
+<body>
+    <a href="../oxbridge-interview.html" class="back-link">&larr; 返回牛剑面试</a>
+
+    <div class="topbar">
+        <div class="topbar-inner">
+            <div class="meta">
+                <span class="tag">DEVIL'S ADVOCATE</span>
+                <span id="metaText">Oxford · Law · Balliol</span>
+            </div>
+            <div class="style-toggle" id="styleToggle">
+                <button data-style="balliol" class="active">Balliol · 法哲学</button>
+                <button data-style="trinity">Trinity · 逻辑推演</button>
+            </div>
+            <select id="materialSelect" class="btn" style="min-width:150px;">
+                <option value="law-firefighter">法学 · 消防员两难</option>
+                <option value="history-silences">历史 · 档案的沉默</option>
+                <option value="ppe-bus-fare">PPE · 0.5 英镑公交票</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="workspace">
+        <div class="main-col">
+            <!-- 学生第一轮回答 -->
+            <div class="card">
+                <h2>你的第一轮回答 <span style="font-size:0.74rem;color:#999;font-weight:400;">First Answer</span></h2>
+                <div class="sub">从 Think Aloud 页面带入的转写文本，或直接在下方输入</div>
+                <div class="student-answer" id="studentAnswer">
+                    <div class="empty">尚无回答内容。请在下方输入框填写，或从 Think Aloud 页面跳转后自动带入。</div>
+                </div>
+                <textarea id="answerInput" placeholder="在此输入或粘贴你的回答（如：我认为 A 不构成谋杀，因为他没有杀人故意，只是在两个必然死亡的人里选了一个去救……）" style="width:100%;min-height:80px;margin-top:10px;padding:10px 12px;border:1px solid #ddd;border-radius:5px;font-size:0.86rem;line-height:1.6;font-family:inherit;resize:vertical;"></textarea>
+                <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap;">
+                    <button class="btn btn-primary" id="parseBtn">解析论证链条</button>
+                    <button class="btn btn-danger" id="challengeBtn" disabled>🔥 触发 Devil's Advocate</button>
+                    <span style="font-size:0.74rem;color:#999;align-self:center;margin-left:auto;" id="answerChars">0 字</span>
+                </div>
+
+                <!-- 论证链条解析结果 -->
+                <div class="chain-parse" id="chainParse" style="display:none;">
+                    <div class="chain-title">论证链条解析 · Argument Chain</div>
+                    <div id="chainSteps"></div>
+                </div>
+            </div>
+
+            <!-- Devil's Advocate 反驳区 -->
+            <div class="card" id="challengeCard" style="display:none;">
+                <h2>导师反驳 <span style="font-size:0.74rem;color:#999;font-weight:400;">Devil's Advocate</span></h2>
+                <div class="sub">基于你的论证薄弱点生成——非预设题库。承认局限并顺新条件重新推理</div>
+                <div class="challenge-card" id="challengeContent"></div>
+
+                <!-- 二次推演引导 -->
+                <div class="revision-box" id="revisionBox" style="display:none;">
+                    <div class="rev-label">💡 二次推演引导 · Revision</div>
+                    <div class="rev-framework" id="revisionFramework"></div>
+                    <textarea id="revisionInput" placeholder="在此输入你的二次推演……" style="border-color:#c8e6c9;"></textarea>
+                    <div class="revision-actions">
+                        <button class="btn btn-primary" id="submitRevisionBtn">提交二次推演</button>
+                        <button class="btn" id="anotherChallengeBtn">再被反驳一次</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 反驳轮次历史 -->
+            <div class="card" id="historyCard" style="display:none;">
+                <h2>推演轮次 <span style="font-size:0.74rem;color:#999;font-weight:400;">Rounds</span></h2>
+                <div class="sub">完整的"发问 → 回答 → 反驳 → 修正"推演链</div>
+                <div class="round-history" id="roundHistory"></div>
+            </div>
+        </div>
+
+        <!-- 侧边栏 -->
+        <div class="side-col">
+            <div class="side-card">
+                <h3>当前学院风格</h3>
+                <div class="sc-body" id="styleInfo">
+                    <b>Balliol · 法哲学</b><br>
+                    偏好追问立法目的、自然法 vs 实证法等元问题。反驳方向：把你从字面解释逼向哲学根基。
+                </div>
+            </div>
+
+            <div class="side-card">
+                <h3>本环节要点</h3>
+                <div class="sc-body">
+                    · 反驳基于你<b>刚说的话</b>，不是题库<br>
+                    · 被反驳是正常——导师在测你的可教性<br>
+                    · <b>不要死守原结论</b>，要承认局限<br>
+                    · 顺新条件重新推理，而非全盘否定
+                </div>
+            </div>
+
+            <div class="side-card">
+                <h3>LLM 接口状态</h3>
+                <div class="sc-body" id="llmStatus">
+                    <span style="color:#ff8f00;">⚠ 规则引擎模式</span><br>
+                    当前为关键词规则引擎模拟。接入 LLM API 后，反驳将基于语义理解生成，更贴近真实导师。
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <a href="../../index.html">Home</a> ·
+        <a href="../oxbridge-interview.html">Oxbridge Interviews</a> ·
+        <a href="simulator.html">预读</a> ·
+        <a href="hints.html">Think Aloud</a> ·
+        Devil's Advocate
+    </div>
+
+    <script>
+    (function() {
+        'use strict';
+
+        // ============ 材料元数据 ============
+        const MATERIALS = {
+            'law-firefighter': {
+                name: '法学 · 消防员两难', meta: 'Oxford · Law · Balliol',
+                prompt: '"故意"在该场景中应如何界定？A 的心理状态是什么？'
+            },
+            'history-silences': {
+                name: '历史 · 档案的沉默', meta: 'Cambridge · History · Trinity',
+                prompt: '"胜利者书写历史"——我们还能了解被毁灭的文明吗？'
+            },
+            'ppe-bus-fare': {
+                name: 'PPE · 0.5 英镑公交票', meta: 'Oxford · PPE · Balliol',
+                prompt: '恢复 0.5 英镑票价是否合理？如何权衡效率与公平？'
+            }
+        };
+
+        // ============ OX-13: 反驳规则引擎（基于关键词） ============
+        // 这是模拟实现——真实 LLM 接口在 generateChallengeLLM()
+        const CHALLENGE_RULES = {
+            'law-firefighter': {
+                // 检测学生回答中的论证模式，生成针对性反驳
+                patterns: [
+                    {
+                        // 模式1：学生说"没有故意"
+                        match: /没有.{0,4}故意|不.{0,2}故意|没有杀人|没有杀/,
+                        weakness: '前提：A 没有杀人故意 → 结论：不构成谋杀',
+                        balliol: '你说 A"没有故意"——但"故意"在法哲学上有两种界定：一是"积极追求结果"（dolus directus），二是"明知结果必然发生仍接受"（dolus eventualis）。A 明知救 B 则 C 必死，却仍选择——这算不算第二种故意？如果算，你的结论还成立吗？',
+                        trinity: '你的论证依赖"故意 = 积极追求"。但法条原文只写"故意剥夺他人生命"，未限定是哪种故意。若立法者本意涵盖 dolus eventualis，你的前提就被推翻。请重新界定"故意"的外延。'
+                    },
+                    {
+                        // 模式2：学生说"只是选择/救援"
+                        match: /只是.{0,4}选择|只是.{0,4}救|选择救|救援|未能阻止/,
+                        weakness: '前提：A 的行为是"救援"而非"杀害" → 结论：不构成谋杀',
+                        balliol: '你把 A 的行为定性为"救援"。但救援的"不作为"与"作为"在道德哲学上是同质的吗？消防员有职务义务，其"选择不救 C"是否等价于"主动让 C 死"？这里涉及作为/不作为的道德等同性——这是法哲学的核心争议。',
+                        trinity: '你区分了"救援"与"杀害"。但法律上，负有作为义务者的"不作为"可等同于"作为"。消防员对 C 负有职务义务，其"选择不救"在法律评价上是否构成不作为犯罪？请给出区分标准。'
+                    },
+                    {
+                        // 模式3：学生说"因果"或"导致"
+                        match: /导致|因果|造成|使得|结果/,
+                        weakness: '前提：A 的选择与 C 的死亡有因果 → 但未区分因果性质',
+                        balliol: '你抓住了因果关系。但因果关系有"事实因果"（but for）与"法律因果"（proximate cause）之分。A 的选择确实是 C 死亡的 but for cause，但法律上是否认定其为 proximate？若火场本身才是 proximate cause，你的因果论证就失效了。',
+                        trinity: '你提到因果。请形式化：设事件 E = C 死亡。A 的选择 S 是否是 E 的必要条件？充分条件？若仅是必要条件之一（火场也是），法律上如何分配因果责任？'
+                    }
+                ],
+                // 默认反驳（无模式匹配时）
+                fallback: {
+                    weakness: '论证链条不明确——未清晰区分"作为/不作为"或"故意"的界定',
+                    balliol: '你的回答尚未触及核心：A 的"选择"在道德哲学上是作为还是不作为？消防员的职务义务是否改变了这一性质？请从立法目的出发重新思考。',
+                    trinity: '你的论证结构不够清晰。请明确：①你的前提是什么？②"故意"如何界定？③作为/不作为如何区分？给出形式化的推理链。'
+                }
+            },
+            'history-silences': {
+                patterns: [
+                    {
+                        match: /不可知|无法.{0,4}了解|不能.{0,4}了解|不可能/,
+                        weakness: '前提：胜利者控制记录 → 结论：全然不可知',
+                        balliol: '你说"不可知"——但"可知性"在认识论上有程度之分。考古证据、物质文化难以被伪造，这是否构成"部分的可知"？你的"全然不可知"是否过强？',
+                        trinity: '你的结论"全然不可知"依赖"记录 = 全部证据"这一前提。但考古学、环境数据是非文字证据。剔除这个错误前提后，结论是否需要修正？'
+                    },
+                    {
+                        match: /考古|物质文化|陶器|建筑|环境/,
+                        weakness: '已识别多元史料，但未追问史料的"生产机制"',
+                        balliol: '你提到考古证据。但考古遗迹本身也是"被选择保留"的——胜利者同样可以摧毁物质文化。那么"多元史料"是否只是另一种被权力塑造的文本？这引向更深的问题：史料的生产本身就是权力行为。',
+                        trinity: '你正确指出史料多元性。但请追问：考古数据的"幸存"是否也是非随机的？如果只有胜利者有资源保存某些遗迹，你的"多元性"论证是否仍成立？'
+                    }
+                ],
+                fallback: {
+                    weakness: '未触及"档案的沉默"这一深层维度',
+                    balliol: '你尚未触及核心：胜利者不仅书写，还选择性销毁。"沉默"本身是权力关系的证据。追问"为什么这些记录消失了"——这才是历史学的任务。',
+                    trinity: '请明确：你的论证是"还原真相"还是"追问记录如何被生产"？这两个史学目标有不同的方法论含义。'
+                }
+            },
+            'ppe-bus-fare': {
+                patterns: [
+                    {
+                        match: /恢复|收.{0,2}票|应该收费|支持.{0,4}票价/,
+                        weakness: '前提：收费可过滤无目的乘车 → 结论：应恢复票价',
+                        balliol: '你支持恢复票价——但"过滤无目的乘车"暗含一个价值判断：什么样的出行算"有目的"？这个标准由谁定？若由效率定义，是否已预设了效率优于公平？',
+                        trinity: '你的论证前提是"收费能过滤"。但数据显示低收入群体搭乘率降 30%——被过滤的是"无目的"还是"低收入"？你的前提与经验证据冲突，需要修正。'
+                    },
+                    {
+                        match: /公平|低收入|不公|歧视/,
+                        weakness: '已识别公平维度，但未提出帕累托改进',
+                        balliol: '你抓住了公平问题。但"公平"与"效率"是否真的不可兼得？如果存在帕累托改进（如凭证补贴），你的"二选一"框架是否本身就是一种不必要的预设？',
+                        trinity: '你指出公平问题。请形式化：设目标函数 = α·效率 + β·公平。是否存在一种定价机制，使得两个分量同时改善？若存在，你的论证需要重构。'
+                    }
+                ],
+                fallback: {
+                    weakness: '未明确权衡效率与公平',
+                    balliol: '你尚未明确：当效率与公平冲突时，应优先哪个？这个优先顺序本身需要哲学论证，不能默认。',
+                    trinity: '请明确你的目标函数：你优化的究竟是效率、公平还是环保？三个维度可能冲突，需要明确权重。'
+                }
+            }
+        };
+
+        // ============ OX-14: 二次推演句式框架 ============
+        const REVISION_FRAMEWORKS = [
+            '我之前的定义太依赖 ____，如果转向 ____ 的区分……',
+            '导师的反驳揭示了我原论证中 ____ 这一前提的局限。若按新条件 ____，则……',
+            '我承认原结论在 ____ 情境下不成立。顺延新条件，可以重构为……'
+        ];
+
+        // ============ 状态 ============
+        const state = {
+            materialId: 'law-firefighter',
+            style: 'balliol',  // balliol | trinity
+            answer: '',
+            chainParsed: false,
+            rounds: []  // { type: 'answer'|'challenge'|'revision', text, style? }
+        };
+
+        // ============ DOM ============
+        const metaText = document.getElementById('metaText');
+        const materialSelect = document.getElementById('materialSelect');
+        const styleToggle = document.getElementById('styleToggle');
+        const styleInfo = document.getElementById('styleInfo');
+        const studentAnswer = document.getElementById('studentAnswer');
+        const answerInput = document.getElementById('answerInput');
+        const answerChars = document.getElementById('answerChars');
+        const parseBtn = document.getElementById('parseBtn');
+        const challengeBtn = document.getElementById('challengeBtn');
+        const chainParse = document.getElementById('chainParse');
+        const chainSteps = document.getElementById('chainSteps');
+        const challengeCard = document.getElementById('challengeCard');
+        const challengeContent = document.getElementById('challengeContent');
+        const revisionBox = document.getElementById('revisionBox');
+        const revisionFramework = document.getElementById('revisionFramework');
+        const revisionInput = document.getElementById('revisionInput');
+        const submitRevisionBtn = document.getElementById('submitRevisionBtn');
+        const anotherChallengeBtn = document.getElementById('anotherChallengeBtn');
+        const historyCard = document.getElementById('historyCard');
+        const roundHistory = document.getElementById('roundHistory');
+
+        // ============ 从 Think Aloud 页读取转写 ============
+        // 通过 URL 参数或 localStorage 传递
+        function loadFromHints() {
+            const params = new URLSearchParams(window.location.search);
+            const fromHints = params.get('from') === 'hints';
+            const transcript = params.get('transcript');
+            if (transcript) {
+                answerInput.value = decodeURIComponent(transcript);
+                updateAnswer();
+            } else {
+                // 尝试从 localStorage 读（与 hints 页共享，若实现）
+                try {
+                    const raw = localStorage.getItem('oxbridge_hints_transcript');
+                    if (raw) {
+                        answerInput.value = raw;
+                        updateAnswer();
+                    }
+                } catch (e) {}
+            }
+        }
+
+        // ============ 答案输入 ============
+        function updateAnswer() {
+            state.answer = answerInput.value.trim();
+            answerChars.textContent = state.answer.length + ' 字';
+            if (state.answer) {
+                studentAnswer.textContent = state.answer;
+            } else {
+                studentAnswer.innerHTML = '<div class="empty">尚无回答内容</div>';
+            }
+            challengeBtn.disabled = state.answer.length < 10;
+        }
+        answerInput.addEventListener('input', updateAnswer);
+
+        // ============ OX-12: 论证链条解析 ============
+        function parseArgumentChain() {
+            const text = state.answer;
+            if (!text) return;
+
+            const material = MATERIALS[state.materialId];
+            const rules = CHALLENGE_RULES[state.materialId];
+
+            // 简化解析：基于关键词识别论证结构
+            const steps = [];
+
+            // 1. 识别匹配的 pattern
+            let matchedRule = rules.fallback;
+            for (const rule of rules.patterns) {
+                if (rule.match.test(text)) {
+                    matchedRule = rule;
+                    break;
+                }
+            }
+
+            // 2. 提取论证片段（简化版）
+            // 前提：包含"因为/由于/所以/因此"前的部分
+            const premiseMatch = text.match(/因为(.+?)(?:所以|因此|所以|，|。)/) || text.match(/(.+?)(?:所以|因此)/);
+            const conclusionMatch = text.match(/(?:所以|因此|所以)(.+)/) || text.match(/(不构成|构成|应该|不应该|合理|不合理).+/);
+
+            steps.push({
+                label: '前提',
+                content: premiseMatch ? premiseMatch[1].trim() : '（未检测到明确的"因为…"前提，可能隐含）',
+                weak: false
+            });
+            steps.push({
+                label: '推理',
+                content: '从前提推导结论的过程',
+                weak: true  // 简化：假设推理环节最易被攻击
+            });
+            steps.push({
+                label: '结论',
+                content: conclusionMatch ? conclusionMatch[1].trim() : text.slice(-30),
+                weak: false
+            });
+
+            // 3. 标注薄弱点
+            steps.push({
+                label: '薄弱点',
+                content: matchedRule.weakness,
+                weak: true
+            });
+
+            chainSteps.innerHTML = steps.map(s =>
+                '<div class="chain-step' + (s.weak ? ' weak' : '') + '">' +
+                    '<span class="chain-label">' + s.label + '</span>' +
+                    '<span class="chain-content">' + escapeHtml(s.content) + '</span>' +
+                '</div>'
+            ).join('');
+
+            chainParse.style.display = 'block';
+            state.chainParsed = true;
+            state.matchedRule = matchedRule;
+
+            // 自动滚动
+            chainParse.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        parseBtn.addEventListener('click', parseArgumentChain);
+
+        // ============ OX-13: 生成 Devil's Advocate 反驳 ============
+        function generateChallenge() {
+            if (!state.answer) return;
+
+            // 如果未解析，先解析
+            if (!state.chainParsed) {
+                parseArgumentChain();
+            }
+
+            const rule = state.matchedRule || CHALLENGE_RULES[state.materialId].fallback;
+            const challengeText = rule[state.style] || rule.balliol;
+
+            const styleLabel = state.style === 'balliol' ? 'Balliol · 法哲学' : 'Trinity · 逻辑推演';
+
+            challengeContent.innerHTML =
+                '<div class="ch-label">🔥 Devil\'s Advocate <span class="ch-style">' + styleLabel + '</span></div>' +
+                '<div class="ch-text">"' + challengeText + '"</div>' +
+                '<div class="ch-target">📍 针对你的论证薄弱点：<b>' + rule.weakness + '</b></div>';
+
+            challengeCard.style.display = 'block';
+
+            // 记录轮次
+            state.rounds.push({ type: 'challenge', text: challengeText, style: state.style });
+
+            // 显示二次推演引导
+            showRevisionGuidance();
+
+            // 渲染历史
+            renderHistory();
+
+            // 滚动到反驳
+            setTimeout(() => {
+                challengeCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 100);
+        }
+
+        challengeBtn.addEventListener('click', generateChallenge);
+
+        // ============ OX-14: 二次推演引导 ============
+        function showRevisionGuidance() {
+            const framework = REVISION_FRAMEWORKS[Math.floor(Math.random() * REVISION_FRAMEWORKS.length)];
+            revisionFramework.innerHTML =
+                '<b>推荐句式框架（脚手架，熟练后撤除）：</b><br>' +
+                '"' + framework + '"<br><br>' +
+                '<b>关键动作：</b>① 承认原论证的局限 → ② 接受导师的新条件 → ③ 在新条件下重新推理（而非全盘否定原结论）';
+            revisionBox.style.display = 'block';
+            revisionInput.value = '';
+            revisionInput.focus();
+        }
+
+        submitRevisionBtn.addEventListener('click', () => {
+            const text = revisionInput.value.trim();
+            if (!text) {
+                revisionInput.style.borderColor = '#c62828';
+                setTimeout(() => { revisionInput.style.borderColor = '#c8e6c9'; }, 1000);
+                return;
+            }
+            state.rounds.push({ type: 'revision', text });
+            renderHistory();
+            revisionBox.style.display = 'none';
+            // 提示
+            anotherChallengeBtn.textContent = '🔥 再被反驳一次（基于你的二次推演）';
+        });
+
+        anotherChallengeBtn.addEventListener('click', () => {
+            // 基于二次推演文本再次生成反驳（简化：用 fallback）
+            const lastRevision = state.rounds.filter(r => r.type === 'revision').pop();
+            if (lastRevision) {
+                const rule = CHALLENGE_RULES[state.materialId].fallback;
+                const challengeText = rule[state.style] || rule.balliol;
+                state.rounds.push({ type: 'challenge', text: challengeText, style: state.style });
+                challengeContent.innerHTML =
+                    '<div class="ch-label">🔥 第二轮反驳 <span class="ch-style">' + (state.style === 'balliol' ? 'Balliol' : 'Trinity') + '</span></div>' +
+                    '<div class="ch-text">"' + challengeText + '"</div>' +
+                    '<div class="ch-target">📍 针对你的二次推演</div>';
+                showRevisionGuidance();
+                renderHistory();
+            }
+        });
+
+        // ============ 轮次历史 ============
+        function renderHistory() {
+            if (state.rounds.length === 0) {
+                historyCard.style.display = 'none';
+                return;
+            }
+            historyCard.style.display = 'block';
+            // 首轮加入学生原始回答
+            const allRounds = [{ type: 'answer', text: state.answer }, ...state.rounds];
+            roundHistory.innerHTML = allRounds.map((r, i) => {
+                const cls = r.type === 'challenge' ? 'round-challenge' : (r.type === 'revision' ? 'round-revision' : '');
+                const label = r.type === 'answer' ? '第1轮 · 你的回答' :
+                              r.type === 'challenge' ? '反驳 ' + (Math.ceil((i) / 2)) :
+                              '修正 ' + (Math.ceil((i) / 2));
+                const styleTag = r.style ? ' <span style="font-size:0.62rem;color:#888;">[' + r.style + ']</span>' : '';
+                return '<div class="round-item ' + cls + '">' +
+                    '<span class="r-label">' + label + styleTag + '</span>' +
+                    escapeHtml(r.text.length > 120 ? r.text.slice(0, 120) + '…' : r.text) +
+                '</div>';
+            }).join('');
+        }
+
+        // ============ OX-15: 学院风格切换 ============
+        const STYLE_INFO = {
+            balliol: {
+                name: 'Balliol · 法哲学',
+                desc: '偏好追问立法目的、自然法 vs 实证法等元问题。反驳方向：把你从字面解释逼向哲学根基。'
+            },
+            trinity: {
+                name: 'Trinity · 逻辑推演',
+                desc: '偏好严密的制定法逻辑推演、形式化分析。反驳方向：逼你明确前提、区分概念外延、检查推理有效性。'
+            }
+        };
+
+        function updateStyleInfo() {
+            const info = STYLE_INFO[state.style];
+            styleInfo.innerHTML = '<b>' + info.name + '</b><br>' + info.desc;
+        }
+
+        styleToggle.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('click', () => {
+                styleToggle.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                state.style = btn.dataset.style;
+                updateStyleInfo();
+            });
+        });
+
+        // ============ 材料切换 ============
+        materialSelect.addEventListener('change', (e) => {
+            state.materialId = e.target.value;
+            const m = MATERIALS[state.materialId];
+            metaText.textContent = m.meta;
+            state.chainParsed = false;
+            state.rounds = [];
+            chainParse.style.display = 'none';
+            challengeCard.style.display = 'none';
+            historyCard.style.display = 'none';
+        });
+
+        // ============ LLM 接口预留 ============
+        // 真实实现时，将 generateChallenge() 替换为调用 LLM API
+        // async function generateChallengeLLM() {
+        //     const res = await fetch('/api/devils-advocate', {
+        //         method: 'POST',
+        //         headers: { 'Content-Type': 'application/json' },
+        //         body: JSON.stringify({
+        //             materialId: state.materialId,
+        //             style: state.style,
+        //             studentAnswer: state.answer,
+        //             chainParsed: state.chainParsed
+        //         })
+        //     });
+        //     const data = await res.json();
+        //     return data.challenge;
+        // }
+
+        // ============ 工具函数 ============
+        function escapeHtml(str) {
+            const div = document.createElement('div');
+            div.textContent = str;
+            return div.innerHTML;
+        }
+
+        // ============ 初始化 ============
+        loadFromHints();
+        updateStyleInfo();
+    })();
+    </script>
+</body>
+</html>

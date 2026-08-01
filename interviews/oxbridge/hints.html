@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Think Aloud + Hints · Oxbridge</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f5f5; color: #333; min-height: 100vh;
+        }
+        .back-link {
+            display: inline-block; color: #667eea; text-decoration: none;
+            font-size: 0.85rem; padding: 12px 16px 0; max-width: 1000px; margin: 0 auto;
+        }
+        .back-link:hover { text-decoration: underline; }
+
+        /* 顶部栏 */
+        .topbar {
+            background: white; border-bottom: 1px solid #e8ecff;
+            padding: 10px 16px; position: sticky; top: 0; z-index: 100;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+        }
+        .topbar-inner {
+            max-width: 1000px; margin: 0 auto;
+            display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+        }
+        .topbar .meta { font-size: 0.78rem; color: #666; flex: 1; min-width: 180px; }
+        .topbar .meta .tag {
+            display: inline-block; padding: 2px 7px; border-radius: 3px;
+            font-size: 0.68rem; font-weight: 600; margin-right: 5px;
+            background: #e3f2fd; color: #1565c0;
+        }
+        .rec-status {
+            font-size: 0.76rem; color: #888; padding: 3px 9px;
+            border-radius: 12px; background: #f0f0f5;
+            display: flex; align-items: center; gap: 6px;
+        }
+        .rec-dot {
+            width: 8px; height: 8px; border-radius: 50%; background: #aaa;
+        }
+        .rec-status.live .rec-dot { background: #c62828; animation: pulse 1s infinite; }
+        @keyframes pulse { 50% { opacity: 0.4; } }
+
+        .workspace {
+            max-width: 1000px; margin: 12px auto; padding: 0 16px 40px;
+            display: grid; grid-template-columns: 1fr 300px; gap: 12px;
+        }
+        .main-col { min-width: 0; }
+        .side-col { min-width: 0; }
+
+        /* 卡片 */
+        .card {
+            background: white; border-radius: 8px; padding: 16px 20px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05); margin-bottom: 12px;
+        }
+        .card h2 {
+            color: #333; font-size: 1rem; margin-bottom: 4px;
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        .card .sub {
+            color: #888; font-size: 0.8rem; margin-bottom: 12px;
+            padding-bottom: 10px; border-bottom: 1px solid #f0f0f0;
+        }
+
+        /* 问题提示 */
+        .prompt-box {
+            background: #f8f9ff; border-left: 3px solid #667eea;
+            padding: 12px 16px; border-radius: 0 6px 6px 0;
+            font-size: 0.9rem; line-height: 1.7; color: #333;
+        }
+        .prompt-box .q-dim {
+            display: inline-block; font-size: 0.66rem; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 0.04em;
+            padding: 1px 6px; border-radius: 3px; margin-right: 6px;
+        }
+        .q-dim.d-textual { background: #e3f2fd; color: #1565c0; }
+        .q-dim.d-structural { background: #e8f5e9; color: #2e7d32; }
+        .q-dim.d-conflict { background: #ffebee; color: #c62828; }
+        .q-dim.d-boundary { background: #fff9c4; color: #f9a825; }
+
+        /* 录音控制 */
+        .rec-controls {
+            display: flex; gap: 8px; flex-wrap: wrap; align-items: center;
+            margin-top: 12px;
+        }
+        .btn {
+            border: 1px solid #ddd; background: white; color: #555;
+            padding: 6px 14px; border-radius: 5px; font-size: 0.82rem;
+            cursor: pointer; transition: all 0.15s;
+        }
+        .btn:hover { border-color: #667eea; color: #667eea; }
+        .btn-primary { background: #667eea; color: white; border-color: #667eea; }
+        .btn-primary:hover { background: #5568d3; color: white; }
+        .btn-danger { background: #c62828; color: white; border-color: #c62828; }
+        .btn-danger:hover { background: #b71c1c; color: white; }
+        .btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+        /* 转写区 */
+        .transcript {
+            background: #fafaff; border: 1px solid #eee;
+            border-radius: 6px; padding: 14px 16px;
+            min-height: 120px; max-height: 240px; overflow-y: auto;
+            font-size: 0.88rem; line-height: 1.75; color: #333;
+            margin-top: 12px;
+        }
+        .transcript .empty {
+            color: #aaa; text-align: center; padding: 24px 0; font-size: 0.82rem;
+        }
+        .transcript .interim { color: #999; font-style: italic; }
+        .transcript .final { color: #333; }
+
+        /* 阶梯 Hint 区 */
+        .hints-area { margin-top: 14px; }
+        .hint-tier {
+            background: #fff8e1; border-left: 3px solid #ff8f00;
+            padding: 12px 16px; border-radius: 0 6px 6px 0;
+            margin-bottom: 10px; font-size: 0.86rem; line-height: 1.7;
+        }
+        .hint-tier.used { opacity: 0.7; }
+        .hint-tier .hint-label {
+            font-size: 0.68rem; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 0.04em; color: #ff8f00; margin-right: 6px;
+        }
+        .hint-tier .hint-target {
+            display: inline-block; font-size: 0.66rem; font-weight: 600;
+            padding: 1px 6px; border-radius: 3px; margin-left: 6px;
+            background: #e3f2fd; color: #1565c0;
+        }
+        .hint-tier .hint-text { color: #5d4037; margin-top: 4px; display: block; }
+        .hint-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+
+        /* 句式救场卡片 */
+        .phrases-card { position: relative; }
+        .phrases-card.scaffold-removed {
+            opacity: 0.5;
+        }
+        .phrases-card.scaffold-removed .phrases-list { display: none; }
+        .phrases-card.scaffold-removed .removed-notice { display: block; }
+        .removed-notice {
+            display: none; background: #e8f5e9; color: #1b5e20;
+            padding: 10px 14px; border-radius: 6px; font-size: 0.82rem;
+            line-height: 1.6;
+        }
+        .phrases-list {
+            display: grid; grid-template-columns: 1fr; gap: 6px;
+        }
+        .phrase-item {
+            background: #f3e5f5; border-left: 3px solid #7b1fa2;
+            padding: 8px 12px; border-radius: 0 5px 5px 0;
+            font-size: 0.8rem; line-height: 1.5; color: #4a148c;
+            cursor: pointer; transition: all 0.15s;
+            font-style: italic;
+        }
+        .phrase-item:hover { background: #e1bee7; }
+        .phrase-item.used {
+            opacity: 0.5; text-decoration: line-through;
+        }
+        .phrase-badge {
+            font-size: 0.62rem; background: #7b1fa2; color: white;
+            padding: 1px 5px; border-radius: 3px; margin-left: 6px;
+            font-style: normal; font-weight: 600;
+        }
+        .scaffold-meter {
+            height: 6px; background: #f0f0f5; border-radius: 3px;
+            margin-top: 8px; overflow: hidden;
+        }
+        .scaffold-meter .fill {
+            height: 100%; background: #7b1fa2; transition: width 0.3s;
+        }
+        .scaffold-hint {
+            font-size: 0.72rem; color: #999; margin-top: 4px;
+        }
+
+        /* 侧边栏 */
+        .side-card {
+            background: white; border-radius: 8px; padding: 14px 16px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05); margin-bottom: 12px;
+        }
+        .side-card h3 {
+            color: #667eea; font-size: 0.88rem; margin-bottom: 10px;
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        .side-card h3 .count {
+            background: #eef1ff; color: #667eea; font-size: 0.7rem;
+            padding: 1px 7px; border-radius: 10px;
+        }
+        .dim-list { font-size: 0.8rem; }
+        .dim-list .dim-row {
+            display: flex; align-items: center; gap: 8px;
+            padding: 5px 0; border-bottom: 1px solid #f5f5f5;
+        }
+        .dim-list .dim-row:last-child { border: none; }
+        .dim-list .dim-name { flex: 1; color: #555; }
+        .dim-list .dim-stat {
+            font-size: 0.68rem; padding: 1px 6px; border-radius: 3px;
+        }
+        .dim-list .dim-stat.ok { background: #e8f5e9; color: #2e7d32; }
+        .dim-list .dim-stat.miss { background: #ffebee; color: #c62828; }
+        .dim-list .dim-stat.shallow { background: #fff8e1; color: #ff8f00; }
+        .color-dot {
+            width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0;
+        }
+        .dot-blue { background: #1565c0; }
+        .dot-green { background: #2e7d32; }
+        .dot-red { background: #c62828; }
+        .dot-yellow { background: #f9a825; }
+
+        .info-box {
+            background: #e3f2fd; border-left: 3px solid #1565c0;
+            padding: 10px 14px; border-radius: 0 6px 6px 0;
+            font-size: 0.8rem; color: #0d47a1; line-height: 1.6;
+        }
+        .warning-box {
+            background: #fff8e1; border-left: 3px solid #ff8f00;
+            padding: 10px 14px; border-radius: 0 6px 6px 0;
+            font-size: 0.8rem; color: #5d4037; line-height: 1.6;
+        }
+        .tip-box {
+            background: #e8f5e9; border-left: 3px solid #2e7d32;
+            padding: 10px 14px; border-radius: 0 6px 6px 0;
+            font-size: 0.8rem; color: #1b5e20; line-height: 1.6;
+        }
+
+        .footer {
+            text-align: center; color: #aaa; font-size: 0.75rem; padding: 16px;
+        }
+        .footer a { color: #aaa; text-decoration: none; }
+
+        @media (max-width: 700px) {
+            .workspace { grid-template-columns: 1fr; }
+        }
+    </style>
+    <link rel="stylesheet" href="../../css/theme.css">
+    <meta name="theme-color" content="#667eea">
+    <script src="../../js/theme.js"></script>
+</head>
+<body>
+    <a href="../oxbridge-interview.html" class="back-link">&larr; 返回牛剑面试</a>
+
+    <div class="topbar">
+        <div class="topbar-inner">
+            <div class="meta">
+                <span class="tag" id="metaTag">LAW</span>
+                <span id="metaText">Oxford · Balliol College</span>
+            </div>
+            <select id="materialSelect" class="btn" style="min-width:160px;">
+                <option value="law-firefighter">法学 · 消防员两难</option>
+                <option value="history-silences">历史 · 档案的沉默</option>
+                <option value="ppe-bus-fare">PPE · 0.5 英镑公交票</option>
+            </select>
+            <div class="rec-status" id="recStatus">
+                <span class="rec-dot"></span>
+                <span id="recStatusText">未开始</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="workspace">
+        <div class="main-col">
+            <!-- 当前问题 -->
+            <div class="card">
+                <h2>当前问题 <span style="font-size:0.74rem;color:#999;font-weight:400;">Question</span></h2>
+                <div class="sub">把思考过程出声说出来（Think Aloud）——沉默比说错更致命</div>
+                <div class="prompt-box" id="promptBox">
+                    <span class="q-dim d-textual">文本层</span>
+                    <span id="promptText">"故意"在该场景中应如何界定？A 的心理状态是什么？</span>
+                </div>
+                <div class="rec-controls">
+                    <button class="btn btn-primary" id="startRecBtn">开始录音（Think Aloud）</button>
+                    <button class="btn btn-danger" id="stopRecBtn" disabled>停止</button>
+                    <button class="btn" id="clearTranscriptBtn">清空转写</button>
+                    <button class="btn" id="toDevilBtn" style="margin-left:auto;background:#c62828;color:white;border-color:#c62828;">🔥 进入 Devil's Advocate →</button>
+                    <span style="font-size:0.74rem;color:#999;" id="transcriptWordCount">0 字</span>
+                </div>
+                <div class="transcript" id="transcript">
+                    <div class="empty">点击"开始录音"后，把你的思考过程说出来。系统会实时转写。</div>
+                </div>
+            </div>
+
+            <!-- 阶梯 Hints -->
+            <div class="card">
+                <h2>阶梯式提示 <span style="font-size:0.74rem;color:#999;font-weight:400;">Scaffolded Hints</span></h2>
+                <div class="sub">卡壳时点击。提示从你漏标的维度触发——不是预设题库，而是基于你的标注行为</div>
+                <div class="hint-actions">
+                    <button class="btn" id="hint1Btn" disabled>💡 Hint 1 · 思考切入角</button>
+                    <button class="btn" id="hint2Btn" disabled>💡 Hint 2 · 限定变量</button>
+                </div>
+                <div class="hints-area" id="hintsArea">
+                    <div class="empty" style="color:#aaa;text-align:center;padding:14px 0;font-size:0.82rem;">
+                        先在上一页（模拟器）完成标注，或直接开始录音后点击 Hint
+                    </div>
+                </div>
+            </div>
+
+            <!-- 句式救场卡片 -->
+            <div class="card phrases-card" id="phrasesCard">
+                <h2>句式救场卡 <span style="font-size:0.74rem;color:#999;font-weight:400;">Sentence Lifeline</span></h2>
+                <div class="sub">牛剑面试高好感度过渡句。点击即记入"已用"——注意：过度依赖会触发撤除</div>
+                <div class="phrases-list" id="phrasesList"></div>
+                <div class="removed-notice">
+                    <strong>🚧 脚手架已撤除</strong><br>
+                    你已多次依赖句式卡片。真实面试中没有救场卡——现在请用自己的话组织过渡。撤除后才能从"依赖工具"过渡到"内化思维"。
+                </div>
+                <div class="scaffold-meter"><div class="fill" id="scaffoldFill" style="width:0%;"></div></div>
+                <div class="scaffold-hint" id="scaffoldHint">依赖度 0/3 —— 使用 3 次后撤除脚手架</div>
+            </div>
+        </div>
+
+        <!-- 侧边栏 -->
+        <div class="side-col">
+            <div class="side-card">
+                <h3>维度覆盖 <span class="count" id="annoCount">0</span></h3>
+                <div class="dim-list" id="dimList">
+                    <div class="dim-row"><span class="color-dot dot-blue"></span><span class="dim-name">文本层</span><span class="dim-stat miss" id="stat-blue">未标</span></div>
+                    <div class="dim-row"><span class="color-dot dot-green"></span><span class="dim-name">结构层</span><span class="dim-stat miss" id="stat-green">未标</span></div>
+                    <div class="dim-row"><span class="color-dot dot-red"></span><span class="dim-name">冲突层</span><span class="dim-stat miss" id="stat-red">未标</span></div>
+                    <div class="dim-row"><span class="color-dot dot-yellow"></span><span class="dim-name">边界层</span><span class="dim-stat miss" id="stat-yellow">未标</span></div>
+                </div>
+            </div>
+
+            <div class="side-card">
+                <h3>Hint 引擎数据</h3>
+                <div style="font-size:0.76rem;color:#555;line-height:1.6;" id="hintEngineData">
+                    等待标注数据…
+                </div>
+            </div>
+
+            <div class="side-card">
+                <h3>使用统计</h3>
+                <div style="font-size:0.78rem;line-height:1.8;color:#555;">
+                    <div>Hints 使用：<b id="hintUsedCount">0</b> / 2</div>
+                    <div>句式卡片：<b id="phraseUsedCount">0</b> / 3（撤除阈值）</div>
+                    <div>录音时长：<b id="recDuration">00:00</b></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <a href="../../index.html">Home</a> ·
+        <a href="../oxbridge-interview.html">Oxbridge Interviews</a> ·
+        <a href="simulator.html">预读模拟器</a> ·
+        Think Aloud + Hints
+    </div>
+
+    <script>
+    (function() {
+        'use strict';
+
+        // ============ 维度配置 ============
+        const DIMENSIONS = {
+            blue:   { name: '文本层', en: 'Textual',   statEl: 'stat-blue' },
+            green:  { name: '结构层', en: 'Structural', statEl: 'stat-green' },
+            red:    { name: '冲突层', en: 'Conflict',   statEl: 'stat-red' },
+            yellow: { name: '边界层', en: 'Boundary',   statEl: 'stat-yellow' }
+        };
+
+        // ============ OX-7 复用：材料数据（与 simulator 一致） ============
+        const MATERIALS = {
+            'law-firefighter': {
+                tag: 'LAW', meta: 'Oxford · Balliol College',
+                questions: [
+                    { dim: 'blue',   dimName: '文本层',   text: '"故意"在该场景中应如何界定？A 的心理状态是什么？' },
+                    { dim: 'green',  dimName: '结构层',   text: '不作为能否构成"剥夺生命"？区分标准是什么？' },
+                    { dim: 'red',    dimName: '冲突层',   text: '本案中"行为责任"与"结果责任"的冲突如何化解？立法目的应优先哪一方？' },
+                    { dim: 'yellow', dimName: '边界层',   text: '给出一个让结论反转的事实变体（如改变 A 的身份或与 B/C 的关系）。' }
+                ]
+            },
+            'history-silences': {
+                tag: 'HISTORY', meta: 'Cambridge · Trinity College',
+                questions: [
+                    { dim: 'blue',   dimName: '文本层',   text: '"胜利者书写历史"这句话的措辞如何界定？"书写"是单纯记录，还是包含塑造与删改？' },
+                    { dim: 'green',  dimName: '结构层',   text: '"全然不可知"结论的论证链条是什么？哪个环节最薄弱？' },
+                    { dim: 'red',    dimName: '冲突层',   text: '"还原真相"与"追问记录如何被生产"两种史学目标存在什么张力？' },
+                    { dim: 'yellow', dimName: '边界层',   text: '给出一个反例：在什么情境下，被征服文明的史料反而比征服者的更完整？' }
+                ]
+            },
+            'ppe-bus-fare': {
+                tag: 'PPE', meta: 'Oxford · Balliol College',
+                questions: [
+                    { dim: 'blue',   dimName: '文本层',   text: '"有效"一词在该政策语境中应如何界定？效率、公平、环保哪个优先？' },
+                    { dim: 'green',  dimName: '结构层',   text: '支持票价恢复的论证链条是什么？低收入数据如何动摇它？' },
+                    { dim: 'red',    dimName: '冲突层',   text: '本案中"效率"与"公平"的冲突如何化解？是否存在帕累托改进？' },
+                    { dim: 'yellow', dimName: '边界层',   text: '给出一个让"恢复票价"结论反转的条件变体。' }
+                ]
+            }
+        };
+
+        // ============ OX-9: 阶梯 Hint 文案库（按维度） ============
+        // Hint 1 = 思考切入角；Hint 2 = 限定变量
+        const HINT_BANK = {
+            blue: {
+                name: '文本层',
+                hint1: '尝试回到法条/材料的字词本身——关键词（如"故意""书写""有效"）在通常语境与学术语境下是否同义？',
+                hint2: '限定变量：如果"故意"仅指"积极追求结果"，那"明知结果必然发生却选择接受"算不算？'
+            },
+            green: {
+                name: '结构层',
+                hint1: '把论证拆成"前提 → 推理 → 结论"三段。哪一步是跳跃？哪一步依赖了未明说的假设？',
+                hint2: '限定变量：如果把"不作为"换成"作为"，前提变了，结论是否必然反转？'
+            },
+            red: {
+                name: '冲突层',
+                hint1: '识别材料背后对立的两个价值（如行为责任 vs 结果责任、效率 vs 公平）。它们为何在此冲突？',
+                hint2: '限定变量：假设立法目的只能二选一——你选哪个？选了之后另一价值如何补救？'
+            },
+            yellow: {
+                name: '边界层',
+                hint1: '找一个让结论反转的事实变体：改变谁（身份）、改变什么（关系/义务/资源）能让结论翻转？',
+                hint2: '限定变量：如果 A 是普通路人（无救援义务）vs 消防员（有职务义务），结论的稳定性如何？'
+            }
+        };
+
+        // ============ OX-11: 句式救场卡片库 ============
+        const PHRASES = [
+            { id: 'p1', text: "I haven't considered this angle before, but if I break it down based on your point...", cn: '承认新视角 + 顺延推理' },
+            { id: 'p2', text: "That's a fair challenge. Let me see if I can refine my earlier answer...", cn: '接受反驳 + 修正' },
+            { id: 'p3', text: "I'm not entirely sure, but here's how I'd approach it...", cn: '坦诚不确定 + 展示方法' },
+            { id: 'p4', text: "So if I change that assumption, then... does that hold?", cn: '改变假设 + 验证' },
+            { id: 'p5', text: "Can I take a moment to think that through?", cn: '争取思考时间' }
+        ];
+
+        // ============ 状态 ============
+        const state = {
+            currentMaterialId: 'law-firefighter',
+            currentQuestionIndex: 0,
+            // 标注数据（从 localStorage 读取，与 simulator 共享）
+            annotations: [],
+            // 转写
+            transcript: '',
+            interimText: '',
+            // Hint 状态
+            hintsUsed: { hint1: false, hint2: false },
+            // 句式卡片状态
+            phrasesUsed: new Set(),
+            scaffoldRemoved: false,
+            // 录音
+            recording: false,
+            recognition: null,
+            recStartTime: 0,
+            recTimerId: null,
+            recElapsed: 0
+        };
+
+        // ============ DOM ============
+        const metaTag = document.getElementById('metaTag');
+        const metaText = document.getElementById('metaText');
+        const materialSelect = document.getElementById('materialSelect');
+        const promptBox = document.getElementById('promptBox');
+        const promptText = document.getElementById('promptText');
+        const startRecBtn = document.getElementById('startRecBtn');
+        const stopRecBtn = document.getElementById('stopRecBtn');
+        const clearTranscriptBtn = document.getElementById('clearTranscriptBtn');
+        const transcript = document.getElementById('transcript');
+        const transcriptWordCount = document.getElementById('transcriptWordCount');
+        const recStatus = document.getElementById('recStatus');
+        const recStatusText = document.getElementById('recStatusText');
+        const hint1Btn = document.getElementById('hint1Btn');
+        const hint2Btn = document.getElementById('hint2Btn');
+        const hintsArea = document.getElementById('hintsArea');
+        const phrasesList = document.getElementById('phrasesList');
+        const phrasesCard = document.getElementById('phrasesCard');
+        const scaffoldFill = document.getElementById('scaffoldFill');
+        const scaffoldHint = document.getElementById('scaffoldHint');
+        const annoCount = document.getElementById('annoCount');
+        const hintEngineData = document.getElementById('hintEngineData');
+        const hintUsedCount = document.getElementById('hintUsedCount');
+        const phraseUsedCount = document.getElementById('phraseUsedCount');
+        const recDuration = document.getElementById('recDuration');
+
+        // ============ 从 localStorage 读取模拟器标注数据 ============
+        const SIM_STORAGE_KEY = 'oxbridge_sim_annotations';
+
+        function loadAnnotationsFromSim() {
+            try {
+                const raw = localStorage.getItem(SIM_STORAGE_KEY);
+                if (!raw) return [];
+                const payload = JSON.parse(raw);
+                return payload.annotations || [];
+            } catch (e) {
+                return [];
+            }
+        }
+
+        function refreshAnnotations() {
+            state.annotations = loadAnnotationsFromSim();
+            renderDimCoverage();
+            renderHintEngineData();
+            updateHintButtons();
+        }
+
+        // ============ 维度覆盖率（含"浅标"检测） ============
+        function getDimStatus(color) {
+            const annos = state.annotations.filter(a => a.color === color);
+            if (annos.length === 0) return 'miss';
+            // OX-10: 浅标检测——标注字数少于 6 字视为"标了但没展开"
+            const totalChars = annos.reduce((s, a) => s + (a.text || '').length, 0);
+            if (totalChars < 6) return 'shallow';
+            return 'ok';
+        }
+
+        function renderDimCoverage() {
+            annoCount.textContent = state.annotations.length;
+            Object.keys(DIMENSIONS).forEach(color => {
+                const dim = DIMENSIONS[color];
+                const el = document.getElementById(dim.statEl);
+                const status = getDimStatus(color);
+                el.classList.remove('ok', 'miss', 'shallow');
+                if (status === 'ok') {
+                    el.textContent = '已覆盖';
+                    el.classList.add('ok');
+                } else if (status === 'shallow') {
+                    el.textContent = '浅标';
+                    el.classList.add('shallow');
+                } else {
+                    el.textContent = '未标';
+                    el.classList.add('miss');
+                }
+            });
+        }
+
+        // ============ OX-10: Hint 引擎数据展示 ============
+        function renderHintEngineData() {
+            const marked = state.annotations.map(a => a.color);
+            const missing = Object.keys(DIMENSIONS).filter(c => !marked.includes(c));
+            const shallow = Object.keys(DIMENSIONS).filter(c => getDimStatus(c) === 'shallow');
+            let html = '';
+            if (missing.length > 0) {
+                html += '<div style="color:#c62828;">⚠ 漏标维度 → Hint 指向：</div>';
+                missing.forEach(c => {
+                    html += '<div style="padding-left:8px;">· ' + DIMENSIONS[c].name + '（' + DIMENSIONS[c].en + '）</div>';
+                });
+            }
+            if (shallow.length > 0) {
+                html += '<div style="color:#ff8f00;margin-top:4px;">⚠ 浅标维度 → Hint 限定变量：</div>';
+                shallow.forEach(c => {
+                    html += '<div style="padding-left:8px;">· ' + DIMENSIONS[c].name + '</div>';
+                });
+            }
+            if (missing.length === 0 && shallow.length === 0) {
+                html = '<div style="color:#2e7d32;">✓ 四维度均已覆盖，可自由发挥</div>';
+            }
+            hintEngineData.innerHTML = html;
+        }
+
+        // ============ 当前问题 ============
+        function renderQuestion() {
+            const m = MATERIALS[state.currentMaterialId];
+            const q = m.questions[state.currentQuestionIndex];
+            metaTag.textContent = m.tag;
+            metaText.textContent = m.meta;
+            const cls = 'd-' + ({blue:'textual',green:'structural',red:'conflict',yellow:'boundary'}[q.dim]);
+            promptBox.innerHTML = '<span class="q-dim ' + cls + '">' + q.dimName + '</span><span id="promptText">' + q.text + '</span>';
+            // 切换问题后重置 Hints
+            state.hintsUsed = { hint1: false, hint2: false };
+            hintsArea.innerHTML = '<div class="empty" style="color:#aaa;text-align:center;padding:14px 0;font-size:0.82rem;">卡壳时点击 Hint 按钮</div>';
+            updateHintButtons();
+            updateHintUsedCount();
+        }
+
+        function updateHintButtons() {
+            hint1Btn.disabled = state.hintsUsed.hint1;
+            hint2Btn.disabled = state.hintsUsed.hint2 || !state.hintsUsed.hint1;
+        }
+
+        function updateHintUsedCount() {
+            const used = (state.hintsUsed.hint1 ? 1 : 0) + (state.hintsUsed.hint2 ? 1 : 0);
+            hintUsedCount.textContent = used;
+        }
+
+        // ============ OX-9+OX-10: 生成阶梯 Hint ============
+        function generateHint(tier) {
+            const q = MATERIALS[state.currentMaterialId].questions[state.currentQuestionIndex];
+            const dim = q.dim;
+            const bank = HINT_BANK[dim];
+            const dimStatus = getDimStatus(dim);
+
+            let prefix = '';
+            if (dimStatus === 'miss') {
+                prefix = '<span class="hint-target">你漏标了此维度</span>';
+            } else if (dimStatus === 'shallow') {
+                prefix = '<span class="hint-target" style="background:#fff8e1;color:#ff8f00;">你标注过浅</span>';
+            }
+
+            const hintKey = tier === 1 ? 'hint1' : 'hint2';
+            const hintText = bank[hintKey];
+
+            return {
+                tier,
+                dimName: bank.name,
+                prefix,
+                text: hintText
+            };
+        }
+
+        function showHint(tier) {
+            if (state.hintsUsed['hint' + tier]) return;
+            state.hintsUsed['hint' + tier] = true;
+            const hint = generateHint(tier);
+
+            // 清除 empty 提示
+            const empty = hintsArea.querySelector('.empty');
+            if (empty) empty.remove();
+
+            const div = document.createElement('div');
+            div.className = 'hint-tier';
+            div.innerHTML =
+                '<span class="hint-label">Hint ' + tier + '</span>' +
+                '<span style="color:#555;font-size:0.78rem;">' + hint.dimName + ' · ' + (tier === 1 ? '思考切入角' : '限定变量') + '</span>' +
+                hint.prefix +
+                '<span class="hint-text">' + hint.text + '</span>';
+            hintsArea.appendChild(div);
+
+            updateHintButtons();
+            updateHintUsedCount();
+        }
+
+        hint1Btn.addEventListener('click', () => showHint(1));
+        hint2Btn.addEventListener('click', () => showHint(2));
+
+        // ============ OX-11: 句式救场卡片 + 脚手架撤除 ============
+        const SCAFFOLD_THRESHOLD = 3;  // 使用 3 次后撤除
+
+        function renderPhrases() {
+            phrasesList.innerHTML = PHRASES.map(p => {
+                const used = state.phrasesUsed.has(p.id);
+                return '<div class="phrase-item' + (used ? ' used' : '') + '" data-id="' + p.id + '">' +
+                    escapeHtml(p.text) +
+                    ' <span class="phrase-badge">' + p.cn + '</span>' +
+                '</div>';
+            }).join('');
+            phrasesList.querySelectorAll('.phrase-item').forEach(el => {
+                el.addEventListener('click', () => usePhrase(el.dataset.id));
+            });
+        }
+
+        function usePhrase(id) {
+            if (state.scaffoldRemoved) return;
+            if (state.phrasesUsed.has(id)) return;
+            state.phrasesUsed.add(id);
+            renderPhrases();
+            updateScaffoldMeter();
+            // 达到阈值撤除
+            if (state.phrasesUsed.size >= SCAFFOLD_THRESHOLD) {
+                removeScaffold();
+            }
+        }
+
+        function updateScaffoldMeter() {
+            const pct = (state.phrasesUsed.size / SCAFFOLD_THRESHOLD) * 100;
+            scaffoldFill.style.width = pct + '%';
+            phraseUsedCount.textContent = state.phrasesUsed.size;
+            const remaining = SCAFFOLD_THRESHOLD - state.phrasesUsed.size;
+            if (remaining > 0) {
+                scaffoldHint.textContent = '依赖度 ' + state.phrasesUsed.size + '/' + SCAFFOLD_THRESHOLD + ' —— 剩余 ' + remaining + ' 次后撤除';
+                scaffoldHint.style.color = '#999';
+            }
+        }
+
+        function removeScaffold() {
+            state.scaffoldRemoved = true;
+            phrasesCard.classList.add('scaffold-removed');
+            scaffoldHint.textContent = '🚧 脚手架已撤除——请用自己的话组织';
+            scaffoldHint.style.color = '#c62828';
+            scaffoldFill.style.width = '100%';
+            scaffoldFill.style.background = '#c62828';
+        }
+
+        // ============ OX-8: 录音 + 转写（Web Speech API） ============
+        function initSpeechRecognition() {
+            const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+            if (!SR) {
+                startRecBtn.disabled = true;
+                startRecBtn.textContent = '浏览器不支持语音识别';
+                transcript.innerHTML = '<div class="empty" style="color:#c62828;">当前浏览器不支持 Web Speech API。请使用 Chrome/Edge。<br>可手动在下方输入思考内容测试 Hint 引擎。</div>';
+                return null;
+            }
+            const recognition = new SR();
+            recognition.continuous = true;
+            recognition.interimResults = true;
+            recognition.lang = 'zh-CN';  // 可按需切换 en-US
+
+            recognition.onstart = () => {
+                state.recording = true;
+                recStatus.classList.add('live');
+                recStatusText.textContent = '录音中…';
+                startRecBtn.disabled = true;
+                stopRecBtn.disabled = false;
+                state.recStartTime = Date.now();
+                state.recTimerId = setInterval(updateRecDuration, 1000);
+            };
+
+            recognition.onresult = (event) => {
+                let interim = '';
+                let final = '';
+                for (let i = event.resultIndex; i < event.results.length; i++) {
+                    const t = event.results[i][0].transcript;
+                    if (event.results[i].isFinal) {
+                        final += t;
+                    } else {
+                        interim += t;
+                    }
+                }
+                if (final) {
+                    state.transcript += final;
+                    renderHintEngineDataWithTranscript();  // OX-10: 转写后重新分析
+                }
+                state.interimText = interim;
+                renderTranscript();
+            };
+
+            recognition.onerror = (event) => {
+                if (event.error === 'no-speech') return;
+                if (event.error === 'not-allowed') {
+                    transcript.innerHTML = '<div class="empty" style="color:#c62828;">麦克风权限被拒绝。请允许后重试。</div>';
+                }
+            };
+
+            recognition.onend = () => {
+                state.recording = false;
+                recStatus.classList.remove('live');
+                recStatusText.textContent = '已停止';
+                startRecBtn.disabled = false;
+                stopRecBtn.disabled = true;
+                clearInterval(state.recTimerId);
+            };
+
+            return recognition;
+        }
+
+        function renderTranscript() {
+            if (!state.transcript && !state.interimText) {
+                transcript.innerHTML = '<div class="empty">点击"开始录音"后，把你的思考过程说出来…</div>';
+            } else {
+                let html = '';
+                if (state.transcript) html += '<span class="final">' + escapeHtml(state.transcript) + '</span>';
+                if (state.interimText) html += '<span class="interim"> ' + escapeHtml(state.interimText) + '</span>';
+                transcript.innerHTML = html;
+            }
+            const total = (state.transcript + state.interimText).length;
+            transcriptWordCount.textContent = total + ' 字';
+        }
+
+        function updateRecDuration() {
+            state.recElapsed = Math.floor((Date.now() - state.recStartTime) / 1000);
+            const m = String(Math.floor(state.recElapsed / 60)).padStart(2, '0');
+            const s = String(state.recElapsed % 60).padStart(2, '0');
+            recDuration.textContent = m + ':' + s;
+        }
+
+        // ============ OX-10: 转写关键词分析（浅标补充检测） ============
+        // 检测转写文本是否提及了某维度的关键词
+        function renderHintEngineDataWithTranscript() {
+            renderHintEngineData();  // 基础渲染
+            // 转写后可扩展：检测学生是否在口头回答中触及了漏标维度
+            // 此处仅展示数据接口，实际 LLM 分析留给 Phase 4 Devil's Advocate
+        }
+
+        startRecBtn.addEventListener('click', () => {
+            if (!state.recognition) {
+                state.recognition = initSpeechRecognition();
+                if (!state.recognition) return;
+            }
+            try {
+                state.recognition.start();
+            } catch (e) {
+                // 已在运行
+            }
+        });
+
+        stopRecBtn.addEventListener('click', () => {
+            if (state.recognition && state.recording) {
+                state.recognition.stop();
+            }
+        });
+
+        clearTranscriptBtn.addEventListener('click', () => {
+            state.transcript = '';
+            state.interimText = '';
+            renderTranscript();
+            renderHintEngineData();
+        });
+
+        // 跳转到 Devil's Advocate，携带转写文本
+        document.getElementById('toDevilBtn').addEventListener('click', () => {
+            const text = state.transcript || '';
+            // 存入 localStorage 供 Devil's Advocate 页读取
+            try {
+                localStorage.setItem('oxbridge_hints_transcript', text);
+            } catch (e) {}
+            const url = 'devils-advocate.html?from=hints' + (text ? '&transcript=' + encodeURIComponent(text) : '');
+            window.location.href = url;
+        });
+
+        // ============ 材料切换 ============
+        materialSelect.addEventListener('change', (e) => {
+            state.currentMaterialId = e.target.value;
+            state.currentQuestionIndex = 0;
+            renderQuestion();
+            refreshAnnotations();
+        });
+
+        // ============ 工具函数 ============
+        function escapeHtml(str) {
+            const div = document.createElement('div');
+            div.textContent = str;
+            return div.innerHTML;
+        }
+
+        // ============ 初始化 ============
+        renderQuestion();
+        renderPhrases();
+        updateScaffoldMeter();
+        initSpeechRecognition();  // 预初始化（不自动启动）
+
+        // 尝试从 simulator 读取标注
+        refreshAnnotations();
+
+        // 监听 localStorage 变化（如果用户从 simulator 页跳回）
+        window.addEventListener('storage', (e) => {
+            if (e.key === SIM_STORAGE_KEY) {
+                refreshAnnotations();
+            }
+        });
+    })();
+    </script>
+</body>
+</html>
