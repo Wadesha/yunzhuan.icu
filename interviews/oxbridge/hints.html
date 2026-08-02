@@ -262,6 +262,7 @@
     <link rel="stylesheet" href="../../css/theme.css">
     <meta name="theme-color" content="#667eea">
     <script src="../../js/theme.js"></script>
+    <script src="materials.js"></script>
 </head>
 <body>
     <a href="../oxbridge-interview.html" class="back-link">&larr; 返回牛剑面试</a>
@@ -288,6 +289,10 @@
                 <option value="law-firefighter">法学 · 消防员两难</option>
                 <option value="history-silences">历史 · 档案的沉默</option>
                 <option value="ppe-bus-fare">PPE · 0.5 英镑公交票</option>
+                <option value="math-ladder">数学 · 梯子轨迹（官方真题）</option>
+                <option value="math-tiling">数学 · 铺砖问题（官方真题）</option>
+                <option value="eng-ruler">工程 · 尺子与手指（官方真题）</option>
+                <option value="bio-ladybird">生物 · 瓢虫与草莓（官方真题）</option>
             </select>
             <div class="rec-status" id="recStatus">
                 <span class="rec-dot"></span>
@@ -396,36 +401,8 @@
             yellow: { name: '边界层', en: 'Boundary',   statEl: 'stat-yellow' }
         };
 
-        // ============ OX-7 复用：材料数据（与 simulator 一致） ============
-        const MATERIALS = {
-            'law-firefighter': {
-                tag: 'LAW', meta: 'Oxford · Balliol College', lang: 'zh-CN',
-                questions: [
-                    { dim: 'blue',   dimName: '文本层',   text: '"故意"在该场景中应如何界定？A 的心理状态是什么？' },
-                    { dim: 'green',  dimName: '结构层',   text: '不作为能否构成"剥夺生命"？区分标准是什么？' },
-                    { dim: 'red',    dimName: '冲突层',   text: '本案中"行为责任"与"结果责任"的冲突如何化解？立法目的应优先哪一方？' },
-                    { dim: 'yellow', dimName: '边界层',   text: '给出一个让结论反转的事实变体（如改变 A 的身份或与 B/C 的关系）。' }
-                ]
-            },
-            'history-silences': {
-                tag: 'HISTORY', meta: 'Cambridge · Trinity College', lang: 'zh-CN',
-                questions: [
-                    { dim: 'blue',   dimName: '文本层',   text: '"胜利者书写历史"这句话的措辞如何界定？"书写"是单纯记录，还是包含塑造与删改？' },
-                    { dim: 'green',  dimName: '结构层',   text: '"全然不可知"结论的论证链条是什么？哪个环节最薄弱？' },
-                    { dim: 'red',    dimName: '冲突层',   text: '"还原真相"与"追问记录如何被生产"两种史学目标存在什么张力？' },
-                    { dim: 'yellow', dimName: '边界层',   text: '给出一个反例：在什么情境下，被征服文明的史料反而比征服者的更完整？' }
-                ]
-            },
-            'ppe-bus-fare': {
-                tag: 'PPE', meta: 'Oxford · Balliol College', lang: 'zh-CN',
-                questions: [
-                    { dim: 'blue',   dimName: '文本层',   text: '"有效"一词在该政策语境中应如何界定？效率、公平、环保哪个优先？' },
-                    { dim: 'green',  dimName: '结构层',   text: '支持票价恢复的论证链条是什么？低收入数据如何动摇它？' },
-                    { dim: 'red',    dimName: '冲突层',   text: '本案中"效率"与"公平"的冲突如何化解？是否存在帕累托改进？' },
-                    { dim: 'yellow', dimName: '边界层',   text: '给出一个让"恢复票价"结论反转的条件变体。' }
-                ]
-            }
-        };
+        // ============ F-7: 材料数据已抽取到共享文件 materials.js ============
+        const MATERIALS = window.OXBRIDGE_MATERIALS;
 
         // ============ OX-9: 阶梯 Hint 文案库（按维度） ============
         // Hint 1 = 思考切入角；Hint 2 = 限定变量
@@ -822,13 +799,9 @@
             renderHintEngineData();
         });
 
-        // 跳转到 Devil's Advocate，携带转写文本
+        // 跳转到 Devil's Advocate，携带转写文本（F-9: 单一来源，仅通过 URL 参数传递）
         document.getElementById('toDevilBtn').addEventListener('click', () => {
             const text = state.transcript || '';
-            // 存入 localStorage 供 Devil's Advocate 页读取
-            try {
-                localStorage.setItem('oxbridge_hints_transcript', text);
-            } catch (e) {}
             const url = 'devils-advocate.html?from=hints' + (text ? '&transcript=' + encodeURIComponent(text) : '');
             window.location.href = url;
         });

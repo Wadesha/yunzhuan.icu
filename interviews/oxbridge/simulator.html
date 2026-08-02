@@ -163,6 +163,15 @@
             font-size: 0.66rem; font-weight: 600; text-transform: uppercase;
             letter-spacing: 0.04em;
         }
+        /* F-3: 标注删除按钮 */
+        .anno-list li { position: relative; }
+        .li-del {
+            position: absolute; top: 4px; right: 6px;
+            background: none; border: none; cursor: pointer;
+            font-size: 1.1rem; line-height: 1; color: #aaa;
+            padding: 2px 4px; border-radius: 3px;
+        }
+        .li-del:hover { color: #c62828; background: #ffebee; }
         .anno-list .empty {
             color: #aaa; text-align: center; padding: 16px 0; font-size: 0.78rem;
             cursor: default; border: none; background: transparent;
@@ -253,6 +262,7 @@
     <link rel="stylesheet" href="../../css/theme.css">
     <meta name="theme-color" content="#667eea">
     <script src="../../js/theme.js"></script>
+    <script src="materials.js"></script>
 </head>
 <body>
     <a href="../oxbridge-interview.html" class="back-link">&larr; 返回牛剑面试</a>
@@ -280,6 +290,10 @@
                 <option value="law-firefighter">法学 · 消防员两难</option>
                 <option value="history-silences">历史 · 档案的沉默</option>
                 <option value="ppe-bus-fare">PPE · 0.5 英镑公交票</option>
+                <option value="math-ladder">数学 · 梯子轨迹（官方真题）</option>
+                <option value="math-tiling">数学 · 铺砖问题（官方真题）</option>
+                <option value="eng-ruler">工程 · 尺子与手指（官方真题）</option>
+                <option value="bio-ladybird">生物 · 瓢虫与草莓（官方真题）</option>
             </select>
             <div class="timer" id="timer">15:00</div>
             <div class="timer-controls">
@@ -295,16 +309,16 @@
             <div class="anno-toolbar">
                 <span class="tb-label">选中文本后点击维度：</span>
                 <button class="color-btn" data-color="blue" disabled>
-                    <span class="color-dot dot-blue"></span>文本层
+                    <span class="color-dot dot-blue"></span><span id="lbl-blue">文本层</span>
                 </button>
                 <button class="color-btn" data-color="green" disabled>
-                    <span class="color-dot dot-green"></span>结构层
+                    <span class="color-dot dot-green"></span><span id="lbl-green">结构层</span>
                 </button>
                 <button class="color-btn" data-color="red" disabled>
-                    <span class="color-dot dot-red"></span>冲突层
+                    <span class="color-dot dot-red"></span><span id="lbl-red">冲突层</span>
                 </button>
                 <button class="color-btn" data-color="yellow" disabled>
-                    <span class="color-dot dot-yellow"></span>边界层
+                    <span class="color-dot dot-yellow"></span><span id="lbl-yellow">边界层</span>
                 </button>
                 <span class="hint-text" id="selHint">先选中材料中的一段文字</span>
             </div>
@@ -314,6 +328,7 @@
                 <h2 id="materialTitle">预读材料 · 消防员两难</h2>
                 <div class="mat-sub">Pre-interview Reading · 请在 15 分钟内阅读并标注关键点</div>
                 <div class="reading-text" id="readingText"></div>
+                <div id="officialComment" style="display:none;margin-top:14px;padding:12px 14px;background:#e8f5e9;border-left:3px solid #2e7d32;border-radius:0 6px 6px 0;font-size:0.82rem;color:#1b5e20;line-height:1.6;"></div>
             </div>
 
             <!-- 问题区（OX-5 启用） -->
@@ -381,59 +396,8 @@
         };
 
         // ============ OX-7: 预读材料数据 ============
-        const MATERIALS = {
-            'law-firefighter': {
-                tag: 'LAW', meta: 'Oxford · Balliol College · 2025 Winter',
-                title: '预读材料 · 消防员两难',
-                framework: '四维度',
-                html: '<p>以下材料将在倒计时结束后进入提问环节。请在 15 分钟内用四色标注工具，抓取材料的"核心假设 / 逻辑漏洞 / 潜在争议点"。</p>' +
-                    '<div class="law">法条："任何人故意剥夺他人生命者，处谋杀罪。"</div>' +
-                    '<div class="fact">事实：消防员 A 在火场中只能救一人——救 B 则 C 死，救 C 则 B 死。A 选择救 B。C 的家属控告 A 谋杀。</div>' +
-                    '<p>本案的核心争议在于：A 的"选择"是否构成法条所称的"故意剥夺他人生命"。一种观点认为，A 的行为本质上是"救援"，C 的死亡是火场本身造成的，A 只是未能阻止而非主动造成。另一种观点则强调，A 在两个必然死亡的人之间做出了选择，这一选择直接决定了谁能存活——若 A 选择救 C，则 B 死亡。因此 A 的"选择"与 C 的死亡之间存在因果联系。</p>' +
-                    '<p>进一步的问题是：消防员作为负有职务义务的救援人员，其"不作为"是否等同于"作为"？如果普通路人在同样情境下选择不救人，我们通常不会追究其谋杀责任；但消防员的职务义务是否改变了这一判断？这涉及行为责任与结果责任的区分，以及立法目的究竟是为了惩罚"造成死亡的行为"，还是为了惩罚"主动杀害的行为"。</p>' +
-                    '<p>此外，若改变某些事实条件，结论是否会发生反转？例如：若 A 是普通路人（无救援义务），结论是否不同？若 B 是 A 的孩子，A 的选择是否会被视为正当的偏袒而非谋杀故意？这些边界情形将检验我们对"故意"与"剥夺生命"定义的稳定性。</p>',
-                questions: [
-                    { dim: 'blue',   dimName: '文本层',   text: '"故意"在该场景中应如何界定？A 的心理状态是什么？' },
-                    { dim: 'green',  dimName: '结构层',   text: '不作为能否构成"剥夺生命"？区分标准是什么？' },
-                    { dim: 'red',    dimName: '冲突层',   text: '本案中"行为责任"与"结果责任"的冲突如何化解？立法目的应优先哪一方？' },
-                    { dim: 'yellow', dimName: '边界层',   text: '给出一个让结论反转的事实变体（如改变 A 的身份或与 B/C 的关系）。' }
-                ]
-            },
-            'history-silences': {
-                tag: 'HISTORY', meta: 'Cambridge · Trinity College · 2025 Winter',
-                title: '预读材料 · 档案的沉默',
-                framework: '四维度',
-                html: '<p>以下是一段关于"被征服文明史料"的节选。请在 15 分钟内标注其论证结构与潜在盲点。</p>' +
-                    '<div class="law">俗语："历史是由胜利者书写的。"</div>' +
-                    '<div class="fact">情境：罗马在第三次布匿战争后彻底摧毁迦太基，城池被夷平，文献大多散佚。后世对迦太基的了解，几乎全部依赖罗马作家（如波利比乌斯、李维）的记述。</div>' +
-                    '<p>一种常见的观点认为：既然文字记录被胜利者控制，我们就无法真正了解迦太基这样的"被毁灭文明"——罗马作家会按照自己的立场塑造叙事，将被征服者描绘为野蛮、衰败或罪有应得。</p>' +
-                    '<p>然而，这种"全然不可知"的结论可能过于草率。首先，史料来源并非只有文字：考古遗迹、物质文化（陶器形制、神庙布局）、环境数据（花粉分析、土壤样本）难以被单方面伪造，它们能提供与文字记录相互印证或相互矛盾的证据。其次，即便只有胜利者写的记录，这些记录为了夸大自己的胜利，也会无意间留存关于对方社会组织、战术、人口规模的细节——这被称为"反向解读"（reading against the grain）。</p>' +
-                    '<p>更深层的问题是：胜利者不仅书写，还选择性销毁。档案的"沉默"本身并非偶然的空白，而是权力关系的证据。当我们追问"为什么这些记录消失了"，追问本身就已经在揭示一段被压制的权力史。那么，历史学的任务究竟是"还原真相"，还是"持续追问记录如何被生产、被抹除"？</p>',
-                questions: [
-                    { dim: 'blue',   dimName: '文本层',   text: '"胜利者书写历史"这句话的措辞如何界定？"书写"是单纯记录，还是包含塑造与删改？' },
-                    { dim: 'green',  dimName: '结构层',   text: '"全然不可知"结论的论证链条是什么？哪个环节最薄弱？' },
-                    { dim: 'red',    dimName: '冲突层',   text: '"还原真相"与"追问记录如何被生产"两种史学目标存在什么张力？' },
-                    { dim: 'yellow', dimName: '边界层',   text: '给出一个反例：在什么情境下，被征服文明的史料反而比征服者的更完整？' }
-                ]
-            },
-            'ppe-bus-fare': {
-                tag: 'PPE', meta: 'Oxford · Balliol College · 2025 Winter',
-                title: '预读材料 · 0.5 英镑公交票',
-                framework: '四维度',
-                html: '<p>以下是一段政策困境材料。请在 15 分钟内标注其中的价值冲突与潜在权衡。</p>' +
-                    '<div class="law">政策：某市政府为减少碳排放，将所有公共汽车改为免费乘坐。</div>' +
-                    '<div class="fact">结果：公车极度拥挤、体验恶劣，通勤效率下降。政府考虑恢复收取极低票价（0.5 英镑）以过滤无目的乘车。</div>' +
-                    '<p>支持恢复票价的观点认为：收取微量票价可以过滤掉无目的乘车的流动人群，缓解拥挤，同时为公交系统提供运营维护资金。从效率角度看，0.5 英镑的边际成本足以筛除大量非必要出行，而真正有通勤需求的人几乎不会因此放弃乘车。</p>' +
-                    '<p>然而，反对者指出一个关键数据：这 0.5 英镑的票价让低收入群体的搭乘率下降了 30%，而对中产阶级完全没有影响。结果是低收入者不得不花更多时间步行，而碳排放并没有明显降低——因为被挤出公交的人并未转向私家车（他们本就没有车），只是减少了出行。这意味着政策在"公平"维度上失败了，却并未在"效率"或"环保"维度上获益。</p>' +
-                    '<p>进一步的问题是：如果政府的真实目标是减排而非创收，是否存在比"一刀切票价"更好的工具？例如针对低收入者的凭证补贴、高峰期阶梯定价、或对短途与长途差异化收费。这些替代方案各自引入了什么新的权衡？当我们说一个政策"有效"时，我们究竟在衡量哪个维度的有效性？</p>',
-                questions: [
-                    { dim: 'blue',   dimName: '文本层',   text: '"有效"一词在该政策语境中应如何界定？效率、公平、环保哪个优先？' },
-                    { dim: 'green',  dimName: '结构层',   text: '支持票价恢复的论证链条是什么？低收入数据如何动摇它？' },
-                    { dim: 'red',    dimName: '冲突层',   text: '本案中"效率"与"公平"的冲突如何化解？是否存在帕累托改进？' },
-                    { dim: 'yellow', dimName: '边界层',   text: '给出一个让"恢复票价"结论反转的条件变体（如改变低收入者出行替代方案）。' }
-                ]
-            }
-        };
+        // F-7: 材料数据已抽取到共享文件 materials.js
+        const MATERIALS = window.OXBRIDGE_MATERIALS;
 
         let currentMaterialId = 'law-firefighter';
 
@@ -466,29 +430,54 @@
         const colorBtns = document.querySelectorAll('.color-btn');
 
         // ============ OX-7: 材料切换 ============
+        // F-8: 维度标签随框架切换
+        const FRAMEWORK_LABELS = {
+            '四维度': ['文本层', '结构层', '冲突层', '边界层'],
+            '约束-反例': ['约束识别', '推导路径', '反例收紧', '降级重构']
+        };
         function loadMaterial(id) {
+            // F-4: 切换前保存当前材料的标注（按 materialId 分组）
+            saveAnnotations();
             currentMaterialId = id;
             const m = MATERIALS[id];
             readingText.innerHTML = m.html;
             materialTitle.textContent = m.title;
             metaTag.textContent = m.tag;
             metaText.textContent = m.meta;
-            // 切换材料时重置标注与状态
-            state.annotations = [];
-            state.remaining = state.totalSeconds;
-            state.finished = false;
+            // F-8: 维度按钮标签随框架切换
+            const labels = FRAMEWORK_LABELS[m.framework] || FRAMEWORK_LABELS['四维度'];
+            document.getElementById('lbl-blue').textContent = labels[0];
+            document.getElementById('lbl-green').textContent = labels[1];
+            document.getElementById('lbl-red').textContent = labels[2];
+            document.getElementById('lbl-yellow').textContent = labels[3];
+            // F-8: 官方真题展示导师点评
+            const commentEl = document.getElementById('officialComment');
+            if (commentEl) {
+                commentEl.style.display = m.officialComment ? 'block' : 'none';
+                if (m.officialComment) commentEl.textContent = '🎓 导师点评：' + m.officialComment;
+            }
+            // F-4: 加载目标材料已保存的标注（而非清空）
+            const saved = loadAnnotations(id);
+            if (saved && saved.annotations) {
+                state.annotations = saved.annotations;
+                state.remaining = saved.remaining != null ? saved.remaining : state.totalSeconds;
+                state.finished = saved.finished || false;
+            } else {
+                state.annotations = [];
+                state.remaining = state.totalSeconds;
+                state.finished = false;
+            }
             state.running = false;
             clearInterval(state.timerId);
             startBtn.textContent = '开始倒计时';
             startBtn.disabled = false;
             resetBtn.disabled = true;
-            colorBtns.forEach(b => b.disabled = true);
+            colorBtns.forEach(b => b.disabled = !state.finished);
             materialCard.classList.remove('collapsed');
             questionsCard.classList.remove('show');
             renderAnnotationList();
             renderDimCoverage();
             updateTimerDisplay();
-            saveAnnotations();
         }
 
         materialSelect.addEventListener('change', (e) => {
@@ -672,13 +661,41 @@
                 annoList.innerHTML = '<li class="empty">尚无标注<br><span style="font-size:0.7rem;">选中材料文字 → 点击维度颜色</span></li>';
                 return;
             }
+            // F-8: 维度名称跟随材料框架
+            const m = MATERIALS[currentMaterialId];
+            const labels = FRAMEWORK_LABELS[(m && m.framework) || '四维度'];
+            const dimNames = { blue: labels[0], green: labels[1], red: labels[2], yellow: labels[3] };
             annoList.innerHTML = state.annotations.map(a => {
-                const dim = DIMENSIONS[a.color];
                 return '<li class="c-' + a.color + '" data-id="' + a.id + '">' +
                     '<span class="li-text">' + escapeHtml(a.text) + '</span>' +
-                    '<span class="li-dim" style="color:' + colorHex(a.color) + '">' + dim.name + ' · ' + dim.en + '</span>' +
+                    '<span class="li-dim" style="color:' + colorHex(a.color) + '">' + dimNames[a.color] + '</span>' +
+                    '<button class="li-del" data-del="' + a.id + '" title="删除此标注">&times;</button>' +
                 '</li>';
             }).join('');
+            // F-3: 绑定删除按钮
+            annoList.querySelectorAll('.li-del').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    deleteAnnotation(btn.dataset.del);
+                });
+            });
+        }
+
+        // F-3: 删除单条标注（移除 span + 从 state 移除）
+        function deleteAnnotation(annoId) {
+            // 从 state 移除
+            state.annotations = state.annotations.filter(a => a.id !== annoId);
+            // 移除对应 DOM span（unwrap）
+            const span = readingText.querySelector('.anno[data-anno-id="' + annoId + '"]');
+            if (span) {
+                const parent = span.parentNode;
+                while (span.firstChild) parent.insertBefore(span.firstChild, span);
+                parent.removeChild(span);
+                parent.normalize();
+            }
+            renderAnnotationList();
+            renderDimCoverage();
+            saveAnnotations();
         }
 
         function highlightInList(id) {
@@ -740,10 +757,9 @@
                 questionsCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }, 300);
 
-            // OX-6: 输出 Hint 引擎数据接口（供 Phase 3 Think Aloud + Hints 消费）
+            // OX-6: Hint 引擎数据已通过 localStorage 持久化（F-9: 移除冗余全局变量）
             const hintData = getMissingDimensions();
             console.log('[Hint Engine] 漏标维度检测：', hintData);
-            window.__oxbridgeHintData = hintData;  // 全局暴露，供后续模块读取
         }
 
         // 导出按钮
@@ -762,27 +778,33 @@
         // ============ OX-6: 数据持久化 + Hint 引擎数据接口 ============
         const STORAGE_KEY = 'oxbridge_sim_annotations';
 
-        // 标注数据结构化存储
+        // F-4: 按 materialId 分组存储（切换材料不丢标注）
+        // 存储结构：{ [materialId]: { annotations, remaining, finished, ts }, ... , _last: materialId }
         function saveAnnotations() {
-            const payload = {
-                materialId: state.currentMaterialId,
-                annotations: state.annotations,
-                remaining: state.remaining,
-                finished: state.finished,
-                ts: Date.now()
-            };
+            const mid = state.currentMaterialId;
             try {
-                localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
+                const all = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+                all[mid] = {
+                    annotations: state.annotations,
+                    remaining: state.remaining,
+                    finished: state.finished,
+                    ts: Date.now()
+                };
+                all._last = mid;  // 记录上次使用的材料
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(all));
             } catch (e) {
                 console.warn('存储失败', e);
             }
         }
 
-        function loadAnnotations() {
+        // F-4: 加载指定材料的标注（不传则加载上次 _last）
+        function loadAnnotations(mid) {
             try {
-                const raw = localStorage.getItem(STORAGE_KEY);
-                if (!raw) return null;
-                return JSON.parse(raw);
+                const all = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+                if (mid) return all[mid] || null;
+                const last = all._last;
+                if (!last) return null;
+                return all[last] || null;
             } catch (e) {
                 return null;
             }
@@ -834,41 +856,30 @@
         }
 
         // ============ 初始化 ============
-        // F-2: 恢复上次未完成的会话
-        const saved = loadAnnotations();
-        if (saved && saved.materialId && MATERIALS[saved.materialId]) {
-            // 恢复到上次的材料
-            materialSelect.value = saved.materialId;
-            currentMaterialId = saved.materialId;
-            const m = MATERIALS[saved.materialId];
-            readingText.innerHTML = m.html;
-            materialTitle.textContent = m.title;
-            metaTag.textContent = m.tag;
-            metaText.textContent = m.meta;
-            // 恢复标注数据（DOM 高亮无法精确重建，但数据/列表/维度覆盖可恢复）
-            state.annotations = saved.annotations || [];
-            state.remaining = saved.remaining != null ? saved.remaining : state.totalSeconds;
-            state.finished = saved.finished || false;
-            if (state.finished) {
-                // 倒计时已结束的状态：显示问题区
-                materialCard.classList.add('collapsed');
-                questionsCard.classList.add('show');
-                startBtn.disabled = true;
-                resetBtn.disabled = false;
+        // F-2/F-4: 恢复上次未完成的会话（loadMaterial 已内置标注加载逻辑）
+        try {
+            const all = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+            const lastId = all._last;
+            if (lastId && MATERIALS[lastId]) {
+                materialSelect.value = lastId;
+                loadMaterial(lastId);  // loadMaterial 内部会 loadAnnotations(lastId) 并恢复状态
+                const savedCount = (all[lastId] && all[lastId].annotations) ? all[lastId].annotations.length : 0;
+                if (savedCount > 0) {
+                    selHint.textContent = '已恢复上次未完成的标注（' + savedCount + ' 条）';
+                    selHint.style.color = '#2e7d32';
+                }
+                // 若倒计时已结束，恢复问题区显示
+                if (all[lastId] && all[lastId].finished) {
+                    materialCard.classList.add('collapsed');
+                    questionsCard.classList.add('show');
+                    startBtn.disabled = true;
+                    resetBtn.disabled = false;
+                    renderQuestions();
+                }
             } else {
-                state.running = false;
-                startBtn.textContent = '开始倒计时';
-                startBtn.disabled = false;
-                resetBtn.disabled = true;
+                loadMaterial('law-firefighter');
             }
-            colorBtns.forEach(b => b.disabled = !state.finished);
-            renderAnnotationList();
-            renderDimCoverage();
-            updateTimerDisplay();
-            // 提示用户已恢复
-            selHint.textContent = '已恢复上次未完成的标注（' + state.annotations.length + ' 条）';
-            selHint.style.color = '#2e7d32';
-        } else {
+        } catch (e) {
             loadMaterial('law-firefighter');
         }
     })();

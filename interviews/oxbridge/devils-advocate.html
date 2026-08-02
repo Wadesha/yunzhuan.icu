@@ -495,8 +495,7 @@
         const historyCard = document.getElementById('historyCard');
         const roundHistory = document.getElementById('roundHistory');
 
-        // ============ 从 Think Aloud 页读取转写 ============
-        // 通过 URL 参数或 localStorage 传递
+        // ============ 从 Think Aloud 页读取转写（F-9: 单一来源，仅 URL 参数） ============
         function loadFromHints() {
             const params = new URLSearchParams(window.location.search);
             const fromHints = params.get('from') === 'hints';
@@ -504,15 +503,6 @@
             if (transcript) {
                 answerInput.value = decodeURIComponent(transcript);
                 updateAnswer();
-            } else {
-                // 尝试从 localStorage 读（与 hints 页共享，若实现）
-                try {
-                    const raw = localStorage.getItem('oxbridge_hints_transcript');
-                    if (raw) {
-                        answerInput.value = raw;
-                        updateAnswer();
-                    }
-                } catch (e) {}
             }
         }
 
