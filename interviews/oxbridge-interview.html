@@ -69,6 +69,25 @@
             font-size: 0.82rem;
             line-height: 1.6;
         }
+        /* 学科 tab 切换 */
+        .subject-tabs {
+            display: flex; flex-wrap: wrap; gap: 6px;
+            margin-bottom: 12px; padding-bottom: 8px;
+            border-bottom: 1px solid #e8ecff;
+        }
+        .subject-tabs .tab-btn {
+            padding: 5px 12px; border: 1px solid #ddd; background: white;
+            border-radius: 16px; font-size: 0.78rem; cursor: pointer;
+            color: #666; transition: all 0.15s; font-family: inherit;
+        }
+        .subject-tabs .tab-btn.active {
+            background: #667eea; color: white; border-color: #667eea;
+        }
+        .subject-tabs .tab-btn:hover:not(.active) {
+            border-color: #667eea; color: #667eea;
+        }
+        .sample-q { display: none; }
+        .sample-q.active { display: block; }
         /* 模块架构导航卡片 */
         .module-grid {
             display: grid;
@@ -283,21 +302,122 @@
     <p class="en-name">牛津剑桥面试</p>
     <p class="code-line">Tutorial-style · Think Aloud · Pre-reading · Devil's Advocate</p>
 
+    <!-- ============ Introductory：面试是什么 ============ -->
     <div class="section">
         <h2>What is an Oxbridge Interview? <span class="en">面试本质</span></h2>
-        <p class="cn-hint">牛剑面试<b>不是</b>测试你知道多少，也<b>不是</b>考核简历或口语流畅度——它在模拟未来的学院辅导课（Tutorial / Supervision）。导师关注的是你的<b>可教性（Teachability）</b>：面对从未见过的难题时，在引导下如何思考。</p>
+        <p>An Oxbridge interview is <b>not</b> a test of how much you know, nor a check on your CV or spoken fluency. It is a simulation of the tutorial / supervision you will experience as a student. Tutors are looking for <b>teachability</b>: how you think when guided through an unfamiliar problem.</p>
         <div class="tip-box">
-            <strong>核心本质：</strong><br>
-            · 导师不在找"正确答案"，而在找"正确的思考方式"<br>
-            · 给你全新的概念/难题，看你在引导下如何拆解<br>
-            · 考察学术潜力，而非已背下的知识量<br>
-            · 形式就是未来导师制课堂的预演
+            <strong>Core essence:</strong><br>
+            · Tutors are not looking for the "right answer" — they are looking for the "right way of thinking"<br>
+            · You will be given new concepts or hard problems and watched as you break them down with guidance<br>
+            · It assesses academic potential, not memorised knowledge<br>
+            · The format is a preview of future tutorial-style teaching
         </div>
         <div class="warning-box">
-            <strong>⚠️ 三个致命误区：</strong><br>
-            · <b>背诵痕迹过重</b>——准备了标准套话，一遇导师追问/反驳就秒卡壳<br>
-            · <b>"害怕说错"导致沉默</b>——不知道把思考过程<b>出声说出来（Think Aloud）</b>才是得分关键<br>
-            · <b>不理解学院风格差异</b>——不同学院（Balliol / Trinity / St John's）出题侧重不同，缺切片对比
+            <strong>⚠️ Three fatal misconceptions:</strong><br>
+            · <b>Over-rehearsed answers</b> — prepared scripts collapse the moment a tutor follows up or pushes back<br>
+            · <b>"Afraid to be wrong" → silence</b> — not thinking aloud kills the interview; tutors need to hear your reasoning<br>
+            · <b>Ignoring college style</b> — Balliol / Trinity / St John's weigh different things; failing to compare leaves you unprepared
+        </div>
+    </div>
+
+    <!-- ============ Introductory：面试结构 ============ -->
+    <div class="section">
+        <h2>Interview Structure <span class="en">面试结构</span></h2>
+        <ul style="list-style:none;">
+            <li style="padding:6px 0;border-bottom:1px solid #f0f0f0;">
+                <strong>Number:</strong> Usually 2–3 interviews, each 20–45 minutes
+            </li>
+            <li style="padding:6px 0;border-bottom:1px solid #f0f0f0;">
+                <strong>Interviewers:</strong> Usually 2 (one leads, one notes / assists)
+            </li>
+            <li style="padding:6px 0;border-bottom:1px solid #f0f0f0;">
+                <strong>Content:</strong> Almost entirely academic, focused on the subject you applied for
+            </li>
+            <li style="padding:6px 0;border-bottom:1px solid #f0f0f0;">
+                <strong>Pre-reading:</strong> 15–30 minutes before the interview you receive unseen material (a historical source, a law problem, an economics dataset, a philosophy paradox) to digest and discuss
+            </li>
+            <li style="padding:6px 0;border-bottom:1px solid #f0f0f0;">
+                <strong>Format:</strong> Most international applicants are interviewed online via Microsoft Teams or a college-specific system
+            </li>
+            <li style="padding:6px 0;">
+                <strong>Dialogue mode:</strong> "Brick-taking and brick-dismantling" — the tutor poses an open question, then <b>immediately follows up with a counter-example or a tweaked assumption</b> based on your answer
+            </li>
+        </ul>
+    </div>
+
+    <!-- ============ Introductory：核心技巧 ============ -->
+    <div class="section">
+        <h2>Key Techniques <span class="en">核心技巧</span></h2>
+        <div class="tip-box">
+            <strong>💡 <span class="tag tag-technique">Think Aloud</span></strong><br>
+            The single most important skill. Narrate your reasoning as you go. Tutors want to hear how you think, even before you reach an answer. Silence is worse than a wrong guess.
+        </div>
+        <div class="tip-box" style="margin-top:8px;background:#e3f2fd;border-left-color:#1565c0;color:#0d47a1;">
+            <strong>💡 <span class="tag tag-technique">Take Your Time</span></strong><br>
+            You don't have to answer instantly. Pausing for a few seconds is fine. Saying "Can I have a moment to think?" is completely acceptable.
+        </div>
+        <div class="tip-box" style="margin-top:8px;background:#f3e5f5;border-left-color:#7b1fa2;color:#4a148c;">
+            <strong>💡 <span class="tag tag-technique">Ask Clarifying Questions</span></strong><br>
+            If the question is ambiguous, ask. "When you say X, do you mean Y?" demonstrates critical thinking, not weakness.
+        </div>
+        <div class="tip-box" style="margin-top:8px;background:#fff3e0;border-left-color:#ef6c00;color:#e65100;">
+            <strong>💡 <span class="tag tag-technique">Be Ready to Be Challenged</span></strong><br>
+            Tutors will question you, push back, hand you new information. This is not you being wrong — it is a normal part of the interview. They want to see you <b>acknowledge limits and re-reason under the new condition</b>, not defend a fixed conclusion.
+        </div>
+        <div class="warning-box" style="margin-top:10px;">
+            <strong>⚠️ Common pitfalls:</strong><br>
+            · Thinking you must answer everything — no, being stuck is normal<br>
+            · Being afraid to say "I don't know" — you can, but explain how you would approach it<br>
+            · Panicking when challenged — that reaction is exactly what they are observing<br>
+            · Reciting prepared answers — tutors can tell, and one follow-up breaks them
+        </div>
+    </div>
+
+    <!-- ============ Introductory：准备策略 ============ -->
+    <div class="section">
+        <h2>Preparation Strategy <span class="en">准备策略</span></h2>
+        <ul style="list-style:none;">
+            <li style="padding:6px 0;border-bottom:1px solid #f0f0f0;">
+                <strong>1. Master your A-Level / IB syllabus</strong>
+                <div style="color:#666;font-size:0.82rem;margin-top:4px;">Make sure you can explain the "why" behind every concept, not just the result.</div>
+            </li>
+            <li style="padding:6px 0;border-bottom:1px solid #f0f0f0;">
+                <strong>2. Read beyond the syllabus</strong>
+                <div style="color:#666;font-size:0.82rem;margin-top:4px;">Books, articles, podcasts related to your subject. Anything in your Personal Statement must be deeply understood.</div>
+            </li>
+            <li style="padding:6px 0;border-bottom:1px solid #f0f0f0;">
+                <strong>3. Do mock interviews</strong>
+                <div style="color:#666;font-size:0.82rem;margin-top:4px;">With teachers, seniors, parents. At least 3–5 mocks, focused on "how to respond after being pushed back".</div>
+            </li>
+            <li style="padding:6px 0;border-bottom:1px solid #f0f0f0;">
+                <strong>4. Practise past questions + follow-up chains</strong>
+                <div style="color:#666;font-size:0.82rem;margin-top:4px;">Oxford & Cambridge publish sample questions. Don't just practise answering — practise what to say <i>after</i> a follow-up. Use the chain format in the worked example below.</div>
+            </li>
+            <li style="padding:6px 0;border-bottom:1px solid #f0f0f0;">
+                <strong>5. Know your Personal Statement cold</strong>
+                <div style="color:#666;font-size:0.82rem;margin-top:4px;">Every book or project you mentioned can be probed.</div>
+            </li>
+            <li style="padding:6px 0;">
+                <strong>6. Understand college and tutor style</strong>
+                <div style="color:#666;font-size:0.82rem;margin-top:4px;">E.g. Oxford Balliol leans toward philosophical inquiry; Cambridge Trinity toward logical derivation.</div>
+            </li>
+        </ul>
+    </div>
+
+    <!-- ============ Introductory：卡壳了怎么办 ============ -->
+    <div class="section">
+        <h2>What If You Get Stuck? <span class="en">卡壳了怎么办？</span></h2>
+        <div class="tip-box">
+            <strong>💡 Stuck-response phrases (a scaffold — it will be removed once you internalise them):</strong><br>
+            · "That's an interesting question. Let me think about that for a moment."<br>
+            · "I'm not sure about the exact answer, but here's how I'd approach it..."<br>
+            · "If I understand correctly, you're asking about...?" (confirm the question first)<br>
+            · "Would it be something like...?" (offer a hypothesis, then wait for feedback)<br>
+            · When pointed to a new direction: "Oh, I see what you mean. So that changes things because..."
+        </div>
+        <div class="warning-box" style="margin-top:8px;">
+            <strong>⚠️ The double-edged sword of phrase cards:</strong> These transitions are scaffolds to help you <i>start speaking</i>, <b>not templates to recite</b>. If you repeat the same line every time, tutors notice instantly. The goal is to habituate collaborative inquiry with the tutor, not to deliver conclusions in isolation.
         </div>
     </div>
 
@@ -595,172 +715,6 @@
         </div>
     </div>
 
-    <div class="section">
-        <h2>Interview Structure <span class="en">面试结构</span></h2>
-        <ul style="list-style:none;">
-            <li style="padding:6px 0;border-bottom:1px solid #f0f0f0;">
-                <strong>数量：</strong>通常 2-3 场面试，每场 20-45 分钟
-            </li>
-            <li style="padding:6px 0;border-bottom:1px solid #f0f0f0;">
-                <strong>面试官：</strong>通常 2 位面试官（1 位主导 + 1 位记录/辅助）
-            </li>
-            <li style="padding:6px 0;border-bottom:1px solid #f0f0f0;">
-                <strong>内容：</strong>几乎全是学术问题，围绕你申请的专业
-            </li>
-            <li style="padding:6px 0;border-bottom:1px solid #f0f0f0;">
-                <strong>预读材料：</strong>面试前 15-30 分钟进在线等待室，收到从未见过的材料（历史文献 / 法学判例摘要 / 经济数据图表 / 哲学悖论），短时间内消化后面试讨论
-            </li>
-            <li style="padding:6px 0;border-bottom:1px solid #f0f0f0;">
-                <strong>形式：</strong>近几年绝大多数国际生通过 Microsoft Teams 或学院指定在线系统进行（线上为主）
-            </li>
-            <li style="padding:6px 0;">
-                <strong>对话模式：</strong>"接砖与拆砖"——导师抛开放性问题，根据你的回答<b>立刻追加反例或修改假设</b>，观察应变
-            </li>
-        </ul>
-    </div>
-
-    <div class="section">
-        <h2>Common Subjects & Sample Questions <span class="en">各学科样题</span></h2>
-
-        <div class="sample-q">
-            <span class="tag tag-subject">Maths</span>
-            <div class="q">How would you prove that the square root of 2 is irrational?</div>
-            <div class="hint">思路：反证法（proof by contradiction）。假设 √2 = a/b（最简分数），推出矛盾。关键是展示你的推理过程，而不只是答案。</div>
-        </div>
-
-        <div class="sample-q">
-            <span class="tag tag-subject">Physics</span>
-            <div class="q">If you could drill a hole straight through the Earth from one side to the other, and drop a ball down it, what would happen?</div>
-            <div class="hint">思路：简谐运动（SHM）。球会在两端之间来回振荡。需要考虑引力随半径变化的关系。不用怕不会，试着一步步推。</div>
-        </div>
-
-        <div class="sample-q">
-            <span class="tag tag-subject">Economics</span>
-            <div class="q">Why is poverty difficult to measure?</div>
-            <div class="hint">思路：绝对贫困 vs 相对贫困、购买力平价、不同国家生活成本、收入 vs 多维贫困（教育、健康、机会）。展示多角度思考。</div>
-        </div>
-
-        <div class="sample-q">
-            <span class="tag tag-subject">Medicine</span>
-            <div class="q">Why do we have red blood cells?</div>
-            <div class="hint">思路：运输氧气和二氧化碳。血红蛋白的作用。为什么是红细胞而不是把血红蛋白直接溶解在血浆里？表面积与体积比。</div>
-        </div>
-
-        <div class="sample-q">
-            <span class="tag tag-subject">PPE / Philosophy</span>
-            <div class="q">Should we legalize all drugs?</div>
-            <div class="hint">思路：从多个角度分析——个人自由、公共健康、犯罪率、经济成本、社会公平。不是要一个答案，是看你论证的结构和逻辑。</div>
-        </div>
-
-        <div class="sample-q">
-            <span class="tag tag-subject">Engineering</span>
-            <div class="q">How would you design a gravity dam for holding back water?</div>
-            <div class="hint">思路：受力分析、材料、形状为什么是三角形/梯形？底部宽上窄？考虑水压分布、抗倾覆、抗滑移。一步步推导。</div>
-        </div>
-
-        <div class="sample-q">
-            <span class="tag tag-subject">Computer Science</span>
-            <div class="q">How do pirates divide a cake between n people fairly?</div>
-            <div class="hint">思路：经典的 fair division 问题。"I cut you choose" 的扩展到 n 个人。算法思维、公平性定义、博弈论思路。</div>
-        </div>
-
-        <div class="sample-q">
-            <span class="tag tag-subject">English Literature</span>
-            <div class="q">给你一首诗/一段文字，让你分析某个角色或主题。</div>
-            <div class="hint">思路：仔细读文本，找证据，分析语言、结构、主题。不是要"正确"解读，是看你如何从文本出发的论证能力。</div>
-        </div>
-
-        <div class="sample-q">
-            <span class="tag tag-subject">History</span>
-            <div class="q">"历史是由胜利者书写的。" 如果这是真的，我们还有可能了解像迦太基或阿兹特克这样被彻底毁灭的文明吗？</div>
-            <div class="hint">思路：<b>不要</b>花时间讲述阿兹特克被征服的历史细节（那是背诵）。突破口：① 史料来源多元性——考古遗迹、物质文化、环境数据难以被单方面伪造；② <b>反向解读</b>——胜利者的记录为夸大胜绩，会无意间留存对方社会组织细节；③ <b>档案的沉默</b>——胜利者不仅书写，还选择性销毁，沉默本身也是权力关系的证据。</div>
-        </div>
-
-        <div class="sample-q">
-            <span class="tag tag-subject">Law</span>
-            <div class="q">如果公园门口写着"禁止任何车辆（Vehicles）进入"，现在社区在公园中央放了一辆二战退役坦克作为纪念碑，这违反规定吗？</div>
-            <div class="hint">思路：这是 Fuller 1949 年经典法哲学题。核心是<b>立法目的论（purposivism）</b>——这条规矩到底是为了防止什么？不要只盯"坦克是不是车辆"的字面（textualism）。真正能逼出深度的追问是："如果这辆坦克是纳粹缴获的战利品，放在犹太社区公园门口呢？"——这把"立法目的"从"防污染"逼到"防精神伤害"。</div>
-        </div>
-
-        <div class="sample-q">
-            <span class="tag tag-subject">Natural Sciences / Biology</span>
-            <div class="q">为什么陆地上的大型动物进化出了腿，却没有进化出像车轮一样的轮状器官来移动？</div>
-            <div class="hint">思路：① <b>组织供给</b>——旋转轴承无法保持血管与神经的持续连接（除非是无生命的角质层）；② <b>地形适应</b>——轮子在崎岖/泥泞地带通过性极差，而四肢结构适应性强。<br>⚠️ 注意：不要把细菌鞭毛当"轮子反例"——它是<b>螺旋桨式（propeller）推进</b>，靠旋转产生推力但本身并不滚动前进，混为一谈会暴露概念错误。</div>
-        </div>
-    </div>
-
-    <div class="section">
-        <h2>Key Techniques <span class="en">核心技巧</span></h2>
-        <div class="tip-box">
-            <strong>💡 <span class="tag tag-technique">Think Aloud</span> 边想边说</strong><br>
-            最重要的技巧！把你的思考过程说出来。面试官想知道你是怎么想的，哪怕还没到答案。沉默比说错更致命。
-        </div>
-        <div class="tip-box" style="margin-top:8px;background:#e3f2fd;border-left-color:#1565c0;color:#0d47a1;">
-            <strong>💡 <span class="tag tag-technique">Take Your Time</span> 慢慢来</strong><br>
-            不用马上回答。可以停下来思考几秒钟没关系。说 "Can I have a moment to think?" 完全没问题。
-        </div>
-        <div class="tip-box" style="margin-top:8px;background:#f3e5f5;border-left-color:#7b1fa2;color:#4a148c;">
-            <strong>💡 <span class="tag tag-technique">Ask Questions</span> 问问题澄清</strong><br>
-            题目没懂就问。"When you say X, do you mean Y?" 这展示你的批判性思维。
-        </div>
-        <div class="tip-box" style="margin-top:8px;background:#fff3e0;border-left-color:#ef6c00;color:#e65100;">
-            <strong>💡 <span class="tag tag-technique">Be Ready to Be Challenged</span> 接受挑战</strong><br>
-            面试官会质疑你、反驳你、给你新信息。这不是你错了——这是面试的正常部分！看你能不能<b>承认局限、顺新条件重新推理</b>，而不是死守原结论。
-        </div>
-        <div class="warning-box" style="margin-top:10px;">
-            <strong>⚠️ 常见误区：</strong><br>
-            · 以为要答对所有问题——错！不会很正常<br>
-            · 不敢说"我不知道"——可以说不知道，但要说你会怎么想<br>
-            · 被反驳就慌——他们就是想看你的反应<br>
-            · 背诵准备好的答案——他们听得出来，且一遇追问就崩
-        </div>
-    </div>
-
-    <div class="section">
-        <h2>Preparation Strategy <span class="en">准备策略</span></h2>
-        <ul style="list-style:none;">
-            <li style="padding:6px 0;border-bottom:1px solid #f0f0f0;">
-                <strong>1. 深入掌握 A-Level/IB 课内知识</strong>
-                <div style="color:#666;font-size:0.82rem;margin-top:4px;">确保你完全理解课内的内容，能解释清楚"为什么"。</div>
-            </li>
-            <li style="padding:6px 0;border-bottom:1px solid #f0f0f0;">
-                <strong>2. 拓展阅读</strong>
-                <div style="color:#666;font-size:0.82rem;margin-top:4px;">读专业相关的书籍、文章、播客。PS 里提到的一定要深入了解。</div>
-            </li>
-            <li style="padding:6px 0;border-bottom:1px solid #f0f0f0;">
-                <strong>3. 做模拟面试</strong>
-                <div style="color:#666;font-size:0.82rem;margin-top:4px;">找老师、学长、家长模拟。至少 3-5 次模拟面试，重点练"被反驳后如何接话"。</div>
-            </li>
-            <li style="padding:6px 0;border-bottom:1px solid #f0f0f0;">
-                <strong>4. 练习 past questions + 追问链</strong>
-                <div style="color:#666;font-size:0.82rem;margin-top:4px;">牛津剑桥官网有样题。不要只练"答"，要练"答完被追问怎么接"——参照上方样板房的追问链格式。</div>
-            </li>
-            <li style="padding:6px 0;border-bottom:1px solid #f0f0f0;">
-                <strong>5. 熟悉你的 PS</strong>
-                <div style="color:#666;font-size:0.82rem;margin-top:4px;">你 PS 里说过的书/项目，每一个都可能被问到。</div>
-            </li>
-            <li style="padding:6px 0;">
-                <strong>6. 了解学院和导师风格</strong>
-                <div style="color:#666;font-size:0.82rem;margin-top:4px;">知道你申请的学院特点、导师研究方向。如牛津 Balliol 偏哲学探究，剑桥 Trinity 偏逻辑推演。</div>
-            </li>
-        </ul>
-    </div>
-
-    <div class="section">
-        <h2>What If You Get Stuck? <span class="en">卡壳了怎么办？</span></h2>
-        <div class="tip-box">
-            <strong>💡 卡壳应对话术（注意：这是脚手架，熟练后会撤除）：</strong><br>
-            · "That's an interesting question. Let me think about that for a moment."<br>
-            · "I'm not sure about the exact answer, but here's how I'd approach it..."<br>
-            · "If I understand correctly, you're asking about...?" (先确认问题)<br>
-            · "Would it be something like...?" (提出想法，然后等反馈)<br>
-            · 被指出新方向就说："Oh, I see what you mean. So that changes things because..."
-        </div>
-        <div class="warning-box" style="margin-top:8px;">
-            <strong>⚠️ 句式卡片的双刃剑：</strong>这些过渡句是帮你"开口"的脚手架，<b>不是背诵模板</b>。如果你每次都套同一句，导师立刻能听出来。目标是习惯与导师"合作探讨"，而非孤立地给出结论。
-        </div>
-    </div>
-
     <!-- ============ 迭代路线图（精简版） ============ -->
     <div class="section">
         <h2>Roadmap <span class="en">迭代路线</span></h2>
@@ -778,6 +732,92 @@
         </div>
     </div>
 
+    <!-- ============ 各学科样题（tab 切换，默认法学，放最后） ============ -->
+    <div class="section">
+        <h2>Common Subjects & Sample Questions <span class="en">各学科样题</span></h2>
+        <p style="color:#666;font-size:0.85rem;margin-bottom:10px;">Click a subject tab to switch. Law is shown by default.</p>
+
+        <div class="subject-tabs" id="subjectTabs">
+            <button class="tab-btn" data-target="sq-maths">Maths</button>
+            <button class="tab-btn" data-target="sq-physics">Physics</button>
+            <button class="tab-btn" data-target="sq-economics">Economics</button>
+            <button class="tab-btn" data-target="sq-medicine">Medicine</button>
+            <button class="tab-btn" data-target="sq-ppe">PPE / Philosophy</button>
+            <button class="tab-btn" data-target="sq-engineering">Engineering</button>
+            <button class="tab-btn" data-target="sq-cs">Computer Science</button>
+            <button class="tab-btn" data-target="sq-english">English Literature</button>
+            <button class="tab-btn" data-target="sq-history">History</button>
+            <button class="tab-btn" data-target="sq-bio">Natural Sciences / Biology</button>
+            <button class="tab-btn active" data-target="sq-law">Law</button>
+        </div>
+
+        <div class="sample-q" id="sq-maths">
+            <span class="tag tag-subject">Maths</span>
+            <div class="q">How would you prove that the square root of 2 is irrational?</div>
+            <div class="hint">Approach: proof by contradiction. Assume √2 = a/b in lowest terms, derive a contradiction. The key is to show your reasoning process, not just the answer.</div>
+        </div>
+
+        <div class="sample-q" id="sq-physics">
+            <span class="tag tag-subject">Physics</span>
+            <div class="q">If you could drill a hole straight through the Earth from one side to the other, and drop a ball down it, what would happen?</div>
+            <div class="hint">Approach: simple harmonic motion (SHM). The ball would oscillate between the two ends. Consider how gravitational force varies with radius. It's fine not to know — try to derive it step by step.</div>
+        </div>
+
+        <div class="sample-q" id="sq-economics">
+            <span class="tag tag-subject">Economics</span>
+            <div class="q">Why is poverty difficult to measure?</div>
+            <div class="hint">Approach: absolute vs relative poverty, purchasing power parity, cost of living differences across countries, income vs multidimensional poverty (education, health, opportunity). Demonstrate multi-angle thinking.</div>
+        </div>
+
+        <div class="sample-q" id="sq-medicine">
+            <span class="tag tag-subject">Medicine</span>
+            <div class="q">Why do we have red blood cells?</div>
+            <div class="hint">Approach: transporting oxygen and CO₂. The role of haemoglobin. Why red cells rather than dissolving haemoglobin directly in plasma? Surface-area-to-volume ratio.</div>
+        </div>
+
+        <div class="sample-q" id="sq-ppe">
+            <span class="tag tag-subject">PPE / Philosophy</span>
+            <div class="q">Should we legalize all drugs?</div>
+            <div class="hint">Approach: analyse from multiple angles — individual liberty, public health, crime rates, economic cost, social equity. There is no single right answer; what matters is the structure and logic of your argument.</div>
+        </div>
+
+        <div class="sample-q" id="sq-engineering">
+            <span class="tag tag-subject">Engineering</span>
+            <div class="q">How would you design a gravity dam for holding back water?</div>
+            <div class="hint">Approach: force analysis, materials, why the shape is triangular / trapezoidal? Why wide at the base and narrow at the top? Consider water pressure distribution, resistance to overturning and sliding. Derive it step by step.</div>
+        </div>
+
+        <div class="sample-q" id="sq-cs">
+            <span class="tag tag-subject">Computer Science</span>
+            <div class="q">How do pirates divide a cake between n people fairly?</div>
+            <div class="hint">Approach: the classic fair division problem. Extend "I cut, you choose" to n people. Algorithmic thinking, definitions of fairness, game-theoretic reasoning.</div>
+        </div>
+
+        <div class="sample-q" id="sq-english">
+            <span class="tag tag-subject">English Literature</span>
+            <div class="q">You are given a poem or a short passage and asked to analyse a character or theme.</div>
+            <div class="hint">Approach: read the text closely, find evidence, analyse language, structure and themes. There is no "correct" interpretation — what matters is your ability to argue from the text itself.</div>
+        </div>
+
+        <div class="sample-q" id="sq-history">
+            <span class="tag tag-subject">History</span>
+            <div class="q">"History is written by the victors." If this is true, is it still possible to know about destroyed civilisations such as Carthage or the Aztecs?</div>
+            <div class="hint">Approach: <b>do not</b> spend time narrating the conquest of the Aztecs (that is recitation). Breakthroughs: ① multiplicity of sources — archaeological remains, material culture and environmental data are hard to forge unilaterally; ② <b>reading against the grain</b> — victors' records, to exaggerate their triumph, inadvertently preserve details of the defeated; ③ <b>the silence of the archive</b> — victors not only write but selectively destroy, so silence itself is evidence of power relations.</div>
+        </div>
+
+        <div class="sample-q" id="sq-bio">
+            <span class="tag tag-subject">Natural Sciences / Biology</span>
+            <div class="q">Why have large land animals evolved legs but not wheel-like organs for locomotion?</div>
+            <div class="hint">Approach: ① <b>Tissue supply</b> — a rotating axle cannot maintain continuous vascular and neural connections (unless it is non-living keratin); ② <b>Terrain adaptability</b> — wheels perform poorly on rugged or muddy ground, whereas limbs are highly adaptable.<br>⚠️ Caution: do not cite the bacterial flagellum as a "wheel counter-example" — it is a <b>propeller</b>, generating thrust by rotation but not rolling forward. Conflating the two exposes a conceptual error.</div>
+        </div>
+
+        <div class="sample-q active" id="sq-law">
+            <span class="tag tag-subject">Law</span>
+            <div class="q">A park sign reads "No vehicles allowed." The community places a decommissioned WWII tank on a plinth in the middle of the park as a war memorial. Does this breach the rule?</div>
+            <div class="hint">Approach: this is Fuller's 1949 classic legal-philosophy puzzle. The core is <b>purposivism</b> — what is this rule actually for? Don't get stuck on the literal question "is a tank a vehicle?" (textualism). The follow-up that forces real depth: "What if the tank was a captured Nazi trophy placed at the gate of a Jewish community's park?" — that pushes the legislative purpose from "preventing pollution" to "preventing psychological harm".</div>
+        </div>
+    </div>
+
     <p class="footer">&copy; 2026 yunzhuan.icu | Oxbridge Interviews</p>
     <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
     <div style="text-align:center;padding:8px 0;font-size:0.75rem;color:#aaa;">
@@ -791,5 +831,18 @@
         <span style="margin:0 6px;">·</span>
         <a href="javascript:window.scrollTo(0,0)" style="color:#aaa;text-decoration:none;">Back to top</a>
     </div>
+
+    <script>
+        // 学科样题 tab 切换
+        document.querySelectorAll('#subjectTabs .tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('#subjectTabs .tab-btn').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.sample-q').forEach(q => q.classList.remove('active'));
+                btn.classList.add('active');
+                const target = document.getElementById(btn.dataset.target);
+                if (target) target.classList.add('active');
+            });
+        });
+    </script>
 </body>
 </html>
