@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pre-interview Reading Simulator · Oxbridge</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f5f5; color: #333;
+            min-height: 100vh;
+        }
+        .back-link {
+            display: inline-block; color: #667eea; text-decoration: none;
+            font-size: 0.85rem; padding: 12px 16px 0; max-width: 1000px; margin: 0 auto;
+        }
+        .back-link:hover { text-decoration: underline; }
+
+        /* 顶部栏 */
+        .topbar {
+            background: white; border-bottom: 1px solid #e8ecff;
+            padding: 10px 16px; position: sticky; top: 0; z-index: 100;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+        }
+        .topbar-inner {
+            max-width: 1000px; margin: 0 auto;
+            display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+        }
+        .topbar .meta {
+            font-size: 0.78rem; color: #666; flex: 1; min-width: 180px;
+        }
+        .topbar .meta .tag {
+            display: inline-block; padding: 2px 7px; border-radius: 3px;
+            font-size: 0.68rem; font-weight: 600; margin-right: 5px;
+            background: #e3f2fd; color: #1565c0;
+        }
+        .timer {
+            font-family: 'SF Mono', 'Menlo', monospace;
+            font-size: 1.3rem; font-weight: 700;
+            padding: 4px 12px; border-radius: 6px;
+            background: #e8f5e9; color: #2e7d32;
+            min-width: 92px; text-align: center;
+            transition: background 0.3s, color 0.3s;
+        }
+        .timer.warn { background: #fff8e1; color: #ff8f00; }
+        .timer.danger { background: #ffebee; color: #c62828; animation: pulse 1s infinite; }
+        @keyframes pulse { 50% { opacity: 0.6; } }
+        .timer.done { background: #f0f0f5; color: #999; animation: none; }
+        .timer-controls { display: flex; gap: 6px; }
+        .btn {
+            border: 1px solid #ddd; background: white; color: #555;
+            padding: 5px 12px; border-radius: 5px; font-size: 0.8rem;
+            cursor: pointer; transition: all 0.15s;
+        }
+        .btn:hover { border-color: #667eea; color: #667eea; }
+        .btn-primary { background: #667eea; color: white; border-color: #667eea; }
+        .btn-primary:hover { background: #5568d3; color: white; }
+        .btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+        /* 主区 */
+        .workspace {
+            max-width: 1000px; margin: 12px auto; padding: 0 16px 40px;
+            display: grid; grid-template-columns: 1fr 280px; gap: 12px;
+        }
+        .main-col { min-width: 0; }
+        .side-col { min-width: 0; }
+
+        /* 材料卡片 */
+        .material-card {
+            background: white; border-radius: 8px; padding: 18px 22px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05); margin-bottom: 12px;
+        }
+        .material-card h2 {
+            color: #333; font-size: 1.05rem; margin-bottom: 4px;
+        }
+        .material-card .mat-sub {
+            color: #888; font-size: 0.8rem; margin-bottom: 14px;
+            padding-bottom: 10px; border-bottom: 1px solid #f0f0f0;
+        }
+        /* 可标注文本 */
+        .reading-text {
+            font-size: 0.95rem; line-height: 1.85; color: #333;
+            user-select: text; -webkit-user-select: text;
+        }
+        .reading-text p { margin-bottom: 12px; }
+        .reading-text .law {
+            background: #f8f9ff; padding: 10px 14px; border-left: 3px solid #667eea;
+            border-radius: 0 6px 6px 0; font-style: italic; margin: 10px 0;
+        }
+        .reading-text .fact {
+            background: #fff8e1; padding: 10px 14px; border-left: 3px solid #ff8f00;
+            border-radius: 0 6px 6px 0; margin: 10px 0;
+        }
+        /* 标注高亮 */
+        .anno { border-radius: 2px; padding: 0 2px; cursor: pointer; }
+        .anno-blue { background: #bbdefb; border-bottom: 2px solid #1565c0; }
+        .anno-green { background: #c8e6c9; border-bottom: 2px solid #2e7d32; }
+        .anno-red { background: #ffcdd2; border-bottom: 2px solid #c62828; }
+        .anno-yellow { background: #fff9c4; border-bottom: 2px solid #f9a825; }
+        .anno:hover { filter: brightness(0.95); }
+
+        /* 标注工具栏 */
+        .anno-toolbar {
+            background: white; border-radius: 8px; padding: 10px 14px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05); margin-bottom: 12px;
+            display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+            position: sticky; top: 56px; z-index: 50;
+        }
+        .anno-toolbar .tb-label {
+            font-size: 0.78rem; color: #888; margin-right: 4px;
+        }
+        .color-btn {
+            display: inline-flex; align-items: center; gap: 6px;
+            padding: 5px 11px; border-radius: 5px; border: 1px solid #ddd;
+            background: white; cursor: pointer; font-size: 0.8rem;
+            transition: all 0.15s;
+        }
+        .color-btn:hover { border-color: #999; }
+        .color-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+        .color-dot {
+            width: 12px; height: 12px; border-radius: 50%;
+        }
+        .dot-blue { background: #1565c0; }
+        .dot-green { background: #2e7d32; }
+        .dot-red { background: #c62828; }
+        .dot-yellow { background: #f9a825; }
+        .anno-toolbar .hint-text {
+            font-size: 0.74rem; color: #999; margin-left: auto;
+        }
+
+        /* 侧边栏 */
+        .side-card {
+            background: white; border-radius: 8px; padding: 14px 16px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05); margin-bottom: 12px;
+        }
+        .side-card h3 {
+            color: #667eea; font-size: 0.88rem; margin-bottom: 10px;
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        .side-card h3 .count {
+            background: #eef1ff; color: #667eea; font-size: 0.7rem;
+            padding: 1px 7px; border-radius: 10px;
+        }
+        .anno-list { list-style: none; max-height: 320px; overflow-y: auto; }
+        .anno-list li {
+            padding: 7px 9px; margin-bottom: 5px; border-radius: 5px;
+            font-size: 0.78rem; line-height: 1.5; cursor: pointer;
+            border-left: 3px solid #ddd; background: #fafaff;
+            transition: background 0.15s;
+        }
+        .anno-list li:hover { background: #f0f0f5; }
+        .anno-list li.c-blue { border-left-color: #1565c0; }
+        .anno-list li.c-green { border-left-color: #2e7d32; }
+        .anno-list li.c-red { border-left-color: #c62828; }
+        .anno-list li.c-yellow { border-left-color: #f9a825; }
+        .anno-list .li-text {
+            color: #333; display: block; margin-bottom: 2px;
+            overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+        }
+        .anno-list .li-dim {
+            font-size: 0.66rem; font-weight: 600; text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+        /* F-3: 标注删除按钮 */
+        .anno-list li { position: relative; }
+        .li-del {
+            position: absolute; top: 4px; right: 6px;
+            background: none; border: none; cursor: pointer;
+            font-size: 1.1rem; line-height: 1; color: #aaa;
+            padding: 2px 4px; border-radius: 3px;
+        }
+        .li-del:hover { color: #c62828; background: #ffebee; }
+        .anno-list .empty {
+            color: #aaa; text-align: center; padding: 16px 0; font-size: 0.78rem;
+            cursor: default; border: none; background: transparent;
+        }
+        /* 维度覆盖率 */
+        .dim-coverage { font-size: 0.76rem; }
+        .dim-coverage .dim-row {
+            display: flex; align-items: center; gap: 8px;
+            padding: 4px 0; border-bottom: 1px solid #f5f5f5;
+        }
+        .dim-coverage .dim-row:last-child { border: none; }
+        .dim-coverage .dim-name { flex: 1; color: #555; }
+        .dim-coverage .dim-stat {
+            font-size: 0.7rem; padding: 1px 6px; border-radius: 3px;
+        }
+        .dim-coverage .dim-stat.ok { background: #e8f5e9; color: #2e7d32; }
+        .dim-coverage .dim-stat.miss { background: #ffebee; color: #c62828; }
+
+        /* 问题区（OX-5 预留，OX-4 隐藏） */
+        .questions-card { display: none; }
+        .questions-card.show { display: block; }
+        .question-item {
+            background: #f8f9ff; border-left: 3px solid #667eea;
+            padding: 12px 16px; border-radius: 0 6px 6px 0;
+            margin-bottom: 10px;
+        }
+        .question-item .q-dim {
+            font-size: 0.68rem; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 0.04em; padding: 1px 6px; border-radius: 3px;
+            margin-right: 6px;
+        }
+        .q-dim.d-textual { background: #e3f2fd; color: #1565c0; }
+        .q-dim.d-structural { background: #e8f5e9; color: #2e7d32; }
+        .q-dim.d-conflict { background: #ffebee; color: #c62828; }
+        .q-dim.d-boundary { background: #fff9c4; color: #f9a825; }
+        .question-item .q-text {
+            color: #333; font-size: 0.9rem; line-height: 1.6; margin-top: 5px;
+        }
+
+        /* 文本收缩（OX-5 状态） */
+        .material-card.collapsed {
+            position: fixed; right: 16px; bottom: 16px;
+            width: 320px; max-height: 50vh; overflow-y: auto;
+            z-index: 200; box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            padding: 12px 16px;
+        }
+        .material-card.collapsed h2 { font-size: 0.88rem; }
+        .material-card.collapsed .reading-text { font-size: 0.78rem; line-height: 1.6; }
+        .material-card.collapsed .mat-sub { display: none; }
+
+        .footer {
+            text-align: center; color: #aaa; font-size: 0.75rem; padding: 16px;
+        }
+        .footer a { color: #aaa; text-decoration: none; }
+
+        @media (max-width: 700px) {
+            .workspace { grid-template-columns: 1fr; }
+            .anno-toolbar { position: static; }
+            .material-card.collapsed { width: calc(100% - 32px); }
+        }
+        /* OX-24 使用指引 */
+        .guide-box {
+            background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
+            border: 1px solid #d1c4e9; border-radius: 8px;
+            padding: 14px 18px; margin: 8px auto 12px; max-width: 1000px;
+        }
+        .guide-box .g-title {
+            font-size: 0.82rem; font-weight: 700; color: #5e35b1;
+            margin-bottom: 8px; display: flex; align-items: center; gap: 6px;
+        }
+        .guide-box .g-steps {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 8px;
+            font-size: 0.78rem; color: #4527a0; line-height: 1.55;
+        }
+        .guide-box .g-step { display: flex; gap: 6px; align-items: flex-start; }
+        .guide-box .g-num {
+            background: #5e35b1; color: white; min-width: 18px; height: 18px;
+            border-radius: 50%; font-size: 0.68rem; text-align: center;
+            line-height: 18px; font-weight: 700; flex-shrink: 0;
+        }
+        .guide-box .g-tip {
+            font-size: 0.72rem; color: #c62828; margin-top: 6px;
+            padding-top: 6px; border-top: 1px dashed #d1c4e9;
+        }
+        .guide-box .g-next { font-size: 0.74rem; margin-top: 6px; }
+        .guide-box .g-next a { color: #5e35b1; font-weight: 600; }
+    </style>
+    <link rel="stylesheet" href="../../css/theme.css">
+    <meta name="theme-color" content="#667eea">
+    <script src="../../js/theme.js"></script>
+    <script src="materials.js"></script>
+</head>
+<body>
+    <a href="../oxbridge-interview.html" class="back-link">&larr; 返回牛剑面试</a>
+
+    <!-- OX-24 使用指引 -->
+    <div class="guide-box">
+        <div class="g-title">📍 使用指引 · 这一步对应真实面试的什么</div>
+        <div class="g-steps">
+            <div class="g-step"><span class="g-num">1</span><span>点"开始倒计时"，15 分钟内<strong>只能看材料</strong>，看不到题目（模拟牛剑等待室）</span></div>
+            <div class="g-step"><span class="g-num">2</span><span>选中文本→点四色按钮标注：<strong>蓝=文本/绿=结构/红=冲突/黄=边界</strong>。颜色就是思维脚手架</span></div>
+            <div class="g-step"><span class="g-num">3</span><span>倒计时结束，材料收缩到右下角，弹出递进问题——<strong>漏标维度的问题排前面</strong></span></div>
+        </div>
+        <div class="g-tip">⚠️ 核心提示：不要只读字面意思。标注行为会被记录，喂给下一步的 Hint 引擎——你漏标哪个维度，那里就提示哪个。</div>
+        <div class="g-next">完成标注后 → <a href="hints.html">进入 Think Aloud + Hints（出声思考）→</a></div>
+    </div>
+
+    <!-- 顶部栏：元信息 + 倒计时 -->
+    <div class="topbar">
+        <div class="topbar-inner">
+            <div class="meta">
+                <span class="tag" id="metaTag">LAW</span>
+                <span id="metaText">Oxford · Balliol College · 2025 Winter</span>
+            </div>
+            <select id="materialSelect" class="btn" style="min-width:150px;">
+                <option value="law-firefighter">法学 · 消防员两难</option>
+                <option value="history-silences">历史 · 档案的沉默</option>
+                <option value="ppe-bus-fare">PPE · 0.5 英镑公交票</option>
+                <option value="math-ladder">数学 · 梯子轨迹（官方真题）</option>
+                <option value="math-tiling">数学 · 铺砖问题（官方真题）</option>
+                <option value="eng-ruler">工程 · 尺子与手指（官方真题）</option>
+                <option value="bio-ladybird">生物 · 瓢虫与草莓（官方真题）</option>
+            </select>
+            <div class="timer" id="timer">15:00</div>
+            <div class="timer-controls">
+                <button class="btn btn-primary" id="startBtn">开始倒计时</button>
+                <button class="btn" id="resetBtn" disabled>重置</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="workspace">
+        <div class="main-col">
+            <!-- 标注工具栏 -->
+            <div class="anno-toolbar">
+                <span class="tb-label">选中文本后点击维度：</span>
+                <button class="color-btn" data-color="blue" disabled>
+                    <span class="color-dot dot-blue"></span><span id="lbl-blue">文本层</span>
+                </button>
+                <button class="color-btn" data-color="green" disabled>
+                    <span class="color-dot dot-green"></span><span id="lbl-green">结构层</span>
+                </button>
+                <button class="color-btn" data-color="red" disabled>
+                    <span class="color-dot dot-red"></span><span id="lbl-red">冲突层</span>
+                </button>
+                <button class="color-btn" data-color="yellow" disabled>
+                    <span class="color-dot dot-yellow"></span><span id="lbl-yellow">边界层</span>
+                </button>
+                <span class="hint-text" id="selHint">先选中材料中的一段文字</span>
+            </div>
+
+            <!-- 预读材料 -->
+            <div class="material-card" id="materialCard">
+                <h2 id="materialTitle">预读材料 · 消防员两难</h2>
+                <div class="mat-sub">Pre-interview Reading · 请在 15 分钟内阅读并标注关键点</div>
+                <div class="reading-text" id="readingText"></div>
+                <div id="officialComment" style="display:none;margin-top:14px;padding:12px 14px;background:#e8f5e9;border-left:3px solid #2e7d32;border-radius:0 6px 6px 0;font-size:0.82rem;color:#1b5e20;line-height:1.6;"></div>
+            </div>
+
+            <!-- 问题区（OX-5 启用） -->
+            <div class="material-card questions-card" id="questionsCard">
+                <h2>递进问题</h2>
+                <div class="mat-sub">倒计时结束 · 文本已收缩至右下角 · 请回答以下问题</div>
+                <div id="questionsList"></div>
+            </div>
+        </div>
+
+        <!-- 侧边栏 -->
+        <div class="side-col">
+            <div class="side-card">
+                <h3>维度覆盖率 <span class="count" id="totalCount">0</span></h3>
+                <div class="dim-coverage" id="dimCoverage">
+                    <div class="dim-row">
+                        <span class="color-dot dot-blue"></span>
+                        <span class="dim-name">文本层 Textual</span>
+                        <span class="dim-stat miss" id="stat-blue">未标</span>
+                    </div>
+                    <div class="dim-row">
+                        <span class="color-dot dot-green"></span>
+                        <span class="dim-name">结构层 Structural</span>
+                        <span class="dim-stat miss" id="stat-green">未标</span>
+                    </div>
+                    <div class="dim-row">
+                        <span class="color-dot dot-red"></span>
+                        <span class="dim-name">冲突层 Conflict</span>
+                        <span class="dim-stat miss" id="stat-red">未标</span>
+                    </div>
+                    <div class="dim-row">
+                        <span class="color-dot dot-yellow"></span>
+                        <span class="dim-name">边界层 Boundary</span>
+                        <span class="dim-stat miss" id="stat-yellow">未标</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="side-card">
+                <h3>我的标注 <span class="count" id="listCount">0</span></h3>
+                <ul class="anno-list" id="annoList">
+                    <li class="empty">尚无标注<br><span style="font-size:0.7rem;">选中材料文字 → 点击维度颜色</span></li>
+                </ul>
+                <button class="btn" id="exportBtn" style="width:100%;margin-top:8px;font-size:0.76rem;" disabled>导出标注报告 (JSON)</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <a href="../../index.html">Home</a> ·
+        <a href="../oxbridge-interview.html">Oxbridge Interviews</a> ·
+        Pre-interview Reading Simulator
+    </div>
+
+    <script>
+    (function() {
+        'use strict';
+
+        // ============ 维度配置 ============
+        const DIMENSIONS = {
+            blue:   { name: '文本层',   en: 'Textual',   statEl: 'stat-blue' },
+            green:  { name: '结构层',   en: 'Structural', statEl: 'stat-green' },
+            red:    { name: '冲突层',   en: 'Conflict',   statEl: 'stat-red' },
+            yellow: { name: '边界层',   en: 'Boundary',   statEl: 'stat-yellow' }
+        };
+
+        // ============ OX-7: 预读材料数据 ============
+        // F-7: 材料数据已抽取到共享文件 materials.js
+        const MATERIALS = window.OXBRIDGE_MATERIALS;
+
+        let currentMaterialId = 'law-firefighter';
+
+        // ============ 状态 ============
+        const state = {
+            totalSeconds: 15 * 60,  // 15 分钟（测试时可改小）
+            remaining: 15 * 60,
+            running: false,
+            timerId: null,
+            finished: false,
+            annotations: []  // { id, color, text, note }
+        };
+
+        // ============ DOM ============
+        const timerEl = document.getElementById('timer');
+        const startBtn = document.getElementById('startBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const readingText = document.getElementById('readingText');
+        const materialCard = document.getElementById('materialCard');
+        const materialTitle = document.getElementById('materialTitle');
+        const materialSelect = document.getElementById('materialSelect');
+        const metaTag = document.getElementById('metaTag');
+        const metaText = document.getElementById('metaText');
+        const questionsCard = document.getElementById('questionsCard');
+        const questionsList = document.getElementById('questionsList');
+        const annoList = document.getElementById('annoList');
+        const totalCount = document.getElementById('totalCount');
+        const listCount = document.getElementById('listCount');
+        const selHint = document.getElementById('selHint');
+        const colorBtns = document.querySelectorAll('.color-btn');
+
+        // ============ OX-7: 材料切换 ============
+        // F-8: 维度标签随框架切换
+        const FRAMEWORK_LABELS = {
+            '四维度': ['文本层', '结构层', '冲突层', '边界层'],
+            '约束-反例': ['约束识别', '推导路径', '反例收紧', '降级重构']
+        };
+        function loadMaterial(id) {
+            // F-4: 切换前保存当前材料的标注（按 materialId 分组）
+            saveAnnotations();
+            currentMaterialId = id;
+            const m = MATERIALS[id];
+            readingText.innerHTML = m.html;
+            materialTitle.textContent = m.title;
+            metaTag.textContent = m.tag;
+            metaText.textContent = m.meta;
+            // F-8: 维度按钮标签随框架切换
+            const labels = FRAMEWORK_LABELS[m.framework] || FRAMEWORK_LABELS['四维度'];
+            document.getElementById('lbl-blue').textContent = labels[0];
+            document.getElementById('lbl-green').textContent = labels[1];
+            document.getElementById('lbl-red').textContent = labels[2];
+            document.getElementById('lbl-yellow').textContent = labels[3];
+            // F-8: 官方真题展示导师点评
+            const commentEl = document.getElementById('officialComment');
+            if (commentEl) {
+                commentEl.style.display = m.officialComment ? 'block' : 'none';
+                if (m.officialComment) commentEl.textContent = '🎓 导师点评：' + m.officialComment;
+            }
+            // F-4: 加载目标材料已保存的标注（而非清空）
+            const saved = loadAnnotations(id);
+            if (saved && saved.annotations) {
+                state.annotations = saved.annotations;
+                state.remaining = saved.remaining != null ? saved.remaining : state.totalSeconds;
+                state.finished = saved.finished || false;
+            } else {
+                state.annotations = [];
+                state.remaining = state.totalSeconds;
+                state.finished = false;
+            }
+            state.running = false;
+            clearInterval(state.timerId);
+            startBtn.textContent = '开始倒计时';
+            startBtn.disabled = false;
+            resetBtn.disabled = true;
+            colorBtns.forEach(b => b.disabled = !state.finished);
+            materialCard.classList.remove('collapsed');
+            questionsCard.classList.remove('show');
+            renderAnnotationList();
+            renderDimCoverage();
+            updateTimerDisplay();
+        }
+
+        materialSelect.addEventListener('change', (e) => {
+            loadMaterial(e.target.value);
+        });
+
+        // ============ 倒计时 ============
+        function formatTime(sec) {
+            const m = Math.floor(sec / 60);
+            const s = sec % 60;
+            return String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
+        }
+
+        function updateTimerDisplay() {
+            timerEl.textContent = formatTime(state.remaining);
+            timerEl.classList.remove('warn', 'danger', 'done');
+            if (state.finished) {
+                timerEl.classList.add('done');
+            } else if (state.remaining <= 60) {
+                timerEl.classList.add('danger');
+            } else if (state.remaining <= 180) {
+                timerEl.classList.add('warn');
+            }
+        }
+
+        function tick() {
+            state.remaining--;
+            updateTimerDisplay();
+            if (state.remaining <= 0) {
+                finishCountdown();
+            }
+        }
+
+        function startCountdown() {
+            if (state.running || state.finished) return;
+            state.running = true;
+            startBtn.textContent = '暂停';
+            resetBtn.disabled = false;
+            // 启用标注工具
+            colorBtns.forEach(b => b.disabled = false);
+            state.timerId = setInterval(tick, 1000);
+            updateTimerDisplay();
+        }
+
+        function pauseCountdown() {
+            state.running = false;
+            clearInterval(state.timerId);
+            startBtn.textContent = '继续';
+        }
+
+        function finishCountdown() {
+            clearInterval(state.timerId);
+            state.running = false;
+            state.finished = true;
+            startBtn.textContent = '已结束';
+            startBtn.disabled = true;
+            updateTimerDisplay();
+            triggerQuestions();
+        }
+
+        function resetCountdown() {
+            clearInterval(state.timerId);
+            state.running = false;
+            state.finished = false;
+            state.remaining = state.totalSeconds;
+            startBtn.textContent = '开始倒计时';
+            startBtn.disabled = false;
+            resetBtn.disabled = true;
+            colorBtns.forEach(b => b.disabled = true);
+            // 清除所有标注
+            clearAllAnnotations();
+            // 恢复材料卡片
+            materialCard.classList.remove('collapsed');
+            questionsCard.classList.remove('show');
+            updateTimerDisplay();
+        }
+
+        startBtn.addEventListener('click', () => {
+            if (state.finished) return;
+            if (state.running) pauseCountdown();
+            else startCountdown();
+        });
+        resetBtn.addEventListener('click', resetCountdown);
+
+        // ============ 四色标注 ============
+        let pendingSelection = null;
+
+        function getSelectionText() {
+            const sel = window.getSelection();
+            if (!sel || sel.rangeCount === 0 || sel.isCollapsed) return null;
+            const range = sel.getRangeAt(0);
+            // 确保选区在阅读文本内
+            if (!readingText.contains(range.commonAncestorContainer)) return null;
+            const text = sel.toString().trim();
+            if (!text) return null;
+            return { range, text };
+        }
+
+        // 监听选区变化
+        document.addEventListener('selectionchange', () => {
+            const sel = window.getSelection();
+            const result = getSelectionText();
+            if (result) {
+                pendingSelection = result;
+                colorBtns.forEach(b => {
+                    b.disabled = state.finished || !state.running;
+                });
+                selHint.textContent = '已选中，点击维度标注 →';
+                selHint.style.color = '#667eea';
+            } else {
+                pendingSelection = null;
+                if (!state.finished && state.running) {
+                    selHint.textContent = '选中材料中的一段文字';
+                    selHint.style.color = '#999';
+                }
+            }
+        });
+
+        colorBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                if (!pendingSelection) return;
+                const color = btn.dataset.color;
+                applyAnnotation(pendingSelection, color);
+                window.getSelection().removeAllRanges();
+                pendingSelection = null;
+                selHint.textContent = '已标注 ✓';
+                selHint.style.color = '#2e7d32';
+            });
+        });
+
+        function applyAnnotation(selection, color) {
+            const { range, text } = selection;
+            try {
+                const span = document.createElement('span');
+                span.className = 'anno anno-' + color;
+                span.dataset.annoId = 'a' + Date.now() + Math.random().toString(36).slice(2, 6);
+                range.surroundContents(span);
+                const anno = {
+                    id: span.dataset.annoId,
+                    color,
+                    text,
+                    note: ''
+                };
+                state.annotations.push(anno);
+                span.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    highlightInList(anno.id);
+                });
+                renderAnnotationList();
+                renderDimCoverage();
+                saveAnnotations();  // OX-6: 持久化
+            } catch (err) {
+                // surroundContents 在跨节点选区时会失败，提示用户
+                selHint.textContent = '该选区跨节点，请选连续文字';
+                selHint.style.color = '#c62828';
+            }
+        }
+
+        function clearAllAnnotations() {
+            state.annotations = [];
+            // 移除所有 anno span
+            readingText.querySelectorAll('.anno').forEach(span => {
+                const parent = span.parentNode;
+                while (span.firstChild) parent.insertBefore(span.firstChild, span);
+                parent.removeChild(span);
+                parent.normalize();
+            });
+            renderAnnotationList();
+            renderDimCoverage();
+            saveAnnotations();  // OX-6: 清空存储
+        }
+
+        // ============ 标注列表 ============
+        const exportBtn = document.getElementById('exportBtn');
+
+        function renderAnnotationList() {
+            listCount.textContent = state.annotations.length;
+            totalCount.textContent = state.annotations.length;
+            exportBtn.disabled = state.annotations.length === 0;
+            if (state.annotations.length === 0) {
+                annoList.innerHTML = '<li class="empty">尚无标注<br><span style="font-size:0.7rem;">选中材料文字 → 点击维度颜色</span></li>';
+                return;
+            }
+            // F-8: 维度名称跟随材料框架
+            const m = MATERIALS[currentMaterialId];
+            const labels = FRAMEWORK_LABELS[(m && m.framework) || '四维度'];
+            const dimNames = { blue: labels[0], green: labels[1], red: labels[2], yellow: labels[3] };
+            annoList.innerHTML = state.annotations.map(a => {
+                return '<li class="c-' + a.color + '" data-id="' + a.id + '">' +
+                    '<span class="li-text">' + escapeHtml(a.text) + '</span>' +
+                    '<span class="li-dim" style="color:' + colorHex(a.color) + '">' + dimNames[a.color] + '</span>' +
+                    '<button class="li-del" data-del="' + a.id + '" title="删除此标注">&times;</button>' +
+                '</li>';
+            }).join('');
+            // F-3: 绑定删除按钮
+            annoList.querySelectorAll('.li-del').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    deleteAnnotation(btn.dataset.del);
+                });
+            });
+        }
+
+        // F-3: 删除单条标注（移除 span + 从 state 移除）
+        function deleteAnnotation(annoId) {
+            // 从 state 移除
+            state.annotations = state.annotations.filter(a => a.id !== annoId);
+            // 移除对应 DOM span（unwrap）
+            const span = readingText.querySelector('.anno[data-anno-id="' + annoId + '"]');
+            if (span) {
+                const parent = span.parentNode;
+                while (span.firstChild) parent.insertBefore(span.firstChild, span);
+                parent.removeChild(span);
+                parent.normalize();
+            }
+            renderAnnotationList();
+            renderDimCoverage();
+            saveAnnotations();
+        }
+
+        function highlightInList(id) {
+            const item = annoList.querySelector('[data-id="' + id + '"]');
+            if (item) {
+                item.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+                item.style.background = '#eef1ff';
+                setTimeout(() => { item.style.background = ''; }, 800);
+            }
+        }
+
+        // ============ 维度覆盖率 ============
+        function renderDimCoverage() {
+            Object.keys(DIMENSIONS).forEach(color => {
+                const dim = DIMENSIONS[color];
+                const has = state.annotations.some(a => a.color === color);
+                const el = document.getElementById(dim.statEl);
+                if (has) {
+                    el.textContent = '已覆盖';
+                    el.classList.remove('miss');
+                    el.classList.add('ok');
+                } else {
+                    el.textContent = '未标';
+                    el.classList.remove('ok');
+                    el.classList.add('miss');
+                }
+            });
+        }
+
+        // ============ OX-5: 倒计时结束触发问题 ============
+        // 问题从"该有但学生可能漏标"的维度触发，从当前材料读取
+        function triggerQuestions() {
+            // 文本收缩至右下角
+            materialCard.classList.add('collapsed');
+            // 显示问题区
+            questionsCard.classList.add('show');
+
+            const QUESTIONS = MATERIALS[currentMaterialId].questions;
+            // 按维度排序：漏标的维度对应的问题排在前面
+            const marked = new Set(state.annotations.map(a => a.color));
+            const sorted = [...QUESTIONS].sort((a, b) => {
+                const aMiss = marked.has(a.dim) ? 1 : 0;
+                const bMiss = marked.has(b.dim) ? 1 : 0;
+                return aMiss - bMiss;  // 漏标(0)在前
+            });
+
+            questionsList.innerHTML = sorted.map(q => {
+                const cls = 'd-' + ({blue:'textual',green:'structural',red:'conflict',yellow:'boundary'}[q.dim]);
+                const missTag = marked.has(q.dim) ? '' : ' <span style="color:#c62828;font-size:0.7rem;">（你未标注此维度）</span>';
+                return '<div class="question-item">' +
+                    '<span class="q-dim ' + cls + '">' + q.dimName + '</span>' +
+                    missTag +
+                    '<div class="q-text">' + q.text + '</div>' +
+                '</div>';
+            }).join('');
+
+            // 滚动到问题区
+            setTimeout(() => {
+                questionsCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 300);
+
+            // OX-6: Hint 引擎数据已通过 localStorage 持久化（F-9: 移除冗余全局变量）
+            const hintData = getMissingDimensions();
+            console.log('[Hint Engine] 漏标维度检测：', hintData);
+        }
+
+        // 导出按钮
+        exportBtn.addEventListener('click', exportReport);
+
+        // ============ 工具函数 ============
+        function escapeHtml(str) {
+            const div = document.createElement('div');
+            div.textContent = str;
+            return div.innerHTML;
+        }
+        function colorHex(color) {
+            return { blue:'#1565c0', green:'#2e7d32', red:'#c62828', yellow:'#f9a825' }[color];
+        }
+
+        // ============ OX-6: 数据持久化 + Hint 引擎数据接口 ============
+        const STORAGE_KEY = 'oxbridge_sim_annotations';
+
+        // F-4: 按 materialId 分组存储（切换材料不丢标注）
+        // 存储结构：{ [materialId]: { annotations, remaining, finished, ts }, ... , _last: materialId }
+        function saveAnnotations() {
+            const mid = state.currentMaterialId;
+            try {
+                const all = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+                all[mid] = {
+                    annotations: state.annotations,
+                    remaining: state.remaining,
+                    finished: state.finished,
+                    ts: Date.now()
+                };
+                all._last = mid;  // 记录上次使用的材料
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(all));
+            } catch (e) {
+                console.warn('存储失败', e);
+            }
+        }
+
+        // F-4: 加载指定材料的标注（不传则加载上次 _last）
+        function loadAnnotations(mid) {
+            try {
+                const all = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+                if (mid) return all[mid] || null;
+                const last = all._last;
+                if (!last) return null;
+                return all[last] || null;
+            } catch (e) {
+                return null;
+            }
+        }
+
+        // 在 applyAnnotation 末尾会调用 saveAnnotations（见下方覆盖）
+        // 在 clearAllAnnotations / resetCountdown 中也会调用
+
+        // 漏标维度检测 —— 喂给 Hint 引擎的数据接口
+        function getMissingDimensions() {
+            const marked = new Set(state.annotations.map(a => a.color));
+            const missing = Object.keys(DIMENSIONS).filter(c => !marked.has(c));
+            return {
+                materialId: state.currentMaterialId,
+                markedDimensions: Array.from(marked),
+                missingDimensions: missing,
+                annotationCount: state.annotations.length,
+                // Hint 引擎消费规则：漏标→指向该维度；标了但少→可后续扩展"标注深度"判断
+                hintTargets: missing.map(c => ({
+                    dimension: c,
+                    name: DIMENSIONS[c].name,
+                    en: DIMENSIONS[c].en,
+                    action: 'point_to'  // 指向该维度
+                }))
+            };
+        }
+
+        // 导出标注报告（可下载，为后续 Think Aloud + Hints 阶段准备）
+        function exportReport() {
+            const report = {
+                meta: {
+                    materialId: state.currentMaterialId,
+                    subject: 'Law',
+                    college: 'Balliol',
+                    exportedAt: new Date().toISOString()
+                },
+                annotations: state.annotations,
+                dimensionCoverage: getMissingDimensions(),
+                remainingTime: state.remaining,
+                finished: state.finished
+            };
+            const blob = new Blob([JSON.stringify(report, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'oxbridge-annotations-' + Date.now() + '.json';
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        // ============ 初始化 ============
+        // F-2/F-4: 恢复上次未完成的会话（loadMaterial 已内置标注加载逻辑）
+        try {
+            const all = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+            const lastId = all._last;
+            if (lastId && MATERIALS[lastId]) {
+                materialSelect.value = lastId;
+                loadMaterial(lastId);  // loadMaterial 内部会 loadAnnotations(lastId) 并恢复状态
+                const savedCount = (all[lastId] && all[lastId].annotations) ? all[lastId].annotations.length : 0;
+                if (savedCount > 0) {
+                    selHint.textContent = '已恢复上次未完成的标注（' + savedCount + ' 条）';
+                    selHint.style.color = '#2e7d32';
+                }
+                // 若倒计时已结束，恢复问题区显示
+                if (all[lastId] && all[lastId].finished) {
+                    materialCard.classList.add('collapsed');
+                    questionsCard.classList.add('show');
+                    startBtn.disabled = true;
+                    resetBtn.disabled = false;
+                    renderQuestions();
+                }
+            } else {
+                loadMaterial('law-firefighter');
+            }
+        } catch (e) {
+            loadMaterial('law-firefighter');
+        }
+    })();
+    </script>
+</body>
+</html>

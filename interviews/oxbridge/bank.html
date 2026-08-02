@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>面经库 · Subject × College · Oxbridge</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f5f5; color: #333; min-height: 100vh;
+        }
+        .back-link {
+            display: inline-block; color: #667eea; text-decoration: none;
+            font-size: 0.85rem; padding: 12px 16px 0; max-width: 1100px; margin: 0 auto;
+        }
+        .back-link:hover { text-decoration: underline; }
+
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 16px 40px; }
+
+        .card {
+            background: white; border-radius: 8px; padding: 16px 20px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05); margin-bottom: 12px;
+        }
+        .card h2 {
+            color: #333; font-size: 1rem; margin-bottom: 4px;
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        .card .sub {
+            color: #888; font-size: 0.8rem; margin-bottom: 12px;
+            padding-bottom: 10px; border-bottom: 1px solid #f0f0f0;
+        }
+
+        .btn {
+            border: 1px solid #ddd; background: white; color: #555;
+            padding: 6px 14px; border-radius: 5px; font-size: 0.82rem;
+            cursor: pointer; transition: all 0.15s;
+        }
+        .btn:hover { border-color: #667eea; color: #667eea; }
+        .btn-primary { background: #667eea; color: white; border-color: #667eea; }
+        .btn-primary:hover { background: #5568d3; color: white; }
+        .btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+        /* 三维筛选 */
+        .filters {
+            display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 12px;
+        }
+        .filter-group label {
+            display: block; font-size: 0.72rem; color: #888;
+            text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 4px;
+        }
+        .filter-group select {
+            width: 100%; padding: 6px 10px; border: 1px solid #ddd;
+            border-radius: 5px; font-size: 0.84rem; background: white;
+        }
+        .filter-group select:focus { outline: none; border-color: #667eea; }
+
+        /* 面经列表 */
+        .bank-list { display: grid; grid-template-columns: 1fr; gap: 8px; }
+        .bank-entry {
+            background: #f8f9ff; border: 1px solid #e8ecff; border-radius: 8px;
+            padding: 12px 16px; cursor: pointer; transition: all 0.15s;
+        }
+        .bank-entry:hover { background: #eef1ff; border-color: #667eea; }
+        .bank-entry .be-header {
+            display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+            margin-bottom: 6px;
+        }
+        .bank-entry .tag {
+            display: inline-block; padding: 2px 7px; border-radius: 3px;
+            font-size: 0.66rem; font-weight: 600;
+        }
+        .tag-uni-o { background: #e3f2fd; color: #1565c0; }
+        .tag-uni-c { background: #f3e5f5; color: #7b1fa2; }
+        .tag-subject { background: #e8f5e9; color: #2e7d32; }
+        .tag-college { background: #fff3e0; color: #e65100; }
+        .tag-type { background: #fce4ec; color: #c2185b; }
+        /* 来源等级标签 */
+        .tag.src-official { background: #e8f5e9; color: #1b5e20; }
+        .tag.src-variant { background: #fff8e1; color: #e65100; }
+        .tag.src-circulated { background: #ffebee; color: #c62828; }
+        .tag.src-recalled { background: #f3e5f5; color: #6a1b9a; }
+        .bank-entry .be-title {
+            font-size: 0.9rem; font-weight: 600; color: #333; margin-bottom: 4px;
+        }
+        .bank-entry .be-meta {
+            font-size: 0.74rem; color: #888;
+        }
+        .bank-entry .be-dims {
+            margin-top: 6px; display: flex; gap: 4px;
+        }
+        .bank-entry .dim-dot {
+            width: 8px; height: 8px; border-radius: 50%;
+        }
+        .dot-blue { background: #1565c0; }
+        .dot-green { background: #2e7d32; }
+        .dot-red { background: #c62828; }
+        .dot-yellow { background: #f9a825; }
+        .dim-dot.miss { background: #e0e0e0; }
+
+        /* 上传表单 */
+        .upload-form { display: none; }
+        .upload-form.show { display: block; }
+        .form-row { margin-bottom: 12px; }
+        .form-row label {
+            display: block; font-size: 0.78rem; color: #555; margin-bottom: 4px; font-weight: 600;
+        }
+        .form-row label .req { color: #c62828; }
+        .form-row input, .form-row select, .form-row textarea {
+            width: 100%; padding: 7px 10px; border: 1px solid #ddd;
+            border-radius: 5px; font-size: 0.84rem; font-family: inherit;
+        }
+        .form-row input:focus, .form-row select:focus, .form-row textarea:focus {
+            outline: none; border-color: #667eea;
+        }
+        .form-row textarea { min-height: 60px; resize: vertical; }
+        .form-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .chain-builder { border: 1px solid #e8ecff; border-radius: 6px; padding: 10px; margin-top: 6px; }
+        .chain-step-input {
+            display: grid; grid-template-columns: 90px 1fr; gap: 8px; margin-bottom: 8px;
+        }
+        .chain-step-input select { padding: 5px 8px; font-size: 0.78rem; }
+        .chain-step-input textarea { min-height: 50px !important; font-size: 0.8rem; }
+        .add-step-btn { font-size: 0.76rem; padding: 4px 10px; }
+
+        /* 四维度审核标尺 */
+        .audit-meter {
+            background: #f8f9ff; border: 1px solid #e8ecff; border-radius: 6px;
+            padding: 10px 14px; margin-top: 10px;
+        }
+        .audit-meter .am-title {
+            font-size: 0.74rem; color: #888; margin-bottom: 6px;
+            text-transform: uppercase; letter-spacing: 0.04em;
+        }
+        .audit-meter .am-dims { display: flex; gap: 14px; flex-wrap: wrap; }
+        .audit-meter .am-dim {
+            display: flex; align-items: center; gap: 5px; font-size: 0.76rem;
+        }
+        .audit-meter .am-status {
+            font-size: 0.66rem; padding: 1px 6px; border-radius: 3px;
+        }
+        .am-status.ok { background: #e8f5e9; color: #2e7d32; }
+        .am-status.miss { background: #ffebee; color: #c62828; }
+
+        .info-box {
+            background: #e3f2fd; border-left: 3px solid #1565c0;
+            padding: 10px 14px; border-radius: 0 6px 6px 0;
+            font-size: 0.8rem; color: #0d47a1; line-height: 1.6;
+        }
+        .tip-box {
+            background: #e8f5e9; border-left: 3px solid #2e7d32;
+            padding: 10px 14px; border-radius: 0 6px 6px 0;
+            font-size: 0.8rem; color: #1b5e20; line-height: 1.6;
+        }
+        .warning-box {
+            background: #fff8e1; border-left: 3px solid #ff8f00;
+            padding: 10px 14px; border-radius: 0 6px 6px 0;
+            font-size: 0.8rem; color: #5d4037; line-height: 1.6;
+        }
+
+        /* Offer Holder 还原计划 */
+        .offer-plan {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white; border-radius: 8px; padding: 18px 22px; margin-bottom: 12px;
+        }
+        .offer-plan h2 { color: white; margin-bottom: 8px; }
+        .offer-plan .op-sub { color: rgba(255,255,255,0.85); font-size: 0.82rem; margin-bottom: 12px; }
+        .offer-plan .op-features { font-size: 0.82rem; line-height: 1.8; }
+        .offer-plan .op-cta {
+            margin-top: 12px; display: inline-block; background: white; color: #667eea;
+            padding: 7px 16px; border-radius: 5px; text-decoration: none;
+            font-weight: 600; font-size: 0.84rem;
+        }
+
+        /* Peer-to-Peer */
+        .p2p-card {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+        }
+        .p2p-item {
+            background: #f8f9ff; border: 1px solid #e8ecff; border-radius: 6px;
+            padding: 12px 14px;
+        }
+        .p2p-item h4 { color: #333; font-size: 0.86rem; margin-bottom: 6px; }
+        .p2p-item p { color: #666; font-size: 0.78rem; line-height: 1.6; }
+
+        .empty-state {
+            text-align: center; padding: 32px 0; color: #aaa; font-size: 0.86rem;
+        }
+        /* F-5: 内联展开详情卡片 */
+        .be-detail {
+            margin-top: 10px; padding: 12px 14px; background: white;
+            border: 1px solid #e8ecff; border-radius: 6px;
+            font-size: 0.82rem; line-height: 1.7;
+        }
+        .be-detail .bd-chain { margin-bottom: 10px; }
+        .be-detail .bd-step {
+            padding: 8px 10px; margin-bottom: 6px; border-radius: 5px;
+            border-left: 3px solid #ddd; background: #fafaff;
+        }
+        .be-detail .bd-step.s-question { border-left-color: #667eea; background: #f0f4ff; }
+        .be-detail .bd-step.s-answer { border-left-color: #2e7d32; background: #f1f8f1; }
+        .be-detail .bd-step.s-challenge { border-left-color: #c62828; background: #fff5f5; }
+        .be-detail .bd-step.s-revised { border-left-color: #ff8f00; background: #fff8e8; }
+        .be-detail .bd-step .bs-label {
+            font-size: 0.66rem; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 0.04em; margin-right: 6px;
+        }
+        .be-detail .bd-step.s-question .bs-label { color: #667eea; }
+        .be-detail .bd-step.s-answer .bs-label { color: #2e7d32; }
+        .be-detail .bd-step.s-challenge .bs-label { color: #c62828; }
+        .be-detail .bd-step.s-revised .bs-label { color: #ff8f00; }
+        .be-detail .bd-comment {
+            background: #e8f5e9; border-left: 3px solid #2e7d32;
+            padding: 10px 12px; border-radius: 0 5px 5px 0;
+            font-size: 0.8rem; color: #1b5e20; line-height: 1.6;
+        }
+        .be-detail .bd-comment .bc-label {
+            font-size: 0.66rem; font-weight: 700; display: block; margin-bottom: 4px;
+        }
+        .be-detail .bd-actions { margin-top: 10px; display: flex; gap: 8px; }
+
+        .footer { text-align: center; color: #aaa; font-size: 0.75rem; padding: 16px; }
+        .footer a { color: #aaa; text-decoration: none; }
+
+        @media (max-width: 700px) {
+            .filters { grid-template-columns: 1fr; }
+            .form-grid-2 { grid-template-columns: 1fr; }
+            .p2p-card { grid-template-columns: 1fr; }
+        }
+        /* OX-24 使用指引 */
+        .guide-box {
+            background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
+            border: 1px solid #d1c4e9; border-radius: 8px;
+            padding: 14px 18px; margin: 8px auto 12px; max-width: 1100px;
+        }
+        .guide-box .g-title {
+            font-size: 0.82rem; font-weight: 700; color: #5e35b1;
+            margin-bottom: 8px; display: flex; align-items: center; gap: 6px;
+        }
+        .guide-box .g-steps {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 8px;
+            font-size: 0.78rem; color: #4527a0; line-height: 1.55;
+        }
+        .guide-box .g-step { display: flex; gap: 6px; align-items: flex-start; }
+        .guide-box .g-num {
+            background: #5e35b1; color: white; min-width: 18px; height: 18px;
+            border-radius: 50%; font-size: 0.68rem; text-align: center;
+            line-height: 18px; font-weight: 700; flex-shrink: 0;
+        }
+        .guide-box .g-tip {
+            font-size: 0.72rem; color: #c62828; margin-top: 6px;
+            padding-top: 6px; border-top: 1px dashed #d1c4e9;
+        }
+    </style>
+    <link rel="stylesheet" href="../../css/theme.css">
+    <meta name="theme-color" content="#667eea">
+    <script src="../../js/theme.js"></script>
+</head>
+<body>
+    <a href="../oxbridge-interview.html" class="back-link">&larr; 返回牛剑面试</a>
+
+    <!-- OX-24 使用指引 -->
+    <div class="guide-box">
+        <div class="g-title">📍 使用指引 · 这一步对应真实面试的什么</div>
+        <div class="g-steps">
+            <div class="g-step"><span class="g-num">1</span><span>用<strong>学科 × 学院 × 题型</strong>三维筛选，找到与你目标精确匹配的追问链</span></div>
+            <div class="g-step"><span class="g-num">2</span><span>每条记录都是<strong>完整的"发问→回答→追问→修正"推演链</strong>，不是单点题目</span></div>
+            <div class="g-step"><span class="g-num">3</span><span>你是 Offer Holder？点下方<strong>"上传面经"</strong>还原你的经历，四维度审核标尺把关</span></div>
+        </div>
+        <div class="g-tip">⚠️ 核心提示：单点题目无价值。后来者需要看完整推演过程，才知道"被追问后该怎么修正"。上传至少 3 个环节 + 覆盖 2 个维度才过审。</div>
+    </div>
+    <div class="container">
+
+        <!-- 三维筛选 -->
+        <div class="card">
+            <h2>面经库 <span style="font-size:0.74rem;color:#999;font-weight:400;">Subject × College × Type</span></h2>
+            <div class="sub">按学科、学院、题型三维筛选。每条记录都是完整的追问链，不是单点题目</div>
+            <div class="filters">
+                <div class="filter-group">
+                    <label>学科 Course</label>
+                    <select id="filterSubject">
+                        <option value="">全部</option>
+                        <option value="Law">法学 Law</option>
+                        <option value="PPE">PPE</option>
+                        <option value="History">历史 History</option>
+                        <option value="HSPS">HSPS</option>
+                        <option value="Mathematics">数学 Mathematics</option>
+                        <option value="CS">计算机科学 CS</option>
+                        <option value="Engineering">工程 Engineering</option>
+                        <option value="Medicine">医学 Medicine</option>
+                        <option value="Chemistry">化学 Chemistry</option>
+                        <option value="English">文学 English</option>
+                        <option value="PBS">心理学 PBS</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>学院 College</label>
+                    <select id="filterCollege">
+                        <option value="">全部</option>
+                        <option value="Balliol">Balliol</option>
+                        <option value="Trinity">Trinity</option>
+                        <option value="StJohns">St John's</option>
+                        <option value="King's">King's</option>
+                        <option value="Magdalen">Magdalen</option>
+                        <option value="NewCollege">New College</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>题型 Type</label>
+                    <select id="filterType">
+                        <option value="">全部</option>
+                        <option value="text">文本分析题</option>
+                        <option value="eval">观点评估题</option>
+                        <option value="data">图表/数据解读题</option>
+                        <option value="concept">概念定义题</option>
+                    </select>
+                </div>
+            </div>
+            <div id="bankList" class="bank-list"></div>
+        </div>
+
+        <!-- UGC 上传表单 -->
+        <div class="card">
+            <h2>上传你的面经 <span style="font-size:0.74rem;color:#999;font-weight:400;">UGC Upload</span></h2>
+            <div class="sub">按追问链标准格式填写。上传前系统会用四维度标尺审核覆盖度</div>
+            <button class="btn btn-primary" id="toggleUploadBtn">填写追问链 →</button>
+
+            <div class="upload-form" id="uploadForm">
+                <div class="form-grid-2" style="margin-top:12px;">
+                    <div class="form-row">
+                        <label>大学 <span class="req">*</span></label>
+                        <select id="upUni">
+                            <option value="Oxford">Oxford</option>
+                            <option value="Cambridge">Cambridge</option>
+                        </select>
+                    </div>
+                    <div class="form-row">
+                        <label>学科 Course <span class="req">*</span></label>
+                        <select id="upSubject">
+                            <option value="Law">法学 Law</option>
+                            <option value="PPE">PPE</option>
+                            <option value="History">历史 History</option>
+                            <option value="HSPS">HSPS</option>
+                            <option value="Mathematics">数学 Mathematics</option>
+                            <option value="CS">计算机科学 CS</option>
+                            <option value="Engineering">工程 Engineering</option>
+                            <option value="Medicine">医学 Medicine</option>
+                            <option value="Chemistry">化学 Chemistry</option>
+                            <option value="English">文学 English</option>
+                            <option value="PBS">心理学 PBS</option>
+                        </select>
+                    </div>
+                    <div class="form-row">
+                        <label>学院 College <span class="req">*</span></label>
+                        <select id="upCollege">
+                            <option value="Balliol">Balliol</option>
+                            <option value="Trinity">Trinity</option>
+                            <option value="StJohns">St John's</option>
+                            <option value="King's">King's</option>
+                            <option value="Magdalen">Magdalen</option>
+                            <option value="NewCollege">New College</option>
+                        </select>
+                    </div>
+                    <div class="form-row">
+                        <label>题型 Type <span class="req">*</span></label>
+                        <select id="upType">
+                            <option value="text">文本分析题</option>
+                            <option value="eval">观点评估题</option>
+                            <option value="data">图表/数据解读题</option>
+                            <option value="concept">概念定义题</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <label>面试时间</label>
+                    <input type="text" id="upYear" placeholder="如：2025 Winter" value="2025 Winter">
+                </div>
+                <div class="form-row">
+                    <label>面试形式</label>
+                    <input type="text" id="upFormat" placeholder="如：Pre-reading + 20min Teams" value="Pre-reading + 20min Teams">
+                </div>
+
+                <!-- 追问链构建器 -->
+                <div class="form-row">
+                    <label>追问链（完整对话推演）<span class="req">*</span></label>
+                    <div class="chain-builder" id="chainBuilder">
+                        <div class="chain-step-input">
+                            <select class="cs-role"><option value="tutor-question">导师发问</option><option value="student-answer">学生回答</option><option value="tutor-challenge">导师追问/反驳</option><option value="student-revised">学生二次推演</option></select>
+                            <textarea placeholder="输入该环节的内容…"></textarea>
+                        </div>
+                    </div>
+                    <button class="btn add-step-btn" id="addStepBtn" style="margin-top:6px;">+ 添加环节</button>
+                </div>
+
+                <!-- 四维度拆解 -->
+                <div class="form-row">
+                    <label>四维度拆解（可选，但建议填写以提升审核通过率）</label>
+                    <div class="form-grid-2">
+                        <input type="text" id="upTextual" placeholder="文本层 Textual">
+                        <input type="text" id="upStructural" placeholder="结构层 Structural">
+                        <input type="text" id="upConflict" placeholder="冲突层 Conflict">
+                        <input type="text" id="upBoundary" placeholder="边界层 Boundary">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <label>陷阱提醒（常见错误答法）</label>
+                    <input type="text" id="upPitfall" placeholder="如：容易仓促下结论，忽略作为/不作为区分">
+                </div>
+
+                <!-- 审核标尺 -->
+                <div class="audit-meter" id="auditMeter">
+                    <div class="am-title">🔍 审核标尺 · 四维度覆盖度</div>
+                    <div class="am-dims">
+                        <div class="am-dim"><span class="dim-dot dot-blue"></span>文本层 <span class="am-status miss" id="audit-textual">未填</span></div>
+                        <div class="am-dim"><span class="dim-dot dot-green"></span>结构层 <span class="am-status miss" id="audit-structural">未填</span></div>
+                        <div class="am-dim"><span class="dim-dot dot-red"></span>冲突层 <span class="am-status miss" id="audit-conflict">未填</span></div>
+                        <div class="am-dim"><span class="dim-dot dot-yellow"></span>边界层 <span class="am-status miss" id="audit-boundary">未填</span></div>
+                    </div>
+                </div>
+
+                <div style="margin-top:12px;display:flex;gap:8px;">
+                    <button class="btn btn-primary" id="submitUploadBtn">提交审核</button>
+                    <button class="btn" id="cancelUploadBtn">取消</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Offer Holder 还原计划 -->
+        <div class="offer-plan">
+            <h2>Offer Holder 还原计划</h2>
+            <div class="op-sub">每年 1-2 月牛剑发 Offer 季，招募刚拿到 Offer 的学生还原面试完整对话链</div>
+            <div class="op-features">
+                · 申请者不需要单点题目，需要看<b>"一问一答的推演过程"</b><br>
+                · 以"回忆录"形式还原：导师问了什么 → 我怎么答 → 导师怎么追问<br>
+                · 审核通过的还原内容将成为后辈的<b>标准教材</b>，标注你的署名
+            </div>
+            <a href="#" class="op-cta" id="offerHolderBtn">我是 Offer Holder，报名还原 →</a>
+        </div>
+
+        <!-- Peer-to-Peer 互面匹配 -->
+        <div class="card">
+            <h2>Peer-to-Peer 互面匹配 <span style="font-size:0.74rem;color:#999;font-weight:400;">Mock Match</span></h2>
+            <div class="sub">两个申请者互相扮演"导师"和"学生"，持材料进行半小时模拟</div>
+            <div class="p2p-card">
+                <div class="p2p-item">
+                    <h4>🎯 价值</h4>
+                    <p>克服独自练习时的无反馈感，营造真实的语言与对视压力。标准化评测表确保互面有结构。</p>
+                </div>
+                <div class="p2p-item">
+                    <h4>📋 评测表维度</h4>
+                    <p>Think Aloud 频率 · 被反驳后是否修正 · 是否承认局限 · 维度覆盖度 · 句式自然度</p>
+                </div>
+            </div>
+            <div class="warning-box" style="margin-top:10px;">
+                <strong>⚠️ 状态：</strong>Peer-to-Peer 匹配功能为规划中（OX-20）。当前仅展示设计，匹配算法与实时通信待后续实现。
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>上传须知</h2>
+            <div class="info-box">
+                <strong>📌 为什么要求完整追问链？</strong><br>
+                牛剑面试记录绝对不能只挂一个问题。后来者需要看<b>"发问 → 回答 → 追问/反驳 → 修正"</b>的完整推演，才知道如何准备。单点题目无价值。
+            </div>
+            <div class="tip-box" style="margin-top:8px;">
+                <strong>✓ 审核通过的标准：</strong><br>
+                1. 追问链至少 3 个环节（发问+回答+追问）<br>
+                2. 四维度拆解至少覆盖 2 个维度<br>
+                3. 陷阱提醒非空（帮助后辈避坑）<br>
+                4. 内容为真实经历或高质量还原，非杜撰
+            </div>
+        </div>
+
+    </div>
+    <div class="footer">
+        <a href="../../index.html">Home</a> ·
+        <a href="../oxbridge-interview.html">Oxbridge Interviews</a> ·
+        <a href="simulator.html">预读</a> ·
+        <a href="hints.html">Think Aloud</a> ·
+        <a href="devils-advocate.html">Devil's Advocate</a> ·
+        面经库
+    </div>
+
+    <script>
+    (function() {
+        'use strict';
+
+        // ============ OX-16: 初始面经数据 ============
+        const SEED_BANK = [
+            {
+                id: 'b1', uni: 'Oxford', subject: 'Law', college: 'Balliol', type: 'concept',
+                year: '2025 Winter', format: 'Pre-reading + 20min Teams',
+                title: '消防员两难：A 选择救 B，C 死亡，A 是否构成谋杀？',
+                dims: ['blue','green','red','yellow'],  // 四维度全覆盖
+                chain: [
+                    { role: 'tutor-question', text: '法条"故意剥夺生命处谋杀罪"。消防员 A 只能救一人，救 B 则 C 死，A 选 B。C 家属控告 A 谋杀。' },
+                    { role: 'student-answer', text: 'A 没有杀人故意，只是选择救援。' },
+                    { role: 'tutor-challenge', text: '"选择必然放弃一方"与"有意让 C 死"心理状态有区别吗？' },
+                    { role: 'student-revised', text: '承认定义局限，转向结果责任 vs 行为责任区分。' }
+                ]
+            },
+            {
+                id: 'b2', uni: 'Oxford', subject: 'PPE', college: 'Balliol', type: 'eval',
+                year: '2025 Winter', format: '20min Teams',
+                title: '0.5 英镑公交票：恢复收费是否合理？',
+                dims: ['blue','red','yellow'],
+                chain: [
+                    { role: 'tutor-question', text: '免费公交致拥挤，政府考虑恢复 0.5 英镑票价过滤无目的乘车。' },
+                    { role: 'student-answer', text: '应恢复，微量票价可过滤且提供运营资金。' },
+                    { role: 'tutor-challenge', text: '若低收入群体搭乘率降 30%，中产无影响，碳排放未降——还支持吗？' },
+                    { role: 'student-revised', text: '提出分级定价/凭证补贴替代方案。' }
+                ]
+            },
+            {
+                id: 'b3', uni: 'Cambridge', subject: 'History', college: 'Trinity', type: 'text',
+                year: '2025 Winter', format: 'Pre-reading + 25min Teams',
+                title: '档案的沉默：能否了解被毁灭的文明？',
+                dims: ['blue','green','red','yellow'],
+                chain: [
+                    { role: 'tutor-question', text: '"历史由胜利者书写"——我们还能了解迦太基吗？' },
+                    { role: 'student-answer', text: '不能，文字记录被罗马控制。' },
+                    { role: 'tutor-challenge', text: '考古遗迹、物质文化难以伪造，这是否构成部分可知？' },
+                    { role: 'student-revised', text: '修正为"部分可知"，引入反向解读与档案沉默维度。' }
+                ]
+            },
+            {
+                id: 'b4', uni: 'Oxford', subject: 'CS', college: 'Magdalen', type: 'data',
+                year: '2024 Winter', format: '20min Teams',
+                title: 'bit 翻转下找数组最大值',
+                dims: [],  // STEM 无四维度，用约束-反例
+                chain: [
+                    { role: 'tutor-question', text: '内存有 10% 概率翻转 bit，如何找数组最大值？' },
+                    { role: 'student-answer', text: '复制 3 份投票。' },
+                    { role: 'tutor-challenge', text: '若重复读取成本是常规的 10 倍，99% 准确率下如何设计？' },
+                    { role: 'student-revised', text: '转向概率算法，仅对候选最大值校验。' }
+                ]
+            },
+            {
+                id: 'b5', uni: 'Cambridge', subject: 'Engineering', college: 'Trinity', type: 'eval',
+                year: '2024 Winter', format: '25min Teams',
+                title: '1000 米超级风机为何不可行？',
+                dims: [],
+                chain: [
+                    { role: 'tutor-question', text: '为何不建 1000 米高的风力发电机？' },
+                    { role: 'student-answer', text: '太贵了。' },
+                    { role: 'tutor-challenge', text: 'A∝r²，V∝r³，推导几何尺寸上限受什么控制？' },
+                    { role: 'student-revised', text: '立方-平方定律，自重增长快于支撑力。' }
+                ]
+            },
+            {
+                id: 'b6', uni: 'Oxford', subject: 'English', college: 'StJohns', type: 'text',
+                year: '2025 Winter', format: 'Pre-reading + 20min Teams',
+                title: 'AI 文本 vs 17 世纪诗：真实性归属',
+                dims: ['blue','green','red','yellow'],
+                chain: [
+                    { role: 'tutor-question', text: 'AI 生成对话与 17 世纪诗在"情感真实性"上有何区别？' },
+                    { role: 'student-answer', text: '人比 AI 高尚，AI 缺乏真实经验。' },
+                    { role: 'tutor-challenge', text: '若读者对 AI 文本共鸣更强，真实性是文本固有还是读者赋予？' },
+                    { role: 'student-revised', text: '从意图（Authorial Intent）与接收美学（Reception）拆解。' }
+                ]
+            },
+            // ============ OX-23: 官方真题种子（含官方点评） ============
+            {
+                id: 'b7', uni: 'Oxford', subject: 'Medicine', college: 'Balliol', type: 'concept',
+                year: '官方样题 · Oxford Biological Sciences', format: '官方示范',
+                title: '为什么很多动物身上长有条纹（如斑马）？',
+                dims: [],  // STEM 约束-反例
+                source: 'variant',  // 变体：牛津官网实际公布的是"瓢虫与草莓"，此为导师讨论话题的简化传播版
+                officialComment: '导师官方点评：这题没有标准答案。导师想看学生能否从"伪装避敌""调节体温""防虫叮咬"等不同维度提出假说，并主动说明如何设计实验来验证。',
+                chain: [
+                    { role: 'tutor-question', text: '为什么很多动物身上长有条纹（如斑马）？' },
+                    { role: 'student-answer', text: '可能是为了伪装，躲避捕食者。' },
+                    { role: 'tutor-challenge', text: '但斑马生活在草原，条纹在开阔环境反而显眼——伪装假说是否成立？你能设计实验验证吗？' },
+                    { role: 'student-revised', text: '修正：提出多假说（伪装/体温调节/防虫），各自设计对照实验——如比较条纹与无纹马匹的虫叮率。' }
+                ]
+            },
+            {
+                id: 'b8', uni: 'Oxford', subject: 'Medicine', college: 'Trinity', type: 'data',
+                year: '官方样题 · Oxford Chemistry', format: '官方示范',
+                title: '复杂有机分子：水溶 vs 辛醇溶？pH 变化如何影响？',
+                dims: [],
+                source: 'circulated',  // 疑似流传题：牛津官网未找到此题，官方化学样题实为"6碳12氢能组成多少种分子"
+                officialComment: '导师官方点评：若学生卡壳，导师会提示"低 pH 环境下水分子或官能团会变成什么形态"。考察能否立刻吸收 Hint 并修正推演。',
+                chain: [
+                    { role: 'tutor-question', text: '给定复杂有机分子结构式，预测更易溶于水还是辛醇？改变 pH 溶解度如何变？' },
+                    { role: 'student-answer', text: '看极性官能团数量判断水溶性。' },
+                    { role: 'tutor-challenge', text: '提示：低 pH 环境下，水分子或该官能团会变成什么形态？' },
+                    { role: 'student-revised', text: '吸收 Hint：低 pH 下酸性官能团质子化，改变极性→重新评估溶解度趋势。' }
+                ]
+            },
+            {
+                id: 'b9', uni: 'Cambridge', subject: 'Engineering', college: 'Trinity', type: 'eval',
+                year: '官方样题 · Cambridge Engineering', format: '官方示范',
+                title: '现在英国上空同时有多少架飞机在飞行？（费米估算）',
+                dims: [],
+                source: 'recalled',  // 流传题：剑桥官方明确不公布样题，此为学生回忆
+                officialComment: '导师官方点评：考察费米估算与量级直觉。关键在敢于做合理假设（英国几个主要机场？每分钟起降多少？平均飞行时长？），并把思考过程逐字说出来。',
+                chain: [
+                    { role: 'tutor-question', text: '现在英国上空同时有多少架飞机在飞行？' },
+                    { role: 'student-answer', text: '大概几千架？' },
+                    { role: 'tutor-challenge', text: '怎么得出的？请把假设逐字说出来——英国有几个主要机场？每分钟起降多少？平均飞行时长？' },
+                    { role: 'student-revised', text: '拆解：英国约 20 个主要机场，平均每分钟 2 架起降 = 40 架/分钟，平均飞行 2 小时 = 120 分钟 → 约 4800 架。' }
+                ]
+            },
+            {
+                id: 'b10', uni: 'Oxford', subject: 'PPE', college: 'Balliol', type: 'eval',
+                year: '官方样题 · Oxford/Cambridge PPE & Law', format: '官方示范',
+                title: '海盗分金：100 金币 5 海盗，最资深者应如何分配？',
+                dims: [],
+                source: 'variant',  // 参数错误：官方版为7海盗+计算机科学，此5海盗PPE/Law版属误植变体
+                officialComment: '导师官方点评：考察从最简模型（2 个海盗）开始逆向归纳（Backward Induction）的严密逻辑链。',
+                chain: [
+                    { role: 'tutor-question', text: '100 金币，5 个理性海盗按等级提方案投票，半数以上通过否则最资深者被扔海里。最资深者怎么分？' },
+                    { role: 'student-answer', text: '平均分 20 个给每人。' },
+                    { role: 'tutor-challenge', text: '从最简情况开始：如果只剩 2 个海盗，最资深者会怎么分？再推 3 个、4 个的情况。' },
+                    { role: 'student-revised', text: '逆向归纳：2 人时最资深者全拿（自己一票过半）；3 人时分 1 金币给最末者拉票；最终 5 人时分给第 3、5 号各 1 金币，自己留 98。' }
+                ]
+            },
+            // ============ 新增：12 条牛津官方一手真题（含导师点评，★★★） ============
+            {
+                id: 'b11', uni: 'Oxford', subject: 'CS', college: 'Balliol', type: 'eval',
+                year: '官方样题 · Oxford CS', format: '官方示范',
+                title: '海盗分财宝：7 个海盗 100 金币，最年长者如何提议？',
+                dims: [],
+                source: 'official',  // 官方一手：7海盗CS版（修正5海盗PPE误植）
+                officialComment: '导师官方点评：这是道标准逻辑考题。我关注学生如何跟着引导走，能否将大问题切分成小问题，用算法方式化解复杂概念。有问题应立即提出，而非闷声冥思苦想。',
+                chain: [
+                    { role: 'tutor-question', text: '7 个海盗 100 金币，最年长者提案，半数及以上同意则成立否则投海重来。海盗理性且无情，只关注个人所得最大化。最年长者如何分？' },
+                    { role: 'student-answer', text: '平均分？' },
+                    { role: 'tutor-challenge', text: '能否从最简情况（2 个海盗）开始切分？把大问题拆成小问题。' },
+                    { role: 'student-revised', text: '逆向归纳：2 海盗时年长者全拿；逐步推到 7 海盗，用算法思维递推每轮谁该被收买。' }
+                ]
+            },
+            {
+                id: 'b12', uni: 'Oxford', subject: 'Medicine', college: 'Balliol', type: 'concept',
+                year: '官方样题 · Oxford Biological Sciences', format: '官方示范',
+                title: '瓢虫是红的，草莓也是红的，为什么？',
+                dims: [],
+                source: 'official',  // 官方一手：导师 Martin Speight，动物学系
+                officialComment: '导师 Martin Speight（动物学系）点评：红色既可以向取食者发送"别吃我"信号，又可以发送"吃我"信号。我感兴趣的是看申请人如何解决这个明显的悖论。',
+                chain: [
+                    { role: 'tutor-question', text: 'Ladybirds are red. So are strawberries. Why?' },
+                    { role: 'student-answer', text: '都是红色色素。' },
+                    { role: 'tutor-challenge', text: '红色对取食者同时意味着"别吃我"（瓢虫警戒色）和"吃我"（草莓成熟信号）——这个悖论怎么解释？' },
+                    { role: 'student-revised', text: '区分信号发送者与接收者：瓢虫红色是防御性警戒色（aposematism），草莓红色是吸引传播种子的互利信号。' }
+                ]
+            },
+            {
+                id: 'b13', uni: 'Oxford', subject: 'Chemistry', college: 'Magdalen', type: 'data',
+                year: '官方样题 · Oxford Chemistry', format: '官方示范',
+                title: '6 个碳原子和 12 个氢原子能组成多少种分子？',
+                dims: [],
+                source: 'official',  // 官方一手：牛津官方化学样题
+                officialComment: '导师官方点评：考察同分异构体的系统枚举与化学结构推理能力。',
+                chain: [
+                    { role: 'tutor-question', text: 'How many different molecules can be made with 6 carbon atoms and 12 hydrogen atoms?' },
+                    { role: 'student-answer', text: '几种烷烃？' },
+                    { role: 'tutor-challenge', text: 'C6H12 不只是烷烃——还可能是环烷烃、烯烃。如何系统枚举不遗漏？' },
+                    { role: 'student-revised', text: '按不饱和度分类：环己烷、各种甲基环戊烷、己烯异构体（位置+碳链），系统穷举。' }
+                ]
+            },
+            {
+                id: 'b14', uni: 'Oxford', subject: 'Engineering', college: 'NewCollege', type: 'eval',
+                year: '官方样题 · Oxford Engineering', format: '官方示范',
+                title: '30cm 尺子放在两根手指上，手指靠拢时会发生什么？',
+                dims: [],
+                source: 'official',  // 官方一手：导师 Steve Collins，University College
+                officialComment: '导师 Steve Collins（University College）点评：几乎所有人预期尺子从最靠近中心的手指一侧倾倒，但实验会发现两指同时到达中心、尺子保持平衡。我们喜欢看候选人对意外结果的反应——考察摩擦、力矩的物理直觉。',
+                chain: [
+                    { role: 'tutor-question', text: 'Place a 30cm ruler on top of one finger from each hand... What happens when you bring your fingers together?' },
+                    { role: 'student-answer', text: '尺子会从一边倾倒。' },
+                    { role: 'tutor-challenge', text: '实际试一下——两指同时到达中心，尺子保持平衡。为什么？提示：考虑力矩和摩擦。' },
+                    { role: 'student-revised', text: '力矩使靠近中心的手指受力更大→摩擦更大→尺子先在较远手指上滑动，两指交替滑动直至中心汇合。' }
+                ]
+            },
+            {
+                id: 'b15', uni: 'Oxford', subject: 'Engineering', college: 'Trinity', type: 'eval',
+                year: '官方样题 · Oxford Engineering Science', format: '官方示范',
+                title: '如何设计重力坝来挡水？',
+                dims: [],
+                source: 'official',  // 官方一手：导师 Byron Byrne，工程系
+                officialComment: '导师 Byron Byrne（工程系）点评：候选人先确定作用在坝上的力，再考虑稳定性。可能识别出水会推倒大坝，构建数学表达式预测何时发生。考察把物理和数学应用到新情境的能力。',
+                chain: [
+                    { role: 'tutor-question', text: 'How would you design a gravity dam for holding back water?' },
+                    { role: 'student-answer', text: '建得够重就行。' },
+                    { role: 'tutor-challenge', text: '作用在坝上的力有哪些？什么情况下会失效（倾覆/滑动）？构建数学表达式预测。' },
+                    { role: 'student-revised', text: '识别水压（三角形分布）+自重，列抗倾覆力矩不等式，讨论滑动失效与渗水影响。' }
+                ]
+            },
+            {
+                id: 'b16', uni: 'Oxford', subject: 'PPE', college: 'Balliol', type: 'eval',
+                year: '官方样题 · Oxford Economics & Management', format: '官方示范',
+                title: '银行家值得拿这么高薪酬吗？政府该不该限制？',
+                dims: ['blue','red','yellow'],
+                source: 'official',  // 官方一手：导师 Brian Bell，Lady Margaret Hall
+                officialComment: '导师 Brian Bell（Lady Margaret Hall）点评：关键在于考虑薪酬的"经济性"而非是否公平。应举例说明银行业是否经营竞争性劳动力市场，过高工资是否是缺乏竞争的结果。',
+                chain: [
+                    { role: 'tutor-question', text: 'Do bankers deserve the pay they receive? And should government do something to limit how much they get?' },
+                    { role: 'student-answer', text: '不公平，应该限制。' },
+                    { role: 'tutor-challenge', text: '不要做道德判断——用经济学分析：银行业劳动力市场是否竞争性？高薪是否缺乏竞争的结果？' },
+                    { role: 'student-revised', text: '从劳动力市场结构切入：若银行间存在竞争不足，高薪可能是垄断租金，政府可反垄断而非直接限薪。' }
+                ]
+            },
+            {
+                id: 'b17', uni: 'Oxford', subject: 'PPE', college: 'Balliol', type: 'eval',
+                year: '官方样题 · Oxford PPE', format: '官方示范',
+                title: '为什么美国人均收入是布隆迪的 50-100 倍？',
+                dims: ['blue','green','red','yellow'],
+                source: 'official',  // 官方一手：导师 Brian Bell
+                officialComment: '导师 Brian Bell 点评：关键是要广泛地思考，而不是试图把答案与学校学到的某些知识相吻合。答案可能涉及技术、资本、教育、基础设施、贸易、法律在可持续发展中的作用。',
+                chain: [
+                    { role: 'tutor-question', text: 'Why is income per head 50 to 100 times higher in the US than in countries like Burundi and Malawi?' },
+                    { role: 'student-answer', text: '美国技术发达。' },
+                    { role: 'tutor-challenge', text: '技术只是其一——还有资本、教育、基础设施、贸易、法律制度。如何系统分析多因素？' },
+                    { role: 'student-revised', text: '多因素框架：技术+资本积累（Solow 模型）+人力资本+制度（产权法治）+贸易开放，各因素交互放大差距。' }
+                ]
+            },
+            {
+                id: 'b18', uni: 'Oxford', subject: 'PPE', college: 'Balliol', type: 'eval',
+                year: '官方样题 · Oxford PPE 哲学方向', format: '官方示范',
+                title: '乘飞机的道德论证：我一个人不坐飞机也会飞，所以没理由不坐？',
+                dims: ['blue','green','red','yellow'],
+                source: 'official',  // 官方一手：导师 Cecile Fabre，Lincoln College
+                officialComment: '导师 Cecile Fabre（Lincoln College）点评：面试不考查哲学知识，要看的是批判性思考能力、对反例的处理、在重要概念间作出区分。能否为论证之便接受前提本身就是一项测试。',
+                chain: [
+                    { role: 'tutor-question', text: '"我同意航空导致气候变化，但我不坐那架飞机也会飞，所以我没有道德理由不乘机。"这论证有说服力吗？' },
+                    { role: 'student-answer', text: '没说服力，因为每个人都这么想。' },
+                    { role: 'tutor-challenge', text: '为论证之故接受前提——那么"道德理由"与"审慎理由"如何区分？想想投票：我的一票不影响结果，为何要投？' },
+                    { role: 'student-revised', text: '区分集体行动问题与个体道德责任：即便单次行为不改变结果，"可普遍化原则"下若所有人都这么做则灾难——道德理由在于原则一致性。' }
+                ]
+            },
+            {
+                id: 'b19', uni: 'Oxford', subject: 'HSPS', college: 'King\'s', type: 'text',
+                year: '官方样题 · Oxford Geography', format: '官方示范',
+                title: '如果我去你住的地区，我会对什么感兴趣？',
+                dims: ['blue','green','red','yellow'],
+                source: 'official',  // 官方一手：导师 Lorraine Wild，St Hilda's
+                officialComment: '导师 Lorraine Wild（St Hilda\'s）点评：给候选人把 A-level 地理概念应用到家乡的机会。特意问家乡可消除游历广泛者的优势——考查对周围世界的好奇心与公平性设计。',
+                chain: [
+                    { role: 'tutor-question', text: 'If I were to visit the area where you live, what would I be interested in?' },
+                    { role: 'student-answer', text: '我们那有个商场。' },
+                    { role: 'tutor-challenge', text: '用地理思维看家乡：城市规划、族群迁移、环境管理——你身边有什么值得分析的？' },
+                    { role: 'student-revised', text: '从城市更新切入：老城区改造的绅士化（gentrification）现象，原住民置换与空间正义问题。' }
+                ]
+            },
+            {
+                id: 'b20', uni: 'Oxford', subject: 'Mathematics', college: 'Magdalen', type: 'data',
+                year: '官方样题 · Oxford Mathematics', format: '官方示范',
+                title: '梯子靠墙滑落，中间那级画出什么轨迹？',
+                dims: [],
+                source: 'official',  // 官方一手：牛津官方数学样题
+                officialComment: '导师官方点评：考察能否像数学家那样把不重要的信息抽象掉。梯子每阶段形成直角三角形，可用毕达哥拉斯定理求解——答案是以墙地交点为圆心的四分之一圆，常与直觉相反。',
+                chain: [
+                    { role: 'tutor-question', text: 'Imagine a ladder leaning against a vertical wall... What shape does the middle rung trace out as the ladder falls?' },
+                    { role: 'student-answer', text: '抛物线？' },
+                    { role: 'tutor-challenge', text: '梯子每阶段形成什么三角形？设中间点到墙地的距离，用毕达哥拉斯定理检验。' },
+                    { role: 'student-revised', text: '中间点到墙脚和地脚的距离平方和=梯子半长²（常数），即 x²+y²=r²——四分之一圆弧。' }
+                ]
+            },
+            {
+                id: 'b21', uni: 'Oxford', subject: 'Mathematics', college: 'Trinity', type: 'data',
+                year: '官方样题 · Oxford Mathematics', format: '官方示范',
+                title: '用 2×1 瓷砖铺满 2×n 矩形，有多少种铺法？',
+                dims: [],
+                source: 'official',  // 官方一手：牛津官方数学样题
+                officialComment: '导师官方点评：不希望你立刻给答案，而是探究。前几种情况答案是 1、2、3、5——能否看出斐波那契数列规律？揭示递推思维与从特例到一般化的能力。',
+                chain: [
+                    { role: 'tutor-question', text: 'How many ways can you cover a 2xn rectangular grid with 2x1 tiles?' },
+                    { role: 'student-answer', text: 'n 的函数？' },
+                    { role: 'tutor-challenge', text: '画图试 n=1,2,3,4——答案 1、2、3、5。看出规律了吗？为什么第 n 个是前两个之和？' },
+                    { role: 'student-revised', text: '递推：f(n)=f(n-1)+f(n-2)。最后一块竖放→剩 n-1；最后两块横放→剩 n-2。即斐波那契。' }
+                ]
+            },
+            {
+                id: 'b22', uni: 'Oxford', subject: 'English', college: 'Magdalen', type: 'text',
+                year: '官方样题 · Oxford English Literature', format: '官方示范',
+                title: '英语专业学生读《暮光之城》为什么可能有用？',
+                dims: ['blue','green','red','yellow'],
+                source: 'official',  // 官方一手：导师 Lucinda Rumsey，Mansfield College
+                officialComment: '导师 Lucinda Rumsey（Mansfield College）点评：候选人常集中于他们以为"高级"的文本。我希望不论读过什么都能像文学批评家一样思考。通过他们知道的事情来评判，而非不知道的。',
+                chain: [
+                    { role: 'tutor-question', text: 'Why might it be useful for an English student to read the Twilight series?' },
+                    { role: 'student-answer', text: '流行文化也值得研究？' },
+                    { role: 'tutor-challenge', text: '关键不在读什么，而在怎么读——能否像文学批评家一样分析任何文本？' },
+                    { role: 'student-revised', text: '《暮光之城》可作类型研究：哥特传统演变、性别叙事、受众理论。文本价值不在"高级"而在分析深度。' }
+                ]
+            }
+        ];
+
+        // ============ 状态 ============
+        const state = {
+            bank: [...SEED_BANK],
+            filters: { subject: '', college: '', type: '' }
+        };
+
+        // ============ DOM ============
+        const filterSubject = document.getElementById('filterSubject');
+        const filterCollege = document.getElementById('filterCollege');
+        const filterType = document.getElementById('filterType');
+        const bankList = document.getElementById('bankList');
+        const toggleUploadBtn = document.getElementById('toggleUploadBtn');
+        const uploadForm = document.getElementById('uploadForm');
+        const addStepBtn = document.getElementById('addStepBtn');
+        const chainBuilder = document.getElementById('chainBuilder');
+        const submitUploadBtn = document.getElementById('submitUploadBtn');
+        const cancelUploadBtn = document.getElementById('cancelUploadBtn');
+        const offerHolderBtn = document.getElementById('offerHolderBtn');
+
+        // ============ 渲染面经列表 ============
+        const TYPE_LABELS = { text:'文本分析', eval:'观点评估', data:'图表数据', concept:'概念定义' };
+        const COLLEGE_LABELS = { Balliol:'Balliol', Trinity:'Trinity', StJohns:"St John's", King's:"King's", Magdalen:'Magdalen', NewCollege:'New College' };
+        // 来源等级（F-5 + 联网核实）
+        const SOURCE_LABELS = {
+            official:  { label:'官方一手', cls:'src-official' },   // 牛津官网公布，含导师点评
+            variant:   { label:'官方变体', cls:'src-variant' },     // 导师讨论话题的简化传播版
+            circulated:{ label:'流传题', cls:'src-circulated' },    // 疑似流传，非官方公布
+            recalled:  { label:'学生回忆', cls:'src-recalled' }      // 学生回忆，剑桥类多属此
+        };
+
+        function renderBank() {
+            const filtered = state.bank.filter(e => {
+                if (state.filters.subject && e.subject !== state.filters.subject) return false;
+                if (state.filters.college && e.college !== state.filters.college) return false;
+                if (state.filters.type && e.type !== state.filters.type) return false;
+                return true;
+            });
+
+            if (filtered.length === 0) {
+                bankList.innerHTML = '<div class="empty-state">无匹配面经。尝试调整筛选，或上传你的经历 →</div>';
+                return;
+            }
+
+            bankList.innerHTML = filtered.map(e => {
+                const uniTag = '<span class="tag ' + (e.uni === 'Oxford' ? 'tag-uni-o' : 'tag-uni-c') + '">' + e.uni + '</span>';
+                const subTag = '<span class="tag tag-subject">' + e.subject + '</span>';
+                const colTag = '<span class="tag tag-college">' + (COLLEGE_LABELS[e.college] || e.college) + '</span>';
+                const typeTag = '<span class="tag tag-type">' + (TYPE_LABELS[e.type] || e.type) + '</span>';
+                // 来源等级标签（F-5：替代旧的单一"官方"标识）
+                let sourceTag = '';
+                if (e.source && SOURCE_LABELS[e.source]) {
+                    const s = SOURCE_LABELS[e.source];
+                    const icon = e.source === 'official' ? '🎓 ' : (e.source === 'recalled' ? '🗣 ' : '📋 ');
+                    sourceTag = '<span class="tag ' + s.cls + '" title="来源等级">' + icon + s.label + '</span>';
+                }
+
+                // 维度点（STEM 无维度时显示"约束-反例"标记）
+                let dimsHtml = '';
+                if (e.dims && e.dims.length > 0) {
+                    const allDims = ['blue','green','red','yellow'];
+                    dimsHtml = '<div class="be-dims">' + allDims.map(d => {
+                        const has = e.dims.includes(d);
+                        return '<span class="dim-dot ' + (has ? 'dot-' + d : 'miss') + '" title="' + d + '"></span>';
+                    }).join('') + '</div>';
+                } else {
+                    dimsHtml = '<div class="be-dims"><span style="font-size:0.62rem;color:#1565c0;background:#e3f2fd;padding:1px 5px;border-radius:3px;">约束-反例</span></div>';
+                }
+
+                return '<div class="bank-entry" data-id="' + e.id + '">' +
+                    '<div class="be-header">' + uniTag + subTag + colTag + typeTag + sourceTag + '</div>' +
+                    '<div class="be-title">' + escapeHtml(e.title) + '</div>' +
+                    '<div class="be-meta">' + e.year + ' · ' + e.format + ' · ' + e.chain.length + ' 环节</div>' +
+                    dimsHtml +
+                '</div>';
+            }).join('');
+
+            bankList.querySelectorAll('.bank-entry').forEach(el => {
+                el.addEventListener('click', () => showEntryDetail(el.dataset.id));
+            });
+        }
+
+        function showEntryDetail(id) {
+            const entry = state.bank.find(e => e.id === id);
+            if (!entry) return;
+            const entryEl = bankList.querySelector('.bank-entry[data-id="' + id + '"]');
+            // toggle：已有详情则收起
+            const existing = entryEl.querySelector('.be-detail');
+            if (existing) {
+                existing.remove();
+                return;
+            }
+            // F-5: 内联展开追问链卡片
+            const roleMap = {
+                'tutor-question':   { cls: 's-question',  label: '导师发问' },
+                'student-answer':   { cls: 's-answer',    label: '学生回答' },
+                'tutor-challenge':  { cls: 's-challenge', label: '导师追问/反驳' },
+                'student-revised':  { cls: 's-revised',   label: '学生二次推演' }
+            };
+            const chainHtml = entry.chain.map(c => {
+                const r = roleMap[c.role] || { cls: '', label: c.role };
+                return '<div class="bd-step ' + r.cls + '">' +
+                    '<span class="bs-label">' + r.label + '</span>' +
+                    escapeHtml(c.text) +
+                '</div>';
+            }).join('');
+            const commentHtml = entry.officialComment
+                ? '<div class="bd-comment"><span class="bc-label">🎓 导师官方点评</span>' + escapeHtml(entry.officialComment) + '</div>'
+                : '';
+            const sourceNote = entry.source && SOURCE_LABELS[entry.source]
+                ? '<div style="font-size:0.72rem;color:#888;margin-bottom:8px;">来源等级：<b>' + SOURCE_LABELS[entry.source].label + '</b></div>'
+                : '';
+            const detail = document.createElement('div');
+            detail.className = 'be-detail';
+            detail.innerHTML = sourceNote +
+                '<div class="bd-chain">' + chainHtml + '</div>' +
+                commentHtml +
+                '<div class="bd-actions"><button class="btn" onclick="event.stopPropagation();">📋 复制</button></div>';
+            entryEl.appendChild(detail);
+            // 滚动到详情
+            setTimeout(() => detail.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 50);
+        }
+
+        // 筛选事件
+        [filterSubject, filterCollege, filterType].forEach(sel => {
+            sel.addEventListener('change', () => {
+                state.filters.subject = filterSubject.value;
+                state.filters.college = filterCollege.value;
+                state.filters.type = filterType.value;
+                renderBank();
+            });
+        });
+
+        // ============ UGC 上传表单 ============
+        toggleUploadBtn.addEventListener('click', () => {
+            uploadForm.classList.toggle('show');
+            toggleUploadBtn.textContent = uploadForm.classList.contains('show') ? '收起表单' : '填写追问链 →';
+        });
+
+        addStepBtn.addEventListener('click', () => {
+            const div = document.createElement('div');
+            div.className = 'chain-step-input';
+            div.innerHTML =
+                '<select class="cs-role"><option value="tutor-question">导师发问</option><option value="student-answer">学生回答</option><option value="tutor-challenge">导师追问/反驳</option><option value="student-revised">学生二次推演</option></select>' +
+                '<textarea placeholder="输入该环节的内容…"></textarea>' +
+                '<button class="btn" style="grid-column:1/-1;font-size:0.72rem;padding:2px 8px;justify-self:start;" onclick="this.parentElement.remove()">删除此环节</button>';
+            chainBuilder.appendChild(div);
+            updateAuditMeter();
+        });
+
+        // 四维度审核标尺实时更新
+        ['upTextual','upStructural','upConflict','upBoundary'].forEach(id => {
+            document.getElementById(id).addEventListener('input', updateAuditMeter);
+        });
+
+        function updateAuditMeter() {
+            const dims = [
+                { id: 'upTextual', stat: 'audit-textual' },
+                { id: 'upStructural', stat: 'audit-structural' },
+                { id: 'upConflict', stat: 'audit-conflict' },
+                { id: 'upBoundary', stat: 'audit-boundary' }
+            ];
+            let covered = 0;
+            dims.forEach(d => {
+                const val = document.getElementById(d.id).value.trim();
+                const el = document.getElementById(d.stat);
+                if (val) {
+                    el.textContent = '已填';
+                    el.className = 'am-status ok';
+                    covered++;
+                } else {
+                    el.textContent = '未填';
+                    el.className = 'am-status miss';
+                }
+            });
+        }
+
+        // 提交上传
+        submitUploadBtn.addEventListener('click', () => {
+            const uni = document.getElementById('upUni').value;
+            const subject = document.getElementById('upSubject').value;
+            const college = document.getElementById('upCollege').value;
+            const type = document.getElementById('upType').value;
+            const year = document.getElementById('upYear').value.trim() || '2025 Winter';
+            const format = document.getElementById('upFormat').value.trim() || '20min Teams';
+
+            // 收集追问链
+            const steps = [];
+            chainBuilder.querySelectorAll('.chain-step-input').forEach(step => {
+                const role = step.querySelector('.cs-role').value;
+                const text = step.querySelector('textarea').value.trim();
+                if (text) steps.push({ role, text });
+            });
+
+            // 审核校验
+            if (steps.length < 3) {
+                alert('审核未通过：追问链至少需要 3 个环节（发问+回答+追问）');
+                return;
+            }
+
+            const dims = [];
+            if (document.getElementById('upTextual').value.trim()) dims.push('blue');
+            if (document.getElementById('upStructural').value.trim()) dims.push('green');
+            if (document.getElementById('upConflict').value.trim()) dims.push('red');
+            if (document.getElementById('upBoundary').value.trim()) dims.push('yellow');
+
+            if (dims.length < 2) {
+                alert('审核未通过：四维度拆解至少需覆盖 2 个维度（提升内容价值）');
+                return;
+            }
+
+            // 生成标题（取第一环节前 30 字）
+            const title = steps[0].text.slice(0, 40) + (steps[0].text.length > 40 ? '…' : '');
+
+            const newEntry = {
+                id: 'u' + Date.now(), uni, subject, college, type,
+                year, format, title, dims, chain: steps,
+                userSubmitted: true
+            };
+            state.bank.unshift(newEntry);
+            renderBank();
+
+            // 存入 localStorage
+            try {
+                const userBank = JSON.parse(localStorage.getItem('oxbridge_user_bank') || '[]');
+                userBank.push(newEntry);
+                localStorage.setItem('oxbridge_user_bank', JSON.stringify(userBank));
+            } catch (e) {}
+
+            alert('✓ 审核通过！你的面经已加入面经库。\n\n追问链 ' + steps.length + ' 环节，四维度覆盖 ' + dims.length + '/4。');
+            uploadForm.classList.remove('show');
+            toggleUploadBtn.textContent = '填写追问链 →';
+        });
+
+        cancelUploadBtn.addEventListener('click', () => {
+            uploadForm.classList.remove('show');
+            toggleUploadBtn.textContent = '填写追问链 →';
+        });
+
+        // Offer Holder 报名
+        offerHolderBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            alert('Offer Holder 还原计划报名（OX-19）\n\n感谢你愿意还原面试经历！\n完整报名表单与审核流程将在 1-2 月发 Offer 季上线。\n\n暂可先通过上方"上传面经"表单提交你的还原内容。');
+        });
+
+        // 加载用户已上传面经
+        function loadUserBank() {
+            try {
+                const userBank = JSON.parse(localStorage.getItem('oxbridge_user_bank') || '[]');
+                state.bank = [...userBank, ...SEED_BANK];
+            } catch (e) {}
+        }
+
+        // ============ 工具函数 ============
+        function escapeHtml(str) {
+            const div = document.createElement('div');
+            div.textContent = str;
+            return div.innerHTML;
+        }
+
+        // ============ 初始化 ============
+        loadUserBank();
+        renderBank();
+        updateAuditMeter();
+    })();
+    </script>
+</body>
+</html>

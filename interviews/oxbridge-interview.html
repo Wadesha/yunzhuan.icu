@@ -34,6 +34,10 @@
             font-weight: 600;
         }
         .section h2 .en { color: #999; font-size: 0.8rem; font-weight: normal; }
+        .section h3 {
+            color: #444; font-size: 0.92rem; font-weight: 600;
+            margin: 12px 0 6px;
+        }
         .section p { color: #333; line-height: 1.7; font-size: 0.92rem; }
         .section p.cn-hint { color: #666; font-size: 0.85rem; margin-bottom: 6px; }
         .tag {
@@ -47,6 +51,7 @@
         .tag-subject { background: #e3f2fd; color: #1565c0; }
         .tag-general { background: #f3e5f5; color: #7b1fa2; }
         .tag-technique { background: #e8f5e9; color: #2e7d32; }
+        .tag-phase { background: #fff3e0; color: #e65100; }
         .sample-q {
             background: #f8f9ff;
             border-left: 3px solid #667eea;
@@ -64,6 +69,106 @@
             font-size: 0.82rem;
             line-height: 1.6;
         }
+        /* 学科 tab 切换 */
+        .subject-tabs {
+            display: flex; flex-wrap: wrap; gap: 6px;
+            margin-bottom: 12px; padding-bottom: 8px;
+            border-bottom: 1px solid #e8ecff;
+        }
+        .subject-tabs .tab-btn {
+            padding: 5px 12px; border: 1px solid #ddd; background: white;
+            border-radius: 16px; font-size: 0.78rem; cursor: pointer;
+            color: #666; transition: all 0.15s; font-family: inherit;
+        }
+        .subject-tabs .tab-btn.active {
+            background: #667eea; color: white; border-color: #667eea;
+        }
+        .subject-tabs .tab-btn:hover:not(.active) {
+            border-color: #667eea; color: #667eea;
+        }
+        .sample-q { display: none; }
+        .sample-q.active { display: block; }
+        /* 模块架构导航卡片 */
+        .module-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-top: 8px;
+        }
+        .module-card {
+            background: #f8f9ff;
+            border: 1px solid #e8ecff;
+            border-radius: 8px;
+            padding: 12px 14px;
+            text-decoration: none;
+            transition: all 0.15s ease;
+            position: relative;
+        }
+        .module-card:hover {
+            background: #eef1ff;
+            border-color: #667eea;
+        }
+        .module-card .m-num {
+            color: #667eea; font-size: 0.72rem; font-weight: 700;
+            letter-spacing: 0.05em;
+        }
+        .module-card .m-title {
+            color: #333; font-weight: 600; font-size: 0.92rem;
+            margin: 2px 0 4px;
+        }
+        .module-card .m-en { color: #999; font-size: 0.76rem; }
+        .module-card .m-desc {
+            color: #666; font-size: 0.8rem; line-height: 1.5;
+            margin-top: 6px;
+        }
+        .module-card .m-status {
+            display: inline-block; margin-top: 6px;
+            font-size: 0.68rem; padding: 1px 6px; border-radius: 3px;
+            background: #e8f5e9; color: #2e7d32;
+        }
+        .module-card.disabled { opacity: 0.75; cursor: default; }
+        .module-card.disabled .m-status { background: #fff8e1; color: #ff8f00; }
+        /* 四维度表 */
+        .dim-table {
+            width: 100%; border-collapse: collapse;
+            font-size: 0.82rem; margin-top: 6px;
+        }
+        .dim-table th, .dim-table td {
+            border: 1px solid #eee; padding: 6px 8px; text-align: left;
+            vertical-align: top;
+        }
+        .dim-table th {
+            background: #f8f9ff; color: #555; font-weight: 600;
+            font-size: 0.78rem;
+        }
+        .dim-table .dim-dot {
+            display: inline-block; width: 8px; height: 8px;
+            border-radius: 50%; margin-right: 5px; vertical-align: middle;
+        }
+        .dot-blue { background: #1565c0; }
+        .dot-green { background: #2e7d32; }
+        .dot-red { background: #c62828; }
+        .dot-yellow { background: #f9a825; }
+        /* 推演链 */
+        .chain {
+            margin: 8px 0; border-left: 3px solid #667eea;
+            background: #f8f9ff; border-radius: 0 6px 6px 0;
+            overflow: hidden;
+        }
+        .chain-step {
+            padding: 8px 14px; border-bottom: 1px solid #eef1ff;
+            font-size: 0.85rem; line-height: 1.6;
+        }
+        .chain-step:last-child { border-bottom: none; }
+        .chain-step .role {
+            font-weight: 700; font-size: 0.72rem;
+            text-transform: uppercase; letter-spacing: 0.04em;
+            margin-right: 6px;
+        }
+        .role-tutor { color: #c62828; }
+        .role-student { color: #1565c0; }
+        .role-meta { color: #ff8f00; }
+        .chain-step .content { color: #333; }
         .subject-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -99,9 +204,87 @@
             color: #5d4037;
             line-height: 1.6;
         }
+        .info-box {
+            background: #e3f2fd;
+            border-left: 3px solid #1565c0;
+            padding: 10px 14px;
+            border-radius: 0 6px 6px 0;
+            margin-top: 10px;
+            font-size: 0.82rem;
+            color: #0d47a1;
+            line-height: 1.6;
+        }
+        .info-box strong { color: #0d47a1; }
+        .roadmap-mini {
+            font-size: 0.8rem; color: #555; line-height: 1.7;
+        }
+        .roadmap-mini code {
+            background: #eef1ff; color: #667eea;
+            padding: 1px 5px; border-radius: 3px; font-size: 0.76rem;
+        }
         .footer { text-align: center; margin-top: 20px; color: #999; font-size: 0.8rem; }
+        /* 全学科样板库（折叠卡片） */
+        .bank-filter {
+            display: flex; flex-wrap: wrap; gap: 6px;
+            margin-bottom: 10px; font-size: 0.78rem;
+        }
+        .bank-filter .f-tag {
+            padding: 3px 9px; border-radius: 12px;
+            background: #f0f0f5; color: #666; cursor: default;
+        }
+        .bank-filter .f-tag.stem { background: #e3f2fd; color: #1565c0; }
+        .bank-filter .f-tag.hss { background: #f3e5f5; color: #7b1fa2; }
+        .bank-item {
+            background: #f8f9ff; border: 1px solid #e8ecff;
+            border-radius: 8px; margin-bottom: 8px; overflow: hidden;
+        }
+        .bank-item > summary {
+            list-style: none; cursor: pointer; padding: 10px 14px;
+            display: flex; align-items: center; gap: 8px;
+            font-size: 0.88rem; font-weight: 600; color: #333;
+        }
+        .bank-item > summary::-webkit-details-marker { display: none; }
+        .bank-item > summary::before {
+            content: '▸'; color: #667eea; font-size: 0.72rem;
+            transition: transform 0.15s ease;
+        }
+        .bank-item[open] > summary::before { transform: rotate(90deg); }
+        .bank-item > summary .b-meta {
+            font-weight: 400; font-size: 0.74rem; color: #888;
+            margin-left: auto;
+        }
+        .bank-item .b-body {
+            padding: 0 14px 12px; font-size: 0.84rem; line-height: 1.65;
+        }
+        .bank-item .b-block {
+            padding: 7px 10px; margin: 6px 0; border-radius: 5px;
+            border-left: 3px solid #ddd;
+        }
+        .bank-item .b-block .b-label {
+            font-size: 0.7rem; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 0.04em; margin-right: 5px;
+        }
+        .b-prompt { background: #f8f9ff; border-left-color: #667eea; }
+        .b-prompt .b-label { color: #667eea; }
+        .b-pitfall { background: #fff8e1; border-left-color: #ff8f00; }
+        .b-pitfall .b-label { color: #ff8f00; }
+        .b-followup { background: #ffebee; border-left-color: #c62828; }
+        .b-followup .b-label { color: #c62828; }
+        .b-resolution { background: #e8f5e9; border-left-color: #2e7d32; }
+        .b-resolution .b-label { color: #2e7d32; }
+        .b-framework {
+            font-size: 0.74rem; color: #555; margin-top: 8px;
+            padding: 5px 9px; background: #f0f0f5; border-radius: 4px;
+        }
+        .b-framework .fw-label {
+            font-weight: 700; font-size: 0.68rem;
+            text-transform: uppercase; letter-spacing: 0.04em;
+        }
+        .b-framework.fw-stem .fw-label { color: #1565c0; }
+        .b-framework.fw-hss .fw-label { color: #7b1fa2; }
         @media (max-width: 600px) {
-            .subject-grid { grid-template-columns: 1fr; }
+            .subject-grid, .module-grid { grid-template-columns: 1fr; }
+            .dim-table { font-size: 0.78rem; }
         }
     </style>
     <link rel="stylesheet" href="../css/theme.css">
@@ -117,171 +300,521 @@
 
     <h1>Oxbridge Interviews</h1>
     <p class="en-name">牛津剑桥面试</p>
-    <p class="code-line">Academic interviews · Tutorial style · Sample questions · Preparation</p>
+    <p class="code-line">Tutorial-style · Think Aloud · Pre-reading · Devil's Advocate</p>
 
+    <!-- ============ Introductory：面试是什么 ============ -->
     <div class="section">
-        <h2>What is an Oxbridge Interview? <span class="en">面试是什么样的？</span></h2>
-        <p class="cn-hint">牛剑面试不是测试你知道多少，而是测试你<b>如何思考</b>。面试形式类似牛津剑桥特有的 tutorial/supervision 教学方式，导师会和你讨论学术问题，看你的思维过程。</p>
+        <h2>What is an Oxbridge Interview? <span class="en">面试本质</span></h2>
+        <p>An Oxbridge interview is <b>not</b> a test of how much you know, nor a check on your CV or spoken fluency. It is a simulation of the tutorial / supervision you will experience as a student. Tutors are looking for <b>teachability</b>: how you think when guided through an unfamiliar problem.</p>
         <div class="tip-box">
-            <strong>💡 核心本质：</strong><br>
-            · 面试官不是在找"正确答案"，而是在找"正确的思考方式"<br>
-            · 他们想看到你如何处理不熟悉的问题<br>
-            · 考察你的学术潜力和对学科的热情<br>
-            · 模拟未来导师制教学的感觉
+            <strong>Core essence:</strong><br>
+            · Tutors are not looking for the "right answer" — they are looking for the "right way of thinking"<br>
+            · You will be given new concepts or hard problems and watched as you break them down with guidance<br>
+            · It assesses academic potential, not memorised knowledge<br>
+            · The format is a preview of future tutorial-style teaching
+        </div>
+        <div class="warning-box">
+            <strong>⚠️ Three fatal misconceptions:</strong><br>
+            · <b>Over-rehearsed answers</b> — prepared scripts collapse the moment a tutor follows up or pushes back<br>
+            · <b>"Afraid to be wrong" → silence</b> — not thinking aloud kills the interview; tutors need to hear your reasoning<br>
+            · <b>Ignoring college style</b> — Balliol / Trinity / St John's weigh different things; failing to compare leaves you unprepared
         </div>
     </div>
 
+    <!-- ============ Introductory：面试结构 ============ -->
     <div class="section">
         <h2>Interview Structure <span class="en">面试结构</span></h2>
         <ul style="list-style:none;">
             <li style="padding:6px 0;border-bottom:1px solid #f0f0f0;">
-                <strong>数量：</strong>通常 2-3 场面试，每场 20-45 分钟
+                <strong>Number:</strong> Usually 2–3 interviews, each 20–45 minutes
             </li>
             <li style="padding:6px 0;border-bottom:1px solid #f0f0f0;">
-                <strong>面试官：</strong>通常 2 位面试官（1 位主导 + 1 位记录/辅助）
+                <strong>Interviewers:</strong> Usually 2 (one leads, one notes / assists)
             </li>
             <li style="padding:6px 0;border-bottom:1px solid #f0f0f0;">
-                <strong>内容：</strong>几乎全是学术问题，围绕你申请的专业
+                <strong>Content:</strong> Almost entirely academic, focused on the subject you applied for
             </li>
             <li style="padding:6px 0;border-bottom:1px solid #f0f0f0;">
-                <strong>材料：</strong>可能会给你一篇文章/题目/材料，先读 15-30 分钟后面试讨论
+                <strong>Pre-reading:</strong> 15–30 minutes before the interview you receive unseen material (a historical source, a law problem, an economics dataset, a philosophy paradox) to digest and discuss
+            </li>
+            <li style="padding:6px 0;border-bottom:1px solid #f0f0f0;">
+                <strong>Format:</strong> Most international applicants are interviewed online via Microsoft Teams or a college-specific system
             </li>
             <li style="padding:6px 0;">
-                <strong>形式：</strong>线上（Zoom/Teams）或线下（去英国面试）
+                <strong>Dialogue mode:</strong> "Brick-taking and brick-dismantling" — the tutor poses an open question, then <b>immediately follows up with a counter-example or a tweaked assumption</b> based on your answer
             </li>
         </ul>
     </div>
 
-    <div class="section">
-        <h2>Common Subjects & Sample Questions <span class="en">各学科样题</span></h2>
-        
-        <div class="sample-q">
-            <span class="tag tag-subject">Maths</span>
-            <div class="q">How would you prove that the square root of 2 is irrational?</div>
-            <div class="hint">思路：反证法（proof by contradiction）。假设 √2 = a/b（最简分数），推出矛盾。关键是展示你的推理过程，而不只是答案。</div>
-        </div>
-
-        <div class="sample-q">
-            <span class="tag tag-subject">Physics</span>
-            <div class="q">If you could drill a hole straight through the Earth from one side to the other, and drop a ball down it, what would happen?</div>
-            <div class="hint">思路：简谐运动（SHM）。球会在两端之间来回振荡。需要考虑引力随半径变化的关系。不用怕不会，试着一步步推。</div>
-        </div>
-
-        <div class="sample-q">
-            <span class="tag tag-subject">Economics</span>
-            <div class="q">Why is there poverty difficult to measure?</div>
-            <div class="hint">思路：绝对贫困 vs 相对贫困、购买力平价、不同国家生活成本、收入vs 多维贫困（教育、健康、机会）。展示多角度思考。</div>
-        </div>
-
-        <div class="sample-q">
-            <span class="tag tag-subject">Medicine</span>
-            <div class="q">Why do we have red blood cells?</div>
-            <div class="hint">思路：运输氧气和二氧化碳。血红蛋白的作用。为什么是红细胞而不是把血红蛋白直接溶解在血浆里？表面积与体积比。</div>
-        </div>
-
-        <div class="sample-q">
-            <span class="tag tag-subject">PPE / Philosophy</span>
-            <div class="q">Should we legalize all drugs?</div>
-            <div class="hint">思路：从多个角度分析——个人自由、公共健康、犯罪率、经济成本、社会公平。不是要一个答案，是看你论证的结构和逻辑。</div>
-        </div>
-
-        <div class="sample-q">
-            <span class="tag tag-subject">Engineering</span>
-            <div class="q">How would you design a gravity dam for holding back water?</div>
-            <div class="hint">思路：受力分析、材料、形状为什么是三角形/梯形？底部宽上窄？考虑水压分布、抗倾覆、抗滑移。一步步推导。</div>
-        </div>
-
-        <div class="sample-q">
-            <span class="tag tag-subject">Computer Science</span>
-            <div class="q">How do pirates divide a cake between n people fairly?</div>
-            <div class="hint">思路：经典的 fair division 问题。"I cut you choose" 的扩展到 n 个人。算法思维、公平性定义、博弈论思路。</div>
-        </div>
-
-        <div class="sample-q">
-            <span class="tag tag-subject">English Literature</span>
-            <div class="q">Why do you think a character in [book]?（给你一首诗/一段文字，让你分析。</div>
-            <div class="hint">思路：仔细读文本，找证据，分析语言、结构、主题。不是要"正确"解读，是看你如何从文本出发的论证能力。</div>
-        </div>
-
-        <div class="sample-q">
-            <span class="tag tag-subject">History</span>
-            <div class="q">Is violence always wrong?</div>
-            <div class="hint">思路：定义 什么是"暴力"？什么情境下？不同历史/不同文化的定义一样吗？目的 vs 结果？展示你的论证结构。</div>
-        </div>
-
-        <div class="sample-q">
-            <span class="tag tag-subject">Law</span>
-            <div class="q">「你觉得法律应该惩罚未遂和既遂一样严重吗？</div>
-            <div class="hint">思路：报应主义vs后果主义、威慑、道德可责性、证据问题。多角度论证你的立场的论证能力，角度思考。</div>
-        </div>
-    </div>
-
+    <!-- ============ Introductory：核心技巧 ============ -->
     <div class="section">
         <h2>Key Techniques <span class="en">核心技巧</span></h2>
         <div class="tip-box">
-            <strong>💡 <span class="tag tag-technique">Think Aloud</span> 边想边说
-            <br>最重要的技巧！把你的思考过程说出来。面试官想知道你是怎么想的，哪怕还没到答案。
+            <strong>💡 <span class="tag tag-technique">Think Aloud</span></strong><br>
+            The single most important skill. Narrate your reasoning as you go. Tutors want to hear how you think, even before you reach an answer. Silence is worse than a wrong guess.
         </div>
         <div class="tip-box" style="margin-top:8px;background:#e3f2fd;border-left-color:#1565c0;color:#0d47a1;">
-            <strong>💡 <span class="tag tag-technique">Take Your Time</span> 慢慢来
-            <br>不用马上回答。可以停下来思考几秒钟没关系。说 "Can I have a moment to think?" 完全没问题。
+            <strong>💡 <span class="tag tag-technique">Take Your Time</span></strong><br>
+            You don't have to answer instantly. Pausing for a few seconds is fine. Saying "Can I have a moment to think?" is completely acceptable.
         </div>
         <div class="tip-box" style="margin-top:8px;background:#f3e5f5;border-left-color:#7b1fa2;color:#4a148c;">
-            <strong>💡 <span class="tag tag-technique">Ask Questions</span> 问问题澄清
-            <br>题目没懂就问。 "When you say X, do you mean Y?" 这展示你的批判性思维。
+            <strong>💡 <span class="tag tag-technique">Ask Clarifying Questions</span></strong><br>
+            If the question is ambiguous, ask. "When you say X, do you mean Y?" demonstrates critical thinking, not weakness.
         </div>
         <div class="tip-box" style="margin-top:8px;background:#fff3e0;border-left-color:#ef6c00;color:#e65100;">
-            <strong>💡 <span class="tag tag-technique">Be Ready to Be Challenged</span> 接受挑战
-            <br>面试官可能会质疑你、反驳你、给你新信息。这不是你错了——这是面试的正常部分！看你能不能回应、调整、学习。
+            <strong>💡 <span class="tag tag-technique">Be Ready to Be Challenged</span></strong><br>
+            Tutors will question you, push back, hand you new information. This is not you being wrong — it is a normal part of the interview. They want to see you <b>acknowledge limits and re-reason under the new condition</b>, not defend a fixed conclusion.
         </div>
         <div class="warning-box" style="margin-top:10px;">
-            <strong>⚠️ 常见误区：</strong><br>
-            · 以为要答对所有问题——错！不会很正常<br>
-            · 不敢说"我不知道"——可以说不知道，但要说你会怎么想<br>
-            · 被反驳就慌——他们就是想看你的反应<br>
-            · 背诵准备好的答案——他们听得出来
+            <strong>⚠️ Common pitfalls:</strong><br>
+            · Thinking you must answer everything — no, being stuck is normal<br>
+            · Being afraid to say "I don't know" — you can, but explain how you would approach it<br>
+            · Panicking when challenged — that reaction is exactly what they are observing<br>
+            · Reciting prepared answers — tutors can tell, and one follow-up breaks them
         </div>
     </div>
 
+    <!-- ============ Introductory：准备策略 ============ -->
     <div class="section">
         <h2>Preparation Strategy <span class="en">准备策略</span></h2>
         <ul style="list-style:none;">
             <li style="padding:6px 0;border-bottom:1px solid #f0f0f0;">
-                <strong>1. 深入掌握 A-Level/IB 课内知识</strong>
-                <div style="color:#666;font-size:0.82rem;margin-top:4px;">确保你完全理解课内的内容，能解释清楚"为什么"。</div>
+                <strong>1. Master your A-Level / IB syllabus</strong>
+                <div style="color:#666;font-size:0.82rem;margin-top:4px;">Make sure you can explain the "why" behind every concept, not just the result.</div>
             </li>
             <li style="padding:6px 0;border-bottom:1px solid #f0f0f0;">
-                <strong>2. 拓展阅读</strong>
-                <div style="color:#666;font-size:0.82rem;margin-top:4px;">读专业相关的书籍、文章、播客。PS 里提到的一定要深入了解。</div>
+                <strong>2. Read beyond the syllabus</strong>
+                <div style="color:#666;font-size:0.82rem;margin-top:4px;">Books, articles, podcasts related to your subject. Anything in your Personal Statement must be deeply understood.</div>
             </li>
             <li style="padding:6px 0;border-bottom:1px solid #f0f0f0;">
-                <strong>3. 做模拟面试</strong>
-                <div style="color:#666;font-size:0.82rem;margin-top:4px;">找老师、学长、家长模拟。至少 3-5 次模拟面试。</div>
+                <strong>3. Do mock interviews</strong>
+                <div style="color:#666;font-size:0.82rem;margin-top:4px;">With teachers, seniors, parents. At least 3–5 mocks, focused on "how to respond after being pushed back".</div>
             </li>
             <li style="padding:6px 0;border-bottom:1px solid #f0f0f0;">
-                <strong>4. 练习 past questions</strong>
-                <div style="color:#666;font-size:0.82rem;margin-top:4px;">牛津剑桥官网有样题，自己练的时候边想边说练习。</div>
+                <strong>4. Practise past questions + follow-up chains</strong>
+                <div style="color:#666;font-size:0.82rem;margin-top:4px;">Oxford & Cambridge publish sample questions. Don't just practise answering — practise what to say <i>after</i> a follow-up. Use the chain format in the worked example below.</div>
             </li>
             <li style="padding:6px 0;border-bottom:1px solid #f0f0f0;">
-                <strong>5. 熟悉你的 PS</strong>
-                <div style="color:#666;font-size:0.82rem;margin-top:4px;">你 PS 里说过的书/项目，每一个都可能被问到。</div>
+                <strong>5. Know your Personal Statement cold</strong>
+                <div style="color:#666;font-size:0.82rem;margin-top:4px;">Every book or project you mentioned can be probed.</div>
             </li>
             <li style="padding:6px 0;">
-                <strong>6. 了解学院和导师</strong>
-                <div style="color:#666;font-size:0.82rem;margin-top:4px;">知道你申请的学院特点、导师研究方向。不用太深，了解就行。</div>
+                <strong>6. Understand college and tutor style</strong>
+                <div style="color:#666;font-size:0.82rem;margin-top:4px;">E.g. Oxford Balliol leans toward philosophical inquiry; Cambridge Trinity toward logical derivation.</div>
             </li>
         </ul>
     </div>
 
+    <!-- ============ Introductory：卡壳了怎么办 ============ -->
     <div class="section">
         <h2>What If You Get Stuck? <span class="en">卡壳了怎么办？</span></h2>
         <div class="tip-box">
-            <strong>💡 卡壳应对话术：</strong><br>
+            <strong>💡 Stuck-response phrases (a scaffold — it will be removed once you internalise them):</strong><br>
             · "That's an interesting question. Let me think about that for a moment."<br>
             · "I'm not sure about the exact answer, but here's how I'd approach it..."<br>
-            · "If I understand correctly, you're asking about...?" 先确认问题)<br>
-            · "Would it be something like...?" (提出你的想法，然后等反馈)<br>
-            · 被指出方向就说："Oh, I see what you mean. So that changes things because..."
+            · "If I understand correctly, you're asking about...?" (confirm the question first)<br>
+            · "Would it be something like...?" (offer a hypothesis, then wait for feedback)<br>
+            · When pointed to a new direction: "Oh, I see what you mean. So that changes things because..."
+        </div>
+        <div class="warning-box" style="margin-top:8px;">
+            <strong>⚠️ The double-edged sword of phrase cards:</strong> These transitions are scaffolds to help you <i>start speaking</i>, <b>not templates to recite</b>. If you repeat the same line every time, tutors notice instantly. The goal is to habituate collaborative inquiry with the tutor, not to deliver conclusions in isolation.
+        </div>
+    </div>
+
+    <!-- ============ 模块架构导航（四大环节） ============ -->
+    <div class="section">
+        <h2>Training Modules <span class="en">四大训练环节</span></h2>
+        <p class="cn-hint">牛剑面试的训练不应是"刷题"，而是模拟真实的"接砖与拆砖"对话流。下列四个环节构成完整闭环：</p>
+        <div class="module-grid">
+            <a class="module-card" href="oxbridge/simulator.html">
+                <div class="m-num">PHASE 1</div>
+                <div class="m-title">预读材料限时解题器</div>
+                <div class="m-en">Pre-interview Reading Simulator</div>
+                <div class="m-desc">15 分钟倒计时 + 四色标注（文本/结构/冲突/边界），倒计时结束弹出递进问题。标注数据喂给 Hint 引擎。法学/历史/PPE 三份材料可切换。</div>
+                <span class="m-status">已上线 OX-4~7 →</span>
+            </a>
+            <a class="module-card" href="oxbridge/hints.html">
+                <div class="m-num">PHASE 2</div>
+                <div class="m-title">出声思考 + 阶梯 Hints</div>
+                <div class="m-en">Think Aloud + Scaffolded Hints</div>
+                <div class="m-desc">录音转写（Web Speech API）+ 阶梯式提示（切入角/限定变量，按维度生成）+ 句式救场卡片。Hint 从模拟器标注数据动态触发，脚手架使用 3 次后主动撤除。</div>
+                <span class="m-status">已上线 OX-8~11 →</span>
+            </a>
+            <a class="module-card" href="oxbridge/devils-advocate.html">
+                <div class="m-num">PHASE 3</div>
+                <div class="m-title">导师追问反驳模拟</div>
+                <div class="m-en">Devil's Advocate Challenge</div>
+                <div class="m-desc">读取转写 → 论证链条解析（前提/推理/结论/薄弱点）→ 基于关键词规则引擎生成针对性反驳（非预设题库，留 LLM 接口）→ 二次推演引导。支持 Balliol/Trinity 学院风格切换。</div>
+                <span class="m-status">已上线 OX-12~15 →</span>
+            </a>
+            <a class="module-card" href="oxbridge/bank.html">
+                <div class="m-num">PHASE 4</div>
+                <div class="m-title">学科 + 学院面经库</div>
+                <div class="m-en">Subject × College Question Bank</div>
+                <div class="m-desc">按 Course × College × 题型三维筛选。UGC 上传表单（追问链构建器 + 四维度审核标尺）。Offer Holder 还原计划入口 + P2P 互面匹配设计。含 6 条种子面经。</div>
+                <span class="m-status">已上线 OX-16~20 →</span>
+            </a>
+        </div>
+        <div class="info-box">
+            <strong>📌 为什么是这四步？</strong><br>
+            牛剑面试的真实形态是：<b>预读材料（15–30min）→ 开放性发问 → 学生作答 → 导师立刻追加反例/修改假设</b>。这四环节正是对真实流程的逐段拟真，而非题库堆砌。
+        </div>
+    </div>
+
+    <!-- ============ 四维度拆解框架 ============ -->
+    <div class="section">
+        <h2>The Four-Dimension Framework <span class="en">四维度拆解框架</span></h2>
+        <p class="cn-hint">所有预读材料，无论学科，都能用这四个维度拆。这是本模块的"标准思维模板"，也是后续 Offer Holder 上传内容的审核标尺。法学已跑通，PPE/历史可直接复用，仅调整"冲突层"语义。</p>
+        <table class="dim-table">
+            <thead>
+                <tr>
+                    <th style="width:18%">维度</th>
+                    <th style="width:42%">含义</th>
+                    <th>法学示例（消防员两难）</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="dim-dot dot-blue"></span><b>文本层</b><br>Textual</td>
+                    <td>字词的通常意义 vs 法律/学术意义；关键词如何界定</td>
+                    <td>"故意"如何界定？A"选择救 B"是否构成"故意剥夺 C 的生命"？</td>
+                </tr>
+                <tr>
+                    <td><span class="dim-dot dot-green"></span><b>结构层</b><br>Structural</td>
+                    <td>论证链条：前提→推理→结论；区分裁判理由与附带意见</td>
+                    <td>前提=A 的选择导致 C 死亡→结论=构成谋杀。但前提有歧义（作为 vs 不作为）</td>
+                </tr>
+                <tr>
+                    <td><span class="dim-dot dot-red"></span><b>冲突层</b><br>Conflict</td>
+                    <td>背后的价值张力（法学=价值冲突，PPE=效率-公平，历史=立场-权力）</td>
+                    <td>结果责任（谁死谁负责）vs 行为责任（只罚主动杀害）</td>
+                </tr>
+                <tr>
+                    <td><span class="dim-dot dot-yellow"></span><b>边界层</b><br>Boundary</td>
+                    <td>什么事实变化会反转结论？反例在哪？</td>
+                    <td>若 A 是普通路人（无救援义务），结论是否不同？若 B 是 A 的孩子呢？</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="tip-box">
+            <strong>💡 脚手架撤除机制：</strong>四色标注是前期脚手架。系统追踪你的标注行为，当连续 2–3 次模拟都能自发覆盖四个维度时，<b>会主动隐藏颜色提示</b>，逼你从"依赖工具"过渡到"内化思维"——避免工具变成新的依赖。
+        </div>
+    </div>
+
+    <!-- ============ 内容样板房 ============ -->
+    <div class="section">
+        <h2>Worked Example: Law <span class="en">样板房 · 法学追问链</span></h2>
+        <p class="cn-hint">牛剑面经不能只挂一个问题，必须还原<b>"发问→回答→追问/反驳→二次推演"</b>的完整链条。下面是法学的标准样板（消防员两难），后续用户按此格式上传。</p>
+
+        <div class="info-box" style="margin-top:6px;">
+            <strong>【专业与学院】</strong> Oxford / Law / Balliol College / 2025 Winter<br>
+            <strong>【面试形式】</strong> Pre-interview Reading + 20 mins Teams Interview<br>
+            <strong>【考察重点】</strong> 规则边界的界定能力，能否在规则与现实冲突时保持逻辑一致
+        </div>
+
+        <div class="chain">
+            <div class="chain-step">
+                <span class="role role-tutor">发问</span>
+                <span class="content">法条："任何人故意剥夺他人生命者，处谋杀罪。" 事实：消防员 A 在火场中只能救一人——救 B 则 C 死，救 C 则 B 死。A 选择救 B。C 的家属控告 A 谋杀。A 是否构成谋杀？</span>
+            </div>
+            <div class="chain-step">
+                <span class="role role-student">学生回答</span>
+                <span class="content">"应该不算。A 没有杀人故意，他只是在两个必然死亡的人里选了一个去救，他的行为是'救'而不是'杀'。"</span>
+            </div>
+            <div class="chain-step">
+                <span class="role role-tutor">追问 / Devil's Advocate</span>
+                <span class="content">"但 A 的'选择'直接导致 C 死亡——如果他选 C，C 就活。'选择必然放弃一方'与'有意让 C 死'在心理状态上有实质区别吗？另外，消防员有职务义务，在此'不作为'是否等价于'作为'？"</span>
+            </div>
+            <div class="chain-step">
+                <span class="role role-student">二次推演</span>
+                <span class="content">"我之前的定义太依赖'心理故意'。如果转向<b>结果责任 vs 行为责任</b>的区分：A 的作为是'救 B'，C 的死亡是 A '未救'的结果。若按行为责任，A 不构成谋杀；但若消防员有职务义务，'不救 C'可能从单纯不作为升格为职务不作为……这取决于立法目的是惩罚'造成死亡'还是惩罚'主动杀害'。"</span>
+            </div>
+            <div class="chain-step">
+                <span class="role role-meta">拆解卡</span>
+                <span class="content">
+                    <b>陷阱提醒：</b>容易仓促下"算/不算"结论，或只盯"故意"字面而忽略作为/不作为区分。<br>
+                    <b>导师好感度高光：</b>能承认最初定义的局限，并顺着导师的新条件（职务义务）重新构建逻辑，而非死守原结论。
+                </span>
+            </div>
+        </div>
+        <div class="tip-box">
+            <strong>递进问题（倒计时结束后弹出）：</strong><br>
+            1. "故意"在该场景中应如何界定？A 的心理状态是什么？<br>
+            2. 不作为能否构成"剥夺生命"？区分标准是什么？<br>
+            3. 给出一个让结论反转的事实变体。
+        </div>
+    </div>
+
+    <!-- ============ 全学科样板库 ============ -->
+    <div class="section">
+        <h2>Full-Subject Question Bank <span class="en">全学科样板库</span></h2>
+        <p class="cn-hint">初始数据库必须同时覆盖 STEM 与人文社科——两类学科考查的思维能力不同，样板须分别呈现其框架。点击下方各卡片展开完整追问链。</p>
+        <div class="bank-filter">
+            <span class="f-tag stem">STEM · 约束-反例框架</span>
+            <span class="f-tag hss">HSS · 四维度框架</span>
+            <span style="color:#999;align-self:center;">框架按思维方式选择，而非学科标签</span>
+        </div>
+
+        <!-- 样板二：CS / 数学 -->
+        <details class="bank-item" open>
+            <summary>
+                <span class="tag tag-subject">CS / Maths</span>
+                bit 翻转下找最大值
+                <span class="b-meta">Oxford · STEM</span>
+            </summary>
+            <div class="b-body">
+                <div class="b-block b-prompt">
+                    <span class="b-label">📌 原始发问</span><br>
+                    假设你有一个包含 n 个数字的数组，但运行这段代码的内存硬件有故障，会有 10% 的概率随机把某一位比特（bit）翻转。你如何在这个数组里找到最大值？
+                </div>
+                <div class="b-block b-pitfall">
+                    <span class="b-label">⚠️ 常见陷阱</span><br>
+                    试图寻找"绝对完美"的算法，或盲目说"把数据复制 3 份做投票"，忽略了时间和空间开销。
+                </div>
+                <div class="b-block b-followup">
+                    <span class="b-label">🔄 导师追问</span><br>
+                    如果"重复读取同一个内存地址"的开销（时间/能耗）是"常规读取"的 10 倍，你还会选择复制投票吗？在保证 99% 准确率的前提下，你会怎么设计检查策略？
+                </div>
+                <div class="b-block b-resolution">
+                    <span class="b-label">💡 破局推演</span><br>
+                    不需要给确定性算法，转向<b>概率算法</b>：① 识别"准确率 vs 计算成本"的 Trade-off；② 只对"候选最大值"做二次或三次校验，而非对整个数组全量重复读取，将开销从 O(n) 降下来。
+                </div>
+                <div class="b-framework fw-stem">
+                    <span class="fw-label">约束-反例框架：</span>
+                    约束识别（10% bit 翻转）→ 推导路径（遍历找最大值）→ 反例收紧（重复读取成本 10 倍）→ 降级重构（仅校验候选最大值，O(n)→O(k)）
+                </div>
+            </div>
+        </details>
+
+        <!-- 样板三：工程 / 物理 -->
+        <details class="bank-item">
+            <summary>
+                <span class="tag tag-subject">Engineering</span>
+                1000 米超级风机
+                <span class="b-meta">Cambridge · STEM</span>
+            </summary>
+            <div class="b-body">
+                <div class="b-block b-prompt">
+                    <span class="b-label">📌 原始发问</span><br>
+                    为了获取更高空更稳定的风能，我们为什么不建一座 1000 米高的超级风力发电机？
+                </div>
+                <div class="b-block b-pitfall">
+                    <span class="b-label">⚠️ 常见陷阱</span><br>
+                    单方面回答"太贵了"或"技术达不到"，缺乏具体的物理推导。
+                </div>
+                <div class="b-block b-followup">
+                    <span class="b-label">🔄 导师追问</span><br>
+                    如果材料的抗拉/抗压强度随截面积放大（A ∝ r²），而结构自重随体积放大（V ∝ r³），你能推导出风机叶片和塔架的"几何尺寸上限"受什么控制吗？
+                </div>
+                <div class="b-block b-resolution">
+                    <span class="b-label">💡 破局推演</span><br>
+                    ① <b>立方-平方定律（Square-cube law）</b>：结构等比例放大时，自重增长远快于材料支撑力，导致因自重塌陷；② <b>跨学科联想</b>：若不改变材料，就必须改变结构（拉线悬挂 / 轻量化复合材料），展现工程思维。
+                </div>
+                <div class="b-framework fw-stem">
+                    <span class="fw-label">约束-反例框架：</span>
+                    约束识别（1000m 高度需求）→ 推导路径（材料强度 vs 自重）→ 反例收紧（几何缩放 A∝r² / V∝r³）→ 降级重构（改变结构形式而非堆材料）
+                </div>
+            </div>
+        </details>
+
+        <!-- 样板四：医学 / 生化 -->
+        <details class="bank-item">
+            <summary>
+                <span class="tag tag-subject">Medicine</span>
+                脂质包膜病毒药物设计
+                <span class="b-meta">Oxford · STEM</span>
+            </summary>
+            <div class="b-body">
+                <div class="b-block b-prompt">
+                    <span class="b-label">📌 原始发问</span><br>
+                    某种新型病毒通过将自身包裹在宿主细胞膜的脂质双分子层中来逃避免疫系统。我们应该如何设计药物来杀灭这种病毒，同时不破坏人体正常的细胞？
+                </div>
+                <div class="b-block b-pitfall">
+                    <span class="b-label">⚠️ 常见陷阱</span><br>
+                    只盯"药物分子设计"单点，忽略递送机制与脱靶风险。
+                </div>
+                <div class="b-block b-followup">
+                    <span class="b-label">🔄 导师追问</span><br>
+                    如果你选择靶向病毒内部的核酸结构，但这种核酸序列有 30% 与人体神经细胞中的某种表达 RNA 重合，这会导致什么临床后果？你会如何调整药物递送系统？
+                </div>
+                <div class="b-block b-resolution">
+                    <span class="b-label">💡 破局推演</span><br>
+                    ① 从"分子设计"转向<b>定向递送机制</b>（如脂质纳米颗粒 LNP 的组织特异性）；② 坦诚承认副作用风险，从生化机制给出现实应对（如利用感染区域特有的微酸性环境触发药物释放）。
+                </div>
+                <div class="b-framework fw-stem">
+                    <span class="fw-label">约束-反例框架：</span>
+                    约束识别（避免免疫 + 不伤正常细胞）→ 推导路径（靶向核酸）→ 反例收紧（30% 序列与神经 RNA 重合）→ 降级重构（组织特异性递送 + 微环境触发释放）
+                </div>
+            </div>
+        </details>
+
+        <!-- 样板五：PBS / 心理学 -->
+        <details class="bank-item">
+            <summary>
+                <span class="tag tag-subject">PBS / Psychology</span>
+                邮件比手写信更易撒谎
+                <span class="b-meta">Cambridge · HSS（跨界）</span>
+            </summary>
+            <div class="b-body">
+                <div class="b-block b-prompt">
+                    <span class="b-label">📌 原始发问</span><br>
+                    研究表明，人们在发送电子邮件时比写纸质手写信更容易撒谎。你认为这是什么原因？请设计一个实验来验证你的假设。
+                </div>
+                <div class="b-block b-pitfall">
+                    <span class="b-label">⚠️ 常见陷阱</span><br>
+                    设计了复杂问卷，但问卷只能测出"自我报告（Self-report）的偏好"，测不出真实行为。
+                </div>
+                <div class="b-block b-followup">
+                    <span class="b-label">🔄 导师追问</span><br>
+                    如果在实验室里被试知道自己被观察，会刻意表现得更诚实（霍桑效应）。在不违背伦理（不能过度欺骗被试）的前提下，你如何消除这种观察者效应？
+                </div>
+                <div class="b-block b-resolution">
+                    <span class="b-label">💡 破局推演</span><br>
+                    ① 区分"知情同意"与"告知具体实验目的"；② 引入<b>任务掩护（Cover Story）</b>——让被试以为在参加"办公软件流畅度测试"，过程中自然嵌入决策环境。
+                </div>
+                <div class="b-framework fw-stem">
+                    <span class="fw-label">约束-反例框架（实验设计变体）：</span>
+                    假设（邮件媒介降低撒谎成本）→ 操作化（测真实行为而非自报）→ 反例控制（霍桑效应）→ 任务掩护（Cover Story 嵌入自然决策）
+                </div>
+            </div>
+        </details>
+
+        <!-- 样板六：现代语言 / 文学 -->
+        <details class="bank-item">
+            <summary>
+                <span class="tag tag-subject">English / Modern Lang</span>
+                AI 文本 vs 17 世纪诗
+                <span class="b-meta">Oxford · HSS</span>
+            </summary>
+            <div class="b-body">
+                <div class="b-block b-prompt">
+                    <span class="b-label">📌 原始发问</span><br>
+                    （提供一段 17 世纪匿名诗歌与一段现代 AI 生成的对话）这两段文本在"情感的真实性（Emotional Authenticity）"表达上有什么本质区别？
+                </div>
+                <div class="b-block b-pitfall">
+                    <span class="b-label">⚠️ 常见陷阱</span><br>
+                    感情用事地坚持"人比 AI 高尚"，缺乏文学理论支撑；或只做修辞表层比较，不进入概念辨析。
+                </div>
+                <div class="b-block b-followup">
+                    <span class="b-label">🔄 导师追问</span><br>
+                    如果一个读者在不知道作者身份的情况下，读 AI 文本的心理共鸣程度甚至超越了读这首 17 世纪的诗，我们还能说 AI 的表达缺乏"真实性"吗？究竟是文本本身具有真实性，还是真实性完全由读者的解读赋予？
+                </div>
+                <div class="b-block b-resolution">
+                    <span class="b-label">💡 破局推演</span><br>
+                    ① 跳出"人比 AI 高尚"的感情用事，从<b>意图（Authorial Intent）与接收（Reception Aesthetics）</b>两个维度拆解；② 区分"修辞模仿"与"经验提炼"，展示对文学理论基本概念的理解。
+                </div>
+                <div class="b-framework fw-hss">
+                    <span class="fw-label">四维度框架适用：</span>
+                    文本层（修辞细读）· 结构层（意图 vs 接收美学）· 冲突层（人 vs AI 的真实性归属）· 边界层（文本固有真实 vs 读者赋予真实）
+                </div>
+            </div>
+        </details>
+
+        <div class="info-box">
+            <strong>📌 框架选择规则：</strong>样板按<b>思维方式</b>而非学科标签选择框架——人文社科（法学/历史/PPE/文学）用四维度，STEM（CS/工程/医学）用约束-反例。PBS 心理学虽属社科，但其"假设→操作化→反例控制"逻辑属约束-反例型。详见 <code>docs/OXBRIDGE-INTERVIEW-ROADMAP.md</code> §3.6。
+        </div>
+    </div>
+
+    <!-- ============ 迭代路线图（精简版） ============ -->
+    <div class="section">
+        <h2>Roadmap <span class="en">迭代路线</span></h2>
+        <p class="cn-hint">本模块分 5 个 Phase 逐步实施。完整规划见 <code>docs/OXBRIDGE-INTERVIEW-ROADMAP.md</code>。</p>
+        <div class="roadmap-mini">
+            <p><span class="tag tag-phase">Phase 1</span> 入口重构 + 全学科样板库（法学 + CS/工程/医学 + PBS/文学，双框架） — <code>OX-1 ~ OX-3</code> <b style="color:#2e7d32;">已完成</b></p>
+            <p><span class="tag tag-phase">Phase 2</span> 预读材料限时解题器（15min 倒计时 + 四色标注 + 法学/历史/PPE 三材料） — <code>OX-4 ~ OX-7</code> <b style="color:#2e7d32;">已完成</b></p>
+            <p><span class="tag tag-phase">Phase 3</span> Think Aloud + 阶梯 Hints（录音转写 + 动态提示 + 脚手架撤除） — <code>OX-8 ~ OX-11</code> <b style="color:#2e7d32;">已完成</b></p>
+            <p><span class="tag tag-phase">Phase 4</span> Devil's Advocate（论证解析 + 规则引擎反驳 + 二次推演 + 学院风格切换） — <code>OX-12 ~ OX-15</code> <b style="color:#2e7d32;">已完成</b></p>
+            <p><span class="tag tag-phase">Phase 5</span> 学科+学院面经库 + UGC（三维筛选 + 追问链上传 + 四维度审核 + Offer Holder 还原 + P2P 互面设计） — <code>OX-16 ~ OX-20</code> <b style="color:#2e7d32;">已完成</b></p>
+            <p><span class="tag tag-phase">Phase 6</span> 官方真题种子（4 条含导师点评）+ 全站使用指引 — <code>OX-23 ~ OX-24</code> <b style="color:#2e7d32;">已完成</b> <span style="color:#999;">（OX-21 白板 / OX-22 沉默检测 规划中）</span></p>
+        </div>
+        <div class="info-box">
+            <strong>📌 学科优先级说明：</strong>人文社科（法学/PPE/历史）先行，<b>不是因为更重要</b>，而是因为它们与四维度框架耦合最深、验证成本最低。理工科留作第二轮压力测试——若"冲突层"对生物题无意义，则证明框架需分层（人文社科一套，理工科用"约束-反例型"另一套）。
+        </div>
+    </div>
+
+    <!-- ============ 各学科样题（tab 切换，默认法学，放最后） ============ -->
+    <div class="section">
+        <h2>Common Subjects & Sample Questions <span class="en">各学科样题</span></h2>
+        <p style="color:#666;font-size:0.85rem;margin-bottom:10px;">Click a subject tab to switch. Law is shown by default.</p>
+
+        <div class="subject-tabs" id="subjectTabs">
+            <button class="tab-btn" data-target="sq-maths">Maths</button>
+            <button class="tab-btn" data-target="sq-physics">Physics</button>
+            <button class="tab-btn" data-target="sq-economics">Economics</button>
+            <button class="tab-btn" data-target="sq-medicine">Medicine</button>
+            <button class="tab-btn" data-target="sq-ppe">PPE / Philosophy</button>
+            <button class="tab-btn" data-target="sq-engineering">Engineering</button>
+            <button class="tab-btn" data-target="sq-cs">Computer Science</button>
+            <button class="tab-btn" data-target="sq-english">English Literature</button>
+            <button class="tab-btn" data-target="sq-history">History</button>
+            <button class="tab-btn" data-target="sq-bio">Natural Sciences / Biology</button>
+            <button class="tab-btn active" data-target="sq-law">Law</button>
+        </div>
+
+        <div class="sample-q" id="sq-maths">
+            <span class="tag tag-subject">Maths</span>
+            <div class="q">How would you prove that the square root of 2 is irrational?</div>
+            <div class="hint">Approach: proof by contradiction. Assume √2 = a/b in lowest terms, derive a contradiction. The key is to show your reasoning process, not just the answer.</div>
+        </div>
+
+        <div class="sample-q" id="sq-physics">
+            <span class="tag tag-subject">Physics</span>
+            <div class="q">If you could drill a hole straight through the Earth from one side to the other, and drop a ball down it, what would happen?</div>
+            <div class="hint">Approach: simple harmonic motion (SHM). The ball would oscillate between the two ends. Consider how gravitational force varies with radius. It's fine not to know — try to derive it step by step.</div>
+        </div>
+
+        <div class="sample-q" id="sq-economics">
+            <span class="tag tag-subject">Economics</span>
+            <div class="q">Why is poverty difficult to measure?</div>
+            <div class="hint">Approach: absolute vs relative poverty, purchasing power parity, cost of living differences across countries, income vs multidimensional poverty (education, health, opportunity). Demonstrate multi-angle thinking.</div>
+        </div>
+
+        <div class="sample-q" id="sq-medicine">
+            <span class="tag tag-subject">Medicine</span>
+            <div class="q">Why do we have red blood cells?</div>
+            <div class="hint">Approach: transporting oxygen and CO₂. The role of haemoglobin. Why red cells rather than dissolving haemoglobin directly in plasma? Surface-area-to-volume ratio.</div>
+        </div>
+
+        <div class="sample-q" id="sq-ppe">
+            <span class="tag tag-subject">PPE / Philosophy</span>
+            <div class="q">Should we legalize all drugs?</div>
+            <div class="hint">Approach: analyse from multiple angles — individual liberty, public health, crime rates, economic cost, social equity. There is no single right answer; what matters is the structure and logic of your argument.</div>
+        </div>
+
+        <div class="sample-q" id="sq-engineering">
+            <span class="tag tag-subject">Engineering</span>
+            <div class="q">How would you design a gravity dam for holding back water?</div>
+            <div class="hint">Approach: force analysis, materials, why the shape is triangular / trapezoidal? Why wide at the base and narrow at the top? Consider water pressure distribution, resistance to overturning and sliding. Derive it step by step.</div>
+        </div>
+
+        <div class="sample-q" id="sq-cs">
+            <span class="tag tag-subject">Computer Science</span>
+            <div class="q">How do pirates divide a cake between n people fairly?</div>
+            <div class="hint">Approach: the classic fair division problem. Extend "I cut, you choose" to n people. Algorithmic thinking, definitions of fairness, game-theoretic reasoning.</div>
+        </div>
+
+        <div class="sample-q" id="sq-english">
+            <span class="tag tag-subject">English Literature</span>
+            <div class="q">You are given a poem or a short passage and asked to analyse a character or theme.</div>
+            <div class="hint">Approach: read the text closely, find evidence, analyse language, structure and themes. There is no "correct" interpretation — what matters is your ability to argue from the text itself.</div>
+        </div>
+
+        <div class="sample-q" id="sq-history">
+            <span class="tag tag-subject">History</span>
+            <div class="q">"History is written by the victors." If this is true, is it still possible to know about destroyed civilisations such as Carthage or the Aztecs?</div>
+            <div class="hint">Approach: <b>do not</b> spend time narrating the conquest of the Aztecs (that is recitation). Breakthroughs: ① multiplicity of sources — archaeological remains, material culture and environmental data are hard to forge unilaterally; ② <b>reading against the grain</b> — victors' records, to exaggerate their triumph, inadvertently preserve details of the defeated; ③ <b>the silence of the archive</b> — victors not only write but selectively destroy, so silence itself is evidence of power relations.</div>
+        </div>
+
+        <div class="sample-q" id="sq-bio">
+            <span class="tag tag-subject">Natural Sciences / Biology</span>
+            <div class="q">Why have large land animals evolved legs but not wheel-like organs for locomotion?</div>
+            <div class="hint">Approach: ① <b>Tissue supply</b> — a rotating axle cannot maintain continuous vascular and neural connections (unless it is non-living keratin); ② <b>Terrain adaptability</b> — wheels perform poorly on rugged or muddy ground, whereas limbs are highly adaptable.<br>⚠️ Caution: do not cite the bacterial flagellum as a "wheel counter-example" — it is a <b>propeller</b>, generating thrust by rotation but not rolling forward. Conflating the two exposes a conceptual error.</div>
+        </div>
+
+        <div class="sample-q active" id="sq-law">
+            <span class="tag tag-subject">Law</span>
+            <div class="q">A park sign reads "No vehicles allowed." The community places a decommissioned WWII tank on a plinth in the middle of the park as a war memorial. Does this breach the rule?</div>
+            <div class="hint">Approach: this is Fuller's 1949 classic legal-philosophy puzzle. The core is <b>purposivism</b> — what is this rule actually for? Don't get stuck on the literal question "is a tank a vehicle?" (textualism). The follow-up that forces real depth: "What if the tank was a captured Nazi trophy placed at the gate of a Jewish community's park?" — that pushes the legislative purpose from "preventing pollution" to "preventing psychological harm".</div>
         </div>
     </div>
 
@@ -298,5 +831,18 @@
         <span style="margin:0 6px;">·</span>
         <a href="javascript:window.scrollTo(0,0)" style="color:#aaa;text-decoration:none;">Back to top</a>
     </div>
+
+    <script>
+        // 学科样题 tab 切换
+        document.querySelectorAll('#subjectTabs .tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('#subjectTabs .tab-btn').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.sample-q').forEach(q => q.classList.remove('active'));
+                btn.classList.add('active');
+                const target = document.getElementById(btn.dataset.target);
+                if (target) target.classList.add('active');
+            });
+        });
+    </script>
 </body>
 </html>
