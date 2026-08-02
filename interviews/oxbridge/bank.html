@@ -76,6 +76,11 @@
         .tag-subject { background: #e8f5e9; color: #2e7d32; }
         .tag-college { background: #fff3e0; color: #e65100; }
         .tag-type { background: #fce4ec; color: #c2185b; }
+        /* 来源等级标签 */
+        .tag.src-official { background: #e8f5e9; color: #1b5e20; }
+        .tag.src-variant { background: #fff8e1; color: #e65100; }
+        .tag.src-circulated { background: #ffebee; color: #c62828; }
+        .tag.src-recalled { background: #f3e5f5; color: #6a1b9a; }
         .bank-entry .be-title {
             font-size: 0.9rem; font-weight: 600; color: #333; margin-bottom: 4px;
         }
@@ -182,6 +187,38 @@
         .empty-state {
             text-align: center; padding: 32px 0; color: #aaa; font-size: 0.86rem;
         }
+        /* F-5: 内联展开详情卡片 */
+        .be-detail {
+            margin-top: 10px; padding: 12px 14px; background: white;
+            border: 1px solid #e8ecff; border-radius: 6px;
+            font-size: 0.82rem; line-height: 1.7;
+        }
+        .be-detail .bd-chain { margin-bottom: 10px; }
+        .be-detail .bd-step {
+            padding: 8px 10px; margin-bottom: 6px; border-radius: 5px;
+            border-left: 3px solid #ddd; background: #fafaff;
+        }
+        .be-detail .bd-step.s-question { border-left-color: #667eea; background: #f0f4ff; }
+        .be-detail .bd-step.s-answer { border-left-color: #2e7d32; background: #f1f8f1; }
+        .be-detail .bd-step.s-challenge { border-left-color: #c62828; background: #fff5f5; }
+        .be-detail .bd-step.s-revised { border-left-color: #ff8f00; background: #fff8e8; }
+        .be-detail .bd-step .bs-label {
+            font-size: 0.66rem; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 0.04em; margin-right: 6px;
+        }
+        .be-detail .bd-step.s-question .bs-label { color: #667eea; }
+        .be-detail .bd-step.s-answer .bs-label { color: #2e7d32; }
+        .be-detail .bd-step.s-challenge .bs-label { color: #c62828; }
+        .be-detail .bd-step.s-revised .bs-label { color: #ff8f00; }
+        .be-detail .bd-comment {
+            background: #e8f5e9; border-left: 3px solid #2e7d32;
+            padding: 10px 12px; border-radius: 0 5px 5px 0;
+            font-size: 0.8rem; color: #1b5e20; line-height: 1.6;
+        }
+        .be-detail .bd-comment .bc-label {
+            font-size: 0.66rem; font-weight: 700; display: block; margin-bottom: 4px;
+        }
+        .be-detail .bd-actions { margin-top: 10px; display: flex; gap: 8px; }
 
         .footer { text-align: center; color: #aaa; font-size: 0.75rem; padding: 16px; }
         .footer a { color: #aaa; text-decoration: none; }
@@ -248,9 +285,11 @@
                         <option value="PPE">PPE</option>
                         <option value="History">历史 History</option>
                         <option value="HSPS">HSPS</option>
+                        <option value="Mathematics">数学 Mathematics</option>
                         <option value="CS">计算机科学 CS</option>
                         <option value="Engineering">工程 Engineering</option>
                         <option value="Medicine">医学 Medicine</option>
+                        <option value="Chemistry">化学 Chemistry</option>
                         <option value="English">文学 English</option>
                         <option value="PBS">心理学 PBS</option>
                     </select>
@@ -303,9 +342,11 @@
                             <option value="PPE">PPE</option>
                             <option value="History">历史 History</option>
                             <option value="HSPS">HSPS</option>
+                            <option value="Mathematics">数学 Mathematics</option>
                             <option value="CS">计算机科学 CS</option>
                             <option value="Engineering">工程 Engineering</option>
                             <option value="Medicine">医学 Medicine</option>
+                            <option value="Chemistry">化学 Chemistry</option>
                             <option value="English">文学 English</option>
                             <option value="PBS">心理学 PBS</option>
                         </select>
@@ -525,6 +566,7 @@
                 year: '官方样题 · Oxford Biological Sciences', format: '官方示范',
                 title: '为什么很多动物身上长有条纹（如斑马）？',
                 dims: [],  // STEM 约束-反例
+                source: 'variant',  // 变体：牛津官网实际公布的是"瓢虫与草莓"，此为导师讨论话题的简化传播版
                 officialComment: '导师官方点评：这题没有标准答案。导师想看学生能否从"伪装避敌""调节体温""防虫叮咬"等不同维度提出假说，并主动说明如何设计实验来验证。',
                 chain: [
                     { role: 'tutor-question', text: '为什么很多动物身上长有条纹（如斑马）？' },
@@ -538,6 +580,7 @@
                 year: '官方样题 · Oxford Chemistry', format: '官方示范',
                 title: '复杂有机分子：水溶 vs 辛醇溶？pH 变化如何影响？',
                 dims: [],
+                source: 'circulated',  // 疑似流传题：牛津官网未找到此题，官方化学样题实为"6碳12氢能组成多少种分子"
                 officialComment: '导师官方点评：若学生卡壳，导师会提示"低 pH 环境下水分子或官能团会变成什么形态"。考察能否立刻吸收 Hint 并修正推演。',
                 chain: [
                     { role: 'tutor-question', text: '给定复杂有机分子结构式，预测更易溶于水还是辛醇？改变 pH 溶解度如何变？' },
@@ -551,6 +594,7 @@
                 year: '官方样题 · Cambridge Engineering', format: '官方示范',
                 title: '现在英国上空同时有多少架飞机在飞行？（费米估算）',
                 dims: [],
+                source: 'recalled',  // 流传题：剑桥官方明确不公布样题，此为学生回忆
                 officialComment: '导师官方点评：考察费米估算与量级直觉。关键在敢于做合理假设（英国几个主要机场？每分钟起降多少？平均飞行时长？），并把思考过程逐字说出来。',
                 chain: [
                     { role: 'tutor-question', text: '现在英国上空同时有多少架飞机在飞行？' },
@@ -564,12 +608,182 @@
                 year: '官方样题 · Oxford/Cambridge PPE & Law', format: '官方示范',
                 title: '海盗分金：100 金币 5 海盗，最资深者应如何分配？',
                 dims: [],
+                source: 'variant',  // 参数错误：官方版为7海盗+计算机科学，此5海盗PPE/Law版属误植变体
                 officialComment: '导师官方点评：考察从最简模型（2 个海盗）开始逆向归纳（Backward Induction）的严密逻辑链。',
                 chain: [
                     { role: 'tutor-question', text: '100 金币，5 个理性海盗按等级提方案投票，半数以上通过否则最资深者被扔海里。最资深者怎么分？' },
                     { role: 'student-answer', text: '平均分 20 个给每人。' },
                     { role: 'tutor-challenge', text: '从最简情况开始：如果只剩 2 个海盗，最资深者会怎么分？再推 3 个、4 个的情况。' },
                     { role: 'student-revised', text: '逆向归纳：2 人时最资深者全拿（自己一票过半）；3 人时分 1 金币给最末者拉票；最终 5 人时分给第 3、5 号各 1 金币，自己留 98。' }
+                ]
+            },
+            // ============ 新增：12 条牛津官方一手真题（含导师点评，★★★） ============
+            {
+                id: 'b11', uni: 'Oxford', subject: 'CS', college: 'Balliol', type: 'eval',
+                year: '官方样题 · Oxford CS', format: '官方示范',
+                title: '海盗分财宝：7 个海盗 100 金币，最年长者如何提议？',
+                dims: [],
+                source: 'official',  // 官方一手：7海盗CS版（修正5海盗PPE误植）
+                officialComment: '导师官方点评：这是道标准逻辑考题。我关注学生如何跟着引导走，能否将大问题切分成小问题，用算法方式化解复杂概念。有问题应立即提出，而非闷声冥思苦想。',
+                chain: [
+                    { role: 'tutor-question', text: '7 个海盗 100 金币，最年长者提案，半数及以上同意则成立否则投海重来。海盗理性且无情，只关注个人所得最大化。最年长者如何分？' },
+                    { role: 'student-answer', text: '平均分？' },
+                    { role: 'tutor-challenge', text: '能否从最简情况（2 个海盗）开始切分？把大问题拆成小问题。' },
+                    { role: 'student-revised', text: '逆向归纳：2 海盗时年长者全拿；逐步推到 7 海盗，用算法思维递推每轮谁该被收买。' }
+                ]
+            },
+            {
+                id: 'b12', uni: 'Oxford', subject: 'Medicine', college: 'Balliol', type: 'concept',
+                year: '官方样题 · Oxford Biological Sciences', format: '官方示范',
+                title: '瓢虫是红的，草莓也是红的，为什么？',
+                dims: [],
+                source: 'official',  // 官方一手：导师 Martin Speight，动物学系
+                officialComment: '导师 Martin Speight（动物学系）点评：红色既可以向取食者发送"别吃我"信号，又可以发送"吃我"信号。我感兴趣的是看申请人如何解决这个明显的悖论。',
+                chain: [
+                    { role: 'tutor-question', text: 'Ladybirds are red. So are strawberries. Why?' },
+                    { role: 'student-answer', text: '都是红色色素。' },
+                    { role: 'tutor-challenge', text: '红色对取食者同时意味着"别吃我"（瓢虫警戒色）和"吃我"（草莓成熟信号）——这个悖论怎么解释？' },
+                    { role: 'student-revised', text: '区分信号发送者与接收者：瓢虫红色是防御性警戒色（aposematism），草莓红色是吸引传播种子的互利信号。' }
+                ]
+            },
+            {
+                id: 'b13', uni: 'Oxford', subject: 'Chemistry', college: 'Magdalen', type: 'data',
+                year: '官方样题 · Oxford Chemistry', format: '官方示范',
+                title: '6 个碳原子和 12 个氢原子能组成多少种分子？',
+                dims: [],
+                source: 'official',  // 官方一手：牛津官方化学样题
+                officialComment: '导师官方点评：考察同分异构体的系统枚举与化学结构推理能力。',
+                chain: [
+                    { role: 'tutor-question', text: 'How many different molecules can be made with 6 carbon atoms and 12 hydrogen atoms?' },
+                    { role: 'student-answer', text: '几种烷烃？' },
+                    { role: 'tutor-challenge', text: 'C6H12 不只是烷烃——还可能是环烷烃、烯烃。如何系统枚举不遗漏？' },
+                    { role: 'student-revised', text: '按不饱和度分类：环己烷、各种甲基环戊烷、己烯异构体（位置+碳链），系统穷举。' }
+                ]
+            },
+            {
+                id: 'b14', uni: 'Oxford', subject: 'Engineering', college: 'NewCollege', type: 'eval',
+                year: '官方样题 · Oxford Engineering', format: '官方示范',
+                title: '30cm 尺子放在两根手指上，手指靠拢时会发生什么？',
+                dims: [],
+                source: 'official',  // 官方一手：导师 Steve Collins，University College
+                officialComment: '导师 Steve Collins（University College）点评：几乎所有人预期尺子从最靠近中心的手指一侧倾倒，但实验会发现两指同时到达中心、尺子保持平衡。我们喜欢看候选人对意外结果的反应——考察摩擦、力矩的物理直觉。',
+                chain: [
+                    { role: 'tutor-question', text: 'Place a 30cm ruler on top of one finger from each hand... What happens when you bring your fingers together?' },
+                    { role: 'student-answer', text: '尺子会从一边倾倒。' },
+                    { role: 'tutor-challenge', text: '实际试一下——两指同时到达中心，尺子保持平衡。为什么？提示：考虑力矩和摩擦。' },
+                    { role: 'student-revised', text: '力矩使靠近中心的手指受力更大→摩擦更大→尺子先在较远手指上滑动，两指交替滑动直至中心汇合。' }
+                ]
+            },
+            {
+                id: 'b15', uni: 'Oxford', subject: 'Engineering', college: 'Trinity', type: 'eval',
+                year: '官方样题 · Oxford Engineering Science', format: '官方示范',
+                title: '如何设计重力坝来挡水？',
+                dims: [],
+                source: 'official',  // 官方一手：导师 Byron Byrne，工程系
+                officialComment: '导师 Byron Byrne（工程系）点评：候选人先确定作用在坝上的力，再考虑稳定性。可能识别出水会推倒大坝，构建数学表达式预测何时发生。考察把物理和数学应用到新情境的能力。',
+                chain: [
+                    { role: 'tutor-question', text: 'How would you design a gravity dam for holding back water?' },
+                    { role: 'student-answer', text: '建得够重就行。' },
+                    { role: 'tutor-challenge', text: '作用在坝上的力有哪些？什么情况下会失效（倾覆/滑动）？构建数学表达式预测。' },
+                    { role: 'student-revised', text: '识别水压（三角形分布）+自重，列抗倾覆力矩不等式，讨论滑动失效与渗水影响。' }
+                ]
+            },
+            {
+                id: 'b16', uni: 'Oxford', subject: 'PPE', college: 'Balliol', type: 'eval',
+                year: '官方样题 · Oxford Economics & Management', format: '官方示范',
+                title: '银行家值得拿这么高薪酬吗？政府该不该限制？',
+                dims: ['blue','red','yellow'],
+                source: 'official',  // 官方一手：导师 Brian Bell，Lady Margaret Hall
+                officialComment: '导师 Brian Bell（Lady Margaret Hall）点评：关键在于考虑薪酬的"经济性"而非是否公平。应举例说明银行业是否经营竞争性劳动力市场，过高工资是否是缺乏竞争的结果。',
+                chain: [
+                    { role: 'tutor-question', text: 'Do bankers deserve the pay they receive? And should government do something to limit how much they get?' },
+                    { role: 'student-answer', text: '不公平，应该限制。' },
+                    { role: 'tutor-challenge', text: '不要做道德判断——用经济学分析：银行业劳动力市场是否竞争性？高薪是否缺乏竞争的结果？' },
+                    { role: 'student-revised', text: '从劳动力市场结构切入：若银行间存在竞争不足，高薪可能是垄断租金，政府可反垄断而非直接限薪。' }
+                ]
+            },
+            {
+                id: 'b17', uni: 'Oxford', subject: 'PPE', college: 'Balliol', type: 'eval',
+                year: '官方样题 · Oxford PPE', format: '官方示范',
+                title: '为什么美国人均收入是布隆迪的 50-100 倍？',
+                dims: ['blue','green','red','yellow'],
+                source: 'official',  // 官方一手：导师 Brian Bell
+                officialComment: '导师 Brian Bell 点评：关键是要广泛地思考，而不是试图把答案与学校学到的某些知识相吻合。答案可能涉及技术、资本、教育、基础设施、贸易、法律在可持续发展中的作用。',
+                chain: [
+                    { role: 'tutor-question', text: 'Why is income per head 50 to 100 times higher in the US than in countries like Burundi and Malawi?' },
+                    { role: 'student-answer', text: '美国技术发达。' },
+                    { role: 'tutor-challenge', text: '技术只是其一——还有资本、教育、基础设施、贸易、法律制度。如何系统分析多因素？' },
+                    { role: 'student-revised', text: '多因素框架：技术+资本积累（Solow 模型）+人力资本+制度（产权法治）+贸易开放，各因素交互放大差距。' }
+                ]
+            },
+            {
+                id: 'b18', uni: 'Oxford', subject: 'PPE', college: 'Balliol', type: 'eval',
+                year: '官方样题 · Oxford PPE 哲学方向', format: '官方示范',
+                title: '乘飞机的道德论证：我一个人不坐飞机也会飞，所以没理由不坐？',
+                dims: ['blue','green','red','yellow'],
+                source: 'official',  // 官方一手：导师 Cecile Fabre，Lincoln College
+                officialComment: '导师 Cecile Fabre（Lincoln College）点评：面试不考查哲学知识，要看的是批判性思考能力、对反例的处理、在重要概念间作出区分。能否为论证之便接受前提本身就是一项测试。',
+                chain: [
+                    { role: 'tutor-question', text: '"我同意航空导致气候变化，但我不坐那架飞机也会飞，所以我没有道德理由不乘机。"这论证有说服力吗？' },
+                    { role: 'student-answer', text: '没说服力，因为每个人都这么想。' },
+                    { role: 'tutor-challenge', text: '为论证之故接受前提——那么"道德理由"与"审慎理由"如何区分？想想投票：我的一票不影响结果，为何要投？' },
+                    { role: 'student-revised', text: '区分集体行动问题与个体道德责任：即便单次行为不改变结果，"可普遍化原则"下若所有人都这么做则灾难——道德理由在于原则一致性。' }
+                ]
+            },
+            {
+                id: 'b19', uni: 'Oxford', subject: 'HSPS', college: 'King\'s', type: 'text',
+                year: '官方样题 · Oxford Geography', format: '官方示范',
+                title: '如果我去你住的地区，我会对什么感兴趣？',
+                dims: ['blue','green','red','yellow'],
+                source: 'official',  // 官方一手：导师 Lorraine Wild，St Hilda's
+                officialComment: '导师 Lorraine Wild（St Hilda\'s）点评：给候选人把 A-level 地理概念应用到家乡的机会。特意问家乡可消除游历广泛者的优势——考查对周围世界的好奇心与公平性设计。',
+                chain: [
+                    { role: 'tutor-question', text: 'If I were to visit the area where you live, what would I be interested in?' },
+                    { role: 'student-answer', text: '我们那有个商场。' },
+                    { role: 'tutor-challenge', text: '用地理思维看家乡：城市规划、族群迁移、环境管理——你身边有什么值得分析的？' },
+                    { role: 'student-revised', text: '从城市更新切入：老城区改造的绅士化（gentrification）现象，原住民置换与空间正义问题。' }
+                ]
+            },
+            {
+                id: 'b20', uni: 'Oxford', subject: 'Mathematics', college: 'Magdalen', type: 'data',
+                year: '官方样题 · Oxford Mathematics', format: '官方示范',
+                title: '梯子靠墙滑落，中间那级画出什么轨迹？',
+                dims: [],
+                source: 'official',  // 官方一手：牛津官方数学样题
+                officialComment: '导师官方点评：考察能否像数学家那样把不重要的信息抽象掉。梯子每阶段形成直角三角形，可用毕达哥拉斯定理求解——答案是以墙地交点为圆心的四分之一圆，常与直觉相反。',
+                chain: [
+                    { role: 'tutor-question', text: 'Imagine a ladder leaning against a vertical wall... What shape does the middle rung trace out as the ladder falls?' },
+                    { role: 'student-answer', text: '抛物线？' },
+                    { role: 'tutor-challenge', text: '梯子每阶段形成什么三角形？设中间点到墙地的距离，用毕达哥拉斯定理检验。' },
+                    { role: 'student-revised', text: '中间点到墙脚和地脚的距离平方和=梯子半长²（常数），即 x²+y²=r²——四分之一圆弧。' }
+                ]
+            },
+            {
+                id: 'b21', uni: 'Oxford', subject: 'Mathematics', college: 'Trinity', type: 'data',
+                year: '官方样题 · Oxford Mathematics', format: '官方示范',
+                title: '用 2×1 瓷砖铺满 2×n 矩形，有多少种铺法？',
+                dims: [],
+                source: 'official',  // 官方一手：牛津官方数学样题
+                officialComment: '导师官方点评：不希望你立刻给答案，而是探究。前几种情况答案是 1、2、3、5——能否看出斐波那契数列规律？揭示递推思维与从特例到一般化的能力。',
+                chain: [
+                    { role: 'tutor-question', text: 'How many ways can you cover a 2xn rectangular grid with 2x1 tiles?' },
+                    { role: 'student-answer', text: 'n 的函数？' },
+                    { role: 'tutor-challenge', text: '画图试 n=1,2,3,4——答案 1、2、3、5。看出规律了吗？为什么第 n 个是前两个之和？' },
+                    { role: 'student-revised', text: '递推：f(n)=f(n-1)+f(n-2)。最后一块竖放→剩 n-1；最后两块横放→剩 n-2。即斐波那契。' }
+                ]
+            },
+            {
+                id: 'b22', uni: 'Oxford', subject: 'English', college: 'Magdalen', type: 'text',
+                year: '官方样题 · Oxford English Literature', format: '官方示范',
+                title: '英语专业学生读《暮光之城》为什么可能有用？',
+                dims: ['blue','green','red','yellow'],
+                source: 'official',  // 官方一手：导师 Lucinda Rumsey，Mansfield College
+                officialComment: '导师 Lucinda Rumsey（Mansfield College）点评：候选人常集中于他们以为"高级"的文本。我希望不论读过什么都能像文学批评家一样思考。通过他们知道的事情来评判，而非不知道的。',
+                chain: [
+                    { role: 'tutor-question', text: 'Why might it be useful for an English student to read the Twilight series?' },
+                    { role: 'student-answer', text: '流行文化也值得研究？' },
+                    { role: 'tutor-challenge', text: '关键不在读什么，而在怎么读——能否像文学批评家一样分析任何文本？' },
+                    { role: 'student-revised', text: '《暮光之城》可作类型研究：哥特传统演变、性别叙事、受众理论。文本价值不在"高级"而在分析深度。' }
                 ]
             }
         ];
@@ -596,6 +810,13 @@
         // ============ 渲染面经列表 ============
         const TYPE_LABELS = { text:'文本分析', eval:'观点评估', data:'图表数据', concept:'概念定义' };
         const COLLEGE_LABELS = { Balliol:'Balliol', Trinity:'Trinity', StJohns:"St John's", King's:"King's", Magdalen:'Magdalen', NewCollege:'New College' };
+        // 来源等级（F-5 + 联网核实）
+        const SOURCE_LABELS = {
+            official:  { label:'官方一手', cls:'src-official' },   // 牛津官网公布，含导师点评
+            variant:   { label:'官方变体', cls:'src-variant' },     // 导师讨论话题的简化传播版
+            circulated:{ label:'流传题', cls:'src-circulated' },    // 疑似流传，非官方公布
+            recalled:  { label:'学生回忆', cls:'src-recalled' }      // 学生回忆，剑桥类多属此
+        };
 
         function renderBank() {
             const filtered = state.bank.filter(e => {
@@ -615,7 +836,13 @@
                 const subTag = '<span class="tag tag-subject">' + e.subject + '</span>';
                 const colTag = '<span class="tag tag-college">' + (COLLEGE_LABELS[e.college] || e.college) + '</span>';
                 const typeTag = '<span class="tag tag-type">' + (TYPE_LABELS[e.type] || e.type) + '</span>';
-                const officialTag = e.officialComment ? '<span class="tag" style="background:#fff3e0;color:#e65100;">🎓 官方</span>' : '';
+                // 来源等级标签（F-5：替代旧的单一"官方"标识）
+                let sourceTag = '';
+                if (e.source && SOURCE_LABELS[e.source]) {
+                    const s = SOURCE_LABELS[e.source];
+                    const icon = e.source === 'official' ? '🎓 ' : (e.source === 'recalled' ? '🗣 ' : '📋 ');
+                    sourceTag = '<span class="tag ' + s.cls + '" title="来源等级">' + icon + s.label + '</span>';
+                }
 
                 // 维度点（STEM 无维度时显示"约束-反例"标记）
                 let dimsHtml = '';
@@ -630,7 +857,7 @@
                 }
 
                 return '<div class="bank-entry" data-id="' + e.id + '">' +
-                    '<div class="be-header">' + uniTag + subTag + colTag + typeTag + officialTag + '</div>' +
+                    '<div class="be-header">' + uniTag + subTag + colTag + typeTag + sourceTag + '</div>' +
                     '<div class="be-title">' + escapeHtml(e.title) + '</div>' +
                     '<div class="be-meta">' + e.year + ' · ' + e.format + ' · ' + e.chain.length + ' 环节</div>' +
                     dimsHtml +
@@ -645,19 +872,42 @@
         function showEntryDetail(id) {
             const entry = state.bank.find(e => e.id === id);
             if (!entry) return;
-            // 简化：展开追问链（此处可做成弹窗，暂用 alert 替代为内联）
-            const roleLabels = {
-                'tutor-question': '📌 导师发问',
-                'student-answer': '💬 学生回答',
-                'tutor-challenge': '🔄 导师追问/反驳',
-                'student-revised': '💡 学生二次推演'
+            const entryEl = bankList.querySelector('.bank-entry[data-id="' + id + '"]');
+            // toggle：已有详情则收起
+            const existing = entryEl.querySelector('.be-detail');
+            if (existing) {
+                existing.remove();
+                return;
+            }
+            // F-5: 内联展开追问链卡片
+            const roleMap = {
+                'tutor-question':   { cls: 's-question',  label: '导师发问' },
+                'student-answer':   { cls: 's-answer',    label: '学生回答' },
+                'tutor-challenge':  { cls: 's-challenge', label: '导师追问/反驳' },
+                'student-revised':  { cls: 's-revised',   label: '学生二次推演' }
             };
-            const chainText = entry.chain.map(c => roleLabels[c.role] + '：\n' + c.text).join('\n\n');
-            // OX-23: 官方真题展示官方点评
-            const commentText = entry.officialComment
-                ? '\n\n' + '━━━━━━━━━━━━━━\n🎓 ' + entry.officialComment
+            const chainHtml = entry.chain.map(c => {
+                const r = roleMap[c.role] || { cls: '', label: c.role };
+                return '<div class="bd-step ' + r.cls + '">' +
+                    '<span class="bs-label">' + r.label + '</span>' +
+                    escapeHtml(c.text) +
+                '</div>';
+            }).join('');
+            const commentHtml = entry.officialComment
+                ? '<div class="bd-comment"><span class="bc-label">🎓 导师官方点评</span>' + escapeHtml(entry.officialComment) + '</div>'
                 : '';
-            alert(entry.title + '\n\n' + chainText + commentText);
+            const sourceNote = entry.source && SOURCE_LABELS[entry.source]
+                ? '<div style="font-size:0.72rem;color:#888;margin-bottom:8px;">来源等级：<b>' + SOURCE_LABELS[entry.source].label + '</b></div>'
+                : '';
+            const detail = document.createElement('div');
+            detail.className = 'be-detail';
+            detail.innerHTML = sourceNote +
+                '<div class="bd-chain">' + chainHtml + '</div>' +
+                commentHtml +
+                '<div class="bd-actions"><button class="btn" onclick="event.stopPropagation();">📋 复制</button></div>';
+            entryEl.appendChild(detail);
+            // 滚动到详情
+            setTimeout(() => detail.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 50);
         }
 
         // 筛选事件

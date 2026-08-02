@@ -399,7 +399,7 @@
         // ============ OX-7 复用：材料数据（与 simulator 一致） ============
         const MATERIALS = {
             'law-firefighter': {
-                tag: 'LAW', meta: 'Oxford · Balliol College',
+                tag: 'LAW', meta: 'Oxford · Balliol College', lang: 'zh-CN',
                 questions: [
                     { dim: 'blue',   dimName: '文本层',   text: '"故意"在该场景中应如何界定？A 的心理状态是什么？' },
                     { dim: 'green',  dimName: '结构层',   text: '不作为能否构成"剥夺生命"？区分标准是什么？' },
@@ -408,7 +408,7 @@
                 ]
             },
             'history-silences': {
-                tag: 'HISTORY', meta: 'Cambridge · Trinity College',
+                tag: 'HISTORY', meta: 'Cambridge · Trinity College', lang: 'zh-CN',
                 questions: [
                     { dim: 'blue',   dimName: '文本层',   text: '"胜利者书写历史"这句话的措辞如何界定？"书写"是单纯记录，还是包含塑造与删改？' },
                     { dim: 'green',  dimName: '结构层',   text: '"全然不可知"结论的论证链条是什么？哪个环节最薄弱？' },
@@ -417,7 +417,7 @@
                 ]
             },
             'ppe-bus-fare': {
-                tag: 'PPE', meta: 'Oxford · Balliol College',
+                tag: 'PPE', meta: 'Oxford · Balliol College', lang: 'zh-CN',
                 questions: [
                     { dim: 'blue',   dimName: '文本层',   text: '"有效"一词在该政策语境中应如何界定？效率、公平、环保哪个优先？' },
                     { dim: 'green',  dimName: '结构层',   text: '支持票价恢复的论证链条是什么？低收入数据如何动摇它？' },
@@ -719,7 +719,7 @@
             const recognition = new SR();
             recognition.continuous = true;
             recognition.interimResults = true;
-            recognition.lang = 'zh-CN';  // 可按需切换 en-US
+            recognition.lang = (MATERIALS[state.currentMaterialId] && MATERIALS[state.currentMaterialId].lang) || 'zh-CN';  // F-6: 跟随材料语言
 
             recognition.onstart = () => {
                 state.recording = true;
@@ -839,6 +839,16 @@
             state.currentQuestionIndex = 0;
             renderQuestion();
             refreshAnnotations();
+            // F-6: 录音中切换材料需重建 recognition 以应用新 lang
+            if (state.recording && state.recognition) {
+                try { state.recognition.stop(); } catch (err) {}
+                setTimeout(() => {
+                    state.recognition = initSpeechRecognition();
+                    if (state.recognition) {
+                        try { state.recognition.start(); } catch (err) {}
+                    }
+                }, 300);
+            }
         });
 
         // ============ 工具函数 ============

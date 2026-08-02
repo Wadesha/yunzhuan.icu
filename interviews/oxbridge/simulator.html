@@ -765,7 +765,7 @@
         // 标注数据结构化存储
         function saveAnnotations() {
             const payload = {
-                materialId: 'law-firefighter',
+                materialId: state.currentMaterialId,
                 annotations: state.annotations,
                 remaining: state.remaining,
                 finished: state.finished,
@@ -796,7 +796,7 @@
             const marked = new Set(state.annotations.map(a => a.color));
             const missing = Object.keys(DIMENSIONS).filter(c => !marked.has(c));
             return {
-                materialId: 'law-firefighter',
+                materialId: state.currentMaterialId,
                 markedDimensions: Array.from(marked),
                 missingDimensions: missing,
                 annotationCount: state.annotations.length,
@@ -814,7 +814,7 @@
         function exportReport() {
             const report = {
                 meta: {
-                    materialId: 'law-firefighter',
+                    materialId: state.currentMaterialId,
                     subject: 'Law',
                     college: 'Balliol',
                     exportedAt: new Date().toISOString()
@@ -834,7 +834,43 @@
         }
 
         // ============ 初始化 ============
-        loadMaterial('law-firefighter');
+        // F-2: 恢复上次未完成的会话
+        const saved = loadAnnotations();
+        if (saved && saved.materialId && MATERIALS[saved.materialId]) {
+            // 恢复到上次的材料
+            materialSelect.value = saved.materialId;
+            currentMaterialId = saved.materialId;
+            const m = MATERIALS[saved.materialId];
+            readingText.innerHTML = m.html;
+            materialTitle.textContent = m.title;
+            metaTag.textContent = m.tag;
+            metaText.textContent = m.meta;
+            // 恢复标注数据（DOM 高亮无法精确重建，但数据/列表/维度覆盖可恢复）
+            state.annotations = saved.annotations || [];
+            state.remaining = saved.remaining != null ? saved.remaining : state.totalSeconds;
+            state.finished = saved.finished || false;
+            if (state.finished) {
+                // 倒计时已结束的状态：显示问题区
+                materialCard.classList.add('collapsed');
+                questionsCard.classList.add('show');
+                startBtn.disabled = true;
+                resetBtn.disabled = false;
+            } else {
+                state.running = false;
+                startBtn.textContent = '开始倒计时';
+                startBtn.disabled = false;
+                resetBtn.disabled = true;
+            }
+            colorBtns.forEach(b => b.disabled = !state.finished);
+            renderAnnotationList();
+            renderDimCoverage();
+            updateTimerDisplay();
+            // 提示用户已恢复
+            selHint.textContent = '已恢复上次未完成的标注（' + state.annotations.length + ' 条）';
+            selHint.style.color = '#2e7d32';
+        } else {
+            loadMaterial('law-firefighter');
+        }
     })();
     </script>
 </body>
