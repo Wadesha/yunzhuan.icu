@@ -191,6 +191,30 @@
             .form-grid-2 { grid-template-columns: 1fr; }
             .p2p-card { grid-template-columns: 1fr; }
         }
+        /* OX-24 使用指引 */
+        .guide-box {
+            background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
+            border: 1px solid #d1c4e9; border-radius: 8px;
+            padding: 14px 18px; margin: 8px auto 12px; max-width: 1100px;
+        }
+        .guide-box .g-title {
+            font-size: 0.82rem; font-weight: 700; color: #5e35b1;
+            margin-bottom: 8px; display: flex; align-items: center; gap: 6px;
+        }
+        .guide-box .g-steps {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 8px;
+            font-size: 0.78rem; color: #4527a0; line-height: 1.55;
+        }
+        .guide-box .g-step { display: flex; gap: 6px; align-items: flex-start; }
+        .guide-box .g-num {
+            background: #5e35b1; color: white; min-width: 18px; height: 18px;
+            border-radius: 50%; font-size: 0.68rem; text-align: center;
+            line-height: 18px; font-weight: 700; flex-shrink: 0;
+        }
+        .guide-box .g-tip {
+            font-size: 0.72rem; color: #c62828; margin-top: 6px;
+            padding-top: 6px; border-top: 1px dashed #d1c4e9;
+        }
     </style>
     <link rel="stylesheet" href="../../css/theme.css">
     <meta name="theme-color" content="#667eea">
@@ -198,6 +222,17 @@
 </head>
 <body>
     <a href="../oxbridge-interview.html" class="back-link">&larr; 返回牛剑面试</a>
+
+    <!-- OX-24 使用指引 -->
+    <div class="guide-box">
+        <div class="g-title">📍 使用指引 · 这一步对应真实面试的什么</div>
+        <div class="g-steps">
+            <div class="g-step"><span class="g-num">1</span><span>用<strong>学科 × 学院 × 题型</strong>三维筛选，找到与你目标精确匹配的追问链</span></div>
+            <div class="g-step"><span class="g-num">2</span><span>每条记录都是<strong>完整的"发问→回答→追问→修正"推演链</strong>，不是单点题目</span></div>
+            <div class="g-step"><span class="g-num">3</span><span>你是 Offer Holder？点下方<strong>"上传面经"</strong>还原你的经历，四维度审核标尺把关</span></div>
+        </div>
+        <div class="g-tip">⚠️ 核心提示：单点题目无价值。后来者需要看完整推演过程，才知道"被追问后该怎么修正"。上传至少 3 个环节 + 覆盖 2 个维度才过审。</div>
+    </div>
     <div class="container">
 
         <!-- 三维筛选 -->
@@ -483,6 +518,59 @@
                     { role: 'tutor-challenge', text: '若读者对 AI 文本共鸣更强，真实性是文本固有还是读者赋予？' },
                     { role: 'student-revised', text: '从意图（Authorial Intent）与接收美学（Reception）拆解。' }
                 ]
+            },
+            // ============ OX-23: 官方真题种子（含官方点评） ============
+            {
+                id: 'b7', uni: 'Oxford', subject: 'Medicine', college: 'Balliol', type: 'concept',
+                year: '官方样题 · Oxford Biological Sciences', format: '官方示范',
+                title: '为什么很多动物身上长有条纹（如斑马）？',
+                dims: [],  // STEM 约束-反例
+                officialComment: '导师官方点评：这题没有标准答案。导师想看学生能否从"伪装避敌""调节体温""防虫叮咬"等不同维度提出假说，并主动说明如何设计实验来验证。',
+                chain: [
+                    { role: 'tutor-question', text: '为什么很多动物身上长有条纹（如斑马）？' },
+                    { role: 'student-answer', text: '可能是为了伪装，躲避捕食者。' },
+                    { role: 'tutor-challenge', text: '但斑马生活在草原，条纹在开阔环境反而显眼——伪装假说是否成立？你能设计实验验证吗？' },
+                    { role: 'student-revised', text: '修正：提出多假说（伪装/体温调节/防虫），各自设计对照实验——如比较条纹与无纹马匹的虫叮率。' }
+                ]
+            },
+            {
+                id: 'b8', uni: 'Oxford', subject: 'Medicine', college: 'Trinity', type: 'data',
+                year: '官方样题 · Oxford Chemistry', format: '官方示范',
+                title: '复杂有机分子：水溶 vs 辛醇溶？pH 变化如何影响？',
+                dims: [],
+                officialComment: '导师官方点评：若学生卡壳，导师会提示"低 pH 环境下水分子或官能团会变成什么形态"。考察能否立刻吸收 Hint 并修正推演。',
+                chain: [
+                    { role: 'tutor-question', text: '给定复杂有机分子结构式，预测更易溶于水还是辛醇？改变 pH 溶解度如何变？' },
+                    { role: 'student-answer', text: '看极性官能团数量判断水溶性。' },
+                    { role: 'tutor-challenge', text: '提示：低 pH 环境下，水分子或该官能团会变成什么形态？' },
+                    { role: 'student-revised', text: '吸收 Hint：低 pH 下酸性官能团质子化，改变极性→重新评估溶解度趋势。' }
+                ]
+            },
+            {
+                id: 'b9', uni: 'Cambridge', subject: 'Engineering', college: 'Trinity', type: 'eval',
+                year: '官方样题 · Cambridge Engineering', format: '官方示范',
+                title: '现在英国上空同时有多少架飞机在飞行？（费米估算）',
+                dims: [],
+                officialComment: '导师官方点评：考察费米估算与量级直觉。关键在敢于做合理假设（英国几个主要机场？每分钟起降多少？平均飞行时长？），并把思考过程逐字说出来。',
+                chain: [
+                    { role: 'tutor-question', text: '现在英国上空同时有多少架飞机在飞行？' },
+                    { role: 'student-answer', text: '大概几千架？' },
+                    { role: 'tutor-challenge', text: '怎么得出的？请把假设逐字说出来——英国有几个主要机场？每分钟起降多少？平均飞行时长？' },
+                    { role: 'student-revised', text: '拆解：英国约 20 个主要机场，平均每分钟 2 架起降 = 40 架/分钟，平均飞行 2 小时 = 120 分钟 → 约 4800 架。' }
+                ]
+            },
+            {
+                id: 'b10', uni: 'Oxford', subject: 'PPE', college: 'Balliol', type: 'eval',
+                year: '官方样题 · Oxford/Cambridge PPE & Law', format: '官方示范',
+                title: '海盗分金：100 金币 5 海盗，最资深者应如何分配？',
+                dims: [],
+                officialComment: '导师官方点评：考察从最简模型（2 个海盗）开始逆向归纳（Backward Induction）的严密逻辑链。',
+                chain: [
+                    { role: 'tutor-question', text: '100 金币，5 个理性海盗按等级提方案投票，半数以上通过否则最资深者被扔海里。最资深者怎么分？' },
+                    { role: 'student-answer', text: '平均分 20 个给每人。' },
+                    { role: 'tutor-challenge', text: '从最简情况开始：如果只剩 2 个海盗，最资深者会怎么分？再推 3 个、4 个的情况。' },
+                    { role: 'student-revised', text: '逆向归纳：2 人时最资深者全拿（自己一票过半）；3 人时分 1 金币给最末者拉票；最终 5 人时分给第 3、5 号各 1 金币，自己留 98。' }
+                ]
             }
         ];
 
@@ -527,6 +615,7 @@
                 const subTag = '<span class="tag tag-subject">' + e.subject + '</span>';
                 const colTag = '<span class="tag tag-college">' + (COLLEGE_LABELS[e.college] || e.college) + '</span>';
                 const typeTag = '<span class="tag tag-type">' + (TYPE_LABELS[e.type] || e.type) + '</span>';
+                const officialTag = e.officialComment ? '<span class="tag" style="background:#fff3e0;color:#e65100;">🎓 官方</span>' : '';
 
                 // 维度点（STEM 无维度时显示"约束-反例"标记）
                 let dimsHtml = '';
@@ -541,7 +630,7 @@
                 }
 
                 return '<div class="bank-entry" data-id="' + e.id + '">' +
-                    '<div class="be-header">' + uniTag + subTag + colTag + typeTag + '</div>' +
+                    '<div class="be-header">' + uniTag + subTag + colTag + typeTag + officialTag + '</div>' +
                     '<div class="be-title">' + escapeHtml(e.title) + '</div>' +
                     '<div class="be-meta">' + e.year + ' · ' + e.format + ' · ' + e.chain.length + ' 环节</div>' +
                     dimsHtml +
@@ -564,7 +653,11 @@
                 'student-revised': '💡 学生二次推演'
             };
             const chainText = entry.chain.map(c => roleLabels[c.role] + '：\n' + c.text).join('\n\n');
-            alert(entry.title + '\n\n' + chainText);
+            // OX-23: 官方真题展示官方点评
+            const commentText = entry.officialComment
+                ? '\n\n' + '━━━━━━━━━━━━━━\n🎓 ' + entry.officialComment
+                : '';
+            alert(entry.title + '\n\n' + chainText + commentText);
         }
 
         // 筛选事件

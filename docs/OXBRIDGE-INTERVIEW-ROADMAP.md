@@ -258,6 +258,17 @@
 | OX-19 | Offer Holder 还原计划入口（1–2 月发 Offer 季招募） | 招募转化 |
 | OX-20 | Peer-to-Peer 互面匹配 + 标准化评测表 | 互面反馈 |
 
+### Phase 6：逼近真实 + 官方真题 + 指引（OX-21 ~ OX-24）
+
+> 目标：补齐"无限逼近真实面试"的三个缺口——理工白板、沉默检测、官方真题底座，并加全站指引语言
+
+| 版本 | 交付物 | 反馈检查点 |
+|---|---|---|
+| **OX-21** | 理工科共享白板（Canvas）：鼠标/触控手写公式、函数图、受力分析图，提交时与语音/文字一并保存。模拟剑桥"draw on your paper and show to camera" | 手写流畅度 |
+| **OX-22** | Think Aloud 沉默检测：录音中沉默>15s 弹温和提示；转写后高亮沉默时长 + 统计过渡句使用频次 | 提示是否温和不突兀 |
+| **OX-23** | 4 个官方真题种子入库（斑马条纹 / 化学溶解度 pH / 费米估算飞机数 / 海盗分金），每条标注官方点评 | 官方点评还原度 |
+| **OX-24** | 全站指引语言：simulator/hints/devils-advocate/bank 四页顶部加"使用指引"引导区（对新用户）；本文档加"项目维护指引"（对维护者） | 新用户能否独立走通流程 |
+
 ---
 
 ## 六、实施优先级判断
@@ -350,4 +361,120 @@ interviews/oxbridge/
 
 ---
 
-> **下一步**：实施 OX-1（入口页重构），然后 OX-2（法学 Worked Example 落地）。
+## 九、LLM 接入说明（Devil's Advocate 升级）
+
+> 当前 Devil's Advocate（OX-12~15）使用**关键词规则引擎**模拟反驳。这是无后端、无 API key 的降级方案，能跑通交互链路但反驳缺乏语义理解。接入 LLM 后，反驳将基于学生回答的真实语义生成，更贴近真实导师。
+
+### 9.1 需要用户做什么
+
+| 步骤 | 操作 | 说明 |
+|---|---|---|
+| 1 | 选一家 LLM 服务商并注册 | 推荐 OpenAI / Anthropic / 智谱 GLM（国内可用，免翻墙） |
+| 2 | 获取 API Key | 在服务商控制台创建 API Key，复制保存 |
+| 3 | 提供给开发环境 | 方式 A：填入前端配置（仅本地测试，会暴露 key）；**方式 B（推荐）**：部署一个轻量后端代理，前端调 `/api/devils-advocate`，key 存后端环境变量 |
+| 4 | 确认费用预算 | 见 §9.3 |
+
+### 9.2 服务商选择建议
+
+| 服务商 | 模型 | 优势 | 适合 |
+|---|---|---|---|
+| 智谱 GLM | glm-4-flash / glm-4 | 国内可直连、中文好、有免费额度 | 国内用户首选 |
+| OpenAI | gpt-4o-mini | 反驳质量高、生态成熟 | 有海外卡 |
+| Anthropic | claude-3-5-haiku | 推理强、安全 | 有海外卡 |
+| DeepSeek | deepseek-chat | 极便宜、国内可用 | 预算敏感 |
+
+### 9.3 费用估算（每次 Devil's Advocate 反驳）
+
+单次反驳约消耗：输入 ~800 token（材料+学生回答+提示词）+ 输出 ~300 token（反驳文本）≈ 1100 token。
+
+| 服务商 | 模型 | 单价（输入/输出 每 1M token） | 单次成本 | 月成本（日均 50 次） |
+|---|---|---|---|---|
+| 智谱 GLM | glm-4-flash | ¥1 / ¥1 | ≈ ¥0.001 | ≈ ¥1.5 |
+| 智谱 GLM | glm-4 | ¥50 / ¥50 | ≈ ¥0.055 | ≈ ¥82 |
+| OpenAI | gpt-4o-mini | $0.15 / $0.60 | ≈ $0.0003 | ≈ $0.45 |
+| DeepSeek | deepseek-chat | ¥1 / ¥2 | ≈ ¥0.0014 | ≈ ¥2 |
+
+> **结论**：用 glm-4-flash 或 deepseek-chat，月成本 **¥2~¥3**，几乎免费；用 gpt-4o-mini 月成本约 **$0.45（¥3）**。
+
+### 9.4 接入后的代码改动
+
+```javascript
+// devils-advocate.html 中，将 generateChallenge() 替换为：
+async function generateChallengeLLM() {
+  const res = await fetch('/api/devils-advocate', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      materialId: state.materialId,
+      style: state.style,
+      studentAnswer: state.answer,
+      chainParsed: state.chainParsed
+    })
+  });
+  const data = await res.json();
+  return data.challenge;  // { text, weakness, style }
+}
+```
+
+后端代理（Node 示例）：
+```javascript
+app.post('/api/devils-advocate', async (req, res) => {
+  const { materialId, style, studentAnswer } = req.body;
+  const prompt = buildPrompt(materialId, style, studentAnswer);
+  const result = await callLLM(process.env.LLM_API_KEY, prompt);
+  res.json({ challenge: result });
+});
+```
+
+### 9.5 升级路径
+
+- **阶段 1（当前）**：规则引擎，零成本，跑通交互
+- **阶段 2**：接 glm-4-flash / deepseek-chat，月成本 ¥2~3，反驳有语义理解
+- **阶段 3**：接 gpt-4o-mini，反驳质量更高，月成本 ¥3~5
+- **阶段 4**：多模型对比 + A/B 测试，选最优性价比
+
+---
+
+## 十、项目维护指引（OX-24，对维护者）
+
+> 本章节供维护者（包括未来的 AI 协作）快速上手。普通用户跳过。
+
+### 10.1 文件结构与职责
+
+```
+/workspace/
+├── docs/OXBRIDGE-INTERVIEW-ROADMAP.md   ← 本文档，单一事实源
+├── interviews/oxbridge-interview.html   ← 入口页，模块导航+Roadmap精简版
+└── interviews/oxbridge/
+    ├── simulator.html       ← OX-4~7  预读模拟器
+    ├── hints.html           ← OX-8~11 Think Aloud+Hints
+    ├── devils-advocate.html ← OX-12~15 追问反驳
+    └── bank.html            ← OX-16~20 面经库
+```
+
+### 10.2 修改原则
+
+1. **先改 roadmap，再改代码**：任何新功能/新版本必须先在本文档登记版本号（OX-N）和交付物，再实施
+2. **双框架不可混用**：人文社科用四维度（文本/结构/冲突/边界），STEM 用约束-反例（约束/推导/收紧/降级），PBS 等实验类用约束-反例实验变体
+3. **数据互通**：simulator 的标注 → localStorage `oxbridge_sim_annotations` → hints 读取；hints 的转写 → URL 参数 → devils-advocate 读取。改数据结构时三处同步
+4. **种子数据在 bank.html 的 `SEED_BANK` 数组**，用户上传存 `localStorage.oxbridge_user_bank`
+
+### 10.3 新增学科样板的步骤
+
+1. 在 `MATERIALS` 对象加材料（simulator.html + hints.html + devils-advocate.html 三处同步）
+2. 判定框架：人文社科→四维度，STEM→约束-反例
+3. 若是 STEM，在 `HINT_BANK` 加 Hint 文案（约束/推导/收紧/降级四步）
+4. 若有 Devil's Advocate 需求，在 `CHALLENGE_RULES` 加 pattern 匹配规则
+5. 在 bank.html 的 `SEED_BANK` 加种子面经
+
+### 10.4 用户使用指引（OX-24 落地）
+
+每个模块页面顶部加"使用指引"引导区，包含：
+- 本环节在真实面试中对应什么
+- 建议操作顺序（1→2→3）
+- 完成后跳转到哪个模块
+- 核心提示（如"沉默比说错更致命"）
+
+---
+
+> **下一步**：实施 OX-21（理工白板）→ OX-22（沉默检测）→ OX-23（官方真题种子）→ OX-24（指引语言）。Phase 1~5 已全部完成。
